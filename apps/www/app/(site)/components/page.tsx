@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-import { Suspense } from "react"
-
 import { CatalogFilter } from "@/components/site/catalog-filter"
 import { Eyebrow } from "@/components/site/section-heading"
 import { loadExample } from "@/lib/examples"
@@ -29,31 +27,31 @@ export default async function ComponentsPage() {
           so it never overwrites your shadcn/ui files.
         </p>
       </header>
-      <Suspense>
         <CatalogFilter options={categories.map((c) => ({ value: c, label: categoryLabels[c] ?? c, count: items.filter((i) => i.category === c).length }))}>
       {categories.map((cat) => (
         <section key={cat} data-category={cat} className="mt-12">
           <h2 className="text-muted-foreground mb-5 font-mono text-[11px] tracking-[0.16em] uppercase">{categoryLabels[cat] ?? cat}</h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {items
               .filter((i) => i.category === cat)
               .map((i) => (
-                <Link key={i.name} href={`/components/${i.name}`} className="group overflow-hidden rounded-xl border transition-colors hover:border-foreground/25">
+                <div key={i.name} className="group relative overflow-hidden rounded-xl border transition-colors hover:border-foreground/25">
                   <div className="bm-stage pointer-events-none flex h-48 items-center justify-center overflow-hidden border-b" inert>
                     {/* Demos are sized for the full preview stage; scale them to fit the card. */}
                     <div className="flex w-[125%] shrink-0 scale-[0.8] items-center justify-center">{i.Preview ? <i.Preview /> : null}</div>
                   </div>
                   <div className="p-4">
-                    <p className="font-medium">{i.title}</p>
+                    <Link href={`/components/${i.name}`} className="font-medium after:absolute after:inset-0 after:rounded-xl outline-none focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">
+                      {i.title}
+                    </Link>
                     <p className="text-muted-foreground mt-1 line-clamp-2 text-sm">{i.description}</p>
                   </div>
-                </Link>
+                </div>
               ))}
           </div>
         </section>
       ))}
         </CatalogFilter>
-      </Suspense>
     </div>
   )
 }

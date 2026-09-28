@@ -15,7 +15,7 @@ const badgeVariants = cva(
         secondary: "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/80",
         outline: "border-border bg-background text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         destructive:
-          "border-transparent bg-destructive text-white focus-visible:ring-destructive/40 [a&]:hover:bg-destructive/90",
+          "border-transparent bg-destructive text-white dark:bg-destructive/60 focus-visible:ring-destructive/40 [a&]:hover:bg-destructive/90",
       },
       // A soft tint that overrides the variant's colors. The label text stays foreground for contrast.
       status: {

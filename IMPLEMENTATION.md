@@ -13,10 +13,12 @@ pnpm test             # component tests (Vitest)
 pnpm --filter @ballmac-ui/www typecheck
 pnpm --filter @ballmac-ui/www lint
 pnpm --filter @ballmac-ui/www build
-pnpm smoke            # fresh app: shadcn add every item -> tsc + next build
+pnpm smoke            # fresh app (Base UI init, the shadcn default): shadcn add every item -> tsc + next build
+SMOKE_BASE=radix pnpm smoke   # same, in a Radix project
 ```
 
 Plus a visual pass: desktop and mobile, light and dark, no console errors, no horizontal overflow.
+And axe (zero serious/critical) on every `/preview/*` and the main site pages, light and dark.
 
 ## Phases
 
@@ -24,7 +26,7 @@ Plus a visual pass: desktop and mobile, light and dark, no console errors, no ho
 - [x] pnpm + Turborepo monorepo (`apps/www`, `packages/metadata`, `registry`)
 - [x] GitHub repo `vamsiy78/ballmac-ui` (private until launch), `main` + `preprod`
 - [x] Vercel project `ballmac-ui` (root `apps/www`); domain `ui.ballmac.com` (DNS pending at BigRock)
-- [ ] `preprod.ui.ballmac.com` → `preprod` branch
+- [~] `preprod.ui.ballmac.com` → `preprod` branch (Vercel domain added; DNS at BigRock pending)
 
 ### 2. Design system
 - [x] Theme tokens (`registry/ballmac/themes/theme.meta.ts`) → site CSS generated from the same source
@@ -35,90 +37,94 @@ Plus a visual pass: desktop and mobile, light and dark, no console errors, no ho
 - [x] Metadata schema (`packages/metadata/src/schema.ts`)
 - [x] Build: meta.ts → registry.json → `shadcn build` → site data
 - [x] Alias-based install targets (`@components/ballmac/...`)
-- [x] Checks: dependency truth, license provenance, schema validation, install smoke test
+- [x] Checks: dependency truth, license provenance, schema validation, no JSX `asChild` in shipped files, install smoke test (Base UI and Radix projects)
 - [x] Blocks (`components/blocks/<name>/`) and templates (`app/<route>/page.tsx`) in the build
 - [ ] Pro gated route (`/r/[name]` with license key) — Phase "Pro", not MVP
 
 ### 4. Catalog / data model
 - [x] Generated index + embedded free sources
 - [x] Categories, block categories, tiers
-- [ ] Related items, changelog per item
+- [x] Related items (composesWith + category); `composesWith` validated at build
+- [ ] Changelog per item
 
 ### 5. Component pages
 - [x] Preview/Code, install tabs, manual install, usage, examples, options, a11y, deps, AI, source, related
-- [ ] Props table generated from TypeScript
+- [x] Props table generated from TypeScript (ts-morph: own props, JSDoc, cva variants, defaults)
 
 ### 6. Documentation / navigation
-- [~] Docs: introduction, installation, registry, MCP, theming, licensing, changelog
-- [ ] Docs sidebar navigation
+- [x] Docs: introduction, installation, CLI & registry, MCP, theming, licensing, changelog
+- [x] Docs sidebar navigation
 
 ### 7. Installation system
 - [x] Package-manager tabs (pnpm, npm, yarn, bun), remembered site-wide
 - [x] Manual install (deps + source)
 
 ### 8. CLI / registry examples
-- [ ] Registry docs page with components.json, direct URL, namespaced install
+- [x] Registry docs page (registry add, namespaces, URLs, search, view, --diff, file locations)
 
 ### 9. MCP compatibility
 - [x] shadcn MCP compatible (registry.json + examples + descriptions)
-- [ ] `/api/v1` metadata API
-- [ ] `@ballmac/mcp` server (packages/mcp)
+- [x] `/api/v1` metadata API (index.json, items/[name].json)
+- [x] `@ballmac/mcp` server (packages/mcp): list_items, search_items, get_item, get_examples, get_install_command, compose_page, get_setup — tested; not yet published to npm
 
 ### 10. Search
 - [x] ⌘K command menu
-- [ ] Catalog filters (category, type, tier) in URL params
+- [x] Catalog category filters in URL params (type and tier filters: later)
 
 ### 11. Blocks
-- [ ] 12 MVP blocks with full-page preview + viewport switcher
+- [x] 12 MVP blocks with full-page preview + viewport switcher
 
 ### 12. Templates
-- [ ] `template-launch`
+- [x] `template-launch` (installs components + app/launch/page.tsx)
 
 ### 13. Pricing
-- [ ] Pricing page (Free now, Pro coming)
+- [x] Pricing page (Free now, Pro coming)
 
 ### 14. Final polish
-- [ ] OG images, sitemap, robots, JSON-LD
-- [ ] Lighthouse ≥ 95, a11y (axe) on previews
+- [x] OG images, sitemap, robots, JSON-LD
+- [x] axe: 0 serious/critical on all 67 previews and 17 site pages, light and dark
+- [~] Lighthouse (local `next start`, mobile): a11y/best practices/SEO 100 everywhere; performance 91–96 (simulated LCP ~3.4 s, observed 65 ms). Re-measure on Vercel.
 
 ## Components (MVP: 30)
 
 | # | Item | Category | Status |
 |---|---|---|---|
 | 1 | button | primitives | [x] |
-| 2 | input | primitives | [ ] |
-| 3 | textarea | primitives | [ ] |
-| 4 | label | primitives | [ ] |
-| 5 | checkbox | primitives | [ ] |
-| 6 | switch | primitives | [ ] |
-| 7 | select | primitives | [ ] |
-| 8 | badge | primitives | [ ] |
-| 9 | avatar | primitives | [ ] |
-| 10 | kbd | primitives | [ ] |
-| 11 | tooltip | primitives | [ ] |
-| 12 | dialog | primitives | [ ] |
-| 13 | text-reveal | motion | [ ] |
+| 2 | input | primitives | [x] |
+| 3 | textarea | primitives | [x] |
+| 4 | label | primitives | [x] |
+| 5 | checkbox | primitives | [x] |
+| 6 | switch | primitives | [x] |
+| 7 | select | primitives | [x] |
+| 8 | badge | primitives | [x] |
+| 9 | avatar | primitives | [x] |
+| 10 | kbd | primitives | [x] |
+| 11 | tooltip | primitives | [x] |
+| 12 | dialog | primitives | [x] |
+| 13 | text-reveal | motion | [x] |
 | 14 | number-ticker | motion | [x] |
-| 15 | marquee | motion | [ ] |
-| 16 | spotlight-card | motion | [ ] |
-| 17 | magnetic-button | motion | [ ] |
-| 18 | border-beam | motion | [ ] |
-| 19 | animated-grid | motion | [ ] |
-| 20 | shimmer-text | motion | [ ] |
-| 21 | ai-chat | ai | [ ] |
-| 22 | ai-message | ai | [ ] |
-| 23 | prompt-input | ai | [ ] |
-| 24 | streaming-text | ai | [ ] |
-| 25 | tool-call-card | ai | [ ] |
-| 26 | reasoning-disclosure | ai | [ ] |
-| 27 | terminal | developer | [ ] |
-| 28 | code-block | developer | [ ] |
-| 29 | install-tabs | developer | [ ] |
-| 30 | api-key-field | developer | [ ] |
+| 15 | marquee | motion | [x] |
+| 16 | spotlight-card | motion | [x] |
+| 17 | magnetic-button | motion | [x] |
+| 18 | border-beam | motion | [x] |
+| 19 | animated-grid | motion | [x] |
+| 20 | shimmer-text | motion | [x] |
+| 21 | ai-chat | ai | [x] |
+| 22 | ai-message | ai | [x] |
+| 23 | prompt-input | ai | [x] |
+| 24 | streaming-text | ai | [x] |
+| 25 | tool-call-card | ai | [x] |
+| 26 | reasoning-disclosure | ai | [x] |
+| 27 | terminal | developer | [x] |
+| 28 | code-block | developer | [x] |
+| 29 | install-tabs | developer | [x] |
+| 30 | api-key-field | developer | [x] |
 
 ## Blocks (MVP: 12)
 
-hero-1, hero-2, hero-3, features-1, features-2, pricing-1, faq-1, cta-1, footer-1, header-1, login-1, ai-chat-1 — all `[ ]`
+hero-1, hero-2, hero-3, features-1, features-2, pricing-1, faq-1, cta-1, footer-1, header-1, login-1, ai-chat-1 — all `[x]`
+
+Also added: `accordion` (primitive, needed by faq-1).
 
 ## Architecture decisions log
 
@@ -128,4 +134,9 @@ hero-1, hero-2, hero-3, features-1, features-2, pricing-1, faq-1, cta-1, footer-
 - **Free source is embedded at build time** (`lib/generated/sources.json`); the site never reads the filesystem at runtime, so private Pro source can never be bundled.
 - **Dark mode via a head script**, not next-themes (React 19 script warning).
 - **Search uses cmdk's built-in ranking** over the generated index; Orama is deferred until the catalog is large enough to need facets in the command menu.
+- **Smoke test serves the registry from a separate process** (`scripts/serve-static.mjs`); an in-process server deadlocks against execSync.
+- **Templates ship a reusable component plus a route** (`components/ballmac/templates/<name>/` + `app/<route>/page.tsx`), so the page is previewable on the site and installs as a real route.
 - **`registry/` is a workspace package** declaring the libraries items may use, so pnpm's strict resolution catches undeclared imports.
+- **No `asChild` in shipped JSX.** `shadcn init` now defaults to Base UI (`base-nova`), and the CLI rewrites `asChild` into Base UI's `render` prop, which breaks Radix files. Links and triggers are styled with `buttonVariants()`/`badgeVariants()` instead; components still accept `asChild`. Enforced by `pnpm check`; the smoke test covers both bases.
+- **Catalog cards use a stretched title link**, not a link wrapping the preview: block previews contain real `<a>` elements, and nested links break hydration.
+- **The catalog filter reads the URL after mount** instead of `useSearchParams`, which would drop the whole catalog out of the static HTML behind a Suspense boundary.

@@ -8,7 +8,7 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
 
-import { dependencyProblems } from "./check-deps"
+import { dependencyProblems, portabilityProblems } from "./check-deps"
 import { loadItems } from "./lib"
 
 const names = new Set(process.argv.slice(2))
@@ -19,7 +19,7 @@ if (!names.size) {
 const items = await loadItems()
 const missing = [...names].filter((n) => !items.some((i) => i.name === n))
 const problems = missing.map((n) => `${n}: no item with this name (is <name>.meta.ts in place?)`)
-problems.push(...dependencyProblems(items, names))
+problems.push(...dependencyProblems(items, names), ...portabilityProblems(items, names))
 for (const item of items.filter((i) => names.has(i.name))) {
   const mentions = item.files.some((f) => /Based on /.test(readFileSync(join(item.baseDir, f.path), "utf8")))
   if (mentions !== !!item.source) problems.push(`${item.name}: "Based on …" file header and meta.source must go together`)

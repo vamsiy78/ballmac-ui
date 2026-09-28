@@ -4,6 +4,140 @@
   "homepage": "https://ui.ballmac.com",
   "items": [
     {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Vertically stacked disclosure sections on Radix Accordion, single or multiple open, with hairline dividers, a rotating plus and height animation.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "devDependencies": [
+        "tw-animate-css"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/accordion.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/accordion.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "accordion",
+          "disclosure",
+          "faq",
+          "collapsible",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Show and hide sections of content one at a time (type=\"single\" collapsible) or several at once (type=\"multiple\").",
+          "whenToUse": [
+            "FAQ sections",
+            "Settings or docs with optional detail",
+            "Long content where readers scan headings first"
+          ],
+          "whenNotToUse": [
+            "A single show/hide toggle (use reasoning-disclosure or a Radix Collapsible)",
+            "Navigation between views (use tabs)"
+          ],
+          "composesWith": [
+            "badge"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Toggles the focused section"
+            },
+            {
+              "keys": "↓ / ↑",
+              "action": "Moves focus between section headers"
+            },
+            {
+              "keys": "Home / End",
+              "action": "Moves focus to the first or last header"
+            }
+          ],
+          "customization": [
+            "type: single | multiple",
+            "collapsible (single): allow closing the open section",
+            "defaultValue / value for open sections"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Accordion",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "accordion-demo",
+          "accordion-multiple"
+        ],
+        "url": "https://ui.ballmac.com/components/accordion"
+      }
+    },
+    {
+      "name": "accordion-demo",
+      "type": "registry:example",
+      "title": "Accordion: Default",
+      "description": "Default example of Accordion.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/accordion.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/accordion-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/accordion-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "accordion",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "accordion-multiple",
+      "type": "registry:example",
+      "title": "Accordion: Multiple open",
+      "description": "Multiple open example of Accordion.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/accordion.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/accordion-multiple.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/accordion-multiple.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "accordion",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ai-chat",
       "type": "registry:ui",
       "title": "AI Chat",
@@ -589,7 +723,7 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "A small pill label in four variants with an optional status dot and success, warning and error tones. Renders links or buttons with asChild.",
+      "description": "A small pill label in four variants with an optional status dot and success, warning and error tones. Style links with badgeVariants().",
       "author": "Ballmac <https://ui.ballmac.com>",
       "dependencies": [
         "radix-ui",
@@ -621,7 +755,7 @@
         "version": "1.0.0",
         "updated": "2026-09-28",
         "ai": {
-          "summary": "Short metadata or status label. Use variant for emphasis, status (neutral | success | warning | error) for state with a coloured dot, and asChild to make it a link.",
+          "summary": "Short metadata or status label. Use variant for emphasis, status (neutral | success | warning | error) for state with a coloured dot, and badgeVariants() on an <a> for a link.",
           "whenToUse": [
             "Status of a deployment, invoice or job",
             "Counts, plan names and version tags",
@@ -642,7 +776,7 @@
             "variant: default | secondary | outline | destructive",
             "status: neutral | success (chart-2) | warning (chart-3) | error (destructive); overrides variant colours with a soft tint",
             "dot: shows a leading dot; on by default when status is set",
-            "asChild renders the child element (for example an <a>)"
+            "badgeVariants({ variant }) gives the same styles to an <a> or button"
           ]
         },
         "source": {
@@ -707,6 +841,1058 @@
       "meta": {
         "example": true,
         "of": "badge",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ai-chat-1",
+      "type": "registry:block",
+      "title": "AI Chat 1: full chat app pane",
+      "description": "A complete assistant screen: collapsible conversation sidebar, model picker, messages with reasoning and tool calls, streaming replies, copy and regenerate, and a prompt with attachments.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/ai-chat.json",
+        "https://ui.ballmac.com/r/ai-message.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/prompt-input.json",
+        "https://ui.ballmac.com/r/reasoning-disclosure.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/streaming-text.json",
+        "https://ui.ballmac.com/r/tool-call-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/ai-chat-1/ai-chat-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/ai-chat-1/ai-chat-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "ai-chat"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "chat",
+          "assistant",
+          "agent",
+          "copilot",
+          "app"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "A ready-made chat screen driven entirely by props. Map your chat state (for example the Vercel AI SDK's useChat messages) to `messages`, call your API in `onSubmit`, and pass `streaming` while a reply arrives.",
+          "whenToUse": [
+            "Assistant, copilot or agent products",
+            "Internal AI tools that need history and model choice"
+          ],
+          "whenNotToUse": [
+            "A small embedded chat widget (compose ai-chat, ai-message and prompt-input instead)"
+          ],
+          "composesWith": [
+            "hero-3",
+            "ai-chat",
+            "prompt-input"
+          ],
+          "a11y": [],
+          "customization": [
+            "messages: { id, role, text, streaming?, reasoning?, tools? }[]",
+            "conversations, activeConversation, onSelectConversation(id | null)",
+            "models, model, onModelChange",
+            "onSubmit(value, files), onStop, streaming"
+          ]
+        },
+        "examples": [
+          "ai-chat-1-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/ai-chat-1"
+      }
+    },
+    {
+      "name": "ai-chat-1-demo",
+      "type": "registry:example",
+      "title": "AI Chat 1: full chat app pane: Default",
+      "description": "Default example of AI Chat 1: full chat app pane.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ai-chat-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ai-chat-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ai-chat-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ai-chat-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cta-1",
+      "type": "registry:block",
+      "title": "CTA 1: framed call to action",
+      "description": "A closing call-to-action panel: large heading, one line of reassurance and two buttons, over a softly lit animated grid.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/animated-grid.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/cta-1/cta-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/cta-1/cta-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "cta"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "cta",
+          "call to action",
+          "signup",
+          "landing"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "The last section before the footer: one decisive action. Edit title, description and the two actions.",
+          "whenToUse": [
+            "End of landing and pricing pages",
+            "Between long content sections to prompt sign-up"
+          ],
+          "whenNotToUse": [
+            "Top of the page (use a hero)"
+          ],
+          "composesWith": [
+            "footer-1",
+            "faq-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "title, description, primaryAction, secondaryAction props"
+          ]
+        },
+        "examples": [
+          "cta-1-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/cta-1"
+      }
+    },
+    {
+      "name": "cta-1-demo",
+      "type": "registry:example",
+      "title": "CTA 1: framed call to action: Default",
+      "description": "Default example of CTA 1: framed call to action.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cta-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cta-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cta-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cta-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "faq-1",
+      "type": "registry:block",
+      "title": "FAQ 1: accordion with heading",
+      "description": "Frequently asked questions in an accessible accordion, with the heading and a help line in a side column on desktop.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/accordion.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/faq-1/faq-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/faq-1/faq-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "faq"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "faq",
+          "accordion",
+          "questions",
+          "support"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "An FAQ section. Pass items=[{ question, answer }]; the first answer starts open.",
+          "whenToUse": [
+            "Pricing pages and landing pages",
+            "Support and onboarding pages"
+          ],
+          "whenNotToUse": [
+            "Long documentation (use a docs page)"
+          ],
+          "composesWith": [
+            "pricing-1",
+            "cta-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "items: { question, answer }[]",
+            "title and description props"
+          ]
+        },
+        "examples": [
+          "faq-1-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/faq-1"
+      }
+    },
+    {
+      "name": "faq-1-demo",
+      "type": "registry:example",
+      "title": "FAQ 1: accordion with heading: Default",
+      "description": "Default example of FAQ 1: accordion with heading.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/faq-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/faq-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/faq-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "faq-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "features-1",
+      "type": "registry:block",
+      "title": "Features 1: bento grid",
+      "description": "Bento feature grid of spotlight cards in two sizes, with an animated stat and keyboard-shortcut hints mixed in for texture.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/spotlight-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/features-1/features-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/features-1/features-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "features"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "features",
+          "bento",
+          "grid",
+          "landing"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "A four-cell bento grid for a product's main features. Edit the cells directly; each is a SpotlightCard with an icon, title, body and optional extra content.",
+          "whenToUse": [
+            "Showing 3–6 headline features with visual variety",
+            "SaaS and developer product landing pages"
+          ],
+          "whenNotToUse": [
+            "Long lists of features (use features-2)"
+          ],
+          "composesWith": [
+            "hero-1",
+            "pricing-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "eyebrow, title, description props",
+            "Change cells, spans (md:col-span-2) and icons in the source"
+          ]
+        },
+        "examples": [
+          "features-1-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/features-1"
+      }
+    },
+    {
+      "name": "features-1-demo",
+      "type": "registry:example",
+      "title": "Features 1: bento grid: Default",
+      "description": "Default example of Features 1: bento grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/features-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/features-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/features-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "features-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "features-2",
+      "type": "registry:block",
+      "title": "Features 2: numbered icon grid",
+      "description": "Six features in a hairline grid of numbered cells with an icon, title and one sentence each. Pass your own features array.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/features-2/features-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/features-2/features-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "features"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "features",
+          "grid",
+          "icons",
+          "landing"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "A calm, scannable grid for 3–9 features. Pass features=[{ icon, title, body }] with lucide icons.",
+          "whenToUse": [
+            "Listing several product benefits evenly",
+            "Developer tools and libraries"
+          ],
+          "whenNotToUse": [
+            "Two or three features that need visuals (use features-1)"
+          ],
+          "composesWith": [
+            "hero-2",
+            "cta-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "features: { icon, title, body }[]",
+            "eyebrow and title props"
+          ]
+        },
+        "examples": [
+          "features-2-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/features-2"
+      }
+    },
+    {
+      "name": "features-2-demo",
+      "type": "registry:example",
+      "title": "Features 2: numbered icon grid: Default",
+      "description": "Default example of Features 2: numbered icon grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/features-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/features-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/features-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "features-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "footer-1",
+      "type": "registry:block",
+      "title": "Footer 1: columns with newsletter",
+      "description": "Site footer with brand and tagline, an optional newsletter form, up to four link columns and a legal bar.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/footer-1/footer-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/footer-1/footer-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "footer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "footer",
+          "newsletter",
+          "navigation",
+          "links"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "The bottom of every marketing page. Pass groups of links; pass onSubscribe to show the newsletter form (you handle the email).",
+          "whenToUse": [
+            "Marketing sites and landing pages"
+          ],
+          "whenNotToUse": [
+            "App screens behind login (keep chrome minimal)"
+          ],
+          "composesWith": [
+            "header-1",
+            "cta-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "groups: { title, links: { label, href }[] }[]",
+            "brand, tagline, legal props",
+            "onSubscribe(email) shows the newsletter form"
+          ]
+        },
+        "examples": [
+          "footer-1-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/footer-1"
+      }
+    },
+    {
+      "name": "footer-1-demo",
+      "type": "registry:example",
+      "title": "Footer 1: columns with newsletter: Default",
+      "description": "Default example of Footer 1: columns with newsletter.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/footer-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/footer-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/footer-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "footer-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "header-1",
+      "type": "registry:block",
+      "title": "Header 1: sticky with mobile menu",
+      "description": "Sticky site header with brand, main links, sign-in and primary action, and an accessible mobile menu that closes on Escape or link tap.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/header-1/header-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/header-1/header-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "header"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "header",
+          "navbar",
+          "navigation",
+          "mobile menu"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "The top navigation bar for a marketing site. Pass links and the two actions; it handles the mobile menu.",
+          "whenToUse": [
+            "Marketing sites and landing pages",
+            "Docs sites with a few top-level sections"
+          ],
+          "whenNotToUse": [
+            "Apps with deep navigation (use a sidebar)"
+          ],
+          "composesWith": [
+            "hero-1",
+            "hero-2",
+            "footer-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space on the menu button",
+              "action": "Opens or closes the mobile menu"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the mobile menu"
+            }
+          ],
+          "customization": [
+            "brand, brandHref, links, secondaryAction, primaryAction props",
+            "sticky: false for a static header"
+          ]
+        },
+        "examples": [
+          "header-1-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/header-1"
+      }
+    },
+    {
+      "name": "header-1-demo",
+      "type": "registry:example",
+      "title": "Header 1: sticky with mobile menu: Default",
+      "description": "Default example of Header 1: sticky with mobile menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/header-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/header-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/header-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "header-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hero-1",
+      "type": "registry:block",
+      "title": "Hero 1: split with product visual",
+      "description": "Split hero: badge, word-by-word headline, two calls to action and proof points on the left, a live product summary card on the right, over an animated grid.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/animated-grid.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/text-reveal.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/hero-1/hero-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/hero-1/hero-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "hero"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hero",
+          "landing",
+          "saas",
+          "split"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "The top section of a SaaS or product landing page. Edit the props for copy and swap HeroVisual for your own product screenshot or component.",
+          "whenToUse": [
+            "Landing pages with a product to show",
+            "Launch pages that need a clear primary action"
+          ],
+          "whenNotToUse": [
+            "Developer tools where the install command is the hero (use hero-2)",
+            "AI products where a live prompt sells best (use hero-3)"
+          ],
+          "composesWith": [
+            "header-1",
+            "features-1",
+            "cta-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "eyebrow, title, description, primaryAction, secondaryAction, highlights props",
+            "Replace HeroVisual with an image or live component"
+          ]
+        },
+        "examples": [
+          "hero-1-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/hero-1"
+      }
+    },
+    {
+      "name": "hero-1-demo",
+      "type": "registry:example",
+      "title": "Hero 1: split with product visual: Default",
+      "description": "Default example of Hero 1: split with product visual.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hero-2",
+      "type": "registry:block",
+      "title": "Hero 2: developer tool with install command",
+      "description": "Centered hero for developer tools: headline, two actions, package-manager install tabs and a terminal window with a light beam tracing its border.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/border-beam.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/install-tabs.json",
+        "https://ui.ballmac.com/r/terminal.json",
+        "https://ui.ballmac.com/r/text-reveal.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/hero-2/hero-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/hero-2/hero-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "hero"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hero",
+          "developer",
+          "cli",
+          "open source",
+          "install"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "The top section for a CLI, SDK or library: the install command is the call to action. Set `command` to your package's command without the runner.",
+          "whenToUse": [
+            "Developer tools, SDKs and open-source libraries",
+            "Pages where installing is the first step"
+          ],
+          "whenNotToUse": [
+            "Consumer or visual products (use hero-1)"
+          ],
+          "composesWith": [
+            "header-1",
+            "features-2",
+            "footer-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "command: e.g. \"shadcn@latest add @ballmac/button\"",
+            "eyebrow, title, description and action props",
+            "Replace the terminal lines with your tool's output"
+          ]
+        },
+        "examples": [
+          "hero-2-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/hero-2"
+      }
+    },
+    {
+      "name": "hero-2-demo",
+      "type": "registry:example",
+      "title": "Hero 2: developer tool with install command: Default",
+      "description": "Default example of Hero 2: developer tool with install command.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hero-3",
+      "type": "registry:block",
+      "title": "Hero 3: AI product with live prompt",
+      "description": "Hero for AI products: a real prompt input on the left, and on the right a mock answer with a reasoning panel, a tool call and a streaming reply.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/prompt-input.json",
+        "https://ui.ballmac.com/r/reasoning-disclosure.json",
+        "https://ui.ballmac.com/r/streaming-text.json",
+        "https://ui.ballmac.com/r/tool-call-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/hero-3/hero-3.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/hero-3/hero-3.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "hero"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hero",
+          "ai",
+          "assistant",
+          "prompt",
+          "agent"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Top section for an AI assistant or agent product. The prompt is real: handle onSubmit (e.g. send visitors to sign-up with their question).",
+          "whenToUse": [
+            "AI assistants, copilots and agents",
+            "Products whose value is best shown as a question and answer"
+          ],
+          "whenNotToUse": [
+            "Products without a conversational interface (use hero-1)"
+          ],
+          "composesWith": [
+            "ai-chat-1",
+            "features-1",
+            "pricing-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "eyebrow, title, description, placeholder props",
+            "onSubmit(value) to capture the visitor's question",
+            "Change the demo answer, reasoning and tool call to match your product"
+          ]
+        },
+        "examples": [
+          "hero-3-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/hero-3"
+      }
+    },
+    {
+      "name": "hero-3-demo",
+      "type": "registry:example",
+      "title": "Hero 3: AI product with live prompt: Default",
+      "description": "Default example of Hero 3: AI product with live prompt.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-3-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-3-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "login-1",
+      "type": "registry:block",
+      "title": "Login 1: card with SSO and magic link",
+      "description": "Centered sign-in card: SSO and email-link buttons, an email and password form with remember me, a loading submit and an inline error.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/login-1/login-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/login-1/login-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "auth"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "login",
+          "sign in",
+          "auth",
+          "form",
+          "sso"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "A sign-in screen. Wire onSubmit to your auth (it can be async; the button shows a spinner), pass error to show failures, and onSso/onMagicLink for passwordless options.",
+          "whenToUse": [
+            "App sign-in pages",
+            "Admin or dashboard login"
+          ],
+          "whenNotToUse": [
+            "Sign-up with many fields (build a form from input, label and checkbox)"
+          ],
+          "composesWith": [
+            "footer-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "onSubmit({ email, password, remember })",
+            "error, onSso, onMagicLink, forgotHref, signupHref props",
+            "Pass onSso={null} or onMagicLink={null} to hide that button"
+          ]
+        },
+        "examples": [
+          "login-1-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/login-1"
+      }
+    },
+    {
+      "name": "login-1-demo",
+      "type": "registry:example",
+      "title": "Login 1: card with SSO and magic link: Default",
+      "description": "Default example of Login 1: card with SSO and magic link.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/login-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/login-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/login-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "login-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pricing-1",
+      "type": "registry:block",
+      "title": "Pricing 1: two tiers",
+      "description": "Two pricing cards side by side with included and excluded features, a highlighted plan with a border beam and badge, and small print.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/border-beam.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/pricing-1/pricing-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/pricing-1/pricing-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "pricing"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "pricing",
+          "plans",
+          "saas",
+          "tiers"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Pricing for a free-plus-paid or two-plan product. Pass plans=[{ name, price, period, description, features, cta, featured }].",
+          "whenToUse": [
+            "Freemium products",
+            "Two-plan pricing pages"
+          ],
+          "whenNotToUse": [
+            "Three or more plans side by side"
+          ],
+          "composesWith": [
+            "faq-1",
+            "cta-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "plans: { name, price, period?, description, features: { label, included }[], cta, featured? }[]",
+            "title, description, note props"
+          ]
+        },
+        "examples": [
+          "pricing-1-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/pricing-1"
+      }
+    },
+    {
+      "name": "pricing-1-demo",
+      "type": "registry:example",
+      "title": "Pricing 1: two tiers: Default",
+      "description": "Default example of Pricing 1: two tiers.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pricing-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pricing-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pricing-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pricing-1",
         "tier": "free"
       }
     },
@@ -839,7 +2025,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "A button with six variants, three sizes, a pill shape and a built-in loading state. Renders any element with asChild.",
+      "description": "A button with six variants, three sizes, a pill shape and a built-in loading state. buttonVariants() styles links the same way.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "dependencies": [
         "radix-ui",
@@ -874,7 +2060,7 @@
           "whenToUse": [
             "Primary and secondary actions",
             "Form submit buttons",
-            "Links that should look like buttons (asChild with <a>)"
+            "Links that should look like buttons (className={buttonVariants()} on an <a>)"
           ],
           "whenNotToUse": [
             "Navigation inside running text (use a link)",
@@ -1290,7 +2476,7 @@
         "version": "1.0.0",
         "updated": "2026-09-28",
         "ai": {
-          "summary": "Modal window that traps focus. Compose Dialog > DialogTrigger asChild + DialogContent with DialogHeader (DialogTitle, DialogDescription) and DialogFooter; use DialogClose asChild on cancel buttons.",
+          "summary": "Modal window that traps focus. Compose Dialog > DialogTrigger (style it with buttonVariants) + DialogContent with DialogHeader (DialogTitle, DialogDescription) and DialogFooter; use DialogClose with buttonVariants for cancel buttons. Avoid asChild so the files also work in Base UI projects.",
           "whenToUse": [
             "Short forms that shouldn't leave the page (edit profile, rename)",
             "Confirming destructive actions",
@@ -1891,7 +3077,7 @@
           "whenNotToUse": [
             "Forms, toolbars and dense UI (use button)",
             "Several buttons side by side; one magnetic button per view keeps it meaningful",
-            "Rendering a link via asChild (not supported; wrap a Button asChild instead)"
+            "Rendering a link (not supported; use an <a> with buttonVariants instead)"
           ],
           "composesWith": [
             "button",
@@ -2993,6 +4179,100 @@
       }
     },
     {
+      "name": "template-launch",
+      "type": "registry:block",
+      "title": "Launch page",
+      "description": "A complete product launch page: sticky header, split hero, bento features, two-tier pricing, FAQ, closing call to action and footer, installed as a route.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cta-1.json",
+        "https://ui.ballmac.com/r/faq-1.json",
+        "https://ui.ballmac.com/r/features-1.json",
+        "https://ui.ballmac.com/r/footer-1.json",
+        "https://ui.ballmac.com/r/header-1.json",
+        "https://ui.ballmac.com/r/hero-1.json",
+        "https://ui.ballmac.com/r/pricing-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/launch/launch-page.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/launch/launch-page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/launch/page.tsx",
+          "type": "registry:page",
+          "target": "app/launch/page.tsx"
+        }
+      ],
+      "docs": "The page is at /launch. Edit components/ballmac/templates/launch/launch-page.tsx to change the copy and sections.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "landing page",
+          "launch",
+          "saas",
+          "marketing"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Installs a working /launch route built from Ballmac blocks. Change copy through each block's props in launch-page.tsx; move the route by moving app/launch/page.tsx.",
+          "whenToUse": [
+            "A new SaaS or product landing page",
+            "A starting point to customize section by section"
+          ],
+          "whenNotToUse": [
+            "Adding one section to an existing page (install that block instead)"
+          ],
+          "composesWith": [
+            "hero-2",
+            "hero-3",
+            "features-2"
+          ],
+          "a11y": [],
+          "customization": [
+            "Reorder or swap blocks in LaunchPage",
+            "Pass props to each block for your copy",
+            "Rename the route folder app/launch"
+          ]
+        },
+        "examples": [
+          "template-launch-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/template-launch"
+      }
+    },
+    {
+      "name": "template-launch-demo",
+      "type": "registry:example",
+      "title": "Launch page: Launch page",
+      "description": "Launch page example of Launch page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-launch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-launch-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-launch-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-launch",
+        "tier": "free"
+      }
+    },
+    {
       "name": "terminal",
       "type": "registry:ui",
       "title": "Terminal",
@@ -3530,7 +4810,7 @@
         "version": "1.0.0",
         "updated": "2026-09-28",
         "ai": {
-          "summary": "Short text hint for a control, shown on hover and focus. Compose Tooltip > TooltipTrigger asChild + TooltipContent. Put Kbd inside the content for shortcut hints.",
+          "summary": "Short text hint for a control, shown on hover and focus. Compose Tooltip > TooltipTrigger (style it with buttonVariants and give icon triggers an aria-label) + TooltipContent. Put Kbd inside the content for shortcut hints.",
           "whenToUse": [
             "Naming icon-only buttons (still give the button an aria-label)",
             "Shortcut hints next to a label",

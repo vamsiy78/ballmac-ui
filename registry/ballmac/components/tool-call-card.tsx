@@ -12,7 +12,7 @@ type ToolCallStatus = "pending" | "running" | "success" | "error"
 const statusConfig: Record<ToolCallStatus, { label: string; icon: React.ElementType; className: string }> = {
   pending: { label: "Pending", icon: CircleDashed, className: "text-muted-foreground" },
   running: { label: "Running", icon: LoaderCircle, className: "text-foreground" },
-  success: { label: "Success", icon: CircleCheck, className: "text-chart-2" },
+  success: { label: "Success", icon: CircleCheck, className: "text-chart-2" }, // icon only; chart-2 is too light for small text
   error: { label: "Error", icon: CircleX, className: "text-destructive" },
 }
 
@@ -44,12 +44,12 @@ function ToolCallStatusBadge({ status, className, ...props }: ToolCallStatusBadg
     <span
       data-slot="tool-call-status"
       data-status={status}
-      className={cn("inline-flex shrink-0 items-center gap-1 text-xs font-medium", tone, className)}
+      className={cn("inline-flex shrink-0 items-center gap-1 text-xs font-medium", status === "pending" ? "text-muted-foreground" : "text-foreground", className)}
       {...props}
     >
       <Icon
         aria-hidden="true"
-        className={cn("size-3.5", status === "running" && "animate-spin motion-reduce:animate-none")}
+        className={cn("size-3.5", tone, status === "running" && "animate-spin motion-reduce:animate-none")}
       />
       {label}
     </span>

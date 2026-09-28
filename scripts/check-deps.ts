@@ -58,9 +58,25 @@ export function dependencyProblems(items: LoadedItem[], only?: Set<string>) {
   return problems
 }
 
+// The shadcn CLI rewrites JSX `asChild` into Base UI's `render` prop when the project's style is `base-*`
+// (the `shadcn init` default), which breaks Radix components. Shipped files and examples must not use it.
+const JSX_AS_CHILD = /<[A-Z][\w.]*\b[^<>]*?\sasChild(?:=\{true\})?(?=[\s/>])/
+
+export function portabilityProblems(items: LoadedItem[], only?: Set<string>) {
+  const problems: string[] = []
+  for (const item of items) {
+    if (only && !only.has(item.name)) continue
+    const files = [...item.files.map((f) => join(item.baseDir, f.path)), ...item.examples.map((e) => join(item.examplesDir, e.file))]
+    for (const file of files) {
+      if (JSX_AS_CHILD.test(readFileSync(file, "utf8"))) problems.push(`${item.name}: ${file.slice(file.indexOf("registry/"))} uses asChild in JSX; style the element directly (e.g. buttonVariants) so Base UI projects can install it`)
+    }
+  }
+  return problems
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   const items = await loadItems()
-  const problems = dependencyProblems(items)
+  const problems = [...dependencyProblems(items), ...portabilityProblems(items)]
   if (problems.length) {
     console.error(`✗ Dependency check failed:\n  - ${problems.join("\n  - ")}`)
     process.exit(1)

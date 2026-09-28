@@ -14,17 +14,20 @@ import { join } from "node:path"
 import { ROOT } from "./lib"
 
 const PORT = 4455
-const BASE = `http://localhost:${PORT}`
+const BASE = `http://127.0.0.1:${PORT}`
 const run = (cmd: string, cwd: string) => execSync(cmd, { cwd, stdio: "inherit", env: { ...process.env, CI: "1" } })
 
 run(`REGISTRY_URL=${BASE} node_modules/.bin/tsx scripts/build-registry.ts`, ROOT)
 
-const server = spawn("python3", ["-m", "http.server", String(PORT), "--directory", join(ROOT, "apps/www/public")], { stdio: "ignore" })
+// The registry is served from a separate process: execSync below blocks this one.
+const server = spawn(process.execPath, [join(ROOT, "scripts/serve-static.mjs"), join(ROOT, "apps/www/public"), String(PORT)], { stdio: "ignore" })
+await new Promise((r) => setTimeout(r, 500))
 try {
   const dir = process.env.SMOKE_DIR ?? mkdtempSync(join(tmpdir(), "ballmac-smoke-"))
   run(`npx -y create-next-app@latest app --ts --tailwind --eslint --app --src-dir --import-alias "@/*" --use-npm --yes`, dir)
   const app = join(dir, "app")
-  run(`npx -y shadcn@latest init -d -y`, app)
+  // Default init uses Base UI (base-nova); SMOKE_BASE=radix tests a Radix project instead.
+  run(`npx -y shadcn@latest init -d -y${process.env.SMOKE_BASE ? ` -b ${process.env.SMOKE_BASE}` : ""}`, app)
 
   const registry = JSON.parse(readFileSync(join(ROOT, "apps/www/public/r/registry.json"), "utf8"))
   const names: string[] = registry.items.map((i: { name: string }) => i.name)

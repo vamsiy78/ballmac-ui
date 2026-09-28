@@ -67,7 +67,7 @@ function BorderBeam({
       aria-hidden="true"
       data-slot="border-beam"
       className={cn(
-        "pointer-events-none absolute inset-0 block rounded-[inherit] border-solid border-transparent motion-reduce:hidden",
+        "pointer-events-none absolute inset-0 block overflow-hidden rounded-[inherit] border-solid border-transparent motion-reduce:hidden",
         className
       )}
       style={{ ...borderOnlyMask, borderWidth, ...style }}

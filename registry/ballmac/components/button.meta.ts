@@ -5,7 +5,7 @@ export default defineItem({
   type: "registry:ui",
   title: "Button",
   description:
-    "A button with six variants, three sizes, a pill shape and a built-in loading state. Renders any element with asChild.",
+    "A button with six variants, three sizes, a pill shape and a built-in loading state. buttonVariants() styles links the same way.",
   category: "primitives",
   tags: ["button", "cta", "loading", "radix"],
   files: [{ path: "components/button.tsx" }],
@@ -18,7 +18,7 @@ export default defineItem({
   ],
   ai: {
     summary: "The base action control. Use variant for emphasis, size for density, and loading while an async action runs.",
-    whenToUse: ["Primary and secondary actions", "Form submit buttons", "Links that should look like buttons (asChild with <a>)"],
+    whenToUse: ["Primary and secondary actions", "Form submit buttons", "Links that should look like buttons (className={buttonVariants()} on an <a>)"],
     whenNotToUse: ["Navigation inside running text (use a link)", "Toggling state (use a switch or toggle)"],
     composesWith: ["kbd", "tooltip"],
     a11y: [

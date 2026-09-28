@@ -30,11 +30,11 @@ export default async function BlocksPage() {
       {groups.map((g) => (
         <section key={g} className="mt-14">
           <h2 className="text-muted-foreground mb-5 font-mono text-[11px] tracking-[0.16em] uppercase">{blockCategoryLabels[g] ?? g}</h2>
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {blocks
               .filter((b) => (b.blockCategory ?? "other") === g)
               .map((b) => (
-                <Link key={b.name} href={`/blocks/${b.name}`} className="group overflow-hidden rounded-xl border transition-colors hover:border-foreground/25">
+                <div key={b.name} className="group relative overflow-hidden rounded-xl border transition-colors hover:border-foreground/25">
                   <div className="border-b">
                     <ScaledPreview scale={0.47} height={300} width={1280}>
                       {b.Preview ? <b.Preview /> : null}
@@ -42,12 +42,14 @@ export default async function BlocksPage() {
                   </div>
                   <div className="flex items-baseline justify-between gap-4 p-4">
                     <div>
-                      <p className="font-medium">{b.title}</p>
+                      <Link href={`/blocks/${b.name}`} className="font-medium after:absolute after:inset-0 after:rounded-xl outline-none focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">
+                        {b.title}
+                      </Link>
                       <p className="text-muted-foreground mt-1 line-clamp-1 text-sm">{b.description}</p>
                     </div>
                     <span className="text-muted-foreground shrink-0 font-mono text-[11px]">@ballmac/{b.name}</span>
                   </div>
-                </Link>
+                </div>
               ))}
           </div>
         </section>

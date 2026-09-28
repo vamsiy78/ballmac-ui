@@ -6,6 +6,7 @@ import { CodePanel } from "@/components/site/code-panel"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { PreviewTabs } from "@/components/site/preview-tabs"
 import { PropsTable } from "@/components/site/props-table"
+import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { Eyebrow, SectionHeading } from "@/components/site/section-heading"
 import { loadExample } from "@/lib/examples"
 import { categoryLabels, exportsOf, getComponents, getItem, getRelated, itemHref, readSource } from "@/lib/registry"
@@ -52,6 +53,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
     <div className="mx-auto grid max-w-[1320px] gap-12 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_200px]">
       <article className="min-w-0 space-y-12">
         <header className="space-y-4">
+          <ItemJsonLd item={item} section={{ name: "Components", path: "/components" }} />
           <Eyebrow>
             <Link href="/components" className="hover:text-foreground">Components</Link> / {categoryLabels[item.category]}
           </Eyebrow>
@@ -138,7 +140,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
         {related.length > 0 && (
           <section className="space-y-4">
             <SectionHeading id="related">Related</SectionHeading>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {related.map((r) => (
                 <Link key={r.name} href={itemHref(r)} className="hover:bg-accent rounded-xl border p-4 transition-colors">
                   <p className="text-sm font-medium">{r.title}</p>

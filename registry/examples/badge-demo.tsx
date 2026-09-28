@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react"
 
-import { Badge } from "@/components/ballmac/badge"
+import { Badge, badgeVariants } from "@/components/ballmac/badge"
 
 export default function BadgeDemo() {
   return (
@@ -12,11 +12,9 @@ export default function BadgeDemo() {
       <Badge variant="outline" dot>
         Draft
       </Badge>
-      <Badge variant="outline" asChild>
-        <a href="#changelog">
-          Changelog <ArrowUpRight aria-hidden="true" />
-        </a>
-      </Badge>
+      <a href="#changelog" className={badgeVariants({ variant: "outline" })}>
+        Changelog <ArrowUpRight aria-hidden="true" />
+      </a>
     </div>
   )
 }

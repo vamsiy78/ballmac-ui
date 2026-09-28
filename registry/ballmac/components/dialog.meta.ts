@@ -18,7 +18,7 @@ export default defineItem({
   ],
   ai: {
     summary:
-      "Modal window that traps focus. Compose Dialog > DialogTrigger asChild + DialogContent with DialogHeader (DialogTitle, DialogDescription) and DialogFooter; use DialogClose asChild on cancel buttons.",
+      "Modal window that traps focus. Compose Dialog > DialogTrigger (style it with buttonVariants) + DialogContent with DialogHeader (DialogTitle, DialogDescription) and DialogFooter; use DialogClose with buttonVariants for cancel buttons. Avoid asChild so the files also work in Base UI projects.",
     whenToUse: ["Short forms that shouldn't leave the page (edit profile, rename)", "Confirming destructive actions", "Focused detail views"],
     whenNotToUse: ["Non-blocking messages (use a toast)", "Long multi-step flows (use a page)", "Content tied to a control that should stay visible (use a popover)"],
     composesWith: ["button", "input", "label", "textarea", "select"],

@@ -17,7 +17,7 @@ export default defineItem({
   ],
   ai: {
     summary:
-      "Short text hint for a control, shown on hover and focus. Compose Tooltip > TooltipTrigger asChild + TooltipContent. Put Kbd inside the content for shortcut hints.",
+      "Short text hint for a control, shown on hover and focus. Compose Tooltip > TooltipTrigger (style it with buttonVariants and give icon triggers an aria-label) + TooltipContent. Put Kbd inside the content for shortcut hints.",
     whenToUse: ["Naming icon-only buttons (still give the button an aria-label)", "Shortcut hints next to a label", "Clarifying truncated text"],
     whenNotToUse: ["Essential information or anything interactive (use a popover)", "Touch-first UIs where hover doesn't exist", "Error messages (show them inline)"],
     composesWith: ["button", "kbd", "avatar"],

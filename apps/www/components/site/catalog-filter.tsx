@@ -1,6 +1,5 @@
 "use client"
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
@@ -8,13 +7,18 @@ import { cn } from "@/lib/utils"
 /**
  * Category chips over a server-rendered catalog. Filters by toggling `hidden` on
  * children marked with data-category, and keeps the choice in ?category= so it's shareable.
+ * Reads the URL after mount (not useSearchParams) so the catalog stays in the static HTML.
  */
 export function CatalogFilter({ options, children }: { options: { value: string; label: string; count: number }[]; children: React.ReactNode }) {
-  const params = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
-  const active = params.get("category") ?? "all"
+  const [active, setActive] = React.useState("all")
   const ref = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    const sync = () => setActive(new URLSearchParams(window.location.search).get("category") ?? "all")
+    sync()
+    window.addEventListener("popstate", sync)
+    return () => window.removeEventListener("popstate", sync)
+  }, [])
 
   React.useEffect(() => {
     ref.current?.querySelectorAll<HTMLElement>("[data-category]").forEach((el) => {
@@ -23,10 +27,11 @@ export function CatalogFilter({ options, children }: { options: { value: string;
   }, [active])
 
   const select = (value: string) => {
-    const next = new URLSearchParams(params)
-    if (value === "all") next.delete("category")
-    else next.set("category", value)
-    router.replace(`${pathname}${next.size ? `?${next}` : ""}`, { scroll: false })
+    const url = new URL(window.location.href)
+    if (value === "all") url.searchParams.delete("category")
+    else url.searchParams.set("category", value)
+    window.history.replaceState(null, "", url)
+    setActive(value)
   }
   const total = options.reduce((n, o) => n + o.count, 0)
   return (
@@ -44,7 +49,7 @@ export function CatalogFilter({ options, children }: { options: { value: string;
             )}
           >
             {o.label}
-            <span className="font-mono text-[11px] opacity-60">{o.count}</span>
+            <span className="font-mono text-[11px] tabular-nums">{o.count}</span>
           </button>
         ))}
       </div>

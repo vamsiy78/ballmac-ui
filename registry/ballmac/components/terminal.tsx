@@ -43,7 +43,8 @@ function Terminal({ title, theme = "dark", bodyClassName, className, children, .
       </figcaption>
       <div
         data-slot="terminal-body"
-        className={cn("overflow-x-auto px-4 py-3.5 font-mono text-[13px] leading-6", bodyClassName)}
+        tabIndex={0}
+        className={cn("overflow-x-auto px-4 py-3.5 font-mono text-[13px] leading-6 outline-none focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50", bodyClassName)}
       >
         {children}
       </div>

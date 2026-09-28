@@ -42,7 +42,7 @@ function SelectTrigger({ className, size = "default", children, ...props }: Sele
       {...props}
     >
       {children}
-      <SelectPrimitive.Icon asChild>
+      <SelectPrimitive.Icon className="flex">
         <ChevronDownIcon className="size-4 opacity-60" aria-hidden="true" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>

@@ -9,7 +9,7 @@ export function SiteFooter() {
         <Logo className="text-foreground" />
         <p>
           Free components are MIT licensed. Built by{" "}
-          <a href="https://ballmac.com" className="text-foreground underline-offset-4 hover:underline">
+          <a href="https://ballmac.com" className="text-foreground underline underline-offset-4">
             Ballmac
           </a>
           .

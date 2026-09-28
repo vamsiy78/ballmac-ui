@@ -38,6 +38,8 @@ function useReducedMotionSafe() {
   )
 }
 
+const MAX_COPIES = 12
+
 function Marquee({
   vertical = false,
   reverse = false,
@@ -72,7 +74,8 @@ function Marquee({
     const measure = () => {
       const length = vertical ? copy.offsetHeight : copy.offsetWidth
       const viewport = vertical ? root.clientHeight : root.clientWidth
-      const copies = length > 0 ? Math.max(2, Math.ceil(viewport / length) + 1) : 2
+      // Capped: in a container that sizes to its content, each copy would widen the viewport and loop forever.
+      const copies = length > 0 ? Math.min(MAX_COPIES, Math.max(2, Math.ceil(viewport / length) + 1)) : 2
       setLoop((prev) => (prev.length === length && prev.copies === copies ? prev : { length, copies }))
     }
     measure()
@@ -117,11 +120,15 @@ function Marquee({
     <div
       ref={rootRef}
       data-slot="marquee"
+      // Scrollable instead of animated under reduced motion, so keyboard users need to reach it.
+      tabIndex={reduceMotion ? 0 : undefined}
       data-orientation={vertical ? "vertical" : "horizontal"}
       className={cn(
-        "relative flex",
+        "relative flex max-w-full min-w-0",
         vertical ? "flex-col" : "flex-row",
-        reduceMotion ? (vertical ? "overflow-y-auto" : "overflow-x-auto") : "overflow-hidden",
+        reduceMotion
+          ? cn(vertical ? "overflow-y-auto" : "overflow-x-auto", "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50")
+          : "overflow-hidden",
         className
       )}
       style={{ "--marquee-gap": gapValue, maskImage: fadeMask, WebkitMaskImage: fadeMask, ...style } as React.CSSProperties}

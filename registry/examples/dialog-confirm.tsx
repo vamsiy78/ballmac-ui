@@ -1,6 +1,6 @@
 import { TriangleAlert } from "lucide-react"
 
-import { Button } from "@/components/ballmac/button"
+import { buttonVariants } from "@/components/ballmac/button"
 import {
   Dialog,
   DialogClose,
@@ -15,9 +15,7 @@ import {
 export default function DialogConfirm() {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="destructive">Delete project</Button>
-      </DialogTrigger>
+      <DialogTrigger className={buttonVariants({ variant: "destructive" })}>Delete project</DialogTrigger>
       <DialogContent showCloseButton={false} className="sm:max-w-sm">
         <DialogHeader>
           <div className="mb-2 flex size-10 items-center justify-center rounded-full bg-destructive/10 text-destructive">
@@ -29,12 +27,8 @@ export default function DialogConfirm() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DialogClose>
-          <DialogClose asChild>
-            <Button variant="destructive">Delete project</Button>
-          </DialogClose>
+          <DialogClose className={buttonVariants({ variant: "outline" })}>Cancel</DialogClose>
+          <DialogClose className={buttonVariants({ variant: "destructive" })}>Delete project</DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

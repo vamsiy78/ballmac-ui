@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { CodePanel } from "@/components/site/code-panel"
 import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
+import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { Eyebrow, SectionHeading } from "@/components/site/section-heading"
 import { blockCategoryLabels, getBlocks, getItem, readSource } from "@/lib/registry"
 
@@ -27,6 +28,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
   return (
     <div className="mx-auto max-w-[1320px] space-y-12 px-4 py-10 sm:px-6">
       <header className="space-y-4">
+          <ItemJsonLd item={item} section={{ name: "Blocks", path: "/blocks" }} />
         <Eyebrow>
           <Link href="/blocks" className="hover:text-foreground">Blocks</Link> / {blockCategoryLabels[item.blockCategory ?? ""] ?? "Block"}
         </Eyebrow>
@@ -49,7 +51,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
           }
         />
       )}
-      <div className="grid max-w-4xl gap-12">
+      <div className="grid max-w-4xl grid-cols-1 gap-12">
         <section className="space-y-4">
           <SectionHeading id="installation" index="01">Installation</SectionHeading>
           <ItemInstall item={item} />
@@ -72,7 +74,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
         {related.length > 0 && (
           <section className="space-y-4">
             <SectionHeading id="related">More {blockCategoryLabels[item.blockCategory ?? ""]?.toLowerCase()} blocks</SectionHeading>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {related.map((r) => (
                 <Link key={r.name} href={`/blocks/${r.name}`} className="hover:bg-accent rounded-xl border p-4 transition-colors">
                   <p className="text-sm font-medium">{r.title}</p>

@@ -24,19 +24,21 @@ export default async function TemplatesPage() {
         </p>
       </header>
       {templates.length === 0 && <p className="text-muted-foreground mt-12">Templates are on the way.</p>}
-      <div className="mt-12 grid gap-6 lg:grid-cols-2">
+      <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
         {templates.map((t) => (
-          <Link key={t.name} href={`/templates/${t.name}`} className="overflow-hidden rounded-xl border transition-colors hover:border-foreground/25">
+          <div key={t.name} className="relative overflow-hidden rounded-xl border transition-colors hover:border-foreground/25">
             <div className="border-b">
               <ScaledPreview scale={0.48} height={420} width={1280}>
                 {t.Preview ? <t.Preview /> : null}
               </ScaledPreview>
             </div>
             <div className="p-5">
-              <p className="text-lg font-medium">{t.title}</p>
+              <Link href={`/templates/${t.name}`} className="text-lg font-medium after:absolute after:inset-0 after:rounded-xl outline-none focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">
+                {t.title}
+              </Link>
               <p className="text-muted-foreground mt-1 text-sm">{t.description}</p>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

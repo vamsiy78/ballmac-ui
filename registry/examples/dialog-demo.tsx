@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ballmac/button"
+import { Button, buttonVariants } from "@/components/ballmac/button"
 import {
   Dialog,
   DialogClose,
@@ -17,9 +17,7 @@ import { Label } from "@/components/ballmac/label"
 export default function DialogDemo() {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Edit profile</Button>
-      </DialogTrigger>
+      <DialogTrigger className={buttonVariants({ variant: "outline" })}>Edit profile</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <form className="grid gap-5" onSubmit={(event) => event.preventDefault()}>
           <DialogHeader>
@@ -37,10 +35,8 @@ export default function DialogDemo() {
             </div>
           </div>
           <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline" type="button">
-                Cancel
-              </Button>
+            <DialogClose type="button" className={buttonVariants({ variant: "outline" })}>
+              Cancel
             </DialogClose>
             <Button type="submit">Save changes</Button>
           </DialogFooter>

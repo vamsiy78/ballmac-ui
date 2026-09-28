@@ -22,7 +22,7 @@ export default defineItem({
     whenNotToUse: [
       "Forms, toolbars and dense UI (use button)",
       "Several buttons side by side; one magnetic button per view keeps it meaningful",
-      "Rendering a link via asChild (not supported; wrap a Button asChild instead)",
+      "Rendering a link (not supported; use an <a> with buttonVariants instead)",
     ],
     composesWith: ["button", "border-beam"],
     a11y: [

@@ -1,6 +1,6 @@
 import { Bold, Italic, Link } from "lucide-react"
 
-import { Button } from "@/components/ballmac/button"
+import { buttonVariants } from "@/components/ballmac/button"
 import { Kbd, KbdGroup } from "@/components/ballmac/kbd"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ballmac/tooltip"
 
@@ -16,10 +16,8 @@ export default function TooltipDemo() {
       <div role="toolbar" aria-label="Formatting" className="flex items-center gap-1 rounded-lg border bg-card p-1">
         {tools.map(({ label, icon: Icon, keys }) => (
           <Tooltip key={label}>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon-sm" aria-label={label}>
-                <Icon />
-              </Button>
+            <TooltipTrigger className={buttonVariants({ variant: "ghost", size: "icon-sm" })} aria-label={label}>
+              <Icon />
             </TooltipTrigger>
             <TooltipContent>
               {label}

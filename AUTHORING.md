@@ -40,7 +40,8 @@ Names are permanent public API: kebab-case, no prefixes (`magnetic-button`, `ai-
    (or `& VariantProps<typeof xVariants>` for cva variants) and export it. The site's props table is generated
    from these literals, their JSDoc, cva `variants`/`defaultVariants`, and defaults in the function's destructuring.
 7. **Exports at the bottom:** `export { Card, CardHeader, type CardProps }`. Composable parts over configuration props when there's structure (Dialog, Chat, Terminal).
-8. **SSR-safe:** no `window` or `document` during render; ids via `React.useId()`; any number or date formatting uses a fixed default locale (`"en-US"`) with a `locale` prop, or the server and browser disagree and React throws a hydration error.
+8. **No `asChild` in JSX** (in item files and examples). The shadcn CLI rewrites it to Base UI's `render` prop in `base-*` projects, the `shadcn init` default. Style links and triggers directly instead: `<a className={buttonVariants({ variant: "outline" })}>`, `<DialogTrigger className={buttonVariants()}>`. Components may still *accept* `asChild`. `pnpm check` enforces this.
+9. **SSR-safe:** no `window` or `document` during render; ids via `React.useId()`; any number or date formatting uses a fixed default locale (`"en-US"`) with a `locale` prop, or the server and browser disagree and React throws a hydration error.
 
 ## Design language
 

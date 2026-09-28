@@ -92,7 +92,7 @@ export function ItemAi({ item }: { item: SiteItem }) {
         <CopyButton value={prompt} label="Copy prompt" />
       </div>
       {item.ai?.whenToUse?.length || item.ai?.whenNotToUse?.length ? (
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="rounded-xl border p-4">
             <p className="text-sm font-medium">Use it for</p>
             <ul className="text-muted-foreground mt-2 list-disc space-y-1 pl-5 text-sm">
@@ -109,7 +109,7 @@ export function ItemAi({ item }: { item: SiteItem }) {
       ) : null}
       <p className="text-muted-foreground text-sm">
         Registry JSON:{" "}
-        <a href={url} className="text-foreground font-mono text-[13px] underline-offset-4 hover:underline">
+        <a href={url} className="text-foreground font-mono text-[13px] underline underline-offset-4">
           {url}
         </a>
       </p>

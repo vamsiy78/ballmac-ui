@@ -59,7 +59,7 @@ export default function PricingPage() {
           The core library is free and MIT licensed. Pro will add premium blocks and templates.
         </p>
       </header>
-      <div className="mt-14 grid gap-5 md:grid-cols-2">
+      <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2">
         {plans.map((plan) => {
           const pro = plan.name === "Pro"
           return (

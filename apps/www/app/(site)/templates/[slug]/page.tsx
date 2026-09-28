@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { CodePanel } from "@/components/site/code-panel"
 import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
+import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { Eyebrow, SectionHeading } from "@/components/site/section-heading"
 import { getItem, getTemplates, itemHref, readSource } from "@/lib/registry"
 
@@ -27,6 +28,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
   return (
     <div className="mx-auto max-w-[1320px] space-y-12 px-4 py-10 sm:px-6">
       <header className="space-y-4">
+          <ItemJsonLd item={item} section={{ name: "Templates", path: "/templates" }} />
         <Eyebrow>
           <Link href="/templates" className="hover:text-foreground">Templates</Link>
         </Eyebrow>
@@ -50,7 +52,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
           }
         />
       )}
-      <div className="grid max-w-4xl gap-12">
+      <div className="grid max-w-4xl grid-cols-1 gap-12">
         <section className="space-y-4">
           <SectionHeading id="installation" index="01">Installation</SectionHeading>
           <ItemInstall item={item} />
