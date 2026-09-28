@@ -1,0 +1,44 @@
+# Ballmac UI
+
+Accessible React + Tailwind v4 components, blocks and templates in one design language, distributed as a
+[shadcn](https://ui.shadcn.com) registry and usable from AI agents through MCP. Site: https://ui.ballmac.com
+
+```bash
+npx shadcn@latest add @ballmac/button
+```
+
+Files install into `components/ballmac/`, so they never overwrite your shadcn/ui components.
+
+## Repository
+
+| Path | What |
+|---|---|
+| `registry/ballmac/` | Item source. Paths mirror install locations: `components/x.tsx` installs to `@components/ballmac/x.tsx` |
+| `registry/ballmac/**/<name>.meta.ts` | Item metadata: the single source of truth for the registry, site, search, llms.txt and MCP |
+| `registry/examples/` | Examples, published as `registry:example` items |
+| `packages/metadata/` | The metadata schema (`schema.ts`) |
+| `apps/www/` | The website, registry hosting (`/r/*.json`) and `llms.txt` |
+| `scripts/` | Registry build and quality checks |
+
+## Commands
+
+Uses pnpm (`npx pnpm@10` works without a global install).
+
+```bash
+pnpm install
+pnpm build:registry   # validate metadata, generate registry.json, run `shadcn build`, write site data
+pnpm check            # dependency truth, license provenance, output schema validation
+pnpm smoke            # install every item into a fresh Next.js app, then tsc + next build
+pnpm dev              # website on http://localhost:3000
+```
+
+## Adding an item
+
+1. Write the source under `registry/ballmac/components/` (import `cn` from `@/lib/utils`, other items from `@/components/ballmac/...`).
+2. Add `<name>.meta.ts` next to it with `defineItem({...})`: description, category, dependencies, examples, AI notes, and `source` if any code came from elsewhere.
+3. Add examples under `registry/examples/`.
+4. Run `pnpm build:registry && pnpm check && pnpm smoke`.
+
+## License
+
+Free components are MIT. See `THIRD_PARTY_NOTICES.md` for credited sources.

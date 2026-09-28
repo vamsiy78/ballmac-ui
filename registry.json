@@ -1,0 +1,366 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ballmac",
+  "homepage": "https://ui.ballmac.com",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A button with six variants, three sizes, a pill shape and a built-in loading state. Renders any element with asChild.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/button.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "button",
+          "cta",
+          "loading",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "The base action control. Use variant for emphasis, size for density, and loading while an async action runs.",
+          "whenToUse": [
+            "Primary and secondary actions",
+            "Form submit buttons",
+            "Links that should look like buttons (asChild with <a>)"
+          ],
+          "whenNotToUse": [
+            "Navigation inside running text (use a link)",
+            "Toggling state (use a switch or toggle)"
+          ],
+          "composesWith": [
+            "kbd",
+            "tooltip"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Activates the button"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves focus to the button"
+            }
+          ],
+          "customization": [
+            "variant: default | secondary | outline | ghost | link | destructive",
+            "size: sm | default | lg | icon | icon-sm",
+            "shape: default | pill"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Button",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "button-demo",
+          "button-variants",
+          "button-loading"
+        ],
+        "url": "https://ui.ballmac.com/components/button"
+      }
+    },
+    {
+      "name": "button-demo",
+      "type": "registry:example",
+      "title": "Button: Default",
+      "description": "Default example of Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/button-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/button-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "button",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "button-variants",
+      "type": "registry:example",
+      "title": "Button: Variants",
+      "description": "Variants example of Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/button-variants.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/button-variants.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "button",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "button-loading",
+      "type": "registry:example",
+      "title": "Button: Loading",
+      "description": "Loading example of Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/button-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/button-loading.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "button",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "number-ticker",
+      "type": "registry:ui",
+      "title": "Number Ticker",
+      "description": "Counts up to a number when it scrolls into view, with locale-aware formatting for currency, percentages and decimals.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/number-ticker.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/number-ticker.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "animation",
+          "counter",
+          "stats",
+          "motion"
+        ],
+        "version": "1.0.1",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Animated number for stats and KPIs. Respects reduced motion by showing the final value immediately.",
+          "whenToUse": [
+            "Stat sections on landing pages",
+            "Dashboard KPIs that load in"
+          ],
+          "whenNotToUse": [
+            "Numbers that update every second (animate a live value instead)",
+            "Prices users need to read instantly"
+          ],
+          "composesWith": [
+            "stat-card"
+          ],
+          "a11y": [],
+          "customization": [
+            "format accepts any Intl.NumberFormat options",
+            "locale defaults to en-US so server and browser render identical text; pass your locale explicitly",
+            "duration and delay in seconds"
+          ]
+        },
+        "examples": [
+          "number-ticker-demo",
+          "number-ticker-currency"
+        ],
+        "url": "https://ui.ballmac.com/components/number-ticker"
+      }
+    },
+    {
+      "name": "number-ticker-demo",
+      "type": "registry:example",
+      "title": "Number Ticker: Default",
+      "description": "Default example of Number Ticker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/number-ticker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/number-ticker-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/number-ticker-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "number-ticker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "number-ticker-currency",
+      "type": "registry:example",
+      "title": "Number Ticker: Currency",
+      "description": "Currency example of Number Ticker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/number-ticker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/number-ticker-currency.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/number-ticker-currency.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "number-ticker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "theme",
+      "type": "registry:theme",
+      "title": "Ballmac Theme",
+      "description": "Ballmac UI design tokens in OKLCH: neutral light mode, ink-navy dark mode, the Ballmac blue focus ring, chart colors, and motion easings.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "theme": {
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-duration-fast": "140ms",
+          "bm-duration-base": "220ms",
+          "bm-duration-slow": "320ms"
+        },
+        "light": {
+          "radius": "0.625rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0.012 265)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0.012 265)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0.012 265)",
+          "primary": "oklch(0.21 0.02 266)",
+          "primary-foreground": "oklch(0.985 0.002 265)",
+          "secondary": "oklch(0.965 0.004 265)",
+          "secondary-foreground": "oklch(0.21 0.02 266)",
+          "muted": "oklch(0.965 0.004 265)",
+          "muted-foreground": "oklch(0.5 0.012 265)",
+          "accent": "oklch(0.955 0.012 262)",
+          "accent-foreground": "oklch(0.21 0.02 266)",
+          "destructive": "oklch(0.58 0.22 27)",
+          "border": "oklch(0.915 0.006 265)",
+          "input": "oklch(0.915 0.006 265)",
+          "ring": "oklch(0.62 0.19 262)",
+          "chart-1": "oklch(0.62 0.19 262)",
+          "chart-2": "oklch(0.7 0.13 175)",
+          "chart-3": "oklch(0.78 0.16 75)",
+          "chart-4": "oklch(0.6 0.2 300)",
+          "chart-5": "oklch(0.66 0.18 35)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.02 270)",
+          "foreground": "oklch(0.97 0.004 265)",
+          "card": "oklch(0.2 0.025 268)",
+          "card-foreground": "oklch(0.97 0.004 265)",
+          "popover": "oklch(0.2 0.025 268)",
+          "popover-foreground": "oklch(0.97 0.004 265)",
+          "primary": "oklch(0.97 0.004 265)",
+          "primary-foreground": "oklch(0.2 0.025 268)",
+          "secondary": "oklch(0.25 0.028 268)",
+          "secondary-foreground": "oklch(0.97 0.004 265)",
+          "muted": "oklch(0.25 0.028 268)",
+          "muted-foreground": "oklch(0.72 0.02 265)",
+          "accent": "oklch(0.28 0.05 264)",
+          "accent-foreground": "oklch(0.97 0.004 265)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.18 262)",
+          "chart-1": "oklch(0.66 0.18 262)",
+          "chart-2": "oklch(0.74 0.12 175)",
+          "chart-3": "oklch(0.8 0.15 75)",
+          "chart-4": "oklch(0.66 0.19 300)",
+          "chart-5": "oklch(0.7 0.17 35)"
+        }
+      },
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "tokens",
+          "dark mode"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Installs Ballmac UI's color, radius and motion tokens as CSS variables. Optional: every Ballmac item also works with any shadcn theme.",
+          "whenToUse": [
+            "Starting a new project that should look like Ballmac UI",
+            "Matching the Ballmac demos exactly"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Change --ring and --chart-1 to your brand color",
+            "Adjust --radius for rounder or sharper corners"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme"
+      }
+    }
+  ]
+}
