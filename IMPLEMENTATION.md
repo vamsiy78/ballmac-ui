@@ -25,8 +25,8 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 ### 1. Project foundation
 - [x] pnpm + Turborepo monorepo (`apps/www`, `packages/metadata`, `registry`)
 - [x] GitHub repo `vamsiy78/ballmac-ui` (private until launch), `main` + `preprod`
-- [x] Vercel project `ballmac-ui` (root `apps/www`); domain `ui.ballmac.com` (DNS pending at BigRock)
-- [~] `preprod.ui.ballmac.com` → `preprod` branch (Vercel domain added; DNS at BigRock pending)
+- [x] Vercel project `ballmac-ui` (root `apps/www`); `ui.ballmac.com` live
+- [x] `preprod.ui.ballmac.com` → `preprod` branch (behind Vercel preview protection)
 
 ### 2. Design system
 - [x] Theme tokens (`registry/ballmac/themes/theme.meta.ts`) → site CSS generated from the same source
@@ -83,7 +83,7 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 ### 14. Final polish
 - [x] OG images, sitemap, robots, JSON-LD
 - [x] axe: 0 serious/critical on all 67 previews and 17 site pages, light and dark
-- [~] Lighthouse (local `next start`, mobile): a11y/best practices/SEO 100 everywhere; performance 91–96 (simulated LCP ~3.4 s, observed 65 ms). Re-measure on Vercel.
+- [~] Lighthouse on ui.ballmac.com (mobile): accessibility, best practices, SEO 100 on every page tested. Performance: hero-1 100, button 98, catalog 95, **home 89** (simulated LCP 3.3 s from the JS of five live demos; next: lazy-hydrate the showcase)
 
 ## Components (MVP: 30)
 
