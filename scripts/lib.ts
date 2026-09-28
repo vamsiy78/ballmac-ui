@@ -58,10 +58,22 @@ export async function loadItems(): Promise<LoadedItem[]> {
   return items
 }
 
-/** Install target through the user's aliases: components/x.tsx -> @components/ballmac/x.tsx */
+/**
+ * Install target through the user's aliases:
+ *   components/x.tsx -> @components/ballmac/x.tsx (also hooks/, lib/)
+ *   app/launch/page.tsx -> app/launch/page.tsx (template pages; the CLI maps app/ for the framework)
+ */
 export function targetFor(path: string): string {
   const [head, ...rest] = path.split("/")
+  if (head === "app") return path
   const alias = { components: "components", hooks: "hooks", lib: "lib" }[head]
-  if (!alias) throw new Error(`Unsupported file location "${path}" (use components/, hooks/ or lib/)`)
+  if (!alias) throw new Error(`Unsupported file location "${path}" (use components/, hooks/, lib/ or app/)`)
   return `@${alias}/ballmac/${rest.join("/")}`
+}
+
+/** The import specifier a file is reachable at once installed: components/x.tsx -> @/components/ballmac/x */
+export function importPathFor(path: string): string | null {
+  const [head, ...rest] = path.split("/")
+  if (!["components", "hooks", "lib"].includes(head)) return null
+  return `@/${head}/ballmac/${rest.join("/")}`.replace(/\.(tsx?|jsx?)$/, "").replace(/\/index$/, "")
 }

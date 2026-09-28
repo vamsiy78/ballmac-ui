@@ -47,7 +47,7 @@ function toRegistryItems(item: LoadedItem) {
     files: item.files.length
       ? item.files.map((f) => ({
           path: rel(join(item.baseDir, f.path)),
-          type: f.type ?? defaultFileType[item.type] ?? "registry:component",
+          type: f.type ?? (f.path.startsWith("app/") ? "registry:page" : defaultFileType[item.type] ?? "registry:component"),
           target: targetFor(f.path),
         }))
       : undefined,

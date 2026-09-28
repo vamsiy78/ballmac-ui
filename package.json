@@ -10,7 +10,8 @@
     "typecheck": "turbo run typecheck",
     "verify": "pnpm build:registry && pnpm check",
     "smoke": "tsx scripts/smoke-install.ts",
-    "check": "tsx scripts/check-deps.ts && tsx scripts/check-licenses.ts && tsx scripts/validate-output.ts apps/www/public/r"
+    "check": "tsx scripts/check-deps.ts && tsx scripts/check-licenses.ts && tsx scripts/validate-output.ts apps/www/public/r",
+    "test": "pnpm --filter @ballmac-ui/registry test"
   },
   "devDependencies": {
     "turbo": "^2",
