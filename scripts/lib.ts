@@ -54,6 +54,11 @@ export async function loadItems(): Promise<LoadedItem[]> {
       if (!dep.startsWith("shadcn:") && !names.has(dep)) errors.push(`${item.name}: unknown registry dependency "${dep}"`)
     }
   }
+  for (const item of items) {
+    for (const ref of item.ai?.composesWith ?? []) {
+      if (!names.has(ref) || names.get(ref) !== ref) errors.push(`${item.name}: ai.composesWith "${ref}" is not a Ballmac item`)
+    }
+  }
   if (errors.length) throw new Error(`Registry metadata has ${errors.length} problem(s):\n  - ${errors.join("\n  - ")}`)
   return items
 }

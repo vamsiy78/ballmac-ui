@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 
-import { SiteFooter } from "@/components/site/site-footer"
-import { SiteHeader } from "@/components/site/site-header"
 import { ThemeScript } from "@/components/site/theme-script"
 import { SITE_URL } from "@/lib/registry"
 
@@ -27,9 +25,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ThemeScript />
       </head>
       <body className="flex min-h-dvh flex-col font-sans">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        {children}
       </body>
     </html>
   )

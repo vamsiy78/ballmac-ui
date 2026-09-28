@@ -3,13 +3,15 @@ import Link from "next/link"
 import { CommandMenu, type MenuEntry } from "@/components/site/command-menu"
 import { Logo } from "@/components/site/logo"
 import { ThemeToggle } from "@/components/site/theme-toggle"
-import { categoryLabels, getComponents } from "@/lib/registry"
+import { blockCategoryLabels, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
 
 const nav = [
   { href: "/components", label: "Components" },
-  { href: "/docs/installation", label: "Docs" },
-  { href: "/docs/mcp", label: "MCP" },
-]
+  { href: "/blocks", label: "Blocks" },
+  { href: "/templates", label: "Templates", wide: true },
+  { href: "/docs", label: "Docs" },
+  { href: "/pricing", label: "Pricing", wide: true },
+] as { href: string; label: string; wide?: boolean }[]
 
 export function SiteHeader() {
   const entries: MenuEntry[] = [
@@ -20,6 +22,11 @@ export function SiteHeader() {
       group: categoryLabels[i.category] ?? i.category,
       href: `/components/${i.name}`,
     })),
+    ...getBlocks().map((b) => ({ name: b.name, title: b.title, description: b.description, group: `Blocks · ${blockCategoryLabels[b.blockCategory ?? ""] ?? ""}`, href: `/blocks/${b.name}` })),
+    ...getTemplates().map((t) => ({ name: t.name, title: t.title, description: t.description, group: "Templates", href: `/templates/${t.name}` })),
+    { name: "introduction", title: "Introduction", description: "What Ballmac UI is and how it works.", group: "Docs", href: "/docs" },
+    { name: "registry", title: "CLI & registry", description: "Namespaces, URLs, search, view and updates.", group: "Docs", href: "/docs/registry" },
+    { name: "theming", title: "Theming", description: "Tokens, brand color and dark mode.", group: "Docs", href: "/docs/theming" },
     { name: "installation", title: "Installation", description: "Set up a project and add your first component.", group: "Docs", href: "/docs/installation" },
     { name: "mcp", title: "MCP", description: "Let Claude Code, Cursor or VS Code install Ballmac UI for you.", group: "Docs", href: "/docs/mcp" },
   ]
@@ -31,7 +38,7 @@ export function SiteHeader() {
         </Link>
         <nav aria-label="Main" className="flex items-center sm:gap-1">
           {nav.map((n) => (
-            <Link key={n.href} href={n.href} className="text-muted-foreground hover:text-foreground rounded-md px-1.5 py-1.5 text-[13px] font-medium transition-colors sm:px-2.5">
+            <Link key={n.href} href={n.href} className={`text-muted-foreground hover:text-foreground rounded-md px-1.5 py-1.5 text-[13px] font-medium transition-colors sm:px-2.5 ${n.wide ? "hidden lg:inline-block" : ""}`}>
               {n.label}
             </Link>
           ))}

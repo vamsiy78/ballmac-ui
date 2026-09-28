@@ -4,6 +4,838 @@
   "homepage": "https://ui.ballmac.com",
   "items": [
     {
+      "name": "ai-chat",
+      "type": "registry:ui",
+      "title": "AI Chat",
+      "description": "The layout for a chat UI: a message log that sticks to the bottom while replies stream unless the reader scrolls up, a jump-to-latest button, an empty state with suggestions and a footer.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/ai-chat.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/ai-chat.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "chat",
+          "conversation",
+          "llm",
+          "scroll",
+          "streaming",
+          "layout"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Layout only: <Chat> (a full-height column) > <ChatMessages> (role=log, auto-scroll) + <ChatFooter>. Put ai-message items inside ChatMessages and a prompt-input inside ChatFooter. It holds no chat state, so any source works (Vercel AI SDK useChat, your own fetch stream).",
+          "whenToUse": [
+            "Building an assistant, support bot or copilot panel from ai-message and prompt-input",
+            "Any log that receives streaming content and should follow the newest line unless the reader scrolls up",
+            "A first-run screen with suggested prompts (ChatEmpty + ChatSuggestions)"
+          ],
+          "whenNotToUse": [
+            "A single one-off AI answer on a page (use ai-message or streaming-text alone)",
+            "Terminal-style command output (use terminal)"
+          ],
+          "composesWith": [
+            "ai-message",
+            "prompt-input",
+            "streaming-text",
+            "tool-call-card",
+            "reasoning-disclosure"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the message log (scroll with arrow keys / Page Up / Page Down), then the jump-to-latest button when shown"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "On a suggestion, sends it through onSelect"
+            },
+            {
+              "keys": "—",
+              "action": "The log is role=log with aria-live=polite; set aria-busy on ChatMessages while a reply streams to avoid announcing every token"
+            }
+          ],
+          "customization": [
+            "Give Chat (or its parent) a height; ChatMessages fills the remaining space and scrolls",
+            "contentClassName on ChatMessages and ChatFooter sets the message column width (max-w-3xl by default)",
+            "useChatScroll() inside Chat returns { isAtBottom, scrollToBottom } — call scrollToBottom() when the user sends a message",
+            "Keep ChatMessages mounted and render ChatEmpty inside it when there are no messages",
+            "AI SDK wiring: const { messages, sendMessage, status, stop } = useChat(); render messages in ChatMessages and <PromptInput status={status === 'streaming' || status === 'submitted' ? 'streaming' : 'idle'} onStop={stop} onSubmit={(text) => sendMessage({ text })} /> in ChatFooter"
+          ]
+        },
+        "examples": [
+          "ai-chat-demo",
+          "ai-chat-empty"
+        ],
+        "url": "https://ui.ballmac.com/components/ai-chat"
+      }
+    },
+    {
+      "name": "ai-chat-demo",
+      "type": "registry:example",
+      "title": "AI Chat: Default",
+      "description": "Default example of AI Chat.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ai-chat.json",
+        "https://ui.ballmac.com/r/ai-message.json",
+        "https://ui.ballmac.com/r/prompt-input.json",
+        "https://ui.ballmac.com/r/streaming-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ai-chat-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ai-chat-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ai-chat",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ai-chat-empty",
+      "type": "registry:example",
+      "title": "AI Chat: Empty state with suggestions",
+      "description": "Empty state with suggestions example of AI Chat.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ai-chat.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ai-chat-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ai-chat-empty.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ai-chat",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ai-message",
+      "type": "registry:ui",
+      "title": "AI Message",
+      "description": "A chat message with user, assistant and system roles: right-aligned user bubbles, full-width assistant prose, an avatar slot, hover-revealed actions and a hydration-safe timestamp.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/button.json",
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/ai-message.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/ai-message.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "chat",
+          "message",
+          "llm",
+          "assistant",
+          "copy"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Render one chat turn. <Message role> wraps <MessageAvatar>, <MessageContent>, <MessageActions> (with <MessageAction label> and <MessageCopyAction value>) and <MessageTimestamp date>. It takes plain children, so it works with the Vercel AI SDK, LangChain or any stream.",
+          "whenToUse": [
+            "Rendering each turn of an assistant or chatbot conversation",
+            "Showing copy, regenerate and feedback buttons under an assistant reply",
+            "A system note inside a conversation, such as 'Model switched to a smaller context window'"
+          ],
+          "whenNotToUse": [
+            "The scrolling conversation layout itself (use ai-chat and put messages inside ChatMessages)",
+            "Threaded comments or email-style lists where both sides look alike"
+          ],
+          "composesWith": [
+            "ai-chat",
+            "prompt-input",
+            "streaming-text",
+            "tool-call-card",
+            "reasoning-disclosure",
+            "code-block"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves through the action buttons; focusing any of them reveals the action row"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Runs the focused action"
+            }
+          ],
+          "customization": [
+            "role: user | assistant | system (sets alignment and bubble styling through context)",
+            "MessageActions visibility: hover (default; always visible on touch devices) | always",
+            "MessageAction requires a label (used as aria-label and title); pass aria-pressed for thumbs up/down",
+            "MessageTimestamp formats with locale (en-US default) and timeZone; without timeZone it formats after hydration in the viewer's zone, or pass preformatted children",
+            "Render markdown yourself inside MessageContent; it styles lists, code and spacing lightly",
+            "AI SDK: messages.map(m => <Message key={m.id} role={m.role}><MessageContent>{m.parts.map(p => p.type === 'text' ? p.text : null)}</MessageContent></Message>)"
+          ]
+        },
+        "examples": [
+          "ai-message-demo",
+          "ai-message-actions"
+        ],
+        "url": "https://ui.ballmac.com/components/ai-message"
+      }
+    },
+    {
+      "name": "ai-message-demo",
+      "type": "registry:example",
+      "title": "AI Message: Default",
+      "description": "Default example of AI Message.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ai-message.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ai-message-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ai-message-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ai-message",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ai-message-actions",
+      "type": "registry:example",
+      "title": "AI Message: With actions",
+      "description": "With actions example of AI Message.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ai-message.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ai-message-actions.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ai-message-actions.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ai-message",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "animated-grid",
+      "type": "registry:ui",
+      "title": "Animated Grid",
+      "description": "A decorative hairline grid background where a few random cells softly light up and fade, like instrument lights. SVG, hydration-safe, static under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/animated-grid.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/animated-grid.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "background",
+          "grid",
+          "pattern",
+          "hero",
+          "decorative",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Place <AnimatedGrid /> as the first child of a relative container (it is absolute inset-0, aria-hidden, pointer-events-none) and put content after it with relative positioning. Lit cells are picked on the client after mount, so SSR output is just the grid.",
+          "whenToUse": [
+            "Hero or section backgrounds on developer-tool and SaaS landing pages",
+            "Empty states or sign-in screens that need quiet texture"
+          ],
+          "whenNotToUse": [
+            "Behind dense text or data (it competes with content)",
+            "More than one per screen"
+          ],
+          "composesWith": [
+            "text-reveal",
+            "shimmer-text",
+            "magnetic-button"
+          ],
+          "a11y": [],
+          "customization": [
+            "cellSize in px (default 40); count of lit cells (default 8); interval in ms between changes (default 700)",
+            "fade toggles the radial edge mask; pass your own mask via style",
+            "Colors are CSS variables: className=\"[--grid-line:…] [--grid-light:…]\" (defaults: 8% foreground lines, 20% ring cells)"
+          ]
+        },
+        "examples": [
+          "animated-grid-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/animated-grid"
+      }
+    },
+    {
+      "name": "animated-grid-demo",
+      "type": "registry:example",
+      "title": "Animated Grid: Hero background",
+      "description": "Hero background example of Animated Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/animated-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/animated-grid-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/animated-grid-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "animated-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "api-key-field",
+      "type": "registry:ui",
+      "title": "API Key Field",
+      "description": "Displays a secret such as an API key, masked by default (sk-live-••••••••a1b2), with a reveal toggle, a copy button that copies the full key, and an optional regenerate action.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/api-key-field.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/api-key-field.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "api-key",
+          "secret",
+          "token",
+          "copy",
+          "mask",
+          "settings",
+          "developer"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Show an existing secret: <ApiKeyField value={key} label='Secret key' onRegenerate={confirmThenRotate} />. It is read-only; copy always copies the full value, even while masked.",
+          "whenToUse": [
+            "API keys, webhook signing secrets and access tokens on settings or developer pages",
+            "Showing a newly created key once so the user can copy it"
+          ],
+          "whenNotToUse": [
+            "Password entry (use an input with type=password)",
+            "Secrets you should not send to the browser at all (show only the last four characters from the server)"
+          ],
+          "composesWith": [
+            "button",
+            "dialog"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves between reveal, copy and regenerate buttons"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Reveal is a toggle button (aria-pressed); copy announces 'Key copied to clipboard'"
+            },
+            {
+              "keys": "—",
+              "action": "While masked, screen readers hear the prefix and last characters, not bullet characters"
+            }
+          ],
+          "customization": [
+            "visiblePrefix (default 8) and visibleSuffix (default 4) characters stay visible; the mask length is fixed so it doesn't reveal the key length",
+            "revealed/defaultRevealed/onRevealedChange",
+            "onRegenerate shows a regenerate button; confirmation is the caller's job (e.g. a dialog); regenerating spins it",
+            "onCopy runs after a successful copy; the component never logs the value"
+          ]
+        },
+        "examples": [
+          "api-key-field-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/api-key-field"
+      }
+    },
+    {
+      "name": "api-key-field-demo",
+      "type": "registry:example",
+      "title": "API Key Field: Default",
+      "description": "Default example of API Key Field.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/api-key-field.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/api-key-field-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/api-key-field-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "api-key-field",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "A Radix avatar with image and initials fallback, three sizes, an optional presence dot, and AvatarGroup for overlapping stacks with a +N overflow counter.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/avatar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/avatar.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "avatar",
+          "user",
+          "profile",
+          "presence",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "User or team picture with initials fallback while the image loads or if it fails. Add status for presence, and wrap several in AvatarGroup with max to cap the visible count.",
+          "whenToUse": [
+            "Showing who owns, edited or is assigned to something",
+            "Account menus and comment threads",
+            "Stacks of collaborators or members with an overflow count"
+          ],
+          "whenNotToUse": [
+            "Logos or product icons (use an img)",
+            "Large profile headers that need a custom shape"
+          ],
+          "composesWith": [
+            "badge",
+            "tooltip",
+            "dialog"
+          ],
+          "a11y": [],
+          "customization": [
+            "size: sm | default | lg (24 / 32 / 44 px)",
+            "status: online | away | busy | offline, announced as screen reader text (statusLabel to override)",
+            "AvatarGroup: size, max, total (when more members exist than you render)",
+            "Always include an AvatarFallback with initials; the image alt names the person"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Avatar",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "avatar-demo",
+          "avatar-group"
+        ],
+        "url": "https://ui.ballmac.com/components/avatar"
+      }
+    },
+    {
+      "name": "avatar-demo",
+      "type": "registry:example",
+      "title": "Avatar: Default",
+      "description": "Default example of Avatar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/avatar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/avatar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/avatar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "avatar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "avatar-group",
+      "type": "registry:example",
+      "title": "Avatar: Group",
+      "description": "Group example of Avatar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/avatar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/avatar-group.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/avatar-group.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "avatar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "A small pill label in four variants with an optional status dot and success, warning and error tones. Renders links or buttons with asChild.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/badge.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/badge.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "badge",
+          "status",
+          "tag",
+          "label",
+          "pill"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Short metadata or status label. Use variant for emphasis, status (neutral | success | warning | error) for state with a coloured dot, and asChild to make it a link.",
+          "whenToUse": [
+            "Status of a deployment, invoice or job",
+            "Counts, plan names and version tags",
+            "Small labels on cards and table rows"
+          ],
+          "whenNotToUse": [
+            "Clickable filters that toggle (use a toggle or button)",
+            "Long text (it doesn't wrap)",
+            "Notifications that need attention (use an alert or toast)"
+          ],
+          "composesWith": [
+            "avatar",
+            "button",
+            "switch"
+          ],
+          "a11y": [],
+          "customization": [
+            "variant: default | secondary | outline | destructive",
+            "status: neutral | success (chart-2) | warning (chart-3) | error (destructive); overrides variant colours with a soft tint",
+            "dot: shows a leading dot; on by default when status is set",
+            "asChild renders the child element (for example an <a>)"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Badge",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "badge-demo",
+          "badge-status"
+        ],
+        "url": "https://ui.ballmac.com/components/badge"
+      }
+    },
+    {
+      "name": "badge-demo",
+      "type": "registry:example",
+      "title": "Badge: Default",
+      "description": "Default example of Badge.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/badge.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/badge-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/badge-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "badge",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "badge-status",
+      "type": "registry:example",
+      "title": "Badge: Status",
+      "description": "Status example of Badge.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/badge.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/badge-status.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/badge-status.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "badge",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "border-beam",
+      "type": "registry:ui",
+      "title": "Border Beam",
+      "description": "A short beam of light that travels around the inside edge of its parent's border at a constant speed. Decorative, token-colored, hidden under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/border-beam.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/border-beam.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "border",
+          "glow",
+          "highlight",
+          "decorative",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Drop <BorderBeam /> as the last child of any element with position: relative and a border radius; it inherits the radius and draws only in a borderWidth-thick ring (aria-hidden, pointer-events-none). Renders a span, so it is valid inside buttons.",
+          "whenToUse": [
+            "Drawing attention to one highlighted card, such as the recommended pricing plan",
+            "Marking a live or running state on a panel (an agent working, a deploy in progress)",
+            "A featured call-to-action button"
+          ],
+          "whenNotToUse": [
+            "Several elements on the same screen; one beam per view",
+            "Communicating status on its own (pair it with text; it is hidden under reduced motion)"
+          ],
+          "composesWith": [
+            "spotlight-card",
+            "button",
+            "magnetic-button"
+          ],
+          "a11y": [],
+          "customization": [
+            "duration (s per lap, default 8), delay, reverse",
+            "size: beam length in px (default 80); borderWidth: ring thickness in px (default 1)",
+            "colorFrom / colorTo: any CSS color, default var(--ring) fading out; try var(--chart-2)",
+            "Two beams with delay={duration / 2} give an opposed pair; className=\"-inset-px\" moves the ring onto a 1px parent border",
+            "Needs CSS offset-path rect() (Chrome 116, Firefox 122, Safari 17.2); older browsers simply don't show the beam"
+          ]
+        },
+        "source": {
+          "name": "Magic UI Border Beam",
+          "url": "https://github.com/magicuidesign/magicui",
+          "license": "MIT",
+          "copyright": "Copyright (c) Magic UI",
+          "modified": true
+        },
+        "examples": [
+          "border-beam-demo",
+          "border-beam-button"
+        ],
+        "url": "https://ui.ballmac.com/components/border-beam"
+      }
+    },
+    {
+      "name": "border-beam-demo",
+      "type": "registry:example",
+      "title": "Border Beam: Card",
+      "description": "Card example of Border Beam.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/border-beam.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/border-beam-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/border-beam-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "border-beam",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "border-beam-button",
+      "type": "registry:example",
+      "title": "Border Beam: Button",
+      "description": "Button example of Border Beam.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/border-beam.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/border-beam-button.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/border-beam-button.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "border-beam",
+        "tier": "free"
+      }
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
@@ -91,6 +923,9 @@
       "registryDependencies": [
         "https://ui.ballmac.com/r/button.json"
       ],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/examples/button-demo.tsx",
@@ -156,6 +991,1081 @@
       }
     },
     {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "A Radix checkbox with checked and indeterminate (mixed) states, a check or minus icon, focus ring and invalid styling, for forms and select-all lists.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/checkbox.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "checkbox",
+          "form",
+          "indeterminate",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Binary or tri-state choice. Pass checked=\"indeterminate\" for a parent row whose children are partly selected; aria-checked becomes \"mixed\". Pair with Label via id/htmlFor.",
+          "whenToUse": [
+            "Agreeing to terms or opting into emails",
+            "Multi-select lists and table row selection",
+            "A select-all control that reflects partial selection"
+          ],
+          "whenNotToUse": [
+            "Settings that apply immediately (use switch)",
+            "Choosing exactly one option from several (use a radio group or select)"
+          ],
+          "composesWith": [
+            "label",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Space",
+              "action": "Toggles the checkbox"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves focus to the checkbox"
+            }
+          ],
+          "customization": [
+            "checked: boolean | \"indeterminate\"; onCheckedChange receives the new state",
+            "aria-invalid=\"true\" for errors",
+            "Inherits the peer class so a following Label dims when disabled"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Checkbox",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "checkbox-demo",
+          "checkbox-indeterminate"
+        ],
+        "url": "https://ui.ballmac.com/components/checkbox"
+      }
+    },
+    {
+      "name": "checkbox-demo",
+      "type": "registry:example",
+      "title": "Checkbox: Default",
+      "description": "Default example of Checkbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/checkbox-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/checkbox-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "checkbox",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "checkbox-indeterminate",
+      "type": "registry:example",
+      "title": "Checkbox: Select all",
+      "description": "Select all example of Checkbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/checkbox-indeterminate.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/checkbox-indeterminate.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "checkbox",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "Code Block",
+      "description": "A code panel with filename and language header, line numbers, highlighted lines, a wrap toggle, copy feedback and file tabs. No highlighter bundled; pass Shiki output as children.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/code-block.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/code-block.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "code",
+          "snippet",
+          "syntax",
+          "copy",
+          "shiki",
+          "tabs",
+          "developer",
+          "docs"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "<CodeBlock code filename language lineNumbers highlight={[2,3]} /> renders plain monospace text. For syntax colors, highlight on the server (e.g. Shiki) and pass the result as children plus the raw code for copying. <CodeBlockTabs files={[…]}> shows several files.",
+          "whenToUse": [
+            "Code samples in docs, READMEs rendered on the web and blog posts",
+            "Showing a changed file with specific lines highlighted",
+            "Several related files (component, usage, config) in one panel with tabs"
+          ],
+          "whenNotToUse": [
+            "One-line install commands for several package managers (use install-tabs)",
+            "Terminal sessions with prompts and output (use terminal)",
+            "Editable code (use a code editor)"
+          ],
+          "composesWith": [
+            "install-tabs",
+            "terminal",
+            "ai-message"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the scrollable code region (arrow keys scroll long lines), then wrap and copy buttons"
+            },
+            {
+              "keys": "← / →",
+              "action": "In CodeBlockTabs, moves between file tabs"
+            },
+            {
+              "keys": "—",
+              "action": "Copying announces 'Copied to clipboard' through a polite live region"
+            }
+          ],
+          "customization": [
+            "code (plain text) or children (pre-highlighted markup). Line numbers use a CSS counter on .line spans, which is also what Shiki emits",
+            "highlight: 1-based line numbers (plain code only; with Shiki use its notation transformers)",
+            "wrap (initial) and wrapToggle; copyable={false} hides copy",
+            "bodyClassName for a max height, e.g. 'max-h-80'",
+            "Shiki: const html = await codeToHtml(code, { lang, themes }) then <CodeBlock code={code} language={lang}><div dangerouslySetInnerHTML={{ __html: html }} /></CodeBlock>"
+          ]
+        },
+        "examples": [
+          "code-block-demo",
+          "code-block-tabs"
+        ],
+        "url": "https://ui.ballmac.com/components/code-block"
+      }
+    },
+    {
+      "name": "code-block-demo",
+      "type": "registry:example",
+      "title": "Code Block: Default",
+      "description": "Default example of Code Block.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/code-block.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/code-block-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/code-block-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "code-block",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "code-block-tabs",
+      "type": "registry:example",
+      "title": "Code Block: File tabs",
+      "description": "File tabs example of Code Block.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/code-block.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/code-block-tabs.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/code-block-tabs.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "code-block",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "A Radix modal dialog with a blurred overlay, centered card surface that fits 360 px screens, header and footer parts, optional close button and animations.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "devDependencies": [
+        "tw-animate-css"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/dialog.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "dialog",
+          "modal",
+          "overlay",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Modal window that traps focus. Compose Dialog > DialogTrigger asChild + DialogContent with DialogHeader (DialogTitle, DialogDescription) and DialogFooter; use DialogClose asChild on cancel buttons.",
+          "whenToUse": [
+            "Short forms that shouldn't leave the page (edit profile, rename)",
+            "Confirming destructive actions",
+            "Focused detail views"
+          ],
+          "whenNotToUse": [
+            "Non-blocking messages (use a toast)",
+            "Long multi-step flows (use a page)",
+            "Content tied to a control that should stay visible (use a popover)"
+          ],
+          "composesWith": [
+            "button",
+            "input",
+            "label",
+            "textarea",
+            "select"
+          ],
+          "a11y": [
+            {
+              "keys": "Escape",
+              "action": "Closes the dialog"
+            },
+            {
+              "keys": "Tab / Shift+Tab",
+              "action": "Cycles focus inside the dialog"
+            },
+            {
+              "keys": "Enter / Space on trigger",
+              "action": "Opens the dialog"
+            }
+          ],
+          "customization": [
+            "showCloseButton (default true) and closeLabel for the X button",
+            "DialogContent max-w-lg by default; override with className",
+            "Always include a DialogTitle (use a sr-only class to hide it visually)",
+            "Needs the tw-animate-css classes for the open and close animation"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Dialog",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "dialog-demo",
+          "dialog-confirm"
+        ],
+        "url": "https://ui.ballmac.com/components/dialog"
+      }
+    },
+    {
+      "name": "dialog-demo",
+      "type": "registry:example",
+      "title": "Dialog: Edit profile",
+      "description": "Edit profile example of Dialog.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dialog-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dialog-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dialog",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dialog-confirm",
+      "type": "registry:example",
+      "title": "Dialog: Confirm",
+      "description": "Confirm example of Dialog.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dialog-confirm.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dialog-confirm.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dialog",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "A text input in three heights that match Button, plus InputGroup and InputGroupAddon for leading or trailing icons, units and domains.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/input.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/input.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "input",
+          "text-field",
+          "form",
+          "search"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Single-line text field. Use size to match neighbouring buttons, wrap in InputGroup with InputGroupAddon (align start or end) for icons or text like \".com\", and set aria-invalid for error styling.",
+          "whenToUse": [
+            "Any single-line form field (email, name, URL, search)",
+            "Search boxes with a leading icon",
+            "Fields with a fixed unit or domain suffix"
+          ],
+          "whenNotToUse": [
+            "Multi-line text (use textarea)",
+            "Choosing from a fixed list (use select)",
+            "On/off settings (use switch or checkbox)"
+          ],
+          "composesWith": [
+            "label",
+            "button",
+            "kbd",
+            "tooltip",
+            "dialog"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves focus to the input"
+            },
+            {
+              "keys": "Click on an addon",
+              "action": "Focuses the input"
+            }
+          ],
+          "customization": [
+            "size: sm | default | lg (h-8 / h-9 / h-11)",
+            "InputGroup size: sm | default | lg; InputGroupAddon align: start | end",
+            "aria-invalid=\"true\" switches to destructive border and ring",
+            "htmlSize maps to the native size attribute"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Input",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "input-demo",
+          "input-with-icon",
+          "input-invalid"
+        ],
+        "url": "https://ui.ballmac.com/components/input"
+      }
+    },
+    {
+      "name": "input-demo",
+      "type": "registry:example",
+      "title": "Input: Default",
+      "description": "Default example of Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/input-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/input-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "input-with-icon",
+      "type": "registry:example",
+      "title": "Input: With icon and suffix",
+      "description": "With icon and suffix example of Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/kbd.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/input-with-icon.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/input-with-icon.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "input-invalid",
+      "type": "registry:example",
+      "title": "Input: Invalid",
+      "description": "Invalid example of Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/input-invalid.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/input-invalid.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "install-tabs",
+      "type": "registry:ui",
+      "title": "Install Tabs",
+      "description": "Package-manager tabs for a CLI command (pnpm, npm, yarn, bun) with a copy button. Remembers the reader's choice and keeps every instance on the page in sync.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/install-tabs.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/install-tabs.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "install",
+          "cli",
+          "npm",
+          "pnpm",
+          "yarn",
+          "bun",
+          "tabs",
+          "copy",
+          "docs"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "<InstallTabs command='shadcn@latest add @ballmac/button' storageKey='pm' /> renders pnpm dlx / npx / yarn dlx / bunx --bun variants. Use commands={{ npm: 'npm i x', pnpm: 'pnpm add x' }} for install (not run) commands.",
+          "whenToUse": [
+            "Install or 'run this CLI' instructions in docs and READMEs",
+            "Any page with several install snippets where the reader's package manager should stick"
+          ],
+          "whenNotToUse": [
+            "A command with its output (use terminal)",
+            "Multi-line source code (use code-block)"
+          ],
+          "composesWith": [
+            "code-block",
+            "terminal"
+          ],
+          "a11y": [
+            {
+              "keys": "← / →",
+              "action": "Moves between package-manager tabs and selects them"
+            },
+            {
+              "keys": "Home / End",
+              "action": "Jumps to the first or last tab"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves to the copy button and the command panel"
+            }
+          ],
+          "customization": [
+            "command: run through each manager's runner; commands: explicit per-manager strings (only those get tabs)",
+            "storageKey: remember the choice in localStorage, read after hydration (SSR-safe) and synced across instances and browser tabs",
+            "value/onValueChange for controlled use; defaultValue (pnpm by default)"
+          ]
+        },
+        "examples": [
+          "install-tabs-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/install-tabs"
+      }
+    },
+    {
+      "name": "install-tabs-demo",
+      "type": "registry:example",
+      "title": "Install Tabs: Default",
+      "description": "Default example of Install Tabs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/install-tabs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/install-tabs-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/install-tabs-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "install-tabs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Keyboard key and shortcut display built on the semantic <kbd> element, in three sizes, with KbdGroup for combinations like ⌘ ⇧ K. Adapts inside tooltips.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/kbd.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/kbd.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "kbd",
+          "keyboard",
+          "shortcut",
+          "hotkey"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Displays a key or shortcut. Use Kbd for each key and KbdGroup for keys pressed together; it restyles itself for the dark tooltip surface automatically.",
+          "whenToUse": [
+            "Shortcut hints in menus, tooltips and command palettes",
+            "Documentation of keyboard controls",
+            "Search inputs that show a ⌘ K hint"
+          ],
+          "whenNotToUse": [
+            "Inline code or commands (use code)",
+            "Buttons that trigger the shortcut (use button)"
+          ],
+          "composesWith": [
+            "tooltip",
+            "button",
+            "input"
+          ],
+          "a11y": [],
+          "customization": [
+            "size: sm | default | lg",
+            "Use symbols (⌘ ⇧ ⌥ ⌃ ↵) or words (Ctrl, Enter); add aria-label on KbdGroup if symbols need spelling out"
+          ]
+        },
+        "examples": [
+          "kbd-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/kbd"
+      }
+    },
+    {
+      "name": "kbd-demo",
+      "type": "registry:example",
+      "title": "Kbd: Default",
+      "description": "Default example of Kbd.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kbd.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kbd-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kbd-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kbd",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "An accessible form label built on Radix Label that dims itself when the paired peer control is disabled and never selects text on double-click.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/label.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/label.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "label",
+          "form",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Text label for a form control. Pair with htmlFor/id; put the control before it with className=\"peer\" (Checkbox and Switch already are) to get disabled styling.",
+          "whenToUse": [
+            "Naming inputs, textareas, selects, checkboxes and switches",
+            "Clickable text next to a checkbox or switch"
+          ],
+          "whenNotToUse": [
+            "Headings or section titles (use a heading element)",
+            "Helper or error text under a field (use a p with text-muted-foreground or text-destructive)"
+          ],
+          "composesWith": [
+            "input",
+            "textarea",
+            "checkbox",
+            "switch",
+            "select"
+          ],
+          "a11y": [
+            {
+              "keys": "Click",
+              "action": "Focuses or toggles the associated control"
+            }
+          ],
+          "customization": [
+            "Disabled styling via peer-disabled (control before label) or a parent with group and data-disabled=\"true\"",
+            "Lays out children in a row with gap-2, so icons or badges can sit beside the text"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Label",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "label-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/label"
+      }
+    },
+    {
+      "name": "label-demo",
+      "type": "registry:example",
+      "title": "Label: Default",
+      "description": "Default example of Label.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/label.json",
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/label-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/label-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "label",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "magnetic-button",
+      "type": "registry:ui",
+      "title": "Magnetic Button",
+      "description": "The Ballmac Button with a magnetic pull: it drifts toward a nearby mouse pointer on a spring, and its label moves a little further for depth. Takes every Button prop.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/magnetic-button.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/magnetic-button.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "button",
+          "cta",
+          "hover",
+          "spring",
+          "pointer",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Use like Button (variant, size, shape, loading, onClick…). The pull only reacts to a mouse, stops while disabled or loading, and is off under reduced motion, where it is a plain Button.",
+          "whenToUse": [
+            "The single primary call to action in a hero or pricing section",
+            "A playful secondary action on a marketing page"
+          ],
+          "whenNotToUse": [
+            "Forms, toolbars and dense UI (use button)",
+            "Several buttons side by side; one magnetic button per view keeps it meaningful",
+            "Rendering a link via asChild (not supported; wrap a Button asChild instead)"
+          ],
+          "composesWith": [
+            "button",
+            "border-beam"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Activates the button"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves focus to the button"
+            }
+          ],
+          "customization": [
+            "strength: fraction of the pointer offset the button follows (default 0.2)",
+            "radius: px outside the button where the pull starts, fading to zero at the edge (default 72)",
+            "All Button props: variant, size, shape, loading; wrapperClassName styles the layout wrapper"
+          ]
+        },
+        "examples": [
+          "magnetic-button-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/magnetic-button"
+      }
+    },
+    {
+      "name": "magnetic-button-demo",
+      "type": "registry:example",
+      "title": "Magnetic Button: Default",
+      "description": "Default example of Magnetic Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/magnetic-button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/magnetic-button-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/magnetic-button-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "magnetic-button",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "marquee",
+      "type": "registry:ui",
+      "title": "Marquee",
+      "description": "An endless horizontal or vertical scroller for logo rows and testimonials. Speed is in pixels per second, it pauses on hover and focus, and it fills any width.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/marquee.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/marquee.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "animation",
+          "scroller",
+          "logos",
+          "testimonials",
+          "ticker",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Put the items directly inside <Marquee>; it measures one copy, clones as many as the viewport needs (clones are aria-hidden and inert) and loops them with a GPU transform. Under reduced motion it renders a single copy in a scrollable row.",
+          "whenToUse": [
+            "A row of customer or partner logos under a hero",
+            "A wall of short testimonials (vertical, several columns side by side)",
+            "A ticker of changelog items, integrations or stats"
+          ],
+          "whenNotToUse": [
+            "Content people must read or act on in full (use a grid or carousel with controls)",
+            "Critical navigation or calls to action"
+          ],
+          "composesWith": [
+            "spotlight-card",
+            "badge",
+            "avatar"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves focus into the first copy of the content and pauses the scroll"
+            }
+          ],
+          "customization": [
+            "speed in px/s (default 40); reverse; vertical (set a height with className, e.g. h-80)",
+            "gap as px number or CSS length (default 16)",
+            "fade toggles the edge mask; pauseOnHover (default true)",
+            "Style parts with [data-slot=marquee-track] and [data-slot=marquee-content]"
+          ]
+        },
+        "examples": [
+          "marquee-demo",
+          "marquee-vertical"
+        ],
+        "url": "https://ui.ballmac.com/components/marquee"
+      }
+    },
+    {
+      "name": "marquee-demo",
+      "type": "registry:example",
+      "title": "Marquee: Logo row",
+      "description": "Logo row example of Marquee.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/marquee.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/marquee-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/marquee-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "marquee",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "marquee-vertical",
+      "type": "registry:example",
+      "title": "Marquee: Vertical testimonials",
+      "description": "Vertical testimonials example of Marquee.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/marquee.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/marquee-vertical.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/marquee-vertical.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "marquee",
+        "tier": "free"
+      }
+    },
+    {
       "name": "number-ticker",
       "type": "registry:ui",
       "title": "Number Ticker",
@@ -199,7 +2109,8 @@
             "Prices users need to read instantly"
           ],
           "composesWith": [
-            "stat-card"
+            "text-reveal",
+            "badge"
           ],
           "a11y": [],
           "customization": [
@@ -260,6 +2171,1436 @@
       "meta": {
         "example": true,
         "of": "number-ticker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "prompt-input",
+      "type": "registry:ui",
+      "title": "Prompt Input",
+      "description": "An auto-growing chat input: Enter sends, Shift+Enter adds a line (IME-safe), the send button turns into Stop while streaming, with file attachment chips and a toolbar slot.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/button.json",
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/prompt-input.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/prompt-input.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "chat",
+          "input",
+          "textarea",
+          "composer",
+          "attachments",
+          "llm"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "The message composer for chat UIs. <PromptInput onSubmit={(text, files) => …} status onStop> renders a textarea, attachment chips and a send button by default; compose PromptInputTextarea, PromptInputAttachments, PromptInputToolbar, PromptInputAttachButton and PromptInputSubmit for custom layouts.",
+          "whenToUse": [
+            "The input at the bottom of an AI chat",
+            "A 'describe what you want' box that sends to a model and can be stopped mid-response",
+            "Composer that needs a model picker or other controls next to the send button"
+          ],
+          "whenNotToUse": [
+            "Plain multi-line form fields (use textarea)",
+            "Search boxes with results as you type (use an input or command menu)"
+          ],
+          "composesWith": [
+            "ai-chat",
+            "ai-message"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter",
+              "action": "Sends the message (ignored while an IME composition is active)"
+            },
+            {
+              "keys": "Shift + Enter",
+              "action": "Inserts a new line"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves to the attach button, toolbar controls and send/stop"
+            }
+          ],
+          "customization": [
+            "value/onValueChange for controlled text (clear it yourself in onSubmit) or defaultValue for uncontrolled (clears itself)",
+            "files/onFilesChange for controlled attachments; nothing is uploaded — send the File objects wherever you need",
+            "status: idle | streaming. With the AI SDK map status 'submitted' and 'streaming' to 'streaming'",
+            "PromptInputTextarea maxHeight (px, default 200) caps the auto-grow",
+            "PromptInputAttachButton accept and multiple mirror <input type=file>",
+            "usePromptInput() exposes { value, setValue, files, submit, status } to custom toolbar controls"
+          ]
+        },
+        "examples": [
+          "prompt-input-demo",
+          "prompt-input-attachments"
+        ],
+        "url": "https://ui.ballmac.com/components/prompt-input"
+      }
+    },
+    {
+      "name": "prompt-input-demo",
+      "type": "registry:example",
+      "title": "Prompt Input: Default",
+      "description": "Default example of Prompt Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/prompt-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/prompt-input-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/prompt-input-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "prompt-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "prompt-input-attachments",
+      "type": "registry:example",
+      "title": "Prompt Input: With attachments",
+      "description": "With attachments example of Prompt Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/prompt-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/prompt-input-attachments.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/prompt-input-attachments.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "prompt-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reasoning-disclosure",
+      "type": "registry:ui",
+      "title": "Reasoning Disclosure",
+      "description": "A collapsible 'thinking' panel for model reasoning: shows a shimmering 'Thinking…' while streaming, opens automatically, then collapses to 'Thought for 12s' when done.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/reasoning-disclosure.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/reasoning-disclosure.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "reasoning",
+          "thinking",
+          "collapsible",
+          "llm",
+          "chain-of-thought"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Wrap a model's reasoning text: <ReasoningDisclosure streaming={isReasoning} duration={seconds}>{text}</ReasoningDisclosure>. It opens while streaming and collapses when streaming ends unless you control open.",
+          "whenToUse": [
+            "Showing reasoning or 'thinking' tokens from reasoning models above the final answer",
+            "Any secondary, verbose content that should be visible while it is produced and tucked away afterwards"
+          ],
+          "whenNotToUse": [
+            "FAQ-style expanders (use an accordion)",
+            "Tool call details (use tool-call-card)"
+          ],
+          "composesWith": [
+            "ai-message",
+            "streaming-text",
+            "tool-call-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Opens or closes the reasoning (aria-expanded, aria-controls)"
+            },
+            {
+              "keys": "—",
+              "action": "The shimmer is decorative and stops under reduced motion"
+            }
+          ],
+          "customization": [
+            "streaming: boolean; duration in seconds renders 'Thought for 12s' / 'Thought for 1m 5s'",
+            "open/onOpenChange (controlled: streaming no longer toggles it) or defaultOpen",
+            "autoCollapse={false} keeps it open after streaming ends",
+            "label replaces the header text; contentClassName styles the panel",
+            "AI SDK: render parts with type 'reasoning' as children; streaming while the message is streaming and no text part has started"
+          ]
+        },
+        "examples": [
+          "reasoning-disclosure-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/reasoning-disclosure"
+      }
+    },
+    {
+      "name": "reasoning-disclosure-demo",
+      "type": "registry:example",
+      "title": "Reasoning Disclosure: Default",
+      "description": "Default example of Reasoning Disclosure.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reasoning-disclosure.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reasoning-disclosure-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reasoning-disclosure-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reasoning-disclosure",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "A Radix select with a sized trigger, popper-positioned menu, scroll buttons, groups, labels, separators and a check indicator on the chosen item.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "devDependencies": [
+        "tw-animate-css"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/select.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "select",
+          "dropdown",
+          "form",
+          "radix",
+          "listbox"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Pick one value from a list. Compose Select > SelectTrigger > SelectValue and SelectContent > SelectItem (group with SelectGroup + SelectLabel). The menu is portalled and keyboard navigable with typeahead.",
+          "whenToUse": [
+            "Choosing one option from 4 to 20 fixed values (timezone, role, region)",
+            "Compact filters in toolbars (size sm)",
+            "Grouped options such as regions by continent"
+          ],
+          "whenNotToUse": [
+            "Two or three options that should stay visible (use a radio group or segmented control)",
+            "Long searchable lists (use a combobox)",
+            "Actions rather than values (use a dropdown menu)"
+          ],
+          "composesWith": [
+            "label",
+            "button",
+            "dialog"
+          ],
+          "a11y": [
+            {
+              "keys": "Space / Enter / ArrowDown",
+              "action": "Opens the menu"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "Moves between items"
+            },
+            {
+              "keys": "Enter",
+              "action": "Selects the focused item"
+            },
+            {
+              "keys": "Type a letter",
+              "action": "Jumps to the matching item"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the menu"
+            }
+          ],
+          "customization": [
+            "SelectTrigger size: sm | default",
+            "SelectContent position: popper (default, below the trigger) | item-aligned",
+            "Items accept icons before the text",
+            "Needs the tw-animate-css classes for the open and close animation"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Select",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "select-demo",
+          "select-grouped"
+        ],
+        "url": "https://ui.ballmac.com/components/select"
+      }
+    },
+    {
+      "name": "select-demo",
+      "type": "registry:example",
+      "title": "Select: Default",
+      "description": "Default example of Select.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/select-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/select-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "select",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "select-grouped",
+      "type": "registry:example",
+      "title": "Select: Grouped",
+      "description": "Grouped example of Select.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/select.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/select-grouped.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/select-grouped.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "select",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "shimmer-text",
+      "type": "registry:ui",
+      "title": "Shimmer Text",
+      "description": "Text with a band of light sweeping across it, from muted to full foreground color. Suited to AI \"thinking\" and loading status lines; static under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/shimmer-text.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/shimmer-text.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "text",
+          "loading",
+          "ai",
+          "status",
+          "shimmer",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Wrap short text: <ShimmerText>Thinking…</ShimmerText>. The base color is --muted-foreground, so the text stays readable at every frame; the sweep brightens it to --foreground. In forced-colors mode it falls back to plain system text.",
+          "whenToUse": [
+            "An AI assistant's \"Thinking…\" or \"Searching the docs…\" line while a response streams",
+            "Inline pending states such as \"Deploying…\" or \"Indexing 1,204 files\"",
+            "A subtle accent on a short marketing label"
+          ],
+          "whenNotToUse": [
+            "Paragraphs or long text (the sweep becomes distracting)",
+            "The only signal that something is loading; pair it with aria-live or a spinner's label for screen readers"
+          ],
+          "composesWith": [
+            "text-reveal",
+            "border-beam"
+          ],
+          "a11y": [],
+          "customization": [
+            "duration: seconds per sweep (default 2)",
+            "spread: highlight half-width in em (default 2)",
+            "as: span | p | div | h1–h4; size and weight via className",
+            "Colors come from --muted-foreground and --foreground; override backgroundImage via style for other tokens"
+          ]
+        },
+        "examples": [
+          "shimmer-text-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/shimmer-text"
+      }
+    },
+    {
+      "name": "shimmer-text-demo",
+      "type": "registry:example",
+      "title": "Shimmer Text: Thinking status",
+      "description": "Thinking status example of Shimmer Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/shimmer-text.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/shimmer-text-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/shimmer-text-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "shimmer-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "spotlight-card",
+      "type": "registry:ui",
+      "title": "Spotlight Card",
+      "description": "A card whose surface and border pick up a soft glow that follows the pointer, driven by CSS variables with no re-render per move. Keyboard focus shows a steady glow.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/spotlight-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/spotlight-card.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "card",
+          "hover",
+          "glow",
+          "pointer",
+          "feature",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "A drop-in card surface (rounded-xl, border, bg-card, p-6) with a pointer-following glow in the --ring color. Put any content inside; if the card contains a link or button, focusing it lights the card.",
+          "whenToUse": [
+            "Feature grids on landing pages",
+            "Pricing or plan cards that should respond to hover",
+            "Clickable tiles in a dashboard or settings index"
+          ],
+          "whenNotToUse": [
+            "Dense data tables or long lists of cards (the effect loses meaning when everything glows)",
+            "Plain content containers with no interaction (use card)"
+          ],
+          "composesWith": [
+            "badge",
+            "button",
+            "border-beam"
+          ],
+          "a11y": [],
+          "customization": [
+            "size: glow radius in px (default 320)",
+            "Glow color follows --ring; override per card with className like [--ring:var(--chart-2)]",
+            "Surface styles are ordinary classes: replace p-6, rounded-xl or bg-card through className",
+            "Parts: [data-slot=spotlight-card-surface] and [data-slot=spotlight-card-border]"
+          ]
+        },
+        "examples": [
+          "spotlight-card-demo",
+          "spotlight-card-grid"
+        ],
+        "url": "https://ui.ballmac.com/components/spotlight-card"
+      }
+    },
+    {
+      "name": "spotlight-card-demo",
+      "type": "registry:example",
+      "title": "Spotlight Card: Feature card",
+      "description": "Feature card example of Spotlight Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/spotlight-card.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/spotlight-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/spotlight-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "spotlight-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "spotlight-card-grid",
+      "type": "registry:example",
+      "title": "Spotlight Card: Feature grid",
+      "description": "Feature grid example of Spotlight Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/spotlight-card.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/spotlight-card-grid.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/spotlight-card-grid.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "spotlight-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "streaming-text",
+      "type": "registry:ui",
+      "title": "Streaming Text",
+      "description": "Text that arrives progressively, with a blinking caret while streaming, preserved whitespace, aria-busy for screen readers and an optional typewriter reveal for demos.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/streaming-text.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/streaming-text.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "streaming",
+          "typewriter",
+          "caret",
+          "llm",
+          "text"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Pass the accumulated text and streaming={true} while chunks arrive; it shows a caret and sets aria-busy until you set streaming={false}. Use animate + speed to type out text you already have.",
+          "whenToUse": [
+            "Assistant replies that arrive token by token from a model",
+            "Replaying a saved answer with a typewriter effect in a demo or onboarding",
+            "Any plain-text live output where a caret shows that more is coming"
+          ],
+          "whenNotToUse": [
+            "Rendered markdown (render your markdown in ai-message's MessageContent and show StreamingCaret at the end)",
+            "Headline text effects (use text-reveal)"
+          ],
+          "composesWith": [
+            "ai-message",
+            "ai-chat"
+          ],
+          "a11y": [
+            {
+              "keys": "—",
+              "action": "aria-live=polite region; aria-busy is true while streaming so screen readers read the finished text instead of every chunk"
+            }
+          ],
+          "customization": [
+            "streaming: boolean (caret + aria-busy)",
+            "animate + speed (characters per second, default 80) reveal existing text; skipped under reduced motion",
+            "caret={false} hides the caret; StreamingCaret is exported for use at the end of custom markup",
+            "Whitespace and newlines are preserved (whitespace-pre-wrap)"
+          ]
+        },
+        "examples": [
+          "streaming-text-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/streaming-text"
+      }
+    },
+    {
+      "name": "streaming-text-demo",
+      "type": "registry:example",
+      "title": "Streaming Text: Default",
+      "description": "Default example of Streaming Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/streaming-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/streaming-text-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/streaming-text-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "streaming-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "A Radix toggle switch in two sizes with a CSS-animated thumb, for settings that take effect immediately. Stops animating under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/switch.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/switch.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "switch",
+          "toggle",
+          "settings",
+          "form",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "On/off control for settings that apply immediately. Pair with a Label via id/htmlFor; use size=\"sm\" in dense lists.",
+          "whenToUse": [
+            "Enabling or disabling a feature or notification",
+            "Settings pages with labelled rows",
+            "Toggles inside dense menus or tables (size sm)"
+          ],
+          "whenNotToUse": [
+            "Choices submitted later with a form, or agreeing to terms (use checkbox)",
+            "More than two options (use select)"
+          ],
+          "composesWith": [
+            "label",
+            "badge"
+          ],
+          "a11y": [
+            {
+              "keys": "Space",
+              "action": "Toggles the switch"
+            },
+            {
+              "keys": "Enter",
+              "action": "Toggles the switch"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves focus to the switch"
+            }
+          ],
+          "customization": [
+            "size: sm | default",
+            "checked / defaultChecked with onCheckedChange",
+            "aria-invalid=\"true\" for errors"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Switch",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "switch-demo",
+          "switch-settings"
+        ],
+        "url": "https://ui.ballmac.com/components/switch"
+      }
+    },
+    {
+      "name": "switch-demo",
+      "type": "registry:example",
+      "title": "Switch: Default",
+      "description": "Default example of Switch.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/switch-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/switch-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "switch",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "switch-settings",
+      "type": "registry:example",
+      "title": "Switch: Settings rows",
+      "description": "Settings rows example of Switch.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/switch-settings.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/switch-settings.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "switch",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "terminal",
+      "type": "registry:ui",
+      "title": "Terminal",
+      "description": "A terminal window with command, output, success, error and comment lines, optional per-command copy buttons and a sequenced typing animation that respects reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/terminal.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/terminal.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "terminal",
+          "cli",
+          "shell",
+          "command",
+          "typing",
+          "developer",
+          "docs"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Show CLI sessions: <Terminal title> with <TerminalLine variant='command' copyable> and output lines. Wrap lines in <TerminalAnimated> to type commands out and reveal output in order when scrolled into view.",
+          "whenToUse": [
+            "Install and setup steps on landing pages and docs",
+            "Showing what a CLI prints, including success and error lines",
+            "An animated hero that types a command and its result"
+          ],
+          "whenNotToUse": [
+            "Copyable install commands for several package managers (use install-tabs)",
+            "Source code files (use code-block)",
+            "A real interactive shell (this renders static or scripted lines only)"
+          ],
+          "composesWith": [
+            "install-tabs",
+            "code-block"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the copy button on command lines (hidden until hover on mouse devices, visible on focus)"
+            },
+            {
+              "keys": "—",
+              "action": "The prompt symbol is hidden from screen readers; success and error lines carry a text prefix, not just color; aria-busy is set while animating"
+            }
+          ],
+          "customization": [
+            "theme: dark (default; scopes the theme's .dark tokens to the window) | inherit (follows the page)",
+            "TerminalLine variant: command | output | success | error | comment; prompt changes the '$'",
+            "TerminalLine typing + speed (chars/sec) types a single command; inside TerminalAnimated commands type automatically",
+            "TerminalAnimated speed, lineDelay (ms), startDelay (ms), startOnView, onComplete",
+            "Reduced motion shows every line immediately"
+          ]
+        },
+        "examples": [
+          "terminal-demo",
+          "terminal-typing"
+        ],
+        "url": "https://ui.ballmac.com/components/terminal"
+      }
+    },
+    {
+      "name": "terminal-demo",
+      "type": "registry:example",
+      "title": "Terminal: Default",
+      "description": "Default example of Terminal.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/terminal.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/terminal-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/terminal-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "terminal",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "terminal-typing",
+      "type": "registry:example",
+      "title": "Terminal: Typing animation",
+      "description": "Typing animation example of Terminal.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/terminal.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/terminal-typing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/terminal-typing.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "terminal",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "text-reveal",
+      "type": "registry:ui",
+      "title": "Text Reveal",
+      "description": "Reveals a headline or paragraph word by word or character by character with a soft blur and rise, when it scrolls into view or on mount.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/text-reveal.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/text-reveal.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "animation",
+          "text",
+          "headline",
+          "scroll",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Wrap a plain string: <TextReveal as=\"h1\">Ship the interface</TextReveal>. Screen readers get the full text once from a visually hidden copy; the animated pieces are aria-hidden. Under reduced motion it renders plain text.",
+          "whenToUse": [
+            "Hero headlines and section titles on marketing pages",
+            "A short tagline that should land after the page loads (trigger=\"mount\")",
+            "Pull quotes or statements revealed as the reader scrolls"
+          ],
+          "whenNotToUse": [
+            "Body copy, UI labels or anything users need to read immediately",
+            "Rich text with links or inline elements (children must be a plain string)",
+            "Streaming AI output (render tokens as they arrive instead)"
+          ],
+          "composesWith": [
+            "shimmer-text",
+            "animated-grid",
+            "number-ticker"
+          ],
+          "a11y": [],
+          "customization": [
+            "by: word | char (char staggers faster and keeps each word on one line)",
+            "as: h1 | h2 | h3 | h4 | p | span | div",
+            "trigger: inView | mount; once (default true) replays on re-entry when false",
+            "delay and step in seconds; style with className like any text element"
+          ]
+        },
+        "examples": [
+          "text-reveal-demo",
+          "text-reveal-chars"
+        ],
+        "url": "https://ui.ballmac.com/components/text-reveal"
+      }
+    },
+    {
+      "name": "text-reveal-demo",
+      "type": "registry:example",
+      "title": "Text Reveal: Headline",
+      "description": "Headline example of Text Reveal.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/text-reveal.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/text-reveal-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/text-reveal-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "text-reveal",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "text-reveal-chars",
+      "type": "registry:example",
+      "title": "Text Reveal: By character",
+      "description": "By character example of Text Reveal.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/text-reveal.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/text-reveal-chars.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/text-reveal-chars.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "text-reveal",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "A multi-line text field that can grow with its content between minRows and maxRows, then scroll. Plain resizable mode when autoResize is off.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/textarea.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "textarea",
+          "form",
+          "autosize",
+          "multiline"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Multi-line text input. Set autoResize with minRows and maxRows for chat composers and comment boxes; leave it off for a user-resizable box with a fixed rows count.",
+          "whenToUse": [
+            "Comments, feedback and descriptions",
+            "Chat or prompt composers that grow as the user types (autoResize)",
+            "Notes fields in settings forms"
+          ],
+          "whenNotToUse": [
+            "Single-line values (use input)",
+            "Rich text or markdown editing with formatting controls"
+          ],
+          "composesWith": [
+            "label",
+            "button",
+            "dialog"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves focus to the textarea"
+            },
+            {
+              "keys": "Enter",
+              "action": "Inserts a new line"
+            }
+          ],
+          "customization": [
+            "autoResize: grows with content; minRows (default rows or 3) and maxRows cap the height",
+            "aria-invalid=\"true\" switches to destructive styling",
+            "Works controlled (value/onChange) or uncontrolled"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Textarea",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "textarea-demo",
+          "textarea-autosize"
+        ],
+        "url": "https://ui.ballmac.com/components/textarea"
+      }
+    },
+    {
+      "name": "textarea-demo",
+      "type": "registry:example",
+      "title": "Textarea: Default",
+      "description": "Default example of Textarea.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/textarea.json",
+        "https://ui.ballmac.com/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/textarea-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/textarea-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "textarea",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "textarea-autosize",
+      "type": "registry:example",
+      "title": "Textarea: Auto-resize",
+      "description": "Auto-resize example of Textarea.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/textarea.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/textarea-autosize.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/textarea-autosize.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "textarea",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tool-call-card",
+      "type": "registry:ui",
+      "title": "Tool Call Card",
+      "description": "Shows one agent tool call: the tool name, a pending, running, success or error status with icon and text, duration, and collapsible pretty-printed input and result.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/tool-call-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/tool-call-card.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "tool",
+          "function-calling",
+          "json",
+          "status",
+          "llm"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Render each tool invocation of an agent: <ToolCallCard name status duration input result />. Objects are shown as indented JSON, strings as-is; the details panel is a disclosure (collapsed by default).",
+          "whenToUse": [
+            "Showing function/tool calls inside an assistant message",
+            "Agent run logs where each step calls a tool and returns data",
+            "Debug views for MCP tool calls"
+          ],
+          "whenNotToUse": [
+            "Generic key/value data (use a table or description list)",
+            "Long source files (use code-block)"
+          ],
+          "composesWith": [
+            "ai-message",
+            "ai-chat",
+            "reasoning-disclosure"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "On the tool name, opens or closes the input and result (aria-expanded)"
+            },
+            {
+              "keys": "Tab",
+              "action": "Focuses the scrollable input and result blocks so long JSON can be scrolled with the keyboard"
+            },
+            {
+              "keys": "—",
+              "action": "Status changes are announced politely; status is always icon plus text"
+            }
+          ],
+          "customization": [
+            "status: pending | running | success (chart-2 token) | error (destructive token)",
+            "duration in milliseconds, formatted as 340ms / 1.2s / 1m 12s",
+            "open/defaultOpen/onOpenChange control the details panel",
+            "children render inside the details panel after input and result (e.g. a preview of the data)",
+            "AI SDK: map a tool part's state ('input-streaming' | 'input-available' → running, 'output-available' → success, 'output-error' → error) and pass part.input / part.output"
+          ]
+        },
+        "examples": [
+          "tool-call-card-demo",
+          "tool-call-card-states"
+        ],
+        "url": "https://ui.ballmac.com/components/tool-call-card"
+      }
+    },
+    {
+      "name": "tool-call-card-demo",
+      "type": "registry:example",
+      "title": "Tool Call Card: Default",
+      "description": "Default example of Tool Call Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tool-call-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tool-call-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tool-call-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tool-call-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tool-call-card-states",
+      "type": "registry:example",
+      "title": "Tool Call Card: All states",
+      "description": "All states example of Tool Call Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tool-call-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tool-call-card-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tool-call-card-states.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tool-call-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A Radix tooltip with an arrow, side offset and fade and zoom transitions that opens on hover and keyboard focus. Works standalone or under a shared provider.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "devDependencies": [
+        "tw-animate-css"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/tooltip.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "tooltip",
+          "hint",
+          "popover",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-28",
+        "ai": {
+          "summary": "Short text hint for a control, shown on hover and focus. Compose Tooltip > TooltipTrigger asChild + TooltipContent. Put Kbd inside the content for shortcut hints.",
+          "whenToUse": [
+            "Naming icon-only buttons (still give the button an aria-label)",
+            "Shortcut hints next to a label",
+            "Clarifying truncated text"
+          ],
+          "whenNotToUse": [
+            "Essential information or anything interactive (use a popover)",
+            "Touch-first UIs where hover doesn't exist",
+            "Error messages (show them inline)"
+          ],
+          "composesWith": [
+            "button",
+            "kbd",
+            "avatar"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab (focus trigger)",
+              "action": "Opens the tooltip"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the tooltip"
+            }
+          ],
+          "customization": [
+            "TooltipProvider delayDuration (default 200 ms) and skipDelayDuration",
+            "TooltipContent side, align, sideOffset (default 6) and arrow (default true)",
+            "Needs the tw-animate-css classes for the open and close animation"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Tooltip",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "tooltip-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/tooltip"
+      }
+    },
+    {
+      "name": "tooltip-demo",
+      "type": "registry:example",
+      "title": "Tooltip: Default",
+      "description": "Default example of Tooltip.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tooltip.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/kbd.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tooltip-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tooltip-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tooltip",
         "tier": "free"
       }
     },

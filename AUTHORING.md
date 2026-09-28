@@ -35,8 +35,12 @@ Names are permanent public API: kebab-case, no prefixes (`magnetic-button`, `ai-
 4. **Components are plain functions** (React 19 passes `ref` as a prop; no `forwardRef`):
    `function Card({ className, ...props }: React.ComponentProps<"div">)`. Spread `...props` onto the root, merge `className` last with `cn(...)`.
 5. **`data-slot="<part>"`** on the root and each named part (`data-slot="dialog-content"`), so users can target parts in CSS.
-6. **Exports at the bottom:** `export { Card, CardHeader, type CardProps }`. Composable parts over configuration props when there's structure (Dialog, Chat, Terminal).
-7. **SSR-safe:** no `window` or `document` during render; ids via `React.useId()`; any number or date formatting uses a fixed default locale (`"en-US"`) with a `locale` prop, or the server and browser disagree and React throws a hydration error.
+6. **Props types power the docs.** For every public component with its own props, declare
+   `type <Component>Props = React.ComponentProps<"div"> & { /** JSDoc for each prop */ myProp?: string }`
+   (or `& VariantProps<typeof xVariants>` for cva variants) and export it. The site's props table is generated
+   from these literals, their JSDoc, cva `variants`/`defaultVariants`, and defaults in the function's destructuring.
+7. **Exports at the bottom:** `export { Card, CardHeader, type CardProps }`. Composable parts over configuration props when there's structure (Dialog, Chat, Terminal).
+8. **SSR-safe:** no `window` or `document` during render; ids via `React.useId()`; any number or date formatting uses a fixed default locale (`"en-US"`) with a `locale` prop, or the server and browser disagree and React throws a hydration error.
 
 ## Design language
 

@@ -1,0 +1,55 @@
+import { describe, expect, it } from "vitest"
+
+import { Catalog, composePage, installCommands, type Summary } from "../src/catalog"
+
+const item = (p: Partial<Summary>): Summary => ({
+  name: "x", kind: "component", type: "registry:ui", title: "X", description: "", category: "primitives", tier: "free", tags: [],
+  url: "", registryUrl: "", install: "", whenToUse: [], whenNotToUse: [], composesWith: [], dependencies: [], registryDependencies: [], examples: [],
+  ...p,
+})
+const items = [
+  item({ name: "prompt-input", title: "Prompt Input", category: "ai", tags: ["chat", "textarea", "attachments"], description: "Chat composer with attachments." }),
+  item({ name: "button", title: "Button", tags: ["cta"], description: "A button." }),
+  item({ name: "hero-1", kind: "block", category: "blocks", blockCategory: "hero", title: "Hero 1", description: "Split hero." }),
+  item({ name: "pricing-1", kind: "block", category: "blocks", blockCategory: "pricing", title: "Pricing 1", description: "Two tiers." }),
+  item({ name: "faq-1", kind: "block", category: "blocks", blockCategory: "faq", title: "FAQ 1", description: "Accordion FAQ." }),
+  item({ name: "login-1", kind: "block", category: "blocks", blockCategory: "auth", title: "Login 1", description: "Sign in." }),
+]
+const fakeFetch = (async (url: string) => {
+  const u = String(url)
+  if (u.endsWith("/api/v1/index.json")) return new Response(JSON.stringify({ version: 1, setup: "", namespace: "@ballmac", items }))
+  const name = decodeURIComponent(u.split("/").pop()!.replace(/\.json$/, ""))
+  const Comp = name.replace(/(^|-)(\w)/g, (_, __, c: string) => c.toUpperCase())
+  return new Response(JSON.stringify({ ...items.find((i) => i.name === name), exports: [Comp], import: `import { ${Comp} } from "@/components/ballmac/blocks/${name}/${name}"` }))
+}) as typeof fetch
+
+describe("catalog", () => {
+  const catalog = new Catalog("https://ui.test", fakeFetch)
+
+  it("ranks search results by relevance", async () => {
+    const results = await catalog.search("chat input with attachments")
+    expect(results[0].name).toBe("prompt-input")
+  })
+
+  it("filters by kind", async () => {
+    expect((await catalog.list({ kind: "block" })).map((i) => i.name)).toEqual(["hero-1", "pricing-1", "faq-1", "login-1"])
+  })
+
+  it("builds install commands per package manager", () => {
+    expect(installCommands(["button"], "pnpm").add).toBe("pnpm dlx shadcn@latest add @ballmac/button")
+    expect(installCommands(["button"], "bun").byUrl).toBe("bunx --bun shadcn@latest add https://ui.ballmac.com/r/button.json")
+  })
+
+  it("composes a landing page in section order and reports missing sections", async () => {
+    const plan = await composePage(catalog, "SaaS landing page with pricing and FAQ")
+    expect(plan.sections.map((s) => s.block)).toEqual(["hero-1", "pricing-1", "faq-1"])
+    expect(plan.missing).toContain("header")
+    expect(plan.scaffold).toContain("<Hero1 />")
+    expect(plan.commands.add).toBe("npx shadcn@latest add @ballmac/hero-1 @ballmac/pricing-1 @ballmac/faq-1")
+  })
+
+  it("composes an auth screen", async () => {
+    const plan = await composePage(catalog, "a login screen")
+    expect(plan.sections.map((s) => s.block)).toEqual(["login-1"])
+  })
+})

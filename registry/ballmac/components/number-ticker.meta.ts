@@ -19,7 +19,7 @@ export default defineItem({
     summary: "Animated number for stats and KPIs. Respects reduced motion by showing the final value immediately.",
     whenToUse: ["Stat sections on landing pages", "Dashboard KPIs that load in"],
     whenNotToUse: ["Numbers that update every second (animate a live value instead)", "Prices users need to read instantly"],
-    composesWith: ["stat-card"],
+    composesWith: ["text-reveal", "badge"],
     customization: ["format accepts any Intl.NumberFormat options", "locale defaults to en-US so server and browser render identical text; pass your locale explicitly", "duration and delay in seconds"],
   },
   version: "1.0.1",

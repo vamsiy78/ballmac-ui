@@ -13,7 +13,8 @@ import { join, relative } from "node:path"
 
 import { SCHEMA_VERSION } from "@ballmac-ui/metadata"
 
-import { loadItems, ROOT, targetFor, type LoadedItem } from "./lib"
+import { extractProps } from "./extract-props"
+import { importPathFor, loadItems, ROOT, targetFor, type LoadedItem } from "./lib"
 
 const REGISTRY_URL = (process.env.REGISTRY_URL ?? "https://ui.ballmac.com").replace(/\/$/, "")
 const WWW = join(ROOT, "apps/www")
@@ -31,6 +32,30 @@ const defaultFileType: Record<string, string> = {
 /** "shadcn:utils" -> "utils" (shadcn's registry); "button" -> Ballmac URL. */
 function dep(name: string) {
   return name.startsWith("shadcn:") ? name.slice("shadcn:".length) : `${REGISTRY_URL}/r/${name}.json`
+}
+
+// Which item owns each installable import path (for example dependencies).
+let owners = new Map<string, string>()
+function exampleDependencies(item: LoadedItem, file: string) {
+  const code = readFileSync(join(item.examplesDir, file), "utf8")
+  const deps = new Set<string>([item.name])
+  let utils = false
+  for (const m of code.matchAll(/from\s+["'](@\/[^"']+)["']/g)) {
+    if (m[1] === "@/lib/utils") utils = true
+    const owner = owners.get(m[1]) ?? owners.get(`${m[1]}/index`)
+    if (owner) deps.add(owner)
+  }
+  return [...[...deps].map(dep), ...(utils ? ["utils"] : [])]
+}
+const npmOf = (spec: string) => (spec.startsWith("@") ? spec.split("/").slice(0, 2).join("/") : spec.split("/")[0])
+function exampleNpmDependencies(item: LoadedItem, file: string) {
+  const code = readFileSync(join(item.examplesDir, file), "utf8")
+  const pkgs = new Set<string>()
+  for (const m of code.matchAll(/from\s+["']([^"'.@][^"']*|@[^/"'][^"']*)["']/g)) {
+    const pkg = npmOf(m[1])
+    if (!["react", "react-dom", "next"].includes(pkg)) pkgs.add(pkg)
+  }
+  return [...pkgs]
 }
 
 function toRegistryItems(item: LoadedItem) {
@@ -72,7 +97,8 @@ function toRegistryItems(item: LoadedItem) {
     type: "registry:example",
     title: `${item.title}: ${e.title}`,
     description: e.description ?? `${e.title} example of ${item.title}.`,
-    registryDependencies: [dep(item.name)],
+    registryDependencies: exampleDependencies(item, e.file),
+    dependencies: exampleNpmDependencies(item, e.file).length ? exampleNpmDependencies(item, e.file) : undefined,
     files: [{ path: rel(join(item.examplesDir, e.file)), type: "registry:example", target: `@components/ballmac/examples/${e.file}` }],
     categories: [item.category],
     meta: { example: true, of: item.name, tier: item.tier },
@@ -97,6 +123,7 @@ function shadcnBuild(registryFile: string, output: string) {
 }
 
 const items = await loadItems()
+owners = new Map(items.flatMap((i) => i.files.map((f) => [importPathFor(f.path), i.name] as const)).filter((e): e is [string, string] => !!e[0]))
 const free = items.filter((i) => i.tier === "free")
 const pro = items.filter((i) => i.tier === "pro")
 
@@ -113,6 +140,7 @@ mkdirSync(generated, { recursive: true })
 const index = items.map(({ metaPath, baseDir, examplesDir, ...meta }) => ({
   ...meta,
   files: meta.files.map((f) => ({ ...f, source: relative(ROOT, join(baseDir, f.path)), target: targetFor(f.path) })),
+  props: meta.files.filter((f) => f.path.endsWith(".tsx")).flatMap((f) => extractProps(readFileSync(join(baseDir, f.path), "utf8"), f.path)),
   examples: meta.examples.map((e) => ({ ...e, source: relative(ROOT, join(examplesDir, e.file)) })),
 }))
 writeFileSync(join(generated, "index.json"), JSON.stringify(index, null, 2) + "\n")
