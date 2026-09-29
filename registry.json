@@ -794,8 +794,8 @@
           "settings",
           "developer"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-28",
+        "version": "1.0.1",
+        "updated": "2026-09-29",
         "ai": {
           "summary": "Show an existing secret: <ApiKeyField value={key} label='Secret key' onRegenerate={confirmThenRotate} />. It is read-only; copy always copies the full value, even while masked.",
           "whenToUse": [
@@ -6094,7 +6094,7 @@
           "motion",
           "vibrancy"
         ],
-        "version": "1.0.0",
+        "version": "1.0.1",
         "updated": "2026-09-29",
         "ai": {
           "summary": "Render <NotificationStack> with <Notification key icon iconClassName title time onDismiss>body</Notification> children, newest first. Keep items in state; prepend to add (animates in), filter to dismiss. expanded/defaultExpanded/onExpandedChange control the stack; onClearAll adds a clear button.",

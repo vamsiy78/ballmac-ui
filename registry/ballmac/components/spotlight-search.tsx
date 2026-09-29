@@ -11,6 +11,29 @@ import { cn } from "@/lib/utils"
 type SpotlightSearchProps = React.ComponentProps<typeof CommandPrimitive>
 
 /**
+ * cmdk scrolls the selected row (and its group heading) into view with scrollIntoView, which also
+ * scrolls the page when the palette is off-screen, e.g. an inline demo below the fold. Route those
+ * calls to the results list only, so selection never moves the page.
+ */
+function scrollWithinList(this: HTMLElement) {
+  const list = this.closest<HTMLElement>("[cmdk-list]")
+  if (!list) return
+  const bounds = list.getBoundingClientRect()
+  const rect = this.getBoundingClientRect()
+  if (rect.top < bounds.top) list.scrollTop -= bounds.top - rect.top + 8
+  else if (rect.bottom > bounds.bottom) list.scrollTop += rect.bottom - bounds.bottom + 8
+}
+
+function keepScrollInList(el: HTMLElement | null) {
+  if (el) el.scrollIntoView = scrollWithinList
+}
+
+function setRef<T>(ref: React.Ref<T> | undefined, value: T | null) {
+  if (typeof ref === "function") ref(value)
+  else if (ref) (ref as React.RefObject<T | null>).current = value
+}
+
+/**
  * A macOS Spotlight-style command palette on cmdk: a large translucent search field over grouped results.
  * Renders inline; wrap it in SpotlightSearchDialog for a ⌘K overlay.
  */
@@ -78,9 +101,13 @@ function SpotlightSearchEmpty({ className, ...props }: React.ComponentProps<type
   )
 }
 
-function SpotlightSearchGroup({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Group>) {
+function SpotlightSearchGroup({ ref, className, ...props }: React.ComponentProps<typeof CommandPrimitive.Group>) {
   return (
     <CommandPrimitive.Group
+      ref={(el: HTMLDivElement | null) => {
+        keepScrollInList(el?.querySelector<HTMLElement>("[cmdk-group-heading]") ?? null)
+        setRef(ref, el)
+      }}
       data-slot="spotlight-search-group"
       className={cn(
         "[&:not(:first-child)]:mt-1.5 [&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:pt-1 [&_[cmdk-group-heading]]:pb-1 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:text-foreground/45",
@@ -104,9 +131,13 @@ type SpotlightSearchItemProps = React.ComponentProps<typeof CommandPrimitive.Ite
   detail?: React.ReactNode
 }
 
-function SpotlightSearchItem({ icon, iconClassName, detail, value, className, children, ...props }: SpotlightSearchItemProps) {
+function SpotlightSearchItem({ ref, icon, iconClassName, detail, value, className, children, ...props }: SpotlightSearchItemProps) {
   return (
     <CommandPrimitive.Item
+      ref={(el: HTMLDivElement | null) => {
+        keepScrollInList(el)
+        setRef(ref, el)
+      }}
       data-slot="spotlight-search-item"
       // Match on the title only, not the detail text ("Application" would match almost any query).
       value={value ?? (typeof children === "string" ? children : undefined)}

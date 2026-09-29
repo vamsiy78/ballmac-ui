@@ -38,6 +38,6 @@ export default defineItem({
       "Peeking cards are inert and hidden from assistive tech until the stack expands",
     ],
   },
-  version: "1.0.0",
+  version: "1.0.1",
   updated: "2026-09-29",
 })

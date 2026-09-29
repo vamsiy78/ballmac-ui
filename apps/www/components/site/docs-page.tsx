@@ -6,10 +6,10 @@ import { Eyebrow } from "@/components/site/section-heading"
 export function DocsPage({ eyebrow = "Docs", title, lead, children }: { eyebrow?: string; title: string; lead: ReactNode; children: ReactNode }) {
   return (
     <article className="min-w-0 max-w-3xl">
-      <header className="space-y-4 border-b pb-8">
+      <header className="space-y-3 pb-2">
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h1 className="text-4xl font-semibold tracking-[-0.03em] text-balance">{title}</h1>
-        <p className="text-muted-foreground text-lg leading-relaxed text-pretty">{lead}</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{title}</h1>
+        <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{lead}</p>
       </header>
       <div
         className={[

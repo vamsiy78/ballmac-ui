@@ -106,8 +106,10 @@ function ApiKeyField({
         <code
           data-slot="api-key-field-value"
           translate="no"
+          // Focusable so keyboard users can scroll a long key in a narrow field.
+          tabIndex={0}
           className={cn(
-            "min-w-0 flex-1 overflow-x-auto font-mono text-[13px] whitespace-nowrap [scrollbar-width:none]",
+            "min-w-0 flex-1 overflow-x-auto rounded-sm font-mono text-[13px] whitespace-nowrap outline-none [scrollbar-width:none] focus-visible:ring-[3px] focus-visible:ring-ring/50",
             revealed ? "select-all" : "select-none"
           )}
         >

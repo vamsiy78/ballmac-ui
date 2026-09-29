@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Copy, Maximize2, RotateCcw } from "lucide-react"
+import { Maximize2, RotateCcw } from "lucide-react"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
@@ -22,31 +22,6 @@ function ToolbarButton({ label, className, ...props }: React.ComponentProps<"but
   )
 }
 
-/** Copyable `@ballmac/<name>` chip that copies the full add command. */
-function InstallChip({ name }: { name: string }) {
-  const [copied, setCopied] = React.useState(false)
-  return (
-    <button
-      type="button"
-      onClick={async () => {
-        try {
-          await navigator.clipboard.writeText(`npx shadcn@latest add @ballmac/${name}`)
-          setCopied(true)
-          setTimeout(() => setCopied(false), 1600)
-        } catch {
-          // Clipboard unavailable.
-        }
-      }}
-      aria-label={copied ? "Copied install command" : `Copy install command for @ballmac/${name}`}
-      className="bg-background hover:bg-accent focus-visible:ring-ring/50 hidden h-8 max-w-72 items-center gap-2 whitespace-nowrap rounded-md border px-2.5 font-mono text-xs outline-none transition-colors focus-visible:ring-[3px] md:inline-flex"
-    >
-      <span className="text-muted-foreground">shadcn add</span>
-      <span className="truncate">@ballmac/{name}</span>
-      {copied ? <Check className="size-3.5 shrink-0" aria-hidden="true" /> : <Copy className="text-muted-foreground size-3.5 shrink-0" aria-hidden="true" />}
-    </button>
-  )
-}
-
 function V0Logo() {
   return (
     <svg viewBox="0 0 40 20" aria-hidden="true" className="h-2.5 w-auto fill-current">
@@ -56,20 +31,19 @@ function V0Logo() {
   )
 }
 
-/** Preview / Code tabs with a toolbar: install chip, Open in v0, replay (remount) and full screen. */
+/** Preview / Code tabs. The preview stage carries Open in v0, replay and full screen in its corner. */
 export function PreviewTabs({
   preview,
   code,
   className,
-  minHeight = 460,
-  name,
+  minHeight = 440,
   example,
 }: {
   preview: React.ReactNode
   code: React.ReactNode
   className?: string
   minHeight?: number
-  /** Registry item name, for the install chip. */
+  /** Registry item name. Kept for call sites; installation lives in its own section. */
   name?: string
   /** Example name, for Open in v0 and full screen. */
   example?: string
@@ -79,79 +53,76 @@ export function PreviewTabs({
   const id = React.useId()
   const tabs = ["preview", "code"] as const
   return (
-    <div className={cn("bg-card overflow-hidden rounded-2xl border", className)}>
-      <div className="flex h-12 items-center justify-between gap-2 border-b px-2">
-        <div
-          role="tablist"
-          aria-label="View"
-          className="bg-muted flex gap-0.5 rounded-lg p-0.5"
-          onKeyDown={(e) => {
-            if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return
-            const next = tab === "preview" ? "code" : "preview"
-            setTab(next)
-            document.getElementById(`${id}-${next}`)?.focus()
-          }}
-        >
-          {tabs.map((t) => (
-            <button
-              key={t}
-              role="tab"
-              id={`${id}-${t}`}
-              aria-selected={tab === t}
-              aria-controls={`${id}-${t}-panel`}
-              tabIndex={tab === t ? 0 : -1}
-              onClick={() => setTab(t)}
-              className={cn(
-                "focus-visible:ring-ring/50 rounded-md px-3 py-1 text-[13px] font-medium capitalize outline-none transition-all focus-visible:ring-[3px]",
-                tab === t ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              {t}
-            </button>
-          ))}
-        </div>
-        <div className="flex items-center gap-1">
-          {name && <InstallChip name={name} />}
-          {example && (
-            <a
-              href={`https://v0.dev/chat/api/open?url=${encodeURIComponent(`${SITE_URL}/r/${example}.json`)}`}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-foreground text-background focus-visible:ring-ring/50 hidden h-8 items-center gap-1.5 rounded-md px-2.5 text-xs font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px] sm:inline-flex"
-            >
-              Open in <V0Logo />
-              <span className="sr-only">v0 (opens in a new tab)</span>
-            </a>
-          )}
-          <ToolbarButton
-            label="Replay preview"
-            onClick={() => {
-              setTab("preview")
-              setRun((r) => r + 1)
-            }}
+    <div className={cn("space-y-3", className)}>
+      <div
+        role="tablist"
+        aria-label="View"
+        className="flex gap-5 border-b"
+        onKeyDown={(e) => {
+          if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return
+          const next = tab === "preview" ? "code" : "preview"
+          setTab(next)
+          document.getElementById(`${id}-${next}`)?.focus()
+        }}
+      >
+        {tabs.map((t) => (
+          <button
+            key={t}
+            role="tab"
+            id={`${id}-${t}`}
+            aria-selected={tab === t}
+            aria-controls={`${id}-${t}-panel`}
+            tabIndex={tab === t ? 0 : -1}
+            onClick={() => setTab(t)}
+            className={cn(
+              "focus-visible:ring-ring/50 -mb-px border-b-2 pb-2 text-sm font-medium capitalize outline-none transition-colors focus-visible:rounded-sm focus-visible:ring-[3px]",
+              tab === t ? "border-foreground text-foreground" : "text-muted-foreground hover:text-foreground border-transparent"
+            )}
           >
-            <RotateCcw />
-          </ToolbarButton>
-          {example && (
-            <a
-              href={`/preview/${example}`}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Open preview full screen in a new tab"
-              title="Full screen"
-              className="text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:ring-ring/50 inline-flex size-8 items-center justify-center rounded-md outline-none transition-colors focus-visible:ring-[3px]"
-            >
-              <Maximize2 className="size-3.5" />
-            </a>
-          )}
-        </div>
+            {t}
+          </button>
+        ))}
       </div>
       <div id={`${id}-preview-panel`} role="tabpanel" aria-labelledby={`${id}-preview`} hidden={tab !== "preview"}>
-        <div className="bm-stage bg-background relative flex items-center justify-center overflow-hidden p-6 sm:p-10" style={{ minHeight }}>
+        <div className="bm-stage relative flex items-center justify-center overflow-hidden rounded-xl border px-4 pt-16 pb-10 sm:px-10" style={{ minHeight }}>
+          <div className="absolute top-3 right-3 z-10 flex items-center gap-1">
+            {example && (
+              <a
+                href={`https://v0.dev/chat/api/open?url=${encodeURIComponent(`${SITE_URL}/r/${example}.json`)}`}
+                target="_blank"
+                rel="noreferrer"
+                className="focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 rounded-md bg-black px-2.5 text-xs font-medium text-white outline-none transition-opacity hover:opacity-85 focus-visible:ring-[3px] dark:bg-white dark:text-black max-sm:hidden"
+              >
+                Open in <V0Logo />
+                <span className="sr-only">v0 (opens in a new tab)</span>
+              </a>
+            )}
+            <ToolbarButton
+              label="Replay preview"
+              onClick={() => {
+                setTab("preview")
+                setRun((r) => r + 1)
+              }}
+            >
+              <RotateCcw />
+            </ToolbarButton>
+            {example && (
+              <a
+                href={`/preview/${example}`}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Open preview full screen in a new tab"
+                title="Full screen"
+                className="text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:ring-ring/50 inline-flex size-8 items-center justify-center rounded-md outline-none transition-colors focus-visible:ring-[3px]"
+              >
+                <Maximize2 className="size-3.5" />
+              </a>
+            )}
+          </div>
           <React.Fragment key={run}>{preview}</React.Fragment>
         </div>
       </div>
-      <div id={`${id}-code-panel`} role="tabpanel" aria-labelledby={`${id}-code`} hidden={tab !== "code"} className="max-h-[560px] overflow-auto">
+      <div id={`${id}-code-panel`} role="tabpanel" aria-labelledby={`${id}-code`} hidden={tab !== "code"} className="max-h-[640px] overflow-auto rounded-xl border">
         {code}
       </div>
     </div>

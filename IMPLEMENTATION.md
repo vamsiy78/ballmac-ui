@@ -137,6 +137,19 @@ Positioning: **Mac-grade components for the web**. Ballmac makes Mac apps; nobod
 - [x] Template: template-mac-app
 - [x] Site redesign: docs-style sidebar with every component, component pages with preview toolbar (install chip, Open in v0, replay, full screen), Copy page for LLMs, prev/next, scroll-spy TOC, mobile nav; catalog with featured row, instant search and fit-to-card live previews; new home (live macOS desktop showcase, interactive wall, MCP beam diagram)
 
+## Site redesign v2 (2026-09-29, second competitor pass)
+
+Feedback: the home page looked like our own landing template and the site felt AI-generated. Re-studied shadcn/ui (home mosaic, Blocks toolbar), Magic UI (docs-style component pages), Aceternity (catalog cards, section hubs) and DaisyUI.
+
+- [x] Neutral site palette (greys only; color comes from the components). `@ballmac/theme` itself is unchanged.
+- [x] Header like shadcn: flat nav with active state (Docs, Components, Blocks, Templates, MCP, Pricing), wide ⌘K search, GitHub, X, theme; icon-only search on phones
+- [x] Home rebuilt around a live mosaic: real components composed into app surfaces (settings, notifications, assistant chat, globe, revenue, terminal, Dynamic Island, dock, tabs), each captioned with links to what it uses; then collection tiles, templates, block categories, MCP. Removed the aurora hero, stats row, principles grid and beams CTA
+- [x] Catalog moved into the docs shell (sidebar), thumbnail-then-caption cards, previews mounted lazily
+- [x] Component pages: underline Preview/Code tabs with the toolbar inside the stage, CLI/Manual installation with numbered steps, short usage, credits, pager, TOC plus resources rail; no numbered section headings or mono eyebrows
+- [x] Blocks index with sticky category nav in page order; block and template pages with a shadcn-style frame toolbar (view, viewports, reload, install command, Open in v0)
+- [x] Multi-column footer
+- [x] Checks: axe 0 serious/critical on 21 pages and 127 previews (light and dark); Lighthouse (local production build) home 87/100/100/100, catalog 87/100/100/100, dock 87/100/100/100, hero-4 96/100/100/100, CLS 0. Fixed along the way: api-key-field value is keyboard-focusable (1.0.1), notification-stack dismiss buttons are 24px (1.0.1)
+
 ## Blocks (MVP: 12)
 
 hero-1, hero-2, hero-3, features-1, features-2, pricing-1, faq-1, cta-1, footer-1, header-1, login-1, ai-chat-1 — all `[x]`
@@ -160,3 +173,9 @@ Also added: `accordion` (primitive, needed by faq-1).
 - **Decorative scaled previews are `inert`.** Scaled-down demos would otherwise expose tiny tap targets (WCAG 2.5.8); only tiles whose point is interaction (globe, tilt, beams) and the hero dock stay live.
 - **Canvas and WebGL follow tokens** through `lib/ballmac/color.ts` (resolve CSS variables at runtime, repaint on theme change), so check-item's no-hex rule holds for effects too.
 - **Menu bar status items sit beside the ARIA menubar**, not inside it; a menubar may only contain menu items.
+- **Galleries mount previews lazily** (`LazyMount`, IntersectionObserver). Dozens of live demos hydrating at once cost the home page its performance score; the reserved box keeps layout stable.
+- **The site uses a neutral palette over the published theme.** Components only read shadcn tokens, so the site doubles as proof they adapt to someone else's theme.
+- **The license lives on one legal page (`/license`), not in the marketing UI.** Free items are still MIT (LICENSE, file headers, registry metadata unchanged); the site says "free to use" and links the terms from the footer. `/license` carries the full MIT text and third-party notices grouped by project, generated from `meta.source`. `/docs/licensing` redirects there.
+- **Positioning is platform-neutral:** "Components with native-app polish" for any web product. The `macos` category is labelled "Desktop"; item titles stay literal where a component really is macOS-style (Dock, Mac Window, the Mac app template).
+
+- **Docs and components share one layout** (the `(docs)` route group), so the sidebar stays mounted between them; its scroll position is also kept per tab (sessionStorage), so reloads and remounts do not jump it back to the top.

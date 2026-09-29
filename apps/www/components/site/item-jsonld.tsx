@@ -14,7 +14,7 @@ export function ItemJsonLd({ item, section }: { item: SiteItem; section: { name:
         codeRepository: "https://github.com/vamsiy78/ballmac-ui",
         programmingLanguage: ["TypeScript", "React"],
         runtimePlatform: "React 19, Tailwind CSS v4",
-        license: item.tier === "free" ? "https://opensource.org/licenses/MIT" : `${SITE_URL}/docs/licensing`,
+        license: `${SITE_URL}/license`,
         version: item.version,
         dateModified: item.updated,
         keywords: item.tags.join(", "),

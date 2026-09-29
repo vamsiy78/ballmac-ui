@@ -26,11 +26,12 @@ export function CommandMenu({ entries }: { entries: MenuEntry[] }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="text-muted-foreground hover:text-foreground bg-card inline-flex h-8 w-full max-w-60 items-center gap-2 rounded-lg border px-2.5 text-[13px] transition-colors"
+        aria-label="Search documentation"
+        className="text-muted-foreground hover:text-foreground bg-muted/60 hover:bg-muted focus-visible:ring-ring/50 inline-flex h-8 w-8 items-center justify-center gap-2 rounded-lg text-[13px] sm:w-full sm:justify-start sm:px-2.5 outline-none transition-colors focus-visible:ring-[3px] dark:bg-white/[0.06] dark:hover:bg-white/10"
       >
-        <Search className="size-3.5" />
-        <span className="flex-1 text-left">Search components…</span>
-        <kbd className="bg-muted rounded px-1.5 font-mono text-[10px]">⌘K</kbd>
+        <Search className="size-3.5 shrink-0" aria-hidden="true" />
+        <span className="flex-1 truncate text-left max-sm:sr-only">Search documentation…</span>
+        <kbd className="bg-background text-muted-foreground hidden rounded border px-1.5 font-sans text-[10px] font-medium sm:inline">⌘K</kbd>
       </button>
       <Command.Dialog
         open={open}
@@ -46,7 +47,7 @@ export function CommandMenu({ entries }: { entries: MenuEntry[] }) {
         <Command.List className="max-h-[360px] overflow-y-auto p-2">
           <Command.Empty className="text-muted-foreground px-3 py-8 text-center text-sm">No results.</Command.Empty>
           {groups.map((g) => (
-            <Command.Group key={g} heading={g} className="[&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:font-mono [&_[cmdk-group-heading]]:text-[10px] [&_[cmdk-group-heading]]:tracking-[0.14em] [&_[cmdk-group-heading]]:uppercase">
+            <Command.Group key={g} heading={g} className="[&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium">
               {entries
                 .filter((e) => e.group === g)
                 .map((e) => (

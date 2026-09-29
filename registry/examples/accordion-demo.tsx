@@ -13,7 +13,7 @@ export default function AccordionDemo() {
       </AccordionItem>
       <AccordionItem value="license">
         <AccordionTrigger>Can I use them commercially?</AccordionTrigger>
-        <AccordionContent>Yes. Free components are MIT licensed.</AccordionContent>
+        <AccordionContent>Yes. Free components work in personal, client and commercial projects.</AccordionContent>
       </AccordionItem>
     </Accordion>
   )

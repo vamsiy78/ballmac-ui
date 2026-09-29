@@ -171,7 +171,7 @@ function NotificationStack({
               type="button"
               aria-label="Clear all notifications"
               onClick={onClearAll}
-              className="absolute -top-1.5 -left-1.5 z-[1001] flex size-5 items-center justify-center rounded-full bg-background/90 text-foreground/70 opacity-0 shadow-[0_0_0_0.5px_rgb(0_0_0/0.18),0_2px_6px_rgb(0_0_0/0.15)] backdrop-blur-xl outline-none transition-opacity group-hover/stack:opacity-100 focus-visible:opacity-100 focus-visible:ring-[3px] focus-visible:ring-ring/50 [@media(hover:none)]:opacity-100"
+              className="absolute -top-2 -left-2 z-[1001] flex size-6 items-center justify-center rounded-full bg-background/90 text-foreground/70 opacity-0 shadow-[0_0_0_0.5px_rgb(0_0_0/0.18),0_2px_6px_rgb(0_0_0/0.15)] backdrop-blur-xl outline-none transition-opacity group-hover/stack:opacity-100 focus-visible:opacity-100 focus-visible:ring-[3px] focus-visible:ring-ring/50 [@media(hover:none)]:opacity-100"
             >
               <XIcon className="size-3" aria-hidden="true" />
             </button>
@@ -235,7 +235,7 @@ function Notification({ icon, iconClassName, title, time, onDismiss, dismissLabe
           aria-label={dismissLabel}
           onClick={onDismiss}
           data-slot="notification-dismiss"
-          className="absolute -top-1.5 -left-1.5 flex size-5 items-center justify-center rounded-full bg-background/90 text-foreground/70 opacity-0 shadow-[0_0_0_0.5px_rgb(0_0_0/0.18),0_2px_6px_rgb(0_0_0/0.15)] backdrop-blur-xl outline-none transition-opacity group-hover/notification:opacity-100 focus-visible:opacity-100 focus-visible:ring-[3px] focus-visible:ring-ring/50 [@media(hover:none)]:opacity-100"
+          className="absolute -top-2 -left-2 flex size-6 items-center justify-center rounded-full bg-background/90 text-foreground/70 opacity-0 shadow-[0_0_0_0.5px_rgb(0_0_0/0.18),0_2px_6px_rgb(0_0_0/0.15)] backdrop-blur-xl outline-none transition-opacity group-hover/notification:opacity-100 focus-visible:opacity-100 focus-visible:ring-[3px] focus-visible:ring-ring/50 [@media(hover:none)]:opacity-100"
         >
           <XIcon className="size-3" aria-hidden="true" />
         </button>

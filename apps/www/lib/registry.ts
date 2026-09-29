@@ -129,7 +129,7 @@ export const blockCategoryLabels: Record<string, string> = {
 
 export const categoryLabels: Record<string, string> = {
   primitives: "Primitives",
-  macos: "macOS",
+  macos: "Desktop",
   devices: "Device frames",
   backgrounds: "Backgrounds",
   text: "Text effects",

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next"
 
 import { getAllItems, itemHref, SITE_URL } from "@/lib/registry"
 
-const pages = ["", "/components", "/blocks", "/templates", "/pricing", "/changelog", "/docs", "/docs/installation", "/docs/theming", "/docs/registry", "/docs/mcp", "/docs/licensing"]
+const pages = ["", "/components", "/blocks", "/templates", "/pricing", "/changelog", "/docs", "/docs/installation", "/docs/theming", "/docs/registry", "/docs/mcp", "/license"]
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const items = getAllItems().filter((i) => i.category !== "foundation")

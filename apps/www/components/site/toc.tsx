@@ -20,7 +20,7 @@ export function Toc({ sections }: { sections: readonly (readonly [string, string
     return () => observer.disconnect()
   }, [sections])
   return (
-    <nav aria-label="On this page" className="sticky top-24 text-[13px]">
+    <nav aria-label="On this page" className="text-[13px]">
       <p className="text-foreground mb-3 text-xs font-semibold">On this page</p>
       <ul className="border-l">
         {sections.map(([id, label]) => (

@@ -18,7 +18,7 @@ export function DocsSidebar({ groups, className }: { groups: NavGroup[]; classNa
     <nav aria-label="Docs and components" className={cn("space-y-6 text-[13px]", className)}>
       {groups.map((group) => (
         <div key={group.title}>
-          <p className="text-foreground mb-1.5 px-2 text-xs font-semibold">{group.title}</p>
+          <p className="text-muted-foreground mb-1 px-2 text-xs font-medium">{group.title}</p>
           <ul className="space-y-px">
             {group.items.map((item) => {
               const active = pathname === item.href

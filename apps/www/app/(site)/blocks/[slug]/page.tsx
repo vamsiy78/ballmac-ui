@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -6,7 +7,7 @@ import { CodePanel } from "@/components/site/code-panel"
 import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { ItemJsonLd } from "@/components/site/item-jsonld"
-import { Eyebrow, SectionHeading } from "@/components/site/section-heading"
+import { SectionHeading } from "@/components/site/section-heading"
 import { blockCategoryLabels, getBlocks, getItem, readSource } from "@/lib/registry"
 
 export function generateStaticParams() {
@@ -26,21 +27,22 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
   const example = item.examples[0]
   const related = getBlocks().filter((b) => b.name !== item.name && b.blockCategory === item.blockCategory).slice(0, 4)
   return (
-    <div className="mx-auto max-w-[1440px] space-y-12 px-4 py-10 sm:px-6">
-      <header className="space-y-4">
-          <ItemJsonLd item={item} section={{ name: "Blocks", path: "/blocks" }} />
-        <Eyebrow>
-          <Link href="/blocks" className="hover:text-foreground">Blocks</Link> / {blockCategoryLabels[item.blockCategory ?? ""] ?? "Block"}
-        </Eyebrow>
-        <div className="flex flex-wrap items-center gap-3">
-          <h1 className="text-4xl font-semibold tracking-[-0.03em]">{item.title}</h1>
-          <span className="rounded-full border px-2.5 py-0.5 font-mono text-[11px] tracking-wide uppercase">{item.tier === "pro" ? "Pro" : "Free · MIT"}</span>
-        </div>
-        <p className="text-muted-foreground max-w-3xl text-lg leading-relaxed">{item.description}</p>
+    <div className="mx-auto max-w-[1440px] space-y-10 px-4 py-12 sm:px-6">
+      <header className="max-w-3xl space-y-3">
+        <ItemJsonLd item={item} section={{ name: "Blocks", path: "/blocks" }} />
+        <nav aria-label="Breadcrumb" className="text-muted-foreground flex items-center gap-1.5 text-sm">
+          <Link href="/blocks" className="hover:text-foreground">Blocks</Link>
+          <ChevronRight className="size-3.5" aria-hidden="true" />
+          <Link href={`/blocks#${item.blockCategory}`} className="hover:text-foreground">{blockCategoryLabels[item.blockCategory ?? ""] ?? "Block"}</Link>
+        </nav>
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}</h1>
+        <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
       </header>
       {example && (
         <FramePreview
           src={`/preview/${example.name}`}
+          name={item.name}
+          example={example.name}
           title={`${item.title} preview`}
           code={
             <div className="space-y-4 p-4">
@@ -51,23 +53,23 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
           }
         />
       )}
-      <div className="grid max-w-4xl grid-cols-1 gap-12">
+      <div className="grid max-w-[820px] grid-cols-1 gap-12">
         <section className="space-y-4">
-          <SectionHeading id="installation" index="01">Installation</SectionHeading>
+          <SectionHeading id="installation">Installation</SectionHeading>
           <ItemInstall item={item} />
         </section>
         {example && (
           <section className="space-y-4">
-            <SectionHeading id="usage" index="02">Usage</SectionHeading>
+            <SectionHeading id="usage">Usage</SectionHeading>
             <CodePanel code={readSource(example.source)} title={`Example: ${example.file}`} />
           </section>
         )}
         <section className="space-y-4">
-          <SectionHeading id="dependencies" index="03">Dependencies</SectionHeading>
+          <SectionHeading id="dependencies">Dependencies</SectionHeading>
           <ItemDependencies item={item} />
         </section>
         <section className="space-y-4">
-          <SectionHeading id="ai" index="04">Use with AI</SectionHeading>
+          <SectionHeading id="ai">Use with AI</SectionHeading>
           <ItemAi item={item} />
           <ItemCredits item={item} />
         </section>

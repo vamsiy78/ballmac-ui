@@ -7,7 +7,7 @@ import { Eyebrow } from "@/components/site/section-heading"
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Ballmac UI's components, blocks and templates are free and MIT licensed. Ballmac UI Pro, with premium blocks and templates, is coming.",
+  description: "Ballmac UI's components, blocks and templates are free to use. Ballmac UI Pro, with premium blocks and templates, is coming.",
   alternates: { canonical: "/pricing" },
 }
 
@@ -15,7 +15,7 @@ const plans = [
   {
     name: "Free",
     price: "$0",
-    note: "MIT licensed, forever.",
+    note: "Free forever.",
     cta: { label: "Browse components", href: "/components" },
     features: [
       [true, "Every free component, block and template"],
@@ -42,7 +42,7 @@ const plans = [
 ] as const
 
 const faqs = [
-  { q: "Is the free tier really free for commercial work?", a: "Yes. Free items are MIT licensed. Use them in client work and commercial products; keep the license notice in the source files." },
+  { q: "Is the free tier really free for commercial work?", a: "Yes. Use free items in personal, client and commercial projects, and change them however you like. The license notice stays in the source files." },
   { q: "Will free components become paid?", a: "No. Anything released as free stays free. Pro adds new premium items; it doesn't take any away." },
   { q: "How will Pro work with the CLI?", a: "You'll add your license key once as an environment variable, and the shadcn CLI and MCP server will install Pro items the same way as free ones." },
 ]
@@ -54,9 +54,9 @@ export default function PricingPage() {
         <div className="flex justify-center">
           <Eyebrow>Pricing</Eyebrow>
         </div>
-        <h1 className="text-4xl font-semibold tracking-[-0.03em] text-balance sm:text-5xl">Free to build with. Pro when you want more.</h1>
+        <h1 className="text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Free to build with. Pro when you want more.</h1>
         <p className="text-muted-foreground text-lg leading-relaxed">
-          The core library is free and MIT licensed. Pro will add premium blocks and templates.
+          The core library is free for any project. Pro will add premium blocks and templates.
         </p>
       </header>
       <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -66,7 +66,7 @@ export default function PricingPage() {
             <div key={plan.name} className={pro ? "bg-foreground text-background flex flex-col rounded-2xl p-8" : "bg-card flex flex-col rounded-2xl border p-8"}>
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold">{plan.name}</h2>
-                {pro && <span className="font-mono text-[11px] tracking-[0.14em] uppercase opacity-70">Coming soon</span>}
+                {pro && <span className="rounded-full border border-current/20 px-2 py-0.5 text-xs font-medium opacity-80">Coming soon</span>}
               </div>
               <p className="mt-6 text-5xl font-semibold tracking-[-0.04em]">{plan.price}</p>
               <p className={pro ? "mt-2 opacity-70" : "text-muted-foreground mt-2"}>{plan.note}</p>

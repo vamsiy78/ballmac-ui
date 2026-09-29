@@ -19,4 +19,12 @@ describe("ApiKeyField", () => {
     expect(reveal).toHaveAttribute("aria-pressed", "true")
     expect(screen.getByText(KEY)).toBeInTheDocument()
   })
+
+  it("lets keyboard users reach the value, so a long key can be scrolled", async () => {
+    const user = userEvent.setup()
+    const { container } = render(<ApiKeyField label="Secret key" value={KEY} />)
+    const value = container.querySelector("[data-slot=api-key-field-value]")
+    await user.tab()
+    expect(value).toHaveFocus()
+  })
 })

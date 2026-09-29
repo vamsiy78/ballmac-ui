@@ -2,6 +2,7 @@ import Link from "next/link"
 
 import { CodePanel } from "@/components/site/code-panel"
 import { CopyButton } from "@/components/site/copy-button"
+import { InstallSwitcher } from "@/components/site/install-switcher"
 import { InstallTabs } from "@/components/site/install-tabs"
 import { addCommand, getItem, installCommand, itemHref, packageManagers, readSource, SITE_URL, type PackageManager, type SiteItem } from "@/lib/registry"
 
@@ -9,27 +10,47 @@ const perPm = (fn: (pm: PackageManager) => string) =>
   Object.fromEntries(packageManagers.map((pm) => [pm, fn(pm)])) as Record<PackageManager, string>
 export const shownPath = (target: string) => target.replace(/^@(components|hooks|lib)\//, "$1/")
 
-/** CLI tabs plus a collapsible manual install (npm deps and the source files). */
-export function ItemInstall({ item }: { item: SiteItem }) {
+/** Numbered steps with a guide line, for manual installation. */
+export function Steps({ children }: { children: React.ReactNode }) {
+  return <ol className="[counter-reset:step] space-y-8 border-l pl-7 ml-3.5">{children}</ol>
+}
+
+export function Step({ title, children }: { title: React.ReactNode; children?: React.ReactNode }) {
   return (
-    <div className="space-y-4">
-      <InstallTabs commands={perPm((pm) => addCommand([item.name], pm))} />
-      <details className="rounded-xl border px-4 py-3">
-        <summary className="cursor-pointer text-sm font-medium">Install manually</summary>
-        <div className="mt-4 space-y-4">
+    <li className="relative space-y-3 [counter-increment:step] before:absolute before:top-0 before:-left-[42px] before:flex before:size-7 before:items-center before:justify-center before:rounded-full before:border before:bg-background before:text-xs before:font-medium before:tabular-nums before:content-[counter(step)]">
+      <p className="pt-0.5 text-sm font-medium">{title}</p>
+      {children}
+    </li>
+  )
+}
+
+/** CLI and Manual installation. Manual lists the npm packages, the other items it needs, and the source. */
+export function ItemInstall({ item }: { item: SiteItem }) {
+  const ballmac = item.registryDependencies.filter((d) => !d.startsWith("shadcn:"))
+  return (
+    <InstallSwitcher
+      cli={<InstallTabs commands={perPm((pm) => addCommand([item.name], pm))} />}
+      manual={
+        <Steps>
           {item.dependencies.length > 0 && (
-            <>
-              <p className="text-muted-foreground text-sm">Install the dependencies:</p>
+            <Step title="Install the dependencies.">
               <InstallTabs commands={perPm((pm) => installCommand(item.dependencies, pm))} />
-            </>
+            </Step>
           )}
-          <p className="text-muted-foreground text-sm">Copy the source into your project:</p>
-          {item.files.map((f) => (
-            <CodePanel key={f.path} code={readSource(f.source)} title={shownPath(f.target)} />
-          ))}
-        </div>
-      </details>
-    </div>
+          {ballmac.length > 0 && (
+            <Step title="Add the Ballmac items it builds on.">
+              <InstallTabs commands={perPm((pm) => addCommand(ballmac, pm))} />
+            </Step>
+          )}
+          <Step title="Copy the source into your project.">
+            {item.files.map((f) => (
+              <CodePanel key={f.path} code={readSource(f.source)} title={shownPath(f.target)} />
+            ))}
+          </Step>
+          <Step title="Update the import paths to match your project setup." />
+        </Steps>
+      }
+    />
   )
 }
 
@@ -41,7 +62,7 @@ export function ItemDependencies({ item }: { item: SiteItem }) {
   return (
     <dl className="bg-border grid gap-px overflow-hidden rounded-xl border sm:grid-cols-2">
       <div className="bg-background p-4">
-        <dt className="text-muted-foreground font-mono text-[11px] tracking-[0.14em] uppercase">npm</dt>
+        <dt className="text-muted-foreground text-xs font-medium">npm</dt>
         <dd className="mt-2 flex flex-wrap gap-2">
           {item.dependencies.length ? (
             item.dependencies.map((d) => (
@@ -55,7 +76,7 @@ export function ItemDependencies({ item }: { item: SiteItem }) {
         </dd>
       </div>
       <div className="bg-background p-4">
-        <dt className="text-muted-foreground font-mono text-[11px] tracking-[0.14em] uppercase">Registry</dt>
+        <dt className="text-muted-foreground text-xs font-medium">Registry</dt>
         <dd className="mt-2 flex flex-wrap gap-2">
           {ballmac.map((d) => (
             <Link key={d} href={getItem(d) ? itemHref(getItem(d)!) : `/components/${d}`} className={chip}>
@@ -125,11 +146,11 @@ export function ItemCredits({ item }: { item: SiteItem }) {
           Based on{" "}
           <a href={item.source.url} className="text-foreground underline underline-offset-4">
             {item.source.name}
-          </a>{" "}
-          ({item.source.license}, {item.source.copyright}), modified by Ballmac.{" "}
+          </a>
+          , adapted by Ballmac.{" "}
         </>
       ) : null}
-      {item.tier === "pro" ? "Covered by the Ballmac UI Pro license." : "Released under the MIT License."}
+      {item.tier === "pro" ? "Covered by the Ballmac UI Pro license." : "Free to use in personal and commercial projects."}
     </p>
   )
 }

@@ -1,241 +1,251 @@
-import { ArrowRight, ArrowUpRight, Keyboard, MousePointerClick, PackageCheck, Sparkles } from "lucide-react"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 
-import { AuroraBackground } from "@/components/ballmac/aurora-background"
-import { BeamsBackground } from "@/components/ballmac/beams-background"
 import { buttonVariants } from "@/components/ballmac/button"
-import { NumberTicker } from "@/components/ballmac/number-ticker"
 import { AgentDiagram } from "@/components/home/agent-diagram"
-import { DesktopShowcase } from "@/components/home/desktop-showcase"
-import { FitPreview } from "@/components/site/fit-preview"
-import { InstallTabs } from "@/components/site/install-tabs"
-import { ScaledPreview } from "@/components/site/scaled-preview"
+import { Mosaic } from "@/components/home/mosaic"
+import { CopyButton } from "@/components/site/copy-button"
+import { FitPreview, FitWidth } from "@/components/site/fit-preview"
+import { LazyMount } from "@/components/site/lazy-mount"
 import { loadExample } from "@/lib/examples"
-import { addCommand, getAllItems, getBlocks, getComponents, getTemplates, packageManagers, type PackageManager } from "@/lib/registry"
+import { blockCategoryLabels, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
 import { cn } from "@/lib/utils"
 
-// Tiles in the showcase wall, by registry example. Missing examples are skipped. `live` tiles stay
-// interactive; the rest are scaled-down pictures (inert), so tiny scaled buttons never become tap targets.
-const wall = [
-  { example: "globe-demo", item: "globe", span: "lg:col-span-2 lg:row-span-2", size: [760, 520], live: true },
-  { example: "tilt-card-demo", item: "tilt-card", span: "", size: [520, 400], live: true },
-  { example: "animated-beam-demo", item: "animated-beam", span: "", size: [640, 440], live: true },
-  { example: "mac-window-demo", item: "mac-window", span: "lg:col-span-2", size: [720, 440] },
-  { example: "beams-background-demo", item: "beams-background", span: "", size: [700, 440] },
-  { example: "dynamic-island-demo", item: "dynamic-island", span: "", size: [660, 440] },
-  { example: "laptop-frame-demo", item: "laptop-frame", span: "", size: [760, 520] },
-  { example: "aurora-background-demo", item: "aurora-background", span: "", size: [700, 440] },
+// The collection as an asymmetric bento: two large anchors (desktop top left, devices bottom right),
+// a tall AI tile, a wide motion strip and small tiles filling the gaps. Each shows a real example.
+const collections = [
+  { category: "macos", example: "mac-window-demo", size: "large", span: "sm:col-span-2 sm:row-span-2", design: [720, 520], blurb: "App windows, docks, menu bars, command search and a live notch." },
+  { category: "ai", example: "ai-chat-demo", size: "tall", span: "sm:row-span-2", design: [520, 640], blurb: "Messages, streaming text, tool calls, reasoning and a prompt box." },
+  { category: "backgrounds", example: "beams-background-demo", size: "small", span: "", design: [600, 420], blurb: "" },
+  { category: "text", example: "gradient-text-shiny", size: "small", span: "", design: [520, 360], blurb: "" },
+  { category: "motion", example: "marquee-demo", size: "wide", span: "sm:col-span-2", design: [760, 300], blurb: "Beams, tilt, orbits, marquees and confetti, all spring-tuned." },
+  { category: "devices", example: "laptop-frame-demo", size: "large", span: "sm:col-span-2 sm:row-span-2", design: [760, 520], blurb: "MacBook, iPhone and browser frames for product shots." },
+  { category: "developer", example: "code-block-demo", size: "small", span: "", design: [600, 420], blurb: "" },
+  { category: "primitives", example: "button-variants", size: "small", span: "", design: [480, 320], blurb: "" },
 ] as const
 
-const principles = [
-  { icon: Keyboard, title: "Keyboard first", body: "Every interactive piece works with the keyboard and screen readers, with visible focus and real ARIA." },
-  { icon: MousePointerClick, title: "Motion with manners", body: "Springs tuned like macOS, paused off-screen, and calm when someone asks for reduced motion." },
-  { icon: PackageCheck, title: "Code you own", body: "One command copies the source into components/ballmac. Honest dependencies, never your shadcn files." },
-  { icon: Sparkles, title: "Agent ready", body: "Written descriptions tell Claude Code, Cursor and VS Code when to use each piece and what it pairs with." },
-]
+const install = "npx shadcn@latest add @ballmac/dock"
+
+// Sections in the order they appear on a page.
+const blockOrder = ["header", "hero", "features", "logo-cloud", "testimonials", "pricing", "faq", "cta", "footer", "auth", "ai-chat", "dashboard", "settings", "billing"]
+const byPageOrder = (a: string, b: string) => (blockOrder.indexOf(a) + 1 || 99) - (blockOrder.indexOf(b) + 1 || 99)
+
 
 export default async function Home() {
-  const commands = Object.fromEntries(packageManagers.map((pm) => [pm, addCommand(["dock"], pm)])) as Record<PackageManager, string>
   const components = getComponents()
   const blocks = getBlocks()
   const templates = getTemplates()
-  const names = new Set(getAllItems().flatMap((i) => i.examples.map((e) => e.name)))
   const tiles = await Promise.all(
-    wall.filter((w) => names.has(w.example)).map(async (w) => ({ ...w, Preview: await loadExample(w.example), title: components.find((c) => c.name === w.item)?.title ?? w.item }))
+    collections.map(async (c) => ({
+      ...c,
+      label: categoryLabels[c.category] ?? c.category,
+      count: components.filter((i) => i.category === c.category).length,
+      Preview: await loadExample(c.example),
+    }))
   )
-  const blockPreviews = await Promise.all(
-    blocks.slice(0, 4).map(async (b) => ({ ...b, Preview: b.examples[0] ? await loadExample(b.examples[0].name) : null }))
-  )
-  const newCount = components.filter((c) => ["macos", "backgrounds", "text", "devices"].includes(c.category)).length
+  const templateCards = await Promise.all(templates.map(async (t) => ({ ...t, Preview: t.examples[0] ? await loadExample(t.examples[0].name) : null })))
+  const blockGroups = [...new Set(blocks.map((b) => b.blockCategory ?? "other"))].sort(byPageOrder).map((g) => ({
+    id: g,
+    label: blockCategoryLabels[g] ?? g,
+    count: blocks.filter((b) => (b.blockCategory ?? "other") === g).length,
+  }))
+  const macCount = components.filter((c) => c.category === "macos").length
+  const categoryCount = new Set(components.map((c) => c.category)).size
 
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate overflow-hidden">
-        <AuroraBackground className="absolute inset-x-0 top-0 -z-10 h-[720px]" intensity={0.55} radialMask />
-        <div className="mx-auto max-w-[1440px] px-4 pt-16 sm:px-6 md:pt-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <Link
-              href="/components?category=macos"
-              className="bg-background/60 hover:bg-background/90 inline-flex items-center gap-2 rounded-full border py-1 pr-3 pl-1 text-[13px] font-medium backdrop-blur transition-colors"
-            >
-              <span className="bg-foreground text-background rounded-full px-2 py-0.5 text-[11px] font-semibold">New</span>
-              <span>The macOS collection<span className="max-sm:hidden">{newCount > 0 ? ` · ${newCount} new components` : ""}</span></span>
-              <ArrowRight className="size-3.5" aria-hidden="true" />
-            </Link>
-            <h1 className="mt-7 text-5xl leading-[1.02] font-semibold tracking-[-0.05em] text-balance sm:text-7xl">
-              Mac-grade components for the web.
-            </h1>
-            <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty sm:text-xl">
-              Docks, windows, globes, living backgrounds and AI interfaces with the polish of a native Mac app. Free, accessible,
-              and one command away, for you or your AI agent.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/components" className={buttonVariants({ size: "lg", shape: "pill" })}>
-                Browse components <ArrowRight />
-              </Link>
-              <Link href="/docs/mcp" className={cn(buttonVariants({ size: "lg", shape: "pill", variant: "outline" }), "bg-background/60 backdrop-blur")}>
-                Use with your AI agent
-              </Link>
-            </div>
-            <InstallTabs commands={commands} className="mx-auto mt-8 max-w-md text-left" />
-          </div>
-          <div className="mx-auto mt-14 max-w-[1180px] md:mt-20">
-            <DesktopShowcase />
-            <p className="text-muted-foreground mt-4 text-center text-xs">
-              Live, not a screenshot: a <Link href="/components/mac-window" className="text-foreground underline underline-offset-4">window</Link>,{" "}
-              <Link href="/components/dynamic-island" className="text-foreground underline underline-offset-4">Dynamic Island</Link>,{" "}
-              <Link href="/components/dock" className="text-foreground underline underline-offset-4">dock</Link> and{" "}
-              <Link href="/components/tool-call-card" className="text-foreground underline underline-offset-4">AI components</Link>, all Ballmac UI. Hover the dock.
-            </p>
-          </div>
+      <section className="mx-auto max-w-[1440px] px-4 pt-16 pb-12 text-center sm:px-6 md:pt-24 md:pb-16">
+        <Link
+          href="/components?category=macos"
+          className="bg-muted/60 hover:bg-muted focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-medium outline-none transition-colors focus-visible:ring-[3px] dark:bg-white/[0.06] dark:hover:bg-white/10"
+        >
+          <span className="bg-chart-1 size-1.5 rounded-full" aria-hidden="true" />
+          New: the Desktop collection{macCount ? `, ${macCount} components` : ""}
+          <ArrowRight className="size-3.5" aria-hidden="true" />
+        </Link>
+        <h1 className="mx-auto mt-6 max-w-4xl text-4xl leading-[1.05] font-semibold tracking-[-0.045em] text-balance sm:text-6xl">
+          Make your web app feel native
+        </h1>
+        <p className="text-muted-foreground mx-auto mt-5 max-w-2xl text-base leading-relaxed text-pretty sm:text-lg">
+          Crafted React components with native-app motion, accessibility built in, and code you own. Install any piece with
+          one command, or let your AI agent do it for you.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
+          <Link href="/docs/installation" className={buttonVariants({ shape: "pill" })}>
+            Get started
+          </Link>
+          <Link href="/components" className={buttonVariants({ shape: "pill", variant: "ghost" })}>
+            Browse components <ArrowRight />
+          </Link>
+        </div>
+        <div className="text-muted-foreground mx-auto mt-6 inline-flex max-w-full items-center gap-1.5 rounded-lg border py-1 pr-1 pl-3 font-mono text-[13px]">
+          <span className="select-none" aria-hidden="true">$</span>
+          <span className="text-foreground truncate">{install}</span>
+          <CopyButton value={install} label="Copy install command" />
         </div>
       </section>
 
-      {/* Numbers */}
-      <section className="mx-auto max-w-[1440px] px-4 pt-20 sm:px-6">
-        <dl className="bg-border mx-auto grid max-w-3xl grid-cols-3 gap-px overflow-hidden rounded-2xl border">
-          {[
-            ["Components", components.length],
-            ["Blocks", blocks.length],
-            ["Templates", templates.length],
-          ].map(([label, value]) => (
-            <div key={label} className="bg-background flex flex-col-reverse px-5 py-5 text-center">
-              <dt className="text-muted-foreground mt-1 text-sm">{label}</dt>
-              <dd className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                <NumberTicker value={Number(value)} />
-              </dd>
-            </div>
-          ))}
-        </dl>
+      {/* Live mosaic */}
+      <section aria-labelledby="live-examples" className="mx-auto max-w-[1440px] px-4 sm:px-6">
+        <h2 id="live-examples" className="sr-only">
+          Live examples
+        </h2>
+        <Mosaic />
       </section>
 
-      {/* Showcase wall */}
-      {tiles.length > 0 && (
-        <section className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div className="max-w-2xl">
-              <p className="text-primary text-sm font-medium">Components</p>
-              <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Things people stop scrolling for.</h2>
-              <p className="text-muted-foreground mt-4 text-lg text-pretty">Every tile is the real component. Drag the globe, tilt the card, hover the dock.</p>
-            </div>
-            <Link href="/components" className={buttonVariants({ variant: "outline", shape: "pill" })}>
-              All {components.length} components <ArrowRight />
-            </Link>
+      {/* Collections */}
+      <section className="mx-auto max-w-[1440px] px-4 pt-28 sm:px-6">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Explore the collection</h2>
+            <p className="text-muted-foreground mt-3 text-base leading-relaxed sm:text-lg">
+              {components.length} components across {categoryCount} categories, each with live previews, keyboard support and a
+              single install command.
+            </p>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:auto-rows-[340px] lg:grid-cols-4">
-            {tiles.map((t) => (
-              <div key={t.example} className={cn("group bg-card relative min-h-[300px] overflow-hidden rounded-2xl border", t.span)}>
-                <div className="bm-stage bg-background absolute inset-0" inert={!("live" in t && t.live)}>
-                  <FitPreview width={t.size[0]} height={t.size[1]}>{t.Preview ? <t.Preview /> : null}</FitPreview>
+          <Link href="/components" className={buttonVariants({ variant: "outline", shape: "pill", size: "sm" })}>
+            All components <ArrowRight />
+          </Link>
+        </div>
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:auto-rows-[240px] sm:grid-cols-2 lg:grid-cols-4">
+          {tiles.map((t) => {
+            const featured = t.size === "large" || t.size === "tall"
+            return (
+              <div
+                key={t.category}
+                className={cn(
+                  "group bm-stage relative h-72 overflow-hidden rounded-2xl border transition-[border-color,box-shadow] duration-300 hover:border-foreground/20 hover:shadow-[0_12px_40px_-16px_rgb(0_0_0/0.35)] sm:h-auto",
+                  featured && "max-sm:h-96",
+                  t.span
+                )}
+              >
+                <div className={cn("absolute inset-x-0 top-0 transition-transform duration-500 ease-[var(--bm-ease-out)] group-hover:scale-[1.02]", featured ? "bottom-24" : "bottom-14")} inert>
+                  <LazyMount className="absolute inset-0">
+                    <FitPreview width={t.design[0]} height={t.design[1]} inset={0.06}>
+                      {t.Preview ? <t.Preview /> : null}
+                    </FitPreview>
+                  </LazyMount>
                 </div>
-                <Link
-                  href={`/components/${t.item}`}
-                  className="bg-background/85 hover:bg-background absolute bottom-3 left-3 inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium backdrop-blur transition-colors"
-                >
-                  {t.title} <ArrowUpRight className="size-3" aria-hidden="true" />
-                </Link>
+                <div className="from-surface via-surface/90 pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t to-transparent px-5 pt-10 pb-4">
+                  <div className="flex items-baseline gap-2">
+                    <Link
+                      href={`/components?category=${t.category}`}
+                      className={cn(
+                        "pointer-events-auto font-semibold tracking-tight outline-none after:absolute after:inset-0 after:rounded-2xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50",
+                        featured ? "text-xl" : "text-[15px]"
+                      )}
+                    >
+                      {t.label}
+                    </Link>
+                    <span className="text-muted-foreground text-sm tabular-nums">{t.count}</span>
+                  </div>
+                  {featured && <p className="text-muted-foreground mt-1 max-w-sm text-sm leading-relaxed">{t.blurb}</p>}
+                </div>
+                <ArrowUpRight
+                  className="text-muted-foreground absolute top-4 right-4 size-4 -translate-x-1 translate-y-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100"
+                  aria-hidden="true"
+                />
               </div>
-            ))}
-          </div>
-        </section>
-      )}
+            )
+          })}
+        </div>
+      </section>
 
-      {/* Agents */}
-      <section className="bg-card/40 border-y">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-12 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.2fr]">
+      {/* Blocks and templates */}
+      <section className="mx-auto max-w-[1440px] px-4 pt-32 sm:px-6">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
           <div>
-            <p className="text-primary text-sm font-medium">MCP</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Ask for a landing page. Get Ballmac.</h2>
-            <p className="text-muted-foreground mt-4 text-lg leading-relaxed text-pretty">
-              Ballmac UI speaks the shadcn registry and MCP standard. Your agent searches the catalog, reads when to use each
-              component, installs it and wires it in.
+            <h2 className="text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Whole pages, not just parts</h2>
+            <p className="text-muted-foreground mt-3 max-w-lg text-base leading-relaxed sm:text-lg">
+              {blocks.length} responsive blocks and {templates.length} templates, composed from the same components. Install a section,
+              or an entire page as a route.
             </p>
-            <div className="mt-8 space-y-2 font-mono text-[13px]">
-              <p className="bg-background overflow-x-auto rounded-lg border px-4 py-3 whitespace-nowrap">npx shadcn@latest mcp init --client claude</p>
-              <p className="bg-background text-muted-foreground rounded-lg border px-4 py-3">&gt; Add a hero with a globe and a dock using Ballmac UI</p>
-            </div>
-            <Link href="/docs/mcp" className={cn(buttonVariants({ shape: "pill" }), "mt-8")}>
-              Set up MCP <ArrowRight />
-            </Link>
-          </div>
-          <div className="bg-background overflow-x-auto rounded-3xl border p-6 sm:p-10">
-            <div className="min-w-[520px]">
-              <AgentDiagram />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Principles */}
-      <section className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6">
-        <div className="max-w-2xl">
-          <p className="text-primary text-sm font-medium">Why Ballmac UI</p>
-          <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Built by people who ship Mac apps.</h2>
-        </div>
-        <div className="bg-border mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:grid-cols-4">
-          {principles.map((p) => (
-            <div key={p.title} className="bg-background p-7">
-              <p.icon className="size-5" aria-hidden="true" />
-              <h3 className="mt-5 font-semibold tracking-tight">{p.title}</h3>
-              <p className="text-muted-foreground mt-2 text-[15px] leading-relaxed">{p.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Blocks */}
-      {blockPreviews.length > 0 && (
-        <section className="mx-auto max-w-[1440px] px-4 pb-24 sm:px-6">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div className="max-w-2xl">
-              <p className="text-primary text-sm font-medium">Blocks and templates</p>
-              <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Whole sections, one command each.</h2>
-            </div>
-            <div className="flex gap-2">
-              <Link href="/blocks" className={buttonVariants({ variant: "outline", shape: "pill" })}>
-                Blocks
+            <ul className="mt-9 grid grid-cols-1 border-t sm:grid-cols-2 sm:gap-x-8" aria-label="Block categories">
+              {blockGroups.map((g) => (
+                <li key={g.id} className="border-b">
+                  <Link
+                    href={`/blocks#${g.id}`}
+                    className="group/row focus-visible:ring-ring/50 flex items-center justify-between gap-3 py-3 text-[15px] outline-none focus-visible:ring-[3px]"
+                  >
+                    <span className="transition-transform duration-200 group-hover/row:translate-x-1">{g.label}</span>
+                    <span className="text-muted-foreground flex items-center gap-1.5 text-sm tabular-nums">
+                      {g.count} {g.count === 1 ? "block" : "blocks"}
+                      <ArrowUpRight className="size-3.5 opacity-0 transition-opacity group-hover/row:opacity-100" aria-hidden="true" />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 flex flex-wrap gap-2">
+              <Link href="/blocks" className={buttonVariants({ shape: "pill", size: "sm" })}>
+                Browse blocks <ArrowRight />
               </Link>
-              <Link href="/templates" className={buttonVariants({ variant: "outline", shape: "pill" })}>
+              <Link href="/templates" className={buttonVariants({ variant: "outline", shape: "pill", size: "sm" })}>
                 Templates
               </Link>
             </div>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
-            {blockPreviews.map((b) => (
-              <div key={b.name} className="bg-background hover:border-foreground/25 relative overflow-hidden rounded-2xl border transition-colors">
-                <ScaledPreview scale={0.5} height={300}>
-                  {b.Preview ? <b.Preview /> : null}
-                </ScaledPreview>
-                <div className="flex items-center justify-between gap-4 border-t px-4 py-3">
-                  <Link
-                    href={`/blocks/${b.name}`}
-                    className="text-sm font-medium outline-none after:absolute after:inset-0 after:rounded-2xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50"
-                  >
-                    {b.title}
-                  </Link>
-                  <span className="text-muted-foreground font-mono text-[11px]">@ballmac/{b.name}</span>
+          {/* Templates as overlapping windows: the newest in front. */}
+          <div className="relative grid gap-5 lg:block lg:h-[600px]">
+            {templateCards.map((t, i) => {
+              const front = i === templateCards.length - 1
+              return (
+                <div
+                  key={t.name}
+                  className={cn(
+                    "group bg-background relative overflow-hidden rounded-xl border shadow-[0_24px_60px_-24px_rgb(0_0_0/0.45)] transition-transform duration-500 ease-[var(--bm-ease-out)] lg:absolute lg:w-[84%]",
+                    front ? "lg:bottom-0 lg:left-0 lg:z-10 lg:hover:-translate-y-1.5" : "lg:top-0 lg:right-0 lg:hover:-translate-y-1.5 lg:hover:z-20"
+                  )}
+                >
+                  <div className="bg-muted/60 flex h-9 items-center border-b px-20 backdrop-blur">
+                    <span className="absolute top-3.5 left-3 flex gap-1.5" aria-hidden="true">
+                      <span className="size-2.5 rounded-full bg-[#ff5f57]" />
+                      <span className="size-2.5 rounded-full bg-[#febc2e]" />
+                      <span className="size-2.5 rounded-full bg-[#28c840]" />
+                    </span>
+                    <Link
+                      href={`/templates/${t.name}`}
+                      className="mx-auto truncate text-xs font-medium outline-none after:absolute after:inset-0 after:z-10 after:rounded-xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50"
+                    >
+                      {t.title}
+                    </Link>
+                  </div>
+                  <LazyMount className="relative h-[260px] sm:h-[340px]">
+                    <FitWidth>{t.Preview ? <t.Preview /> : null}</FitWidth>
+                  </LazyMount>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {/* Closing */}
-      <section className="mx-auto max-w-[1440px] px-4 pb-10 sm:px-6">
-        <div className="relative isolate overflow-hidden rounded-3xl border px-6 py-24 text-center sm:py-32">
-          <BeamsBackground className="-z-10" />
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_45%_45%_at_50%_50%,var(--background)_25%,transparent)]" />
-          <h2 className="mx-auto max-w-2xl text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-6xl">Make your next launch feel native.</h2>
-          <p className="text-muted-foreground mx-auto mt-5 max-w-lg text-lg">Free and MIT licensed. Install one component or build a whole page.</p>
-          <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <Link href="/components" className={buttonVariants({ size: "lg", shape: "pill" })}>
-              Browse components <ArrowRight />
+      {/* Agents */}
+      <section className="mx-auto max-w-[1440px] px-4 pt-28 sm:px-6">
+        <div className="grid grid-cols-1 items-center gap-12 overflow-hidden rounded-2xl border p-6 sm:p-10 lg:grid-cols-[1fr_1.15fr] lg:p-14">
+          <div className="min-w-0">
+            <p className="text-muted-foreground text-sm font-medium">MCP and AI agents</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Your agent already knows how to use it</h2>
+            <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+              Ballmac UI follows the shadcn registry standard, so the shadcn MCP server can search it, read when to use each
+              component, and install it into your project.
+            </p>
+            <div className="mt-7 space-y-2 font-mono text-[13px]">
+              <div className="bg-muted/50 flex items-center gap-2 rounded-lg border py-1 pr-1 pl-3.5">
+                <span className="min-w-0 flex-1 truncate">npx shadcn@latest mcp init --client claude</span>
+                <CopyButton value="npx shadcn@latest mcp init --client claude" label="Copy MCP setup command" />
+              </div>
+              <p className="text-muted-foreground rounded-lg border px-3.5 py-2.5">&gt; Add a hero with a globe and a dock from @ballmac</p>
+            </div>
+            <Link href="/docs/mcp" className={cn(buttonVariants({ variant: "outline", shape: "pill", size: "sm" }), "mt-7")}>
+              Set up MCP <ArrowUpRight />
             </Link>
-            <Link href="/docs/installation" className={cn(buttonVariants({ size: "lg", shape: "pill", variant: "outline" }), "bg-background/70")}>
-              Installation
-            </Link>
+          </div>
+          <div className="overflow-x-auto">
+            <div className="min-w-[520px]">
+              <AgentDiagram />
+            </div>
           </div>
         </div>
       </section>

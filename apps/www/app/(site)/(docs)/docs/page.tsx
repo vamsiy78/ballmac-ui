@@ -13,7 +13,7 @@ export default function IntroductionPage() {
   return (
     <DocsPage
       title="Introduction"
-      lead="Ballmac UI is a collection of Mac-grade React and Tailwind CSS components, blocks and templates: macOS interface pieces, living backgrounds, text effects, device frames and AI interfaces, distributed as a shadcn registry."
+      lead="Ballmac UI is a collection of polished React and Tailwind CSS components, blocks and templates: desktop-style app surfaces, living backgrounds, text effects, device frames and AI interfaces, distributed as a shadcn registry."
     >
       <p>
         You don&apos;t install Ballmac UI as a package. You add the components you need with the shadcn CLI, and the source
@@ -22,8 +22,8 @@ export default function IntroductionPage() {
       <h2>What makes it different</h2>
       <ul>
         <li>
-          <strong>Mac-grade polish.</strong> Ballmac makes native Mac apps. The dock, windows, Dynamic Island, menu bar and
-          notifications are built with the same care for springs, vibrancy and hairlines, for the web.
+          <strong>Native-app polish.</strong> Ballmac builds native apps, and brings the same care for springs, depth and
+          hairlines to the web: app windows, docks, a live notch, menus and notifications that work in any product.
         </li>
         <li>
           <strong>One design language.</strong> Primitives, effects, AI interfaces and developer components share tokens,

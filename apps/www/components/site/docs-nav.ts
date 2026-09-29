@@ -5,20 +5,22 @@ export const docsNav = [
       { href: "/docs", label: "Introduction" },
       { href: "/docs/installation", label: "Installation" },
       { href: "/docs/theming", label: "Theming" },
-    ],
-  },
-  {
-    title: "Registry",
-    items: [
-      { href: "/docs/registry", label: "CLI & registry" },
       { href: "/docs/mcp", label: "MCP & AI agents" },
     ],
   },
   {
-    title: "Project",
+    title: "Browse",
     items: [
-      { href: "/docs/licensing", label: "Licensing" },
+      { href: "/components", label: "All components" },
+      { href: "/blocks", label: "Blocks" },
+      { href: "/templates", label: "Templates" },
       { href: "/changelog", label: "Changelog" },
+    ],
+  },
+  {
+    title: "Reference",
+    items: [
+      { href: "/docs/registry", label: "CLI & registry" },
     ],
   },
 ]

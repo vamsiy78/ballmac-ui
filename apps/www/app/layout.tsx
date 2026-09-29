@@ -11,9 +11,9 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Ballmac UI: Mac-grade React components for the web", template: "%s | Ballmac UI" },
+  title: { default: "Ballmac UI: Make your web app feel native", template: "%s | Ballmac UI" },
   description:
-    "Mac-grade React and Tailwind components: docks, windows, globes, beams, text effects and AI interfaces. Free, accessible and shadcn-compatible.",
+    "Crafted React and Tailwind components with native-app motion, accessibility built in and code you own. Install with one command or your AI agent.",
   openGraph: { siteName: "Ballmac UI", type: "website" },
   twitter: { card: "summary_large_image", site: "@ballmacapps" },
 }

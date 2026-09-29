@@ -110,4 +110,22 @@ describe("SpotlightSearch", () => {
     await user.keyboard("{Meta>}k{/Meta}")
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument()
   })
+
+  it("never scrolls the page to show the selected row", () => {
+    const original = Element.prototype.scrollIntoView
+    const pageScroll = vi.fn()
+    Element.prototype.scrollIntoView = pageScroll
+    try {
+      render(
+        <SpotlightSearch label="Spotlight">
+          <Results onSelect={() => {}} />
+        </SpotlightSearch>
+      )
+      const row = screen.getByRole("option", { name: /Calendar/ })
+      row.scrollIntoView({ block: "nearest" })
+      expect(pageScroll).not.toHaveBeenCalled()
+    } finally {
+      Element.prototype.scrollIntoView = original
+    }
+  })
 })

@@ -3,6 +3,9 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   transpilePackages: ["@ballmac-ui/metadata"],
   productionBrowserSourceMaps: false,
+  async redirects() {
+    return [{ source: "/docs/licensing", destination: "/license", permanent: true }]
+  },
   async headers() {
     return [
       {

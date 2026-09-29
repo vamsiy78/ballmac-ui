@@ -36,6 +36,6 @@ export default defineItem({
       "onCopy runs after a successful copy; the component never logs the value",
     ],
   },
-  version: "1.0.0",
-  updated: "2026-09-28",
+  version: "1.0.1",
+  updated: "2026-09-29",
 })

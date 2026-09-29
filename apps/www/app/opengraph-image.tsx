@@ -7,7 +7,7 @@ export const contentType = "image/png"
 export default function Image() {
   return ogImage({
     eyebrow: "shadcn registry · MCP",
-    title: "Mac-grade components for the web.",
-    subtitle: "Docks, windows, globes, beams and AI interfaces. Free, accessible, one command away.",
+    title: "Make your web app feel native.",
+    subtitle: "Crafted React components with native-app motion, built-in accessibility and code you own.",
   })
 }
