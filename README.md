@@ -29,15 +29,22 @@ pnpm install
 pnpm build:registry   # validate metadata, generate registry.json, run `shadcn build`, write site data
 pnpm check            # dependency truth, license provenance, output schema validation
 pnpm smoke            # install every item into a fresh Next.js app, then tsc + next build
+pnpm a11y             # axe every /preview/* page in light and dark; requires a Next build
 pnpm dev              # website on http://localhost:3000
 ```
+
+`pnpm a11y alert card` limits the scan to matching preview names. Set
+`A11Y_BASE_URL` to scan an already running site; otherwise the script starts
+`next start` on port 3301. Run `(cd apps/www && npx next build)` first.
+On a new machine, install the browser once with
+`npx -y pnpm@10 exec playwright install chromium`.
 
 ## Adding an item
 
 1. Write the source under `registry/ballmac/components/` (import `cn` from `@/lib/utils`, other items from `@/components/ballmac/...`).
 2. Add `<name>.meta.ts` next to it with `defineItem({...})`: description, category, dependencies, examples, AI notes, and `source` if any code came from elsewhere.
 3. Add examples under `registry/examples/`.
-4. Run `pnpm build:registry && pnpm check && pnpm smoke`.
+4. Run `pnpm build:registry && pnpm check && pnpm smoke && pnpm a11y`.
 
 ## License
 

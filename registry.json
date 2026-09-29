@@ -410,6 +410,131 @@
       }
     },
     {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "A semantic callout with five theme-aware tones, clear icon placement, an action row, and opt-in urgent announcements.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/alert.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/alert.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "alert",
+          "callout",
+          "status"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "A semantic callout with five theme-aware tones, clear icon placement, an action row, and opt-in urgent announcements.",
+          "whenToUse": [
+            "Display a status or important message",
+            "Pair a warning with a clear next action"
+          ],
+          "whenNotToUse": [
+            "Use a toast for transient confirmation"
+          ],
+          "composesWith": [
+            "badge",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "moves to links and actions"
+            }
+          ],
+          "customization": [
+            "variant: default | info | success | warning | destructive",
+            "urgent: announce new urgent content"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Alert",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "alert-demo",
+          "alert-states"
+        ],
+        "url": "https://ui.ballmac.com/components/alert"
+      }
+    },
+    {
+      "name": "alert-demo",
+      "type": "registry:example",
+      "title": "Alert: Overview",
+      "description": "Overview example of Alert.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/alert.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/alert-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/alert-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "alert",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "alert-states",
+      "type": "registry:example",
+      "title": "Alert: States and variants",
+      "description": "States and variants example of Alert.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/alert.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/alert-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/alert-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "alert",
+        "tier": "free"
+      }
+    },
+    {
       "name": "animated-beam",
       "type": "registry:ui",
       "title": "Animated Beam",
@@ -858,6 +983,114 @@
       "meta": {
         "example": true,
         "of": "api-key-field",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "A CSS-native ratio frame that reserves space for media and safely handles invalid ratio values.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/aspect-ratio.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/aspect-ratio.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "media",
+          "image",
+          "layout"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "A CSS-native ratio frame that reserves space for media and safely handles invalid ratio values.",
+          "whenToUse": [
+            "Reserve image or video space before it loads",
+            "Keep cards aligned across a grid"
+          ],
+          "whenNotToUse": [
+            "Use fixed height when cropping is intentional"
+          ],
+          "composesWith": [
+            "card"
+          ],
+          "a11y": [],
+          "customization": [
+            "ratio: width divided by height; default 16/9"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Aspect Ratio",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "aspect-ratio-demo",
+          "aspect-ratio-states"
+        ],
+        "url": "https://ui.ballmac.com/components/aspect-ratio"
+      }
+    },
+    {
+      "name": "aspect-ratio-demo",
+      "type": "registry:example",
+      "title": "Aspect Ratio: Overview",
+      "description": "Overview example of Aspect Ratio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/aspect-ratio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/aspect-ratio-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/aspect-ratio-demo.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "aspect-ratio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "aspect-ratio-states",
+      "type": "registry:example",
+      "title": "Aspect Ratio: States and variants",
+      "description": "States and variants example of Aspect Ratio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/aspect-ratio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/aspect-ratio-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/aspect-ratio-states.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "aspect-ratio",
         "tier": "free"
       }
     },
@@ -3272,6 +3505,122 @@
       }
     },
     {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "A compact navigation trail with truncation, semantic current page, and visible keyboard focus.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/breadcrumb.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "navigation",
+          "hierarchy",
+          "links"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "A compact navigation trail with truncation, semantic current page, and visible keyboard focus.",
+          "whenToUse": [
+            "Show a location inside a deep hierarchy",
+            "Provide a way back to parent sections"
+          ],
+          "whenNotToUse": [
+            "Use tabs for switching peer views"
+          ],
+          "composesWith": [
+            "pagination"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "moves among breadcrumb links"
+            }
+          ],
+          "customization": [
+            "aria-label: name the navigation landmark"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Breadcrumb",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "breadcrumb-demo",
+          "breadcrumb-states"
+        ],
+        "url": "https://ui.ballmac.com/components/breadcrumb"
+      }
+    },
+    {
+      "name": "breadcrumb-demo",
+      "type": "registry:example",
+      "title": "Breadcrumb: Overview",
+      "description": "Overview example of Breadcrumb.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/breadcrumb.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/breadcrumb-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/breadcrumb-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "breadcrumb",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "breadcrumb-states",
+      "type": "registry:example",
+      "title": "Breadcrumb: States and variants",
+      "description": "States and variants example of Breadcrumb.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/breadcrumb.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/breadcrumb-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/breadcrumb-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "breadcrumb",
+        "tier": "free"
+      }
+    },
+    {
       "name": "browser-frame",
       "type": "registry:ui",
       "title": "Browser Frame",
@@ -3540,6 +3889,125 @@
       "meta": {
         "example": true,
         "of": "button",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "A composable content surface with compact spacing, an action slot, and optional interactive feedback.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/card.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "surface",
+          "panel",
+          "dashboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "A composable content surface with compact spacing, an action slot, and optional interactive feedback.",
+          "whenToUse": [
+            "Group a related set of content and actions",
+            "Present a dashboard metric or settings panel"
+          ],
+          "whenNotToUse": [
+            "Use an alert for status messages"
+          ],
+          "composesWith": [
+            "button",
+            "badge"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "reaches controls and links inside the card"
+            }
+          ],
+          "customization": [
+            "size: default | sm",
+            "interactive: emphasize cards with controls"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Card",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "card-demo",
+          "card-states"
+        ],
+        "url": "https://ui.ballmac.com/components/card"
+      }
+    },
+    {
+      "name": "card-demo",
+      "type": "registry:example",
+      "title": "Card: Overview",
+      "description": "Overview example of Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/card.json",
+        "https://ui.ballmac.com/r/badge.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "card-states",
+      "type": "registry:example",
+      "title": "Card: States and variants",
+      "description": "States and variants example of Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/card-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/card-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "card",
         "tier": "free"
       }
     },
@@ -4449,6 +4917,126 @@
       "meta": {
         "example": true,
         "of": "dynamic-island",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "A responsive empty-state surface with media, concise guidance, and a dedicated action area.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/empty.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/empty.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "empty",
+          "placeholder",
+          "state"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "A responsive empty-state surface with media, concise guidance, and a dedicated action area.",
+          "whenToUse": [
+            "Explain why a list has no content",
+            "Give the next step after a search yields no results"
+          ],
+          "whenNotToUse": [
+            "Use a skeleton while loading"
+          ],
+          "composesWith": [
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "reaches actions in the empty state"
+            }
+          ],
+          "customization": [
+            "compact: reduce vertical padding"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Empty",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "empty-demo",
+          "empty-states"
+        ],
+        "url": "https://ui.ballmac.com/components/empty"
+      }
+    },
+    {
+      "name": "empty-demo",
+      "type": "registry:example",
+      "title": "Empty: Overview",
+      "description": "Overview example of Empty.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/empty.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/empty-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/empty-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "empty",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "empty-states",
+      "type": "registry:example",
+      "title": "Empty: States and variants",
+      "description": "States and variants example of Empty.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/empty.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/empty-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/empty-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "empty",
         "tier": "free"
       }
     },
@@ -6387,6 +6975,126 @@
       }
     },
     {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "A semantic page navigation set with current-page feedback, generous targets, and small-screen labels.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/pagination.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/pagination.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "pages",
+          "navigation",
+          "links"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "A semantic page navigation set with current-page feedback, generous targets, and small-screen labels.",
+          "whenToUse": [
+            "Navigate a large result set by page",
+            "Show a current page and neighboring destinations"
+          ],
+          "whenNotToUse": [
+            "Use infinite scroll when discrete pages are unnecessary"
+          ],
+          "composesWith": [
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "moves between page links"
+            },
+            {
+              "keys": "Enter",
+              "action": "opens the focused page"
+            }
+          ],
+          "customization": [
+            "isActive: marks the current page"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Pagination",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "pagination-demo",
+          "pagination-states"
+        ],
+        "url": "https://ui.ballmac.com/components/pagination"
+      }
+    },
+    {
+      "name": "pagination-demo",
+      "type": "registry:example",
+      "title": "Pagination: Overview",
+      "description": "Overview example of Pagination.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pagination.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pagination-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pagination-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pagination",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pagination-states",
+      "type": "registry:example",
+      "title": "Pagination: States and variants",
+      "description": "States and variants example of Pagination.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pagination.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pagination-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pagination-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pagination",
+        "tier": "free"
+      }
+    },
+    {
       "name": "particles",
       "type": "registry:ui",
       "title": "Particles",
@@ -6617,6 +7325,118 @@
       "meta": {
         "example": true,
         "of": "phone-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "A Radix progress bar with clamped values, optional percentage text, and a reduced-motion-safe pending state.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/progress.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/progress.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "loading",
+          "progress",
+          "status"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "A Radix progress bar with clamped values, optional percentage text, and a reduced-motion-safe pending state.",
+          "whenToUse": [
+            "Show completion of a bounded task",
+            "Show work in progress when completion is unknown"
+          ],
+          "whenNotToUse": [
+            "Use a spinner for very short waits"
+          ],
+          "composesWith": [
+            "spinner"
+          ],
+          "a11y": [],
+          "customization": [
+            "value: current value or null for indeterminate",
+            "showValue: display percentage"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Progress",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "progress-demo",
+          "progress-states"
+        ],
+        "url": "https://ui.ballmac.com/components/progress"
+      }
+    },
+    {
+      "name": "progress-demo",
+      "type": "registry:example",
+      "title": "Progress: Overview",
+      "description": "Overview example of Progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/progress.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/progress-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/progress-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "progress",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "progress-states",
+      "type": "registry:example",
+      "title": "Progress: States and variants",
+      "description": "States and variants example of Progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/progress.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/progress-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/progress-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "progress",
         "tier": "free"
       }
     },
@@ -7226,6 +8046,118 @@
       }
     },
     {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "A semantic or decorative divider with horizontal, vertical, and centered-label layouts.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/separator.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/separator.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "divider",
+          "layout",
+          "section"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "A semantic or decorative divider with horizontal, vertical, and centered-label layouts.",
+          "whenToUse": [
+            "Separate groups of related content",
+            "Divide a form with a short label"
+          ],
+          "whenNotToUse": [
+            "Use spacing alone when separation is already clear"
+          ],
+          "composesWith": [
+            "card"
+          ],
+          "a11y": [],
+          "customization": [
+            "orientation: horizontal | vertical",
+            "label: centered text"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Separator",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "separator-demo",
+          "separator-states"
+        ],
+        "url": "https://ui.ballmac.com/components/separator"
+      }
+    },
+    {
+      "name": "separator-demo",
+      "type": "registry:example",
+      "title": "Separator: Overview",
+      "description": "Overview example of Separator.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/separator.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/separator-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/separator-demo.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "separator",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "separator-states",
+      "type": "registry:example",
+      "title": "Separator: States and variants",
+      "description": "States and variants example of Separator.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/separator.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/separator-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/separator-states.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "separator",
+        "tier": "free"
+      }
+    },
+    {
       "name": "shimmer-text",
       "type": "registry:ui",
       "title": "Shimmer Text",
@@ -7313,6 +8245,226 @@
       "meta": {
         "example": true,
         "of": "shimmer-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "A theme-aware loading placeholder with an animation that stops when reduced motion is requested.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/skeleton.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "loading",
+          "placeholder",
+          "pulse"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "A theme-aware loading placeholder with an animation that stops when reduced motion is requested.",
+          "whenToUse": [
+            "Reserve content space while data loads",
+            "Preview the shape of a card or list"
+          ],
+          "whenNotToUse": [
+            "Use a spinner for a single short operation"
+          ],
+          "composesWith": [
+            "card"
+          ],
+          "a11y": [],
+          "customization": [
+            "animated: enable pulse motion"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Skeleton",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "skeleton-demo",
+          "skeleton-states"
+        ],
+        "url": "https://ui.ballmac.com/components/skeleton"
+      }
+    },
+    {
+      "name": "skeleton-demo",
+      "type": "registry:example",
+      "title": "Skeleton: Overview",
+      "description": "Overview example of Skeleton.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/skeleton.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/skeleton-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/skeleton-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "skeleton",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "skeleton-states",
+      "type": "registry:example",
+      "title": "Skeleton: States and variants",
+      "description": "States and variants example of Skeleton.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/skeleton.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/skeleton-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/skeleton-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "skeleton",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "A compact loading indicator with three sizes, an accessible label, and reduced-motion behavior.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/spinner.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/spinner.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "loading",
+          "busy",
+          "indicator"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "A compact loading indicator with three sizes, an accessible label, and reduced-motion behavior.",
+          "whenToUse": [
+            "Show a short in-progress action",
+            "Place inside a disabled submit button"
+          ],
+          "whenNotToUse": [
+            "Use progress for a measurable operation"
+          ],
+          "composesWith": [
+            "button"
+          ],
+          "a11y": [],
+          "customization": [
+            "size: sm | default | lg",
+            "label: screen reader announcement"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Spinner",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "spinner-demo",
+          "spinner-states"
+        ],
+        "url": "https://ui.ballmac.com/components/spinner"
+      }
+    },
+    {
+      "name": "spinner-demo",
+      "type": "registry:example",
+      "title": "Spinner: Overview",
+      "description": "Overview example of Spinner.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/spinner.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/spinner-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/spinner-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "spinner",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "spinner-states",
+      "type": "registry:example",
+      "title": "Spinner: States and variants",
+      "description": "States and variants example of Spinner.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/spinner.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/spinner-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/spinner-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "spinner",
         "tier": "free"
       }
     },
@@ -7473,7 +8625,7 @@
           "launcher",
           "keyboard"
         ],
-        "version": "1.0.0",
+        "version": "1.0.1",
         "updated": "2026-09-29",
         "ai": {
           "summary": "Inline: <SpotlightSearch><SpotlightSearchInput /><SpotlightSearchList><SpotlightSearchEmpty/><SpotlightSearchGroup heading><SpotlightSearchItem icon iconClassName detail onSelect>Title</SpotlightSearchItem></SpotlightSearchGroup></SpotlightSearchList></SpotlightSearch>. Overlay: swap the root for <SpotlightSearchDialog open onOpenChange hotkey=\"k\">. Root props are cmdk Command props (filter, shouldFilter, value).",
