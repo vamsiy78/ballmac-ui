@@ -25,11 +25,20 @@ Reach **200+ components**, each at a quality that beats shadcn/ui: same accessib
 7. A test in `registry/tests/` for anything interactive (keyboard, controlled and uncontrolled).
 8. No layout shift, no horizontal overflow at 360 px, SSR-safe.
 
+## 2b. Research every component against the best, then beat it
+
+Before building any component, look at how the best libraries do it and write down (in the PR/commit notes, briefly) what you are taking and what you are doing better. The owner wants "crazy good" UI/UX, not generic components: someone seeing the demo should want to install it immediately.
+
+- **Study all of them:** shadcn/ui (structure, API shape, accessibility), Magic UI and Motion Primitives (motion feel), Aceternity UI (bold visual moments), DaisyUI (breadth, variants, theming), Origin UI and ReUI (product-UI breadth), Cult UI, Kibo UI, 21st.dev, Tailwind Plus and Apple's Human Interface Guidelines (polish and interaction details).
+- **Take the best idea from each, then go further:** better defaults, more states, smoother springs, real keyboard support, better dark mode, a more convincing demo. If a competitor's version is already excellent, ours must still add something (an extra variant, better accessibility, a nicer demo, fewer dependencies).
+- **Studying is not copying.** You may look at any library's demos to understand the UX. Code can only come from the permissive sources in section 3; for Aceternity, Tailwind Plus and paid kits, write your own implementation from scratch.
+- **Demos sell the component.** Realistic, specific content (Acme, neutral product copy), shown at its best in the catalog thumbnail and Quick Look.
+
 ## 3. Licensing: the one rule you must not break
 
 The owner said "borrow competitors' code". That is only allowed from **permissively licensed** sources: **MIT, ISC, BSD-2/3, Apache-2.0**.
 
-- **Allowed, after checking the LICENSE file at copy time:** shadcn/ui (MIT), Magic UI free (MIT), Motion Primitives (MIT), Origin UI (verify), Cult UI free (verify), Kibo UI (verify), Animata (verify), ReUI (verify), individual 21st.dev components (license varies per component: check each).
+- **Allowed, after checking the LICENSE file at copy time:** shadcn/ui (MIT), Magic UI free (MIT), Motion Primitives (MIT), DaisyUI (MIT; CSS, so port its patterns into React), Origin UI (verify), Cult UI free (verify), Kibo UI (verify), Animata (verify), ReUI (verify), individual 21st.dev components (license varies per component: check each).
 - **Never, not even "for inspiration by copying":** Aceternity UI (free components are not redistributable), Tailwind Plus / Tailwind UI, Magic UI Pro, Cult Pro, shadcnblocks, any paid kit, anything without a clear license. Implementing a common *idea* (a globe, a marquee, a dock) from scratch is fine.
 - **When you reuse code:** keep the second header line `// Based on <project> (<license>, <copyright>), <what changed>.` and fill `meta.source` (`{ name, url, license, copyright, modified: true }`). `pnpm check` runs `check-licenses.ts`. The site's `/license` page lists third-party notices automatically from `meta.source`.
 - **Do not show "MIT" in the site UI.** The owner wants the license only on `/license` (and in the repo's LICENSE and file headers).

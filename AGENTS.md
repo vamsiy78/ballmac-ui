@@ -1,6 +1,6 @@
 # Agent instructions for Ballmac UI
 
-Start with `HANDOVER.md` (current state, goal, roadmap, workflow), then follow `AUTHORING.md` for every item you write.
+Start with `HANDOVER.md` (current state, goal, research bar, roadmap, workflow), then follow `AUTHORING.md` for every item you write. Every component must be researched against shadcn, Magic UI, Aceternity, DaisyUI and the rest, and end up better than all of them (HANDOVER.md section 2b).
 
 Non-negotiables:
 
