@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 
-import { CatalogProvider, CopyInstallButton, QuickLookButton, type CatalogEntry } from "@/components/site/catalog-context"
-import { CatalogFilter } from "@/components/site/catalog-filter"
+import { CatalogProvider, CopyInstallButton, QuickLookButton, ViewToggle, type CatalogEntry } from "@/components/site/catalog-context"
+import { CatalogDeepLink } from "@/components/site/catalog-deep-link"
 import { FitPreview } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
 import { loadExample } from "@/lib/examples"
@@ -20,8 +20,6 @@ const compact = new Set(["primitives", "forms", "feedback"])
 
 type CatalogItem = SiteItem & { Preview: React.ComponentType | null }
 
-const searchText = (i: SiteItem) => [i.name, i.title, i.description, categoryLabels[i.category] ?? "", ...i.tags].join(" ").toLowerCase()
-
 function NewBadge() {
   return <span className="bg-chart-1/12 text-foreground rounded-full px-1.5 py-px text-[10px] font-semibold">New</span>
 }
@@ -30,7 +28,7 @@ function NewBadge() {
 function Card({ item }: { item: CatalogItem }) {
   const Preview = item.Preview
   return (
-    <div data-search={searchText(item)} data-ql={item.name} data-kind="card" className="group relative">
+    <div data-ql={item.name} data-kind="card" className="group relative">
       <div className="relative">
         <div
           className="bm-stage relative aspect-[4/3] overflow-hidden rounded-xl border transition-[border-color,box-shadow] duration-200 group-hover:border-foreground/20 group-hover:shadow-[0_8px_30px_-12px_rgb(0_0_0/0.25)]"
@@ -63,7 +61,7 @@ function Card({ item }: { item: CatalogItem }) {
 /** List row: name and description, with Quick Look and copy. */
 function Row({ item }: { item: CatalogItem }) {
   return (
-    <li data-search={searchText(item)} data-ql={item.name} data-kind="row" className="group hover:bg-accent/50 relative flex items-center gap-4 rounded-lg px-3 py-3 transition-colors">
+    <li data-ql={item.name} data-kind="row" className="group hover:bg-accent/50 relative flex items-center gap-4 rounded-lg px-3 py-3 transition-colors">
       <div className="min-w-0 flex-1 sm:flex sm:items-baseline sm:gap-4">
         <div className="flex shrink-0 items-center gap-2 sm:w-56">
           <Link
@@ -80,6 +78,20 @@ function Row({ item }: { item: CatalogItem }) {
         <QuickLookButton name={item.name} label={false} />
         <CopyInstallButton name={item.name} />
       </div>
+    </li>
+  )
+}
+
+/** Index entry: just the name, like a table of contents. Space on it opens Quick Look. */
+function IndexEntry({ item }: { item: CatalogItem }) {
+  return (
+    <li data-ql={item.name} data-kind="index" className="flex items-center gap-2">
+      <Link href={`/components/${item.name}`} className="hover:text-foreground/80 text-[15px] underline-offset-4 outline-none hover:underline focus-visible:underline">
+        {item.title}
+      </Link>
+      {isNew(item) && (
+        <span className="bg-chart-1 size-1.5 shrink-0 rounded-full" aria-label="New" role="img" />
+      )}
     </li>
   )
 }
@@ -103,41 +115,44 @@ export default async function ComponentsPage() {
   // Live, interactive instances for Quick Look; only the open one is ever mounted.
   const previews = Object.fromEntries(items.map((i) => [i.name, i.Preview ? <i.Preview /> : null]))
   return (
-    <div>
-      <header className="max-w-3xl">
-        <nav aria-label="Breadcrumb" className="text-muted-foreground flex items-center gap-1.5 text-sm">
-          <Link href="/docs" className="hover:text-foreground">Docs</Link>
-          <ChevronRight className="size-3.5" aria-hidden="true" />
-          <span className="text-foreground" aria-current="page">Components</span>
-        </nav>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Components</h1>
-        <p className="text-muted-foreground mt-3 max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">
-          {items.length} components, from desktop-style app surfaces and living backgrounds to AI interfaces and the everyday
-          basics. Hover any card and press Quick Look, or focus it and press Space, to try it right here.
-        </p>
+    <CatalogProvider entries={entries} previews={previews}>
+      <CatalogDeepLink />
+      <header className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
+        <div className="max-w-2xl">
+          <nav aria-label="Breadcrumb" className="text-muted-foreground flex items-center gap-1.5 text-sm">
+            <Link href="/docs" className="hover:text-foreground">Docs</Link>
+            <ChevronRight className="size-3.5" aria-hidden="true" />
+            <span className="text-foreground" aria-current="page">Components</span>
+          </nav>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Components</h1>
+          <p className="text-muted-foreground mt-3 text-[1.05rem] leading-7 text-balance sm:text-base">
+            Every component in the library. Press Quick Look on any card to try it right here.
+          </p>
+        </div>
+        <ViewToggle />
       </header>
-      <CatalogProvider entries={entries} previews={previews}>
-        <CatalogFilter options={categories.map((c) => ({ value: c, label: categoryLabels[c] ?? c, count: items.filter((i) => i.category === c).length }))}>
-          {categories.map((cat) => (
-            <section key={cat} data-category={cat} className="mt-12">
-              <h2 id={`c-${cat}`} className="mb-5 flex items-baseline gap-2 text-lg font-semibold tracking-tight">
-                {categoryLabels[cat] ?? cat}
-                <span className="text-muted-foreground text-sm font-normal tabular-nums">{items.filter((i) => i.category === cat).length}</span>
-              </h2>
-              <div className="grid grid-cols-1 gap-x-5 gap-y-8 group-data-[view=list]/catalog:hidden sm:grid-cols-2 xl:grid-cols-3">
-                {inCategory(cat).map((i) => (
-                  <Card key={i.name} item={i} />
-                ))}
-              </div>
-              <ul className="-mx-3 hidden divide-y group-data-[view=list]/catalog:block">
-                {inCategory(cat).map((i) => (
-                  <Row key={i.name} item={i} />
-                ))}
-              </ul>
-            </section>
-          ))}
-        </CatalogFilter>
-      </CatalogProvider>
-    </div>
+      {categories.map((cat) => (
+        <section key={cat} data-category={cat} className="mt-12 group-data-[view=index]/catalog:mt-9">
+          <h2 id={`c-${cat}`} className="mb-5 flex items-baseline gap-2 text-lg font-semibold tracking-tight group-data-[view=index]/catalog:mb-4 group-data-[view=index]/catalog:text-base">
+            {categoryLabels[cat] ?? cat}
+          </h2>
+          <div className="grid grid-cols-1 gap-x-5 gap-y-8 group-data-[view=index]/catalog:hidden group-data-[view=list]/catalog:hidden sm:grid-cols-2 xl:grid-cols-3">
+            {inCategory(cat).map((i) => (
+              <Card key={i.name} item={i} />
+            ))}
+          </div>
+          <ul className="-mx-3 hidden divide-y group-data-[view=list]/catalog:block">
+            {inCategory(cat).map((i) => (
+              <Row key={i.name} item={i} />
+            ))}
+          </ul>
+          <ul className="hidden grid-cols-2 gap-x-6 gap-y-4 group-data-[view=index]/catalog:grid sm:grid-cols-3">
+            {inCategory(cat).map((i) => (
+              <IndexEntry key={i.name} item={i} />
+            ))}
+          </ul>
+        </section>
+      ))}
+    </CatalogProvider>
   )
 }

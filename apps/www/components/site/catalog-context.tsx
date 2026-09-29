@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Copy, Eye, LayoutGrid, List, X } from "lucide-react"
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Columns3, Copy, Eye, LayoutGrid, List, X } from "lucide-react"
 import Link from "next/link"
 import { Dialog as DialogPrimitive } from "radix-ui"
 import * as React from "react"
@@ -19,7 +19,7 @@ export type CatalogEntry = {
   commands: Record<PM, string>
 }
 
-type View = "gallery" | "list"
+type View = "gallery" | "list" | "index"
 const VIEW_KEY = "bm-catalog-view"
 
 type CatalogState = {
@@ -40,7 +40,8 @@ function subscribeView(cb: () => void) {
 function readView(): View {
   if (memoryView) return memoryView
   try {
-    return localStorage.getItem(VIEW_KEY) === "list" ? "list" : "gallery"
+    const saved = localStorage.getItem(VIEW_KEY)
+    return saved === "list" || saved === "index" ? saved : "gallery"
   } catch {
     return "gallery"
   }
@@ -228,12 +229,13 @@ export function CopyInstallButton({ name, className }: { name: string; className
   )
 }
 
-/** Gallery / List switch. */
+/** Gallery / List / Index switch. */
 export function ViewToggle() {
   const { view, setView } = useCatalog()
   const options = [
     { value: "gallery", label: "Gallery", icon: LayoutGrid },
     { value: "list", label: "List", icon: List },
+    { value: "index", label: "Index", icon: Columns3 },
   ] as const
   return (
     <div role="radiogroup" aria-label="Catalog view" data-view-toggle className="bg-muted flex shrink-0 gap-0.5 rounded-lg p-0.5">

@@ -179,3 +179,5 @@ Also added: `accordion` (primitive, needed by faq-1).
 - **Positioning is platform-neutral:** "Components with native-app polish" for any web product. The `macos` category is labelled "Desktop"; item titles stay literal where a component really is macOS-style (Dock, Mac Window, the Mac app template).
 
 - **Docs and components share one layout** (the `(docs)` route group), so the sidebar stays mounted between them; its scroll position is also kept per tab (sessionStorage), so reloads and remounts do not jump it back to the top.
+- **The catalog has no search box or category chips.** ⌘K in the header already searches everything, and section headings plus the collapsible sidebar categories cover navigation. The page offers Gallery / List / Index views (remembered) and Quick Look; `?category=` links still land on their section.
+- **Sidebar component categories are collapsible** under one "Components" heading: collapsed on the catalog and docs, the current component's category open on its page, so the sidebar never repeats the catalog.

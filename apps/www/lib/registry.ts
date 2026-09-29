@@ -49,7 +49,8 @@ const newest = Math.max(...items.map((i) => Date.parse(i.updated)))
 export const isNew = (item: Pick<SiteItem, "updated">) => newest - Date.parse(item.updated) < 864e5
 
 export type NavLink = { href: string; label: string; badge?: "new" }
-export type NavGroup = { title: string; items: NavLink[] }
+/** A sidebar group. `collapsible` groups (component categories) fold under one "Components" heading. */
+export type NavGroup = { title: string; items: NavLink[]; collapsible?: boolean }
 
 /** Components grouped by category, in browse order, for the sidebar and prev/next links. */
 export function componentGroups(): NavGroup[] {
@@ -59,6 +60,7 @@ export function componentGroups(): NavGroup[] {
     .sort(([a], [b]) => categoryRank(a) - categoryRank(b))
     .map(([cat, list]) => ({
       title: categoryLabels[cat] ?? cat,
+      collapsible: true,
       items: list
         .sort((a, b) => Number(b.featured) - Number(a.featured) || a.title.localeCompare(b.title))
         .map((i) => ({ href: `/components/${i.name}`, label: i.title, badge: isNew(i) ? ("new" as const) : undefined })),
