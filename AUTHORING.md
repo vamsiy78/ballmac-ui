@@ -31,6 +31,7 @@ Names are permanent public API: kebab-case, no prefixes (`magnetic-button`, `ai-
    - Motion: `motion/react`, and presets from `@/lib/ballmac/motion` (registry dependency `motion-presets`)
    - Icons: `lucide-react`
    - Other Ballmac items: `@/components/ballmac/<name>` (and list them in `registryDependencies`)
+   - Canvas/WebGL colors: `resolveCssColor` / `cssColorToRgba` / `observeTheme` from `@/lib/ballmac/color` (registry dependency `color`)
    - Variants: `class-variance-authority` when a component has variant props
 4. **Components are plain functions** (React 19 passes `ref` as a prop; no `forwardRef`):
    `function Card({ className, ...props }: React.ComponentProps<"div">)`. Spread `...props` onto the root, merge `className` last with `cn(...)`.

@@ -1,15 +1,18 @@
 import type { Metadata } from "next"
+import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { CodePanel } from "@/components/site/code-panel"
+import { CopyPageButton } from "@/components/site/copy-page-button"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { PreviewTabs } from "@/components/site/preview-tabs"
 import { PropsTable } from "@/components/site/props-table"
 import { ItemJsonLd } from "@/components/site/item-jsonld"
-import { Eyebrow, SectionHeading } from "@/components/site/section-heading"
+import { SectionHeading } from "@/components/site/section-heading"
+import { Toc } from "@/components/site/toc"
 import { loadExample } from "@/lib/examples"
-import { categoryLabels, exportsOf, getComponents, getItem, getRelated, itemHref, readSource } from "@/lib/registry"
+import { addCommand, categoryLabels, componentNeighbors, exportsOf, getComponents, getItem, getRelated, isNew, itemHref, readSource } from "@/lib/registry"
 
 export function generateStaticParams() {
   return getComponents().map((i) => ({ slug: i.name }))
@@ -40,34 +43,71 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
   const sections = [
     ["installation", "Installation"],
     ["usage", "Usage"],
-    ...(rest.length ? [["examples", "Examples"]] : []),
-    ...(item.props.length ? [["api", "API reference"]] : []),
-    ...(item.ai?.a11y?.length ? [["accessibility", "Accessibility"]] : []),
+    ...(rest.length ? [["examples", "Examples"] as const] : []),
+    ...(item.props.length ? [["api", "API reference"] as const] : []),
+    ...(item.ai?.a11y?.length ? [["accessibility", "Accessibility"] as const] : []),
     ["dependencies", "Dependencies"],
     ["ai", "Use with AI"],
     ["source", "Source"],
   ] as const
   const num = (id: string) => String(sections.findIndex(([s]) => s === id) + 1).padStart(2, "0")
+  const { prev, next } = componentNeighbors(item.name)
+  const markdown = [
+    `# ${item.title}`,
+    item.description,
+    `## Installation\n\n\`\`\`bash\n${addCommand([item.name], "npm")}\n\`\`\``,
+    `## Usage\n\n\`\`\`tsx\n${usage}\n\`\`\``,
+    first ? `## Example\n\n\`\`\`tsx\n${first.code.trimEnd()}\n\`\`\`` : "",
+    item.ai?.whenToUse?.length ? `## When to use\n\n${item.ai.whenToUse.map((w) => `- ${w}`).join("\n")}` : "",
+    `Docs: https://ui.ballmac.com/components/${item.name}`,
+  ].filter(Boolean).join("\n\n")
 
   return (
-    <div className="mx-auto grid max-w-[1320px] gap-12 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_200px]">
+    <div className="grid grid-cols-1 gap-12 xl:grid-cols-[minmax(0,1fr)_180px]">
       <article className="min-w-0 space-y-12">
         <header className="space-y-4">
           <ItemJsonLd item={item} section={{ name: "Components", path: "/components" }} />
-          <Eyebrow>
-            <Link href="/components" className="hover:text-foreground">Components</Link> / {categoryLabels[item.category]}
-          </Eyebrow>
-          <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-4xl font-semibold tracking-[-0.03em]">{item.title}</h1>
-            <span className="rounded-full border px-2.5 py-0.5 font-mono text-[11px] tracking-wide uppercase">{item.tier === "pro" ? "Pro" : "Free · MIT"}</span>
+          <nav aria-label="Breadcrumb" className="text-muted-foreground flex items-center gap-1.5 text-[13px]">
+            <Link href="/components" className="hover:text-foreground">Components</Link>
+            <ChevronRight className="size-3.5" aria-hidden="true" />
+            <Link href={`/components?category=${item.category}`} className="hover:text-foreground">{categoryLabels[item.category]}</Link>
+            <ChevronRight className="size-3.5" aria-hidden="true" />
+            <span className="text-foreground" aria-current="page">{item.title}</span>
+          </nav>
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <h1 className="text-4xl font-semibold tracking-[-0.035em] sm:text-[2.75rem]">{item.title}</h1>
+              {isNew(item) && (
+                <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-semibold">New</span>
+              )}
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CopyPageButton markdown={markdown} />
+              {prev && (
+                <Link href={prev.href} aria-label={`Previous: ${prev.label}`} title={prev.label} className="bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border transition-colors">
+                  <ArrowLeft className="size-3.5" />
+                </Link>
+              )}
+              {next && (
+                <Link href={next.href} aria-label={`Next: ${next.label}`} title={next.label} className="bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border transition-colors">
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              )}
+            </div>
           </div>
-          <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed">{item.description}</p>
-          <p className="text-muted-foreground font-mono text-xs">
-            v{item.version} · Updated {item.updated}
-          </p>
+          <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed text-pretty">{item.description}</p>
+          <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-xs">
+            <span className="rounded-md border px-2 py-0.5 font-medium">{item.tier === "pro" ? "Pro" : "Free · MIT"}</span>
+            {item.tags.slice(0, 4).map((t) => (
+              <span key={t} className="bg-muted rounded-md px-2 py-0.5">{t}</span>
+            ))}
+            <span className="font-mono">v{item.version}</span>
+          </div>
         </header>
 
-        {first?.Component && <PreviewTabs preview={<first.Component />} code={<CodePanel code={first.code} className="rounded-none border-0" />} />}
+        {first?.Component && (
+          <PreviewTabs name={item.name} example={first.name} preview={<first.Component />} code={<CodePanel code={first.code} className="rounded-none border-0" />} />
+        )}
 
         <section className="space-y-4">
           <SectionHeading id="installation" index={num("installation")}>Installation</SectionHeading>
@@ -87,7 +127,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
               e.Component ? (
                 <div key={e.name} className="space-y-3">
                   <h3 className="text-sm font-medium">{e.title}</h3>
-                  <PreviewTabs minHeight={220} preview={<e.Component />} code={<CodePanel code={e.code} className="rounded-none border-0" />} />
+                  <PreviewTabs minHeight={320} example={e.name} preview={<e.Component />} code={<CodePanel code={e.code} className="rounded-none border-0" />} />
                 </div>
               ) : null
             )}
@@ -150,15 +190,26 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             </div>
           </section>
         )}
+        {(prev || next) && (
+          <nav aria-label="Previous and next component" className="grid grid-cols-1 gap-3 border-t pt-8 sm:grid-cols-2">
+            {prev ? (
+              <Link href={prev.href} className="hover:bg-accent group rounded-xl border p-4 transition-colors">
+                <span className="text-muted-foreground flex items-center gap-1 text-xs"><ArrowLeft className="size-3" aria-hidden="true" /> Previous</span>
+                <span className="mt-1 block font-medium">{prev.label}</span>
+              </Link>
+            ) : <span />}
+            {next && (
+              <Link href={next.href} className="hover:bg-accent group rounded-xl border p-4 text-right transition-colors">
+                <span className="text-muted-foreground flex items-center justify-end gap-1 text-xs">Next <ArrowRight className="size-3" aria-hidden="true" /></span>
+                <span className="mt-1 block font-medium">{next.label}</span>
+              </Link>
+            )}
+          </nav>
+        )}
       </article>
 
-      <aside className="hidden lg:block">
-        <nav aria-label="On this page" className="sticky top-24 space-y-2 text-[13px]">
-          <p className="text-muted-foreground font-mono text-[11px] tracking-[0.14em] uppercase">On this page</p>
-          {sections.map(([id, label]) => (
-            <a key={id} href={`#${id}`} className="text-muted-foreground hover:text-foreground block">{label}</a>
-          ))}
-        </nav>
+      <aside className="hidden xl:block">
+        <Toc sections={sections} />
       </aside>
     </div>
   )

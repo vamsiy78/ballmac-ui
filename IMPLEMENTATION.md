@@ -83,6 +83,7 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 ### 14. Final polish
 - [x] OG images, sitemap, robots, JSON-LD
 - [x] axe: 0 serious/critical on all 67 previews and 17 site pages, light and dark
+- [x] axe after the showpiece collection: 0 serious/critical on 127 previews and 21 pages, light and dark
 - [~] Lighthouse on ui.ballmac.com (mobile): accessibility, best practices, SEO 100 on every page tested. Performance: hero-1 100, button 98, catalog 95, **home 89** (simulated LCP 3.3 s from the JS of five live demos; next: lazy-hydrate the showcase)
 
 ## Components (MVP: 30)
@@ -120,6 +121,22 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 | 29 | install-tabs | developer | [x] |
 | 30 | api-key-field | developer | [x] |
 
+## Showpiece collection (2026-09-29, after competitor review)
+
+Research: shadcn/ui, Magic UI, Aceternity UI, Cult UI, Motion Primitives, Origin UI, ReUI, Tailark (home, catalog, component pages).
+Positioning: **Mac-grade components for the web**. Ballmac makes Mac apps; nobody owns macOS-quality web UI.
+
+- [x] macOS: dock, dynamic-island, mac-window, menu-bar, notification-stack, spotlight-search, segmented-control
+- [x] Devices: laptop-frame, phone-frame, browser-frame
+- [x] Backgrounds: globe (cobe), particles, meteors, aurora-background, beams-background, flickering-grid, dot-pattern
+- [x] Motion and cards: animated-beam (credited to Magic UI, MIT), orbiting-circles, tilt-card, glow-border, confetti
+- [x] Text: word-rotate, scramble-text, gradient-text
+- [x] Layout and navigation: bento-grid, animated-tabs
+- [x] Foundation: `color` lib (theme tokens for canvas/WebGL, theme observer)
+- [x] Blocks: hero-4 (globe), hero-5 (Mac app laptop), features-3 (integrations beams), features-4 (Mac bento), testimonials-1, logo-cloud-1, cta-2 (waitlist)
+- [x] Template: template-mac-app
+- [x] Site redesign: docs-style sidebar with every component, component pages with preview toolbar (install chip, Open in v0, replay, full screen), Copy page for LLMs, prev/next, scroll-spy TOC, mobile nav; catalog with featured row, instant search and fit-to-card live previews; new home (live macOS desktop showcase, interactive wall, MCP beam diagram)
+
 ## Blocks (MVP: 12)
 
 hero-1, hero-2, hero-3, features-1, features-2, pricing-1, faq-1, cta-1, footer-1, header-1, login-1, ai-chat-1 — all `[x]`
@@ -140,3 +157,6 @@ Also added: `accordion` (primitive, needed by faq-1).
 - **No `asChild` in shipped JSX.** `shadcn init` now defaults to Base UI (`base-nova`), and the CLI rewrites `asChild` into Base UI's `render` prop, which breaks Radix files. Links and triggers are styled with `buttonVariants()`/`badgeVariants()` instead; components still accept `asChild`. Enforced by `pnpm check`; the smoke test covers both bases.
 - **Catalog cards use a stretched title link**, not a link wrapping the preview: block previews contain real `<a>` elements, and nested links break hydration.
 - **The catalog filter reads the URL after mount** instead of `useSearchParams`, which would drop the whole catalog out of the static HTML behind a Suspense boundary.
+- **Decorative scaled previews are `inert`.** Scaled-down demos would otherwise expose tiny tap targets (WCAG 2.5.8); only tiles whose point is interaction (globe, tilt, beams) and the hero dock stay live.
+- **Canvas and WebGL follow tokens** through `lib/ballmac/color.ts` (resolve CSS variables at runtime, repaint on theme change), so check-item's no-hex rule holds for effects too.
+- **Menu bar status items sit beside the ARIA menubar**, not inside it; a menubar may only contain menu items.

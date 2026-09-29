@@ -410,6 +410,136 @@
       }
     },
     {
+      "name": "animated-beam",
+      "type": "registry:ui",
+      "title": "Animated Beam",
+      "description": "An SVG beam that connects two elements with a curved path and sends a glowing gradient pulse along it. Follows layout changes, pauses off-screen, static under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/animated-beam.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/animated-beam.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "beam",
+          "connection",
+          "integration",
+          "diagram",
+          "svg",
+          "hero",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Give a relative container a ref, give each endpoint element a ref, and render <AnimatedBeam containerRef fromRef toRef /> inside the container once per connection. Put endpoint nodes above the beams with relative z-10. The SVG is aria-hidden and pointer-events-none.",
+          "whenToUse": [
+            "Integration diagrams: tools or data sources flowing into an agent or product",
+            "Showing a request path between services on a landing page",
+            "Explaining a sync or pipeline visually in a feature section"
+          ],
+          "whenNotToUse": [
+            "Real, data-driven graphs with many nodes (use a graph library)",
+            "Conveying state on its own; label the nodes, the beam is decorative"
+          ],
+          "composesWith": [
+            "orbiting-circles",
+            "dot-pattern",
+            "border-beam"
+          ],
+          "a11y": [],
+          "customization": [
+            "curvature in px (positive bows up), reverse to flip direction",
+            "duration, delay and repeatDelay in seconds; stagger delays across beams",
+            "pulseLength as a fraction of the path (default 0.35)",
+            "startXOffset/startYOffset/endXOffset/endYOffset to attach to node edges",
+            "pathColor, pathWidth, pathOpacity; gradientStartColor/gradientStopColor default to var(--chart-1) → var(--chart-4)"
+          ]
+        },
+        "source": {
+          "name": "Magic UI Animated Beam",
+          "url": "https://github.com/magicuidesign/magicui",
+          "license": "MIT",
+          "copyright": "Copyright (c) Magic UI",
+          "modified": true
+        },
+        "examples": [
+          "animated-beam-demo",
+          "animated-beam-bidirectional"
+        ],
+        "url": "https://ui.ballmac.com/components/animated-beam"
+      }
+    },
+    {
+      "name": "animated-beam-demo",
+      "type": "registry:example",
+      "title": "Animated Beam: Agent integrations",
+      "description": "Agent integrations example of Animated Beam.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/animated-beam.json",
+        "utils"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/animated-beam-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/animated-beam-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "animated-beam",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "animated-beam-bidirectional",
+      "type": "registry:example",
+      "title": "Animated Beam: Two-way sync",
+      "description": "Two-way sync example of Animated Beam.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/animated-beam.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/animated-beam-bidirectional.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/animated-beam-bidirectional.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "animated-beam",
+        "tier": "free"
+      }
+    },
+    {
       "name": "animated-grid",
       "type": "registry:ui",
       "title": "Animated Grid",
@@ -494,6 +624,139 @@
       "meta": {
         "example": true,
         "of": "animated-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "animated-tabs",
+      "type": "registry:ui",
+      "title": "Animated Tabs",
+      "description": "Radix Tabs with a pill or underline indicator that slides between triggers on a spring, and panels that fade in. Keeps full keyboard support and ARIA; controlled or uncontrolled.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/animated-tabs.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/animated-tabs.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "tabs",
+          "segmented",
+          "navigation",
+          "indicator",
+          "layout animation",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Same API as Radix Tabs: <AnimatedTabs defaultValue variant=\"pill\" | \"underline\"> with AnimatedTabsList, AnimatedTabsTrigger value and AnimatedTabsContent value. The indicator is a Motion layoutId element inside the active trigger.",
+          "whenToUse": [
+            "Switching between views of the same object (overview, activity, settings)",
+            "Settings pages with a few sections",
+            "Pricing toggles such as monthly and yearly"
+          ],
+          "whenNotToUse": [
+            "Page-level navigation between routes (use links)",
+            "More than about six options (use a select)",
+            "Package-manager command tabs (use install-tabs)"
+          ],
+          "composesWith": [
+            "install-tabs",
+            "code-block"
+          ],
+          "a11y": [
+            {
+              "keys": "Left / Right",
+              "action": "Moves focus between tabs and selects them"
+            },
+            {
+              "keys": "Home / End",
+              "action": "Jumps to the first or last tab"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves from the tab list into the selected panel"
+            }
+          ],
+          "customization": [
+            "variant: pill (default) | underline",
+            "value / onValueChange for controlled use, defaultValue otherwise",
+            "Icon-only triggers need aria-label",
+            "Style parts via [data-slot=animated-tabs-indicator], -list, -trigger, -content",
+            "Reduced motion: the indicator jumps and panels appear without a fade"
+          ]
+        },
+        "examples": [
+          "animated-tabs-demo",
+          "animated-tabs-underline"
+        ],
+        "url": "https://ui.ballmac.com/components/animated-tabs"
+      }
+    },
+    {
+      "name": "animated-tabs-demo",
+      "type": "registry:example",
+      "title": "Animated Tabs: Pill with icons",
+      "description": "Pill with icons example of Animated Tabs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/animated-tabs.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/animated-tabs-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/animated-tabs-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "animated-tabs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "animated-tabs-underline",
+      "type": "registry:example",
+      "title": "Animated Tabs: Underline",
+      "description": "Underline example of Animated Tabs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/animated-tabs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/animated-tabs-underline.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/animated-tabs-underline.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "animated-tabs",
         "tier": "free"
       }
     },
@@ -595,6 +858,118 @@
       "meta": {
         "example": true,
         "of": "api-key-field",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "aurora-background",
+      "type": "registry:ui",
+      "title": "Aurora Background",
+      "description": "Soft, slowly drifting aurora light made of blurred token-colored glows with fine vertical curtains and an optional radial fade. Pure CSS layers, paused off-screen, still under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/aurora-background.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/aurora-background.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "aurora",
+          "gradient",
+          "glow",
+          "background",
+          "hero",
+          "decorative"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Place <AuroraBackground /> as the first child of a relative, overflow-hidden hero; it is absolute inset-0, aria-hidden and pointer-events-none. The light sits along the top edge and fades down, so headline text reads on the page background.",
+          "whenToUse": [
+            "Behind a hero headline or a launch announcement",
+            "Sign-in or waitlist pages that need atmosphere without imagery"
+          ],
+          "whenNotToUse": [
+            "Behind dense content or data",
+            "Several stacked sections (use once per page, at the top)"
+          ],
+          "composesWith": [
+            "text-reveal",
+            "shimmer-text",
+            "magnetic-button"
+          ],
+          "a11y": [],
+          "customization": [
+            "colors: array of CSS colors, default chart-1, chart-2, chart-4, chart-1",
+            "duration (s, default 22), intensity (0–1, default 0.75), blur (px, default 64)",
+            "curtains toggles the vertical ray texture; radialMask toggles the elliptical fade"
+          ]
+        },
+        "examples": [
+          "aurora-background-demo",
+          "aurora-background-warm"
+        ],
+        "url": "https://ui.ballmac.com/components/aurora-background"
+      }
+    },
+    {
+      "name": "aurora-background-demo",
+      "type": "registry:example",
+      "title": "Aurora Background: Hero",
+      "description": "Hero example of Aurora Background.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/aurora-background.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/aurora-background-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/aurora-background-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "aurora-background",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "aurora-background-warm",
+      "type": "registry:example",
+      "title": "Aurora Background: Warm, no curtains",
+      "description": "Warm, no curtains example of Aurora Background.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/aurora-background.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/aurora-background-warm.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/aurora-background-warm.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "aurora-background",
         "tier": "free"
       }
     },
@@ -845,6 +1220,251 @@
       }
     },
     {
+      "name": "beams-background",
+      "type": "registry:ui",
+      "title": "Beams Background",
+      "description": "Hairline rails with thin light beams rising along them and dissolving near the top, over a soft glow. Canvas, token colors, DPR aware, pauses off-screen, a still frame under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/color.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/beams-background.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/beams-background.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "beams",
+          "light",
+          "rails",
+          "canvas",
+          "background",
+          "hero",
+          "waitlist"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Place <BeamsBackground /> as the first child of a relative, overflow-hidden section; it fills it (absolute inset-0, aria-hidden, pointer-events-none). Content goes after it; the rails fade out at the top and bottom edges.",
+          "whenToUse": [
+            "Waitlist, sign-up or launch sections with centered content",
+            "Hero backgrounds for developer tools, infrastructure or AI products"
+          ],
+          "whenNotToUse": [
+            "Behind long text or tables",
+            "Pages that already have another animated background"
+          ],
+          "composesWith": [
+            "input",
+            "button",
+            "shimmer-text",
+            "text-reveal"
+          ],
+          "a11y": [],
+          "customization": [
+            "gap: rail spacing in px (default 36); density: beams per 1000 px of width (default 30)",
+            "colors: CSS variable names or colors, default --chart-1, --chart-2, --chart-4",
+            "direction: up | down; speed multiplier (default 1); railOpacity (default 0.07)",
+            "glow toggles the soft light (in the first color) at the edge the beams come from"
+          ]
+        },
+        "examples": [
+          "beams-background-demo",
+          "beams-background-falling"
+        ],
+        "url": "https://ui.ballmac.com/components/beams-background"
+      }
+    },
+    {
+      "name": "beams-background-demo",
+      "type": "registry:example",
+      "title": "Beams Background: Waitlist",
+      "description": "Waitlist example of Beams Background.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/beams-background.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/beams-background-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/beams-background-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "beams-background",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "beams-background-falling",
+      "type": "registry:example",
+      "title": "Beams Background: Falling, single color",
+      "description": "Falling, single color example of Beams Background.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/beams-background.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/beams-background-falling.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/beams-background-falling.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "beams-background",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "bento-grid",
+      "type": "registry:ui",
+      "title": "Bento Grid",
+      "description": "A responsive bento layout of feature cards that span columns and rows. Each BentoCard has a background visual slot, icon, title and description, and a link that slides up on hover or focus.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/bento-grid.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/bento-grid.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "bento",
+          "grid",
+          "features",
+          "landing",
+          "cards",
+          "layout"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "<BentoGrid columns={3}> with <BentoCard colSpan rowSpan icon title description href background />. The grid responds to its own width (container queries): one column below 36rem. The background slot takes any decorative node, such as animated-grid, marquee or number-ticker visuals.",
+          "whenToUse": [
+            "Landing-page feature sections with 4–7 features of different weight",
+            "Product overviews where each tile shows a small live visual",
+            "Dashboard home pages with shortcuts"
+          ],
+          "whenNotToUse": [
+            "Uniform lists of equal items (use a plain grid of cards)",
+            "Long text content; cards hold one or two lines"
+          ],
+          "composesWith": [
+            "animated-grid",
+            "marquee",
+            "number-ticker",
+            "border-beam"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the card's link; the whole card is its click target and shows a focus ring"
+            }
+          ],
+          "customization": [
+            "BentoGrid: columns 2 | 3 | 4 (default 3), rowHeight (default 13rem)",
+            "BentoCard: colSpan 1–4, rowSpan 1–2, href + cta (default \"Learn more\")",
+            "background is aria-hidden and masked to fade toward the text",
+            "On touch screens the link is always visible"
+          ]
+        },
+        "examples": [
+          "bento-grid-demo",
+          "bento-grid-features"
+        ],
+        "url": "https://ui.ballmac.com/components/bento-grid"
+      }
+    },
+    {
+      "name": "bento-grid-demo",
+      "type": "registry:example",
+      "title": "Bento Grid: Live feature grid",
+      "description": "Live feature grid example of Bento Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/bento-grid.json",
+        "https://ui.ballmac.com/r/animated-grid.json",
+        "https://ui.ballmac.com/r/border-beam.json",
+        "https://ui.ballmac.com/r/marquee.json",
+        "https://ui.ballmac.com/r/number-ticker.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/bento-grid-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/bento-grid-demo.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "bento-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "bento-grid-features",
+      "type": "registry:example",
+      "title": "Bento Grid: Two columns",
+      "description": "Two columns example of Bento Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/bento-grid.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/bento-grid-features.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/bento-grid-features.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "bento-grid",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ai-chat-1",
       "type": "registry:block",
       "title": "AI Chat 1: full chat app pane",
@@ -1021,6 +1641,94 @@
       "meta": {
         "example": true,
         "of": "cta-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cta-2",
+      "type": "registry:block",
+      "title": "CTA 2: waitlist over light beams",
+      "description": "A waitlist or newsletter signup over rising light beams: heading, email field with validation, loading, success and error states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/beams-background.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/cta-2/cta-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/cta-2/cta-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "cta"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "cta",
+          "waitlist",
+          "newsletter",
+          "signup",
+          "beams"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Email capture section. Wire `onSubmit(email)` to your API (throw on failure); the block handles loading, success and error states.",
+          "whenToUse": [
+            "Pre-launch waitlists",
+            "Newsletter signup at the end of a page"
+          ],
+          "whenNotToUse": [
+            "Collecting more than an email (use a form page)"
+          ],
+          "composesWith": [
+            "hero-4",
+            "features-3",
+            "footer-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "eyebrow, title, description, buttonLabel, note, successMessage",
+            "onSubmit(email): Promise<void>"
+          ]
+        },
+        "examples": [
+          "cta-2-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/cta-2"
+      }
+    },
+    {
+      "name": "cta-2-demo",
+      "type": "registry:example",
+      "title": "CTA 2: waitlist over light beams: Default",
+      "description": "Default example of CTA 2: waitlist over light beams.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cta-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cta-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cta-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cta-2",
         "tier": "free"
       }
     },
@@ -1271,6 +1979,177 @@
       "meta": {
         "example": true,
         "of": "features-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "features-3",
+      "type": "registry:block",
+      "title": "Features 3: integrations hub with beams",
+      "description": "Integrations section: heading, description and checked benefits beside a hub diagram where animated beams flow between your product and six tools.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/animated-beam.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/features-3/features-3.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/features-3/features-3.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "features"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "features",
+          "integrations",
+          "animated beam",
+          "diagram"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Explains integrations or data flow. Pass up to six `integrations` ({ name, icon }) and set hubIcon/hubLabel for your product.",
+          "whenToUse": [
+            "Integrations or connectors pages",
+            "Showing that a product sits between many tools (AI agents, automation, sync)"
+          ],
+          "whenNotToUse": [
+            "Listing more than six integrations (use a logo grid)"
+          ],
+          "composesWith": [
+            "hero-4",
+            "features-1",
+            "cta-2"
+          ],
+          "a11y": [],
+          "customization": [
+            "eyebrow, title, description, points",
+            "integrations, hubIcon, hubLabel"
+          ]
+        },
+        "examples": [
+          "features-3-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/features-3"
+      }
+    },
+    {
+      "name": "features-3-demo",
+      "type": "registry:example",
+      "title": "Features 3: integrations hub with beams: Default",
+      "description": "Default example of Features 3: integrations hub with beams.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/features-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/features-3-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/features-3-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "features-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "features-4",
+      "type": "registry:block",
+      "title": "Features 4: Mac app bento",
+      "description": "Bento feature grid for a desktop app: menu bar companion, keyboard shortcuts, privacy, iCloud sync and notifications, each with a small live visual.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/bento-grid.json",
+        "https://ui.ballmac.com/r/kbd.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/features-4/features-4.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/features-4/features-4.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "features"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "features",
+          "bento",
+          "mac app",
+          "desktop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Feature section for Mac or desktop apps. Edit eyebrow/title/description props; change the five BentoCards and their visuals in the source to match your features.",
+          "whenToUse": [
+            "Desktop or Mac app landing pages",
+            "Showing five features with visuals instead of icons"
+          ],
+          "whenNotToUse": [
+            "Web SaaS feature lists (use features-1 or features-2)"
+          ],
+          "composesWith": [
+            "hero-5",
+            "pricing-1",
+            "testimonials-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "eyebrow, title, description props",
+            "BentoCard title, description, icon and background visual per feature"
+          ]
+        },
+        "examples": [
+          "features-4-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/features-4"
+      }
+    },
+    {
+      "name": "features-4-demo",
+      "type": "registry:example",
+      "title": "Features 4: Mac app bento: Default",
+      "description": "Default example of Features 4: Mac app bento.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/features-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/features-4-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/features-4-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "features-4",
         "tier": "free"
       }
     },
@@ -1723,6 +2602,184 @@
       }
     },
     {
+      "name": "hero-4",
+      "type": "registry:block",
+      "title": "Hero 4: split with interactive globe",
+      "description": "Split hero with a live pill, headline, two actions and headline stats beside a large draggable WebGL globe marking your regions.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/globe.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/hero-4/hero-4.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/hero-4/hero-4.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "hero"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hero",
+          "globe",
+          "infrastructure",
+          "landing",
+          "3d"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Top-of-page hero for global or infrastructure products. Edit announcement, title, description, actions, stats and globe markers ([lat, long]).",
+          "whenToUse": [
+            "Infrastructure, hosting, edge or global-reach products",
+            "Companies with offices or users worldwide"
+          ],
+          "whenNotToUse": [
+            "Products where geography doesn't matter (use hero-1 or hero-2)"
+          ],
+          "composesWith": [
+            "header-1",
+            "logo-cloud-1",
+            "features-3"
+          ],
+          "a11y": [],
+          "customization": [
+            "markers: [{ location: [lat, long], size }]",
+            "stats: up to three { value, label }"
+          ]
+        },
+        "examples": [
+          "hero-4-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/hero-4"
+      }
+    },
+    {
+      "name": "hero-4-demo",
+      "type": "registry:example",
+      "title": "Hero 4: split with interactive globe: Default",
+      "description": "Default example of Hero 4: split with interactive globe.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-4-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-4-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hero-5",
+      "type": "registry:block",
+      "title": "Hero 5: Mac app with opening laptop",
+      "description": "Centered hero for a Mac app: shiny highlighted headline, download button and requirements, over a laptop whose lid opens into view on a live app window.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/gradient-text.json",
+        "https://ui.ballmac.com/r/laptop-frame.json",
+        "https://ui.ballmac.com/r/mac-window.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/hero-5/hero-5.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/hero-5/hero-5.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "hero"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hero",
+          "mac app",
+          "download",
+          "laptop",
+          "product"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Top of a desktop-app landing page. Edit title, highlight, description, actions and requirements; pass `screen` (an image or your UI) to replace the sample app window.",
+          "whenToUse": [
+            "Landing pages for Mac or desktop apps",
+            "Products whose UI is the selling point"
+          ],
+          "whenNotToUse": [
+            "Web SaaS without a desktop app (use hero-1)",
+            "Mobile apps (compose phone-frame instead)"
+          ],
+          "composesWith": [
+            "header-1",
+            "features-4",
+            "pricing-1",
+            "template-mac-app"
+          ],
+          "a11y": [],
+          "customization": [
+            "title + highlight (shiny gradient)",
+            "screen: any ReactNode laid out at 1280px wide and scaled"
+          ]
+        },
+        "examples": [
+          "hero-5-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/hero-5"
+      }
+    },
+    {
+      "name": "hero-5-demo",
+      "type": "registry:example",
+      "title": "Hero 5: Mac app with opening laptop: Default",
+      "description": "Default example of Hero 5: Mac app with opening laptop.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-5-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-5-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-5",
+        "tier": "free"
+      }
+    },
+    {
       "name": "login-1",
       "type": "registry:block",
       "title": "Login 1: card with SSO and magic link",
@@ -1811,6 +2868,116 @@
       }
     },
     {
+      "name": "logo-cloud-1",
+      "type": "registry:block",
+      "title": "Logo Cloud 1: marquee or grid",
+      "description": "Customer logos as an endlessly scrolling row with faded edges, or a static grid with hairline dividers. Wordmarks brighten on hover.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/marquee.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/logo-cloud-1/logo-cloud-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/logo-cloud-1/logo-cloud-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "logo-cloud"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "logos",
+          "social proof",
+          "customers",
+          "marquee"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Social proof strip under a hero. Pass `logos` ({ name, icon? | logo? }[]) with your customers' SVG logos via `logo`; choose variant \"marquee\" or \"grid\".",
+          "whenToUse": [
+            "Directly under a hero",
+            "Near pricing to reassure buyers"
+          ],
+          "whenNotToUse": [
+            "Fewer than four logos (use a single line of text)"
+          ],
+          "composesWith": [
+            "hero-1",
+            "hero-2",
+            "testimonials-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "title, logos, variant props",
+            "Marquee speed and gap in the source"
+          ]
+        },
+        "examples": [
+          "logo-cloud-1-demo",
+          "logo-cloud-1-grid"
+        ],
+        "url": "https://ui.ballmac.com/components/logo-cloud-1"
+      }
+    },
+    {
+      "name": "logo-cloud-1-demo",
+      "type": "registry:example",
+      "title": "Logo Cloud 1: marquee or grid: Marquee",
+      "description": "Marquee example of Logo Cloud 1: marquee or grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/logo-cloud-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/logo-cloud-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/logo-cloud-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "logo-cloud-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "logo-cloud-1-grid",
+      "type": "registry:example",
+      "title": "Logo Cloud 1: marquee or grid: Grid",
+      "description": "Grid example of Logo Cloud 1: marquee or grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/logo-cloud-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/logo-cloud-1-grid.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/logo-cloud-1-grid.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "logo-cloud-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "pricing-1",
       "type": "registry:block",
       "title": "Pricing 1: two tiers",
@@ -1893,6 +3060,89 @@
       "meta": {
         "example": true,
         "of": "pricing-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "testimonials-1",
+      "type": "registry:block",
+      "title": "Testimonials 1: scrolling wall of quotes",
+      "description": "A wall of testimonial cards in three columns that scroll at different speeds in opposite directions, pausing on hover, with a plain list on phones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/marquee.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/testimonials-1/testimonials-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/testimonials-1/testimonials-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "testimonials"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "testimonials",
+          "social proof",
+          "quotes",
+          "marquee"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Social proof section: pass `testimonials` ({ quote, name, role }[]); they are spread across three vertical marquees. Replace the placeholder quotes with real ones.",
+          "whenToUse": [
+            "Landing pages after features or pricing",
+            "Showing many short quotes without a carousel"
+          ],
+          "whenNotToUse": [
+            "One or two quotes (use a single large quote in a section)"
+          ],
+          "composesWith": [
+            "features-1",
+            "pricing-1",
+            "cta-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "eyebrow, title, description, testimonials props",
+            "Column speed and direction are set per column in the source"
+          ]
+        },
+        "examples": [
+          "testimonials-1-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/testimonials-1"
+      }
+    },
+    {
+      "name": "testimonials-1-demo",
+      "type": "registry:example",
+      "title": "Testimonials 1: scrolling wall of quotes: Default",
+      "description": "Default example of Testimonials 1: scrolling wall of quotes.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/testimonials-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/testimonials-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/testimonials-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "testimonials-1",
         "tier": "free"
       }
     },
@@ -2018,6 +3268,123 @@
       "meta": {
         "example": true,
         "of": "border-beam",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "browser-frame",
+      "type": "registry:ui",
+      "title": "Browser Frame",
+      "description": "A Safari-style window with traffic lights, a padlocked address field and optional tabs. Children render as the page, either at natural size or laid out at desktop width and scaled to fit.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/browser-frame.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/browser-frame.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "mockup",
+          "browser",
+          "safari",
+          "window",
+          "screenshot",
+          "website",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Wrap web content in <BrowserFrame url=\"acme.com\">. Pass screenWidth={1280} (plus aspectRatio) to render a full desktop layout scaled down, tabs={[\"Home\", \"Docs\"]} for a tab strip, or src for a screenshot. Chrome colors follow the theme tokens.",
+          "whenToUse": [
+            "Showing a website or web app on a landing page or in docs",
+            "Template and theme galleries",
+            "Before/after comparisons of a web page"
+          ],
+          "whenNotToUse": [
+            "Native desktop apps (use laptop-frame, or a plain window)",
+            "Mobile layouts (use phone-frame)"
+          ],
+          "composesWith": [
+            "laptop-frame",
+            "phone-frame"
+          ],
+          "a11y": [],
+          "customization": [
+            "url, secure (padlock), tabs (strings or { title, icon }), activeTab",
+            "screenWidth + aspectRatio for a scaled desktop layout; omit both for natural size",
+            "Traffic-light colors: override --traffic-close, --traffic-minimize, --traffic-zoom",
+            "Parts: [data-slot=browser-frame-toolbar], -address, -tabs, -screen"
+          ]
+        },
+        "examples": [
+          "browser-frame-demo",
+          "browser-frame-minimal"
+        ],
+        "url": "https://ui.ballmac.com/components/browser-frame"
+      }
+    },
+    {
+      "name": "browser-frame-demo",
+      "type": "registry:example",
+      "title": "Browser Frame: Landing page with tabs",
+      "description": "Landing page with tabs example of Browser Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/browser-frame.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/browser-frame-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/browser-frame-demo.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "browser-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "browser-frame-minimal",
+      "type": "registry:example",
+      "title": "Browser Frame: Natural size",
+      "description": "Natural size example of Browser Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/browser-frame.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/browser-frame-minimal.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/browser-frame-minimal.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "browser-frame",
         "tier": "free"
       }
     },
@@ -2439,6 +3806,133 @@
       }
     },
     {
+      "name": "confetti",
+      "type": "registry:ui",
+      "title": "Confetti",
+      "description": "Confetti in your theme colors: fireConfetti(), a useConfetti() hook that fires from an element, and a ConfettiButton. Presets for burst, side cannons, stars and fireworks; nothing fires under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "canvas-confetti@^1.9.3",
+        "class-variance-authority"
+      ],
+      "devDependencies": [
+        "@types/canvas-confetti"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/color.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/confetti.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/confetti.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "confetti",
+          "celebration",
+          "success",
+          "canvas",
+          "button",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Call fireConfetti({ preset, colors, element }) from an event handler, or useConfetti().fireFrom(buttonRef.current) after an async success. <ConfettiButton options={{ preset: \"stars\" }}> is a Ballmac button that bursts from itself on click. Colors default to --chart-1…5.",
+          "whenToUse": [
+            "Rewarding a finished milestone: first deploy, upgrade, completed onboarding",
+            "Success states after a long async action",
+            "Playful marketing buttons (sparingly)"
+          ],
+          "whenNotToUse": [
+            "Routine actions such as saving a form (use a toast or inline check)",
+            "As the only success signal; always show a text confirmation too"
+          ],
+          "composesWith": [
+            "button",
+            "number-ticker"
+          ],
+          "a11y": [],
+          "customization": [
+            "preset: burst | sides | stars | fireworks",
+            "colors: theme variables (\"--chart-2\") or CSS colors",
+            "Any canvas-confetti option (particleCount, spread, scalar, ticks…) passes through",
+            "ConfettiButton takes the button variants (variant, size, shape)",
+            "Reduced motion: fireConfetti resolves immediately without drawing"
+          ]
+        },
+        "examples": [
+          "confetti-demo",
+          "confetti-presets"
+        ],
+        "url": "https://ui.ballmac.com/components/confetti"
+      }
+    },
+    {
+      "name": "confetti-demo",
+      "type": "registry:example",
+      "title": "Confetti: Deploy success",
+      "description": "Deploy success example of Confetti.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/confetti.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/confetti-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/confetti-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "confetti",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "confetti-presets",
+      "type": "registry:example",
+      "title": "Confetti: Presets",
+      "description": "Presets example of Confetti.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/confetti.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/confetti-presets.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/confetti-presets.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "confetti",
+        "tier": "free"
+      }
+    },
+    {
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
@@ -2581,6 +4075,850 @@
       "meta": {
         "example": true,
         "of": "dialog",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dock",
+      "type": "registry:ui",
+      "title": "Dock",
+      "description": "A macOS-style dock whose icons grow with spring physics as the pointer approaches and push their neighbors apart. Labels, running dots, a launch bounce and arrow-key navigation included.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/dock.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/dock.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "dock",
+          "macos",
+          "magnification",
+          "toolbar",
+          "navigation",
+          "motion",
+          "app launcher"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "<Dock> is a role=toolbar row (or column with orientation=\"vertical\") of <DockItem label icon /> buttons with cursor-proximity magnification; <DockSeparator /> draws the divider. Style each tile through DockItem's className (gradients, colors); icons are sized to about half the tile.",
+          "whenToUse": [
+            "An app-launcher or quick-links bar on a Mac-flavored landing page or product hero",
+            "A floating navigation bar for a portfolio or dashboard with a handful of destinations",
+            "Showing off the apps or integrations a product ships with"
+          ],
+          "whenNotToUse": [
+            "Primary navigation with many text links (use a header or sidebar)",
+            "More than about 12 items, or anywhere it would need to scroll horizontally"
+          ],
+          "composesWith": [
+            "mac-window",
+            "menu-bar",
+            "dynamic-island"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves focus into the dock (one tab stop) and out again"
+            },
+            {
+              "keys": "ArrowLeft / ArrowRight (ArrowUp / ArrowDown when vertical)",
+              "action": "Moves between items; the focused item magnifies and shows its label"
+            },
+            {
+              "keys": "Home / End",
+              "action": "Jumps to the first or last item"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Activates the focused item"
+            }
+          ],
+          "customization": [
+            "size: resting item size in px (default 48); magnification: size under the pointer (default 76); distance: reach in px (default 150)",
+            "orientation: horizontal | vertical",
+            "DockItem: label, icon, active (running dot, also announced), bounce (launch bounce on click), className for the tile, containerClassName for the wrapper (e.g. max-sm:hidden)",
+            "Under reduced motion the dock does not magnify or bounce; items brighten on hover and focus instead"
+          ]
+        },
+        "examples": [
+          "dock-demo",
+          "dock-vertical"
+        ],
+        "url": "https://ui.ballmac.com/components/dock"
+      }
+    },
+    {
+      "name": "dock-demo",
+      "type": "registry:example",
+      "title": "Dock: App dock",
+      "description": "App dock example of Dock.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dock.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dock-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dock-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dock",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dock-vertical",
+      "type": "registry:example",
+      "title": "Dock: Vertical",
+      "description": "Vertical example of Dock.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dock.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dock-vertical.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dock-vertical.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dock",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dot-pattern",
+      "type": "registry:ui",
+      "title": "Dot Pattern",
+      "description": "A lightweight SVG dot grid background with an optional radial fade and a few softly pulsing glow dots. One pattern element, token colors, hydration-safe, still under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/dot-pattern.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/dot-pattern.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "dots",
+          "pattern",
+          "grid",
+          "svg",
+          "background",
+          "decorative"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Place <DotPattern /> as the first child of a relative, overflow-hidden container (absolute inset-0, aria-hidden, pointer-events-none). Add glow for a few pulsing accent dots. The cheapest Ballmac background; safe for large areas.",
+          "whenToUse": [
+            "Quiet texture behind heroes, feature cards, empty states and auth pages",
+            "Large page areas where canvas effects would be too heavy"
+          ],
+          "whenNotToUse": [
+            "When you want visible motion as the focal point (use flickering-grid or beams-background)"
+          ],
+          "composesWith": [
+            "orbiting-circles",
+            "animated-beam",
+            "spotlight-card"
+          ],
+          "a11y": [],
+          "customization": [
+            "width / height: dot spacing in px (default 16); radius (default 1)",
+            "glow, glowCount (default 18), glowColor (default var(--chart-1))",
+            "radialMask toggles the edge fade; dot color is the --dot CSS variable: className=\"[--dot:var(--chart-2)]\""
+          ]
+        },
+        "examples": [
+          "dot-pattern-demo",
+          "dot-pattern-dense"
+        ],
+        "url": "https://ui.ballmac.com/components/dot-pattern"
+      }
+    },
+    {
+      "name": "dot-pattern-demo",
+      "type": "registry:example",
+      "title": "Dot Pattern: Glowing dots",
+      "description": "Glowing dots example of Dot Pattern.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dot-pattern.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dot-pattern-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dot-pattern-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dot-pattern",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dot-pattern-dense",
+      "type": "registry:example",
+      "title": "Dot Pattern: Dense, no glow",
+      "description": "Dense, no glow example of Dot Pattern.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dot-pattern.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dot-pattern-dense.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dot-pattern-dense.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dot-pattern",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dynamic-island",
+      "type": "registry:ui",
+      "title": "Dynamic Island",
+      "description": "A black pill or MacBook-style notch that morphs between live activities (timers, uploads, an AI thinking state, notifications) with a spring layout animation. Each view is announced politely.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/dynamic-island.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/dynamic-island.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "dynamic island",
+          "notch",
+          "macos",
+          "ios",
+          "live activity",
+          "status",
+          "motion",
+          "morph"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "<DynamicIsland view={state}> renders whichever <DynamicIslandView value=\"…\"> child matches and springs its size and corner radius to fit. Size each view with className (h-/w-/padding); set radius per view; label is announced via a polite live region.",
+          "whenToUse": [
+            "Showing one live background activity at a time: an upload, a build, a timer, an AI response in progress",
+            "A compact status surface pinned to the top of an app or a product mockup",
+            "Landing-page heroes that demo a Mac notch or iPhone app"
+          ],
+          "whenNotToUse": [
+            "Several notifications that need to stay visible together (use notification-stack)",
+            "Long or critical messages that must not disappear (use a dialog or an inline alert)"
+          ],
+          "composesWith": [
+            "dock"
+          ],
+          "a11y": [
+            {
+              "keys": "—",
+              "action": "The active view's label is announced in a polite live region; interactive content inside a view is reachable with Tab"
+            }
+          ],
+          "customization": [
+            "view: the active view value (controlled)",
+            "shape: pill | notch (square top corners, hangs from the top edge)",
+            "DynamicIslandView: value, radius (px, default 22), label (announced), className for size and layout",
+            "Always black like the hardware it imitates; accent content with chart-1..5 tokens",
+            "Under reduced motion the island switches views without the morph"
+          ]
+        },
+        "examples": [
+          "dynamic-island-demo",
+          "dynamic-island-pill"
+        ],
+        "url": "https://ui.ballmac.com/components/dynamic-island"
+      }
+    },
+    {
+      "name": "dynamic-island-demo",
+      "type": "registry:example",
+      "title": "Dynamic Island: MacBook notch",
+      "description": "MacBook notch example of Dynamic Island.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dynamic-island.json",
+        "utils"
+      ],
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dynamic-island-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dynamic-island-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dynamic-island",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dynamic-island-pill",
+      "type": "registry:example",
+      "title": "Dynamic Island: Floating pill",
+      "description": "Floating pill example of Dynamic Island.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dynamic-island.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dynamic-island-pill.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dynamic-island-pill.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dynamic-island",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "flickering-grid",
+      "type": "registry:ui",
+      "title": "Flickering Grid",
+      "description": "A canvas grid of small squares that flicker at random brightness, like a busy status board. Pixel-snapped, token-colored, DPR aware, pauses off-screen, static under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/color.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/flickering-grid.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/flickering-grid.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "grid",
+          "pixels",
+          "flicker",
+          "canvas",
+          "background",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Place <FlickeringGrid /> as the first child of a relative, overflow-hidden container; it fills it (absolute inset-0, aria-hidden, pointer-events-none). Tune squareSize, gap and maxOpacity for density and contrast.",
+          "whenToUse": [
+            "Section or hero backgrounds for infrastructure, data or developer products",
+            "Feature cards that should feel alive without a focal animation"
+          ],
+          "whenNotToUse": [
+            "Behind small or low-contrast text (keep maxOpacity low or add a scrim)",
+            "Very large full-page areas on low-power devices (use dot-pattern)"
+          ],
+          "composesWith": [
+            "number-ticker",
+            "shimmer-text"
+          ],
+          "a11y": [],
+          "customization": [
+            "squareSize (px, default 4), gap (px, default 6)",
+            "flickerChance: changes per square per second (default 0.3); maxOpacity (default 0.3)",
+            "color: CSS variable name or color, default --foreground; fade toggles the radial mask"
+          ]
+        },
+        "examples": [
+          "flickering-grid-demo",
+          "flickering-grid-accent"
+        ],
+        "url": "https://ui.ballmac.com/components/flickering-grid"
+      }
+    },
+    {
+      "name": "flickering-grid-demo",
+      "type": "registry:example",
+      "title": "Flickering Grid: Section background",
+      "description": "Section background example of Flickering Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/flickering-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/flickering-grid-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/flickering-grid-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "flickering-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "flickering-grid-accent",
+      "type": "registry:example",
+      "title": "Flickering Grid: Accent card",
+      "description": "Accent card example of Flickering Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/flickering-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/flickering-grid-accent.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/flickering-grid-accent.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "flickering-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "globe",
+      "type": "registry:ui",
+      "title": "Globe",
+      "description": "An interactive WebGL dot globe (cobe) with markers, drag-to-spin momentum and arrow-key control. Colors come from theme tokens and repaint on theme change; starts lazily and pauses off-screen.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "cobe@^0.6"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/color.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/globe.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/globe.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "globe",
+          "webgl",
+          "map",
+          "regions",
+          "3d",
+          "hero",
+          "interactive"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Render <Globe markers={[{ location: [lat, lng], size: 0.06 }]} /> in a sized container (it is a square, w-full, max 600px). The canvas has role=img and an aria-label; pass label to describe what it shows. It starts WebGL only when scrolled near the viewport.",
+          "whenToUse": [
+            "Showing global reach: regions, edge locations, offices, customers by country",
+            "A hero or feature-card visual for infrastructure, networking or travel products"
+          ],
+          "whenNotToUse": [
+            "Precise geographic data or choropleths (use a real map library)",
+            "Several globes on one page; each is a WebGL context"
+          ],
+          "composesWith": [
+            "number-ticker",
+            "spotlight-card",
+            "badge"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Arrow Right",
+              "action": "Spins the globe"
+            },
+            {
+              "keys": "Arrow Up / Arrow Down",
+              "action": "Tilts the globe; it settles back"
+            }
+          ],
+          "customization": [
+            "markers: [{ location: [lat, lng], size }]",
+            "markerColor (default --chart-1), baseColor and glowColor: CSS variable names or any CSS color; defaults adapt to light and dark",
+            "speed (radians per frame, 0 to stop), phi, theta, mapBrightness, mapSamples",
+            "interactive={false} for a purely decorative globe"
+          ]
+        },
+        "examples": [
+          "globe-demo",
+          "globe-hero"
+        ],
+        "url": "https://ui.ballmac.com/components/globe"
+      }
+    },
+    {
+      "name": "globe-demo",
+      "type": "registry:example",
+      "title": "Globe: Regions card",
+      "description": "Regions card example of Globe.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/globe.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/globe-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/globe-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "globe",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "globe-hero",
+      "type": "registry:example",
+      "title": "Globe: Hero horizon",
+      "description": "Hero horizon example of Globe.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/globe.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/globe-hero.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/globe-hero.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "globe",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "glow-border",
+      "type": "registry:ui",
+      "title": "Glow Border",
+      "description": "Wraps any content in a border drawn by a rotating conic gradient in theme colors, with a soft outer glow. Speed, width, radius and arc length are props; it stops at a still angle under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/glow-border.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/glow-border.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "border",
+          "gradient",
+          "glow",
+          "conic",
+          "highlight",
+          "pricing",
+          "button",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Put content inside <GlowBorder>; it renders a padded wrapper whose padding shows a rotating conic gradient and a content surface (bg-card, radius minus width). Use arc={1} for a full rainbow ring, a smaller arc for a comet.",
+          "whenToUse": [
+            "The recommended plan in a pricing table",
+            "One primary call-to-action or an AI entry point",
+            "Marking a card as new, live or selected"
+          ],
+          "whenNotToUse": [
+            "Several elements at once on the same screen (use it for one focal point)",
+            "A thin light that travels along an existing border (use border-beam)"
+          ],
+          "composesWith": [
+            "button",
+            "border-beam",
+            "tilt-card"
+          ],
+          "a11y": [],
+          "customization": [
+            "duration: seconds per rotation (default 4); width: ring px (default 1.5); radius: px (default 14, 999 for pills)",
+            "colors: CSS colors or var(--chart-n) values; arc: 0–1 share of the ring lit (default 0.55)",
+            "glow: 0–1 outer glow strength (0 turns it off)",
+            "contentClassName styles the inner surface (bg-background, bg-primary…)",
+            "Animates a registered CSS property (--glow-border-angle); pauses off-screen"
+          ]
+        },
+        "examples": [
+          "glow-border-demo",
+          "glow-border-button"
+        ],
+        "url": "https://ui.ballmac.com/components/glow-border"
+      }
+    },
+    {
+      "name": "glow-border-demo",
+      "type": "registry:example",
+      "title": "Glow Border: Pricing highlight",
+      "description": "Pricing highlight example of Glow Border.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/glow-border.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/glow-border-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/glow-border-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "glow-border",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "glow-border-button",
+      "type": "registry:example",
+      "title": "Glow Border: Buttons",
+      "description": "Buttons example of Glow Border.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/glow-border.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/glow-border-button.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/glow-border-button.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "glow-border",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gradient-text",
+      "type": "registry:ui",
+      "title": "Gradient Text",
+      "description": "Text filled with a gradient of theme colors that slowly drifts, or a shiny variant that sweeps a glint of light across it on a pause. Static under reduced motion; plain text in forced colors.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/gradient-text.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/gradient-text.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "text",
+          "gradient",
+          "headline",
+          "shine",
+          "hero",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Wrap a few words: <GradientText>ship software</GradientText> inside a heading, or as=\"h2\". variant=\"flow\" (default) drifts the gradient; variant=\"shiny\" adds a periodic white glint. Colors default to --chart-1/4/5/3.",
+          "whenToUse": [
+            "Highlighting two or three words in a hero headline",
+            "Product or plan names (shiny)"
+          ],
+          "whenNotToUse": [
+            "Body text or long passages (contrast varies along the gradient)",
+            "A muted loading shimmer on status text (use shimmer-text)"
+          ],
+          "composesWith": [
+            "word-rotate",
+            "shimmer-text"
+          ],
+          "a11y": [],
+          "customization": [
+            "variant: flow | shiny",
+            "colors: CSS colors or var(--chart-n); angle in degrees (default 100)",
+            "duration: seconds per drift (default 6) or sweep (default 1.4); repeatDelay for shiny (default 2.4)",
+            "shineColor: glint color for the shiny variant (default near-white; keep colors saturated so it shows)",
+            "Add pb-[0.08em] if descenders clip at large sizes"
+          ]
+        },
+        "examples": [
+          "gradient-text-demo",
+          "gradient-text-shiny"
+        ],
+        "url": "https://ui.ballmac.com/components/gradient-text"
+      }
+    },
+    {
+      "name": "gradient-text-demo",
+      "type": "registry:example",
+      "title": "Gradient Text: Flowing headline",
+      "description": "Flowing headline example of Gradient Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gradient-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gradient-text-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gradient-text-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gradient-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gradient-text-shiny",
+      "type": "registry:example",
+      "title": "Gradient Text: Shiny",
+      "description": "Shiny example of Gradient Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gradient-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gradient-text-shiny.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gradient-text-shiny.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gradient-text",
         "tier": "free"
       }
     },
@@ -3032,6 +5370,250 @@
       }
     },
     {
+      "name": "laptop-frame",
+      "type": "registry:ui",
+      "title": "Laptop Frame",
+      "description": "A notched aluminium laptop drawn in CSS that scales with its container. Renders children, an image or a video as the screen, and can open its lid when it scrolls into view.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/laptop-frame.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/laptop-frame.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "mockup",
+          "device",
+          "laptop",
+          "macbook",
+          "screenshot",
+          "hero",
+          "3d",
+          "scroll"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Wrap a product screen in <LaptopFrame>: children become the display. Pass screenWidth (e.g. 1280) to lay the content out at a desktop resolution and scale it down to fit; openAnimation=\"in-view\" or \"scroll\" swings the lid open.",
+          "whenToUse": [
+            "Landing-page heroes that show a desktop or web app in context",
+            "Feature sections with a live React screen instead of a static screenshot",
+            "Scroll-driven product reveals (openAnimation=\"scroll\")"
+          ],
+          "whenNotToUse": [
+            "Showing a website with its URL and browser chrome (use browser-frame)",
+            "Mobile app screens (use phone-frame)"
+          ],
+          "composesWith": [
+            "browser-frame",
+            "phone-frame"
+          ],
+          "a11y": [],
+          "customization": [
+            "variant: auto (silver in light, midnight in dark) | silver | midnight",
+            "screenWidth: virtual resolution in CSS px; content is scaled with a CSS transform",
+            "src/alt for an image, videoSrc/poster for a muted looping video",
+            "openAnimation: none | in-view | scroll; reduced motion always shows it open",
+            "Sizes are in container units, so set the width with className (e.g. max-w-3xl)"
+          ]
+        },
+        "examples": [
+          "laptop-frame-demo",
+          "laptop-frame-scroll"
+        ],
+        "url": "https://ui.ballmac.com/components/laptop-frame"
+      }
+    },
+    {
+      "name": "laptop-frame-demo",
+      "type": "registry:example",
+      "title": "Laptop Frame: Dashboard",
+      "description": "Dashboard example of Laptop Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/laptop-frame.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/laptop-frame-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/laptop-frame-demo.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "laptop-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "laptop-frame-scroll",
+      "type": "registry:example",
+      "title": "Laptop Frame: Midnight, opens on scroll",
+      "description": "Midnight, opens on scroll example of Laptop Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/laptop-frame.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/laptop-frame-scroll.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/laptop-frame-scroll.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "laptop-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mac-window",
+      "type": "registry:ui",
+      "title": "Mac Window",
+      "description": "macOS window chrome: traffic lights whose glyphs appear on hover, a centered title or unified toolbar, an optional translucent sidebar with vibrancy, and active and inactive appearances.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/mac-window.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/mac-window.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "window",
+          "macos",
+          "traffic lights",
+          "chrome",
+          "mockup",
+          "sidebar",
+          "frame"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Frame content as a Mac app window. Simple: <MacWindow><MacWindowTitleBar title=\"…\" /><MacWindowContent>…</MacWindowContent></MacWindow>. Sidebar layout: <MacWindow><MacWindowSidebar>rows…</MacWindowSidebar><MacWindowMain><MacWindowTitleBar controls={false} title>toolbar buttons</MacWindowTitleBar><MacWindowContent/></MacWindowMain></MacWindow>. Size the window with className.",
+          "whenToUse": [
+            "Product screenshots and mockups of a Mac app on a landing page",
+            "Framing a code sample, terminal session or settings panel so it reads as desktop software",
+            "Interactive app demos where the sidebar and toolbar actually work"
+          ],
+          "whenNotToUse": [
+            "Modal dialogs in a web app (use dialog)",
+            "Browser mockups; this draws native window chrome, not an address bar"
+          ],
+          "composesWith": [
+            "dock",
+            "menu-bar",
+            "segmented-control"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Reaches the traffic lights only when onClose, onMinimize or onZoom handlers are set, then toolbar and sidebar buttons"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Activates the focused traffic light or button"
+            }
+          ],
+          "customization": [
+            "active: false grays the lights and title like a background window",
+            "onClose / onMinimize / onZoom: make the lights real buttons with aria-labels (labels prop on MacWindowControls)",
+            "--mac-close, --mac-minimize, --mac-zoom: traffic-light colors (CSS variables on the window)",
+            "MacWindowTitleBar: title, controls, children become a trailing toolbar (use MacWindowToolbarButton)",
+            "MacWindowSidebar: translucent, blurs what's behind the window; MacWindowSidebarItem for rows (selected sets aria-current)"
+          ]
+        },
+        "examples": [
+          "mac-window-demo",
+          "mac-window-stack"
+        ],
+        "url": "https://ui.ballmac.com/components/mac-window"
+      }
+    },
+    {
+      "name": "mac-window-demo",
+      "type": "registry:example",
+      "title": "Mac Window: Notes app",
+      "description": "Notes app example of Mac Window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mac-window.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mac-window-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mac-window-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mac-window",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mac-window-stack",
+      "type": "registry:example",
+      "title": "Mac Window: Active and inactive",
+      "description": "Active and inactive example of Mac Window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mac-window.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mac-window-stack.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mac-window-stack.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mac-window",
+        "tier": "free"
+      }
+    },
+    {
       "name": "magnetic-button",
       "type": "registry:ui",
       "title": "Magnetic Button",
@@ -3252,6 +5834,338 @@
       }
     },
     {
+      "name": "menu-bar",
+      "type": "registry:ui",
+      "title": "Menu Bar",
+      "description": "A translucent macOS menu bar on Radix Menubar: a bold app menu, menus with key equivalents, submenus and checkmarks, a status area with icon buttons and a hydration-safe live clock.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/menu-bar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/menu-bar.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "menubar",
+          "menu",
+          "macos",
+          "navigation",
+          "keyboard shortcuts",
+          "clock",
+          "status bar"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "<MenuBar> holds <MenuBarMenu value><MenuBarTrigger/><MenuBarContent>items</MenuBarContent></MenuBarMenu> (Radix Menubar parts with Mac styling) followed by <MenuBarStatus> with <MenuBarStatusItem aria-label> icon buttons and <MenuBarClock />. Use variant=\"app\" on the app-name trigger and <MenuBarShortcut> for key equivalents.",
+          "whenToUse": [
+            "A Mac desktop mockup or product hero where the app's menus should really open",
+            "A web app that wants desktop-style menus with keyboard navigation (File, Edit, View)",
+            "Status bars that pair a few icon buttons with a clock"
+          ],
+          "whenNotToUse": [
+            "Site navigation for a marketing page (use a header with links)",
+            "A single action menu on a button (use a dropdown menu)"
+          ],
+          "composesWith": [
+            "mac-window",
+            "dock",
+            "dynamic-island"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the menu bar (one stop), then the status buttons"
+            },
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Moves between menus, also while one is open"
+            },
+            {
+              "keys": "Enter / Space / ArrowDown",
+              "action": "Opens the focused menu"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown, typeahead",
+              "action": "Moves between items"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the menu and returns focus to its trigger"
+            }
+          ],
+          "customization": [
+            "MenuBarTrigger variant: default | app (bold)",
+            "MenuBarContent / MenuBarSubContent portal: false keeps menus inside a mockup container",
+            "MenuBarItem inset and variant=\"destructive\"; highlighted items use the --ring color like the macOS accent",
+            "MenuBarClock: locale (default en-US), format (Intl options), value for a fixed time"
+          ]
+        },
+        "examples": [
+          "menu-bar-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/menu-bar"
+      }
+    },
+    {
+      "name": "menu-bar-demo",
+      "type": "registry:example",
+      "title": "Menu Bar: Desktop menu bar",
+      "description": "Desktop menu bar example of Menu Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/menu-bar.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/menu-bar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/menu-bar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "menu-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "meteors",
+      "type": "registry:ui",
+      "title": "Meteors",
+      "description": "Thin meteors with glowing heads and fading tails streak across a container at a set angle. Randomized after mount (hydration-safe), paused off-screen, hidden under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/meteors.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/meteors.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "meteors",
+          "shooting stars",
+          "background",
+          "card",
+          "decorative"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Put <Meteors /> inside a relative, overflow-hidden card or section (it is absolute inset-0, aria-hidden, pointer-events-none) and lift content with relative z-10. Meteor positions are generated on the client after mount, so the server renders an empty layer.",
+          "whenToUse": [
+            "A launch, release or milestone card that should feel special",
+            "Dark hero sections or CTA panels that need a hint of motion"
+          ],
+          "whenNotToUse": [
+            "Dense UI or data tables",
+            "Communicating anything; it is decorative and hidden under reduced motion"
+          ],
+          "composesWith": [
+            "spotlight-card",
+            "badge",
+            "button"
+          ],
+          "a11y": [],
+          "customization": [
+            "count (default 14), angle in degrees (default 135, down-left)",
+            "duration: [min, max] seconds per crossing; tail: [min, max] px",
+            "color: any CSS color, default 70% --foreground; try var(--chart-1)"
+          ]
+        },
+        "examples": [
+          "meteors-demo",
+          "meteors-colored"
+        ],
+        "url": "https://ui.ballmac.com/components/meteors"
+      }
+    },
+    {
+      "name": "meteors-demo",
+      "type": "registry:example",
+      "title": "Meteors: Release card",
+      "description": "Release card example of Meteors.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/meteors.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/meteors-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/meteors-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "meteors",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "meteors-colored",
+      "type": "registry:example",
+      "title": "Meteors: Steep, colored",
+      "description": "Steep, colored example of Meteors.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/meteors.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/meteors-colored.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/meteors-colored.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "meteors",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "notification-stack",
+      "type": "registry:ui",
+      "title": "Notification Stack",
+      "description": "macOS Notification Center cards: collapsed, the newest sits in front with two peeking behind; click or press Enter to spring the stack open. New cards slide in from the top; each can be dismissed.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/notification-stack.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/notification-stack.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "notifications",
+          "toast",
+          "stack",
+          "macos",
+          "notification center",
+          "motion",
+          "vibrancy"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Render <NotificationStack> with <Notification key icon iconClassName title time onDismiss>body</Notification> children, newest first. Keep items in state; prepend to add (animates in), filter to dismiss. expanded/defaultExpanded/onExpandedChange control the stack; onClearAll adds a clear button.",
+          "whenToUse": [
+            "An activity or notification feed in a dashboard corner",
+            "A landing-page hero showing the alerts a product sends (deploys, reviews, payments)",
+            "Grouping several recent events so they take the space of one"
+          ],
+          "whenNotToUse": [
+            "Transient feedback after a single action (use a toast)",
+            "A single live activity that changes over time (use dynamic-island)"
+          ],
+          "composesWith": [
+            "dynamic-island",
+            "mac-window"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the stack's expand button when collapsed, or each card's dismiss button and Show less when expanded"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Expands the collapsed stack (focus moves to Show less) or activates the focused button"
+            },
+            {
+              "keys": "Escape",
+              "action": "Collapses an expanded stack and returns focus to it"
+            }
+          ],
+          "customization": [
+            "expanded / defaultExpanded / onExpandedChange: controlled or uncontrolled",
+            "label: heading and region name (default Notifications); onClearAll shows clear buttons",
+            "Notification: icon + iconClassName (tile background), title, time, children (body, clamped to 2 lines), onDismiss, dismissLabel",
+            "Peeking cards are inert and hidden from assistive tech until the stack expands"
+          ]
+        },
+        "examples": [
+          "notification-stack-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/notification-stack"
+      }
+    },
+    {
+      "name": "notification-stack-demo",
+      "type": "registry:example",
+      "title": "Notification Stack: Notification Center",
+      "description": "Notification Center example of Notification Stack.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/notification-stack.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/notification-stack-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/notification-stack-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "notification-stack",
+        "tier": "free"
+      }
+    },
+    {
       "name": "number-ticker",
       "type": "registry:ui",
       "title": "Number Ticker",
@@ -3357,6 +6271,352 @@
       "meta": {
         "example": true,
         "of": "number-ticker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "orbiting-circles",
+      "type": "registry:ui",
+      "title": "Orbiting Circles",
+      "description": "Items that orbit a center on circular tracks while staying upright. Evenly spaced, any radius, speed and direction; stack several for rings. Paused off-screen, static under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/orbiting-circles.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/orbiting-circles.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "orbit",
+          "integrations",
+          "icons",
+          "rings",
+          "hero",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Inside a relative container with a fixed height, render the center element, then one <OrbitingCircles radius duration> per ring with the orbiting items as children. Each ring fills the container (absolute inset-0) and centers itself; items are laid out evenly around the circle.",
+          "whenToUse": [
+            "An integrations or ecosystem section: your product in the middle, tools around it",
+            "A hero visual for a platform that connects many services"
+          ],
+          "whenNotToUse": [
+            "Items people must read or click reliably (moving targets); use a grid",
+            "More than about 8 items per ring"
+          ],
+          "composesWith": [
+            "animated-beam",
+            "dot-pattern"
+          ],
+          "a11y": [],
+          "customization": [
+            "radius (px), duration (s per orbit), reverse, startAngle (degrees)",
+            "iconSize: the box each item gets (px)",
+            "path toggles the dashed track; restyle it with [&_[data-slot=orbiting-circles-path]_circle]:stroke-…"
+          ]
+        },
+        "examples": [
+          "orbiting-circles-demo",
+          "orbiting-circles-minimal"
+        ],
+        "url": "https://ui.ballmac.com/components/orbiting-circles"
+      }
+    },
+    {
+      "name": "orbiting-circles-demo",
+      "type": "registry:example",
+      "title": "Orbiting Circles: Integrations",
+      "description": "Integrations example of Orbiting Circles.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/orbiting-circles.json",
+        "utils"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/orbiting-circles-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/orbiting-circles-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "orbiting-circles",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "orbiting-circles-minimal",
+      "type": "registry:example",
+      "title": "Orbiting Circles: Single ring",
+      "description": "Single ring example of Orbiting Circles.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/orbiting-circles.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/orbiting-circles-minimal.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/orbiting-circles-minimal.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "orbiting-circles",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "particles",
+      "type": "registry:ui",
+      "title": "Particles",
+      "description": "A canvas field of softly twinkling particles with depth, gentle drift and a pointer that attracts or repels them. Token colors, DPR aware, pauses off-screen, still under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/color.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/particles.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/particles.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "particles",
+          "stars",
+          "canvas",
+          "background",
+          "hero",
+          "interactive"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Place <Particles /> as the first child of a relative, overflow-hidden container; it fills it (absolute inset-0, aria-hidden, pointer-events-none) and tracks the pointer at window level, so content above it stays clickable.",
+          "whenToUse": [
+            "Quiet hero or CTA backgrounds, especially on dark surfaces",
+            "Space, AI or data themed sections that need depth without imagery"
+          ],
+          "whenNotToUse": [
+            "Behind long-form text",
+            "Many instances on one page (each runs its own canvas loop)"
+          ],
+          "composesWith": [
+            "text-reveal",
+            "shimmer-text",
+            "magnetic-button"
+          ],
+          "a11y": [],
+          "customization": [
+            "quantity (per ~800×500 px, scales with area), size (base radius px), maxOpacity",
+            "color: CSS variable name or color, default --foreground; try --chart-1",
+            "interaction: attract | repel | none; radius and ease shape the pointer response",
+            "vx / vy add a constant drift (vy={-0.3} rises like embers)"
+          ]
+        },
+        "examples": [
+          "particles-demo",
+          "particles-rising"
+        ],
+        "url": "https://ui.ballmac.com/components/particles"
+      }
+    },
+    {
+      "name": "particles-demo",
+      "type": "registry:example",
+      "title": "Particles: Hero card",
+      "description": "Hero card example of Particles.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/particles.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/particles-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/particles-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "particles",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "particles-rising",
+      "type": "registry:example",
+      "title": "Particles: Rising, repel",
+      "description": "Rising, repel example of Particles.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/particles.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/particles-rising.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/particles-rising.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "particles",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "phone-frame",
+      "type": "registry:ui",
+      "title": "Phone Frame",
+      "description": "A modern phone drawn in CSS: titanium band, side buttons, Dynamic Island, status bar and home indicator. Children render as the screen, laid out at a phone resolution and scaled to fit.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/phone-frame.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/phone-frame.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "mockup",
+          "device",
+          "phone",
+          "iphone",
+          "mobile",
+          "screenshot",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Wrap a mobile screen in <PhoneFrame screenWidth={390}>: children render below a status bar at 390 CSS px wide and are scaled to the frame's width. Set the frame width with className (e.g. w-64); height follows the phone's aspect ratio.",
+          "whenToUse": [
+            "Showing a mobile app or responsive site on a landing page",
+            "App Store-style feature sections with live React screens",
+            "Pairing with laptop-frame to show desktop and mobile together"
+          ],
+          "whenNotToUse": [
+            "Desktop apps or websites at desktop width (use laptop-frame or browser-frame)",
+            "Real device screenshots that already include the bezel"
+          ],
+          "composesWith": [
+            "laptop-frame"
+          ],
+          "a11y": [],
+          "customization": [
+            "variant: auto (natural titanium in light, black in dark) | natural | black",
+            "screenWidth: virtual width in CSS px, e.g. 390",
+            "statusBar, time (default \"9:41\"), homeIndicator",
+            "screenClassName=\"dark\" gives the screen its own theme regardless of the page",
+            "src/alt or videoSrc/poster to show media instead of children"
+          ]
+        },
+        "examples": [
+          "phone-frame-demo",
+          "phone-frame-chat"
+        ],
+        "url": "https://ui.ballmac.com/components/phone-frame"
+      }
+    },
+    {
+      "name": "phone-frame-demo",
+      "type": "registry:example",
+      "title": "Phone Frame: Wallet app",
+      "description": "Wallet app example of Phone Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/phone-frame.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/phone-frame-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/phone-frame-demo.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "phone-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "phone-frame-chat",
+      "type": "registry:example",
+      "title": "Phone Frame: Black, dark screen",
+      "description": "Black, dark screen example of Phone Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/phone-frame.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/phone-frame-chat.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/phone-frame-chat.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "phone-frame",
         "tier": "free"
       }
     },
@@ -3587,6 +6847,231 @@
       "meta": {
         "example": true,
         "of": "reasoning-disclosure",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "scramble-text",
+      "type": "registry:ui",
+      "title": "Scramble Text",
+      "description": "Decodes text in place: each character cycles through random glyphs before settling, left to right. Plays on mount, in view or on hover, keeps its final width, and exposes the final text to screen readers.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/scramble-text.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/scramble-text.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "text",
+          "scramble",
+          "decode",
+          "glitch",
+          "terminal",
+          "hover",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "<ScrambleText trigger=\"mount\" | \"inView\" | \"hover\">Final text</ScrambleText>. Children must be a string. Frames are written straight to the DOM (no re-renders); an invisible copy of the final text reserves the layout and an sr-only copy is what assistive tech reads.",
+          "whenToUse": [
+            "Terminal, security or developer-tool moments (status lines, keys, hashes)",
+            "Short headings that reveal on scroll",
+            "Nav links or buttons with a hover flourish (trigger=\"hover\")"
+          ],
+          "whenNotToUse": [
+            "Paragraphs or anything longer than a line",
+            "Text that updates often (the scramble restarts each time)"
+          ],
+          "composesWith": [
+            "terminal",
+            "word-rotate"
+          ],
+          "a11y": [],
+          "customization": [
+            "duration (default 900 ms), delay, speed (ms per frame, default 40)",
+            "characters: glyph set, e.g. \"01\" or hex digits",
+            "mono: monospace so the width never shifts",
+            "onComplete fires after the final frame; reduced motion shows the final text at once"
+          ]
+        },
+        "examples": [
+          "scramble-text-demo",
+          "scramble-text-hover"
+        ],
+        "url": "https://ui.ballmac.com/components/scramble-text"
+      }
+    },
+    {
+      "name": "scramble-text-demo",
+      "type": "registry:example",
+      "title": "Scramble Text: Deploy log",
+      "description": "Deploy log example of Scramble Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/scramble-text.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/scramble-text-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/scramble-text-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "scramble-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "scramble-text-hover",
+      "type": "registry:example",
+      "title": "Scramble Text: On hover",
+      "description": "On hover example of Scramble Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/scramble-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/scramble-text-hover.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/scramble-text-hover.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "scramble-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented Control",
+      "description": "A macOS segmented control: mutually exclusive options with a selected pill that springs between segments and hairline dividers between unselected ones. A Radix radio group underneath.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "radix-ui",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/segmented-control.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/segmented-control.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "segmented control",
+          "toggle group",
+          "radio group",
+          "tabs",
+          "macos",
+          "switcher",
+          "form"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "<SegmentedControl aria-label value|defaultValue onValueChange size><SegmentedControlItem value>Label</SegmentedControlItem>…</SegmentedControl>. Exactly one segment is always selected. Icon-only items need aria-label; fullWidth stretches segments equally.",
+          "whenToUse": [
+            "Switching a view mode or range (Day / Week / Month, List / Grid)",
+            "A short, always-visible choice in settings (Light / Dark / Auto)",
+            "Filtering one list by a few exclusive categories"
+          ],
+          "whenNotToUse": [
+            "Switching between panels of content with their own semantics (use tabs)",
+            "More than about five options or long labels (use select)",
+            "Options that can be combined (use checkboxes or a toggle group)"
+          ],
+          "composesWith": [
+            "mac-window"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the selected segment (one tab stop)"
+            },
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Moves to and selects the previous or next segment, wrapping"
+            },
+            {
+              "keys": "Space",
+              "action": "Selects the focused segment"
+            }
+          ],
+          "customization": [
+            "size: sm | default | lg",
+            "fullWidth: stretch to the container with equal segments",
+            "value / defaultValue / onValueChange: controlled or uncontrolled",
+            "Parts: [data-slot=segmented-control-indicator] (the sliding pill), [data-slot=segmented-control-divider]",
+            "Under reduced motion the pill jumps instead of sliding"
+          ]
+        },
+        "examples": [
+          "segmented-control-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/segmented-control"
+      }
+    },
+    {
+      "name": "segmented-control-demo",
+      "type": "registry:example",
+      "title": "Segmented Control: Settings panel",
+      "description": "Settings panel example of Segmented Control.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/segmented-control-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/segmented-control-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "segmented-control",
         "tier": "free"
       }
     },
@@ -3952,6 +7437,148 @@
       }
     },
     {
+      "name": "spotlight-search",
+      "type": "registry:ui",
+      "title": "Spotlight Search",
+      "description": "A macOS Spotlight-style command palette on cmdk: a large translucent search field, grouped results with app-icon tiles, fuzzy filtering and arrow-key navigation, inline or as a ⌘K dialog.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "cmdk@^1",
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/spotlight-search.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/spotlight-search.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "command palette",
+          "search",
+          "spotlight",
+          "cmdk",
+          "macos",
+          "⌘k",
+          "launcher",
+          "keyboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Inline: <SpotlightSearch><SpotlightSearchInput /><SpotlightSearchList><SpotlightSearchEmpty/><SpotlightSearchGroup heading><SpotlightSearchItem icon iconClassName detail onSelect>Title</SpotlightSearchItem></SpotlightSearchGroup></SpotlightSearchList></SpotlightSearch>. Overlay: swap the root for <SpotlightSearchDialog open onOpenChange hotkey=\"k\">. Root props are cmdk Command props (filter, shouldFilter, value).",
+          "whenToUse": [
+            "A ⌘K command palette for navigation and actions in an app or docs site",
+            "A Mac-style launcher in a product hero or desktop mockup",
+            "Searching a mixed list of apps, documents and commands with keyboard-first navigation"
+          ],
+          "whenNotToUse": [
+            "A plain search field for a results page (use input)",
+            "Choosing one value in a form (use select or a combobox)"
+          ],
+          "composesWith": [
+            "menu-bar",
+            "mac-window",
+            "dock"
+          ],
+          "a11y": [
+            {
+              "keys": "⌘K / Ctrl+K",
+              "action": "Opens and closes SpotlightSearchDialog (hotkey prop; false disables)"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "Moves the highlighted result, wrapping at the ends"
+            },
+            {
+              "keys": "Enter",
+              "action": "Runs the highlighted item's onSelect"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the dialog and returns focus to where it was"
+            }
+          ],
+          "customization": [
+            "SpotlightSearchItem: icon + iconClassName (tile color), detail (kind, path or shortcut), keywords for extra matches",
+            "SpotlightSearchInput: placeholder (default Spotlight Search), trailing slot",
+            "SpotlightSearchFooter for key hints; SpotlightSearchSeparator between groups",
+            "The highlight uses --ring, like the macOS accent color",
+            "useSpotlightHotkey(callback, key) for your own trigger"
+          ]
+        },
+        "examples": [
+          "spotlight-search-demo",
+          "spotlight-search-dialog"
+        ],
+        "url": "https://ui.ballmac.com/components/spotlight-search"
+      }
+    },
+    {
+      "name": "spotlight-search-demo",
+      "type": "registry:example",
+      "title": "Spotlight Search: Spotlight",
+      "description": "Spotlight example of Spotlight Search.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/spotlight-search.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/spotlight-search-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/spotlight-search-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "spotlight-search",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "spotlight-search-dialog",
+      "type": "registry:example",
+      "title": "Spotlight Search: ⌘K dialog",
+      "description": "⌘K dialog example of Spotlight Search.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/spotlight-search.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/spotlight-search-dialog.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/spotlight-search-dialog.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "spotlight-search",
+        "tier": "free"
+      }
+    },
+    {
       "name": "streaming-text",
       "type": "registry:ui",
       "title": "Streaming Text",
@@ -4269,6 +7896,102 @@
       "meta": {
         "example": true,
         "of": "template-launch",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-mac-app",
+      "type": "registry:block",
+      "title": "Mac app landing page",
+      "description": "A complete landing page for a Mac app: header, hero with an opening laptop, logo cloud, Mac feature bento, testimonials, one-time pricing, FAQ, beta signup and footer.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cta-2.json",
+        "https://ui.ballmac.com/r/faq-1.json",
+        "https://ui.ballmac.com/r/features-4.json",
+        "https://ui.ballmac.com/r/footer-1.json",
+        "https://ui.ballmac.com/r/header-1.json",
+        "https://ui.ballmac.com/r/hero-5.json",
+        "https://ui.ballmac.com/r/logo-cloud-1.json",
+        "https://ui.ballmac.com/r/pricing-1.json",
+        "https://ui.ballmac.com/r/testimonials-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/mac-app/mac-app-page.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/mac-app/mac-app-page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/mac-app/page.tsx",
+          "type": "registry:page",
+          "target": "app/mac-app/page.tsx"
+        }
+      ],
+      "docs": "The page is at /mac-app. Edit components/ballmac/templates/mac-app/mac-app-page.tsx to change the copy and sections.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "landing page",
+          "mac app",
+          "desktop",
+          "download"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Installs a working /mac-app route for a desktop app built from Ballmac blocks. Change copy through each block's props in mac-app-page.tsx; move the route by moving app/mac-app/page.tsx.",
+          "whenToUse": [
+            "Landing pages for Mac or desktop apps",
+            "Indie app launches with a free tier and a one-time Pro purchase"
+          ],
+          "whenNotToUse": [
+            "Web SaaS landing pages (use template-launch)"
+          ],
+          "composesWith": [
+            "template-launch",
+            "hero-4"
+          ],
+          "a11y": [],
+          "customization": [
+            "Header and footer brand",
+            "Pricing plans (one-time or subscription)",
+            "FAQ items",
+            "Hero screen: pass a screenshot via Hero5 `screen`"
+          ]
+        },
+        "examples": [
+          "template-mac-app-demo"
+        ],
+        "url": "https://ui.ballmac.com/components/template-mac-app"
+      }
+    },
+    {
+      "name": "template-mac-app-demo",
+      "type": "registry:example",
+      "title": "Mac app landing page: Mac app landing page",
+      "description": "Mac app landing page example of Mac app landing page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-mac-app.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-mac-app-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-mac-app-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-mac-app",
         "tier": "free"
       }
     },
@@ -4644,6 +8367,132 @@
       }
     },
     {
+      "name": "tilt-card",
+      "type": "registry:ui",
+      "title": "Tilt Card",
+      "description": "A card that tilts in 3D toward the pointer with spring smoothing and a moving glare. TiltCardLayer children float at their own depth for parallax. Keyboard focus shows a gentle tilt.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/tilt-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/tilt-card.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "card",
+          "3d",
+          "tilt",
+          "parallax",
+          "hover",
+          "glare",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "<TiltCard> is a card surface (rounded-xl, border, bg-card) that rotates toward the pointer; wrap parts in <TiltCardLayer depth={24}> to lift them off the surface. The card sets --tilt-x and --tilt-y (0%–100%) for custom foil or gradient effects.",
+          "whenToUse": [
+            "A single hero object: a membership or gift card, a product box, an app icon",
+            "Pricing or product cards on a landing page that should feel physical",
+            "Collectible or badge-style achievements"
+          ],
+          "whenNotToUse": [
+            "Dense grids of many cards (the motion competes; use spotlight-card)",
+            "Cards holding forms or text people need to read while moving the pointer"
+          ],
+          "composesWith": [
+            "spotlight-card",
+            "border-beam"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focusing the card (tabIndex) or a link inside it shows a gentle fixed tilt"
+            }
+          ],
+          "customization": [
+            "maxTilt in degrees (default 10), perspective in px (default 900), hoverScale (default 1.02)",
+            "glare, glareOpacity (default 0.28)",
+            "TiltCardLayer depth in px; parents of layers need transform-3d (the card already has it)",
+            "Clip backgrounds in an inner absolute div with overflow-hidden rounded-[inherit]; overflow-hidden on the card itself flattens the 3D layers",
+            "Reduced motion and touch input keep the card flat"
+          ]
+        },
+        "examples": [
+          "tilt-card-demo",
+          "tilt-card-product"
+        ],
+        "url": "https://ui.ballmac.com/components/tilt-card"
+      }
+    },
+    {
+      "name": "tilt-card-demo",
+      "type": "registry:example",
+      "title": "Tilt Card: Membership card",
+      "description": "Membership card example of Tilt Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tilt-card.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tilt-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tilt-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tilt-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tilt-card-product",
+      "type": "registry:example",
+      "title": "Tilt Card: Linked product card",
+      "description": "Linked product card example of Tilt Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tilt-card.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tilt-card-product.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tilt-card-product.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tilt-card",
+        "tier": "free"
+      }
+    },
+    {
       "name": "tool-call-card",
       "type": "registry:ui",
       "title": "Tool Call Card",
@@ -4882,6 +8731,169 @@
         "example": true,
         "of": "tooltip",
         "tier": "free"
+      }
+    },
+    {
+      "name": "word-rotate",
+      "type": "registry:ui",
+      "title": "Word Rotate",
+      "description": "Cycles one word of a sentence with a vertical slide and blur while its width springs to the next word, so the rest of the line reflows smoothly. Screen readers hear one stable sentence.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/word-rotate.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/word-rotate.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "text",
+          "headline",
+          "rotate",
+          "words",
+          "hero",
+          "typewriter",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Place <WordRotate words={[\"faster\", \"safer\"]} /> inside a heading or paragraph; it inherits the font. Style the words with wordClassName (gradients, highlights). The accessible text is srText or the words joined with commas; the animated part is aria-hidden and not a live region.",
+          "whenToUse": [
+            "Hero headlines that name several audiences or benefits",
+            "Short inline highlights in a tagline"
+          ],
+          "whenNotToUse": [
+            "Information people must read in full (rotating text is easy to miss)",
+            "Long phrases or more than about five options"
+          ],
+          "composesWith": [
+            "gradient-text",
+            "button"
+          ],
+          "a11y": [],
+          "customization": [
+            "interval in ms (default 2400), paused to hold the current word",
+            "wordClassName for color, gradient (bg-clip-text) or a highlight background",
+            "srText to set exactly what screen readers hear",
+            "Pauses while off-screen; reduced motion swaps words with a plain fade"
+          ]
+        },
+        "examples": [
+          "word-rotate-demo",
+          "word-rotate-inline"
+        ],
+        "url": "https://ui.ballmac.com/components/word-rotate"
+      }
+    },
+    {
+      "name": "word-rotate-demo",
+      "type": "registry:example",
+      "title": "Word Rotate: Hero headline",
+      "description": "Hero headline example of Word Rotate.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/word-rotate.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/word-rotate-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/word-rotate-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "word-rotate",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "word-rotate-inline",
+      "type": "registry:example",
+      "title": "Word Rotate: Inline highlight",
+      "description": "Inline highlight example of Word Rotate.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/word-rotate.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/word-rotate-inline.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/word-rotate-inline.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "word-rotate",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "color",
+      "type": "registry:lib",
+      "title": "Color",
+      "description": "Resolves theme tokens for canvas and WebGL effects: CSS variables to color strings or RGBA numbers, plus a theme-change observer so effects repaint in dark mode.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "files": [
+        {
+          "path": "registry/ballmac/lib/color.ts",
+          "type": "registry:lib",
+          "target": "@lib/ballmac/color.ts"
+        }
+      ],
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "color",
+          "canvas",
+          "webgl",
+          "theme"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-29",
+        "ai": {
+          "summary": "Use resolveCssColor(el, '--primary') for canvas fillStyle and cssColorToRgba for WebGL, and observeTheme to repaint when the theme changes.",
+          "whenToUse": [
+            "Canvas or WebGL components that must follow the theme tokens"
+          ],
+          "whenNotToUse": [
+            "DOM elements (use Tailwind token classes)"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Pass any CSS variable name, var() expression or CSS color"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/color"
       }
     },
     {

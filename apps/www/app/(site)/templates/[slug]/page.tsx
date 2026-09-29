@@ -26,7 +26,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
   const example = item.examples[0]
   const uses = item.registryDependencies.filter((d) => !d.startsWith("shadcn:")).map(getItem).filter((i) => !!i)
   return (
-    <div className="mx-auto max-w-[1320px] space-y-12 px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-[1440px] space-y-12 px-4 py-10 sm:px-6">
       <header className="space-y-4">
           <ItemJsonLd item={item} section={{ name: "Templates", path: "/templates" }} />
         <Eyebrow>

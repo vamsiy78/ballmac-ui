@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default async function TemplatesPage() {
   const templates = await Promise.all(getTemplates().map(async (t) => ({ ...t, Preview: t.examples[0] ? await loadExample(t.examples[0].name) : null })))
   return (
-    <div className="mx-auto max-w-[1320px] px-4 py-12 sm:px-6">
+    <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6">
       <header className="max-w-2xl space-y-4">
         <Eyebrow>{templates.length} {templates.length === 1 ? "template" : "templates"}</Eyebrow>
         <h1 className="text-4xl font-semibold tracking-[-0.03em]">Templates</h1>

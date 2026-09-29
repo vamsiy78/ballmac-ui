@@ -9,6 +9,10 @@ export const SCHEMA_VERSION = 1
 
 export const categories = [
   "primitives",
+  "macos",
+  "devices",
+  "backgrounds",
+  "text",
   "motion",
   "layout",
   "navigation",
@@ -99,6 +103,8 @@ export const itemMeta = z
     category: z.enum(categories),
     blockCategory: z.enum(blockCategories).optional(),
     tier: z.enum(["free", "pro"]).default("free"),
+    /** Showpiece items lead the catalog and home page. */
+    featured: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
     files: z.array(file).default([]),
     /** npm packages the installed files import, with a major range, e.g. "motion@^12". */

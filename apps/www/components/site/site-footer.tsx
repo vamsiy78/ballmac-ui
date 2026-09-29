@@ -5,7 +5,7 @@ import { Logo } from "@/components/site/logo"
 export function SiteFooter() {
   return (
     <footer className="mt-24 border-t">
-      <div className="text-muted-foreground mx-auto flex max-w-[1320px] flex-col gap-4 px-4 py-10 text-[13px] sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div className="text-muted-foreground mx-auto flex max-w-[1440px] flex-col gap-4 px-4 py-10 text-[13px] sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <Logo className="text-foreground" />
         <p>
           Free components are MIT licensed. Built by{" "}

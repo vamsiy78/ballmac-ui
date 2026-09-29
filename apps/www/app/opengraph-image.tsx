@@ -7,7 +7,7 @@ export const contentType = "image/png"
 export default function Image() {
   return ogImage({
     eyebrow: "shadcn registry · MCP",
-    title: "Components your AI agent can install.",
-    subtitle: "Accessible React and Tailwind components, blocks and templates in one design language.",
+    title: "Mac-grade components for the web.",
+    subtitle: "Docks, windows, globes, beams and AI interfaces. Free, accessible, one command away.",
   })
 }

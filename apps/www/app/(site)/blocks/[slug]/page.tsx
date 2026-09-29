@@ -26,7 +26,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
   const example = item.examples[0]
   const related = getBlocks().filter((b) => b.name !== item.name && b.blockCategory === item.blockCategory).slice(0, 4)
   return (
-    <div className="mx-auto max-w-[1320px] space-y-12 px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-[1440px] space-y-12 px-4 py-10 sm:px-6">
       <header className="space-y-4">
           <ItemJsonLd item={item} section={{ name: "Blocks", path: "/blocks" }} />
         <Eyebrow>

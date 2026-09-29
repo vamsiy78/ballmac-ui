@@ -5,7 +5,10 @@
   "description": "Ballmac UI registry source. These are the packages registry items may import; each item still declares its own dependencies in its meta.ts.",
   "dependencies": {
     "@ballmac-ui/metadata": "workspace:*",
+    "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
+    "cmdk": "^1.1.1",
+    "cobe": "^0.6.4",
     "clsx": "^2.1.1",
     "lucide-react": "^0.544.0",
     "motion": "^12.23.0",
@@ -17,6 +20,7 @@
   "devDependencies": {
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/canvas-confetti": "^1.9.0",
     "vitest": "^3.2.4",
     "@vitejs/plugin-react": "^5.0.0",
     "@testing-library/react": "^16.3.0",

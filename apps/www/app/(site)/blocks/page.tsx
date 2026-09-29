@@ -16,7 +16,7 @@ export default async function BlocksPage() {
   const blocks = await Promise.all(getBlocks().map(async (b) => ({ ...b, Preview: b.examples[0] ? await loadExample(b.examples[0].name) : null })))
   const groups = [...new Set(blocks.map((b) => b.blockCategory ?? "other"))]
   return (
-    <div className="mx-auto max-w-[1320px] px-4 py-12 sm:px-6">
+    <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6">
       <header className="max-w-2xl space-y-4">
         <Eyebrow>{blocks.length} blocks</Eyebrow>
         <h1 className="text-4xl font-semibold tracking-[-0.03em]">Blocks</h1>

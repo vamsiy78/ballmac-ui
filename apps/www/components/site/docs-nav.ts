@@ -21,4 +21,4 @@ export const docsNav = [
       { href: "/changelog", label: "Changelog" },
     ],
   },
-] as const
+]

@@ -3,6 +3,7 @@
 Ballmac UI (MIT) includes code adapted from the projects below. Their notices are preserved in each file header.
 
 - **Accordion** (`accordion`) is based on [shadcn/ui Accordion](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
+- **Animated Beam** (`animated-beam`) is based on [Magic UI Animated Beam](https://github.com/magicuidesign/magicui), MIT, Copyright (c) Magic UI.
 - **Avatar** (`avatar`) is based on [shadcn/ui Avatar](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Badge** (`badge`) is based on [shadcn/ui Badge](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Border Beam** (`border-beam`) is based on [Magic UI Border Beam](https://github.com/magicuidesign/magicui), MIT, Copyright (c) Magic UI.

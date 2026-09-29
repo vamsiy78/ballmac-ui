@@ -40,6 +40,38 @@ export function getRelated(item: SiteItem, limit = 4) {
   return [...new Map([...explicit, ...sameCategory].map((i) => [i.name, i])).values()].slice(0, limit)
 }
 
+/** Browse order: showpiece categories first. */
+export const categoryOrder = ["macos", "backgrounds", "text", "devices", "motion", "ai", "developer", "layout", "navigation", "primitives", "forms", "data-display", "feedback", "marketing", "saas", "dashboards"]
+const categoryRank = (c: string) => (categoryOrder.indexOf(c) + 1 || 99)
+
+/** Items from the latest release (updated on the same day as the newest item) count as new. */
+const newest = Math.max(...items.map((i) => Date.parse(i.updated)))
+export const isNew = (item: Pick<SiteItem, "updated">) => newest - Date.parse(item.updated) < 864e5
+
+export type NavLink = { href: string; label: string; badge?: "new" }
+export type NavGroup = { title: string; items: NavLink[] }
+
+/** Components grouped by category, in browse order, for the sidebar and prev/next links. */
+export function componentGroups(): NavGroup[] {
+  const groups = new Map<string, SiteItem[]>()
+  for (const i of getComponents()) groups.set(i.category, [...(groups.get(i.category) ?? []), i])
+  return [...groups.entries()]
+    .sort(([a], [b]) => categoryRank(a) - categoryRank(b))
+    .map(([cat, list]) => ({
+      title: categoryLabels[cat] ?? cat,
+      items: list
+        .sort((a, b) => Number(b.featured) - Number(a.featured) || a.title.localeCompare(b.title))
+        .map((i) => ({ href: `/components/${i.name}`, label: i.title, badge: isNew(i) ? ("new" as const) : undefined })),
+    }))
+}
+
+/** Previous and next component in sidebar order. */
+export function componentNeighbors(name: string) {
+  const flat = componentGroups().flatMap((g) => g.items)
+  const at = flat.findIndex((l) => l.href === `/components/${name}`)
+  return { prev: at > 0 ? flat[at - 1] : undefined, next: at >= 0 && at < flat.length - 1 ? flat[at + 1] : undefined }
+}
+
 /** Source embedded at build time (free items only). Pro items have no entry, so their code stays locked. */
 export function readSource(path: string) {
   return (sources as Record<string, string>)[path] ?? ""
@@ -97,6 +129,10 @@ export const blockCategoryLabels: Record<string, string> = {
 
 export const categoryLabels: Record<string, string> = {
   primitives: "Primitives",
+  macos: "macOS",
+  devices: "Device frames",
+  backgrounds: "Backgrounds",
+  text: "Text effects",
   motion: "Motion",
   layout: "Layout",
   navigation: "Navigation",

@@ -1,7 +1,9 @@
 import Link from "next/link"
 
 import { CommandMenu, type MenuEntry } from "@/components/site/command-menu"
+import { sidebarGroups } from "@/components/site/docs-shell"
 import { Logo } from "@/components/site/logo"
+import { MobileNav } from "@/components/site/mobile-nav"
 import { ThemeToggle } from "@/components/site/theme-toggle"
 import { blockCategoryLabels, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
 
@@ -32,11 +34,12 @@ export function SiteHeader() {
   ]
   return (
     <header className="bg-background/80 sticky top-0 z-40 border-b backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-[1320px] items-center gap-3 px-4 sm:gap-6 sm:px-6">
+      <div className="mx-auto flex h-14 max-w-[1440px] items-center gap-3 px-4 sm:gap-6 sm:px-6">
+        <MobileNav groups={sidebarGroups()} />
         <Link href="/" aria-label="Ballmac UI home" className="flex items-center rounded-md">
           <Logo />
         </Link>
-        <nav aria-label="Main" className="flex items-center sm:gap-1">
+        <nav aria-label="Main" className="hidden items-center sm:gap-1 md:flex">
           {nav.map((n) => (
             <Link key={n.href} href={n.href} className={`text-muted-foreground hover:text-foreground rounded-md px-1.5 py-1.5 text-[13px] font-medium transition-colors sm:px-2.5 ${n.wide ? "hidden lg:inline-block" : ""}`}>
               {n.label}
@@ -44,7 +47,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="ml-auto flex flex-1 items-center justify-end gap-2">
-          <div className="hidden w-full max-w-60 sm:block">
+          <div className="w-full max-w-60">
             <CommandMenu entries={entries} />
           </div>
           <a

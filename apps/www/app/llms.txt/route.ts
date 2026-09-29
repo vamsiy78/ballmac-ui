@@ -6,7 +6,7 @@ export function GET() {
   const lines = [
     "# Ballmac UI",
     "",
-    "> Accessible React + Tailwind v4 components in one design language, distributed as a shadcn registry (namespace @ballmac). Install with `npx shadcn@latest add @ballmac/<name>`; files go to components/ballmac.",
+    "> Mac-grade, accessible React + Tailwind v4 components (macOS interface pieces, backgrounds, text effects, device frames, AI interfaces) in one design language, distributed as a shadcn registry (namespace @ballmac). Install with `npx shadcn@latest add @ballmac/<name>`; files go to components/ballmac.",
     "",
     "## Docs",
     `- [Installation](${SITE_URL}/docs/installation): set up and add components`,
