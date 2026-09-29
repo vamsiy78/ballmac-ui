@@ -85,12 +85,17 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 - [x] axe: 0 serious/critical on all 67 previews and 17 site pages, light and dark
 - [x] axe after the showpiece collection: 0 serious/critical on 127 previews and 21 pages, light and dark
 - [x] Automated `pnpm a11y` with axe-core + Playwright: all 147 preview examples in light and dark (294 checks), 0 serious/critical after Wave 1 batch 1
+- [x] Wave 2 batch 1: all 167 preview examples in light and dark (334 checks), 0 serious/critical
 - [~] Lighthouse on ui.ballmac.com (mobile): accessibility, best practices, SEO 100 on every page tested. Performance: hero-1 100, button 98, catalog 95, **home 89** (simulated LCP 3.3 s from the JS of five live demos; next: lazy-hydrate the showcase)
 
 ## Components (MVP: 30)
 
 Wave 1 batch 1 (2026-09-29): alert, aspect-ratio, breadcrumb, card, empty,
 pagination, progress, separator, skeleton, spinner. Component count: 68.
+
+Wave 2 batch 1 (2026-09-30): file-dropzone, multi-select, tag-input,
+number-input, password-input, search-field, phone-input, color-picker, rating,
+time-picker. Component count: 78.
 
 | # | Item | Category | Status |
 |---|---|---|---|

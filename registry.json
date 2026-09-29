@@ -4274,6 +4274,117 @@
       }
     },
     {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color Picker",
+      "description": "A native color chooser paired with an editable hex field and a live swatch.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/color-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/color-picker.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "color",
+          "picker",
+          "hex"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A native color chooser paired with an editable hex field and a live swatch.",
+          "whenToUse": [
+            "Choose a custom brand or annotation color",
+            "Edit a color precisely by hexadecimal value"
+          ],
+          "whenNotToUse": [
+            "Use theme tokens for application chrome"
+          ],
+          "composesWith": [
+            "input"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves between color and text inputs"
+            },
+            {
+              "keys": "Enter",
+              "action": "Accepts a native color selection"
+            }
+          ],
+          "customization": [
+            "value / defaultValue and onValueChange",
+            "name: form field name"
+          ]
+        },
+        "examples": [
+          "color-picker-demo",
+          "color-picker-states"
+        ],
+        "url": "https://ui.ballmac.com/components/color-picker"
+      }
+    },
+    {
+      "name": "color-picker-demo",
+      "type": "registry:example",
+      "title": "Color Picker: Overview",
+      "description": "Overview example of Color Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/color-picker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/color-picker-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/color-picker-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "color-picker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "color-picker-states",
+      "type": "registry:example",
+      "title": "Color Picker: States and variants",
+      "description": "States and variants example of Color Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/color-picker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/color-picker-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/color-picker-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "color-picker",
+        "tier": "free"
+      }
+    },
+    {
       "name": "confetti",
       "type": "registry:ui",
       "title": "Confetti",
@@ -5037,6 +5148,124 @@
       "meta": {
         "example": true,
         "of": "empty",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "file-dropzone",
+      "type": "registry:ui",
+      "title": "File Dropzone",
+      "description": "Drop files or browse with native file selection, type and size validation, removable file rows, and live errors.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/file-dropzone.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/file-dropzone.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "upload",
+          "files",
+          "dropzone"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Drop files or browse with native file selection, type and size validation, removable file rows, and live errors.",
+          "whenToUse": [
+            "Upload a document or group of assets",
+            "Review selected files before submitting"
+          ],
+          "whenNotToUse": [
+            "Use input for a minimal single-file field"
+          ],
+          "composesWith": [
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter",
+              "action": "Opens the native file chooser"
+            },
+            {
+              "keys": "Drop",
+              "action": "Adds valid files"
+            },
+            {
+              "keys": "Tab / Enter",
+              "action": "Removes a selected file"
+            }
+          ],
+          "customization": [
+            "accept, maxFiles, maxSize, multiple",
+            "files / defaultFiles and onFilesChange"
+          ]
+        },
+        "examples": [
+          "file-dropzone-demo",
+          "file-dropzone-states"
+        ],
+        "url": "https://ui.ballmac.com/components/file-dropzone"
+      }
+    },
+    {
+      "name": "file-dropzone-demo",
+      "type": "registry:example",
+      "title": "File Dropzone: Overview",
+      "description": "Overview example of File Dropzone.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/file-dropzone.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/file-dropzone-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/file-dropzone-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "file-dropzone",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "file-dropzone-states",
+      "type": "registry:example",
+      "title": "File Dropzone: States and variants",
+      "description": "States and variants example of File Dropzone.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/file-dropzone.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/file-dropzone-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/file-dropzone-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "file-dropzone",
         "tier": "free"
       }
     },
@@ -6648,6 +6877,125 @@
       }
     },
     {
+      "name": "multi-select",
+      "type": "registry:ui",
+      "title": "Multi Select",
+      "description": "Search and select several options in a Radix popover with native checkboxes and a selection cap.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/multi-select.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/multi-select.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "multi-select",
+          "filter",
+          "checkbox"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Search and select several options in a Radix popover with native checkboxes and a selection cap.",
+          "whenToUse": [
+            "Choose multiple teammates or categories",
+            "Filter a list by several states"
+          ],
+          "whenNotToUse": [
+            "Use select when only one option is allowed"
+          ],
+          "composesWith": [
+            "select"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Opens the option popover"
+            },
+            {
+              "keys": "Tab / Space",
+              "action": "Moves to and toggles native checkboxes"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the popover"
+            }
+          ],
+          "customization": [
+            "options, maxSelected",
+            "value / defaultValue and onValueChange"
+          ]
+        },
+        "examples": [
+          "multi-select-demo",
+          "multi-select-states"
+        ],
+        "url": "https://ui.ballmac.com/components/multi-select"
+      }
+    },
+    {
+      "name": "multi-select-demo",
+      "type": "registry:example",
+      "title": "Multi Select: Overview",
+      "description": "Overview example of Multi Select.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/multi-select.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/multi-select-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/multi-select-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "multi-select",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "multi-select-states",
+      "type": "registry:example",
+      "title": "Multi Select: States and variants",
+      "description": "States and variants example of Multi Select.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/multi-select.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/multi-select-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/multi-select-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "multi-select",
+        "tier": "free"
+      }
+    },
+    {
       "name": "notification-stack",
       "type": "registry:ui",
       "title": "Notification Stack",
@@ -6750,6 +7098,120 @@
       "meta": {
         "example": true,
         "of": "notification-stack",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "number-input",
+      "type": "registry:ui",
+      "title": "Number Input",
+      "description": "A bounded numeric field with native spinbutton semantics, step buttons, and controlled or uncontrolled state.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/number-input.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/number-input.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "number",
+          "stepper",
+          "spinbutton"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A bounded numeric field with native spinbutton semantics, step buttons, and controlled or uncontrolled state.",
+          "whenToUse": [
+            "Choose a quantity or bounded count",
+            "Adjust a value precisely using keys or buttons"
+          ],
+          "whenNotToUse": [
+            "Use a slider when approximate adjustment is sufficient"
+          ],
+          "composesWith": [
+            "input"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Up / Down",
+              "action": "Changes the native numeric value"
+            },
+            {
+              "keys": "Tab / Enter",
+              "action": "Operates the step buttons"
+            }
+          ],
+          "customization": [
+            "min, max, step",
+            "value / defaultValue and onValueChange"
+          ]
+        },
+        "examples": [
+          "number-input-demo",
+          "number-input-states"
+        ],
+        "url": "https://ui.ballmac.com/components/number-input"
+      }
+    },
+    {
+      "name": "number-input-demo",
+      "type": "registry:example",
+      "title": "Number Input: Overview",
+      "description": "Overview example of Number Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/number-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/number-input-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/number-input-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "number-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "number-input-states",
+      "type": "registry:example",
+      "title": "Number Input: States and variants",
+      "description": "States and variants example of Number Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/number-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/number-input-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/number-input-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "number-input",
         "tier": "free"
       }
     },
@@ -7209,6 +7671,116 @@
       }
     },
     {
+      "name": "password-input",
+      "type": "registry:ui",
+      "title": "Password Input",
+      "description": "A password field with a visibility toggle and a four-step strength guide that explains how to improve the entry.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/password-input.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/password-input.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "password",
+          "security",
+          "strength"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A password field with a visibility toggle and a four-step strength guide that explains how to improve the entry.",
+          "whenToUse": [
+            "Create or change a password",
+            "Give immediate guidance while typing"
+          ],
+          "whenNotToUse": [
+            "Use input for a standard text field"
+          ],
+          "composesWith": [
+            "input"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Space",
+              "action": "Toggles password visibility"
+            }
+          ],
+          "customization": [
+            "showStrength",
+            "value / defaultValue and onValueChange"
+          ]
+        },
+        "examples": [
+          "password-input-demo",
+          "password-input-states"
+        ],
+        "url": "https://ui.ballmac.com/components/password-input"
+      }
+    },
+    {
+      "name": "password-input-demo",
+      "type": "registry:example",
+      "title": "Password Input: Overview",
+      "description": "Overview example of Password Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/password-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/password-input-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/password-input-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "password-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "password-input-states",
+      "type": "registry:example",
+      "title": "Password Input: States and variants",
+      "description": "States and variants example of Password Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/password-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/password-input-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/password-input-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "password-input",
+        "tier": "free"
+      }
+    },
+    {
       "name": "phone-frame",
       "type": "registry:ui",
       "title": "Phone Frame",
@@ -7325,6 +7897,117 @@
       "meta": {
         "example": true,
         "of": "phone-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "phone-input",
+      "type": "registry:ui",
+      "title": "Phone Input",
+      "description": "A native dialing-code selector paired with a telephone field that preserves the user’s formatting.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/phone-input.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/phone-input.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "phone",
+          "telephone",
+          "country"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A native dialing-code selector paired with a telephone field that preserves the user’s formatting.",
+          "whenToUse": [
+            "Collect a contact number with a dialing prefix",
+            "Edit a national number without forced formatting"
+          ],
+          "whenNotToUse": [
+            "Use input type tel when a country selector is unnecessary"
+          ],
+          "composesWith": [
+            "input"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Up / Down",
+              "action": "Changes the native dialing-code selection"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves to the telephone field"
+            }
+          ],
+          "customization": [
+            "countries, countryCodeName",
+            "value / defaultValue and onValueChange"
+          ]
+        },
+        "examples": [
+          "phone-input-demo",
+          "phone-input-states"
+        ],
+        "url": "https://ui.ballmac.com/components/phone-input"
+      }
+    },
+    {
+      "name": "phone-input-demo",
+      "type": "registry:example",
+      "title": "Phone Input: Overview",
+      "description": "Overview example of Phone Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/phone-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/phone-input-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/phone-input-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "phone-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "phone-input-states",
+      "type": "registry:example",
+      "title": "Phone Input: States and variants",
+      "description": "States and variants example of Phone Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/phone-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/phone-input-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/phone-input-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "phone-input",
         "tier": "free"
       }
     },
@@ -7571,6 +8254,120 @@
       }
     },
     {
+      "name": "rating",
+      "type": "registry:ui",
+      "title": "Rating",
+      "description": "A native radio-group star rating with keyboard arrows, value text, and a clear action.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/rating.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/rating.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "rating",
+          "stars",
+          "feedback"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A native radio-group star rating with keyboard arrows, value text, and a clear action.",
+          "whenToUse": [
+            "Collect a quick score or satisfaction rating",
+            "Display a read-only score beside content"
+          ],
+          "whenNotToUse": [
+            "Use a text field for detailed feedback"
+          ],
+          "composesWith": [
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right",
+              "action": "Changes the selected native radio"
+            },
+            {
+              "keys": "Tab / Space",
+              "action": "Focuses and activates Clear"
+            }
+          ],
+          "customization": [
+            "max, showValue, readOnly",
+            "value / defaultValue and onValueChange"
+          ]
+        },
+        "examples": [
+          "rating-demo",
+          "rating-states"
+        ],
+        "url": "https://ui.ballmac.com/components/rating"
+      }
+    },
+    {
+      "name": "rating-demo",
+      "type": "registry:example",
+      "title": "Rating: Overview",
+      "description": "Overview example of Rating.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/rating.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/rating-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/rating-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "rating",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "rating-states",
+      "type": "registry:example",
+      "title": "Rating: States and variants",
+      "description": "States and variants example of Rating.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/rating.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/rating-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/rating-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "rating",
+        "tier": "free"
+      }
+    },
+    {
       "name": "reasoning-disclosure",
       "type": "registry:ui",
       "title": "Reasoning Disclosure",
@@ -7784,6 +8581,120 @@
       "meta": {
         "example": true,
         "of": "scramble-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "search-field",
+      "type": "registry:ui",
+      "title": "Search Field",
+      "description": "A compact search control with a clear action, Enter callback, and preserved keyboard focus.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/search-field.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/search-field.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "search",
+          "filter",
+          "input"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A compact search control with a clear action, Enter callback, and preserved keyboard focus.",
+          "whenToUse": [
+            "Filter a list or catalog",
+            "Submit a query from a toolbar"
+          ],
+          "whenNotToUse": [
+            "Use spotlight-search for site-wide command search"
+          ],
+          "composesWith": [
+            "input"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter",
+              "action": "Submits the current query"
+            },
+            {
+              "keys": "Tab / Space",
+              "action": "Clears the query and returns focus"
+            }
+          ],
+          "customization": [
+            "onSearch",
+            "value / defaultValue and onValueChange"
+          ]
+        },
+        "examples": [
+          "search-field-demo",
+          "search-field-states"
+        ],
+        "url": "https://ui.ballmac.com/components/search-field"
+      }
+    },
+    {
+      "name": "search-field-demo",
+      "type": "registry:example",
+      "title": "Search Field: Overview",
+      "description": "Overview example of Search Field.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/search-field.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/search-field-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/search-field-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "search-field",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "search-field-states",
+      "type": "registry:example",
+      "title": "Search Field: States and variants",
+      "description": "States and variants example of Search Field.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/search-field.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/search-field-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/search-field-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "search-field",
         "tier": "free"
       }
     },
@@ -8958,6 +9869,124 @@
       }
     },
     {
+      "name": "tag-input",
+      "type": "registry:ui",
+      "title": "Tag Input",
+      "description": "Enter, paste, and remove text tags with duplicate prevention, limits, and keyboard shortcuts.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/tag-input.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/tag-input.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "tags",
+          "chips",
+          "text-input"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Enter, paste, and remove text tags with duplicate prevention, limits, and keyboard shortcuts.",
+          "whenToUse": [
+            "Enter free-form labels or skills",
+            "Edit a small set of keywords"
+          ],
+          "whenNotToUse": [
+            "Use multi-select for a fixed set of options"
+          ],
+          "composesWith": [
+            "input"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / comma",
+              "action": "Adds the typed tag"
+            },
+            {
+              "keys": "Backspace",
+              "action": "Removes the last tag when empty"
+            },
+            {
+              "keys": "Tab / Enter",
+              "action": "Focuses and activates remove buttons"
+            }
+          ],
+          "customization": [
+            "maxTags, maxLength",
+            "value / defaultValue and onValueChange"
+          ]
+        },
+        "examples": [
+          "tag-input-demo",
+          "tag-input-states"
+        ],
+        "url": "https://ui.ballmac.com/components/tag-input"
+      }
+    },
+    {
+      "name": "tag-input-demo",
+      "type": "registry:example",
+      "title": "Tag Input: Overview",
+      "description": "Overview example of Tag Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tag-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tag-input-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tag-input-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tag-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tag-input-states",
+      "type": "registry:example",
+      "title": "Tag Input: States and variants",
+      "description": "States and variants example of Tag Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tag-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tag-input-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tag-input-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tag-input",
+        "tier": "free"
+      }
+    },
+    {
       "name": "template-launch",
       "type": "registry:block",
       "title": "Launch page",
@@ -9641,6 +10670,120 @@
       "meta": {
         "example": true,
         "of": "tilt-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "time-picker",
+      "type": "registry:ui",
+      "title": "Time Picker",
+      "description": "A native time field with optional quick-pick presets and controlled or uncontrolled state.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/time-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/time-picker.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "time",
+          "schedule",
+          "input"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A native time field with optional quick-pick presets and controlled or uncontrolled state.",
+          "whenToUse": [
+            "Schedule an appointment or reminder",
+            "Offer common meeting times as shortcuts"
+          ],
+          "whenNotToUse": [
+            "Use date-range-picker for a period across days"
+          ],
+          "composesWith": [
+            "input"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Edits the native time field"
+            },
+            {
+              "keys": "Tab / Enter",
+              "action": "Activates a time preset"
+            }
+          ],
+          "customization": [
+            "presets",
+            "value / defaultValue and onValueChange"
+          ]
+        },
+        "examples": [
+          "time-picker-demo",
+          "time-picker-states"
+        ],
+        "url": "https://ui.ballmac.com/components/time-picker"
+      }
+    },
+    {
+      "name": "time-picker-demo",
+      "type": "registry:example",
+      "title": "Time Picker: Overview",
+      "description": "Overview example of Time Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/time-picker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/time-picker-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/time-picker-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "time-picker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "time-picker-states",
+      "type": "registry:example",
+      "title": "Time Picker: States and variants",
+      "description": "States and variants example of Time Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/time-picker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/time-picker-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/time-picker-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "time-picker",
         "tier": "free"
       }
     },

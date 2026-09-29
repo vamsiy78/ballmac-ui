@@ -5,7 +5,7 @@ Written 2026-09-29 for the next agent (Codex). Read this, then `AUTHORING.md` (t
 ## 1. Where things stand
 
 - **Product:** a shadcn-compatible registry (`@ballmac`, `https://ui.ballmac.com/r/{name}.json`) plus the docs site in `apps/www` (Next.js 16, React 19, Tailwind v4, Motion 12, Radix via `radix-ui`).
-- **Catalog today:** 68 components, 19 blocks, 2 templates. The original 58 are listed in section 6; Wave 1 batch 1 adds ten more.
+- **Catalog today:** 78 components, 19 blocks, 2 templates. The original 58 are listed in section 6; Wave 1 batch 1 and Wave 2 batch 1 add ten each.
 - **Site:** redesigned; the catalog has Gallery / List / Index views and Quick Look; sidebar component categories are collapsible, so the site scales to 200+ items without changes.
 - **Branches:** `preprod` is where work lands (Vercel preview, behind Vercel login). `main` is production, which the owner has deliberately disabled. **Never push to `main`** unless the owner asks.
 - **Uncommitted/unpushed at handover:** see `git status` and `git log origin/preprod..preprod`. Anything local was committed by the previous agent and still needs a push to `preprod` when the owner agrees.
@@ -68,7 +68,7 @@ SMOKE_BASE=radix npx -y pnpm@10 smoke                 # same with Radix
 
 All must pass. Then commit on `preprod` with a descriptive message listing the items, and push to `origin preprod`.
 
-Accessibility: run axe-core (serious + critical must be 0) on `/preview/<example>` for new items in light and dark, and Lighthouse on `/components` after big batches. There is no axe script in the repo yet; adding `@axe-core/playwright` and a `scripts/a11y.ts` that visits every `/preview/*` is a good first task.
+Accessibility: run `npx -y pnpm@10 a11y` (axe-core; serious + critical must be 0) on every `/preview/<example>` in light and dark, and Lighthouse on `/components` after big batches.
 
 ## 6. Roadmap to 200+
 
@@ -82,6 +82,8 @@ alert, alert-dialog, aspect-ratio, breadcrumb, button-group, calendar, card, car
 Wave 1 batch 1 complete: alert, aspect-ratio, breadcrumb, card, empty, pagination, progress, separator, skeleton, spinner. Research and design decisions: `research/wave-1-batch-1.md`. Automated preview axe check: `pnpm a11y` after `next build`.
 
 **Wave 2: forms beyond shadcn (≈15, `forms`).** file-dropzone, multi-select, tag-input, number-input, password-input (strength meter), search-field, phone-input, color-picker, rating, date-range-picker, time-picker, currency-input, stepper-form (wizard), slider-range, signature-pad.
+
+Wave 2 batch 1 complete: file-dropzone, multi-select, tag-input, number-input, password-input, search-field, phone-input, color-picker, rating, time-picker. Research and design decisions: `research/wave-2-batch-1.md`. Remaining Wave 2: date-range-picker, currency-input, stepper-form, slider-range, signature-pad.
 
 **Wave 3: data display (≈16, `data-display`).** stat-card, kpi-row, timeline, tree-view, file-tree, json-viewer, diff-viewer, kanban-board, contribution-graph, sparkline, progress-ring, description-list, activity-feed, comparison-table, avatar-stack, calendar-agenda.
 
