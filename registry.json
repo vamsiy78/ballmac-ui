@@ -515,6 +515,130 @@
       }
     },
     {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "Focus-managed confirmation for consequential actions, with a clear cancel path, optional media, and a token-based destructive action.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/alert-dialog.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "confirmation",
+          "modal",
+          "destructive",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Ask for explicit confirmation before a consequential action; cancel remains the safe keyboard path.",
+          "whenToUse": [
+            "Delete or revoke something permanent",
+            "Confirm an action with a material consequence"
+          ],
+          "whenNotToUse": [
+            "Show information without requiring a choice; use dialog",
+            "Confirm a low-risk routine action"
+          ],
+          "composesWith": [
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Shift+Tab",
+              "action": "Moves within the modal choices"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Activates the focused choice"
+            },
+            {
+              "keys": "Escape",
+              "action": "Cancels when the dialog permits dismissal"
+            }
+          ],
+          "customization": [
+            "size: default | sm",
+            "destructive action state",
+            "controlled open state"
+          ]
+        },
+        "examples": [
+          "alert-dialog-demo",
+          "alert-dialog-states"
+        ],
+        "url": "https://ui.ballmac.com/components/alert-dialog"
+      }
+    },
+    {
+      "name": "alert-dialog-demo",
+      "type": "registry:example",
+      "title": "Alert Dialog: Remove a project",
+      "description": "Remove a project example of Alert Dialog.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/alert-dialog.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/alert-dialog-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/alert-dialog-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "alert-dialog",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "alert-dialog-states",
+      "type": "registry:example",
+      "title": "Alert Dialog: Confirmation styles",
+      "description": "Confirmation styles example of Alert Dialog.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/alert-dialog.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/alert-dialog-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/alert-dialog-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "alert-dialog",
+        "tier": "free"
+      }
+    },
+    {
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
@@ -4059,6 +4183,124 @@
       }
     },
     {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Join adjacent actions into one compact control surface while retaining each button's visible keyboard focus and accessible name.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/button-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/button-group.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "buttons",
+          "actions",
+          "toolbar"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Groups closely related actions without turning them into a selection widget.",
+          "whenToUse": [
+            "Adjacent document or editor actions",
+            "Compact controls with one shared boundary"
+          ],
+          "whenNotToUse": [
+            "Mutually exclusive options; use toggle-group",
+            "Unrelated actions"
+          ],
+          "composesWith": [
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves between each button in document order"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Activates the focused button"
+            }
+          ],
+          "customization": [
+            "orientation: horizontal | vertical",
+            "button and text parts"
+          ]
+        },
+        "examples": [
+          "button-group-demo",
+          "button-group-states"
+        ],
+        "url": "https://ui.ballmac.com/components/button-group"
+      }
+    },
+    {
+      "name": "button-group-demo",
+      "type": "registry:example",
+      "title": "Button Group: Document actions",
+      "description": "Document actions example of Button Group.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/button-group.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/button-group-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/button-group-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "button-group",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "button-group-states",
+      "type": "registry:example",
+      "title": "Button Group: Orientations",
+      "description": "Orientations example of Button Group.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/button-group.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/button-group-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/button-group-states.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "button-group",
+        "tier": "free"
+      }
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
@@ -4811,6 +5053,125 @@
       "meta": {
         "example": true,
         "of": "code-block",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "A single disclosure panel with a generous trigger, visible open state, and reduced-motion-aware content transition.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/collapsible.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/collapsible.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "disclosure",
+          "details",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Reveals one optional section of information with a keyboard-accessible disclosure trigger.",
+          "whenToUse": [
+            "Advanced settings",
+            "Supporting detail in a dense card"
+          ],
+          "whenNotToUse": [
+            "Several related disclosures; use accordion",
+            "Primary content that should always be visible"
+          ],
+          "composesWith": [
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Opens or closes the disclosure"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves into visible content"
+            }
+          ],
+          "customization": [
+            "controlled or uncontrolled open state",
+            "optional trigger chevron"
+          ]
+        },
+        "examples": [
+          "collapsible-demo",
+          "collapsible-states"
+        ],
+        "url": "https://ui.ballmac.com/components/collapsible"
+      }
+    },
+    {
+      "name": "collapsible-demo",
+      "type": "registry:example",
+      "title": "Collapsible: Release details",
+      "description": "Release details example of Collapsible.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/collapsible.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/collapsible-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/collapsible-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "collapsible",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "collapsible-states",
+      "type": "registry:example",
+      "title": "Collapsible: Controlled disclosure",
+      "description": "Controlled disclosure example of Collapsible.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/collapsible.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/collapsible-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/collapsible-states.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "collapsible",
         "tier": "free"
       }
     },
@@ -7241,6 +7602,125 @@
       "meta": {
         "example": true,
         "of": "gradient-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "A compact preview of a linked resource that appears on hover or keyboard focus without hiding essential information.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/hover-card.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "preview",
+          "link",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Adds optional context to a link for pointer and keyboard users; the link remains useful without the preview.",
+          "whenToUse": [
+            "Preview a project or profile without navigating",
+            "Show supplementary link metadata"
+          ],
+          "whenNotToUse": [
+            "Interactive actions inside a panel; use popover",
+            "Information required to complete a task"
+          ],
+          "composesWith": [
+            "avatar",
+            "badge"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the linked trigger and opens its preview"
+            },
+            {
+              "keys": "Escape",
+              "action": "Dismisses the preview"
+            }
+          ],
+          "customization": [
+            "side and alignment",
+            "open and close delays"
+          ]
+        },
+        "examples": [
+          "hover-card-demo",
+          "hover-card-states"
+        ],
+        "url": "https://ui.ballmac.com/components/hover-card"
+      }
+    },
+    {
+      "name": "hover-card-demo",
+      "type": "registry:example",
+      "title": "Hover Card: Project preview",
+      "description": "Project preview example of Hover Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hover-card.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hover-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hover-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hover-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hover-card-states",
+      "type": "registry:example",
+      "title": "Hover Card: People preview",
+      "description": "People preview example of Hover Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hover-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hover-card-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hover-card-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hover-card",
         "tier": "free"
       }
     },
@@ -10059,6 +10539,132 @@
       }
     },
     {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "A focus-managed compact surface for controls or details, with collision handling, mobile-safe width, and optional close action.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/popover.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/popover.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "overlay",
+          "panel",
+          "editor",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Displays a small interactive panel anchored to a control, with managed focus and Escape dismissal.",
+          "whenToUse": [
+            "Inline editors and compact preferences",
+            "Actions needing more room than a menu"
+          ],
+          "whenNotToUse": [
+            "Long or critical forms; use dialog",
+            "Noninteractive link previews; use hover-card"
+          ],
+          "composesWith": [
+            "button",
+            "input"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Opens the panel from its trigger"
+            },
+            {
+              "keys": "Tab / Shift+Tab",
+              "action": "Moves among panel controls"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes and returns focus to the trigger"
+            }
+          ],
+          "customization": [
+            "alignment and side offset",
+            "optional close button",
+            "controlled open state"
+          ]
+        },
+        "examples": [
+          "popover-demo",
+          "popover-states"
+        ],
+        "url": "https://ui.ballmac.com/components/popover"
+      }
+    },
+    {
+      "name": "popover-demo",
+      "type": "registry:example",
+      "title": "Popover: Share settings",
+      "description": "Share settings example of Popover.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/popover.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/popover-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/popover-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "popover",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "popover-states",
+      "type": "registry:example",
+      "title": "Popover: Profile details",
+      "description": "Profile details example of Popover.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/popover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/popover-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/popover-states.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "popover",
+        "tier": "free"
+      }
+    },
+    {
       "name": "progress-ring",
       "type": "registry:ui",
       "title": "Progress Ring",
@@ -10517,6 +11123,128 @@
       }
     },
     {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Single-choice radios with optional full-card labels, descriptions, and large pointer targets around Radix keyboard navigation.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/radio-group.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "choice",
+          "form",
+          "radio",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Choose exactly one option in a form; use descriptive card labels when choices need context.",
+          "whenToUse": [
+            "A few mutually exclusive preferences",
+            "Pricing or delivery options with explanations"
+          ],
+          "whenNotToUse": [
+            "Many options; use select",
+            "Multiple selections; use checkbox or toggle-group"
+          ],
+          "composesWith": [
+            "label"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Enters the radio group"
+            },
+            {
+              "keys": "Arrow keys",
+              "action": "Moves and selects among enabled choices"
+            },
+            {
+              "keys": "Space",
+              "action": "Selects the focused choice"
+            }
+          ],
+          "customization": [
+            "controlled or uncontrolled value",
+            "card or compact radio labels",
+            "disabled options"
+          ]
+        },
+        "examples": [
+          "radio-group-demo",
+          "radio-group-states"
+        ],
+        "url": "https://ui.ballmac.com/components/radio-group"
+      }
+    },
+    {
+      "name": "radio-group-demo",
+      "type": "registry:example",
+      "title": "Radio Group: Delivery frequency",
+      "description": "Delivery frequency example of Radio Group.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/radio-group.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/radio-group-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/radio-group-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "radio-group",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "radio-group-states",
+      "type": "registry:example",
+      "title": "Radio Group: Compact choices",
+      "description": "Compact choices example of Radio Group.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/radio-group.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/radio-group-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/radio-group-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "radio-group",
+        "tier": "free"
+      }
+    },
+    {
       "name": "rating",
       "type": "registry:ui",
       "title": "Rating",
@@ -10844,6 +11572,126 @@
       "meta": {
         "example": true,
         "of": "scramble-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "A focusable, named scroll region with theme-aware custom thumb and native scrolling behavior for long lists and documents.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/scroll-area.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "scroll",
+          "overflow",
+          "region",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Constrains long content in an accessible keyboard-scrollable region without changing native scroll behavior.",
+          "whenToUse": [
+            "Activity feeds and long lists",
+            "Constrained side panels"
+          ],
+          "whenNotToUse": [
+            "Short content that can fit naturally",
+            "The main page scroll"
+          ],
+          "composesWith": [
+            "activity-feed"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the named scroll region"
+            },
+            {
+              "keys": "Arrow keys / Page Up / Page Down",
+              "action": "Scrolls the focused region"
+            }
+          ],
+          "customization": [
+            "vertical and horizontal scrollbar",
+            "accessible label",
+            "viewport height"
+          ]
+        },
+        "examples": [
+          "scroll-area-demo",
+          "scroll-area-states"
+        ],
+        "url": "https://ui.ballmac.com/components/scroll-area"
+      }
+    },
+    {
+      "name": "scroll-area-demo",
+      "type": "registry:example",
+      "title": "Scroll Area: Recent activity",
+      "description": "Recent activity example of Scroll Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/scroll-area.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/scroll-area-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/scroll-area-demo.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "scroll-area",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "scroll-area-states",
+      "type": "registry:example",
+      "title": "Scroll Area: Horizontal gallery",
+      "description": "Horizontal gallery example of Scroll Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/scroll-area.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/scroll-area-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/scroll-area-states.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "scroll-area",
         "tier": "free"
       }
     },
@@ -12889,6 +13737,131 @@
       }
     },
     {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Keyboard-navigable content tabs with quiet pill or underline styling and a clear selected state in both themes.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/tabs.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "tabs",
+          "views",
+          "navigation",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Switches between a small number of peer views while retaining Radix tablist semantics and roving focus.",
+          "whenToUse": [
+            "Related panels within one page",
+            "Compact dashboards and detail views"
+          ],
+          "whenNotToUse": [
+            "Steps in a workflow; use progress-steps",
+            "Site navigation to separate pages"
+          ],
+          "composesWith": [
+            "card",
+            "badge"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the active tab"
+            },
+            {
+              "keys": "Arrow keys / Home / End",
+              "action": "Moves among tabs"
+            },
+            {
+              "keys": "Tab again",
+              "action": "Moves into the active panel"
+            }
+          ],
+          "customization": [
+            "variant: pills | underline",
+            "controlled or uncontrolled value",
+            "orientation"
+          ]
+        },
+        "examples": [
+          "tabs-demo",
+          "tabs-states"
+        ],
+        "url": "https://ui.ballmac.com/components/tabs"
+      }
+    },
+    {
+      "name": "tabs-demo",
+      "type": "registry:example",
+      "title": "Tabs: Workspace dashboard",
+      "description": "Workspace dashboard example of Tabs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tabs.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tabs-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tabs-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tabs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tabs-states",
+      "type": "registry:example",
+      "title": "Tabs: Underline tabs",
+      "description": "Underline tabs example of Tabs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tabs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tabs-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tabs-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tabs",
+        "tier": "free"
+      }
+    },
+    {
       "name": "tag-input",
       "type": "registry:ui",
       "title": "Tag Input",
@@ -14020,6 +14993,256 @@
       "meta": {
         "example": true,
         "of": "toast-stack",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "A compact roving-focus selection group for one or several pressed options, with clear states and mobile-friendly sizing.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/toggle-group.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "toggle",
+          "selection",
+          "toolbar",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Lets users choose one or multiple options from a short row while Radix handles roving focus.",
+          "whenToUse": [
+            "View mode or density selector",
+            "Formatting options that can coexist"
+          ],
+          "whenNotToUse": [
+            "Unrelated actions; use button-group",
+            "A long list of options; use select"
+          ],
+          "composesWith": [
+            "button-group"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Enters or exits the group"
+            },
+            {
+              "keys": "Arrow keys",
+              "action": "Moves focus between items"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Selects the focused item"
+            }
+          ],
+          "customization": [
+            "type: single | multiple",
+            "variant: default | outline",
+            "size: sm | default | lg"
+          ]
+        },
+        "examples": [
+          "toggle-group-demo",
+          "toggle-group-states"
+        ],
+        "url": "https://ui.ballmac.com/components/toggle-group"
+      }
+    },
+    {
+      "name": "toggle-group-demo",
+      "type": "registry:example",
+      "title": "Toggle Group: View density",
+      "description": "View density example of Toggle Group.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/toggle-group.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/toggle-group-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/toggle-group-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "toggle-group",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "toggle-group-states",
+      "type": "registry:example",
+      "title": "Toggle Group: Multiple filters",
+      "description": "Multiple filters example of Toggle Group.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/toggle-group.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/toggle-group-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/toggle-group-states.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "toggle-group",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "A compact two-state action with distinct pressed styling, visible keyboard focus, and outline or filled variants.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/toggle.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/toggle.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "toggle",
+          "pressed",
+          "toolbar",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "An on/off action such as pinning or formatting that communicates its pressed state to assistive technology.",
+          "whenToUse": [
+            "A toolbar action with persistent pressed state",
+            "Favorite or pin control"
+          ],
+          "whenNotToUse": [
+            "Boolean form field; use switch",
+            "Multiple related choices; use toggle-group"
+          ],
+          "composesWith": [
+            "button-group"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the toggle"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Changes pressed state"
+            }
+          ],
+          "customization": [
+            "variant: default | outline",
+            "size: sm | default | lg",
+            "controlled or uncontrolled pressed state"
+          ]
+        },
+        "examples": [
+          "toggle-demo",
+          "toggle-states"
+        ],
+        "url": "https://ui.ballmac.com/components/toggle"
+      }
+    },
+    {
+      "name": "toggle-demo",
+      "type": "registry:example",
+      "title": "Toggle: Pin a workspace",
+      "description": "Pin a workspace example of Toggle.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/toggle.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/toggle-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/toggle-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "toggle",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "toggle-states",
+      "type": "registry:example",
+      "title": "Toggle: Sizes and states",
+      "description": "Sizes and states example of Toggle.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/toggle.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/toggle-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/toggle-states.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "toggle",
         "tier": "free"
       }
     },

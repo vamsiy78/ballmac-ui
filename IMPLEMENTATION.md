@@ -88,6 +88,7 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 - [x] Wave 2 batch 1: all 167 preview examples in light and dark (334 checks), 0 serious/critical
 - [x] Wave 2 batch 2: all 177 preview examples in light and dark (354 checks), 0 serious/critical
 - [x] Wave 3: all 209 preview examples in light and dark (418 checks), 0 serious/critical; 52 test files / 121 tests; Base UI and Radix install smoke passed for all 332 registry entries
+- [x] Wave 1 batch 2: all 249 preview examples in light and dark (498 checks), 0 serious/critical; 66 test files / 147 tests; Base UI and Radix install smoke passed for all 392 registry entries
 - [x] Wave 3 catalog Lighthouse (local mobile): accessibility, best practices, SEO 100; performance 85 (LCP 4.2 s)
 - [~] Lighthouse on ui.ballmac.com (mobile): accessibility, best practices, SEO 100 on every page tested. Performance: hero-1 100, button 98, catalog 95, **home 89** (simulated LCP 3.3 s from the JS of five live demos; next: lazy-hydrate the showcase)
 
@@ -118,6 +119,15 @@ mobile overflow and browser-error checks in both themes; representative
 screenshots were reviewed. See `research/wave-4-feedback.md` for competitor
 patterns and design improvements. Lighthouse 13.5.0 on `/components` scored
 85 performance and 100 each for accessibility, best practices, and SEO.
+
+Wave 1 batch 2 (2026-09-30): alert-dialog, button-group, collapsible,
+hover-card, popover, radio-group, scroll-area, tabs, toggle, toggle-group.
+Component count: 119. Registry validation passed for 392 entries; 147 tests,
+lint, typecheck, production build, and Base UI/Radix install builds passed.
+Axe scanned 249 previews in both themes (498 scans) with zero serious/critical
+findings. Mobile preview and component page checks passed without overflow or
+console errors. Lighthouse catalog scores: performance 83, accessibility 100,
+best practices 100, SEO 100. Research: `research/wave-1-batch-2.md`.
 
 | # | Item | Category | Status |
 |---|---|---|---|
