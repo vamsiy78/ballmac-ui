@@ -1,4 +1,4 @@
-import { BellRing, ChevronRight, Github, ShieldCheck } from "lucide-react";
+import { BellRing, ChevronRight, Plug, ShieldCheck } from "lucide-react";
 import { Badge } from "@/components/ballmac/badge";
 import { buttonVariants } from "@/components/ballmac/button";
 import {
@@ -48,7 +48,7 @@ export default function ItemDemo() {
       </Item>
       <a href="#connections" className={itemVariants({ variant: "muted" })}>
         <ItemMedia variant="icon">
-          <Github aria-hidden="true" />
+          <Plug aria-hidden="true" />
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Connected accounts</ItemTitle>

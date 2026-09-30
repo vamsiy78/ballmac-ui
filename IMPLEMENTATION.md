@@ -89,7 +89,7 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 - [x] Wave 2 batch 2: all 177 preview examples in light and dark (354 checks), 0 serious/critical
 - [x] Wave 3: all 209 preview examples in light and dark (418 checks), 0 serious/critical; 52 test files / 121 tests; Base UI and Radix install smoke passed for all 332 registry entries
 - [x] Wave 1 batch 2: all 249 preview examples in light and dark (498 checks), 0 serious/critical; 66 test files / 147 tests; Base UI and Radix install smoke passed for all 392 registry entries
-- [~] Wave 1 batch 3: all 273 preview examples in light and dark (546 checks), 0 serious/critical; open overlay states scanned with `scripts/a11y-open-states.ts`; 78 test files / 171 tests; Base UI and Radix install smokes pending (network policy blocked `ui.shadcn.com`)
+- [~] Wave 1 batch 3: all 273 preview examples in light and dark (546 checks), 0 serious/critical; open overlay states scanned with `scripts/a11y-open-states.ts`; 78 test files / 171 tests; official Base UI and Radix CLI smokes pending (network policy blocked `ui.shadcn.com`); offline fresh-app typecheck and build of all 273 examples passed
 - [x] Wave 3 catalog Lighthouse (local mobile): accessibility, best practices, SEO 100; performance 85 (LCP 4.2 s)
 - [~] Lighthouse on ui.ballmac.com (mobile): accessibility, best practices, SEO 100 on every page tested. Performance: hero-1 100, button 98, catalog 95, **home 89** (simulated LCP 3.3 s from the JS of five live demos; next: lazy-hydrate the showcase)
 
