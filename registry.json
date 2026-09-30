@@ -243,6 +243,136 @@
       }
     },
     {
+      "name": "agent-plan",
+      "type": "registry:ui",
+      "title": "Agent Plan",
+      "description": "A live task plan for agents: a vertical timeline with pending, running, done, failed and skipped steps, nested substeps, expandable output, segmented progress and retry on failure.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/agent-plan.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/agent-plan.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "plan",
+          "steps",
+          "timeline",
+          "tasks"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "steps is [{ id, title, status, description?, duration?, detail?, error?, steps? }]. Update statuses as the agent works and the timeline, progress bar and screen reader summary follow. onRetry adds a Retry button to failed steps.",
+          "whenToUse": [
+            "Showing what an agent will do and is doing",
+            "Multi-step workflows that can fail part-way"
+          ],
+          "whenNotToUse": [
+            "A single tool invocation; use tool-call-card",
+            "Onboarding checklists; use onboarding-checklist"
+          ],
+          "composesWith": [
+            "tool-call-card",
+            "approval-card",
+            "thinking-indicator"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Expands or collapses a step's output"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Each step reads its status first; a polite status line announces the current step"
+            },
+            {
+              "keys": "Color",
+              "action": "Every state has an icon and, for running and failed, a word"
+            }
+          ],
+          "customization": [
+            "expanded / onExpandedChange",
+            "onRetry",
+            "actions slot",
+            "nested steps"
+          ]
+        },
+        "examples": [
+          "agent-plan-demo",
+          "agent-plan-failed"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-plan"
+      }
+    },
+    {
+      "name": "agent-plan-demo",
+      "type": "registry:example",
+      "title": "Agent Plan: Plan that runs",
+      "description": "Plan that runs example of Agent Plan.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-plan.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-plan-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-plan-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-plan",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-plan-failed",
+      "type": "registry:example",
+      "title": "Agent Plan: Failure with retry",
+      "description": "Failure with retry example of Agent Plan.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-plan.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-plan-failed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-plan-failed.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-plan",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ai-chat",
       "type": "registry:ui",
       "title": "AI Chat",
@@ -511,6 +641,129 @@
       "meta": {
         "example": true,
         "of": "ai-message",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ai-orb",
+      "type": "registry:ui",
+      "title": "AI Orb",
+      "description": "A glass orb of drifting theme-colored light that shows whether the assistant is idle, listening, thinking or speaking, and swells with a live voice level.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/ai-orb.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/ai-orb.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "orb",
+          "voice",
+          "assistant",
+          "status",
+          "visual"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "state is idle | listening | thinking | speaking. Pass level (0 to 1) to make it swell with audio. size is sm | default | lg | xl. Colors come from chart-1 to chart-5, so it follows the theme.",
+          "whenToUse": [
+            "The face of a voice assistant or a full-screen chat",
+            "A status mark beside an assistant's name"
+          ],
+          "whenNotToUse": [
+            "A plain spinner (use spinner)",
+            "Anything that must be readable as text; pair it with thinking-indicator"
+          ],
+          "composesWith": [
+            "voice-input",
+            "thinking-indicator",
+            "ai-chat"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "role=img named 'Assistant is listening' and so on. Pass label={null} to hide it when text beside it says the same"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Static orb, no drift or breathing"
+            }
+          ],
+          "customization": [
+            "state",
+            "level",
+            "size",
+            "label (string | null)"
+          ]
+        },
+        "examples": [
+          "ai-orb-demo",
+          "ai-orb-voice"
+        ],
+        "url": "https://ui.ballmac.com/components/ai-orb"
+      }
+    },
+    {
+      "name": "ai-orb-demo",
+      "type": "registry:example",
+      "title": "AI Orb: Four states",
+      "description": "Four states example of AI Orb.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ai-orb.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ai-orb-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ai-orb-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ai-orb",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ai-orb-voice",
+      "type": "registry:example",
+      "title": "AI Orb: Reacting to voice level",
+      "description": "Reacting to voice level example of AI Orb.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ai-orb.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ai-orb-voice.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ai-orb-voice.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ai-orb",
         "tier": "free"
       }
     },
@@ -1342,6 +1595,270 @@
       "meta": {
         "example": true,
         "of": "app-shell",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "approval-card",
+      "type": "registry:ui",
+      "title": "Approval Card",
+      "description": "A human-in-the-loop confirmation for agent actions: what will happen, risk level in words, the exact command, Approve, Deny and Always allow, a timeout countdown and a recorded decision.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/approval-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/approval-card.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "approval",
+          "confirm",
+          "safety",
+          "human-in-the-loop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "title, description, risk (low | medium | high), details rows and a preview of the exact action. onApprove, onDeny, optional onAlwaysAllow. expiresIn counts down and denies. After a decision the card shows the outcome and moves focus to it.",
+          "whenToUse": [
+            "Before an agent runs commands, writes files or sends data out",
+            "Any action that needs a person's explicit yes"
+          ],
+          "whenNotToUse": [
+            "Confirming a destructive UI action; use alert-dialog",
+            "Reporting what a tool already did; use tool-call-card"
+          ],
+          "composesWith": [
+            "agent-plan",
+            "tool-call-card",
+            "ai-message"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Approve, Deny, Always allow, and the scrollable preview"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Risk is read as words; the decision is announced and focus moves to it"
+            },
+            {
+              "keys": "Color",
+              "action": "Risk uses an icon and label as well as a colored edge"
+            }
+          ],
+          "customization": [
+            "risk",
+            "details",
+            "preview",
+            "expiresIn and onExpire",
+            "status (controlled)",
+            "button labels"
+          ]
+        },
+        "examples": [
+          "approval-card-demo",
+          "approval-card-risks"
+        ],
+        "url": "https://ui.ballmac.com/components/approval-card"
+      }
+    },
+    {
+      "name": "approval-card-demo",
+      "type": "registry:example",
+      "title": "Approval Card: Shell command",
+      "description": "Shell command example of Approval Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/approval-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/approval-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/approval-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "approval-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "approval-card-risks",
+      "type": "registry:example",
+      "title": "Approval Card: Three risk levels",
+      "description": "Three risk levels example of Approval Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/approval-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/approval-card-risks.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/approval-card-risks.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "approval-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "artifact-panel",
+      "type": "registry:ui",
+      "title": "Artifact Panel",
+      "description": "A side panel for things an assistant generates: Preview and Code tabs, version stepping, copy and download, a streaming state and a close button, with the rendered result in your own slot.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/artifact-panel.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/artifact-panel.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "artifact",
+          "canvas",
+          "preview",
+          "code",
+          "panel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "title, kind, icon, code, filename, language and children as the preview. versions > 1 adds steppers (version/onVersionChange). streaming shows a progress edge and disables copy and download. onClose adds a close button.",
+          "whenToUse": [
+            "Code, documents or designs a model produced next to the chat",
+            "Anything users iterate on in versions"
+          ],
+          "whenNotToUse": [
+            "Showing code in the chat; use code-block",
+            "Generic tabs; use tabs"
+          ],
+          "composesWith": [
+            "ai-chat",
+            "code-block",
+            "resizable"
+          ],
+          "a11y": [
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Switches between Preview and Code when the tabs have focus"
+            },
+            {
+              "keys": "Tab",
+              "action": "Reaches version arrows, copy, download, close, and the scrollable content"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Region named by the title; version changes are announced politely"
+            }
+          ],
+          "customization": [
+            "defaultTab",
+            "streaming",
+            "actions slot",
+            "previewClassName",
+            "filename and language"
+          ]
+        },
+        "examples": [
+          "artifact-panel-demo",
+          "artifact-panel-streaming"
+        ],
+        "url": "https://ui.ballmac.com/components/artifact-panel"
+      }
+    },
+    {
+      "name": "artifact-panel-demo",
+      "type": "registry:example",
+      "title": "Artifact Panel: Component with code",
+      "description": "Component with code example of Artifact Panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/artifact-panel.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/artifact-panel-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/artifact-panel-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "artifact-panel",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "artifact-panel-streaming",
+      "type": "registry:example",
+      "title": "Artifact Panel: Writing and versions",
+      "description": "Writing and versions example of Artifact Panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/artifact-panel.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/artifact-panel-streaming.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/artifact-panel-streaming.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "artifact-panel",
         "tier": "free"
       }
     },
@@ -5729,6 +6246,132 @@
       }
     },
     {
+      "name": "chat-attachment",
+      "type": "registry:ui",
+      "title": "Chat Attachment",
+      "description": "File chips and image tiles for composers and messages, with type detection, sizes, upload progress, failed-upload retry, remove and open actions, and animated list changes.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/chat-attachment.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/chat-attachment.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "chat",
+          "attachment",
+          "file",
+          "upload",
+          "image"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "<ChatAttachmentList> holds <ChatAttachment name size type previewUrl status progress onRemove onRetry onOpen variant='chip'|'tile'>. Kind and icon come from the MIME type or extension. Also exports formatFileSize and attachmentKind.",
+          "whenToUse": [
+            "Files staged in a prompt input before sending",
+            "Attachments shown inside a sent message"
+          ],
+          "whenNotToUse": [
+            "A drag and drop upload area",
+            "Generic file tables"
+          ],
+          "composesWith": [
+            "prompt-input",
+            "ai-message"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Reaches open, retry and remove for each file"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Runs the focused action"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "List of attachments, buttons named 'Remove report.pdf', and a progressbar per upload"
+            }
+          ],
+          "customization": [
+            "variant: chip | tile",
+            "status: ready | uploading | error",
+            "progress 0 to 100",
+            "error text"
+          ]
+        },
+        "examples": [
+          "chat-attachment-demo",
+          "chat-attachment-tiles"
+        ],
+        "url": "https://ui.ballmac.com/components/chat-attachment"
+      }
+    },
+    {
+      "name": "chat-attachment-demo",
+      "type": "registry:example",
+      "title": "Chat Attachment: Chips with upload states",
+      "description": "Chips with upload states example of Chat Attachment.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chat-attachment.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chat-attachment-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chat-attachment-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chat-attachment",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chat-attachment-tiles",
+      "type": "registry:example",
+      "title": "Chat Attachment: Image tiles",
+      "description": "Image tiles example of Chat Attachment.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chat-attachment.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chat-attachment-tiles.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chat-attachment-tiles.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chat-attachment",
+        "tier": "free"
+      }
+    },
+    {
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
@@ -5854,6 +6497,132 @@
       "meta": {
         "example": true,
         "of": "checkbox",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "citation",
+      "type": "registry:ui",
+      "title": "Citation",
+      "description": "An inline source marker for AI answers, as a numbered chip or a site pill. Hover or focus opens a preview card with title, excerpt and link, and a pager when one claim has several sources.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/hover-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/citation.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/citation.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "citation",
+          "source",
+          "reference",
+          "hover"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Place <Citation index={1} sources={{ title, url, snippet }} /> right after the claim. Pass an array for several sources. variant is number | pill. The marker is a real link, so touch users open the page directly. Also exports SourceFavicon and hostOf.",
+          "whenToUse": [
+            "Answers grounded in web or document sources",
+            "Footnotes that should not pull the reader away from the text"
+          ],
+          "whenNotToUse": [
+            "A full list of references; use sources-list",
+            "Tooltips with no link; use tooltip"
+          ],
+          "composesWith": [
+            "sources-list",
+            "ai-message",
+            "hover-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the marker and opens its card"
+            },
+            {
+              "keys": "Enter",
+              "action": "Opens the source in a new tab"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Named 'Source 1: Title', with 'and 2 more' for grouped sources"
+            }
+          ],
+          "customization": [
+            "variant",
+            "index",
+            "sources as one or many",
+            "favicon url (monogram by default, nothing is fetched)"
+          ]
+        },
+        "examples": [
+          "citation-demo",
+          "citation-pill"
+        ],
+        "url": "https://ui.ballmac.com/components/citation"
+      }
+    },
+    {
+      "name": "citation-demo",
+      "type": "registry:example",
+      "title": "Citation: Numbered markers in an answer",
+      "description": "Numbered markers in an answer example of Citation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/citation.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/citation-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/citation-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "citation",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "citation-pill",
+      "type": "registry:example",
+      "title": "Citation: Site pills with several sources",
+      "description": "Site pills with several sources example of Citation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/citation.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/citation-pill.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/citation-pill.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "citation",
         "tier": "free"
       }
     },
@@ -13141,6 +13910,143 @@
       }
     },
     {
+      "name": "model-picker",
+      "type": "registry:ui",
+      "title": "Model Picker",
+      "description": "A searchable model selector grouped by provider, with capability icons, locked plans and a detail pane that follows the highlighted model with context window, cost and abilities.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/popover.json",
+        "https://ui.ballmac.com/r/command.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/model-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/model-picker.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "model",
+          "select",
+          "combobox",
+          "llm",
+          "picker"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "models is an array of { id, name, provider?, description?, capabilities?, contextWindow?, cost?, isNew?, locked? }. value/onValueChange or defaultValue. Locked models call onLockedSelect. variant default | compact.",
+          "whenToUse": [
+            "Choosing the model for a chat or an agent",
+            "Any picker where options have facts worth comparing"
+          ],
+          "whenNotToUse": [
+            "A plain short list of choices; use select",
+            "Settings with many fields; use settings-panel"
+          ],
+          "composesWith": [
+            "prompt-input",
+            "ai-chat",
+            "token-meter"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space / ArrowDown",
+              "action": "Opens the list from the trigger"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "Moves the highlight; the detail pane updates"
+            },
+            {
+              "keys": "Enter",
+              "action": "Selects the model and returns focus to the trigger"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes without changing"
+            }
+          ],
+          "customization": [
+            "searchable",
+            "showDetails",
+            "variant",
+            "align",
+            "onLockedSelect",
+            "lockedLabel per model"
+          ]
+        },
+        "examples": [
+          "model-picker-demo",
+          "model-picker-compact"
+        ],
+        "url": "https://ui.ballmac.com/components/model-picker"
+      }
+    },
+    {
+      "name": "model-picker-demo",
+      "type": "registry:example",
+      "title": "Model Picker: Grouped with details",
+      "description": "Grouped with details example of Model Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/model-picker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/model-picker-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/model-picker-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "model-picker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "model-picker-compact",
+      "type": "registry:example",
+      "title": "Model Picker: Compact in a composer",
+      "description": "Compact in a composer example of Model Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/model-picker.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/model-picker-compact.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/model-picker-compact.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "model-picker",
+        "tier": "free"
+      }
+    },
+    {
       "name": "multi-select",
       "type": "registry:ui",
       "title": "Multi Select",
@@ -18025,6 +18931,136 @@
       }
     },
     {
+      "name": "sources-list",
+      "type": "registry:ui",
+      "title": "Sources List",
+      "description": "The 'Used N sources' footer of an AI answer: a stack of site icons that opens a numbered list or card grid, with show-all, a highlighted row for hover sync and stable row ids.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/citation.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/sources-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/sources-list.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "sources",
+          "references",
+          "citations",
+          "disclosure"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "sources is the array used by citations, in order. variant is list | cards. collapsible={false} keeps it open. highlight={n} emphasizes row n, and each row has id `${idPrefix}-${n}` so a citation can link to it.",
+          "whenToUse": [
+            "The end of a grounded answer",
+            "A side panel of everything the assistant read"
+          ],
+          "whenNotToUse": [
+            "Inline markers; use citation",
+            "Generic link lists"
+          ],
+          "composesWith": [
+            "citation",
+            "ai-message",
+            "collapsible"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Opens or closes the list from its header"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves through the source links"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "An ordered list named Sources; each link reads 'Source 2: Title'"
+            }
+          ],
+          "customization": [
+            "variant",
+            "visibleCount",
+            "highlight",
+            "idPrefix",
+            "open / defaultOpen / onOpenChange"
+          ]
+        },
+        "examples": [
+          "sources-list-demo",
+          "sources-list-cards"
+        ],
+        "url": "https://ui.ballmac.com/components/sources-list"
+      }
+    },
+    {
+      "name": "sources-list-demo",
+      "type": "registry:example",
+      "title": "Sources List: Collapsible list",
+      "description": "Collapsible list example of Sources List.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sources-list.json",
+        "https://ui.ballmac.com/r/citation.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sources-list-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sources-list-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sources-list",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sources-list-cards",
+      "type": "registry:example",
+      "title": "Sources List: Always-open cards",
+      "description": "Always-open cards example of Sources List.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sources-list.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sources-list-cards.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sources-list-cards.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sources-list",
+        "tier": "free"
+      }
+    },
+    {
       "name": "sparkline",
       "type": "registry:ui",
       "title": "Sparkline",
@@ -19168,6 +20204,138 @@
       "meta": {
         "example": true,
         "of": "streaming-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "suggestion-chips",
+      "type": "registry:ui",
+      "title": "Suggestion Chips",
+      "description": "Starter prompts for an empty chat or follow-ups after a reply, as wrapping pills, a swipeable row with faded edges, or cards with descriptions, plus loading and refresh states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/suggestion-chips.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/suggestion-chips.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "chat",
+          "prompts",
+          "suggestions",
+          "chips"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "suggestions is an array of { label, prompt?, description?, icon? }. onSelect receives the prompt text. variant is pills | scroll | cards. loading shows placeholders and onRefresh adds a shuffle button.",
+          "whenToUse": [
+            "Empty state of a chat with example questions",
+            "Follow-up questions under an answer"
+          ],
+          "whenNotToUse": [
+            "Filtering a list (use filter-chips or tabs)",
+            "Free-form input; use prompt-input"
+          ],
+          "composesWith": [
+            "prompt-input",
+            "ai-chat",
+            "ai-message"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Shift+Tab",
+              "action": "Moves between chips"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Sends the chosen prompt"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Chips fade in without sliding"
+            }
+          ],
+          "customization": [
+            "variant: pills | scroll | cards",
+            "loading",
+            "disabled",
+            "onRefresh and refreshLabel"
+          ]
+        },
+        "examples": [
+          "suggestion-chips-demo",
+          "suggestion-chips-cards"
+        ],
+        "url": "https://ui.ballmac.com/components/suggestion-chips"
+      }
+    },
+    {
+      "name": "suggestion-chips-demo",
+      "type": "registry:example",
+      "title": "Suggestion Chips: Follow-up pills with refresh",
+      "description": "Follow-up pills with refresh example of Suggestion Chips.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/suggestion-chips.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/suggestion-chips-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/suggestion-chips-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "suggestion-chips",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "suggestion-chips-cards",
+      "type": "registry:example",
+      "title": "Suggestion Chips: Starter cards",
+      "description": "Starter cards example of Suggestion Chips.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/suggestion-chips.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/suggestion-chips-cards.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/suggestion-chips-cards.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "suggestion-chips",
         "tier": "free"
       }
     },
@@ -20494,6 +21662,127 @@
       }
     },
     {
+      "name": "thinking-indicator",
+      "type": "registry:ui",
+      "title": "Thinking Indicator",
+      "description": "A waiting indicator for assistants with four animations (dots, bars, wave, shimmer), labels that take turns, an optional timer and one calm announcement for screen readers.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/thinking-indicator.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/thinking-indicator.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "loading",
+          "thinking",
+          "typing",
+          "status"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Show it while a reply has not started. variant picks the animation, label takes a string or an array of phrases, showTimer adds a clock. Screen readers hear statusLabel once instead of every phrase.",
+          "whenToUse": [
+            "The gap between sending a message and the first streamed token",
+            "A long agent task where the phrase changes with the current step"
+          ],
+          "whenNotToUse": [
+            "Showing the model's reasoning text; use reasoning-disclosure",
+            "Progress with a known end; use progress or agent-plan"
+          ],
+          "composesWith": [
+            "ai-message",
+            "reasoning-disclosure",
+            "ai-orb"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "role=status announces statusLabel once; cycling phrases and the timer are visual only"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Animations stop, phrases cross-fade in place"
+            }
+          ],
+          "customization": [
+            "variant: dots | bars | wave | shimmer",
+            "label as string or string[] with interval",
+            "showTimer and elapsed",
+            "size: sm | default"
+          ]
+        },
+        "examples": [
+          "thinking-indicator-demo",
+          "thinking-indicator-variants"
+        ],
+        "url": "https://ui.ballmac.com/components/thinking-indicator"
+      }
+    },
+    {
+      "name": "thinking-indicator-demo",
+      "type": "registry:example",
+      "title": "Thinking Indicator: Cycling labels with a timer",
+      "description": "Cycling labels with a timer example of Thinking Indicator.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/thinking-indicator.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/thinking-indicator-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/thinking-indicator-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "thinking-indicator",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "thinking-indicator-variants",
+      "type": "registry:example",
+      "title": "Thinking Indicator: Four animations",
+      "description": "Four animations example of Thinking Indicator.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/thinking-indicator.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/thinking-indicator-variants.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/thinking-indicator-variants.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "thinking-indicator",
+        "tier": "free"
+      }
+    },
+    {
       "name": "tilt-card",
       "type": "registry:ui",
       "title": "Tilt Card",
@@ -21332,6 +22621,134 @@
       }
     },
     {
+      "name": "token-meter",
+      "type": "registry:ui",
+      "title": "Token Meter",
+      "description": "A context-window meter that stacks system, history and attachments against the limit with a reserved reply area, plus a composer pill that opens the same view in a popover.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/popover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/token-meter.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/token-meter.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "tokens",
+          "context",
+          "meter",
+          "usage",
+          "llm"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "segments is [{ label, tokens, reserved? }], limit is the window. The meter warns at warnAt percent (80) and again when full, with words and an icon. <TokenMeterPill> shows a ring and percentage. Exports formatTokens and estimateTokens.",
+          "whenToUse": [
+            "Showing how full the model's context is",
+            "Nudging people to start a new chat or compact"
+          ],
+          "whenNotToUse": [
+            "Plan quotas and billing limits; use usage-meter",
+            "Generic progress; use progress"
+          ],
+          "composesWith": [
+            "prompt-input",
+            "model-picker",
+            "usage-meter"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "role=meter with a value such as '142k of 200k tokens used, 71%. 58k left.'"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Opens the pill's detail popover"
+            },
+            {
+              "keys": "Color",
+              "action": "Warning and full states add an icon and words"
+            }
+          ],
+          "customization": [
+            "segments and limit",
+            "warnAt",
+            "cost text",
+            "action slot for a Compact button"
+          ]
+        },
+        "examples": [
+          "token-meter-demo",
+          "token-meter-pill"
+        ],
+        "url": "https://ui.ballmac.com/components/token-meter"
+      }
+    },
+    {
+      "name": "token-meter-demo",
+      "type": "registry:example",
+      "title": "Token Meter: Breakdown with warning",
+      "description": "Breakdown with warning example of Token Meter.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/token-meter.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/token-meter-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/token-meter-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "token-meter",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "token-meter-pill",
+      "type": "registry:example",
+      "title": "Token Meter: Composer pill",
+      "description": "Composer pill example of Token Meter.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/token-meter.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/token-meter-pill.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/token-meter-pill.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "token-meter",
+        "tier": "free"
+      }
+    },
+    {
       "name": "tool-call-card",
       "type": "registry:ui",
       "title": "Tool Call Card",
@@ -21937,6 +23354,138 @@
       "meta": {
         "example": true,
         "of": "user-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "voice-input",
+      "type": "registry:ui",
+      "title": "Voice Input",
+      "description": "A microphone control as a round button or an expanding recorder with a scrolling waveform, timer, discard and send, plus a hook that reads the real microphone level.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/voice-input.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/voice-input.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "voice",
+          "microphone",
+          "audio",
+          "recorder",
+          "input"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "The component draws the control; you record. onStart, onStop, onCancel fire; state (idle | listening | processing) can be controlled. Feed level (0 to 1) from useMicrophoneLevel(active) for a real waveform.",
+          "whenToUse": [
+            "Dictation in a composer",
+            "Voice messages"
+          ],
+          "whenNotToUse": [
+            "Text entry; use prompt-input",
+            "Playing audio; use audio-player"
+          ],
+          "composesWith": [
+            "prompt-input",
+            "ai-orb",
+            "ai-chat"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Starts, and while listening stops and uses the recording"
+            },
+            {
+              "keys": "Escape",
+              "action": "Discards the recording while listening"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Button names change with state; status is announced politely; the waveform is decorative"
+            }
+          ],
+          "customization": [
+            "variant: button | bar",
+            "state",
+            "level",
+            "duration",
+            "processingLabel",
+            "useMicrophoneLevel"
+          ]
+        },
+        "examples": [
+          "voice-input-demo",
+          "voice-input-button"
+        ],
+        "url": "https://ui.ballmac.com/components/voice-input"
+      }
+    },
+    {
+      "name": "voice-input-demo",
+      "type": "registry:example",
+      "title": "Voice Input: Recorder bar",
+      "description": "Recorder bar example of Voice Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/voice-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/voice-input-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/voice-input-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "voice-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "voice-input-button",
+      "type": "registry:example",
+      "title": "Voice Input: Button with live glow",
+      "description": "Button with live glow example of Voice Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/voice-input.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/voice-input-button.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/voice-input-button.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "voice-input",
         "tier": "free"
       }
     },

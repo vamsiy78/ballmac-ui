@@ -41,6 +41,6 @@ describe("InviteMembers", () => {
     const input = screen.getByRole("textbox", { name: "Email addresses" });
     await user.type(input, "a@b.co,");
     await user.keyboard("{Backspace}");
-    expect(screen.queryByRole("button", { name: "Remove a@b.co" })).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByRole("button", { name: "Remove a@b.co" })).not.toBeInTheDocument());
   });
 });
