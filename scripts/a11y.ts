@@ -82,7 +82,6 @@ try {
         })
         await context.addInitScript((mode) => {
           localStorage.setItem("bm-theme", mode)
-          document.documentElement.classList.toggle("dark", mode === "dark")
         }, theme)
         const page = await context.newPage()
         try {

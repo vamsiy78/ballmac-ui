@@ -138,6 +138,111 @@
       }
     },
     {
+      "name": "activity-feed",
+      "type": "registry:ui",
+      "title": "Activity Feed",
+      "description": "A compact actor and action feed with timestamps and an empty state.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/activity-feed.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/activity-feed.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "activity",
+          "history",
+          "events"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A compact actor and action feed with timestamps and an empty state.",
+          "whenToUse": [
+            "Show recent changes made by people or the system"
+          ],
+          "whenNotToUse": [
+            "Use Timeline for milestone progression"
+          ],
+          "composesWith": [
+            "timeline"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Static content is announced with semantic structure"
+            }
+          ],
+          "customization": [
+            "Content, layout, and token-based className styling"
+          ]
+        },
+        "examples": [
+          "activity-feed-demo",
+          "activity-feed-states"
+        ],
+        "url": "https://ui.ballmac.com/components/activity-feed"
+      }
+    },
+    {
+      "name": "activity-feed-demo",
+      "type": "registry:example",
+      "title": "Activity Feed: Overview",
+      "description": "Overview example of Activity Feed.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/activity-feed.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/activity-feed-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/activity-feed-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "activity-feed",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "activity-feed-states",
+      "type": "registry:example",
+      "title": "Activity Feed: States and variants",
+      "description": "States and variants example of Activity Feed.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/activity-feed.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/activity-feed-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/activity-feed-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "activity-feed",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ai-chat",
       "type": "registry:ui",
       "title": "AI Chat",
@@ -1203,6 +1308,111 @@
       "meta": {
         "example": true,
         "of": "aurora-background",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "avatar-stack",
+      "type": "registry:ui",
+      "title": "Avatar Stack",
+      "description": "An accessible compact row of people with initials, image support, and an overflow count.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/avatar-stack.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/avatar-stack.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "people",
+          "avatar",
+          "team"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "An accessible compact row of people with initials, image support, and an overflow count.",
+          "whenToUse": [
+            "Show participants or collaborators in limited space"
+          ],
+          "whenNotToUse": [
+            "Use Avatar for one person"
+          ],
+          "composesWith": [
+            "avatar"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Static content is announced with semantic structure"
+            }
+          ],
+          "customization": [
+            "Content, layout, and token-based className styling"
+          ]
+        },
+        "examples": [
+          "avatar-stack-demo",
+          "avatar-stack-states"
+        ],
+        "url": "https://ui.ballmac.com/components/avatar-stack"
+      }
+    },
+    {
+      "name": "avatar-stack-demo",
+      "type": "registry:example",
+      "title": "Avatar Stack: Overview",
+      "description": "Overview example of Avatar Stack.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/avatar-stack.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/avatar-stack-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/avatar-stack-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "avatar-stack",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "avatar-stack-states",
+      "type": "registry:example",
+      "title": "Avatar Stack: States and variants",
+      "description": "States and variants example of Avatar Stack.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/avatar-stack.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/avatar-stack-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/avatar-stack-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "avatar-stack",
         "tier": "free"
       }
     },
@@ -3893,6 +4103,115 @@
       }
     },
     {
+      "name": "calendar-agenda",
+      "type": "registry:ui",
+      "title": "Calendar Agenda",
+      "description": "A day agenda with native date entry, adjacent-day controls, and accessible event times.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/calendar-agenda.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/calendar-agenda.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "calendar",
+          "agenda",
+          "events"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A day agenda with native date entry, adjacent-day controls, and accessible event times.",
+          "whenToUse": [
+            "Show scheduled events for one day"
+          ],
+          "whenNotToUse": [
+            "Use a full calendar for month-level date picking"
+          ],
+          "composesWith": [
+            "timeline"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter / Space",
+              "action": "Changes the day through native date input and buttons"
+            }
+          ],
+          "customization": [
+            "Controlled and uncontrolled state",
+            "Content and token-based className styling"
+          ]
+        },
+        "examples": [
+          "calendar-agenda-demo",
+          "calendar-agenda-states"
+        ],
+        "url": "https://ui.ballmac.com/components/calendar-agenda"
+      }
+    },
+    {
+      "name": "calendar-agenda-demo",
+      "type": "registry:example",
+      "title": "Calendar Agenda: Overview",
+      "description": "Overview example of Calendar Agenda.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/calendar-agenda.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/calendar-agenda-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/calendar-agenda-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "calendar-agenda",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "calendar-agenda-states",
+      "type": "registry:example",
+      "title": "Calendar Agenda: States and variants",
+      "description": "States and variants example of Calendar Agenda.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/calendar-agenda.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/calendar-agenda-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/calendar-agenda-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "calendar-agenda",
+        "tier": "free"
+      }
+    },
+    {
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
@@ -4385,6 +4704,114 @@
       }
     },
     {
+      "name": "comparison-table",
+      "type": "registry:ui",
+      "title": "Comparison Table",
+      "description": "A semantic feature matrix with a highlighted choice and accessible boolean values.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/comparison-table.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/comparison-table.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "comparison",
+          "pricing",
+          "features"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A semantic feature matrix with a highlighted choice and accessible boolean values.",
+          "whenToUse": [
+            "Compare capabilities across choices"
+          ],
+          "whenNotToUse": [
+            "Use Description List for one object"
+          ],
+          "composesWith": [
+            "description-list"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Arrow keys",
+              "action": "Focuses and scrolls the comparison region when narrow"
+            }
+          ],
+          "customization": [
+            "Content, layout, and token-based className styling"
+          ]
+        },
+        "examples": [
+          "comparison-table-demo",
+          "comparison-table-states"
+        ],
+        "url": "https://ui.ballmac.com/components/comparison-table"
+      }
+    },
+    {
+      "name": "comparison-table-demo",
+      "type": "registry:example",
+      "title": "Comparison Table: Overview",
+      "description": "Overview example of Comparison Table.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/comparison-table.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/comparison-table-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/comparison-table-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "comparison-table",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "comparison-table-states",
+      "type": "registry:example",
+      "title": "Comparison Table: States and variants",
+      "description": "States and variants example of Comparison Table.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/comparison-table.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/comparison-table-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/comparison-table-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "comparison-table",
+        "tier": "free"
+      }
+    },
+    {
       "name": "confetti",
       "type": "registry:ui",
       "title": "Confetti",
@@ -4508,6 +4935,111 @@
       "meta": {
         "example": true,
         "of": "confetti",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "contribution-graph",
+      "type": "registry:ui",
+      "title": "Contribution Graph",
+      "description": "A compact daily activity heatmap with token-based intensity and an accessible summary.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/contribution-graph.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/contribution-graph.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "heatmap",
+          "activity",
+          "calendar"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A compact daily activity heatmap with token-based intensity and an accessible summary.",
+          "whenToUse": [
+            "Show a daily activity pattern over time"
+          ],
+          "whenNotToUse": [
+            "Use a calendar when dates need interaction"
+          ],
+          "composesWith": [
+            "activity-feed"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Arrow keys",
+              "action": "Focuses and scrolls the heatmap; total and date span are announced"
+            }
+          ],
+          "customization": [
+            "Content, layout, and token-based className styling"
+          ]
+        },
+        "examples": [
+          "contribution-graph-demo",
+          "contribution-graph-states"
+        ],
+        "url": "https://ui.ballmac.com/components/contribution-graph"
+      }
+    },
+    {
+      "name": "contribution-graph-demo",
+      "type": "registry:example",
+      "title": "Contribution Graph: Overview",
+      "description": "Overview example of Contribution Graph.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/contribution-graph.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/contribution-graph-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/contribution-graph-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "contribution-graph",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "contribution-graph-states",
+      "type": "registry:example",
+      "title": "Contribution Graph: States and variants",
+      "description": "States and variants example of Contribution Graph.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/contribution-graph.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/contribution-graph-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/contribution-graph-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "contribution-graph",
         "tier": "free"
       }
     },
@@ -4724,6 +5256,111 @@
       }
     },
     {
+      "name": "description-list",
+      "type": "registry:ui",
+      "title": "Description List",
+      "description": "A semantic key-value surface with responsive split and stacked layouts.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/description-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/description-list.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "details",
+          "key-value",
+          "metadata"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A semantic key-value surface with responsive split and stacked layouts.",
+          "whenToUse": [
+            "Display read-only properties for an object"
+          ],
+          "whenNotToUse": [
+            "Use a form for editable fields"
+          ],
+          "composesWith": [
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Static content is announced with semantic structure"
+            }
+          ],
+          "customization": [
+            "Content, layout, and token-based className styling"
+          ]
+        },
+        "examples": [
+          "description-list-demo",
+          "description-list-states"
+        ],
+        "url": "https://ui.ballmac.com/components/description-list"
+      }
+    },
+    {
+      "name": "description-list-demo",
+      "type": "registry:example",
+      "title": "Description List: Overview",
+      "description": "Overview example of Description List.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/description-list.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/description-list-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/description-list-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "description-list",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "description-list-states",
+      "type": "registry:example",
+      "title": "Description List: States and variants",
+      "description": "States and variants example of Description List.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/description-list.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/description-list-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/description-list-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "description-list",
+        "tier": "free"
+      }
+    },
+    {
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
@@ -4866,6 +5503,112 @@
       "meta": {
         "example": true,
         "of": "dialog",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "diff-viewer",
+      "type": "registry:ui",
+      "title": "Diff Viewer",
+      "description": "A line-by-line text diff with change counts, line numbers, and accessible change labels.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/diff-viewer.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/diff-viewer.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "diff",
+          "code",
+          "comparison"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A line-by-line text diff with change counts, line numbers, and accessible change labels.",
+          "whenToUse": [
+            "Review before-and-after text changes"
+          ],
+          "whenNotToUse": [
+            "Use Comparison Table for product features"
+          ],
+          "composesWith": [
+            "code-block"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Arrow keys",
+              "action": "Focuses and scrolls long diffs"
+            }
+          ],
+          "customization": [
+            "Controlled and uncontrolled state",
+            "Content and token-based className styling"
+          ]
+        },
+        "examples": [
+          "diff-viewer-demo",
+          "diff-viewer-states"
+        ],
+        "url": "https://ui.ballmac.com/components/diff-viewer"
+      }
+    },
+    {
+      "name": "diff-viewer-demo",
+      "type": "registry:example",
+      "title": "Diff Viewer: Overview",
+      "description": "Overview example of Diff Viewer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/diff-viewer.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/diff-viewer-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/diff-viewer-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "diff-viewer",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "diff-viewer-states",
+      "type": "registry:example",
+      "title": "Diff Viewer: States and variants",
+      "description": "States and variants example of Diff Viewer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/diff-viewer.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/diff-viewer-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/diff-viewer-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "diff-viewer",
         "tier": "free"
       }
     },
@@ -5478,6 +6221,115 @@
       "meta": {
         "example": true,
         "of": "file-dropzone",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "file-tree",
+      "type": "registry:ui",
+      "title": "File Tree",
+      "description": "A folder and file explorer with semantic tree navigation and file-type icons.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tree-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/file-tree.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/file-tree.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "files",
+          "folders",
+          "tree"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A folder and file explorer with semantic tree navigation and file-type icons.",
+          "whenToUse": [
+            "Browse a project or document hierarchy"
+          ],
+          "whenNotToUse": [
+            "Use Tree View for non-file hierarchies"
+          ],
+          "composesWith": [
+            "tree-view"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys / Home / End / Enter / Space",
+              "action": "Navigates folders and selects files"
+            }
+          ],
+          "customization": [
+            "Controlled and uncontrolled state",
+            "Content and token-based className styling"
+          ]
+        },
+        "examples": [
+          "file-tree-demo",
+          "file-tree-states"
+        ],
+        "url": "https://ui.ballmac.com/components/file-tree"
+      }
+    },
+    {
+      "name": "file-tree-demo",
+      "type": "registry:example",
+      "title": "File Tree: Overview",
+      "description": "Overview example of File Tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/file-tree.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/file-tree-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/file-tree-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "file-tree",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "file-tree-states",
+      "type": "registry:example",
+      "title": "File Tree: States and variants",
+      "description": "States and variants example of File Tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/file-tree.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/file-tree-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/file-tree-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "file-tree",
         "tier": "free"
       }
     },
@@ -6216,6 +7068,224 @@
       }
     },
     {
+      "name": "json-viewer",
+      "type": "registry:ui",
+      "title": "JSON Viewer",
+      "description": "A collapsible JSON inspector with compact type styling and keyboard-operable branches.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/json-viewer.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/json-viewer.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "json",
+          "data",
+          "developer"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A collapsible JSON inspector with compact type styling and keyboard-operable branches.",
+          "whenToUse": [
+            "Inspect nested API responses or configuration"
+          ],
+          "whenNotToUse": [
+            "Use Code Block for unstructured text"
+          ],
+          "composesWith": [
+            "code-block"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter / Space",
+              "action": "Focuses and toggles JSON branches"
+            }
+          ],
+          "customization": [
+            "Controlled and uncontrolled state",
+            "Content and token-based className styling"
+          ]
+        },
+        "examples": [
+          "json-viewer-demo",
+          "json-viewer-states"
+        ],
+        "url": "https://ui.ballmac.com/components/json-viewer"
+      }
+    },
+    {
+      "name": "json-viewer-demo",
+      "type": "registry:example",
+      "title": "JSON Viewer: Overview",
+      "description": "Overview example of JSON Viewer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/json-viewer.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/json-viewer-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/json-viewer-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "json-viewer",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "json-viewer-states",
+      "type": "registry:example",
+      "title": "JSON Viewer: States and variants",
+      "description": "States and variants example of JSON Viewer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/json-viewer.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/json-viewer-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/json-viewer-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "json-viewer",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "kanban-board",
+      "type": "registry:ui",
+      "title": "Kanban Board",
+      "description": "A responsive task board with pointer drag and keyboard movement between columns.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/kanban-board.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/kanban-board.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "kanban",
+          "tasks",
+          "board"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A responsive task board with pointer drag and keyboard movement between columns.",
+          "whenToUse": [
+            "Organize tasks across workflow stages"
+          ],
+          "whenNotToUse": [
+            "Use a table for dense sortable records"
+          ],
+          "composesWith": [
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Alt + Arrow keys",
+              "action": "Focuses and moves cards; buttons also move between columns"
+            }
+          ],
+          "customization": [
+            "Controlled and uncontrolled state",
+            "Content and token-based className styling"
+          ]
+        },
+        "examples": [
+          "kanban-board-demo",
+          "kanban-board-states"
+        ],
+        "url": "https://ui.ballmac.com/components/kanban-board"
+      }
+    },
+    {
+      "name": "kanban-board-demo",
+      "type": "registry:example",
+      "title": "Kanban Board: Overview",
+      "description": "Overview example of Kanban Board.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kanban-board.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kanban-board-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kanban-board-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kanban-board",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "kanban-board-states",
+      "type": "registry:example",
+      "title": "Kanban Board: States and variants",
+      "description": "States and variants example of Kanban Board.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kanban-board.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kanban-board-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kanban-board-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kanban-board",
+        "tier": "free"
+      }
+    },
+    {
       "name": "kbd",
       "type": "registry:ui",
       "title": "Kbd",
@@ -6297,6 +7367,111 @@
       "meta": {
         "example": true,
         "of": "kbd",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "kpi-row",
+      "type": "registry:ui",
+      "title": "KPI Row",
+      "description": "A compact, semantic row of key metrics that adapts from one to four columns.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/kpi-row.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/kpi-row.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "metric",
+          "dashboard",
+          "summary"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A compact, semantic row of key metrics that adapts from one to four columns.",
+          "whenToUse": [
+            "Show several related metrics together"
+          ],
+          "whenNotToUse": [
+            "Use Stat Card when each metric needs more context"
+          ],
+          "composesWith": [
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Static content is announced with semantic structure"
+            }
+          ],
+          "customization": [
+            "Content, layout, and token-based className styling"
+          ]
+        },
+        "examples": [
+          "kpi-row-demo",
+          "kpi-row-states"
+        ],
+        "url": "https://ui.ballmac.com/components/kpi-row"
+      }
+    },
+    {
+      "name": "kpi-row-demo",
+      "type": "registry:example",
+      "title": "KPI Row: Overview",
+      "description": "Overview example of KPI Row.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kpi-row.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kpi-row-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kpi-row-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kpi-row",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "kpi-row-states",
+      "type": "registry:example",
+      "title": "KPI Row: States and variants",
+      "description": "States and variants example of KPI Row.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kpi-row.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kpi-row-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kpi-row-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kpi-row",
         "tier": "free"
       }
     },
@@ -8224,6 +9399,111 @@
       }
     },
     {
+      "name": "progress-ring",
+      "type": "registry:ui",
+      "title": "Progress Ring",
+      "description": "A token-colored circular progress meter with a readable center and accessible value.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/progress-ring.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/progress-ring.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "progress",
+          "gauge",
+          "status"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A token-colored circular progress meter with a readable center and accessible value.",
+          "whenToUse": [
+            "Show bounded progress in a small area"
+          ],
+          "whenNotToUse": [
+            "Use Progress for a full-width track"
+          ],
+          "composesWith": [
+            "progress"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Progressbar name and current value are announced"
+            }
+          ],
+          "customization": [
+            "Content, layout, and token-based className styling"
+          ]
+        },
+        "examples": [
+          "progress-ring-demo",
+          "progress-ring-states"
+        ],
+        "url": "https://ui.ballmac.com/components/progress-ring"
+      }
+    },
+    {
+      "name": "progress-ring-demo",
+      "type": "registry:example",
+      "title": "Progress Ring: Overview",
+      "description": "Overview example of Progress Ring.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/progress-ring.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/progress-ring-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/progress-ring-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "progress-ring",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "progress-ring-states",
+      "type": "registry:example",
+      "title": "Progress Ring: States and variants",
+      "description": "States and variants example of Progress Ring.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/progress-ring.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/progress-ring-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/progress-ring-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "progress-ring",
+        "tier": "free"
+      }
+    },
+    {
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
@@ -9698,6 +10978,111 @@
       }
     },
     {
+      "name": "sparkline",
+      "type": "registry:ui",
+      "title": "Sparkline",
+      "description": "A lightweight accessible SVG trend line with a marked latest value and no chart dependency.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/sparkline.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/sparkline.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "trend",
+          "data"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A lightweight accessible SVG trend line with a marked latest value and no chart dependency.",
+          "whenToUse": [
+            "Show a small trend beside a metric"
+          ],
+          "whenNotToUse": [
+            "Use a full chart for axes and detailed inspection"
+          ],
+          "composesWith": [
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Trend description is announced as an image"
+            }
+          ],
+          "customization": [
+            "Content, layout, and token-based className styling"
+          ]
+        },
+        "examples": [
+          "sparkline-demo",
+          "sparkline-states"
+        ],
+        "url": "https://ui.ballmac.com/components/sparkline"
+      }
+    },
+    {
+      "name": "sparkline-demo",
+      "type": "registry:example",
+      "title": "Sparkline: Overview",
+      "description": "Overview example of Sparkline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sparkline.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sparkline-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sparkline-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sparkline",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sparkline-states",
+      "type": "registry:example",
+      "title": "Sparkline: States and variants",
+      "description": "States and variants example of Sparkline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sparkline.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sparkline-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sparkline-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sparkline",
+        "tier": "free"
+      }
+    },
+    {
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
@@ -10068,6 +11453,115 @@
       "meta": {
         "example": true,
         "of": "spotlight-search",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:ui",
+      "title": "Stat Card",
+      "description": "A metric card with a clear comparison trend, optional visual, and readable value hierarchy.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/stat-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/stat-card.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "metric",
+          "dashboard",
+          "analytics"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A metric card with a clear comparison trend, optional visual, and readable value hierarchy.",
+          "whenToUse": [
+            "Track a key metric with a comparison period"
+          ],
+          "whenNotToUse": [
+            "Use Kpi Row for several compact metrics"
+          ],
+          "composesWith": [
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Static content is announced with semantic structure"
+            }
+          ],
+          "customization": [
+            "Content, layout, and token-based className styling"
+          ]
+        },
+        "examples": [
+          "stat-card-demo",
+          "stat-card-states"
+        ],
+        "url": "https://ui.ballmac.com/components/stat-card"
+      }
+    },
+    {
+      "name": "stat-card-demo",
+      "type": "registry:example",
+      "title": "Stat Card: Overview",
+      "description": "Overview example of Stat Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/stat-card.json",
+        "https://ui.ballmac.com/r/sparkline.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/stat-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/stat-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "stat-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "stat-card-states",
+      "type": "registry:example",
+      "title": "Stat Card: States and variants",
+      "description": "States and variants example of Stat Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/stat-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/stat-card-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/stat-card-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "stat-card",
         "tier": "free"
       }
     },
@@ -11327,6 +12821,111 @@
       }
     },
     {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "A composable sequence of milestones with current and complete states, dates, and connectors.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/timeline.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/timeline.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "events",
+          "steps",
+          "history"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A composable sequence of milestones with current and complete states, dates, and connectors.",
+          "whenToUse": [
+            "Show milestones or a chronological process"
+          ],
+          "whenNotToUse": [
+            "Use Activity Feed for a compact actor log"
+          ],
+          "composesWith": [
+            "activity-feed"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Static content is announced with semantic structure"
+            }
+          ],
+          "customization": [
+            "Content, layout, and token-based className styling"
+          ]
+        },
+        "examples": [
+          "timeline-demo",
+          "timeline-states"
+        ],
+        "url": "https://ui.ballmac.com/components/timeline"
+      }
+    },
+    {
+      "name": "timeline-demo",
+      "type": "registry:example",
+      "title": "Timeline: Overview",
+      "description": "Overview example of Timeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/timeline.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/timeline-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/timeline-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "timeline",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "timeline-states",
+      "type": "registry:example",
+      "title": "Timeline: States and variants",
+      "description": "States and variants example of Timeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/timeline.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/timeline-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/timeline-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "timeline",
+        "tier": "free"
+      }
+    },
+    {
       "name": "tool-call-card",
       "type": "registry:ui",
       "title": "Tool Call Card",
@@ -11564,6 +13163,115 @@
       "meta": {
         "example": true,
         "of": "tooltip",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tree-view",
+      "type": "registry:ui",
+      "title": "Tree View",
+      "description": "A keyboard-operable hierarchical tree with selection, expansion, and optional node icons.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/tree-view.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/tree-view.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "tree",
+          "navigation",
+          "hierarchy"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A keyboard-operable hierarchical tree with selection, expansion, and optional node icons.",
+          "whenToUse": [
+            "Browse nested navigation or structured data"
+          ],
+          "whenNotToUse": [
+            "Use File Tree for folders and files"
+          ],
+          "composesWith": [
+            "file-tree"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys / Home / End / Enter / Space",
+              "action": "Navigates, expands, and selects nodes"
+            }
+          ],
+          "customization": [
+            "Controlled and uncontrolled state",
+            "Content and token-based className styling"
+          ]
+        },
+        "examples": [
+          "tree-view-demo",
+          "tree-view-states"
+        ],
+        "url": "https://ui.ballmac.com/components/tree-view"
+      }
+    },
+    {
+      "name": "tree-view-demo",
+      "type": "registry:example",
+      "title": "Tree View: Overview",
+      "description": "Overview example of Tree View.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tree-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tree-view-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tree-view-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tree-view",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tree-view-states",
+      "type": "registry:example",
+      "title": "Tree View: States and variants",
+      "description": "States and variants example of Tree View.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tree-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tree-view-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tree-view-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tree-view",
         "tier": "free"
       }
     },

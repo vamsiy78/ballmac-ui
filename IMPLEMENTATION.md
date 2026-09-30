@@ -87,6 +87,8 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 - [x] Automated `pnpm a11y` with axe-core + Playwright: all 147 preview examples in light and dark (294 checks), 0 serious/critical after Wave 1 batch 1
 - [x] Wave 2 batch 1: all 167 preview examples in light and dark (334 checks), 0 serious/critical
 - [x] Wave 2 batch 2: all 177 preview examples in light and dark (354 checks), 0 serious/critical
+- [x] Wave 3: all 209 preview examples in light and dark (418 checks), 0 serious/critical; 52 test files / 121 tests; Base UI and Radix install smoke passed for all 332 registry entries
+- [x] Wave 3 catalog Lighthouse (local mobile): accessibility, best practices, SEO 100; performance 85 (LCP 4.2 s)
 - [~] Lighthouse on ui.ballmac.com (mobile): accessibility, best practices, SEO 100 on every page tested. Performance: hero-1 100, button 98, catalog 95, **home 89** (simulated LCP 3.3 s from the JS of five live demos; next: lazy-hydrate the showcase)
 
 ## Components (MVP: 30)
@@ -100,6 +102,11 @@ time-picker. Component count: 78.
 
 Wave 2 batch 2 (2026-09-30): date-range-picker, currency-input, stepper-form,
 slider-range, signature-pad. Component count: 83. Wave 2 complete.
+
+Wave 3 (2026-09-30): stat-card, kpi-row, timeline, activity-feed,
+description-list, comparison-table, avatar-stack, progress-ring, sparkline,
+contribution-graph, tree-view, file-tree, json-viewer, diff-viewer,
+kanban-board, calendar-agenda. Component count: 99. Wave 3 complete.
 
 | # | Item | Category | Status |
 |---|---|---|---|

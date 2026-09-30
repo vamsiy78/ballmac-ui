@@ -5,7 +5,7 @@ Written 2026-09-29 for the next agent (Codex). Read this, then `AUTHORING.md` (t
 ## 1. Where things stand
 
 - **Product:** a shadcn-compatible registry (`@ballmac`, `https://ui.ballmac.com/r/{name}.json`) plus the docs site in `apps/www` (Next.js 16, React 19, Tailwind v4, Motion 12, Radix via `radix-ui`).
-- **Catalog today:** 83 components, 19 blocks, 2 templates. The original 58 are listed in section 6; Wave 1 batch 1 adds ten and Wave 2 adds fifteen.
+- **Catalog today:** 99 components, 19 blocks, 2 templates. The original 58 are listed in section 6; Wave 1 batch 1 adds ten, Wave 2 adds fifteen, and Wave 3 adds sixteen.
 - **Site:** redesigned; the catalog has Gallery / List / Index views and Quick Look; sidebar component categories are collapsible, so the site scales to 200+ items without changes.
 - **Branches:** `preprod` is where work lands (Vercel preview, behind Vercel login). `main` is production, which the owner has deliberately disabled. **Never push to `main`** unless the owner asks.
 - **Uncommitted/unpushed at handover:** see `git status` and `git log origin/preprod..preprod`. Anything local was committed by the previous agent and still needs a push to `preprod` when the owner agrees.
@@ -86,6 +86,8 @@ Wave 1 batch 1 complete: alert, aspect-ratio, breadcrumb, card, empty, paginatio
 Wave 2 complete. Batch 1: file-dropzone, multi-select, tag-input, number-input, password-input, search-field, phone-input, color-picker, rating, time-picker. Batch 2: date-range-picker, currency-input, stepper-form, slider-range, signature-pad. Research and design decisions: `research/wave-2-batch-1.md` and `research/wave-2-batch-2.md`.
 
 **Wave 3: data display (≈16, `data-display`).** stat-card, kpi-row, timeline, tree-view, file-tree, json-viewer, diff-viewer, kanban-board, contribution-graph, sparkline, progress-ring, description-list, activity-feed, comparison-table, avatar-stack, calendar-agenda.
+
+Wave 3 complete. Batch 1: stat-card, kpi-row, timeline, activity-feed, description-list, comparison-table, avatar-stack, progress-ring, sparkline, contribution-graph. Batch 2: tree-view, file-tree, json-viewer, diff-viewer, kanban-board, calendar-agenda. Research and design decisions: `research/wave-3-batch-1.md` and `research/wave-3-batch-2.md`.
 
 **Wave 4: feedback and status (≈10, `feedback`).** banner, callout, status-dot, empty-state, progress-steps, loading-dots, inline-alert, toast-stack (macOS style), countdown, shortcut-hint.
 
