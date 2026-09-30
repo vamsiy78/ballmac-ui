@@ -1216,6 +1216,136 @@
       }
     },
     {
+      "name": "app-shell",
+      "type": "registry:ui",
+      "title": "App Shell",
+      "description": "The frame of an application page: skip link, sticky header, sidebar that becomes a sheet on small screens, main area, optional aside and footer.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/sheet.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/app-shell.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/app-shell.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "layout",
+          "dashboard",
+          "sidebar",
+          "landmarks"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "AppShell > AppShellSkipLink, AppShellHeader (with AppShellSidebarTrigger), AppShellSidebar, AppShellMain, AppShellAside, AppShellFooter. Sizes are CSS variables set by props.",
+          "whenToUse": [
+            "Admin and dashboard pages",
+            "Any page with a sidebar, a main column and optional details"
+          ],
+          "whenNotToUse": [
+            "A collapsible icon-rail sidebar; use sidebar",
+            "Marketing pages; use navbar"
+          ],
+          "composesWith": [
+            "sidebar",
+            "navbar",
+            "sheet"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "The first stop is the skip link; it jumps to the main content"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Header, sidebar, main, aside and footer are landmarks"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the mobile sidebar"
+            }
+          ],
+          "customization": [
+            "headerHeight, sidebarWidth, asideWidth",
+            "sticky panels scroll on their own",
+            "hide the aside by leaving it out"
+          ]
+        },
+        "examples": [
+          "app-shell-demo",
+          "app-shell-states"
+        ],
+        "url": "https://ui.ballmac.com/components/app-shell"
+      }
+    },
+    {
+      "name": "app-shell-demo",
+      "type": "registry:example",
+      "title": "App Shell: Dashboard frame",
+      "description": "Dashboard frame example of App Shell.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/app-shell.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/app-shell-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/app-shell-demo.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "app-shell",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "app-shell-states",
+      "type": "registry:example",
+      "title": "App Shell: Compact shell",
+      "description": "Compact shell example of App Shell.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/app-shell.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/app-shell-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/app-shell-states.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "app-shell",
+        "tier": "free"
+      }
+    },
+    {
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
@@ -1658,6 +1788,128 @@
       "meta": {
         "example": true,
         "of": "avatar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "back-to-top",
+      "type": "registry:ui",
+      "title": "Back To Top",
+      "description": "A floating button that appears after scrolling, draws a progress ring, scrolls smoothly (instantly under reduced motion) and moves focus to the content.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/scroll.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/back-to-top.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/back-to-top.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "button",
+          "scroll",
+          "floating",
+          "progress"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Render <BackToTop /> once. threshold sets when it appears; container follows a scrollable element; focusTarget chooses where focus lands.",
+          "whenToUse": [
+            "Long pages, feeds and docs",
+            "Panels with a lot of scrolling"
+          ],
+          "whenNotToUse": [
+            "Short pages",
+            "Infinite feeds where returning to the top loses work"
+          ],
+          "composesWith": [
+            "scroll-progress",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Scrolls to the top and moves focus to the main content so focus is not lost when the button disappears"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Jumps instead of scrolling smoothly"
+            }
+          ],
+          "customization": [
+            "threshold",
+            "showProgress",
+            "showLabel",
+            "container and focusTarget"
+          ]
+        },
+        "examples": [
+          "back-to-top-demo",
+          "back-to-top-states"
+        ],
+        "url": "https://ui.ballmac.com/components/back-to-top"
+      }
+    },
+    {
+      "name": "back-to-top-demo",
+      "type": "registry:example",
+      "title": "Back To Top: Progress ring",
+      "description": "Progress ring example of Back To Top.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/back-to-top.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/back-to-top-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/back-to-top-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "back-to-top",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "back-to-top-states",
+      "type": "registry:example",
+      "title": "Back To Top: Labelled",
+      "description": "Labelled example of Back To Top.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/back-to-top.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/back-to-top-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/back-to-top-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "back-to-top",
         "tier": "free"
       }
     },
@@ -5858,6 +6110,147 @@
       }
     },
     {
+      "name": "command-bar",
+      "type": "registry:ui",
+      "title": "Command Bar",
+      "description": "A command palette with pages: a search-field style trigger, grouped commands, drill-in pages with a breadcrumb, Backspace to go back and a footer of key hints.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/command.json",
+        "https://ui.ballmac.com/r/kbd.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/command-bar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/command-bar.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "command palette",
+          "search",
+          "pages",
+          "keyboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "groups: {heading, items:[{id,label,icon,shortcut,keywords,onSelect,pages}]}. An item with pages opens a second page. hotkey toggles with Cmd/Ctrl; trigger={false} hides the button.",
+          "whenToUse": [
+            "Global quick actions and navigation",
+            "Apps with many commands and sub-choices"
+          ],
+          "whenNotToUse": [
+            "A macOS-style launcher; use spotlight-search",
+            "Choosing one value in a form; use combobox"
+          ],
+          "composesWith": [
+            "command",
+            "kbd",
+            "dialog"
+          ],
+          "a11y": [
+            {
+              "keys": "Cmd/Ctrl+K",
+              "action": "Toggles the bar"
+            },
+            {
+              "keys": "Type",
+              "action": "Filters commands"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown / Enter",
+              "action": "Moves and runs"
+            },
+            {
+              "keys": "Backspace on an empty field",
+              "action": "Goes back one page"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes"
+            }
+          ],
+          "customization": [
+            "hotkey",
+            "trigger text or false",
+            "pages for nested choices",
+            "controlled open"
+          ]
+        },
+        "examples": [
+          "command-bar-demo",
+          "command-bar-states"
+        ],
+        "url": "https://ui.ballmac.com/components/command-bar"
+      }
+    },
+    {
+      "name": "command-bar-demo",
+      "type": "registry:example",
+      "title": "Command Bar: Global commands",
+      "description": "Global commands example of Command Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/command-bar.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/command-bar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/command-bar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "command-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "command-bar-states",
+      "type": "registry:example",
+      "title": "Command Bar: Own trigger",
+      "description": "Own trigger example of Command Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/command-bar.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/command-bar-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/command-bar-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "command-bar",
+        "tier": "free"
+      }
+    },
+    {
       "name": "command",
       "type": "registry:ui",
       "title": "Command",
@@ -6239,6 +6632,126 @@
       "meta": {
         "example": true,
         "of": "confetti",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "container-scroll",
+      "type": "registry:ui",
+      "title": "Container Scroll",
+      "description": "A showcase frame that starts tilted back in 3D and flattens to face the reader as it scrolls into view, with a title that lifts alongside.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/container-scroll.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/container-scroll.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "3d",
+          "scroll",
+          "hero",
+          "showcase"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "<ContainerScroll title={...}>{screenshot or live demo}</ContainerScroll>. tilt sets the starting angle; container tracks a scrollable element.",
+          "whenToUse": [
+            "Product hero sections",
+            "Showing a dashboard or app screenshot"
+          ],
+          "whenNotToUse": [
+            "Content that must stay flat and readable at all times",
+            "Pages that scroll inside nested containers without passing container"
+          ],
+          "composesWith": [
+            "browser-frame",
+            "sticky-scroll",
+            "bento-grid"
+          ],
+          "a11y": [
+            {
+              "keys": "Reduced motion",
+              "action": "The frame is flat from the start, with no transform"
+            },
+            {
+              "keys": "Content",
+              "action": "Children stay real, selectable, focusable content"
+            }
+          ],
+          "customization": [
+            "tilt",
+            "title slot",
+            "frameClassName",
+            "container"
+          ]
+        },
+        "examples": [
+          "container-scroll-demo",
+          "container-scroll-states"
+        ],
+        "url": "https://ui.ballmac.com/components/container-scroll"
+      }
+    },
+    {
+      "name": "container-scroll-demo",
+      "type": "registry:example",
+      "title": "Container Scroll: Product showcase",
+      "description": "Product showcase example of Container Scroll.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/container-scroll.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/container-scroll-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/container-scroll-demo.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "container-scroll",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "container-scroll-states",
+      "type": "registry:example",
+      "title": "Container Scroll: Steeper tilt",
+      "description": "Steeper tilt example of Container Scroll.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/container-scroll.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/container-scroll-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/container-scroll-states.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "container-scroll",
         "tier": "free"
       }
     },
@@ -8790,6 +9303,137 @@
       }
     },
     {
+      "name": "floating-nav",
+      "type": "registry:ui",
+      "title": "Floating Nav",
+      "description": "A pill-shaped navigation that floats over the page, with an indicator that glides between items on a spring and optional hide-on-scroll.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/scroll.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/floating-nav.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/floating-nav.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "navigation",
+          "pill",
+          "floating",
+          "mobile"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "items: {value,label,href,icon}. position top or bottom; autoHide slides it away on scroll; value/defaultValue/onValueChange pick the active item.",
+          "whenToUse": [
+            "Landing pages and portfolios",
+            "App-style bottom navigation on small screens"
+          ],
+          "whenNotToUse": [
+            "Sites that need nested menus; use navbar with mega-menu",
+            "Long lists of links"
+          ],
+          "composesWith": [
+            "navbar",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves through the links"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Active item has aria-current; icon-only items keep their label"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The indicator jumps instead of gliding; hiding uses no transition"
+            }
+          ],
+          "customization": [
+            "position: top | bottom",
+            "autoHide",
+            "icons (labels collapse on small screens)",
+            "scrollContainer"
+          ]
+        },
+        "examples": [
+          "floating-nav-demo",
+          "floating-nav-states"
+        ],
+        "url": "https://ui.ballmac.com/components/floating-nav"
+      }
+    },
+    {
+      "name": "floating-nav-demo",
+      "type": "registry:example",
+      "title": "Floating Nav: Top bar that hides",
+      "description": "Top bar that hides example of Floating Nav.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/floating-nav.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/floating-nav-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/floating-nav-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "floating-nav",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "floating-nav-states",
+      "type": "registry:example",
+      "title": "Floating Nav: Bottom bar",
+      "description": "Bottom bar example of Floating Nav.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/floating-nav.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/floating-nav-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/floating-nav-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "floating-nav",
+        "tier": "free"
+      }
+    },
+    {
       "name": "form",
       "type": "registry:ui",
       "title": "Form",
@@ -11262,6 +11906,256 @@
       }
     },
     {
+      "name": "masonry-grid",
+      "type": "registry:ui",
+      "title": "Masonry Grid",
+      "description": "A gap-free multi-column layout for tiles of different heights, built on CSS columns so it never shifts on load, with responsive column counts and optional reveal.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/masonry-grid.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/masonry-grid.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "masonry",
+          "grid",
+          "gallery",
+          "columns"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "<MasonryGrid columns={{base:2, lg:4}} gap reveal><MasonryItem/>…</MasonryGrid>. DOM order is reading order: down the first column, then the next.",
+          "whenToUse": [
+            "Galleries, portfolios and boards",
+            "Testimonials or notes of uneven length"
+          ],
+          "whenNotToUse": [
+            "Rows that must line up across columns; use CSS grid",
+            "Sortable boards; use kanban-board"
+          ],
+          "composesWith": [
+            "card",
+            "bento-grid"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab order",
+              "action": "Follows DOM order, which matches the visual column flow"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Reveal animation is skipped"
+            }
+          ],
+          "customization": [
+            "columns number or per breakpoint",
+            "gap: sm | md | lg",
+            "reveal"
+          ]
+        },
+        "examples": [
+          "masonry-grid-demo",
+          "masonry-grid-states"
+        ],
+        "url": "https://ui.ballmac.com/components/masonry-grid"
+      }
+    },
+    {
+      "name": "masonry-grid-demo",
+      "type": "registry:example",
+      "title": "Masonry Grid: Gallery",
+      "description": "Gallery example of Masonry Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/masonry-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/masonry-grid-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/masonry-grid-demo.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "masonry-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "masonry-grid-states",
+      "type": "registry:example",
+      "title": "Masonry Grid: Notes",
+      "description": "Notes example of Masonry Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/masonry-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/masonry-grid-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/masonry-grid-states.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "masonry-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mega-menu",
+      "type": "registry:ui",
+      "title": "Mega Menu",
+      "description": "A data-driven header menu with wide panels of grouped, described links, an optional featured card, and an accordion list for small screens.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/navigation-menu.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/mega-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/mega-menu.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "navigation",
+          "dropdown",
+          "header",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Pass items: a plain link ({label, href}) or a panel ({label, columns, featured}). MegaMenuMobileList renders the same data for the mobile menu.",
+          "whenToUse": [
+            "Sites with many products or solutions",
+            "Headers that need descriptions beside links"
+          ],
+          "whenNotToUse": [
+            "A handful of plain links; use navbar",
+            "Application commands; use menubar"
+          ],
+          "composesWith": [
+            "navbar",
+            "navigation-menu"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space / ArrowDown",
+              "action": "Opens the focused panel"
+            },
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Moves between top-level items"
+            },
+            {
+              "keys": "Tab",
+              "action": "Enters the panel links"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the panel"
+            }
+          ],
+          "customization": [
+            "columns with titles",
+            "featured card with media and cta",
+            "badge on links",
+            "viewportAlign start | center"
+          ]
+        },
+        "examples": [
+          "mega-menu-demo",
+          "mega-menu-states"
+        ],
+        "url": "https://ui.ballmac.com/components/mega-menu"
+      }
+    },
+    {
+      "name": "mega-menu-demo",
+      "type": "registry:example",
+      "title": "Mega Menu: Product menu",
+      "description": "Product menu example of Mega Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mega-menu.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mega-menu-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mega-menu-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mega-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mega-menu-states",
+      "type": "registry:example",
+      "title": "Mega Menu: Mobile list",
+      "description": "Mobile list example of Mega Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mega-menu.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mega-menu-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mega-menu-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mega-menu",
+        "tier": "free"
+      }
+    },
+    {
       "name": "menu-bar",
       "type": "registry:ui",
       "title": "Menu Bar",
@@ -11737,6 +12631,139 @@
       "meta": {
         "example": true,
         "of": "multi-select",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "navbar",
+      "type": "registry:ui",
+      "title": "Navbar",
+      "description": "A responsive site header that gains a border and shadow on scroll, can hide while scrolling down, and turns its links into a sheet menu on small screens.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/sheet.json",
+        "https://ui.ballmac.com/r/scroll.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/navbar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/navbar.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "header",
+          "navigation",
+          "sticky",
+          "responsive"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Compose Navbar with NavbarBrand, NavbarLinks/NavbarLink (active sets aria-current), NavbarActions and NavbarMobileMenu with NavbarMobileLink.",
+          "whenToUse": [
+            "Marketing and docs site headers",
+            "Headers that should get out of the way on long pages"
+          ],
+          "whenNotToUse": [
+            "Application chrome with a sidebar; use app-shell",
+            "Wide dropdown panels; add mega-menu"
+          ],
+          "composesWith": [
+            "mega-menu",
+            "button",
+            "sheet"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves through brand, links, actions and the menu button"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Opens the mobile menu; Escape closes it and returns focus"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Links are in a labelled navigation landmark; the current page has aria-current"
+            }
+          ],
+          "customization": [
+            "sticky and hideOnScroll",
+            "border: scrolled | always | never",
+            "scrollContainer for headers inside panels",
+            "mobile menu label"
+          ]
+        },
+        "examples": [
+          "navbar-demo",
+          "navbar-states"
+        ],
+        "url": "https://ui.ballmac.com/components/navbar"
+      }
+    },
+    {
+      "name": "navbar-demo",
+      "type": "registry:example",
+      "title": "Navbar: Marketing header",
+      "description": "Marketing header example of Navbar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/navbar.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/navbar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/navbar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "navbar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "navbar-states",
+      "type": "registry:example",
+      "title": "Navbar: Hide on scroll",
+      "description": "Hide on scroll example of Navbar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/navbar.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/navbar-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/navbar-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "navbar",
         "tier": "free"
       }
     },
@@ -14191,6 +15218,124 @@
       }
     },
     {
+      "name": "scroll-progress",
+      "type": "registry:ui",
+      "title": "Scroll Progress",
+      "description": "A thin reading-progress bar fixed to the top or bottom of the page, or to a scrollable panel, that fills on a soft spring (or exactly under reduced motion).",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/scroll-progress.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/scroll-progress.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "progress",
+          "reading",
+          "scroll",
+          "indicator"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Render <ScrollProgress /> once. Pass container (a ref) to follow a scrollable element and add className='absolute' inside its wrapper.",
+          "whenToUse": [
+            "Long articles and docs",
+            "Multi-section landing pages"
+          ],
+          "whenNotToUse": [
+            "Task or upload progress; use progress",
+            "Step indicators; use progress-steps"
+          ],
+          "composesWith": [
+            "table-of-contents",
+            "back-to-top"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Decorative (aria-hidden); the page's own scroll position is already exposed"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "No spring smoothing"
+            }
+          ],
+          "customization": [
+            "position: top | bottom",
+            "thickness",
+            "container"
+          ]
+        },
+        "examples": [
+          "scroll-progress-demo",
+          "scroll-progress-states"
+        ],
+        "url": "https://ui.ballmac.com/components/scroll-progress"
+      }
+    },
+    {
+      "name": "scroll-progress-demo",
+      "type": "registry:example",
+      "title": "Scroll Progress: Article progress",
+      "description": "Article progress example of Scroll Progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/scroll-progress.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/scroll-progress-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/scroll-progress-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "scroll-progress",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "scroll-progress-states",
+      "type": "registry:example",
+      "title": "Scroll Progress: Bottom, thicker",
+      "description": "Bottom, thicker example of Scroll Progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/scroll-progress.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/scroll-progress-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/scroll-progress-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "scroll-progress",
+        "tier": "free"
+      }
+    },
+    {
       "name": "search-field",
       "type": "registry:ui",
       "title": "Search Field",
@@ -14301,6 +15446,132 @@
       "meta": {
         "example": true,
         "of": "search-field",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "section-tabs",
+      "type": "registry:ui",
+      "title": "Section Tabs",
+      "description": "Sticky in-page tabs that follow the reader's section, slide an indicator to it, keep the active tab in view on narrow screens and scroll to a section on click.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/scroll.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/section-tabs.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/section-tabs.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "tabs",
+          "scrollspy",
+          "sticky",
+          "anchor links"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "sections: {id,label} matching element ids in the page. offset is the space to leave for this bar and any header. variant underline or pill.",
+          "whenToUse": [
+            "Long product, pricing and docs pages",
+            "Anchored sections of a settings page"
+          ],
+          "whenNotToUse": [
+            "Switching views without scrolling; use tabs",
+            "Vertical page outlines; use table-of-contents"
+          ],
+          "composesWith": [
+            "table-of-contents",
+            "navbar",
+            "tabs"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter",
+              "action": "Scrolls to the section and updates the URL hash"
+            },
+            {
+              "keys": "Tab",
+              "action": "Real links; middle-click and copy link work"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Current section has aria-current=location"
+            }
+          ],
+          "customization": [
+            "variant",
+            "sticky and stickyTop",
+            "offset",
+            "container"
+          ]
+        },
+        "examples": [
+          "section-tabs-demo",
+          "section-tabs-states"
+        ],
+        "url": "https://ui.ballmac.com/components/section-tabs"
+      }
+    },
+    {
+      "name": "section-tabs-demo",
+      "type": "registry:example",
+      "title": "Section Tabs: Product page",
+      "description": "Product page example of Section Tabs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/section-tabs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/section-tabs-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/section-tabs-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "section-tabs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "section-tabs-states",
+      "type": "registry:example",
+      "title": "Section Tabs: Pill, narrow",
+      "description": "Pill, narrow example of Section Tabs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/section-tabs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/section-tabs-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/section-tabs-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "section-tabs",
         "tier": "free"
       }
     },
@@ -15832,6 +17103,132 @@
       }
     },
     {
+      "name": "split-view",
+      "type": "registry:ui",
+      "title": "Split View",
+      "description": "A master and detail layout with a keyboard-resizable divider. Panes sit side by side in wide containers and stack with a Back button in narrow ones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/split-view.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/split-view.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "master detail",
+          "split",
+          "list",
+          "responsive"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "SplitView > SplitViewList, SplitViewDetail and SplitViewBack. Use useSplitView().setDetailOpen(true) when an item is chosen. Responds to its own width, not the screen's.",
+          "whenToUse": [
+            "Mail, files and settings screens",
+            "Any list that opens a detail"
+          ],
+          "whenNotToUse": [
+            "User-arranged dock panels; use resizable",
+            "Overlay details; use sheet or drawer"
+          ],
+          "composesWith": [
+            "resizable",
+            "scroll-area",
+            "sidebar"
+          ],
+          "a11y": [
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Resize the list from the divider; Shift for larger steps; Home and End for the limits"
+            },
+            {
+              "keys": "Tab",
+              "action": "Back button appears only when panes stack"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Panes are labelled regions; the divider is a separator with value bounds"
+            }
+          ],
+          "customization": [
+            "listWidth, minListWidth, maxListWidth",
+            "controlled detailOpen",
+            "container-query breakpoint"
+          ]
+        },
+        "examples": [
+          "split-view-demo",
+          "split-view-states"
+        ],
+        "url": "https://ui.ballmac.com/components/split-view"
+      }
+    },
+    {
+      "name": "split-view-demo",
+      "type": "registry:example",
+      "title": "Split View: Mail layout",
+      "description": "Mail layout example of Split View.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/split-view.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/split-view-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/split-view-demo.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "split-view",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "split-view-states",
+      "type": "registry:example",
+      "title": "Split View: Stacked on narrow",
+      "description": "Stacked on narrow example of Split View.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/split-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/split-view-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/split-view-states.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "split-view",
+        "tier": "free"
+      }
+    },
+    {
       "name": "spotlight-card",
       "type": "registry:ui",
       "title": "Spotlight Card",
@@ -16420,6 +17817,129 @@
       }
     },
     {
+      "name": "sticky-scroll",
+      "type": "registry:ui",
+      "title": "Sticky Scroll",
+      "description": "Scroll-driven storytelling: text steps scroll past while one visual stays pinned and crossfades to match, with each visual inline on small screens.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/sticky-scroll.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/sticky-scroll.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "scrollytelling",
+          "sticky",
+          "feature",
+          "marketing"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "items: {id,title,description,visual}. The step nearest the middle of the viewport is active (aria-current=step) and its visual shows in the pinned panel.",
+          "whenToUse": [
+            "Feature tours on landing pages",
+            "Step-by-step explanations with a matching picture"
+          ],
+          "whenNotToUse": [
+            "Short lists of benefits; use a plain grid",
+            "Content that must all be visible at once"
+          ],
+          "composesWith": [
+            "container-scroll",
+            "bento-grid"
+          ],
+          "a11y": [
+            {
+              "keys": "Reading order",
+              "action": "Steps are an ordered list; the pinned visual is decorative and hidden from assistive technology"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "No crossfade or scale"
+            }
+          ],
+          "customization": [
+            "visualSide: left | right",
+            "stickyOffset and stepMinHeight",
+            "container for panel scrolling",
+            "onActiveChange"
+          ]
+        },
+        "examples": [
+          "sticky-scroll-demo",
+          "sticky-scroll-states"
+        ],
+        "url": "https://ui.ballmac.com/components/sticky-scroll"
+      }
+    },
+    {
+      "name": "sticky-scroll-demo",
+      "type": "registry:example",
+      "title": "Sticky Scroll: Feature story",
+      "description": "Feature story example of Sticky Scroll.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sticky-scroll.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sticky-scroll-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sticky-scroll-demo.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sticky-scroll",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sticky-scroll-states",
+      "type": "registry:example",
+      "title": "Sticky Scroll: Visual on the left",
+      "description": "Visual on the left example of Sticky Scroll.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sticky-scroll.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sticky-scroll-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sticky-scroll-states.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sticky-scroll",
+        "tier": "free"
+      }
+    },
+    {
       "name": "streaming-text",
       "type": "registry:ui",
       "title": "Streaming Text",
@@ -16643,6 +18163,131 @@
       "meta": {
         "example": true,
         "of": "switch",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "table-of-contents",
+      "type": "registry:ui",
+      "title": "Table Of Contents",
+      "description": "An 'On this page' list with a scroll spy and a sliding current-section marker. It collects headings itself or takes a list, and scrolls below sticky headers.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/scroll.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/table-of-contents.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/table-of-contents.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "toc",
+          "scrollspy",
+          "docs",
+          "anchor links"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Leave items out to collect h2 and h3 headings (they need text; missing ids are created). Current section gets aria-current=location.",
+          "whenToUse": [
+            "Documentation and long articles",
+            "Settings pages with many sections"
+          ],
+          "whenNotToUse": [
+            "Horizontal in-page tabs; use section-tabs",
+            "App navigation; use sidebar"
+          ],
+          "composesWith": [
+            "scroll-progress",
+            "section-tabs"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter",
+              "action": "Scrolls to the section and updates the URL hash"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "A labelled navigation; the current section has aria-current=location"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Jumps instead of smooth scrolling; the marker does not glide"
+            }
+          ],
+          "customization": [
+            "items or headingsFrom",
+            "levels",
+            "title",
+            "offset and container"
+          ]
+        },
+        "examples": [
+          "table-of-contents-demo",
+          "table-of-contents-states"
+        ],
+        "url": "https://ui.ballmac.com/components/table-of-contents"
+      }
+    },
+    {
+      "name": "table-of-contents-demo",
+      "type": "registry:example",
+      "title": "Table Of Contents: Auto-collected",
+      "description": "Auto-collected example of Table Of Contents.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/table-of-contents.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/table-of-contents-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/table-of-contents-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "table-of-contents",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "table-of-contents-states",
+      "type": "registry:example",
+      "title": "Table Of Contents: Explicit items",
+      "description": "Explicit items example of Table Of Contents.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/table-of-contents.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/table-of-contents-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/table-of-contents-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "table-of-contents",
         "tier": "free"
       }
     },
@@ -17013,6 +18658,138 @@
       "meta": {
         "example": true,
         "of": "tag-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "team-switcher",
+      "type": "registry:ui",
+      "title": "Team Switcher",
+      "description": "A workspace picker: the current team on a button, the others in a radio menu with logos and descriptions, an add-team row, and a compact icon mode.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/dropdown-menu.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/team-switcher.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/team-switcher.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "workspace",
+          "switcher",
+          "menu",
+          "dropdown"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "teams: {id,name,description,logo}. value/defaultValue/onValueChange choose the active team; onAddTeam adds the last row; compact shows only the logo.",
+          "whenToUse": [
+            "Multi-workspace apps in a sidebar or header",
+            "Switching organizations or projects"
+          ],
+          "whenNotToUse": [
+            "Choosing a value in a form; use select or combobox",
+            "Long searchable lists; use combobox"
+          ],
+          "composesWith": [
+            "sidebar",
+            "app-shell",
+            "avatar"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space / ArrowDown",
+              "action": "Opens the menu"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "Moves between teams"
+            },
+            {
+              "keys": "Enter",
+              "action": "Chooses the team"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes and returns focus"
+            }
+          ],
+          "customization": [
+            "compact",
+            "logo per team",
+            "onAddTeam and addLabel",
+            "side and align"
+          ]
+        },
+        "examples": [
+          "team-switcher-demo",
+          "team-switcher-states"
+        ],
+        "url": "https://ui.ballmac.com/components/team-switcher"
+      }
+    },
+    {
+      "name": "team-switcher-demo",
+      "type": "registry:example",
+      "title": "Team Switcher: Workspace menu",
+      "description": "Workspace menu example of Team Switcher.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/team-switcher.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/team-switcher-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/team-switcher-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "team-switcher",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "team-switcher-states",
+      "type": "registry:example",
+      "title": "Team Switcher: Compact",
+      "description": "Compact example of Team Switcher.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/team-switcher.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/team-switcher-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/team-switcher-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "team-switcher",
         "tier": "free"
       }
     },
@@ -18976,6 +20753,55 @@
         },
         "examples": [],
         "url": "https://ui.ballmac.com/components/motion-presets"
+      }
+    },
+    {
+      "name": "scroll",
+      "type": "registry:lib",
+      "title": "Scroll Utilities",
+      "description": "Small hooks and helpers for scroll-aware UI: scrolled state, scroll direction, a scroll spy for in-page sections, and reduced-motion-aware scrolling to an element below a sticky header.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "files": [
+        {
+          "path": "registry/ballmac/lib/scroll.ts",
+          "type": "registry:lib",
+          "target": "@lib/ballmac/scroll.ts"
+        }
+      ],
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "scroll",
+          "scrollspy",
+          "sticky header",
+          "reduced motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Import useScrolled, useScrollDirection, useScrollSpy, scrollToId, scrollToElement and prefersReducedMotion from @/lib/ballmac/scroll. Pass a container ref to watch an element instead of the page.",
+          "whenToUse": [
+            "Sticky headers that change on scroll",
+            "Highlighting the current section in a table of contents or tab bar",
+            "Smooth in-page links that respect reduced motion"
+          ],
+          "whenNotToUse": [
+            "Scroll-linked animation values (use Motion's useScroll)",
+            "Virtual lists"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "offset: pixels reserved for a sticky header",
+            "container: a ref to a scrollable element"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/scroll"
       }
     },
     {

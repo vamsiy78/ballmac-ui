@@ -11,11 +11,14 @@ import { cn } from "@/lib/utils";
 type NavigationMenuProps = React.ComponentProps<typeof Primitive.Root> & {
   /** Render panels in a shared viewport that resizes between items. Turn off to position each panel under its trigger. */
   viewport?: boolean;
+  /** Where the shared viewport sits under the menu: from its left edge, or centered under the whole menu (good for wide mega menus). */
+  viewportAlign?: "start" | "center";
 };
 function NavigationMenu({
   className,
   children,
   viewport = true,
+  viewportAlign = "start",
   ...props
 }: NavigationMenuProps) {
   return (
@@ -29,7 +32,7 @@ function NavigationMenu({
       {...props}
     >
       {children}
-      {viewport && <NavigationMenuViewport />}
+      {viewport && <NavigationMenuViewport align={viewportAlign} />}
     </Primitive.Root>
   );
 }
@@ -97,14 +100,17 @@ function NavigationMenuContent({ className, ...props }: NavigationMenuContentPro
   );
 }
 
-type NavigationMenuViewportProps = React.ComponentProps<typeof Primitive.Viewport>;
-function NavigationMenuViewport({ className, ...props }: NavigationMenuViewportProps) {
+type NavigationMenuViewportProps = React.ComponentProps<typeof Primitive.Viewport> & {
+  /** Align the viewport to the menu's left edge or center it under the menu. */
+  align?: "start" | "center";
+};
+function NavigationMenuViewport({ className, align = "start", ...props }: NavigationMenuViewportProps) {
   return (
-    <div className="absolute top-full left-0 isolate z-50 flex justify-center">
+    <div className={cn("absolute top-full left-0 isolate z-50 flex justify-center", align === "center" && "w-full")}>
       <Primitive.Viewport
         data-slot="navigation-menu-viewport"
         className={cn(
-          "origin-top-center relative mt-1.5 h-(--radix-navigation-menu-viewport-height) w-full overflow-hidden rounded-xl border bg-popover text-popover-foreground shadow-[0_12px_36px_-10px_rgb(0_0_0/0.25)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-(--radix-navigation-menu-viewport-width) motion-reduce:animate-none",
+          "origin-top-center relative mt-1.5 shrink-0 h-(--radix-navigation-menu-viewport-height) w-full overflow-hidden rounded-xl border bg-popover text-popover-foreground shadow-[0_12px_36px_-10px_rgb(0_0_0/0.25)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-(--radix-navigation-menu-viewport-width) motion-reduce:animate-none",
           className,
         )}
         {...props}

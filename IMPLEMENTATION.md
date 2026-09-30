@@ -91,10 +91,13 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 - [x] Wave 1 batch 2: all 249 preview examples in light and dark (498 checks), 0 serious/critical; 66 test files / 147 tests; Base UI and Radix install smoke passed for all 392 registry entries
 - [x] Wave 1 batch 3: all 273 preview examples in light and dark (546 checks), 0 serious/critical; open overlay states scanned with `scripts/a11y-open-states.ts`; 78 test files / 171 tests; the owner ran the official Base UI and Radix CLI smokes locally and reported them good (the cloud session could not reach `ui.shadcn.com`); offline fresh-app typecheck and build of all 273 examples passed
 - [~] Wave 1 batch 4 (completes Wave 1): all 296 preview examples in light and dark (592 checks), 0 serious/critical; every overlay and error state opened and scanned with `scripts/a11y-open-states.ts` (only the known Radix aria-hidden-focus pattern on menus); 89 test files / 202 tests; registry check (462 entries), lint, typecheck and production build pass; fresh-app offline typecheck and build of all 296 examples passes. Official shadcn CLI smokes (Base UI, Radix) for this batch still to be run where `ui.shadcn.com` is reachable
+- [~] Wave 5 (navigation and layout): all 324 preview examples in light and dark (648 checks), 0 serious/critical; opened menus, sheets, dialogs and scrolled states scanned with `scripts/a11y-open-states.ts`; 104 test files / 233 tests; registry check (505 entries), lint, typecheck and production build pass; component pages, catalog views and Quick Look clean at desktop and 390 px; fresh-app offline typecheck and build of all 324 examples passes. Official shadcn CLI smokes (Base UI, Radix) for Waves 1 batch 4 and 5 still to be run where `ui.shadcn.com` is reachable
 - [x] Wave 3 catalog Lighthouse (local mobile): accessibility, best practices, SEO 100; performance 85 (LCP 4.2 s)
 - [~] Lighthouse on ui.ballmac.com (mobile): accessibility, best practices, SEO 100 on every page tested. Performance: hero-1 100, button 98, catalog 95, **home 89** (simulated LCP 3.3 s from the JS of five live demos; next: lazy-hydrate the showcase)
 
 ## Components (MVP: 30)
+
+Wave 5 (2026-09-30): navbar, mega-menu, floating-nav, app-shell, team-switcher, sticky-scroll, split-view, masonry-grid, scroll-progress, back-to-top, table-of-contents, container-scroll, section-tabs, command-bar (plus the `scroll` lib). Component count: 156. Wave 5 complete. See `research/wave-5-navigation-layout.md`.
 
 Wave 1 batch 4 (2026-09-30): calendar, date-picker, carousel, chart, data-table, drawer, form, input-otp, resizable, sidebar, toast. Component count: 142. Wave 1 complete. See `research/wave-1-batch-4.md`.
 

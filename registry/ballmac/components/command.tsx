@@ -208,6 +208,8 @@ function CommandSeparator({ className, ...props }: CommandSeparatorProps) {
 }
 
 type CommandItemProps = React.ComponentProps<typeof Primitive.Item> & {
+  /** Leading icon. Use this instead of putting the icon in `children` when the item has a `description`. */
+  icon?: React.ReactNode;
   /** Second line of muted text under the title. */
   description?: React.ReactNode;
   /** Show a check at the end, for the currently chosen option in a picker. */
@@ -216,6 +218,7 @@ type CommandItemProps = React.ComponentProps<typeof Primitive.Item> & {
 function CommandItem({
   ref,
   className,
+  icon,
   description,
   selected,
   children,
@@ -235,6 +238,7 @@ function CommandItem({
       )}
       {...props}
     >
+      {icon}
       {description ? (
         <span className="grid min-w-0 flex-1 gap-0.5">
           <span className="truncate">{children}</span>

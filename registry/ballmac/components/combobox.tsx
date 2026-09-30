@@ -153,6 +153,7 @@ function Combobox({
                     key={o.value}
                     value={o.value}
                     keywords={[o.label, ...(o.keywords ?? [])]}
+                    icon={o.icon}
                     description={o.description}
                     selected={o.value === value}
                     disabled={o.disabled}
@@ -161,7 +162,6 @@ function Combobox({
                       setOpen(false);
                     }}
                   >
-                    {o.icon}
                     {o.label}
                   </CommandItem>
                 ))}
