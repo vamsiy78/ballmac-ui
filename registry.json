@@ -5287,6 +5287,290 @@
       }
     },
     {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "A searchable single-choice select with groups, descriptions, keywords, clearable value, invalid state and hidden-input form submission.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/command.json",
+        "https://ui.ballmac.com/r/popover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/combobox.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/combobox.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "select",
+          "search",
+          "autocomplete",
+          "form"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Pass options with value and label. It opens a filterable list; the trigger is a combobox button that submits through name.",
+          "whenToUse": [
+            "Choosing from more than about seven options",
+            "Time zones, countries, users and frameworks"
+          ],
+          "whenNotToUse": [
+            "Short lists; use select or radio-group",
+            "Choosing several values; use multi-select"
+          ],
+          "composesWith": [
+            "field",
+            "command",
+            "popover"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space / ArrowDown",
+              "action": "Opens the list from the trigger"
+            },
+            {
+              "keys": "Type",
+              "action": "Filters options; matches value, label and keywords"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown / Enter",
+              "action": "Moves and selects"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes and returns focus to the trigger"
+            }
+          ],
+          "customization": [
+            "options with group, icon, description and keywords",
+            "clearable",
+            "invalid",
+            "name for native form submission"
+          ]
+        },
+        "examples": [
+          "combobox-demo",
+          "combobox-states"
+        ],
+        "url": "https://ui.ballmac.com/components/combobox"
+      }
+    },
+    {
+      "name": "combobox-demo",
+      "type": "registry:example",
+      "title": "Combobox: Framework picker",
+      "description": "Framework picker example of Combobox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/combobox.json",
+        "https://ui.ballmac.com/r/field.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/combobox-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/combobox-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "combobox",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "combobox-states",
+      "type": "registry:example",
+      "title": "Combobox: Groups and states",
+      "description": "Groups and states example of Combobox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/combobox.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/combobox-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/combobox-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "combobox",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "A filterable command list on cmdk, inline or in a Cmd/Ctrl+K dialog, with groups, shortcuts, descriptions, loading state and page-safe scrolling.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "cmdk@^1",
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/command.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/command.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "command palette",
+          "search",
+          "cmdk",
+          "keyboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Compose Command, CommandInput, CommandList, CommandGroup and CommandItem. CommandDialog adds the modal and the ⌘K hotkey.",
+          "whenToUse": [
+            "Command palettes and quick switchers",
+            "Searchable action lists",
+            "The list inside a combobox"
+          ],
+          "whenNotToUse": [
+            "macOS-style launcher visuals; use spotlight-search",
+            "A simple select; use select"
+          ],
+          "composesWith": [
+            "popover",
+            "dialog",
+            "kbd"
+          ],
+          "a11y": [
+            {
+              "keys": "Type",
+              "action": "Filters the list"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "Moves the highlighted item"
+            },
+            {
+              "keys": "Enter",
+              "action": "Runs the highlighted item"
+            },
+            {
+              "keys": "Cmd/Ctrl+K",
+              "action": "Toggles CommandDialog"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the dialog"
+            }
+          ],
+          "customization": [
+            "hotkey key or false",
+            "filter and shouldFilter from cmdk",
+            "item description and selected check",
+            "CommandLoading for async results"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Command",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "command-demo",
+          "command-dialog"
+        ],
+        "url": "https://ui.ballmac.com/components/command"
+      }
+    },
+    {
+      "name": "command-demo",
+      "type": "registry:example",
+      "title": "Command: Inline menu",
+      "description": "Inline menu example of Command.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/command.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/command-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/command-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "command",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "command-dialog",
+      "type": "registry:example",
+      "title": "Command: Cmd+K dialog",
+      "description": "Cmd+K dialog example of Command.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/command.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/kbd.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/command-dialog.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/command-dialog.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "command",
+        "tier": "free"
+      }
+    },
+    {
       "name": "comparison-table",
       "type": "registry:ui",
       "title": "Comparison Table",
@@ -5518,6 +5802,148 @@
       "meta": {
         "example": true,
         "of": "confetti",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "A right-click, long-press and Shift+F10 menu with submenus, checkbox and radio items, shortcut hints and a destructive style, built on Radix.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/context-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/context-menu.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "menu",
+          "right-click",
+          "overlay",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Shows actions at the pointer on right-click or long-press. Keyboard users open it with Shift+F10 or the Menu key on a focusable trigger.",
+          "whenToUse": [
+            "File, card and canvas actions",
+            "Secondary actions that also exist elsewhere",
+            "Desktop-style apps"
+          ],
+          "whenNotToUse": [
+            "The only way to reach an action; menus must be discoverable, so also offer a dropdown-menu button",
+            "Touch-first layouts without a visible trigger"
+          ],
+          "composesWith": [
+            "dropdown-menu",
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "Right-click / long-press",
+              "action": "Opens the menu at the pointer"
+            },
+            {
+              "keys": "Shift+F10 / Menu key",
+              "action": "Opens it from a focused trigger"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "Moves between items"
+            },
+            {
+              "keys": "ArrowRight / ArrowLeft",
+              "action": "Opens and closes a submenu"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the menu"
+            }
+          ],
+          "customization": [
+            "destructive item style",
+            "give the trigger tabIndex 0 and a label so it is keyboard reachable",
+            "checkbox and radio items"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Context Menu",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "context-menu-demo",
+          "context-menu-states"
+        ],
+        "url": "https://ui.ballmac.com/components/context-menu"
+      }
+    },
+    {
+      "name": "context-menu-demo",
+      "type": "registry:example",
+      "title": "Context Menu: File actions",
+      "description": "File actions example of Context Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/context-menu.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/context-menu-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/context-menu-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "context-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "context-menu-states",
+      "type": "registry:example",
+      "title": "Context Menu: View options",
+      "description": "View options example of Context Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/context-menu.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/context-menu-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/context-menu-states.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "context-menu",
         "tier": "free"
       }
     },
@@ -6549,6 +6975,153 @@
       }
     },
     {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "An action menu on a trigger with checkbox and radio items, submenus, shortcut hints and destructive rows, built on Radix for full keyboard and typeahead support.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/dropdown-menu.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "menu",
+          "overlay",
+          "actions",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Opens a menu of actions from a button. Supports groups, labels, checkbox and radio items, nested submenus, shortcuts and a destructive style.",
+          "whenToUse": [
+            "Account, row and overflow (…) actions",
+            "Sort and view preferences with radio items",
+            "Menus with a submenu or checked options"
+          ],
+          "whenNotToUse": [
+            "Choosing a form value; use select or combobox",
+            "Right-click menus; use context-menu",
+            "A persistent app menu bar; use menubar"
+          ],
+          "composesWith": [
+            "button",
+            "kbd"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space / ArrowDown",
+              "action": "Opens the menu from the trigger"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "Moves between items; Home and End jump"
+            },
+            {
+              "keys": "Type a letter",
+              "action": "Jumps to the next item starting with it"
+            },
+            {
+              "keys": "ArrowRight / ArrowLeft",
+              "action": "Opens and closes a submenu"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes and returns focus to the trigger"
+            }
+          ],
+          "customization": [
+            "destructive item style",
+            "inset alignment for mixed icon rows",
+            "alignment and side offset on the content",
+            "controlled open state"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Dropdown Menu",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "dropdown-menu-demo",
+          "dropdown-menu-states"
+        ],
+        "url": "https://ui.ballmac.com/components/dropdown-menu"
+      }
+    },
+    {
+      "name": "dropdown-menu-demo",
+      "type": "registry:example",
+      "title": "Dropdown Menu: Account menu",
+      "description": "Account menu example of Dropdown Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dropdown-menu.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dropdown-menu-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dropdown-menu-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dropdown-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dropdown-menu-states",
+      "type": "registry:example",
+      "title": "Dropdown Menu: Radio choices",
+      "description": "Radio choices example of Dropdown Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dropdown-menu.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dropdown-menu-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dropdown-menu-states.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dropdown-menu",
+        "tier": "free"
+      }
+    },
+    {
       "name": "dynamic-island",
       "type": "registry:ui",
       "title": "Dynamic Island",
@@ -6905,6 +7478,141 @@
       "meta": {
         "example": true,
         "of": "empty",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Form field layout with label, description and error that wire their ids to the control automatically, plus fieldset, legend, orientation and invalid/disabled state.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/field.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/field.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "form",
+          "label",
+          "validation",
+          "layout"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Wrap a control in Field, spread useFieldControl() on it, and label, description, error, aria-invalid and disabled are connected for you.",
+          "whenToUse": [
+            "Any labelled form control",
+            "Forms with validation messages",
+            "Settings rows with a switch or checkbox"
+          ],
+          "whenNotToUse": [
+            "A single unlabeled search box; use search-field",
+            "Complete form state management; combine with your form library"
+          ],
+          "composesWith": [
+            "input",
+            "textarea",
+            "select",
+            "checkbox",
+            "switch",
+            "combobox"
+          ],
+          "a11y": [
+            {
+              "keys": "Click label",
+              "action": "Focuses the control"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Read the description, and the error when invalid; the error is announced with role alert"
+            }
+          ],
+          "customization": [
+            "orientation: vertical | horizontal | responsive",
+            "invalid and disabled",
+            "FieldError errors array (deduplicated)",
+            "required marker on FieldLabel"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Field",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "field-demo",
+          "field-states"
+        ],
+        "url": "https://ui.ballmac.com/components/field"
+      }
+    },
+    {
+      "name": "field-demo",
+      "type": "registry:example",
+      "title": "Field: Invite form",
+      "description": "Invite form example of Field.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/field.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/field-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/field-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "field",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "field-states",
+      "type": "registry:example",
+      "title": "Field: Switch rows",
+      "description": "Switch rows example of Field.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/field.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/field-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/field-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "field",
         "tier": "free"
       }
     },
@@ -7836,6 +8544,139 @@
       }
     },
     {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "One bordered field that wraps an input or textarea with icon, text, button and keyboard-hint addons at either end or above and below.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/input-group.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "input",
+          "addon",
+          "form",
+          "textarea"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Put InputGroupInput or InputGroupTextarea plus InputGroupAddon parts inside InputGroup. The group draws the border, focus ring and invalid state.",
+          "whenToUse": [
+            "URL and currency prefixes and suffixes",
+            "Search fields with a button",
+            "Chat composers with a send button"
+          ],
+          "whenNotToUse": [
+            "A plain field; use input",
+            "Attached separate buttons; use button-group"
+          ],
+          "composesWith": [
+            "field",
+            "button",
+            "kbd"
+          ],
+          "a11y": [
+            {
+              "keys": "Click addon text",
+              "action": "Focuses the control"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves between the control and addon buttons"
+            }
+          ],
+          "customization": [
+            "addon align: inline-start | inline-end | block-start | block-end",
+            "button size: xs | sm | icon-xs | icon-sm",
+            "aria-invalid on the control"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Input Group",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "input-group-demo",
+          "input-group-states"
+        ],
+        "url": "https://ui.ballmac.com/components/input-group"
+      }
+    },
+    {
+      "name": "input-group-demo",
+      "type": "registry:example",
+      "title": "Input Group: Addons",
+      "description": "Addons example of Input Group.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/input-group.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/input-group-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/input-group-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "input-group",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "input-group-states",
+      "type": "registry:example",
+      "title": "Input Group: Invalid and disabled",
+      "description": "Invalid and disabled example of Input Group.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/input-group.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/input-group-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/input-group-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "input-group",
+        "tier": "free"
+      }
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
@@ -8096,6 +8937,137 @@
       "meta": {
         "example": true,
         "of": "install-tabs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "item",
+      "type": "registry:ui",
+      "title": "Item",
+      "description": "A flexible list row with media, title, description and actions, in outline, muted and plain variants, that can also render as a link.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/item.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/item.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "list",
+          "row",
+          "media",
+          "layout"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Compose rows from ItemMedia, ItemContent, ItemTitle, ItemDescription and ItemActions. asChild styles a link or button as a whole-row target.",
+          "whenToUse": [
+            "Settings, connected accounts and file lists",
+            "Rows with an icon or avatar, text and an action"
+          ],
+          "whenNotToUse": [
+            "Tabular data with columns; use table",
+            "Long card layouts; use card"
+          ],
+          "composesWith": [
+            "badge",
+            "avatar",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter",
+              "action": "When rendered as a link or button, behaves as one"
+            }
+          ],
+          "customization": [
+            "variant: default | outline | muted",
+            "size: default | sm",
+            "ItemMedia variant: default | icon | image"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Item",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "item-demo",
+          "item-states"
+        ],
+        "url": "https://ui.ballmac.com/components/item"
+      }
+    },
+    {
+      "name": "item-demo",
+      "type": "registry:example",
+      "title": "Item: Settings rows",
+      "description": "Settings rows example of Item.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/item.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/item-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/item-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "item",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "item-states",
+      "type": "registry:example",
+      "title": "Item: Files and footer",
+      "description": "Files and footer example of Item.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/item.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/item-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/item-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "item",
         "tier": "free"
       }
     },
@@ -9293,6 +10265,140 @@
       }
     },
     {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "A horizontal application menu bar with roving focus across menus, submenus, shortcuts, checkbox and radio items, built on Radix.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/menubar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/menubar.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "menu",
+          "application",
+          "desktop",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A File / Edit / View style bar. Left and Right move between menus, Down opens one, and hovering across open menus switches them.",
+          "whenToUse": [
+            "Editors, dashboards and tools with many commands",
+            "Desktop-style web apps"
+          ],
+          "whenNotToUse": [
+            "Website navigation with links; use navigation-menu",
+            "The macOS system menu bar mockup; use menu-bar"
+          ],
+          "composesWith": [
+            "kbd",
+            "dropdown-menu"
+          ],
+          "a11y": [
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Moves focus between menu triggers"
+            },
+            {
+              "keys": "ArrowDown / Enter / Space",
+              "action": "Opens the focused menu"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "Moves within a menu"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the menu and returns to the bar"
+            }
+          ],
+          "customization": [
+            "value on each menu for a default open menu",
+            "shortcut hints",
+            "checkbox and radio items"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Menubar",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "menubar-demo",
+          "menubar-states"
+        ],
+        "url": "https://ui.ballmac.com/components/menubar"
+      }
+    },
+    {
+      "name": "menubar-demo",
+      "type": "registry:example",
+      "title": "Menubar: Editor menu",
+      "description": "Editor menu example of Menubar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/menubar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/menubar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/menubar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "menubar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "menubar-states",
+      "type": "registry:example",
+      "title": "Menubar: Preferences",
+      "description": "Preferences example of Menubar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/menubar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/menubar-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/menubar-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "menubar",
+        "tier": "free"
+      }
+    },
+    {
       "name": "meteors",
       "type": "registry:ui",
       "title": "Meteors",
@@ -9519,6 +10625,144 @@
       "meta": {
         "example": true,
         "of": "multi-select",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "A site navigation bar with flyout panels sharing one animated viewport that resizes to its content, with keyboard and pointer intent handling, built on Radix.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/navigation-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/navigation-menu.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "navigation",
+          "header",
+          "mega menu",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Top-level triggers open content panels of links. Use navigationMenuTriggerStyle for plain top-level links.",
+          "whenToUse": [
+            "Marketing site headers",
+            "Docs navigation with grouped links"
+          ],
+          "whenNotToUse": [
+            "An application command menu; use menubar",
+            "A small overflow list; use dropdown-menu"
+          ],
+          "composesWith": [
+            "button",
+            "separator"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space / ArrowDown",
+              "action": "Opens the focused panel"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves into the panel links"
+            },
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Moves between top-level items"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the panel"
+            }
+          ],
+          "customization": [
+            "viewport: shared or per-item",
+            "indicator arrow",
+            "content width per panel"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Navigation Menu",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "navigation-menu-demo",
+          "navigation-menu-states"
+        ],
+        "url": "https://ui.ballmac.com/components/navigation-menu"
+      }
+    },
+    {
+      "name": "navigation-menu-demo",
+      "type": "registry:example",
+      "title": "Navigation Menu: Product menu",
+      "description": "Product menu example of Navigation Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/navigation-menu.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/navigation-menu-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/navigation-menu-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "navigation-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "navigation-menu-states",
+      "type": "registry:example",
+      "title": "Navigation Menu: Without viewport",
+      "description": "Without viewport example of Navigation Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/navigation-menu.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/navigation-menu-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/navigation-menu-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "navigation-menu",
         "tier": "free"
       }
     },
@@ -12180,6 +13424,144 @@
       }
     },
     {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "A modal panel that slides from any edge, with header, scrollable body and footer parts, a grab handle on bottom sheets, and safe-area padding.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/sheet.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/sheet.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "overlay",
+          "panel",
+          "drawer",
+          "dialog",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A dialog attached to a screen edge. Use side right for settings panels, bottom for mobile actions, left for navigation.",
+          "whenToUse": [
+            "Edit forms that keep page context visible",
+            "Filters and settings panels",
+            "Mobile navigation drawers"
+          ],
+          "whenNotToUse": [
+            "Short confirmations; use alert-dialog",
+            "Small anchored panels; use popover"
+          ],
+          "composesWith": [
+            "button",
+            "input",
+            "label"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Opens from the trigger"
+            },
+            {
+              "keys": "Tab / Shift+Tab",
+              "action": "Cycles focus inside the sheet"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes and returns focus to the trigger"
+            }
+          ],
+          "customization": [
+            "side: right | left | top | bottom",
+            "showCloseButton",
+            "SheetBody scrolls long content"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Sheet",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "sheet-demo",
+          "sheet-states"
+        ],
+        "url": "https://ui.ballmac.com/components/sheet"
+      }
+    },
+    {
+      "name": "sheet-demo",
+      "type": "registry:example",
+      "title": "Sheet: Edit project",
+      "description": "Edit project example of Sheet.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sheet.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sheet-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sheet-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sheet",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sheet-states",
+      "type": "registry:example",
+      "title": "Sheet: Four edges",
+      "description": "Four edges example of Sheet.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sheet.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sheet-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sheet-states.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sheet",
+        "tier": "free"
+      }
+    },
+    {
       "name": "shimmer-text",
       "type": "registry:ui",
       "title": "Shimmer Text",
@@ -12701,6 +14083,141 @@
       "meta": {
         "example": true,
         "of": "slider-range",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "A single or range slider with a name per thumb, a live value bubble, vertical orientation and full keyboard control, built on Radix.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/slider.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/slider.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "input",
+          "range",
+          "form",
+          "radix"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Drag or use the keyboard to pick a number or a range. Give every thumb a name with thumbLabels; showValue adds a bubble on hover, focus and drag.",
+          "whenToUse": [
+            "Volume, brightness and zoom",
+            "Price and date ranges with two thumbs",
+            "Any bounded numeric choice where precision is not critical"
+          ],
+          "whenNotToUse": [
+            "Exact numeric entry; use number-input",
+            "A styled range with marks or steps shown; use slider-range"
+          ],
+          "composesWith": [
+            "label",
+            "field"
+          ],
+          "a11y": [
+            {
+              "keys": "ArrowLeft / ArrowRight / ArrowUp / ArrowDown",
+              "action": "Changes the value by one step"
+            },
+            {
+              "keys": "PageUp / PageDown",
+              "action": "Changes by a larger step"
+            },
+            {
+              "keys": "Home / End",
+              "action": "Jumps to min or max"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves between thumbs"
+            }
+          ],
+          "customization": [
+            "min, max, step",
+            "thumbLabels for range sliders",
+            "showValue and formatValue",
+            "orientation: horizontal | vertical"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Slider",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "slider-demo",
+          "slider-states"
+        ],
+        "url": "https://ui.ballmac.com/components/slider"
+      }
+    },
+    {
+      "name": "slider-demo",
+      "type": "registry:example",
+      "title": "Slider: Volume and price",
+      "description": "Volume and price example of Slider.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/slider.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/slider-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/slider-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "slider",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "slider-states",
+      "type": "registry:example",
+      "title": "Slider: Vertical and disabled",
+      "description": "Vertical and disabled example of Slider.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/slider.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/slider-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/slider-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "slider",
         "tier": "free"
       }
     },
@@ -13733,6 +15250,133 @@
       "meta": {
         "example": true,
         "of": "switch",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "A semantic table in a focusable, named scroll region, with sticky header, striping, three densities, aria-sort headers and numeric columns.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/table.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/table.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "table",
+          "data",
+          "semantic",
+          "responsive"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Static table parts. The wrapper scrolls on narrow screens and is keyboard focusable; pass label to name it and sort on TableHead for aria-sort.",
+          "whenToUse": [
+            "Invoices, logs and lists of records",
+            "Read-only or lightly interactive data"
+          ],
+          "whenNotToUse": [
+            "Sorting, filtering and pagination logic; build on data-table",
+            "Key-value pairs; use description-list"
+          ],
+          "composesWith": [
+            "badge",
+            "pagination"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focuses the scroll region, then any controls inside it"
+            },
+            {
+              "keys": "Arrow keys",
+              "action": "Scroll the focused region"
+            }
+          ],
+          "customization": [
+            "stickyHeader with containerClassName max height",
+            "striped",
+            "density: compact | default | comfortable",
+            "numeric on TableHead and TableCell"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Table",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "table-demo",
+          "table-states"
+        ],
+        "url": "https://ui.ballmac.com/components/table"
+      }
+    },
+    {
+      "name": "table-demo",
+      "type": "registry:example",
+      "title": "Table: Invoices",
+      "description": "Invoices example of Table.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/table.json",
+        "https://ui.ballmac.com/r/badge.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/table-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/table-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "table",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "table-states",
+      "type": "registry:example",
+      "title": "Table: Sortable and sticky",
+      "description": "Sortable and sticky example of Table.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/table-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/table-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "table",
         "tier": "free"
       }
     },

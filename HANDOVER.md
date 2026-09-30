@@ -5,7 +5,7 @@ Written 2026-09-29 for the next agent (Codex). Read this, then `AUTHORING.md` (t
 ## 1. Where things stand
 
 - **Product:** a shadcn-compatible registry (`@ballmac`, `https://ui.ballmac.com/r/{name}.json`) plus the docs site in `apps/www` (Next.js 16, React 19, Tailwind v4, Motion 12, Radix via `radix-ui`).
-- **Catalog on `preprod`:** 119 components, 19 blocks, 2 templates. Wave 1 batch 2 adds ten interaction foundations.
+- **Catalog on `preprod`:** 119 components committed (f15159e). Wave 1 batch 3 adds twelve more in the working tree (131 components, 19 blocks, 2 templates once committed); see section 6 for the gate status.
 - **Site:** redesigned; the catalog has Gallery / List / Index views and Quick Look; sidebar component categories are collapsible, so the site scales to 200+ items without changes.
 - **Branches:** `preprod` is where work lands (Vercel preview, behind Vercel login). `main` is production, which the owner has deliberately disabled. **Never push to `main`** unless the owner asks.
 - **Working tree:** check `git status` before starting another batch. The Wave 4 commit also fixes duplicate React keys in component-page accessibility tables when shortcut labels repeat.
@@ -76,7 +76,7 @@ Accessibility: run `npx -y pnpm@10 a11y` (axe-core; serious + critical must be 0
 
 | Wave | Planned | Implemented | Still to build | State |
 | --- | ---: | ---: | ---: | --- |
-| 1 · shadcn parity | 43 | 20 | 23 | Batches 1–2 shipped; parity remains incomplete |
+| 1 · shadcn parity | 43 | 32 | 11 | Batches 1–2 shipped; batch 3 written, gate pending (smoke installs) |
 | 2 · forms beyond shadcn | 15 | 15 | 0 | Shipped |
 | 3 · data display | 16 | 16 | 0 | Shipped |
 | 4 · feedback and status | 10 | 10 | 0 | Shipped |
@@ -87,7 +87,7 @@ Accessibility: run `npx -y pnpm@10 a11y` (axe-core; serious + critical must be 0
 | 9 · motion and effects | 35 | 0 | 35 | Not started |
 | 10 · desktop and devices | 15 | 0 | 15 | Not started |
 
-The original 58 components plus 61 shipped wave items make **119 on `preprod`**. The listed roadmap has **121 components still to build** and would reach about **240** if completed. Reaching the 200-component floor requires at least **81 more**. Finish the 23 missing Wave 1 parity items, then continue Waves 5–10 in batches of 10–20.
+The original 58 components plus 61 shipped wave items make **119 on `preprod`**; batch 3 brings the working tree to **131**. The listed roadmap has **109 components still to build** and would reach about **240** if completed. Reaching the 200-component floor requires at least **69 more**. Finish the 23 missing Wave 1 parity items, then continue Waves 5–10 in batches of 10–20.
 
 Existing (58, do not duplicate): accordion, ai-chat, ai-message, animated-beam, animated-grid, animated-tabs, api-key-field, aurora-background, avatar, badge, beams-background, bento-grid, border-beam, browser-frame, button, checkbox, code-block, confetti, dialog, dock, dot-pattern, dynamic-island, flickering-grid, globe, glow-border, gradient-text, input, install-tabs, kbd, label, laptop-frame, mac-window, magnetic-button, marquee, menu-bar, meteors, notification-stack, number-ticker, orbiting-circles, particles, phone-frame, prompt-input, reasoning-disclosure, scramble-text, segmented-control, select, shimmer-text, spotlight-card, spotlight-search, streaming-text, switch, terminal, text-reveal, textarea, tilt-card, tool-call-card, tooltip, word-rotate.
 
@@ -100,7 +100,9 @@ Wave 1 batch 1 complete: alert, aspect-ratio, breadcrumb, card, empty, paginatio
 
 Wave 1 batch 2 complete: alert-dialog, button-group, collapsible, hover-card, popover, radio-group, scroll-area, tabs, toggle, toggle-group. Research and design decisions: `research/wave-1-batch-2.md`. Registry validation passed for 392 entries; 147 tests, lint, typecheck, production build, and Base UI/Radix fresh-app install builds passed. Axe scanned all 249 previews in light and dark (498 scans) with zero serious/critical findings; separately scanned both open alert-dialog variants and fixed a dark-theme destructive-action contrast issue. The new previews and docs pages passed mobile browser checks; catalog views and Quick Look worked. Lighthouse 13.5.0 on `/components`: performance 83, accessibility 100, best practices 100, SEO 100.
 
-Wave 1 still to build (23): calendar, carousel, chart, combobox, command, context-menu, data-table, date-picker, drawer, dropdown-menu, field, form, input-group, input-otp, item, menubar, navigation-menu, resizable, sheet, sidebar, slider, table, toast (sonner).
+Wave 1 batch 3 written (12): command, combobox, context-menu, dropdown-menu, field, input-group, item, menubar, navigation-menu, sheet, slider, table. Research and design decisions: `research/wave-1-batch-3.md`. **Gate status (2026-09-30, cloud session):** registry build/check (428 entries, schema valid), 171 tests, lint, typecheck and production build passed. Axe scanned all 273 previews in light and dark (546 scans) with zero serious/critical findings; `scripts/a11y-open-states.ts` opened every new overlay at desktop and 390 px in light and dark with no findings beyond the known Radix `aria-hidden-focus` pattern (see the research note). Component pages, catalog views and Quick Look showed no overflow or console errors. **Not run: Base UI and Radix fresh-app install smokes**, because that cloud environment's network policy denied `ui.shadcn.com` (needed by `shadcn init`). Run both smokes (`pnpm smoke`, `SMOKE_BASE=radix pnpm smoke`), then commit the batch.
+
+Wave 1 still to build after batch 3 (11): calendar, carousel, chart, data-table, date-picker, drawer, form, input-otp, resizable, sidebar, toast (sonner).
 
 **Wave 2: forms beyond shadcn (≈15, `forms`).** file-dropzone, multi-select, tag-input, number-input, password-input (strength meter), search-field, phone-input, color-picker, rating, date-range-picker, time-picker, currency-input, stepper-form (wizard), slider-range, signature-pad.
 

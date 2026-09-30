@@ -69,7 +69,10 @@ try {
   if (!ready)
     throw new Error(`Preview server did not become ready at ${baseUrl}`)
 
-  browser = await chromium.launch({ headless: true })
+  browser = await chromium.launch({
+    headless: true,
+    executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE,
+  })
   const findings: Finding[] = []
   let checked = 0
   let next = 0
