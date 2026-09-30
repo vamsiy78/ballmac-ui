@@ -5,10 +5,10 @@ Written 2026-09-29 for the next agent (Codex). Read this, then `AUTHORING.md` (t
 ## 1. Where things stand
 
 - **Product:** a shadcn-compatible registry (`@ballmac`, `https://ui.ballmac.com/r/{name}.json`) plus the docs site in `apps/www` (Next.js 16, React 19, Tailwind v4, Motion 12, Radix via `radix-ui`).
-- **Catalog today:** 99 components, 19 blocks, 2 templates. The original 58 are listed in section 6; Wave 1 batch 1 adds ten, Wave 2 adds fifteen, and Wave 3 adds sixteen.
+- **Catalog on `preprod`:** 109 components, 19 blocks, 2 templates. Wave 4 adds ten feedback and status components.
 - **Site:** redesigned; the catalog has Gallery / List / Index views and Quick Look; sidebar component categories are collapsible, so the site scales to 200+ items without changes.
 - **Branches:** `preprod` is where work lands (Vercel preview, behind Vercel login). `main` is production, which the owner has deliberately disabled. **Never push to `main`** unless the owner asks.
-- **Uncommitted/unpushed at handover:** see `git status` and `git log origin/preprod..preprod`. Anything local was committed by the previous agent and still needs a push to `preprod` when the owner agrees.
+- **Working tree:** check `git status` before starting another batch. The Wave 4 commit also fixes duplicate React keys in component-page accessibility tables when shortcut labels repeat.
 
 ## 2. The goal
 
@@ -72,14 +72,33 @@ Accessibility: run `npx -y pnpm@10 a11y` (axe-core; serious + critical must be 0
 
 ## 6. Roadmap to 200+
 
+### Implementation status (2026-09-30)
+
+| Wave | Planned | Implemented | Still to build | State |
+| --- | ---: | ---: | ---: | --- |
+| 1 · shadcn parity | 43 | 10 | 33 | Batch 1 shipped; parity remains incomplete |
+| 2 · forms beyond shadcn | 15 | 15 | 0 | Shipped |
+| 3 · data display | 16 | 16 | 0 | Shipped |
+| 4 · feedback and status | 10 | 10 | 0 | Shipped |
+| 5 · navigation and layout | 14 | 0 | 14 | Not started |
+| 6 · SaaS patterns | 12 | 0 | 12 | Not started |
+| 7 · AI interfaces | 12 | 0 | 12 | Not started |
+| 8 · developer | 10 | 0 | 10 | Not started |
+| 9 · motion and effects | 35 | 0 | 35 | Not started |
+| 10 · desktop and devices | 15 | 0 | 15 | Not started |
+
+The original 58 components plus 51 shipped wave items make **109 on `preprod`**. The listed roadmap has **131 components still to build** and would reach about **240** if completed. Reaching the 200-component floor requires at least **91 more**. Finish the 33 missing Wave 1 parity items, then continue Waves 5–10 in batches of 10–20.
+
 Existing (58, do not duplicate): accordion, ai-chat, ai-message, animated-beam, animated-grid, animated-tabs, api-key-field, aurora-background, avatar, badge, beams-background, bento-grid, border-beam, browser-frame, button, checkbox, code-block, confetti, dialog, dock, dot-pattern, dynamic-island, flickering-grid, globe, glow-border, gradient-text, input, install-tabs, kbd, label, laptop-frame, mac-window, magnetic-button, marquee, menu-bar, meteors, notification-stack, number-ticker, orbiting-circles, particles, phone-frame, prompt-input, reasoning-disclosure, scramble-text, segmented-control, select, shimmer-text, spotlight-card, spotlight-search, streaming-text, switch, terminal, text-reveal, textarea, tilt-card, tool-call-card, tooltip, word-rotate.
 
-Work in waves, in this order. Names are suggestions; keep them kebab-case and permanent once published.
+The waves below retain the original roadmap order; Waves 2–4 were tackled before Wave 1 parity was finished. Work in batches of 10–20. Names are suggestions; keep them kebab-case and permanent once published.
 
-**Wave 1: shadcn parity (≈40, category `primitives` / `navigation` / `forms` / `data-display` / `feedback`).** Base on shadcn/ui (MIT) and upgrade. This is what makes "beats shadcn" true.
+**Wave 1: shadcn parity (43 planned, category `primitives` / `navigation` / `forms` / `data-display` / `feedback`).** Base on shadcn/ui (MIT) and upgrade. This is what makes "beats shadcn" true.
 alert, alert-dialog, aspect-ratio, breadcrumb, button-group, calendar, card, carousel, chart, collapsible, combobox, command, context-menu, data-table, date-picker, drawer, dropdown-menu, empty, field, form, hover-card, input-group, input-otp, item, menubar, navigation-menu, pagination, popover, progress, radio-group, resizable, scroll-area, separator, sheet, sidebar, skeleton, slider, spinner, table, tabs, toast (sonner), toggle, toggle-group.
 
 Wave 1 batch 1 complete: alert, aspect-ratio, breadcrumb, card, empty, pagination, progress, separator, skeleton, spinner. Research and design decisions: `research/wave-1-batch-1.md`. Automated preview axe check: `pnpm a11y` after `next build`.
+
+Wave 1 still to build (33): alert-dialog, button-group, calendar, carousel, chart, collapsible, combobox, command, context-menu, data-table, date-picker, drawer, dropdown-menu, field, form, hover-card, input-group, input-otp, item, menubar, navigation-menu, popover, radio-group, resizable, scroll-area, sheet, sidebar, slider, table, tabs, toast (sonner), toggle, toggle-group.
 
 **Wave 2: forms beyond shadcn (≈15, `forms`).** file-dropzone, multi-select, tag-input, number-input, password-input (strength meter), search-field, phone-input, color-picker, rating, date-range-picker, time-picker, currency-input, stepper-form (wizard), slider-range, signature-pad.
 
@@ -90,6 +109,8 @@ Wave 2 complete. Batch 1: file-dropzone, multi-select, tag-input, number-input, 
 Wave 3 complete. Batch 1: stat-card, kpi-row, timeline, activity-feed, description-list, comparison-table, avatar-stack, progress-ring, sparkline, contribution-graph. Batch 2: tree-view, file-tree, json-viewer, diff-viewer, kanban-board, calendar-agenda. Research and design decisions: `research/wave-3-batch-1.md` and `research/wave-3-batch-2.md`.
 
 **Wave 4: feedback and status (≈10, `feedback`).** banner, callout, status-dot, empty-state, progress-steps, loading-dots, inline-alert, toast-stack (macOS style), countdown, shortcut-hint.
+
+Wave 4 complete. Research and design decisions: `research/wave-4-feedback.md`. Registry validation passed for all 362 entries; 130 tests, lint, typecheck, production build, and Base UI and Radix fresh-app install builds passed. Browser axe checked all 229 previews in light and dark (458 scans) with zero serious or critical findings. The 20 Wave 4 previews passed 40 mobile browser checks with no page errors or horizontal overflow; representative light and dark screenshots were reviewed. Lighthouse 13.5.0 on `/components`: performance 85, accessibility 100, best practices 100, SEO 100.
 
 **Wave 5: navigation and layout (≈14, `navigation` / `layout`).** navbar, mega-menu, floating-nav, app-shell, team-switcher, sticky-scroll, split-view, masonry-grid, scroll-progress, back-to-top, table-of-contents, container-scroll, section-tabs, command-bar.
 

@@ -143,8 +143,8 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
                   <tr><th className="px-4 py-2.5 font-medium">Key</th><th className="px-4 py-2.5 font-medium">Action</th></tr>
                 </thead>
                 <tbody className="divide-y">
-                  {item.ai.a11y.map((a) => (
-                    <tr key={a.keys}><td className="px-4 py-2.5 font-mono text-[13px]">{a.keys}</td><td className="text-muted-foreground px-4 py-2.5">{a.action}</td></tr>
+                  {item.ai.a11y.map((a, index) => (
+                    <tr key={`${a.keys}-${index}`}><td className="px-4 py-2.5 font-mono text-[13px]">{a.keys}</td><td className="text-muted-foreground px-4 py-2.5">{a.action}</td></tr>
                   ))}
                 </tbody>
               </table>

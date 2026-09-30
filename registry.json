@@ -1663,6 +1663,117 @@
       }
     },
     {
+      "name": "banner",
+      "type": "registry:ui",
+      "title": "Banner",
+      "description": "A page-wide announcement with semantic tones, optional action, and controlled or local dismissal.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/banner.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/banner.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "announcement",
+          "status",
+          "dismissible"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A page-wide announcement with semantic tones, optional action, and controlled or local dismissal.",
+          "whenToUse": [
+            "Announce a page-level update",
+            "Keep a persistent notice above page content"
+          ],
+          "whenNotToUse": [
+            "Use alert for content scoped to one panel"
+          ],
+          "composesWith": [
+            "alert",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter",
+              "action": "Focus and activate the action or dismiss control"
+            }
+          ],
+          "customization": [
+            "tone: info | success | warning",
+            "Controlled or uncontrolled visibility"
+          ]
+        },
+        "examples": [
+          "banner-demo",
+          "banner-states"
+        ],
+        "url": "https://ui.ballmac.com/components/banner"
+      }
+    },
+    {
+      "name": "banner-demo",
+      "type": "registry:example",
+      "title": "Banner: Overview",
+      "description": "Overview example of Banner.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/banner.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/banner-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/banner-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "banner",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "banner-states",
+      "type": "registry:example",
+      "title": "Banner: States and variants",
+      "description": "States and variants example of Banner.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/banner.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/banner-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/banner-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "banner",
+        "tier": "free"
+      }
+    },
+    {
       "name": "beams-background",
       "type": "registry:ui",
       "title": "Beams Background",
@@ -4212,6 +4323,117 @@
       }
     },
     {
+      "name": "callout",
+      "type": "registry:ui",
+      "title": "Callout",
+      "description": "An editorial guidance panel with a clear kind label, icon, title, and optional action.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/callout.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/callout.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "guidance",
+          "tip",
+          "note"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "An editorial guidance panel with a clear kind label, icon, title, and optional action.",
+          "whenToUse": [
+            "Add contextual guidance to docs or settings",
+            "Explain a recommended next step"
+          ],
+          "whenNotToUse": [
+            "Use alert for urgent system feedback"
+          ],
+          "composesWith": [
+            "alert",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focus an optional action"
+            }
+          ],
+          "customization": [
+            "kind: tip | note | caution",
+            "Action slot and content"
+          ]
+        },
+        "examples": [
+          "callout-demo",
+          "callout-states"
+        ],
+        "url": "https://ui.ballmac.com/components/callout"
+      }
+    },
+    {
+      "name": "callout-demo",
+      "type": "registry:example",
+      "title": "Callout: Overview",
+      "description": "Overview example of Callout.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/callout.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/callout-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/callout-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "callout",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "callout-states",
+      "type": "registry:example",
+      "title": "Callout: States and variants",
+      "description": "States and variants example of Callout.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/callout.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/callout-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/callout-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "callout",
+        "tier": "free"
+      }
+    },
+    {
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
@@ -5040,6 +5262,113 @@
       "meta": {
         "example": true,
         "of": "contribution-graph",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "countdown",
+      "type": "registry:ui",
+      "title": "Countdown",
+      "description": "An SSR-safe timer with controlled or local seconds, pause support, and a completion announcement.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/countdown.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/countdown.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "timer",
+          "countdown",
+          "time"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "An SSR-safe timer with controlled or local seconds, pause support, and a completion announcement.",
+          "whenToUse": [
+            "Show time until a short event",
+            "Display a temporary offer or session limit"
+          ],
+          "whenNotToUse": [
+            "Use progress for work completion"
+          ],
+          "composesWith": [
+            "progress-ring"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Timer is labelled; completion is announced"
+            }
+          ],
+          "customization": [
+            "Controlled or uncontrolled seconds",
+            "Pause and completion callback"
+          ]
+        },
+        "examples": [
+          "countdown-demo",
+          "countdown-states"
+        ],
+        "url": "https://ui.ballmac.com/components/countdown"
+      }
+    },
+    {
+      "name": "countdown-demo",
+      "type": "registry:example",
+      "title": "Countdown: Overview",
+      "description": "Overview example of Countdown.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/countdown.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/countdown-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/countdown-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "countdown",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "countdown-states",
+      "type": "registry:example",
+      "title": "Countdown: States and variants",
+      "description": "States and variants example of Countdown.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/countdown.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/countdown-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/countdown-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "countdown",
         "tier": "free"
       }
     },
@@ -5987,6 +6316,118 @@
       }
     },
     {
+      "name": "empty-state",
+      "type": "registry:ui",
+      "title": "Empty State",
+      "description": "A ready-to-use empty screen with guidance and primary and secondary action slots.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/empty.json",
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/empty-state.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/empty-state.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "empty",
+          "placeholder",
+          "action"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A ready-to-use empty screen with guidance and primary and secondary action slots.",
+          "whenToUse": [
+            "Explain an empty collection",
+            "Offer a clear first action"
+          ],
+          "whenNotToUse": [
+            "Use empty for a custom composition"
+          ],
+          "composesWith": [
+            "empty",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter",
+              "action": "Focus and activate supplied actions"
+            }
+          ],
+          "customization": [
+            "Compact layout",
+            "Icon and actions"
+          ]
+        },
+        "examples": [
+          "empty-state-demo",
+          "empty-state-states"
+        ],
+        "url": "https://ui.ballmac.com/components/empty-state"
+      }
+    },
+    {
+      "name": "empty-state-demo",
+      "type": "registry:example",
+      "title": "Empty State: Overview",
+      "description": "Overview example of Empty State.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/empty-state.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/empty-state-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/empty-state-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "empty-state",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "empty-state-states",
+      "type": "registry:example",
+      "title": "Empty State: States and variants",
+      "description": "States and variants example of Empty State.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/empty-state.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/empty-state-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/empty-state-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "empty-state",
+        "tier": "free"
+      }
+    },
+    {
       "name": "empty",
       "type": "registry:ui",
       "title": "Empty",
@@ -6800,6 +7241,117 @@
       "meta": {
         "example": true,
         "of": "gradient-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inline-alert",
+      "type": "registry:ui",
+      "title": "Inline Alert",
+      "description": "A short in-context message with semantic live priority and an optional corrective action.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/inline-alert.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/inline-alert.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "validation",
+          "message",
+          "status"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A short in-context message with semantic live priority and an optional corrective action.",
+          "whenToUse": [
+            "Explain a field or form outcome",
+            "Show a small inline confirmation"
+          ],
+          "whenNotToUse": [
+            "Use alert for a larger callout"
+          ],
+          "composesWith": [
+            "alert",
+            "input"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter",
+              "action": "Focus and activate an optional action"
+            }
+          ],
+          "customization": [
+            "tone: info | success | error",
+            "Action slot"
+          ]
+        },
+        "examples": [
+          "inline-alert-demo",
+          "inline-alert-states"
+        ],
+        "url": "https://ui.ballmac.com/components/inline-alert"
+      }
+    },
+    {
+      "name": "inline-alert-demo",
+      "type": "registry:example",
+      "title": "Inline Alert: Overview",
+      "description": "Overview example of Inline Alert.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inline-alert.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inline-alert-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inline-alert-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inline-alert",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inline-alert-states",
+      "type": "registry:example",
+      "title": "Inline Alert: States and variants",
+      "description": "States and variants example of Inline Alert.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inline-alert.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inline-alert-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inline-alert-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inline-alert",
         "tier": "free"
       }
     },
@@ -7689,6 +8241,114 @@
       "meta": {
         "example": true,
         "of": "laptop-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "loading-dots",
+      "type": "registry:ui",
+      "title": "Loading Dots",
+      "description": "A compact loading status with staggered token-colored dots that stop for reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/loading-dots.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/loading-dots.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "loading",
+          "status",
+          "animation"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A compact loading status with staggered token-colored dots that stop for reduced motion.",
+          "whenToUse": [
+            "Indicate short pending work",
+            "Pair a compact loader with a button label"
+          ],
+          "whenNotToUse": [
+            "Use skeleton for a full content placeholder"
+          ],
+          "composesWith": [
+            "spinner",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Accessible status label"
+            }
+          ],
+          "customization": [
+            "size: sm | default | lg",
+            "Status label"
+          ]
+        },
+        "examples": [
+          "loading-dots-demo",
+          "loading-dots-states"
+        ],
+        "url": "https://ui.ballmac.com/components/loading-dots"
+      }
+    },
+    {
+      "name": "loading-dots-demo",
+      "type": "registry:example",
+      "title": "Loading Dots: Overview",
+      "description": "Overview example of Loading Dots.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/loading-dots.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/loading-dots-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/loading-dots-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "loading-dots",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "loading-dots-states",
+      "type": "registry:example",
+      "title": "Loading Dots: States and variants",
+      "description": "States and variants example of Loading Dots.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/loading-dots.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/loading-dots-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/loading-dots-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "loading-dots",
         "tier": "free"
       }
     },
@@ -9504,6 +10164,117 @@
       }
     },
     {
+      "name": "progress-steps",
+      "type": "registry:ui",
+      "title": "Progress Steps",
+      "description": "An ordered progress sequence with current-step semantics and optional navigation to completed steps.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/progress-steps.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/progress-steps.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "steps",
+          "wizard",
+          "progress"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "An ordered progress sequence with current-step semantics and optional navigation to completed steps.",
+          "whenToUse": [
+            "Show a multi-step flow",
+            "Let users revisit completed steps"
+          ],
+          "whenNotToUse": [
+            "Use progress for an unlabelled percentage"
+          ],
+          "composesWith": [
+            "stepper-form",
+            "progress"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter",
+              "action": "Return to a completed step when navigable"
+            }
+          ],
+          "customization": [
+            "Controlled or uncontrolled active index",
+            "Optional descriptions"
+          ]
+        },
+        "examples": [
+          "progress-steps-demo",
+          "progress-steps-states"
+        ],
+        "url": "https://ui.ballmac.com/components/progress-steps"
+      }
+    },
+    {
+      "name": "progress-steps-demo",
+      "type": "registry:example",
+      "title": "Progress Steps: Overview",
+      "description": "Overview example of Progress Steps.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/progress-steps.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/progress-steps-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/progress-steps-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "progress-steps",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "progress-steps-states",
+      "type": "registry:example",
+      "title": "Progress Steps: States and variants",
+      "description": "States and variants example of Progress Steps.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/progress-steps.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/progress-steps-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/progress-steps-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "progress-steps",
+        "tier": "free"
+      }
+    },
+    {
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
@@ -10652,6 +11423,114 @@
       }
     },
     {
+      "name": "shortcut-hint",
+      "type": "registry:ui",
+      "title": "Shortcut Hint",
+      "description": "A compact accessible keycap sequence paired with the action it performs.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/shortcut-hint.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/shortcut-hint.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "keyboard",
+          "shortcut",
+          "kbd"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A compact accessible keycap sequence paired with the action it performs.",
+          "whenToUse": [
+            "Label a command in a menu",
+            "Teach an optional keyboard shortcut"
+          ],
+          "whenNotToUse": [
+            "Use kbd for an isolated key"
+          ],
+          "composesWith": [
+            "kbd",
+            "spotlight-search"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Full shortcut meaning is in the accessible name"
+            }
+          ],
+          "customization": [
+            "Compact keycaps",
+            "Action label and key sequence"
+          ]
+        },
+        "examples": [
+          "shortcut-hint-demo",
+          "shortcut-hint-states"
+        ],
+        "url": "https://ui.ballmac.com/components/shortcut-hint"
+      }
+    },
+    {
+      "name": "shortcut-hint-demo",
+      "type": "registry:example",
+      "title": "Shortcut Hint: Overview",
+      "description": "Overview example of Shortcut Hint.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/shortcut-hint.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/shortcut-hint-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/shortcut-hint-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "shortcut-hint",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "shortcut-hint-states",
+      "type": "registry:example",
+      "title": "Shortcut Hint: States and variants",
+      "description": "States and variants example of Shortcut Hint.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/shortcut-hint.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/shortcut-hint-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/shortcut-hint-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "shortcut-hint",
+        "tier": "free"
+      }
+    },
+    {
       "name": "signature-pad",
       "type": "registry:ui",
       "title": "Signature Pad",
@@ -11562,6 +12441,114 @@
       "meta": {
         "example": true,
         "of": "stat-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "status-dot",
+      "type": "registry:ui",
+      "title": "Status Dot",
+      "description": "A compact status indicator that always pairs its color with a visible label.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/status-dot.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/status-dot.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "status",
+          "presence",
+          "online"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A compact status indicator that always pairs its color with a visible label.",
+          "whenToUse": [
+            "Show presence or service state",
+            "Label a live operational status"
+          ],
+          "whenNotToUse": [
+            "Use badge for category labels"
+          ],
+          "composesWith": [
+            "badge",
+            "avatar"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Status is expressed in visible text"
+            }
+          ],
+          "customization": [
+            "status: online | busy | away | offline",
+            "Optional reduced-motion pulse"
+          ]
+        },
+        "examples": [
+          "status-dot-demo",
+          "status-dot-states"
+        ],
+        "url": "https://ui.ballmac.com/components/status-dot"
+      }
+    },
+    {
+      "name": "status-dot-demo",
+      "type": "registry:example",
+      "title": "Status Dot: Overview",
+      "description": "Overview example of Status Dot.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/status-dot.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/status-dot-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/status-dot-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "status-dot",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "status-dot-states",
+      "type": "registry:example",
+      "title": "Status Dot: States and variants",
+      "description": "States and variants example of Status Dot.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/status-dot.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/status-dot-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/status-dot-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "status-dot",
         "tier": "free"
       }
     },
@@ -12922,6 +13909,117 @@
       "meta": {
         "example": true,
         "of": "timeline",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "toast-stack",
+      "type": "registry:ui",
+      "title": "Toast Stack",
+      "description": "A token-based notification stack with dismissal, optional actions, and pause-on-interaction timing.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/toast-stack.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/toast-stack.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "toast",
+          "notification",
+          "feedback"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "A token-based notification stack with dismissal, optional actions, and pause-on-interaction timing.",
+          "whenToUse": [
+            "Confirm an asynchronous action",
+            "Offer undo or retry after a task"
+          ],
+          "whenNotToUse": [
+            "Use banner for persistent page-wide messages"
+          ],
+          "composesWith": [
+            "button",
+            "notification-stack"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter / Escape",
+              "action": "Activate actions or dismiss a focused toast"
+            }
+          ],
+          "customization": [
+            "Controlled or uncontrolled list",
+            "Auto-dismiss duration and pause"
+          ]
+        },
+        "examples": [
+          "toast-stack-demo",
+          "toast-stack-states"
+        ],
+        "url": "https://ui.ballmac.com/components/toast-stack"
+      }
+    },
+    {
+      "name": "toast-stack-demo",
+      "type": "registry:example",
+      "title": "Toast Stack: Overview",
+      "description": "Overview example of Toast Stack.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/toast-stack.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/toast-stack-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/toast-stack-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "toast-stack",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "toast-stack-states",
+      "type": "registry:example",
+      "title": "Toast Stack: States and variants",
+      "description": "States and variants example of Toast Stack.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/toast-stack.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/toast-stack-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/toast-stack-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "toast-stack",
         "tier": "free"
       }
     },

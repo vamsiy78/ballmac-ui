@@ -108,6 +108,17 @@ description-list, comparison-table, avatar-stack, progress-ring, sparkline,
 contribution-graph, tree-view, file-tree, json-viewer, diff-viewer,
 kanban-board, calendar-agenda. Component count: 99. Wave 3 complete.
 
+Wave 4 complete (2026-09-30): banner, callout, status-dot, empty-state,
+progress-steps, loading-dots, inline-alert, toast-stack, countdown,
+shortcut-hint. Component count: 109. Registry validation passed for 362 entries;
+130 tests, lint, typecheck, production Next.js build, and Base UI and Radix
+fresh-app install builds passed. Browser axe scanned 229 previews in light and
+dark (458 scans) with zero serious/critical findings. All 20 new previews passed
+mobile overflow and browser-error checks in both themes; representative
+screenshots were reviewed. See `research/wave-4-feedback.md` for competitor
+patterns and design improvements. Lighthouse 13.5.0 on `/components` scored
+85 performance and 100 each for accessibility, best practices, and SEO.
+
 | # | Item | Category | Status |
 |---|---|---|---|
 | 1 | button | primitives | [x] |
