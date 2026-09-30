@@ -2395,6 +2395,126 @@
       }
     },
     {
+      "name": "billing-card",
+      "type": "registry:ui",
+      "title": "Billing Card",
+      "description": "A subscription summary with plan and price, status, next charge, payment method, seat usage and recent invoices, including failed-payment and trial states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/billing-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/billing-card.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "billing",
+          "subscription",
+          "invoices",
+          "plan"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "plan {name,price,interval,status,renewsOn,seats}, paymentMethod, invoices[], and onChangePlan / onUpdatePayment / onCancel. Dates are ISO strings formatted in UTC.",
+          "whenToUse": [
+            "Account billing pages",
+            "Showing subscription state in settings"
+          ],
+          "whenNotToUse": [
+            "Choosing a plan; use plan-selector",
+            "A line-item invoice table; use table"
+          ],
+          "composesWith": [
+            "usage-meter",
+            "plan-selector",
+            "settings-panel"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Details are a description list; a failed payment is announced as an alert"
+            },
+            {
+              "keys": "Tab",
+              "action": "Change plan, Update, Cancel and invoice downloads are real buttons and links"
+            }
+          ],
+          "customization": [
+            "currency and locale",
+            "status: active | trialing | past_due | canceled",
+            "seats",
+            "invoices"
+          ]
+        },
+        "examples": [
+          "billing-card-demo",
+          "billing-card-states"
+        ],
+        "url": "https://ui.ballmac.com/components/billing-card"
+      }
+    },
+    {
+      "name": "billing-card-demo",
+      "type": "registry:example",
+      "title": "Billing Card: Team plan",
+      "description": "Team plan example of Billing Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/billing-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/billing-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/billing-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "billing-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "billing-card-states",
+      "type": "registry:example",
+      "title": "Billing Card: Payment failed and trial",
+      "description": "Payment failed and trial example of Billing Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/billing-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/billing-card-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/billing-card-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "billing-card",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ai-chat-1",
       "type": "registry:block",
       "title": "AI Chat 1: full chat app pane",
@@ -5324,6 +5444,131 @@
       }
     },
     {
+      "name": "changelog-feed",
+      "type": "registry:ui",
+      "title": "Changelog Feed",
+      "description": "A release-notes feed with a sticky date and version column, change-type labels, optional media, filter chips with counts and show-more for long releases.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/changelog-feed.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/changelog-feed.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "changelog",
+          "release notes",
+          "updates",
+          "timeline"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "entries[] with {id,version,date (ISO),title,summary,changes:[{type,text}],media}. Types: new | improved | fixed | removed. Dates format in UTC.",
+          "whenToUse": [
+            "Product changelog pages",
+            "What's-new surfaces"
+          ],
+          "whenNotToUse": [
+            "Activity of people on a record; use activity-feed",
+            "A single status message; use banner"
+          ],
+          "composesWith": [
+            "timeline",
+            "activity-feed",
+            "badge"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Filter chips and show-more are buttons with aria-pressed / aria-expanded"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Each release is an article with a time element; change types have text labels"
+            }
+          ],
+          "customization": [
+            "filterable",
+            "collapsedCount",
+            "locale",
+            "media"
+          ]
+        },
+        "examples": [
+          "changelog-feed-demo",
+          "changelog-feed-states"
+        ],
+        "url": "https://ui.ballmac.com/components/changelog-feed"
+      }
+    },
+    {
+      "name": "changelog-feed-demo",
+      "type": "registry:example",
+      "title": "Changelog Feed: Release notes",
+      "description": "Release notes example of Changelog Feed.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/changelog-feed.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/changelog-feed-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/changelog-feed-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "changelog-feed",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "changelog-feed-states",
+      "type": "registry:example",
+      "title": "Changelog Feed: Single release with media",
+      "description": "Single release with media example of Changelog Feed.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/changelog-feed.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/changelog-feed-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/changelog-feed-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "changelog-feed",
+        "tier": "free"
+      }
+    },
+    {
       "name": "chart",
       "type": "registry:ui",
       "title": "Chart",
@@ -6999,6 +7244,132 @@
       "meta": {
         "example": true,
         "of": "contribution-graph",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cookie-consent",
+      "type": "registry:ui",
+      "title": "Cookie Consent",
+      "description": "A privacy banner with equal-weight Accept all and Reject non-essential, plus a preferences view with a switch per category and locked required ones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/cookie-consent.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/cookie-consent.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "privacy",
+          "cookies",
+          "consent",
+          "gdpr"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "categories[] with {id,label,description,required}. onConsent receives a map of category to boolean. storageKey saves and remembers the choice in localStorage.",
+          "whenToUse": [
+            "Sites that set non-essential cookies",
+            "Consent prompts for analytics and marketing"
+          ],
+          "whenNotToUse": [
+            "Legal advice: check your own requirements",
+            "Unrelated notices; use banner"
+          ],
+          "composesWith": [
+            "banner",
+            "switch",
+            "dialog"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Buttons and switches are all reachable; the banner never traps focus"
+            },
+            {
+              "keys": "Focus",
+              "action": "Opening preferences moves focus to the new heading"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "A labelled non-modal dialog; switches announce their state"
+            }
+          ],
+          "customization": [
+            "categories",
+            "placement",
+            "policyHref",
+            "storageKey or controlled open"
+          ]
+        },
+        "examples": [
+          "cookie-consent-demo",
+          "cookie-consent-states"
+        ],
+        "url": "https://ui.ballmac.com/components/cookie-consent"
+      }
+    },
+    {
+      "name": "cookie-consent-demo",
+      "type": "registry:example",
+      "title": "Cookie Consent: Banner",
+      "description": "Banner example of Cookie Consent.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cookie-consent.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cookie-consent-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cookie-consent-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cookie-consent",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cookie-consent-states",
+      "type": "registry:example",
+      "title": "Cookie Consent: Controlled",
+      "description": "Controlled example of Cookie Consent.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cookie-consent.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cookie-consent-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cookie-consent-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cookie-consent",
         "tier": "free"
       }
     },
@@ -8828,6 +9199,134 @@
       "meta": {
         "example": true,
         "of": "empty",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "feedback-widget",
+      "type": "registry:ui",
+      "title": "Feedback Widget",
+      "description": "A feedback pill that opens a popover with five face ratings as a radio group, optional topic chips and a comment box, then a thank-you confirmation.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/popover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/feedback-widget.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/feedback-widget.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "feedback",
+          "rating",
+          "survey",
+          "popover"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "<FeedbackWidget onSubmit topics question />. onSubmit receives {rating, message, topic}; return a promise to show sending. Dock it in a corner with your own positioning.",
+          "whenToUse": [
+            "Collecting product feedback in-app",
+            "Page 'was this helpful' prompts"
+          ],
+          "whenNotToUse": [
+            "Long surveys",
+            "Support requests; link to a help form"
+          ],
+          "composesWith": [
+            "popover",
+            "rating",
+            "textarea"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between faces (native radios); each has a text label"
+            },
+            {
+              "keys": "Tab",
+              "action": "Topic chips, comment and Send are in order"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Success is announced as a status"
+            }
+          ],
+          "customization": [
+            "topics",
+            "question",
+            "requireMessage",
+            "closeAfter",
+            "side and align"
+          ]
+        },
+        "examples": [
+          "feedback-widget-demo",
+          "feedback-widget-states"
+        ],
+        "url": "https://ui.ballmac.com/components/feedback-widget"
+      }
+    },
+    {
+      "name": "feedback-widget-demo",
+      "type": "registry:example",
+      "title": "Feedback Widget: Floating widget",
+      "description": "Floating widget example of Feedback Widget.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/feedback-widget.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/feedback-widget-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/feedback-widget-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "feedback-widget",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "feedback-widget-states",
+      "type": "registry:example",
+      "title": "Feedback Widget: Helpful page, required comment",
+      "description": "Helpful page, required comment example of Feedback Widget.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/feedback-widget.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/feedback-widget-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/feedback-widget-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "feedback-widget",
         "tier": "free"
       }
     },
@@ -10693,6 +11192,132 @@
       "meta": {
         "example": true,
         "of": "install-tabs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "invite-members",
+      "type": "registry:ui",
+      "title": "Invite Members",
+      "description": "Invite teammates by email: type or paste addresses into chips, flag invalid or duplicate ones with an explanation, pick a role, send, and manage pending invitations.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/invite-members.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/invite-members.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "invite",
+          "team",
+          "email",
+          "roles"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "roles[], onInvite(invitations), pending[], onResend/onRevoke, existing[]. Addresses split on comma, space, semicolon or Enter and validate as you go.",
+          "whenToUse": [
+            "Team and workspace settings",
+            "Onboarding step for inviting colleagues"
+          ],
+          "whenNotToUse": [
+            "Searching existing users; use combobox",
+            "Single email field; use input"
+          ],
+          "composesWith": [
+            "team-switcher",
+            "settings-panel",
+            "avatar"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / comma / space",
+              "action": "Turns typed text into a chip"
+            },
+            {
+              "keys": "Backspace",
+              "action": "Removes the last chip when the field is empty"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Invalid chips announce the problem; results are a polite status"
+            }
+          ],
+          "customization": [
+            "roles and defaultRole",
+            "existing emails",
+            "max per batch",
+            "title and description"
+          ]
+        },
+        "examples": [
+          "invite-members-demo",
+          "invite-members-states"
+        ],
+        "url": "https://ui.ballmac.com/components/invite-members"
+      }
+    },
+    {
+      "name": "invite-members-demo",
+      "type": "registry:example",
+      "title": "Invite Members: With pending invitations",
+      "description": "With pending invitations example of Invite Members.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/invite-members.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/invite-members-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/invite-members-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "invite-members",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "invite-members-states",
+      "type": "registry:example",
+      "title": "Invite Members: Minimal",
+      "description": "Minimal example of Invite Members.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/invite-members.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/invite-members-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/invite-members-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "invite-members",
         "tier": "free"
       }
     },
@@ -12906,6 +13531,136 @@
       }
     },
     {
+      "name": "notification-center",
+      "type": "registry:ui",
+      "title": "Notification Center",
+      "description": "A bell with an unread badge that opens grouped notifications with All and Unread views, mark-as-read, dismiss, and an unread count in its accessible name.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/popover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/notification-center.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/notification-center.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "notifications",
+          "inbox",
+          "bell",
+          "popover"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "notifications[] with {id,title,description,time,group,read,icon,href}. Handle onMarkRead, onMarkAllRead, onDismiss and onOpenItem in your own state.",
+          "whenToUse": [
+            "App headers",
+            "In-app activity and alerts"
+          ],
+          "whenNotToUse": [
+            "Transient confirmations; use toast",
+            "Long-form updates; use changelog-feed"
+          ],
+          "composesWith": [
+            "popover",
+            "avatar",
+            "toast"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Opens the panel; Escape closes and restores focus"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The button announces the unread count; unread rows include 'Unread'; the list is a polite live region"
+            },
+            {
+              "keys": "Tab",
+              "action": "Row actions appear on hover and on keyboard focus"
+            }
+          ],
+          "customization": [
+            "groups",
+            "onOpenChange and open",
+            "emptyText and label",
+            "row icons"
+          ]
+        },
+        "examples": [
+          "notification-center-demo",
+          "notification-center-states"
+        ],
+        "url": "https://ui.ballmac.com/components/notification-center"
+      }
+    },
+    {
+      "name": "notification-center-demo",
+      "type": "registry:example",
+      "title": "Notification Center: Inbox",
+      "description": "Inbox example of Notification Center.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/notification-center.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/notification-center-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/notification-center-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "notification-center",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "notification-center-states",
+      "type": "registry:example",
+      "title": "Notification Center: Empty",
+      "description": "Empty example of Notification Center.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/notification-center.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/notification-center-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/notification-center-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "notification-center",
+        "tier": "free"
+      }
+    },
+    {
       "name": "notification-stack",
       "type": "registry:ui",
       "title": "Notification Stack",
@@ -13231,6 +13986,136 @@
       "meta": {
         "example": true,
         "of": "number-ticker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "onboarding-checklist",
+      "type": "registry:ui",
+      "title": "Onboarding Checklist",
+      "description": "A get-started checklist with a progress ring and segmented bar, expandable steps with actions, checkable tasks and a short celebration when everything is done.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/onboarding-checklist.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/onboarding-checklist.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "onboarding",
+          "checklist",
+          "progress",
+          "activation"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "steps: {id,title,description,action}. completed/defaultCompleted/onCompletedChange track progress. The open step shows its description and action.",
+          "whenToUse": [
+            "First-run setup for new accounts",
+            "Activation nudges in a dashboard corner"
+          ],
+          "whenNotToUse": [
+            "Multi-page wizards; use stepper-form",
+            "A plain progress bar; use progress"
+          ],
+          "composesWith": [
+            "progress-ring",
+            "card",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Reaches each step's checkbox and its expand button"
+            },
+            {
+              "keys": "Space",
+              "action": "Toggles a step done (role checkbox)"
+            },
+            {
+              "keys": "Enter / Space on the title",
+              "action": "Expands or collapses the step (aria-expanded)"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Check, bar and panel changes are instant"
+            }
+          ],
+          "customization": [
+            "controlled completed ids",
+            "defaultOpenId",
+            "onDismiss",
+            "completeMessage"
+          ]
+        },
+        "examples": [
+          "onboarding-checklist-demo",
+          "onboarding-checklist-states"
+        ],
+        "url": "https://ui.ballmac.com/components/onboarding-checklist"
+      }
+    },
+    {
+      "name": "onboarding-checklist-demo",
+      "type": "registry:example",
+      "title": "Onboarding Checklist: Setup steps",
+      "description": "Setup steps example of Onboarding Checklist.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/onboarding-checklist.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/onboarding-checklist-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/onboarding-checklist-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "onboarding-checklist",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "onboarding-checklist-states",
+      "type": "registry:example",
+      "title": "Onboarding Checklist: Complete and dismissible",
+      "description": "Complete and dismissible example of Onboarding Checklist.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/onboarding-checklist.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/onboarding-checklist-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/onboarding-checklist-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "onboarding-checklist",
         "tier": "free"
       }
     },
@@ -13918,6 +14803,132 @@
       "meta": {
         "example": true,
         "of": "phone-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "plan-selector",
+      "type": "registry:ui",
+      "title": "Plan Selector",
+      "description": "Pricing plan cards that work as a radio group, with a Monthly/Yearly switch that re-prices every plan, a highlighted plan, feature lists and form submission.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/plan-selector.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/plan-selector.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "pricing",
+          "plans",
+          "radio",
+          "billing toggle"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "plans: {id,name,price:{monthly,yearly},features,highlight,disabled}. value/onValueChange pick a plan; billing/onBillingChange switch period; name submits with a form.",
+          "whenToUse": [
+            "Upgrade and signup flows",
+            "Pricing sections where visitors choose a plan"
+          ],
+          "whenNotToUse": [
+            "A feature comparison grid; use comparison-table",
+            "Displaying the current plan; use billing-card"
+          ],
+          "composesWith": [
+            "billing-card",
+            "comparison-table",
+            "radio-group"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys / Space",
+              "action": "Native radio behavior between plans and the billing switch"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Announced as a radio group with position, name and price"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Price changes swap instantly"
+            }
+          ],
+          "customization": [
+            "highlight ribbon",
+            "priceNote",
+            "currency and locale",
+            "disabled plans"
+          ]
+        },
+        "examples": [
+          "plan-selector-demo",
+          "plan-selector-states"
+        ],
+        "url": "https://ui.ballmac.com/components/plan-selector"
+      }
+    },
+    {
+      "name": "plan-selector-demo",
+      "type": "registry:example",
+      "title": "Plan Selector: Three plans",
+      "description": "Three plans example of Plan Selector.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/plan-selector.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/plan-selector-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/plan-selector-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "plan-selector",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "plan-selector-states",
+      "type": "registry:example",
+      "title": "Plan Selector: Controlled, one unavailable",
+      "description": "Controlled, one unavailable example of Plan Selector.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/plan-selector.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/plan-selector-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/plan-selector-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "plan-selector",
         "tier": "free"
       }
     },
@@ -15942,6 +16953,134 @@
       "meta": {
         "example": true,
         "of": "separator",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-panel",
+      "type": "registry:ui",
+      "title": "Settings Panel",
+      "description": "A sectioned settings card with label-and-control rows and a save bar that slides in when something changes, with a status announced to screen readers.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/settings-panel.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/settings-panel.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "settings",
+          "form",
+          "preferences",
+          "save bar"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "<SettingsPanel status onSave onDiscard><SettingsSection title><SettingsRow label htmlFor>{control}</SettingsRow></SettingsSection></SettingsPanel>. Drive status: idle | dirty | saving | saved.",
+          "whenToUse": [
+            "Account, workspace and notification settings",
+            "Any form where people expect Save and Discard"
+          ],
+          "whenNotToUse": [
+            "Single-field inline edits",
+            "Wizards; use stepper-form"
+          ],
+          "composesWith": [
+            "switch",
+            "input",
+            "select",
+            "field"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter",
+              "action": "Submits the form from any field"
+            },
+            {
+              "keys": "Tab",
+              "action": "Save bar buttons are in the tab order after the fields"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Sections are labelled groups; save status is a polite live region"
+            }
+          ],
+          "customization": [
+            "status",
+            "dirtyMessage and saveLabel",
+            "stacked rows for wide controls"
+          ]
+        },
+        "examples": [
+          "settings-panel-demo",
+          "settings-panel-states"
+        ],
+        "url": "https://ui.ballmac.com/components/settings-panel"
+      }
+    },
+    {
+      "name": "settings-panel-demo",
+      "type": "registry:example",
+      "title": "Settings Panel: Workspace settings",
+      "description": "Workspace settings example of Settings Panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-panel.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-panel-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-panel-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-panel",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-panel-states",
+      "type": "registry:example",
+      "title": "Settings Panel: Unsaved changes",
+      "description": "Unsaved changes example of Settings Panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-panel.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-panel-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-panel-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-panel",
         "tier": "free"
       }
     },
@@ -20543,6 +21682,265 @@
       }
     },
     {
+      "name": "usage-meter",
+      "type": "registry:ui",
+      "title": "Usage Meter",
+      "description": "A plan-limit meter as a bar or ring, with normal, near-limit and over-limit states shown by icon and words, optional stacked segments and a meter role.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/usage-meter.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/usage-meter.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "usage",
+          "limit",
+          "quota",
+          "meter"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "label, used (or segments), limit, unit. warnAt sets the warning percent. variant bar | ring. Exposes role=meter with a readable value.",
+          "whenToUse": [
+            "Storage, seats, API calls and other quotas",
+            "Plan pages that nudge upgrades"
+          ],
+          "whenNotToUse": [
+            "Task progress; use progress",
+            "Multiple steps; use progress-steps"
+          ],
+          "composesWith": [
+            "billing-card",
+            "plan-selector",
+            "progress"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "role=meter with aria-valuetext such as '86 of 100 k. 86% used, nearing the limit.'"
+            },
+            {
+              "keys": "Color",
+              "action": "State is conveyed by icon and text as well as color"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Fills appear at their final size"
+            }
+          ],
+          "customization": [
+            "segments",
+            "warnAt",
+            "variant",
+            "note and action slots"
+          ]
+        },
+        "examples": [
+          "usage-meter-demo",
+          "usage-meter-states"
+        ],
+        "url": "https://ui.ballmac.com/components/usage-meter"
+      }
+    },
+    {
+      "name": "usage-meter-demo",
+      "type": "registry:example",
+      "title": "Usage Meter: Storage with segments",
+      "description": "Storage with segments example of Usage Meter.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/usage-meter.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/usage-meter-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/usage-meter-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "usage-meter",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "usage-meter-states",
+      "type": "registry:example",
+      "title": "Usage Meter: Warning, over and ring",
+      "description": "Warning, over and ring example of Usage Meter.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/usage-meter.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/usage-meter-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/usage-meter-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "usage-meter",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "user-menu",
+      "type": "registry:ui",
+      "title": "User Menu",
+      "description": "An account menu on the dropdown: avatar or avatar-with-name trigger, a header card with plan, link groups with shortcuts and badges, a theme submenu and sign out.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/dropdown-menu.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/user-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/user-menu.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "account",
+          "avatar",
+          "menu",
+          "theme"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "user {name,email,image,plan,status}, groups: UserMenuItem[][], theme/onThemeChange, onSignOut, variant avatar | full.",
+          "whenToUse": [
+            "Headers and sidebar footers",
+            "Account access with theme and sign out"
+          ],
+          "whenNotToUse": [
+            "Switching workspaces; use team-switcher",
+            "Generic action menus; use dropdown-menu"
+          ],
+          "composesWith": [
+            "avatar",
+            "dropdown-menu",
+            "team-switcher"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space / ArrowDown",
+              "action": "Opens the menu"
+            },
+            {
+              "keys": "Arrow keys and typeahead",
+              "action": "Move between items"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes and returns focus"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The avatar button names the person; links are real links"
+            }
+          ],
+          "customization": [
+            "variant",
+            "groups with icons, shortcuts and badges",
+            "theme submenu",
+            "open state props"
+          ]
+        },
+        "examples": [
+          "user-menu-demo",
+          "user-menu-states"
+        ],
+        "url": "https://ui.ballmac.com/components/user-menu"
+      }
+    },
+    {
+      "name": "user-menu-demo",
+      "type": "registry:example",
+      "title": "User Menu: Sidebar account",
+      "description": "Sidebar account example of User Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/user-menu.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/user-menu-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/user-menu-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "user-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "user-menu-states",
+      "type": "registry:example",
+      "title": "User Menu: Avatar only",
+      "description": "Avatar only example of User Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/user-menu.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/user-menu-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/user-menu-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "user-menu",
+        "tier": "free"
+      }
+    },
+    {
       "name": "word-rotate",
       "type": "registry:ui",
       "title": "Word Rotate",
@@ -20657,6 +22055,128 @@
       "meta": {
         "example": true,
         "of": "word-rotate",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workspace-card",
+      "type": "registry:ui",
+      "title": "Workspace Card",
+      "description": "A workspace or team card with a generated cover and logo tile, plan, member faces, project and storage stats, a current badge, an actions menu and a loading state.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/dropdown-menu.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/workspace-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/workspace-card.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "workspace",
+          "team",
+          "card",
+          "members"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "workspace {name,description,plan,members,memberCount,projects,storage,lastActive}, href or onOpen, current, actions[], loading. The title is the card's single link.",
+          "whenToUse": [
+            "Workspace pickers and team lists",
+            "Account overview pages"
+          ],
+          "whenNotToUse": [
+            "A dropdown switcher; use team-switcher",
+            "Generic content cards; use card"
+          ],
+          "composesWith": [
+            "team-switcher",
+            "avatar",
+            "usage-meter"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "One link per card (the title); the actions menu is a separate button"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Storage is a labelled meter; loading state sets aria-busy"
+            }
+          ],
+          "customization": [
+            "current",
+            "actions",
+            "href vs onOpen",
+            "cover and logo color come from the name"
+          ]
+        },
+        "examples": [
+          "workspace-card-demo",
+          "workspace-card-states"
+        ],
+        "url": "https://ui.ballmac.com/components/workspace-card"
+      }
+    },
+    {
+      "name": "workspace-card-demo",
+      "type": "registry:example",
+      "title": "Workspace Card: Workspace grid",
+      "description": "Workspace grid example of Workspace Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workspace-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workspace-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workspace-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workspace-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workspace-card-states",
+      "type": "registry:example",
+      "title": "Workspace Card: Loading and minimal",
+      "description": "Loading and minimal example of Workspace Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workspace-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workspace-card-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workspace-card-states.tsx"
+        }
+      ],
+      "categories": [
+        "saas"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workspace-card",
         "tier": "free"
       }
     },

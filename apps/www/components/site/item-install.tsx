@@ -101,7 +101,7 @@ export function ItemAi({ item }: { item: SiteItem }) {
   const url = `${SITE_URL}/r/${item.name}.json`
   return (
     <div className="space-y-4">
-      <p className="text-muted-foreground text-sm leading-relaxed">
+      <p className="text-muted-foreground text-sm leading-relaxed [overflow-wrap:anywhere]">
         {item.ai?.summary} With the shadcn MCP server set up (
         <Link href="/docs/mcp" className="text-foreground underline underline-offset-4">
           guide
