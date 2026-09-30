@@ -4565,6 +4565,147 @@
       }
     },
     {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "A date grid for one day, several days or a range, with month and year selects, week numbers, disabled rules and range-end styling, on React DayPicker.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "react-day-picker@^9",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/calendar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/calendar.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "date",
+          "calendar",
+          "range",
+          "day-picker"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Use mode single, multiple or range with selected and onSelect. All DayPicker props work: disabled, numberOfMonths, captionLayout dropdown, locale.",
+          "whenToUse": [
+            "Choosing a date or range inside a card or popover",
+            "Booking and scheduling",
+            "Showing availability with disabled days"
+          ],
+          "whenNotToUse": [
+            "A date field in a form; use date-picker",
+            "Typing a range with inputs; use date-range-picker"
+          ],
+          "composesWith": [
+            "popover",
+            "date-picker",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between days"
+            },
+            {
+              "keys": "PageUp / PageDown",
+              "action": "Previous or next month; with Shift, previous or next year"
+            },
+            {
+              "keys": "Home / End",
+              "action": "First or last day of the week"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Selects the focused day"
+            }
+          ],
+          "customization": [
+            "mode: single | multiple | range",
+            "captionLayout dropdown with startMonth and endMonth",
+            "disabled rules and max selection",
+            "bordered surface",
+            "footer text"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Calendar",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "calendar-demo",
+          "calendar-states"
+        ],
+        "url": "https://ui.ballmac.com/components/calendar"
+      }
+    },
+    {
+      "name": "calendar-demo",
+      "type": "registry:example",
+      "title": "Calendar: Date range",
+      "description": "Date range example of Calendar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/calendar.json"
+      ],
+      "dependencies": [
+        "react-day-picker"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/calendar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/calendar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "calendar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "calendar-states",
+      "type": "registry:example",
+      "title": "Calendar: Dropdowns and multiple",
+      "description": "Dropdowns and multiple example of Calendar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/calendar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/calendar-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/calendar-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "calendar",
+        "tier": "free"
+      }
+    },
+    {
       "name": "callout",
       "type": "registry:ui",
       "title": "Callout",
@@ -4791,6 +4932,302 @@
       "meta": {
         "example": true,
         "of": "card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "A swipeable, keyboard-operable carousel on Embla with slide labels, dot pagination, vertical mode, loop, and autoplay that pauses on hover, focus and reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "embla-carousel-react@^8",
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/carousel.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/carousel.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "slider",
+          "swipe",
+          "slides",
+          "embla"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Compose Carousel, CarouselContent and CarouselItem with CarouselPrevious, CarouselNext, CarouselDots and CarouselPlayPause. Give Carousel a label.",
+          "whenToUse": [
+            "Feature highlights and testimonials",
+            "Product image galleries",
+            "Horizontal lists that overflow"
+          ],
+          "whenNotToUse": [
+            "Content people must read in full; show it all",
+            "A marquee of logos; use marquee"
+          ],
+          "composesWith": [
+            "card",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Previous or next slide (Up / Down when vertical)"
+            },
+            {
+              "keys": "Tab",
+              "action": "Reaches arrows, dots and the pause button"
+            },
+            {
+              "keys": "Swipe / drag",
+              "action": "Moves slides with touch or mouse"
+            }
+          ],
+          "customization": [
+            "opts (loop, align, slidesToScroll)",
+            "orientation",
+            "autoplay in ms",
+            "item basis classes for several visible slides"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Carousel",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "carousel-demo",
+          "carousel-states"
+        ],
+        "url": "https://ui.ballmac.com/components/carousel"
+      }
+    },
+    {
+      "name": "carousel-demo",
+      "type": "registry:example",
+      "title": "Carousel: Product highlights",
+      "description": "Product highlights example of Carousel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/carousel.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/carousel-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/carousel-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "carousel",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "carousel-states",
+      "type": "registry:example",
+      "title": "Carousel: Multiple and vertical",
+      "description": "Multiple and vertical example of Carousel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/carousel.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/carousel-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/carousel-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "carousel",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "Theme-aware chart wrapper for Recharts with token colors, a styled tooltip and legend, a named figure with a screen-reader summary, and keyboard navigation.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/chart.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/chart.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "recharts",
+          "graph",
+          "data"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Wrap any Recharts chart in ChartContainer with a config of label and color per series. Use ChartTooltipContent and ChartLegendContent. Always pass label and summary.",
+          "whenToUse": [
+            "Dashboards and reports",
+            "Trends, comparisons and proportions"
+          ],
+          "whenNotToUse": [
+            "A tiny inline trend; use sparkline",
+            "A single ring value; use progress-ring"
+          ],
+          "composesWith": [
+            "card",
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between data points (accessibilityLayer)"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Read the figure name and summary"
+            }
+          ],
+          "customization": [
+            "config colors via chart tokens",
+            "tooltip indicator: dot | line | dashed",
+            "legend content",
+            "summary text for assistive tech"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Chart",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "chart-demo",
+          "chart-bars",
+          "chart-donut"
+        ],
+        "url": "https://ui.ballmac.com/components/chart"
+      }
+    },
+    {
+      "name": "chart-demo",
+      "type": "registry:example",
+      "title": "Chart: Revenue area chart",
+      "description": "Revenue area chart example of Chart.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart.json"
+      ],
+      "dependencies": [
+        "recharts"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-bars",
+      "type": "registry:example",
+      "title": "Chart: Grouped bars",
+      "description": "Grouped bars example of Chart.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart.json"
+      ],
+      "dependencies": [
+        "recharts"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-bars.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-bars.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-donut",
+      "type": "registry:example",
+      "title": "Chart: Donut",
+      "description": "Donut example of Chart.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart.json"
+      ],
+      "dependencies": [
+        "recharts"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-donut.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-donut.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart",
         "tier": "free"
       }
     },
@@ -6266,6 +6703,271 @@
       }
     },
     {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "A complete data grid on TanStack Table: sortable headers, search, column visibility, row selection, pagination, a loading state and live result counts.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "@tanstack/react-table@^8",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/dropdown-menu.json",
+        "https://ui.ballmac.com/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/data-table.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/data-table.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "table",
+          "sorting",
+          "filter",
+          "pagination",
+          "tanstack"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Pass columns (TanStack ColumnDef) and data. Use DataTableColumnHeader for sortable headers. selectable adds checkboxes; pageSize sets rows per page.",
+          "whenToUse": [
+            "Lists of records people search, sort and select",
+            "Admin and billing screens"
+          ],
+          "whenNotToUse": [
+            "A small static table; use table",
+            "Server-side paging for huge datasets without adapting the parts"
+          ],
+          "composesWith": [
+            "table",
+            "badge",
+            "dropdown-menu"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter",
+              "action": "Sort buttons, checkboxes, pagination and the column menu are real controls"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "aria-sort on headers; the result count is a polite live region"
+            }
+          ],
+          "customization": [
+            "columns and cell renderers",
+            "selectable and onSelectionChange",
+            "searchable, columnToggle, pageSize",
+            "stickyHeader with maxHeightClassName",
+            "toolbar slot"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Data Table",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "data-table-demo",
+          "data-table-states"
+        ],
+        "url": "https://ui.ballmac.com/components/data-table"
+      }
+    },
+    {
+      "name": "data-table-demo",
+      "type": "registry:example",
+      "title": "Data Table: Invoices",
+      "description": "Invoices example of Data Table.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/data-table.json",
+        "https://ui.ballmac.com/r/badge.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/data-table-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/data-table-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "data-table",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "data-table-states",
+      "type": "registry:example",
+      "title": "Data Table: Loading and empty",
+      "description": "Loading and empty example of Data Table.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/data-table.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/data-table-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/data-table-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "data-table",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "A button that opens a calendar popover to choose one date, with presets, month and year selects, min and max dates, clearing, invalid state and form submission.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/calendar.json",
+        "https://ui.ballmac.com/r/popover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/date-picker.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "date",
+          "input",
+          "popover",
+          "form"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Give it a defaultValue or value and onValueChange. presets add quick picks, dropdowns adds month and year selects, name submits YYYY-MM-DD.",
+          "whenToUse": [
+            "A single date in a form",
+            "Deadlines, birthdays and delivery dates",
+            "When quick picks like Tomorrow help"
+          ],
+          "whenNotToUse": [
+            "A date range; use date-range-picker",
+            "An always-visible calendar; use calendar"
+          ],
+          "composesWith": [
+            "field",
+            "calendar",
+            "popover"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space / ArrowDown",
+              "action": "Opens the calendar from the trigger"
+            },
+            {
+              "keys": "Arrow keys",
+              "action": "Move between days"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes and returns focus to the trigger"
+            }
+          ],
+          "customization": [
+            "presets",
+            "dropdowns for distant dates",
+            "minDate and maxDate",
+            "format (Intl options) and locale",
+            "clearable and invalid"
+          ]
+        },
+        "examples": [
+          "date-picker-demo",
+          "date-picker-states"
+        ],
+        "url": "https://ui.ballmac.com/components/date-picker"
+      }
+    },
+    {
+      "name": "date-picker-demo",
+      "type": "registry:example",
+      "title": "Date Picker: Delivery date with presets",
+      "description": "Delivery date with presets example of Date Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/date-picker.json",
+        "https://ui.ballmac.com/r/field.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/date-picker-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/date-picker-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "date-picker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "date-picker-states",
+      "type": "registry:example",
+      "title": "Date Picker: Birthday, invalid, disabled",
+      "description": "Birthday, invalid, disabled example of Date Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/date-picker.json",
+        "https://ui.ballmac.com/r/field.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/date-picker-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/date-picker-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "date-picker",
+        "tier": "free"
+      }
+    },
+    {
       "name": "date-range-picker",
       "type": "registry:ui",
       "title": "Date Range Picker",
@@ -6971,6 +7673,141 @@
       "meta": {
         "example": true,
         "of": "dot-pattern",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "A swipe-to-dismiss panel from any edge on Vaul, with grab handle, header, scrollable body and footer, drag-safe inner content and reduced-motion handling.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "vaul@^1"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/drawer.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/drawer.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "overlay",
+          "mobile",
+          "bottom sheet",
+          "vaul"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Bottom drawers suit mobile actions; use direction left or right for side panels. Compose DrawerHeader, DrawerBody and DrawerFooter.",
+          "whenToUse": [
+            "Mobile-first confirmations and pickers",
+            "Panels users may want to flick away"
+          ],
+          "whenNotToUse": [
+            "Desktop settings panels; use sheet",
+            "Critical confirmations; use alert-dialog"
+          ],
+          "composesWith": [
+            "button",
+            "sheet"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Shift+Tab",
+              "action": "Cycles focus inside the drawer"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes and returns focus to the trigger"
+            },
+            {
+              "keys": "Drag / swipe",
+              "action": "Dismisses by gesture"
+            }
+          ],
+          "customization": [
+            "direction",
+            "snapPoints",
+            "dismissible",
+            "handle visibility"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Drawer",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "drawer-demo",
+          "drawer-states"
+        ],
+        "url": "https://ui.ballmac.com/components/drawer"
+      }
+    },
+    {
+      "name": "drawer-demo",
+      "type": "registry:example",
+      "title": "Drawer: Order review",
+      "description": "Order review example of Drawer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/drawer.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/drawer-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/drawer-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "drawer",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "drawer-states",
+      "type": "registry:example",
+      "title": "Drawer: Four directions",
+      "description": "Four directions example of Drawer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/drawer.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/drawer-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/drawer-states.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "drawer",
         "tier": "free"
       }
     },
@@ -7953,6 +8790,147 @@
       }
     },
     {
+      "name": "form",
+      "type": "registry:ui",
+      "title": "Form",
+      "description": "React Hook Form wired to Ballmac Field: one FormField renders label, control, description and error with ids, aria-invalid and aria-describedby linked, plus a pending submit button.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "react-hook-form@^7"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/field.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/form.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/form.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "form",
+          "validation",
+          "react-hook-form",
+          "field"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "const form = useForm(); <Form form onSubmit><FormField name label render={(props) => <Input {...props}/>}/><FormSubmit/></Form>. Use rules or a resolver for validation.",
+          "whenToUse": [
+            "Any form with client validation",
+            "Forms that need per-field errors announced"
+          ],
+          "whenNotToUse": [
+            "A single uncontrolled input; use field",
+            "Server actions without client state"
+          ],
+          "composesWith": [
+            "field",
+            "input",
+            "checkbox",
+            "select"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter",
+              "action": "Submits; focus moves to the first invalid control"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Labels, hints and errors are linked; errors use role alert"
+            }
+          ],
+          "customization": [
+            "rules or resolver",
+            "orientation horizontal for checkboxes",
+            "pendingText on FormSubmit",
+            "description and required"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Form",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "form-demo",
+          "form-states"
+        ],
+        "url": "https://ui.ballmac.com/components/form"
+      }
+    },
+    {
+      "name": "form-demo",
+      "type": "registry:example",
+      "title": "Form: Sign up",
+      "description": "Sign up example of Form.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/form.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "dependencies": [
+        "react-hook-form",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/form-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/form-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "form",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "form-states",
+      "type": "registry:example",
+      "title": "Form: Pending submit",
+      "description": "Pending submit example of Form.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/form.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/textarea.json"
+      ],
+      "dependencies": [
+        "react-hook-form"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/form-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/form-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "form",
+        "tier": "free"
+      }
+    },
+    {
       "name": "globe",
       "type": "registry:ui",
       "title": "Globe",
@@ -8673,6 +9651,140 @@
       "meta": {
         "example": true,
         "of": "input-group",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input OTP",
+      "description": "A one-time-code field with grouped slots, separator, caret, paste and autofill support, invalid state and reduced-motion-safe animation, on a single real input.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "input-otp@^1",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/input-otp.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "otp",
+          "code",
+          "verification",
+          "input"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "<InputOTP maxLength={6}> with InputOTPGroup, InputOTPSlot index and InputOTPSeparator. onComplete fires when every slot is filled.",
+          "whenToUse": [
+            "Two-step sign-in and email verification",
+            "PIN entry"
+          ],
+          "whenNotToUse": [
+            "Free-form text codes; use input",
+            "Long passwords; use password-input"
+          ],
+          "composesWith": [
+            "field",
+            "label"
+          ],
+          "a11y": [
+            {
+              "keys": "Type / paste",
+              "action": "Fills slots; autofill works with one-time-code"
+            },
+            {
+              "keys": "Backspace / arrows",
+              "action": "Edit like a normal text field"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "One text input is announced, not six boxes"
+            }
+          ],
+          "customization": [
+            "maxLength and pattern",
+            "groups and separators",
+            "aria-invalid",
+            "onComplete"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Input OTP",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "input-otp-demo",
+          "input-otp-states"
+        ],
+        "url": "https://ui.ballmac.com/components/input-otp"
+      }
+    },
+    {
+      "name": "input-otp-demo",
+      "type": "registry:example",
+      "title": "Input OTP: Verification code",
+      "description": "Verification code example of Input OTP.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/input-otp.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/input-otp-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/input-otp-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "input-otp",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "input-otp-states",
+      "type": "registry:example",
+      "title": "Input OTP: PIN, invalid, disabled",
+      "description": "PIN, invalid, disabled example of Input OTP.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/input-otp.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/input-otp-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/input-otp-states.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "input-otp",
         "tier": "free"
       }
     },
@@ -12703,6 +13815,145 @@
       }
     },
     {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Draggable split panels with keyboard resizing, nested horizontal and vertical groups, collapsible panels, and a grip that appears on hover and focus.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "react-resizable-panels@^3",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/resizable.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/resizable.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "panels",
+          "split",
+          "layout",
+          "resize"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "ResizablePanelGroup with ResizablePanel children separated by ResizableHandle. Sizes are percentages. Give each handle a label.",
+          "whenToUse": [
+            "IDE, email and file-manager layouts",
+            "User-adjustable sidebars and consoles"
+          ],
+          "whenNotToUse": [
+            "Fixed layouts; use plain CSS grid",
+            "App navigation; use sidebar"
+          ],
+          "composesWith": [
+            "scroll-area",
+            "separator"
+          ],
+          "a11y": [
+            {
+              "keys": "ArrowLeft / ArrowRight (ArrowUp / ArrowDown)",
+              "action": "Resize by 10% steps from the focused handle"
+            },
+            {
+              "keys": "Home / End",
+              "action": "Move to minimum or maximum"
+            },
+            {
+              "keys": "Enter",
+              "action": "Collapse or expand a collapsible neighbor"
+            }
+          ],
+          "customization": [
+            "direction",
+            "defaultSize, minSize, maxSize",
+            "collapsible panels",
+            "autoSaveId to remember sizes",
+            "withHandle grip"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Resizable",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "resizable-demo",
+          "resizable-states"
+        ],
+        "url": "https://ui.ballmac.com/components/resizable"
+      }
+    },
+    {
+      "name": "resizable-demo",
+      "type": "registry:example",
+      "title": "Resizable: Editor layout",
+      "description": "Editor layout example of Resizable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/resizable.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/resizable-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/resizable-demo.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "resizable",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "resizable-states",
+      "type": "registry:example",
+      "title": "Resizable: Collapsible panel",
+      "description": "Collapsible panel example of Resizable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/resizable.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "react-resizable-panels"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/resizable-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/resizable-states.tsx"
+        }
+      ],
+      "categories": [
+        "layout"
+      ],
+      "meta": {
+        "example": true,
+        "of": "resizable",
+        "tier": "free"
+      }
+    },
+    {
       "name": "scramble-text",
       "type": "registry:ui",
       "title": "Scramble Text",
@@ -13757,6 +15008,148 @@
       "meta": {
         "example": true,
         "of": "shortcut-hint",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "An app sidebar with icon-rail collapse, floating and inset variants, grouped menus with badges and sub-items, a mobile sheet, tooltips when collapsed and a Cmd/Ctrl+B shortcut.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "class-variance-authority",
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/sheet.json",
+        "https://ui.ballmac.com/r/tooltip.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/sidebar.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "navigation",
+          "layout",
+          "app shell",
+          "collapsible"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "SidebarProvider wraps Sidebar and SidebarInset. Menu entries use SidebarMenuButton with href and isActive. SidebarTrigger toggles it.",
+          "whenToUse": [
+            "Application navigation with many sections",
+            "Dashboards and admin tools"
+          ],
+          "whenNotToUse": [
+            "Marketing site headers; use navigation-menu",
+            "Two or three links; use tabs"
+          ],
+          "composesWith": [
+            "sheet",
+            "tooltip",
+            "button",
+            "avatar"
+          ],
+          "a11y": [
+            {
+              "keys": "Cmd/Ctrl+B",
+              "action": "Toggles the sidebar"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves through links; the current page has aria-current"
+            },
+            {
+              "keys": "Mobile",
+              "action": "Opens as a named dialog sheet; Escape closes"
+            }
+          ],
+          "customization": [
+            "side, variant, collapsible",
+            "defaultOpen or controlled open",
+            "SidebarMenuBadge and sub-menus",
+            "width via --sidebar-width"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Sidebar",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "sidebar-demo",
+          "sidebar-states"
+        ],
+        "url": "https://ui.ballmac.com/components/sidebar"
+      }
+    },
+    {
+      "name": "sidebar-demo",
+      "type": "registry:example",
+      "title": "Sidebar: Workspace navigation",
+      "description": "Workspace navigation example of Sidebar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sidebar.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sidebar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sidebar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sidebar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sidebar-states",
+      "type": "registry:example",
+      "title": "Sidebar: Icon rail",
+      "description": "Icon rail example of Sidebar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sidebar.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sidebar-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sidebar-states.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sidebar",
         "tier": "free"
       }
     },
@@ -16637,6 +18030,138 @@
       "meta": {
         "example": true,
         "of": "toast-stack",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Stacked toasts on Sonner styled with theme tokens: status icons, actions, promises, swipe to dismiss, pause on hover and focus, and screen-reader announcements.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "sonner@^2",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/toast.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/toast.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "toast",
+          "notification",
+          "sonner",
+          "feedback"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-09-30",
+        "ai": {
+          "summary": "Render <Toaster /> once, then call toast(), toast.success(), toast.error() or toast.promise() from anywhere.",
+          "whenToUse": [
+            "Confirming an action (saved, copied, archived)",
+            "Undo prompts",
+            "Background task results"
+          ],
+          "whenNotToUse": [
+            "Errors the user must fix in a form; use field errors",
+            "Permanent page messages; use alert or banner",
+            "A macOS-style stack; use toast-stack"
+          ],
+          "composesWith": [
+            "button",
+            "toast-stack"
+          ],
+          "a11y": [
+            {
+              "keys": "Alt+T",
+              "action": "Focuses the notification region"
+            },
+            {
+              "keys": "Tab",
+              "action": "Reaches toast actions and close buttons"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Toasts are announced politely"
+            }
+          ],
+          "customization": [
+            "position",
+            "duration",
+            "action and cancel buttons",
+            "toasterId for multiple regions"
+          ]
+        },
+        "source": {
+          "name": "shadcn/ui Sonner",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "toast-demo",
+          "toast-states"
+        ],
+        "url": "https://ui.ballmac.com/components/toast"
+      }
+    },
+    {
+      "name": "toast-demo",
+      "type": "registry:example",
+      "title": "Toast: Toast types",
+      "description": "Toast types example of Toast.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/toast.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/toast-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/toast-demo.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "toast",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "toast-states",
+      "type": "registry:example",
+      "title": "Toast: Action and warning",
+      "description": "Action and warning example of Toast.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/toast.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/toast-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/toast-states.tsx"
+        }
+      ],
+      "categories": [
+        "feedback"
+      ],
+      "meta": {
+        "example": true,
+        "of": "toast",
         "tier": "free"
       }
     },

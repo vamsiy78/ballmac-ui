@@ -89,13 +89,16 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 - [x] Wave 2 batch 2: all 177 preview examples in light and dark (354 checks), 0 serious/critical
 - [x] Wave 3: all 209 preview examples in light and dark (418 checks), 0 serious/critical; 52 test files / 121 tests; Base UI and Radix install smoke passed for all 332 registry entries
 - [x] Wave 1 batch 2: all 249 preview examples in light and dark (498 checks), 0 serious/critical; 66 test files / 147 tests; Base UI and Radix install smoke passed for all 392 registry entries
-- [~] Wave 1 batch 3: all 273 preview examples in light and dark (546 checks), 0 serious/critical; open overlay states scanned with `scripts/a11y-open-states.ts`; 78 test files / 171 tests; official Base UI and Radix CLI smokes pending (network policy blocked `ui.shadcn.com`); offline fresh-app typecheck and build of all 273 examples passed
+- [x] Wave 1 batch 3: all 273 preview examples in light and dark (546 checks), 0 serious/critical; open overlay states scanned with `scripts/a11y-open-states.ts`; 78 test files / 171 tests; the owner ran the official Base UI and Radix CLI smokes locally and reported them good (the cloud session could not reach `ui.shadcn.com`); offline fresh-app typecheck and build of all 273 examples passed
+- [~] Wave 1 batch 4 (completes Wave 1): all 296 preview examples in light and dark (592 checks), 0 serious/critical; every overlay and error state opened and scanned with `scripts/a11y-open-states.ts` (only the known Radix aria-hidden-focus pattern on menus); 89 test files / 202 tests; registry check (462 entries), lint, typecheck and production build pass; fresh-app offline typecheck and build of all 296 examples passes. Official shadcn CLI smokes (Base UI, Radix) for this batch still to be run where `ui.shadcn.com` is reachable
 - [x] Wave 3 catalog Lighthouse (local mobile): accessibility, best practices, SEO 100; performance 85 (LCP 4.2 s)
 - [~] Lighthouse on ui.ballmac.com (mobile): accessibility, best practices, SEO 100 on every page tested. Performance: hero-1 100, button 98, catalog 95, **home 89** (simulated LCP 3.3 s from the JS of five live demos; next: lazy-hydrate the showcase)
 
 ## Components (MVP: 30)
 
-Wave 1 batch 3 (2026-09-30, gate pending smokes): dropdown-menu, context-menu, menubar, sheet, slider, table, item, field, input-group, navigation-menu, command, combobox. Component count: 131. See `research/wave-1-batch-3.md`.
+Wave 1 batch 4 (2026-09-30): calendar, date-picker, carousel, chart, data-table, drawer, form, input-otp, resizable, sidebar, toast. Component count: 142. Wave 1 complete. See `research/wave-1-batch-4.md`.
+
+Wave 1 batch 3 (2026-09-30): dropdown-menu, context-menu, menubar, sheet, slider, table, item, field, input-group, navigation-menu, command, combobox. Component count: 131. See `research/wave-1-batch-3.md`.
 
 Wave 1 batch 1 (2026-09-29): alert, aspect-ratio, breadcrumb, card, empty,
 pagination, progress, separator, skeleton, spinner. Component count: 68.

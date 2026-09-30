@@ -27,3 +27,5 @@ window.matchMedia ??= (query: string) =>
 Element.prototype.scrollIntoView ??= () => {}
 Element.prototype.hasPointerCapture ??= () => false
 Element.prototype.releasePointerCapture ??= () => {}
+Element.prototype.setPointerCapture ??= () => {}
+document.elementFromPoint ??= () => null

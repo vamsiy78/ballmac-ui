@@ -111,10 +111,13 @@ type TableHeadProps = React.ComponentProps<"th"> & {
   sort?: "ascending" | "descending" | "none";
   /** Right-align and use tabular numbers. */
   numeric?: boolean;
+  /** Draw the direction icon when `sort` is set. Turn off when your own header button already shows one. */
+  sortIcon?: boolean;
 };
 function TableHead({
   className,
   sort,
+  sortIcon = true,
   numeric,
   children,
   scope = "col",
@@ -134,7 +137,7 @@ function TableHead({
       )}
       {...props}
     >
-      {sort ? (
+      {sort && sortIcon ? (
         <span
           className={cn(
             "inline-flex items-center gap-1.5",

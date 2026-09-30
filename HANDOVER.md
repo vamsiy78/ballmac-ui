@@ -5,7 +5,7 @@ Written 2026-09-29 for the next agent (Codex). Read this, then `AUTHORING.md` (t
 ## 1. Where things stand
 
 - **Product:** a shadcn-compatible registry (`@ballmac`, `https://ui.ballmac.com/r/{name}.json`) plus the docs site in `apps/www` (Next.js 16, React 19, Tailwind v4, Motion 12, Radix via `radix-ui`).
-- **Catalog on `preprod`:** 119 components committed (f15159e). Wave 1 batch 3 adds twelve more in the working tree (131 components, 19 blocks, 2 templates once committed); see section 6 for the gate status.
+- **Catalog on `preprod`:** 142 components, 19 blocks, 2 templates. Wave 1 is complete (batches 1 to 4).
 - **Site:** redesigned; the catalog has Gallery / List / Index views and Quick Look; sidebar component categories are collapsible, so the site scales to 200+ items without changes.
 - **Branches:** `preprod` is where work lands (Vercel preview, behind Vercel login). `main` is production, which the owner has deliberately disabled. **Never push to `main`** unless the owner asks.
 - **Working tree:** check `git status` before starting another batch. The Wave 4 commit also fixes duplicate React keys in component-page accessibility tables when shortcut labels repeat.
@@ -76,7 +76,7 @@ Accessibility: run `npx -y pnpm@10 a11y` (axe-core; serious + critical must be 0
 
 | Wave | Planned | Implemented | Still to build | State |
 | --- | ---: | ---: | ---: | --- |
-| 1 · shadcn parity | 43 | 32 | 11 | Batches 1–2 shipped; batch 3 written, gate pending (smoke installs) |
+| 1 · shadcn parity | 43 | 43 | 0 | Shipped (batches 1–4) |
 | 2 · forms beyond shadcn | 15 | 15 | 0 | Shipped |
 | 3 · data display | 16 | 16 | 0 | Shipped |
 | 4 · feedback and status | 10 | 10 | 0 | Shipped |
@@ -87,7 +87,7 @@ Accessibility: run `npx -y pnpm@10 a11y` (axe-core; serious + critical must be 0
 | 9 · motion and effects | 35 | 0 | 35 | Not started |
 | 10 · desktop and devices | 15 | 0 | 15 | Not started |
 
-The original 58 components plus 61 shipped wave items make **119 on `preprod`**; batch 3 brings the working tree to **131**. The listed roadmap has **109 components still to build** and would reach about **240** if completed. Reaching the 200-component floor requires at least **69 more**. Finish the 23 missing Wave 1 parity items, then continue Waves 5–10 in batches of 10–20.
+The original 58 components plus 61 shipped wave items make **119 on `preprod`**; batch 3 (12) and batch 4 (11) bring the working tree to **142**. The listed roadmap has **98 components still to build** and would reach about **240** if completed. Reaching the 200-component floor requires at least **58 more**. Finish Waves 5–10 in batches of 10–20. Finish the 23 missing Wave 1 parity items, then continue Waves 5–10 in batches of 10–20.
 
 Existing (58, do not duplicate): accordion, ai-chat, ai-message, animated-beam, animated-grid, animated-tabs, api-key-field, aurora-background, avatar, badge, beams-background, bento-grid, border-beam, browser-frame, button, checkbox, code-block, confetti, dialog, dock, dot-pattern, dynamic-island, flickering-grid, globe, glow-border, gradient-text, input, install-tabs, kbd, label, laptop-frame, mac-window, magnetic-button, marquee, menu-bar, meteors, notification-stack, number-ticker, orbiting-circles, particles, phone-frame, prompt-input, reasoning-disclosure, scramble-text, segmented-control, select, shimmer-text, spotlight-card, spotlight-search, streaming-text, switch, terminal, text-reveal, textarea, tilt-card, tool-call-card, tooltip, word-rotate.
 
@@ -102,7 +102,7 @@ Wave 1 batch 2 complete: alert-dialog, button-group, collapsible, hover-card, po
 
 Wave 1 batch 3 written (12): command, combobox, context-menu, dropdown-menu, field, input-group, item, menubar, navigation-menu, sheet, slider, table. Research and design decisions: `research/wave-1-batch-3.md`. **Gate status (2026-09-30, cloud session):** registry build/check (428 entries, schema valid), 171 tests, lint, typecheck and production build passed. Axe scanned all 273 previews in light and dark (546 scans) with zero serious/critical findings; `scripts/a11y-open-states.ts` opened every new overlay at desktop and 390 px in light and dark with no findings beyond the known Radix `aria-hidden-focus` pattern (see the research note). Component pages, catalog views and Quick Look showed no overflow or console errors. **Official Base UI and Radix smokes still not run** (that cloud environment's network policy denied `ui.shadcn.com`, needed by `shadcn init`). Substitute run: a fresh create-next-app with latest npm dependencies and every built registry file written to its install path typechecked and built all 273 examples (this caught `lucide-react` no longer exporting `Github`, fixed in item-demo). It does not exercise the shadcn CLI, so run `pnpm smoke` and `SMOKE_BASE=radix pnpm smoke` where `ui.shadcn.com` is reachable before promoting to main.
 
-Wave 1 still to build after batch 3 (11): calendar, carousel, chart, data-table, date-picker, drawer, form, input-otp, resizable, sidebar, toast (sonner).
+Wave 1 batch 4 (11, completes Wave 1): calendar, carousel, chart, data-table, date-picker, drawer, form, input-otp, resizable, sidebar, toast (sonner). Research and design decisions: `research/wave-1-batch-4.md`. **Gate (2026-09-30, cloud session):** registry check (462 entries), 202 tests, lint, typecheck and production build passed; axe over 296 previews in light and dark (592 scans) found 0 serious/critical, and `scripts/a11y-open-states.ts` scanned every opened overlay; component pages, catalog views and Quick Look had no overflow or console errors at desktop and 390 px; a fresh Next app with latest npm dependencies typechecked and built all 296 examples. **Still to run: the official Base UI and Radix CLI smokes (`pnpm smoke`, `SMOKE_BASE=radix pnpm smoke`)**, which need `ui.shadcn.com`. New dependencies are pinned in the item metadata: react-day-picker 9, @tanstack/react-table 8, react-resizable-panels 3 (later majors have different APIs), embla-carousel-react 8, recharts 3, vaul 1, input-otp 1, sonner 2, react-hook-form 7.
 
 **Wave 2: forms beyond shadcn (≈15, `forms`).** file-dropzone, multi-select, tag-input, number-input, password-input (strength meter), search-field, phone-input, color-picker, rating, date-range-picker, time-picker, currency-input, stepper-form (wizard), slider-range, signature-pad.
 
