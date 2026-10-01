@@ -5,7 +5,7 @@ Written 2026-09-29 for the next agent (Codex). Read this, then `AUTHORING.md` (t
 ## 1. Where things stand
 
 - **Product:** a shadcn-compatible registry (`@ballmac`, `https://ui.ballmac.com/r/{name}.json`) plus the docs site in `apps/www` (Next.js 16, React 19, Tailwind v4, Motion 12, Radix via `radix-ui`).
-- **Catalog on `preprod`:** 180 components, 19 blocks, 2 templates. Waves 1 to 7 are complete.
+- **Catalog on `preprod`:** 190 components, 19 blocks, 2 templates. Waves 1 to 8 are complete.
 - **Site:** redesigned; the catalog has Gallery / List / Index views and Quick Look; sidebar component categories are collapsible, so the site scales to 200+ items without changes.
 - **Branches:** `preprod` is where work lands (Vercel preview, behind Vercel login). `main` is production, which the owner has deliberately disabled. **Never push to `main`** unless the owner asks.
 - **Working tree:** check `git status` before starting another batch. The Wave 4 commit also fixes duplicate React keys in component-page accessibility tables when shortcut labels repeat.
@@ -87,7 +87,7 @@ Accessibility: run `npx -y pnpm@10 a11y` (axe-core; serious + critical must be 0
 | 9 · motion and effects | 35 | 0 | 35 | Not started |
 | 10 · desktop and devices | 15 | 0 | 15 | Not started |
 
-The original 58 components plus 61 shipped wave items make **119 on `preprod`**; batches 3 (12) and 4 (11) Wave 5 (14), Wave 6 (12) and Wave 7 (12) bring the working tree to **180**. The listed roadmap has **60 components still to build** and would reach about **240** if completed. Reaching the 200-component floor requires at least **20 more**. Finish Waves 8–10 in batches of 10–20. Finish the 23 missing Wave 1 parity items, then continue Waves 5–10 in batches of 10–20.
+The original 58 components plus 61 shipped wave items make **119 on `preprod`**; batches 3 (12) and 4 (11) Wave 5 (14), Wave 6 (12), Wave 7 (12) and Wave 8 (10) bring the working tree to **190**. The listed roadmap has **50 components still to build** and would reach about **240** if completed. Reaching the 200-component floor requires at least **10 more**. Finish Waves 9–10 in batches of 10–20. Finish the 23 missing Wave 1 parity items, then continue Waves 5–10 in batches of 10–20.
 
 Existing (58, do not duplicate): accordion, ai-chat, ai-message, animated-beam, animated-grid, animated-tabs, api-key-field, aurora-background, avatar, badge, beams-background, bento-grid, border-beam, browser-frame, button, checkbox, code-block, confetti, dialog, dock, dot-pattern, dynamic-island, flickering-grid, globe, glow-border, gradient-text, input, install-tabs, kbd, label, laptop-frame, mac-window, magnetic-button, marquee, menu-bar, meteors, notification-stack, number-ticker, orbiting-circles, particles, phone-frame, prompt-input, reasoning-disclosure, scramble-text, segmented-control, select, shimmer-text, spotlight-card, spotlight-search, streaming-text, switch, terminal, text-reveal, textarea, tilt-card, tool-call-card, tooltip, word-rotate.
 
@@ -129,6 +129,8 @@ Wave 6 complete (2026-09-30). Research and design decisions: `research/wave-6-sa
 Wave 7 complete (2026-09-30). Research and design decisions: `research/wave-7-ai-interfaces.md`. Status is always icon plus words, cycling text and timers are hidden from screen readers behind one calm announcement, and nothing is fetched from third parties. **Gate:** registry check (577 entries), 321 tests, lint, typecheck and production build pass; axe over all 372 previews in light and dark (744 scans) plus interacted states is clean; a fresh Next app typechecks and builds all 24 Wave 7 examples. Official shadcn CLI smokes for Wave 1 batch 4 and Waves 5 to 7 still to run where `ui.shadcn.com` is reachable.
 
 **Wave 8: developer (≈10, `developer`).** api-endpoint, env-editor, log-stream, copy-button, snippet-tabs, status-badge-row, webhook-card, keyboard-shortcuts, package-badge, git-graph.
+
+Wave 8 complete (2026-10-01). Research and design decisions: `research/wave-8-developer.md`. Adds the shared `highlight` tokenizer lib (theme-aware token colors, no dependency) and `copy-button`, which the other developer components reuse. **Gate:** registry check (608 entries), 367 tests, lint, typecheck and production build pass; axe over all 392 previews in light and dark (784 scans) plus interacted states is clean; a fresh Next app typechecks and builds all 20 Wave 8 examples. Official shadcn CLI smokes for Wave 1 batch 4 and Waves 5 to 8 still to run where `ui.shadcn.com` is reachable.
 
 **Wave 9: motion and effects (≈35, `motion` / `text` / `backgrounds`).** Base on Magic UI and Motion Primitives (MIT) where it saves time. animated-list, blur-fade, text-animate, typing-text, hyper-text, sparkles-text, morphing-text, spinning-text, highlighter, rainbow-button, shiny-button, pulse-button, ripple, retro-grid, grid-pattern, interactive-grid, warp-background, light-rays, noise-texture, progressive-blur, scroll-velocity, smooth-cursor, icon-cloud, lens, circular-progress, video-dialog, avatar-circles, magic-card, neon-card, glare-hover, dotted-map, animated-number-flow, in-view, stagger-list, spring-drawer.
 

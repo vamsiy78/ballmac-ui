@@ -1368,6 +1368,133 @@
       }
     },
     {
+      "name": "api-endpoint",
+      "type": "registry:ui",
+      "title": "API Endpoint",
+      "description": "An endpoint reference card: method and path with highlighted parameters, auth, grouped parameter lists, and request and response examples in tabs with copy.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/highlight.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/api-endpoint.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/api-endpoint.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "api",
+          "endpoint",
+          "docs",
+          "rest",
+          "reference"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "method, path (use {id} for path parameters), summary, description, auth, parameters [{ name, in, type, required, description }], requestExample and responses [{ status, description, example }]. Collapsible; copies the full URL when baseUrl is set.",
+          "whenToUse": [
+            "Hand-written API reference pages",
+            "Internal docs for a small API"
+          ],
+          "whenNotToUse": [
+            "Generating a full OpenAPI portal (render from the spec with your own loop over this component)"
+          ],
+          "composesWith": [
+            "snippet-tabs",
+            "code-block",
+            "json-viewer"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Opens or closes the card"
+            },
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Moves between Request and response tabs"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Parameters are grouped lists; each example is a labelled region; status tabs say Success or error class"
+            }
+          ],
+          "customization": [
+            "defaultOpen / open",
+            "baseUrl",
+            "auth",
+            "per-response language"
+          ]
+        },
+        "examples": [
+          "api-endpoint-demo",
+          "api-endpoint-list"
+        ],
+        "url": "https://ui.ballmac.com/components/api-endpoint"
+      }
+    },
+    {
+      "name": "api-endpoint-demo",
+      "type": "registry:example",
+      "title": "API Endpoint: Create a customer",
+      "description": "Create a customer example of API Endpoint.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/api-endpoint.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/api-endpoint-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/api-endpoint-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "api-endpoint",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "api-endpoint-list",
+      "type": "registry:example",
+      "title": "API Endpoint: A stack of endpoints",
+      "description": "A stack of endpoints example of API Endpoint.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/api-endpoint.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/api-endpoint-list.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/api-endpoint-list.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "api-endpoint",
+        "tier": "free"
+      }
+    },
+    {
       "name": "api-key-field",
       "type": "registry:ui",
       "title": "API Key Field",
@@ -8143,6 +8270,133 @@
       }
     },
     {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "title": "Copy Button",
+      "description": "A copy-to-clipboard button with a morphing check icon, an optional label, a fallback for blocked clipboards, an error state and a polite announcement.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/copy-button.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/copy-button.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "copy",
+          "clipboard",
+          "button",
+          "developer"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Pass value (or getValue for content read at click time). label adds visible text, variant is ghost | outline | solid, size sm | default | lg. Falls back to execCommand when navigator.clipboard is blocked and shows 'Copy failed' if both fail.",
+          "whenToUse": [
+            "Any value a developer will paste: keys, URLs, commands, IDs",
+            "Toolbars on code, logs and config"
+          ],
+          "whenNotToUse": [
+            "Copying a whole code block with a header (code-block has its own button)"
+          ],
+          "composesWith": [
+            "code-block",
+            "api-key-field",
+            "terminal"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Copies and confirms"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Name changes to 'Copied' and a polite status announces it; failures say 'Copy failed'"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The icon swaps with a fade only"
+            }
+          ],
+          "customization": [
+            "variant",
+            "size",
+            "label and copiedLabel",
+            "getValue for async or dynamic text",
+            "resetAfter",
+            "onCopied / onError"
+          ]
+        },
+        "examples": [
+          "copy-button-demo",
+          "copy-button-inline"
+        ],
+        "url": "https://ui.ballmac.com/components/copy-button"
+      }
+    },
+    {
+      "name": "copy-button-demo",
+      "type": "registry:example",
+      "title": "Copy Button: Icon, label and variants",
+      "description": "Icon, label and variants example of Copy Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/copy-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/copy-button-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/copy-button-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "copy-button",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "copy-button-inline",
+      "type": "registry:example",
+      "title": "Copy Button: Inline with a value",
+      "description": "Inline with a value example of Copy Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/copy-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/copy-button-inline.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/copy-button-inline.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "copy-button",
+        "tier": "free"
+      }
+    },
+    {
       "name": "countdown",
       "type": "registry:ui",
       "title": "Countdown",
@@ -9972,6 +10226,133 @@
       }
     },
     {
+      "name": "env-editor",
+      "type": "registry:ui",
+      "title": "Env Editor",
+      "description": "A .env editor with masked values, show and hide, name validation and duplicate detection, paste-to-import for whole .env files, and copy as .env.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/copy-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/env-editor.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/env-editor.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "env",
+          "environment",
+          "variables",
+          "secrets",
+          "config"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Uncontrolled with defaultValue [{ key, value }] or controlled with value [{ id, key, value }] and onChange. Pasting KEY=value lines into a name field, or into the Paste .env box, imports them. parseEnv and formatEnv are exported.",
+          "whenToUse": [
+            "Project or deployment settings pages",
+            "Anywhere people manage secrets as key and value pairs"
+          ],
+          "whenNotToUse": [
+            "Structured settings with types (settings-panel)",
+            "A single secret (api-key-field)"
+          ],
+          "composesWith": [
+            "api-key-field",
+            "settings-panel",
+            "copy-button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Name, value, show/hide, remove for every row, in order"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Inputs are named 'Name of variable 2' and 'Value of API_KEY'; problems are linked with aria-describedby; add and remove are announced"
+            },
+            {
+              "keys": "Focus",
+              "action": "A new row focuses its name; removing focuses the row above"
+            }
+          ],
+          "customization": [
+            "maskAll",
+            "disabled",
+            "title and description",
+            "onChange"
+          ]
+        },
+        "examples": [
+          "env-editor-demo",
+          "env-editor-controlled"
+        ],
+        "url": "https://ui.ballmac.com/components/env-editor"
+      }
+    },
+    {
+      "name": "env-editor-demo",
+      "type": "registry:example",
+      "title": "Env Editor: Project variables",
+      "description": "Project variables example of Env Editor.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/env-editor.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/env-editor-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/env-editor-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "env-editor",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "env-editor-controlled",
+      "type": "registry:example",
+      "title": "Env Editor: Controlled with a live .env preview",
+      "description": "Controlled with a live .env preview example of Env Editor.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/env-editor.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/env-editor-controlled.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/env-editor-controlled.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "env-editor",
+        "tier": "free"
+      }
+    },
+    {
       "name": "feedback-widget",
       "type": "registry:ui",
       "title": "Feedback Widget",
@@ -10839,6 +11220,134 @@
       "meta": {
         "example": true,
         "of": "form",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "git-graph",
+      "type": "registry:ui",
+      "title": "Git Graph",
+      "description": "A commit history with lane-routed branch and merge lines, branch and tag labels, authors and dates, selection, and listbox keyboard navigation.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/git-graph.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/git-graph.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "git",
+          "commits",
+          "history",
+          "branches",
+          "graph"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "commits is newest first: [{ hash, parents, message, author, date, branches?, tags? }]. Lanes are computed for you (layoutCommits is exported). selected/onSelect for a detail view. Rows are listbox options.",
+          "whenToUse": [
+            "Repository or release history views",
+            "Explaining a branching strategy in docs"
+          ],
+          "whenNotToUse": [
+            "Diffs (diff-viewer)",
+            "Huge histories without paging"
+          ],
+          "composesWith": [
+            "diff-viewer",
+            "code-block",
+            "badge"
+          ],
+          "a11y": [
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "Moves the active commit"
+            },
+            {
+              "keys": "Home / End",
+              "action": "First or last commit"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Selects the active commit"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Each option reads message, author, date, short hash, merge and refs"
+            }
+          ],
+          "customization": [
+            "selected / onSelect",
+            "hideAuthors",
+            "label"
+          ]
+        },
+        "examples": [
+          "git-graph-demo",
+          "git-graph-linear"
+        ],
+        "url": "https://ui.ballmac.com/components/git-graph"
+      }
+    },
+    {
+      "name": "git-graph-demo",
+      "type": "registry:example",
+      "title": "Git Graph: Branches and a merge",
+      "description": "Branches and a merge example of Git Graph.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/git-graph.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/git-graph-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/git-graph-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "git-graph",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "git-graph-linear",
+      "type": "registry:example",
+      "title": "Git Graph: Linear history",
+      "description": "Linear history example of Git Graph.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/git-graph.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/git-graph-linear.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/git-graph-linear.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "git-graph",
         "tier": "free"
       }
     },
@@ -12525,6 +13034,136 @@
       }
     },
     {
+      "name": "keyboard-shortcuts",
+      "type": "registry:ui",
+      "title": "Keyboard Shortcuts",
+      "description": "A searchable shortcut cheat sheet, inline or in a dialog opened by pressing ?, with Command or Ctrl keys chosen for the viewer's platform and spoken key names.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/kbd.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/keyboard-shortcuts.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/keyboard-shortcuts.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "keyboard",
+          "shortcuts",
+          "hotkeys",
+          "help",
+          "dialog"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "groups is [{ title, shortcuts: [{ label, keys, sequence?, description? }] }]. Use 'Mod' for Cmd on Mac and Ctrl elsewhere. <KeyboardShortcutsDialog hotkey='?'> opens from anywhere outside a text field. platform='auto' corrects after hydration.",
+          "whenToUse": [
+            "A help overlay for apps with many shortcuts",
+            "Docs pages that list hotkeys"
+          ],
+          "whenNotToUse": [
+            "A single hint beside a button (shortcut-hint)",
+            "Binding the shortcuts themselves; this only displays them"
+          ],
+          "composesWith": [
+            "kbd",
+            "shortcut-hint",
+            "command-bar",
+            "dialog"
+          ],
+          "a11y": [
+            {
+              "keys": "?",
+              "action": "Opens the dialog when focus is not in a text field"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes the dialog"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Keys read as 'Command plus K', sequences as 'G then I'; the filtered count is announced"
+            }
+          ],
+          "customization": [
+            "platform",
+            "columns",
+            "searchable",
+            "hotkey (or null)",
+            "sequence shortcuts"
+          ]
+        },
+        "examples": [
+          "keyboard-shortcuts-demo",
+          "keyboard-shortcuts-dialog"
+        ],
+        "url": "https://ui.ballmac.com/components/keyboard-shortcuts"
+      }
+    },
+    {
+      "name": "keyboard-shortcuts-demo",
+      "type": "registry:example",
+      "title": "Keyboard Shortcuts: Searchable cheat sheet",
+      "description": "Searchable cheat sheet example of Keyboard Shortcuts.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/keyboard-shortcuts.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/keyboard-shortcuts-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/keyboard-shortcuts-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "keyboard-shortcuts",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "keyboard-shortcuts-dialog",
+      "type": "registry:example",
+      "title": "Keyboard Shortcuts: Dialog opened with ?",
+      "description": "Dialog opened with ? example of Keyboard Shortcuts.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/keyboard-shortcuts.json",
+        "https://ui.ballmac.com/r/kbd.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/keyboard-shortcuts-dialog.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/keyboard-shortcuts-dialog.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "keyboard-shortcuts",
+        "tier": "free"
+      }
+    },
+    {
       "name": "kpi-row",
       "type": "registry:ui",
       "title": "KPI Row",
@@ -12951,6 +13590,134 @@
       "meta": {
         "example": true,
         "of": "loading-dots",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "log-stream",
+      "type": "registry:ui",
+      "title": "Log Stream",
+      "description": "A live log viewer with level filters and counts, search with highlighted matches, wrap, pause with a new-lines counter, follow-the-tail scrolling and copy.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/copy-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/log-stream.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/log-stream.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "logs",
+          "stream",
+          "console",
+          "debug",
+          "tail"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "lines is [{ id, time, level, message, source? }], oldest first; append as lines arrive. Follows the tail while you are at the bottom, shows 'N new lines' when paused or scrolled up. maxLines limits what is rendered.",
+          "whenToUse": [
+            "Deploy, build and server logs",
+            "Streaming output from background jobs"
+          ],
+          "whenNotToUse": [
+            "A terminal with input (terminal)",
+            "Millions of lines (use a virtualized list)"
+          ],
+          "composesWith": [
+            "terminal",
+            "status-dot",
+            "copy-button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Reaches filters, search, wrap, pause, copy, then the scrollable log (role=log)"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The log is not announced line by line; pause state is announced; levels are words"
+            },
+            {
+              "keys": "Color",
+              "action": "Level is a word and a bar"
+            }
+          ],
+          "customization": [
+            "maxLines",
+            "follow",
+            "height",
+            "wrap",
+            "hideSource",
+            "onClear"
+          ]
+        },
+        "examples": [
+          "log-stream-demo",
+          "log-stream-static"
+        ],
+        "url": "https://ui.ballmac.com/components/log-stream"
+      }
+    },
+    {
+      "name": "log-stream-demo",
+      "type": "registry:example",
+      "title": "Log Stream: Live deploy logs",
+      "description": "Live deploy logs example of Log Stream.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/log-stream.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/log-stream-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/log-stream-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "log-stream",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "log-stream-static",
+      "type": "registry:example",
+      "title": "Log Stream: Filtered build output",
+      "description": "Filtered build output example of Log Stream.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/log-stream.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/log-stream-static.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/log-stream-static.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "log-stream",
         "tier": "free"
       }
     },
@@ -15134,6 +15901,128 @@
       "meta": {
         "example": true,
         "of": "orbiting-circles",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "package-badge",
+      "type": "registry:ui",
+      "title": "Package Badge",
+      "description": "An npm-style package card or inline pill with version, weekly downloads and sparkline, size, license, TypeScript and module formats, and a one-click install command.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/copy-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/package-badge.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/package-badge.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "npm",
+          "package",
+          "version",
+          "install",
+          "badge"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Pass the facts you already have: name, version, description, downloads, trend, size, license, types, formats. variant is card | inline. manager picks npm | pnpm | yarn | bun for the copyable install command. Nothing is fetched.",
+          "whenToUse": [
+            "Library landing pages and docs",
+            "Showing dependencies in a changelog or README-style page"
+          ],
+          "whenNotToUse": [
+            "Live registry lookups (fetch on the server and pass the result)"
+          ],
+          "composesWith": [
+            "install-tabs",
+            "copy-button",
+            "badge"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Reaches the package link and the copy button"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The trend chart is an image with a text alternative; stats are a description list"
+            }
+          ],
+          "customization": [
+            "variant",
+            "manager",
+            "hideInstall",
+            "trend",
+            "href"
+          ]
+        },
+        "examples": [
+          "package-badge-demo",
+          "package-badge-inline"
+        ],
+        "url": "https://ui.ballmac.com/components/package-badge"
+      }
+    },
+    {
+      "name": "package-badge-demo",
+      "type": "registry:example",
+      "title": "Package Badge: Card with stats",
+      "description": "Card with stats example of Package Badge.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/package-badge.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/package-badge-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/package-badge-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "package-badge",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "package-badge-inline",
+      "type": "registry:example",
+      "title": "Package Badge: Inline pills",
+      "description": "Inline pills example of Package Badge.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/package-badge.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/package-badge-inline.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/package-badge-inline.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "package-badge",
         "tier": "free"
       }
     },
@@ -18931,6 +19820,135 @@
       }
     },
     {
+      "name": "snippet-tabs",
+      "type": "registry:ui",
+      "title": "Snippet Tabs",
+      "description": "Request examples in several languages with built-in highlighting, a remembered language choice shared across the page, line numbers, copy, and {{variables}} filled with real values.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/highlight.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/snippet-tabs.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/snippet-tabs.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "code",
+          "snippet",
+          "tabs",
+          "api",
+          "curl"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "snippets is [{ label, code, language? }]. Language comes from the label (cURL, Python, Go, JavaScript). storageKey remembers the reader's pick and syncs every instance. variables replaces {{name}} in code and in what Copy puts on the clipboard.",
+          "whenToUse": [
+            "API docs that show one call in several languages",
+            "Getting-started pages where code should use the viewer's own key"
+          ],
+          "whenNotToUse": [
+            "Package manager commands (install-tabs)",
+            "One file per tab (code-block tabs)"
+          ],
+          "composesWith": [
+            "install-tabs",
+            "code-block",
+            "api-key-field",
+            "api-endpoint"
+          ],
+          "a11y": [
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Moves between languages"
+            },
+            {
+              "keys": "Tab",
+              "action": "Reaches Copy and the scrollable code, which is a named region"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Tab list named by the title; each panel is a labelled region"
+            }
+          ],
+          "customization": [
+            "storageKey",
+            "variables",
+            "lineNumbers",
+            "title",
+            "bodyClassName for a max height"
+          ]
+        },
+        "examples": [
+          "snippet-tabs-demo",
+          "snippet-tabs-variables"
+        ],
+        "url": "https://ui.ballmac.com/components/snippet-tabs"
+      }
+    },
+    {
+      "name": "snippet-tabs-demo",
+      "type": "registry:example",
+      "title": "Snippet Tabs: cURL, JavaScript, Python and Go",
+      "description": "cURL, JavaScript, Python and Go example of Snippet Tabs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/snippet-tabs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/snippet-tabs-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/snippet-tabs-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "snippet-tabs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "snippet-tabs-variables",
+      "type": "registry:example",
+      "title": "Snippet Tabs: With your API key filled in",
+      "description": "With your API key filled in example of Snippet Tabs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/snippet-tabs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/snippet-tabs-variables.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/snippet-tabs-variables.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "snippet-tabs",
+        "tier": "free"
+      }
+    },
+    {
       "name": "sources-list",
       "type": "registry:ui",
       "title": "Sources List",
@@ -19771,6 +20789,131 @@
       "meta": {
         "example": true,
         "of": "stat-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "status-badge-row",
+      "type": "registry:ui",
+      "title": "Status Badge Row",
+      "description": "A status page block: an overall banner and one row per service with a status chip, uptime and a 90-day bar history you can explore with the pointer or arrow keys.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/status-badge-row.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/status-badge-row.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "status",
+          "uptime",
+          "incident",
+          "monitoring",
+          "health"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "services is [{ name, status, description?, uptime?, days? }]; days holds one status (or { status, note }) per day, oldest first. endDate labels the bars. The banner shows the worst status. Bar height as well as color encodes status.",
+          "whenToUse": [
+            "Public or internal status pages",
+            "Admin dashboards listing service health"
+          ],
+          "whenNotToUse": [
+            "A single presence dot (status-dot)",
+            "Charting numeric metrics (chart)"
+          ],
+          "composesWith": [
+            "status-dot",
+            "badge",
+            "chart"
+          ],
+          "a11y": [
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Moves through days; Shift moves by a week; Home and End jump to the ends"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Each history is a slider whose value text reads 'Sep 21: Outage'"
+            },
+            {
+              "keys": "Color",
+              "action": "Status is also shown by icon, word and bar height"
+            }
+          ],
+          "customization": [
+            "endDate",
+            "updated",
+            "summary",
+            "per-day notes"
+          ]
+        },
+        "examples": [
+          "status-badge-row-demo",
+          "status-badge-row-incident"
+        ],
+        "url": "https://ui.ballmac.com/components/status-badge-row"
+      }
+    },
+    {
+      "name": "status-badge-row-demo",
+      "type": "registry:example",
+      "title": "Status Badge Row: Services with 90-day history",
+      "description": "Services with 90-day history example of Status Badge Row.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/status-badge-row.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/status-badge-row-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/status-badge-row-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "status-badge-row",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "status-badge-row-incident",
+      "type": "registry:example",
+      "title": "Status Badge Row: During an incident",
+      "description": "During an incident example of Status Badge Row.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/status-badge-row.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/status-badge-row-incident.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/status-badge-row-incident.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "status-badge-row",
         "tier": "free"
       }
     },
@@ -23490,6 +24633,134 @@
       }
     },
     {
+      "name": "webhook-card",
+      "type": "registry:ui",
+      "title": "Webhook Card",
+      "description": "A webhook endpoint card with URL and enable switch, health from recent deliveries, a masked signing secret, subscribed events and expandable deliveries with payloads and redeliver.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/highlight.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/webhook-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/webhook-card.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "webhook",
+          "endpoint",
+          "events",
+          "deliveries",
+          "integration"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "url, enabled/onEnabledChange, secret, events, deliveries [{ id, event, status, duration, time, payload, response }], onRedeliver, onTest. Health is Active, Failing (half or more of the last five failed) or Disabled, shown with icon and word.",
+          "whenToUse": [
+            "Developer dashboards that manage outgoing webhooks",
+            "Debugging failed deliveries"
+          ],
+          "whenNotToUse": [
+            "Incoming webhook documentation (api-endpoint)"
+          ],
+          "composesWith": [
+            "api-key-field",
+            "log-stream",
+            "status-badge-row"
+          ],
+          "a11y": [
+            {
+              "keys": "Space",
+              "action": "Toggles the endpoint"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Expands a delivery"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Each status code reads with its meaning ('500, Server error'); payloads are labelled regions"
+            }
+          ],
+          "customization": [
+            "visibleEvents",
+            "onRedeliver",
+            "onTest",
+            "deliveries"
+          ]
+        },
+        "examples": [
+          "webhook-card-demo",
+          "webhook-card-failing"
+        ],
+        "url": "https://ui.ballmac.com/components/webhook-card"
+      }
+    },
+    {
+      "name": "webhook-card-demo",
+      "type": "registry:example",
+      "title": "Webhook Card: Healthy endpoint",
+      "description": "Healthy endpoint example of Webhook Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/webhook-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/webhook-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/webhook-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "webhook-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "webhook-card-failing",
+      "type": "registry:example",
+      "title": "Webhook Card: Failing endpoint",
+      "description": "Failing endpoint example of Webhook Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/webhook-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/webhook-card-failing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/webhook-card-failing.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "webhook-card",
+        "tier": "free"
+      }
+    },
+    {
       "name": "word-rotate",
       "type": "registry:ui",
       "title": "Word Rotate",
@@ -23772,6 +25043,54 @@
         },
         "examples": [],
         "url": "https://ui.ballmac.com/components/color"
+      }
+    },
+    {
+      "name": "highlight",
+      "type": "registry:lib",
+      "title": "Highlight",
+      "description": "A small dependency-free tokenizer for the snippets developer UIs show: JSON, shell and curl, JavaScript and TypeScript, Python, Go, HTTP and .env, with theme-aware token colors.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "files": [
+        {
+          "path": "registry/ballmac/lib/highlight.ts",
+          "type": "registry:lib",
+          "target": "@lib/ballmac/highlight.ts"
+        }
+      ],
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "syntax highlighting",
+          "tokenizer",
+          "code",
+          "snippet"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Import highlightLines(code, language) from @/lib/ballmac/highlight to get tokens grouped by line, and map each token to tokenClass[token.type]. languageFromName('app.ts') picks a language from a file name or label. Not a full grammar: use Shiki for exact highlighting of large files.",
+          "whenToUse": [
+            "Showing short request examples, logs and config without shipping a highlighter",
+            "Server or client rendering with no async loading"
+          ],
+          "whenNotToUse": [
+            "Editors or long source files that need exact grammar (use Shiki)",
+            "Languages outside the list"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "tokenClass: change the Tailwind classes per token type",
+            "language: json | bash | javascript | typescript | python | go | http | env | text"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/highlight"
       }
     },
     {
