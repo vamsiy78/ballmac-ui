@@ -5729,6 +5729,267 @@
       }
     },
     {
+      "name": "devices-1",
+      "type": "registry:block",
+      "title": "Devices 1: Mac, iPad, iPhone and Watch lineup",
+      "description": "A lineup of laptop, tablet, phone and watch frames with their own token-drawn screens, scaled as one picture. Buttons underneath bring a device forward and dim the rest.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/laptop-frame.json",
+        "https://ui.ballmac.com/r/phone-frame.json",
+        "https://ui.ballmac.com/r/tablet-frame.json",
+        "https://ui.ballmac.com/r/watch-frame.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/devices-1/devices-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/devices-1/devices-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "devices"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "devices",
+          "mac",
+          "ipad",
+          "iphone",
+          "watch",
+          "multi-platform",
+          "lineup"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A multi-platform section. Edit eyebrow, title, description and captions; pass screens={{ mac, ipad, iphone, watch }} to replace the sample screens, each laid out at its real device width (1280, 834, 393, 208).",
+          "whenToUse": [
+            "Apps that ship on several Apple platforms",
+            "Showing responsive or cross-device behaviour"
+          ],
+          "whenNotToUse": [
+            "Single-platform products (use hero-5 or showcase-1)"
+          ],
+          "composesWith": [
+            "hero-5",
+            "features-4",
+            "download-1",
+            "pricing-4"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Enter on a device button",
+              "action": "Brings that device forward (aria-pressed); pressing again clears it"
+            },
+            {
+              "keys": "Picture",
+              "action": "Hidden from assistive technology; the four buttons describe each device in words"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Devices change focus without moving"
+            }
+          ],
+          "customization": [
+            "captions per device",
+            "screens: any node per device"
+          ]
+        },
+        "examples": [
+          "devices-1-demo",
+          "devices-1-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/devices-1"
+      }
+    },
+    {
+      "name": "devices-1-demo",
+      "type": "registry:example",
+      "title": "Devices 1: Mac, iPad, iPhone and Watch lineup: Default",
+      "description": "Default example of Devices 1: Mac, iPad, iPhone and Watch lineup.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/devices-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/devices-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/devices-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "devices-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "devices-1-custom",
+      "type": "registry:example",
+      "title": "Devices 1: Mac, iPad, iPhone and Watch lineup: Your own screens",
+      "description": "Your own screens example of Devices 1: Mac, iPad, iPhone and Watch lineup.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/devices-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/devices-1-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/devices-1-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "devices-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "download-1",
+      "type": "registry:block",
+      "title": "Download 1: Mac app download with release notes",
+      "description": "A Mac app download section: app icon and version, an Apple silicon or Intel choice that swaps the file, copyable checksum and Homebrew command, install steps and release notes you can flip between.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/mac-icons.json",
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/download-1/download-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/download-1/download-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "download"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "download",
+          "mac",
+          "app",
+          "release notes",
+          "homebrew",
+          "checksum",
+          "install"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "The download page of a Mac app. Pass app, tagline, downloads={ arm64: { href, file, size, sha256? }, x64: {...} }, requirements, brew, steps and releases=[{ version, date, changes: [{ type, text }] }].",
+          "whenToUse": [
+            "Direct-download Mac apps",
+            "Any desktop app with separate builds per chip"
+          ],
+          "whenNotToUse": [
+            "App Store only apps (link to the store instead)",
+            "Web apps"
+          ],
+          "composesWith": [
+            "hero-5",
+            "showcase-1",
+            "features-7",
+            "pricing-4"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right",
+              "action": "Switches between Apple silicon and Intel, and between release versions"
+            },
+            {
+              "keys": "Download link",
+              "action": "A real link; when activated a polite status confirms the file name"
+            },
+            {
+              "keys": "Copy buttons",
+              "action": "Named 'Copy SHA-256 checksum' and 'Copy Homebrew command'; success is announced"
+            }
+          ],
+          "customization": [
+            "downloads, requirements, brew (null hides), steps ([] hides), releases",
+            "glyph: a letter or short text on the icon"
+          ]
+        },
+        "examples": [
+          "download-1-demo",
+          "download-1-simple"
+        ],
+        "url": "https://ui.ballmac.com/components/download-1"
+      }
+    },
+    {
+      "name": "download-1-demo",
+      "type": "registry:example",
+      "title": "Download 1: Mac app download with release notes: Default",
+      "description": "Default example of Download 1: Mac app download with release notes.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/download-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/download-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/download-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "download-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "download-1-simple",
+      "type": "registry:example",
+      "title": "Download 1: Mac app download with release notes: One build, no notes",
+      "description": "One build, no notes example of Download 1: Mac app download with release notes.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/download-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/download-1-simple.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/download-1-simple.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "download-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "error-1",
       "type": "registry:block",
       "title": "Error 1: friendly 404, 403 and 500 page",
@@ -6643,6 +6904,138 @@
       "meta": {
         "example": true,
         "of": "features-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "features-7",
+      "type": "registry:block",
+      "title": "Features 7: menu bar app tour",
+      "description": "A feature picker for menu bar apps: choose a feature and a miniature desktop shows the app's panel hanging from its menu bar icon, with quick capture, clipboard history, a focus timer and shortcuts drawn from tokens.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/kbd.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/features-7/features-7.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/features-7/features-7.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "features"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "features",
+          "menu bar",
+          "mac",
+          "tour",
+          "shortcuts",
+          "panel",
+          "utility"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "For menu bar and utility apps. Pass features=[{ id, title, description, keys?, icon?, panel }] where panel is the UI that hangs from the menu bar icon; time sets the clock in the mock menu bar.",
+          "whenToUse": [
+            "Menu bar utilities and background apps",
+            "Anything the user reaches with a shortcut"
+          ],
+          "whenNotToUse": [
+            "Window-based apps (use features-4 or showcase-1)"
+          ],
+          "composesWith": [
+            "hero-5",
+            "showcase-1",
+            "download-1",
+            "pricing-4"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Up / Down",
+              "action": "Moves between features and selects; the list is a radio group"
+            },
+            {
+              "keys": "Shortcuts",
+              "action": "Each feature spells its shortcut out for screen readers; the miniature desktop is hidden from assistive technology"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Panels swap without animation"
+            }
+          ],
+          "customization": [
+            "features: panel is any node; keys are shown as keycaps",
+            "defaultValue, time"
+          ]
+        },
+        "examples": [
+          "features-7-demo",
+          "features-7-two"
+        ],
+        "url": "https://ui.ballmac.com/components/features-7"
+      }
+    },
+    {
+      "name": "features-7-demo",
+      "type": "registry:example",
+      "title": "Features 7: menu bar app tour: Default",
+      "description": "Default example of Features 7: menu bar app tour.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/features-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/features-7-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/features-7-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "features-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "features-7-two",
+      "type": "registry:example",
+      "title": "Features 7: menu bar app tour: Two features",
+      "description": "Two features example of Features 7: menu bar app tour.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/features-7.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/features-7-two.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/features-7-two.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "features-7",
         "tier": "free"
       }
     },
@@ -9193,6 +9586,140 @@
       }
     },
     {
+      "name": "pricing-4",
+      "type": "registry:block",
+      "title": "Pricing 4: one-time license vs subscription",
+      "description": "A pricing section for Mac apps that sell both ways: a Buy once / Subscribe switch, license size cards and a cumulative-cost chart that computes the break-even year.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/label.json",
+        "https://ui.ballmac.com/r/radio-group.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/pricing-4/pricing-4.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/pricing-4/pricing-4.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "pricing"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "pricing",
+          "license",
+          "subscription",
+          "one-time",
+          "mac",
+          "chart",
+          "break-even"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Pricing for apps with a one-time license and a subscription. Pass tiers=[{ id, name, description?, once, yearly }], optional renewal (price of paid updates after year 1), years, currency and href(tierId, mode). The chart and the 'pays for itself in year N' message are computed from the numbers.",
+          "whenToUse": [
+            "Mac and desktop apps that offer a perpetual license next to a subscription",
+            "When you want to show buyers the long-run cost honestly"
+          ],
+          "whenNotToUse": [
+            "Monthly SaaS plans with feature tiers (pricing-1 or pricing-3)"
+          ],
+          "composesWith": [
+            "download-1",
+            "faq-2",
+            "cta-1",
+            "showcase-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right on the way-to-pay switch",
+              "action": "Switches between Buy once and Subscribe"
+            },
+            {
+              "keys": "Arrow Up / Down on license size",
+              "action": "Selects another size and updates the price and chart"
+            },
+            {
+              "keys": "Space on the updates switch",
+              "action": "Includes optional update renewals in the one-time cost"
+            }
+          ],
+          "customization": [
+            "renewal: a number, or { [tierId]: number }; 0 hides the updates switch",
+            "href: build the checkout link from the tier and mode",
+            "onceIncludes / subscribeIncludes: the checklist for each way to pay"
+          ]
+        },
+        "examples": [
+          "pricing-4-demo",
+          "pricing-4-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/pricing-4"
+      }
+    },
+    {
+      "name": "pricing-4-demo",
+      "type": "registry:example",
+      "title": "Pricing 4: one-time license vs subscription: Default",
+      "description": "Default example of Pricing 4: one-time license vs subscription.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pricing-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pricing-4-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pricing-4-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pricing-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pricing-4-custom",
+      "type": "registry:example",
+      "title": "Pricing 4: one-time license vs subscription: Two tiers in euros",
+      "description": "Two tiers in euros example of Pricing 4: one-time license vs subscription.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pricing-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pricing-4-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pricing-4-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pricing-4",
+        "tier": "free"
+      }
+    },
+    {
       "name": "settings-1",
       "type": "registry:block",
       "title": "Settings 1: profile and account",
@@ -9589,6 +10116,137 @@
       "meta": {
         "example": true,
         "of": "settings-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "showcase-1",
+      "type": "registry:block",
+      "title": "Showcase 1: interactive Mac desktop",
+      "description": "A working Mac desktop for your landing page: wallpaper, a menu bar with menus and a clock, draggable and resizable windows, desktop widgets and a magnifying dock that launches and relaunches them.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/dock.json",
+        "https://ui.ballmac.com/r/menu-bar.json",
+        "https://ui.ballmac.com/r/widgets.json",
+        "https://ui.ballmac.com/r/window-manager.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/showcase-1/showcase-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/showcase-1/showcase-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "showcase"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "mac",
+          "desktop",
+          "showcase",
+          "windows",
+          "dock",
+          "menu bar",
+          "demo"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A hero-sized interactive screenshot. Set app, time (ISO, fixed) and pass your own window content as children; widgets={false} hides the desk widgets and notes={false} the sample Notes window. Windows can be dragged, resized, zoomed and minimized; the dock reopens closed apps.",
+          "whenToUse": [
+            "Landing pages for Mac apps that want to be tried, not just seen",
+            "Under a hero as a live product tour"
+          ],
+          "whenNotToUse": [
+            "Showing one screenshot (use laptop-frame or browser-frame)",
+            "Non-desktop products"
+          ],
+          "composesWith": [
+            "hero-5",
+            "download-1",
+            "features-7",
+            "devices-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right in the dock",
+              "action": "Moves between dock items; Enter launches or reopens an app"
+            },
+            {
+              "keys": "Window title bars",
+              "action": "Windows can be moved and resized with the keyboard through the window manager; traffic lights are real buttons"
+            },
+            {
+              "keys": "Menu bar",
+              "action": "Arrow keys move between menus; Escape closes"
+            }
+          ],
+          "customization": [
+            "app, time, widgets, notes, height",
+            "children: your window content, laid out in a container (use @sm: / @md: variants)"
+          ]
+        },
+        "examples": [
+          "showcase-1-demo",
+          "showcase-1-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/showcase-1"
+      }
+    },
+    {
+      "name": "showcase-1-demo",
+      "type": "registry:example",
+      "title": "Showcase 1: interactive Mac desktop: Default",
+      "description": "Default example of Showcase 1: interactive Mac desktop.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/showcase-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/showcase-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/showcase-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "showcase-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "showcase-1-custom",
+      "type": "registry:example",
+      "title": "Showcase 1: interactive Mac desktop: Your own app window",
+      "description": "Your own app window example of Showcase 1: interactive Mac desktop.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/showcase-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/showcase-1-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/showcase-1-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "showcase-1",
         "tier": "free"
       }
     },

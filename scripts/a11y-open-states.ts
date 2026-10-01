@@ -346,6 +346,16 @@ const cases: Record<string, Step> = {
   "calendar-1-compact": async () => {},
   "ai-chat-2-demo": async (p) => { await p.getByRole("button", { name: "Add a monthly and yearly toggle" }).click(); await p.getByText(/added a monthly and yearly toggle/).waitFor({ timeout: 8000 }) },
   "ai-chat-2-blank": async () => {},
+  "showcase-1-demo": async (p) => { await p.getByRole("menubar").getByText("Ledger", { exact: true }).click(); await p.getByRole("menu").waitFor() },
+  "showcase-1-custom": async () => {},
+  "download-1-demo": async (p) => { await p.getByRole("radio", { name: "Intel" }).click(); const l = p.getByRole("link", { name: /Download/ }); await l.evaluate((el) => el.addEventListener("click", (e) => e.preventDefault())); await l.click(); await p.getByText(/should start/).waitFor() },
+  "download-1-simple": async () => {},
+  "devices-1-demo": async (p) => { await p.getByRole("button", { name: /iPad/ }).click() },
+  "devices-1-custom": async () => {},
+  "features-7-demo": async (p) => { await p.getByRole("radio", { name: /Focus timer/ }).click(); await p.getByText(/session|Focus/).first().waitFor() },
+  "features-7-two": async () => {},
+  "pricing-4-demo": async (p) => { await p.getByRole("radio", { name: "Subscribe" }).click(); await p.getByRole("switch").click() },
+  "pricing-4-custom": async () => {},
 }
 const filter = process.argv.slice(2)
 const browser = await chromium.launch({ headless: true, executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE })
