@@ -69,7 +69,7 @@ function Calendar({
         range_end: "rounded-r-md bg-accent [&>button]:rounded-md",
         selected: "[&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary",
         today:
-          "[&>button]:font-semibold [&>button:not([aria-selected=true]):not([data-range-middle])]:bg-accent [&>button:not([aria-selected=true])]:after:absolute [&>button:not([aria-selected=true])]:after:bottom-1 [&>button:not([aria-selected=true])]:after:left-1/2 [&>button:not([aria-selected=true])]:after:size-1 [&>button:not([aria-selected=true])]:after:-translate-x-1/2 [&>button:not([aria-selected=true])]:after:rounded-full [&>button:not([aria-selected=true])]:after:bg-primary",
+          "[&>button]:font-semibold [&:not([aria-selected=true])>button:not([data-range-middle])]:bg-accent [&:not([aria-selected=true])>button]:after:absolute [&:not([aria-selected=true])>button]:after:bottom-1 [&:not([aria-selected=true])>button]:after:left-1/2 [&:not([aria-selected=true])>button]:after:size-1 [&:not([aria-selected=true])>button]:after:-translate-x-1/2 [&:not([aria-selected=true])>button]:after:rounded-full [&:not([aria-selected=true])>button]:after:bg-primary",
         outside: "text-muted-foreground aria-selected:text-muted-foreground",
         disabled: "text-muted-foreground opacity-40 [&>button]:pointer-events-none",
         hidden: "invisible",

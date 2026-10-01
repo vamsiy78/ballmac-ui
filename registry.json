@@ -3757,6 +3757,536 @@
       }
     },
     {
+      "name": "ai-chat-2",
+      "type": "registry:block",
+      "title": "AI Chat 2: conversation with artifact panel",
+      "description": "A chat that builds things: conversation list, streaming replies, suggestion chips and a side panel with Preview and Code tabs, version history, copy and download. The panel overlays the chat on narrow screens.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/ai-chat.json",
+        "https://ui.ballmac.com/r/ai-message.json",
+        "https://ui.ballmac.com/r/artifact-panel.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/prompt-input.json",
+        "https://ui.ballmac.com/r/streaming-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/ai-chat-2/ai-chat-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/ai-chat-2/ai-chat-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "ai-chat"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai chat",
+          "artifact",
+          "assistant",
+          "streaming",
+          "code",
+          "side panel",
+          "versions"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "An assistant UI that produces artifacts. Pass versions=[{ code, preview, note }], defaultMessages, suggestions and onSend(prompt) returning { reply, artifact? } (the 1-based version the reply moves to). Without onSend a built-in script lets you try the whole flow.",
+          "whenToUse": [
+            "Assistants that write code, documents or designs",
+            "Anywhere results deserve their own panel with versions"
+          ],
+          "whenNotToUse": [
+            "A plain chat pane (use ai-chat-1)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "ai-chat-1",
+            "mail-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Chips, the artifact chip in a reply, the panel's tabs and its version arrows are all buttons in reading order"
+            },
+            {
+              "keys": "Streaming",
+              "action": "Replies stream into a live region; the panel shows a progress edge while it writes"
+            },
+            {
+              "keys": "Esc / Close",
+              "action": "The close button returns to the chat on narrow screens"
+            }
+          ],
+          "customization": [
+            "versions, defaultMessages, suggestions, conversations",
+            "artifactTitle, artifactKind, filename, language",
+            "onSend(prompt) async"
+          ]
+        },
+        "examples": [
+          "ai-chat-2-demo",
+          "ai-chat-2-blank"
+        ],
+        "url": "https://ui.ballmac.com/components/ai-chat-2"
+      }
+    },
+    {
+      "name": "ai-chat-2-demo",
+      "type": "registry:example",
+      "title": "AI Chat 2: conversation with artifact panel: Default",
+      "description": "Default example of AI Chat 2: conversation with artifact panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ai-chat-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ai-chat-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ai-chat-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ai-chat-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ai-chat-2-blank",
+      "type": "registry:example",
+      "title": "AI Chat 2: conversation with artifact panel: Your own artifact",
+      "description": "Your own artifact example of AI Chat 2: conversation with artifact panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ai-chat-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ai-chat-2-blank.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ai-chat-2-blank.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ai-chat-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "app-shell-1",
+      "type": "registry:block",
+      "title": "App Shell 1: collapsible sidebar with command menu",
+      "description": "A product frame: workspace switcher, grouped navigation with badges that collapses to an icon rail, top bar with search, notifications and a ⌘K command menu, and a scrolling page slot. A drawer on phones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/command.json",
+        "https://ui.ballmac.com/r/dropdown-menu.json",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/sheet.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/app-shell-1/app-shell-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/app-shell-1/app-shell-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "app-shell"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "app shell",
+          "sidebar",
+          "dashboard layout",
+          "navigation",
+          "command menu",
+          "workspace"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "The frame around an app. Pass nav=[{ label?, items: [{ id, label, icon?, badge? }] }], workspace, user and a children render function (page) => node; value / onValueChange control the open page.",
+          "whenToUse": [
+            "Dashboards, admin tools and any multi-page product",
+            "A realistic frame for demos and screenshots"
+          ],
+          "whenNotToUse": [
+            "Marketing sites (use header-2)",
+            "Single-screen tools"
+          ],
+          "composesWith": [
+            "dashboard-1",
+            "dashboard-2",
+            "settings-1",
+            "billing-1",
+            "mail-1",
+            "kanban-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Ctrl/⌘ + K",
+              "action": "Opens the command menu to jump to any page"
+            },
+            {
+              "keys": "Ctrl/⌘ + B",
+              "action": "Collapses or expands the sidebar"
+            },
+            {
+              "keys": "Tab",
+              "action": "A skip link jumps past the sidebar; the open page is marked aria-current=page"
+            }
+          ],
+          "customization": [
+            "nav groups, workspace, workspaces, user",
+            "children: (page) => node",
+            "defaultCollapsed, height ('100svh' for a full-screen app)"
+          ]
+        },
+        "examples": [
+          "app-shell-1-demo",
+          "app-shell-1-collapsed"
+        ],
+        "url": "https://ui.ballmac.com/components/app-shell-1"
+      }
+    },
+    {
+      "name": "app-shell-1-demo",
+      "type": "registry:example",
+      "title": "App Shell 1: collapsible sidebar with command menu: Default",
+      "description": "Default example of App Shell 1: collapsible sidebar with command menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/app-shell-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/app-shell-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/app-shell-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "app-shell-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "app-shell-1-collapsed",
+      "type": "registry:example",
+      "title": "App Shell 1: collapsible sidebar with command menu: Collapsed, custom pages",
+      "description": "Collapsed, custom pages example of App Shell 1: collapsible sidebar with command menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/app-shell-1.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/app-shell-1-collapsed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/app-shell-1-collapsed.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "app-shell-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "billing-1",
+      "type": "registry:block",
+      "title": "Billing 1: plan, usage and invoices",
+      "description": "A billing page: current plan and monthly cost, usage meters that turn amber near the limit, the card on file with an update dialog (formatted, validated), the billing contact and an invoice list with status and downloads.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/field.json",
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/billing-1/billing-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/billing-1/billing-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "billing"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "billing",
+          "subscription",
+          "usage",
+          "invoices",
+          "payment method",
+          "plan"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "The billing screen. Pass plan, usage=[{ label, used, limit?, unit? }], card, contact, invoices, currency and handlers onChangePlan / onUpdateCard (throw to show an error). Real card numbers must go to your payment provider's hosted fields, not through this form.",
+          "whenToUse": [
+            "Subscription management pages",
+            "Usage-based or seat-based products"
+          ],
+          "whenNotToUse": [
+            "Choosing between plans (use billing-2 or pricing-2)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "billing-2",
+            "settings-1",
+            "settings-3"
+          ],
+          "a11y": [
+            {
+              "keys": "Usage meters",
+              "action": "Each is an image with a text alternative ('Storage: 64 percent used') and the warning is written out, not only coloured"
+            },
+            {
+              "keys": "Update card",
+              "action": "A dialog with labelled fields, inline errors and focus returned to the button on close"
+            },
+            {
+              "keys": "Download",
+              "action": "Each icon link is named 'Download invoice INV-…'"
+            }
+          ],
+          "customization": [
+            "plan, usage, card, contact, invoices",
+            "currency, locale",
+            "onChangePlan, onUpdateCard"
+          ]
+        },
+        "examples": [
+          "billing-1-demo",
+          "billing-1-starter"
+        ],
+        "url": "https://ui.ballmac.com/components/billing-1"
+      }
+    },
+    {
+      "name": "billing-1-demo",
+      "type": "registry:example",
+      "title": "Billing 1: plan, usage and invoices: Default",
+      "description": "Default example of Billing 1: plan, usage and invoices.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/billing-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/billing-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/billing-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "billing-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "billing-1-starter",
+      "type": "registry:example",
+      "title": "Billing 1: plan, usage and invoices: Free plan",
+      "description": "Free plan example of Billing 1: plan, usage and invoices.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/billing-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/billing-1-starter.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/billing-1-starter.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "billing-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "billing-2",
+      "type": "registry:block",
+      "title": "Billing 2: change plan with proration",
+      "description": "A change-plan flow: billing interval, plan cards as radios, a seat stepper that respects the current team, and a sticky summary that works out the prorated charge, the credit and what is due today.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/billing-2/billing-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/billing-2/billing-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "billing"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "billing",
+          "upgrade",
+          "downgrade",
+          "proration",
+          "seats",
+          "plans",
+          "checkout"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Upgrade and downgrade flow. Pass plans=[{ id, name, monthly, yearly, description, features }], currentPlan, currentSeats, today and renewsOn (ISO dates, so server and browser agree) and onConfirm({ plan, seats, interval }) (throw to show an error).",
+          "whenToUse": [
+            "In-app plan changes",
+            "Seat-based products with prorated billing"
+          ],
+          "whenNotToUse": [
+            "Public pricing pages (use pricing-2 or pricing-3)"
+          ],
+          "composesWith": [
+            "billing-1",
+            "app-shell-1",
+            "settings-3"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys on plans",
+              "action": "Move between plan radios; the chosen plan is marked and named 'Current' when it is the active one"
+            },
+            {
+              "keys": "Seat buttons",
+              "action": "Named 'Add a seat' and 'Remove a seat'; the count is announced politely and can't go below the team size"
+            },
+            {
+              "keys": "Summary",
+              "action": "A labelled complementary region; every line is plain text"
+            }
+          ],
+          "customization": [
+            "plans, currentPlan, currentSeats, currentInterval, minSeats",
+            "today and renewsOn drive the proration",
+            "onConfirm(change) async"
+          ]
+        },
+        "examples": [
+          "billing-2-demo",
+          "billing-2-yearly"
+        ],
+        "url": "https://ui.ballmac.com/components/billing-2"
+      }
+    },
+    {
+      "name": "billing-2-demo",
+      "type": "registry:example",
+      "title": "Billing 2: change plan with proration: Default",
+      "description": "Default example of Billing 2: change plan with proration.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/billing-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/billing-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/billing-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "billing-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "billing-2-yearly",
+      "type": "registry:example",
+      "title": "Billing 2: change plan with proration: Yearly account",
+      "description": "Yearly account example of Billing 2: change plan with proration.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/billing-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/billing-2-yearly.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/billing-2-yearly.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "billing-2",
+        "tier": "free"
+      }
+    },
+    {
       "name": "blog-1",
       "type": "registry:block",
       "title": "Blog 1: featured post with filterable grid",
@@ -4004,6 +4534,137 @@
       "meta": {
         "example": true,
         "of": "blog-post-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "calendar-1",
+      "type": "registry:block",
+      "title": "Calendar 1: week view with mini month",
+      "description": "A week calendar: a time grid with overlapping events placed side by side, an all-day row, a now line, a mini month and calendar toggles, event popovers and a new-event dialog. One day at a time on phones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/calendar.json",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/popover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/calendar-1/calendar-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/calendar-1/calendar-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "calendar"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "calendar",
+          "schedule",
+          "week view",
+          "events",
+          "planner",
+          "agenda"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A scheduling view. Pass defaultEvents=[{ id, title, start, end, calendar, location?, allDay? }] with local 'YYYY-MM-DDTHH:mm' times, calendars, today (YYYY-MM-DD) and now (HH:mm) so the page is identical on the server and in the browser.",
+          "whenToUse": [
+            "Scheduling, booking and planning screens",
+            "A realistic product screenshot"
+          ],
+          "whenNotToUse": [
+            "Picking a date in a form (use calendar or date-picker)",
+            "An agenda list (use calendar-agenda)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "kanban-1",
+            "mail-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Events are buttons in time order; Enter opens a popover with the details"
+            },
+            {
+              "keys": "Mini month arrow keys",
+              "action": "Move between days; PageUp and PageDown change month"
+            },
+            {
+              "keys": "Calendar checkboxes",
+              "action": "Show or hide a calendar; each event's name, time and place are in its accessible name"
+            }
+          ],
+          "customization": [
+            "defaultEvents, calendars, today, now (null hides the line)",
+            "startHour and endHour",
+            "onAdd(event), height"
+          ]
+        },
+        "examples": [
+          "calendar-1-demo",
+          "calendar-1-compact"
+        ],
+        "url": "https://ui.ballmac.com/components/calendar-1"
+      }
+    },
+    {
+      "name": "calendar-1-demo",
+      "type": "registry:example",
+      "title": "Calendar 1: week view with mini month: Default",
+      "description": "Default example of Calendar 1: week view with mini month.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/calendar-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/calendar-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/calendar-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "calendar-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "calendar-1-compact",
+      "type": "registry:example",
+      "title": "Calendar 1: week view with mini month: Work hours, your calendars",
+      "description": "Work hours, your calendars example of Calendar 1: week view with mini month.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/calendar-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/calendar-1-compact.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/calendar-1-compact.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "calendar-1",
         "tier": "free"
       }
     },
@@ -4800,6 +5461,270 @@
       "meta": {
         "example": true,
         "of": "cta-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dashboard-1",
+      "type": "registry:block",
+      "title": "Dashboard 1: sales overview",
+      "description": "A sales dashboard page: a date-range switch that recomputes everything, four KPI cards with change and trend, a revenue area chart against the previous period, revenue by channel and a recent-orders table.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/sparkline.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/dashboard-1/dashboard-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/dashboard-1/dashboard-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "dashboard"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "dashboard",
+          "analytics",
+          "kpi",
+          "chart",
+          "orders",
+          "sales",
+          "table"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "The first screen of a store or SaaS admin. Pass getSeries(range) returning { label, revenue, previous, orders }[], plus channels, orders and currency; the KPIs, deltas and chart are derived from the series.",
+          "whenToUse": [
+            "Admin home pages",
+            "Sales, billing and usage overviews"
+          ],
+          "whenNotToUse": [
+            "Traffic analytics (use dashboard-2)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "dashboard-2",
+            "billing-1",
+            "settings-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right",
+              "action": "Changes the date range"
+            },
+            {
+              "keys": "Chart",
+              "action": "Labelled figure with a plain-language summary; the same numbers are in the KPI cards and the table"
+            },
+            {
+              "keys": "Tab",
+              "action": "The orders table scrolls sideways on phones and is focusable"
+            }
+          ],
+          "customization": [
+            "getSeries(range) for your own data",
+            "channels, orders, currency, locale",
+            "onRangeChange to fetch"
+          ]
+        },
+        "examples": [
+          "dashboard-1-demo",
+          "dashboard-1-week"
+        ],
+        "url": "https://ui.ballmac.com/components/dashboard-1"
+      }
+    },
+    {
+      "name": "dashboard-1-demo",
+      "type": "registry:example",
+      "title": "Dashboard 1: sales overview: Default",
+      "description": "Default example of Dashboard 1: sales overview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dashboard-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dashboard-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dashboard-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dashboard-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dashboard-1-week",
+      "type": "registry:example",
+      "title": "Dashboard 1: sales overview: Seven days, your data",
+      "description": "Seven days, your data example of Dashboard 1: sales overview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dashboard-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dashboard-1-week.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dashboard-1-week.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dashboard-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dashboard-2",
+      "type": "registry:block",
+      "title": "Dashboard 2: traffic analytics",
+      "description": "A web analytics page: a live-now pill, date range and compare switch, a visitors line chart against the previous period, traffic sources as a donut, devices, top countries and a top-pages table.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/status-dot.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/dashboard-2/dashboard-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/dashboard-2/dashboard-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "dashboard"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "dashboard",
+          "analytics",
+          "traffic",
+          "line chart",
+          "donut",
+          "visitors",
+          "web"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A traffic dashboard. Pass getSeries(range) returning { label, visitors, previous }[], plus sources, devices, pages, countries and live (null hides the pill).",
+          "whenToUse": [
+            "Site and product analytics",
+            "Marketing performance pages"
+          ],
+          "whenNotToUse": [
+            "Sales and revenue (use dashboard-1)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "dashboard-1",
+            "settings-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right",
+              "action": "Changes the date range"
+            },
+            {
+              "keys": "Compare switch",
+              "action": "Shows or hides the dashed previous-period line; the legend appears with it"
+            },
+            {
+              "keys": "Charts",
+              "action": "Each chart is a labelled figure with a text summary; sources, devices and countries are also listed as text with their values"
+            }
+          ],
+          "customization": [
+            "getSeries, sources, devices, pages, countries",
+            "live: number | null",
+            "locale"
+          ]
+        },
+        "examples": [
+          "dashboard-2-demo",
+          "dashboard-2-week"
+        ],
+        "url": "https://ui.ballmac.com/components/dashboard-2"
+      }
+    },
+    {
+      "name": "dashboard-2-demo",
+      "type": "registry:example",
+      "title": "Dashboard 2: traffic analytics: Default",
+      "description": "Default example of Dashboard 2: traffic analytics.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dashboard-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dashboard-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dashboard-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dashboard-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dashboard-2-week",
+      "type": "registry:example",
+      "title": "Dashboard 2: traffic analytics: Compact, no live pill",
+      "description": "Compact, no live pill example of Dashboard 2: traffic analytics.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dashboard-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dashboard-2-week.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dashboard-2-week.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dashboard-2",
         "tier": "free"
       }
     },
@@ -7088,6 +8013,136 @@
       }
     },
     {
+      "name": "kanban-1",
+      "type": "registry:block",
+      "title": "Kanban 1: project board with drag and keyboard moves",
+      "description": "A project board: columns with counts, rich task cards (tags, priority, due date, comments, assignee), drag and drop with a drop indicator, keyboard pick-up and move with announcements, a Move-to menu, quick add and a person filter.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/dropdown-menu.json",
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/kanban-1/kanban-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/kanban-1/kanban-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "kanban"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "kanban",
+          "board",
+          "tasks",
+          "drag and drop",
+          "project",
+          "keyboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A task board. Pass defaultColumns=[{ id, title, tasks: [{ id, title, tags?, priority?, assignee?, due?, comments? }] }] and onChange(columns).",
+          "whenToUse": [
+            "Project and sprint boards",
+            "Pipelines, hiring and support queues"
+          ],
+          "whenNotToUse": [
+            "A simple list of tasks (use a table)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "calendar-1",
+            "mail-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Space or Enter on a card",
+              "action": "Picks it up; Arrow keys move it between columns and positions; Space or Enter drops it; Escape puts it back"
+            },
+            {
+              "keys": "Move to menu",
+              "action": "Every card has a menu that moves it to any column, for people who don't drag"
+            },
+            {
+              "keys": "Announcements",
+              "action": "Each pick-up, move, drop and removal is announced politely"
+            }
+          ],
+          "customization": [
+            "defaultColumns and onChange(columns)",
+            "height of the board area",
+            "priority: low, medium or high"
+          ]
+        },
+        "examples": [
+          "kanban-1-demo",
+          "kanban-1-simple"
+        ],
+        "url": "https://ui.ballmac.com/components/kanban-1"
+      }
+    },
+    {
+      "name": "kanban-1-demo",
+      "type": "registry:example",
+      "title": "Kanban 1: project board with drag and keyboard moves: Default",
+      "description": "Default example of Kanban 1: project board with drag and keyboard moves.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kanban-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kanban-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kanban-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kanban-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "kanban-1-simple",
+      "type": "registry:example",
+      "title": "Kanban 1: project board with drag and keyboard moves: Three columns",
+      "description": "Three columns example of Kanban 1: project board with drag and keyboard moves.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kanban-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kanban-1-simple.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kanban-1-simple.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kanban-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "login-1",
       "type": "registry:block",
       "title": "Login 1: card with SSO and magic link",
@@ -7408,6 +8463,139 @@
       "meta": {
         "example": true,
         "of": "logo-cloud-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mail-1",
+      "type": "registry:block",
+      "title": "Mail 1: three-pane inbox",
+      "description": "A working inbox: folders with an unread count, a searchable message list with stars and keyboard navigation, a reading pane with archive, delete, mark unread and reply, and a compose dialog. One pane at a time on phones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/search-field.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/mail-1/mail-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/mail-1/mail-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "mail"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "mail",
+          "inbox",
+          "email",
+          "three pane",
+          "messages",
+          "compose",
+          "reply"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "An email client UI. Pass messages=[{ id, folder, from, subject, body[], time, unread?, starred?, attachments? }], me and onSend(to, subject, body); archive, delete, star, read state, search and reply are handled in state.",
+          "whenToUse": [
+            "Webmail, support inboxes and notification centres",
+            "A realistic product screenshot"
+          ],
+          "whenNotToUse": [
+            "Chat (use ai-chat-2 or the chat components)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "kanban-1",
+            "calendar-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Up / Down or J / K",
+              "action": "Moves focus between messages; Enter or Space opens one"
+            },
+            {
+              "keys": "Unread",
+              "action": "Unread messages say 'Unread' to screen readers as well as being bold with a dot"
+            },
+            {
+              "keys": "Actions",
+              "action": "Archive, delete and mark-unread results are announced politely"
+            }
+          ],
+          "customization": [
+            "messages, me, height",
+            "onSend(to, subject, body)",
+            "folders are inbox, sent and archive plus Starred"
+          ]
+        },
+        "examples": [
+          "mail-1-demo",
+          "mail-1-empty"
+        ],
+        "url": "https://ui.ballmac.com/components/mail-1"
+      }
+    },
+    {
+      "name": "mail-1-demo",
+      "type": "registry:example",
+      "title": "Mail 1: three-pane inbox: Default",
+      "description": "Default example of Mail 1: three-pane inbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mail-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mail-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mail-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mail-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mail-1-empty",
+      "type": "registry:example",
+      "title": "Mail 1: three-pane inbox: Empty inbox",
+      "description": "Empty inbox example of Mail 1: three-pane inbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mail-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mail-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mail-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mail-1",
         "tier": "free"
       }
     },
@@ -8001,6 +9189,406 @@
       "meta": {
         "example": true,
         "of": "pricing-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-1",
+      "type": "registry:block",
+      "title": "Settings 1: profile and account",
+      "description": "An account settings page: profile with username availability, sign-in details with a change-password dialog, language, time zone and appearance, a type-to-confirm delete, and a sticky save bar that appears only when something changed.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/field.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/password-input.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/settings-1/settings-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/settings-1/settings-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "settings"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "settings",
+          "profile",
+          "account",
+          "preferences",
+          "save bar",
+          "danger zone"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Profile and account settings. Pass defaultValues, email, onSave(values) (throw to show an error) and onDeleteAccount; the dirty-state save bar, validation and availability hint are built in.",
+          "whenToUse": [
+            "Account and profile pages",
+            "Any settings screen where edits are saved together"
+          ],
+          "whenNotToUse": [
+            "Toggle-style settings that save instantly (use settings-2 or settings-panel)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "settings-2",
+            "settings-3",
+            "billing-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Edit any field",
+              "action": "The save bar slides in; its state (unsaved, saving, saved, error) is announced politely"
+            },
+            {
+              "keys": "Delete account",
+              "action": "An alert dialog asks you to type 'delete'; the confirm button stays disabled until you do"
+            },
+            {
+              "keys": "Invalid name or username",
+              "action": "Errors are announced and linked to the field; saving is blocked"
+            }
+          ],
+          "customization": [
+            "defaultValues, email, takenUsernames, languages, timezones",
+            "onSave(values), onDeleteAccount()"
+          ]
+        },
+        "examples": [
+          "settings-1-demo",
+          "settings-1-save"
+        ],
+        "url": "https://ui.ballmac.com/components/settings-1"
+      }
+    },
+    {
+      "name": "settings-1-demo",
+      "type": "registry:example",
+      "title": "Settings 1: profile and account: Default",
+      "description": "Default example of Settings 1: profile and account.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-1-save",
+      "type": "registry:example",
+      "title": "Settings 1: profile and account: Failing save",
+      "description": "Failing save example of Settings 1: profile and account.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-1-save.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-1-save.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-2",
+      "type": "registry:block",
+      "title": "Settings 2: notification preferences",
+      "description": "Notification settings that save as you go: digest frequency as radio cards, a grid of switches for each event and channel (cards on phones), and quiet hours with times and weekdays.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/toggle-group.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/settings-2/settings-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/settings-2/settings-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "settings"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "settings",
+          "notifications",
+          "preferences",
+          "switches",
+          "quiet hours",
+          "digest"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Notification preferences with instant saving. Pass events=[{ id, label, description }], defaultValues and onChange(values) (return a promise; throw to show an error).",
+          "whenToUse": [
+            "Notification, alert and email preference pages",
+            "Settings that apply the moment they are toggled"
+          ],
+          "whenNotToUse": [
+            "Forms that need an explicit Save (use settings-1)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "settings-1",
+            "settings-3"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys / Space",
+              "action": "Digest radios move and select; switches toggle with Space"
+            },
+            {
+              "keys": "Screen reader",
+              "action": "Each switch is named 'Event by Channel'; the saving state is announced politely"
+            },
+            {
+              "keys": "Weekdays",
+              "action": "A toggle group with full day names as labels"
+            }
+          ],
+          "customization": [
+            "events: { id, label, description }[]",
+            "defaultValues: digest, events, quiet",
+            "onChange(values) async"
+          ]
+        },
+        "examples": [
+          "settings-2-demo",
+          "settings-2-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/settings-2"
+      }
+    },
+    {
+      "name": "settings-2-demo",
+      "type": "registry:example",
+      "title": "Settings 2: notification preferences: Default",
+      "description": "Default example of Settings 2: notification preferences.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-2-custom",
+      "type": "registry:example",
+      "title": "Settings 2: notification preferences: Your events",
+      "description": "Your events example of Settings 2: notification preferences.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-2-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-2-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-3",
+      "type": "registry:block",
+      "title": "Settings 3: team members and roles",
+      "description": "Team management: a seats meter, an invite form with role, role filters and search, a member list with role selects, pending invitations and a confirm-before-remove dialog. Stacks cleanly on phones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/dropdown-menu.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/search-field.json",
+        "https://ui.ballmac.com/r/select.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/settings-3/settings-3.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/settings-3/settings-3.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "settings"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "settings",
+          "team",
+          "members",
+          "roles",
+          "invite",
+          "permissions",
+          "seats"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Workspace member management. Pass members=[{ id, name, email, role, status, lastActive? }], roles, seats and onInvite / onRoleChange / onRemove; the Owner can't be changed or removed.",
+          "whenToUse": [
+            "Workspace and organisation settings",
+            "Any product with roles and seats"
+          ],
+          "whenNotToUse": [
+            "A first-run invite step (use onboarding-1)",
+            "Sending many invites at once (use invite-members)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "settings-1",
+            "billing-1",
+            "invite-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter in the email field",
+              "action": "Sends the invitation; errors are announced and linked to the field"
+            },
+            {
+              "keys": "Role select",
+              "action": "Each is named 'Role for <person>'; changes are announced politely"
+            },
+            {
+              "keys": "Actions menu",
+              "action": "Opens a menu; removing asks for confirmation in an alert dialog"
+            }
+          ],
+          "customization": [
+            "members, roles, seats",
+            "onInvite(email, role) async; throw to show an error",
+            "onRoleChange(id, role), onRemove(id)"
+          ]
+        },
+        "examples": [
+          "settings-3-demo",
+          "settings-3-full"
+        ],
+        "url": "https://ui.ballmac.com/components/settings-3"
+      }
+    },
+    {
+      "name": "settings-3-demo",
+      "type": "registry:example",
+      "title": "Settings 3: team members and roles: Default",
+      "description": "Default example of Settings 3: team members and roles.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-3-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-3-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-3-full",
+      "type": "registry:example",
+      "title": "Settings 3: team members and roles: Seats full",
+      "description": "Seats full example of Settings 3: team members and roles.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-3-full.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-3-full.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-3",
         "tier": "free"
       }
     },
