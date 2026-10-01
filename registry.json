@@ -9705,6 +9705,138 @@
       }
     },
     {
+      "name": "desktop-icons",
+      "type": "registry:ui",
+      "title": "Desktop Icons",
+      "description": "A macOS desktop of icons: box-select with the pointer, drag to move with snapping to grid cells, double-click or Return to open, arrow keys to move focus and Alt plus arrows to move an icon.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/mac-icons.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/desktop-icons.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/desktop-icons.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "desktop",
+          "icons",
+          "drag",
+          "selection",
+          "macos"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<DesktopIcons items={[{ id, name, kind, col, row }]} onItemsChange onOpen cell />. Positions are grid cells. Icons that land on an occupied cell move to the nearest free one.",
+          "whenToUse": [
+            "Desktop-style demos and playgrounds",
+            "Launch surfaces with draggable shortcuts"
+          ],
+          "whenNotToUse": [
+            "Ordinary file lists (file-browser)"
+          ],
+          "composesWith": [
+            "window-manager",
+            "finder-window",
+            "mac-icons",
+            "mac-context-menu"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move focus to the nearest icon in that direction"
+            },
+            {
+              "keys": "Alt+Arrow",
+              "action": "Moves the focused icon one cell"
+            },
+            {
+              "keys": "Enter",
+              "action": "Opens"
+            },
+            {
+              "keys": "Space",
+              "action": "Toggles selection"
+            }
+          ],
+          "customization": [
+            "cell size",
+            "items and positions",
+            "onItemsChange"
+          ]
+        },
+        "examples": [
+          "desktop-icons-demo",
+          "desktop-icons-window"
+        ],
+        "url": "https://ui.ballmac.com/components/desktop-icons"
+      }
+    },
+    {
+      "name": "desktop-icons-demo",
+      "type": "registry:example",
+      "title": "Desktop Icons: Desktop on a wallpaper",
+      "description": "Desktop on a wallpaper example of Desktop Icons.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-icons.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-icons-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-icons-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-icons",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-icons-window",
+      "type": "registry:example",
+      "title": "Desktop Icons: Icons behind windows",
+      "description": "Icons behind windows example of Desktop Icons.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-icons.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-icons-window.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-icons-window.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-icons",
+        "tier": "free"
+      }
+    },
+    {
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
@@ -11363,6 +11495,135 @@
       }
     },
     {
+      "name": "file-browser",
+      "type": "registry:ui",
+      "title": "File Browser",
+      "description": "A file manager for apps: breadcrumb folders, search, sortable columns, row checkboxes with select-all, a bulk-action bar, list and grid views and full keyboard control.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/file-browser.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/file-browser.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "files",
+          "browser",
+          "table",
+          "upload",
+          "folders"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<FileBrowser entries rootLabel view onOpenFile onDelete onDownload />. entries is a FileEntry tree. Sort by name, modified or size (aria-sort). Space selects, Enter opens, arrow keys move.",
+          "whenToUse": [
+            "Drive-style pages inside an app",
+            "Choosing files for download or deletion"
+          ],
+          "whenNotToUse": [
+            "A Mac-styled window (finder-window)",
+            "Plain tables (data-table)"
+          ],
+          "composesWith": [
+            "data-table",
+            "breadcrumb",
+            "file-dropzone"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between rows or cards"
+            },
+            {
+              "keys": "Space",
+              "action": "Toggles selection"
+            },
+            {
+              "keys": "Enter",
+              "action": "Opens a folder or file"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Sort state, selection count and item count are announced"
+            }
+          ],
+          "customization": [
+            "view",
+            "rootLabel",
+            "onDelete and onDownload",
+            "sorting"
+          ]
+        },
+        "examples": [
+          "file-browser-demo",
+          "file-browser-grid"
+        ],
+        "url": "https://ui.ballmac.com/components/file-browser"
+      }
+    },
+    {
+      "name": "file-browser-demo",
+      "type": "registry:example",
+      "title": "File Browser: Project files",
+      "description": "Project files example of File Browser.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/file-browser.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/file-browser-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/file-browser-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "file-browser",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "file-browser-grid",
+      "type": "registry:example",
+      "title": "File Browser: Grid view",
+      "description": "Grid view example of File Browser.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/file-browser.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/file-browser-grid.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/file-browser-grid.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "file-browser",
+        "tier": "free"
+      }
+    },
+    {
       "name": "file-dropzone",
       "type": "registry:ui",
       "title": "File Dropzone",
@@ -11586,6 +11847,144 @@
       "meta": {
         "example": true,
         "of": "file-tree",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "finder-window",
+      "type": "registry:ui",
+      "title": "Finder Window",
+      "description": "A working mini Finder: sidebar shortcuts, back and forward history, icon and list views, search, click, shift and command selection, keyboard navigation and a path bar, on a macOS window.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/mac-window.json",
+        "https://ui.ballmac.com/r/mac-icons.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/finder-window.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/finder-window.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "finder",
+          "files",
+          "macos",
+          "window",
+          "browser"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<FinderWindow root={tree} sidebar defaultFolder view onOpenFile onSelectionChange />. root is a FinderNode tree (folder, file or drive). Double-click or Return opens; Cmd+Up goes to the parent folder.",
+          "whenToUse": [
+            "Product demos and docs that show a file system",
+            "Mac-style apps"
+          ],
+          "whenNotToUse": [
+            "A real file manager for your app (file-browser)",
+            "A single window frame (mac-window)"
+          ],
+          "composesWith": [
+            "mac-window",
+            "toolbar",
+            "desktop-icons",
+            "mac-context-menu"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move the selection; Shift extends it"
+            },
+            {
+              "keys": "Enter / Cmd+Down",
+              "action": "Opens the item"
+            },
+            {
+              "keys": "Cmd+Up",
+              "action": "Opens the parent folder"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "A multi-select listbox named by the folder; the path bar and item count are announced"
+            }
+          ],
+          "customization": [
+            "view: icons | list",
+            "sidebar sections",
+            "defaultFolder",
+            "onOpenFile"
+          ]
+        },
+        "examples": [
+          "finder-window-demo",
+          "finder-window-list"
+        ],
+        "url": "https://ui.ballmac.com/components/finder-window"
+      }
+    },
+    {
+      "name": "finder-window-demo",
+      "type": "registry:example",
+      "title": "Finder Window: Home folder",
+      "description": "Home folder example of Finder Window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/finder-window.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/finder-window-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/finder-window-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "finder-window",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "finder-window-list",
+      "type": "registry:example",
+      "title": "Finder Window: List view",
+      "description": "List view example of Finder Window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/finder-window.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/finder-window-list.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/finder-window-list.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "finder-window",
         "tier": "free"
       }
     },
@@ -15095,6 +15494,144 @@
       }
     },
     {
+      "name": "launchpad",
+      "type": "registry:ui",
+      "title": "Launchpad",
+      "description": "The macOS Launchpad: a frosted full-area overlay with search, pages of app icons sized to fit, page dots, wheel and key paging, arrow-key focus across pages and Escape to close.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/launchpad.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/launchpad.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "launchpad",
+          "apps",
+          "grid",
+          "overlay",
+          "macos"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<Launchpad apps={[{ id, name, icon }]} open onClose onLaunch />. It fills its positioned parent. Pages, rows and columns are computed from the available size.",
+          "whenToUse": [
+            "Mac desktop demos",
+            "App launchers in dashboards"
+          ],
+          "whenNotToUse": [
+            "Command palettes (command)",
+            "Navigation menus"
+          ],
+          "composesWith": [
+            "dock",
+            "mac-icons",
+            "spotlight-search"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between apps across pages"
+            },
+            {
+              "keys": "PageUp / PageDown",
+              "action": "Turn pages"
+            },
+            {
+              "keys": "Enter in search",
+              "action": "Launches the first match"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "No zoom or blur on open"
+            }
+          ],
+          "customization": [
+            "cellWidth and cellHeight",
+            "label",
+            "open / onClose"
+          ]
+        },
+        "examples": [
+          "launchpad-demo",
+          "launchpad-many"
+        ],
+        "url": "https://ui.ballmac.com/components/launchpad"
+      }
+    },
+    {
+      "name": "launchpad-demo",
+      "type": "registry:example",
+      "title": "Launchpad: Open launcher",
+      "description": "Open launcher example of Launchpad.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/launchpad.json",
+        "https://ui.ballmac.com/r/mac-icons.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/launchpad-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/launchpad-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "launchpad",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "launchpad-many",
+      "type": "registry:example",
+      "title": "Launchpad: Many apps and paging",
+      "description": "Many apps and paging example of Launchpad.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/launchpad.json",
+        "https://ui.ballmac.com/r/mac-icons.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/launchpad-many.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/launchpad-many.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "launchpad",
+        "tier": "free"
+      }
+    },
+    {
       "name": "lens",
       "type": "registry:ui",
       "title": "Lens",
@@ -15570,6 +16107,252 @@
       "meta": {
         "example": true,
         "of": "log-stream",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mac-context-menu",
+      "type": "registry:ui",
+      "title": "Mac Context Menu",
+      "description": "A right-click menu styled like macOS: frosted panel, accent-color highlight, key equivalents, checkmarks, submenus and a red destructive item, on Radix for full keyboard support.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/mac-context-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/mac-context-menu.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "context menu",
+          "macos",
+          "right click",
+          "menu",
+          "shortcuts"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Compose <MacContextMenu><MacContextMenuTrigger/><MacContextMenuContent> with MacContextMenuItem (icon, shortcut, destructive), CheckboxItem, RadioGroup/RadioItem, Label, Separator and Sub parts. Shift+F10 and long-press also open it.",
+          "whenToUse": [
+            "Desktop-like apps and file managers",
+            "Anywhere you want the macOS look"
+          ],
+          "whenNotToUse": [
+            "Standard product UI (context-menu)",
+            "Click-opened menus (dropdown-menu)"
+          ],
+          "composesWith": [
+            "finder-window",
+            "desktop-icons",
+            "context-menu"
+          ],
+          "a11y": [
+            {
+              "keys": "Shift+F10 / ContextMenu key",
+              "action": "Opens the menu on the focused trigger"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "Moves through items; ArrowRight opens a submenu"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes"
+            }
+          ],
+          "customization": [
+            "shortcut and icon per item",
+            "destructive",
+            "accent via --mac-accent"
+          ]
+        },
+        "examples": [
+          "mac-context-menu-demo",
+          "mac-context-menu-view"
+        ],
+        "url": "https://ui.ballmac.com/components/mac-context-menu"
+      }
+    },
+    {
+      "name": "mac-context-menu-demo",
+      "type": "registry:example",
+      "title": "Mac Context Menu: File menu with submenu",
+      "description": "File menu with submenu example of Mac Context Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mac-context-menu.json",
+        "https://ui.ballmac.com/r/mac-icons.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mac-context-menu-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mac-context-menu-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mac-context-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mac-context-menu-view",
+      "type": "registry:example",
+      "title": "Mac Context Menu: Checkmarks and radio items",
+      "description": "Checkmarks and radio items example of Mac Context Menu.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mac-context-menu.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mac-context-menu-view.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mac-context-menu-view.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mac-context-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mac-icons",
+      "type": "registry:ui",
+      "title": "Mac Icons",
+      "description": "Resolution-independent macOS-style icons drawn in SVG and CSS: folders, documents with extension badges, drives and gradient app icons in eight theme-aware colors.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/mac-icons.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/mac-icons.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "icons",
+          "folder",
+          "file",
+          "app icon",
+          "macos"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<FolderIcon size tone />, <FileIcon label='PDF' tone />, <DriveIcon />, <AppIcon tone size>{glyph}</AppIcon>. tone is blue | teal | green | amber | orange | red | purple | graphite. All are decorative (aria-hidden): put the name in text next to them.",
+          "whenToUse": [
+            "Desktop, Finder and Launchpad recreations",
+            "File lists that want recognisable macOS icons"
+          ],
+          "whenNotToUse": [
+            "Small UI glyphs (use lucide-react icons)"
+          ],
+          "composesWith": [
+            "finder-window",
+            "desktop-icons",
+            "launchpad",
+            "dock"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Icons are aria-hidden; always label the item with text"
+            }
+          ],
+          "customization": [
+            "size",
+            "tone",
+            "FileIcon label",
+            "AppIcon glyph"
+          ]
+        },
+        "examples": [
+          "mac-icons-demo",
+          "mac-icons-tones"
+        ],
+        "url": "https://ui.ballmac.com/components/mac-icons"
+      }
+    },
+    {
+      "name": "mac-icons-demo",
+      "type": "registry:example",
+      "title": "Mac Icons: The four icon kinds",
+      "description": "The four icon kinds example of Mac Icons.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mac-icons.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mac-icons-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mac-icons-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mac-icons",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mac-icons-tones",
+      "type": "registry:example",
+      "title": "Mac Icons: Colors and sizes",
+      "description": "Colors and sizes example of Mac Icons.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mac-icons.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mac-icons-tones.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mac-icons-tones.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mac-icons",
         "tier": "free"
       }
     },
@@ -21951,6 +22734,141 @@
       }
     },
     {
+      "name": "sheet-dialog",
+      "type": "registry:ui",
+      "title": "Sheet Dialog",
+      "description": "A macOS sheet: a frosted panel that drops from the top edge of its window and dims only that window, with a default accent button, on Radix Dialog for focus trapping and Escape to cancel.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/sheet-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/sheet-dialog.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "sheet",
+          "dialog",
+          "macos",
+          "modal",
+          "window"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<SheetDialog container={windowRef}> with SheetDialogTrigger and SheetDialogContent (Header, Title, Description, Footer, Button primary). Give it the window element so it attaches there; without it it drops from the page.",
+          "whenToUse": [
+            "Confirmations and short forms attached to a window",
+            "Mac-style apps and demos"
+          ],
+          "whenNotToUse": [
+            "General modals (dialog)",
+            "Side panels (sheet)"
+          ],
+          "composesWith": [
+            "mac-window",
+            "dialog",
+            "window-manager"
+          ],
+          "a11y": [
+            {
+              "keys": "Escape",
+              "action": "Cancels"
+            },
+            {
+              "keys": "Focus",
+              "action": "Trapped in the sheet and returned to the trigger on close"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Named dialog with description"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The sheet fades in place"
+            }
+          ],
+          "customization": [
+            "container",
+            "primary and destructive buttons",
+            "className on the content"
+          ]
+        },
+        "examples": [
+          "sheet-dialog-demo",
+          "sheet-dialog-form"
+        ],
+        "url": "https://ui.ballmac.com/components/sheet-dialog"
+      }
+    },
+    {
+      "name": "sheet-dialog-demo",
+      "type": "registry:example",
+      "title": "Sheet Dialog: Save changes sheet",
+      "description": "Save changes sheet example of Sheet Dialog.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sheet-dialog.json",
+        "https://ui.ballmac.com/r/mac-window.json",
+        "https://ui.ballmac.com/r/mac-icons.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sheet-dialog-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sheet-dialog-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sheet-dialog",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sheet-dialog-form",
+      "type": "registry:example",
+      "title": "Sheet Dialog: Form sheet in a window",
+      "description": "Form sheet in a window example of Sheet Dialog.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sheet-dialog.json",
+        "https://ui.ballmac.com/r/mac-window.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sheet-dialog-form.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sheet-dialog-form.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sheet-dialog",
+        "tier": "free"
+      }
+    },
+    {
       "name": "sheet",
       "type": "registry:ui",
       "title": "Sheet",
@@ -27958,6 +28876,137 @@
       }
     },
     {
+      "name": "toolbar",
+      "type": "registry:ui",
+      "title": "Toolbar",
+      "description": "A frosted macOS toolbar with a title block, icon and labeled buttons, segmented view switches, an expanding search field, separators and spacers, built on Radix Toolbar so the whole bar is one tab stop.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/toolbar.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "toolbar",
+          "macos",
+          "segmented",
+          "buttons",
+          "search"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<Toolbar label title subtitle> with ToolbarButton (icon, labeled, pressed), ToolbarGroup, ToolbarSegmented + ToolbarSegment (single choice), ToolbarSeparator, ToolbarSpacer and ToolbarSearch. Arrow keys move between buttons.",
+          "whenToUse": [
+            "Document and file-manager windows",
+            "Editors with many commands"
+          ],
+          "whenNotToUse": [
+            "Page navigation (navbar)",
+            "One or two buttons (button-group)"
+          ],
+          "composesWith": [
+            "mac-window",
+            "finder-window",
+            "button-group"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Enters and leaves the toolbar as a single stop"
+            },
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "action": "Moves between buttons; Home and End jump to the ends"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Named by its label; pressed buttons use aria-pressed"
+            }
+          ],
+          "customization": [
+            "labeled buttons",
+            "segmented groups",
+            "ToolbarSearch widths"
+          ]
+        },
+        "examples": [
+          "toolbar-demo",
+          "toolbar-labeled"
+        ],
+        "url": "https://ui.ballmac.com/components/toolbar"
+      }
+    },
+    {
+      "name": "toolbar-demo",
+      "type": "registry:example",
+      "title": "Toolbar: Document toolbar",
+      "description": "Document toolbar example of Toolbar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/toolbar.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/toolbar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/toolbar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "toolbar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "toolbar-labeled",
+      "type": "registry:example",
+      "title": "Toolbar: Labeled buttons",
+      "description": "Labeled buttons example of Toolbar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/toolbar.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/toolbar-labeled.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/toolbar-labeled.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "toolbar",
+        "tier": "free"
+      }
+    },
+    {
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
@@ -29065,6 +30114,141 @@
       "meta": {
         "example": true,
         "of": "webhook-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "window-manager",
+      "type": "registry:ui",
+      "title": "Window Manager",
+      "description": "A desktop of real windows: focus raises, the title bar drags, edges and corners resize, double-click zooms, the yellow light tucks a window into a tray, and Alt plus arrow keys move and resize from the keyboard.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/mac-window.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/window-manager.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/window-manager.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "window manager",
+          "drag",
+          "resize",
+          "desktop",
+          "macos"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<WindowManager windows={[{ id, title, content, x, y, width, height, minWidth, minHeight }]} onClose>background</WindowManager>. Add or remove entries to open or close windows. Children render behind the windows.",
+          "whenToUse": [
+            "Interactive OS-style demos",
+            "Multi-panel tools that need freely arranged windows"
+          ],
+          "whenNotToUse": [
+            "Fixed split layouts (resizable)",
+            "Dialogs (dialog)"
+          ],
+          "composesWith": [
+            "mac-window",
+            "desktop-icons",
+            "dock",
+            "sheet-dialog"
+          ],
+          "a11y": [
+            {
+              "keys": "Alt+Arrow",
+              "action": "Moves the focused window"
+            },
+            {
+              "keys": "Alt+Shift+Arrow",
+              "action": "Resizes it"
+            },
+            {
+              "keys": "Ctrl/Cmd+W and M",
+              "action": "Close and minimize"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Each window is a labelled group; minimized windows are restorable from a named list"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Windows appear and minimize without scaling"
+            }
+          ],
+          "customization": [
+            "windows",
+            "onClose",
+            "minWidth and minHeight",
+            "children as the desktop"
+          ]
+        },
+        "examples": [
+          "window-manager-demo",
+          "window-manager-controlled"
+        ],
+        "url": "https://ui.ballmac.com/components/window-manager"
+      }
+    },
+    {
+      "name": "window-manager-demo",
+      "type": "registry:example",
+      "title": "Window Manager: Three apps on a desktop",
+      "description": "Three apps on a desktop example of Window Manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/window-manager.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/window-manager-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/window-manager-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "window-manager",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "window-manager-controlled",
+      "type": "registry:example",
+      "title": "Window Manager: Open and close windows",
+      "description": "Open and close windows example of Window Manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/window-manager.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/window-manager-controlled.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/window-manager-controlled.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "window-manager",
         "tier": "free"
       }
     },
