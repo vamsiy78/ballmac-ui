@@ -1017,6 +1017,136 @@
       }
     },
     {
+      "name": "android-frame",
+      "type": "registry:ui",
+      "title": "Android Frame",
+      "description": "A modern Android phone drawn in CSS: satin frame in porcelain, obsidian or sage, centered punch-hole camera, Material-style status bar and gesture or three-button navigation. Children render at phone resolution, scaled to fit.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/android-frame.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/android-frame.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "mockup",
+          "device",
+          "phone",
+          "android",
+          "pixel",
+          "mobile",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Wrap a mobile screen in <AndroidFrame screenWidth={412}>: children render below a status bar at 412 CSS px wide and are scaled to the frame's width. Set the width with className (e.g. w-64).",
+          "whenToUse": [
+            "Showing an Android or responsive mobile app",
+            "Side by side with phone-frame for cross-platform stories"
+          ],
+          "whenNotToUse": [
+            "iPhone mockups (phone-frame)",
+            "Real device screenshots with a bezel"
+          ],
+          "composesWith": [
+            "phone-frame",
+            "tablet-frame",
+            "laptop-frame"
+          ],
+          "a11y": [
+            {
+              "keys": "Static",
+              "action": "Purely visual: no focusable elements from the frame"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Video on the screen is not autoplayed"
+            }
+          ],
+          "customization": [
+            "variant: auto | porcelain | obsidian | sage",
+            "navigation: gesture | buttons | none",
+            "screenWidth: virtual width in CSS px",
+            "statusBar, time",
+            "src/alt or videoSrc/poster instead of children"
+          ]
+        },
+        "examples": [
+          "android-frame-demo",
+          "android-frame-buttons"
+        ],
+        "url": "https://ui.ballmac.com/components/android-frame"
+      }
+    },
+    {
+      "name": "android-frame-demo",
+      "type": "registry:example",
+      "title": "Android Frame: Home screen",
+      "description": "Home screen example of Android Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/android-frame.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/android-frame-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/android-frame-demo.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "android-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "android-frame-buttons",
+      "type": "registry:example",
+      "title": "Android Frame: Three-button navigation",
+      "description": "Three-button navigation example of Android Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/android-frame.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/android-frame-buttons.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/android-frame-buttons.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "android-frame",
+        "tier": "free"
+      }
+    },
+    {
       "name": "animated-beam",
       "type": "registry:ui",
       "title": "Animated Beam",
@@ -8763,6 +8893,139 @@
       }
     },
     {
+      "name": "control-center",
+      "type": "registry:ui",
+      "title": "Control Center",
+      "description": "The macOS Control Center panel in frosted glass: toggle tiles with round badges, grouped Wi-Fi, Bluetooth and AirDrop rows, pill sliders with the icon in the track, and a Now Playing tile. Real toggle buttons and Radix sliders.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/control-center.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/control-center.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "control-center",
+          "macos",
+          "toggles",
+          "slider",
+          "settings",
+          "panel",
+          "media"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<ControlCenter> is a 2-column grid. Put <ControlCluster> with <ControlRow> toggles first, then <ControlTile>, <ControlSlider label icon> and <ControlNowPlaying>. Toggles are controlled with pressed / onPressedChange or uncontrolled.",
+          "whenToUse": [
+            "Mac system UI mockups",
+            "Quick-settings popovers"
+          ],
+          "whenNotToUse": [
+            "Full settings pages (use field, switch, slider)"
+          ],
+          "composesWith": [
+            "menu-bar",
+            "mac-window",
+            "hud",
+            "switch"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Space / Enter",
+              "action": "Every tile and row is a button with aria-pressed"
+            },
+            {
+              "keys": "Arrow keys",
+              "action": "Adjust a slider; Home and End jump to the ends"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "No press scale or color transitions"
+            }
+          ],
+          "customization": [
+            "ControlTile: icon, label, status, pressed, stacked",
+            "ControlSlider: label, icon, value, onValueChange",
+            "ControlNowPlaying: title, artist, artwork, playing"
+          ]
+        },
+        "examples": [
+          "control-center-demo",
+          "control-center-compact"
+        ],
+        "url": "https://ui.ballmac.com/components/control-center"
+      }
+    },
+    {
+      "name": "control-center-demo",
+      "type": "registry:example",
+      "title": "Control Center: Full panel",
+      "description": "Full panel example of Control Center.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/control-center.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/control-center-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/control-center-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "control-center",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "control-center-compact",
+      "type": "registry:example",
+      "title": "Control Center: Tiles only",
+      "description": "Tiles only example of Control Center.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/control-center.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/control-center-compact.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/control-center-compact.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "control-center",
+        "tier": "free"
+      }
+    },
+    {
       "name": "cookie-consent",
       "type": "registry:ui",
       "title": "Cookie Consent",
@@ -13350,6 +13613,131 @@
       }
     },
     {
+      "name": "hud",
+      "type": "registry:ui",
+      "title": "HUD",
+      "description": "The macOS volume and brightness HUD: a dark frosted square with a big icon and a 16-segment bar, or a slim capsule with a smooth bar. Pops in, restarts its timer when the value changes, fades out and announces the new level.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/hud.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/hud.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hud",
+          "volume",
+          "brightness",
+          "macos",
+          "overlay",
+          "feedback"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<Hud kind=\"volume\" value={60} visible={visible} onVisibleChange={setVisible} /> inside a relative container. useTransientHud() gives { visible, show, hide, onVisibleChange }.",
+          "whenToUse": [
+            "Keyboard-driven level changes in desktop UI demos",
+            "Transient feedback for hardware-style controls"
+          ],
+          "whenNotToUse": [
+            "Toasts and messages (toast)",
+            "Persistent controls (slider)"
+          ],
+          "composesWith": [
+            "control-center",
+            "menu-bar",
+            "keyboard-shortcuts"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "A polite status message says the new level; the visual HUD is hidden from them"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Fades without scaling"
+            }
+          ],
+          "customization": [
+            "kind: volume | brightness | keyboard",
+            "variant: mac | pill",
+            "muted, duration, value 0 to 100"
+          ]
+        },
+        "examples": [
+          "hud-demo",
+          "hud-pill"
+        ],
+        "url": "https://ui.ballmac.com/components/hud"
+      }
+    },
+    {
+      "name": "hud-demo",
+      "type": "registry:example",
+      "title": "HUD: Volume keys",
+      "description": "Volume keys example of HUD.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hud.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hud-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hud-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hud",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hud-pill",
+      "type": "registry:example",
+      "title": "HUD: Capsule variant",
+      "description": "Capsule variant example of HUD.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hud.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hud-pill.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hud-pill.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hud",
+        "tier": "free"
+      }
+    },
+    {
       "name": "hyper-text",
       "type": "registry:ui",
       "title": "Hyper Text",
@@ -15979,6 +16367,146 @@
       "meta": {
         "example": true,
         "of": "loading-dots",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "lock-screen",
+      "type": "registry:ui",
+      "title": "Lock Screen",
+      "description": "A full-screen lock screen in two flavors: macOS (live clock, avatar, password field that shakes when wrong) and iOS (clock, notification stack, flashlight and camera, swipe up to unlock). Hydration-safe clock.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/lock-screen.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/lock-screen.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "lock-screen",
+          "login",
+          "macos",
+          "ios",
+          "clock",
+          "password",
+          "wallpaper"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<LockScreen variant=\"mac\" password=\"hello\" /> fills its positioned parent until unlocked. variant=\"ios\" takes notifications as children and unlocks by swiping up or pressing the button. Control with locked / onLockedChange.",
+          "whenToUse": [
+            "Mac or phone UI demos with a login moment",
+            "Idle or session-timeout screens"
+          ],
+          "whenNotToUse": [
+            "Real authentication: the password prop is for demos, check credentials on a server"
+          ],
+          "composesWith": [
+            "phone-frame",
+            "notification-stack",
+            "mac-window",
+            "menu-bar"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Reaches the password field and the Unlock button"
+            },
+            {
+              "keys": "Enter",
+              "action": "Submits the password"
+            },
+            {
+              "keys": "Wrong password",
+              "action": "Announced as an alert and the field shakes (no shake with reduced motion)"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Fade instead of slide, blur and scale; iOS shows an Unlock button"
+            }
+          ],
+          "customization": [
+            "variant: mac | ios",
+            "password, onUnlock, hint, name, avatar",
+            "time and date for a fixed clock (omit for live)",
+            "wallpaper replaces the default",
+            "locked / defaultLocked / onLockedChange"
+          ]
+        },
+        "examples": [
+          "lock-screen-demo",
+          "lock-screen-ios"
+        ],
+        "url": "https://ui.ballmac.com/components/lock-screen"
+      }
+    },
+    {
+      "name": "lock-screen-demo",
+      "type": "registry:example",
+      "title": "Lock Screen: macOS password lock",
+      "description": "macOS password lock example of Lock Screen.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/lock-screen.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/lock-screen-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/lock-screen-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "lock-screen",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "lock-screen-ios",
+      "type": "registry:example",
+      "title": "Lock Screen: iOS in a phone",
+      "description": "iOS in a phone example of Lock Screen.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/lock-screen.json",
+        "https://ui.ballmac.com/r/phone-frame.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/lock-screen-ios.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/lock-screen-ios.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "lock-screen",
         "tier": "free"
       }
     },
@@ -26601,6 +27129,136 @@
       }
     },
     {
+      "name": "tablet-frame",
+      "type": "registry:ui",
+      "title": "Tablet Frame",
+      "description": "A modern tablet drawn in CSS: brushed aluminum frame, thin glass bezel, front camera, status bar and home indicator. Landscape or portrait with the same proportions; children render as the screen at tablet resolution, scaled to fit.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/tablet-frame.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/tablet-frame.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "mockup",
+          "device",
+          "tablet",
+          "ipad",
+          "screenshot",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Wrap a tablet screen in <TabletFrame screenWidth={1194}>: children render below a status bar at 1194 CSS px wide (834 in portrait) and are scaled to the frame's width. Set the width with className; the height follows the aspect ratio.",
+          "whenToUse": [
+            "Showing a dashboard or app on a landing page",
+            "Pairing with phone-frame and laptop-frame in a device lineup"
+          ],
+          "whenNotToUse": [
+            "Phone-sized screens (phone-frame, android-frame)",
+            "Real screenshots that already include a bezel"
+          ],
+          "composesWith": [
+            "phone-frame",
+            "laptop-frame",
+            "watch-frame"
+          ],
+          "a11y": [
+            {
+              "keys": "Static",
+              "action": "Purely visual: the frame adds no focusable elements and hides its decoration from assistive tech"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Video on the screen is not autoplayed"
+            }
+          ],
+          "customization": [
+            "orientation: landscape | portrait",
+            "variant: auto | silver | black",
+            "screenWidth: virtual width in CSS px",
+            "statusBar, time, date, homeIndicator",
+            "src/alt or videoSrc/poster instead of children",
+            "screenClassName=\"dark\" gives the screen its own theme"
+          ]
+        },
+        "examples": [
+          "tablet-frame-demo",
+          "tablet-frame-portrait"
+        ],
+        "url": "https://ui.ballmac.com/components/tablet-frame"
+      }
+    },
+    {
+      "name": "tablet-frame-demo",
+      "type": "registry:example",
+      "title": "Tablet Frame: Dashboard, landscape",
+      "description": "Dashboard, landscape example of Tablet Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tablet-frame.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tablet-frame-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tablet-frame-demo.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tablet-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tablet-frame-portrait",
+      "type": "registry:example",
+      "title": "Tablet Frame: Portrait reader",
+      "description": "Portrait reader example of Tablet Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tablet-frame.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tablet-frame-portrait.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tablet-frame-portrait.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tablet-frame",
+        "tier": "free"
+      }
+    },
+    {
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
@@ -29990,6 +30648,131 @@
       }
     },
     {
+      "name": "watch-frame",
+      "type": "registry:ui",
+      "title": "Watch Frame",
+      "description": "A smartwatch drawn in CSS: rounded aluminum case, digital crown and side button, curved glass and a fading strap in sport, loop or leather. The screen is always dark and children render scaled to fit.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/watch-frame.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/watch-frame.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "mockup",
+          "device",
+          "watch",
+          "apple-watch",
+          "wearable",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<WatchFrame screenWidth={208} band=\"sport\" bandTone=\"blue\"> renders children as the watch screen at 208 CSS px wide, scaled to fit. Set the width with className (about w-40).",
+          "whenToUse": [
+            "Wearable app showcases",
+            "Device lineups next to phone-frame"
+          ],
+          "whenNotToUse": [
+            "Large UI that needs a normal screen (phone-frame)"
+          ],
+          "composesWith": [
+            "phone-frame",
+            "tablet-frame",
+            "progress-ring"
+          ],
+          "a11y": [
+            {
+              "keys": "Static",
+              "action": "Purely visual: no focusable elements from the frame"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Video on the screen is not autoplayed"
+            }
+          ],
+          "customization": [
+            "variant: auto | silver | black | gold",
+            "band: sport | loop | leather | none",
+            "bandTone: blue | teal | orange | purple | graphite | red",
+            "screenWidth: virtual width in CSS px",
+            "src/alt or videoSrc/poster instead of children"
+          ]
+        },
+        "examples": [
+          "watch-frame-demo",
+          "watch-frame-workout"
+        ],
+        "url": "https://ui.ballmac.com/components/watch-frame"
+      }
+    },
+    {
+      "name": "watch-frame-demo",
+      "type": "registry:example",
+      "title": "Watch Frame: Analog face",
+      "description": "Analog face example of Watch Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/watch-frame.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/watch-frame-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/watch-frame-demo.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "watch-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "watch-frame-workout",
+      "type": "registry:example",
+      "title": "Watch Frame: Workout, loop band",
+      "description": "Workout, loop band example of Watch Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/watch-frame.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/watch-frame-workout.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/watch-frame-workout.tsx"
+        }
+      ],
+      "categories": [
+        "devices"
+      ],
+      "meta": {
+        "example": true,
+        "of": "watch-frame",
+        "tier": "free"
+      }
+    },
+    {
       "name": "webhook-card",
       "type": "registry:ui",
       "title": "Webhook Card",
@@ -30114,6 +30897,135 @@
       "meta": {
         "example": true,
         "of": "webhook-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "widgets",
+      "type": "registry:ui",
+      "title": "Widgets",
+      "description": "Desktop widgets in three sizes: weather with a sky gradient, hourly strip and daily ranges; a calendar with a month grid and events; a battery widget with rings. They scale with their width and use UTC dates.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/widgets.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/widgets.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "widgets",
+          "weather",
+          "calendar",
+          "battery",
+          "macos",
+          "dashboard",
+          "desktop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<WeatherWidget city temperature condition high low hourly daily size />, <CalendarWidget date=\"2026-10-01\" events size />, <BatteryWidget devices size />. Width is set with className; height follows the size (small square, medium 2:1, large near-square). <Widget> is the bare frame.",
+          "whenToUse": [
+            "Dashboards that want glanceable cards",
+            "Desktop and Today-view mockups"
+          ],
+          "whenNotToUse": [
+            "Interactive charts (chart)",
+            "Live data fetching: pass data in"
+          ],
+          "composesWith": [
+            "desktop-icons",
+            "phone-frame",
+            "control-center"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Each widget is a named section with a one-sentence summary; decorative icons are hidden"
+            },
+            {
+              "keys": "Color",
+              "action": "Charge level and conditions are also given in words"
+            }
+          ],
+          "customization": [
+            "size: small | medium | large",
+            "className width, e.g. w-48",
+            "WeatherWidget: condition clear | partly-cloudy | cloudy | rain | snow | storm | night",
+            "BatteryWidget devices with charging"
+          ]
+        },
+        "examples": [
+          "widgets-demo",
+          "widgets-sizes"
+        ],
+        "url": "https://ui.ballmac.com/components/widgets"
+      }
+    },
+    {
+      "name": "widgets-demo",
+      "type": "registry:example",
+      "title": "Widgets: Weather, calendar and battery",
+      "description": "Weather, calendar and battery example of Widgets.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/widgets.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/widgets-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/widgets-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "widgets",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "widgets-sizes",
+      "type": "registry:example",
+      "title": "Widgets: All three sizes",
+      "description": "All three sizes example of Widgets.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/widgets.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/widgets-sizes.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/widgets-sizes.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "widgets",
         "tier": "free"
       }
     },
