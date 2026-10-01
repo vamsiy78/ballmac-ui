@@ -4841,6 +4841,127 @@
       }
     },
     {
+      "name": "blur-fade",
+      "type": "registry:ui",
+      "title": "Blur Fade",
+      "description": "A wrapper that fades content in while it unblurs and slides a few pixels, once it scrolls into view, with a group that staggers its children.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blur-fade.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/blur-fade.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "fade",
+          "blur",
+          "reveal",
+          "scroll",
+          "stagger"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Wrap anything in <BlurFade delay direction offset blur inView once>. <BlurFadeGroup stagger> wraps each child and staggers them. Shows content instantly under reduced motion.",
+          "whenToUse": [
+            "Hero and section intros",
+            "Lists and cards that should arrive in sequence"
+          ],
+          "whenNotToUse": [
+            "Text that should animate letter by letter (text-animate)",
+            "Content that must be visible without JavaScript before hydration"
+          ],
+          "composesWith": [
+            "text-animate",
+            "bento-grid",
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "Reduced motion",
+              "action": "Content appears at once with no blur or travel"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Content is in the DOM from the start; only opacity, blur and position change"
+            }
+          ],
+          "customization": [
+            "direction: up | down | left | right | none",
+            "offset and blur amounts",
+            "inView, once, delay, duration",
+            "BlurFadeGroup stagger and item settings"
+          ]
+        },
+        "examples": [
+          "blur-fade-demo",
+          "blur-fade-directions"
+        ],
+        "url": "https://ui.ballmac.com/components/blur-fade"
+      }
+    },
+    {
+      "name": "blur-fade-demo",
+      "type": "registry:example",
+      "title": "Blur Fade: Staggered page intro",
+      "description": "Staggered page intro example of Blur Fade.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/blur-fade.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/blur-fade-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/blur-fade-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "blur-fade",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "blur-fade-directions",
+      "type": "registry:example",
+      "title": "Blur Fade: Directions and blur",
+      "description": "Directions and blur example of Blur Fade.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/blur-fade.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/blur-fade-directions.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/blur-fade-directions.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "blur-fade",
+        "tier": "free"
+      }
+    },
+    {
       "name": "border-beam",
       "type": "registry:ui",
       "title": "Border Beam",
@@ -11713,6 +11834,131 @@
       }
     },
     {
+      "name": "highlighter",
+      "type": "registry:ui",
+      "title": "Highlighter",
+      "description": "Hand-drawn marks around inline text: highlight, underline, box, circle, strike-through and brackets, drawn in when the phrase scrolls into view.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/highlighter.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/highlighter.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "highlight",
+          "underline",
+          "annotation",
+          "marker",
+          "text"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<Highlighter action='highlight|underline|box|circle|strike|bracket' tone padding duration delay>phrase</Highlighter>. Short phrases only: the mark is drawn around one box.",
+          "whenToUse": [
+            "Drawing attention to a key phrase in copy",
+            "Editorial and tutorial text"
+          ],
+          "whenNotToUse": [
+            "Multi-line passages",
+            "Search-result highlighting (use a plain mark element)"
+          ],
+          "composesWith": [
+            "text-animate",
+            "callout"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "The mark is decorative (aria-hidden); the text is unchanged"
+            },
+            {
+              "keys": "Contrast",
+              "action": "Text keeps the foreground color on a translucent highlight"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Marks are drawn instantly"
+            }
+          ],
+          "customization": [
+            "action",
+            "tone",
+            "strokeWidth and padding",
+            "duration and delay",
+            "inView"
+          ]
+        },
+        "examples": [
+          "highlighter-demo",
+          "highlighter-actions"
+        ],
+        "url": "https://ui.ballmac.com/components/highlighter"
+      }
+    },
+    {
+      "name": "highlighter-demo",
+      "type": "registry:example",
+      "title": "Highlighter: Marks in a paragraph",
+      "description": "Marks in a paragraph example of Highlighter.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/highlighter.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/highlighter-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/highlighter-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "highlighter",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "highlighter-actions",
+      "type": "registry:example",
+      "title": "Highlighter: All six marks",
+      "description": "All six marks example of Highlighter.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/highlighter.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/highlighter-actions.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/highlighter-actions.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "highlighter",
+        "tier": "free"
+      }
+    },
+    {
       "name": "hover-card",
       "type": "registry:ui",
       "title": "Hover Card",
@@ -11828,6 +12074,130 @@
       "meta": {
         "example": true,
         "of": "hover-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hyper-text",
+      "type": "registry:ui",
+      "title": "Hyper Text",
+      "description": "Characters flip through random letters like a split-flap board and settle left to right, as plain text or on tiles, on load, on scroll or on hover and focus.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/hyper-text.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/hyper-text.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "text",
+          "flip",
+          "split-flap",
+          "hover",
+          "headline"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<HyperText trigger='mount|inView|hover' variant='plain|tiles' speed spread>TEXT</HyperText>. Text is uppercased. The hover trigger is focusable and replays on focus.",
+          "whenToUse": [
+            "Brand words, status boards, dates and counters",
+            "Playful hover headings"
+          ],
+          "whenNotToUse": [
+            "Anything that must stay readable mid-animation",
+            "Long sentences"
+          ],
+          "composesWith": [
+            "scramble-text",
+            "number-ticker"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Reaches the text when trigger is hover; focus replays the animation"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The real text is read once; the flipping characters are hidden"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Characters appear settled"
+            }
+          ],
+          "customization": [
+            "variant",
+            "trigger",
+            "speed and spread",
+            "onComplete"
+          ]
+        },
+        "examples": [
+          "hyper-text-demo",
+          "hyper-text-hover"
+        ],
+        "url": "https://ui.ballmac.com/components/hyper-text"
+      }
+    },
+    {
+      "name": "hyper-text-demo",
+      "type": "registry:example",
+      "title": "Hyper Text: Split-flap tiles",
+      "description": "Split-flap tiles example of Hyper Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hyper-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hyper-text-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hyper-text-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hyper-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hyper-text-hover",
+      "type": "registry:example",
+      "title": "Hyper Text: Replay on hover",
+      "description": "Replay on hover example of Hyper Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hyper-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hyper-text-hover.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hyper-text-hover.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hyper-text",
         "tier": "free"
       }
     },
@@ -14814,6 +15184,126 @@
       }
     },
     {
+      "name": "morphing-text",
+      "type": "registry:ui",
+      "title": "Morphing Text",
+      "description": "Words melt into each other with a blur and threshold effect, cycling through a list, pausing when off screen, with a box that never jumps in width.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/morphing-text.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/morphing-text.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "text",
+          "morph",
+          "gooey",
+          "transition",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<MorphingText texts={['Build','Ship','Scale']} hold morph className='text-6xl' />. The size comes from className. Uses an SVG threshold filter; the loop stops when off screen or when reduced motion is on.",
+          "whenToUse": [
+            "A hero word that changes between a few options",
+            "Brand or product-name reveals"
+          ],
+          "whenNotToUse": [
+            "Small body text (the effect needs large type)",
+            "Many words per frame"
+          ],
+          "composesWith": [
+            "word-rotate",
+            "hyper-text",
+            "text-animate"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "All texts are read once as a list; the morph is hidden"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The first text is shown still"
+            }
+          ],
+          "customization": [
+            "texts",
+            "hold and morph in milliseconds",
+            "font size and weight via className"
+          ]
+        },
+        "examples": [
+          "morphing-text-demo",
+          "morphing-text-inline"
+        ],
+        "url": "https://ui.ballmac.com/components/morphing-text"
+      }
+    },
+    {
+      "name": "morphing-text-demo",
+      "type": "registry:example",
+      "title": "Morphing Text: Big word cycle",
+      "description": "Big word cycle example of Morphing Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/morphing-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/morphing-text-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/morphing-text-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "morphing-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "morphing-text-inline",
+      "type": "registry:example",
+      "title": "Morphing Text: Inline in a sentence",
+      "description": "Inline in a sentence example of Morphing Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/morphing-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/morphing-text-inline.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/morphing-text-inline.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "morphing-text",
+        "tier": "free"
+      }
+    },
+    {
       "name": "multi-select",
       "type": "registry:ui",
       "title": "Multi Select",
@@ -17312,6 +17802,132 @@
       }
     },
     {
+      "name": "pulse-button",
+      "type": "registry:ui",
+      "title": "Pulse Button",
+      "description": "A call-to-action button that sends soft rings outward to ask for attention, calming as soon as it is hovered or focused, and switchable off once the person acts.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/pulse-button.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/pulse-button.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "button",
+          "pulse",
+          "attention",
+          "cta",
+          "notification"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<PulseButton tone rings duration active>Label</PulseButton>. Rings stop on hover and focus, and when active is false or the button is disabled.",
+          "whenToUse": [
+            "Onboarding steps and 'try it now' prompts",
+            "Live or record buttons"
+          ],
+          "whenNotToUse": [
+            "More than one per view",
+            "Anything permanent: attention fades if it never stops"
+          ],
+          "composesWith": [
+            "button",
+            "shiny-button",
+            "status-dot"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Activates like any button"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Rings are aria-hidden"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "A still faint ring replaces the pulse"
+            }
+          ],
+          "customization": [
+            "tone",
+            "rings",
+            "duration",
+            "active"
+          ]
+        },
+        "examples": [
+          "pulse-button-demo",
+          "pulse-button-tones"
+        ],
+        "url": "https://ui.ballmac.com/components/pulse-button"
+      }
+    },
+    {
+      "name": "pulse-button-demo",
+      "type": "registry:example",
+      "title": "Pulse Button: Attention ring",
+      "description": "Attention ring example of Pulse Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pulse-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pulse-button-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pulse-button-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pulse-button",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pulse-button-tones",
+      "type": "registry:example",
+      "title": "Pulse Button: Tones and states",
+      "description": "Tones and states example of Pulse Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pulse-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pulse-button-tones.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pulse-button-tones.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pulse-button",
+        "tier": "free"
+      }
+    },
+    {
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
@@ -17430,6 +18046,132 @@
       "meta": {
         "example": true,
         "of": "radio-group",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "rainbow-button",
+      "type": "registry:ui",
+      "title": "Rainbow Button",
+      "description": "A button with a border of theme colors circling it and a glow on hover, built on the Ballmac button so every size, variant and focus state still works.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/rainbow-button.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/rainbow-button.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "button",
+          "gradient",
+          "border",
+          "glow",
+          "cta"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Use like <Button>: <RainbowButton size variant shape duration glow>Label</RainbowButton>. Best with default, secondary or outline variants (the inside needs a background).",
+          "whenToUse": [
+            "The single most important call to action on a page",
+            "Upgrade and launch prompts"
+          ],
+          "whenNotToUse": [
+            "Several buttons on one screen",
+            "Ghost buttons (no background to sit on the border)"
+          ],
+          "composesWith": [
+            "button",
+            "shiny-button",
+            "pulse-button"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Activates like any button"
+            },
+            {
+              "keys": "Focus",
+              "action": "The standard focus ring and the glow both appear on keyboard focus"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The border is a still gradient"
+            }
+          ],
+          "customization": [
+            "duration",
+            "glow",
+            "shape: default | pill",
+            "all Button props"
+          ]
+        },
+        "examples": [
+          "rainbow-button-demo",
+          "rainbow-button-sizes"
+        ],
+        "url": "https://ui.ballmac.com/components/rainbow-button"
+      }
+    },
+    {
+      "name": "rainbow-button-demo",
+      "type": "registry:example",
+      "title": "Rainbow Button: Primary call to action",
+      "description": "Primary call to action example of Rainbow Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/rainbow-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/rainbow-button-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/rainbow-button-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "rainbow-button",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "rainbow-button-sizes",
+      "type": "registry:example",
+      "title": "Rainbow Button: Sizes and pill",
+      "description": "Sizes and pill example of Rainbow Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/rainbow-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/rainbow-button-sizes.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/rainbow-button-sizes.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "rainbow-button",
         "tier": "free"
       }
     },
@@ -17783,6 +18525,125 @@
       "meta": {
         "example": true,
         "of": "resizable",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ripple",
+      "type": "registry:ui",
+      "title": "Ripple",
+      "description": "Concentric rings that breathe outward as a background, plus a press ripple that spreads from the pointer (or the center for keyboard) on any surface.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/ripple.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/ripple.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ripple",
+          "rings",
+          "background",
+          "click",
+          "material"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<Ripple circles size gap duration /> fills its positioned parent. <ClickRipple centered duration> wraps a surface and ripples on pointer down, and from the center on Enter or Space when the wrapper itself has focus.",
+          "whenToUse": [
+            "A calm focal point behind a central call to action",
+            "Touch feedback on custom cards and tiles"
+          ],
+          "whenNotToUse": [
+            "Standard buttons (the Ballmac button already has press feedback)"
+          ],
+          "composesWith": [
+            "card",
+            "button",
+            "orbiting-circles"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "All rings and ripples are aria-hidden and pointer-events-none"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Rings are still and press ripples are skipped"
+            }
+          ],
+          "customization": [
+            "circles, size, gap",
+            "duration",
+            "ClickRipple centered"
+          ]
+        },
+        "examples": [
+          "ripple-demo",
+          "ripple-click"
+        ],
+        "url": "https://ui.ballmac.com/components/ripple"
+      }
+    },
+    {
+      "name": "ripple-demo",
+      "type": "registry:example",
+      "title": "Ripple: Ring background behind a hero",
+      "description": "Ring background behind a hero example of Ripple.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ripple.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ripple-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ripple-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ripple",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ripple-click",
+      "type": "registry:example",
+      "title": "Ripple: Press ripple on cards",
+      "description": "Press ripple on cards example of Ripple.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ripple.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ripple-click.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ripple-click.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ripple",
         "tier": "free"
       }
     },
@@ -19109,6 +19970,127 @@
       }
     },
     {
+      "name": "shiny-button",
+      "type": "registry:ui",
+      "title": "Shiny Button",
+      "description": "A button with a diagonal band of light that sweeps across on hover and focus, or on a timer to draw the eye, built on the Ballmac button.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/shiny-button.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/shiny-button.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "button",
+          "shine",
+          "hover",
+          "cta",
+          "motion"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<ShinyButton shine='hover|loop' interval>Label</ShinyButton>. Accepts every Button prop. No shine under reduced motion.",
+          "whenToUse": [
+            "Primary calls to action that deserve a little life",
+            "Pricing and signup buttons"
+          ],
+          "whenNotToUse": [
+            "Dense toolbars",
+            "Destructive actions"
+          ],
+          "composesWith": [
+            "button",
+            "rainbow-button",
+            "magnetic-button"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Activates like any button"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "No shine is drawn"
+            }
+          ],
+          "customization": [
+            "shine",
+            "interval",
+            "all Button props"
+          ]
+        },
+        "examples": [
+          "shiny-button-demo",
+          "shiny-button-variants"
+        ],
+        "url": "https://ui.ballmac.com/components/shiny-button"
+      }
+    },
+    {
+      "name": "shiny-button-demo",
+      "type": "registry:example",
+      "title": "Shiny Button: Hover and loop",
+      "description": "Hover and loop example of Shiny Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/shiny-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/shiny-button-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/shiny-button-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "shiny-button",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "shiny-button-variants",
+      "type": "registry:example",
+      "title": "Shiny Button: On every variant",
+      "description": "On every variant example of Shiny Button.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/shiny-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/shiny-button-variants.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/shiny-button-variants.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "shiny-button",
+        "tier": "free"
+      }
+    },
+    {
       "name": "shortcut-hint",
       "type": "registry:ui",
       "title": "Shortcut Hint",
@@ -20079,6 +21061,126 @@
       }
     },
     {
+      "name": "sparkles-text",
+      "type": "registry:ui",
+      "title": "Sparkles Text",
+      "description": "Text with four-point stars that twinkle around it in theme colors, re-rolling position each time, with an optional gradient fill.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/sparkles-text.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/sparkles-text.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "text",
+          "sparkle",
+          "stars",
+          "twinkle",
+          "marketing"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<SparklesText count gradient>Text</SparklesText>. Sparkles are decorative and positioned after mount, so the server markup stays identical.",
+          "whenToUse": [
+            "One standout word in a marketing headline",
+            "Celebratory states such as a new plan or achievement"
+          ],
+          "whenNotToUse": [
+            "Dense UI",
+            "More than one or two per screen"
+          ],
+          "composesWith": [
+            "gradient-text",
+            "confetti",
+            "shimmer-text"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Sparkles are aria-hidden and pointer-events-none; the text is untouched"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "No sparkles are drawn"
+            }
+          ],
+          "customization": [
+            "count",
+            "gradient",
+            "className for size and weight"
+          ]
+        },
+        "examples": [
+          "sparkles-text-demo",
+          "sparkles-text-gradient"
+        ],
+        "url": "https://ui.ballmac.com/components/sparkles-text"
+      }
+    },
+    {
+      "name": "sparkles-text-demo",
+      "type": "registry:example",
+      "title": "Sparkles Text: Headline with sparkles",
+      "description": "Headline with sparkles example of Sparkles Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sparkles-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sparkles-text-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sparkles-text-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sparkles-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sparkles-text-gradient",
+      "type": "registry:example",
+      "title": "Sparkles Text: Gradient fill",
+      "description": "Gradient fill example of Sparkles Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sparkles-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sparkles-text-gradient.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sparkles-text-gradient.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sparkles-text",
+        "tier": "free"
+      }
+    },
+    {
       "name": "sparkline",
       "type": "registry:ui",
       "title": "Sparkline",
@@ -20292,6 +21394,128 @@
       "meta": {
         "example": true,
         "of": "spinner",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "spinning-text",
+      "type": "registry:ui",
+      "title": "Spinning Text",
+      "description": "Text laid out on a circle that turns slowly, with a center slot for a logo or arrow, pausing on hover.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/spinning-text.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/spinning-text.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "text",
+          "circle",
+          "rotate",
+          "badge",
+          "marketing"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<SpinningText text duration reverse pauseOnHover className='size-40'>{center}</SpinningText>. The string is fitted to the circle, so shorter text spreads wider.",
+          "whenToUse": [
+            "Scroll-down or 'new' badges",
+            "Decorative seals and stamps"
+          ],
+          "whenNotToUse": [
+            "Information people need to read (rotating text is hard to read)"
+          ],
+          "composesWith": [
+            "orbiting-circles",
+            "gradient-text"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "The ring is an image named by the text; the center slot is read normally"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The ring stays still"
+            }
+          ],
+          "customization": [
+            "text and separator",
+            "duration",
+            "reverse",
+            "size via className"
+          ]
+        },
+        "examples": [
+          "spinning-text-demo",
+          "spinning-text-sizes"
+        ],
+        "url": "https://ui.ballmac.com/components/spinning-text"
+      }
+    },
+    {
+      "name": "spinning-text-demo",
+      "type": "registry:example",
+      "title": "Spinning Text: Badge with arrow",
+      "description": "Badge with arrow example of Spinning Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/spinning-text.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/spinning-text-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/spinning-text-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "spinning-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "spinning-text-sizes",
+      "type": "registry:example",
+      "title": "Spinning Text: Sizes and direction",
+      "description": "Sizes and direction example of Spinning Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/spinning-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/spinning-text-sizes.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/spinning-text-sizes.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "spinning-text",
         "tier": "free"
       }
     },
@@ -22561,6 +23785,128 @@
       }
     },
     {
+      "name": "text-animate",
+      "type": "registry:ui",
+      "title": "Text Animate",
+      "description": "Reveals text by character, word or line with eight entrances (fade, blur, slide, scale, rotate), staggered and triggered on scroll, with the full text kept for screen readers.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/text-animate.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/text-animate.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "text",
+          "animation",
+          "reveal",
+          "stagger",
+          "headline"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<TextAnimate by='word|character|line' animation='blurIn|fadeIn|slideUp|slideDown|slideLeft|slideRight|scaleUp|rotateIn'>Text</TextAnimate>. Newlines make lines. as picks the element.",
+          "whenToUse": [
+            "Headlines and short statements that should make an entrance",
+            "Section titles revealed on scroll"
+          ],
+          "whenNotToUse": [
+            "Paragraphs of body text",
+            "Text that changes often (use word-rotate or typing-text)"
+          ],
+          "composesWith": [
+            "blur-fade",
+            "gradient-text",
+            "text-reveal"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "The full text is in a hidden element; animated pieces are aria-hidden"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Text is shown immediately"
+            }
+          ],
+          "customization": [
+            "by",
+            "animation",
+            "stagger and duration",
+            "inView and once",
+            "as"
+          ]
+        },
+        "examples": [
+          "text-animate-demo",
+          "text-animate-characters"
+        ],
+        "url": "https://ui.ballmac.com/components/text-animate"
+      }
+    },
+    {
+      "name": "text-animate-demo",
+      "type": "registry:example",
+      "title": "Text Animate: Headline by word",
+      "description": "Headline by word example of Text Animate.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/text-animate.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/text-animate-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/text-animate-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "text-animate",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "text-animate-characters",
+      "type": "registry:example",
+      "title": "Text Animate: By character, five entrances",
+      "description": "By character, five entrances example of Text Animate.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/text-animate.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/text-animate-characters.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/text-animate-characters.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "text-animate",
+        "tier": "free"
+      }
+    },
+    {
       "name": "text-reveal",
       "type": "registry:ui",
       "title": "Text Reveal",
@@ -24238,6 +25584,128 @@
       "meta": {
         "example": true,
         "of": "tree-view",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "typing-text",
+      "type": "registry:ui",
+      "title": "Typing Text",
+      "description": "A typewriter that types and erases one or several strings with natural timing and a blinking caret, starting on scroll if you like, with the whole text available to screen readers.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/typing-text.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/typing-text.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "typewriter",
+          "typing",
+          "text",
+          "caret",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<TypingText text={['one','two']} typingSpeed deleteSpeed pause loop cursor startOnView onComplete />. A single string types once unless loop is set.",
+          "whenToUse": [
+            "Hero lines that cycle through use cases",
+            "Terminal-style intros"
+          ],
+          "whenNotToUse": [
+            "Streaming AI output (streaming-text)",
+            "Long copy"
+          ],
+          "composesWith": [
+            "word-rotate",
+            "terminal",
+            "text-animate"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "All strings are available as hidden text; the typing itself is aria-hidden"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The first string (or the last, when not looping) is shown whole with no caret blink"
+            }
+          ],
+          "customization": [
+            "typingSpeed, deleteSpeed, pause",
+            "loop",
+            "cursor",
+            "startOnView",
+            "onComplete"
+          ]
+        },
+        "examples": [
+          "typing-text-demo",
+          "typing-text-once"
+        ],
+        "url": "https://ui.ballmac.com/components/typing-text"
+      }
+    },
+    {
+      "name": "typing-text-demo",
+      "type": "registry:example",
+      "title": "Typing Text: Cycling headline",
+      "description": "Cycling headline example of Typing Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/typing-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/typing-text-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/typing-text-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "typing-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "typing-text-once",
+      "type": "registry:example",
+      "title": "Typing Text: Type once with a caret",
+      "description": "Type once with a caret example of Typing Text.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/typing-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/typing-text-once.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/typing-text-once.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "typing-text",
         "tier": "free"
       }
     },
