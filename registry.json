@@ -3757,6 +3757,761 @@
       }
     },
     {
+      "name": "blog-1",
+      "type": "registry:block",
+      "title": "Blog 1: featured post with filterable grid",
+      "description": "A blog index with a large featured post, topic filter chips and a three-column grid. Posts without a photo get a generated cover drawn from theme tokens, in five compositions.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/blog-1/blog-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/blog-1/blog-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "blog"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "blog",
+          "posts",
+          "articles",
+          "index",
+          "filter",
+          "cards"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "The index page of a blog. Pass posts=[{ title, excerpt, category, date, readMinutes, author, role?, href, image?, cover? }]; the first post is featured. Also exports BlogCover for your own cards.",
+          "whenToUse": [
+            "Company and product blogs",
+            "Resource and news pages"
+          ],
+          "whenNotToUse": [
+            "A single article (use blog-post-1)",
+            "Hundreds of posts that need pagination and search"
+          ],
+          "composesWith": [
+            "blog-post-1",
+            "newsletter-1",
+            "header-2",
+            "footer-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space on a topic chip",
+              "action": "Filters the list (aria-pressed); the count is announced politely"
+            },
+            {
+              "keys": "Tab",
+              "action": "Each card has one link; the whole card is clickable"
+            }
+          ],
+          "customization": [
+            "posts: image for a photo, or cover (0 to 4) to choose a generated cover",
+            "filterable: false hides the chips",
+            "locale for dates (UTC, fixed by default)"
+          ]
+        },
+        "examples": [
+          "blog-1-demo",
+          "blog-1-compact"
+        ],
+        "url": "https://ui.ballmac.com/components/blog-1"
+      }
+    },
+    {
+      "name": "blog-1-demo",
+      "type": "registry:example",
+      "title": "Blog 1: featured post with filterable grid: Default",
+      "description": "Default example of Blog 1: featured post with filterable grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/blog-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/blog-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/blog-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "blog-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "blog-1-compact",
+      "type": "registry:example",
+      "title": "Blog 1: featured post with filterable grid: Three posts",
+      "description": "Three posts example of Blog 1: featured post with filterable grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/blog-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/blog-1-compact.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/blog-1-compact.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "blog-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "blog-post-1",
+      "type": "registry:block",
+      "title": "Blog Post 1: article with contents and progress",
+      "description": "A long-form article page: centered title and author row, cover, comfortable prose with pull quote and code, sticky table of contents with scroll spy, reading progress bar, author card and related posts.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/blog-1.json",
+        "https://ui.ballmac.com/r/breadcrumb.json",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/scroll-progress.json",
+        "https://ui.ballmac.com/r/table-of-contents.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/blog-post-1/blog-post-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/blog-post-1/blog-post-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "blog"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "blog",
+          "article",
+          "post",
+          "prose",
+          "table of contents",
+          "reading progress"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "An article template. Pass title, subtitle, author, date and readMinutes, give the body as children (plain h2, h3, p, ul, blockquote and pre are styled), and list the headings in toc.",
+          "whenToUse": [
+            "Blog posts, guides and announcements",
+            "Any long reading page"
+          ],
+          "whenNotToUse": [
+            "Documentation with a left sidebar (use your docs layout)"
+          ],
+          "composesWith": [
+            "blog-1",
+            "newsletter-1",
+            "header-2",
+            "footer-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Reaches the breadcrumb, the copy button, links in the body, then the contents list"
+            },
+            {
+              "keys": "Enter on a contents link",
+              "action": "Scrolls to that heading; the current section is marked with aria-current"
+            }
+          ],
+          "customization": [
+            "children: your article, with ids on h2 and h3 headings",
+            "toc: { id, title, level }[] matching those ids",
+            "stickyOffset: pixels to keep clear of a fixed header",
+            "related: [] hides the Keep reading section"
+          ]
+        },
+        "examples": [
+          "blog-post-1-demo",
+          "blog-post-1-short"
+        ],
+        "url": "https://ui.ballmac.com/components/blog-post-1"
+      }
+    },
+    {
+      "name": "blog-post-1-demo",
+      "type": "registry:example",
+      "title": "Blog Post 1: article with contents and progress: Default",
+      "description": "Default example of Blog Post 1: article with contents and progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/blog-post-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/blog-post-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/blog-post-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "blog-post-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "blog-post-1-short",
+      "type": "registry:example",
+      "title": "Blog Post 1: article with contents and progress: Your own content",
+      "description": "Your own content example of Blog Post 1: article with contents and progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/blog-post-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/blog-post-1-short.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/blog-post-1-short.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "blog-post-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "careers-1",
+      "type": "registry:block",
+      "title": "Careers 1: open roles with filters and perks",
+      "description": "Open roles grouped by team with team filter chips, live search and an empty state, then a hairline grid of perks. Every role row is one large link with location and type.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/search-field.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/careers-1/careers-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/careers-1/careers-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "careers"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "careers",
+          "jobs",
+          "hiring",
+          "roles",
+          "filter",
+          "perks"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A jobs section. Pass jobs=[{ title, team, location, type?, href }] and optionally perks=[{ icon?, title, description }]; teams and filters are derived from the jobs.",
+          "whenToUse": [
+            "Company careers pages",
+            "Open source projects looking for maintainers"
+          ],
+          "whenNotToUse": [
+            "A full applicant tracking system"
+          ],
+          "composesWith": [
+            "team-1",
+            "contact-1",
+            "header-2",
+            "footer-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space on a team chip",
+              "action": "Filters the roles (aria-pressed); the count is announced politely"
+            },
+            {
+              "keys": "Tab",
+              "action": "Each role is a single link with its location and type in the name"
+            }
+          ],
+          "customization": [
+            "jobs / perks arrays",
+            "perks: [] hides the grid",
+            "openApplication: null hides the link"
+          ]
+        },
+        "examples": [
+          "careers-1-demo",
+          "careers-1-small"
+        ],
+        "url": "https://ui.ballmac.com/components/careers-1"
+      }
+    },
+    {
+      "name": "careers-1-demo",
+      "type": "registry:example",
+      "title": "Careers 1: open roles with filters and perks: Default",
+      "description": "Default example of Careers 1: open roles with filters and perks.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/careers-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/careers-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/careers-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "careers-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "careers-1-small",
+      "type": "registry:example",
+      "title": "Careers 1: open roles with filters and perks: A few roles",
+      "description": "A few roles example of Careers 1: open roles with filters and perks.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/careers-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/careers-1-small.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/careers-1-small.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "careers-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "changelog-1",
+      "type": "registry:block",
+      "title": "Changelog 1: release notes timeline",
+      "description": "A release-notes page: a sticky version and date beside each release card, optional banner art for headline releases, typed changes with filters and counts, and a show-older button.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/blog-1.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/changelog-1/changelog-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/changelog-1/changelog-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "changelog"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "changelog",
+          "release notes",
+          "updates",
+          "versions",
+          "timeline",
+          "filter"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A public changelog page. Pass releases=[{ version, date, title, summary?, changes: { type: 'new' | 'improved' | 'fixed', text }[], cover? }] newest first.",
+          "whenToUse": [
+            "Product release notes",
+            "Open-source project updates"
+          ],
+          "whenNotToUse": [
+            "A compact in-app feed (use changelog-feed)"
+          ],
+          "composesWith": [
+            "newsletter-1",
+            "header-2",
+            "footer-2",
+            "hero-6"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space on a filter",
+              "action": "Filters the changes (aria-pressed); the release count is announced politely"
+            },
+            {
+              "keys": "Tab",
+              "action": "Each change type is also spelled out in text, not only colour"
+            }
+          ],
+          "customization": [
+            "releases: cover (0 to 4) adds banner art to a headline release",
+            "initialCount: releases shown before the button",
+            "feed: null hides the RSS button"
+          ]
+        },
+        "examples": [
+          "changelog-1-demo",
+          "changelog-1-minimal"
+        ],
+        "url": "https://ui.ballmac.com/components/changelog-1"
+      }
+    },
+    {
+      "name": "changelog-1-demo",
+      "type": "registry:example",
+      "title": "Changelog 1: release notes timeline: Default",
+      "description": "Default example of Changelog 1: release notes timeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/changelog-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/changelog-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/changelog-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "changelog-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "changelog-1-minimal",
+      "type": "registry:example",
+      "title": "Changelog 1: release notes timeline: Minimal",
+      "description": "Minimal example of Changelog 1: release notes timeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/changelog-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/changelog-1-minimal.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/changelog-1-minimal.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "changelog-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "comparison-1",
+      "type": "registry:block",
+      "title": "Comparison 1: us versus the alternatives",
+      "description": "A product-versus-alternatives table where your column is lifted into its own card, with yes, partly, no and text values and a row of headline results. Phones switch between alternatives.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/comparison-1/comparison-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/comparison-1/comparison-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "comparison"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "comparison",
+          "versus",
+          "alternatives",
+          "table",
+          "switch",
+          "features"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A switch-from-X page section. Pass product, competitors=[{ key, name }] and rows=[{ label, hint?, values: { us, [key]: true | false | 'partial' | text } }].",
+          "whenToUse": [
+            "Landing pages aimed at people evaluating alternatives",
+            "Migration and 'vs' pages"
+          ],
+          "whenNotToUse": [
+            "Comparing your own plans (use pricing-3)"
+          ],
+          "composesWith": [
+            "pricing-2",
+            "testimonials-2",
+            "cta-1",
+            "faq-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right (phones)",
+              "action": "Switches the alternative shown"
+            },
+            {
+              "keys": "Screen reader",
+              "action": "Each cell reads as 'Name, capability: yes / partly / no'"
+            }
+          ],
+          "customization": [
+            "values use the key 'us' for your product",
+            "reasons: [] hides the headline results"
+          ]
+        },
+        "examples": [
+          "comparison-1-demo",
+          "comparison-1-single"
+        ],
+        "url": "https://ui.ballmac.com/components/comparison-1"
+      }
+    },
+    {
+      "name": "comparison-1-demo",
+      "type": "registry:example",
+      "title": "Comparison 1: us versus the alternatives: Default",
+      "description": "Default example of Comparison 1: us versus the alternatives.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/comparison-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/comparison-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/comparison-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "comparison-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "comparison-1-single",
+      "type": "registry:example",
+      "title": "Comparison 1: us versus the alternatives: One alternative",
+      "description": "One alternative example of Comparison 1: us versus the alternatives.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/comparison-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/comparison-1-single.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/comparison-1-single.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "comparison-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "contact-1",
+      "type": "registry:block",
+      "title": "Contact 1: form with contact methods",
+      "description": "A contact section with a validated form (name, email, topic, message with counter, consent), loading, error and thank-you states, beside tiles for email, chat, phone and office with a response-time pill.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/field.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/status-dot.json",
+        "https://ui.ballmac.com/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/contact-1/contact-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/contact-1/contact-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "contact"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "contact",
+          "form",
+          "support",
+          "validation",
+          "email",
+          "sales"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Contact page section. Pass methods, topics and onSubmit(values) (throw to show an error). Validation, focus on the first error, loading and the thank-you screen are built in.",
+          "whenToUse": [
+            "Contact and support pages",
+            "Sales enquiry sections"
+          ],
+          "whenNotToUse": [
+            "Newsletter signup (use newsletter-1)",
+            "Authenticated in-app feedback (use feedback-widget)"
+          ],
+          "composesWith": [
+            "faq-2",
+            "header-2",
+            "footer-2",
+            "careers-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Submit with errors",
+              "action": "Focus moves to the first invalid field; each error is announced as an alert and linked with aria-describedby"
+            },
+            {
+              "keys": "Arrow keys / Enter in the topic menu",
+              "action": "Choose a topic (Radix Select)"
+            }
+          ],
+          "customization": [
+            "methods: { icon?, label, value, href? }[]",
+            "topics: [] hides the dropdown",
+            "responseTime: null hides the pill",
+            "onSubmit(values): async; throw to show the error state"
+          ]
+        },
+        "examples": [
+          "contact-1-demo",
+          "contact-1-support"
+        ],
+        "url": "https://ui.ballmac.com/components/contact-1"
+      }
+    },
+    {
+      "name": "contact-1-demo",
+      "type": "registry:example",
+      "title": "Contact 1: form with contact methods: Default",
+      "description": "Default example of Contact 1: form with contact methods.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/contact-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/contact-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/contact-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "contact-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "contact-1-support",
+      "type": "registry:example",
+      "title": "Contact 1: form with contact methods: Support form",
+      "description": "Support form example of Contact 1: form with contact methods.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/contact-1.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/contact-1-support.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/contact-1-support.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "contact-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "cta-1",
       "type": "registry:block",
       "title": "CTA 1: framed call to action",
@@ -4045,6 +4800,133 @@
       "meta": {
         "example": true,
         "of": "cta-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "error-1",
+      "type": "registry:block",
+      "title": "Error 1: friendly 404, 403 and 500 page",
+      "description": "An error page with giant fading numerals whose zero is a ring with an orbiting moon, plain-language copy per status, home and back buttons, site search and helpful links.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/search-field.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/error-1/error-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/error-1/error-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "error"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "error",
+          "404",
+          "not found",
+          "500",
+          "403",
+          "page"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Drop into not-found.tsx or error.tsx. Set status ('404' | '403' | '500'); override title and description if you like; pass onSearch to wire the search box, links for next steps and reference for a request id.",
+          "whenToUse": [
+            "Next.js not-found.tsx and error.tsx",
+            "Any missing, forbidden or failed page"
+          ],
+          "whenNotToUse": [
+            "Inline errors inside a form or panel (use alert or empty-state)"
+          ],
+          "composesWith": [
+            "header-2",
+            "footer-2",
+            "contact-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Page title",
+              "action": "The heading is prefixed with 'Error 404:' for screen readers; the giant numerals are decorative"
+            },
+            {
+              "keys": "Enter in the search field",
+              "action": "Calls onSearch with the query"
+            }
+          ],
+          "customization": [
+            "status picks the numerals and default copy",
+            "links: [] hides the cards, search: false hides the field",
+            "The orbiting moon stops for reduced motion"
+          ]
+        },
+        "examples": [
+          "error-1-demo",
+          "error-1-server"
+        ],
+        "url": "https://ui.ballmac.com/components/error-1"
+      }
+    },
+    {
+      "name": "error-1-demo",
+      "type": "registry:example",
+      "title": "Error 1: friendly 404, 403 and 500 page: 404",
+      "description": "404 example of Error 1: friendly 404, 403 and 500 page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/error-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/error-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/error-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "error-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "error-1-server",
+      "type": "registry:example",
+      "title": "Error 1: friendly 404, 403 and 500 page: 500 with reference",
+      "description": "500 with reference example of Error 1: friendly 404, 403 and 500 page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/error-1.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/error-1-server.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/error-1-server.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "error-1",
         "tier": "free"
       }
     },
@@ -6151,6 +7033,131 @@
       "meta": {
         "example": true,
         "of": "logo-cloud-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "newsletter-1",
+      "type": "registry:block",
+      "title": "Newsletter 1: signup with topics and sample issue",
+      "description": "An editorial newsletter signup: topic chips, an email field with validation, loading, error and success states, avatar social proof, and a tilted sample issue card beside it.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/newsletter-1/newsletter-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/newsletter-1/newsletter-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "newsletter"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "newsletter",
+          "signup",
+          "email",
+          "subscribe",
+          "topics",
+          "form"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A newsletter signup section. Pass topics (or [] for none), proof, issue headlines for the preview card, and onSubmit(email, topics); throw to show an error.",
+          "whenToUse": [
+            "Blogs, changelogs and docs sites",
+            "Anywhere readers choose what to receive"
+          ],
+          "whenNotToUse": [
+            "A waitlist over a dramatic background (use cta-2)"
+          ],
+          "composesWith": [
+            "blog-1",
+            "changelog-1",
+            "footer-2",
+            "faq-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space on a topic",
+              "action": "Toggles it (aria-pressed)"
+            },
+            {
+              "keys": "Submit with a bad address",
+              "action": "The error is announced as an alert and linked with aria-describedby"
+            }
+          ],
+          "customization": [
+            "topics: [] hides the chips",
+            "defaultTopics",
+            "issue: { name, number, headlines } for the preview card",
+            "onSubmit(email, topics)"
+          ]
+        },
+        "examples": [
+          "newsletter-1-demo",
+          "newsletter-1-simple"
+        ],
+        "url": "https://ui.ballmac.com/components/newsletter-1"
+      }
+    },
+    {
+      "name": "newsletter-1-demo",
+      "type": "registry:example",
+      "title": "Newsletter 1: signup with topics and sample issue: Default",
+      "description": "Default example of Newsletter 1: signup with topics and sample issue.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/newsletter-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/newsletter-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/newsletter-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "newsletter-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "newsletter-1-simple",
+      "type": "registry:example",
+      "title": "Newsletter 1: signup with topics and sample issue: Email only",
+      "description": "Email only example of Newsletter 1: signup with topics and sample issue.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/newsletter-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/newsletter-1-simple.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/newsletter-1-simple.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "newsletter-1",
         "tier": "free"
       }
     },

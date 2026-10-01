@@ -278,6 +278,28 @@ const cases: Record<string, Step> = {
   "team-1-small": async () => {},
   "footer-2-demo": async () => {},
   "footer-2-long": async () => {},
+  // Blocks, batch B
+  "blog-1-demo": async (p) => { await p.getByRole("button", { name: "Engineering" }).click() },
+  "blog-1-compact": async () => {},
+  "blog-post-1-demo": async (p) => { await p.evaluate(() => window.scrollTo(0, document.body.scrollHeight / 2)); await p.waitForTimeout(600) },
+  "blog-post-1-short": async () => {},
+  "changelog-1-demo": async (p) => { await p.getByRole("button", { name: /older releases/ }).click(); await p.getByRole("button", { name: /^Fixed/ }).click() },
+  "changelog-1-minimal": async () => {},
+  "contact-1-demo": async (p) => { await p.getByRole("button", { name: /Send message/ }).click(); await p.waitForTimeout(300) },
+  "contact-1-support": async (p) => {
+    await p.getByRole("textbox", { name: /Name/ }).fill("Jordan Lee"); await p.getByRole("textbox", { name: /Email/ }).fill("jordan@acme.com")
+    await p.getByRole("textbox", { name: /Message/ }).fill("The export button does nothing for me."); await p.getByRole("checkbox").click()
+    await p.getByRole("combobox").click(); await p.getByRole("option", { name: "Bug report" }).click()
+    await p.getByRole("button", { name: /Send message/ }).click(); await p.getByText("Message sent").waitFor()
+  },
+  "careers-1-demo": async (p) => { await p.getByRole("searchbox", { name: "Search roles" }).fill("zzz"); await p.waitForTimeout(300) },
+  "careers-1-small": async () => {},
+  "comparison-1-demo": async (p) => { const r = p.getByRole("radio", { name: "Legacy suite" }); if (await r.isVisible()) await r.click() },
+  "comparison-1-single": async () => {},
+  "newsletter-1-demo": async (p) => { await p.getByLabel("Email address").fill("nope"); await p.getByRole("button", { name: /Subscribe/ }).click() },
+  "newsletter-1-simple": async (p) => { await p.getByLabel("Email address").fill("me@acme.com"); await p.getByRole("button", { name: /Sign me up/ }).click(); await p.getByText("You’re subscribed.").waitFor() },
+  "error-1-demo": async (p) => { await p.getByRole("searchbox", { name: "Search the site" }).focus() },
+  "error-1-server": async () => {},
 }
 const filter = process.argv.slice(2)
 const browser = await chromium.launch({ headless: true, executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE })
