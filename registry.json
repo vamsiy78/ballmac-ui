@@ -10203,6 +10203,134 @@
       }
     },
     {
+      "name": "dotted-map",
+      "type": "registry:ui",
+      "title": "Dotted Map",
+      "description": "A world map built from dots, with pulsing markers, optional labels and animated routes between places, as one lightweight SVG with a text summary for screen readers.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/dotted-map.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/dotted-map.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "map",
+          "world",
+          "dots",
+          "markers",
+          "locations"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<DottedMap markers={[{ lat, lng, label, tone }]} arcs={[{ from:[lat,lng], to:[lat,lng] }]} dots latRange tone labels />. The land mask is built in; nothing is fetched. Higher dots gives finer coastlines.",
+          "whenToUse": [
+            "Where-we-operate and customer-location sections",
+            "Network and traffic visualizations"
+          ],
+          "whenNotToUse": [
+            "Interactive geographic data or zooming (use a map library)",
+            "A 3D globe (globe)"
+          ],
+          "composesWith": [
+            "globe",
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "The map is an image whose name lists every labelled place"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Routes are drawn solid and markers do not pulse"
+            }
+          ],
+          "customization": [
+            "dots",
+            "latRange",
+            "tone",
+            "labels",
+            "markers and arcs"
+          ]
+        },
+        "source": {
+          "name": "cobe",
+          "url": "https://github.com/shuding/cobe",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2021 Shu Ding",
+          "modified": true
+        },
+        "examples": [
+          "dotted-map-demo",
+          "dotted-map-regions"
+        ],
+        "url": "https://ui.ballmac.com/components/dotted-map"
+      }
+    },
+    {
+      "name": "dotted-map-demo",
+      "type": "registry:example",
+      "title": "Dotted Map: Offices with routes",
+      "description": "Offices with routes example of Dotted Map.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dotted-map.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dotted-map-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dotted-map-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dotted-map",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dotted-map-regions",
+      "type": "registry:example",
+      "title": "Dotted Map: Dense map with labels",
+      "description": "Dense map with labels example of Dotted Map.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dotted-map.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dotted-map-regions.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dotted-map-regions.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dotted-map",
+        "tier": "free"
+      }
+    },
+    {
       "name": "drawer",
       "type": "registry:ui",
       "title": "Drawer",
@@ -12456,6 +12584,129 @@
       }
     },
     {
+      "name": "grid-pattern",
+      "type": "registry:ui",
+      "title": "Grid Pattern",
+      "description": "A crisp square-grid background in the border color with optional dashed lines, filled cells, softly lighting random cells and an edge fade, drawn as one SVG pattern.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/grid-pattern.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/grid-pattern.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "grid",
+          "pattern",
+          "svg",
+          "background",
+          "lines"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<GridPattern cell strokeDasharray squares={[[col,row]]} flicker={n} fade='radial|top|bottom|none' /> in a relative parent. Random cells are picked after mount so server and browser agree.",
+          "whenToUse": [
+            "Section and hero backgrounds that need structure",
+            "Behind cards and empty states"
+          ],
+          "whenNotToUse": [
+            "Dots (dot-pattern)",
+            "A pointer-reactive grid (interactive-grid)"
+          ],
+          "composesWith": [
+            "dot-pattern",
+            "interactive-grid",
+            "animated-grid"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Decorative: aria-hidden"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "No random cells light up"
+            }
+          ],
+          "customization": [
+            "cell",
+            "x and y offset",
+            "strokeDasharray",
+            "squares",
+            "flicker",
+            "fade"
+          ]
+        },
+        "examples": [
+          "grid-pattern-demo",
+          "grid-pattern-variants"
+        ],
+        "url": "https://ui.ballmac.com/components/grid-pattern"
+      }
+    },
+    {
+      "name": "grid-pattern-demo",
+      "type": "registry:example",
+      "title": "Grid Pattern: Faded grid with highlighted cells",
+      "description": "Faded grid with highlighted cells example of Grid Pattern.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/grid-pattern.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/grid-pattern-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/grid-pattern-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "grid-pattern",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "grid-pattern-variants",
+      "type": "registry:example",
+      "title": "Grid Pattern: Dashed and flickering",
+      "description": "Dashed and flickering example of Grid Pattern.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/grid-pattern.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/grid-pattern-variants.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/grid-pattern-variants.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "grid-pattern",
+        "tier": "free"
+      }
+    },
+    {
       "name": "highlighter",
       "type": "registry:ui",
       "title": "Highlighter",
@@ -12820,6 +13071,131 @@
       "meta": {
         "example": true,
         "of": "hyper-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "icon-cloud",
+      "type": "registry:ui",
+      "title": "Icon Cloud",
+      "description": "Icons, logos or labels orbiting on a 3D sphere, spun by dragging, calming under the pointer and when anything has focus, with real list markup so every item stays reachable.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/icon-cloud.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/icon-cloud.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "sphere",
+          "3d",
+          "logos",
+          "cloud",
+          "tech stack"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<IconCloud size speed label>{items}</IconCloud>. Each child becomes a list item. Positions come from a Fibonacci sphere and update straight on the DOM. Links inside stay clickable because dragging only starts after a few pixels of movement.",
+          "whenToUse": [
+            "Showing a technology or partner ecosystem",
+            "A playful, interactive hero centerpiece"
+          ],
+          "whenNotToUse": [
+            "Anything people must read quickly",
+            "Long lists (use a grid)"
+          ],
+          "composesWith": [
+            "orbiting-circles",
+            "globe",
+            "marquee"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Items remain focusable in document order; rotation stops while one has focus"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "A named list; position changes are visual only"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "A still sphere"
+            }
+          ],
+          "customization": [
+            "size",
+            "speed",
+            "label",
+            "children as icons, links or text"
+          ]
+        },
+        "examples": [
+          "icon-cloud-demo",
+          "icon-cloud-links"
+        ],
+        "url": "https://ui.ballmac.com/components/icon-cloud"
+      }
+    },
+    {
+      "name": "icon-cloud-demo",
+      "type": "registry:example",
+      "title": "Icon Cloud: Tech stack sphere",
+      "description": "Tech stack sphere example of Icon Cloud.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/icon-cloud.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/icon-cloud-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/icon-cloud-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "icon-cloud",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "icon-cloud-links",
+      "type": "registry:example",
+      "title": "Icon Cloud: Linked labels",
+      "description": "Linked labels example of Icon Cloud.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/icon-cloud.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/icon-cloud-links.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/icon-cloud-links.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "icon-cloud",
         "tier": "free"
       }
     },
@@ -13583,6 +13959,126 @@
       "meta": {
         "example": true,
         "of": "install-tabs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "interactive-grid",
+      "type": "registry:ui",
+      "title": "Interactive Grid",
+      "description": "A canvas grid whose cells light up under the pointer and fade out behind it, leaving a glowing trail, drawn only while something is moving and listening on its parent so content above never blocks it.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/color.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/interactive-grid.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/interactive-grid.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "grid",
+          "canvas",
+          "hover",
+          "trail",
+          "background"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<InteractiveGrid cell color lineColor radius decay fade /> inside a relative parent. Colors are CSS variable names. It listens to the parent, repaints on theme changes and stops its frame loop when idle.",
+          "whenToUse": [
+            "Heroes and empty states that should respond to the mouse",
+            "Playful 404 pages"
+          ],
+          "whenNotToUse": [
+            "Touch-only audiences (there is no hover)",
+            "Large amounts of text over the grid"
+          ],
+          "composesWith": [
+            "grid-pattern",
+            "flickering-grid",
+            "particles"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Decorative: aria-hidden and pointer-events-none"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "A still grid; nothing lights up"
+            }
+          ],
+          "customization": [
+            "cell",
+            "color and lineColor",
+            "radius",
+            "decay",
+            "fade"
+          ]
+        },
+        "examples": [
+          "interactive-grid-demo",
+          "interactive-grid-colors"
+        ],
+        "url": "https://ui.ballmac.com/components/interactive-grid"
+      }
+    },
+    {
+      "name": "interactive-grid-demo",
+      "type": "registry:example",
+      "title": "Interactive Grid: Hero that reacts to the pointer",
+      "description": "Hero that reacts to the pointer example of Interactive Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/interactive-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/interactive-grid-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/interactive-grid-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "interactive-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "interactive-grid-colors",
+      "type": "registry:example",
+      "title": "Interactive Grid: Colors and cell size",
+      "description": "Colors and cell size example of Interactive Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/interactive-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/interactive-grid-colors.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/interactive-grid-colors.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "interactive-grid",
         "tier": "free"
       }
     },
@@ -14717,6 +15213,127 @@
       "meta": {
         "example": true,
         "of": "lens",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "light-rays",
+      "type": "registry:ui",
+      "title": "Light Rays",
+      "description": "Soft beams of theme-colored light fanning down from the top edge, each swaying and breathing at its own pace, deterministic so the server and browser match.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/light-rays.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/light-rays.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "light",
+          "rays",
+          "glow",
+          "background",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<LightRays count tone spread intensity duration /> inside a relative, overflow-hidden parent. Tone is a theme token, so it follows any palette.",
+          "whenToUse": [
+            "Hero and pricing sections that want warmth",
+            "Behind modals and announcement bars"
+          ],
+          "whenNotToUse": [
+            "Light backgrounds with dark text at high intensity"
+          ],
+          "composesWith": [
+            "aurora-background",
+            "retro-grid",
+            "beams-background"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Decorative: aria-hidden and pointer-events-none"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The rays are still"
+            }
+          ],
+          "customization": [
+            "count",
+            "tone",
+            "spread",
+            "intensity",
+            "duration"
+          ]
+        },
+        "examples": [
+          "light-rays-demo",
+          "light-rays-tones"
+        ],
+        "url": "https://ui.ballmac.com/components/light-rays"
+      }
+    },
+    {
+      "name": "light-rays-demo",
+      "type": "registry:example",
+      "title": "Light Rays: Hero spotlight",
+      "description": "Hero spotlight example of Light Rays.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/light-rays.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/light-rays-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/light-rays-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "light-rays",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "light-rays-tones",
+      "type": "registry:example",
+      "title": "Light Rays: Tones and count",
+      "description": "Tones and count example of Light Rays.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/light-rays.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/light-rays-tones.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/light-rays-tones.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "light-rays",
         "tier": "free"
       }
     },
@@ -16808,6 +17425,127 @@
       }
     },
     {
+      "name": "noise-texture",
+      "type": "registry:ui",
+      "title": "Noise Texture",
+      "description": "A film-grain layer made from an SVG turbulence filter, with strength, fineness, blend mode and an optional shimmer, to take the plastic edge off gradients, cards and photos.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/noise-texture.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/noise-texture.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "noise",
+          "grain",
+          "texture",
+          "overlay",
+          "gradient"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<NoiseTexture opacity frequency tile blend animated /> absolutely fills its relative parent. No image file is needed; the grain is an inline SVG data URI.",
+          "whenToUse": [
+            "Gradient heroes and cards that band or look flat",
+            "Giving imagery a printed feel"
+          ],
+          "whenNotToUse": [
+            "Text-heavy surfaces at high opacity"
+          ],
+          "composesWith": [
+            "aurora-background",
+            "gradient-text",
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Decorative: aria-hidden and pointer-events-none"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The grain never shimmers"
+            }
+          ],
+          "customization": [
+            "opacity",
+            "frequency",
+            "tile",
+            "blend",
+            "animated"
+          ]
+        },
+        "examples": [
+          "noise-texture-demo",
+          "noise-texture-blends"
+        ],
+        "url": "https://ui.ballmac.com/components/noise-texture"
+      }
+    },
+    {
+      "name": "noise-texture-demo",
+      "type": "registry:example",
+      "title": "Noise Texture: Gradient with grain",
+      "description": "Gradient with grain example of Noise Texture.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/noise-texture.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/noise-texture-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/noise-texture-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "noise-texture",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "noise-texture-blends",
+      "type": "registry:example",
+      "title": "Noise Texture: Blend modes",
+      "description": "Blend modes example of Noise Texture.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/noise-texture.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/noise-texture-blends.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/noise-texture-blends.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "noise-texture",
+        "tier": "free"
+      }
+    },
+    {
       "name": "notification-center",
       "type": "registry:ui",
       "title": "Notification Center",
@@ -18786,6 +19524,122 @@
       }
     },
     {
+      "name": "progressive-blur",
+      "type": "registry:ui",
+      "title": "Progressive Blur",
+      "description": "A blur that ramps up toward an edge instead of switching on at a line, made of stacked backdrop-filter layers, for scrolling lists, headers, footers and image captions.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/progressive-blur.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/progressive-blur.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "blur",
+          "gradient",
+          "edge",
+          "scroll",
+          "backdrop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<ProgressiveBlur position='top|bottom|left|right' size strength layers /> inside a relative parent that scrolls or holds an image. Pointer events pass through it. A server component with no JavaScript.",
+          "whenToUse": [
+            "Scrolling lists that fade out at the edges",
+            "Text over images, instead of a dark gradient"
+          ],
+          "whenNotToUse": [
+            "Browsers or surfaces without backdrop-filter support (it degrades to no blur)"
+          ],
+          "composesWith": [
+            "scroll-area",
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Decorative: aria-hidden and pointer-events-none"
+            },
+            {
+              "keys": "Interaction",
+              "action": "Never blocks clicks or scrolling"
+            }
+          ],
+          "customization": [
+            "position",
+            "size",
+            "strength",
+            "layers"
+          ]
+        },
+        "examples": [
+          "progressive-blur-demo",
+          "progressive-blur-sides"
+        ],
+        "url": "https://ui.ballmac.com/components/progressive-blur"
+      }
+    },
+    {
+      "name": "progressive-blur-demo",
+      "type": "registry:example",
+      "title": "Progressive Blur: Scrolling list with both edges",
+      "description": "Scrolling list with both edges example of Progressive Blur.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/progressive-blur.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/progressive-blur-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/progressive-blur-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "progressive-blur",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "progressive-blur-sides",
+      "type": "registry:example",
+      "title": "Progressive Blur: Four edges",
+      "description": "Four edges example of Progressive Blur.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/progressive-blur.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/progressive-blur-sides.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/progressive-blur-sides.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "progressive-blur",
+        "tier": "free"
+      }
+    },
+    {
       "name": "prompt-input",
       "type": "registry:ui",
       "title": "Prompt Input",
@@ -19643,6 +20497,128 @@
       }
     },
     {
+      "name": "retro-grid",
+      "type": "registry:ui",
+      "title": "Retro Grid",
+      "description": "A perspective floor of grid lines gliding toward you under a glowing horizon, tinted with any theme color, tilt and cell size adjustable, still under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/retro-grid.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/retro-grid.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "grid",
+          "perspective",
+          "synthwave",
+          "background",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Place <RetroGrid angle cellSize tone speed glow /> inside a relative, overflow-hidden parent and put content above it. It fades into the page background at the horizon.",
+          "whenToUse": [
+            "Landing page heroes with a technical or retro mood",
+            "Under a centered headline and call to action"
+          ],
+          "whenNotToUse": [
+            "Dense UI behind small text",
+            "Pages with many competing backgrounds"
+          ],
+          "composesWith": [
+            "grid-pattern",
+            "light-rays",
+            "aurora-background"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Decorative: aria-hidden and pointer-events-none"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The floor is still"
+            }
+          ],
+          "customization": [
+            "angle",
+            "cellSize",
+            "tone",
+            "speed",
+            "glow"
+          ]
+        },
+        "examples": [
+          "retro-grid-demo",
+          "retro-grid-tones"
+        ],
+        "url": "https://ui.ballmac.com/components/retro-grid"
+      }
+    },
+    {
+      "name": "retro-grid-demo",
+      "type": "registry:example",
+      "title": "Retro Grid: Hero with horizon glow",
+      "description": "Hero with horizon glow example of Retro Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/retro-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/retro-grid-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/retro-grid-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "retro-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "retro-grid-tones",
+      "type": "registry:example",
+      "title": "Retro Grid: Tones and tilt",
+      "description": "Tones and tilt example of Retro Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/retro-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/retro-grid-tones.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/retro-grid-tones.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "retro-grid",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ripple",
       "type": "registry:ui",
       "title": "Ripple",
@@ -20113,6 +21089,126 @@
       "meta": {
         "example": true,
         "of": "scroll-progress",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "scroll-velocity",
+      "type": "registry:ui",
+      "title": "Scroll Velocity",
+      "description": "A looping row of text or logos that drifts sideways and speeds up, or reverses, with how fast you scroll the page or any scroll container, repeating itself to fill the width.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/scroll-velocity.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/scroll-velocity.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "marquee",
+          "scroll",
+          "velocity",
+          "text",
+          "ticker"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<ScrollVelocity baseVelocity direction sensitivity scrollContainer gap>content</ScrollVelocity>. Stack rows with opposite directions. Repeats are aria-hidden and inert; reduced motion shows one scrollable row.",
+          "whenToUse": [
+            "Big typographic dividers between sections",
+            "Logo and keyword strips that react to scrolling"
+          ],
+          "whenNotToUse": [
+            "A steady marquee that ignores scroll (marquee)"
+          ],
+          "composesWith": [
+            "marquee",
+            "text-animate"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Only the first copy is read; repeats are hidden and not focusable"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "A static, horizontally scrollable row"
+            }
+          ],
+          "customization": [
+            "baseVelocity",
+            "direction",
+            "sensitivity",
+            "scrollContainer",
+            "gap"
+          ]
+        },
+        "examples": [
+          "scroll-velocity-demo",
+          "scroll-velocity-logos"
+        ],
+        "url": "https://ui.ballmac.com/components/scroll-velocity"
+      }
+    },
+    {
+      "name": "scroll-velocity-demo",
+      "type": "registry:example",
+      "title": "Scroll Velocity: Two rows in a scroller",
+      "description": "Two rows in a scroller example of Scroll Velocity.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/scroll-velocity.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/scroll-velocity-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/scroll-velocity-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "scroll-velocity",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "scroll-velocity-logos",
+      "type": "registry:example",
+      "title": "Scroll Velocity: Logo row",
+      "description": "Logo row example of Scroll Velocity.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/scroll-velocity.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/scroll-velocity-logos.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/scroll-velocity-logos.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "scroll-velocity",
         "tier": "free"
       }
     },
@@ -21912,6 +23008,131 @@
       "meta": {
         "example": true,
         "of": "slider",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "smooth-cursor",
+      "type": "registry:ui",
+      "title": "Smooth Cursor",
+      "description": "A custom cursor for one area that glides after the pointer on a spring, leans into the direction of travel, shrinks on press and grows a label over elements marked with data-cursor-label.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/smooth-cursor.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/smooth-cursor.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "cursor",
+          "pointer",
+          "spring",
+          "hover",
+          "label"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<SmoothCursor cursor hideNative stiffness>area</SmoothCursor>. It only covers its own area, ignores touch, leaves text fields on the normal cursor and sets no global styles. data-cursor-label='View' on any child adds a label.",
+          "whenToUse": [
+            "Portfolios and galleries",
+            "Product tours with hover storytelling"
+          ],
+          "whenNotToUse": [
+            "Form-heavy or data-dense screens",
+            "Touch-first products"
+          ],
+          "composesWith": [
+            "magnetic-button",
+            "tilt-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Keyboard",
+              "action": "Unaffected: focus rings and tab order do not change"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The cursor is aria-hidden"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The cursor follows the pointer with no spring or lean"
+            }
+          ],
+          "customization": [
+            "cursor",
+            "hideNative",
+            "stiffness",
+            "data-cursor-label",
+            "data-cursor='native'"
+          ]
+        },
+        "examples": [
+          "smooth-cursor-demo",
+          "smooth-cursor-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/smooth-cursor"
+      }
+    },
+    {
+      "name": "smooth-cursor-demo",
+      "type": "registry:example",
+      "title": "Smooth Cursor: Gallery with labels",
+      "description": "Gallery with labels example of Smooth Cursor.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/smooth-cursor.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/smooth-cursor-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/smooth-cursor-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "smooth-cursor",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "smooth-cursor-custom",
+      "type": "registry:example",
+      "title": "Smooth Cursor: Custom cursor graphic",
+      "description": "Custom cursor graphic example of Smooth Cursor.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/smooth-cursor.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/smooth-cursor-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/smooth-cursor-custom.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "smooth-cursor",
         "tier": "free"
       }
     },
@@ -27592,6 +28813,130 @@
       "meta": {
         "example": true,
         "of": "voice-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "warp-background",
+      "type": "registry:ui",
+      "title": "Warp Background",
+      "description": "A hyperspace tunnel of streaks flying out from the center on a canvas, in theme colors with a soft vignette for readable content, parallax toward the pointer, pausing off screen.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/color.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/warp-background.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/warp-background.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "warp",
+          "hyperspace",
+          "canvas",
+          "background",
+          "hero"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<WarpBackground density speed colors vignette parallax>content</WarpBackground>. colors takes CSS variable names. The content sits on its own layer above the canvas.",
+          "whenToUse": [
+            "Launch and waitlist pages",
+            "A dramatic backdrop for one centered message"
+          ],
+          "whenNotToUse": [
+            "Content-heavy pages",
+            "Anything that must be calm all the time"
+          ],
+          "composesWith": [
+            "particles",
+            "retro-grid",
+            "light-rays"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "The canvas is aria-hidden; children are read normally"
+            },
+            {
+              "keys": "Contrast",
+              "action": "The vignette darkens the center behind text"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "A single still frame of streaks"
+            }
+          ],
+          "customization": [
+            "density",
+            "speed",
+            "colors",
+            "vignette",
+            "parallax"
+          ]
+        },
+        "examples": [
+          "warp-background-demo",
+          "warp-background-cards"
+        ],
+        "url": "https://ui.ballmac.com/components/warp-background"
+      }
+    },
+    {
+      "name": "warp-background-demo",
+      "type": "registry:example",
+      "title": "Warp Background: Hero in the tunnel",
+      "description": "Hero in the tunnel example of Warp Background.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/warp-background.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/warp-background-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/warp-background-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "warp-background",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "warp-background-cards",
+      "type": "registry:example",
+      "title": "Warp Background: Calm, dense variant",
+      "description": "Calm, dense variant example of Warp Background.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/warp-background.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/warp-background-cards.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/warp-background-cards.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "warp-background",
         "tier": "free"
       }
     },

@@ -20,6 +20,7 @@ Ballmac UI (MIT) includes code adapted from the projects below. Their notices ar
 - **Context Menu** (`context-menu`) is based on [shadcn/ui Context Menu](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Data Table** (`data-table`) is based on [shadcn/ui Data Table](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Dialog** (`dialog`) is based on [shadcn/ui Dialog](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
+- **Dotted Map** (`dotted-map`) is based on [cobe](https://github.com/shuding/cobe), MIT, Copyright (c) 2021 Shu Ding.
 - **Drawer** (`drawer`) is based on [shadcn/ui Drawer](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Dropdown Menu** (`dropdown-menu`) is based on [shadcn/ui Dropdown Menu](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Empty** (`empty`) is based on [shadcn/ui Empty](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
