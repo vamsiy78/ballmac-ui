@@ -38,7 +38,7 @@ export default async function Home() {
       Preview: await loadExample(c.example),
     }))
   )
-  const templateCards = await Promise.all(templates.map(async (t) => ({ ...t, Preview: t.examples[0] ? await loadExample(t.examples[0].name) : null })))
+  const templateCards = await Promise.all([...templates].sort((a, b) => Number(b.featured) - Number(a.featured)).slice(0, 2).reverse().map(async (t) => ({ ...t, Preview: t.examples[0] ? await loadExample(t.examples[0].name) : null })))
   const blockCategoryLinks = blockGroups.map((g) => ({
     id: g.id,
     label: g.label,
@@ -237,7 +237,7 @@ export default async function Home() {
               Set up MCP <ArrowUpRight />
             </Link>
           </div>
-          <div className="overflow-x-auto">
+          <div tabIndex={0} role="region" aria-label="How agents use Ballmac" className="overflow-x-auto focus-visible:ring-ring/50 outline-none focus-visible:ring-[3px]">
             <div className="min-w-[520px]">
               <AgentDiagram />
             </div>

@@ -24,6 +24,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
   const item = getItem((await params).slug)
   if (!item || item.category !== "templates") notFound()
   const example = item.examples[0]
+  const pages = item.templatePages.length > 0 ? item.templatePages : example ? [{ title: item.title, example: example.name, path: undefined }] : []
   const uses = item.registryDependencies.filter((d) => !d.startsWith("shadcn:")).map(getItem).filter((i) => !!i)
   return (
     <div className="mx-auto max-w-[1440px] space-y-10 px-4 py-12 sm:px-6">
@@ -39,7 +40,8 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
       </header>
       {example && (
         <FramePreview
-          src={`/preview/${example.name}`}
+          src={`/preview/${pages[0]?.example ?? example.name}`}
+          pages={pages.map((p) => ({ title: p.title, src: `/preview/${p.example}` }))}
           name={item.name}
           example={example.name}
           title={`${item.title} preview`}
@@ -58,6 +60,30 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
           <SectionHeading id="installation">Installation</SectionHeading>
           <ItemInstall item={item} />
           <p className="text-muted-foreground text-sm">The page is added as a route in your app, with every block it uses.</p>
+        </section>
+        <section className="space-y-4">
+          <SectionHeading id="inside">What&apos;s inside</SectionHeading>
+          <dl className="grid gap-x-8 gap-y-4 text-sm sm:grid-cols-[8rem_1fr]">
+            <dt className="text-muted-foreground">Pages</dt>
+            <dd>
+              <ul className="flex flex-wrap gap-2">
+                {pages.map((p) => (
+                  <li key={p.example} className="bg-muted rounded-md px-2.5 py-1 text-[13px]">
+                    {p.title}
+                    {p.path && <span className="text-muted-foreground ml-1.5 font-mono text-[11px]">{p.path}</span>}
+                  </li>
+                ))}
+              </ul>
+            </dd>
+            {item.fonts.length > 0 && (
+              <>
+                <dt className="text-muted-foreground">Fonts</dt>
+                <dd>{item.fonts.join(", ")} (Google Fonts, loaded with next/font)</dd>
+              </>
+            )}
+            <dt className="text-muted-foreground">Files</dt>
+            <dd>{item.files.length} file{item.files.length === 1 ? "" : "s"} · {uses.length} Ballmac block{uses.length === 1 ? "" : "s"} and component{uses.length === 1 ? "" : "s"}</dd>
+          </dl>
         </section>
         {uses.length > 0 && (
           <section className="space-y-4">

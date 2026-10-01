@@ -29,6 +29,8 @@ export const categories = [
   "foundation",
 ] as const
 
+export const templateKinds = ["marketing", "application", "content", "specialty"] as const
+
 export const blockCategories = [
   "hero",
   "features",
@@ -119,6 +121,12 @@ export const itemMeta = z
     description: z.string().min(20).max(240),
     category: z.enum(categories),
     blockCategory: z.enum(blockCategories).optional(),
+    /** Templates only: the group a template belongs to in the gallery. */
+    templateKind: z.enum(templateKinds).optional(),
+    /** Templates only: every page the template installs, each previewed by one of its examples. */
+    templatePages: z.array(z.object({ title: z.string(), example: z.string(), path: z.string().optional() })).default([]),
+    /** Templates only: Google Fonts the template loads, e.g. "Instrument Serif". */
+    fonts: z.array(z.string()).default([]),
     tier: z.enum(["free", "pro"]).default("free"),
     /** Showpiece items lead the catalog and home page. */
     featured: z.boolean().default(false),
@@ -158,6 +166,9 @@ export const itemMeta = z
   .superRefine((item, ctx) => {
     if (item.category === "blocks" && !item.blockCategory) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: "blocks need a blockCategory", path: ["blockCategory"] })
+    }
+    if (item.category === "templates" && !item.templateKind) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "templates need a templateKind", path: ["templateKind"] })
     }
     if (item.type !== "registry:theme" && item.type !== "registry:style" && item.type !== "registry:font" && item.files.length === 0) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: "items must ship at least one file", path: ["files"] })

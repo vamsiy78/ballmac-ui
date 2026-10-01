@@ -7,6 +7,8 @@ export default defineItem({
   description:
     "A complete product launch page: sticky header, split hero, bento features, two-tier pricing, FAQ, closing call to action and footer, installed as a route.",
   category: "templates",
+  templateKind: "marketing",
+  templatePages: [{ title: "Home", example: "template-launch-demo", path: "/launch" }],
   tags: ["template", "landing page", "launch", "saas", "marketing"],
   files: [{ path: "components/templates/launch/launch-page.tsx" }, { path: "app/launch/page.tsx" }],
   registryDependencies: ["cta-1", "faq-1", "features-1", "footer-1", "header-1", "hero-1", "pricing-1"],

@@ -7,6 +7,8 @@ export default defineItem({
   description:
     "A complete landing page for a Mac app: header, hero with an opening laptop, logo cloud, Mac feature bento, testimonials, one-time pricing, FAQ, beta signup and footer.",
   category: "templates",
+  templateKind: "marketing",
+  templatePages: [{ title: "Home", example: "template-mac-app-demo", path: "/mac-app" }],
   featured: true,
   tags: ["template", "landing page", "mac app", "desktop", "download"],
   files: [{ path: "components/templates/mac-app/mac-app-page.tsx" }, { path: "app/mac-app/page.tsx" }],

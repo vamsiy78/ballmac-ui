@@ -202,3 +202,11 @@ export const categoryLabels: Record<string, string> = {
 /** Every block category in page order (group by group). */
 export const blockOrder: string[] = blockGroups.flatMap((g) => [...g.categories])
 export const byBlockOrder = (a: string, b: string) => (blockOrder.indexOf(a) + 1 || 99) - (blockOrder.indexOf(b) + 1 || 99)
+
+/** Gallery groups for templates, in page order. */
+export const templateGroups = [
+  { id: "marketing", label: "Product marketing", description: "Landing sites with their own look: AI, developer, Mac app and B2B products." },
+  { id: "application", label: "Applications", description: "Working apps you install as routes: admin, chat, workspace and sign-in flows." },
+  { id: "content", label: "Content and personal", description: "Portfolios, agencies, publications and podcasts." },
+  { id: "specialty", label: "Specialty", description: "Documentation, events, stores and mobile app sites." },
+] as const

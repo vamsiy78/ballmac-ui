@@ -29,7 +29,7 @@ export function InstallTabs({ commands, className }: { commands: Record<PM, stri
         </div>
         <CopyButton value={command} label="Copy command" />
       </div>
-      <pre className="overflow-x-auto px-4 py-3.5 font-mono text-[13px] leading-6">
+      <pre tabIndex={0} className="overflow-x-auto px-4 py-3.5 font-mono text-[13px] leading-6">
         <code>
           <span className="text-muted-foreground select-none">$ </span>
           {command}

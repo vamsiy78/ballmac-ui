@@ -144,6 +144,8 @@ Wave 10 is split in two batches. **Batch A done (2026-10-01):** mac-icons (share
 
 That is about 180 new items, reaching roughly 240. Blocks (pricing-2, signup-1, dashboard-1, settings-1, billing-1, header mega-menu) and templates (saas, ai-app, dashboard, devtool) follow once Wave 1–3 components exist.
 
+**Templates expansion (started 2026-10-01).** Plan: 16 new multi-page templates with their own art direction (A product marketing: Orbit, Relay, Ledger, Northwind; B applications: Atlas Admin, Muse, Workspace, Auth Kit; C content: Portfolio, Studio, Publication, Podcast; D specialty: Docs, Summit, Goods, Pocket), plus a refresh of template-launch and template-mac-app. **Site changes done:** metadata fields `templateKind`, `templatePages` (one example per page) and `fonts`; gallery grouped by kind (`templateGroups` in `apps/www/lib/registry.ts`); detail page with page tabs, light/dark toggle for the preview, "What's inside"; install snippet made keyboard-scrollable. Next: batch A templates.
+
 ## 7. Lessons already paid for (avoid these)
 
 - **No `asChild` in JSX.** The shadcn CLI rewrites it for Base UI projects and breaks Radix files. `pnpm check` fails on it.

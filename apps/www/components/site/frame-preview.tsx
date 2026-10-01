@@ -1,6 +1,6 @@
 "use client"
 
-import { ExternalLink, Monitor, RotateCcw, Smartphone, Tablet, Terminal } from "lucide-react"
+import { ExternalLink, Monitor, Moon, RotateCcw, Smartphone, Sun, Tablet, Terminal } from "lucide-react"
 import * as React from "react"
 
 import { CopyButton } from "@/components/site/copy-button"
@@ -25,6 +25,7 @@ export function FramePreview({
   height = 720,
   name,
   example,
+  pages,
 }: {
   src: string
   title: string
@@ -34,14 +35,47 @@ export function FramePreview({
   name?: string
   /** Example name, for Open in v0. */
   example?: string
+  /** Extra pages of a multi-page template. When given, a page switcher replaces `src`. */
+  pages?: { title: string; src: string }[]
 }) {
   const [tab, setTab] = React.useState<"preview" | "code">("preview")
   const [viewport, setViewport] = React.useState<(typeof viewports)[number]["id"]>("desktop")
   const [run, setRun] = React.useState(0)
+  const [pageIndex, setPageIndex] = React.useState(0)
+  const [theme, setTheme] = React.useState<"site" | "light" | "dark">("site")
+  const frame = React.useRef<HTMLIFrameElement>(null)
+  const current = pages?.[pageIndex]?.src ?? src
+  const applyTheme = React.useCallback((t: "site" | "light" | "dark") => {
+    if (t === "site") return
+    try {
+      frame.current?.contentDocument?.documentElement.classList.toggle("dark", t === "dark")
+    } catch {}
+  }, [])
   const width = viewports.find((v) => v.id === viewport)!.width
   const command = name ? `npx shadcn@latest add @ballmac/${name}` : ""
   return (
     <div className="space-y-3">
+      {pages && pages.length > 1 && (
+        <div role="tablist" aria-label="Pages" className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none]">
+          {pages.map((p, i) => (
+            <button
+              key={p.src}
+              role="tab"
+              aria-selected={pageIndex === i}
+              onClick={() => {
+                setTab("preview")
+                setPageIndex(i)
+              }}
+              className={cn(
+                "focus-visible:ring-ring/50 h-8 shrink-0 rounded-full border px-3 text-[13px] font-medium outline-none transition-colors focus-visible:ring-[3px]",
+                pageIndex === i ? "bg-foreground text-background border-foreground" : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              )}
+            >
+              {p.title}
+            </button>
+          ))}
+        </div>
+      )}
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div role="tablist" aria-label="View" className="bg-muted flex gap-0.5 rounded-lg p-0.5">
           {(["preview", "code"] as const).map((t) => (
@@ -78,10 +112,24 @@ export function FramePreview({
               </button>
             ))}
             <span className="bg-border mx-0.5 h-4 w-px" aria-hidden="true" />
+            <button
+              type="button"
+              aria-pressed={theme === "dark"}
+              aria-label="Preview in dark mode"
+              title={theme === "dark" ? "Preview in light mode" : "Preview in dark mode"}
+              onClick={() => {
+                const next = theme === "dark" ? "light" : "dark"
+                setTheme(next)
+                applyTheme(next)
+              }}
+              className={cn(iconButton, theme === "dark" && "bg-accent text-foreground")}
+            >
+              {theme === "dark" ? <Moon /> : <Sun />}
+            </button>
             <button type="button" onClick={() => setRun((r) => r + 1)} aria-label="Reload preview" title="Reload" className={iconButton}>
               <RotateCcw />
             </button>
-            <a href={src} target="_blank" rel="noreferrer" aria-label="Open preview in a new tab" title="Open in a new tab" className={iconButton}>
+            <a href={current} target="_blank" rel="noreferrer" aria-label="Open preview in a new tab" title="Open in a new tab" className={iconButton}>
               <ExternalLink />
             </a>
           </div>
@@ -107,8 +155,10 @@ export function FramePreview({
       <div hidden={tab !== "preview"} className="bg-muted/40 overflow-hidden rounded-xl border">
         <div className="flex justify-center">
           <iframe
-            key={run}
-            src={src}
+            key={`${run}-${current}`}
+            ref={frame}
+            src={current}
+            onLoad={() => applyTheme(theme)}
             title={title}
             loading="lazy"
             className="bg-background block max-w-full transition-[width] duration-300 ease-[var(--bm-ease-out)] data-[narrow=true]:border-x"
