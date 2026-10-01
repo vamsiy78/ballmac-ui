@@ -3929,6 +3929,126 @@
       }
     },
     {
+      "name": "cta-3",
+      "type": "registry:block",
+      "title": "CTA 3: install command",
+      "description": "A closing call-to-action for developer products: heading, two buttons and a copyable install command with package-manager tabs, over a soft dotted glow.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/install-tabs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/cta-3/cta-3.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/cta-3/cta-3.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "cta"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "cta",
+          "install",
+          "command",
+          "developer",
+          "copy",
+          "package manager"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "The last section of a developer landing page. Set command (run through npm, pnpm, yarn and bun) or commands for explicit per-manager strings.",
+          "whenToUse": [
+            "Libraries, CLIs and APIs",
+            "Docs landing pages"
+          ],
+          "whenNotToUse": [
+            "Consumer products without a command line"
+          ],
+          "composesWith": [
+            "hero-2",
+            "features-6",
+            "faq-2",
+            "footer-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right",
+              "action": "Switches package manager; the copy button announces success"
+            }
+          ],
+          "customization": [
+            "command or commands for the install tabs",
+            "storageKey: remember the package manager",
+            "notes: short facts under the command"
+          ]
+        },
+        "examples": [
+          "cta-3-demo",
+          "cta-3-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/cta-3"
+      }
+    },
+    {
+      "name": "cta-3-demo",
+      "type": "registry:example",
+      "title": "CTA 3: install command: Default",
+      "description": "Default example of CTA 3: install command.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cta-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cta-3-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cta-3-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cta-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cta-3-custom",
+      "type": "registry:example",
+      "title": "CTA 3: install command: Custom command",
+      "description": "Custom command example of CTA 3: install command.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cta-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cta-3-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cta-3-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cta-3",
+        "tier": "free"
+      }
+    },
+    {
       "name": "faq-1",
       "type": "registry:block",
       "title": "FAQ 1: accordion with heading",
@@ -4006,6 +4126,130 @@
       "meta": {
         "example": true,
         "of": "faq-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "faq-2",
+      "type": "registry:block",
+      "title": "FAQ 2: searchable with topic filters",
+      "description": "Frequently asked questions with live search that highlights matches, topic filters with counts, a friendly empty state and a support prompt. Topics scroll sideways on phones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/accordion.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/search-field.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/faq-2/faq-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/faq-2/faq-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "faq"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "faq",
+          "search",
+          "accordion",
+          "help",
+          "support",
+          "filter"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A help-centre style FAQ. Pass categories=[{ name, questions: [{ question, answer }] }]; an All filter and search are built in.",
+          "whenToUse": [
+            "More than eight questions across topics",
+            "Pricing and product pages that attract many questions"
+          ],
+          "whenNotToUse": [
+            "A handful of questions (use faq-1)"
+          ],
+          "composesWith": [
+            "pricing-2",
+            "pricing-3",
+            "cta-1",
+            "footer-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space on a topic",
+              "action": "Filters the list (aria-pressed)"
+            },
+            {
+              "keys": "Typing in search",
+              "action": "Filters live; the result count is announced politely"
+            }
+          ],
+          "customization": [
+            "categories: { name, questions: { question, answer }[] }[]",
+            "support: { label, href, text? } (null to hide)"
+          ]
+        },
+        "examples": [
+          "faq-2-demo",
+          "faq-2-compact"
+        ],
+        "url": "https://ui.ballmac.com/components/faq-2"
+      }
+    },
+    {
+      "name": "faq-2-demo",
+      "type": "registry:example",
+      "title": "FAQ 2: searchable with topic filters: Default",
+      "description": "Default example of FAQ 2: searchable with topic filters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/faq-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/faq-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/faq-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "faq-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "faq-2-compact",
+      "type": "registry:example",
+      "title": "FAQ 2: searchable with topic filters: Two topics",
+      "description": "Two topics example of FAQ 2: searchable with topic filters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/faq-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/faq-2-compact.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/faq-2-compact.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "faq-2",
         "tier": "free"
       }
     },
@@ -4350,6 +4594,252 @@
       }
     },
     {
+      "name": "features-5",
+      "type": "registry:block",
+      "title": "Features 5: scrolling product tour",
+      "description": "Numbered steps on the left; as each scrolls into view, a sticky panel on the right crossfades to its picture. On phones every step carries its own picture.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/badge.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/features-5/features-5.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/features-5/features-5.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "features"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "features",
+          "tour",
+          "sticky",
+          "scroll",
+          "steps",
+          "how it works"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A how-it-works section that shows the product as you read. Pass steps=[{ title, description, points?, visual }] where visual is any ReactNode.",
+          "whenToUse": [
+            "Explaining a workflow in three to five steps",
+            "Products where each step has a distinct screen"
+          ],
+          "whenNotToUse": [
+            "Long feature lists (use features-2)",
+            "Pages without room to scroll"
+          ],
+          "composesWith": [
+            "hero-7",
+            "logo-cloud-1",
+            "testimonials-1",
+            "cta-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Scroll",
+              "action": "The picture is decorative and hidden from assistive technology, so every step must state what it shows in text"
+            }
+          ],
+          "customization": [
+            "steps: { title, description, points?, visual }[]",
+            "eyebrow, title, description props"
+          ]
+        },
+        "examples": [
+          "features-5-demo",
+          "features-5-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/features-5"
+      }
+    },
+    {
+      "name": "features-5-demo",
+      "type": "registry:example",
+      "title": "Features 5: scrolling product tour: Default",
+      "description": "Default example of Features 5: scrolling product tour.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/features-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/features-5-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/features-5-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "features-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "features-5-custom",
+      "type": "registry:example",
+      "title": "Features 5: scrolling product tour: Custom steps",
+      "description": "Custom steps example of Features 5: scrolling product tour.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/features-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/features-5-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/features-5-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "features-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "features-6",
+      "type": "registry:block",
+      "title": "Features 6: tabbed showcase",
+      "description": "Pill tabs with a sliding indicator switch between feature panels: heading, checked points and link beside a product picture. Tabs scroll sideways on phones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/animated-tabs.json",
+        "https://ui.ballmac.com/r/badge.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/features-6/features-6.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/features-6/features-6.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "features"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "features",
+          "tabs",
+          "showcase",
+          "panels",
+          "product"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A compact way to show several feature areas without a long scroll. Pass tabs=[{ value, label, icon?, title, description, points?, link?, visual }].",
+          "whenToUse": [
+            "Four to six equal feature areas",
+            "Pages that need to stay short"
+          ],
+          "whenNotToUse": [
+            "A single story told in order (use features-5)"
+          ],
+          "composesWith": [
+            "hero-6",
+            "logo-cloud-1",
+            "pricing-2",
+            "cta-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right",
+              "action": "Moves between tabs and shows the panel"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves from the tab list into the panel"
+            }
+          ],
+          "customization": [
+            "tabs: { value, label, icon?, title, description, points?, link?, visual }[]",
+            "defaultValue: the tab selected first"
+          ]
+        },
+        "examples": [
+          "features-6-demo",
+          "features-6-two"
+        ],
+        "url": "https://ui.ballmac.com/components/features-6"
+      }
+    },
+    {
+      "name": "features-6-demo",
+      "type": "registry:example",
+      "title": "Features 6: tabbed showcase: Default",
+      "description": "Default example of Features 6: tabbed showcase.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/features-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/features-6-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/features-6-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "features-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "features-6-two",
+      "type": "registry:example",
+      "title": "Features 6: tabbed showcase: Two tabs",
+      "description": "Two tabs example of Features 6: tabbed showcase.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/features-6.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/features-6-two.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/features-6-two.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "features-6",
+        "tier": "free"
+      }
+    },
+    {
       "name": "footer-1",
       "type": "registry:block",
       "title": "Footer 1: columns with newsletter",
@@ -4428,6 +4918,119 @@
       "meta": {
         "example": true,
         "of": "footer-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "footer-2",
+      "type": "registry:block",
+      "title": "Footer 2: giant wordmark",
+      "description": "Brand, tagline and a live status pill beside three link columns, a legal bar with icon links, and an oversized wordmark that sinks into a fading gradient along the bottom.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/status-dot.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/footer-2/footer-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/footer-2/footer-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "footer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "footer",
+          "wordmark",
+          "links",
+          "status",
+          "brand"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A confident site footer. Pass columns, socials, legal and legalLinks; the wordmark scales to the footer width from its length.",
+          "whenToUse": [
+            "Brand-led marketing sites",
+            "Pages that end with a big visual moment"
+          ],
+          "whenNotToUse": [
+            "Footers that need a newsletter form (use footer-1)"
+          ],
+          "composesWith": [
+            "cta-3",
+            "cta-1",
+            "faq-2",
+            "header-2"
+          ],
+          "a11y": [],
+          "customization": [
+            "wordmark: text for the big word (defaults to brand)",
+            "status: null hides the pill",
+            "columns / socials / legalLinks"
+          ]
+        },
+        "examples": [
+          "footer-2-demo",
+          "footer-2-long"
+        ],
+        "url": "https://ui.ballmac.com/components/footer-2"
+      }
+    },
+    {
+      "name": "footer-2-demo",
+      "type": "registry:example",
+      "title": "Footer 2: giant wordmark: Default",
+      "description": "Default example of Footer 2: giant wordmark.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/footer-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/footer-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/footer-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "footer-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "footer-2-long",
+      "type": "registry:example",
+      "title": "Footer 2: giant wordmark: Long brand name",
+      "description": "Long brand name example of Footer 2: giant wordmark.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/footer-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/footer-2-long.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/footer-2-long.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "footer-2",
         "tier": "free"
       }
     },
@@ -4522,6 +5125,135 @@
       "meta": {
         "example": true,
         "of": "header-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "header-2",
+      "type": "registry:block",
+      "title": "Header 2: mega menu with mobile sheet",
+      "description": "Sticky header with brand, a mega menu of grouped links and a featured card, sign-in and primary actions. On phones the same links open in a slide-in sheet with accordions.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/mega-menu.json",
+        "https://ui.ballmac.com/r/sheet.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/header-2/header-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/header-2/header-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "header"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "header",
+          "navbar",
+          "mega menu",
+          "navigation",
+          "sheet",
+          "mobile"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A navigation header for products with many pages. Pass items (the same shape as mega-menu), brand, logo, secondaryAction and primaryAction.",
+          "whenToUse": [
+            "Sites with several product areas",
+            "Anything that outgrew four top-level links"
+          ],
+          "whenNotToUse": [
+            "Simple sites with a few links (use header-1)"
+          ],
+          "composesWith": [
+            "hero-6",
+            "hero-7",
+            "footer-2",
+            "template-launch"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right",
+              "action": "Moves between menu triggers"
+            },
+            {
+              "keys": "Arrow Down / Enter",
+              "action": "Opens a panel"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes a panel or the mobile sheet and returns focus"
+            }
+          ],
+          "customization": [
+            "items: MegaMenuItem[] (links, or panels with columns and a featured card)",
+            "logo, brand, brandHref",
+            "sticky: false for a static header"
+          ]
+        },
+        "examples": [
+          "header-2-demo",
+          "header-2-simple"
+        ],
+        "url": "https://ui.ballmac.com/components/header-2"
+      }
+    },
+    {
+      "name": "header-2-demo",
+      "type": "registry:example",
+      "title": "Header 2: mega menu with mobile sheet: Default",
+      "description": "Default example of Header 2: mega menu with mobile sheet.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/header-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/header-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/header-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "header-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "header-2-simple",
+      "type": "registry:example",
+      "title": "Header 2: mega menu with mobile sheet: Simple links",
+      "description": "Simple links example of Header 2: mega menu with mobile sheet.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/header-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/header-2-simple.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/header-2-simple.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "header-2",
         "tier": "free"
       }
     },
@@ -4976,6 +5708,255 @@
       }
     },
     {
+      "name": "hero-6",
+      "type": "registry:block",
+      "title": "Hero 6: gradient mesh with floating cards",
+      "description": "Centered hero over a slowly drifting colour mesh, with gradient headline words and product cards that bob and follow the pointer. Cards stack below the buttons on phones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/gradient-text.json",
+        "https://ui.ballmac.com/r/sparkline.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/hero-6/hero-6.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/hero-6/hero-6.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "hero"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hero",
+          "gradient",
+          "mesh",
+          "parallax",
+          "floating cards",
+          "saas"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A bold, friendly landing hero. Edit eyebrow, title, highlight (the gradient words), description, actions and highlights; pass `cards` to replace the floating cards.",
+          "whenToUse": [
+            "Consumer and prosumer SaaS landing pages",
+            "Launches that want a memorable first screen"
+          ],
+          "whenNotToUse": [
+            "Dense developer tools (use hero-2)",
+            "Pages that must stay completely static"
+          ],
+          "composesWith": [
+            "header-1",
+            "logo-cloud-1",
+            "features-2",
+            "pricing-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Pointer only",
+              "action": "The parallax and bobbing are decorative; they stop for reduced motion and on touch"
+            }
+          ],
+          "customization": [
+            "cards: wrap each card in <Hero6Float depth bob delay className=positions> to place it",
+            "The mesh uses --chart-1, --chart-3 and --chart-5, so it follows your theme"
+          ]
+        },
+        "examples": [
+          "hero-6-demo",
+          "hero-6-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/hero-6"
+      }
+    },
+    {
+      "name": "hero-6-demo",
+      "type": "registry:example",
+      "title": "Hero 6: gradient mesh with floating cards: Default",
+      "description": "Default example of Hero 6: gradient mesh with floating cards.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-6-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-6-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hero-6-custom",
+      "type": "registry:example",
+      "title": "Hero 6: gradient mesh with floating cards: Custom cards",
+      "description": "Custom cards example of Hero 6: gradient mesh with floating cards.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-6.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-6-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-6-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hero-7",
+      "type": "registry:block",
+      "title": "Hero 7: product screen that tilts into view",
+      "description": "Centered hero with a browser frame that leans back and settles flat as you scroll. Ships a sample dashboard drawn with theme tokens; swap in a screenshot or your own UI.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/browser-frame.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/hero-7/hero-7.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/hero-7/hero-7.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "hero"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hero",
+          "product",
+          "screenshot",
+          "scroll",
+          "browser",
+          "dashboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A landing hero that lets the product do the talking. Edit eyebrow, title, description and actions; pass `screenshot` ({ src, alt }) or `screen` (any UI laid out 1180px wide) to replace the sample dashboard.",
+          "whenToUse": [
+            "Products with a strong UI",
+            "Pages where a first-screen screenshot sells the product"
+          ],
+          "whenNotToUse": [
+            "Developer tools led by a command (use hero-2)",
+            "Products with no visual UI"
+          ],
+          "composesWith": [
+            "header-1",
+            "logo-cloud-1",
+            "features-1",
+            "testimonials-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Scroll",
+              "action": "The tilt is decorative and is turned off for reduced motion; the sample screen is hidden from assistive technology"
+            }
+          ],
+          "customization": [
+            "tilt: starting lean in degrees (0 for none)",
+            "url: address shown in the browser frame",
+            "screen: any ReactNode, scaled to fit"
+          ]
+        },
+        "examples": [
+          "hero-7-demo",
+          "hero-7-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/hero-7"
+      }
+    },
+    {
+      "name": "hero-7-demo",
+      "type": "registry:example",
+      "title": "Hero 7: product screen that tilts into view: Default",
+      "description": "Default example of Hero 7: product screen that tilts into view.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-7-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-7-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hero-7-custom",
+      "type": "registry:example",
+      "title": "Hero 7: product screen that tilts into view: Your own screen",
+      "description": "Your own screen example of Hero 7: product screen that tilts into view.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-7-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-7-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-7",
+        "tier": "free"
+      }
+    },
+    {
       "name": "login-1",
       "type": "registry:block",
       "title": "Login 1: card with SSO and magic link",
@@ -5260,6 +6241,492 @@
       }
     },
     {
+      "name": "pricing-2",
+      "type": "registry:block",
+      "title": "Pricing 2: three tiers with billing toggle",
+      "description": "Three plan cards with a monthly/yearly switch. Prices roll to the new value, a savings badge and billed-total line update, and the middle plan is lifted with a border beam.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/animated-number-flow.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/border-beam.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/pricing-2/pricing-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/pricing-2/pricing-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "pricing"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "pricing",
+          "plans",
+          "toggle",
+          "yearly",
+          "saas",
+          "tiers"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Standard SaaS pricing with a billing toggle. Pass plans=[{ name, description, price: { monthly, yearly } | string, unit?, lead?, features, cta, featured? }].",
+          "whenToUse": [
+            "SaaS products with three plans",
+            "Products that discount annual billing"
+          ],
+          "whenNotToUse": [
+            "Two plans only (use pricing-1)",
+            "Usage-based pricing (use plan-selector or a calculator)"
+          ],
+          "composesWith": [
+            "faq-2",
+            "logo-cloud-1",
+            "cta-1",
+            "pricing-3"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right",
+              "action": "Switches billing interval"
+            },
+            {
+              "keys": "Status message",
+              "action": "Announces the interval being shown"
+            }
+          ],
+          "customization": [
+            "plans: price is { monthly, yearly } per month or a string like 'Custom'",
+            "defaultInterval / interval / onIntervalChange",
+            "discountLabel, currency, note, enterprise (null to hide)"
+          ]
+        },
+        "examples": [
+          "pricing-2-demo",
+          "pricing-2-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/pricing-2"
+      }
+    },
+    {
+      "name": "pricing-2-demo",
+      "type": "registry:example",
+      "title": "Pricing 2: three tiers with billing toggle: Default",
+      "description": "Default example of Pricing 2: three tiers with billing toggle.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pricing-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pricing-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pricing-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pricing-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pricing-2-custom",
+      "type": "registry:example",
+      "title": "Pricing 2: three tiers with billing toggle: Custom plans",
+      "description": "Custom plans example of Pricing 2: three tiers with billing toggle.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pricing-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pricing-2-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pricing-2-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pricing-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pricing-3",
+      "type": "registry:block",
+      "title": "Pricing 3: full plan comparison",
+      "description": "A feature-by-feature comparison table with a sticky plan header, collapsible groups and a highlighted column. On phones it becomes a plan switcher with one clean list.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/pricing-3/pricing-3.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/pricing-3/pricing-3.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "pricing"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "pricing",
+          "comparison",
+          "table",
+          "sticky",
+          "plans",
+          "features"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "The detailed pricing table for buyers who compare. Pass plans=[{ key, name, price, period?, cta, featured? }] and groups=[{ title, rows: [{ label, hint?, values: { [planKey]: boolean | string } }] }].",
+          "whenToUse": [
+            "Below pricing cards, for buyers who want every detail",
+            "Products with many differentiating features"
+          ],
+          "whenNotToUse": [
+            "Two simple plans (pricing-1 is enough)"
+          ],
+          "composesWith": [
+            "pricing-2",
+            "faq-2",
+            "cta-1",
+            "header-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space on a group heading",
+              "action": "Collapses or expands the group"
+            },
+            {
+              "keys": "Arrow Left / Right (phones)",
+              "action": "Switches the plan shown"
+            }
+          ],
+          "customization": [
+            "stickyOffset: pixels to keep from the top when you have a fixed site header",
+            "values: true / false render an icon with a text label; strings render as text"
+          ]
+        },
+        "examples": [
+          "pricing-3-demo",
+          "pricing-3-two"
+        ],
+        "url": "https://ui.ballmac.com/components/pricing-3"
+      }
+    },
+    {
+      "name": "pricing-3-demo",
+      "type": "registry:example",
+      "title": "Pricing 3: full plan comparison: Default",
+      "description": "Default example of Pricing 3: full plan comparison.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pricing-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pricing-3-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pricing-3-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pricing-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pricing-3-two",
+      "type": "registry:example",
+      "title": "Pricing 3: full plan comparison: Two plans",
+      "description": "Two plans example of Pricing 3: full plan comparison.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pricing-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pricing-3-two.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pricing-3-two.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pricing-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "stats-1",
+      "type": "registry:block",
+      "title": "Stats 1: headline metrics with trends",
+      "description": "Four large numbers in a hairline grid that count up on scroll, each with a change badge, a small trend line and one line of context. Heading and copy sit above.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/sparkline.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/stats-1/stats-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/stats-1/stats-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "stats"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "stats",
+          "metrics",
+          "numbers",
+          "social proof",
+          "sparkline"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Social proof as numbers. Pass stats=[{ label, value, prefix?, suffix?, decimals?, delta?, trend?, trendLabel?, note? }].",
+          "whenToUse": [
+            "Under a hero or logo cloud as proof",
+            "Company and about pages"
+          ],
+          "whenNotToUse": [
+            "Live product dashboards (use stat-card or kpi-row)",
+            "Numbers you cannot back up"
+          ],
+          "composesWith": [
+            "hero-7",
+            "logo-cloud-1",
+            "testimonials-2",
+            "cta-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "stats: omit trend and delta for a plain numbers layout",
+            "decimals controls the digits after the point; suffix can be %, k, M+ and so on"
+          ]
+        },
+        "examples": [
+          "stats-1-demo",
+          "stats-1-simple"
+        ],
+        "url": "https://ui.ballmac.com/components/stats-1"
+      }
+    },
+    {
+      "name": "stats-1-demo",
+      "type": "registry:example",
+      "title": "Stats 1: headline metrics with trends: Default",
+      "description": "Default example of Stats 1: headline metrics with trends.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/stats-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/stats-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/stats-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "stats-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "stats-1-simple",
+      "type": "registry:example",
+      "title": "Stats 1: headline metrics with trends: Numbers only",
+      "description": "Numbers only example of Stats 1: headline metrics with trends.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/stats-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/stats-1-simple.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/stats-1-simple.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "stats-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "team-1",
+      "type": "registry:block",
+      "title": "Team 1: portrait grid with hover bios",
+      "description": "A grid of team portraits with name, role, location and links. On hover or keyboard focus a bio slides up over the photo; phones show it inline. Initial tiles when there is no photo.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/team-1/team-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/team-1/team-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "team"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "team",
+          "people",
+          "about",
+          "company",
+          "portraits"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "An About-page team section. Pass members=[{ name, role, bio?, location?, image?, links? }].",
+          "whenToUse": [
+            "About and careers pages",
+            "Showing the humans behind a product"
+          ],
+          "whenNotToUse": [
+            "Long staff directories (use a table)"
+          ],
+          "composesWith": [
+            "stats-1",
+            "testimonials-2",
+            "cta-1",
+            "footer-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Focusing a member's link reveals their bio, like hover"
+            }
+          ],
+          "customization": [
+            "members: { name, role, bio?, location?, image?, links?: { label, href, icon? }[] }[]",
+            "action: link beside the heading (null to hide)"
+          ]
+        },
+        "examples": [
+          "team-1-demo",
+          "team-1-small"
+        ],
+        "url": "https://ui.ballmac.com/components/team-1"
+      }
+    },
+    {
+      "name": "team-1-demo",
+      "type": "registry:example",
+      "title": "Team 1: portrait grid with hover bios: Default",
+      "description": "Default example of Team 1: portrait grid with hover bios.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/team-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/team-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/team-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "team-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "team-1-small",
+      "type": "registry:example",
+      "title": "Team 1: portrait grid with hover bios: Four people",
+      "description": "Four people example of Team 1: portrait grid with hover bios.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/team-1.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/team-1-small.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/team-1-small.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "team-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "testimonials-1",
       "type": "registry:block",
       "title": "Testimonials 1: scrolling wall of quotes",
@@ -5339,6 +6806,136 @@
       "meta": {
         "example": true,
         "of": "testimonials-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "testimonials-2",
+      "type": "registry:block",
+      "title": "Testimonials 2: featured quote with avatar picker",
+      "description": "One large quote at a time with the person, role and a highlighted result. A row of avatars switches quotes with arrow keys; optional gentle autoplay that pauses on hover and focus.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/testimonials-2/testimonials-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/testimonials-2/testimonials-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "testimonials"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "testimonials",
+          "quote",
+          "carousel",
+          "social proof",
+          "avatars"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A focused testimonial section. Pass items=[{ quote, name, role, company, image?, result? }]; control the index with value/onValueChange or let it manage itself.",
+          "whenToUse": [
+            "Three to five strong quotes",
+            "Above a pricing or CTA section"
+          ],
+          "whenNotToUse": [
+            "Many short reviews (use testimonials-1)"
+          ],
+          "composesWith": [
+            "stats-1",
+            "pricing-2",
+            "cta-1",
+            "logo-cloud-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow Left / Right",
+              "action": "Moves to the previous or next quote"
+            },
+            {
+              "keys": "Home / End",
+              "action": "Jumps to the first or last quote"
+            },
+            {
+              "keys": "Tab",
+              "action": "Moves from the avatars into the quote"
+            }
+          ],
+          "customization": [
+            "items: { quote, name, role, company, image?, result? }[]",
+            "autoplay: milliseconds between quotes (0 = manual)",
+            "value / defaultValue / onValueChange"
+          ]
+        },
+        "examples": [
+          "testimonials-2-demo",
+          "testimonials-2-autoplay"
+        ],
+        "url": "https://ui.ballmac.com/components/testimonials-2"
+      }
+    },
+    {
+      "name": "testimonials-2-demo",
+      "type": "registry:example",
+      "title": "Testimonials 2: featured quote with avatar picker: Default",
+      "description": "Default example of Testimonials 2: featured quote with avatar picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/testimonials-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/testimonials-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/testimonials-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "testimonials-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "testimonials-2-autoplay",
+      "type": "registry:example",
+      "title": "Testimonials 2: featured quote with avatar picker: Autoplay",
+      "description": "Autoplay example of Testimonials 2: featured quote with avatar picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/testimonials-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/testimonials-2-autoplay.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/testimonials-2-autoplay.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "testimonials-2",
         "tier": "free"
       }
     },

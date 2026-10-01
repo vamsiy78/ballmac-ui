@@ -29,3 +29,6 @@ Element.prototype.hasPointerCapture ??= () => false
 Element.prototype.releasePointerCapture ??= () => {}
 Element.prototype.setPointerCapture ??= () => {}
 document.elementFromPoint ??= () => null
+// jsdom has no CSS.supports; report support so feature-detected effects (border-beam) take their normal path.
+if (typeof CSS === "undefined") Object.assign(globalThis, { CSS: { supports: () => true } })
+else if (!CSS.supports) Object.assign(CSS, { supports: () => true })

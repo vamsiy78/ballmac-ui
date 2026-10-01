@@ -8,7 +8,7 @@ import { CopyButton } from "@/components/site/copy-button"
 import { FitPreview, FitWidth } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
 import { loadExample } from "@/lib/examples"
-import { blockCategoryLabels, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
+import { blockGroups, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
 import { cn } from "@/lib/utils"
 
 // The collection as an asymmetric bento: two large anchors (desktop top left, devices bottom right),
@@ -26,11 +26,6 @@ const collections = [
 
 const install = "npx shadcn@latest add @ballmac/dock"
 
-// Sections in the order they appear on a page.
-const blockOrder = ["header", "hero", "features", "logo-cloud", "testimonials", "pricing", "faq", "cta", "footer", "auth", "ai-chat", "dashboard", "settings", "billing"]
-const byPageOrder = (a: string, b: string) => (blockOrder.indexOf(a) + 1 || 99) - (blockOrder.indexOf(b) + 1 || 99)
-
-
 export default async function Home() {
   const components = getComponents()
   const blocks = getBlocks()
@@ -44,11 +39,11 @@ export default async function Home() {
     }))
   )
   const templateCards = await Promise.all(templates.map(async (t) => ({ ...t, Preview: t.examples[0] ? await loadExample(t.examples[0].name) : null })))
-  const blockGroups = [...new Set(blocks.map((b) => b.blockCategory ?? "other"))].sort(byPageOrder).map((g) => ({
-    id: g,
-    label: blockCategoryLabels[g] ?? g,
-    count: blocks.filter((b) => (b.blockCategory ?? "other") === g).length,
-  }))
+  const blockCategoryLinks = blockGroups.map((g) => ({
+    id: g.id,
+    label: g.label,
+    count: blocks.filter((b) => (g.categories as readonly string[]).includes(b.blockCategory ?? "")).length,
+  })).filter((g) => g.count > 0)
   const macCount = components.filter((c) => c.category === "macos").length
   const categoryCount = new Set(components.map((c) => c.category)).size
 
@@ -162,7 +157,7 @@ export default async function Home() {
               or an entire page as a route.
             </p>
             <ul className="mt-9 grid grid-cols-1 border-t sm:grid-cols-2 sm:gap-x-8" aria-label="Block categories">
-              {blockGroups.map((g) => (
+              {blockCategoryLinks.map((g) => (
                 <li key={g.id} className="border-b">
                   <Link
                     href={`/blocks#${g.id}`}

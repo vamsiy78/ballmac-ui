@@ -127,7 +127,58 @@ export const blockCategoryLabels: Record<string, string> = {
   settings: "Settings",
   "ai-chat": "AI chat",
   billing: "Billing",
+  stats: "Stats",
+  team: "Team",
+  blog: "Blog",
+  changelog: "Changelog",
+  contact: "Contact",
+  careers: "Careers",
+  comparison: "Comparison",
+  newsletter: "Newsletter",
+  error: "Error pages",
+  onboarding: "Onboarding",
+  "app-shell": "App shell",
+  mail: "Mail",
+  kanban: "Kanban",
+  calendar: "Calendar",
+  showcase: "Desktop showcase",
+  download: "Download",
+  devices: "Devices",
 }
+
+/** Section order within each group, the order sections appear on a page. */
+export const blockGroups = [
+  {
+    id: "marketing",
+    label: "Marketing",
+    description: "Sections for landing pages: heroes, features, pricing, proof and calls to action.",
+    categories: ["header", "hero", "features", "stats", "logo-cloud", "testimonials", "team", "comparison", "pricing", "faq", "cta", "newsletter", "footer"],
+  },
+  {
+    id: "content",
+    label: "Content and company",
+    description: "Blog, changelog, careers, contact and error pages.",
+    categories: ["blog", "changelog", "careers", "contact", "error"],
+  },
+  {
+    id: "account",
+    label: "Account",
+    description: "Sign in, sign up, verification and onboarding.",
+    categories: ["auth", "onboarding"],
+  },
+  {
+    id: "application",
+    label: "Application",
+    description: "Screens inside a product: shell, dashboards, settings, billing, inbox, boards and AI chat.",
+    categories: ["app-shell", "dashboard", "settings", "billing", "mail", "kanban", "calendar", "ai-chat"],
+  },
+  {
+    id: "mac",
+    label: "Mac and devices",
+    description: "Showcase a desktop or mobile app with live device scenes and download sections.",
+    categories: ["showcase", "download", "devices"],
+  },
+] as const
 
 export const categoryLabels: Record<string, string> = {
   primitives: "Primitives",
@@ -147,3 +198,7 @@ export const categoryLabels: Record<string, string> = {
   saas: "SaaS",
   dashboards: "Dashboards",
 }
+
+/** Every block category in page order (group by group). */
+export const blockOrder: string[] = blockGroups.flatMap((g) => [...g.categories])
+export const byBlockOrder = (a: string, b: string) => (blockOrder.indexOf(a) + 1 || 99) - (blockOrder.indexOf(b) + 1 || 99)
