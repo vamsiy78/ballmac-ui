@@ -33246,6 +33246,636 @@
       }
     },
     {
+      "name": "template-atlas",
+      "type": "registry:block",
+      "title": "Atlas: store admin",
+      "description": "A dense, quiet six-page admin for an online store: a dashboard with a live date range, sortable orders with bulk actions, an order page with a refund flow, products, customers and settings.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/command.json",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/dropdown-menu.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/sheet.json",
+        "https://ui.ballmac.com/r/sparkline.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/atlas/atlas-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/atlas/atlas-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/atlas/atlas-data.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/atlas/atlas-data.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/atlas/atlas-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/atlas/atlas-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/atlas/atlas-dashboard.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/atlas/atlas-dashboard.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/atlas/atlas-orders.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/atlas/atlas-orders.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/atlas/atlas-order.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/atlas/atlas-order.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/atlas/atlas-products.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/atlas/atlas-products.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/atlas/atlas-customers.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/atlas/atlas-customers.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/atlas/atlas-settings.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/atlas/atlas-settings.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/atlas/page.tsx",
+          "type": "registry:page",
+          "target": "app/atlas/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/atlas/orders/page.tsx",
+          "type": "registry:page",
+          "target": "app/atlas/orders/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/atlas/orders/[id]/page.tsx",
+          "type": "registry:page",
+          "target": "app/atlas/orders/[id]/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/atlas/products/page.tsx",
+          "type": "registry:page",
+          "target": "app/atlas/products/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/atlas/customers/page.tsx",
+          "type": "registry:page",
+          "target": "app/atlas/customers/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/atlas/settings/page.tsx",
+          "type": "registry:page",
+          "target": "app/atlas/settings/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /atlas, /atlas/orders, /atlas/orders/[id], /atlas/products, /atlas/customers and /atlas/settings. The palette is the atlasCss string in atlas-theme.tsx and the sample data is atlas-data.ts: replace it with calls to your own API.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "admin",
+          "dashboard",
+          "ecommerce",
+          "orders",
+          "products",
+          "customers",
+          "settings"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a six-page store admin with working client-side filtering, sorting, selection, drawers and forms over sample data. Replace atlas-data.ts with your API, and edit atlasCss for the palette.",
+          "whenToUse": [
+            "Back offices for shops, marketplaces and internal tools",
+            "A starting point for dense admin tables with bulk actions"
+          ],
+          "whenNotToUse": [
+            "Public marketing sites (use a marketing template)"
+          ],
+          "composesWith": [
+            "data-table",
+            "dashboard-1",
+            "settings-1"
+          ],
+          "a11y": [
+            {
+              "keys": "⌘K / Ctrl+K",
+              "action": "Opens the search and navigation menu"
+            },
+            {
+              "keys": "Enter / Space on a column heading",
+              "action": "Sorts the table by that column"
+            }
+          ],
+          "customization": [
+            "Replace atlas-data.ts with your data",
+            "Edit atlasCss for the light and dark palettes",
+            "Swap the sidebar items in the nav array of atlas-theme.tsx"
+          ]
+        },
+        "examples": [
+          "template-atlas-demo",
+          "template-atlas-orders",
+          "template-atlas-order",
+          "template-atlas-products",
+          "template-atlas-customers",
+          "template-atlas-settings"
+        ],
+        "url": "https://ui.ballmac.com/components/template-atlas"
+      }
+    },
+    {
+      "name": "template-atlas-demo",
+      "type": "registry:example",
+      "title": "Atlas: store admin: Dashboard",
+      "description": "Dashboard example of Atlas: store admin.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-atlas.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-atlas-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-atlas-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-atlas",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-atlas-orders",
+      "type": "registry:example",
+      "title": "Atlas: store admin: Orders",
+      "description": "Orders example of Atlas: store admin.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-atlas.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-atlas-orders.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-atlas-orders.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-atlas",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-atlas-order",
+      "type": "registry:example",
+      "title": "Atlas: store admin: Order",
+      "description": "Order example of Atlas: store admin.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-atlas.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-atlas-order.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-atlas-order.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-atlas",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-atlas-products",
+      "type": "registry:example",
+      "title": "Atlas: store admin: Products",
+      "description": "Products example of Atlas: store admin.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-atlas.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-atlas-products.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-atlas-products.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-atlas",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-atlas-customers",
+      "type": "registry:example",
+      "title": "Atlas: store admin: Customers",
+      "description": "Customers example of Atlas: store admin.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-atlas.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-atlas-customers.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-atlas-customers.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-atlas",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-atlas-settings",
+      "type": "registry:example",
+      "title": "Atlas: store admin: Settings",
+      "description": "Settings example of Atlas: store admin.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-atlas.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-atlas-settings.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-atlas-settings.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-atlas",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-auth-kit",
+      "type": "registry:block",
+      "title": "Auth Kit: complete sign-in flow",
+      "description": "Seven auth pages in three switchable layouts (centered, split with art, frosted glass): sign in, sign up with a live password checklist, six-digit verification, forgot and reset password, team invite and a three-step onboarding.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/aurora-background.json",
+        "https://ui.ballmac.com/r/input-otp.json",
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/auth-kit/auth-kit-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/auth-kit/auth-kit-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/auth-kit/auth-kit-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/auth-kit/auth-kit-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/auth-kit/auth-kit-forms.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/auth-kit/auth-kit-forms.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/auth-kit/auth-kit-pages.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/auth-kit/auth-kit-pages.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/auth/sign-in/page.tsx",
+          "type": "registry:page",
+          "target": "app/auth/sign-in/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/auth/sign-up/page.tsx",
+          "type": "registry:page",
+          "target": "app/auth/sign-up/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/auth/verify/page.tsx",
+          "type": "registry:page",
+          "target": "app/auth/verify/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/auth/forgot/page.tsx",
+          "type": "registry:page",
+          "target": "app/auth/forgot/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/auth/reset/page.tsx",
+          "type": "registry:page",
+          "target": "app/auth/reset/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/auth/invite/page.tsx",
+          "type": "registry:page",
+          "target": "app/auth/invite/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/auth/onboarding/page.tsx",
+          "type": "registry:page",
+          "target": "app/auth/onboarding/page.tsx"
+        }
+      ],
+      "docs": "Routes are at /auth/sign-in, /auth/sign-up, /auth/verify, /auth/forgot, /auth/reset, /auth/invite and /auth/onboarding. Each form simulates its request with a short timer: replace the useFake() calls in auth-kit-forms.tsx with your API.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "auth",
+          "login",
+          "signup",
+          "verification",
+          "onboarding",
+          "password",
+          "otp"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a complete authentication flow. AuthKitPage renders one page in a layout (centered, split or glass); AuthKitPlayground lets you try every combination. Replace the simulated requests in auth-kit-forms.tsx with your auth provider.",
+          "whenToUse": [
+            "Any product that needs sign in, sign up, verification and onboarding that look consistent",
+            "Trying layouts quickly before you commit to one"
+          ],
+          "whenNotToUse": [
+            "A single login box (use login-1 or login-2)"
+          ],
+          "composesWith": [
+            "login-2",
+            "verify-1",
+            "onboarding-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / Shift+Tab",
+              "action": "Moves through fields; the first invalid field is focused after a failed submit"
+            },
+            {
+              "keys": "Paste in the code field",
+              "action": "Fills all six digits at once"
+            }
+          ],
+          "customization": [
+            "layout: centered, split or glass on each AuthKitPage",
+            "Edit authCss for the light and dark palettes",
+            "Replace the quote in the split layout"
+          ]
+        },
+        "examples": [
+          "template-auth-kit-demo",
+          "template-auth-kit-sign-in",
+          "template-auth-kit-sign-up",
+          "template-auth-kit-verify",
+          "template-auth-kit-forgot",
+          "template-auth-kit-reset",
+          "template-auth-kit-invite",
+          "template-auth-kit-onboarding"
+        ],
+        "url": "https://ui.ballmac.com/components/template-auth-kit"
+      }
+    },
+    {
+      "name": "template-auth-kit-demo",
+      "type": "registry:example",
+      "title": "Auth Kit: complete sign-in flow: Playground",
+      "description": "Playground example of Auth Kit: complete sign-in flow.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-auth-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-auth-kit-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-auth-kit-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-auth-kit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-auth-kit-sign-in",
+      "type": "registry:example",
+      "title": "Auth Kit: complete sign-in flow: Sign in",
+      "description": "Sign in example of Auth Kit: complete sign-in flow.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-auth-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-auth-kit-sign-in.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-auth-kit-sign-in.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-auth-kit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-auth-kit-sign-up",
+      "type": "registry:example",
+      "title": "Auth Kit: complete sign-in flow: Sign up",
+      "description": "Sign up example of Auth Kit: complete sign-in flow.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-auth-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-auth-kit-sign-up.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-auth-kit-sign-up.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-auth-kit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-auth-kit-verify",
+      "type": "registry:example",
+      "title": "Auth Kit: complete sign-in flow: Verify",
+      "description": "Verify example of Auth Kit: complete sign-in flow.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-auth-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-auth-kit-verify.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-auth-kit-verify.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-auth-kit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-auth-kit-forgot",
+      "type": "registry:example",
+      "title": "Auth Kit: complete sign-in flow: Forgot",
+      "description": "Forgot example of Auth Kit: complete sign-in flow.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-auth-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-auth-kit-forgot.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-auth-kit-forgot.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-auth-kit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-auth-kit-reset",
+      "type": "registry:example",
+      "title": "Auth Kit: complete sign-in flow: Reset",
+      "description": "Reset example of Auth Kit: complete sign-in flow.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-auth-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-auth-kit-reset.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-auth-kit-reset.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-auth-kit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-auth-kit-invite",
+      "type": "registry:example",
+      "title": "Auth Kit: complete sign-in flow: Invite",
+      "description": "Invite example of Auth Kit: complete sign-in flow.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-auth-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-auth-kit-invite.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-auth-kit-invite.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-auth-kit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-auth-kit-onboarding",
+      "type": "registry:example",
+      "title": "Auth Kit: complete sign-in flow: Onboarding",
+      "description": "Onboarding example of Auth Kit: complete sign-in flow.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-auth-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-auth-kit-onboarding.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-auth-kit-onboarding.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-auth-kit",
+        "tier": "free"
+      }
+    },
+    {
       "name": "template-launch",
       "type": "registry:block",
       "title": "Launch page",
@@ -33590,6 +34220,275 @@
       "meta": {
         "example": true,
         "of": "template-ledger",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-muse",
+      "type": "registry:block",
+      "title": "Muse: AI chat app",
+      "description": "A calm, reading-first AI chat app in five pages: a chat with reasoning, sources, a document panel and a model picker, a new-chat screen, projects, a library of everything made, and settings.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/ai-chat.json",
+        "https://ui.ballmac.com/r/ai-message.json",
+        "https://ui.ballmac.com/r/artifact-panel.json",
+        "https://ui.ballmac.com/r/citation.json",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/model-picker.json",
+        "https://ui.ballmac.com/r/prompt-input.json",
+        "https://ui.ballmac.com/r/reasoning-disclosure.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/sheet.json",
+        "https://ui.ballmac.com/r/slider.json",
+        "https://ui.ballmac.com/r/streaming-text.json",
+        "https://ui.ballmac.com/r/suggestion-chips.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/thinking-indicator.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/muse/muse-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/muse/muse-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/muse/muse-data.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/muse/muse-data.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/muse/muse-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/muse/muse-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/muse/muse-chat.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/muse/muse-chat.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/muse/muse-projects.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/muse/muse-projects.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/muse/muse-library.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/muse/muse-library.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/muse/muse-settings.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/muse/muse-settings.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/muse/page.tsx",
+          "type": "registry:page",
+          "target": "app/muse/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/muse/new/page.tsx",
+          "type": "registry:page",
+          "target": "app/muse/new/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/muse/projects/page.tsx",
+          "type": "registry:page",
+          "target": "app/muse/projects/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/muse/library/page.tsx",
+          "type": "registry:page",
+          "target": "app/muse/library/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/muse/settings/page.tsx",
+          "type": "registry:page",
+          "target": "app/muse/settings/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /muse, /muse/new, /muse/projects, /muse/library and /muse/settings. Connect your model in MuseChat's send(): it currently streams a scripted reply from muse-data.ts.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "ai",
+          "chat",
+          "assistant",
+          "projects",
+          "library",
+          "settings",
+          "artifacts"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a five-page AI chat product with a serif reading column. Replace send() in muse-chat.tsx with your model call, muse-data.ts with your history, and edit museCss for the palette.",
+          "whenToUse": [
+            "Chat assistants and copilots that need a full product UI",
+            "Reading-heavy AI tools where answers are long"
+          ],
+          "whenNotToUse": [
+            "Embedding a small chat widget in another page (use ai-chat-1)"
+          ],
+          "composesWith": [
+            "ai-chat-2",
+            "settings-1",
+            "login-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter",
+              "action": "Sends the message; Shift+Enter adds a new line"
+            },
+            {
+              "keys": "Arrow keys in the model picker",
+              "action": "Moves through models; Enter chooses one"
+            }
+          ],
+          "customization": [
+            "Replace send() with your model call",
+            "Edit museCss for the light and dark palettes",
+            "Swap the reading font in muse-fonts.ts"
+          ]
+        },
+        "examples": [
+          "template-muse-demo",
+          "template-muse-new",
+          "template-muse-projects",
+          "template-muse-library",
+          "template-muse-settings"
+        ],
+        "url": "https://ui.ballmac.com/components/template-muse"
+      }
+    },
+    {
+      "name": "template-muse-demo",
+      "type": "registry:example",
+      "title": "Muse: AI chat app: Chat",
+      "description": "Chat example of Muse: AI chat app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-muse.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-muse-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-muse-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-muse",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-muse-new",
+      "type": "registry:example",
+      "title": "Muse: AI chat app: New chat",
+      "description": "New chat example of Muse: AI chat app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-muse.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-muse-new.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-muse-new.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-muse",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-muse-projects",
+      "type": "registry:example",
+      "title": "Muse: AI chat app: Projects",
+      "description": "Projects example of Muse: AI chat app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-muse.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-muse-projects.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-muse-projects.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-muse",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-muse-library",
+      "type": "registry:example",
+      "title": "Muse: AI chat app: Library",
+      "description": "Library example of Muse: AI chat app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-muse.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-muse-library.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-muse-library.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-muse",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-muse-settings",
+      "type": "registry:example",
+      "title": "Muse: AI chat app: Settings",
+      "description": "Settings example of Muse: AI chat app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-muse.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-muse-settings.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-muse-settings.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-muse",
         "tier": "free"
       }
     },
@@ -34294,6 +35193,264 @@
       "meta": {
         "example": true,
         "of": "template-relay",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-workspace",
+      "type": "registry:block",
+      "title": "Parcel: productivity workspace",
+      "description": "A five-app productivity suite in one shell: a Today page with agenda, tasks and a focus timer, plus a full mail client, week calendar, drag-and-drop board and settings. A tab bar on phones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/calendar-1.json",
+        "https://ui.ballmac.com/r/command.json",
+        "https://ui.ballmac.com/r/kanban-1.json",
+        "https://ui.ballmac.com/r/mail-1.json",
+        "https://ui.ballmac.com/r/settings-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/workspace/workspace-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/workspace/workspace-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/workspace/workspace-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/workspace/workspace-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/workspace/workspace-today.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/workspace/workspace-today.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/workspace/workspace-mail.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/workspace/workspace-mail.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/workspace/workspace-calendar.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/workspace/workspace-calendar.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/workspace/workspace-board.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/workspace/workspace-board.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/workspace/workspace-settings.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/workspace/workspace-settings.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/workspace/page.tsx",
+          "type": "registry:page",
+          "target": "app/workspace/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/workspace/mail/page.tsx",
+          "type": "registry:page",
+          "target": "app/workspace/mail/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/workspace/calendar/page.tsx",
+          "type": "registry:page",
+          "target": "app/workspace/calendar/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/workspace/board/page.tsx",
+          "type": "registry:page",
+          "target": "app/workspace/board/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/workspace/settings/page.tsx",
+          "type": "registry:page",
+          "target": "app/workspace/settings/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /workspace, /workspace/mail, /workspace/calendar, /workspace/board and /workspace/settings. Mail, calendar, board and settings are the Ballmac blocks: pass them your data through their props.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "productivity",
+          "mail",
+          "calendar",
+          "kanban",
+          "tasks",
+          "workspace",
+          "app shell"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a multi-app productivity shell. WorkspaceShell gives every page an app rail (a tab bar on phones) and a command menu; each app page wraps a Ballmac block you can feed with your own data.",
+          "whenToUse": [
+            "Suites that combine several tools under one navigation",
+            "Starting point for team inboxes, planners and internal tools"
+          ],
+          "whenNotToUse": [
+            "A single dashboard (use template-atlas)"
+          ],
+          "composesWith": [
+            "mail-1",
+            "calendar-1",
+            "kanban-1"
+          ],
+          "a11y": [
+            {
+              "keys": "⌘K / Ctrl+K",
+              "action": "Opens the command menu to jump between apps"
+            },
+            {
+              "keys": "J / K in mail",
+              "action": "Moves between messages"
+            }
+          ],
+          "customization": [
+            "Edit workspaceCss for the palette",
+            "Add an app to the apps array in workspace-theme.tsx",
+            "Pass data props to the Mail1, Calendar1 and Kanban1 blocks"
+          ]
+        },
+        "examples": [
+          "template-workspace-demo",
+          "template-workspace-mail",
+          "template-workspace-calendar",
+          "template-workspace-board",
+          "template-workspace-settings"
+        ],
+        "url": "https://ui.ballmac.com/components/template-workspace"
+      }
+    },
+    {
+      "name": "template-workspace-demo",
+      "type": "registry:example",
+      "title": "Parcel: productivity workspace: Today",
+      "description": "Today example of Parcel: productivity workspace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-workspace.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-workspace-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-workspace-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-workspace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-workspace-mail",
+      "type": "registry:example",
+      "title": "Parcel: productivity workspace: Mail",
+      "description": "Mail example of Parcel: productivity workspace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-workspace.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-workspace-mail.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-workspace-mail.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-workspace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-workspace-calendar",
+      "type": "registry:example",
+      "title": "Parcel: productivity workspace: Calendar",
+      "description": "Calendar example of Parcel: productivity workspace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-workspace.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-workspace-calendar.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-workspace-calendar.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-workspace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-workspace-board",
+      "type": "registry:example",
+      "title": "Parcel: productivity workspace: Board",
+      "description": "Board example of Parcel: productivity workspace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-workspace.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-workspace-board.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-workspace-board.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-workspace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-workspace-settings",
+      "type": "registry:example",
+      "title": "Parcel: productivity workspace: Settings",
+      "description": "Settings example of Parcel: productivity workspace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-workspace.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-workspace-settings.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-workspace-settings.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-workspace",
         "tier": "free"
       }
     },
