@@ -2,9 +2,9 @@
 "use client"
 
 import * as React from "react"
-import { useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 
 type GlareHoverProps = React.ComponentProps<"div"> & {
   /** Tilt of the band of light, in degrees. */
@@ -18,7 +18,7 @@ type GlareHoverProps = React.ComponentProps<"div"> & {
 }
 
 function GlareHover({ angle = 18, duration = 800, intensity = 0.55, tone = "light", className, children, style, ...props }: GlareHoverProps) {
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotionSafe()
   const color = tone === "light" ? `rgb(255 255 255 / ${intensity})` : `color-mix(in oklab, var(--foreground) ${Math.round(intensity * 22)}%, transparent)`
 
   return (

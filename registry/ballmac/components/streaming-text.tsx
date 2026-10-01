@@ -2,15 +2,16 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 
 type StreamingCaretProps = React.ComponentProps<"span">
 
 /** The blinking block caret shown at the end of text that is still arriving. Static under reduced motion. */
 function StreamingCaret({ className, ...props }: StreamingCaretProps) {
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useReducedMotionSafe()
   const classes = cn(
     "ml-0.5 inline-block h-[1.1em] w-[0.5ch] min-w-1.5 translate-y-[0.15em] rounded-[1px] bg-foreground/80",
     className
@@ -55,7 +56,7 @@ function StreamingText({
   className,
   ...props
 }: StreamingTextProps) {
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useReducedMotionSafe()
   const revealing = animate && !reduceMotion
   const [count, setCount] = React.useState(0)
   const countRef = React.useRef(0)

@@ -14,7 +14,14 @@ import { cn } from "@/lib/utils"
 function useDemoBag(on: boolean) {
   React.useEffect(() => {
     if (!on) return
-    if (typeof window !== "undefined" && window.sessionStorage.getItem("kiln-bag") === null) {
+    let empty = false
+    try {
+      empty = window.sessionStorage.getItem("kiln-bag") === null
+    } catch {
+      // Storage is blocked; the demo bag still fills for this page.
+      empty = true
+    }
+    if (empty) {
       cart.add("morning-mug", 0, 2)
       cart.add("noodle-bowl", 2, 1)
     }

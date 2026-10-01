@@ -113,7 +113,7 @@ function WorkspaceCard({
   const storagePercent = workspace.storage ? Math.min(100, (workspace.storage.used / Math.max(workspace.storage.total, 1)) * 100) : 0;
   const total = workspace.memberCount ?? workspace.members?.length ?? 0;
   const titleClass =
-    "rounded-sm text-base font-semibold tracking-tight outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50 focus-visible:after:rounded-2xl";
+    "rounded-sm text-base font-semibold tracking-tight outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:ring-[3px] focus-visible:after:ring-inset focus-visible:after:ring-ring/50 focus-visible:after:rounded-2xl";
 
   return (
     <article

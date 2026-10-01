@@ -18,14 +18,14 @@ const paths = [
 
 /** Producer, queue and consumer with packets travelling between them. Decorative; the sentence below carries the meaning. */
 function Flow() {
-  const box = "bg-card grid h-20 w-28 shrink-0 place-items-center rounded-xl border text-center text-sm font-semibold shadow-xs sm:w-32"
+  const box = "bg-card grid h-20 w-24 shrink-0 place-items-center rounded-xl border text-center text-xs font-semibold shadow-xs sm:w-32 sm:text-sm"
   return (
     <figure className="mx-auto w-full max-w-xl" aria-label="How a message travels">
       <div aria-hidden="true" className="flex items-center">
         <div className={box}><span>Producer<span className={cn("text-muted-foreground block text-xs font-normal", docsMonoClass)}>your app</span></span></div>
-        <div className="relative h-px min-w-6 flex-1 border-t-2 border-dashed" style={{ ["--docs-travel" as string]: "5rem" }}><span className="docs-packet bg-chart-1 absolute -top-[7px] left-0 size-3 rounded-full" /></div>
+        <div className="relative h-px min-w-6 flex-1 border-t-2 border-dashed [--docs-travel:1.75rem] sm:[--docs-travel:5rem]"><span className="docs-packet bg-chart-1 absolute -top-[7px] left-0 size-3 rounded-full" /></div>
         <div className={cn(box, "bg-primary text-primary-foreground border-primary")}><span>Queue<span className={cn("block text-xs font-normal opacity-100", docsMonoClass)}>invoices</span></span></div>
-        <div className="relative h-px min-w-6 flex-1 border-t-2 border-dashed" style={{ ["--docs-travel" as string]: "5rem" }}><span className="docs-packet bg-chart-3 absolute -top-[7px] left-0 size-3 rounded-full" style={{ animationDelay: "1.1s" }} /></div>
+        <div className="relative h-px min-w-6 flex-1 border-t-2 border-dashed [--docs-travel:1.75rem] sm:[--docs-travel:5rem]"><span className="docs-packet bg-chart-3 absolute -top-[7px] left-0 size-3 rounded-full" style={{ animationDelay: "1.1s" }} /></div>
         <div className={box}><span>Consumer<span className={cn("text-muted-foreground block text-xs font-normal", docsMonoClass)}>worker</span></span></div>
       </div>
       <figcaption className="text-muted-foreground mt-4 text-center text-sm">A producer sends, Tern holds the message until a consumer acknowledges it.</figcaption>

@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["card", "3d", "tilt", "parallax", "hover", "glare", "motion"],
   files: [{ path: "components/tilt-card.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [
     { name: "tilt-card-demo", title: "Membership card", file: "tilt-card-demo.tsx" },
     { name: "tilt-card-product", title: "Linked product card", file: "tilt-card-product.tsx" },

@@ -21,7 +21,7 @@ function List({ selected, onPick }: { selected: string; onPick: (id: string) => 
               onPick(m.id);
               setDetailOpen(true);
             }}
-            className="grid w-full gap-0.5 px-4 py-3 text-left outline-none transition-colors hover:bg-accent/60 focus-visible:bg-accent aria-[current=true]:bg-accent"
+            className="grid w-full gap-0.5 px-4 py-3 text-left outline-none transition-colors hover:bg-accent/60 focus-visible:bg-accent focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50 aria-[current=true]:bg-accent"
           >
             <span className="flex items-baseline justify-between gap-2">
               <span className="truncate text-sm font-semibold">{m.from}</span>

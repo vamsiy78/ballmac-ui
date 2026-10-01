@@ -1,4 +1,6 @@
 // Ballmac UI: Studio project page. https://ui.ballmac.com/templates/template-studio
+"use client"
+
 import * as React from "react"
 import { ArrowUpRight } from "lucide-react"
 

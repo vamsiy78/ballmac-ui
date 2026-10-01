@@ -3,9 +3,10 @@
 
 import * as React from "react"
 import { ArrowRight, Camera, Flashlight, Lock } from "lucide-react"
-import { AnimatePresence, motion, useAnimationControls, useReducedMotion } from "motion/react"
+import { AnimatePresence, motion, useAnimationControls } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 
 type LockScreenProps = Omit<React.ComponentProps<"section">, "onSubmit"> & {
   /** "mac" shows a password field under the user's avatar; "ios" shows notifications and a swipe-up unlock. */
@@ -95,7 +96,7 @@ function LockScreen({
   className,
   ...props
 }: LockScreenProps) {
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotionSafe()
   const uid = React.useId()
   const [lockedState, setLockedState] = React.useState(defaultLocked)
   const locked = lockedProp ?? lockedState

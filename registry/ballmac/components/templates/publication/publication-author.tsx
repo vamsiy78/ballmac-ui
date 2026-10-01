@@ -1,4 +1,6 @@
 // Ballmac UI: Publication author page. https://ui.ballmac.com/templates/template-publication
+"use client"
+
 import * as React from "react"
 
 import { articles, authors, formatShort } from "@/components/ballmac/templates/publication/publication-data"

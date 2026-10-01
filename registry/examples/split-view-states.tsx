@@ -7,7 +7,7 @@ function Files() {
     <ul className="divide-y">
       {files.map((f) => (
         <li key={f}>
-          <button type="button" onClick={() => setDetailOpen(true)} className="w-full px-4 py-3 text-left text-sm outline-none hover:bg-accent/60 focus-visible:bg-accent">
+          <button type="button" onClick={() => setDetailOpen(true)} className="w-full px-4 py-3 text-left text-sm outline-none hover:bg-accent/60 focus-visible:bg-accent focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50">
             {f}
           </button>
         </li>

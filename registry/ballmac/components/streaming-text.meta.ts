@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "streaming", "typewriter", "caret", "llm", "text"],
   files: [{ path: "components/streaming-text.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [{ name: "streaming-text-demo", title: "Default", file: "streaming-text-demo.tsx" }],
   ai: {
     summary:

@@ -12041,7 +12041,7 @@
         "https://ui.ballmac.com/r/calendar.json"
       ],
       "dependencies": [
-        "react-day-picker"
+        "react-day-picker@^9"
       ],
       "files": [
         {
@@ -12321,11 +12321,11 @@
       "author": "Ballmac <https://ui.ballmac.com>",
       "dependencies": [
         "embla-carousel-react@^8",
-        "lucide-react",
-        "motion@^12"
+        "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -12662,7 +12662,7 @@
         "https://ui.ballmac.com/r/chart.json"
       ],
       "dependencies": [
-        "recharts"
+        "recharts@^3"
       ],
       "files": [
         {
@@ -12689,7 +12689,7 @@
         "https://ui.ballmac.com/r/chart.json"
       ],
       "dependencies": [
-        "recharts"
+        "recharts@^3"
       ],
       "files": [
         {
@@ -12716,7 +12716,7 @@
         "https://ui.ballmac.com/r/chart.json"
       ],
       "dependencies": [
-        "recharts"
+        "recharts@^3"
       ],
       "files": [
         {
@@ -16346,7 +16346,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -16828,7 +16829,7 @@
         "utils"
       ],
       "dependencies": [
-        "motion",
+        "motion@^12",
         "lucide-react"
       ],
       "files": [
@@ -18323,7 +18324,7 @@
         "https://ui.ballmac.com/r/input.json"
       ],
       "dependencies": [
-        "react-hook-form",
+        "react-hook-form@^7",
         "lucide-react"
       ],
       "files": [
@@ -18353,7 +18354,7 @@
         "https://ui.ballmac.com/r/textarea.json"
       ],
       "dependencies": [
-        "react-hook-form"
+        "react-hook-form@^7"
       ],
       "files": [
         {
@@ -18505,11 +18506,9 @@
       "title": "Glare Hover",
       "description": "Wraps any content so a diagonal band of light sweeps across it on hover or keyboard focus, in white for images and dark surfaces or a soft shadow for light ones.",
       "author": "Ballmac <https://ui.ballmac.com>",
-      "dependencies": [
-        "motion@^12"
-      ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -22120,7 +22119,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -24955,7 +24955,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -27528,7 +27529,7 @@
         "https://ui.ballmac.com/r/button.json"
       ],
       "dependencies": [
-        "react-resizable-panels"
+        "react-resizable-panels@^3"
       ],
       "files": [
         {
@@ -28152,7 +28153,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -32266,7 +32268,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -35566,7 +35569,7 @@
       "author": "Ballmac <https://ui.ballmac.com>",
       "dependencies": [
         "lucide-react",
-        "motion",
+        "motion@^12",
         "recharts@^3"
       ],
       "registryDependencies": [
@@ -37060,7 +37063,7 @@
       "author": "Ballmac <https://ui.ballmac.com>",
       "dependencies": [
         "lucide-react",
-        "motion"
+        "motion@^12"
       ],
       "registryDependencies": [
         "utils",
@@ -38460,7 +38463,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -39907,7 +39911,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {

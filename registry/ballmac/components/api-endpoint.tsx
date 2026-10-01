@@ -252,12 +252,12 @@ function ApiEndpoint({
                 ))}
               </TabsPrimitive.List>
               {requestExample && (
-                <TabsPrimitive.Content value="request" className="grid gap-2 outline-none">
+                <TabsPrimitive.Content value="request" className="grid gap-2 rounded-lg outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50">
                   <Code code={requestExample} language={requestLanguage} label="request body" />
                 </TabsPrimitive.Content>
               )}
               {responses.map((r) => (
-                <TabsPrimitive.Content key={r.status} value={String(r.status)} className="grid gap-2 outline-none">
+                <TabsPrimitive.Content key={r.status} value={String(r.status)} className="grid gap-2 rounded-lg outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50">
                   <p className="text-[13px] text-foreground">
                     <span className="font-medium">{statusMeaning(r.status)}.</span>{" "}
                     <span className="text-muted-foreground">{r.description}</span>

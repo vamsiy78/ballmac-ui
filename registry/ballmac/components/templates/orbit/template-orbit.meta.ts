@@ -30,7 +30,7 @@ export default defineItem({
     { path: "app/orbit/changelog/page.tsx" },
     { path: "app/orbit/login/page.tsx" },
   ],
-  dependencies: ["lucide-react", "motion", "recharts@^3"],
+  dependencies: ["lucide-react", "motion@^12", "recharts@^3"],
   registryDependencies: ["shadcn:utils", "accordion", "aurora-background", "blur-fade", "changelog-feed", "chart", "copy-button", "marquee", "number-ticker", "segmented-control", "slider"],
   examples: [
     { name: "template-orbit-demo", title: "Home", file: "template-orbit-demo.tsx" },

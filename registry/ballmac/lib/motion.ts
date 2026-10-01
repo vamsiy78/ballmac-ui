@@ -1,6 +1,7 @@
 // Ballmac UI: Motion presets. https://ui.ballmac.com/components/motion-presets
 // One set of easings, durations and springs shared by every animated Ballmac component.
-import type { Transition, Variants } from "motion/react"
+import * as React from "react"
+import { useReducedMotion, type Transition, type Variants } from "motion/react"
 
 /** Cubic-bezier easings (match --bm-ease-* in the theme). */
 export const ease = {
@@ -46,4 +47,17 @@ export const variants = {
 /** Stagger children by `step` seconds. */
 export function stagger(step = 0.06, delayChildren = 0): Transition {
   return { staggerChildren: step, delayChildren }
+}
+
+const noopSubscribe = () => () => {}
+
+/**
+ * Motion's `useReducedMotion`, made safe for server rendering. Motion reads the media query on the first
+ * client render, so a component that renders different markup for reduced motion would not match the
+ * server HTML. This returns `false` until hydration has finished, then the visitor's real preference.
+ */
+export function useReducedMotionSafe(): boolean {
+  const reduce = useReducedMotion()
+  const hydrated = React.useSyncExternalStore(noopSubscribe, () => true, () => false)
+  return hydrated && !!reduce
 }

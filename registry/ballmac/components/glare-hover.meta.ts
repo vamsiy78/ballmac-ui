@@ -9,8 +9,7 @@ export default defineItem({
   category: "motion",
   tags: ["hover", "glare", "shine", "image", "card"],
   files: [{ path: "components/glare-hover.tsx" }],
-  dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [
     { name: "glare-hover-demo", title: "Image cards", file: "glare-hover-demo.tsx" },
     { name: "glare-hover-tones", title: "Light and dark tone", file: "glare-hover-tones.tsx" },

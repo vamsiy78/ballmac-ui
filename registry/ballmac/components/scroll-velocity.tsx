@@ -2,9 +2,10 @@
 "use client"
 
 import * as React from "react"
-import { motion, useAnimationFrame, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, useVelocity } from "motion/react"
+import { motion, useAnimationFrame, useMotionValue, useScroll, useSpring, useTransform, useVelocity } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 
 type ScrollVelocityProps = Omit<React.ComponentProps<"div">, "children"> & {
   /** What runs along the row: words, logos, anything. It is repeated to fill the width. */
@@ -28,7 +29,7 @@ const wrap = (min: number, max: number, v: number) => {
 
 /** A row that drifts sideways and speeds up, or reverses, with how fast you scroll. */
 function ScrollVelocity({ children, baseVelocity = 60, direction = "left", sensitivity = 1, scrollContainer, gap = "2rem", className, ...props }: ScrollVelocityProps) {
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotionSafe()
   const rootRef = React.useRef<HTMLDivElement>(null)
   const copyRef = React.useRef<HTMLDivElement>(null)
   const [copies, setCopies] = React.useState(4)

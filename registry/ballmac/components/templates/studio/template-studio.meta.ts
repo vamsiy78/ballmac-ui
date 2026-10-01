@@ -33,7 +33,7 @@ export default defineItem({
     { path: "app/studio/services/page.tsx" },
     { path: "app/studio/contact/page.tsx" },
   ],
-  dependencies: ["lucide-react", "motion"],
+  dependencies: ["lucide-react", "motion@^12"],
   registryDependencies: ["shadcn:utils", "copy-button", "marquee"],
   examples: [
     { name: "template-studio-demo", title: "Home", file: "template-studio-demo.tsx" },

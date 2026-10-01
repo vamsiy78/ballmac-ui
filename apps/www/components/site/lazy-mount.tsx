@@ -22,17 +22,25 @@ export function LazyMount({
   React.useEffect(() => {
     const el = ref.current
     if (!el) return
+    let idle = 0
+    let timer = 0
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
-          setShown(true)
           io.disconnect()
+          // Mount when the browser is idle, so heavy previews never block the first interaction.
+          if (typeof window.requestIdleCallback === "function") idle = window.requestIdleCallback(() => setShown(true), { timeout: 1200 })
+          else timer = window.setTimeout(() => setShown(true), 200)
         }
       },
       { rootMargin }
     )
     io.observe(el)
-    return () => io.disconnect()
+    return () => {
+      io.disconnect()
+      if (idle) window.cancelIdleCallback(idle)
+      if (timer) window.clearTimeout(timer)
+    }
   }, [rootMargin])
   return (
     <div ref={ref} className={className} style={style}>

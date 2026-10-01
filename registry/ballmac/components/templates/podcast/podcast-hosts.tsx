@@ -1,4 +1,6 @@
 // Ballmac UI: Podcast hosts page. https://ui.ballmac.com/templates/template-podcast
+"use client"
+
 import * as React from "react"
 import { Mail } from "lucide-react"
 

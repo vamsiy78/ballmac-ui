@@ -15,7 +15,7 @@ export default function ModelPickerCompact() {
   const [model, setModel] = React.useState("lyra-mid")
   return (
     <div className="flex h-[22rem] w-full max-w-xl flex-col justify-end">
-      <div className="rounded-2xl border bg-card p-3 shadow-xs">
+      <div className="rounded-2xl border bg-card p-3 shadow-xs transition-shadow focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/30 motion-reduce:transition-none">
         <textarea
           aria-label="Message"
           rows={2}

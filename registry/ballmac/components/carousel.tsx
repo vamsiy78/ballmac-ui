@@ -5,8 +5,9 @@
 import * as React from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
-import { useReducedMotion } from "motion/react";
+
 import { cn } from "@/lib/utils";
+import { useReducedMotionSafe } from "@/lib/ballmac/motion";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type CarouselOptions = NonNullable<Parameters<typeof useEmblaCarousel>[0]>;
@@ -65,7 +66,7 @@ function Carousel({
   onBlur,
   ...props
 }: CarouselProps) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [viewportRef, api] = useEmblaCarousel(
     { ...opts, axis: orientation === "horizontal" ? "x" : "y", ...(reduce ? { duration: 0 } : {}) },
   );

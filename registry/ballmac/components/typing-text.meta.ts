@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["typewriter", "typing", "text", "caret", "hero"],
   files: [{ path: "components/typing-text.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [
     { name: "typing-text-demo", title: "Cycling headline", file: "typing-text-demo.tsx" },
     { name: "typing-text-once", title: "Type once with a caret", file: "typing-text-once.tsx" },

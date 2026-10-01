@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["lock-screen", "login", "macos", "ios", "clock", "password", "wallpaper"],
   files: [{ path: "components/lock-screen.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [
     { name: "lock-screen-demo", title: "macOS password lock", file: "lock-screen-demo.tsx" },
     { name: "lock-screen-ios", title: "iOS in a phone", file: "lock-screen-ios.tsx" },

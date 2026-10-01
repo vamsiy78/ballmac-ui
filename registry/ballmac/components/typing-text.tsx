@@ -2,9 +2,10 @@
 "use client"
 
 import * as React from "react"
-import { motion, useInView, useReducedMotion } from "motion/react"
+import { motion, useInView } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 
 type TypingTextProps = Omit<React.ComponentProps<"span">, "children"> & {
   /** One string to type, or several to type and erase in turn. */
@@ -39,7 +40,7 @@ function TypingText({
 }: TypingTextProps) {
   const list = React.useMemo(() => (Array.isArray(text) ? text : [text]), [text])
   const looping = loop ?? list.length > 1
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotionSafe()
   const ref = React.useRef<HTMLSpanElement>(null)
   const seen = useInView(ref, { once: true })
   const active = !startOnView || seen

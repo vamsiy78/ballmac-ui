@@ -33,7 +33,7 @@ function Tile({ children, className, uses }: { children: React.ReactNode; classN
         {uses.map((u, i) => (
           <React.Fragment key={u.name}>
             {i > 0 && <span aria-hidden="true">·</span>}
-            <Link href={`/components/${u.name}`} className="hover:text-foreground underline-offset-4 transition-colors hover:underline">
+            <Link href={`/components/${u.name}`} className="hover:text-foreground inline-flex min-h-6 items-center underline-offset-4 transition-colors hover:underline">
               {u.title}
             </Link>
           </React.Fragment>
@@ -293,7 +293,7 @@ function TerminalTile() {
         <TerminalLine variant="success">Created components/ballmac/dock.tsx</TerminalLine>
       </Terminal>
       <figcaption className="text-muted-foreground px-1 text-xs">
-        <Link href="/components/terminal" className="hover:text-foreground underline-offset-4 transition-colors hover:underline">
+        <Link href="/components/terminal" className="hover:text-foreground inline-flex min-h-6 items-center underline-offset-4 transition-colors hover:underline">
           Terminal
         </Link>
       </figcaption>

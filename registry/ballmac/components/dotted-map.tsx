@@ -3,9 +3,10 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 
 type MapTone = "foreground" | "primary" | "chart-1" | "chart-2" | "chart-3" | "chart-4" | "chart-5" | "destructive"
 
@@ -85,7 +86,7 @@ function project(lat: number, lng: number, top: number, span: number, height: nu
 
 /** A world map made of dots, with markers and flowing routes. Pure SVG. */
 function DottedMap({ markers = [], arcs = [], dots = 150, latRange = [-56, 73], tone = "foreground", labels = false, label = "World map", className, ...props }: DottedMapProps) {
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotionSafe()
   const [south, north] = latRange
   const span = north - south
   const height = (WIDTH * span) / 360

@@ -2,9 +2,10 @@
 "use client"
 
 import * as React from "react"
-import { animate, useInView, useReducedMotion } from "motion/react"
+import { animate, useInView } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 
 type NumberTickerProps = Omit<React.ComponentProps<"span">, "children"> & {
   /** The number to count to. */
@@ -33,7 +34,7 @@ function NumberTicker({
 }: NumberTickerProps) {
   const ref = React.useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" })
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useReducedMotionSafe()
   const formatter = React.useMemo(() => new Intl.NumberFormat(locale, format), [locale, format])
 
   React.useEffect(() => {

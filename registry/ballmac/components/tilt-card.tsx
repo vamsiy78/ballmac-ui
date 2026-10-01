@@ -2,9 +2,10 @@
 "use client"
 
 import * as React from "react"
-import { motion, type MotionStyle, useMotionTemplate, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react"
+import { motion, type MotionStyle, useMotionTemplate, useMotionValue, useSpring, useTransform } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 
 type TiltCardProps = Omit<
   React.ComponentProps<"div">,
@@ -50,7 +51,7 @@ function TiltCard({
   onBlur,
   ...props
 }: TiltCardProps) {
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useReducedMotionSafe()
   // Pointer position over the card, 0–1 on each axis; 0.5 is the center.
   const px = useMotionValue(0.5)
   const py = useMotionValue(0.5)
