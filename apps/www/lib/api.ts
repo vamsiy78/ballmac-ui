@@ -30,6 +30,14 @@ export function summary(i: SiteItem) {
     dependencies: i.dependencies,
     registryDependencies: i.registryDependencies,
     examples: i.examples.map((e) => e.name),
+    ...(i.category === "templates"
+      ? {
+          templateKind: i.templateKind,
+          pages: i.templatePages.map((p) => ({ title: p.title, path: p.path, preview: `${SITE_URL}/preview/${p.example}` })),
+          fonts: i.fonts,
+        }
+      : {}),
+    preview: i.examples[0] ? `${SITE_URL}/preview/${i.examples[0].name}` : undefined,
   }
 }
 

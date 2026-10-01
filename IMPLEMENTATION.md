@@ -65,7 +65,7 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 ### 9. MCP compatibility
 - [x] shadcn MCP compatible (registry.json + examples + descriptions)
 - [x] `/api/v1` metadata API (index.json, items/[name].json)
-- [x] `@ballmac/mcp` server (packages/mcp): list_items, search_items, get_item, get_examples, get_install_command, compose_page, get_setup — tested; not yet published to npm
+- [x] `@ballmac/mcp` 1.0.0 (packages/mcp): 8 tools (list_items, list_categories, search_items, get_item, get_examples, get_install_command, compose_page with template suggestions, get_setup) with structured output, resources `ballmac://catalog` and `ballmac://items/{name}`, prompts `build_page` and `choose_component`, synonym and whole-word search, typo suggestions, timeouts and a 10-minute index cache; 12 unit tests and an 18-check end-to-end run against the site pass; README, licence, publish config and `.github/workflows/release-mcp.yml` (tag `mcp-v1.0.0`, needs the NPM_TOKEN secret) are ready; not yet published to npm
 
 ### 10. Search
 - [x] ⌘K command menu

@@ -10,7 +10,7 @@ export function GET() {
     "",
     "## Docs",
     `- [Installation](${SITE_URL}/docs/installation): set up and add components`,
-    `- [MCP](${SITE_URL}/docs/mcp): use Ballmac UI from Claude Code, Cursor, VS Code and Codex`,
+    `- [MCP](${SITE_URL}/docs/mcp): use Ballmac UI from Claude Code, Cursor, VS Code and Codex (npx -y @ballmac/mcp)`,
     `- [Registry index](${SITE_URL}/r/registry.json): every item in shadcn registry format`,
     "",
     "## Components",

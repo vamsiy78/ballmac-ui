@@ -5,9 +5,24 @@ import { DocsPage } from "@/components/site/docs-page"
 
 export const metadata: Metadata = {
   title: "MCP & AI agents",
-  description: "Let Claude Code, Cursor, VS Code, Codex or Windsurf browse, search and install Ballmac UI components through the shadcn MCP server.",
+  description: "Connect Claude, Cursor, VS Code, Windsurf or Codex to Ballmac UI with the @ballmac/mcp server: search components, blocks and templates, read their props and install them.",
   alternates: { canonical: "/docs/mcp" },
 }
+
+const ballmacClients = [
+  { name: "Claude Code", lang: "bash", code: "claude mcp add ballmac -- npx -y @ballmac/mcp" },
+  { name: "Cursor (.cursor/mcp.json) · Claude Desktop · Windsurf", lang: "json", code: `{\n  "mcpServers": {\n    "ballmac": {\n      "command": "npx",\n      "args": ["-y", "@ballmac/mcp"]\n    }\n  }\n}` },
+  { name: "VS Code (.vscode/mcp.json)", lang: "json", code: `{\n  "servers": {\n    "ballmac": {\n      "type": "stdio",\n      "command": "npx",\n      "args": ["-y", "@ballmac/mcp"]\n    }\n  }\n}` },
+  { name: "Codex (~/.codex/config.toml)", lang: "bash", code: `[mcp_servers.ballmac]\ncommand = "npx"\nargs = ["-y", "@ballmac/mcp"]` },
+] as const
+
+const tools = [
+  ["search_items", "Best matches for a need, such as “chat input with attachments” or “online store”."],
+  ["list_items · list_categories", "Browse components, blocks and templates by kind, category or tier."],
+  ["get_item · get_examples", "Props, keyboard behaviour, import line, template pages, full source and working examples."],
+  ["get_install_command · get_setup", "The exact shadcn CLI commands for pnpm, npm, yarn or bun."],
+  ["compose_page", "A page plan from blocks in order, with a page.tsx scaffold, and any template that already fits."],
+]
 
 const clients = [
   { name: "Claude Code", cmd: "npx shadcn@latest mcp init --client claude" },
@@ -22,30 +37,55 @@ const prompts = [
   "Add @ballmac/prompt-input and @ballmac/ai-message and build a chat panel with them",
   "Which Ballmac UI component should I use for an animated stat, and how do I install it?",
   "Build a pricing section using Ballmac UI blocks",
+  "Is there a Ballmac template for an online store? Install it",
 ]
 
 export default function McpPage() {
   return (
     <DocsPage
       title="MCP & AI agents"
-      lead="Ballmac UI works with the official shadcn MCP server. Your agent can list, search and read components, see their examples and install them, with no extra accounts or keys."
+      lead="Connect your AI coding assistant to Ballmac UI. It can search components, blocks and templates, read their props and examples, install them, and plan pages, with no account or key."
     >
-      <h2>1. Add the registry to your project</h2>
+      <h2>Ballmac MCP server</h2>
+      <p>
+        <code>@ballmac/mcp</code> knows the whole catalog, including blocks and multi-page templates, and can plan a page
+        from blocks. It is read-only and needs no account. Node.js 20 or later.
+      </p>
+      <div className="space-y-3">
+        {ballmacClients.map((c) => (
+          <CodePanel key={c.name} lang={c.lang} code={c.code} title={c.name} />
+        ))}
+      </div>
+      <h3>Tools</h3>
+      <ul>
+        {tools.map(([name, what]) => (
+          <li key={name}>
+            <code>{name}</code>: {what}
+          </li>
+        ))}
+      </ul>
+      <p>
+        It also offers the resources <code>ballmac://catalog</code> and <code>ballmac://items/{"{name}"}</code>, and the
+        prompts <code>build_page</code> and <code>choose_component</code>.
+      </p>
+      <h2>Or use the shadcn MCP server</h2>
+      <p>Ballmac UI is a standard shadcn registry, so the official server works too once the registry is in your project.</p>
+      <h3>1. Add the registry to your project</h3>
       <p>The MCP server reads the registries in <code>components.json</code>:</p>
       <CodePanel lang="bash" code="npx shadcn@latest registry add @ballmac=https://ui.ballmac.com/r/{name}.json" />
-      <h2>2. Connect your client</h2>
+      <h3>2. Connect your client</h3>
       <div className="space-y-3">
         {clients.map((c) => (
           <CodePanel key={c.name} lang="bash" code={c.cmd} title={c.name} />
         ))}
       </div>
-      <h3>Windsurf and other clients</h3>
+      <h4>Windsurf and other clients</h4>
       <p>Add the server to your client&apos;s MCP configuration:</p>
       <CodePanel
         lang="json"
         code={`{\n  "mcpServers": {\n    "shadcn": {\n      "command": "npx",\n      "args": ["shadcn@latest", "mcp"]\n    }\n  }\n}`}
       />
-      <h2>3. Ask for components</h2>
+      <h2>Things to ask</h2>
       <ul>
         {prompts.map((p) => (
           <li key={p}>&ldquo;{p}&rdquo;</li>
