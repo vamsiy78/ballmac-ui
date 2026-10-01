@@ -34003,6 +34003,553 @@
       }
     },
     {
+      "name": "template-docs",
+      "type": "registry:block",
+      "title": "Tern: documentation",
+      "description": "A five-page documentation site: search-first landing, a guide with synced language tabs, filterable API reference, search with highlighted matches and a changelog, with ⌘K search in the header.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/command.json",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/sheet.json",
+        "https://ui.ballmac.com/r/snippet-tabs.json",
+        "https://ui.ballmac.com/r/install-tabs.json",
+        "https://ui.ballmac.com/r/code-block.json",
+        "https://ui.ballmac.com/r/callout.json",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/table-of-contents.json",
+        "https://ui.ballmac.com/r/api-endpoint.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/docs/docs-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/docs/docs-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/docs/docs-data.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/docs/docs-data.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/docs/docs-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/docs/docs-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/docs/docs-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/docs/docs-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/docs/docs-guide.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/docs/docs-guide.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/docs/docs-reference.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/docs/docs-reference.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/docs/docs-search.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/docs/docs-search.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/docs/docs-changelog.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/docs/docs-changelog.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/docs/page.tsx",
+          "type": "registry:page",
+          "target": "app/docs/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/docs/guides/page.tsx",
+          "type": "registry:page",
+          "target": "app/docs/guides/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/docs/reference/page.tsx",
+          "type": "registry:page",
+          "target": "app/docs/reference/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/docs/search/page.tsx",
+          "type": "registry:page",
+          "target": "app/docs/search/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/docs/changelog/page.tsx",
+          "type": "registry:page",
+          "target": "app/docs/changelog/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /docs, /docs/guides, /docs/reference, /docs/search and /docs/changelog. Edit navigation, search entries, releases and endpoints in docs-data.ts; edit docsCss in docs-theme.tsx for the palette. Language tabs share one storage key (tern-lang), so a reader's choice follows them across pages.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "docs",
+          "documentation",
+          "api reference",
+          "search",
+          "changelog",
+          "developer"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a five-page documentation site with ⌘K search, synced language tabs, an on-this-page list, endpoint cards and a changelog. Change content in docs-data.ts and the palette in docsCss.",
+          "whenToUse": [
+            "Developer docs, API references and product help centres",
+            "Any site that needs search, a guide layout and a changelog"
+          ],
+          "whenNotToUse": [
+            "A long-form editorial site (use the publication template)",
+            "Marketing pages without reference content"
+          ],
+          "composesWith": [
+            "command",
+            "snippet-tabs",
+            "table-of-contents",
+            "api-endpoint",
+            "callout"
+          ],
+          "a11y": [
+            {
+              "keys": "⌘K / Ctrl+K",
+              "action": "Opens the docs search"
+            },
+            {
+              "keys": "Arrow keys and Enter in search",
+              "action": "Move through results and open one"
+            },
+            {
+              "keys": "Method buttons on the reference page",
+              "action": "Filter endpoints; each is a pressed toggle"
+            }
+          ],
+          "customization": [
+            "Replace nav, searchIndex, releases and endpointGroups in docs-data.ts",
+            "Edit docsCss for the light and dark palettes",
+            "Swap the Tern mark in DocsLogo"
+          ]
+        },
+        "examples": [
+          "template-docs-demo",
+          "template-docs-guide",
+          "template-docs-reference",
+          "template-docs-search",
+          "template-docs-changelog"
+        ],
+        "url": "https://ui.ballmac.com/components/template-docs"
+      }
+    },
+    {
+      "name": "template-docs-demo",
+      "type": "registry:example",
+      "title": "Tern: documentation: Home",
+      "description": "Home example of Tern: documentation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-docs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-docs-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-docs-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-docs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-docs-guide",
+      "type": "registry:example",
+      "title": "Tern: documentation: Guide",
+      "description": "Guide example of Tern: documentation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-docs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-docs-guide.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-docs-guide.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-docs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-docs-reference",
+      "type": "registry:example",
+      "title": "Tern: documentation: Reference",
+      "description": "Reference example of Tern: documentation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-docs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-docs-reference.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-docs-reference.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-docs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-docs-search",
+      "type": "registry:example",
+      "title": "Tern: documentation: Search",
+      "description": "Search example of Tern: documentation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-docs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-docs-search.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-docs-search.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-docs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-docs-changelog",
+      "type": "registry:example",
+      "title": "Tern: documentation: Changelog",
+      "description": "Changelog example of Tern: documentation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-docs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-docs-changelog.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-docs-changelog.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-docs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-goods",
+      "type": "registry:block",
+      "title": "Kiln & Co: online store",
+      "description": "A five-page store with a bag that persists across pages: a collage home, a filterable shop, a product page with glaze and gallery pickers, a bag with a free-shipping meter and promo code, and a validated checkout. Products are drawn in CSS.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/sheet.json",
+        "https://ui.ballmac.com/r/slider.json",
+        "https://ui.ballmac.com/r/progress.json",
+        "https://ui.ballmac.com/r/accordion.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/goods/goods-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/goods/goods-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/goods/goods-data.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/goods/goods-data.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/goods/goods-cart.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/goods/goods-cart.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/goods/goods-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/goods/goods-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/goods/goods-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/goods/goods-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/goods/goods-shop.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/goods/goods-shop.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/goods/goods-product.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/goods/goods-product.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/goods/goods-cart-page.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/goods/goods-cart-page.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/goods/goods-checkout.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/goods/goods-checkout.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/goods/page.tsx",
+          "type": "registry:page",
+          "target": "app/goods/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/goods/shop/page.tsx",
+          "type": "registry:page",
+          "target": "app/goods/shop/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/goods/shop/[id]/page.tsx",
+          "type": "registry:page",
+          "target": "app/goods/shop/[id]/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/goods/cart/page.tsx",
+          "type": "registry:page",
+          "target": "app/goods/cart/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/goods/checkout/page.tsx",
+          "type": "registry:page",
+          "target": "app/goods/checkout/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /goods, /goods/shop, /goods/shop/[id], /goods/cart and /goods/checkout. Products, glazes and reviews live in goods-data.ts. The bag is kept in sessionStorage (goods-cart.ts); swap it for your cart API. The promo code in the demo is KILN10. Replace Piece with product photos.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "ecommerce",
+          "store",
+          "shop",
+          "product",
+          "cart",
+          "checkout",
+          "ceramics"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a five-page store with a shared bag drawer, filters, a product page, a bag page with free-shipping progress and a validated checkout. Edit goods-data.ts and goodsCss; replace Piece with photos.",
+          "whenToUse": [
+            "Small online shops and product drops",
+            "Any store that needs filters, a product page, a bag and checkout"
+          ],
+          "whenNotToUse": [
+            "Large catalogues that need server-side search and pagination"
+          ],
+          "composesWith": [
+            "sheet",
+            "slider",
+            "accordion",
+            "progress"
+          ],
+          "a11y": [
+            {
+              "keys": "Glaze swatches",
+              "action": "A radio group; arrow keys change the glaze and the picture follows"
+            },
+            {
+              "keys": "Bag drawer",
+              "action": "Opens from the header; Escape closes it and focus returns to the button"
+            },
+            {
+              "keys": "Filter chips",
+              "action": "Each active filter is a button that removes itself"
+            }
+          ],
+          "customization": [
+            "Replace products and reviews in goods-data.ts",
+            "Swap the cart store for your cart or commerce API",
+            "Replace Piece with product photography",
+            "Edit goodsCss for the palette"
+          ]
+        },
+        "examples": [
+          "template-goods-demo",
+          "template-goods-shop",
+          "template-goods-product",
+          "template-goods-cart",
+          "template-goods-checkout"
+        ],
+        "url": "https://ui.ballmac.com/components/template-goods"
+      }
+    },
+    {
+      "name": "template-goods-demo",
+      "type": "registry:example",
+      "title": "Kiln & Co: online store: Home",
+      "description": "Home example of Kiln & Co: online store.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-goods.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-goods-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-goods-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-goods",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-goods-shop",
+      "type": "registry:example",
+      "title": "Kiln & Co: online store: Shop",
+      "description": "Shop example of Kiln & Co: online store.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-goods.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-goods-shop.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-goods-shop.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-goods",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-goods-product",
+      "type": "registry:example",
+      "title": "Kiln & Co: online store: Product",
+      "description": "Product example of Kiln & Co: online store.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-goods.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-goods-product.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-goods-product.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-goods",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-goods-cart",
+      "type": "registry:example",
+      "title": "Kiln & Co: online store: Bag",
+      "description": "Bag example of Kiln & Co: online store.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-goods.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-goods-cart.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-goods-cart.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-goods",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-goods-checkout",
+      "type": "registry:example",
+      "title": "Kiln & Co: online store: Checkout",
+      "description": "Checkout example of Kiln & Co: online store.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-goods.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-goods-checkout.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-goods-checkout.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-goods",
+        "tier": "free"
+      }
+    },
+    {
       "name": "template-launch",
       "type": "registry:block",
       "title": "Launch page",
@@ -35098,6 +35645,271 @@
       "meta": {
         "example": true,
         "of": "template-orbit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-pocket",
+      "type": "registry:block",
+      "title": "Pocket: mobile money app",
+      "description": "A bold five-page landing site for a money app: a working app inside a phone frame, live feature demos (freeze a card, round-up calculator, bill splitting, currency conversion), pricing with a yearly switch, security and download.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/phone-frame.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/slider.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/pocket/pocket-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/pocket/pocket-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/pocket/pocket-data.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/pocket/pocket-data.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/pocket/pocket-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/pocket/pocket-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/pocket/pocket-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/pocket/pocket-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/pocket/pocket-features.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/pocket/pocket-features.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/pocket/pocket-pricing.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/pocket/pocket-pricing.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/pocket/pocket-security.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/pocket/pocket-security.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/pocket/pocket-download.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/pocket/pocket-download.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/pocket/page.tsx",
+          "type": "registry:page",
+          "target": "app/pocket/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/pocket/features/page.tsx",
+          "type": "registry:page",
+          "target": "app/pocket/features/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/pocket/pricing/page.tsx",
+          "type": "registry:page",
+          "target": "app/pocket/pricing/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/pocket/security/page.tsx",
+          "type": "registry:page",
+          "target": "app/pocket/security/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/pocket/download/page.tsx",
+          "type": "registry:page",
+          "target": "app/pocket/download/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /pocket, /pocket/features, /pocket/pricing, /pocket/security and /pocket/download. Plans, comparison rows, FAQ and transactions live in pocket-data.ts. PocketApp (in pocket-theme.tsx) is the working app inside the phone; replace its content with your own screens. The palette is pocketCss.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "mobile app",
+          "fintech",
+          "landing",
+          "pricing",
+          "phone",
+          "download"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a five-page mobile-app landing site with a working app in a phone frame, live feature demos, pricing with a yearly toggle, a security page and a download page. Edit pocket-data.ts and pocketCss.",
+          "whenToUse": [
+            "Mobile app and fintech landing sites",
+            "Any product that benefits from a live demo inside a phone"
+          ],
+          "whenNotToUse": [
+            "Real banking flows (this is marketing; connect your own auth and APIs)"
+          ],
+          "composesWith": [
+            "phone-frame",
+            "switch",
+            "slider"
+          ],
+          "a11y": [
+            {
+              "keys": "Bottom tab bar in the phone",
+              "action": "Arrow-free tabs: Tab to a button and press Enter to switch screens"
+            },
+            {
+              "keys": "Freeze card switch",
+              "action": "Space toggles it; a polite status message confirms the state"
+            },
+            {
+              "keys": "Round-up slider",
+              "action": "Arrow keys change monthly spending; the result is announced"
+            }
+          ],
+          "customization": [
+            "Replace plans, comparison rows and FAQ in pocket-data.ts",
+            "Rebuild the screens inside PocketApp",
+            "Edit pocketCss for the mint, cobalt and lime palette",
+            "Replace QrArt with a real QR code"
+          ]
+        },
+        "examples": [
+          "template-pocket-demo",
+          "template-pocket-features",
+          "template-pocket-pricing",
+          "template-pocket-security",
+          "template-pocket-download"
+        ],
+        "url": "https://ui.ballmac.com/components/template-pocket"
+      }
+    },
+    {
+      "name": "template-pocket-demo",
+      "type": "registry:example",
+      "title": "Pocket: mobile money app: Home",
+      "description": "Home example of Pocket: mobile money app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-pocket.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-pocket-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-pocket-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-pocket",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-pocket-features",
+      "type": "registry:example",
+      "title": "Pocket: mobile money app: Features",
+      "description": "Features example of Pocket: mobile money app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-pocket.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-pocket-features.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-pocket-features.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-pocket",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-pocket-pricing",
+      "type": "registry:example",
+      "title": "Pocket: mobile money app: Pricing",
+      "description": "Pricing example of Pocket: mobile money app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-pocket.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-pocket-pricing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-pocket-pricing.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-pocket",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-pocket-security",
+      "type": "registry:example",
+      "title": "Pocket: mobile money app: Security",
+      "description": "Security example of Pocket: mobile money app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-pocket.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-pocket-security.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-pocket-security.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-pocket",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-pocket-download",
+      "type": "registry:example",
+      "title": "Pocket: mobile money app: Download",
+      "description": "Download example of Pocket: mobile money app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-pocket.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-pocket-download.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-pocket-download.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-pocket",
         "tier": "free"
       }
     },
@@ -36361,6 +37173,271 @@
       "meta": {
         "example": true,
         "of": "template-studio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-summit",
+      "type": "registry:block",
+      "title": "Northlight Summit: conference",
+      "description": "A five-page conference site under a sunrise ridgeline: a hero with a live countdown, a schedule you can star into an agenda with clash warnings, speakers with bios, tickets with a live total and promo code, and a venue guide.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/accordion.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/summit/summit-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/summit/summit-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/summit/summit-data.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/summit/summit-data.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/summit/summit-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/summit/summit-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/summit/summit-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/summit/summit-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/summit/summit-schedule.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/summit/summit-schedule.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/summit/summit-speakers.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/summit/summit-speakers.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/summit/summit-tickets.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/summit/summit-tickets.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/summit/summit-venue.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/summit/summit-venue.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/summit/page.tsx",
+          "type": "registry:page",
+          "target": "app/summit/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/summit/schedule/page.tsx",
+          "type": "registry:page",
+          "target": "app/summit/schedule/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/summit/speakers/page.tsx",
+          "type": "registry:page",
+          "target": "app/summit/speakers/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/summit/tickets/page.tsx",
+          "type": "registry:page",
+          "target": "app/summit/tickets/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/summit/venue/page.tsx",
+          "type": "registry:page",
+          "target": "app/summit/venue/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /summit, /summit/schedule, /summit/speakers, /summit/tickets and /summit/venue. Speakers, sessions, tiers and FAQ live in summit-data.ts; set EVENT_DATE for the countdown. The promo code in the demo is NORTH10. Replace Portrait with photos when you have them.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "event",
+          "conference",
+          "summit",
+          "schedule",
+          "speakers",
+          "tickets",
+          "countdown"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a five-page conference site with a countdown, a starrable schedule that warns about clashes, speaker dialogs, a ticket calculator with group and promo discounts, and a venue guide. Edit summit-data.ts and summitCss.",
+          "whenToUse": [
+            "Conferences, meetups and festivals",
+            "Any event site with a schedule, speakers and ticket tiers"
+          ],
+          "whenNotToUse": [
+            "Ticketing with real payments (wire the form to your processor first)"
+          ],
+          "composesWith": [
+            "dialog",
+            "accordion",
+            "countdown"
+          ],
+          "a11y": [
+            {
+              "keys": "Star button on a session",
+              "action": "Adds or removes it from your agenda; the summary updates in a live region"
+            },
+            {
+              "keys": "Enter on a speaker",
+              "action": "Opens their bio in a dialog; Escape closes it"
+            },
+            {
+              "keys": "Arrow buttons beside the ticket count",
+              "action": "Change the quantity; the total is announced"
+            }
+          ],
+          "customization": [
+            "Edit summit-data.ts for the event, speakers, sessions and tiers",
+            "Change summitCss for the sky and ridge colours",
+            "Swap Portrait for real photos",
+            "Connect the checkout form to your payment provider"
+          ]
+        },
+        "examples": [
+          "template-summit-demo",
+          "template-summit-schedule",
+          "template-summit-speakers",
+          "template-summit-tickets",
+          "template-summit-venue"
+        ],
+        "url": "https://ui.ballmac.com/components/template-summit"
+      }
+    },
+    {
+      "name": "template-summit-demo",
+      "type": "registry:example",
+      "title": "Northlight Summit: conference: Home",
+      "description": "Home example of Northlight Summit: conference.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-summit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-summit-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-summit-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-summit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-summit-schedule",
+      "type": "registry:example",
+      "title": "Northlight Summit: conference: Schedule",
+      "description": "Schedule example of Northlight Summit: conference.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-summit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-summit-schedule.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-summit-schedule.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-summit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-summit-speakers",
+      "type": "registry:example",
+      "title": "Northlight Summit: conference: Speakers",
+      "description": "Speakers example of Northlight Summit: conference.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-summit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-summit-speakers.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-summit-speakers.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-summit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-summit-tickets",
+      "type": "registry:example",
+      "title": "Northlight Summit: conference: Tickets",
+      "description": "Tickets example of Northlight Summit: conference.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-summit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-summit-tickets.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-summit-tickets.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-summit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-summit-venue",
+      "type": "registry:example",
+      "title": "Northlight Summit: conference: Venue",
+      "description": "Venue example of Northlight Summit: conference.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-summit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-summit-venue.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-summit-venue.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-summit",
         "tier": "free"
       }
     },

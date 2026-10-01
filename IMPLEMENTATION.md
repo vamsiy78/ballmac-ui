@@ -108,6 +108,7 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 - [~] Templates batch A (product marketing): template-orbit, template-relay, template-ledger (replaces template-mac-app), template-northwind; 18 pages; site gallery grouped by kind, page tabs and dark toggle on the detail page; 203 test files / 754 tests; axe over the template previews and interacted states clean; fresh-app typecheck passes
 - [~] Templates batch B (applications): template-atlas, template-muse, template-workspace, template-auth-kit; 26 pages; 204 test files / 775 tests; axe over all previews and template interacted states clean; fresh-app typecheck and build pass
 - [~] Templates batch C (content and personal): template-portfolio, template-studio, template-publication, template-podcast, plus audio-player; 20 pages; 206 test files / 799 tests; axe over all previews and template interacted states clean; fresh-app typecheck and build pass
+- [~] Templates batch D (specialty): template-docs, template-summit, template-goods, template-pocket; 20 pages; 207 test files / 817 tests; axe over all previews and template interacted states clean; fresh-app typecheck and build pass
 - [x] Wave 3 catalog Lighthouse (local mobile): accessibility, best practices, SEO 100; performance 85 (LCP 4.2 s)
 - [~] Lighthouse on ui.ballmac.com (mobile): accessibility, best practices, SEO 100 on every page tested. Performance: hero-1 100, button 98, catalog 95, **home 89** (simulated LCP 3.3 s from the JS of five live demos; next: lazy-hydrate the showcase)
 
