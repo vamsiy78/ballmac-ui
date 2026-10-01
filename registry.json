@@ -2474,6 +2474,133 @@
       }
     },
     {
+      "name": "audio-player",
+      "type": "registry:ui",
+      "title": "Audio Player",
+      "description": "A podcast-style audio player: play and pause, skip back and forward, a scrubber with chapter ticks, a named current chapter and a speed control. Works with a real file or as a silent demo.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/slider.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/audio-player.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/audio-player.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "audio",
+          "player",
+          "podcast",
+          "music",
+          "media",
+          "chapters",
+          "speed"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Pass src (omit it for a silent demo), title, duration and optional chapters=[{ start, title }]. Control the position with time and onTimeChange to sync a transcript. variant='compact' is a one-row mini player.",
+          "whenToUse": [
+            "Podcast episodes, audio articles, voice notes and music previews",
+            "Syncing a transcript or chapter list to playback"
+          ],
+          "whenNotToUse": [
+            "Video (use the native video element or video-dialog)"
+          ],
+          "composesWith": [
+            "slider",
+            "segmented-control",
+            "scroll-area"
+          ],
+          "a11y": [
+            {
+              "keys": "Space / Enter on Play",
+              "action": "Plays or pauses; the name switches between Play and Pause"
+            },
+            {
+              "keys": "Arrow keys on the scrubber",
+              "action": "Seeks one second; Page Up / Down seeks more; the value reads as 'm:ss of m:ss'"
+            },
+            {
+              "keys": "Skip buttons",
+              "action": "Jump back or forward by the configured seconds"
+            }
+          ],
+          "customization": [
+            "rates: the speeds the speed button cycles through",
+            "skip: { back, forward } seconds",
+            "artwork: any node",
+            "variant: default or compact"
+          ]
+        },
+        "examples": [
+          "audio-player-demo",
+          "audio-player-compact"
+        ],
+        "url": "https://ui.ballmac.com/components/audio-player"
+      }
+    },
+    {
+      "name": "audio-player-demo",
+      "type": "registry:example",
+      "title": "Audio Player: Episode with chapters",
+      "description": "Episode with chapters example of Audio Player.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/audio-player.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/audio-player-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/audio-player-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "audio-player",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "audio-player-compact",
+      "type": "registry:example",
+      "title": "Audio Player: Compact mini player",
+      "description": "Compact mini player example of Audio Player.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/audio-player.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/audio-player-compact.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/audio-player-compact.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "audio-player",
+        "tier": "free"
+      }
+    },
+    {
       "name": "aurora-background",
       "type": "registry:ui",
       "title": "Aurora Background",
@@ -34975,6 +35102,786 @@
       }
     },
     {
+      "name": "template-podcast",
+      "type": "registry:block",
+      "title": "The Long Table: podcast",
+      "description": "A warm five-page podcast site built on a new audio player: a home with a latest-episode hero and a mini player, an episodes archive, an episode page with chapters and a transcript that follows playback, hosts and subscribe.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/audio-player.json",
+        "https://ui.ballmac.com/r/copy-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/podcast/podcast-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/podcast/podcast-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/podcast/podcast-data.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/podcast/podcast-data.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/podcast/podcast-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/podcast/podcast-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/podcast/podcast-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/podcast/podcast-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/podcast/podcast-episodes.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/podcast/podcast-episodes.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/podcast/podcast-episode.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/podcast/podcast-episode.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/podcast/podcast-hosts.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/podcast/podcast-hosts.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/podcast/podcast-subscribe.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/podcast/podcast-subscribe.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/podcast/page.tsx",
+          "type": "registry:page",
+          "target": "app/podcast/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/podcast/episodes/page.tsx",
+          "type": "registry:page",
+          "target": "app/podcast/episodes/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/podcast/episodes/[slug]/page.tsx",
+          "type": "registry:page",
+          "target": "app/podcast/episodes/[slug]/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/podcast/hosts/page.tsx",
+          "type": "registry:page",
+          "target": "app/podcast/hosts/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/podcast/subscribe/page.tsx",
+          "type": "registry:page",
+          "target": "app/podcast/subscribe/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /podcast, /podcast/episodes, /podcast/episodes/[slug], /podcast/hosts and /podcast/subscribe. Episodes and the transcript live in podcast-data.ts; pass a real src to AudioPlayer in podcast-episode.tsx to play audio (without one it runs a silent demo).",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "podcast",
+          "audio",
+          "episodes",
+          "transcript",
+          "player",
+          "show notes"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a five-page podcast site on the audio-player component. Change episodes in podcast-data.ts, add src URLs for real audio, and edit podcastCss for the palette.",
+          "whenToUse": [
+            "Podcasts, audio shows and interview series",
+            "Any site where a transcript should follow audio playback"
+          ],
+          "whenNotToUse": [
+            "Music streaming with playlists and queues"
+          ],
+          "composesWith": [
+            "audio-player",
+            "slider",
+            "scroll-progress"
+          ],
+          "a11y": [
+            {
+              "keys": "Click or Enter on a transcript line",
+              "action": "Seeks the player to that line"
+            },
+            {
+              "keys": "Enter / Space on a chapter",
+              "action": "Jumps to the start of the chapter"
+            }
+          ],
+          "customization": [
+            "Add src to AudioPlayer in podcast-episode.tsx and podcast-theme.tsx",
+            "Edit podcastCss for the light and dark palettes",
+            "Replace ShowArt with cover images"
+          ]
+        },
+        "examples": [
+          "template-podcast-demo",
+          "template-podcast-episodes",
+          "template-podcast-episode",
+          "template-podcast-hosts",
+          "template-podcast-subscribe"
+        ],
+        "url": "https://ui.ballmac.com/components/template-podcast"
+      }
+    },
+    {
+      "name": "template-podcast-demo",
+      "type": "registry:example",
+      "title": "The Long Table: podcast: Home",
+      "description": "Home example of The Long Table: podcast.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-podcast.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-podcast-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-podcast-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-podcast",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-podcast-episodes",
+      "type": "registry:example",
+      "title": "The Long Table: podcast: Episodes",
+      "description": "Episodes example of The Long Table: podcast.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-podcast.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-podcast-episodes.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-podcast-episodes.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-podcast",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-podcast-episode",
+      "type": "registry:example",
+      "title": "The Long Table: podcast: Episode",
+      "description": "Episode example of The Long Table: podcast.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-podcast.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-podcast-episode.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-podcast-episode.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-podcast",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-podcast-hosts",
+      "type": "registry:example",
+      "title": "The Long Table: podcast: Hosts",
+      "description": "Hosts example of The Long Table: podcast.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-podcast.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-podcast-hosts.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-podcast-hosts.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-podcast",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-podcast-subscribe",
+      "type": "registry:example",
+      "title": "The Long Table: podcast: Subscribe",
+      "description": "Subscribe example of The Long Table: podcast.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-podcast.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-podcast-subscribe.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-podcast-subscribe.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-podcast",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-portfolio",
+      "type": "registry:block",
+      "title": "Folio: designer portfolio",
+      "description": "A bold five-page portfolio: a huge intro with inline colour pills, a work grid that reveals each result on hover and focus, an about bento, a case study with a sticky fact sheet and contents list, writing and a uses page.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/marquee.json",
+        "https://ui.ballmac.com/r/table-of-contents.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/portfolio/portfolio-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/portfolio/portfolio-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/portfolio/portfolio-data.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/portfolio/portfolio-data.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/portfolio/portfolio-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/portfolio/portfolio-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/portfolio/portfolio-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/portfolio/portfolio-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/portfolio/portfolio-work.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/portfolio/portfolio-work.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/portfolio/portfolio-case.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/portfolio/portfolio-case.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/portfolio/portfolio-writing.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/portfolio/portfolio-writing.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/portfolio/portfolio-uses.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/portfolio/portfolio-uses.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/portfolio/page.tsx",
+          "type": "registry:page",
+          "target": "app/portfolio/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/portfolio/work/page.tsx",
+          "type": "registry:page",
+          "target": "app/portfolio/work/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/portfolio/work/[slug]/page.tsx",
+          "type": "registry:page",
+          "target": "app/portfolio/work/[slug]/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/portfolio/writing/page.tsx",
+          "type": "registry:page",
+          "target": "app/portfolio/writing/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/portfolio/uses/page.tsx",
+          "type": "registry:page",
+          "target": "app/portfolio/uses/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /portfolio, /portfolio/work, /portfolio/work/[slug], /portfolio/writing and /portfolio/uses. Edit your projects, posts and kit in portfolio-data.ts; the palette is the portfolioCss string in portfolio-theme.tsx.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "portfolio",
+          "designer",
+          "case study",
+          "personal site",
+          "writing",
+          "bento"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a five-page personal portfolio. Change the content in portfolio-data.ts, the palette in portfolioCss, and the painted covers in the Cover component (or replace them with images).",
+          "whenToUse": [
+            "Personal sites for designers, developers and independent consultants",
+            "A bold, typographic portfolio with a real case-study layout"
+          ],
+          "whenNotToUse": [
+            "Agencies with a team and services pages (use template-studio)"
+          ],
+          "composesWith": [
+            "marquee",
+            "table-of-contents",
+            "blur-fade"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab to a work card",
+              "action": "Reveals the result on the card, the same as hovering it"
+            },
+            {
+              "keys": "Enter / Space on a filter",
+              "action": "Filters the list and announces the number shown"
+            }
+          ],
+          "customization": [
+            "Replace Cover with <img> or next/image when you have real screenshots",
+            "Edit portfolioCss for the light and dark palettes",
+            "Swap the font in portfolio-fonts.ts"
+          ]
+        },
+        "examples": [
+          "template-portfolio-demo",
+          "template-portfolio-work",
+          "template-portfolio-case",
+          "template-portfolio-writing",
+          "template-portfolio-uses"
+        ],
+        "url": "https://ui.ballmac.com/components/template-portfolio"
+      }
+    },
+    {
+      "name": "template-portfolio-demo",
+      "type": "registry:example",
+      "title": "Folio: designer portfolio: Home",
+      "description": "Home example of Folio: designer portfolio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-portfolio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-portfolio-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-portfolio-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-portfolio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-portfolio-work",
+      "type": "registry:example",
+      "title": "Folio: designer portfolio: Work",
+      "description": "Work example of Folio: designer portfolio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-portfolio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-portfolio-work.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-portfolio-work.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-portfolio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-portfolio-case",
+      "type": "registry:example",
+      "title": "Folio: designer portfolio: Case study",
+      "description": "Case study example of Folio: designer portfolio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-portfolio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-portfolio-case.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-portfolio-case.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-portfolio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-portfolio-writing",
+      "type": "registry:example",
+      "title": "Folio: designer portfolio: Writing",
+      "description": "Writing example of Folio: designer portfolio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-portfolio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-portfolio-writing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-portfolio-writing.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-portfolio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-portfolio-uses",
+      "type": "registry:example",
+      "title": "Folio: designer portfolio: Uses",
+      "description": "Uses example of Folio: designer portfolio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-portfolio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-portfolio-uses.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-portfolio-uses.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-portfolio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-publication",
+      "type": "registry:block",
+      "title": "Marginalia: magazine",
+      "description": "An editorial five-page magazine: a masthead between double rules, a lead story, an article with reading progress, drop cap and margin notes, section pages with sort and load more, author pages and an issues shelf with subscriptions.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/scroll-progress.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/publication/publication-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/publication/publication-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/publication/publication-data.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/publication/publication-data.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/publication/publication-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/publication/publication-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/publication/publication-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/publication/publication-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/publication/publication-article.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/publication/publication-article.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/publication/publication-section.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/publication/publication-section.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/publication/publication-author.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/publication/publication-author.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/publication/publication-issues.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/publication/publication-issues.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/publication/page.tsx",
+          "type": "registry:page",
+          "target": "app/publication/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/publication/essays/[slug]/page.tsx",
+          "type": "registry:page",
+          "target": "app/publication/essays/[slug]/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/publication/essays/page.tsx",
+          "type": "registry:page",
+          "target": "app/publication/essays/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/publication/authors/[id]/page.tsx",
+          "type": "registry:page",
+          "target": "app/publication/authors/[id]/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/publication/issues/page.tsx",
+          "type": "registry:page",
+          "target": "app/publication/issues/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /publication, /publication/essays/[slug], /publication/essays, /publication/authors/[id] and /publication/issues. Edit stories, authors and issues in publication-data.ts; the palette is the publicationCss string in publication-theme.tsx.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "magazine",
+          "blog",
+          "editorial",
+          "publication",
+          "article",
+          "newsletter",
+          "serif"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a five-page magazine. Change stories and authors in publication-data.ts, the palette in publicationCss, and the duotone MagArt illustrations (or swap them for photographs).",
+          "whenToUse": [
+            "Magazines, long-form blogs and newsletters with an archive",
+            "Reading-first sites with margin notes and a strong masthead"
+          ],
+          "whenNotToUse": [
+            "A product blog inside a SaaS marketing site (use blog-1 and blog-post-1)"
+          ],
+          "composesWith": [
+            "blog-1",
+            "blog-post-1",
+            "newsletter-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab to a note number",
+              "action": "Moves to the note; on wide screens it sits in the margin beside the paragraph"
+            },
+            {
+              "keys": "Enter / Space on a section",
+              "action": "Switches the list and announces how many stories are shown"
+            }
+          ],
+          "customization": [
+            "Replace MagArt with photographs",
+            "Edit publicationCss for the light and dark palettes",
+            "Change the masthead name in publication-theme.tsx"
+          ]
+        },
+        "examples": [
+          "template-publication-demo",
+          "template-publication-article",
+          "template-publication-section",
+          "template-publication-author",
+          "template-publication-issues"
+        ],
+        "url": "https://ui.ballmac.com/components/template-publication"
+      }
+    },
+    {
+      "name": "template-publication-demo",
+      "type": "registry:example",
+      "title": "Marginalia: magazine: Home",
+      "description": "Home example of Marginalia: magazine.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-publication.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-publication-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-publication-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-publication",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-publication-article",
+      "type": "registry:example",
+      "title": "Marginalia: magazine: Article",
+      "description": "Article example of Marginalia: magazine.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-publication.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-publication-article.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-publication-article.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-publication",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-publication-section",
+      "type": "registry:example",
+      "title": "Marginalia: magazine: Section",
+      "description": "Section example of Marginalia: magazine.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-publication.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-publication-section.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-publication-section.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-publication",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-publication-author",
+      "type": "registry:example",
+      "title": "Marginalia: magazine: Author",
+      "description": "Author example of Marginalia: magazine.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-publication.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-publication-author.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-publication-author.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-publication",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-publication-issues",
+      "type": "registry:example",
+      "title": "Marginalia: magazine: Issues",
+      "description": "Issues example of Marginalia: magazine.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-publication.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-publication-issues.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-publication-issues.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-publication",
+        "tier": "free"
+      }
+    },
+    {
       "name": "template-relay",
       "type": "registry:block",
       "title": "Relay: developer API platform",
@@ -35193,6 +36100,267 @@
       "meta": {
         "example": true,
         "of": "template-relay",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-studio",
+      "type": "registry:block",
+      "title": "Studio: creative agency",
+      "description": "A loud, typographic five-page agency site: giant wide headlines, a work reel whose poster follows the pointer, numbered services that open, a work index with grid or table, project pages and a brief form.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/marquee.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/studio/studio-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/studio/studio-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/studio/studio-data.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/studio/studio-data.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/studio/studio-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/studio/studio-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/studio/studio-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/studio/studio-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/studio/studio-work.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/studio/studio-work.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/studio/studio-project.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/studio/studio-project.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/studio/studio-services.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/studio/studio-services.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/studio/studio-contact.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/studio/studio-contact.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/studio/page.tsx",
+          "type": "registry:page",
+          "target": "app/studio/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/studio/work/page.tsx",
+          "type": "registry:page",
+          "target": "app/studio/work/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/studio/work/[slug]/page.tsx",
+          "type": "registry:page",
+          "target": "app/studio/work/[slug]/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/studio/services/page.tsx",
+          "type": "registry:page",
+          "target": "app/studio/services/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/studio/contact/page.tsx",
+          "type": "registry:page",
+          "target": "app/studio/contact/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /studio, /studio/work, /studio/work/[slug], /studio/services and /studio/contact. Edit projects and services in studio-data.ts; the palette is the studioCss string in studio-theme.tsx.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "agency",
+          "studio",
+          "branding",
+          "portfolio",
+          "typography",
+          "creative",
+          "contact"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a five-page agency site. Change the content in studio-data.ts, the palette in studioCss, and the painted posters in StudioArt (or swap them for real imagery).",
+          "whenToUse": [
+            "Agencies, studios and collectives that want a loud, typographic site",
+            "Any site where the work should carry the page"
+          ],
+          "whenNotToUse": [
+            "A personal portfolio with long case studies (use template-portfolio)"
+          ],
+          "composesWith": [
+            "marquee",
+            "copy-button",
+            "faq-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab through the work reel",
+              "action": "Shows the poster beside the focused row, the same as hovering it"
+            },
+            {
+              "keys": "Enter / Space on a service",
+              "action": "Opens or closes it"
+            }
+          ],
+          "customization": [
+            "Replace StudioArt with real images",
+            "Edit studioCss for the light and dark palettes",
+            "Tune the headline width in the studioDisplay class"
+          ]
+        },
+        "examples": [
+          "template-studio-demo",
+          "template-studio-work",
+          "template-studio-project",
+          "template-studio-services",
+          "template-studio-contact"
+        ],
+        "url": "https://ui.ballmac.com/components/template-studio"
+      }
+    },
+    {
+      "name": "template-studio-demo",
+      "type": "registry:example",
+      "title": "Studio: creative agency: Home",
+      "description": "Home example of Studio: creative agency.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-studio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-studio-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-studio-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-studio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-studio-work",
+      "type": "registry:example",
+      "title": "Studio: creative agency: Work",
+      "description": "Work example of Studio: creative agency.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-studio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-studio-work.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-studio-work.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-studio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-studio-project",
+      "type": "registry:example",
+      "title": "Studio: creative agency: Project",
+      "description": "Project example of Studio: creative agency.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-studio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-studio-project.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-studio-project.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-studio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-studio-services",
+      "type": "registry:example",
+      "title": "Studio: creative agency: Services",
+      "description": "Services example of Studio: creative agency.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-studio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-studio-services.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-studio-services.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-studio",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-studio-contact",
+      "type": "registry:example",
+      "title": "Studio: creative agency: Contact",
+      "description": "Contact example of Studio: creative agency.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-studio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-studio-contact.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-studio-contact.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-studio",
         "tier": "free"
       }
     },
