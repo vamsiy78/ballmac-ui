@@ -300,6 +300,27 @@ const cases: Record<string, Step> = {
   "newsletter-1-simple": async (p) => { await p.getByLabel("Email address").fill("me@acme.com"); await p.getByRole("button", { name: /Sign me up/ }).click(); await p.getByText("You’re subscribed.").waitFor() },
   "error-1-demo": async (p) => { await p.getByRole("searchbox", { name: "Search the site" }).focus() },
   "error-1-server": async () => {},
+  // Blocks, batch C
+  "login-2-demo": async (p) => { await p.getByRole("button", { name: /^Sign in/ }).click(); await p.waitForTimeout(300) },
+  "login-2-error": async (p) => { await p.getByRole("textbox", { name: "Email" }).fill("me@acme.com"); await p.getByLabel("Password", { exact: true }).fill("wrong"); await p.getByRole("button", { name: /^Sign in/ }).click(); await p.getByText(/don’t match/).waitFor() },
+  "signup-1-demo": async (p) => { await p.getByLabel("Password", { exact: true }).fill("abc"); await p.getByRole("button", { name: /Create account/ }).click(); await p.waitForTimeout(300) },
+  "signup-1-simple": async (p) => {
+    await p.getByRole("textbox", { name: /Full name/ }).fill("Jordan Lee"); await p.getByRole("textbox", { name: /Work email/ }).fill("jordan@acme.com")
+    await p.getByLabel("Password", { exact: true }).fill("Correct-Horse-9"); await p.getByRole("checkbox").click(); await p.getByRole("button", { name: /Start trial/ }).click(); await p.getByText("Check your inbox").waitFor()
+  },
+  "forgot-password-1-demo": async (p) => { await p.getByRole("textbox", { name: "Email" }).fill("me@acme.com"); await p.getByRole("button", { name: /Send reset link/ }).click(); await p.getByRole("heading", { name: "Check your email" }).waitFor() },
+  "forgot-password-1-reset": async (p) => { await p.getByLabel("New password", { exact: true }).fill("Correct-Horse-9"); await p.getByLabel("Confirm password", { exact: true }).fill("nope"); await p.getByRole("button", { name: "Update password" }).click(); await p.waitForTimeout(300) },
+  "verify-1-demo": async (p) => { await p.getByLabel("6-digit verification code").fill("000000"); await p.getByText(/That code isn’t right/).waitFor() },
+  "verify-1-four": async (p) => { await p.getByLabel("4-digit verification code").fill("4242"); await p.getByRole("heading", { name: "You’re verified" }).waitFor() },
+  "onboarding-1-demo": async (p) => { await p.getByRole("textbox", { name: /Workspace name/ }).fill("Northwind Studio"); await p.getByRole("button", { name: /Continue/ }).click(); await p.getByRole("heading", { name: /What will you use/ }).waitFor(); await p.getByRole("checkbox", { name: /Send invoices/ }).check({ force: true }) },
+  "onboarding-1-custom": async (p) => {
+    await p.getByRole("textbox", { name: /Workspace name/ }).fill("Fjord"); await p.getByRole("button", { name: /Continue/ }).click()
+    await p.getByRole("checkbox", { name: /Ship faster/ }).check({ force: true }); await p.getByRole("button", { name: /Continue/ }).click()
+    await p.getByRole("textbox", { name: "Email addresses" }).fill("maya@acme.com"); await p.keyboard.press("Enter"); await p.getByRole("button", { name: /Continue/ }).click()
+    await p.getByRole("button", { name: "Create workspace" }).click(); await p.getByRole("heading", { name: /is ready/ }).waitFor()
+  },
+  "invite-1-demo": async (p) => { await p.getByRole("button", { name: "Accept invitation" }).click(); await p.getByRole("heading", { name: /Welcome to/ }).waitFor() },
+  "invite-1-expired": async (p) => { await p.getByRole("button", { name: "Request a new invitation" }).click(); await p.getByRole("heading", { name: "Request sent" }).waitFor() },
 }
 const filter = process.argv.slice(2)
 const browser = await chromium.launch({ headless: true, executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE })

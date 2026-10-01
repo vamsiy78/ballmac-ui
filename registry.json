@@ -5917,6 +5917,131 @@
       }
     },
     {
+      "name": "forgot-password-1",
+      "type": "registry:block",
+      "title": "Forgot Password 1: request, resend and reset",
+      "description": "The whole password-recovery flow in one card: request a link, check-your-email with a resend countdown, choose a new password with confirmation and strength, and a success screen. Focus moves to each new heading.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/field.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/password-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/forgot-password-1/forgot-password-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/forgot-password-1/forgot-password-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "auth"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "forgot password",
+          "reset password",
+          "auth",
+          "recovery",
+          "email",
+          "countdown"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Use it on /forgot-password (initialView 'request') and on the page the emailed link opens (initialView 'reset'). Pass onRequest(email) and onReset(password); throw to show an error.",
+          "whenToUse": [
+            "Any app with passwords",
+            "The page an emailed reset link opens"
+          ],
+          "whenNotToUse": [
+            "Passwordless-only products"
+          ],
+          "composesWith": [
+            "login-2",
+            "login-1",
+            "verify-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen changes",
+              "action": "Focus moves to the new heading so the change is announced"
+            },
+            {
+              "keys": "Resend",
+              "action": "The countdown is announced politely; the button is disabled until it ends"
+            }
+          ],
+          "customization": [
+            "initialView: 'request' | 'sent' | 'reset' | 'done'",
+            "onRequest / onReset async handlers",
+            "resendAfter: cooldown in seconds"
+          ]
+        },
+        "examples": [
+          "forgot-password-1-demo",
+          "forgot-password-1-reset"
+        ],
+        "url": "https://ui.ballmac.com/components/forgot-password-1"
+      }
+    },
+    {
+      "name": "forgot-password-1-demo",
+      "type": "registry:example",
+      "title": "Forgot Password 1: request, resend and reset: Request a link",
+      "description": "Request a link example of Forgot Password 1: request, resend and reset.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/forgot-password-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/forgot-password-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/forgot-password-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "forgot-password-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "forgot-password-1-reset",
+      "type": "registry:example",
+      "title": "Forgot Password 1: request, resend and reset: Choose a new password",
+      "description": "Choose a new password example of Forgot Password 1: request, resend and reset.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/forgot-password-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/forgot-password-1-reset.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/forgot-password-1-reset.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "forgot-password-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "header-1",
       "type": "registry:block",
       "title": "Header 1: sticky with mobile menu",
@@ -6839,6 +6964,130 @@
       }
     },
     {
+      "name": "invite-1",
+      "type": "registry:block",
+      "title": "Invite 1: accept a team invitation",
+      "description": "The page an invitation email opens: workspace tile, who invited you, your role and what it allows, the account being used, accept and decline, with welcome, declined and expired states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/invite-1/invite-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/invite-1/invite-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "onboarding"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "invite",
+          "invitation",
+          "team",
+          "workspace",
+          "accept",
+          "join"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Landing page for an emailed invitation. Pass workspace, inviter, role, email, access, onAccept / onDecline / onRequestNew (throw to show an error) and status ('pending' | 'expired').",
+          "whenToUse": [
+            "Team and workspace invitations",
+            "Sharing links that need an explicit accept"
+          ],
+          "whenNotToUse": [
+            "Sending invitations (use invite-members)"
+          ],
+          "composesWith": [
+            "signup-1",
+            "login-2",
+            "onboarding-1",
+            "verify-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Accept / Decline",
+              "action": "Focus moves to the new heading and the result is announced as a status"
+            },
+            {
+              "keys": "Errors",
+              "action": "A failed action is announced as an alert"
+            }
+          ],
+          "customization": [
+            "status: 'expired' shows the request-a-new-link flow",
+            "onDecline / onSwitchAccount: null hides them",
+            "access: [] hides the list"
+          ]
+        },
+        "examples": [
+          "invite-1-demo",
+          "invite-1-expired"
+        ],
+        "url": "https://ui.ballmac.com/components/invite-1"
+      }
+    },
+    {
+      "name": "invite-1-demo",
+      "type": "registry:example",
+      "title": "Invite 1: accept a team invitation: Pending",
+      "description": "Pending example of Invite 1: accept a team invitation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/invite-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/invite-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/invite-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "invite-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "invite-1-expired",
+      "type": "registry:example",
+      "title": "Invite 1: accept a team invitation: Expired",
+      "description": "Expired example of Invite 1: accept a team invitation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/invite-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/invite-1-expired.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/invite-1-expired.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "invite-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "login-1",
       "type": "registry:block",
       "title": "Login 1: card with SSO and magic link",
@@ -6923,6 +7172,132 @@
       "meta": {
         "example": true,
         "of": "login-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "login-2",
+      "type": "registry:block",
+      "title": "Login 2: split screen with testimonial",
+      "description": "A split-screen sign-in: SSO and passkey buttons, validated email and password with show/hide, remember me and error state on one side, a soft colour mesh with a customer quote on the other.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/field.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/password-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/login-2/login-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/login-2/login-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "auth"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "login",
+          "sign in",
+          "auth",
+          "split screen",
+          "passkey",
+          "sso"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A full-width sign-in page. Pass onSubmit(values) (throw to show errorMessage), onSso / onPasskey (null hides), quote and author, or visual to replace the right side.",
+          "whenToUse": [
+            "Product sign-in pages with room for a brand moment",
+            "Apps with SSO and passkeys"
+          ],
+          "whenNotToUse": [
+            "Small centered dialogs (use login-1)"
+          ],
+          "composesWith": [
+            "signup-1",
+            "forgot-password-1",
+            "verify-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Submit with errors",
+              "action": "Each error is announced and linked to its field; a failed sign-in is announced as an alert"
+            },
+            {
+              "keys": "Show / hide button",
+              "action": "Toggles the password with aria-pressed"
+            }
+          ],
+          "customization": [
+            "onSubmit(values) async; throw for the error state",
+            "quote, author or visual (any node)",
+            "onSso / onPasskey: null hides"
+          ]
+        },
+        "examples": [
+          "login-2-demo",
+          "login-2-error"
+        ],
+        "url": "https://ui.ballmac.com/components/login-2"
+      }
+    },
+    {
+      "name": "login-2-demo",
+      "type": "registry:example",
+      "title": "Login 2: split screen with testimonial: Default",
+      "description": "Default example of Login 2: split screen with testimonial.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/login-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/login-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/login-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "login-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "login-2-error",
+      "type": "registry:example",
+      "title": "Login 2: split screen with testimonial: Wrong password",
+      "description": "Wrong password example of Login 2: split screen with testimonial.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/login-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/login-2-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/login-2-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "login-2",
         "tier": "free"
       }
     },
@@ -7158,6 +7533,136 @@
       "meta": {
         "example": true,
         "of": "newsletter-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "onboarding-1",
+      "type": "registry:block",
+      "title": "Onboarding 1: workspace setup wizard",
+      "description": "A four-step setup wizard with a progress rail: name and address a workspace (auto-filled), pick goals as cards, invite teammates as removable chips, review, then a finish screen. Slides between steps.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/field.json",
+        "https://ui.ballmac.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/onboarding-1/onboarding-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/onboarding-1/onboarding-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "onboarding"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "onboarding",
+          "wizard",
+          "setup",
+          "workspace",
+          "steps",
+          "invite"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "First-run setup after signup. Pass product, domain, goals=[{ id, title, description }] and onComplete(values) with { name, slug, color, goals, invites } (throw to show an error).",
+          "whenToUse": [
+            "The first screen after signup or verification",
+            "Products where a workspace or team has to be created"
+          ],
+          "whenNotToUse": [
+            "A checklist that lives inside the app (use onboarding-checklist)"
+          ],
+          "composesWith": [
+            "signup-1",
+            "verify-1",
+            "invite-1",
+            "app-shell"
+          ],
+          "a11y": [
+            {
+              "keys": "Continue / Back",
+              "action": "Focus moves to the new step's heading so the change is announced"
+            },
+            {
+              "keys": "Arrow keys on colors",
+              "action": "Move between color radios; goals are checkboxes toggled with Space"
+            },
+            {
+              "keys": "Enter in the email field",
+              "action": "Adds the address as a removable chip"
+            }
+          ],
+          "customization": [
+            "goals: { id, title, description }[]",
+            "product, domain, continueHref",
+            "onComplete(values) async"
+          ]
+        },
+        "examples": [
+          "onboarding-1-demo",
+          "onboarding-1-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/onboarding-1"
+      }
+    },
+    {
+      "name": "onboarding-1-demo",
+      "type": "registry:example",
+      "title": "Onboarding 1: workspace setup wizard: Default",
+      "description": "Default example of Onboarding 1: workspace setup wizard.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/onboarding-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/onboarding-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/onboarding-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "onboarding-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "onboarding-1-custom",
+      "type": "registry:example",
+      "title": "Onboarding 1: workspace setup wizard: Custom goals",
+      "description": "Custom goals example of Onboarding 1: workspace setup wizard.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/onboarding-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/onboarding-1-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/onboarding-1-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "onboarding-1",
         "tier": "free"
       }
     },
@@ -7496,6 +8001,134 @@
       "meta": {
         "example": true,
         "of": "pricing-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "signup-1",
+      "type": "registry:block",
+      "title": "Signup 1: form with benefits column",
+      "description": "A signup page: validated name, work email and password with a live strength guide, terms checkbox, SSO option and a check-your-inbox confirmation, beside a benefits list with social proof.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/field.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/password-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/signup-1/signup-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/signup-1/signup-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "auth"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "signup",
+          "register",
+          "auth",
+          "password strength",
+          "form",
+          "sso"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "A registration page. Pass onSubmit(values) (throw to show an error), onSso (null hides), and benefits / pitch / proof for the left column.",
+          "whenToUse": [
+            "Self-serve SaaS signup",
+            "Pages that should sell while they collect details"
+          ],
+          "whenNotToUse": [
+            "Invitation acceptance (use invite-1)",
+            "Multi-step setup (use onboarding-1)"
+          ],
+          "composesWith": [
+            "login-2",
+            "verify-1",
+            "onboarding-1",
+            "header-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Submit with errors",
+              "action": "Each error is announced and linked to its field"
+            },
+            {
+              "keys": "Password field",
+              "action": "The strength guide is announced politely as you type"
+            }
+          ],
+          "customization": [
+            "onSubmit(values) async; throw for the error state",
+            "benefits, pitch, proof",
+            "onSso: null hides the SSO button"
+          ]
+        },
+        "examples": [
+          "signup-1-demo",
+          "signup-1-simple"
+        ],
+        "url": "https://ui.ballmac.com/components/signup-1"
+      }
+    },
+    {
+      "name": "signup-1-demo",
+      "type": "registry:example",
+      "title": "Signup 1: form with benefits column: Default",
+      "description": "Default example of Signup 1: form with benefits column.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/signup-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/signup-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/signup-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "signup-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "signup-1-simple",
+      "type": "registry:example",
+      "title": "Signup 1: form with benefits column: No SSO, no pitch",
+      "description": "No SSO, no pitch example of Signup 1: form with benefits column.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/signup-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/signup-1-simple.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/signup-1-simple.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "signup-1",
         "tier": "free"
       }
     },
@@ -7943,6 +8576,135 @@
       "meta": {
         "example": true,
         "of": "testimonials-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "verify-1",
+      "type": "registry:block",
+      "title": "Verify 1: one-time code with resend",
+      "description": "A code-entry screen: masked email, six slots that accept typing and pasting, automatic submit on the last digit, shake and alert on a wrong code, a resend countdown and an animated success state.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input-otp.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/verify-1/verify-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/verify-1/verify-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "auth"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "verify",
+          "otp",
+          "code",
+          "two-factor",
+          "email",
+          "resend"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Email or SMS code verification. Pass email, length, onVerify(code) (throw for a wrong code) and onResend. Without onVerify any code except all zeros succeeds, so you can try every state.",
+          "whenToUse": [
+            "Email confirmation after signup",
+            "Two-factor sign-in and sensitive actions"
+          ],
+          "whenNotToUse": [
+            "Magic links that need no typing"
+          ],
+          "composesWith": [
+            "signup-1",
+            "login-2",
+            "forgot-password-1",
+            "onboarding-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Typing or pasting",
+              "action": "Fills the slots; the last digit submits automatically"
+            },
+            {
+              "keys": "Wrong code",
+              "action": "Announced as an alert, the field is marked invalid and focus returns to it"
+            },
+            {
+              "keys": "Resend",
+              "action": "The countdown is shown as text; the button is disabled until it ends"
+            }
+          ],
+          "customization": [
+            "length: digits in the code",
+            "onVerify, onResend, onChangeEmail (null hides)",
+            "resendAfter: seconds"
+          ]
+        },
+        "examples": [
+          "verify-1-demo",
+          "verify-1-four"
+        ],
+        "url": "https://ui.ballmac.com/components/verify-1"
+      }
+    },
+    {
+      "name": "verify-1-demo",
+      "type": "registry:example",
+      "title": "Verify 1: one-time code with resend: Default",
+      "description": "Default example of Verify 1: one-time code with resend.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/verify-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/verify-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/verify-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "verify-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "verify-1-four",
+      "type": "registry:example",
+      "title": "Verify 1: one-time code with resend: Four digits",
+      "description": "Four digits example of Verify 1: one-time code with resend.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/verify-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/verify-1-four.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/verify-1-four.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "verify-1",
         "tier": "free"
       }
     },
