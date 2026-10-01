@@ -1,11 +1,11 @@
-// Ballmac UI: Launch template page. https://ui.ballmac.com/templates/template-launch
+// Ballmac UI: Launch template route. https://ui.ballmac.com/templates/template-launch
 import type { Metadata } from "next"
 
 import { LaunchPage } from "@/components/ballmac/templates/launch/launch-page"
 
 export const metadata: Metadata = {
-  title: "Acme: Ship with confidence",
-  description: "Deploy previews, performance budgets and one-click rollbacks for every branch.",
+  title: "Beacon: ship every branch with nothing to fear",
+  description: "Preview URLs, performance budgets and one-click rollbacks for every pull request.",
 }
 
 export default function Page() {

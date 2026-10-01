@@ -440,6 +440,10 @@ const cases: Record<string, Step> = {
   "template-pocket-pricing": async (p) => { await p.getByRole("button", { name: "Monthly" }).click() },
   "template-pocket-security": async () => {},
   "template-pocket-download": async (p) => { await p.getByRole("button", { name: "Text me the link" }).click(); await p.getByText("Enter a mobile number or an email address.").waitFor() },
+  "template-launch-demo": async (p) => { await p.getByRole("button", { name: "Next quote" }).click().catch(() => {}) },
+  "template-launch-pricing": async (p) => { await p.getByRole("radio", { name: /Yearly/ }).click().catch(() => {}); await p.getByRole("button", { name: /Billing/ }).first().click().catch(() => {}) },
+  "template-launch-changelog": async (p) => { await p.getByRole("button", { name: /older release/ }).click() },
+  "template-launch-contact": async (p) => { await p.getByRole("button", { name: /Send/ }).click(); await p.getByText(/required|valid|Enter|Tell us|Please/i).first().waitFor() },
 }
 const filter = process.argv.slice(2)
 const browser = await chromium.launch({ headless: true, executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE })

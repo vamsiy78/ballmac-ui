@@ -24,3 +24,4 @@ export const Young_Serif = font
 export const Nunito_Sans = font
 export const Unbounded = font
 export const Gabarito = font
+export const Schibsted_Grotesk = font

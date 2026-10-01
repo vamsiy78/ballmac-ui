@@ -34552,31 +34552,81 @@
     {
       "name": "template-launch",
       "type": "registry:block",
-      "title": "Launch page",
-      "description": "A complete product launch page: sticky header, split hero, bento features, two-tier pricing, FAQ, closing call to action and footer, installed as a route.",
+      "title": "Beacon: launch site from blocks",
+      "description": "A four-page product site assembled entirely from Ballmac blocks (Hero6, Stats1, Features5, Testimonials2, Cta3, Pricing2, Pricing3, Faq2, Changelog1, Contact1) in one palette, so any section can be swapped for another block.",
       "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
-        "https://ui.ballmac.com/r/cta-1.json",
-        "https://ui.ballmac.com/r/faq-1.json",
-        "https://ui.ballmac.com/r/features-1.json",
-        "https://ui.ballmac.com/r/footer-1.json",
-        "https://ui.ballmac.com/r/header-1.json",
-        "https://ui.ballmac.com/r/hero-1.json",
-        "https://ui.ballmac.com/r/pricing-1.json"
+        "utils",
+        "https://ui.ballmac.com/r/header-2.json",
+        "https://ui.ballmac.com/r/footer-2.json",
+        "https://ui.ballmac.com/r/hero-6.json",
+        "https://ui.ballmac.com/r/logo-cloud-1.json",
+        "https://ui.ballmac.com/r/stats-1.json",
+        "https://ui.ballmac.com/r/features-5.json",
+        "https://ui.ballmac.com/r/testimonials-2.json",
+        "https://ui.ballmac.com/r/cta-3.json",
+        "https://ui.ballmac.com/r/pricing-2.json",
+        "https://ui.ballmac.com/r/pricing-3.json",
+        "https://ui.ballmac.com/r/faq-2.json",
+        "https://ui.ballmac.com/r/changelog-1.json",
+        "https://ui.ballmac.com/r/contact-1.json"
       ],
       "files": [
+        {
+          "path": "registry/ballmac/components/templates/launch/launch-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/launch/launch-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/launch/launch-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/launch/launch-theme.tsx"
+        },
         {
           "path": "registry/ballmac/components/templates/launch/launch-page.tsx",
           "type": "registry:component",
           "target": "@components/ballmac/templates/launch/launch-page.tsx"
         },
         {
+          "path": "registry/ballmac/components/templates/launch/launch-pricing.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/launch/launch-pricing.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/launch/launch-changelog.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/launch/launch-changelog.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/launch/launch-contact.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/launch/launch-contact.tsx"
+        },
+        {
           "path": "registry/ballmac/app/launch/page.tsx",
           "type": "registry:page",
           "target": "app/launch/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/launch/pricing/page.tsx",
+          "type": "registry:page",
+          "target": "app/launch/pricing/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/launch/changelog/page.tsx",
+          "type": "registry:page",
+          "target": "app/launch/changelog/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/launch/contact/page.tsx",
+          "type": "registry:page",
+          "target": "app/launch/contact/page.tsx"
         }
       ],
-      "docs": "The page is at /launch. Edit components/ballmac/templates/launch/launch-page.tsx to change the copy and sections.",
+      "docs": "Pages are at /launch, /launch/pricing, /launch/changelog and /launch/contact. Each page is LaunchShell (header, footer, palette) around Ballmac blocks: change copy through the blocks' props, reorder them, or swap any block for another in the same category. Edit launchCss in launch-theme.tsx for the palette.",
       "categories": [
         "templates"
       ],
@@ -34588,33 +34638,48 @@
           "landing page",
           "launch",
           "saas",
-          "marketing"
+          "marketing",
+          "blocks"
         ],
         "version": "1.0.0",
-        "updated": "2026-09-28",
+        "updated": "2026-10-01",
         "ai": {
-          "summary": "Installs a working /launch route built from Ballmac blocks. Change copy through each block's props in launch-page.tsx; move the route by moving app/launch/page.tsx.",
+          "summary": "Installs a four-page product site built entirely from Ballmac blocks in one palette. Change copy through block props, swap blocks freely, and edit launchCss for the look.",
           "whenToUse": [
-            "A new SaaS or product landing page",
-            "A starting point to customize section by section"
+            "A new SaaS or developer-tool site you will customize section by section",
+            "A starting point that shows how blocks compose"
           ],
           "whenNotToUse": [
             "Adding one section to an existing page (install that block instead)"
           ],
           "composesWith": [
-            "hero-2",
-            "hero-3",
-            "features-2"
+            "hero-7",
+            "features-6",
+            "testimonials-1",
+            "pricing-1"
           ],
-          "a11y": [],
+          "a11y": [
+            {
+              "keys": "Tab and Enter in the header",
+              "action": "Open the navigation; the mobile menu is a sheet"
+            },
+            {
+              "keys": "Arrow keys on the quote dots",
+              "action": "Change the testimonial"
+            }
+          ],
           "customization": [
-            "Reorder or swap blocks in LaunchPage",
-            "Pass props to each block for your copy",
+            "Swap any block for another in the same category",
+            "Pass your copy to each block's props",
+            "Edit launchCss for the palette",
             "Rename the route folder app/launch"
           ]
         },
         "examples": [
-          "template-launch-demo"
+          "template-launch-demo",
+          "template-launch-pricing",
+          "template-launch-changelog",
+          "template-launch-contact"
         ],
         "url": "https://ui.ballmac.com/components/template-launch"
       }
@@ -34622,8 +34687,8 @@
     {
       "name": "template-launch-demo",
       "type": "registry:example",
-      "title": "Launch page: Launch page",
-      "description": "Launch page example of Launch page.",
+      "title": "Beacon: launch site from blocks: Home",
+      "description": "Home example of Beacon: launch site from blocks.",
       "registryDependencies": [
         "https://ui.ballmac.com/r/template-launch.json"
       ],
@@ -34632,6 +34697,78 @@
           "path": "registry/examples/template-launch-demo.tsx",
           "type": "registry:example",
           "target": "@components/ballmac/examples/template-launch-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-launch",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-launch-pricing",
+      "type": "registry:example",
+      "title": "Beacon: launch site from blocks: Pricing",
+      "description": "Pricing example of Beacon: launch site from blocks.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-launch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-launch-pricing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-launch-pricing.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-launch",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-launch-changelog",
+      "type": "registry:example",
+      "title": "Beacon: launch site from blocks: Changelog",
+      "description": "Changelog example of Beacon: launch site from blocks.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-launch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-launch-changelog.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-launch-changelog.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-launch",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-launch-contact",
+      "type": "registry:example",
+      "title": "Beacon: launch site from blocks: Contact",
+      "description": "Contact example of Beacon: launch site from blocks.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-launch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-launch-contact.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-launch-contact.tsx"
         }
       ],
       "categories": [
