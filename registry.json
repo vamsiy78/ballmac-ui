@@ -7994,7 +7994,7 @@
             "header-1",
             "features-4",
             "pricing-1",
-            "template-mac-app"
+            "template-ledger"
           ],
           "a11y": [],
           "customization": [
@@ -33340,35 +33340,90 @@
       }
     },
     {
-      "name": "template-mac-app",
+      "name": "template-ledger",
       "type": "registry:block",
-      "title": "Mac app landing page",
-      "description": "A complete landing page for a Mac app: header, hero with an opening laptop, logo cloud, Mac feature bento, testimonials, one-time pricing, FAQ, beta signup and footer.",
+      "title": "Ledger: Mac app",
+      "description": "A five-page site for a Mac app: an interactive desktop hero, a menu-bar tour, a native-features bento, a device lineup, license-or-subscription pricing, a download page, release notes and support.",
       "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
-        "https://ui.ballmac.com/r/cta-2.json",
-        "https://ui.ballmac.com/r/faq-1.json",
-        "https://ui.ballmac.com/r/features-4.json",
-        "https://ui.ballmac.com/r/footer-1.json",
-        "https://ui.ballmac.com/r/header-1.json",
-        "https://ui.ballmac.com/r/hero-5.json",
-        "https://ui.ballmac.com/r/logo-cloud-1.json",
-        "https://ui.ballmac.com/r/pricing-1.json",
-        "https://ui.ballmac.com/r/testimonials-1.json"
+        "utils",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/changelog-1.json",
+        "https://ui.ballmac.com/r/devices-1.json",
+        "https://ui.ballmac.com/r/download-1.json",
+        "https://ui.ballmac.com/r/faq-2.json",
+        "https://ui.ballmac.com/r/features-7.json",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/mac-icons.json",
+        "https://ui.ballmac.com/r/pricing-4.json",
+        "https://ui.ballmac.com/r/showcase-1.json"
       ],
       "files": [
         {
-          "path": "registry/ballmac/components/templates/mac-app/mac-app-page.tsx",
+          "path": "registry/ballmac/components/templates/ledger/ledger-fonts.ts",
           "type": "registry:component",
-          "target": "@components/ballmac/templates/mac-app/mac-app-page.tsx"
+          "target": "@components/ballmac/templates/ledger/ledger-fonts.ts"
         },
         {
-          "path": "registry/ballmac/app/mac-app/page.tsx",
+          "path": "registry/ballmac/components/templates/ledger/ledger-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/ledger/ledger-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/ledger/ledger-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/ledger/ledger-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/ledger/ledger-download.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/ledger/ledger-download.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/ledger/ledger-pricing.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/ledger/ledger-pricing.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/ledger/ledger-changelog.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/ledger/ledger-changelog.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/ledger/ledger-support.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/ledger/ledger-support.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/ledger/page.tsx",
           "type": "registry:page",
-          "target": "app/mac-app/page.tsx"
+          "target": "app/ledger/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/ledger/download/page.tsx",
+          "type": "registry:page",
+          "target": "app/ledger/download/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/ledger/pricing/page.tsx",
+          "type": "registry:page",
+          "target": "app/ledger/pricing/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/ledger/changelog/page.tsx",
+          "type": "registry:page",
+          "target": "app/ledger/changelog/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/ledger/support/page.tsx",
+          "type": "registry:page",
+          "target": "app/ledger/support/page.tsx"
         }
       ],
-      "docs": "The page is at /mac-app. Edit components/ballmac/templates/mac-app/mac-app-page.tsx to change the copy and sections.",
+      "docs": "Pages are at /ledger, /ledger/download, /ledger/pricing, /ledger/changelog and /ledger/support. The light and dark palettes are the ledgerCss string in ledger-theme.tsx.",
       "categories": [
         "templates"
       ],
@@ -33377,53 +33432,60 @@
         "tier": "free",
         "tags": [
           "template",
-          "landing page",
           "mac app",
-          "desktop",
-          "download"
+          "macos",
+          "landing page",
+          "download",
+          "pricing",
+          "support",
+          "indie"
         ],
         "version": "1.0.0",
-        "updated": "2026-09-29",
+        "updated": "2026-10-01",
         "ai": {
-          "summary": "Installs a working /mac-app route for a desktop app built from Ballmac blocks. Change copy through each block's props in mac-app-page.tsx; move the route by moving app/mac-app/page.tsx.",
+          "summary": "Installs a five-page site for a Mac or desktop app, assembled from the Mac blocks (showcase-1, features-7, devices-1, pricing-4, download-1). Change the palette in ledgerCss, and the copy in each page file.",
           "whenToUse": [
-            "Landing pages for Mac or desktop apps",
-            "Indie app launches with a free tier and a one-time Pro purchase"
+            "Marketing sites for Mac, desktop and indie apps",
+            "Products that sell a license and a subscription"
           ],
           "whenNotToUse": [
-            "Web SaaS landing pages (use template-launch)"
+            "Web SaaS with signup flows (use an Orbit-style template)"
           ],
           "composesWith": [
-            "template-launch",
-            "hero-4"
+            "showcase-1",
+            "download-1",
+            "pricing-4"
           ],
           "a11y": [],
           "customization": [
-            "Header and footer brand",
-            "Pricing plans (one-time or subscription)",
-            "FAQ items",
-            "Hero screen: pass a screenshot via Hero5 `screen`"
+            "Edit ledgerCss for the palette",
+            "Pass your own app window to Showcase1 as children",
+            "Replace the italic serif in ledger-fonts.ts"
           ]
         },
         "examples": [
-          "template-mac-app-demo"
+          "template-ledger-demo",
+          "template-ledger-download",
+          "template-ledger-pricing",
+          "template-ledger-changelog",
+          "template-ledger-support"
         ],
-        "url": "https://ui.ballmac.com/components/template-mac-app"
+        "url": "https://ui.ballmac.com/components/template-ledger"
       }
     },
     {
-      "name": "template-mac-app-demo",
+      "name": "template-ledger-demo",
       "type": "registry:example",
-      "title": "Mac app landing page: Mac app landing page",
-      "description": "Mac app landing page example of Mac app landing page.",
+      "title": "Ledger: Mac app: Home",
+      "description": "Home example of Ledger: Mac app.",
       "registryDependencies": [
-        "https://ui.ballmac.com/r/template-mac-app.json"
+        "https://ui.ballmac.com/r/template-ledger.json"
       ],
       "files": [
         {
-          "path": "registry/examples/template-mac-app-demo.tsx",
+          "path": "registry/examples/template-ledger-demo.tsx",
           "type": "registry:example",
-          "target": "@components/ballmac/examples/template-mac-app-demo.tsx"
+          "target": "@components/ballmac/examples/template-ledger-demo.tsx"
         }
       ],
       "categories": [
@@ -33431,7 +33493,807 @@
       ],
       "meta": {
         "example": true,
-        "of": "template-mac-app",
+        "of": "template-ledger",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-ledger-download",
+      "type": "registry:example",
+      "title": "Ledger: Mac app: Download",
+      "description": "Download example of Ledger: Mac app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-ledger.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-ledger-download.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-ledger-download.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-ledger",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-ledger-pricing",
+      "type": "registry:example",
+      "title": "Ledger: Mac app: Pricing",
+      "description": "Pricing example of Ledger: Mac app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-ledger.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-ledger-pricing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-ledger-pricing.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-ledger",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-ledger-changelog",
+      "type": "registry:example",
+      "title": "Ledger: Mac app: What’s new",
+      "description": "What’s new example of Ledger: Mac app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-ledger.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-ledger-changelog.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-ledger-changelog.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-ledger",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-ledger-support",
+      "type": "registry:example",
+      "title": "Ledger: Mac app: Support",
+      "description": "Support example of Ledger: Mac app.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-ledger.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-ledger-support.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-ledger-support.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-ledger",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-northwind",
+      "type": "registry:block",
+      "title": "Northwind: B2B SaaS",
+      "description": "A warm, editorial five-page site for a B2B product: serif headlines on cream paper, an interactive product tour with numbered pins, case studies, pricing, an about page and a demo request form.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/accordion.json",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/northwind/northwind-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/northwind/northwind-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/northwind/northwind-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/northwind/northwind-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/northwind/northwind-tour.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/northwind/northwind-tour.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/northwind/northwind-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/northwind/northwind-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/northwind/northwind-pricing.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/northwind/northwind-pricing.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/northwind/northwind-customers.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/northwind/northwind-customers.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/northwind/northwind-about.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/northwind/northwind-about.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/northwind/northwind-contact.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/northwind/northwind-contact.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/northwind/page.tsx",
+          "type": "registry:page",
+          "target": "app/northwind/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/northwind/pricing/page.tsx",
+          "type": "registry:page",
+          "target": "app/northwind/pricing/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/northwind/customers/page.tsx",
+          "type": "registry:page",
+          "target": "app/northwind/customers/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/northwind/about/page.tsx",
+          "type": "registry:page",
+          "target": "app/northwind/about/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/northwind/contact/page.tsx",
+          "type": "registry:page",
+          "target": "app/northwind/contact/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /northwind, /northwind/pricing, /northwind/customers, /northwind/about and /northwind/contact. The light and dark palettes are the northwindCss string in northwind-theme.tsx.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "b2b",
+          "saas",
+          "editorial",
+          "serif",
+          "landing page",
+          "pricing",
+          "case study",
+          "contact"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a five-page editorial site for a B2B product, with a hotspot product tour on the home page. Change the palette in northwindCss, the tour steps in northwind-tour.tsx, and the copy in each page file.",
+          "whenToUse": [
+            "Marketing sites for finance, HR, legal and other B2B software",
+            "Brands that want a warm, trustworthy, editorial voice instead of a tech look"
+          ],
+          "whenNotToUse": [
+            "Dark developer tools (use an Orbit-style template)"
+          ],
+          "composesWith": [
+            "pricing-3",
+            "faq-2",
+            "contact-1"
+          ],
+          "a11y": [],
+          "customization": [
+            "Edit northwindCss for the palette",
+            "Edit steps and the mock dashboard in northwind-tour.tsx",
+            "Swap fonts in northwind-fonts.ts"
+          ]
+        },
+        "examples": [
+          "template-northwind-demo",
+          "template-northwind-pricing",
+          "template-northwind-customers",
+          "template-northwind-about",
+          "template-northwind-contact"
+        ],
+        "url": "https://ui.ballmac.com/components/template-northwind"
+      }
+    },
+    {
+      "name": "template-northwind-demo",
+      "type": "registry:example",
+      "title": "Northwind: B2B SaaS: Home",
+      "description": "Home example of Northwind: B2B SaaS.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-northwind.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-northwind-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-northwind-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-northwind",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-northwind-pricing",
+      "type": "registry:example",
+      "title": "Northwind: B2B SaaS: Pricing",
+      "description": "Pricing example of Northwind: B2B SaaS.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-northwind.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-northwind-pricing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-northwind-pricing.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-northwind",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-northwind-customers",
+      "type": "registry:example",
+      "title": "Northwind: B2B SaaS: Customers",
+      "description": "Customers example of Northwind: B2B SaaS.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-northwind.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-northwind-customers.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-northwind-customers.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-northwind",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-northwind-about",
+      "type": "registry:example",
+      "title": "Northwind: B2B SaaS: About",
+      "description": "About example of Northwind: B2B SaaS.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-northwind.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-northwind-about.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-northwind-about.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-northwind",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-northwind-contact",
+      "type": "registry:example",
+      "title": "Northwind: B2B SaaS: Contact",
+      "description": "Contact example of Northwind: B2B SaaS.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-northwind.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-northwind-contact.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-northwind-contact.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-northwind",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-orbit",
+      "type": "registry:block",
+      "title": "Orbit: AI agent platform",
+      "description": "A dark, four-page site for an AI agent platform: a hero that plays a live agent run, tools, an eval chart, traces, security, pricing with a usage calculator, a changelog and sign-in.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion",
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/accordion.json",
+        "https://ui.ballmac.com/r/aurora-background.json",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/changelog-feed.json",
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/marquee.json",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/slider.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/orbit/orbit-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/orbit/orbit-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/orbit/orbit-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/orbit/orbit-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/orbit/orbit-agent-run.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/orbit/orbit-agent-run.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/orbit/orbit-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/orbit/orbit-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/orbit/orbit-pricing.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/orbit/orbit-pricing.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/orbit/orbit-changelog.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/orbit/orbit-changelog.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/orbit/orbit-login.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/orbit/orbit-login.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/orbit/page.tsx",
+          "type": "registry:page",
+          "target": "app/orbit/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/orbit/pricing/page.tsx",
+          "type": "registry:page",
+          "target": "app/orbit/pricing/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/orbit/changelog/page.tsx",
+          "type": "registry:page",
+          "target": "app/orbit/changelog/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/orbit/login/page.tsx",
+          "type": "registry:page",
+          "target": "app/orbit/login/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /orbit, /orbit/pricing, /orbit/changelog and /orbit/login. The palette lives in orbit-theme.tsx (orbitVars); fonts load through next/font in orbit-fonts.ts.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "ai",
+          "agents",
+          "saas",
+          "dark",
+          "landing page",
+          "pricing",
+          "changelog"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a four-page dark site for an AI product. Change the palette in orbit-theme.tsx (orbitVars), the copy in each page file, and the agent-run script (steps) in orbit-agent-run.tsx.",
+          "whenToUse": [
+            "Marketing sites for AI agents, LLM tooling or developer platforms",
+            "A dark, high-contrast brand with a live product demo in the hero"
+          ],
+          "whenNotToUse": [
+            "Light, editorial brands (a Northwind-style template)",
+            "Mac app landing pages (a Ledger-style template)"
+          ],
+          "composesWith": [
+            "pricing-3",
+            "changelog-1",
+            "faq-2"
+          ],
+          "a11y": [],
+          "customization": [
+            "Edit orbitVars for the palette",
+            "Edit steps in OrbitAgentRun to script your own demo run",
+            "Swap fonts in orbit-fonts.ts"
+          ]
+        },
+        "examples": [
+          "template-orbit-demo",
+          "template-orbit-pricing",
+          "template-orbit-changelog",
+          "template-orbit-login"
+        ],
+        "url": "https://ui.ballmac.com/components/template-orbit"
+      }
+    },
+    {
+      "name": "template-orbit-demo",
+      "type": "registry:example",
+      "title": "Orbit: AI agent platform: Home",
+      "description": "Home example of Orbit: AI agent platform.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-orbit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-orbit-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-orbit-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-orbit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-orbit-pricing",
+      "type": "registry:example",
+      "title": "Orbit: AI agent platform: Pricing",
+      "description": "Pricing example of Orbit: AI agent platform.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-orbit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-orbit-pricing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-orbit-pricing.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-orbit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-orbit-changelog",
+      "type": "registry:example",
+      "title": "Orbit: AI agent platform: Changelog",
+      "description": "Changelog example of Orbit: AI agent platform.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-orbit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-orbit-changelog.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-orbit-changelog.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-orbit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-orbit-login",
+      "type": "registry:example",
+      "title": "Orbit: AI agent platform: Sign in",
+      "description": "Sign in example of Orbit: AI agent platform.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-orbit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-orbit-login.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-orbit-login.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-orbit",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-relay",
+      "type": "registry:block",
+      "title": "Relay: developer API platform",
+      "description": "A paper-and-ink, terminal-flavoured site for a developer API: a live send console, the life of an event, a delivery map, language-synced docs, usage pricing and a status page.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/accordion.json",
+        "https://ui.ballmac.com/r/api-endpoint.json",
+        "https://ui.ballmac.com/r/dotted-map.json",
+        "https://ui.ballmac.com/r/marquee.json",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/slider.json",
+        "https://ui.ballmac.com/r/snippet-tabs.json",
+        "https://ui.ballmac.com/r/table-of-contents.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/templates/relay/relay-fonts.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/relay/relay-fonts.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/relay/relay-theme.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/relay/relay-theme.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/relay/relay-samples.ts",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/relay/relay-samples.ts"
+        },
+        {
+          "path": "registry/ballmac/components/templates/relay/relay-home.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/relay/relay-home.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/relay/relay-docs.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/relay/relay-docs.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/relay/relay-pricing.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/relay/relay-pricing.tsx"
+        },
+        {
+          "path": "registry/ballmac/components/templates/relay/relay-status.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/templates/relay/relay-status.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/relay/page.tsx",
+          "type": "registry:page",
+          "target": "app/relay/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/relay/docs/page.tsx",
+          "type": "registry:page",
+          "target": "app/relay/docs/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/relay/pricing/page.tsx",
+          "type": "registry:page",
+          "target": "app/relay/pricing/page.tsx"
+        },
+        {
+          "path": "registry/ballmac/app/relay/status/page.tsx",
+          "type": "registry:page",
+          "target": "app/relay/status/page.tsx"
+        }
+      ],
+      "docs": "Pages are at /relay, /relay/docs, /relay/pricing and /relay/status. The light and dark palettes are the relayCss string in relay-theme.tsx; code samples live in relay-samples.ts.",
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "template",
+          "developer",
+          "api",
+          "docs",
+          "devtool",
+          "pricing",
+          "status page",
+          "landing page"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "Installs a four-page site for a developer API or infrastructure product. Change the palette in relayCss (relay-theme.tsx), the samples in relay-samples.ts, and the copy in each page file.",
+          "whenToUse": [
+            "Marketing and docs sites for APIs, SDKs and developer infrastructure",
+            "Brands that want a precise, terminal-flavoured look in light and dark"
+          ],
+          "whenNotToUse": [
+            "Consumer apps or soft, editorial brands (use a Northwind-style template)"
+          ],
+          "composesWith": [
+            "api-endpoint",
+            "snippet-tabs",
+            "faq-2"
+          ],
+          "a11y": [],
+          "customization": [
+            "Edit relayCss for the light and dark palettes",
+            "Replace relay-samples.ts with your own languages",
+            "Swap fonts in relay-fonts.ts"
+          ]
+        },
+        "examples": [
+          "template-relay-demo",
+          "template-relay-docs",
+          "template-relay-pricing",
+          "template-relay-status"
+        ],
+        "url": "https://ui.ballmac.com/components/template-relay"
+      }
+    },
+    {
+      "name": "template-relay-demo",
+      "type": "registry:example",
+      "title": "Relay: developer API platform: Home",
+      "description": "Home example of Relay: developer API platform.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-relay.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-relay-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-relay-demo.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-relay",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-relay-docs",
+      "type": "registry:example",
+      "title": "Relay: developer API platform: Docs",
+      "description": "Docs example of Relay: developer API platform.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-relay.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-relay-docs.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-relay-docs.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-relay",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-relay-pricing",
+      "type": "registry:example",
+      "title": "Relay: developer API platform: Pricing",
+      "description": "Pricing example of Relay: developer API platform.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-relay.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-relay-pricing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-relay-pricing.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-relay",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "template-relay-status",
+      "type": "registry:example",
+      "title": "Relay: developer API platform: Status",
+      "description": "Status example of Relay: developer API platform.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/template-relay.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/template-relay-status.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/template-relay-status.tsx"
+        }
+      ],
+      "categories": [
+        "templates"
+      ],
+      "meta": {
+        "example": true,
+        "of": "template-relay",
         "tier": "free"
       }
     },

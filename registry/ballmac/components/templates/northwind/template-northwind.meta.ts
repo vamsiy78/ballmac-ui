@@ -1,0 +1,56 @@
+import { defineItem } from "@ballmac-ui/metadata"
+
+export default defineItem({
+  name: "template-northwind",
+  type: "registry:block",
+  title: "Northwind: B2B SaaS",
+  description:
+    "A warm, editorial five-page site for a B2B product: serif headlines on cream paper, an interactive product tour with numbered pins, case studies, pricing, an about page and a demo request form.",
+  category: "templates",
+  templateKind: "marketing",
+  templatePages: [
+    { title: "Home", example: "template-northwind-demo", path: "/northwind" },
+    { title: "Pricing", example: "template-northwind-pricing", path: "/northwind/pricing" },
+    { title: "Customers", example: "template-northwind-customers", path: "/northwind/customers" },
+    { title: "About", example: "template-northwind-about", path: "/northwind/about" },
+    { title: "Contact", example: "template-northwind-contact", path: "/northwind/contact" },
+  ],
+  fonts: ["Fraunces", "Figtree"],
+  featured: true,
+  tags: ["template", "b2b", "saas", "editorial", "serif", "landing page", "pricing", "case study", "contact"],
+  files: [
+    { path: "components/templates/northwind/northwind-fonts.ts" },
+    { path: "components/templates/northwind/northwind-theme.tsx" },
+    { path: "components/templates/northwind/northwind-tour.tsx" },
+    { path: "components/templates/northwind/northwind-home.tsx" },
+    { path: "components/templates/northwind/northwind-pricing.tsx" },
+    { path: "components/templates/northwind/northwind-customers.tsx" },
+    { path: "components/templates/northwind/northwind-about.tsx" },
+    { path: "components/templates/northwind/northwind-contact.tsx" },
+    { path: "app/northwind/page.tsx" },
+    { path: "app/northwind/pricing/page.tsx" },
+    { path: "app/northwind/customers/page.tsx" },
+    { path: "app/northwind/about/page.tsx" },
+    { path: "app/northwind/contact/page.tsx" },
+  ],
+  dependencies: ["lucide-react", "radix-ui"],
+  registryDependencies: ["shadcn:utils", "accordion", "blur-fade", "number-ticker", "segmented-control"],
+  examples: [
+    { name: "template-northwind-demo", title: "Home", file: "template-northwind-demo.tsx" },
+    { name: "template-northwind-pricing", title: "Pricing", file: "template-northwind-pricing.tsx" },
+    { name: "template-northwind-customers", title: "Customers", file: "template-northwind-customers.tsx" },
+    { name: "template-northwind-about", title: "About", file: "template-northwind-about.tsx" },
+    { name: "template-northwind-contact", title: "Contact", file: "template-northwind-contact.tsx" },
+  ],
+  docs: "Pages are at /northwind, /northwind/pricing, /northwind/customers, /northwind/about and /northwind/contact. The light and dark palettes are the northwindCss string in northwind-theme.tsx.",
+  ai: {
+    summary:
+      "Installs a five-page editorial site for a B2B product, with a hotspot product tour on the home page. Change the palette in northwindCss, the tour steps in northwind-tour.tsx, and the copy in each page file.",
+    whenToUse: ["Marketing sites for finance, HR, legal and other B2B software", "Brands that want a warm, trustworthy, editorial voice instead of a tech look"],
+    whenNotToUse: ["Dark developer tools (use an Orbit-style template)"],
+    composesWith: ["pricing-3", "faq-2", "contact-1"],
+    customization: ["Edit northwindCss for the palette", "Edit steps and the mock dashboard in northwind-tour.tsx", "Swap fonts in northwind-fonts.ts"],
+  },
+  version: "1.0.0",
+  updated: "2026-10-01",
+})

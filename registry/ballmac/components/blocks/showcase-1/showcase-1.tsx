@@ -180,8 +180,8 @@ function Showcase1({ app = "Ledger", children, time = "2026-10-01T09:41:00", wid
 
       {widgets && (
         <div className="pointer-events-none absolute top-10 right-4 z-0 hidden flex-col gap-3 @4xl:flex">
-          <WeatherWidget city="Cupertino" temperature={72} condition="partly-cloudy" high={78} low={61} className="pointer-events-auto w-36" />
-          <CalendarWidget date="2026-10-01" events={[{ id: "a", title: "Design review", time: "10:30 AM", tone: "red" }]} className="pointer-events-auto w-36" />
+          <WeatherWidget city="Cupertino" temperature={72} condition="partly-cloudy" high={78} low={61} className="pointer-events-auto w-40" />
+          <CalendarWidget date="2026-10-01" events={[{ id: "a", title: "Design review", time: "10:30 AM", tone: "red" }]} className="pointer-events-auto w-40" />
         </div>
       )}
 

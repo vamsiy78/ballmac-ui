@@ -1,0 +1,55 @@
+import { defineItem } from "@ballmac-ui/metadata"
+
+export default defineItem({
+  name: "template-ledger",
+  type: "registry:block",
+  title: "Ledger: Mac app",
+  description:
+    "A five-page site for a Mac app: an interactive desktop hero, a menu-bar tour, a native-features bento, a device lineup, license-or-subscription pricing, a download page, release notes and support.",
+  category: "templates",
+  templateKind: "marketing",
+  templatePages: [
+    { title: "Home", example: "template-ledger-demo", path: "/ledger" },
+    { title: "Download", example: "template-ledger-download", path: "/ledger/download" },
+    { title: "Pricing", example: "template-ledger-pricing", path: "/ledger/pricing" },
+    { title: "What’s new", example: "template-ledger-changelog", path: "/ledger/changelog" },
+    { title: "Support", example: "template-ledger-support", path: "/ledger/support" },
+  ],
+  fonts: ["Newsreader", "System UI (San Francisco)"],
+  featured: true,
+  tags: ["template", "mac app", "macos", "landing page", "download", "pricing", "support", "indie"],
+  files: [
+    { path: "components/templates/ledger/ledger-fonts.ts" },
+    { path: "components/templates/ledger/ledger-theme.tsx" },
+    { path: "components/templates/ledger/ledger-home.tsx" },
+    { path: "components/templates/ledger/ledger-download.tsx" },
+    { path: "components/templates/ledger/ledger-pricing.tsx" },
+    { path: "components/templates/ledger/ledger-changelog.tsx" },
+    { path: "components/templates/ledger/ledger-support.tsx" },
+    { path: "app/ledger/page.tsx" },
+    { path: "app/ledger/download/page.tsx" },
+    { path: "app/ledger/pricing/page.tsx" },
+    { path: "app/ledger/changelog/page.tsx" },
+    { path: "app/ledger/support/page.tsx" },
+  ],
+  dependencies: ["lucide-react"],
+  registryDependencies: ["shadcn:utils", "blur-fade", "changelog-1", "devices-1", "download-1", "faq-2", "features-7", "kbd", "mac-icons", "pricing-4", "showcase-1"],
+  examples: [
+    { name: "template-ledger-demo", title: "Home", file: "template-ledger-demo.tsx" },
+    { name: "template-ledger-download", title: "Download", file: "template-ledger-download.tsx" },
+    { name: "template-ledger-pricing", title: "Pricing", file: "template-ledger-pricing.tsx" },
+    { name: "template-ledger-changelog", title: "What’s new", file: "template-ledger-changelog.tsx" },
+    { name: "template-ledger-support", title: "Support", file: "template-ledger-support.tsx" },
+  ],
+  docs: "Pages are at /ledger, /ledger/download, /ledger/pricing, /ledger/changelog and /ledger/support. The light and dark palettes are the ledgerCss string in ledger-theme.tsx.",
+  ai: {
+    summary:
+      "Installs a five-page site for a Mac or desktop app, assembled from the Mac blocks (showcase-1, features-7, devices-1, pricing-4, download-1). Change the palette in ledgerCss, and the copy in each page file.",
+    whenToUse: ["Marketing sites for Mac, desktop and indie apps", "Products that sell a license and a subscription"],
+    whenNotToUse: ["Web SaaS with signup flows (use an Orbit-style template)"],
+    composesWith: ["showcase-1", "download-1", "pricing-4"],
+    customization: ["Edit ledgerCss for the palette", "Pass your own app window to Showcase1 as children", "Replace the italic serif in ledger-fonts.ts"],
+  },
+  version: "1.0.0",
+  updated: "2026-10-01",
+})

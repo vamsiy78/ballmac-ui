@@ -13,6 +13,7 @@ export default defineConfig({
       { find: /^@\/hooks\/ballmac\/(.*)$/, replacement: r("./ballmac/hooks/$1") },
       { find: /^@\/lib\/ballmac\/(.*)$/, replacement: r("./ballmac/lib/$1") },
       { find: /^@\/lib\/utils$/, replacement: r("./tests/utils.ts") },
+      { find: /^next\/font\/google$/, replacement: r("./tests/next-font-google.ts") },
     ],
   },
   test: {
