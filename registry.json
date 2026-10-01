@@ -1235,6 +1235,252 @@
       }
     },
     {
+      "name": "animated-list",
+      "type": "registry:ui",
+      "title": "Animated List",
+      "description": "A live feed where new items spring in at the top and the rest glide down, with leave animations, an item cap, an optional fading tail and a polite announcement for new entries.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/animated-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/animated-list.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "list",
+          "feed",
+          "notifications",
+          "live",
+          "spring"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<AnimatedList max fadeEnd announce><AnimatedListItem key={id}>…</AnimatedListItem></AnimatedList>. Each item needs a stable key. Prepend new entries to your array; layout animation does the rest.",
+          "whenToUse": [
+            "Live activity, notification and event feeds",
+            "Chat-like logs where entries arrive over time"
+          ],
+          "whenNotToUse": [
+            "Static lists (stagger-list)",
+            "Hundreds of rows (virtualize instead)"
+          ],
+          "composesWith": [
+            "notification-stack",
+            "activity-feed",
+            "stagger-list"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "announce turns on a polite live region that reads additions only"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Items fade in without moving or scaling"
+            }
+          ],
+          "customization": [
+            "max",
+            "fadeEnd",
+            "announce",
+            "label",
+            "item content is yours"
+          ]
+        },
+        "examples": [
+          "animated-list-demo",
+          "animated-list-log"
+        ],
+        "url": "https://ui.ballmac.com/components/animated-list"
+      }
+    },
+    {
+      "name": "animated-list-demo",
+      "type": "registry:example",
+      "title": "Animated List: Live notification feed",
+      "description": "Live notification feed example of Animated List.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/animated-list.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/animated-list-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/animated-list-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "animated-list",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "animated-list-log",
+      "type": "registry:example",
+      "title": "Animated List: Capped activity log",
+      "description": "Capped activity log example of Animated List.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/animated-list.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/animated-list-log.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/animated-list-log.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "animated-list",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "animated-number-flow",
+      "type": "registry:ui",
+      "title": "Animated Number Flow",
+      "description": "A number whose digits roll like an odometer to the new value, with locale and Intl formatting for currency, percent and compact notation, and widths that animate as digits come and go.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/animated-number-flow.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/animated-number-flow.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "number",
+          "odometer",
+          "counter",
+          "currency",
+          "format"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<AnimatedNumberFlow value format locale prefix suffix announce fade />. Change value and each digit rolls to its new place. Uses Intl.NumberFormat with a fixed default locale so server and browser agree.",
+          "whenToUse": [
+            "Prices, balances and stats that change on interaction",
+            "Live metrics"
+          ],
+          "whenNotToUse": [
+            "A one-time count-up on scroll (number-ticker)"
+          ],
+          "composesWith": [
+            "number-ticker",
+            "stat-card",
+            "kpi-row"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "The formatted number is read as text; announce adds a polite live region"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The value changes instantly"
+            }
+          ],
+          "customization": [
+            "format (Intl options)",
+            "locale",
+            "prefix and suffix",
+            "fade",
+            "announce"
+          ]
+        },
+        "examples": [
+          "animated-number-flow-demo",
+          "animated-number-flow-formats"
+        ],
+        "url": "https://ui.ballmac.com/components/animated-number-flow"
+      }
+    },
+    {
+      "name": "animated-number-flow-demo",
+      "type": "registry:example",
+      "title": "Animated Number Flow: Price with plan toggle",
+      "description": "Price with plan toggle example of Animated Number Flow.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/animated-number-flow.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/animated-number-flow-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/animated-number-flow-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "animated-number-flow",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "animated-number-flow-formats",
+      "type": "registry:example",
+      "title": "Animated Number Flow: Currency, percent, compact",
+      "description": "Currency, percent, compact example of Animated Number Flow.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/animated-number-flow.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/animated-number-flow-formats.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/animated-number-flow-formats.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "animated-number-flow",
+        "tier": "free"
+      }
+    },
+    {
       "name": "animated-tabs",
       "type": "registry:ui",
       "title": "Animated Tabs",
@@ -2206,6 +2452,132 @@
       "meta": {
         "example": true,
         "of": "aurora-background",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "avatar-circles",
+      "type": "registry:ui",
+      "title": "Avatar Circles",
+      "description": "Overlapping avatars that spread on hover, lift individually with a name and role tooltip, show presence, fall back to initials and end in a +N count that can be a button.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/avatar-circles.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/avatar-circles.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "avatar",
+          "people",
+          "stack",
+          "presence",
+          "team"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<AvatarCircles people={[{ name, src, role, status, href }]} max total size onOverflowClick />. Each face is a link or button named with its person (and status). total adds the +N when only some are loaded.",
+          "whenToUse": [
+            "Showing who is in a project, document or room",
+            "Social proof next to a call to action"
+          ],
+          "whenNotToUse": [
+            "A plain compact row (avatar-stack)",
+            "Large member tables (data-table)"
+          ],
+          "composesWith": [
+            "avatar-stack",
+            "avatar",
+            "tooltip"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Each person is focusable and shows the tooltip on focus"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Named 'Ada Lovelace, online'; the group announces the people count"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "No lift; the spread still happens with a plain transition"
+            }
+          ],
+          "customization": [
+            "max and total",
+            "size: sm | default | lg",
+            "status",
+            "href",
+            "onOverflowClick"
+          ]
+        },
+        "examples": [
+          "avatar-circles-demo",
+          "avatar-circles-sizes"
+        ],
+        "url": "https://ui.ballmac.com/components/avatar-circles"
+      }
+    },
+    {
+      "name": "avatar-circles-demo",
+      "type": "registry:example",
+      "title": "Avatar Circles: Team with presence",
+      "description": "Team with presence example of Avatar Circles.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/avatar-circles.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/avatar-circles-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/avatar-circles-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "avatar-circles",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "avatar-circles-sizes",
+      "type": "registry:example",
+      "title": "Avatar Circles: Sizes and overflow button",
+      "description": "Sizes and overflow button example of Avatar Circles.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/avatar-circles.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/avatar-circles-sizes.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/avatar-circles-sizes.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "avatar-circles",
         "tier": "free"
       }
     },
@@ -6745,6 +7117,132 @@
       "meta": {
         "example": true,
         "of": "checkbox",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "circular-progress",
+      "type": "registry:ui",
+      "title": "Circular Progress",
+      "description": "Concentric progress rings or a 270 degree gauge in theme colors with animated fills, a legend with values and a center slot, for goals, quotas and activity summaries.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/circular-progress.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/circular-progress.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "progress",
+          "rings",
+          "gauge",
+          "activity",
+          "chart"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<CircularProgress rings={[{ label, value, max, tone, display }]} size thickness gap sweep legend>center</CircularProgress>. One ring is role=meter; several are a named group whose value text lists every ring. sweep=270 makes a gauge.",
+          "whenToUse": [
+            "Daily goals and multi-metric summaries",
+            "Storage, quota or score gauges"
+          ],
+          "whenNotToUse": [
+            "A single small ring in a table (progress-ring)",
+            "Time series (chart)"
+          ],
+          "composesWith": [
+            "progress-ring",
+            "usage-meter",
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Value text such as Move 74%, Exercise 38%; the legend repeats values as text"
+            },
+            {
+              "keys": "Color",
+              "action": "Each ring is named in the legend; color is not the only cue"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Rings are drawn full length at once"
+            }
+          ],
+          "customization": [
+            "rings",
+            "sweep",
+            "thickness and gap",
+            "legend",
+            "duration"
+          ]
+        },
+        "examples": [
+          "circular-progress-demo",
+          "circular-progress-gauge"
+        ],
+        "url": "https://ui.ballmac.com/components/circular-progress"
+      }
+    },
+    {
+      "name": "circular-progress-demo",
+      "type": "registry:example",
+      "title": "Circular Progress: Activity rings",
+      "description": "Activity rings example of Circular Progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/circular-progress.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/circular-progress-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/circular-progress-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "circular-progress",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "circular-progress-gauge",
+      "type": "registry:example",
+      "title": "Circular Progress: Gauge with center content",
+      "description": "Gauge with center content example of Circular Progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/circular-progress.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/circular-progress-gauge.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/circular-progress-gauge.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "circular-progress",
         "tier": "free"
       }
     },
@@ -11473,6 +11971,130 @@
       }
     },
     {
+      "name": "glare-hover",
+      "type": "registry:ui",
+      "title": "Glare Hover",
+      "description": "Wraps any content so a diagonal band of light sweeps across it on hover or keyboard focus, in white for images and dark surfaces or a soft shadow for light ones.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/glare-hover.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/glare-hover.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hover",
+          "glare",
+          "shine",
+          "image",
+          "card"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<GlareHover angle duration intensity tone='light|dark'>anything</GlareHover>. The sweep runs once per hover and resets instantly when the pointer leaves. Pure CSS transitions; nothing renders on pointer move.",
+          "whenToUse": [
+            "Product images, posters and cards",
+            "Anything that deserves a small touch of polish on hover"
+          ],
+          "whenNotToUse": [
+            "Pointer-following lighting (magic-card or spotlight-card)"
+          ],
+          "composesWith": [
+            "tilt-card",
+            "magic-card",
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "Focus",
+              "action": "The sweep also plays when something inside gains keyboard focus"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The glare is aria-hidden"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "No glare is drawn"
+            }
+          ],
+          "customization": [
+            "angle",
+            "duration",
+            "intensity",
+            "tone"
+          ]
+        },
+        "examples": [
+          "glare-hover-demo",
+          "glare-hover-tones"
+        ],
+        "url": "https://ui.ballmac.com/components/glare-hover"
+      }
+    },
+    {
+      "name": "glare-hover-demo",
+      "type": "registry:example",
+      "title": "Glare Hover: Image cards",
+      "description": "Image cards example of Glare Hover.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/glare-hover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/glare-hover-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/glare-hover-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "glare-hover",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "glare-hover-tones",
+      "type": "registry:example",
+      "title": "Glare Hover: Light and dark tone",
+      "description": "Light and dark tone example of Glare Hover.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/glare-hover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/glare-hover-tones.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/glare-hover-tones.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "glare-hover",
+        "tier": "free"
+      }
+    },
+    {
       "name": "globe",
       "type": "registry:ui",
       "title": "Globe",
@@ -12198,6 +12820,127 @@
       "meta": {
         "example": true,
         "of": "hyper-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "in-view",
+      "type": "registry:ui",
+      "title": "In View",
+      "description": "A wrapper that knows when it is on screen: it sets a data attribute for CSS, offers a render function and callbacks, and can run a simple entrance.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/in-view.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/in-view.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "viewport",
+          "scroll",
+          "observer",
+          "reveal",
+          "trigger"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<InView effect='fade|slide-up|slide-down|scale|blur|none' amount margin once onInViewChange>{content or (inView)=>content}</InView>. data-in-view is true or false for Tailwind's data-[in-view=true] variants.",
+          "whenToUse": [
+            "Starting a video, counter or animation only when seen",
+            "Custom reveal styling driven by data-in-view"
+          ],
+          "whenNotToUse": [
+            "Staggered groups (blur-fade or stagger-list)"
+          ],
+          "composesWith": [
+            "blur-fade",
+            "number-ticker",
+            "stagger-list"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Content is always in the DOM; only presentation changes"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Content is shown with no entrance"
+            }
+          ],
+          "customization": [
+            "effect",
+            "amount and margin",
+            "once",
+            "onInViewChange",
+            "as"
+          ]
+        },
+        "examples": [
+          "in-view-demo",
+          "in-view-state"
+        ],
+        "url": "https://ui.ballmac.com/components/in-view"
+      }
+    },
+    {
+      "name": "in-view-demo",
+      "type": "registry:example",
+      "title": "In View: Entrances",
+      "description": "Entrances example of In View.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/in-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/in-view-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/in-view-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "in-view",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "in-view-state",
+      "type": "registry:example",
+      "title": "In View: Render function and callback",
+      "description": "Render function and callback example of In View.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/in-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/in-view-state.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/in-view-state.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "in-view",
         "tier": "free"
       }
     },
@@ -13856,6 +14599,128 @@
       }
     },
     {
+      "name": "lens",
+      "type": "registry:ui",
+      "title": "Lens",
+      "description": "A magnifying lens that follows the pointer over an image or any content, moves with the arrow keys when focused, hides on Escape and keeps the copy inside it out of the accessibility tree.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/lens.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/lens.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "zoom",
+          "magnifier",
+          "image",
+          "hover",
+          "lens"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<Lens zoom lensSize label>{image or content}</Lens>. Works with any child. The magnified copy is inert and aria-hidden. Touch pointers are ignored so scrolling is never blocked.",
+          "whenToUse": [
+            "Product photos and maps",
+            "Inspecting fine detail in diagrams or charts"
+          ],
+          "whenNotToUse": [
+            "Full-screen image viewing (use a dialog)"
+          ],
+          "composesWith": [
+            "card",
+            "tilt-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "The area is focusable; the lens appears centered"
+            },
+            {
+              "keys": "ArrowKeys",
+              "action": "Move the lens in steps; Escape hides it"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The group is named and explains the keys; the copy is hidden"
+            }
+          ],
+          "customization": [
+            "zoom",
+            "lensSize",
+            "label"
+          ]
+        },
+        "examples": [
+          "lens-demo",
+          "lens-text"
+        ],
+        "url": "https://ui.ballmac.com/components/lens"
+      }
+    },
+    {
+      "name": "lens-demo",
+      "type": "registry:example",
+      "title": "Lens: Product image",
+      "description": "Product image example of Lens.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/lens.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/lens-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/lens-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "lens",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "lens-text",
+      "type": "registry:example",
+      "title": "Lens: Magnifying text",
+      "description": "Magnifying text example of Lens.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/lens.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/lens-text.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/lens-text.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "lens",
+        "tier": "free"
+      }
+    },
+    {
       "name": "loading-dots",
       "type": "registry:ui",
       "title": "Loading Dots",
@@ -14213,6 +15078,130 @@
       "meta": {
         "example": true,
         "of": "mac-window",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "magic-card",
+      "type": "registry:ui",
+      "title": "Magic Card",
+      "description": "A card with a two-color light that follows the pointer along its border, with an optional soft glow inside, driven by CSS variables so moving never re-renders, and a steady light on keyboard focus.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/magic-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/magic-card.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "card",
+          "hover",
+          "gradient",
+          "border",
+          "pointer"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<MagicCard from to size glow contentClassName>content</MagicCard>. from and to are chart tokens. Use spotlight-card for a single soft glow and this for a colored border light.",
+          "whenToUse": [
+            "Feature and pricing cards on dark or light pages",
+            "Any card grid that should feel responsive to the pointer"
+          ],
+          "whenNotToUse": [
+            "Dense data UI",
+            "Cards that are not interactive"
+          ],
+          "composesWith": [
+            "spotlight-card",
+            "tilt-card",
+            "bento-grid"
+          ],
+          "a11y": [
+            {
+              "keys": "Focus",
+              "action": "A centered light shows when anything inside has focus"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "No pointer tracking; a plain border remains"
+            }
+          ],
+          "customization": [
+            "from and to tones",
+            "size",
+            "glow",
+            "contentClassName"
+          ]
+        },
+        "examples": [
+          "magic-card-demo",
+          "magic-card-colors"
+        ],
+        "url": "https://ui.ballmac.com/components/magic-card"
+      }
+    },
+    {
+      "name": "magic-card-demo",
+      "type": "registry:example",
+      "title": "Magic Card: Feature grid",
+      "description": "Feature grid example of Magic Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/magic-card.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/magic-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/magic-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "magic-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "magic-card-colors",
+      "type": "registry:example",
+      "title": "Magic Card: Color pairs",
+      "description": "Color pairs example of Magic Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/magic-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/magic-card-colors.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/magic-card-colors.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "magic-card",
         "tier": "free"
       }
     },
@@ -15690,6 +16679,131 @@
       "meta": {
         "example": true,
         "of": "navigation-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "neon-card",
+      "type": "registry:ui",
+      "title": "Neon Card",
+      "description": "A card framed by a two-color neon border with a soft outer light and inner glow, tunable thickness, intensity and corner radius, with an optional warm-up flicker that never plays under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/neon-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/neon-card.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "card",
+          "neon",
+          "glow",
+          "border",
+          "gradient"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<NeonCard from to borderWidth glow flicker radius contentClassName>content</NeonCard>. Colors are theme tokens, so it follows any theme. The light is strongest in dark mode.",
+          "whenToUse": [
+            "A single highlighted plan, product or announcement",
+            "Dark-themed landing pages"
+          ],
+          "whenNotToUse": [
+            "Several cards at once",
+            "A rotating border (glow-border)"
+          ],
+          "composesWith": [
+            "glow-border",
+            "magic-card",
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "Contrast",
+              "action": "Content sits on the normal card surface; the glow is decorative"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Flicker is never played"
+            }
+          ],
+          "customization": [
+            "from and to",
+            "borderWidth",
+            "glow",
+            "flicker",
+            "radius"
+          ]
+        },
+        "examples": [
+          "neon-card-demo",
+          "neon-card-tones"
+        ],
+        "url": "https://ui.ballmac.com/components/neon-card"
+      }
+    },
+    {
+      "name": "neon-card-demo",
+      "type": "registry:example",
+      "title": "Neon Card: Pricing tier",
+      "description": "Pricing tier example of Neon Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/neon-card.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/neon-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/neon-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "neon-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "neon-card-tones",
+      "type": "registry:example",
+      "title": "Neon Card: Tones and flicker",
+      "description": "Tones and flicker example of Neon Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/neon-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/neon-card-tones.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/neon-card-tones.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "neon-card",
         "tier": "free"
       }
     },
@@ -21908,6 +23022,261 @@
       }
     },
     {
+      "name": "spring-drawer",
+      "type": "registry:ui",
+      "title": "Spring Drawer",
+      "description": "A drawer with spring physics: drag the handle to snap between heights or flick it closed, or slide in from the left or right, on Radix Dialog for focus trapping and scroll lock.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/spring-drawer.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/spring-drawer.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "drawer",
+          "sheet",
+          "snap",
+          "drag",
+          "dialog"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<SpringDrawer side snapPoints defaultSnap><SpringDrawerTrigger/><SpringDrawerContent><SpringDrawerHeader><SpringDrawerTitle/></SpringDrawerHeader><SpringDrawerBody/></SpringDrawerContent></SpringDrawer>. snapPoints are fractions of the screen height. The handle is a keyboard slider.",
+          "whenToUse": [
+            "Mobile-style sheets that can sit half open",
+            "Details panels that can be pulled larger"
+          ],
+          "whenNotToUse": [
+            "Simple modals (dialog)",
+            "Vaul-style nested drawers (drawer)"
+          ],
+          "composesWith": [
+            "drawer",
+            "sheet",
+            "dialog"
+          ],
+          "a11y": [
+            {
+              "keys": "Escape",
+              "action": "Closes the drawer"
+            },
+            {
+              "keys": "ArrowUp / ArrowDown",
+              "action": "On the handle, moves between snap points"
+            },
+            {
+              "keys": "Focus",
+              "action": "Trapped in the drawer and returned to the trigger on close"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The drawer moves without springs"
+            }
+          ],
+          "customization": [
+            "side",
+            "snapPoints and defaultSnap",
+            "onSnapChange",
+            "maxWidth",
+            "showCloseButton"
+          ]
+        },
+        "examples": [
+          "spring-drawer-demo",
+          "spring-drawer-side"
+        ],
+        "url": "https://ui.ballmac.com/components/spring-drawer"
+      }
+    },
+    {
+      "name": "spring-drawer-demo",
+      "type": "registry:example",
+      "title": "Spring Drawer: Bottom drawer with snap points",
+      "description": "Bottom drawer with snap points example of Spring Drawer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/spring-drawer.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/spring-drawer-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/spring-drawer-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "spring-drawer",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "spring-drawer-side",
+      "type": "registry:example",
+      "title": "Spring Drawer: Side drawers",
+      "description": "Side drawers example of Spring Drawer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/spring-drawer.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/spring-drawer-side.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/spring-drawer-side.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "spring-drawer",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "stagger-list",
+      "type": "registry:ui",
+      "title": "Stagger List",
+      "description": "A list or grid whose items arrive one after another from any direction, then glide to their new places when filtered, sorted, added or removed.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/stagger-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/stagger-list.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "list",
+          "stagger",
+          "reorder",
+          "filter",
+          "entrance"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<StaggerList stagger direction distance inView reorder><StaggerItem key={id}>…</StaggerItem></StaggerList>. Keep each item's key stable and filtering or sorting animates automatically.",
+          "whenToUse": [
+            "Result lists that filter or sort",
+            "Feature grids that should arrive in sequence"
+          ],
+          "whenNotToUse": [
+            "A live feed where new items push others down (animated-list)",
+            "Plain fade-ins (blur-fade)"
+          ],
+          "composesWith": [
+            "animated-list",
+            "blur-fade",
+            "bento-grid"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "The real list markup is untouched; only opacity and position change"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "Items are shown at once and reordering is instant"
+            }
+          ],
+          "customization": [
+            "as: ul | ol | div",
+            "stagger and delay",
+            "direction: up | down | left | right | scale",
+            "reorder"
+          ]
+        },
+        "examples": [
+          "stagger-list-demo",
+          "stagger-list-directions"
+        ],
+        "url": "https://ui.ballmac.com/components/stagger-list"
+      }
+    },
+    {
+      "name": "stagger-list-demo",
+      "type": "registry:example",
+      "title": "Stagger List: Filterable grid",
+      "description": "Filterable grid example of Stagger List.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/stagger-list.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/stagger-list-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/stagger-list-demo.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "stagger-list",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "stagger-list-directions",
+      "type": "registry:example",
+      "title": "Stagger List: Four directions",
+      "description": "Four directions example of Stagger List.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/stagger-list.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/stagger-list-directions.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/stagger-list-directions.tsx"
+        }
+      ],
+      "categories": [
+        "motion"
+      ],
+      "meta": {
+        "example": true,
+        "of": "stagger-list",
+        "tier": "free"
+      }
+    },
+    {
       "name": "stat-card",
       "type": "registry:ui",
       "title": "Stat Card",
@@ -25965,6 +27334,132 @@
       "meta": {
         "example": true,
         "of": "user-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "video-dialog",
+      "type": "registry:ui",
+      "title": "Video Dialog",
+      "description": "A thumbnail with a play button that opens a video in a focus-trapped dialog, for a video file, an embed URL or a YouTube id from the privacy-friendly domain, mounting the player only while open.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/dialog.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/video-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/video-dialog.tsx"
+        }
+      ],
+      "categories": [
+        "marketing"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "video",
+          "dialog",
+          "modal",
+          "youtube",
+          "thumbnail"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-01",
+        "ai": {
+          "summary": "<VideoDialog title thumbnail duration youtubeId | embedUrl | src aspect />. The player is created on open and removed on close, so nothing loads or keeps playing until asked.",
+          "whenToUse": [
+            "Product demos and launch videos on landing pages",
+            "Tutorial thumbnails"
+          ],
+          "whenNotToUse": [
+            "Inline background video",
+            "Audio only (use an audio player)"
+          ],
+          "composesWith": [
+            "dialog",
+            "card"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "Opens the video"
+            },
+            {
+              "keys": "Escape",
+              "action": "Closes it and returns focus to the thumbnail"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Button reads 'Play video: Title'; the dialog is named by the title"
+            }
+          ],
+          "customization": [
+            "youtubeId, embedUrl or src",
+            "thumbnail",
+            "duration",
+            "aspect",
+            "open / onOpenChange"
+          ]
+        },
+        "examples": [
+          "video-dialog-demo",
+          "video-dialog-aspects"
+        ],
+        "url": "https://ui.ballmac.com/components/video-dialog"
+      }
+    },
+    {
+      "name": "video-dialog-demo",
+      "type": "registry:example",
+      "title": "Video Dialog: Hero video",
+      "description": "Hero video example of Video Dialog.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/video-dialog.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/video-dialog-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/video-dialog-demo.tsx"
+        }
+      ],
+      "categories": [
+        "marketing"
+      ],
+      "meta": {
+        "example": true,
+        "of": "video-dialog",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "video-dialog-aspects",
+      "type": "registry:example",
+      "title": "Video Dialog: Shapes",
+      "description": "Shapes example of Video Dialog.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/video-dialog.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/video-dialog-aspects.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/video-dialog-aspects.tsx"
+        }
+      ],
+      "categories": [
+        "marketing"
+      ],
+      "meta": {
+        "example": true,
+        "of": "video-dialog",
         "tier": "free"
       }
     },
