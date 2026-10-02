@@ -146,5 +146,9 @@
   {
     "prefix": "dashboard-pro-4-",
     "reason": "The chart updates every second, so two captures differ."
+  },
+  {
+    "prefix": "calendar-pro-1",
+    "reason": "The time axis runs left to right in every language, so the timeline is not mirrored by design."
   }
 ]
