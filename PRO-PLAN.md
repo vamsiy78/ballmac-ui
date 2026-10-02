@@ -20,7 +20,7 @@ Started 2026-10-02. Work happens on `preprod`; nothing ships to `main` without t
 
 Owner to provide later: a Lemon Squeezy or Polar product, its IDs and checkout links (environment variables listed in `/docs/pro` and `apps/www/.env.example`), and a private repository for Pro sources, added as a submodule at `registry/pro` or cloned there during the deploy build.
 
-## Phase 2: Theme presets and theme builder
+## Phase 2: Theme presets and theme builder (done 2026-10-02)
 
 - 12 theme presets as free `registry:theme` items (installable with the CLI), each validated for contrast in light and dark.
 - `/themes` builder: pick a preset, adjust hue, radius, fonts and density with a live preview of real components and blocks, export CSS or install through a generated registry item. Builder is free (it brings traffic); Pro adds saved themes later if wanted.

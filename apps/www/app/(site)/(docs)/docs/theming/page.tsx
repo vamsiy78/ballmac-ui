@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import Link from "next/link"
+
 import { CodePanel } from "@/components/site/code-panel"
 import { DocsPage } from "@/components/site/docs-page"
 
@@ -21,6 +23,17 @@ export default function ThemingPage() {
         <code>--accent</code>, <code>--border</code>, <code>--input</code>, <code>--ring</code>, <code>--destructive</code>,{" "}
         <code>--chart-1</code> to <code>--chart-5</code> and <code>--radius</code>. Change them in your{" "}
         <code>globals.css</code> and every Ballmac component follows.
+      </p>
+      <h2 id="presets">Presets and the builder</h2>
+      <p>
+        <Link href="/themes">The theme builder</Link> has twelve ready-made themes (Graphite, Ocean, Indigo, Violet, Rose, Ember, Amber, Forest,
+        Teal, Sand, Mono and Midnight). Each one is a full set of light and dark tokens, with contrast checked for text, focus rings and
+        charts. Install one by name, or tune hue, intensity, radius, density and font on a live preview and copy the result.
+      </p>
+      <CodePanel lang="bash" code={`npx shadcn@latest add @ballmac/theme-ocean`} />
+      <p>
+        Themes change the variables only. Installing a second theme replaces the first, and your components keep working because they read
+        the same tokens.
       </p>
       <h2>Brand color in one line</h2>
       <p>Focus rings, selections and accents come from <code>--ring</code> and <code>--chart-1</code>:</p>

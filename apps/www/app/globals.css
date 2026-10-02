@@ -5,7 +5,8 @@
 /* Registry source lives outside the app; scan it for class names. */
 @source "../../../registry";
 
-@custom-variant dark (&:is(.dark *));
+/* `dark:` follows an ancestor .dark. The theme builder's light previews carry data-theme-scope="light" so they stay light on a dark site. */
+@custom-variant dark (&:is(.dark *):where(:not([data-theme-scope="light"] *)));
 
 /*
  * Site palette: neutral greys so the components carry the color, not the chrome. Components still
@@ -142,4 +143,54 @@
   font-size: 13px;
   line-height: 1.7;
   counter-reset: line;
+}
+
+/* Theme builder: native range inputs with a coloured track. */
+.bm-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+}
+.bm-range::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--bm-range-track, var(--muted));
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--foreground) 12%, transparent);
+}
+.bm-range::-moz-range-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--bm-range-track, var(--muted));
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--foreground) 12%, transparent);
+}
+.bm-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: -0.3125rem;
+  border-radius: 9999px;
+  border: 2px solid var(--foreground);
+  background: var(--background);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+}
+.bm-range::-moz-range-thumb {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 9999px;
+  border: 2px solid var(--foreground);
+  background: var(--background);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+}
+.bm-range:focus-visible {
+  outline: none;
+}
+.bm-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px color-mix(in oklch, var(--ring) 55%, transparent);
+}
+.bm-range:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 4px color-mix(in oklch, var(--ring) 55%, transparent);
 }

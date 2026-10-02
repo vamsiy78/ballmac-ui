@@ -1,7 +1,7 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@ballmac-ui/metadata"],
+  transpilePackages: ["@ballmac-ui/metadata", "@ballmac-ui/theme-engine"],
   productionBrowserSourceMaps: false,
   // The private Pro registry route reads the Pro build from disk at request time.
   outputFileTracingIncludes: { "/r/pro/\\[name\\]": ["./.registry-pro/**/*"] },

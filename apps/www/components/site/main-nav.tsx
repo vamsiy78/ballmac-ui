@@ -10,6 +10,7 @@ const nav = [
   { href: "/components", label: "Components", match: ["/components"] },
   { href: "/blocks", label: "Blocks", match: ["/blocks"] },
   { href: "/templates", label: "Templates", match: ["/templates"] },
+  { href: "/themes", label: "Themes", match: ["/themes"] },
   { href: "/docs/mcp", label: "MCP", match: [] },
   { href: "/pricing", label: "Pricing", match: ["/pricing"] },
 ]

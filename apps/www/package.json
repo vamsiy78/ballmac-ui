@@ -13,6 +13,7 @@
   "dependencies": {
     "@ballmac-ui/metadata": "workspace:*",
     "@ballmac-ui/registry": "workspace:*",
+    "@ballmac-ui/theme-engine": "workspace:*",
     "@tanstack/react-table": "^8.21.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

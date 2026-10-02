@@ -15,6 +15,7 @@ export const docsNav = [
       { href: "/components", label: "All components" },
       { href: "/blocks", label: "Blocks" },
       { href: "/templates", label: "Templates" },
+      { href: "/themes", label: "Themes" },
       { href: "/changelog", label: "Changelog" },
     ],
   },

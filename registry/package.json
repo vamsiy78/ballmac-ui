@@ -5,6 +5,7 @@
   "description": "Ballmac UI registry source. These are the packages registry items may import; each item still declares its own dependencies in its meta.ts.",
   "dependencies": {
     "@ballmac-ui/metadata": "workspace:*",
+    "@ballmac-ui/theme-engine": "workspace:*",
     "@hookform/resolvers": "^5.9.1",
     "@tanstack/react-table": "^8.21.3",
     "canvas-confetti": "^1.9.3",

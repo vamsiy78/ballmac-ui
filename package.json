@@ -12,7 +12,7 @@
     "smoke": "tsx scripts/smoke-install.ts",
     "a11y": "tsx scripts/a11y.ts",
     "check": "tsx scripts/check-deps.ts && tsx scripts/check-licenses.ts && tsx scripts/validate-output.ts apps/www/public/r && shadcn registry validate registry.json",
-    "test": "pnpm --filter @ballmac-ui/registry test && pnpm --filter @ballmac-ui/www test"
+    "test": "pnpm --filter @ballmac-ui/registry test && pnpm --filter @ballmac-ui/theme-engine test && pnpm --filter @ballmac-ui/www test"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

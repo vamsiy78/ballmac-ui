@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { PRESETS } from "@ballmac-ui/theme-engine"
 
 import { CommandMenu, type MenuEntry } from "@/components/site/command-menu"
 import { sidebarGroups } from "@/components/site/docs-shell"
@@ -19,6 +20,8 @@ export function SiteHeader() {
     })),
     ...getBlocks().map((b) => ({ name: b.name, title: b.title, description: b.description, group: `Blocks · ${blockCategoryLabels[b.blockCategory ?? ""] ?? ""}`, href: `/blocks/${b.name}` })),
     ...getTemplates().map((t) => ({ name: t.name, title: t.title, description: t.description, group: "Templates", href: `/templates/${t.name}` })),
+    { name: "themes", title: "Theme builder", description: "Twelve free themes and a live builder with contrast checks.", group: "Docs", href: "/themes" },
+    ...PRESETS.map((p) => ({ name: `theme-${p.slug}`, title: `${p.title} theme`, description: p.tagline, group: "Themes", href: `/themes/${p.slug}` })),
     { name: "introduction", title: "Introduction", description: "What Ballmac UI is and how it works.", group: "Docs", href: "/docs" },
     { name: "registry", title: "CLI & registry", description: "Namespaces, URLs, search, view and updates.", group: "Docs", href: "/docs/registry" },
     { name: "theming", title: "Theming", description: "Tokens, brand color and dark mode.", group: "Docs", href: "/docs/theming" },

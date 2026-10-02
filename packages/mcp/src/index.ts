@@ -223,6 +223,7 @@ server.registerTool(
         `${cmds.setup.split(" shadcn@latest")[0]} shadcn@latest init   # only if components.json is missing`,
         cmds.setup,
         `${cmds.add}   # optional: the Ballmac theme tokens`,
+        "Or pick one of 12 themes (graphite, ocean, indigo, violet, rose, ember, amber, forest, teal, sand, mono, midnight): add @ballmac/theme-<name>. Preview and tune them at https://ui.ballmac.com/themes",
         `For Pro items (tier "pro"), add to components.json "registries": ${JSON.stringify(PRO_REGISTRY)} and put BALLMAC_LICENSE_KEY=<key> in .env.local${catalog.hasLicense ? " (this MCP server has a licence key, so get_item returns Pro source)" : ""}. Guide: https://ui.ballmac.com/docs/pro`,
       ],
       installLocation: "components/ballmac (blocks in components/ballmac/blocks, templates in components/ballmac/templates plus app routes)",

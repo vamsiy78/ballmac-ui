@@ -41615,6 +41615,1134 @@
       }
     },
     {
+      "name": "theme-amber",
+      "type": "registry:theme",
+      "title": "Amber theme",
+      "description": "Near-black buttons with amber focus rings and charts on warm paper-tinted greys.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0.375rem",
+          "background": "oklch(0.978 0.012 80)",
+          "foreground": "oklch(0.17 0.016 80)",
+          "card": "oklch(0.994 0.006 80)",
+          "card-foreground": "oklch(0.17 0.016 80)",
+          "popover": "oklch(0.994 0.006 80)",
+          "popover-foreground": "oklch(0.17 0.016 80)",
+          "primary": "oklch(0.2 0.024 80)",
+          "primary-foreground": "oklch(0.985 0.004 80)",
+          "secondary": "oklch(0.965 0.008 80)",
+          "secondary-foreground": "oklch(0.2 0.024 80)",
+          "muted": "oklch(0.965 0.008 80)",
+          "muted-foreground": "oklch(0.5 0.016 80)",
+          "accent": "oklch(0.955 0.011 80)",
+          "accent-foreground": "oklch(0.2 0.024 80)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.915 0.008 80)",
+          "input": "oklch(0.915 0.008 80)",
+          "ring": "oklch(0.62 0.129 80)",
+          "chart-1": "oklch(0.6 0.125 80)",
+          "chart-2": "oklch(0.644 0.129 230)",
+          "chart-3": "oklch(0.636 0.136 155)",
+          "chart-4": "oklch(0.58 0.136 10)",
+          "chart-5": "oklch(0.64 0.136 295)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.026 80)",
+          "foreground": "oklch(0.97 0.006 80)",
+          "card": "oklch(0.2 0.033 80)",
+          "card-foreground": "oklch(0.97 0.006 80)",
+          "popover": "oklch(0.2 0.033 80)",
+          "popover-foreground": "oklch(0.97 0.006 80)",
+          "primary": "oklch(0.97 0.006 80)",
+          "primary-foreground": "oklch(0.2 0.033 80)",
+          "secondary": "oklch(0.25 0.037 80)",
+          "secondary-foreground": "oklch(0.97 0.006 80)",
+          "muted": "oklch(0.25 0.037 80)",
+          "muted-foreground": "oklch(0.72 0.026 80)",
+          "accent": "oklch(0.28 0.043 80)",
+          "accent-foreground": "oklch(0.97 0.006 80)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.137 80)",
+          "chart-1": "oklch(0.7 0.128 80)",
+          "chart-2": "oklch(0.76 0.128 230)",
+          "chart-3": "oklch(0.8 0.128 155)",
+          "chart-4": "oklch(0.68 0.128 10)",
+          "chart-5": "oklch(0.74 0.128 295)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/amber",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "amber"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Ink buttons, golden accents. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Editorial and docs sites",
+            "Brands that want warmth without a coloured button"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/amber to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-amber"
+      }
+    },
+    {
+      "name": "theme-ember",
+      "type": "registry:theme",
+      "title": "Ember theme",
+      "description": "Orange buttons on warm greys with tighter corners. Energetic but readable.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0.5rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0.016 60)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0.016 60)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0.016 60)",
+          "primary": "oklch(0.56 0.161 45)",
+          "primary-foreground": "oklch(0.985 0.004 60)",
+          "secondary": "oklch(0.965 0.008 60)",
+          "secondary-foreground": "oklch(0.2 0.024 60)",
+          "muted": "oklch(0.965 0.008 60)",
+          "muted-foreground": "oklch(0.5 0.016 60)",
+          "accent": "oklch(0.955 0.012 45)",
+          "accent-foreground": "oklch(0.2 0.024 60)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.915 0.008 60)",
+          "input": "oklch(0.915 0.008 60)",
+          "ring": "oklch(0.62 0.17 45)",
+          "chart-1": "oklch(0.6 0.145 45)",
+          "chart-2": "oklch(0.656 0.112 195)",
+          "chart-3": "oklch(0.66 0.145 120)",
+          "chart-4": "oklch(0.58 0.145 335)",
+          "chart-5": "oklch(0.64 0.145 260)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.026 60)",
+          "foreground": "oklch(0.97 0.006 60)",
+          "card": "oklch(0.2 0.033 60)",
+          "card-foreground": "oklch(0.97 0.006 60)",
+          "popover": "oklch(0.2 0.033 60)",
+          "popover-foreground": "oklch(0.97 0.006 60)",
+          "primary": "oklch(0.74 0.168 45)",
+          "primary-foreground": "oklch(0.16 0.03 45)",
+          "secondary": "oklch(0.25 0.037 60)",
+          "secondary-foreground": "oklch(0.97 0.006 60)",
+          "muted": "oklch(0.25 0.037 60)",
+          "muted-foreground": "oklch(0.72 0.026 60)",
+          "accent": "oklch(0.28 0.046 45)",
+          "accent-foreground": "oklch(0.97 0.006 60)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.17 45)",
+          "chart-1": "oklch(0.7 0.136 45)",
+          "chart-2": "oklch(0.76 0.13 195)",
+          "chart-3": "oklch(0.8 0.136 120)",
+          "chart-4": "oklch(0.68 0.136 335)",
+          "chart-5": "oklch(0.74 0.134 260)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/ember",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "ember"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Burnt orange, crisp. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Developer platforms and media",
+            "Calls to action that must stand out"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/ember to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-ember"
+      }
+    },
+    {
+      "name": "theme-forest",
+      "type": "registry:theme",
+      "title": "Forest theme",
+      "description": "A deep green brand colour with slightly green greys and medium corners.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0.5rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0.016 152)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0.016 152)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0.016 152)",
+          "primary": "oklch(0.54 0.14 152)",
+          "primary-foreground": "oklch(0.985 0.004 152)",
+          "secondary": "oklch(0.965 0.008 152)",
+          "secondary-foreground": "oklch(0.2 0.024 152)",
+          "muted": "oklch(0.965 0.008 152)",
+          "muted-foreground": "oklch(0.5 0.016 152)",
+          "accent": "oklch(0.955 0.01 152)",
+          "accent-foreground": "oklch(0.2 0.024 152)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.915 0.008 152)",
+          "input": "oklch(0.915 0.008 152)",
+          "ring": "oklch(0.62 0.14 152)",
+          "chart-1": "oklch(0.6 0.119 152)",
+          "chart-2": "oklch(0.66 0.119 302)",
+          "chart-3": "oklch(0.66 0.119 227)",
+          "chart-4": "oklch(0.58 0.119 82)",
+          "chart-5": "oklch(0.64 0.119 7)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.026 152)",
+          "foreground": "oklch(0.97 0.006 152)",
+          "card": "oklch(0.2 0.033 152)",
+          "card-foreground": "oklch(0.97 0.006 152)",
+          "popover": "oklch(0.2 0.033 152)",
+          "popover-foreground": "oklch(0.97 0.006 152)",
+          "primary": "oklch(0.74 0.14 152)",
+          "primary-foreground": "oklch(0.16 0.03 152)",
+          "secondary": "oklch(0.25 0.037 152)",
+          "secondary-foreground": "oklch(0.97 0.006 152)",
+          "muted": "oklch(0.25 0.037 152)",
+          "muted-foreground": "oklch(0.72 0.026 152)",
+          "accent": "oklch(0.28 0.038 152)",
+          "accent-foreground": "oklch(0.97 0.006 152)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.14 152)",
+          "chart-1": "oklch(0.7 0.112 152)",
+          "chart-2": "oklch(0.76 0.112 302)",
+          "chart-3": "oklch(0.8 0.112 227)",
+          "chart-4": "oklch(0.68 0.112 82)",
+          "chart-5": "oklch(0.74 0.112 7)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/forest",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "forest"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Deep green, grounded. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Sustainability, finance and wellness",
+            "Products that should feel calm and established"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/forest to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-forest"
+      }
+    },
+    {
+      "name": "theme-graphite",
+      "type": "registry:theme",
+      "title": "Graphite theme",
+      "description": "Neutral greys with near-black buttons and a calm blue focus ring. The safest starting point for any product.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0.5rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0.008 255)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0.008 255)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0.008 255)",
+          "primary": "oklch(0.2 0.012 255)",
+          "primary-foreground": "oklch(0.985 0.002 255)",
+          "secondary": "oklch(0.965 0.004 255)",
+          "secondary-foreground": "oklch(0.2 0.012 255)",
+          "muted": "oklch(0.965 0.004 255)",
+          "muted-foreground": "oklch(0.5 0.008 255)",
+          "accent": "oklch(0.955 0.008 255)",
+          "accent-foreground": "oklch(0.2 0.012 255)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.915 0.004 255)",
+          "input": "oklch(0.915 0.004 255)",
+          "ring": "oklch(0.62 0.12 255)",
+          "chart-1": "oklch(0.6 0.102 255)",
+          "chart-2": "oklch(0.66 0.102 45)",
+          "chart-3": "oklch(0.68 0.102 330)",
+          "chart-4": "oklch(0.58 0.102 185)",
+          "chart-5": "oklch(0.64 0.102 110)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.013 255)",
+          "foreground": "oklch(0.97 0.003 255)",
+          "card": "oklch(0.2 0.017 255)",
+          "card-foreground": "oklch(0.97 0.003 255)",
+          "popover": "oklch(0.2 0.017 255)",
+          "popover-foreground": "oklch(0.97 0.003 255)",
+          "primary": "oklch(0.97 0.003 255)",
+          "primary-foreground": "oklch(0.2 0.017 255)",
+          "secondary": "oklch(0.25 0.018 255)",
+          "secondary-foreground": "oklch(0.97 0.003 255)",
+          "muted": "oklch(0.25 0.018 255)",
+          "muted-foreground": "oklch(0.72 0.013 255)",
+          "accent": "oklch(0.28 0.032 255)",
+          "accent-foreground": "oklch(0.97 0.003 255)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.12 255)",
+          "chart-1": "oklch(0.7 0.096 255)",
+          "chart-2": "oklch(0.76 0.096 45)",
+          "chart-3": "oklch(0.8 0.096 330)",
+          "chart-4": "oklch(0.68 0.096 185)",
+          "chart-5": "oklch(0.74 0.096 110)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/graphite",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "graphite"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Quiet greys, ink buttons. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Dashboards and admin tools",
+            "Products that should look neutral and let content lead"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/graphite to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-graphite"
+      }
+    },
+    {
+      "name": "theme-indigo",
+      "type": "registry:theme",
+      "title": "Indigo theme",
+      "description": "Indigo buttons and accents with generous corners. Feels modern without being loud.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0.75rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0.016 277)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0.016 277)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0.016 277)",
+          "primary": "oklch(0.56 0.2 277)",
+          "primary-foreground": "oklch(0.985 0.004 277)",
+          "secondary": "oklch(0.965 0.008 277)",
+          "secondary-foreground": "oklch(0.2 0.024 277)",
+          "muted": "oklch(0.965 0.008 277)",
+          "muted-foreground": "oklch(0.5 0.016 277)",
+          "accent": "oklch(0.955 0.014 277)",
+          "accent-foreground": "oklch(0.2 0.024 277)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.915 0.008 277)",
+          "input": "oklch(0.915 0.008 277)",
+          "ring": "oklch(0.62 0.2 277)",
+          "chart-1": "oklch(0.6 0.17 277)",
+          "chart-2": "oklch(0.66 0.146 67)",
+          "chart-3": "oklch(0.688 0.17 352)",
+          "chart-4": "oklch(0.58 0.1 207)",
+          "chart-5": "oklch(0.64 0.17 132)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.026 277)",
+          "foreground": "oklch(0.97 0.006 277)",
+          "card": "oklch(0.2 0.033 277)",
+          "card-foreground": "oklch(0.97 0.006 277)",
+          "popover": "oklch(0.2 0.033 277)",
+          "popover-foreground": "oklch(0.97 0.006 277)",
+          "primary": "oklch(0.74 0.135 277)",
+          "primary-foreground": "oklch(0.16 0.03 277)",
+          "secondary": "oklch(0.25 0.037 277)",
+          "secondary-foreground": "oklch(0.97 0.006 277)",
+          "muted": "oklch(0.25 0.037 277)",
+          "muted-foreground": "oklch(0.72 0.026 277)",
+          "accent": "oklch(0.28 0.054 277)",
+          "accent-foreground": "oklch(0.97 0.006 277)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.183 277)",
+          "chart-1": "oklch(0.7 0.159 277)",
+          "chart-2": "oklch(0.76 0.16 67)",
+          "chart-3": "oklch(0.8 0.134 352)",
+          "chart-4": "oklch(0.68 0.117 207)",
+          "chart-5": "oklch(0.74 0.16 132)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/indigo",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "indigo"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Deep blue-violet, rounder. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Developer tools and AI products",
+            "Marketing sites that want a distinct colour"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/indigo to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-indigo"
+      }
+    },
+    {
+      "name": "theme-midnight",
+      "type": "registry:theme",
+      "title": "Midnight theme",
+      "description": "A bright sky-blue brand colour with strong outlines. Built to look best in dark mode.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0.625rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0.024 250)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0.024 250)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0.024 250)",
+          "primary": "oklch(0.548 0.104 225)",
+          "primary-foreground": "oklch(0.985 0.006 250)",
+          "secondary": "oklch(0.965 0.012 250)",
+          "secondary-foreground": "oklch(0.2 0.03 250)",
+          "muted": "oklch(0.965 0.012 250)",
+          "muted-foreground": "oklch(0.5 0.024 250)",
+          "accent": "oklch(0.955 0.011 225)",
+          "accent-foreground": "oklch(0.2 0.03 250)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.668 0.012 250)",
+          "input": "oklch(0.668 0.012 250)",
+          "ring": "oklch(0.62 0.118 225)",
+          "chart-1": "oklch(0.6 0.114 225)",
+          "chart-2": "oklch(0.66 0.136 15)",
+          "chart-3": "oklch(0.68 0.136 300)",
+          "chart-4": "oklch(0.58 0.136 155)",
+          "chart-5": "oklch(0.64 0.133 80)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.035 250)",
+          "foreground": "oklch(0.97 0.008 250)",
+          "card": "oklch(0.2 0.044 250)",
+          "card-foreground": "oklch(0.97 0.008 250)",
+          "popover": "oklch(0.2 0.044 250)",
+          "popover-foreground": "oklch(0.97 0.008 250)",
+          "primary": "oklch(0.74 0.14 225)",
+          "primary-foreground": "oklch(0.16 0.03 225)",
+          "secondary": "oklch(0.25 0.049 250)",
+          "secondary-foreground": "oklch(0.97 0.008 250)",
+          "muted": "oklch(0.25 0.049 250)",
+          "muted-foreground": "oklch(0.72 0.04 250)",
+          "accent": "oklch(0.28 0.043 225)",
+          "accent-foreground": "oklch(0.97 0.008 250)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(0.5 0.035 250)",
+          "input": "oklch(0.5 0.035 250)",
+          "ring": "oklch(0.66 0.125 225)",
+          "chart-1": "oklch(0.7 0.128 225)",
+          "chart-2": "oklch(0.76 0.128 15)",
+          "chart-3": "oklch(0.8 0.119 300)",
+          "chart-4": "oklch(0.68 0.128 155)",
+          "chart-5": "oklch(0.74 0.128 80)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/midnight",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "midnight"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Electric sky blue, strong edges. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Developer and gaming products",
+            "Apps used mostly in dark mode"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/midnight to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-midnight"
+      }
+    },
+    {
+      "name": "theme-mono",
+      "type": "registry:theme",
+      "title": "Mono theme",
+      "description": "No colour at all: black, white and greys, square corners and borders strong enough to meet 3:1 contrast.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0 0)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0 0)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0 0)",
+          "primary": "oklch(0.2 0 0)",
+          "primary-foreground": "oklch(0.985 0 0)",
+          "secondary": "oklch(0.965 0 0)",
+          "secondary-foreground": "oklch(0.2 0 0)",
+          "muted": "oklch(0.965 0 0)",
+          "muted-foreground": "oklch(0.5 0 0)",
+          "accent": "oklch(0.955 0 0)",
+          "accent-foreground": "oklch(0.2 0 0)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.668 0 0)",
+          "input": "oklch(0.668 0 0)",
+          "ring": "oklch(0.62 0 0)",
+          "chart-1": "oklch(0.2 0 0)",
+          "chart-2": "oklch(0.4 0 0)",
+          "chart-3": "oklch(0.56 0 0)",
+          "chart-4": "oklch(0.3 0 0)",
+          "chart-5": "oklch(0.48 0 0)"
+        },
+        "dark": {
+          "background": "oklch(0.145 0 0)",
+          "foreground": "oklch(0.97 0 0)",
+          "card": "oklch(0.2 0 0)",
+          "card-foreground": "oklch(0.97 0 0)",
+          "popover": "oklch(0.2 0 0)",
+          "popover-foreground": "oklch(0.97 0 0)",
+          "primary": "oklch(0.97 0 0)",
+          "primary-foreground": "oklch(0.2 0 0)",
+          "secondary": "oklch(0.25 0 0)",
+          "secondary-foreground": "oklch(0.97 0 0)",
+          "muted": "oklch(0.25 0 0)",
+          "muted-foreground": "oklch(0.72 0 0)",
+          "accent": "oklch(0.28 0 0)",
+          "accent-foreground": "oklch(0.97 0 0)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(0.5 0 0)",
+          "input": "oklch(0.5 0 0)",
+          "ring": "oklch(0.66 0 0)",
+          "chart-1": "oklch(0.9 0 0)",
+          "chart-2": "oklch(0.7 0 0)",
+          "chart-3": "oklch(0.55 0 0)",
+          "chart-4": "oklch(0.8 0 0)",
+          "chart-5": "oklch(0.62 0 0)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/mono",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "mono"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Pure black and white, square. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Brutalist and technical products",
+            "Teams that need maximum contrast"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/mono to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-mono"
+      }
+    },
+    {
+      "name": "theme-ocean",
+      "type": "registry:theme",
+      "title": "Ocean theme",
+      "description": "A confident blue brand colour on cool, lightly tinted greys with soft corners.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0.625rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0.016 248)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0.016 248)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0.016 248)",
+          "primary": "oklch(0.556 0.15 248)",
+          "primary-foreground": "oklch(0.985 0.004 248)",
+          "secondary": "oklch(0.965 0.008 248)",
+          "secondary-foreground": "oklch(0.2 0.024 248)",
+          "muted": "oklch(0.965 0.008 248)",
+          "muted-foreground": "oklch(0.5 0.016 248)",
+          "accent": "oklch(0.955 0.012 248)",
+          "accent-foreground": "oklch(0.2 0.024 248)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.915 0.008 248)",
+          "input": "oklch(0.915 0.008 248)",
+          "ring": "oklch(0.62 0.167 248)",
+          "chart-1": "oklch(0.6 0.145 248)",
+          "chart-2": "oklch(0.66 0.145 38)",
+          "chart-3": "oklch(0.684 0.145 323)",
+          "chart-4": "oklch(0.58 0.107 178)",
+          "chart-5": "oklch(0.64 0.135 103)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.026 248)",
+          "foreground": "oklch(0.97 0.006 248)",
+          "card": "oklch(0.2 0.033 248)",
+          "card-foreground": "oklch(0.97 0.006 248)",
+          "popover": "oklch(0.2 0.033 248)",
+          "popover-foreground": "oklch(0.97 0.006 248)",
+          "primary": "oklch(0.74 0.141 248)",
+          "primary-foreground": "oklch(0.16 0.03 248)",
+          "secondary": "oklch(0.25 0.037 248)",
+          "secondary-foreground": "oklch(0.97 0.006 248)",
+          "muted": "oklch(0.25 0.037 248)",
+          "muted-foreground": "oklch(0.72 0.026 248)",
+          "accent": "oklch(0.28 0.046 248)",
+          "accent-foreground": "oklch(0.97 0.006 248)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.17 248)",
+          "chart-1": "oklch(0.7 0.136 248)",
+          "chart-2": "oklch(0.76 0.136 38)",
+          "chart-3": "oklch(0.8 0.136 323)",
+          "chart-4": "oklch(0.68 0.125 178)",
+          "chart-5": "oklch(0.74 0.136 103)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/ocean",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "ocean"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Clear blue, friendly corners. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "SaaS and fintech products",
+            "Anything that should feel trustworthy"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/ocean to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-ocean"
+      }
+    },
+    {
+      "name": "theme-rose",
+      "type": "registry:theme",
+      "title": "Rose theme",
+      "description": "A warm rose brand colour with blush-tinted greys and soft corners.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0.75rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0.016 12)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0.016 12)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0.016 12)",
+          "primary": "oklch(0.56 0.19 12)",
+          "primary-foreground": "oklch(0.985 0.004 12)",
+          "secondary": "oklch(0.965 0.008 12)",
+          "secondary-foreground": "oklch(0.2 0.024 12)",
+          "muted": "oklch(0.965 0.008 12)",
+          "muted-foreground": "oklch(0.5 0.016 12)",
+          "accent": "oklch(0.955 0.013 12)",
+          "accent-foreground": "oklch(0.2 0.024 12)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.915 0.008 12)",
+          "input": "oklch(0.915 0.008 12)",
+          "ring": "oklch(0.62 0.19 12)",
+          "chart-1": "oklch(0.6 0.162 12)",
+          "chart-2": "oklch(0.652 0.143 162)",
+          "chart-3": "oklch(0.668 0.137 87)",
+          "chart-4": "oklch(0.58 0.162 302)",
+          "chart-5": "oklch(0.64 0.124 227)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.026 12)",
+          "foreground": "oklch(0.97 0.006 12)",
+          "card": "oklch(0.2 0.033 12)",
+          "card-foreground": "oklch(0.97 0.006 12)",
+          "popover": "oklch(0.2 0.033 12)",
+          "popover-foreground": "oklch(0.97 0.006 12)",
+          "primary": "oklch(0.74 0.162 12)",
+          "primary-foreground": "oklch(0.16 0.03 12)",
+          "secondary": "oklch(0.25 0.037 12)",
+          "secondary-foreground": "oklch(0.97 0.006 12)",
+          "muted": "oklch(0.25 0.037 12)",
+          "muted-foreground": "oklch(0.72 0.026 12)",
+          "accent": "oklch(0.28 0.051 12)",
+          "accent-foreground": "oklch(0.97 0.006 12)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.19 12)",
+          "chart-1": "oklch(0.7 0.152 12)",
+          "chart-2": "oklch(0.76 0.152 162)",
+          "chart-3": "oklch(0.8 0.152 87)",
+          "chart-4": "oklch(0.68 0.152 302)",
+          "chart-5": "oklch(0.74 0.143 227)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/rose",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "rose"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Warm pink-red, soft. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Lifestyle, health and community products",
+            "Shops with a friendly voice"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/rose to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-rose"
+      }
+    },
+    {
+      "name": "theme-sand",
+      "type": "registry:theme",
+      "title": "Sand theme",
+      "description": "Off-white paper tones with terracotta accents and small, precise corners. Reads like print.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0.375rem",
+          "background": "oklch(0.978 0.018 80)",
+          "foreground": "oklch(0.17 0.024 80)",
+          "card": "oklch(0.994 0.006 80)",
+          "card-foreground": "oklch(0.17 0.024 80)",
+          "popover": "oklch(0.994 0.006 80)",
+          "popover-foreground": "oklch(0.17 0.024 80)",
+          "primary": "oklch(0.56 0.13 40)",
+          "primary-foreground": "oklch(0.985 0.006 80)",
+          "secondary": "oklch(0.965 0.012 80)",
+          "secondary-foreground": "oklch(0.2 0.03 80)",
+          "muted": "oklch(0.965 0.012 80)",
+          "muted-foreground": "oklch(0.5 0.024 80)",
+          "accent": "oklch(0.955 0.009 40)",
+          "accent-foreground": "oklch(0.2 0.03 80)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.915 0.012 80)",
+          "input": "oklch(0.915 0.012 80)",
+          "ring": "oklch(0.62 0.13 40)",
+          "chart-1": "oklch(0.6 0.111 40)",
+          "chart-2": "oklch(0.636 0.11 190)",
+          "chart-3": "oklch(0.644 0.111 115)",
+          "chart-4": "oklch(0.58 0.111 330)",
+          "chart-5": "oklch(0.64 0.111 255)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.035 80)",
+          "foreground": "oklch(0.97 0.008 80)",
+          "card": "oklch(0.2 0.044 80)",
+          "card-foreground": "oklch(0.97 0.008 80)",
+          "popover": "oklch(0.2 0.044 80)",
+          "popover-foreground": "oklch(0.97 0.008 80)",
+          "primary": "oklch(0.74 0.13 40)",
+          "primary-foreground": "oklch(0.16 0.03 40)",
+          "secondary": "oklch(0.25 0.049 80)",
+          "secondary-foreground": "oklch(0.97 0.008 80)",
+          "muted": "oklch(0.25 0.049 80)",
+          "muted-foreground": "oklch(0.72 0.04 80)",
+          "accent": "oklch(0.28 0.035 40)",
+          "accent-foreground": "oklch(0.97 0.008 80)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.13 40)",
+          "chart-1": "oklch(0.7 0.104 40)",
+          "chart-2": "oklch(0.76 0.104 190)",
+          "chart-3": "oklch(0.8 0.104 115)",
+          "chart-4": "oklch(0.68 0.104 330)",
+          "chart-5": "oklch(0.74 0.104 255)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/sand",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "sand"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Warm paper, terracotta. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Portfolios, publications and studios",
+            "Shops with a crafted feel"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/sand to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-sand"
+      }
+    },
+    {
+      "name": "theme-teal",
+      "type": "registry:theme",
+      "title": "Teal theme",
+      "description": "A fresh teal with cool greys and rounded corners.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "0.875rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0.016 200)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0.016 200)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0.016 200)",
+          "primary": "oklch(0.544 0.094 192)",
+          "primary-foreground": "oklch(0.985 0.004 200)",
+          "secondary": "oklch(0.965 0.008 200)",
+          "secondary-foreground": "oklch(0.2 0.024 200)",
+          "muted": "oklch(0.965 0.008 200)",
+          "muted-foreground": "oklch(0.5 0.016 200)",
+          "accent": "oklch(0.955 0.008 192)",
+          "accent-foreground": "oklch(0.2 0.024 200)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.915 0.008 200)",
+          "input": "oklch(0.915 0.008 200)",
+          "ring": "oklch(0.62 0.107 192)",
+          "chart-1": "oklch(0.6 0.102 192)",
+          "chart-2": "oklch(0.66 0.102 342)",
+          "chart-3": "oklch(0.672 0.102 267)",
+          "chart-4": "oklch(0.58 0.102 122)",
+          "chart-5": "oklch(0.64 0.102 47)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.026 200)",
+          "foreground": "oklch(0.97 0.006 200)",
+          "card": "oklch(0.2 0.033 200)",
+          "card-foreground": "oklch(0.97 0.006 200)",
+          "popover": "oklch(0.2 0.033 200)",
+          "popover-foreground": "oklch(0.97 0.006 200)",
+          "primary": "oklch(0.74 0.12 192)",
+          "primary-foreground": "oklch(0.16 0.03 192)",
+          "secondary": "oklch(0.25 0.037 200)",
+          "secondary-foreground": "oklch(0.97 0.006 200)",
+          "muted": "oklch(0.25 0.037 200)",
+          "muted-foreground": "oklch(0.72 0.026 200)",
+          "accent": "oklch(0.28 0.032 192)",
+          "accent-foreground": "oklch(0.97 0.006 200)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.114 192)",
+          "chart-1": "oklch(0.7 0.096 192)",
+          "chart-2": "oklch(0.76 0.096 342)",
+          "chart-3": "oklch(0.8 0.096 267)",
+          "chart-4": "oklch(0.68 0.096 122)",
+          "chart-5": "oklch(0.74 0.096 47)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/teal",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "teal"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Fresh blue-green, round. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Health, data and productivity apps",
+            "Dashboards that want a friendly tone"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/teal to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-teal"
+      }
+    },
+    {
+      "name": "theme-violet",
+      "type": "registry:theme",
+      "title": "Violet theme",
+      "description": "A saturated purple with pill-like corners and slightly warm greys for a playful, creative feel.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "light": {
+          "radius": "1rem",
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.17 0.02 305)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.17 0.02 305)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.17 0.02 305)",
+          "primary": "oklch(0.56 0.22 305)",
+          "primary-foreground": "oklch(0.985 0.005 305)",
+          "secondary": "oklch(0.965 0.01 305)",
+          "secondary-foreground": "oklch(0.2 0.03 305)",
+          "muted": "oklch(0.965 0.01 305)",
+          "muted-foreground": "oklch(0.5 0.02 305)",
+          "accent": "oklch(0.955 0.015 305)",
+          "accent-foreground": "oklch(0.2 0.03 305)",
+          "destructive": "oklch(0.56 0.22 27)",
+          "border": "oklch(0.915 0.01 305)",
+          "input": "oklch(0.915 0.01 305)",
+          "ring": "oklch(0.62 0.22 305)",
+          "chart-1": "oklch(0.6 0.187 305)",
+          "chart-2": "oklch(0.66 0.136 95)",
+          "chart-3": "oklch(0.692 0.187 20)",
+          "chart-4": "oklch(0.58 0.123 235)",
+          "chart-5": "oklch(0.64 0.145 160)"
+        },
+        "dark": {
+          "background": "oklch(0.16 0.033 305)",
+          "foreground": "oklch(0.97 0.007 305)",
+          "card": "oklch(0.2 0.041 305)",
+          "card-foreground": "oklch(0.97 0.007 305)",
+          "popover": "oklch(0.2 0.041 305)",
+          "popover-foreground": "oklch(0.97 0.007 305)",
+          "primary": "oklch(0.74 0.169 305)",
+          "primary-foreground": "oklch(0.16 0.03 305)",
+          "secondary": "oklch(0.25 0.046 305)",
+          "secondary-foreground": "oklch(0.97 0.007 305)",
+          "muted": "oklch(0.25 0.046 305)",
+          "muted-foreground": "oklch(0.72 0.033 305)",
+          "accent": "oklch(0.28 0.059 305)",
+          "accent-foreground": "oklch(0.97 0.007 305)",
+          "destructive": "oklch(0.66 0.2 25)",
+          "border": "oklch(1 0 0 / 11%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.66 0.22 305)",
+          "chart-1": "oklch(0.7 0.176 305)",
+          "chart-2": "oklch(0.76 0.156 95)",
+          "chart-3": "oklch(0.8 0.115 20)",
+          "chart-4": "oklch(0.68 0.145 235)",
+          "chart-5": "oklch(0.74 0.168 160)"
+        }
+      },
+      "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/violet",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "theme",
+          "preset",
+          "tokens",
+          "dark mode",
+          "violet"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Rich purple, very round. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "whenToUse": [
+            "Creative tools and communities",
+            "Consumer apps"
+          ],
+          "whenNotToUse": [
+            "The project already has a brand theme you want to keep"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Open https://ui.ballmac.com/themes/violet to change hue, intensity, radius, density and font, then copy the CSS or install the result"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/theme-violet"
+      }
+    },
+    {
       "name": "theme",
       "type": "registry:theme",
       "title": "Ballmac Theme",
