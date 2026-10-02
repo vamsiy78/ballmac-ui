@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["features", "tabs", "showcase", "panels", "product"],
   files: [{ path: "components/blocks/features-6/features-6.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "animated-tabs", "badge"],
+  registryDependencies: ["shadcn:utils", "animated-tabs", "badge", "media"],
   examples: [
     { name: "features-6-demo", title: "Default", file: "features-6-demo.tsx" },
     { name: "features-6-two", title: "Two tabs", file: "features-6-two.tsx" },

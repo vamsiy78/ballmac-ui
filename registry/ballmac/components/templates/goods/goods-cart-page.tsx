@@ -66,7 +66,7 @@ function GoodsCartPage({ hrefs, demo = false, ...props }: GoodsCartPageProps) {
               <ul className="mt-2 divide-y">
                 {lines.map((l) => (
                   <li key={l.id + l.glaze} className="grid grid-cols-[6rem_minmax(0,1fr)] gap-5 py-6 sm:grid-cols-[7rem_minmax(0,1fr)_auto]">
-                    <a href={link.product} aria-label={l.product.name}><Piece shape={l.product.shape} glaze={l.glaze} className="rounded-2xl" /></a>
+                    <a href={link.product} aria-label={l.product.name}><Piece shape={l.product.shape} glaze={l.glaze} image={l.product.images?.[l.glaze]} imageAlt={l.product.name} className="rounded-2xl" /></a>
                     <div className="min-w-0">
                       <h2 className={cn("text-2xl", goodsSerifClass)}>{l.product.name}</h2>
                       <p className="text-muted-foreground text-sm">{glazes[l.glaze]!.name} · {l.product.size}</p>

@@ -8,6 +8,7 @@ import { buttonVariants } from "@/components/ballmac/button"
 import { NumberTicker } from "@/components/ballmac/number-ticker"
 import { TextReveal } from "@/components/ballmac/text-reveal"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Action = { label: string; href: string }
 
@@ -24,6 +25,10 @@ type Hero1Props = Omit<React.ComponentProps<"section">, "title"> & {
   secondaryAction?: Action
   /** Short proof points under the buttons. */
   highlights?: string[]
+  /** Your product image instead of the sample deploy card. An image URL (give it mediaAlt), an object with alt text and a dark-mode file, or your own element. */
+  media?: MediaSource
+  /** Describes `media` when it is a plain URL. */
+  mediaAlt?: string
 }
 
 function Hero1({
@@ -33,6 +38,8 @@ function Hero1({
   primaryAction = { label: "Start free", href: "#" },
   secondaryAction = { label: "Book a demo", href: "#" },
   highlights = ["No credit card", "SOC 2 Type II", "Cancel anytime"],
+  media,
+  mediaAlt,
   className,
   ...props
 }: Hero1Props) {
@@ -63,7 +70,7 @@ function Hero1({
             ))}
           </ul>
         </div>
-        <HeroVisual />
+        <Media media={media} alt={mediaAlt} frame priority fallback={<HeroVisual />} />
       </div>
     </section>
   )

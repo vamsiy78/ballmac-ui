@@ -53,7 +53,7 @@ function WorkReel({ href }: { href: string }) {
         className={cn("pointer-events-none absolute top-0 start-0 z-10 hidden w-72 will-change-transform md:block", shown ? "opacity-100" : "opacity-0", "transition-opacity duration-200 motion-reduce:transition-none")}
         style={mode === "focus" || reduce ? { transform: `translate(calc(100% - 20rem), ${(active ?? 0) * 7.2}rem)` } : undefined}
       >
-        {shown && (<div className="border-foreground bg-background overflow-hidden rounded border-2 shadow-2xl"><StudioArt variant={shown.art} /><p className="border-t-2 px-3 py-2 text-sm font-semibold">{shown.line}</p></div>)}
+        {shown && (<div className="border-foreground bg-background overflow-hidden rounded border-2 shadow-2xl"><StudioArt variant={shown.art} image={shown.image} imageAlt={shown.imageAlt} /><p className="border-t-2 px-3 py-2 text-sm font-semibold">{shown.line}</p></div>)}
       </div>
     </div>
   )

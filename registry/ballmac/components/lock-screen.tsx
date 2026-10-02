@@ -8,6 +8,7 @@ import { AnimatePresence, motion, useAnimationControls } from "motion/react"
 import { cn } from "@/lib/utils"
 import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 import { useMessages } from "@/lib/ballmac/i18n"
+import { Media, isMediaImage, type MediaSource } from "@/components/ballmac/media"
 
 type LockScreenProps = Omit<React.ComponentProps<"section">, "onSubmit"> & {
   /** "mac" shows a password field under the user's avatar; "ios" shows notifications and a swipe-up unlock. */
@@ -32,8 +33,8 @@ type LockScreenProps = Omit<React.ComponentProps<"section">, "onSubmit"> & {
   onUnlock?: (password: string) => boolean | void
   /** Hint under the field (mac). */
   hint?: string
-  /** Replaces the default wallpaper. Fill it with an image or gradient; text stays white, so keep it dark enough. */
-  wallpaper?: React.ReactNode
+  /** Replaces the default wallpaper. An image URL, an object with alt text and a dark-mode file, or an element that fills it; text stays white, so keep it dark enough. */
+  wallpaper?: MediaSource
   /** Notifications on iOS, or controls along the bottom on mac. */
   children?: React.ReactNode
 }
@@ -166,7 +167,7 @@ function LockScreen({
             : {})}
           {...(props as object)}
         >
-          {wallpaper ?? <DefaultWallpaper />}
+          {isMediaImage(wallpaper) ? <Media media={wallpaper} alt="" fill priority className="absolute inset-0" /> : (wallpaper ?? <DefaultWallpaper />)}
           <div aria-hidden="true" className="absolute inset-0 bg-black/20" />
 
           {variant === "ios" ? (

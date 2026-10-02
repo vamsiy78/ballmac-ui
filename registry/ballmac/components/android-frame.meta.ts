@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["mockup", "device", "phone", "android", "pixel", "mobile", "hero"],
   files: [{ path: "components/android-frame.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "media"],
   examples: [
     { name: "android-frame-demo", title: "Home screen", file: "android-frame-demo.tsx" },
     { name: "android-frame-buttons", title: "Three-button navigation", file: "android-frame-buttons.tsx" },

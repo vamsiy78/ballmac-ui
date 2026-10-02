@@ -60,7 +60,7 @@ function PortfolioHome({ hrefs, ...props }: PortfolioHomeProps) {
               <li key={p.slug} className={cn(i % 2 === 1 && "sm:mt-16")}>
                 <a href={h.case} className="group focus-visible:ring-ring/50 block rounded-3xl outline-none focus-visible:ring-[3px] focus-visible:ring-offset-4 focus-visible:ring-offset-background">
                   <div className="relative overflow-hidden rounded-3xl border">
-                    <Cover variant={p.cover} className="transition-transform duration-700 ease-out group-hover:scale-[1.04] group-focus-visible:scale-[1.04] motion-reduce:transition-none" />
+                    <Cover variant={p.cover} image={p.image} imageAlt={p.imageAlt} className="transition-transform duration-700 ease-out group-hover:scale-[1.04] group-focus-visible:scale-[1.04] motion-reduce:transition-none" />
                     <div className="bg-chart-1 text-[var(--portfolio-on-accent)] absolute end-4 bottom-4 flex translate-y-3 items-center gap-2 rounded-full px-4 py-2 text-sm font-bold opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">
                       {p.result} <ArrowUpRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />
                     </div>

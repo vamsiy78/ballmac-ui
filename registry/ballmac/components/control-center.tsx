@@ -7,6 +7,7 @@ import { Slider as SliderPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 import { useMessages } from "@/lib/ballmac/i18n"
+import { Media, isMediaImage, type MediaSource } from "@/components/ballmac/media"
 
 /** Pressed state that works controlled or not. */
 function usePressed(pressed: boolean | undefined, defaultPressed: boolean, onChange?: (pressed: boolean) => void) {
@@ -186,8 +187,8 @@ type ControlNowPlayingProps = Omit<React.ComponentProps<"div">, "title"> & {
   title: string
   /** Artist or show. */
   artist: string
-  /** Artwork: an image or any element. */
-  artwork?: React.ReactNode
+  /** Artwork: an image URL, an object with alt text and a dark-mode file, or any element. Decorative: the title and artist carry the meaning. */
+  artwork?: MediaSource
   /** Whether it is playing (controlled). */
   playing?: boolean
   /** Initial state when uncontrolled. */
@@ -209,7 +210,7 @@ function ControlNowPlaying({ title, artist, artwork, playing, defaultPlaying = f
   return (
     <div data-slot="control-now-playing" className={cn(tile, "col-span-2 flex items-center gap-3 p-2.5", className)} {...props}>
       <div aria-hidden="true" className="size-14 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-chart-4 to-chart-5 shadow-md [&>img]:size-full [&>img]:object-cover">
-        {artwork}
+        {isMediaImage(artwork) ? <Media media={artwork} alt="" fill className="size-full" /> : artwork}
       </div>
       <div className="min-w-0 flex-1 leading-tight">
         <p className="truncate text-[13px] font-semibold">{title}</p>

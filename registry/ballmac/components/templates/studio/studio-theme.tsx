@@ -6,6 +6,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react"
 
 import { studioMono, studioSans } from "@/components/ballmac/templates/studio/studio-fonts"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type StudioPage = "home" | "work" | "project" | "services" | "contact"
 type StudioHrefs = Record<StudioPage, string>
@@ -23,8 +24,9 @@ body:has(.studio-theme){font-family:var(--studio-sans),ui-sans-serif,system-ui,s
 const display = "[font-stretch:112%] font-extrabold uppercase tracking-[-0.03em] leading-[0.88]"
 
 /** A painted poster: bold shapes in the accent colours, standing in for project imagery. */
-function StudioArt({ variant, className }: { variant: number; className?: string }) {
+function StudioArt({ variant, className, image, imageAlt }: { variant: number; className?: string; image?: MediaSource; imageAlt?: string }) {
   const v = ((variant % 6) + 6) % 6
+  if (image) return <Media media={image} alt={imageAlt} fill className={cn("aspect-[4/3] w-full", className)} />
   return (
     <div aria-hidden="true" className={cn("relative isolate aspect-[4/3] w-full overflow-hidden", className)}>
       {v === 0 && (<><div className="bg-chart-1 absolute inset-0" /><div className="bg-foreground absolute -bottom-[20%] -start-[10%] w-[80%] aspect-square rounded-full" /><div className="bg-chart-3 absolute top-[12%] end-[12%] w-[26%] aspect-square rounded-full" /></>)}

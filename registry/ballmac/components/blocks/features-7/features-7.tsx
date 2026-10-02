@@ -8,6 +8,7 @@ import { RadioGroup as RadioGroupPrimitive } from "radix-ui"
 
 import { Kbd } from "@/components/ballmac/kbd"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Features7Feature = {
   /** Stable key. */
@@ -19,6 +20,10 @@ type Features7Feature = {
   icon?: React.ReactNode
   /** What the menu bar panel shows. Decorative: the title and description carry the meaning. */
   panel: React.ReactNode
+  /** Your own screenshot of this feature instead of the sample menu bar scene: an image URL (give it imageAlt), an object with alt text and a dark-mode file, or your own element. */
+  image?: MediaSource
+  /** Describes `image` when it is a plain URL. */
+  imageAlt?: string
 }
 
 type Features7Props = Omit<React.ComponentProps<"section">, "title"> & {
@@ -158,6 +163,7 @@ function Features7({
         </div>
 
         {/* A miniature desktop: the menu bar with the app's icon lit, and its panel hanging underneath. Decorative. */}
+        <Media media={current.image} alt={current.imageAlt} frame fallback={
         <div aria-hidden="true" className="relative isolate overflow-hidden rounded-3xl border">
           <div className="pointer-events-none absolute inset-0 -z-10 dark:brightness-[0.6] dark:saturate-[1.2]">
             <div className="absolute inset-0 bg-linear-to-br from-chart-1 via-chart-4 to-chart-5" />
@@ -189,6 +195,7 @@ function Features7({
             </div>
           </div>
         </div>
+        } />
       </div>
     </section>
   )

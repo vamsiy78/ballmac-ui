@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["mockup", "device", "tablet", "ipad", "screenshot", "hero"],
   files: [{ path: "components/tablet-frame.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "media"],
   examples: [
     { name: "tablet-frame-demo", title: "Dashboard, landscape", file: "tablet-frame-demo.tsx" },
     { name: "tablet-frame-portrait", title: "Portrait reader", file: "tablet-frame-portrait.tsx" },

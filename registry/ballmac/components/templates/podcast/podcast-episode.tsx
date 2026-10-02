@@ -47,7 +47,7 @@ function PodcastEpisode({ hrefs, slug = "the-optimised-life", ...props }: Podcas
         <p className="text-muted-foreground mt-4 text-sm">{formatDate(ep.date)} · {minutes(ep.duration)} · with <span className="text-foreground font-semibold">{ep.guest}</span></p>
 
         <div className="mt-8">
-          <AudioPlayer title={`${ep.n}. ${ep.title}`} subtitle={`The Long Table · ${minutes(ep.duration)}`} duration={ep.duration} chapters={ep.chapters} time={time} onTimeChange={setTime} artwork={<ShowArt variant={ep.art} />} />
+          <AudioPlayer title={`${ep.n}. ${ep.title}`} subtitle={`The Long Table · ${minutes(ep.duration)}`} duration={ep.duration} chapters={ep.chapters} time={time} onTimeChange={setTime} artwork={<ShowArt variant={ep.art} image={ep.image} imageAlt={ep.imageAlt} />} />
         </div>
 
         <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem]">
@@ -95,7 +95,7 @@ function PodcastEpisode({ hrefs, slug = "the-optimised-life", ...props }: Podcas
 
         <section aria-labelledby="pe-more" className="mt-20">
           <h2 id="pe-more" className={cn("text-3xl", podcastDisplayClass)}>More conversations</h2>
-          <ul className="mt-6 grid gap-6 sm:grid-cols-3">{episodes.filter((e) => e.slug !== ep.slug).slice(0, 3).map((e) => <li key={e.slug}><a href={hrefs?.episode ?? "#"} className="group focus-visible:ring-ring/50 block rounded-3xl outline-none focus-visible:ring-[3px]"><ShowArt variant={e.art} className="rounded-3xl" /><p className="text-muted-foreground mt-3 text-xs font-semibold">Ep. {e.n} · {minutes(e.duration)}</p><h3 className={cn("mt-1 text-xl leading-tight text-balance group-hover:underline underline-offset-4", podcastDisplayClass)}>{e.title}</h3></a></li>)}</ul>
+          <ul className="mt-6 grid gap-6 sm:grid-cols-3">{episodes.filter((e) => e.slug !== ep.slug).slice(0, 3).map((e) => <li key={e.slug}><a href={hrefs?.episode ?? "#"} className="group focus-visible:ring-ring/50 block rounded-3xl outline-none focus-visible:ring-[3px]"><ShowArt variant={e.art} image={e.image} imageAlt={e.imageAlt} className="rounded-3xl" /><p className="text-muted-foreground mt-3 text-xs font-semibold">Ep. {e.n} · {minutes(e.duration)}</p><h3 className={cn("mt-1 text-xl leading-tight text-balance group-hover:underline underline-offset-4", podcastDisplayClass)}>{e.title}</h3></a></li>)}</ul>
         </section>
       </main>
     </PodcastShell>

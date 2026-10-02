@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["newsletter", "signup", "email", "subscribe", "topics", "form"],
   files: [{ path: "components/blocks/newsletter-1/newsletter-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "button", "input"],
+  registryDependencies: ["shadcn:utils", "button", "input", "media"],
   examples: [
     { name: "newsletter-1-demo", title: "Default", file: "newsletter-1-demo.tsx" },
     { name: "newsletter-1-simple", title: "Email only", file: "newsletter-1-simple.tsx" },

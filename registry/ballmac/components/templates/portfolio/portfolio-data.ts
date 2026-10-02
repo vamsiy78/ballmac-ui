@@ -1,3 +1,5 @@
+import type { MediaSource } from "@/components/ballmac/media"
+
 // Ballmac UI: Portfolio sample content. https://ui.ballmac.com/templates/template-portfolio
 
 export type PortfolioProject = {
@@ -11,6 +13,10 @@ export type PortfolioProject = {
   tags: string[]
   /** Which painted cover to draw (0 to 5). */
   cover: number
+  /** Your own image instead of the painted art: an image URL (give it imageAlt), an object with alt text and a dark-mode file, or your own element. */
+  image?: MediaSource
+  /** Describes `image` when it is a plain URL. */
+  imageAlt?: string
 }
 
 export const projects: PortfolioProject[] = [

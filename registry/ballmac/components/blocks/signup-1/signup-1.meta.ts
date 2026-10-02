@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["signup", "register", "auth", "password strength", "form", "sso"],
   files: [{ path: "components/blocks/signup-1/signup-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "button", "checkbox", "field", "input", "password-input"],
+  registryDependencies: ["shadcn:utils", "button", "checkbox", "field", "input", "password-input", "media"],
   examples: [
     { name: "signup-1-demo", title: "Default", file: "signup-1-demo.tsx" },
     { name: "signup-1-simple", title: "No SSO, no pitch", file: "signup-1-simple.tsx" },

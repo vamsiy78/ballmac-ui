@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["changelog", "release notes", "updates", "versions", "timeline", "filter"],
   files: [{ path: "components/blocks/changelog-1/changelog-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "blog-1", "button", "i18n"],
+  registryDependencies: ["shadcn:utils", "blog-1", "button", "i18n", "media"],
   examples: [
     { name: "changelog-1-demo", title: "Default", file: "changelog-1-demo.tsx" },
     { name: "changelog-1-minimal", title: "Minimal", file: "changelog-1-minimal.tsx" },

@@ -5,6 +5,7 @@ import * as React from "react"
 import { useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { Media } from "@/components/ballmac/media"
 
 type WatchFrameProps = Omit<React.ComponentProps<"div">, "children"> & {
   /** Screen content. Ignored when `src` or `videoSrc` is set. Defaults to a dark screen. */
@@ -168,7 +169,7 @@ function WatchFrame({
                 />
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img data-slot="watch-frame-image" className="absolute inset-0 size-full object-cover" src={src} alt={alt} />
+                <Media data-slot="watch-frame-image" media={src} alt={alt} fill className="absolute inset-0" />
               )
             ) : (
               <div ref={viewportRef} data-slot="watch-frame-content" className="relative min-h-0 flex-1">

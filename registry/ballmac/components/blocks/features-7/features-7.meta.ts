@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["features", "menu bar", "mac", "tour", "shortcuts", "panel", "utility"],
   files: [{ path: "components/blocks/features-7/features-7.tsx" }],
   dependencies: ["lucide-react", "motion@^12", "radix-ui"],
-  registryDependencies: ["shadcn:utils", "kbd"],
+  registryDependencies: ["shadcn:utils", "kbd", "media"],
   examples: [
     { name: "features-7-demo", title: "Default", file: "features-7-demo.tsx" },
     { name: "features-7-two", title: "Two features", file: "features-7-two.tsx" },

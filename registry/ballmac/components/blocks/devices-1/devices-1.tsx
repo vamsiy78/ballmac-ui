@@ -23,6 +23,8 @@ type Devices1Props = Omit<React.ComponentProps<"section">, "title"> & {
   captions?: Partial<Record<Devices1Device, { title: string; description: string }>>
   /** Replaces a device's sample screen. Each screen is laid out at the real device width: 1280, 834, 393 and 208 CSS pixels. */
   screens?: Partial<Record<Devices1Device, React.ReactNode>>
+  /** Real screenshots, one per device: `{ src, alt }`. The frame crops each to its screen. Wins over `screens`. */
+  screenshots?: Partial<Record<Devices1Device, { src: string; alt: string }>>
 }
 
 const defaultCaptions: Record<Devices1Device, { title: string; description: string }> = {
@@ -31,6 +33,8 @@ const defaultCaptions: Record<Devices1Device, { title: string; description: stri
   iphone: { title: "iPhone", description: "Snap a receipt, approve a payment, check cash from anywhere." },
   watch: { title: "Apple Watch", description: "A glance at what’s been paid today, with a tap to nudge late invoices." },
 }
+
+const shot = (s?: { src: string; alt: string }) => (s ? { src: s.src, alt: s.alt } : {})
 
 const icons = { mac: Laptop, ipad: Tablet, iphone: Smartphone, watch: Watch }
 
@@ -115,6 +119,7 @@ function Devices1({
   description = "Start on your Mac, approve on your iPad, check in from your iPhone and glance at your wrist. Everything stays in sync.",
   captions,
   screens,
+  screenshots,
   className,
   ...props
 }: Devices1Props) {
@@ -139,10 +144,10 @@ function Devices1({
         <div className="relative aspect-[2/1] sm:aspect-[2.5/1] w-full">
           <div className="bg-chart-1/15 absolute inset-x-[8%] bottom-0 h-1/2 rounded-[50%] blur-3xl" />
           {[
-            { d: "ipad" as const, pos: "start-[1%] bottom-[2%] w-[20cqw] z-0", node: <TabletFrame orientation="portrait" screenWidth={834}>{screens?.ipad ?? <IpadScreen />}</TabletFrame> },
-            { d: "mac" as const, pos: "start-[18%] bottom-0 w-[62cqw] z-10", node: <LaptopFrame screenWidth={1280}>{screens?.mac ?? <MacScreen />}</LaptopFrame> },
-            { d: "iphone" as const, pos: "end-[6%] bottom-0 w-[14cqw] z-20", node: <PhoneFrame screenWidth={393}>{screens?.iphone ?? <PhoneScreen />}</PhoneFrame> },
-            { d: "watch" as const, pos: "end-[0.5%] bottom-[3%] w-[7.5cqw] z-20", node: <WatchFrame screenWidth={208} band="sport" bandTone="blue" variant="black">{screens?.watch ?? <WatchScreen />}</WatchFrame> },
+            { d: "ipad" as const, pos: "start-[1%] bottom-[2%] w-[20cqw] z-0", node: <TabletFrame orientation="portrait" screenWidth={834} {...shot(screenshots?.ipad)}>{screenshots?.ipad ? null : (screens?.ipad ?? <IpadScreen />)}</TabletFrame> },
+            { d: "mac" as const, pos: "start-[18%] bottom-0 w-[62cqw] z-10", node: <LaptopFrame screenWidth={1280} {...shot(screenshots?.mac)}>{screenshots?.mac ? null : (screens?.mac ?? <MacScreen />)}</LaptopFrame> },
+            { d: "iphone" as const, pos: "end-[6%] bottom-0 w-[14cqw] z-20", node: <PhoneFrame screenWidth={393} {...shot(screenshots?.iphone)}>{screenshots?.iphone ? null : (screens?.iphone ?? <PhoneScreen />)}</PhoneFrame> },
+            { d: "watch" as const, pos: "end-[0.5%] bottom-[3%] w-[7.5cqw] z-20", node: <WatchFrame screenWidth={208} band="sport" bandTone="blue" variant="black" {...shot(screenshots?.watch)}>{screenshots?.watch ? null : (screens?.watch ?? <WatchScreen />)}</WatchFrame> },
           ].map(({ d, pos, node }) => (
             <div key={d} className={cn("absolute origin-bottom transition-[transform,opacity,filter] duration-500 ease-out motion-reduce:transition-none", pos, dim(d) && "opacity-40 blur-[2px] saturate-50", lift(d) && "-translate-y-[3%] scale-[1.04]")}>{node}</div>
           ))}

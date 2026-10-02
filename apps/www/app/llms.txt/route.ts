@@ -15,6 +15,7 @@ export function GET() {
     `- [MCP](${SITE_URL}/docs/mcp): use Ballmac UI from Claude Code, Cursor, VS Code and Codex (npx -y @ballmac/mcp)`,
     `- [Right-to-left](${SITE_URL}/docs/rtl): every component mirrors for Arabic, Hebrew, Persian and Urdu`,
     `- [Translations](${SITE_URL}/docs/i18n): translate all built-in strings with one provider; keys at ${SITE_URL}/i18n/en.json`,
+    `- [Your own images](${SITE_URL}/docs/images): pass media/image props to heroes, cards and templates; alt text, aspect ratios, lazy loading, dark variants`,
     `- [Registry index](${SITE_URL}/r/registry.json): every item in shadcn registry format`,
     "",
     "## Themes",

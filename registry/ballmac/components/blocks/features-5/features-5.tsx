@@ -8,6 +8,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { Avatar, AvatarFallback } from "@/components/ballmac/avatar"
 import { Badge } from "@/components/ballmac/badge"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Features5Step = {
   /** Step title. */
@@ -16,8 +17,12 @@ type Features5Step = {
   description: string
   /** Short checked points under the description. */
   points?: string[]
-  /** The picture shown beside the steps while this step is in view. Decorative: describe it in the text. */
-  visual: React.ReactNode
+  /** The sample picture shown beside the steps while this step is in view. Decorative: describe it in the text. Replaced by `image` when you set one. */
+  visual?: React.ReactNode
+  /** Your own picture for this step: an image URL (give it imageAlt), an object with alt text and a dark-mode file, or your own element. */
+  image?: MediaSource
+  /** Describes `image` when it is a plain URL. */
+  imageAlt?: string
 }
 
 type Features5Props = Omit<React.ComponentProps<"section">, "title"> & {
@@ -241,12 +246,12 @@ function Features5({
                 )}
               </div>
               {/* Phones and tablets: the picture sits right under its step. */}
-              <div aria-hidden="true" className="bg-muted/40 mt-8 flex justify-center rounded-3xl border p-5 sm:p-8 lg:hidden">{step.visual}</div>
+              <div aria-hidden={step.image ? undefined : true} className="bg-muted/40 mt-8 flex justify-center rounded-3xl border p-5 sm:p-8 lg:hidden">{step.image ? <Media media={step.image} alt={step.imageAlt} fit="contain" className="w-full rounded-xl" /> : step.visual}</div>
             </li>
           ))}
         </ol>
 
-        <div className="hidden lg:block" aria-hidden="true">
+        <div className="hidden lg:block" aria-hidden={steps[active]?.image ? undefined : true}>
           <div className="sticky top-24 flex h-[28rem] items-center justify-center overflow-hidden rounded-3xl border bg-muted/40 p-10">
             <div className="absolute inset-0 bg-[radial-gradient(color-mix(in_oklch,var(--foreground)_14%,transparent)_1px,transparent_1px)] [background-size:18px_18px] [mask-image:radial-gradient(70%_70%_at_50%_50%,black,transparent)]" />
             <AnimatePresence mode="wait" initial={false}>
@@ -258,7 +263,7 @@ function Features5({
                 exit={reduce ? undefined : { opacity: 0, y: -10, scale: 0.98, filter: "blur(6px)" }}
                 transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               >
-                {steps[active]?.visual}
+                {steps[active]?.image ? <Media media={steps[active].image} alt={steps[active].imageAlt} fit="contain" className="w-full rounded-xl" /> : steps[active]?.visual}
               </motion.div>
             </AnimatePresence>
           </div>

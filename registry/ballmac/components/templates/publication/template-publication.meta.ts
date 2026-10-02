@@ -34,7 +34,7 @@ export default defineItem({
     { path: "app/publication/issues/page.tsx" },
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "copy-button", "scroll-progress"],
+  registryDependencies: ["shadcn:utils", "copy-button", "scroll-progress", "media"],
   examples: [
     { name: "template-publication-demo", title: "Home", file: "template-publication-demo.tsx" },
     { name: "template-publication-article", title: "Article", file: "template-publication-article.tsx" },

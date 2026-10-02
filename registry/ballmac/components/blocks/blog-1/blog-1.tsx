@@ -6,6 +6,7 @@ import { ArrowUpRight, Clock } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { useLocale } from "@/lib/ballmac/i18n"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Blog1Post = {
   title: string
@@ -23,8 +24,10 @@ type Blog1Post = {
   role?: string
   /** Where the post lives. */
   href: string
-  /** Cover photo. A generated cover is drawn when omitted. */
-  image?: string
+  /** Cover photo: an image URL, an object with alt text and a dark-mode file, or your own element. A generated cover is drawn when omitted. */
+  image?: MediaSource
+  /** Describes `image` when it is a plain URL. The title sits beside the cover, so the default is decorative (empty). */
+  imageAlt?: string
   /** Which generated cover to draw (0 to 4). Defaults to the post's position. */
   cover?: number
 }
@@ -135,10 +138,7 @@ function Meta({ post, locale, className }: { post: Blog1Post; locale: string; cl
 }
 
 function Cover({ post, index, className }: { post: Blog1Post; index: number; className?: string }) {
-  if (post.image) {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={post.image} alt="" className={cn("object-cover", className)} />
-  }
+  if (post.image) return <Media media={post.image} alt={post.imageAlt ?? ""} fill className={className} />
   return <BlogCover variant={post.cover ?? index} className={className} />
 }
 

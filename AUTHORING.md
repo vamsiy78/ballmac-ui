@@ -56,6 +56,16 @@ Both are enforced by `pnpm check` (`scripts/rtl.ts`, `scripts/i18n.ts`); `--fix`
 - **Every built-in string goes through `msg`:** `const msg = useMessages()` from `@/lib/ballmac/i18n`, then `aria-label={msg("my-item.close", "Close")}`. Put the whole sentence in one message with `{placeholders}` (`msg("x.pageOf", "Page {page} of {total}", { page, total })`), never in fragments. Plurals: `msg("x.items", { one: "{count} item", other: "{count} items" }, { count })`. Module-level label tables use `defineMessage` and render with `msg.of(...)`. A label prop keeps working and falls back to the dictionary (`label ??= msg(...)`). Use `useLocale()` for `Intl` formatting; never hard-code `"en-US"`. Sample values: `// i18n-ignore`. Blocks and templates are exempt: their copy is content.
 - **Preview it:** the toolbar RTL toggle, or `/preview/<example>?dir=rtl`; `pnpm rtl:sweep` compares every preview with its mirror image.
 
+## Image slots
+
+Enforced by `pnpm check` (`scripts/media.ts`) for blocks and templates.
+
+- **Never a bare `<img>` in a block or template.** Render pictures through `Media` (`@/lib/ballmac/media`, add `"media"` to `registryDependencies`). It gives a fixed aspect ratio, lazy loading, `srcDark`, a fallback and a dev alt warning.
+- **Props:** one big picture is `media?: MediaSource` + `mediaAlt?: string`; items in a list take `image?: MediaSource` + `imageAlt?: string`. The generated artwork stays as the `fallback` so the item still looks finished with no image.
+- **Alt text:** required for informative images (`alt=""` only for decoration). Hide the artwork from assistive tech only when it is decorative.
+- **Above the fold** (hero) passes `priority`; everything else stays lazy.
+- A line with `// media-ignore` is skipped.
+
 ## Design language
 
 - **Tokens only.** `bg-background`, `bg-card`, `bg-muted`, `bg-accent`, `bg-primary`, `text-foreground`, `text-muted-foreground`, `text-primary-foreground`, `border-border`, `border-input`, `ring-ring`, `bg-destructive`, `chart-1…5`. No hex or named colors. White/black alpha is fine for overlays and shadows (`bg-black/50`, `shadow-[0_1px_2px_0_rgb(0_0_0/0.12)]`). Use `dark:` only when a token can't express it.

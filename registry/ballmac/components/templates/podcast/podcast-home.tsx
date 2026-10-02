@@ -58,7 +58,7 @@ function PodcastHome({ hrefs, ...props }: PodcastHomeProps) {
             <ul aria-label="Listen on" className="mt-8 flex flex-wrap gap-2">{["Apple Podcasts", "Spotify", "YouTube", "RSS"].map((p) => <li key={p}><a href={hrefs?.subscribe ?? "/podcast/subscribe"} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-9 items-center rounded-full border px-4 text-sm font-semibold outline-none transition-colors focus-visible:ring-[3px]">{p}</a></li>)}</ul>
           </div>
           <a href={ep} className="group focus-visible:ring-ring/50 block rotate-2 rounded-[2rem] outline-none transition-transform duration-500 hover:rotate-0 focus-visible:ring-[3px] focus-visible:ring-offset-4 focus-visible:ring-offset-background motion-reduce:transition-none motion-reduce:hover:rotate-2">
-            <ShowArt variant={latest.art} className="rounded-[2rem] shadow-[0_30px_70px_-30px_oklch(0.3_0.1_340/0.6)]" />
+            <ShowArt variant={latest.art} image={latest.image} imageAlt={latest.imageAlt} className="rounded-[2rem] shadow-[0_30px_70px_-30px_oklch(0.3_0.1_340/0.6)]" />
             <span className="sr-only">Episode {latest.n}: {latest.title}</span>
           </a>
         </section>
@@ -68,7 +68,7 @@ function PodcastHome({ hrefs, ...props }: PodcastHomeProps) {
           <ul className="mt-8 divide-y border-y">
             {rest.slice(0, 5).map((e) => (
               <li key={e.slug} className="grid grid-cols-[3.5rem_1fr_auto] items-center gap-4 py-5 sm:grid-cols-[5rem_1fr_auto] sm:gap-6">
-                <ShowArt variant={e.art} className="rounded-xl" />
+                <ShowArt variant={e.art} image={e.image} imageAlt={e.imageAlt} className="rounded-xl" />
                 <a href={ep} className="group focus-visible:ring-ring/50 min-w-0 rounded outline-none focus-visible:ring-[3px]">
                   <p className="text-muted-foreground text-xs font-semibold">Ep. {e.n} · {formatDate(e.date)} · {minutes(e.duration)}</p>
                   <h3 className={cn("mt-1 text-xl leading-tight text-balance group-hover:underline underline-offset-4 sm:text-2xl", podcastDisplayClass)}>{e.title}</h3>

@@ -10,6 +10,7 @@ import { AppIcon } from "@/components/ballmac/mac-icons"
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
 import { cn } from "@/lib/utils"
 import { useLocale } from "@/lib/ballmac/i18n"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Download1Arch = "arm64" | "x64"
 type Download1Kind = "new" | "improved" | "fixed"
@@ -28,6 +29,8 @@ type Download1Props = Omit<React.ComponentProps<"section">, "title"> & {
   tagline?: string
   /** One letter or short text drawn on the icon. */
   glyph?: string
+  /** Your app icon instead of the sample tile: an image URL, an object with alt text and a dark-mode file, or your own element. A plain URL is described by the app name. */
+  icon?: MediaSource
   /** Downloads per Mac type: the link, the file name and the size. */
   downloads?: Record<Download1Arch, { href: string; file: string; size: string; sha256?: string }>
   /** Requirements shown as chips. */
@@ -83,6 +86,7 @@ function Download1({
   app = "Ledger",
   tagline = "Invoices, approvals and reports, right in your menu bar.",
   glyph,
+  icon,
   downloads = defaultDownloads,
   requirements = ["macOS 13 Ventura or later", "Apple silicon or Intel", "Signed and notarized"],
   brew = "brew install --cask ledger",
@@ -108,7 +112,7 @@ function Download1({
       <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
         <div className="min-w-0">
           <div className="flex items-center gap-5">
-            <AppIcon size={88} tone="blue" className="text-3xl font-bold">{glyph ?? app[0]}</AppIcon>
+            {icon ? <Media media={icon} alt={app} aspect="square" fit="contain" priority className="size-[88px] shrink-0 rounded-[22%]" /> : <AppIcon size={88} tone="blue" className="text-3xl font-bold">{glyph ?? app[0]}</AppIcon>}
             <div>
               <h2 className="text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">{app} for Mac</h2>
               {current && <p className="text-muted-foreground mt-1 text-sm">Version {current.version} · {fmt(current.date)}</p>}

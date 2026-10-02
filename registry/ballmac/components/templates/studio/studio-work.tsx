@@ -38,7 +38,7 @@ function StudioWork({ hrefs, ...props }: StudioWorkProps) {
             {shown.map((p) => (
               <li key={p.slug}>
                 <a href={href} className="group focus-visible:ring-ring/50 block outline-none focus-visible:ring-[3px] focus-visible:ring-offset-4 focus-visible:ring-offset-background">
-                  <div className="border-foreground overflow-hidden border-2"><StudioArt variant={p.art} className="transition-transform duration-500 group-hover:scale-105 group-focus-visible:scale-105 motion-reduce:transition-none" /></div>
+                  <div className="border-foreground overflow-hidden border-2"><StudioArt variant={p.art} image={p.image} imageAlt={p.imageAlt} className="transition-transform duration-500 group-hover:scale-105 group-focus-visible:scale-105 motion-reduce:transition-none" /></div>
                   <div className="mt-4 flex items-baseline justify-between gap-3"><h2 className={cn("text-3xl group-hover:underline decoration-chart-1 decoration-4 underline-offset-4", studioDisplay)}>{p.name}</h2><span className="text-muted-foreground text-sm tabular-nums" style={mono}>{p.year}</span></div>
                   <p className="text-muted-foreground mt-1 text-sm" style={mono}>{p.discipline} · {p.line}</p>
                 </a>

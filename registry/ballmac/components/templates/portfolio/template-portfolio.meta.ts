@@ -34,7 +34,7 @@ export default defineItem({
     { path: "app/portfolio/uses/page.tsx" },
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "blur-fade", "copy-button", "marquee", "table-of-contents"],
+  registryDependencies: ["shadcn:utils", "blur-fade", "copy-button", "marquee", "table-of-contents", "media"],
   examples: [
     { name: "template-portfolio-demo", title: "Home", file: "template-portfolio-demo.tsx" },
     { name: "template-portfolio-work", title: "Work", file: "template-portfolio-work.tsx" },

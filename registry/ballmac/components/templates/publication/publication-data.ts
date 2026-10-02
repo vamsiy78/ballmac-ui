@@ -1,3 +1,5 @@
+import type { MediaSource } from "@/components/ballmac/media"
+
 // Ballmac UI: Publication sample content. https://ui.ballmac.com/templates/template-publication
 
 export type Section = "Essays" | "Culture" | "Science" | "Technology" | "Interviews"
@@ -11,7 +13,7 @@ export const authors: Author[] = [
   { id: "elena", name: "Elena Rossi", role: "Culture editor", bio: "Edits the culture desk. Cooks, reads, rarely sleeps in October.", tone: 4 },
 ]
 
-export type Article = { id: string; section: Section; kicker: string; title: string; dek: string; author: string; date: string; read: number; art: number; popular?: number }
+export type Article = { id: string; section: Section; kicker: string; title: string; dek: string; author: string; date: string; read: number; art: number; popular?: number; image?: MediaSource; imageAlt?: string }
 
 export const articles: Article[] = [
   { id: "a1", section: "Essays", kicker: "The long view", title: "The case for the unfinished city", dek: "What a scaffold-covered street teaches us about patience, and why the cities we love are never done.", author: "ines", date: "2026-09-28", read: 14, art: 0, popular: 1 },
@@ -26,7 +28,9 @@ export const articles: Article[] = [
   { id: "a10", section: "Essays", kicker: "Small things", title: "In praise of the folding chair", dek: "The most democratic object ever designed.", author: "ines", date: "2026-09-09", read: 5, art: 3 },
 ]
 
-export const issues = [
+export type Issue = { n: number; season: string; theme: string; art: number; image?: MediaSource; imageAlt?: string }
+
+export const issues: Issue[] = [
   { n: 48, season: "Autumn 2026", theme: "Patience", art: 0 },
   { n: 47, season: "Summer 2026", theme: "Heat", art: 1 },
   { n: 46, season: "Spring 2026", theme: "Return", art: 2 },

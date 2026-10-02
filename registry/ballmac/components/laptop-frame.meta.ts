@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["mockup", "device", "laptop", "macbook", "screenshot", "hero", "3d", "scroll"],
   files: [{ path: "components/laptop-frame.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "media"],
   examples: [
     { name: "laptop-frame-demo", title: "Dashboard", file: "laptop-frame-demo.tsx" },
     { name: "laptop-frame-scroll", title: "Midnight, opens on scroll", file: "laptop-frame-scroll.tsx" },

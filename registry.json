@@ -1030,7 +1030,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -3562,7 +3563,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -4442,7 +4444,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -4571,7 +4574,8 @@
         "https://ui.ballmac.com/r/copy-button.json",
         "https://ui.ballmac.com/r/scroll-progress.json",
         "https://ui.ballmac.com/r/table-of-contents.json",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -4952,7 +4956,8 @@
         "utils",
         "https://ui.ballmac.com/r/blog-1.json",
         "https://ui.ballmac.com/r/button.json",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -6023,7 +6028,8 @@
         "https://ui.ballmac.com/r/copy-button.json",
         "https://ui.ballmac.com/r/mac-icons.json",
         "https://ui.ballmac.com/r/segmented-control.json",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -6825,7 +6831,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/avatar.json",
-        "https://ui.ballmac.com/r/badge.json"
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -6945,7 +6952,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/animated-tabs.json",
-        "https://ui.ballmac.com/r/badge.json"
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -7071,7 +7079,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/kbd.json"
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -7748,7 +7757,8 @@
         "https://ui.ballmac.com/r/badge.json",
         "https://ui.ballmac.com/r/button.json",
         "https://ui.ballmac.com/r/number-ticker.json",
-        "https://ui.ballmac.com/r/text-reveal.json"
+        "https://ui.ballmac.com/r/text-reveal.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -7929,7 +7939,8 @@
         "https://ui.ballmac.com/r/prompt-input.json",
         "https://ui.ballmac.com/r/reasoning-disclosure.json",
         "https://ui.ballmac.com/r/streaming-text.json",
-        "https://ui.ballmac.com/r/tool-call-card.json"
+        "https://ui.ballmac.com/r/tool-call-card.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -8017,7 +8028,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/button.json",
-        "https://ui.ballmac.com/r/globe.json"
+        "https://ui.ballmac.com/r/globe.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -8444,7 +8456,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/badge.json",
-        "https://ui.ballmac.com/r/button.json"
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -8789,7 +8802,8 @@
         "https://ui.ballmac.com/r/checkbox.json",
         "https://ui.ballmac.com/r/field.json",
         "https://ui.ballmac.com/r/input.json",
-        "https://ui.ballmac.com/r/password-input.json"
+        "https://ui.ballmac.com/r/password-input.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -9155,7 +9169,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/button.json",
-        "https://ui.ballmac.com/r/input.json"
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -10416,7 +10431,8 @@
         "https://ui.ballmac.com/r/checkbox.json",
         "https://ui.ballmac.com/r/field.json",
         "https://ui.ballmac.com/r/input.json",
-        "https://ui.ballmac.com/r/password-input.json"
+        "https://ui.ballmac.com/r/password-input.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -10654,7 +10670,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/button.json"
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -11479,7 +11496,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -14684,7 +14702,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -21582,7 +21601,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -22197,7 +22217,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/motion-presets.json",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -23287,6 +23308,128 @@
       "meta": {
         "example": true,
         "of": "masonry-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "media",
+      "type": "registry:ui",
+      "title": "Media",
+      "description": "A picture slot: reserves the space, lazy-loads, takes a URL, an image with required alt text and a dark-mode file, or your own element, and falls back to artwork if there is no image or it fails.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/media.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/media.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "image",
+          "picture",
+          "slot",
+          "screenshot",
+          "photo",
+          "alt text",
+          "aspect ratio",
+          "dark mode"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Pass media as a URL (with alt), an object { src, alt, srcDark? }, or any element such as a next/image. aspect reserves the box (video, photo, square, wide, portrait or '3/2'); fit is cover | contain | fill; priority loads an above-the-fold image eagerly. fallback shows when there is no media or the file fails.",
+          "whenToUse": [
+            "Any place a product screenshot, photo, cover or avatar goes",
+            "Blocks and templates that ship with generated artwork but should accept the buyer's own image"
+          ],
+          "whenNotToUse": [
+            "Icons (use an icon component)",
+            "Animated or interactive content that is not an image: pass it as an element"
+          ],
+          "composesWith": [
+            "hero-1",
+            "features-5",
+            "blog-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "Informative images need alt text; alt=\"\" marks decoration. A URL without alt logs a warning in development"
+            },
+            {
+              "keys": "Layout",
+              "action": "A fixed aspect ratio reserves the space, so nothing jumps when the file arrives"
+            }
+          ],
+          "customization": [
+            "aspect, fit and priority",
+            "srcDark for a dark-mode file",
+            "position for object-position",
+            "fallback for the artwork shown with no image",
+            "onImageError"
+          ]
+        },
+        "examples": [
+          "media-demo",
+          "media-dark"
+        ],
+        "url": "https://ui.ballmac.com/components/media"
+      }
+    },
+    {
+      "name": "media-demo",
+      "type": "registry:example",
+      "title": "Media: Image, element and fallback",
+      "description": "Image, element and fallback example of Media.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/media.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/media-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/media-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "media",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "media-dark",
+      "type": "registry:example",
+      "title": "Media: A different file in dark mode",
+      "description": "A different file in dark mode example of Media.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/media.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/media-dark.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/media-dark.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "media",
         "tier": "free"
       }
     },
@@ -25866,7 +26009,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -33008,7 +33152,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -33385,7 +33530,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/dropdown-menu.json",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -34424,7 +34570,8 @@
         "https://ui.ballmac.com/r/sheet.json",
         "https://ui.ballmac.com/r/slider.json",
         "https://ui.ballmac.com/r/progress.json",
-        "https://ui.ballmac.com/r/accordion.json"
+        "https://ui.ballmac.com/r/accordion.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -36196,7 +36343,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/audio-player.json",
-        "https://ui.ballmac.com/r/copy-button.json"
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -36457,7 +36605,8 @@
         "https://ui.ballmac.com/r/blur-fade.json",
         "https://ui.ballmac.com/r/copy-button.json",
         "https://ui.ballmac.com/r/marquee.json",
-        "https://ui.ballmac.com/r/table-of-contents.json"
+        "https://ui.ballmac.com/r/table-of-contents.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -36716,7 +36865,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/copy-button.json",
-        "https://ui.ballmac.com/r/scroll-progress.json"
+        "https://ui.ballmac.com/r/scroll-progress.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -37199,7 +37349,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/copy-button.json",
-        "https://ui.ballmac.com/r/marquee.json"
+        "https://ui.ballmac.com/r/marquee.json",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {
@@ -40819,7 +40970,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/media.json"
       ],
       "files": [
         {

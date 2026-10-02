@@ -5,6 +5,7 @@ import * as React from "react"
 import { animate, motion, useInView, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { Media } from "@/components/ballmac/media"
 
 type LaptopFrameProps = Omit<React.ComponentProps<"div">, "children"> & {
   /** Screen content. Ignored when `src` or `videoSrc` is set. */
@@ -83,7 +84,7 @@ function ScreenContent({
   }
   if (src) {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img data-slot="laptop-frame-image" className="size-full object-cover" src={src} alt={alt} />
+    return <Media data-slot="laptop-frame-image" media={src} alt={alt} fill className="size-full" />
   }
   if (!screenWidth) return <>{children}</>
   return (

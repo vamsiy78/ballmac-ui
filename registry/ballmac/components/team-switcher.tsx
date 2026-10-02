@@ -15,6 +15,7 @@ import {
 } from "@/components/ballmac/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { useMessages } from "@/lib/ballmac/i18n";
+import { Media, isMediaImage, type MediaSource } from "@/components/ballmac/media";
 
 type Team = {
   /** Unique id; used for `value`. */
@@ -23,8 +24,8 @@ type Team = {
   name: string;
   /** Secondary line, such as the plan or member count. */
   description?: string;
-  /** Logo or avatar. Defaults to the first letter of the name. */
-  logo?: React.ReactNode;
+  /** Logo or avatar: an image URL, an object with alt text and a dark-mode file, or any element. Defaults to the first letter of the name. */
+  logo?: MediaSource;
 };
 
 type TeamSwitcherProps = Omit<React.ComponentProps<"button">, "value" | "defaultValue" | "onChange"> & {
@@ -57,7 +58,7 @@ function Logo({ team, className }: { team: Team; className?: string }) {
         className,
       )}
     >
-      {team.logo ?? team.name.charAt(0).toUpperCase()}
+      {isMediaImage(team.logo) ? <Media media={team.logo} alt="" fit="contain" fill className="size-full" /> : (team.logo ?? team.name.charAt(0).toUpperCase())}
     </span>
   );
 }

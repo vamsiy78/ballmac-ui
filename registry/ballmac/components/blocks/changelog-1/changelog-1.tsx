@@ -8,6 +8,7 @@ import { BlogCover } from "@/components/ballmac/blocks/blog-1/blog-1"
 import { buttonVariants } from "@/components/ballmac/button"
 import { cn } from "@/lib/utils"
 import { useLocale } from "@/lib/ballmac/i18n"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Changelog1Kind = "new" | "improved" | "fixed"
 
@@ -30,6 +31,10 @@ type Changelog1Release = {
   changes: Changelog1Change[]
   /** Which generated banner to draw (0 to 4) for a headline release. Omit for a plain release. */
   cover?: number
+  /** Your own banner for a headline release: an image URL (give it imageAlt), an object with alt text and a dark-mode file, or your own element. Wins over `cover`. */
+  image?: MediaSource
+  /** Describes `image` when it is a plain URL. */
+  imageAlt?: string
 }
 
 type Changelog1Props = Omit<React.ComponentProps<"section">, "title"> & {
@@ -169,7 +174,7 @@ function Changelog1({
               {i === 0 && filter === "all" && !expanded && <span className="bg-foreground text-background mt-3 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium">Latest</span>}
             </div>
             <article className="bg-card overflow-hidden rounded-3xl border">
-              {r.cover !== undefined && <BlogCover variant={r.cover} className="aspect-[21/8] w-full" />}
+              {r.image ? <Media media={r.image} alt={r.imageAlt} aspect="21/8" className="w-full" /> : r.cover !== undefined && <BlogCover variant={r.cover} className="aspect-[21/8] w-full" />}
               <div className="p-6 sm:p-8">
                 <h3 className="text-xl font-semibold tracking-[-0.02em] text-balance sm:text-2xl">{r.title}</h3>
                 {r.summary && <p className="text-muted-foreground mt-2 max-w-2xl text-pretty">{r.summary}</p>}

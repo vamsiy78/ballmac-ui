@@ -9,6 +9,7 @@ import { cart, useCart } from "@/components/ballmac/templates/goods/goods-cart"
 import { FREE_SHIPPING, glazes, money, type Shape } from "@/components/ballmac/templates/goods/goods-data"
 import { goodsSans, goodsSerif } from "@/components/ballmac/templates/goods/goods-fonts"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type GoodsPage = "home" | "shop" | "product" | "cart" | "checkout"
 type GoodsHrefs = Record<GoodsPage, string>
@@ -29,7 +30,8 @@ const onClay = "text-[var(--goods-on-clay)]"
  * A piece of ceramics drawn in CSS: a mug, bowl, vase, plate, pitcher or cup in one of five glazes, on a wall.
  * `view` changes the composition (front, close, pair, dark wall) so a gallery has something to switch between.
  */
-function Piece({ shape, glaze = 0, view = 0, className }: { shape: Shape; glaze?: number; view?: number; className?: string }) {
+function Piece({ shape, glaze = 0, view = 0, className, image, imageAlt }: { shape: Shape; glaze?: number; view?: number; className?: string; image?: MediaSource; imageAlt?: string }) {
+  if (image) return <Media media={image} alt={imageAlt} fill className={cn("aspect-[4/5] w-full", className)} />
   const gl = glazes[glaze % glazes.length]!
   const g = gl.cls
   const shine = "bg-gradient-to-br from-white/35 via-transparent to-black/25"
@@ -143,7 +145,7 @@ function GoodsShell({ page, hrefs: overrides, className, style, children, ...pro
               <ul className="grid gap-5">
                 {lines.map((l) => (
                   <li key={l.id + l.glaze} className="grid grid-cols-[5rem_minmax(0,1fr)] gap-4">
-                    <Piece shape={l.product.shape} glaze={l.glaze} className="rounded-xl" />
+                    <Piece shape={l.product.shape} glaze={l.glaze} image={l.product.images?.[l.glaze]} imageAlt={l.product.name} className="rounded-xl" />
                     <div className="min-w-0">
                       <p className="font-semibold">{l.product.name}</p>
                       <p className="text-muted-foreground text-sm">{glazes[l.glaze]!.name} · {money(l.product.price)}</p>

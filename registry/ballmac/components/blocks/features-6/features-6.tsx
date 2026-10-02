@@ -5,6 +5,7 @@ import { ArrowRight, BarChart3, Check, MessageSquare, Plug, ShieldCheck } from "
 import { AnimatedTabs, AnimatedTabsContent, AnimatedTabsList, AnimatedTabsTrigger } from "@/components/ballmac/animated-tabs"
 import { Badge } from "@/components/ballmac/badge"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Features6Tab = {
   /** Stable key for the tab. */
@@ -21,8 +22,12 @@ type Features6Tab = {
   points?: string[]
   /** Link under the points. */
   link?: { label: string; href: string }
-  /** Picture on the right of the panel. Decorative: the text must say what it shows. */
-  visual: React.ReactNode
+  /** Sample picture on the right of the panel. Decorative: the text must say what it shows. Replaced by `image` when you set one. */
+  visual?: React.ReactNode
+  /** Your own picture for this tab: an image URL (give it imageAlt), an object with alt text and a dark-mode file, or your own element. */
+  image?: MediaSource
+  /** Describes `image` when it is a plain URL. */
+  imageAlt?: string
 }
 
 type Features6Props = Omit<React.ComponentProps<"section">, "title"> & {
@@ -233,9 +238,9 @@ function Features6({
                   </a>
                 )}
               </div>
-              <div aria-hidden="true" className="bg-muted/40 relative flex items-center justify-center border-t p-6 sm:p-10 md:border-t-0 md:border-s">
+              <div aria-hidden={t.image ? undefined : true} className="bg-muted/40 relative flex items-center justify-center border-t p-6 sm:p-10 md:border-t-0 md:border-s">
                 <div className="absolute inset-0 bg-[radial-gradient(color-mix(in_oklch,var(--foreground)_14%,transparent)_1px,transparent_1px)] [background-size:18px_18px] [mask-image:radial-gradient(70%_70%_at_50%_50%,black,transparent)]" />
-                <div className="relative flex w-full justify-center">{t.visual}</div>
+                <div className="relative flex w-full justify-center">{t.image ? <Media media={t.image} alt={t.imageAlt} fit="contain" className="w-full rounded-xl" /> : t.visual}</div>
               </div>
             </div>
           </AnimatedTabsContent>

@@ -54,7 +54,7 @@ function PublicationHome({ hrefs, ...props }: PublicationHomeProps) {
         <div className="grid gap-8 lg:grid-cols-[1fr_20rem] lg:gap-10">
           <article>
             <a href={a} className="group focus-visible:ring-ring/50 block rounded outline-none focus-visible:ring-[3px]">
-              <MagArt variant={lead.art} className="aspect-[16/10]" />
+              <MagArt variant={lead.art} image={lead.image} imageAlt={lead.imageAlt} className="aspect-[16/10]" />
               <p className={cn("mt-5", kicker)}>{lead.kicker}</p>
               <h1 className={cn("mt-2 text-[clamp(2.4rem,6vw,4.5rem)] leading-[1.02] tracking-[-0.01em] text-balance group-hover:underline decoration-1 underline-offset-4", pubSerifClass)}>{lead.title}</h1>
               <p className={cn("text-muted-foreground mt-4 max-w-2xl text-xl leading-relaxed text-pretty", pubTextClass)}>{lead.dek}</p>
@@ -81,7 +81,7 @@ function PublicationHome({ hrefs, ...props }: PublicationHomeProps) {
             {grid.map((g) => (
               <li key={g.id}>
                 <a href={a} className="group focus-visible:ring-ring/50 block rounded outline-none focus-visible:ring-[3px]">
-                  <MagArt variant={g.art} />
+                  <MagArt variant={g.art} image={g.image} imageAlt={g.imageAlt} />
                   <p className={cn("mt-4", kicker)}>{g.section}</p>
                   <h3 className={cn("mt-1.5 text-2xl leading-tight text-balance group-hover:underline underline-offset-4", pubSerifClass)}>{g.title}</h3>
                   <p className={cn("text-muted-foreground mt-2 text-pretty", pubTextClass)}>{g.dek}</p>

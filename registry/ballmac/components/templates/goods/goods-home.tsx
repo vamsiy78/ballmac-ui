@@ -26,7 +26,7 @@ function ProductCard({ product, href }: { product: Product; href: string }) {
     <li className="group relative">
       <a href={href} className="focus-visible:ring-ring/50 block rounded-3xl outline-none focus-visible:ring-[3px]">
         <div className="relative overflow-hidden rounded-3xl">
-          <Piece shape={product.shape} glaze={product.glazes[0]} className="transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
+          <Piece shape={product.shape} glaze={product.glazes[0]} image={product.images?.[product.glazes[0]!]} imageAlt={product.name} className="transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
           {product.tag && <span className={cn("bg-chart-3 absolute top-3 start-3 rounded-full px-3 py-1 text-xs font-bold", goodsOnClay)}>{product.tag}</span>}
         </div>
         <span className="mt-4 flex items-start justify-between gap-3"><span className={cn("text-xl", goodsSerifClass)}>{product.name}</span><span className="font-semibold tabular-nums">{money(product.price)}</span></span>

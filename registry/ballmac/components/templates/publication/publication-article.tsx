@@ -48,7 +48,7 @@ function PublicationArticle({ hrefs, ...props }: PublicationArticleProps) {
             <p className="text-start"><span className="block font-semibold">By {au.name}</span><span className="text-muted-foreground">{formatDate(a.date)} · {a.read} min read</span></p>
           </div>
         </header>
-        <div className="mx-auto mt-10 max-w-5xl px-4 sm:px-6"><MagArt variant={a.art} className="aspect-[16/8]" /><p className="text-muted-foreground mt-2 text-xs">Scaffolding on Rua da Madalena, Lisbon. Illustration.</p></div>
+        <div className="mx-auto mt-10 max-w-5xl px-4 sm:px-6"><MagArt variant={a.art} image={a.image} imageAlt={a.imageAlt} className="aspect-[16/8]" /><p className="text-muted-foreground mt-2 text-xs">Scaffolding on Rua da Madalena, Lisbon. Illustration.</p></div>
 
         <article className="mx-auto mt-12 max-w-[40rem] space-y-7 px-4 sm:px-6">
           <div className="relative">
@@ -77,7 +77,7 @@ function PublicationArticle({ hrefs, ...props }: PublicationArticleProps) {
 
         <section aria-labelledby="pub-related" className="mx-auto mt-20 max-w-6xl px-4 sm:px-6">
           <h2 id="pub-related" className="border-foreground border-b-2 pb-2 text-sm font-bold tracking-[0.14em] uppercase">Keep reading</h2>
-          <ul className="mt-8 grid gap-8 sm:grid-cols-3">{related.map((r) => <li key={r.id}><a href={hrefs?.article ?? "#"} className="group focus-visible:ring-ring/50 block rounded outline-none focus-visible:ring-[3px]"><MagArt variant={r.art} /><h3 className={cn("mt-4 text-2xl leading-tight text-balance group-hover:underline underline-offset-4", pubSerifClass)}>{r.title}</h3><p className="text-muted-foreground mt-2 text-sm">{getAuthor(r.author).name} · {r.read} min</p></a></li>)}</ul>
+          <ul className="mt-8 grid gap-8 sm:grid-cols-3">{related.map((r) => <li key={r.id}><a href={hrefs?.article ?? "#"} className="group focus-visible:ring-ring/50 block rounded outline-none focus-visible:ring-[3px]"><MagArt variant={r.art} image={r.image} imageAlt={r.imageAlt} /><h3 className={cn("mt-4 text-2xl leading-tight text-balance group-hover:underline underline-offset-4", pubSerifClass)}>{r.title}</h3><p className="text-muted-foreground mt-2 text-sm">{getAuthor(r.author).name} · {r.read} min</p></a></li>)}</ul>
         </section>
         <div className="mx-auto mt-16 max-w-6xl px-4 sm:px-6"><Newsletter tone="ink" /></div>
       </main>

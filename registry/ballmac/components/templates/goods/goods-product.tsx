@@ -47,10 +47,10 @@ function GoodsProduct({ hrefs, slug, ...props }: GoodsProductProps) {
           <div className="grid gap-4 sm:grid-cols-[5rem_minmax(0,1fr)]">
             <div role="radiogroup" aria-label="Gallery views" className="order-2 grid grid-cols-4 gap-3 sm:order-1 sm:grid-cols-1 sm:content-start">
               {viewNames.map((v, i) => (
-                <button key={v} type="button" role="radio" aria-checked={view === i} aria-label={v} onClick={() => setView(i)} className={cn("focus-visible:ring-ring/50 overflow-hidden rounded-xl border-2 outline-none focus-visible:ring-[3px]", view === i ? "border-foreground" : "border-transparent")}><Piece shape={product.shape} glaze={glaze} view={i} /></button>
+                <button key={v} type="button" role="radio" aria-checked={view === i} aria-label={v} onClick={() => setView(i)} className={cn("focus-visible:ring-ring/50 overflow-hidden rounded-xl border-2 outline-none focus-visible:ring-[3px]", view === i ? "border-foreground" : "border-transparent")}><Piece shape={product.shape} glaze={glaze} image={product.images?.[glaze]} imageAlt={product.name} view={i} /></button>
               ))}
             </div>
-            <div className="order-1 sm:order-2"><Piece shape={product.shape} glaze={glaze} view={view} className="rounded-3xl" /><p role="status" className="sr-only">Showing the {viewNames[view]!.toLowerCase()} view in {glazes[glaze]!.name}</p></div>
+            <div className="order-1 sm:order-2"><Piece shape={product.shape} glaze={glaze} image={product.images?.[glaze]} imageAlt={product.name} view={view} className="rounded-3xl" /><p role="status" className="sr-only">Showing the {viewNames[view]!.toLowerCase()} view in {glazes[glaze]!.name}</p></div>
           </div>
 
           <div>

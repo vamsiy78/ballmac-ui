@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["login", "sign in", "auth", "split screen", "passkey", "sso"],
   files: [{ path: "components/blocks/login-2/login-2.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "button", "checkbox", "field", "input", "password-input"],
+  registryDependencies: ["shadcn:utils", "button", "checkbox", "field", "input", "password-input", "media"],
   examples: [
     { name: "login-2-demo", title: "Default", file: "login-2-demo.tsx" },
     { name: "login-2-error", title: "Wrong password", file: "login-2-error.tsx" },

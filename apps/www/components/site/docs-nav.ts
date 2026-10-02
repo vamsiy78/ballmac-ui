@@ -25,6 +25,7 @@ export const docsNav = [
       { href: "/docs/registry", label: "CLI & registry" },
       { href: "/docs/rtl", label: "Right-to-left" },
       { href: "/docs/i18n", label: "Translations" },
+      { href: "/docs/images", label: "Your own images" },
     ],
   },
 ]

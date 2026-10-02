@@ -7,6 +7,7 @@ import { Menu, Search, X } from "lucide-react"
 import { pubBody, pubDisplay, pubSans } from "@/components/ballmac/templates/publication/publication-fonts"
 import { sections } from "@/components/ballmac/templates/publication/publication-data"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type PublicationPage = "home" | "article" | "section" | "author" | "issues"
 type PublicationHrefs = Record<PublicationPage, string>
@@ -24,8 +25,9 @@ const serif = "[font-family:var(--pub-display),ui-serif,Georgia,serif]"
 const text = "[font-family:var(--pub-body),ui-serif,Georgia,serif]"
 
 /** A duotone illustration in ink and red, standing in for photography. */
-function MagArt({ variant, className }: { variant: number; className?: string }) {
+function MagArt({ variant, className, image, imageAlt }: { variant: number; className?: string; image?: MediaSource; imageAlt?: string }) {
   const v = ((variant % 6) + 6) % 6
+  if (image) return <Media media={image} alt={imageAlt} fill className={cn("aspect-[4/3] w-full", className)} />
   return (
     <div aria-hidden="true" className={cn("bg-secondary relative isolate aspect-[4/3] w-full overflow-hidden", className)}>
       {v === 0 && (<><div className="bg-chart-3 absolute inset-0" />{[0, 1, 2, 3].map((i) => <div key={i} className="bg-foreground absolute bottom-0" style={{ left: `${12 + i * 20}%`, width: "14%", height: `${28 + i * 10}%` }} />)}<div className="bg-chart-1 absolute top-[14%] end-[14%] w-[14%] aspect-square rounded-full" /></>)}

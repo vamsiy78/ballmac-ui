@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, Copy, Globe, Lock, PanelLeft, Plus, RotateCw
 
 import { cn } from "@/lib/utils"
 import { useMessages } from "@/lib/ballmac/i18n"
+import { Media } from "@/components/ballmac/media"
 
 type BrowserFrameTab = {
   /** Tab title. */
@@ -168,7 +169,7 @@ function BrowserFrame({
       >
         {src ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img data-slot="browser-frame-image" className="absolute inset-0 size-full object-cover object-top" src={src} alt={alt} />
+          <Media data-slot="browser-frame-image" media={{ src, alt: alt ?? "", position: "top" }} fill className="absolute inset-0" />
         ) : scaled ? (
           <div
             data-slot="browser-frame-viewport"

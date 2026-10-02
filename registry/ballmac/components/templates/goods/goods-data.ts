@@ -1,3 +1,4 @@
+import type { MediaSource } from "@/components/ballmac/media"
 // Ballmac UI: Goods template data. https://ui.ballmac.com/templates/template-goods
 export type Shape = "mug" | "bowl" | "vase" | "plate" | "pitcher" | "cup"
 export type Category = "Mugs" | "Bowls" | "Vases" | "Plates"
@@ -24,6 +25,8 @@ export type Product = {
   reviews: number
   tag?: "New" | "Low stock" | "Bestseller"
   inStock: boolean
+  /** Your own photos instead of the drawn piece, keyed by glaze number (the index into `glazes`). A glaze without a photo keeps the drawing. Each photo is an image URL, an object with alt text and a dark-mode file, or your own element. */
+  images?: Partial<Record<number, MediaSource>>
 }
 
 export const products: Product[] = [

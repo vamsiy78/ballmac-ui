@@ -8,6 +8,7 @@ import { AudioPlayer } from "@/components/ballmac/audio-player"
 import { type Episode } from "@/components/ballmac/templates/podcast/podcast-data"
 import { podcastDisplay, podcastSans } from "@/components/ballmac/templates/podcast/podcast-fonts"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type PodcastPage = "home" | "episodes" | "episode" | "hosts" | "subscribe"
 type PodcastHrefs = Record<PodcastPage, string>
@@ -24,8 +25,9 @@ body:has(.podcast-theme){font-family:var(--podcast-sans),ui-sans-serif,system-ui
 const display = "[font-family:var(--podcast-display),ui-serif,Georgia,serif] font-normal tracking-[-0.01em]"
 
 /** Cover art: a table seen from above, in the show's colours. */
-function ShowArt({ variant, className }: { variant: number; className?: string }) {
+function ShowArt({ variant, className, image, imageAlt }: { variant: number; className?: string; image?: MediaSource; imageAlt?: string }) {
   const v = ((variant % 6) + 6) % 6
+  if (image) return <Media media={image} alt={imageAlt} fill className={cn("aspect-square w-full", className)} />
   const bg = ["bg-chart-2", "bg-chart-1", "bg-chart-4", "bg-chart-3", "bg-chart-5", "bg-primary"][v]
   return (
     <div aria-hidden="true" className={cn("@container relative isolate aspect-square w-full overflow-hidden", bg, className)}>

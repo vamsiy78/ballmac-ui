@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["team", "people", "about", "company", "portraits"],
   files: [{ path: "components/blocks/team-1/team-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "button"],
+  registryDependencies: ["shadcn:utils", "button", "media"],
   examples: [
     { name: "team-1-demo", title: "Default", file: "team-1-demo.tsx" },
     { name: "team-1-small", title: "Four people", file: "team-1-small.tsx" },

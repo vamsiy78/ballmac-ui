@@ -7,6 +7,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react"
 import { CopyButton } from "@/components/ballmac/copy-button"
 import { portfolioMono, portfolioSans } from "@/components/ballmac/templates/portfolio/portfolio-fonts"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type PortfolioPage = "home" | "work" | "case" | "writing" | "uses"
 type PortfolioHrefs = Record<PortfolioPage, string>
@@ -21,8 +22,9 @@ body:has(.portfolio-theme){font-family:var(--portfolio-sans),ui-sans-serif,syste
 `
 
 /** A painted cover: abstract shapes in the chart colours standing in for a screenshot. */
-function Cover({ variant, className }: { variant: number; className?: string }) {
+function Cover({ variant, className, image, imageAlt }: { variant: number; className?: string; image?: MediaSource; imageAlt?: string }) {
   const v = ((variant % 6) + 6) % 6
+  if (image) return <Media media={image} alt={imageAlt} fill className={cn("aspect-[4/3] w-full", className)} />
   return (
     <div aria-hidden="true" className={cn("relative isolate aspect-[4/3] w-full overflow-hidden", className)}>
       {v === 0 && (<><div className="bg-chart-5 absolute inset-0" /><div className="bg-card absolute inset-x-[12%] top-[14%] bottom-0 rounded-t-2xl shadow-xl"><div className="bg-chart-1 m-[7%] h-[14%] w-[40%] rounded-md" /><div className="bg-muted mx-[7%] h-[8%] w-[70%] rounded" /><div className="bg-muted mx-[7%] mt-[3%] h-[8%] w-[54%] rounded" /><div className="mx-[7%] mt-[7%] grid grid-cols-3 gap-[3%]">{[0, 1, 2].map((i) => <div key={i} className="bg-secondary aspect-square rounded-lg" />)}</div></div></>)}

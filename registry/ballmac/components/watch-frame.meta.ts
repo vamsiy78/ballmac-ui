@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["mockup", "device", "watch", "apple-watch", "wearable", "hero"],
   files: [{ path: "components/watch-frame.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "media"],
   examples: [
     { name: "watch-frame-demo", title: "Analog face", file: "watch-frame-demo.tsx" },
     { name: "watch-frame-workout", title: "Workout, loop band", file: "watch-frame-workout.tsx" },

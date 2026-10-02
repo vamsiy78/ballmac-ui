@@ -31,7 +31,7 @@ function PublicationAuthor({ hrefs, authorId = "ines", ...props }: PublicationAu
           <h2 id="pub-by" className="text-sm font-bold tracking-[0.14em] uppercase">Stories by {au.name.split(" ")[0]}</h2>
           <ul className="divide-y">
             {mine.map((s) => (
-              <li key={s.id}><a href={a} className="group focus-visible:ring-ring/50 grid gap-5 rounded py-7 outline-none focus-visible:ring-[3px] sm:grid-cols-[1fr_12rem]"><div><p className="text-chart-1 text-xs font-bold tracking-[0.14em] uppercase">{s.section} · {formatShort(s.date)}</p><h3 className={cn("mt-2 text-3xl leading-tight text-balance group-hover:underline underline-offset-4", pubSerifClass)}>{s.title}</h3><p className={cn("text-muted-foreground mt-2 text-pretty", pubTextClass)}>{s.dek}</p></div><MagArt variant={s.art} className="order-first sm:order-none" /></a></li>
+              <li key={s.id}><a href={a} className="group focus-visible:ring-ring/50 grid gap-5 rounded py-7 outline-none focus-visible:ring-[3px] sm:grid-cols-[1fr_12rem]"><div><p className="text-chart-1 text-xs font-bold tracking-[0.14em] uppercase">{s.section} · {formatShort(s.date)}</p><h3 className={cn("mt-2 text-3xl leading-tight text-balance group-hover:underline underline-offset-4", pubSerifClass)}>{s.title}</h3><p className={cn("text-muted-foreground mt-2 text-pretty", pubTextClass)}>{s.dek}</p></div><MagArt variant={s.art} image={s.image} imageAlt={s.imageAlt} className="order-first sm:order-none" /></a></li>
             ))}
           </ul>
         </section>

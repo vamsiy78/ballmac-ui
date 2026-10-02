@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["bento", "grid", "features", "landing", "cards", "layout"],
   files: [{ path: "components/bento-grid.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "media"],
   examples: [
     { name: "bento-grid-demo", title: "Live feature grid", file: "bento-grid-demo.tsx" },
     { name: "bento-grid-features", title: "Two columns", file: "bento-grid-features.tsx" },

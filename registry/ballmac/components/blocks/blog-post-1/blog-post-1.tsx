@@ -11,6 +11,7 @@ import { ScrollProgress } from "@/components/ballmac/scroll-progress"
 import { TableOfContents, type TocItem } from "@/components/ballmac/table-of-contents"
 import { cn } from "@/lib/utils"
 import { useLocale } from "@/lib/ballmac/i18n"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type BlogPostRelated = { title: string; category: string; href: string; readMinutes: number }
 
@@ -33,8 +34,10 @@ type BlogPost1Props = Omit<React.ComponentProps<"article">, "title"> & {
   authorBio?: string
   /** Absolute link copied by the share button. */
   url?: string
-  /** Cover photo. A generated cover is drawn when omitted. */
-  image?: string
+  /** Cover photo: an image URL (give it imageAlt), an object with alt text and a dark-mode file, or your own element. A generated cover is drawn when omitted. */
+  image?: MediaSource
+  /** Describes `image` when it is a plain URL. */
+  imageAlt?: string
   /** Which generated cover to draw (0 to 4). */
   cover?: number
   /** Links for "On this page". The ids must match headings in `children`. */
@@ -134,6 +137,7 @@ function BlogPost1({
   authorBio = "Priya leads Acme. Before that she ran finance operations at two growth-stage companies and has closed more books than she cares to count.",
   url = "https://acme.com/blog/month-end-close",
   image,
+  imageAlt,
   cover = 0,
   toc = defaultToc,
   stickyOffset = 24,
@@ -182,8 +186,7 @@ function BlogPost1({
 
         <div className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-3xl border">
           {image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={image} alt="" className="aspect-[21/9] w-full object-cover" />
+            <Media media={image} alt={imageAlt} aspect="21/9" priority className="w-full" />
           ) : (
             <BlogCover variant={cover} className="aspect-[16/9] w-full sm:aspect-[21/9]" />
           )}

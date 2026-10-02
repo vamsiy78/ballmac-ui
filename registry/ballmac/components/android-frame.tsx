@@ -5,6 +5,7 @@ import * as React from "react"
 import { useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { Media } from "@/components/ballmac/media"
 
 type AndroidFrameProps = Omit<React.ComponentProps<"div">, "children"> & {
   /** Screen content, laid out below the status bar. Ignored when `src` or `videoSrc` is set. */
@@ -129,7 +130,7 @@ function AndroidFrame({
                 />
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img data-slot="android-frame-image" className="absolute inset-0 size-full object-cover" src={src} alt={alt} />
+                <Media data-slot="android-frame-image" media={src} alt={alt} fill className="absolute inset-0" />
               )
             ) : null}
             {statusBar && (

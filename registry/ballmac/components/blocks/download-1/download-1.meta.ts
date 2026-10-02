@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["download", "mac", "app", "release notes", "homebrew", "checksum", "install"],
   files: [{ path: "components/blocks/download-1/download-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "button", "copy-button", "mac-icons", "segmented-control", "i18n"],
+  registryDependencies: ["shadcn:utils", "button", "copy-button", "mac-icons", "segmented-control", "i18n", "media"],
   examples: [
     { name: "download-1-demo", title: "Default", file: "download-1-demo.tsx" },
     { name: "download-1-simple", title: "One build, no notes", file: "download-1-simple.tsx" },

@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["mockup", "device", "phone", "iphone", "mobile", "screenshot", "hero"],
   files: [{ path: "components/phone-frame.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "media"],
   examples: [
     { name: "phone-frame-demo", title: "Wallet app", file: "phone-frame-demo.tsx" },
     { name: "phone-frame-chat", title: "Black, dark screen", file: "phone-frame-chat.tsx" },

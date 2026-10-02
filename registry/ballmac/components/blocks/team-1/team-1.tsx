@@ -4,6 +4,7 @@ import { ArrowRight, Link2, MapPin } from "lucide-react"
 
 import { buttonVariants } from "@/components/ballmac/button"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Team1Link = {
   /** Accessible name, e.g. "Priya on LinkedIn". */
@@ -21,8 +22,10 @@ type Team1Member = {
   bio?: string
   /** City or country. */
   location?: string
-  /** Photo URL. Initials on a coloured tile are shown when omitted. */
-  image?: string
+  /** Photo: an image URL, an object with alt text and a dark-mode file, or your own element. Initials on a coloured tile are shown when omitted. */
+  image?: MediaSource
+  /** Describes `image` when it is a plain URL. The name is printed beside the photo, so the default is decorative (empty). */
+  imageAlt?: string
   /** Social and contact links. */
   links?: Team1Link[]
 }
@@ -90,8 +93,7 @@ function Team1({
           <li key={m.name} data-slot="team-1-member" className="group/member">
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border">
               {m.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={m.image} alt="" className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover/member:scale-105 motion-reduce:transition-none motion-reduce:group-hover/member:scale-100" />
+                <Media media={m.image} alt={m.imageAlt ?? ""} fill className="absolute inset-0 transition-transform duration-500 group-hover/member:scale-105 motion-reduce:transition-none motion-reduce:group-hover/member:scale-100" />
               ) : (
                 <div aria-hidden="true" className={cn("absolute inset-0 flex items-center justify-center bg-gradient-to-br", tiles[i % tiles.length])}>
                   <span className="text-foreground/80 text-6xl font-semibold tracking-tight select-none">{initials(m.name)}</span>

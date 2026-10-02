@@ -31,7 +31,7 @@ Owner to provide later: a Lemon Squeezy or Polar product, its IDs and checkout l
 - Every hard-coded user-facing string becomes a prop with an English default (`labels` objects).
 - RTL toggle on previews; axe and overflow sweeps also run with `dir="rtl"`.
 
-## Phase 4: Image slots
+## Phase 4: Image slots (done 2026-10-02)
 
 - Heroes, features, cards, galleries and templates accept `image`/`media` props (URL or element) with fixed aspect ratios, required alt text and the current generated art as the fallback.
 

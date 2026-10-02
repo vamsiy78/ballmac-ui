@@ -35,7 +35,7 @@ export default defineItem({
     { path: "app/goods/checkout/page.tsx" },
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "sheet", "slider", "progress", "accordion"],
+  registryDependencies: ["shadcn:utils", "sheet", "slider", "progress", "accordion", "media"],
   examples: [
     { name: "template-goods-demo", title: "Home", file: "template-goods-demo.tsx" },
     { name: "template-goods-shop", title: "Shop", file: "template-goods-shop.tsx" },

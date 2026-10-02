@@ -10,12 +10,15 @@ import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel, useFieldCo
 import { Input } from "@/components/ballmac/input"
 import { PasswordInput } from "@/components/ballmac/password-input"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Signup1Values = { name: string; email: string; password: string }
 
 type Signup1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
   /** Brand name beside the logo mark. */
   brand?: string
+  /** Your logo mark instead of the brand's first letter: an image URL, an object with alt text and a dark-mode file, or your own element. A plain URL is described by the brand name. */
+  logo?: MediaSource
   /** Heading on the form. */
   title?: string
   /** One sentence under the heading. */
@@ -49,6 +52,7 @@ const emailPattern = /^\S+@\S+\.\S+$/
 
 function Signup1({
   brand = "Acme",
+  logo,
   title = "Create your account",
   description = "Free for your first three teammates. No card needed.",
   buttonLabel = "Create account",
@@ -92,7 +96,7 @@ function Signup1({
     <section data-slot="signup-1" className={cn("mx-auto grid max-w-6xl items-center gap-12 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-[1fr_28rem] lg:gap-20", className)} {...props}>
       <div className="hidden lg:block">
         <a href="#" className="focus-visible:ring-ring/50 inline-flex items-center gap-2.5 rounded-md text-lg font-semibold tracking-tight outline-none focus-visible:ring-[3px]">
-          <span aria-hidden="true" className="bg-foreground text-background flex size-7 items-center justify-center rounded-lg text-sm font-bold">{brand[0]}</span>
+          {logo ? <Media media={logo} alt={brand} aspect="square" fit="contain" priority className="size-7 shrink-0 rounded-lg" /> : <span aria-hidden="true" className="bg-foreground text-background flex size-7 items-center justify-center rounded-lg text-sm font-bold">{brand[0]}</span>}
           {brand}
         </a>
         <h2 className="mt-10 max-w-md text-4xl font-semibold tracking-[-0.04em] text-balance xl:text-5xl xl:leading-[1.05]">{pitch}</h2>

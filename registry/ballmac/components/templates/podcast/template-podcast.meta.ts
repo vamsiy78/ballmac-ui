@@ -34,7 +34,7 @@ export default defineItem({
     { path: "app/podcast/subscribe/page.tsx" },
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "audio-player", "copy-button"],
+  registryDependencies: ["shadcn:utils", "audio-player", "copy-button", "media"],
   examples: [
     { name: "template-podcast-demo", title: "Home", file: "template-podcast-demo.tsx" },
     { name: "template-podcast-episodes", title: "Episodes", file: "template-podcast-episodes.tsx" },

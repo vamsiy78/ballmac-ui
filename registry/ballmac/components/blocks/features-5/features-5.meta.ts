@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["features", "tour", "sticky", "scroll", "steps", "how it works"],
   files: [{ path: "components/blocks/features-5/features-5.tsx" }],
   dependencies: ["lucide-react", "motion@^12"],
-  registryDependencies: ["shadcn:utils", "avatar", "badge"],
+  registryDependencies: ["shadcn:utils", "avatar", "badge", "media"],
   examples: [
     { name: "features-5-demo", title: "Default", file: "features-5-demo.tsx" },
     { name: "features-5-custom", title: "Custom steps", file: "features-5-custom.tsx" },

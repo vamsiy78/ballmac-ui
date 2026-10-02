@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["hero", "landing", "saas", "split"],
   files: [{ path: "components/blocks/hero-1/hero-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "animated-grid", "badge", "button", "number-ticker", "text-reveal"],
+  registryDependencies: ["shadcn:utils", "animated-grid", "badge", "button", "number-ticker", "text-reveal", "media"],
   examples: [{ name: "hero-1-demo", title: "Default", file: "hero-1-demo.tsx" }],
   ai: {
     summary: "The top section of a SaaS or product landing page. Edit the props for copy and swap HeroVisual for your own product screenshot or component.",

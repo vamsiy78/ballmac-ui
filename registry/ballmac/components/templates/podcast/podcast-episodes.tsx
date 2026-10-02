@@ -45,7 +45,7 @@ function PodcastEpisodes({ hrefs, ...props }: PodcastEpisodesProps) {
           <ul className="mt-8 divide-y border-y">
             {list.map((e) => (
               <li key={e.slug} className="grid grid-cols-[4rem_1fr_auto] items-center gap-4 py-6 sm:grid-cols-[6rem_1fr_auto] sm:gap-6">
-                <ShowArt variant={e.art} className="rounded-2xl" />
+                <ShowArt variant={e.art} image={e.image} imageAlt={e.imageAlt} className="rounded-2xl" />
                 <a href={ep} className="group focus-visible:ring-ring/50 min-w-0 rounded outline-none focus-visible:ring-[3px]">
                   <p className="text-chart-2 text-xs font-extrabold tracking-[0.12em] uppercase">Season {e.season} · Ep. {e.n}</p>
                   <h2 className={cn("mt-1 text-2xl leading-tight text-balance group-hover:underline underline-offset-4 sm:text-3xl", podcastDisplayClass)}>{e.title}</h2>

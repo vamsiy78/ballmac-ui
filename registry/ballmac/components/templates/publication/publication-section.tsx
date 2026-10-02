@@ -43,7 +43,7 @@ function PublicationSection({ hrefs, initial = "Essays", ...props }: Publication
                   <p className={cn("text-muted-foreground mt-3 text-pretty", pubTextClass)}>{s.dek}</p>
                   <p className="text-muted-foreground mt-4 text-sm">By <span className="text-foreground font-semibold">{getAuthor(s.author).name}</span> · {formatShort(s.date)} · {s.read} min</p>
                 </div>
-                <MagArt variant={s.art} className="order-first sm:order-none" />
+                <MagArt variant={s.art} image={s.image} imageAlt={s.imageAlt} className="order-first sm:order-none" />
               </a>
             </li>
           ))}

@@ -11,7 +11,7 @@
     "verify": "pnpm build:registry && pnpm check",
     "smoke": "tsx scripts/smoke-install.ts",
     "a11y": "tsx scripts/a11y.ts",
-    "check": "tsx scripts/check-deps.ts && tsx scripts/check-licenses.ts && tsx scripts/rtl.ts && tsx scripts/i18n.ts && tsx scripts/validate-output.ts apps/www/public/r && shadcn registry validate registry.json",
+    "check": "tsx scripts/check-deps.ts && tsx scripts/check-licenses.ts && tsx scripts/rtl.ts && tsx scripts/i18n.ts && tsx scripts/media.ts && tsx scripts/validate-output.ts apps/www/public/r && shadcn registry validate registry.json",
     "test": "pnpm --filter @ballmac-ui/registry test && pnpm --filter @ballmac-ui/theme-engine test && pnpm --filter @ballmac-ui/www test",
     "rtl:sweep": "tsx scripts/rtl-sweep.ts"
   },

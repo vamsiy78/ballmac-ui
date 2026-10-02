@@ -10,6 +10,7 @@ import { ReasoningDisclosure } from "@/components/ballmac/reasoning-disclosure"
 import { StreamingText } from "@/components/ballmac/streaming-text"
 import { ToolCallCard } from "@/components/ballmac/tool-call-card"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Hero3Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
   /** Label above the headline. */
@@ -22,6 +23,10 @@ type Hero3Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & 
   placeholder?: string
   /** Called when a visitor submits the prompt, e.g. to route them to sign-up with their question. */
   onSubmit?: (value: string) => void
+  /** Your product image instead of the sample conversation. An image URL (give it mediaAlt), an object with alt text and a dark-mode file, or your own element. */
+  media?: MediaSource
+  /** Describes `media` when it is a plain URL. */
+  mediaAlt?: string
 }
 
 const ANSWER = "Revenue grew 18% quarter over quarter, driven by annual plans. Churn fell to 2.1%, the lowest this year."
@@ -32,6 +37,8 @@ function Hero3({
   description = "Type a question in plain English. The assistant finds the right tables, runs the queries and explains the answer with sources.",
   placeholder = "How did revenue change last quarter?",
   onSubmit,
+  media,
+  mediaAlt,
   className,
   ...props
 }: Hero3Props) {
@@ -53,6 +60,7 @@ function Hero3({
             </PromptInputToolbar>
           </PromptInput>
         </div>
+        <Media media={media} alt={mediaAlt} frame priority fallback={
         <div className="space-y-3 rounded-2xl border bg-card p-5 shadow-[0_30px_80px_-40px_rgb(0_0_0/0.35)] sm:p-6">
           <p className="ms-auto w-fit max-w-[85%] rounded-xl rounded-ee-sm bg-muted px-3.5 py-2 text-sm">{placeholder}</p>
           <ReasoningDisclosure duration={4} defaultOpen={false}>
@@ -63,6 +71,7 @@ function Hero3({
             <StreamingText text={ANSWER} animate speed={50} />
           </div>
         </div>
+        } />
       </div>
     </section>
   )

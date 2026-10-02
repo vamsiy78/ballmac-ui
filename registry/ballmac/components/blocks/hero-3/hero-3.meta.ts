@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["hero", "ai", "assistant", "prompt", "agent"],
   files: [{ path: "components/blocks/hero-3/hero-3.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "badge", "prompt-input", "reasoning-disclosure", "streaming-text", "tool-call-card"],
+  registryDependencies: ["shadcn:utils", "badge", "prompt-input", "reasoning-disclosure", "streaming-text", "tool-call-card", "media"],
   examples: [{ name: "hero-3-demo", title: "Default", file: "hero-3-demo.tsx" }],
   ai: {
     summary: "Top section for an AI assistant or agent product. The prompt is real: handle onSubmit (e.g. send visitors to sign-up with their question).",

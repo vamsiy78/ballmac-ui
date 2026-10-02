@@ -7,10 +7,13 @@ import { ArrowRight, Check, Clock, Users } from "lucide-react"
 import { Badge } from "@/components/ballmac/badge"
 import { Button, buttonVariants } from "@/components/ballmac/button"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Invite1Status = "pending" | "expired"
 
 type Invite1Props = Omit<React.ComponentProps<"section">, "onSubmit"> & {
+  /** The workspace's logo instead of its first letter: an image URL, an object with alt text and a dark-mode file, or your own element. A plain URL is described by the workspace name. */
+  logo?: MediaSource
   /** Whether the invitation can still be accepted. */
   status?: Invite1Status
   /** The workspace being joined. */
@@ -50,6 +53,7 @@ function Invite1({
   onSwitchAccount = () => {},
   continueHref = "#",
   className,
+  logo,
   ...props
 }: Invite1Props) {
   const [view, setView] = React.useState<"idle" | "accepted" | "declined" | "requested">("idle")
@@ -119,7 +123,7 @@ function Invite1({
         ) : (
           <div className="relative">
             <div className="flex items-center justify-center">
-              <span aria-hidden="true" className={cn("text-background flex size-16 items-center justify-center rounded-2xl text-2xl font-bold shadow-lg", tone)}>{initial}</span>
+              {logo ? <Media media={logo} alt={workspace.name} aspect="square" fit="contain" priority className="size-16 rounded-2xl shadow-lg" /> : <span aria-hidden="true" className={cn("text-background flex size-16 items-center justify-center rounded-2xl text-2xl font-bold shadow-lg", tone)}>{initial}</span>}
             </div>
             <p className="text-muted-foreground mt-6 text-sm"><span className="text-foreground font-medium">{inviter.name}</span>{inviter.role ? ` (${inviter.role})` : ""} invited you to join</p>
             <h1 ref={headingRef} tabIndex={-1} className={cn(heading, "mt-1")}>{workspace.name}</h1>

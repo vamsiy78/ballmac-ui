@@ -90,7 +90,7 @@ function GoodsCheckout({ hrefs, demo = false, ...props }: GoodsCheckoutProps) {
               </form>
               <aside aria-labelledby="gk-sum" className="bg-card rounded-3xl border p-6 lg:sticky lg:top-24">
                 <h2 id="gk-sum" className={cn("text-2xl", goodsSerifClass)}>In your bag</h2>
-                <ul className="mt-5 grid gap-4">{lines.map((l) => <li key={l.id + l.glaze} className="grid grid-cols-[4rem_minmax(0,1fr)_auto] items-center gap-3"><Piece shape={l.product.shape} glaze={l.glaze} className="rounded-lg" /><span className="min-w-0"><span className="block font-semibold">{l.product.name}</span><span className="text-muted-foreground text-sm">{glazes[l.glaze]!.name} × {l.qty}</span></span><span className="font-semibold tabular-nums">{money(l.product.price * l.qty)}</span></li>)}</ul>
+                <ul className="mt-5 grid gap-4">{lines.map((l) => <li key={l.id + l.glaze} className="grid grid-cols-[4rem_minmax(0,1fr)_auto] items-center gap-3"><Piece shape={l.product.shape} glaze={l.glaze} image={l.product.images?.[l.glaze]} imageAlt={l.product.name} className="rounded-lg" /><span className="min-w-0"><span className="block font-semibold">{l.product.name}</span><span className="text-muted-foreground text-sm">{glazes[l.glaze]!.name} × {l.qty}</span></span><span className="font-semibold tabular-nums">{money(l.product.price * l.qty)}</span></li>)}</ul>
                 <dl className="mt-5 grid gap-2 border-t pt-4 text-sm">
                   <div className="flex justify-between"><dt>Subtotal</dt><dd className="tabular-nums">{money(subtotal)}</dd></div>
                   {promoOn && <div className="flex justify-between"><dt>Promo {PROMO.code}</dt><dd className="tabular-nums">−{money(subtotal * PROMO.rate)}</dd></div>}

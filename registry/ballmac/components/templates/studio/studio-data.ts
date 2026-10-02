@@ -1,6 +1,8 @@
+import type { MediaSource } from "@/components/ballmac/media"
+
 // Ballmac UI: Studio sample content. https://ui.ballmac.com/templates/template-studio
 
-export type StudioProject = { slug: string; name: string; client: string; year: string; discipline: "Brand" | "Digital" | "Campaign"; line: string; art: number }
+export type StudioProject = { slug: string; name: string; client: string; year: string; discipline: "Brand" | "Digital" | "Campaign"; line: string; art: number; image?: MediaSource; imageAlt?: string }
 
 export const projects: StudioProject[] = [
   { slug: "north-coast", name: "North Coast Rail", client: "North Coast", year: "2026", discipline: "Brand", line: "A railway identity that moves.", art: 0 },

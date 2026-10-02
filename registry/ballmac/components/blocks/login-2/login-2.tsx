@@ -10,12 +10,15 @@ import { Field, FieldError, FieldGroup, FieldLabel, useFieldControl } from "@/co
 import { Input } from "@/components/ballmac/input"
 import { PasswordInput } from "@/components/ballmac/password-input"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Login2Values = { email: string; password: string; remember: boolean }
 
 type Login2Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
   /** Brand name beside the logo mark. */
   brand?: string
+  /** Your logo mark instead of the brand's first letter: an image URL, an object with alt text and a dark-mode file, or your own element. A plain URL is described by the brand name. */
+  logo?: MediaSource
   /** Heading. */
   title?: string
   /** One sentence under the heading. */
@@ -36,8 +39,12 @@ type Login2Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> &
   quote?: string
   /** Who said it. */
   author?: { name: string; role: string }
-  /** Replaces the picture side. Hidden below the lg breakpoint. */
+  /** Replaces the picture side with your own element. Hidden below the lg breakpoint. */
   visual?: React.ReactNode
+  /** A photo or illustration for the picture side: an image URL (give it imageAlt), an object with alt text and a dark-mode file, or your own element. */
+  image?: MediaSource
+  /** Describes `image` when it is a plain URL. */
+  imageAlt?: string
 }
 
 function FieldInput(props: React.ComponentProps<typeof Input>) {
@@ -51,6 +58,7 @@ const emailPattern = /^\S+@\S+\.\S+$/
 
 function Login2({
   brand = "Acme",
+  logo,
   title = "Welcome back",
   description = "Sign in to pick up where you left off.",
   onSubmit,
@@ -62,6 +70,8 @@ function Login2({
   quote = "We moved our entire finance team over in an afternoon. The calm, fast interface is the reason people actually use it.",
   author = { name: "Priya Raman", role: "VP Finance, Northwind" },
   visual,
+  image,
+  imageAlt,
   className,
   ...props
 }: Login2Props) {
@@ -92,7 +102,7 @@ function Login2({
       <div className="flex items-center justify-center px-4 py-14 sm:px-8">
         <div className="w-full max-w-sm">
           <a href="#" className="focus-visible:ring-ring/50 inline-flex items-center gap-2.5 rounded-md text-lg font-semibold tracking-tight outline-none focus-visible:ring-[3px]">
-            <span aria-hidden="true" className="bg-foreground text-background flex size-7 items-center justify-center rounded-lg text-sm font-bold">{brand[0]}</span>
+            {logo ? <Media media={logo} alt={brand} aspect="square" fit="contain" priority className="size-7 shrink-0 rounded-lg" /> : <span aria-hidden="true" className="bg-foreground text-background flex size-7 items-center justify-center rounded-lg text-sm font-bold">{brand[0]}</span>}
             {brand}
           </a>
           <h1 className="mt-10 text-3xl font-semibold tracking-[-0.035em]">{title}</h1>
@@ -143,8 +153,8 @@ function Login2({
         </div>
       </div>
 
-      <div className="bg-muted/40 relative hidden overflow-hidden border-s lg:block" aria-hidden={visual ? undefined : true}>
-        {visual ?? (
+      <div className="bg-muted/40 relative hidden overflow-hidden border-s lg:block" aria-hidden={visual || image ? undefined : true}>
+        {image ? <Media media={image} alt={imageAlt} fill priority className="absolute inset-0" /> : visual ?? (
           <>
             <div className="absolute inset-0">
               <div className="bg-chart-1/25 absolute -top-24 -end-16 size-[30rem] rounded-full blur-[100px]" />

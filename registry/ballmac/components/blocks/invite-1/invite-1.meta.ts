@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["invite", "invitation", "team", "workspace", "accept", "join"],
   files: [{ path: "components/blocks/invite-1/invite-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "badge", "button"],
+  registryDependencies: ["shadcn:utils", "badge", "button", "media"],
   examples: [
     { name: "invite-1-demo", title: "Pending", file: "invite-1-demo.tsx" },
     { name: "invite-1-expired", title: "Expired", file: "invite-1-expired.tsx" },

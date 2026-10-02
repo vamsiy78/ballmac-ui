@@ -3,6 +3,7 @@ import * as React from "react"
 import { ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Media, isMediaImage, type MediaSource } from "@/components/ballmac/media"
 
 type BentoGridProps = React.ComponentProps<"div"> & {
   /** Columns once the grid is wider than 36rem; narrower grids stack in one column. */
@@ -36,7 +37,7 @@ type BentoCardProps = Omit<React.ComponentProps<"div">, "title"> & {
   /** Rows the card spans in the wide layout. */
   rowSpan?: 1 | 2
   /** Decorative visual that fills the card behind the text; it fades out toward the text. */
-  background?: React.ReactNode
+  background?: MediaSource
   /** Small icon shown above the title. */
   icon?: React.ReactNode
   /** Card title. */
@@ -83,7 +84,7 @@ function BentoCard({
           data-slot="bento-card-background"
           className="pointer-events-none absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_35%,transparent_72%)] transition-transform duration-500 ease-(--bm-ease-out) group-hover/bento:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover/bento:scale-100"
         >
-          {background}
+          {isMediaImage(background) ? <Media media={background} alt="" fill className="absolute inset-0" /> : background}
         </div>
       )}
       {children}

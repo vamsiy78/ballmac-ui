@@ -7,6 +7,7 @@ import { ArrowRight, Check, Mail } from "lucide-react"
 import { Button } from "@/components/ballmac/button"
 import { Input } from "@/components/ballmac/input"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Newsletter1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
   /** Label above the heading. */
@@ -27,6 +28,10 @@ type Newsletter1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmi
   note?: string
   /** Headings shown in the sample issue. */
   issue?: { name: string; number: string; headlines: string[] }
+  /** A picture of an issue instead of the sample one. An image URL (give it mediaAlt), an object with alt text and a dark-mode file, or your own element. */
+  media?: MediaSource
+  /** Describes `media` when it is a plain URL. */
+  mediaAlt?: string
   /** Called with the email and the chosen topics. Throw to show an error; resolve to show the thank-you message. */
   onSubmit?: (email: string, topics: string[]) => void | Promise<void>
 }
@@ -48,6 +53,8 @@ function Newsletter1({
     headlines: ["Why we rebuilt approvals", "Five invoices that got paid in a day", "Reading list: calm software"],
   },
   onSubmit,
+  media,
+  mediaAlt,
   className,
   ...props
 }: Newsletter1Props) {
@@ -157,6 +164,7 @@ function Newsletter1({
           </div>
 
           {/* A sample issue, so people know what they are signing up for. */}
+          <Media media={media} alt={mediaAlt} frame className="mx-auto hidden w-full max-w-sm sm:block" fallback={
           <div aria-hidden="true" className="relative mx-auto hidden w-full max-w-sm sm:block">
             <div className="bg-background/60 absolute inset-0 translate-x-4 translate-y-4 rotate-3 rounded-2xl border" />
             <div className="bg-background relative -rotate-2 rounded-2xl border p-6 shadow-[0_30px_70px_-35px_rgb(0_0_0/0.4)] transition-transform duration-500 hover:rotate-0 motion-reduce:transition-none">
@@ -178,6 +186,7 @@ function Newsletter1({
               </ul>
             </div>
           </div>
+          } />
         </div>
       </div>
     </section>

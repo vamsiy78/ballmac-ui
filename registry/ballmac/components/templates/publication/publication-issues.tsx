@@ -32,7 +32,7 @@ function PublicationIssues({ hrefs, ...props }: PublicationIssuesProps) {
               <li key={i.n}>
                 <a href="#" className="group focus-visible:ring-ring/50 block rounded outline-none focus-visible:ring-[3px]">
                   <div className="relative shadow-[6px_6px_0_0_var(--border)] transition-transform duration-300 group-hover:-translate-y-1 motion-reduce:transition-none">
-                    <MagArt variant={i.art} className="aspect-[3/4]" />
+                    <MagArt variant={i.art} image={i.image} imageAlt={i.imageAlt} className="aspect-[3/4]" />
                     <div className="bg-card/95 absolute inset-x-0 bottom-0 border-t p-3"><p className={cn("text-xl leading-none", pubSerifClass)}>{i.theme}</p><p className="text-muted-foreground mt-1 text-[11px] tracking-wide uppercase">No. {i.n}</p></div>
                   </div>
                   <p className="text-muted-foreground mt-3 text-sm">{i.season}</p>

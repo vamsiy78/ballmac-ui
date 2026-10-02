@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["hero", "globe", "infrastructure", "landing", "3d"],
   files: [{ path: "components/blocks/hero-4/hero-4.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "button", "globe"],
+  registryDependencies: ["shadcn:utils", "button", "globe", "media"],
   examples: [{ name: "hero-4-demo", title: "Default", file: "hero-4-demo.tsx" }],
   ai: {
     summary: "Top-of-page hero for global or infrastructure products. Edit announcement, title, description, actions, stats and globe markers ([lat, long]).",

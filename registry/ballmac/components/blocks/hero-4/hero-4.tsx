@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react"
 import { buttonVariants } from "@/components/ballmac/button"
 import { Globe, type GlobeMarker } from "@/components/ballmac/globe"
 import { cn } from "@/lib/utils"
+import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Action = { label: string; href: string }
 
@@ -23,6 +24,10 @@ type Hero4Props = Omit<React.ComponentProps<"section">, "title"> & {
   stats?: { value: string; label: string }[]
   /** Points on the globe, such as your regions or offices. */
   markers?: GlobeMarker[]
+  /** Your own image instead of the globe. An image URL (give it mediaAlt), an object with alt text and a dark-mode file, or your own element. */
+  media?: MediaSource
+  /** Describes `media` when it is a plain URL. */
+  mediaAlt?: string
 }
 
 const defaultMarkers: GlobeMarker[] = [
@@ -49,6 +54,8 @@ function Hero4({
     { value: "99.99%", label: "uptime" },
   ],
   markers = defaultMarkers,
+  media,
+  mediaAlt,
   className,
   ...props
 }: Hero4Props) {
@@ -84,10 +91,12 @@ function Hero4({
             </dl>
           )}
         </div>
+        <Media media={media} alt={mediaAlt} aspect="square" priority fallback={
         <div className="relative -mx-4 aspect-square sm:mx-auto sm:w-full sm:max-w-[560px] lg:-me-24 lg:max-w-none">
           <div aria-hidden="true" className="absolute inset-[12%] -z-10 rounded-full bg-chart-1/20 blur-3xl" />
           <Globe markers={markers} label={`Globe with ${markers.length} highlighted regions`} className="size-full" />
         </div>
+        } />
       </div>
     </section>
   )
