@@ -27,6 +27,7 @@ export function FramePreview({
   example,
   v0 = true,
   pages,
+  pro = false,
 }: {
   src: string
   title: string
@@ -40,6 +41,8 @@ export function FramePreview({
   v0?: boolean
   /** Extra pages of a multi-page template. When given, a page switcher replaces `src`. */
   pages?: { title: string; src: string }[]
+  /** Pro item: the install command uses the licensed @ballmac-pro namespace. */
+  pro?: boolean
 }) {
   const [tab, setTab] = React.useState<"preview" | "code">("preview")
   const [viewport, setViewport] = React.useState<(typeof viewports)[number]["id"]>("desktop")
@@ -61,7 +64,7 @@ export function FramePreview({
     } catch {}
   }, [])
   const width = viewports.find((v) => v.id === viewport)!.width
-  const command = name ? `npx shadcn@latest add @ballmac/${name}` : ""
+  const command = name ? `npx shadcn@latest add @ballmac${pro ? "-pro" : ""}/${name}` : ""
   return (
     <div className="space-y-3">
       {pages && pages.length > 1 && (

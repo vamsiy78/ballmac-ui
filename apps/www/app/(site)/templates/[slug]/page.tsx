@@ -46,6 +46,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
           name={item.name}
           example={example.name}
           v0={!isPro(item)}
+          pro={isPro(item)}
           title={`${item.title} preview`}
           height={900}
           code={

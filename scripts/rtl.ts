@@ -13,7 +13,7 @@ import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs"
 import { join, relative } from "node:path"
 
 const ROOT = join(import.meta.dirname, "..")
-const DIRS = ["registry/ballmac", "registry/examples"]
+const DIRS = ["registry/ballmac", "registry/examples", "registry/pro/ballmac", "registry/pro/examples"]
 
 const exceptions: { file: string; reason: string; allow?: string[] }[] = JSON.parse(readFileSync(join(import.meta.dirname, "rtl-exceptions.json"), "utf8"))
 

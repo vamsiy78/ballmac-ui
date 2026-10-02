@@ -45,6 +45,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
           name={item.name}
           example={example.name}
           v0={!isPro(item)}
+          pro={isPro(item)}
           title={`${item.title} preview`}
           code={
             <div className="space-y-4 p-4">

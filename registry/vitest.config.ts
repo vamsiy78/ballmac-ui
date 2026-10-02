@@ -9,6 +9,8 @@ export default defineConfig({
   resolve: {
     // The same import paths users get after `shadcn add`.
     alias: [
+      // Pro blocks live in the private checkout at registry/pro (absent in public clones).
+      { find: /^@\/components\/ballmac\/blocks\/([a-z]+-pro-\d+)\/(.*)$/, replacement: r("./pro/ballmac/components/blocks/$1/$2") },
       { find: /^@\/components\/ballmac\/(.*)$/, replacement: r("./ballmac/components/$1") },
       { find: /^@\/hooks\/ballmac\/(.*)$/, replacement: r("./ballmac/hooks/$1") },
       { find: /^@\/lib\/ballmac\/(.*)$/, replacement: r("./ballmac/lib/$1") },
@@ -19,7 +21,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./tests/setup.ts"],
-    include: ["tests/**/*.test.tsx"],
+    include: ["tests/**/*.test.tsx", "pro/tests/**/*.test.tsx"],
     css: false,
   },
 })

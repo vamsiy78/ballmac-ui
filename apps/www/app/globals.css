@@ -4,6 +4,7 @@
 
 /* Registry source lives outside the app; scan it for class names. */
 @source "../../../registry";
+@source "../../../registry/pro"; /* git-ignored private checkout: scan it explicitly */
 
 /* `dark:` follows an ancestor .dark. The theme builder's light previews carry data-theme-scope="light" so they stay light on a dark site. */
 @custom-variant dark (&:is(.dark *):where(:not([data-theme-scope="light"] *)));

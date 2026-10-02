@@ -10,7 +10,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs"
 import { join, relative } from "node:path"
 
 const ROOT = join(import.meta.dirname, "..")
-const SCOPES = ["registry/ballmac/components/blocks", "registry/ballmac/components/templates", "registry/ballmac/app"]
+const SCOPES = ["registry/ballmac/components/blocks", "registry/ballmac/components/templates", "registry/ballmac/app", "registry/pro/ballmac"]
 
 function walk(dir: string): string[] {
   try {

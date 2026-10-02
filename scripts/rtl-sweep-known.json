@@ -98,5 +98,21 @@
   {
     "prefix": "newsletter-1",
     "reason": "Text reflows differently in the other direction; checked by eye."
+  },
+  {
+    "prefix": "hero-pro-3-",
+    "reason": "Keyboard shortcuts (⌘ N) keep their left-to-right order inside the mirrored row, and the background grid flickers at random."
+  },
+  {
+    "prefix": "hero-pro-11-",
+    "reason": "The orbit is drawn left-to-right on purpose (it is a circle) and the icons are mid-rotation when captured."
+  },
+  {
+    "prefix": "hero-pro-13-",
+    "reason": "The code editor and response are left-to-right inside by design."
+  },
+  {
+    "prefix": "hero-pro-14-",
+    "reason": "The countdown ticks between the two captures."
   }
 ]
