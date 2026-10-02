@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["onboarding", "checklist", "progress", "activation"],
   files: [{ path: "components/onboarding-checklist.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n"],
   examples: [
     { name: "onboarding-checklist-demo", title: "Setup steps", file: "onboarding-checklist-demo.tsx" },
     { name: "onboarding-checklist-states", title: "Complete and dismissible", file: "onboarding-checklist-states.tsx" },

@@ -4,6 +4,7 @@
 import * as React from "react"
 import { FileCode2, FileText, Folder, FolderOpen } from "lucide-react"
 import { TreeView, type TreeNode } from "@/components/ballmac/tree-view"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type FileNode = TreeNode & {
   /** Folder or file type. Folders can contain children. */
@@ -22,7 +23,9 @@ type FileTreeProps = Omit<
   /** Accessible name for the file tree. */
   label?: string
 }
-function FileTree({ files, label = "Files", ...props }: FileTreeProps) {
+function FileTree({ files, label, ...props }: FileTreeProps) {
+  const msg = useMessages()
+  label ??= msg("file-tree.label", "Files")
   return (
     <TreeView
       data-slot="file-tree"

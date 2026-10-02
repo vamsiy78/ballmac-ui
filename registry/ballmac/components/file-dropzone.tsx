@@ -4,6 +4,7 @@
 import * as React from "react"
 import { FileUp, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type FileDropzoneProps = Omit<React.ComponentProps<"div">, "onChange"> & {
   /** Accepted MIME types or extensions, in native input accept syntax. */
@@ -40,6 +41,7 @@ function FileDropzone({
   onDrop,
   ...props
 }: FileDropzoneProps) {
+  const msg = useMessages()
   const [internalFiles, setInternalFiles] = React.useState<File[]>(defaultFiles)
   const [dragging, setDragging] = React.useState(false)
   const [error, setError] = React.useState("")
@@ -118,10 +120,10 @@ function FileDropzone({
           aria-hidden="true"
           className="mb-3 size-6 text-muted-foreground"
         />
-        <p className="text-sm font-medium">Drop files here or browse</p>
+        <p className="text-sm font-medium">{msg("file-dropzone.dropFilesHereOrBrowse", "Drop files here or browse")}</p>
         <p id={id} className="mt-1 text-xs text-muted-foreground">
           {multiple ? `Up to ${maxFiles} files` : "One file"} ·{" "}
-          {Math.round(maxSize / 1024 / 1024)} MB each
+          {msg("file-dropzone.maxSize", "{size} MB each", { size: Math.round(maxSize / 1024 / 1024) })}
         </p>
         <button
           type="button"
@@ -129,12 +131,12 @@ function FileDropzone({
           onClick={() => inputRef.current?.click()}
           className="mt-4 inline-flex h-9 items-center rounded-md border border-border bg-background px-3 text-sm font-medium shadow-xs outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
         >
-          Choose {multiple ? "files" : "file"}
+          {msg("file-dropzone.choose", "Choose")} {multiple ? "files" : "file"}
         </button>
         <input
           ref={inputRef}
           type="file"
-          aria-label="Files to upload"
+          aria-label={msg("file-dropzone.filesToUpload", "Files to upload")}
           accept={accept}
           multiple={multiple}
           disabled={disabled}
@@ -168,11 +170,11 @@ function FileDropzone({
             >
               <span className="min-w-0 flex-1 truncate">{file.name}</span>
               <span className="text-xs text-muted-foreground tabular-nums">
-                {Math.max(1, Math.round(file.size / 1024))} KB
+                {msg("file-dropzone.sizeKb", "{size} KB", { size: Math.max(1, Math.round(file.size / 1024)) })}
               </span>
               <button
                 type="button"
-                aria-label={`Remove ${file.name}`}
+                aria-label={msg("file-dropzone.remove", "Remove {name}", { name: file.name })}
                 disabled={disabled}
                 onClick={() =>
                   commit(selected.filter((_, position) => position !== index))

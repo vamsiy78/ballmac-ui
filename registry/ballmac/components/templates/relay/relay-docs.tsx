@@ -30,7 +30,7 @@ function RelayDocs({ hrefs, ...props }: RelayDocsProps) {
     <RelayShell page="docs" hrefs={hrefs} {...props}>
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[14rem_minmax(0,1fr)] xl:grid-cols-[14rem_minmax(0,1fr)_13rem]">
         <aside className="hidden lg:block">
-          <nav aria-label="Documentation" className="sticky top-14 max-h-[calc(100dvh-3.5rem)] space-y-6 overflow-y-auto py-10 pr-2">
+          <nav aria-label="Documentation" className="sticky top-14 max-h-[calc(100dvh-3.5rem)] space-y-6 overflow-y-auto py-10 pe-2">
             {nav.map((g) => (
               <div key={g.title}>
                 <h2 className="text-xs font-semibold tracking-wider uppercase" style={mono}>{g.title}</h2>
@@ -54,7 +54,7 @@ function RelayDocs({ hrefs, ...props }: RelayDocsProps) {
 
         <main className="min-w-0 py-10 lg:py-12">
           <nav aria-label="Breadcrumb" className="text-muted-foreground flex items-center gap-1 text-sm">
-            Get started <ChevronRight className="size-3.5" aria-hidden="true" /> <span className="text-foreground">Quickstart</span>
+            Get started <ChevronRight className="size-3.5 rtl:rotate-180" aria-hidden="true" /> <span className="text-foreground">Quickstart</span>
           </nav>
           <h1 className="mt-5 text-4xl font-semibold tracking-[-0.045em] text-balance sm:text-5xl">Quickstart</h1>
           <p className="text-muted-foreground mt-4 max-w-2xl text-lg text-pretty">Send your first event and watch it arrive. This takes about two minutes.</p>

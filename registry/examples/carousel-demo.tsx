@@ -21,7 +21,7 @@ export default function CarouselDemo() {
         {slides.map(({ icon: Icon, title, text, tone, glow }, i) => (
           <CarouselItem key={title}>
             <div className={`relative flex h-56 flex-col justify-end gap-3 overflow-hidden rounded-2xl border bg-gradient-to-br ${glow} via-card to-card p-6 shadow-sm`}>
-              <span aria-hidden="true" className="absolute top-4 right-5 font-mono text-5xl font-semibold text-foreground/[0.06] tabular-nums">
+              <span aria-hidden="true" className="absolute top-4 end-5 font-mono text-5xl font-semibold text-foreground/[0.06] tabular-nums">
                 0{i + 1}
               </span>
               <span className={`flex size-11 items-center justify-center rounded-xl ${tone}`}>
@@ -35,8 +35,8 @@ export default function CarouselDemo() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="-left-3 sm:-left-5" />
-      <CarouselNext className="-right-3 sm:-right-5" />
+      <CarouselPrevious className="-start-3 sm:-start-5" />
+      <CarouselNext className="-end-3 sm:-end-5" />
       <div className="mt-3 flex items-center justify-center gap-2">
         <CarouselDots />
         <CarouselPlayPause />

@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "chat", "attachment", "file", "upload", "image"],
   files: [{ path: "components/chat-attachment.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "chat-attachment-demo", title: "Chips with upload states", file: "chat-attachment-demo.tsx" },
     { name: "chat-attachment-tiles", title: "Image tiles", file: "chat-attachment-tiles.tsx" },

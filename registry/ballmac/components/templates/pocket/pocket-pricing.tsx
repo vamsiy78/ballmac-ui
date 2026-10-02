@@ -31,7 +31,7 @@ function PocketPricing({ hrefs, ...props }: PocketPricingProps) {
             const price = yearly ? p.annual : p.monthly
             return (
               <li key={p.id} className={cn("relative flex flex-col rounded-[2rem] border p-8", p.featured ? "bg-primary text-primary-foreground border-transparent lg:-my-4 lg:py-12" : "bg-card")}>
-                {p.featured && <span className="bg-chart-1 absolute -top-3 left-8 rounded-full px-3 py-1 text-xs font-extrabold text-[var(--pocket-on-lime)]">Most popular</span>}
+                {p.featured && <span className="bg-chart-1 absolute -top-3 start-8 rounded-full px-3 py-1 text-xs font-extrabold text-[var(--pocket-on-lime)]">Most popular</span>}
                 <h2 className={cn("text-2xl", pocketDisplayClass)}>{p.name}</h2>
                 <p className="mt-1 text-sm font-medium">{p.blurb}</p>
                 <p className="mt-6 flex items-baseline gap-1"><span className={cn("text-6xl leading-none tabular-nums", pocketDisplayClass)}>${price}</span><span className="text-sm font-bold">{price === 0 ? "forever" : "a month"}</span></p>
@@ -46,7 +46,7 @@ function PocketPricing({ hrefs, ...props }: PocketPricingProps) {
         <section aria-labelledby="pp-compare" className="mt-24">
           <h2 id="pp-compare" className={cn("text-[clamp(2rem,5vw,3.5rem)] leading-none", pocketDisplayClass)}>Compare plans</h2>
           <div role="region" aria-label="Plan comparison" tabIndex={0} className="focus-visible:ring-ring/50 mt-8 overflow-x-auto rounded-3xl border outline-none focus-visible:ring-[3px]">
-            <table className="w-full min-w-[34rem] text-left text-sm">
+            <table className="w-full min-w-[34rem] text-start text-sm">
               <thead className="bg-secondary"><tr><th scope="col" className="p-4 font-extrabold">Feature</th>{plans.map((p) => <th key={p.id} scope="col" className="p-4 text-center font-extrabold">{p.name}</th>)}</tr></thead>
               <tbody className="divide-y">{compare.map((r) => <tr key={r[0]}><th scope="row" className="p-4 font-bold">{r[0]}</th>{[r[1], r[2], r[3]].map((v, i) => <td key={i} className="p-4 text-center font-semibold">{cell(v)}</td>)}</tr>)}</tbody>
             </table>

@@ -66,7 +66,7 @@ function WorkspaceShell({ page, hrefs: overrides, fill, className, style, childr
       {...props}
     >
       <style>{workspaceCss}</style>
-      <nav aria-label="Apps" className="bg-surface order-last flex shrink-0 items-center justify-around border-t px-2 py-1.5 md:order-none md:w-[4.5rem] md:flex-col md:justify-start md:gap-1 md:border-t-0 md:border-r md:py-3">
+      <nav aria-label="Apps" className="bg-surface order-last flex shrink-0 items-center justify-around border-t px-2 py-1.5 md:order-none md:w-[4.5rem] md:flex-col md:justify-start md:gap-1 md:border-t-0 md:border-e md:py-3">
         <a href={hrefs.today} aria-label="Parcel home" className="focus-visible:ring-ring/50 mb-3 hidden rounded-xl outline-none focus-visible:ring-[3px] md:block"><ParcelMark /></a>
         {apps.map((a) => (
           <a key={a.key} href={hrefs[a.key]} aria-current={page === a.key ? "page" : undefined} className="text-muted-foreground hover:text-foreground hover:bg-accent aria-[current=page]:bg-card aria-[current=page]:text-foreground aria-[current=page]:shadow-sm focus-visible:ring-ring/50 flex min-w-14 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-[11px] font-medium outline-none transition-colors focus-visible:ring-[3px] md:w-14">
@@ -80,7 +80,7 @@ function WorkspaceShell({ page, hrefs: overrides, fill, className, style, childr
           <h1 className="text-[15px] font-semibold tracking-tight">{current.label}</h1>
           <button type="button" onClick={() => setPalette(true)} className="text-muted-foreground bg-card hover:bg-accent focus-visible:ring-ring/50 mx-auto flex h-9 w-full max-w-md items-center gap-2.5 rounded-xl border px-3 text-sm outline-none transition-colors focus-visible:ring-[3px]">
             <Search className="size-4" aria-hidden="true" />
-            <span className="flex-1 text-left">Search or jump to…</span>
+            <span className="flex-1 text-start">Search or jump to…</span>
             <kbd className="bg-muted hidden items-center gap-0.5 rounded px-1.5 py-0.5 text-[11px] sm:flex"><CommandIcon className="size-3" aria-hidden="true" />K</kbd>
           </button>
           <a href={hrefs.mail} className="bg-primary text-primary-foreground focus-visible:ring-ring/50 inline-flex h-9 shrink-0 items-center gap-1.5 rounded-xl px-3 text-sm font-semibold outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]"><Plus className="size-4" aria-hidden="true" /><span className="hidden sm:inline">Compose</span><span className="sr-only sm:hidden">Compose</span></a>

@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } fr
 import { prefersReducedMotion, useScrolled } from "@/lib/ballmac/scroll";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type BackToTopProps = Omit<React.ComponentProps<"button">, "onClick"> & {
   /** Scroll distance in pixels after which the button appears. */
@@ -36,11 +37,13 @@ function BackToTop({
   container,
   showProgress = true,
   focusTarget,
-  label = "Back to top",
+  label,
   showLabel = false,
   className,
   ...props
 }: BackToTopProps) {
+  const msg = useMessages()
+  label ??= msg("back-to-top.label", "Back to top")
   const reduce = useReducedMotion();
   const visible = useScrolled(threshold, container);
   const { scrollYProgress } = useScroll(container ? { container } : undefined);
@@ -66,8 +69,8 @@ function BackToTop({
             target.focus({ preventScroll: true });
           }}
           className={cn(
-            "fixed right-5 bottom-5 z-40 inline-flex h-11 items-center justify-center gap-2 rounded-full border bg-background/90 text-foreground shadow-[0_8px_24px_-8px_rgb(0_0_0/0.3)] outline-none backdrop-blur transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50",
-            showLabel ? "pr-4 pl-3" : "w-11",
+            "fixed end-5 bottom-5 z-40 inline-flex h-11 items-center justify-center gap-2 rounded-full border bg-background/90 text-foreground shadow-[0_8px_24px_-8px_rgb(0_0_0/0.3)] outline-none backdrop-blur transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50",
+            showLabel ? "pe-4 ps-3" : "w-11",
             className,
           )}
           {...(props as object)}

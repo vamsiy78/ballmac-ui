@@ -6,6 +6,7 @@ import * as React from "react";
 import { GripVertical } from "lucide-react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type ResizablePanelGroupProps = React.ComponentProps<typeof PanelGroup>;
 /** Container for panels and handles. `direction` is `"horizontal"` (side by side) or `"vertical"` (stacked). Pass `autoSaveId` to remember sizes. */
@@ -32,7 +33,9 @@ type ResizableHandleProps = React.ComponentProps<typeof PanelResizeHandle> & {
   label?: string;
 };
 /** The draggable divider. Focus it and use the arrow keys, Home and End to resize; Enter collapses a collapsible neighbor. */
-function ResizableHandle({ withHandle = false, label = "Resize panels", className, ...props }: ResizableHandleProps) {
+function ResizableHandle({ withHandle = false, label, className, ...props }: ResizableHandleProps) {
+  const msg = useMessages()
+  label ??= msg("resizable.label", "Resize panels")
   return (
     <PanelResizeHandle
       data-slot="resizable-handle"

@@ -42,7 +42,7 @@ function PodcastSubscribe({ hrefs, ...props }: PodcastSubscribeProps) {
               return (
                 <label key={t.id} className={cn("has-[:focus-visible]:ring-ring/50 relative flex cursor-pointer flex-col rounded-3xl border-2 p-6 transition-colors has-[:focus-visible]:ring-[3px]", on ? "border-primary bg-card" : "hover:bg-accent/50 border-transparent bg-secondary")}>
                   <input type="radio" name="tier" value={t.id} checked={on} onChange={() => setTier(t.id)} className="sr-only" />
-                  {"featured" in t && t.featured && <span className="bg-chart-1 absolute -top-3 left-6 rounded-full px-3 py-0.5 text-xs font-extrabold text-[var(--podcast-on-amber)]">Most chosen</span>}
+                  {"featured" in t && t.featured && <span className="bg-chart-1 absolute -top-3 start-6 rounded-full px-3 py-0.5 text-xs font-extrabold text-[var(--podcast-on-amber)]">Most chosen</span>}
                   <span className={cn("text-2xl", podcastDisplayClass)}>{t.name}</span>
                   <span className="mt-3 flex items-baseline gap-1"><span className="text-5xl font-extrabold tabular-nums">${t.price}</span><span className="text-muted-foreground text-sm">a month</span></span>
                   <ul className="mt-5 space-y-2.5">{t.perks.map((p) => <li key={p} className="flex items-start gap-2.5 text-sm text-pretty"><Check className="text-chart-3 mt-0.5 size-4 shrink-0" aria-hidden="true" />{p}</li>)}</ul>

@@ -72,7 +72,7 @@ export default function AnimatedTabsDemo() {
               <div key={v} className="flex items-center gap-3 rounded-md border bg-background px-3 py-2">
                 <span className="font-medium">{v}</span>
                 <span className="text-muted-foreground">{env}</span>
-                <span className="ml-auto">{state}</span>
+                <span className="ms-auto">{state}</span>
               </div>
             ))}
           </div>

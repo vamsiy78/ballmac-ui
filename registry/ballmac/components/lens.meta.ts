@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["zoom", "magnifier", "image", "hover", "lens"],
   files: [{ path: "components/lens.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "lens-demo", title: "Product image", file: "lens-demo.tsx" },
     { name: "lens-text", title: "Magnifying text", file: "lens-text.tsx" },

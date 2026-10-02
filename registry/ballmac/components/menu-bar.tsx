@@ -104,7 +104,7 @@ function MenuBarItem({ inset, variant = "default", className, ...props }: MenuBa
     <MenubarPrimitive.Item
       data-slot="menu-bar-item"
       data-variant={variant}
-      className={cn(itemClasses, inset && "pl-6", variant === "destructive" && "text-destructive", "group/menu-item", className)}
+      className={cn(itemClasses, inset && "ps-6", variant === "destructive" && "text-destructive", "group/menu-item", className)}
       {...props}
     />
   )
@@ -112,8 +112,8 @@ function MenuBarItem({ inset, variant = "default", className, ...props }: MenuBa
 
 function MenuBarCheckboxItem({ className, children, ...props }: React.ComponentProps<typeof MenubarPrimitive.CheckboxItem>) {
   return (
-    <MenubarPrimitive.CheckboxItem data-slot="menu-bar-checkbox-item" className={cn(itemClasses, "group/menu-item pl-6", className)} {...props}>
-      <span className="absolute left-1.5 flex size-3.5 items-center justify-center">
+    <MenubarPrimitive.CheckboxItem data-slot="menu-bar-checkbox-item" className={cn(itemClasses, "group/menu-item ps-6", className)} {...props}>
+      <span className="absolute start-1.5 flex size-3.5 items-center justify-center">
         <MenubarPrimitive.ItemIndicator>
           <CheckIcon className="size-3" strokeWidth={2.5} aria-hidden="true" />
         </MenubarPrimitive.ItemIndicator>
@@ -144,7 +144,7 @@ function MenuBarShortcut({ className, ...props }: MenuBarShortcutProps) {
   return (
     <span
       data-slot="menu-bar-shortcut"
-      className={cn("ml-auto pl-6 font-sans text-[12px] tracking-[0.12em] text-muted-foreground group-data-[highlighted]/menu-item:text-white/90", className)}
+      className={cn("ms-auto ps-6 font-sans text-[12px] tracking-[0.12em] text-muted-foreground group-data-[highlighted]/menu-item:text-white/90", className)}
       {...props}
     />
   )
@@ -158,7 +158,7 @@ function MenuBarSubTrigger({ className, children, ...props }: React.ComponentPro
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ml-auto size-3.5 opacity-60" aria-hidden="true" />
+      <ChevronRightIcon className="ms-auto size-3.5 opacity-60" aria-hidden="true" />
     </MenubarPrimitive.SubTrigger>
   )
 }
@@ -184,7 +184,7 @@ type MenuBarStatusProps = React.ComponentProps<"div">
 
 /** The right side of the bar: status icons and the clock. */
 function MenuBarStatus({ className, ...props }: MenuBarStatusProps) {
-  return <div data-slot="menu-bar-status" className={cn("ml-auto flex shrink-0 items-center gap-0.5", className)} {...props} />
+  return <div data-slot="menu-bar-status" className={cn("ms-auto flex shrink-0 items-center gap-0.5", className)} {...props} />
 }
 
 type MenuBarStatusItemProps = React.ComponentProps<"button">

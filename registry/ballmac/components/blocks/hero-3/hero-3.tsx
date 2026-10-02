@@ -49,12 +49,12 @@ function Hero3({
             <PromptInputTextarea placeholder={placeholder} aria-label="Ask a question" />
             <PromptInputToolbar>
               <span className="px-2 text-xs text-muted-foreground">Press Enter to ask</span>
-              <PromptInputSubmit className="ml-auto" />
+              <PromptInputSubmit className="ms-auto" />
             </PromptInputToolbar>
           </PromptInput>
         </div>
         <div className="space-y-3 rounded-2xl border bg-card p-5 shadow-[0_30px_80px_-40px_rgb(0_0_0/0.35)] sm:p-6">
-          <p className="ml-auto w-fit max-w-[85%] rounded-xl rounded-br-sm bg-muted px-3.5 py-2 text-sm">{placeholder}</p>
+          <p className="ms-auto w-fit max-w-[85%] rounded-xl rounded-ee-sm bg-muted px-3.5 py-2 text-sm">{placeholder}</p>
           <ReasoningDisclosure duration={4} defaultOpen={false}>
             Revenue lives in the invoices table; churn in subscriptions. Compare Q3 against Q2 and group by plan.
           </ReasoningDisclosure>

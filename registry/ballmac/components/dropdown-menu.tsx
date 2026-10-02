@@ -5,6 +5,7 @@
 import * as React from "react";
 import { Check, ChevronRight, Circle } from "lucide-react";
 import { DropdownMenu as Primitive } from "radix-ui";
+import { useDirection } from "@/lib/ballmac/direction";
 import { cn } from "@/lib/utils";
 
 const itemBase =
@@ -15,7 +16,8 @@ const surface =
 
 type DropdownMenuProps = React.ComponentProps<typeof Primitive.Root>;
 function DropdownMenu(props: DropdownMenuProps) {
-  return <Primitive.Root data-slot="dropdown-menu" {...props} />;
+  const dir = useDirection(props.dir);
+  return <Primitive.Root data-slot="dropdown-menu" dir={dir} {...props} />;
 }
 
 type DropdownMenuTriggerProps = React.ComponentProps<typeof Primitive.Trigger>;
@@ -85,7 +87,7 @@ function DropdownMenuItem({
       data-variant={destructive ? "destructive" : "default"}
       className={cn(
         itemBase,
-        "data-[inset]:pl-8",
+        "data-[inset]:ps-8",
         "data-[variant=destructive]:text-destructive data-[variant=destructive]:data-[highlighted]:bg-destructive/10 data-[variant=destructive]:data-[highlighted]:text-destructive data-[variant=destructive]:[&_svg]:!text-destructive",
         className,
       )}
@@ -105,10 +107,10 @@ function DropdownMenuCheckboxItem({
   return (
     <Primitive.CheckboxItem
       data-slot="dropdown-menu-checkbox-item"
-      className={cn(itemBase, "pl-8", className)}
+      className={cn(itemBase, "ps-8", className)}
       {...props}
     >
-      <span className="pointer-events-none absolute left-2 flex size-4 items-center justify-center">
+      <span className="pointer-events-none absolute start-2 flex size-4 items-center justify-center">
         <Primitive.ItemIndicator>
           <Check aria-hidden="true" className="size-4 !text-foreground" />
         </Primitive.ItemIndicator>
@@ -129,10 +131,10 @@ function DropdownMenuRadioItem({
   return (
     <Primitive.RadioItem
       data-slot="dropdown-menu-radio-item"
-      className={cn(itemBase, "pl-8", className)}
+      className={cn(itemBase, "ps-8", className)}
       {...props}
     >
-      <span className="pointer-events-none absolute left-2 flex size-4 items-center justify-center">
+      <span className="pointer-events-none absolute start-2 flex size-4 items-center justify-center">
         <Primitive.ItemIndicator>
           <Circle
             aria-hidden="true"
@@ -159,7 +161,7 @@ function DropdownMenuLabel({
       data-slot="dropdown-menu-label"
       data-inset={inset ? "" : undefined}
       className={cn(
-        "px-2 py-1.5 text-xs font-medium text-muted-foreground data-[inset]:pl-8",
+        "px-2 py-1.5 text-xs font-medium text-muted-foreground data-[inset]:ps-8",
         className,
       )}
       {...props}
@@ -194,7 +196,7 @@ function DropdownMenuShortcut({
       data-slot="dropdown-menu-shortcut"
       aria-hidden="true"
       className={cn(
-        "ml-auto pl-4 font-mono text-xs tracking-wide text-muted-foreground",
+        "ms-auto ps-4 font-mono text-xs tracking-wide text-muted-foreground",
         className,
       )}
       {...props}
@@ -220,13 +222,13 @@ function DropdownMenuSubTrigger({
       data-inset={inset ? "" : undefined}
       className={cn(
         itemBase,
-        "data-[inset]:pl-8 data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
+        "data-[inset]:ps-8 data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
         className,
       )}
       {...props}
     >
       {children}
-      <ChevronRight aria-hidden="true" className="ml-auto size-4" />
+      <ChevronRight aria-hidden="true" className="ms-auto size-4 rtl:rotate-180" />
     </Primitive.SubTrigger>
   );
 }

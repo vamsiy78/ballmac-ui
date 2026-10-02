@@ -18,7 +18,7 @@ export default function CookieConsentDemo() {
           <div className="h-20 rounded-lg bg-muted" />
         </div>
       </div>
-      <CookieConsent open categories={categories} policyHref="#cookies" className="absolute bottom-4 left-4" />
+      <CookieConsent open categories={categories} policyHref="#cookies" className="absolute bottom-4 start-4" />
     </div>
   );
 }

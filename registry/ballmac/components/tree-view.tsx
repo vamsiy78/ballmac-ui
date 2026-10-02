@@ -4,6 +4,7 @@
 import * as React from "react"
 import { ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useDirection } from "@/lib/ballmac/direction"
 
 type TreeNode = {
   /** Stable node identifier. */
@@ -56,6 +57,7 @@ function TreeView({
   renderIcon,
   ...props
 }: TreeViewProps) {
+  const dir = useDirection()
   const [internalSelected, setInternalSelected] = React.useState(
     defaultSelectedId ?? nodes[0]?.id,
   )
@@ -120,10 +122,10 @@ function TreeView({
     else if (event.key === "End")
       next = [...visible].reverse().find((entry) => !entry.node.disabled)
         ?.node.id
-    else if (event.key === "ArrowRight" && children) {
+    else if (event.key === (dir === "rtl" ? "ArrowLeft" : "ArrowRight") && children) {
       if (!expandedSet.has(current.node.id)) toggle(current.node.id, true)
       else next = current.node.children?.find((child) => !child.disabled)?.id
-    } else if (event.key === "ArrowLeft") {
+    } else if (event.key === (dir === "rtl" ? "ArrowRight" : "ArrowLeft")) {
       if (children && expandedSet.has(current.node.id))
         toggle(current.node.id, false)
       else next = current.parent
@@ -181,7 +183,7 @@ function TreeView({
               if (!node.disabled) onKeyDown(event, entry, index)
             }}
             className={cn(
-              "flex min-h-9 cursor-default items-center gap-1 rounded-md pr-2 text-sm outline-none transition-colors duration-150 hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none",
+              "flex min-h-9 cursor-default items-center gap-1 rounded-md pe-2 text-sm outline-none transition-colors duration-150 hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none",
               selection === node.id && "bg-accent text-accent-foreground",
               node.disabled && "pointer-events-none opacity-50",
             )}
@@ -195,7 +197,7 @@ function TreeView({
                 <ChevronRight
                   className={cn(
                     "size-3.5 transition-transform duration-150 motion-reduce:transition-none",
-                    isExpanded && "rotate-90",
+                    isExpanded ? "rotate-90" : "rtl:rotate-180",
                   )}
                 />
               )}

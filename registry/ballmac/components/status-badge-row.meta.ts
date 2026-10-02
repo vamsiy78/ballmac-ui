@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["status", "uptime", "incident", "monitoring", "health"],
   files: [{ path: "components/status-badge-row.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n", "direction"],
   examples: [
     { name: "status-badge-row-demo", title: "Services with 90-day history", file: "status-badge-row-demo.tsx" },
     { name: "status-badge-row-incident", title: "During an incident", file: "status-badge-row-incident.tsx" },

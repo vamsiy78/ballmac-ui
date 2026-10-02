@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["marquee", "scroll", "velocity", "text", "ticker"],
   files: [{ path: "components/scroll-velocity.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n"],
   examples: [
     { name: "scroll-velocity-demo", title: "Two rows in a scroller", file: "scroll-velocity-demo.tsx" },
     { name: "scroll-velocity-logos", title: "Logo row", file: "scroll-velocity-logos.tsx" },

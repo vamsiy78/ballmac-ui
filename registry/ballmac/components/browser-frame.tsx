@@ -5,6 +5,7 @@ import * as React from "react"
 import { ChevronLeft, ChevronRight, Copy, Globe, Lock, PanelLeft, Plus, RotateCw, Share, X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type BrowserFrameTab = {
   /** Tab title. */
@@ -81,6 +82,7 @@ function BrowserFrame({
   children,
   ...props
 }: BrowserFrameProps) {
+  const msg = useMessages()
   const scaled = !src && !!screenWidth
   const screenRef = useScreenScale(scaled ? screenWidth : undefined)
   const ratio = aspectRatio ?? (scaled || src ? 16 / 10 : undefined)
@@ -104,17 +106,17 @@ function BrowserFrame({
       >
         <TrafficLights />
         <div aria-hidden="true" className="hidden items-center gap-3 @lg:flex">
-          <PanelLeft className={toolbarIcon} />
-          <ChevronLeft className={toolbarIcon} />
-          <ChevronRight className={cn(toolbarIcon, "opacity-40")} />
+          <PanelLeft className={cn(toolbarIcon, "rtl:-scale-x-100")} />
+          <ChevronLeft className={cn(toolbarIcon, "rtl:rotate-180")} />
+          <ChevronRight className={cn(toolbarIcon, "opacity-40 rtl:rotate-180")} />
         </div>
         <div
           data-slot="browser-frame-address"
           className="mx-auto flex h-7 w-full max-w-sm min-w-0 items-center justify-center gap-1.5 rounded-md bg-background/80 px-2.5 text-xs text-foreground shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_8%,transparent)]"
         >
-          {secure && <Lock aria-label="Secure connection" className="size-3 shrink-0 text-muted-foreground" />}
+          {secure && <Lock aria-label={msg("browser-frame.secureConnection", "Secure connection")} className="size-3 shrink-0 text-muted-foreground" />}
           <span className="truncate">{url}</span>
-          <RotateCw aria-hidden="true" className="ml-auto hidden size-3 shrink-0 text-muted-foreground @sm:block" />
+          <RotateCw aria-hidden="true" className="ms-auto hidden size-3 shrink-0 text-muted-foreground @sm:block" />
         </div>
         <div aria-hidden="true" className="hidden items-center gap-3 @lg:flex">
           <Share className={toolbarIcon} />
@@ -146,7 +148,7 @@ function BrowserFrame({
                   !active && i > 1 && "hidden @md:flex"
                 )}
               >
-                {active && <X aria-hidden="true" className="absolute left-2 size-3 text-muted-foreground" />}
+                {active && <X aria-hidden="true" className="absolute start-2 size-3 text-muted-foreground" />}
                 <span aria-hidden="true" className="flex size-3.5 shrink-0 items-center justify-center [&_svg]:size-3.5">
                   {tab.icon ?? <Globe />}
                 </span>
@@ -170,7 +172,7 @@ function BrowserFrame({
         ) : scaled ? (
           <div
             data-slot="browser-frame-viewport"
-            className="absolute top-0 left-0 origin-top-left"
+            className="absolute top-0 left-0 origin-top-left" // rtl-fixed: scaled from its top-left corner
             style={{
               width: screenWidth,
               height: "calc(100% / var(--screen-scale, 1))",

@@ -70,12 +70,12 @@ function SidebarNav({ page, hrefs, onNavigate }: { page: AtlasPage; hrefs: Atlas
           >
             <n.icon className="size-4" aria-hidden="true" />
             {n.label}
-            {n.badge && <span className="bg-chart-1 text-primary-foreground ml-auto rounded-full px-1.5 text-[11px] font-semibold tabular-nums">{n.badge}</span>}
+            {n.badge && <span className="bg-chart-1 text-primary-foreground ms-auto rounded-full px-1.5 text-[11px] font-semibold tabular-nums">{n.badge}</span>}
           </a>
         ))}
       </nav>
       <div className="border-t p-2.5">
-        <button type="button" className="hover:bg-accent focus-visible:ring-ring/50 flex w-full items-center gap-2.5 rounded-lg p-2 text-left outline-none focus-visible:ring-[3px]">
+        <button type="button" className="hover:bg-accent focus-visible:ring-ring/50 flex w-full items-center gap-2.5 rounded-lg p-2 text-start outline-none focus-visible:ring-[3px]">
           <span className="bg-chart-4/25 flex size-8 items-center justify-center rounded-full text-xs font-bold" aria-hidden="true">MK</span>
           <span className="min-w-0 flex-1 leading-tight">
             <span className="block truncate text-sm font-semibold">Mina Kovac</span>
@@ -118,11 +118,11 @@ function AtlasShell({ page, title, hrefs: overrides, actions, className, style, 
       {...props}
     >
       <style>{atlasCss + atlasBodyCss}</style>
-      <aside className="bg-surface sticky top-0 hidden h-dvh border-r lg:block">
+      <aside className="bg-surface sticky top-0 hidden h-dvh border-e lg:block">
         <SidebarNav page={page} hrefs={hrefs} />
       </aside>
       <Sheet open={drawer} onOpenChange={setDrawer}>
-        <SheetContent side="left" className="w-72 p-0" closeLabel="Close navigation">
+        <SheetContent side="start" className="w-72 p-0" closeLabel="Close navigation">
           <SheetTitle className="sr-only">Navigation</SheetTitle>
           <SheetDescription className="sr-only">Pages in the Fieldnote Goods store</SheetDescription>
           <SidebarNav page={page} hrefs={hrefs} onNavigate={() => setDrawer(false)} />
@@ -131,25 +131,25 @@ function AtlasShell({ page, title, hrefs: overrides, actions, className, style, 
 
       <div className="min-w-0">
         <header className="bg-background/85 sticky top-0 z-30 flex h-14 items-center gap-3 border-b px-4 backdrop-blur-lg sm:px-6">
-          <button type="button" aria-label="Open navigation" onClick={() => setDrawer(true)} className="hover:bg-accent focus-visible:ring-ring/50 -ml-1 inline-flex size-9 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px] lg:hidden">
+          <button type="button" aria-label="Open navigation" onClick={() => setDrawer(true)} className="hover:bg-accent focus-visible:ring-ring/50 -ms-1 inline-flex size-9 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px] lg:hidden">
             <Menu className="size-5" aria-hidden="true" />
           </button>
           <h1 className="min-w-0 truncate text-[15px] font-bold tracking-tight">{title}</h1>
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ms-auto flex items-center gap-2">
             <button
               type="button"
               onClick={() => setPalette(true)}
               className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 bg-card flex h-9 items-center gap-2 rounded-lg border px-2.5 text-sm outline-none transition-colors focus-visible:ring-[3px] sm:w-56"
             >
               <Search className="size-4" aria-hidden="true" />
-              <span className="hidden flex-1 text-left sm:block">Search</span>
+              <span className="hidden flex-1 text-start sm:block">Search</span>
               <kbd className="bg-muted hidden rounded px-1.5 py-0.5 text-[11px] sm:block" style={{ fontFamily: "var(--atlas-mono)" }}>⌘K</kbd>
               <span className="sr-only sm:hidden">Search the store</span>
             </button>
             {actions}
             <button type="button" aria-label="Notifications, 3 unread" className="hover:bg-accent focus-visible:ring-ring/50 relative inline-flex size-9 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px]">
               <Bell className="size-[18px]" aria-hidden="true" />
-              <span className="bg-chart-3 absolute top-2 right-2.5 size-1.5 rounded-full" aria-hidden="true" />
+              <span className="bg-chart-3 absolute top-2 end-2.5 size-1.5 rounded-full" aria-hidden="true" />
             </button>
           </div>
         </header>

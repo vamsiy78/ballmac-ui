@@ -25,7 +25,7 @@ export default function NavbarDemo() {
         <NavbarBrand href="#top">
           <Hexagon aria-hidden="true" className="size-5 text-primary" /> Acme
         </NavbarBrand>
-        <NavbarLinks className="ml-4">
+        <NavbarLinks className="ms-4">
           {links.map(([label, href]) => (
             <NavbarLink key={label} href={href} active={label === "Pricing"}>
               {label}

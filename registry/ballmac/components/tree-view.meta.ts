@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["tree", "navigation", "hierarchy"],
   files: [{ path: "components/tree-view.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     { name: "tree-view-demo", title: "Overview", file: "tree-view-demo.tsx" },
     {

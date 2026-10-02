@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["git", "commits", "history", "branches", "graph"],
   files: [{ path: "components/git-graph.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "git-graph-demo", title: "Branches and a merge", file: "git-graph-demo.tsx" },
     { name: "git-graph-linear", title: "Linear history", file: "git-graph-linear.tsx" },

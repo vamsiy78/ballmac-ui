@@ -189,6 +189,33 @@ for (const i of free) {
 }
 writeFileSync(join(generated, "sources.json"), JSON.stringify(sources) + "\n")
 
+// Every built-in string, with its English default, for translators: /i18n/en.json and the i18n docs page.
+const messages: Record<string, string> = {}
+for (const i of free) {
+  for (const f of i.files) {
+    const code = readFileSync(join(i.baseDir, f.path), "utf8")
+    for (const m of code.matchAll(/msg(?:\.rich)?\(\s*"([^"]+)"\s*,\s*"((?:[^"\\]|\\.)*)"/g)) messages[m[1]!] = JSON.parse(`"${m[2]}"`)
+    // Plural forms: msg("k", { one: "…", other: "…" }, { count })
+    for (const m of code.matchAll(/msg\(\s*"([^"]+)"\s*,\s*\{([^}]*)\}/g))
+      for (const form of m[2]!.matchAll(/(zero|one|two|few|many|other)\s*:\s*"((?:[^"\\]|\\.)*)"/g)) messages[`${m[1]}_${form[1]}`] = JSON.parse(`"${form[2]}"`)
+  }
+}
+const sortedMessages = Object.fromEntries(Object.entries(messages).sort(([a], [b]) => a.localeCompare(b)))
+mkdirSync(join(WWW, "public/i18n"), { recursive: true })
+writeFileSync(join(WWW, "public/i18n/en.json"), JSON.stringify(sortedMessages, null, 2) + "\n")
+writeFileSync(join(generated, "messages.json"), JSON.stringify(sortedMessages) + "\n")
+console.log(`✓ ${Object.keys(sortedMessages).length} translatable message(s) → apps/www/public/i18n/en.json`)
+
+// Items that keep a fixed layout in right-to-left, with the reason (shown on the RTL docs page).
+{
+  const exceptions = JSON.parse(readFileSync(join(ROOT, "scripts/rtl-exceptions.json"), "utf8")) as { file: string; reason: string }[]
+  const byName = exceptions.flatMap((e) => {
+    const item = items.find((i) => i.files.some((f) => join("registry/ballmac", f.path) === e.file))
+    return item ? [{ name: item.name, title: item.title, reason: e.reason }] : []
+  })
+  writeFileSync(join(generated, "rtl-exceptions.json"), JSON.stringify(byName) + "\n")
+}
+
 // The site's tokens come from the theme item itself, so the site and @ballmac/theme can't drift.
 const theme = items.find((i) => i.name === "theme")
 if (theme?.cssVars) {

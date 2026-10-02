@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["slider", "range", "filter"],
   files: [{ path: "components/slider-range.tsx" }],
   dependencies: ["radix-ui"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction", "i18n"],
   examples: [
     {
       name: "slider-range-demo",

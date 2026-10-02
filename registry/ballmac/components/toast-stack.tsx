@@ -4,6 +4,7 @@
 import * as React from "react"
 import { CircleCheck, CircleAlert, Info, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ToastMessage = {
   /** Stable ID used for dismissal and updates. */ id: string
@@ -32,9 +33,11 @@ function ToastStack({
   defaultToasts = [],
   onToastsChange,
   durationMs = 5000,
-  label = "Notifications",
+  label,
   ...props
 }: ToastStackProps) {
+  const msg = useMessages()
+  label ??= msg("toast-stack.label", "Notifications")
   const [internal, setInternal] = React.useState(defaultToasts)
   const [paused, setPaused] = React.useState(false)
   const current = toasts ?? internal
@@ -115,7 +118,7 @@ function ToastStack({
               </div>
               <button
                 type="button"
-                aria-label={`Dismiss ${toast.title}`}
+                aria-label={msg("toast-stack.dismiss", "Dismiss {title}", { title: toast.title })}
                 onClick={() => dismiss(toast.id)}
                 className="text-muted-foreground hover:bg-accent hover:text-foreground flex size-8 shrink-0 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
               >

@@ -12,6 +12,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ballmac/navigation-menu";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type MegaMenuLinkItem = {
   /** Link title. */
@@ -87,7 +88,9 @@ function LinkCard({ link }: { link: MegaMenuLinkItem }) {
  * A data-driven mega menu on Navigation Menu: wide panels with grouped, described links and an optional featured card.
  * Shown from the `md` breakpoint up; pair it with MegaMenuMobileList inside your mobile menu.
  */
-function MegaMenu({ items, label = "Main", className, viewportAlign = "center", ...props }: MegaMenuProps) {
+function MegaMenu({ items, label, className, viewportAlign = "center", ...props }: MegaMenuProps) {
+  const msg = useMessages()
+  label ??= msg("mega-menu.label", "Main")
   return (
     <NavigationMenu
       aria-label={label}
@@ -132,10 +135,10 @@ function MegaMenu({ items, label = "Main", className, viewportAlign = "center", 
                         <span className="text-sm font-semibold">{item.featured.title}</span>
                         <span className="text-xs leading-snug text-muted-foreground">{item.featured.description}</span>
                         <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-foreground">
-                          {item.featured.cta ?? "Learn more"}
+                          {item.featured.cta ?? msg("mega-menu.learnMore", "Learn more")}
                           <ArrowRight
                             aria-hidden="true"
-                            className="size-3 transition-transform group-hover/featured:translate-x-0.5 motion-reduce:transition-none"
+                            className="size-3 transition-transform group-hover/featured:translate-x-0.5 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover/featured:-translate-x-0.5"
                           />
                         </span>
                       </span>
@@ -177,7 +180,7 @@ function MegaMenuMobileList({ items, onNavigate, className, ...props }: MegaMenu
                 className="size-4 text-muted-foreground transition-transform group-open/details:rotate-180 motion-reduce:transition-none"
               />
             </summary>
-            <div className="grid gap-0.5 pt-1 pb-2 pl-3">
+            <div className="grid gap-0.5 pt-1 pb-2 ps-3">
               {item.columns.flatMap((column) => column.links).map((link) => (
                 <a
                   key={link.href}

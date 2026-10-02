@@ -15,7 +15,7 @@ function Chat() {
   return (
     <div className="flex h-full flex-col text-[15px]">
       <div className="flex items-center gap-2 border-b px-3 pb-3">
-        <ChevronLeft className="size-6 text-chart-1" aria-hidden="true" />
+        <ChevronLeft className="size-6 text-chart-1 rtl:rotate-180" aria-hidden="true" />
         <span className="flex size-9 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--chart-2),var(--chart-1))] text-[13px] font-semibold text-white">
           RL
         </span>
@@ -32,8 +32,8 @@ function Chat() {
             key={i}
             className={
               m.from === "me"
-                ? "max-w-[78%] self-end rounded-[20px] rounded-br-md bg-chart-1 px-3.5 py-2 text-white"
-                : "max-w-[78%] self-start rounded-[20px] rounded-bl-md bg-muted px-3.5 py-2"
+                ? "max-w-[78%] self-end rounded-[20px] rounded-ee-md bg-chart-1 px-3.5 py-2 text-white"
+                : "max-w-[78%] self-start rounded-[20px] rounded-es-md bg-muted px-3.5 py-2"
             }
           >
             {m.text}

@@ -28,7 +28,7 @@ function StudioWork({ hrefs, ...props }: StudioWorkProps) {
           <div role="group" aria-label="Filter by discipline" className="flex flex-wrap gap-2">
             {filters.map((f) => <button key={f} type="button" aria-pressed={filter === f} onClick={() => setFilter(f)} className={cn("focus-visible:ring-ring/50 h-11 rounded-full border-2 border-current px-5 text-sm font-bold tracking-wide uppercase outline-none transition-colors focus-visible:ring-[3px]", filter === f ? "bg-foreground text-background" : "hover:bg-chart-1 hover:text-[var(--studio-on-accent)]")}>{f}</button>)}
           </div>
-          <div role="group" aria-label="Layout" className="ml-auto flex gap-1">
+          <div role="group" aria-label="Layout" className="ms-auto flex gap-1">
             {([["grid", LayoutGrid, "Grid"], ["list", List, "List"]] as const).map(([v, Icon, l]) => <button key={v} type="button" aria-pressed={view === v} aria-label={`${l} view`} onClick={() => setView(v)} className={cn("focus-visible:ring-ring/50 inline-flex size-11 items-center justify-center rounded-full border-2 outline-none focus-visible:ring-[3px]", view === v ? "bg-foreground text-background border-transparent" : "hover:bg-accent border-current")}><Icon className="size-4" aria-hidden="true" /></button>)}
           </div>
         </div>
@@ -47,16 +47,16 @@ function StudioWork({ hrefs, ...props }: StudioWorkProps) {
           </ul>
         ) : (
           <div className="mt-6 overflow-x-auto">
-            <table className="w-full min-w-[34rem] text-left">
+            <table className="w-full min-w-[34rem] text-start">
               <caption className="sr-only">All projects</caption>
-              <thead><tr className="text-muted-foreground border-b text-xs uppercase" style={mono}><th scope="col" className="py-3 font-normal">Project</th><th scope="col" className="py-3 font-normal">Discipline</th><th scope="col" className="py-3 font-normal">Client</th><th scope="col" className="py-3 text-right font-normal">Year</th></tr></thead>
+              <thead><tr className="text-muted-foreground border-b text-xs uppercase" style={mono}><th scope="col" className="py-3 font-normal">Project</th><th scope="col" className="py-3 font-normal">Discipline</th><th scope="col" className="py-3 font-normal">Client</th><th scope="col" className="py-3 text-end font-normal">Year</th></tr></thead>
               <tbody>
                 {shown.map((p) => (
                   <tr key={p.slug} className="hover:bg-chart-1 hover:text-[var(--studio-on-accent)] border-b transition-colors motion-reduce:transition-none">
-                    <th scope="row" className="py-5 pr-4"><a href={href} className={cn("focus-visible:ring-ring/50 rounded text-2xl outline-none focus-visible:ring-[3px] sm:text-4xl", studioDisplay)}>{p.name}</a></th>
+                    <th scope="row" className="py-5 pe-4"><a href={href} className={cn("focus-visible:ring-ring/50 rounded text-2xl outline-none focus-visible:ring-[3px] sm:text-4xl", studioDisplay)}>{p.name}</a></th>
                     <td className="py-5 text-sm" style={mono}>{p.discipline}</td>
                     <td className="py-5 text-sm" style={mono}>{p.client}</td>
-                    <td className="py-5 text-right text-sm tabular-nums" style={mono}>{p.year}</td>
+                    <td className="py-5 text-end text-sm tabular-nums" style={mono}>{p.year}</td>
                   </tr>
                 ))}
               </tbody>

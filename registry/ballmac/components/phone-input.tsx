@@ -3,6 +3,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type PhoneCountry = { code: string; label: string }
 type PhoneInputProps = Omit<
@@ -43,12 +44,14 @@ function PhoneInput({
   defaultCountryCode = "+1",
   onCountryCodeChange,
   countries = defaultCountries,
-  label = "Phone number",
+  label,
   countryCodeName,
   className,
   disabled,
   ...props
 }: PhoneInputProps) {
+  const msg = useMessages()
+  label ??= msg("phone-input.label", "Phone number")
   const [internal, setInternal] = React.useState(defaultValue)
   const [internalCode, setInternalCode] = React.useState(defaultCountryCode)
   const current = value ?? internal
@@ -63,7 +66,7 @@ function PhoneInput({
     >
       <select
         data-slot="phone-input-country"
-        aria-label="Country dialing code"
+        aria-label={msg("phone-input.countryDialingCode", "Country dialing code")}
         name={countryCodeName}
         disabled={disabled}
         value={code}
@@ -71,7 +74,7 @@ function PhoneInput({
           if (countryCode === undefined) setInternalCode(event.target.value)
           onCountryCodeChange?.(event.target.value)
         }}
-        className="h-full max-w-24 shrink-0 rounded-l-md border-r border-input bg-transparent px-2 text-sm text-foreground outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
+        className="h-full max-w-24 shrink-0 rounded-s-md border-e border-input bg-transparent px-2 text-sm text-foreground outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
       >
         {countries.map((country) => (
           <option key={country.code} value={country.code}>

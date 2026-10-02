@@ -35,7 +35,7 @@ function PocketSecurity({ hrefs, ...props }: PocketSecurityProps) {
           </div>
           <div aria-hidden="true" className="relative mx-auto aspect-square w-full max-w-sm">
             <div className="bg-chart-1 absolute inset-[6%] rounded-full" /><div className="bg-[var(--pocket-navy)] absolute inset-[22%] rounded-full" /><ShieldCheck className="text-chart-1 absolute inset-[36%] size-[28%]" strokeWidth={1.6} />
-            <span className="bg-card absolute top-[8%] right-[2%] rotate-6 rounded-2xl border px-3 py-1.5 text-sm font-extrabold shadow-lg">256-bit</span><span className="bg-card absolute bottom-[10%] left-[0%] -rotate-6 rounded-2xl border px-3 py-1.5 text-sm font-extrabold shadow-lg">Passkeys</span>
+            <span className="bg-card absolute top-[8%] end-[2%] rotate-6 rounded-2xl border px-3 py-1.5 text-sm font-extrabold shadow-lg">256-bit</span><span className="bg-card absolute bottom-[10%] start-[0%] -rotate-6 rounded-2xl border px-3 py-1.5 text-sm font-extrabold shadow-lg">Passkeys</span>
           </div>
         </section>
 

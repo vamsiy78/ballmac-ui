@@ -76,7 +76,7 @@ function AtlasOrders({ hrefs, ...props }: AtlasOrdersProps) {
   }
 
   const head = (k: SortKey, children: React.ReactNode, right?: boolean) => (
-    <th key={k} scope="col" aria-sort={sort.key === k ? (sort.dir === "asc" ? "ascending" : "descending") : "none"} className={cn("px-3 py-2.5 font-semibold", right && "text-right")}>
+    <th key={k} scope="col" aria-sort={sort.key === k ? (sort.dir === "asc" ? "ascending" : "descending") : "none"} className={cn("px-3 py-2.5 font-semibold", right && "text-end")}>
       <button type="button" onClick={() => toggleSort(k)} className={cn("hover:text-foreground focus-visible:ring-ring/50 -mx-1.5 inline-flex items-center gap-1 rounded px-1.5 py-0.5 outline-none focus-visible:ring-[3px]", sort.key === k && "text-foreground")}>
         {children}
         {sort.key === k ? (sort.dir === "asc" ? <ArrowUp className="size-3" aria-hidden="true" /> : <ArrowDown className="size-3" aria-hidden="true" />) : <ArrowUpDown className="size-3 opacity-50" aria-hidden="true" />}
@@ -109,21 +109,21 @@ function AtlasOrders({ hrefs, ...props }: AtlasOrdersProps) {
               })}
             </div>
             <div className="relative lg:w-72">
-              <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2" aria-hidden="true" />
+              <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-3 size-4 -translate-y-1/2" aria-hidden="true" />
               <input
                 type="search"
                 aria-label="Search orders"
                 value={query}
                 onChange={(e) => { setQuery(e.target.value); setPage(0) }}
                 placeholder="Search order, customer or channel"
-                className="bg-background focus-visible:ring-ring/50 placeholder:text-muted-foreground h-9 w-full rounded-lg border pr-3 pl-9 text-sm outline-none focus-visible:ring-[3px]"
+                className="bg-background focus-visible:ring-ring/50 placeholder:text-muted-foreground h-9 w-full rounded-lg border pe-3 ps-9 text-sm outline-none focus-visible:ring-[3px]"
               />
             </div>
           </div>
 
           {selected.size > 0 && (
             <div role="region" aria-label="Bulk actions" className="bg-accent flex flex-wrap items-center gap-2 border-b px-3 py-2">
-              <p className="mr-auto text-sm font-semibold" aria-live="polite">{selected.size} selected</p>
+              <p className="me-auto text-sm font-semibold" aria-live="polite">{selected.size} selected</p>
               <button type="button" onClick={markShipped} className={atlasButton.outline}><Truck aria-hidden="true" /> Mark as shipped</button>
               <button type="button" className={atlasButton.outline}><Printer aria-hidden="true" /> Print labels</button>
               <button type="button" onClick={() => setSelected(new Set())} aria-label="Clear selection" className={cn(atlasButton.ghost, "px-2.5")}><X aria-hidden="true" /></button>
@@ -131,7 +131,7 @@ function AtlasOrders({ hrefs, ...props }: AtlasOrdersProps) {
           )}
 
           <div tabIndex={0} role="region" aria-label="Orders table" className="focus-visible:ring-ring/50 overflow-x-auto outline-none focus-visible:ring-[3px] focus-visible:ring-inset">
-            <table className="w-full min-w-[52rem] text-left text-sm">
+            <table className="w-full min-w-[52rem] text-start text-sm">
               <caption className="sr-only">Orders, {sorted.length} shown</caption>
               <thead>
                 <tr className="text-muted-foreground bg-surface border-b text-xs">
@@ -153,12 +153,12 @@ function AtlasOrders({ hrefs, ...props }: AtlasOrdersProps) {
                     <tr key={o.id} data-state={on ? "selected" : undefined} className="hover:bg-accent/40 data-[state=selected]:bg-accent/60">
                       <td className="px-3 py-3"><Checkbox aria-label={`Select ${o.id}`} checked={on} onCheckedChange={(v) => toggleOne(o.id, v === true)} /></td>
                       <td className="px-3 py-3"><a href={orderHref} className="text-chart-1 font-semibold underline-offset-4 hover:underline" style={{ fontFamily: "var(--atlas-mono)" }}>{o.id}</a></td>
-                      <td className="text-muted-foreground px-3 py-3 whitespace-nowrap">{formatDate(o.date)}<span className="ml-1.5 text-xs">{formatTime(o.date)}</span></td>
+                      <td className="text-muted-foreground px-3 py-3 whitespace-nowrap">{formatDate(o.date)}<span className="ms-1.5 text-xs">{formatTime(o.date)}</span></td>
                       <td className="px-3 py-3"><span className="flex items-center gap-2.5 whitespace-nowrap"><span className={cn("flex size-7 shrink-0 items-center justify-center rounded-full text-[11px] font-bold", tones[c.tone - 1])} aria-hidden="true">{initials(c.name)}</span>{c.name}</span></td>
                       <td className="text-muted-foreground px-3 py-3 whitespace-nowrap">{o.channel}</td>
                       <td className="px-3 py-3"><PaymentBadge value={o.payment} /></td>
                       <td className="px-3 py-3"><FulfilmentBadge value={o.fulfillment} /></td>
-                      <td className="px-3 py-3 text-right font-semibold tabular-nums">{moneyExact.format(orderGrand(o))}</td>
+                      <td className="px-3 py-3 text-end font-semibold tabular-nums">{moneyExact.format(orderGrand(o))}</td>
                     </tr>
                   )
                 })}
@@ -174,9 +174,9 @@ function AtlasOrders({ hrefs, ...props }: AtlasOrdersProps) {
               {sorted.length === 0 ? "No orders" : `Showing ${safePage * PAGE + 1}–${safePage * PAGE + view.length} of ${sorted.length}`}
             </p>
             <div className="flex items-center gap-1">
-              <button type="button" aria-label="Previous page" disabled={safePage === 0} onClick={() => setPage(safePage - 1)} className={cn(atlasButton.outline, "px-2.5")}><ChevronLeft aria-hidden="true" /></button>
+              <button type="button" aria-label="Previous page" disabled={safePage === 0} onClick={() => setPage(safePage - 1)} className={cn(atlasButton.outline, "px-2.5")}><ChevronLeft aria-hidden="true"  className="rtl:rotate-180"/></button>
               <span className="text-muted-foreground px-2 text-xs tabular-nums">Page {safePage + 1} of {pages}</span>
-              <button type="button" aria-label="Next page" disabled={safePage >= pages - 1} onClick={() => setPage(safePage + 1)} className={cn(atlasButton.outline, "px-2.5")}><ChevronRight aria-hidden="true" /></button>
+              <button type="button" aria-label="Next page" disabled={safePage >= pages - 1} onClick={() => setPage(safePage + 1)} className={cn(atlasButton.outline, "px-2.5")}><ChevronRight aria-hidden="true"  className="rtl:rotate-180"/></button>
             </div>
           </div>
         </div>

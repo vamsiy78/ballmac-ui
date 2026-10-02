@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["navigation", "pill", "floating", "mobile"],
   files: [{ path: "components/floating-nav.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils", "scroll", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "scroll", "motion-presets", "i18n"],
   examples: [
     { name: "floating-nav-demo", title: "Top bar that hides", file: "floating-nav-demo.tsx" },
     { name: "floating-nav-states", title: "Bottom bar", file: "floating-nav-states.tsx" },

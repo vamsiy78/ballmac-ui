@@ -58,9 +58,9 @@ function PocketApp({ className, defaultTab = "home" }: { className?: string; def
           {tab === "card" && (
             <>
               <div className={cn("relative aspect-[1.6] overflow-hidden rounded-3xl p-5 text-[var(--pocket-on-navy)] transition-opacity motion-reduce:transition-none", "bg-[var(--pocket-navy)]", frozen && "opacity-50")}>
-                <div aria-hidden="true" className="bg-chart-1 absolute -right-10 -bottom-10 aspect-square w-40 rounded-full" /><div aria-hidden="true" className="bg-chart-3 absolute -right-2 -bottom-16 aspect-square w-32 rounded-full" />
+                <div aria-hidden="true" className="bg-chart-1 absolute -end-10 -bottom-10 aspect-square w-40 rounded-full" /><div aria-hidden="true" className="bg-chart-3 absolute -end-2 -bottom-16 aspect-square w-32 rounded-full" />
                 <p className={cn("relative text-xl", display)}>pocket</p><p className="relative mt-8 text-lg font-bold tracking-widest tabular-nums">•••• 4821</p><p className="relative mt-1 text-xs">MAYA OKAFOR · 09/29</p>
-                {frozen && <span className="bg-chart-4 absolute top-4 right-4 rounded-full px-3 py-1 text-xs font-extrabold text-[var(--pocket-on-lime)]">Frozen</span>}
+                {frozen && <span className="bg-chart-4 absolute top-4 end-4 rounded-full px-3 py-1 text-xs font-extrabold text-[var(--pocket-on-lime)]">Frozen</span>}
               </div>
               <div className="bg-secondary mt-4 flex items-center justify-between rounded-2xl p-4"><span><span className="block font-extrabold">Freeze card</span><span className="text-muted-foreground text-xs">Stops every payment instantly</span></span><Switch checked={frozen} onCheckedChange={setFrozen} aria-label="Freeze card" /></div>
               <dl className="mt-3 grid gap-2 text-sm">{[["Daily limit", "$2,000"], ["Online payments", "On"], ["Contactless", "On"]].map(([k, v]) => <div key={k} className="bg-card flex justify-between rounded-xl border px-4 py-3"><dt className="text-muted-foreground">{k}</dt><dd className="font-extrabold">{v}</dd></div>)}</dl>
@@ -88,8 +88,8 @@ function StoreButtons({ href, className }: { href: string; className?: string })
   const b = "bg-[var(--pocket-navy)] text-[var(--pocket-on-navy)] focus-visible:ring-ring inline-flex h-14 items-center gap-3 rounded-2xl px-5 outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
   return (
     <div className={cn("flex flex-wrap gap-3", className)}>
-      <a href={href} className={b}><Apple className="size-7" aria-hidden="true" /><span className="text-left leading-tight"><span className="block text-[11px] font-medium">Download on the</span><span className="block text-lg font-extrabold">App Store</span></span></a>
-      <a href={href} className={b}><Play className="size-7" aria-hidden="true" /><span className="text-left leading-tight"><span className="block text-[11px] font-medium">Get it on</span><span className="block text-lg font-extrabold">Google Play</span></span></a>
+      <a href={href} className={b}><Apple className="size-7" aria-hidden="true" /><span className="text-start leading-tight"><span className="block text-[11px] font-medium">Download on the</span><span className="block text-lg font-extrabold">App Store</span></span></a>
+      <a href={href} className={b}><Play className="size-7" aria-hidden="true" /><span className="text-start leading-tight"><span className="block text-[11px] font-medium">Get it on</span><span className="block text-lg font-extrabold">Google Play</span></span></a>
     </div>
   )
 }
@@ -121,7 +121,7 @@ function PocketShell({ page, hrefs: overrides, className, style, children, ...pr
     >
       <style>{pocketCss}</style>
       <header className="sticky top-3 z-40 px-3 sm:px-6">
-        <div className="bg-card/90 mx-auto flex h-16 max-w-6xl items-center justify-between rounded-full border pr-2 pl-5 shadow-sm backdrop-blur-xl">
+        <div className="bg-card/90 mx-auto flex h-16 max-w-6xl items-center justify-between rounded-full border pe-2 ps-5 shadow-sm backdrop-blur-xl">
           <a href={hrefs.home} className={cn("focus-visible:ring-ring/50 flex items-center gap-2 rounded-full text-2xl outline-none focus-visible:ring-[3px]", display)}><span aria-hidden="true" className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-xl text-lg">p</span>pocket</a>
           <nav aria-label="Main" className="hidden items-center gap-1 md:flex">{links.map((l) => <a key={l.key} href={hrefs[l.key]} aria-current={page === l.key ? "page" : undefined} className="hover:bg-accent aria-[current=page]:bg-accent focus-visible:ring-ring/50 rounded-full px-4 py-2 text-sm font-extrabold outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none">{l.label}</a>)}</nav>
           <div className="flex items-center gap-1">

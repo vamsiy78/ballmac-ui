@@ -31,6 +31,6 @@ describe("Table", () => {
     expect(region).toHaveAttribute("tabindex", "0");
     expect(screen.getByRole("columnheader", { name: "Name" })).toHaveAttribute("aria-sort", "ascending");
     expect(screen.getByRole("row", { name: /Acme/ })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByRole("cell", { name: "$10" })).toHaveClass("text-right");
+    expect(screen.getByRole("cell", { name: "$10" })).toHaveClass("text-end");
   });
 });

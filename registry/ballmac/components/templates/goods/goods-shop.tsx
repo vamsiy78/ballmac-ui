@@ -29,7 +29,7 @@ function GoodsShop({ hrefs, ...props }: GoodsShopProps) {
     .sort((a, b) => (sort === "low" ? a.price - b.price : sort === "high" ? b.price - a.price : sort === "rating" ? b.rating - a.rating : 0))
   const active = cats.length + picked.length + (stock ? 1 : 0) + (maxPrice < 80 ? 1 : 0)
   const clear = () => { setCats([]); setPicked([]); setStock(false); setMaxPrice(80) }
-  const chip = "bg-secondary hover:bg-accent focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 rounded-full pl-3 pr-2 text-sm font-medium outline-none focus-visible:ring-[3px]"
+  const chip = "bg-secondary hover:bg-accent focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 rounded-full ps-3 pe-2 text-sm font-medium outline-none focus-visible:ring-[3px]"
 
   const filters = (p: string) => (
     <div className="grid gap-8">
@@ -52,7 +52,7 @@ function GoodsShop({ hrefs, ...props }: GoodsShopProps) {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <details className="lg:hidden"><summary className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-10 cursor-pointer list-none items-center gap-2 rounded-full border px-4 text-sm font-semibold outline-none focus-visible:ring-[3px]"><SlidersHorizontal className="size-4" aria-hidden="true" />Filters{active > 0 ? ` (${active})` : ""}</summary><div className="bg-card mt-3 rounded-3xl border p-5">{filters("gs-m")}</div></details>
               <p role="status" className="text-muted-foreground text-sm">{list.length} {list.length === 1 ? "piece" : "pieces"}</p>
-              <div className="ml-auto flex items-center gap-2 text-sm"><label htmlFor="gs-sort" className="text-muted-foreground">Sort</label><select id="gs-sort" value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} className="bg-card focus-visible:ring-ring/50 h-10 rounded-full border px-3 font-medium outline-none focus-visible:ring-[3px]">{sorts.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></div>
+              <div className="ms-auto flex items-center gap-2 text-sm"><label htmlFor="gs-sort" className="text-muted-foreground">Sort</label><select id="gs-sort" value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} className="bg-card focus-visible:ring-ring/50 h-10 rounded-full border px-3 font-medium outline-none focus-visible:ring-[3px]">{sorts.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></div>
             </div>
             {active > 0 && (
               <div className="mt-4 flex flex-wrap items-center gap-2" aria-label="Active filters" role="group">

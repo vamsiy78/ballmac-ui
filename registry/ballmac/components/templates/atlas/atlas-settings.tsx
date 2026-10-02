@@ -110,7 +110,7 @@ function AtlasSettings({ hrefs, ...props }: AtlasSettingsProps) {
       </main>
 
       {(dirty || status === "saved") && (
-        <div role="region" aria-label="Save changes" className="bg-popover fixed inset-x-3 bottom-4 z-40 mx-auto flex max-w-xl items-center justify-between gap-3 rounded-2xl border p-3 pl-5 shadow-[0_20px_50px_-12px_rgb(0_0_0/0.35)]">
+        <div role="region" aria-label="Save changes" className="bg-popover fixed inset-x-3 bottom-4 z-40 mx-auto flex max-w-xl items-center justify-between gap-3 rounded-2xl border p-3 ps-5 shadow-[0_20px_50px_-12px_rgb(0_0_0/0.35)]">
           <p className="text-sm font-semibold" role="status">{dirty ? "You have unsaved changes" : <span className="flex items-center gap-1.5"><Check className="text-chart-2 size-4" aria-hidden="true" />Changes saved</span>}</p>
           {dirty && (
             <div className="flex gap-2">

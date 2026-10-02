@@ -6,6 +6,7 @@ import { Check, Copy } from "lucide-react"
 
 import { Button } from "@/components/ballmac/button"
 import { cn } from "@/lib/utils"
+import { useLocale, useMessages } from "@/lib/ballmac/i18n"
 
 type MessageRole = "user" | "assistant" | "system"
 
@@ -74,9 +75,9 @@ function MessageContent({ className, ...props }: MessageContentProps) {
         placement,
         "min-w-0 text-sm break-words",
         role === "user" &&
-          "max-w-[85%] rounded-xl rounded-br-sm bg-muted px-3.5 py-2 leading-6 whitespace-pre-wrap text-foreground",
+          "max-w-[85%] rounded-xl rounded-ee-sm bg-muted px-3.5 py-2 leading-6 whitespace-pre-wrap text-foreground",
         role === "assistant" &&
-          "w-full leading-7 text-foreground [&_code]:font-mono [&_code]:text-[0.9em] [&_pre]:overflow-x-auto [&>*+*]:mt-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5",
+          "w-full leading-7 text-foreground [&_code]:font-mono [&_code]:text-[0.9em] [&_pre]:overflow-x-auto [&>*+*]:mt-3 [&_ol]:list-decimal [&_ol]:ps-5 [&_ul]:list-disc [&_ul]:ps-5",
         role === "system" &&
           "rounded-md border border-dashed px-3 py-1.5 text-center font-mono text-xs text-muted-foreground",
         className
@@ -92,17 +93,18 @@ type MessageActionsProps = React.ComponentProps<"div"> & {
 }
 
 function MessageActions({ visibility = "hover", className, ...props }: MessageActionsProps) {
+  const msg = useMessages()
   const { role } = React.useContext(MessageContext)
   const placement = useBodyPlacement()
   return (
     <div
       data-slot="message-actions"
       role="toolbar"
-      aria-label="Message actions"
+      aria-label={msg("ai-message.messageActions", "Message actions")}
       className={cn(
         placement,
         "flex items-center gap-0.5",
-        role === "assistant" && "-ml-1.5",
+        role === "assistant" && "-ms-1.5",
         visibility === "hover" &&
           "transition-opacity duration-150 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-focus-within/message:opacity-100 [@media(hover:hover)]:group-hover/message:opacity-100",
         className
@@ -144,7 +146,9 @@ type MessageCopyActionProps = Omit<MessageActionProps, "label" | "onClick"> & {
   onCopied?: () => void
 }
 
-function MessageCopyAction({ value, label = "Copy message", onCopied, ...props }: MessageCopyActionProps) {
+function MessageCopyAction({ value, label, onCopied, ...props }: MessageCopyActionProps) {
+  const msg = useMessages()
+  label ??= msg("ai-message.label", "Copy message")
   const [copied, setCopied] = React.useState(false)
   const timer = React.useRef<ReturnType<typeof setTimeout>>(undefined)
   React.useEffect(() => () => clearTimeout(timer.current), [])
@@ -190,13 +194,15 @@ const subscribeNothing = () => () => {}
 
 function MessageTimestamp({
   date,
-  locale = "en-US",
+  locale,
   timeZone,
   format = { hour: "numeric", minute: "2-digit" },
   className,
   children,
   ...props
 }: MessageTimestampProps) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const placement = useBodyPlacement()
   const isClient = React.useSyncExternalStore(
     subscribeNothing,

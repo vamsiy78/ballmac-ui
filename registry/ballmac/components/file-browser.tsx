@@ -5,6 +5,8 @@ import * as React from "react"
 import { Archive, ArrowDown, ArrowUp, ChevronRight, File, FileCode2, FileText, Film, Folder, Image as ImageIcon, LayoutGrid, List, Music, Search, Trash2 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
+import { useDirection } from "@/lib/ballmac/direction"
 
 type FileEntry = {
   /** Unique id. */
@@ -96,7 +98,10 @@ type FileBrowserProps = Omit<React.ComponentProps<"div">, "onSelect"> & {
 }
 
 /** A file manager: breadcrumb navigation, search, sortable columns, multi-select with a bulk-action bar, and list or grid views. */
-function FileBrowser({ entries, rootLabel = "All files", view: viewProp = "list", onOpenFile, onDelete, onDownload, className, ...props }: FileBrowserProps) {
+function FileBrowser({ entries, rootLabel, view: viewProp = "list", onOpenFile, onDelete, onDownload, className, ...props }: FileBrowserProps) {
+  const dir = useDirection()
+  const msg = useMessages()
+  rootLabel ??= msg("file-browser.rootLabel", "All files")
   const uid = React.useId()
   const [trail, setTrail] = React.useState<FileEntry[]>([])
   const [view, setView] = React.useState(viewProp)
@@ -144,8 +149,8 @@ function FileBrowser({ entries, rootLabel = "All files", view: viewProp = "list"
     const cols = view === "grid" ? Math.max(1, Math.floor((event.currentTarget.parentElement?.clientWidth ?? 1) / ((event.currentTarget as HTMLElement).offsetWidth || 1))) : 1
     if (event.key === "ArrowDown") { event.preventDefault(); move(i + cols) }
     else if (event.key === "ArrowUp") { event.preventDefault(); move(i - cols) }
-    else if (view === "grid" && event.key === "ArrowRight") { event.preventDefault(); move(i + 1) }
-    else if (view === "grid" && event.key === "ArrowLeft") { event.preventDefault(); move(i - 1) }
+    else if (view === "grid" && event.key === (dir === "rtl" ? "ArrowLeft" : "ArrowRight")) { event.preventDefault(); move(i + 1) }
+    else if (view === "grid" && event.key === (dir === "rtl" ? "ArrowRight" : "ArrowLeft")) { event.preventDefault(); move(i - 1) }
     else if (event.key === "Home") { event.preventDefault(); move(0) }
     else if (event.key === "End") { event.preventDefault(); move(visible.length - 1) }
     else if (event.key === " ") { event.preventDefault(); toggle(entry.id) }
@@ -157,11 +162,11 @@ function FileBrowser({ entries, rootLabel = "All files", view: viewProp = "list"
   return (
     <div data-slot="file-browser" className={cn("@container flex w-full flex-col overflow-hidden rounded-xl border bg-card text-card-foreground", className)} {...props}>
       <div className="flex flex-wrap items-center gap-2 border-b px-3 py-2.5">
-        <nav aria-label="Folder path" className="min-w-0 flex-1">
+        <nav aria-label={msg("file-browser.folderPath", "Folder path")} className="min-w-0 flex-1">
           <ol className="flex min-w-0 flex-wrap items-center gap-1 text-sm">
             {[{ id: "root", name: rootLabel } as FileEntry, ...trail].map((crumb, i, all) => (
               <li key={crumb.id} className="flex min-w-0 items-center gap-1">
-                {i > 0 && <ChevronRight aria-hidden="true" className="size-3.5 shrink-0 text-muted-foreground" />}
+                {i > 0 && <ChevronRight aria-hidden="true" className="size-3.5 shrink-0 text-muted-foreground rtl:rotate-180" />}
                 <button
                   type="button"
                   aria-current={i === all.length - 1 ? "location" : undefined}
@@ -175,10 +180,10 @@ function FileBrowser({ entries, rootLabel = "All files", view: viewProp = "list"
           </ol>
         </nav>
         <div className="relative w-full @md:w-52">
-          <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
-          <input type="search" aria-label="Search files" placeholder="Search files" value={query} onChange={(e) => setQuery(e.target.value)} className="h-8 w-full rounded-md border bg-background pr-2 pl-8 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50" />
+          <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 start-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+          <input type="search" aria-label={msg("file-browser.searchFiles", "Search files")} placeholder={msg("file-browser.searchFiles", "Search files")} value={query} onChange={(e) => setQuery(e.target.value)} className="h-8 w-full rounded-md border bg-background pe-2 ps-8 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50" />
         </div>
-        <div role="group" aria-label="View" className="inline-flex rounded-lg bg-muted p-0.5">
+        <div role="group" aria-label={msg("file-browser.view", "View")} className="inline-flex rounded-lg bg-muted p-0.5">
           {([["list", List, "List view"], ["grid", LayoutGrid, "Grid view"]] as const).map(([v, Glyph, label]) => (
             <button key={v} type="button" aria-label={label} aria-pressed={view === v} onClick={() => setView(v)} className="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-pressed:bg-background aria-pressed:text-foreground aria-pressed:shadow-xs">
               <Glyph aria-hidden="true" className="size-4" />
@@ -188,31 +193,31 @@ function FileBrowser({ entries, rootLabel = "All files", view: viewProp = "list"
       </div>
 
       {count > 0 && (
-        <div role="region" aria-label="Selection actions" className="flex items-center gap-2 border-b bg-accent/50 px-3 py-1.5 text-sm">
-          <span className="font-medium tabular-nums">{count} selected</span>
-          <span className="ml-auto flex items-center gap-1">
-            {onDownload && <button type="button" onClick={() => onDownload([...selected])} className="h-7 rounded-md border bg-background px-2.5 text-[13px] font-medium outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50">Download</button>}
+        <div role="region" aria-label={msg("file-browser.selectionActions", "Selection actions")} className="flex items-center gap-2 border-b bg-accent/50 px-3 py-1.5 text-sm">
+          <span className="font-medium tabular-nums">{msg("file-browser.selectedCount", "{count} selected", { count })}</span>
+          <span className="ms-auto flex items-center gap-1">
+            {onDownload && <button type="button" onClick={() => onDownload([...selected])} className="h-7 rounded-md border bg-background px-2.5 text-[13px] font-medium outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50">{msg("file-browser.download", "Download")}</button>}
             {onDelete && (
               <button type="button" onClick={() => { onDelete([...selected]); setSelected(new Set()) }} className="inline-flex h-7 items-center gap-1 rounded-md border bg-background px-2.5 text-[13px] font-medium outline-none hover:bg-destructive/10 focus-visible:ring-[3px] focus-visible:ring-ring/50">
                 <Trash2 aria-hidden="true" className="size-3.5" />
-                Delete
+                {msg("file-browser.delete", "Delete")}
               </button>
             )}
-            <button type="button" onClick={() => setSelected(new Set())} className="h-7 rounded-md px-2.5 text-[13px] text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50">Clear</button>
+            <button type="button" onClick={() => setSelected(new Set())} className="h-7 rounded-md px-2.5 text-[13px] text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50">{msg("file-browser.clear", "Clear")}</button>
           </span>
         </div>
       )}
 
       {view === "list" ? (
-        <div className="max-h-96 overflow-auto" tabIndex={0} role="region" aria-label="Files">
+        <div className="max-h-96 overflow-auto" tabIndex={0} role="region" aria-label={msg("file-browser.files", "Files")}>
           <table className="w-full min-w-[30rem] border-collapse text-sm">
-            <thead className="sticky top-0 z-10 bg-card text-left text-xs text-muted-foreground">
+            <thead className="sticky top-0 z-10 bg-card text-start text-xs text-muted-foreground">
               <tr className="border-b">
-                <th className="w-10 py-2 pl-3 font-normal">
-                  <input ref={allRef} type="checkbox" aria-label="Select all files" checked={allSelected} onChange={() => setSelected(allSelected ? new Set() : new Set(visible.map((e) => e.id)))} className="size-4 rounded accent-primary" />
+                <th className="w-10 py-2 ps-3 font-normal">
+                  <input ref={allRef} type="checkbox" aria-label={msg("file-browser.selectAllFiles", "Select all files")} checked={allSelected} onChange={() => setSelected(allSelected ? new Set() : new Set(visible.map((e) => e.id)))} className="size-4 rounded accent-primary" />
                 </th>
                 {([["name", "Name"], ["modified", "Modified"], ["size", "Size"]] as const).map(([key, label]) => (
-                  <th key={key} aria-sort={sort.key === key ? (sort.dir === "asc" ? "ascending" : "descending") : "none"} className={cn("py-2 pr-3 font-normal", key === "size" && "text-right", key === "modified" && "hidden @md:table-cell")}>
+                  <th key={key} aria-sort={sort.key === key ? (sort.dir === "asc" ? "ascending" : "descending") : "none"} className={cn("py-2 pe-3 font-normal", key === "size" && "text-end", key === "modified" && "hidden @md:table-cell")}>
                     <button type="button" onClick={() => setSortKey(key)} className="inline-flex items-center gap-1 rounded px-1 py-0.5 outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50">
                       {label}
                       {sort.key === key && (sort.dir === "asc" ? <ArrowUp aria-hidden="true" className="size-3" /> : <ArrowDown aria-hidden="true" className="size-3" />)}
@@ -233,28 +238,28 @@ function FileBrowser({ entries, rootLabel = "All files", view: viewProp = "list"
                   onDoubleClick={() => enter(e)}
                   className={cn("border-b outline-none last:border-0 hover:bg-accent/40 focus-visible:bg-accent/60 focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50", selected.has(e.id) && "bg-accent/70")}
                 >
-                  <td className="py-2 pl-3">
-                    <input type="checkbox" aria-label={`Select ${e.name}`} checked={selected.has(e.id)} onChange={(ev) => toggle(e.id, ev.target.checked)} className="size-4 rounded accent-primary" />
+                  <td className="py-2 ps-3">
+                    <input type="checkbox" aria-label={msg("file-browser.select", "Select {name}", { name: e.name })} checked={selected.has(e.id)} onChange={(ev) => toggle(e.id, ev.target.checked)} className="size-4 rounded accent-primary" />
                   </td>
-                  <td className="py-2 pr-3">
+                  <td className="py-2 pe-3">
                     <span className="flex min-w-0 items-center gap-3">
                       <TypeIcon entry={e} />
                       {e.kind === "folder" ? (
-                        <button type="button" onClick={() => enter(e)} className="truncate rounded text-left font-medium outline-none hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50">{e.name}</button>
+                        <button type="button" onClick={() => enter(e)} className="truncate rounded text-start font-medium outline-none hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50">{e.name}</button>
                       ) : (
                         <span className="truncate font-medium">{e.name}</span>
                       )}
                     </span>
                   </td>
-                  <td className="hidden py-2 pr-3 text-muted-foreground @md:table-cell">{formatDate(e.modified)}</td>
-                  <td className="py-2 pr-3 text-right text-muted-foreground tabular-nums">{e.kind === "folder" ? itemCount(e.children?.length ?? 0) : formatSize(e.size)}</td>
+                  <td className="hidden py-2 pe-3 text-muted-foreground @md:table-cell">{formatDate(e.modified)}</td>
+                  <td className="py-2 pe-3 text-end text-muted-foreground tabular-nums">{e.kind === "folder" ? itemCount(e.children?.length ?? 0) : formatSize(e.size)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       ) : (
-        <div role="region" aria-label="Files" tabIndex={0} className="max-h-96 overflow-auto p-3">
+        <div role="region" aria-label={msg("file-browser.files", "Files")} tabIndex={0} className="max-h-96 overflow-auto p-3">
           <div className="grid grid-cols-[repeat(auto-fill,minmax(8.5rem,1fr))] gap-2.5">
             {visible.map((e, i) => (
               <div
@@ -263,7 +268,7 @@ function FileBrowser({ entries, rootLabel = "All files", view: viewProp = "list"
                 role="button"
                 tabIndex={focusIndex === i ? 0 : -1}
                 aria-pressed={selected.has(e.id)}
-                aria-label={`${e.name}, ${e.kind === "folder" ? "folder" : formatSize(e.size)}`}
+                aria-label={msg("file-browser.rowLabel", "{name}, {detail}", { name: e.name, detail: e.kind === "folder" ? msg("file-browser.folder", "folder") : formatSize(e.size) })}
                 onFocus={() => setFocusIndex(i)}
                 onKeyDown={(ev) => onRowKey(ev, e, i)}
                 onClick={() => toggle(e.id)}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { PreviewDirection } from "@/components/site/preview-direction"
 import { loadExample } from "@/lib/examples"
 import { getAllItems } from "@/lib/registry"
 
@@ -18,13 +19,17 @@ export default async function PreviewPage({ params }: PageProps<"/preview/[name]
   if (!Example) notFound()
   const owner = getAllItems().find((i) => i.examples.some((e) => e.name === name))
   const fullPage = owner?.category === "blocks" || owner?.category === "templates"
-  return fullPage ? (
-    <div className="bg-background min-h-dvh">
-      <Example />
-    </div>
-  ) : (
-    <div className="bm-stage bg-background flex min-h-dvh items-center justify-center p-6 sm:p-12">
-      <Example />
-    </div>
+  return (
+    <PreviewDirection>
+      {fullPage ? (
+        <div className="bg-background min-h-dvh">
+          <Example />
+        </div>
+      ) : (
+        <div className="bm-stage bg-background flex min-h-dvh items-center justify-center p-6 sm:p-12">
+          <Example />
+        </div>
+      )}
+    </PreviewDirection>
   )
 }

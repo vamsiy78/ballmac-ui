@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["upload", "files", "dropzone"],
   files: [{ path: "components/file-dropzone.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "file-dropzone-demo",

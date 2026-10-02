@@ -1,8 +1,11 @@
 // Ballmac UI: Pagination. https://ui.ballmac.com/components/pagination
 // Based on shadcn/ui Pagination (MIT, Copyright (c) 2023 shadcn), adding current-page contrast and compact overflow behavior.
+"use client"
+
 import * as React from "react"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type PaginationProps = React.ComponentProps<"nav"> & {
   /** Accessible name of the navigation landmark. */
@@ -10,9 +13,11 @@ type PaginationProps = React.ComponentProps<"nav"> & {
 }
 function Pagination({
   className,
-  "aria-label": label = "Pagination",
+  "aria-label": label,
   ...props
 }: PaginationProps) {
+  const msg = useMessages()
+  label ??= msg("pagination.label", "Pagination")
   return (
     <nav
       data-slot="pagination"
@@ -65,17 +70,18 @@ function PaginationPrevious({
   children = "Previous",
   ...props
 }: React.ComponentProps<"a">) {
+  const msg = useMessages()
   return (
     <a
       data-slot="pagination-previous"
-      aria-label="Previous page"
+      aria-label={msg("pagination.previousPage", "Previous page")}
       className={cn(
         "focus-visible:ring-ring/50 inline-flex h-9 items-center gap-1 rounded-md px-2 text-sm outline-none hover:bg-accent focus-visible:ring-[3px]",
         className,
       )}
       {...props}
     >
-      <ChevronLeft aria-hidden="true" className="size-4" />
+      <ChevronLeft aria-hidden="true" className="size-4 rtl:rotate-180" />
       <span className="hidden sm:inline">{children}</span>
     </a>
   )
@@ -85,10 +91,11 @@ function PaginationNext({
   children = "Next",
   ...props
 }: React.ComponentProps<"a">) {
+  const msg = useMessages()
   return (
     <a
       data-slot="pagination-next"
-      aria-label="Next page"
+      aria-label={msg("pagination.nextPage", "Next page")}
       className={cn(
         "focus-visible:ring-ring/50 inline-flex h-9 items-center gap-1 rounded-md px-2 text-sm outline-none hover:bg-accent focus-visible:ring-[3px]",
         className,
@@ -96,7 +103,7 @@ function PaginationNext({
       {...props}
     >
       <span className="hidden sm:inline">{children}</span>
-      <ChevronRight aria-hidden="true" className="size-4" />
+      <ChevronRight aria-hidden="true" className="size-4 rtl:rotate-180" />
     </a>
   )
 }
@@ -104,6 +111,7 @@ function PaginationEllipsis({
   className,
   ...props
 }: React.ComponentProps<"span">) {
+  const msg = useMessages()
   return (
     <span
       data-slot="pagination-ellipsis"
@@ -114,7 +122,7 @@ function PaginationEllipsis({
       {...props}
     >
       <MoreHorizontal aria-hidden="true" />
-      <span className="sr-only">More pages</span>
+      <span className="sr-only">{msg("pagination.morePages", "More pages")}</span>
     </span>
   )
 }

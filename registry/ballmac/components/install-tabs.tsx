@@ -6,6 +6,7 @@ import { Check, Copy } from "lucide-react"
 import { Tabs as TabsPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type PackageManager = "pnpm" | "npm" | "yarn" | "bun"
 
@@ -111,6 +112,7 @@ function InstallTabs({
   className,
   ...props
 }: InstallTabsProps) {
+  const msg = useMessages()
   const entries = React.useMemo(() => {
     if (commands) {
       return PACKAGE_MANAGERS.flatMap((m) => (commands[m] ? [[m, commands[m]] as [PackageManager, string]] : []))
@@ -138,8 +140,8 @@ function InstallTabs({
       className={cn("w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground", className)}
       {...props}
     >
-      <div className="flex h-10 items-center gap-2 border-b bg-muted/40 pr-1.5 pl-1.5">
-        <TabsPrimitive.List aria-label="Package manager" className="flex min-w-0 items-center overflow-x-auto [scrollbar-width:none]">
+      <div className="flex h-10 items-center gap-2 border-b bg-muted/40 pe-1.5 ps-1.5">
+        <TabsPrimitive.List aria-label={msg("install-tabs.packageManager", "Package manager")} className="flex min-w-0 items-center overflow-x-auto [scrollbar-width:none]">
           {entries.map(([manager]) => (
             <TabsPrimitive.Trigger
               key={manager}
@@ -158,8 +160,8 @@ function InstallTabs({
           value={manager}
           className="overflow-x-auto px-4 py-3 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:ring-inset"
         >
-          <code data-slot="install-tabs-command" className="font-mono text-[13px] leading-6 whitespace-pre">
-            <span aria-hidden="true" className="mr-2 text-muted-foreground select-none">
+          <code dir="ltr" data-slot="install-tabs-command" className="font-mono text-[13px] leading-6 whitespace-pre">
+            <span aria-hidden="true" className="me-2 text-muted-foreground select-none">
               $
             </span>
             {cmd}
@@ -171,6 +173,7 @@ function InstallTabs({
 }
 
 function CopyCommandButton({ value }: { value: string }) {
+  const msg = useMessages()
   const [copied, setCopied] = React.useState(false)
   const timer = React.useRef<ReturnType<typeof setTimeout>>(undefined)
   React.useEffect(() => () => clearTimeout(timer.current), [])
@@ -179,8 +182,8 @@ function CopyCommandButton({ value }: { value: string }) {
       <button
         type="button"
         data-slot="install-tabs-copy"
-        aria-label={copied ? "Copied" : "Copy command"}
-        title="Copy command"
+        aria-label={copied ? msg("install-tabs.copied", "Copied") : msg("install-tabs.copyCommand", "Copy command")}
+        title={msg("install-tabs.copyCommand", "Copy command")}
         onClick={async () => {
           try {
             await navigator.clipboard.writeText(value)
@@ -191,7 +194,7 @@ function CopyCommandButton({ value }: { value: string }) {
           clearTimeout(timer.current)
           timer.current = setTimeout(() => setCopied(false), 1800)
         }}
-        className="ml-auto flex size-7 shrink-0 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+        className="ms-auto flex size-7 shrink-0 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
       >
         {copied ? <Check aria-hidden="true" className="size-3.5" /> : <Copy aria-hidden="true" className="size-3.5" />}
       </button>

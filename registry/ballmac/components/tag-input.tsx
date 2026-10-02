@@ -4,6 +4,7 @@
 import * as React from "react"
 import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type TagInputProps = Omit<React.ComponentProps<"div">, "onChange"> & {
   /** Controlled tag list. */
@@ -31,13 +32,16 @@ function TagInput({
   onValueChange,
   maxTags = 8,
   maxLength = 32,
-  placeholder = "Add a tag…",
-  label = "Tags",
+  placeholder,
+  label,
   name,
   disabled = false,
   className,
   ...props
 }: TagInputProps) {
+  const msg = useMessages()
+  placeholder ??= msg("tag-input.placeholder", "Add a tag…")
+  label ??= msg("tag-input.label", "Tags")
   const [internal, setInternal] = React.useState(defaultValue)
   const [draft, setDraft] = React.useState("")
   const [message, setMessage] = React.useState("")
@@ -87,7 +91,7 @@ function TagInput({
             <button
               type="button"
               disabled={disabled}
-              aria-label={`Remove ${tag}`}
+              aria-label={msg("tag-input.remove", "Remove {tag}", { tag })}
               onClick={(event) => {
                 event.stopPropagation()
                 commit(tags.filter((_, position) => position !== index))

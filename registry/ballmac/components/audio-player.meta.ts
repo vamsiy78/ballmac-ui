@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["audio", "player", "podcast", "music", "media", "chapters", "speed"],
   files: [{ path: "components/audio-player.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "slider"],
+  registryDependencies: ["shadcn:utils", "slider", "i18n"],
   examples: [
     { name: "audio-player-demo", title: "Episode with chapters", file: "audio-player-demo.tsx" },
     { name: "audio-player-compact", title: "Compact mini player", file: "audio-player-compact.tsx" },

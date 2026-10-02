@@ -53,7 +53,7 @@ function StudioProject({ hrefs, ...props }: StudioProjectProps) {
         <a href={hrefs?.project ?? "/studio/work/oat-and-ember"} className="group border-foreground focus-visible:ring-ring/50 block border-t-2 outline-none focus-visible:ring-[3px] focus-visible:ring-inset">
           <div className="mx-auto flex max-w-[100rem] items-center justify-between gap-6 px-4 py-14 sm:px-8">
             <div><p className="text-muted-foreground text-sm" style={mono}>Next project</p><p className={cn("group-hover:text-chart-1 mt-3 text-[clamp(2.4rem,8vw,8rem)] transition-colors motion-reduce:transition-none", studioDisplay)}>{next.name}</p></div>
-            <ArrowUpRight className="size-14 shrink-0 transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 motion-reduce:transition-none" strokeWidth={1.5} aria-hidden="true" />
+            <ArrowUpRight className="size-14 shrink-0 transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 motion-reduce:transition-none rtl:-scale-x-100 rtl:group-hover:-translate-x-2" strokeWidth={1.5} aria-hidden="true" />
           </div>
         </a>
       </main>

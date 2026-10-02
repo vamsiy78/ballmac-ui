@@ -9,6 +9,7 @@ import { CopyButton } from "@/components/ballmac/copy-button"
 import { Switch } from "@/components/ballmac/switch"
 import { highlightLines, tokenClass } from "@/lib/ballmac/highlight"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type WebhookDelivery = {
   /** Unique id of the delivery. */
@@ -46,7 +47,7 @@ function statusText(status: number) {
 function Json({ code, label }: { code: string; label: string }) {
   const lines = React.useMemo(() => highlightLines(code, "json"), [code])
   return (
-    <pre
+    <pre dir="ltr"
       role="region"
       aria-label={label}
       tabIndex={0}
@@ -97,6 +98,7 @@ function WebhookCard({
   className,
   ...props
 }: WebhookCardProps) {
+  const msg = useMessages()
   const reduce = useReducedMotion()
   const uid = React.useId()
   const [isOn, setIsOn] = React.useState(enabled)
@@ -121,7 +123,7 @@ function WebhookCard({
     <section
       data-slot="webhook-card"
       data-state={state}
-      aria-label={`Webhook ${url}`}
+      aria-label={msg("webhook-card.webhook", "Webhook {url}", { url })}
       className={cn("w-full overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs", className)}
       {...props}
     >
@@ -142,19 +144,19 @@ function WebhookCard({
               {meta.label}
             </span>
             {successRate !== null && (
-              <span className="text-xs text-muted-foreground tabular-nums">{successRate}% of {deliveries.length} deliveries succeeded</span>
+              <span className="text-xs text-muted-foreground tabular-nums">{msg("webhook-card.successRate", "{percent}% of {count} deliveries succeeded", { percent: successRate, count: deliveries.length })}</span>
             )}
           </div>
         </div>
         <label className="flex shrink-0 items-center gap-2 text-xs text-muted-foreground">
-          <span className="sr-only">Send events to this endpoint</span>
+          <span className="sr-only">{msg("webhook-card.sendEventsToThisEndpoint", "Send events to this endpoint")}</span>
           <Switch
             checked={isOn}
             onCheckedChange={(next) => {
               setIsOn(next)
               onEnabledChange?.(next)
             }}
-            aria-label="Send events to this endpoint"
+            aria-label={msg("webhook-card.sendEventsToThisEndpoint", "Send events to this endpoint")}
           />
         </label>
       </header>
@@ -164,12 +166,12 @@ function WebhookCard({
           {secret && (
             <div className="flex items-center gap-2">
               <KeyRound aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
-              <span className="shrink-0 text-muted-foreground">Signing secret</span>
+              <span className="shrink-0 text-muted-foreground">{msg("webhook-card.signingSecret", "Signing secret")}</span>
               <code className="min-w-0 flex-1 truncate font-mono text-xs text-foreground">{reveal ? secret : masked}</code>
               <button
                 type="button"
                 aria-pressed={reveal}
-                aria-label={reveal ? "Hide signing secret" : "Reveal signing secret"}
+                aria-label={reveal ? msg("webhook-card.hideSigningSecret", "Hide signing secret") : msg("webhook-card.revealSigningSecret", "Reveal signing secret")}
                 onClick={() => setReveal((r) => !r)}
                 className="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
               >
@@ -180,7 +182,7 @@ function WebhookCard({
           )}
           {events.length > 0 && (
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className="mr-1 text-muted-foreground">Events</span>
+              <span className="me-1 text-muted-foreground">{msg("webhook-card.events", "Events")}</span>
               {shownEvents.map((e) => (
                 <code key={e} className="rounded-md border bg-muted/60 px-1.5 py-0.5 font-mono text-[11px] text-foreground">
                   {e}
@@ -188,7 +190,7 @@ function WebhookCard({
               ))}
               {extra > 0 && (
                 <span className="text-xs text-muted-foreground" title={events.slice(visibleEvents).join(", ")}>
-                  +{extra} more
+                  {msg("webhook-card.moreEvents", "+{count} more", { count: extra })}
                 </span>
               )}
             </div>
@@ -198,19 +200,19 @@ function WebhookCard({
 
       <div className="border-t">
         <div className="flex items-center justify-between gap-2 px-4 py-2.5">
-          <h4 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Recent deliveries</h4>
+          <h4 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{msg("webhook-card.recentDeliveries", "Recent deliveries")}</h4>
           {onTest && (
             <button
               type="button"
               onClick={onTest}
               className="h-7 rounded-md border bg-background px-2.5 text-xs font-medium shadow-xs outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
             >
-              Send test event
+              {msg("webhook-card.sendTestEvent", "Send test event")}
             </button>
           )}
         </div>
         {deliveries.length === 0 ? (
-          <p className="px-4 pb-5 text-[13px] text-muted-foreground">No deliveries yet. Events appear here as soon as they are sent.</p>
+          <p className="px-4 pb-5 text-[13px] text-muted-foreground">{msg("webhook-card.noDeliveriesYetEventsAppear", "No deliveries yet. Events appear here as soon as they are sent.")}</p>
         ) : (
           <ul className="divide-y border-t">
             {deliveries.map((d) => {
@@ -223,11 +225,11 @@ function WebhookCard({
                     aria-expanded={isOpen}
                     aria-controls={panel}
                     onClick={() => setOpen(isOpen ? null : d.id)}
-                    className="flex w-full items-center gap-3 px-4 py-2.5 text-left outline-none transition-colors hover:bg-accent/40 focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50 motion-reduce:transition-none"
+                    className="flex w-full items-center gap-3 px-4 py-2.5 text-start outline-none transition-colors hover:bg-accent/40 focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50 motion-reduce:transition-none"
                   >
                     <ChevronRight
                       aria-hidden="true"
-                      className={cn("size-4 shrink-0 text-muted-foreground transition-transform duration-200 motion-reduce:transition-none", isOpen && "rotate-90")}
+                      className={cn("size-4 shrink-0 text-muted-foreground transition-transform duration-200 motion-reduce:transition-none", isOpen ? "rotate-90" : "rtl:rotate-180")}
                     />
                     <span
                       className={cn(
@@ -257,16 +259,16 @@ function WebhookCard({
                         transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="grid gap-3 border-t bg-muted/20 px-4 py-3 sm:pl-11">
+                        <div className="grid gap-3 border-t bg-muted/20 px-4 py-3 sm:ps-11">
                           {d.payload && (
                             <div className="grid gap-1.5">
-                              <p className="text-xs font-medium text-muted-foreground">Request body</p>
+                              <p className="text-xs font-medium text-muted-foreground">{msg("webhook-card.requestBody", "Request body")}</p>
                               <Json code={d.payload} label={`Request body of ${d.event}`} />
                             </div>
                           )}
                           {d.response && (
                             <div className="grid gap-1.5">
-                              <p className="text-xs font-medium text-muted-foreground">Your response</p>
+                              <p className="text-xs font-medium text-muted-foreground">{msg("webhook-card.yourResponse", "Your response")}</p>
                               <Json code={d.response} label={`Response to ${d.event}`} />
                             </div>
                           )}
@@ -277,7 +279,7 @@ function WebhookCard({
                               className="inline-flex h-8 w-fit items-center gap-1.5 rounded-md border bg-background px-3 text-[13px] font-medium shadow-xs outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
                             >
                               <RotateCw aria-hidden="true" className="size-3.5" />
-                              Redeliver
+                              {msg("webhook-card.redeliver", "Redeliver")}
                             </button>
                           )}
                         </div>

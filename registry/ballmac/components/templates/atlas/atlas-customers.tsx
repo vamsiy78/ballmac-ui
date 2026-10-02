@@ -55,19 +55,19 @@ function AtlasCustomers({ hrefs, ...props }: AtlasCustomersProps) {
               })}
             </div>
             <div className="relative lg:w-72">
-              <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2" aria-hidden="true" />
-              <input type="search" aria-label="Search customers" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search name, email or city" className="bg-background focus-visible:ring-ring/50 placeholder:text-muted-foreground h-9 w-full rounded-lg border pr-3 pl-9 text-sm outline-none focus-visible:ring-[3px]" />
+              <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-3 size-4 -translate-y-1/2" aria-hidden="true" />
+              <input type="search" aria-label="Search customers" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search name, email or city" className="bg-background focus-visible:ring-ring/50 placeholder:text-muted-foreground h-9 w-full rounded-lg border pe-3 ps-9 text-sm outline-none focus-visible:ring-[3px]" />
             </div>
           </div>
           <div tabIndex={0} role="region" aria-label="Customers table" className="focus-visible:ring-ring/50 overflow-x-auto outline-none focus-visible:ring-[3px] focus-visible:ring-inset">
-            <table className="w-full min-w-[44rem] text-left text-sm">
+            <table className="w-full min-w-[44rem] text-start text-sm">
               <caption className="sr-only">Customers by lifetime spend</caption>
               <thead><tr className="text-muted-foreground bg-surface border-b text-xs">{["Customer", "Segment", "Orders", "Last order", "Lifetime spend"].map((c) => <th key={c} scope="col" className="px-4 py-2.5 font-semibold">{c}</th>)}</tr></thead>
               <tbody className="divide-y">
                 {rows.map(({ c, mine, spent, last }) => (
                   <tr key={c.id} className="hover:bg-accent/40">
                     <td className="px-4 py-3">
-                      <button type="button" onClick={() => setOpenId(c.id)} className="focus-visible:ring-ring/50 -m-1 flex items-center gap-3 rounded-lg p-1 text-left outline-none focus-visible:ring-[3px]">
+                      <button type="button" onClick={() => setOpenId(c.id)} className="focus-visible:ring-ring/50 -m-1 flex items-center gap-3 rounded-lg p-1 text-start outline-none focus-visible:ring-[3px]">
                         <span className={cn("flex size-9 shrink-0 items-center justify-center rounded-full text-xs font-bold", tones[c.tone - 1])} aria-hidden="true">{initials(c.name)}</span>
                         <span><span className="block font-semibold">{c.name}</span><span className="text-muted-foreground block text-xs">{c.email} · {c.city}</span></span>
                       </button>
@@ -78,7 +78,7 @@ function AtlasCustomers({ hrefs, ...props }: AtlasCustomersProps) {
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
                         <div className="bg-muted hidden h-1.5 w-24 rounded-full sm:block" aria-hidden="true"><div className="bg-chart-1 h-full rounded-full" style={{ width: `${(spent / max) * 100}%` }} /></div>
-                        <span className="w-20 text-right font-semibold tabular-nums">{money.format(spent)}</span>
+                        <span className="w-20 text-end font-semibold tabular-nums">{money.format(spent)}</span>
                       </div>
                     </td>
                   </tr>
@@ -92,7 +92,7 @@ function AtlasCustomers({ hrefs, ...props }: AtlasCustomersProps) {
       </main>
 
       <Sheet open={!!open} onOpenChange={(o) => !o && setOpenId(null)}>
-        <SheetContent side="right" className="w-full sm:max-w-md" closeLabel="Close profile">
+        <SheetContent side="end" className="w-full sm:max-w-md" closeLabel="Close profile">
           {open && openStats && (
             <>
               <SheetHeader>
@@ -113,7 +113,7 @@ function AtlasCustomers({ hrefs, ...props }: AtlasCustomersProps) {
                   <ul className="mt-2 divide-y rounded-lg border">
                     {openStats.mine.slice(0, 4).map((o) => (
                       <li key={o.id} className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm">
-                        <span><span className="font-semibold" style={{ fontFamily: "var(--atlas-mono)" }}>{o.id}</span><span className="text-muted-foreground ml-2 text-xs">{formatDate(o.date)}</span></span>
+                        <span><span className="font-semibold" style={{ fontFamily: "var(--atlas-mono)" }}>{o.id}</span><span className="text-muted-foreground ms-2 text-xs">{formatDate(o.date)}</span></span>
                         <span className="flex items-center gap-2"><FulfilmentBadge value={o.fulfillment} /><span className="tabular-nums">{moneyExact.format(orderGrand(o))}</span></span>
                       </li>
                     ))}

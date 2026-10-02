@@ -68,7 +68,7 @@ function Stats1({
           {link && (
             <a href={link.href} className="group/link focus-visible:ring-ring/50 mt-4 inline-flex items-center gap-1 rounded-md text-sm font-medium outline-none focus-visible:ring-[3px]">
               {link.label}
-              <ArrowUpRight className="size-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 motion-reduce:transition-none" aria-hidden="true" />
+              <ArrowUpRight className="size-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 motion-reduce:transition-none rtl:-scale-x-100 rtl:group-hover/link:-translate-x-0.5" aria-hidden="true" />
             </a>
           )}
         </div>
@@ -89,7 +89,7 @@ function Stats1({
               <span className="mt-2 inline-flex h-5 w-fit items-center gap-1 text-sm font-medium">
                 {s.delta && (
                   <>
-                    <ArrowUpRight className="text-chart-2 size-3.5" aria-hidden="true" />
+                    <ArrowUpRight className="text-chart-2 size-3.5 rtl:-scale-x-100" aria-hidden="true" />
                     {s.delta}
                   </>
                 )}

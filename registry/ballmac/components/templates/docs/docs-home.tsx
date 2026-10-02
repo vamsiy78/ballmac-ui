@@ -23,9 +23,9 @@ function Flow() {
     <figure className="mx-auto w-full max-w-xl" aria-label="How a message travels">
       <div aria-hidden="true" className="flex items-center">
         <div className={box}><span>Producer<span className={cn("text-muted-foreground block text-xs font-normal", docsMonoClass)}>your app</span></span></div>
-        <div className="relative h-px min-w-6 flex-1 border-t-2 border-dashed [--docs-travel:1.75rem] sm:[--docs-travel:5rem]"><span className="docs-packet bg-chart-1 absolute -top-[7px] left-0 size-3 rounded-full" /></div>
+        <div className="relative h-px min-w-6 flex-1 border-t-2 border-dashed [--docs-travel:1.75rem] sm:[--docs-travel:5rem]"><span className="docs-packet bg-chart-1 absolute -top-[7px] start-0 size-3 rounded-full" /></div>
         <div className={cn(box, "bg-primary text-primary-foreground border-primary")}><span>Queue<span className={cn("block text-xs font-normal opacity-100", docsMonoClass)}>invoices</span></span></div>
-        <div className="relative h-px min-w-6 flex-1 border-t-2 border-dashed [--docs-travel:1.75rem] sm:[--docs-travel:5rem]"><span className="docs-packet bg-chart-3 absolute -top-[7px] left-0 size-3 rounded-full" style={{ animationDelay: "1.1s" }} /></div>
+        <div className="relative h-px min-w-6 flex-1 border-t-2 border-dashed [--docs-travel:1.75rem] sm:[--docs-travel:5rem]"><span className="docs-packet bg-chart-3 absolute -top-[7px] start-0 size-3 rounded-full" style={{ animationDelay: "1.1s" }} /></div>
         <div className={box}><span>Consumer<span className={cn("text-muted-foreground block text-xs font-normal", docsMonoClass)}>worker</span></span></div>
       </div>
       <figcaption className="text-muted-foreground mt-4 text-center text-sm">A producer sends, Tern holds the message until a consumer acknowledges it.</figcaption>
@@ -50,8 +50,8 @@ function DocsHome({ hrefs, ...props }: DocsHomeProps) {
             <form action={link.search} method="get" role="search" className="mx-auto mt-9 flex max-w-xl items-center gap-2">
               <label htmlFor="dh-q" className="sr-only">Search the docs</label>
               <div className="bg-card focus-within:ring-ring/50 relative flex-1 rounded-xl border shadow-sm focus-within:ring-[3px]">
-                <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2" aria-hidden="true" />
-                <input id="dh-q" name="q" type="search" placeholder="Search: retries, idempotency, dead letters…" className="h-14 w-full rounded-xl bg-transparent pr-4 pl-12 text-base outline-none" />
+                <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-4 size-5 -translate-y-1/2" aria-hidden="true" />
+                <input id="dh-q" name="q" type="search" placeholder="Search: retries, idempotency, dead letters…" className="h-14 w-full rounded-xl bg-transparent pe-4 ps-12 text-base outline-none" />
               </div>
               <button type="submit" className="bg-primary text-primary-foreground focus-visible:ring-ring/50 h-14 rounded-xl px-6 text-base font-semibold outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]">Search</button>
             </form>
@@ -69,7 +69,7 @@ function DocsHome({ hrefs, ...props }: DocsHomeProps) {
                   <span className={cn("inline-flex size-11 items-center justify-center rounded-xl", p.tint)}><p.icon className="size-5" aria-hidden="true" /></span>
                   <span className={cn("mt-5 text-2xl", docsSerifClass)}>{p.title}</span>
                   <span className="text-muted-foreground mt-2 flex-1 text-sm text-pretty">{p.body}</span>
-                  <span className="text-primary mt-5 inline-flex items-center gap-1 text-sm font-semibold">Open <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" /></span>
+                  <span className="text-primary mt-5 inline-flex items-center gap-1 text-sm font-semibold">Open <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden="true" /></span>
                 </a>
               </li>
             ))}
@@ -96,7 +96,7 @@ function DocsHome({ hrefs, ...props }: DocsHomeProps) {
                   <a href={link[e.page]} className="hover:bg-accent focus-visible:ring-ring/50 group grid grid-cols-[2rem_1fr_auto] items-center gap-3 px-2 py-4 outline-none focus-visible:ring-[3px] focus-visible:ring-inset">
                     <span className={cn("text-muted-foreground text-sm", docsMonoClass)}>{String(i + 1).padStart(2, "0")}</span>
                     <span className="min-w-0"><span className="block font-semibold">{e.title}</span><span className="text-muted-foreground block truncate text-sm">{e.summary}</span></span>
-                    <ArrowRight className="text-muted-foreground size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
+                    <ArrowRight className="text-muted-foreground size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden="true" />
                   </a>
                 </li>
               ))}
@@ -119,7 +119,7 @@ function DocsHome({ hrefs, ...props }: DocsHomeProps) {
         <section aria-labelledby="dh-help" className="mx-auto max-w-6xl px-4 pb-8 sm:px-6">
           <div className="bg-primary text-primary-foreground flex flex-col items-start justify-between gap-6 rounded-3xl p-8 sm:flex-row sm:items-center sm:p-12">
             <div><h2 id="dh-help" className={cn("text-3xl sm:text-4xl", docsSerifClass)}>Stuck? A human will answer.</h2><p className="mt-2 max-w-lg text-pretty">Average first reply on weekdays is eleven minutes. Bring your message id and we will find it.</p></div>
-            <a href={link.search} className="bg-primary-foreground text-primary focus-visible:ring-ring inline-flex h-12 shrink-0 items-center gap-2 rounded-xl px-6 font-semibold outline-none focus-visible:ring-[3px]">Ask support <ArrowRight className="size-4" aria-hidden="true" /></a>
+            <a href={link.search} className="bg-primary-foreground text-primary focus-visible:ring-ring inline-flex h-12 shrink-0 items-center gap-2 rounded-xl px-6 font-semibold outline-none focus-visible:ring-[3px]">Ask support <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" /></a>
           </div>
         </section>
       </main>

@@ -3,6 +3,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type CurrencyInputProps = Omit<
   React.ComponentProps<"input">,
@@ -29,7 +30,7 @@ function CurrencyInput({
   className,
   label,
   currency = "USD",
-  locale = "en-US",
+  locale,
   value,
   defaultValue = null,
   onValueChange,
@@ -39,6 +40,8 @@ function CurrencyInput({
   onBlur,
   ...props
 }: CurrencyInputProps) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const [internal, setInternal] = React.useState<number | null>(defaultValue)
   const [editing, setEditing] = React.useState(false)
   const [draft, setDraft] = React.useState("")
@@ -113,13 +116,13 @@ function CurrencyInput({
             onBlur?.(event)
           }}
           className={cn(
-            "border-input bg-background text-foreground h-9 w-full min-w-0 rounded-md border px-3 pr-14 text-sm tabular-nums outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20",
+            "border-input bg-background text-foreground h-9 w-full min-w-0 rounded-md border px-3 pe-14 text-sm tabular-nums outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20",
             className,
           )}
         />
         <span
           aria-hidden="true"
-          className="text-muted-foreground pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium"
+          className="text-muted-foreground pointer-events-none absolute end-3 top-1/2 -translate-y-1/2 text-xs font-medium"
         >
           {currency}
         </span>

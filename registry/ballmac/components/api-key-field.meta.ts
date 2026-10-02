@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["api-key", "secret", "token", "copy", "mask", "settings", "developer"],
   files: [{ path: "components/api-key-field.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [{ name: "api-key-field-demo", title: "Default", file: "api-key-field-demo.tsx" }],
   ai: {
     summary:

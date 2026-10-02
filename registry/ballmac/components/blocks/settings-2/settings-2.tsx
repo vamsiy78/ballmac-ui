@@ -144,7 +144,7 @@ function Settings2({
 
           {/* Tablets and up: a grid with one switch per event and channel. */}
           <div className="bg-card mt-4 hidden overflow-hidden rounded-2xl border sm:block">
-            <table className="w-full text-left text-sm">
+            <table className="w-full text-start text-sm">
               <caption className="sr-only">Notification channels for each event</caption>
               <thead>
                 <tr className="text-muted-foreground bg-muted/40 border-b text-xs">

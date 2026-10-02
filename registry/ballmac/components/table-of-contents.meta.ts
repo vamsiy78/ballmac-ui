@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["toc", "scrollspy", "docs", "anchor links"],
   files: [{ path: "components/table-of-contents.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils", "scroll", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "scroll", "motion-presets", "i18n"],
   examples: [
     { name: "table-of-contents-demo", title: "Auto-collected", file: "table-of-contents-demo.tsx" },
     { name: "table-of-contents-states", title: "Explicit items", file: "table-of-contents-states.tsx" },

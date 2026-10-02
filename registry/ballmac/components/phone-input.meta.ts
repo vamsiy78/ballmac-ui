@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["phone", "telephone", "country"],
   files: [{ path: "components/phone-input.tsx" }],
   dependencies: [],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "phone-input-demo",

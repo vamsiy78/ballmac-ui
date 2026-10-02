@@ -6,6 +6,7 @@ import { animate, useInView } from "motion/react"
 
 import { cn } from "@/lib/utils"
 import { useReducedMotionSafe } from "@/lib/ballmac/motion"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type NumberTickerProps = Omit<React.ComponentProps<"span">, "children"> & {
   /** The number to count to. */
@@ -28,10 +29,12 @@ function NumberTicker({
   duration = 1.4,
   delay = 0,
   format,
-  locale = "en-US",
+  locale,
   className,
   ...props
 }: NumberTickerProps) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const ref = React.useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" })
   const reduceMotion = useReducedMotionSafe()

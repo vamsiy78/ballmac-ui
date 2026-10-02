@@ -67,17 +67,17 @@ function AtlasProducts({ hrefs, ...props }: AtlasProductsProps) {
 
         <div className="flex flex-wrap items-center gap-2">
           <div className="relative min-w-52 flex-1 sm:max-w-xs">
-            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2" aria-hidden="true" />
-            <input type="search" aria-label="Search products" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search products" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-9 w-full rounded-lg border pr-3 pl-9 text-sm outline-none focus-visible:ring-[3px]" />
+            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-3 size-4 -translate-y-1/2" aria-hidden="true" />
+            <input type="search" aria-label="Search products" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search products" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-9 w-full rounded-lg border pe-3 ps-9 text-sm outline-none focus-visible:ring-[3px]" />
           </div>
           <select aria-label="Category" value={category} onChange={(e) => setCategory(e.target.value)} className="bg-card focus-visible:ring-ring/50 h-9 rounded-lg border px-3 text-sm outline-none focus-visible:ring-[3px]">
             <option value="all">All categories</option>
             {categories.map((c) => <option key={c}>{c}</option>)}
           </select>
           <button type="button" aria-pressed={lowOnly} onClick={() => setLowOnly((v) => !v)} className={cn("focus-visible:ring-ring/50 h-9 rounded-lg border px-3 text-sm font-semibold outline-none transition-colors focus-visible:ring-[3px]", lowOnly ? "bg-accent border-foreground/30" : "bg-card hover:bg-accent")}>
-            Low stock <span className="text-muted-foreground ml-1 tabular-nums">{lowCount}</span>
+            Low stock <span className="text-muted-foreground ms-1 tabular-nums">{lowCount}</span>
           </button>
-          <SegmentedControl aria-label="Layout" value={view} onValueChange={(v) => setView(v as View)} size="sm" className="ml-auto">
+          <SegmentedControl aria-label="Layout" value={view} onValueChange={(v) => setView(v as View)} size="sm" className="ms-auto">
             <SegmentedControlItem value="grid" aria-label="Grid view"><LayoutGrid /></SegmentedControlItem>
             <SegmentedControlItem value="list" aria-label="List view"><List /></SegmentedControlItem>
           </SegmentedControl>
@@ -105,16 +105,16 @@ function AtlasProducts({ hrefs, ...props }: AtlasProductsProps) {
         ) : (
           <div className="bg-card overflow-hidden rounded-xl border">
             <div tabIndex={0} role="region" aria-label="Products table" className="focus-visible:ring-ring/50 overflow-x-auto outline-none focus-visible:ring-[3px] focus-visible:ring-inset">
-              <table className="w-full min-w-[40rem] text-left text-sm">
+              <table className="w-full min-w-[40rem] text-start text-sm">
                 <caption className="sr-only">Products</caption>
-                <thead><tr className="text-muted-foreground bg-surface border-b text-xs">{["Product", "Category", "Status", "Price", "Stock"].map((c, i) => <th key={c} scope="col" className={cn("px-4 py-2.5 font-semibold", i === 3 && "text-right", i === 4 && "text-right")}>{c}</th>)}</tr></thead>
+                <thead><tr className="text-muted-foreground bg-surface border-b text-xs">{["Product", "Category", "Status", "Price", "Stock"].map((c, i) => <th key={c} scope="col" className={cn("px-4 py-2.5 font-semibold", i === 3 && "text-end", i === 4 && "text-end")}>{c}</th>)}</tr></thead>
                 <tbody className="divide-y">
                   {shown.map((p) => (
                     <tr key={p.id} className="hover:bg-accent/40">
                       <td className="px-4 py-2.5"><span className="flex items-center gap-3"><ProductTile hue={p.hue} className="size-9 shrink-0" /><span className="font-semibold">{p.name}</span></span></td>
                       <td className="text-muted-foreground px-4 py-2.5">{p.category}</td>
                       <td className="px-4 py-2.5"><Badge status={p.status === "active" ? "success" : "neutral"} variant="outline">{p.status === "active" ? "Active" : "Draft"}</Badge></td>
-                      <td className="px-4 py-2.5 text-right font-semibold tabular-nums">{moneyExact.format(p.price)}</td>
+                      <td className="px-4 py-2.5 text-end font-semibold tabular-nums">{moneyExact.format(p.price)}</td>
                       <td className="px-4 py-2.5">
                         <div className="flex items-center justify-end gap-1.5">
                           <button type="button" aria-label={`Remove one ${p.name}`} onClick={() => adjust(p.id, -1)} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex size-7 items-center justify-center rounded-md border outline-none focus-visible:ring-[3px]"><Minus className="size-3.5" aria-hidden="true" /></button>
@@ -132,7 +132,7 @@ function AtlasProducts({ hrefs, ...props }: AtlasProductsProps) {
       </main>
 
       <Sheet open={open} onOpenChange={(o) => { setOpen(o); if (!o) setErrors({}) }}>
-        <SheetContent side="right" className="w-full sm:max-w-md" closeLabel="Close">
+        <SheetContent side="end" className="w-full sm:max-w-md" closeLabel="Close">
           <form onSubmit={add} noValidate className="flex h-full flex-col">
             <SheetHeader>
               <SheetTitle>Add product</SheetTitle>

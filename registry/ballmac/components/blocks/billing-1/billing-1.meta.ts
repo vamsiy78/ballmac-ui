@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["billing", "subscription", "usage", "invoices", "payment method", "plan"],
   files: [{ path: "components/blocks/billing-1/billing-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "badge", "button", "dialog", "field", "input"],
+  registryDependencies: ["shadcn:utils", "badge", "button", "dialog", "field", "input", "i18n"],
   examples: [
     { name: "billing-1-demo", title: "Default", file: "billing-1-demo.tsx" },
     { name: "billing-1-starter", title: "Free plan", file: "billing-1-starter.tsx" },

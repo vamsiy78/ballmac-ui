@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "sources", "references", "citations", "disclosure"],
   files: [{ path: "components/sources-list.tsx" }],
   dependencies: ["motion@^12", "lucide-react", "radix-ui"],
-  registryDependencies: ["shadcn:utils", "citation"],
+  registryDependencies: ["shadcn:utils", "citation", "i18n"],
   examples: [
     { name: "sources-list-demo", title: "Collapsible list", file: "sources-list-demo.tsx" },
     { name: "sources-list-cards", title: "Always-open cards", file: "sources-list-cards.tsx" },

@@ -229,11 +229,11 @@ function Features6({
                 {t.link && (
                   <a href={t.link.href} className="group/link focus-visible:ring-ring/50 mt-8 inline-flex w-fit items-center gap-1.5 rounded-md text-sm font-medium outline-none focus-visible:ring-[3px]">
                     {t.link.label}
-                    <ArrowRight className="size-4 transition-transform group-hover/link:translate-x-0.5 motion-reduce:transition-none" aria-hidden="true" />
+                    <ArrowRight className="size-4 transition-transform group-hover/link:translate-x-0.5 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover/link:-translate-x-0.5" aria-hidden="true" />
                   </a>
                 )}
               </div>
-              <div aria-hidden="true" className="bg-muted/40 relative flex items-center justify-center border-t p-6 sm:p-10 md:border-t-0 md:border-l">
+              <div aria-hidden="true" className="bg-muted/40 relative flex items-center justify-center border-t p-6 sm:p-10 md:border-t-0 md:border-s">
                 <div className="absolute inset-0 bg-[radial-gradient(color-mix(in_oklch,var(--foreground)_14%,transparent)_1px,transparent_1px)] [background-size:18px_18px] [mask-image:radial-gradient(70%_70%_at_50%_50%,black,transparent)]" />
                 <div className="relative flex w-full justify-center">{t.visual}</div>
               </div>

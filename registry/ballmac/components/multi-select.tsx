@@ -5,6 +5,7 @@ import * as React from "react"
 import { Check, ChevronDown, Search } from "lucide-react"
 import { Popover as PopoverPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type MultiSelectOption = { value: string; label: string; disabled?: boolean }
 type MultiSelectProps = Omit<React.ComponentProps<"div">, "onChange"> & {
@@ -32,14 +33,17 @@ function MultiSelect({
   value,
   defaultValue = [],
   onValueChange,
-  label = "Select options",
-  placeholder = "Choose options",
+  label,
+  placeholder,
   maxSelected = Number.POSITIVE_INFINITY,
   disabled = false,
   name,
   className,
   ...props
 }: MultiSelectProps) {
+  const msg = useMessages()
+  label ??= msg("multi-select.label", "Select options")
+  placeholder ??= msg("multi-select.placeholder", "Choose options")
   const [internal, setInternal] = React.useState(defaultValue)
   const [query, setQuery] = React.useState("")
   const [open, setOpen] = React.useState(false)
@@ -70,7 +74,7 @@ function MultiSelect({
           data-slot="multi-select-trigger"
           disabled={disabled}
           aria-label={label}
-          className="flex min-h-9 w-full min-w-0 items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-1.5 text-left text-sm shadow-xs outline-none transition-[border-color,box-shadow] duration-150 motion-reduce:transition-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
+          className="flex min-h-9 w-full min-w-0 items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-1.5 text-start text-sm shadow-xs outline-none transition-[border-color,box-shadow] duration-150 motion-reduce:transition-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
         >
           {selected.length ? (
             <span className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden">
@@ -112,11 +116,11 @@ function MultiSelect({
               />
               <input
                 data-slot="multi-select-search"
-                aria-label="Search options"
+                aria-label={msg("multi-select.searchOptions", "Search options")}
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 className="h-9 min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-                placeholder="Search options…"
+                placeholder={msg("multi-select.searchOptions2", "Search options…")}
               />
             </div>
             <div
@@ -162,13 +166,12 @@ function MultiSelect({
                 })
               ) : (
                 <p className="px-2 py-4 text-center text-sm text-muted-foreground">
-                  No matching options
+                  {msg("multi-select.noMatchingOptions", "No matching options")}
                 </p>
               )}
             </div>
             <p id={id} className="mt-1 px-2 text-xs text-muted-foreground">
-              {selected.length} selected
-              {Number.isFinite(maxSelected) ? ` of ${maxSelected}` : ""}
+              {Number.isFinite(maxSelected) ? msg("multi-select.selectedOf", "{count} selected of {max}", { count: selected.length, max: maxSelected }) : msg("multi-select.selected", "{count} selected", { count: selected.length })}
             </p>
           </PopoverPrimitive.Content>
         </PopoverPrimitive.Portal>

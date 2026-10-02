@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["npm", "package", "version", "install", "badge"],
   files: [{ path: "components/package-badge.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "copy-button"],
+  registryDependencies: ["shadcn:utils", "copy-button", "i18n"],
   examples: [
     { name: "package-badge-demo", title: "Card with stats", file: "package-badge-demo.tsx" },
     { name: "package-badge-inline", title: "Inline pills", file: "package-badge-inline.tsx" },

@@ -50,7 +50,7 @@ export default function GlobeDemo() {
       <Globe
         markers={regions}
         label="Globe with 14 highlighted deployment regions"
-        className="absolute top-40 -right-36 w-[440px] max-w-none sm:top-10 sm:-right-28"
+        className="absolute top-40 -end-36 w-[440px] max-w-none sm:top-10 sm:-end-28"
       />
       <div
         aria-hidden="true"

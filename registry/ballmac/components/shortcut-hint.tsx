@@ -1,6 +1,9 @@
 // Ballmac UI: Shortcut Hint. https://ui.ballmac.com/components/shortcut-hint
+"use client"
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ShortcutHintProps = React.ComponentProps<"span"> & {
   /** Keys in order, such as ["⌘", "K"]. */
@@ -18,18 +21,19 @@ function ShortcutHint({
   compact = false,
   ...props
 }: ShortcutHintProps) {
+  const msg = useMessages()
   return (
     <span
       data-slot="shortcut-hint"
       role="note"
-      aria-label={`${label}: ${keys.join(" plus ")}`}
+      aria-label={msg("shortcut-hint.label", "{label}: {keys}", { label, keys: keys.join(msg("shortcut-hint.plus", " plus ")) })}
       className={cn(
         "inline-flex min-w-0 items-center gap-1 text-sm",
         className,
       )}
       {...props}
     >
-      <span aria-hidden="true" className="text-muted-foreground mr-1 truncate">
+      <span aria-hidden="true" className="text-muted-foreground me-1 truncate">
         {label}
       </span>
       <span

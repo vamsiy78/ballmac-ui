@@ -11,7 +11,7 @@ export default function TableOfContentsDemo() {
   const scroller = React.useRef<HTMLDivElement>(null);
   return (
     <div className="grid w-full max-w-2xl gap-6 rounded-xl border bg-card p-4 shadow-sm sm:grid-cols-[1fr_12rem]">
-      <div ref={scroller} tabIndex={0} aria-label="Guide" className="h-72 overflow-auto pr-2 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50">
+      <div ref={scroller} tabIndex={0} aria-label="Guide" className="h-72 overflow-auto pe-2 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50">
         <article className="grid gap-3 text-sm leading-relaxed text-muted-foreground">
           {sections.map(([title, subs]) => (
             <section key={title} className="grid gap-3">

@@ -6,12 +6,15 @@ import { Check, Copy, FileCode2, WrapText } from "lucide-react"
 import { Tabs as TabsPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 /* -------------------------------------------------------------------------------------------------
  * Shared pieces
  * -----------------------------------------------------------------------------------------------*/
 
-function CopyCodeButton({ getText, label = "Copy code" }: { getText: () => string; label?: string }) {
+function CopyCodeButton({ getText, label }: { getText: () => string; label?: string }) {
+  const msg = useMessages()
+  label ??= msg("code-block.label", "Copy code")
   const [copied, setCopied] = React.useState(false)
   const timer = React.useRef<ReturnType<typeof setTimeout>>(undefined)
   React.useEffect(() => () => clearTimeout(timer.current), [])
@@ -20,7 +23,7 @@ function CopyCodeButton({ getText, label = "Copy code" }: { getText: () => strin
       <button
         type="button"
         data-slot="code-block-copy"
-        aria-label={copied ? "Copied" : label}
+        aria-label={copied ? msg("code-block.copied", "Copied") : label}
         title={label}
         onClick={async () => {
           try {
@@ -44,13 +47,14 @@ function CopyCodeButton({ getText, label = "Copy code" }: { getText: () => strin
 }
 
 function WrapToggle({ wrap, onWrapChange }: { wrap: boolean; onWrapChange: (wrap: boolean) => void }) {
+  const msg = useMessages()
   return (
     <button
       type="button"
       data-slot="code-block-wrap"
-      aria-label="Wrap lines"
+      aria-label={msg("code-block.wrapLines", "Wrap lines")}
       aria-pressed={wrap}
-      title="Wrap lines"
+      title={msg("code-block.wrapLines", "Wrap lines")}
       onClick={() => onWrapChange(!wrap)}
       className="flex size-7 shrink-0 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-pressed:bg-accent aria-pressed:text-foreground"
     >
@@ -89,7 +93,7 @@ function CodeBody({ code, children, lineNumbers, highlight, wrap, label, codeRef
       className={cn(
         "overflow-x-auto py-3 font-mono text-[13px] leading-6 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:ring-inset",
         lineNumbers &&
-          "[counter-reset:line] [&_.line]:before:[counter-increment:line] [&_.line]:before:mr-4 [&_.line]:before:inline-block [&_.line]:before:w-[3ch] [&_.line]:before:text-right [&_.line]:before:text-muted-foreground/60 [&_.line]:before:content-[counter(line)] [&_.line]:before:select-none",
+          "[counter-reset:line] [&_.line]:before:[counter-increment:line] [&_.line]:before:me-4 [&_.line]:before:inline-block [&_.line]:before:w-[3ch] [&_.line]:before:text-end [&_.line]:before:text-muted-foreground/60 [&_.line]:before:content-[counter(line)] [&_.line]:before:select-none",
         // Pre-highlighted children (e.g. Shiki's <pre>) keep their colors but lose their own box.
         "[&_pre]:m-0 [&_pre]:bg-transparent! [&_pre]:p-0 [&_pre]:font-mono",
         wrap ? "[&_pre]:whitespace-pre-wrap [&_pre]:break-words" : "[&_pre]:whitespace-pre",
@@ -97,7 +101,7 @@ function CodeBody({ code, children, lineNumbers, highlight, wrap, label, codeRef
       )}
     >
       {code !== undefined ? (
-        <pre className={cn("min-w-full", wrap ? "w-full" : "w-max")}>
+        <pre dir="ltr" className={cn("min-w-full", wrap ? "w-full" : "w-max")}>
           <code className="block">
             {lines.map((line, i) => (
               <span
@@ -117,7 +121,7 @@ function CodeBody({ code, children, lineNumbers, highlight, wrap, label, codeRef
   )
 }
 
-const headerClass = "flex h-10 min-w-0 items-center gap-2 border-b bg-muted/40 pr-1.5 pl-3.5"
+const headerClass = "flex h-10 min-w-0 items-center gap-2 border-b bg-muted/40 pe-1.5 ps-3.5"
 
 /* -------------------------------------------------------------------------------------------------
  * CodeBlock
@@ -181,15 +185,15 @@ function CodeBlock({
             </>
           ) : null}
           {language ? (
-            <span className="ml-auto shrink-0 font-mono text-[11px] tracking-wide text-muted-foreground uppercase">{language}</span>
+            <span className="ms-auto shrink-0 font-mono text-[11px] tracking-wide text-muted-foreground uppercase">{language}</span>
           ) : null}
-          <span className={cn("flex shrink-0 items-center", !language && "ml-auto")}>
+          <span className={cn("flex shrink-0 items-center", !language && "ms-auto")}>
             {wrapToggle ? <WrapToggle wrap={wrap} onWrapChange={setWrap} /> : null}
             {copyable ? <CopyCodeButton getText={getText} /> : null}
           </span>
         </div>
       ) : wrapToggle || copyable ? (
-        <div className="absolute top-1.5 right-1.5 z-10 flex items-center rounded-md bg-card/90">
+        <div className="absolute top-1.5 end-1.5 z-10 flex items-center rounded-md bg-card/90">
           {wrapToggle ? <WrapToggle wrap={wrap} onWrapChange={setWrap} /> : null}
           {copyable ? <CopyCodeButton getText={getText} /> : null}
         </div>
@@ -201,7 +205,7 @@ function CodeBlock({
         wrap={wrap}
         label={filename ?? (language ? `${language} code` : "Code")}
         codeRef={codeRef}
-        className={cn(!hasHeader && (copyable || wrapToggle) && "pr-10", bodyClassName)}
+        className={cn(!hasHeader && (copyable || wrapToggle) && "pe-10", bodyClassName)}
       >
         {children}
       </CodeBody>
@@ -257,6 +261,7 @@ function CodeBlockTabs({
   className,
   ...props
 }: CodeBlockTabsProps) {
+  const msg = useMessages()
   const [internal, setInternal] = React.useState(defaultValue ?? files[0]?.filename ?? "")
   const value = valueProp ?? internal
   const current = files.find((f) => f.filename === value) ?? files[0]
@@ -273,9 +278,9 @@ function CodeBlockTabs({
       className={cn("w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground", className)}
       {...props}
     >
-      <div className={cn(headerClass, "pl-1.5")}>
+      <div className={cn(headerClass, "ps-1.5")}>
         <TabsPrimitive.List
-          aria-label="Files"
+          aria-label={msg("code-block.files", "Files")}
           className="flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto [scrollbar-width:none]"
         >
           {files.map((file) => (

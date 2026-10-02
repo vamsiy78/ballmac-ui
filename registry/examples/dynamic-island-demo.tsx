@@ -151,7 +151,7 @@ export default function DynamicIslandDemo() {
             <DynamicIslandView value="deploy" radius={24} label="Deploy succeeded: acme-web is live" className="w-[300px] gap-3 px-3.5 pt-9 pb-3.5 sm:w-[360px]">
               <span className="relative flex size-10 shrink-0 items-center justify-center rounded-[11px] bg-linear-to-b from-chart-2/80 to-chart-2">
                 <Rocket className="size-5" aria-hidden="true" />
-                <span className="absolute -right-1 -bottom-1 flex size-4 items-center justify-center rounded-full bg-white text-black ring-2 ring-black">
+                <span className="absolute -end-1 -bottom-1 flex size-4 items-center justify-center rounded-full bg-white text-black ring-2 ring-black">
                   <Check className="size-2.5" strokeWidth={3} aria-hidden="true" />
                 </span>
               </span>

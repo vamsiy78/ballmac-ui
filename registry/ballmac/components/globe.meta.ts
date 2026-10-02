@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["globe", "webgl", "map", "regions", "3d", "hero", "interactive"],
   files: [{ path: "components/globe.tsx" }],
   dependencies: ["cobe@^0.6"],
-  registryDependencies: ["shadcn:utils", "color"],
+  registryDependencies: ["shadcn:utils", "color", "i18n"],
   examples: [
     { name: "globe-demo", title: "Regions card", file: "globe-demo.tsx" },
     { name: "globe-hero", title: "Hero horizon", file: "globe-hero.tsx" },

@@ -188,7 +188,7 @@ function AiChat2({
 
   return (
     <div data-slot="ai-chat-2" className={cn("bg-background relative flex overflow-hidden rounded-2xl border shadow-[0_30px_80px_-50px_rgb(0_0_0/0.4)]", className)} style={{ height, ...style }} {...props}>
-      <aside hidden={!sidebar} className="bg-muted/30 hidden w-60 shrink-0 flex-col border-r lg:flex [&[hidden]]:hidden">
+      <aside hidden={!sidebar} className="bg-muted/30 hidden w-60 shrink-0 flex-col border-e lg:flex [&[hidden]]:hidden">
         <div className="p-3">
           <Button variant="outline" className="w-full justify-start" onClick={() => { setMessages([]); setActive(undefined); setChips([]); setPanel("closed") }}><Plus /> New chat</Button>
         </div>
@@ -197,7 +197,7 @@ function AiChat2({
           <ul className="space-y-0.5">
             {conversations.map((c) => (
               <li key={c.id}>
-                <button type="button" aria-current={c.id === active ? "page" : undefined} onClick={() => setActive(c.id)} className={cn("focus-visible:ring-ring/50 flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-sm outline-none transition-colors focus-visible:ring-[3px]", c.id === active ? "bg-accent text-foreground" : "text-muted-foreground hover:bg-accent/60 hover:text-foreground")}>
+                <button type="button" aria-current={c.id === active ? "page" : undefined} onClick={() => setActive(c.id)} className={cn("focus-visible:ring-ring/50 flex w-full items-center gap-2 rounded-lg px-2 py-2 text-start text-sm outline-none transition-colors focus-visible:ring-[3px]", c.id === active ? "bg-accent text-foreground" : "text-muted-foreground hover:bg-accent/60 hover:text-foreground")}>
                   <MessageSquare className="size-4 shrink-0" aria-hidden="true" /><span className="truncate">{c.title}</span>
                 </button>
               </li>
@@ -208,9 +208,9 @@ function AiChat2({
 
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex h-14 shrink-0 items-center gap-2 border-b px-3">
-          <Button variant="ghost" size="icon" className="hidden lg:inline-flex" aria-label={sidebar ? "Hide conversations" : "Show conversations"} aria-pressed={sidebar} onClick={() => setSidebar((s) => !s)}><PanelLeft /></Button>
+          <Button variant="ghost" size="icon" className="hidden lg:inline-flex" aria-label={sidebar ? "Hide conversations" : "Show conversations"} aria-pressed={sidebar} onClick={() => setSidebar((s) => !s)}><PanelLeft  className="rtl:-scale-x-100"/></Button>
           <p className="truncate text-sm font-medium">{conversations.find((c) => c.id === active)?.title ?? "New chat"}</p>
-          {hasArtifact && panel !== "open" && <Button variant="outline" size="sm" className={cn("ml-auto", panel === "auto" && "xl:hidden")} onClick={() => setPanel("open")}><FileCode2 /> Open {artifactTitle}</Button>}
+          {hasArtifact && panel !== "open" && <Button variant="outline" size="sm" className={cn("ms-auto", panel === "auto" && "xl:hidden")} onClick={() => setPanel("open")}><FileCode2 /> Open {artifactTitle}</Button>}
         </div>
 
         <Chat className="min-h-0 flex-1">
@@ -231,7 +231,7 @@ function AiChat2({
                   <MessageContent>
                     <StreamingText text={m.text} streaming={m.streaming} />
                     {m.artifact && !m.streaming && (
-                      <button type="button" onClick={() => { setVersion(m.artifact!); setPanel("open") }} className="bg-card hover:bg-accent/50 focus-visible:ring-ring/50 mt-3 flex w-full max-w-sm items-center gap-3 rounded-xl border p-3 text-left outline-none transition-colors focus-visible:ring-[3px]">
+                      <button type="button" onClick={() => { setVersion(m.artifact!); setPanel("open") }} className="bg-card hover:bg-accent/50 focus-visible:ring-ring/50 mt-3 flex w-full max-w-sm items-center gap-3 rounded-xl border p-3 text-start outline-none transition-colors focus-visible:ring-[3px]">
                         <span aria-hidden="true" className="bg-muted flex size-9 items-center justify-center rounded-lg"><FileCode2 className="size-4" /></span>
                         <span className="min-w-0 flex-1 text-sm"><span className="block font-medium">{artifactTitle} <span className="text-muted-foreground font-normal">· v{m.artifact}</span></span><span className="text-muted-foreground block truncate text-xs">{versions[m.artifact - 1]?.note}</span></span>
                       </button>
@@ -251,7 +251,7 @@ function AiChat2({
             <PromptInput onSubmit={(v) => send(v)} status={busy ? "streaming" : "idle"}>
               <PromptInputTextarea placeholder="Ask for a change…" />
               <PromptInputToolbar>
-                <PromptInputSubmit className="ml-auto" />
+                <PromptInputSubmit className="ms-auto" />
               </PromptInputToolbar>
             </PromptInput>
           </ChatFooter>
@@ -259,7 +259,7 @@ function AiChat2({
       </div>
 
       {hasArtifact && panel !== "closed" && current && (
-        <div className={cn("bg-background xl:static xl:inset-auto xl:z-auto xl:flex xl:w-[28rem] xl:shrink-0 xl:border-l 2xl:w-[34rem]", panel === "open" ? "absolute inset-0 z-10 flex" : "hidden")}>
+        <div className={cn("bg-background xl:static xl:inset-auto xl:z-auto xl:flex xl:w-[28rem] xl:shrink-0 xl:border-s 2xl:w-[34rem]", panel === "open" ? "absolute inset-0 z-10 flex" : "hidden")}>
           <ArtifactPanel
             title={artifactTitle}
             kind={artifactKind}

@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["number", "odometer", "counter", "currency", "format"],
   files: [{ path: "components/animated-number-flow.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "animated-number-flow-demo", title: "Price with plan toggle", file: "animated-number-flow-demo.tsx" },
     { name: "animated-number-flow-formats", title: "Currency, percent, compact", file: "animated-number-flow-formats.tsx" },

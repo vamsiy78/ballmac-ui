@@ -4,6 +4,7 @@
 
 import * as React from "react";
 import { Slider as Primitive } from "radix-ui";
+import { useDirection } from "@/lib/ballmac/direction";
 import { cn } from "@/lib/utils";
 
 type SliderProps = Omit<
@@ -40,9 +41,11 @@ function Slider({
   const [inner, setInner] = React.useState<number[]>(defaultValue ?? [min]);
   const values = value ?? inner;
   const vertical = orientation === "vertical";
+  const dir = useDirection(props.dir);
   return (
     <Primitive.Root
       data-slot="slider"
+      dir={dir}
       value={value}
       defaultValue={defaultValue}
       min={min}
@@ -84,7 +87,7 @@ function Slider({
               className={cn(
                 "pointer-events-none absolute rounded-md bg-foreground px-1.5 py-0.5 text-xs font-medium tabular-nums text-background opacity-0 shadow transition-opacity duration-150 group-hover/thumb:opacity-100 group-focus-visible/thumb:opacity-100 group-active/thumb:opacity-100 motion-reduce:transition-none",
                 vertical
-                  ? "top-1/2 left-full ml-2 -translate-y-1/2"
+                  ? "top-1/2 start-full ms-2 -translate-y-1/2"
                   : "bottom-full left-1/2 mb-2 -translate-x-1/2",
               )}
             >

@@ -3,7 +3,9 @@
 
 import * as React from "react"
 import { Slider as SliderPrimitive } from "radix-ui"
+import { useDirection } from "@/lib/ballmac/direction"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type SliderRangeProps = Omit<
   React.ComponentProps<typeof SliderPrimitive.Root>,
@@ -36,8 +38,10 @@ function SliderRange({
   disabled,
   ...props
 }: SliderRangeProps) {
+  const msg = useMessages()
   const [internal, setInternal] = React.useState<[number, number]>(defaultValue)
   const current = value ?? internal
+  const dir = useDirection(props.dir)
   return (
     <div
       data-slot="slider-range"
@@ -53,6 +57,7 @@ function SliderRange({
         </span>
       </div>
       <SliderPrimitive.Root
+        dir={dir}
         {...props}
         value={current}
         onValueChange={(next) => {
@@ -78,12 +83,12 @@ function SliderRange({
         </SliderPrimitive.Track>
         <SliderPrimitive.Thumb
           data-slot="slider-range-min"
-          aria-label={`${label} minimum`}
+          aria-label={msg("slider-range.minimum", "{label} minimum", { label })}
           className="border-primary bg-background block size-5 rounded-full border-2 shadow-sm outline-none transition-transform duration-150 focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-safe:hover:scale-110 motion-reduce:transition-none"
         />
         <SliderPrimitive.Thumb
           data-slot="slider-range-max"
-          aria-label={`${label} maximum`}
+          aria-label={msg("slider-range.maximum", "{label} maximum", { label })}
           className="border-primary bg-background block size-5 rounded-full border-2 shadow-sm outline-none transition-transform duration-150 focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-safe:hover:scale-110 motion-reduce:transition-none"
         />
       </SliderPrimitive.Root>

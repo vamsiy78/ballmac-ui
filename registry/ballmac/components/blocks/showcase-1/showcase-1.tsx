@@ -36,7 +36,7 @@ function Ledger({ app }: { app: string }) {
   ]
   return (
     <div className="@container bg-background flex h-full text-xs">
-      <aside className="bg-muted/50 hidden w-32 shrink-0 space-y-0.5 border-r p-2 @md:block">
+      <aside className="bg-muted/50 hidden w-32 shrink-0 space-y-0.5 border-e p-2 @md:block">
         <p className="text-muted-foreground px-2 pt-1 pb-1.5 text-[10px] font-semibold uppercase">{app}</p>
         {["Overview", "Invoices", "Customers", "Reports"].map((l, i) => (
           <p key={l} className={cn("rounded-md px-2 py-1.5", i === 1 ? "bg-foreground/10 font-medium" : "text-muted-foreground")}>{l}</p>
@@ -57,7 +57,7 @@ function Ledger({ app }: { app: string }) {
             <li key={n} className="flex items-center gap-2 px-2.5 py-2">
               <span className="min-w-0 flex-1 truncate font-medium">{n}</span>
               <span className={cn("rounded-full px-1.5 py-px text-[10px]", s === "Paid" ? "bg-chart-2/15" : "bg-chart-3/20")}>{s}</span>
-              <span className="w-14 text-right tabular-nums">{a}</span>
+              <span className="w-14 text-end tabular-nums">{a}</span>
             </li>
           ))}
         </ul>
@@ -179,7 +179,7 @@ function Showcase1({ app = "Ledger", children, time = "2026-10-01T09:41:00", wid
       </MenuBar>
 
       {widgets && (
-        <div className="pointer-events-none absolute top-10 right-4 z-0 hidden flex-col gap-3 @4xl:flex">
+        <div className="pointer-events-none absolute top-10 end-4 z-0 hidden flex-col gap-3 @4xl:flex">
           <WeatherWidget city="Cupertino" temperature={72} condition="partly-cloudy" high={78} low={61} className="pointer-events-auto w-40" />
           <CalendarWidget date="2026-10-01" events={[{ id: "a", title: "Design review", time: "10:30 AM", tone: "red" }]} className="pointer-events-auto w-40" />
         </div>

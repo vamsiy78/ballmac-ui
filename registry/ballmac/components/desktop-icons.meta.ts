@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["desktop", "icons", "drag", "selection", "macos"],
   files: [{ path: "components/desktop-icons.tsx" }],
   dependencies: [],
-  registryDependencies: ["shadcn:utils", "mac-icons"],
+  registryDependencies: ["shadcn:utils", "mac-icons", "i18n"],
   examples: [
     { name: "desktop-icons-demo", title: "Desktop on a wallpaper", file: "desktop-icons-demo.tsx" },
     { name: "desktop-icons-window", title: "Icons behind windows", file: "desktop-icons-window.tsx" },

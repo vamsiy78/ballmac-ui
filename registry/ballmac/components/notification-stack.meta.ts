@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["notifications", "toast", "stack", "macos", "notification center", "motion", "vibrancy"],
   files: [{ path: "components/notification-stack.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [{ name: "notification-stack-demo", title: "Notification Center", file: "notification-stack-demo.tsx" }],
   ai: {
     summary:

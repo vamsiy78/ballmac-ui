@@ -187,7 +187,7 @@ function AnimatedBeam({
       width={geometry.width}
       height={geometry.height}
       viewBox={`0 0 ${geometry.width} ${geometry.height}`}
-      className={cn("pointer-events-none absolute top-0 left-0 overflow-visible", className)}
+      className={cn("pointer-events-none absolute top-0 start-0 overflow-visible", className)}
       style={style}
       {...props}
     >

@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["multi-select", "filter", "checkbox"],
   files: [{ path: "components/multi-select.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "multi-select-demo",

@@ -43,7 +43,7 @@ export default function SheetDialogForm() {
                     <SheetDialogDescription>Choose a name for the document.</SheetDialogDescription>
                   </div>
                   <label className="flex items-center gap-3 text-[13px]">
-                    <span className="w-14 text-right text-muted-foreground">Name:</span>
+                    <span className="w-14 text-end text-muted-foreground">Name:</span>
                     <input
                       value={name}
                       onChange={(e) => setName(e.target.value)}

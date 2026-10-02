@@ -29,7 +29,7 @@ function PublicationSection({ hrefs, initial = "Essays", ...props }: Publication
           <div role="group" aria-label="Choose a section" className="flex flex-wrap gap-1.5">
             {(["All", ...sections] as const).map((s) => <button key={s} type="button" aria-pressed={section === s} onClick={() => { setSection(s); setCount(4) }} className={cn("focus-visible:ring-ring/50 h-9 rounded-full border px-4 text-sm font-semibold outline-none transition-colors focus-visible:ring-[3px]", section === s ? "bg-foreground text-background border-transparent" : "hover:bg-accent")}>{s}</button>)}
           </div>
-          <label className="text-muted-foreground ml-auto flex items-center gap-2 text-sm">Sort <select value={sort} onChange={(e) => setSort(e.target.value as "new" | "long")} className="bg-background focus-visible:ring-ring/50 text-foreground h-9 rounded border px-2 outline-none focus-visible:ring-[3px]"><option value="new">Newest</option><option value="long">Longest</option></select></label>
+          <label className="text-muted-foreground ms-auto flex items-center gap-2 text-sm">Sort <select value={sort} onChange={(e) => setSort(e.target.value as "new" | "long")} className="bg-background focus-visible:ring-ring/50 text-foreground h-9 rounded border px-2 outline-none focus-visible:ring-[3px]"><option value="new">Newest</option><option value="long">Longest</option></select></label>
         </div>
         <p className="sr-only" role="status">Showing {shown.length} of {list.length} stories</p>
         {shown.length === 0 && <p className="text-muted-foreground mt-12 border border-dashed p-12 text-center">Nothing in this section yet.</p>}

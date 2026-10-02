@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["date", "range", "calendar"],
   files: [{ path: "components/date-range-picker.tsx" }],
   dependencies: [],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "date-range-picker-demo",

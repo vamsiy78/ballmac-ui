@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["files", "browser", "table", "upload", "folders"],
   files: [{ path: "components/file-browser.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n", "direction"],
   examples: [
     { name: "file-browser-demo", title: "Project files", file: "file-browser-demo.tsx" },
     { name: "file-browser-grid", title: "Grid view", file: "file-browser-grid.tsx" },

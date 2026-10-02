@@ -8,6 +8,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { Button } from "@/components/ballmac/button"
 import { spring } from "@/lib/ballmac/motion"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 /** Pixels from the bottom that still count as "at the bottom". */
 const BOTTOM_THRESHOLD = 48
@@ -107,13 +108,16 @@ type ChatMessagesProps = React.ComponentProps<"div"> & {
  * reader scrolled up; then shows a "scroll to latest" button.
  */
 function ChatMessages({
-  label = "Conversation",
-  scrollButtonLabel = "Scroll to latest message",
+  label,
+  scrollButtonLabel,
   contentClassName,
   className,
   children,
   ...props
 }: ChatMessagesProps) {
+  const msg = useMessages()
+  label ??= msg("ai-chat.label", "Conversation")
+  scrollButtonLabel ??= msg("ai-chat.scrollButtonLabel", "Scroll to latest message")
   const ctx = React.useContext(ChatContext)
   const local = useStickToBottom()
   const { scrollRef, contentRef, isAtBottom, scrollToBottom } = ctx ?? local
@@ -212,11 +216,12 @@ type ChatSuggestionsProps = Omit<React.ComponentProps<"ul">, "onSelect"> & {
 }
 
 function ChatSuggestions({ onSelect, className, children, ...props }: ChatSuggestionsProps) {
+  const msg = useMessages()
   return (
     <SuggestionsContext.Provider value={onSelect}>
       <ul
         data-slot="chat-suggestions"
-        aria-label="Suggestions"
+        aria-label={msg("ai-chat.suggestions", "Suggestions")}
         className={cn("mt-2 flex flex-wrap justify-center gap-2", className)}
         {...props}
       >
@@ -244,7 +249,7 @@ function ChatSuggestion({ value, className, children, onClick, ...props }: ChatS
         if (text) onSelect?.(text)
       }}
       className={cn(
-        "inline-flex min-h-8 max-w-full items-center rounded-full border bg-card px-3 py-1 text-left text-[13px] text-foreground outline-none transition-colors duration-150 hover:border-foreground/20 hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex min-h-8 max-w-full items-center rounded-full border bg-card px-3 py-1 text-start text-[13px] text-foreground outline-none transition-colors duration-150 hover:border-foreground/20 hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
         className
       )}
       {...props}

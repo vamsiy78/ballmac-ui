@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["json", "data", "developer"],
   files: [{ path: "components/json-viewer.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "json-viewer-demo",

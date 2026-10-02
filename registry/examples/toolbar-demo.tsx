@@ -13,8 +13,8 @@ export default function ToolbarDemo() {
     <div className="w-full max-w-2xl overflow-hidden rounded-xl border bg-card shadow-sm">
       <Toolbar label="Documents" title="Documents" subtitle="42 items" className="border-b">
         <ToolbarGroup>
-          <ToolbarButton aria-label="Back" icon={<ChevronLeft />} />
-          <ToolbarButton aria-label="Forward" icon={<ChevronRight />} disabled />
+          <ToolbarButton aria-label="Back" icon={<ChevronLeft  className="rtl:rotate-180"/>} />
+          <ToolbarButton aria-label="Forward" icon={<ChevronRight  className="rtl:rotate-180"/>} disabled />
         </ToolbarGroup>
         <ToolbarSegmented type="single" value={view} onValueChange={(v) => v && setView(v)} aria-label="View">
           <ToolbarSegment value="icons" aria-label="Icons"><LayoutGrid /></ToolbarSegment>

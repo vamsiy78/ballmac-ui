@@ -38,8 +38,8 @@ function LedgerSupport({ hrefs, ...props }: LedgerSupportProps) {
           <LedgerHeading as="h1" className="text-4xl sm:text-6xl">How can we <em>help</em>?</LedgerHeading>
           <form role="search" onSubmit={(e) => e.preventDefault()} className="relative mx-auto mt-8 max-w-xl">
             <label htmlFor="ledger-search" className="sr-only">Search help articles</label>
-            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2" aria-hidden="true" />
-            <input id="ledger-search" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search “license”, “sync”, “export”…" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-13 w-full rounded-full border pr-5 pl-12 text-base shadow-sm outline-none focus-visible:ring-[3px]" />
+            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-4 size-5 -translate-y-1/2" aria-hidden="true" />
+            <input id="ledger-search" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search “license”, “sync”, “export”…" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-13 w-full rounded-full border pe-5 ps-12 text-base shadow-sm outline-none focus-visible:ring-[3px]" />
           </form>
           <p className="text-muted-foreground mt-3 text-sm" role="status">{q ? `${shown.length} ${shown.length === 1 ? "topic" : "topics"} match “${query}”` : "Most questions are answered in under a minute."}</p>
         </section>

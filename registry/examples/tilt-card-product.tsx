@@ -26,7 +26,7 @@ export default function TiltCardProduct() {
               <span className="block text-sm font-semibold">Command Palette</span>
               <span className="mt-1 block text-sm text-muted-foreground">Every action, two keystrokes away.</span>
             </span>
-            <ArrowUpRight className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+            <ArrowUpRight className="size-4 shrink-0 text-muted-foreground rtl:-scale-x-100" aria-hidden="true" />
           </TiltCardLayer>
         </a>
       </TiltCard>

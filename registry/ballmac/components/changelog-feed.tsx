@@ -6,6 +6,7 @@ import { Bug, ChevronDown, Sparkles, Trash2, Wand2 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useLocale, useMessages, defineMessage, type Message } from "@/lib/ballmac/i18n";
 
 type ChangeType = "new" | "improved" | "fixed" | "removed";
 
@@ -43,11 +44,11 @@ type ChangelogFeedProps = Omit<React.ComponentProps<"div">, "children"> & {
   locale?: string;
 };
 
-const TYPES: Record<ChangeType, { label: string; icon: typeof Sparkles; chip: string; tone: string }> = {
-  new: { label: "New", icon: Sparkles, chip: "bg-chart-2/12 text-foreground", tone: "text-chart-2" },
-  improved: { label: "Improved", icon: Wand2, chip: "bg-chart-1/12 text-foreground", tone: "text-chart-1" },
-  fixed: { label: "Fixed", icon: Bug, chip: "bg-chart-3/15 text-foreground", tone: "text-chart-3" },
-  removed: { label: "Removed", icon: Trash2, chip: "bg-muted text-foreground", tone: "text-muted-foreground" },
+const TYPES: Record<ChangeType, { label: Message; icon: typeof Sparkles; chip: string; tone: string }> = {
+  new: { label: defineMessage("changelog-feed.TYPES.new", "New"), icon: Sparkles, chip: "bg-chart-2/12 text-foreground", tone: "text-chart-2" },
+  improved: { label: defineMessage("changelog-feed.TYPES.improved", "Improved"), icon: Wand2, chip: "bg-chart-1/12 text-foreground", tone: "text-chart-1" },
+  fixed: { label: defineMessage("changelog-feed.TYPES.fixed", "Fixed"), icon: Bug, chip: "bg-chart-3/15 text-foreground", tone: "text-chart-3" },
+  removed: { label: defineMessage("changelog-feed.TYPES.removed", "Removed"), icon: Trash2, chip: "bg-muted text-foreground", tone: "text-muted-foreground" },
 };
 
 function EntryCard({
@@ -63,6 +64,7 @@ function EntryCard({
   locale: string;
   latest: boolean;
 }) {
+  const msg = useMessages()
   const reduce = useReducedMotion();
   const [expanded, setExpanded] = React.useState(false);
   const listId = React.useId();
@@ -92,7 +94,7 @@ function EntryCard({
           )}
           {latest && (
             <span className="rounded-md bg-primary px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-primary-foreground uppercase">
-              Latest
+              {msg("changelog-feed.latest", "Latest")}
             </span>
           )}
         </div>
@@ -112,7 +114,7 @@ function EntryCard({
               <li key={`${change.type}-${i}`} className="flex items-start gap-3 text-sm leading-relaxed">
                 <span className={cn("mt-0.5 inline-flex h-5 shrink-0 items-center gap-1 rounded-md px-1.5 text-[11px] font-semibold", t.chip)}>
                   <Icon aria-hidden="true" className={cn("size-3", t.tone)} />
-                  {t.label}
+                  {msg.of(t.label)}
                 </span>
                 <span>{change.text}</span>
               </li>
@@ -144,10 +146,13 @@ function ChangelogFeed({
   entries,
   filterable = true,
   collapsedCount = 4,
-  locale = "en-US",
+  locale,
   className,
   ...props
 }: ChangelogFeedProps) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
+  const msg = useMessages()
   const [filter, setFilter] = React.useState<ChangeType | "all">("all");
   const counts = entries.reduce(
     (acc, e) => {
@@ -162,7 +167,7 @@ function ChangelogFeed({
   return (
     <div data-slot="changelog-feed" className={cn("grid gap-8", className)} {...props}>
       {filterable && (
-        <div role="group" aria-label="Filter changes" className="flex flex-wrap gap-2">
+        <div role="group" aria-label={msg("changelog-feed.filterChanges", "Filter changes")} className="flex flex-wrap gap-2">
           {(["all", ...types] as const).map((t) => {
             const active = filter === t;
             return (
@@ -173,7 +178,7 @@ function ChangelogFeed({
                 onClick={() => setFilter(t)}
                 className="inline-flex h-8 items-center gap-2 rounded-full border px-3.5 text-[13px] font-medium outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground"
               >
-                {t === "all" ? "All" : TYPES[t].label}
+                {t === "all" ? msg("changelog-feed.all", "All") : msg.of(TYPES[t].label)}
                 <span className="text-xs opacity-70 tabular-nums">{t === "all" ? entries.reduce((n, e) => n + e.changes.length, 0) : counts[t]}</span>
               </button>
             );
@@ -186,7 +191,7 @@ function ChangelogFeed({
             <EntryCard key={entry.id} entry={entry} filter={filter} collapsedCount={collapsedCount} locale={locale} latest={entry.id === entries[0]?.id} />
           ))}
         </AnimatePresence>
-        {shown.length === 0 && <p className="text-sm text-muted-foreground">No releases match this filter.</p>}
+        {shown.length === 0 && <p className="text-sm text-muted-foreground">{msg("changelog-feed.noReleasesMatchThisFilter", "No releases match this filter.")}</p>}
       </div>
     </div>
   );

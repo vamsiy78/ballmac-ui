@@ -115,7 +115,7 @@ function TimelineConnector({
       data-slot="timeline-connector"
       aria-hidden="true"
       className={cn(
-        "bg-border absolute bottom-0 left-[11px] top-6 w-px group-last/timeline-item:hidden",
+        "bg-border absolute bottom-0 start-[11px] top-6 w-px group-last/timeline-item:hidden",
         className,
       )}
       {...props}

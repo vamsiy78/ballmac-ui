@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["sphere", "3d", "logos", "cloud", "tech stack"],
   files: [{ path: "components/icon-cloud.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "icon-cloud-demo", title: "Tech stack sphere", file: "icon-cloud-demo.tsx" },
     { name: "icon-cloud-links", title: "Linked labels", file: "icon-cloud-links.tsx" },

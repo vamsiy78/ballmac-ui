@@ -23,7 +23,7 @@ function Landing() {
         <span className="text-muted-foreground">Product</span>
         <span className="text-muted-foreground">Docs</span>
         <span className="text-muted-foreground">Pricing</span>
-        <span className="ml-auto text-muted-foreground">Sign in</span>
+        <span className="ms-auto text-muted-foreground">Sign in</span>
         <span className="rounded-full bg-primary px-4 py-1.5 font-medium text-primary-foreground">Get started</span>
       </nav>
 
@@ -31,7 +31,7 @@ function Landing() {
         <span className="inline-flex items-center gap-2 rounded-full border bg-background/70 px-3 py-1 text-[13px] text-muted-foreground backdrop-blur">
           <Sparkles className="size-3.5 text-chart-4" aria-hidden="true" />
           Release 3.0 is out
-          <ArrowRight className="size-3.5" aria-hidden="true" />
+          <ArrowRight className="size-3.5 rtl:rotate-180" aria-hidden="true" />
         </span>
         <h1 className="mt-6 text-[64px] leading-[1.02] font-semibold tracking-[-0.04em]">
           Ship calmer software.

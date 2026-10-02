@@ -94,7 +94,7 @@ function StickyScroll({
               aria-current={isActive ? "step" : undefined}
               data-active={isActive || undefined}
               style={{ "--step-min-h": stepMinHeight } as React.CSSProperties}
-              className="group/step relative grid content-center gap-4 lg:min-h-(--step-min-h) lg:border-l-2 lg:border-transparent lg:pl-6 lg:transition-colors lg:data-[active]:border-primary motion-reduce:transition-none"
+              className="group/step relative grid content-center gap-4 lg:min-h-(--step-min-h) lg:border-s-2 lg:border-transparent lg:ps-6 lg:transition-colors lg:data-[active]:border-primary motion-reduce:transition-none"
             >
               <div className="lg:hidden" aria-hidden="true">
                 <div className="aspect-[4/3] overflow-hidden rounded-2xl border bg-card">{item.visual}</div>

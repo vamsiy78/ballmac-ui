@@ -63,7 +63,7 @@ function Console() {
           className="bg-chart-1 text-background focus-visible:ring-ring/50 inline-flex h-9 items-center gap-1.5 rounded-md px-3.5 text-sm font-semibold outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px] disabled:opacity-60"
           style={mono}
         >
-          {state === "done" ? "Send again" : "Send"} <ArrowRight className="size-4" aria-hidden="true" />
+          {state === "done" ? "Send again" : "Send"} <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />
         </button>
       </div>
       {state === "done" && (
@@ -99,7 +99,7 @@ function RelayHome({ hrefs, ...props }: RelayHomeProps) {
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <a href="#" className="bg-foreground text-background focus-visible:ring-ring/50 inline-flex h-12 items-center gap-2 rounded-md px-5 font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]" style={mono}>
-                  Get your API key <ArrowRight className="size-4" aria-hidden="true" />
+                  Get your API key <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />
                 </a>
                 <a href={hrefs?.docs ?? "/relay/docs"} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-12 items-center rounded-md border px-5 font-medium outline-none transition-colors focus-visible:ring-[3px]" style={mono}>
                   Read the docs
@@ -160,7 +160,7 @@ function RelayHome({ hrefs, ...props }: RelayHomeProps) {
             <h2 className="mt-4 max-w-2xl text-3xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Everything between “send” and “received”.</h2>
             <ul className="mt-12 grid overflow-hidden rounded-lg border sm:grid-cols-2 lg:grid-cols-3">
               {features.map((f, i) => (
-                <li key={f.title} className={cn("bg-card p-7", "border-b sm:[&:nth-child(odd)]:border-r lg:[&:nth-child(odd)]:border-r-0 lg:[&:not(:nth-child(3n))]:border-r", i >= 4 && "sm:border-b-0", i >= 3 && "lg:border-b-0", i < 3 && "lg:border-b")}>
+                <li key={f.title} className={cn("bg-card p-7", "border-b sm:[&:nth-child(odd)]:border-e lg:[&:nth-child(odd)]:border-e-0 lg:[&:not(:nth-child(3n))]:border-e", i >= 4 && "sm:border-b-0", i >= 3 && "lg:border-b-0", i < 3 && "lg:border-b")}>
                   <f.icon className="text-chart-1 size-6" aria-hidden="true" />
                   <h3 className="mt-6 font-semibold">{f.title}</h3>
                   <p className="text-muted-foreground mt-2 text-sm text-pretty">{f.text}</p>
@@ -238,7 +238,7 @@ function RelayHome({ hrefs, ...props }: RelayHomeProps) {
             <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-[-0.045em] text-balance sm:text-5xl">Send your first event in two minutes.</h2>
             <p className="mx-auto mt-4 max-w-md text-pretty opacity-70">One API key, one request. The free plan includes 100,000 events a month.</p>
             <a href="#" className="bg-chart-1 text-background focus-visible:ring-ring mt-8 inline-flex h-12 items-center gap-2 rounded-md px-6 font-semibold outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]" style={mono}>
-              Get your API key <ArrowRight className="size-4" aria-hidden="true" />
+              Get your API key <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />
             </a>
           </div>
         </section>

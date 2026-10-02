@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["feedback", "rating", "survey", "popover"],
   files: [{ path: "components/feedback-widget.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets", "popover"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "popover", "i18n"],
   examples: [
     { name: "feedback-widget-demo", title: "Floating widget", file: "feedback-widget-demo.tsx" },
     { name: "feedback-widget-states", title: "Helpful page, required comment", file: "feedback-widget-states.tsx" },

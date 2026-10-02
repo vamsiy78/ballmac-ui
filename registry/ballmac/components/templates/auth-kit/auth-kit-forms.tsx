@@ -166,7 +166,7 @@ function VerifyForm({ hrefs }: FormProps) {
         Didn’t get it?{" "}
         <button type="button" disabled={wait > 0} onClick={() => { setWait(30); setCode(""); setState("idle") }} className={cn(link, "disabled:text-muted-foreground disabled:no-underline")}>{wait > 0 ? `Resend in ${wait}s` : "Resend the code"}</button>
       </p>
-      <p className="mt-3 text-center text-sm"><a href={links["sign-in"]} className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5"><ArrowLeft className="size-3.5" aria-hidden="true" />Back to sign in</a></p>
+      <p className="mt-3 text-center text-sm"><a href={links["sign-in"]} className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5"><ArrowLeft className="size-3.5 rtl:rotate-180" aria-hidden="true" />Back to sign in</a></p>
     </>
   )
 }
@@ -198,7 +198,7 @@ function ForgotForm({ hrefs }: FormProps) {
         <AuthField id="fp-email" name="email" type="email" label="Email" autoComplete="email" error={error} />
         <AuthButton type="submit" busy={busy}>{busy ? "Sending…" : "Send reset link"}</AuthButton>
       </form>
-      <p className="mt-6 text-center text-sm"><a href={links["sign-in"]} className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5"><ArrowLeft className="size-3.5" aria-hidden="true" />Back to sign in</a></p>
+      <p className="mt-6 text-center text-sm"><a href={links["sign-in"]} className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5"><ArrowLeft className="size-3.5 rtl:rotate-180" aria-hidden="true" />Back to sign in</a></p>
     </>
   )
 }
@@ -347,8 +347,8 @@ function OnboardingForm({ hrefs }: FormProps) {
         )}
       </div>
       <div className="mt-7 flex items-center justify-between gap-3">
-        {step > 0 ? <button type="button" onClick={() => { setError(""); setStep((s) => s - 1) }} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded-lg px-1 text-sm outline-none focus-visible:ring-[3px]"><ArrowLeft className="size-4" aria-hidden="true" />Back</button> : <button type="button" onClick={() => setDone(true)} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 rounded px-1 text-sm outline-none focus-visible:ring-[3px]">Skip for now</button>}
-        <AuthButton type="button" onClick={next} className="w-auto px-6">{step === 2 ? (emails.length ? "Send invitations" : "Finish") : "Continue"}{step < 2 && <ArrowRight className="size-4" aria-hidden="true" />}</AuthButton>
+        {step > 0 ? <button type="button" onClick={() => { setError(""); setStep((s) => s - 1) }} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded-lg px-1 text-sm outline-none focus-visible:ring-[3px]"><ArrowLeft className="size-4 rtl:rotate-180" aria-hidden="true" />Back</button> : <button type="button" onClick={() => setDone(true)} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 rounded px-1 text-sm outline-none focus-visible:ring-[3px]">Skip for now</button>}
+        <AuthButton type="button" onClick={next} className="w-auto px-6">{step === 2 ? (emails.length ? "Send invitations" : "Finish") : "Continue"}{step < 2 && <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />}</AuthButton>
       </div>
       <p className="text-muted-foreground mt-6 flex items-center justify-center gap-1.5 text-xs"><ShieldCheck className="size-3.5" aria-hidden="true" />Step {step + 1} of {steps.length}</p>
     </>

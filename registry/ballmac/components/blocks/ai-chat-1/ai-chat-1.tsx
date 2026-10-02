@@ -89,7 +89,7 @@ function AiChat1({
   const model = modelProp ?? modelState
   return (
     <div data-slot="ai-chat-1" className={cn("flex h-[720px] w-full overflow-hidden border bg-background", className)} {...props}>
-      <aside hidden={!sidebar} className="hidden w-64 shrink-0 flex-col border-r bg-card md:flex [&[hidden]]:hidden">
+      <aside hidden={!sidebar} className="hidden w-64 shrink-0 flex-col border-e bg-card md:flex [&[hidden]]:hidden">
         <div className="p-3">
           <Button variant="outline" className="w-full justify-start" onClick={() => onSelectConversation?.(null)}>
             <Plus /> New chat
@@ -105,7 +105,7 @@ function AiChat1({
                   aria-current={c.id === activeConversation ? "page" : undefined}
                   onClick={() => onSelectConversation?.(c.id)}
                   className={cn(
-                    "flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                    "flex w-full items-center gap-2 rounded-md px-2 py-2 text-start text-sm outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
                     c.id === activeConversation ? "bg-accent text-foreground" : "text-muted-foreground hover:bg-accent/60 hover:text-foreground"
                   )}
                 >
@@ -120,10 +120,10 @@ function AiChat1({
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex h-14 shrink-0 items-center gap-2 border-b px-3">
           <Button variant="ghost" size="icon-sm" className="hidden md:inline-flex" aria-label={sidebar ? "Hide conversations" : "Show conversations"} aria-pressed={sidebar} onClick={() => setSidebar((s) => !s)}>
-            <PanelLeft />
+            <PanelLeft  className="rtl:-scale-x-100"/>
           </Button>
           <p className="truncate text-sm font-medium">{conversations.find((c) => c.id === activeConversation)?.title ?? "New chat"}</p>
-          <div className="ml-auto">
+          <div className="ms-auto">
             <Select
               value={model}
               onValueChange={(v) => {
@@ -181,7 +181,7 @@ function AiChat1({
               <PromptInputTextarea placeholder="Message the assistant…" />
               <PromptInputToolbar>
                 <PromptInputAttachButton />
-                <PromptInputSubmit className="ml-auto" />
+                <PromptInputSubmit className="ms-auto" />
               </PromptInputToolbar>
             </PromptInput>
             <p className="mt-2 text-center text-xs text-muted-foreground">Answers can be wrong. Check important details.</p>

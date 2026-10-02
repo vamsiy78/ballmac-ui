@@ -7,6 +7,7 @@ import { Check, Copy } from "lucide-react"
 import { motion, useInView, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type TerminalProps = React.ComponentProps<"figure"> & {
   /** Text in the title bar, e.g. "zsh" or "~/my-app". */
@@ -18,9 +19,11 @@ type TerminalProps = React.ComponentProps<"figure"> & {
 }
 
 function Terminal({ title, theme = "dark", bodyClassName, className, children, ...props }: TerminalProps) {
+  const msg = useMessages()
   return (
     <figure
       data-slot="terminal"
+      dir="ltr"
       className={cn(
         "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground shadow-[0_1px_2px_0_rgb(0_0_0/0.08)]",
         theme === "dark" && "dark [color-scheme:dark]",
@@ -38,7 +41,7 @@ function Terminal({ title, theme = "dark", bodyClassName, className, children, .
           <span className="size-2.5 rounded-full bg-muted-foreground/35" />
         </span>
         <span className="absolute inset-x-16 truncate text-center font-mono text-xs text-muted-foreground">
-          {title ?? <span className="sr-only">Terminal</span>}
+          {title ?? <span className="sr-only">{msg("terminal.terminal", "Terminal")}</span>}
         </span>
       </figcaption>
       <div
@@ -189,6 +192,7 @@ function useTyping(text: string, enabled: boolean, speed: number, onDone: () => 
 }
 
 function LineCopyButton({ value }: { value: string }) {
+  const msg = useMessages()
   const [copied, setCopied] = React.useState(false)
   const timer = React.useRef<ReturnType<typeof setTimeout>>(undefined)
   React.useEffect(() => () => clearTimeout(timer.current), [])
@@ -196,8 +200,8 @@ function LineCopyButton({ value }: { value: string }) {
     <>
       <button
         type="button"
-        aria-label={copied ? "Copied" : "Copy command"}
-        title="Copy command"
+        aria-label={copied ? msg("terminal.copied", "Copied") : msg("terminal.copyCommand", "Copy command")}
+        title={msg("terminal.copyCommand", "Copy command")}
         onClick={async () => {
           try {
             await navigator.clipboard.writeText(value)
@@ -208,7 +212,7 @@ function LineCopyButton({ value }: { value: string }) {
           clearTimeout(timer.current)
           timer.current = setTimeout(() => setCopied(false), 1600)
         }}
-        className="ml-auto flex size-6 shrink-0 items-center justify-center rounded-md text-muted-foreground outline-none transition-opacity duration-150 hover:bg-accent hover:text-foreground focus-visible:opacity-100 focus-visible:ring-[3px] focus-visible:ring-ring/50 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover/line:opacity-100"
+        className="ms-auto flex size-6 shrink-0 items-center justify-center rounded-md text-muted-foreground outline-none transition-opacity duration-150 hover:bg-accent hover:text-foreground focus-visible:opacity-100 focus-visible:ring-[3px] focus-visible:ring-ring/50 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover/line:opacity-100"
       >
         {copied ? <Check aria-hidden="true" className="size-3.5" /> : <Copy aria-hidden="true" className="size-3.5" />}
       </button>

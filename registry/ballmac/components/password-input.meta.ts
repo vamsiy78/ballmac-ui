@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["password", "security", "strength"],
   files: [{ path: "components/password-input.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "password-input-demo",

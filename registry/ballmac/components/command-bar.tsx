@@ -14,6 +14,7 @@ import {
 } from "@/components/ballmac/command";
 import { Kbd } from "@/components/ballmac/kbd";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type CommandBarItem = {
   /** Unique id. */
@@ -74,13 +75,17 @@ function CommandBar({
   open: openProp,
   defaultOpen = false,
   onOpenChange,
-  placeholder = "Search commands…",
-  emptyText = "No results found.",
+  placeholder,
+  emptyText,
   hotkey = "k",
   trigger = "Search or jump to…",
   triggerClassName,
-  title = "Command bar",
+  title,
 }: CommandBarProps) {
+  const msg = useMessages()
+  placeholder ??= msg("command-bar.placeholder", "Search commands…")
+  emptyText ??= msg("command-bar.emptyText", "No results found.")
+  title ??= msg("command-bar.title", "Command bar")
   const [inner, setInner] = React.useState(defaultOpen);
   const open = openProp ?? inner;
   const [stack, setStack] = React.useState<CommandBarItem[]>([]);
@@ -122,7 +127,7 @@ function CommandBar({
           aria-haspopup="dialog"
           aria-keyshortcuts={hotkey ? `Meta+${hotkey.toUpperCase()} Control+${hotkey.toUpperCase()}` : undefined}
           className={cn(
-            "inline-flex h-10 w-full max-w-sm items-center gap-2.5 rounded-xl border bg-background px-3 text-left text-sm text-muted-foreground shadow-xs outline-none transition-[border-color,box-shadow,background-color] hover:bg-accent/50 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
+            "inline-flex h-10 w-full max-w-sm items-center gap-2.5 rounded-xl border bg-background px-3 text-start text-sm text-muted-foreground shadow-xs outline-none transition-[border-color,box-shadow,background-color] hover:bg-accent/50 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
             triggerClassName,
           )}
         >
@@ -145,7 +150,7 @@ function CommandBar({
         className="[&_[cmdk-list]]:max-h-[min(22rem,50dvh)]"
       >
         {stack.length > 0 && (
-          <div className="flex items-center gap-1 border-b px-3 pt-2.5 pb-2 text-xs" aria-label="Current page">
+          <div className="flex items-center gap-1 border-b px-3 pt-2.5 pb-2 text-xs" aria-label={msg("command-bar.currentPage", "Current page")}>
             <button
               type="button"
               onClick={() => {
@@ -154,11 +159,11 @@ function CommandBar({
               }}
               className="rounded px-1.5 py-0.5 text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
             >
-              All
+              {msg("command-bar.all", "All")}
             </button>
             {stack.map((page, index) => (
               <React.Fragment key={page.id}>
-                <ChevronRight aria-hidden="true" className="size-3 text-muted-foreground" />
+                <ChevronRight aria-hidden="true" className="size-3 text-muted-foreground rtl:rotate-180" />
                 <span aria-current={index === stack.length - 1 ? "page" : undefined} className="rounded bg-accent px-1.5 py-0.5 font-medium">
                   {page.label}
                 </span>
@@ -193,7 +198,7 @@ function CommandBar({
                 >
                   {item.label}
                   {item.pages ? (
-                    <ChevronRight aria-hidden="true" className="ml-auto size-4" />
+                    <ChevronRight aria-hidden="true" className="ms-auto size-4 rtl:rotate-180" />
                   ) : (
                     item.shortcut && <CommandShortcut>{item.shortcut.join(" ")}</CommandShortcut>
                   )}
@@ -208,21 +213,21 @@ function CommandBar({
         >
           <span className="flex items-center gap-1.5">
             <Kbd size="sm">↑</Kbd>
-            <Kbd size="sm">↓</Kbd> Navigate
+            <Kbd size="sm">↓</Kbd> {msg("command-bar.navigate", "Navigate")}
           </span>
           <span className="flex items-center gap-1.5">
             <Kbd size="sm">
-              <CornerDownLeft className="size-3" />
+              <CornerDownLeft className="size-3 rtl:-scale-x-100" />
             </Kbd>{" "}
-            Select
+            {msg("command-bar.select", "Select")}
           </span>
           {stack.length > 0 && (
             <span className="flex items-center gap-1.5">
-              <Kbd size="sm">⌫</Kbd> Back
+              <Kbd size="sm">⌫</Kbd> {msg("command-bar.back", "Back")}
             </span>
           )}
-          <span className="ml-auto flex items-center gap-1.5">
-            <Kbd size="sm">Esc</Kbd> Close
+          <span className="ms-auto flex items-center gap-1.5">
+            <Kbd size="sm">{msg("command-bar.esc", "Esc")}</Kbd> {msg("command-bar.close", "Close")}
           </span>
         </div>
       </CommandDialog>

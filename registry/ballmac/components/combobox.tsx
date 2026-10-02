@@ -17,6 +17,7 @@ import {
   PopoverTrigger,
 } from "@/components/ballmac/popover";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type ComboboxOption = {
   /** Unique value returned in `onValueChange`. */
@@ -69,9 +70,9 @@ function Combobox({
   value: valueProp,
   defaultValue = "",
   onValueChange,
-  placeholder = "Select an option",
-  searchPlaceholder = "Search",
-  emptyText = "No results found.",
+  placeholder,
+  searchPlaceholder,
+  emptyText,
   clearable = false,
   invalid = false,
   disabled,
@@ -81,6 +82,10 @@ function Combobox({
   "aria-label": ariaLabel,
   ...props
 }: ComboboxProps) {
+  const msg = useMessages()
+  placeholder ??= msg("combobox.placeholder", "Select an option")
+  searchPlaceholder ??= msg("combobox.searchPlaceholder", "Search")
+  emptyText ??= msg("combobox.emptyText", "No results found.")
   const [open, setOpen] = React.useState(false);
   const [inner, setInner] = React.useState(defaultValue);
   const value = valueProp ?? inner;
@@ -109,7 +114,7 @@ function Combobox({
           disabled={disabled}
           className={cn(
             "flex h-9 w-full min-w-0 items-center justify-between gap-2 rounded-md border border-input bg-background px-3 text-sm shadow-xs outline-none transition-[color,border-color,box-shadow] duration-150 hover:bg-accent/40 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30",
-            clearable && selected && "pr-14",
+            clearable && selected && "pe-14",
             !selected && "text-muted-foreground",
             className,
           )}
@@ -124,9 +129,9 @@ function Combobox({
         {clearable && selected && !disabled && (
           <button
             type="button"
-            aria-label="Clear selection"
+            aria-label={msg("combobox.clearSelection", "Clear selection")}
             onClick={() => choose("")}
-            className="absolute top-1/2 right-8 inline-flex size-6 -translate-y-1/2 items-center justify-center rounded text-muted-foreground outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="absolute top-1/2 end-8 inline-flex size-6 -translate-y-1/2 items-center justify-center rounded text-muted-foreground outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             <X aria-hidden="true" className="size-3.5" />
           </button>

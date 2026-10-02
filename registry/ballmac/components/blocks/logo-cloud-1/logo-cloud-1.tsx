@@ -58,7 +58,7 @@ function LogoCloud1({ title = "Trusted by fast-moving product teams", logos = de
       ) : (
         <ul className="mt-8 grid grid-cols-2 overflow-hidden rounded-2xl border sm:grid-cols-4">
           {logos.map((l) => (
-            <li key={l.name} className="-mr-px -mb-px flex h-24 items-center justify-center border-r border-b">
+            <li key={l.name} className="-me-px -mb-px flex h-24 items-center justify-center border-e border-b">
               <Wordmark logo={l} />
             </li>
           ))}

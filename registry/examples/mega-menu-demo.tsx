@@ -43,7 +43,7 @@ export default function MegaMenuDemo() {
       <div className="flex items-center gap-4 rounded-lg border bg-background px-3 py-1.5">
         <span className="text-[15px] font-semibold tracking-tight">Acme</span>
         <MegaMenu items={megaItems} label="Main" />
-        <span className="ml-auto text-xs text-muted-foreground md:hidden">Menu on small screens</span>
+        <span className="ms-auto text-xs text-muted-foreground md:hidden">Menu on small screens</span>
       </div>
       <p className="px-2 text-sm text-muted-foreground">Open Product to see grouped links and a featured card. Arrow keys move between menus.</p>
     </div>

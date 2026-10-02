@@ -68,7 +68,7 @@ function InputGroup({ className, size = "default", ...props }: InputGroupProps) 
         "has-[[data-slot=input][aria-invalid=true]]:border-destructive has-[[data-slot=input][aria-invalid=true]]:ring-destructive/20",
         "has-[[data-slot=input]:disabled]:opacity-50",
         "[&>[data-slot=input]]:h-full [&>[data-slot=input]]:flex-1 [&>[data-slot=input]]:border-0 [&>[data-slot=input]]:bg-transparent [&>[data-slot=input]]:shadow-none [&>[data-slot=input]]:ring-0 [&>[data-slot=input]]:focus-visible:ring-0 [&>[data-slot=input]]:dark:bg-transparent",
-        "has-[>[data-align=start]]:[&>[data-slot=input]]:pl-1.5 has-[>[data-align=end]]:[&>[data-slot=input]]:pr-1.5",
+        "has-[>[data-align=start]]:[&>[data-slot=input]]:ps-1.5 has-[>[data-align=end]]:[&>[data-slot=input]]:pe-1.5",
         className
       )}
       {...props}
@@ -88,7 +88,7 @@ function InputGroupAddon({ className, align = "start", onMouseDown, ...props }: 
       data-align={align}
       className={cn(
         "flex h-full shrink-0 select-none items-center gap-1.5 text-sm text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        align === "start" ? "order-first pl-3" : "order-last pr-3",
+        align === "start" ? "order-first ps-3" : "order-last pe-3",
         className
       )}
       onMouseDown={(event) => {

@@ -101,7 +101,7 @@ function DocsShell({ page, hrefs: overrides, sidebar = true, className, style, c
           {sidebar && (
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger className="hover:bg-accent focus-visible:ring-ring/50 inline-flex size-10 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px] lg:hidden" aria-label="Open navigation"><Menu className="size-5" aria-hidden="true" /></SheetTrigger>
-              <SheetContent side="left" className="docs-theme bg-background w-80 overflow-y-auto p-5">
+              <SheetContent side="start" className="docs-theme bg-background w-80 overflow-y-auto p-5">
                 <SheetHeader className="p-0 pb-4"><SheetTitle>Tern docs</SheetTitle><SheetDescription>Browse every guide and the API reference.</SheetDescription></SheetHeader>
                 <SidebarNav page={page} hrefs={hrefs} onNavigate={() => setMenuOpen(false)} />
               </SheetContent>
@@ -110,17 +110,17 @@ function DocsShell({ page, hrefs: overrides, sidebar = true, className, style, c
           <a href={hrefs.home} className="focus-visible:ring-ring/50 flex items-center gap-2.5 rounded-lg outline-none focus-visible:ring-[3px]">
             <Logo />
             <span className={cn("text-2xl", serif)}>Tern</span>
-            <span className="text-muted-foreground hidden border-l pl-2.5 text-sm font-semibold sm:inline">Docs</span>
+            <span className="text-muted-foreground hidden border-s ps-2.5 text-sm font-semibold sm:inline">Docs</span>
           </a>
-          <nav aria-label="Main" className="ml-4 hidden items-center gap-1 text-sm font-medium md:flex">
+          <nav aria-label="Main" className="ms-4 hidden items-center gap-1 text-sm font-medium md:flex">
             {([["guide", "Guides"], ["reference", "API reference"], ["changelog", "Changelog"]] as const).map(([key, label]) => (
               <a key={key} href={hrefs[key]} aria-current={page === key ? "page" : undefined} className="text-muted-foreground hover:text-foreground aria-[current=page]:text-foreground focus-visible:ring-ring/50 rounded-md px-3 py-2 outline-none transition-colors focus-visible:ring-[3px] aria-[current=page]:font-semibold motion-reduce:transition-none">{label}</a>
             ))}
           </nav>
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ms-auto flex items-center gap-2">
             <button type="button" onClick={() => setSearchOpen(true)} className="bg-surface hover:bg-accent focus-visible:ring-ring/50 text-muted-foreground inline-flex h-10 items-center gap-2 rounded-lg border px-3 text-sm outline-none transition-colors focus-visible:ring-[3px] sm:w-64 motion-reduce:transition-none" aria-label="Search the docs">
               <Search className="size-4 shrink-0" aria-hidden="true" />
-              <span className="hidden flex-1 text-left sm:inline">Search the docs</span>
+              <span className="hidden flex-1 text-start sm:inline">Search the docs</span>
               <span className="hidden items-center gap-1 sm:inline-flex" aria-hidden="true"><Kbd>⌘</Kbd><Kbd>K</Kbd></span>
             </button>
             <label className="sr-only" htmlFor="docs-version">API version</label>
@@ -152,7 +152,7 @@ function DocsShell({ page, hrefs: overrides, sidebar = true, className, style, c
 
       {sidebar ? (
         <div className="mx-auto grid max-w-[90rem] grid-cols-[minmax(0,1fr)] lg:grid-cols-[16rem_minmax(0,1fr)]">
-          <aside className="sticky top-16 hidden h-[calc(100dvh-4rem)] overflow-y-auto border-r p-6 pr-4 lg:block" aria-label="Sidebar">
+          <aside className="sticky top-16 hidden h-[calc(100dvh-4rem)] overflow-y-auto border-e p-6 pe-4 lg:block" aria-label="Sidebar">
             <SidebarNav page={page} hrefs={hrefs} />
           </aside>
           <div className="min-w-0">{children}</div>
@@ -184,7 +184,7 @@ function Crumbs({ items }: { items: string[] }) {
     <nav aria-label="Breadcrumb" className="text-muted-foreground flex flex-wrap items-center gap-1 text-sm">
       {items.map((it, i) => (
         <React.Fragment key={it}>
-          {i > 0 && <ChevronRight className="size-3.5" aria-hidden="true" />}
+          {i > 0 && <ChevronRight className="size-3.5 rtl:rotate-180" aria-hidden="true" />}
           <span aria-current={i === items.length - 1 ? "page" : undefined} className={i === items.length - 1 ? "text-foreground font-medium" : undefined}>{it}</span>
         </React.Fragment>
       ))}

@@ -19,7 +19,7 @@ export default function PromptInputDemo() {
         <PromptInputTextarea placeholder="Message the assistant…" />
         <PromptInputToolbar>
           <PromptInputAttachButton />
-          <PromptInputSubmit className="ml-auto" />
+          <PromptInputSubmit className="ms-auto" />
         </PromptInputToolbar>
       </PromptInput>
     </div>

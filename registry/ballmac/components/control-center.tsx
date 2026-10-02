@@ -6,6 +6,7 @@ import { Pause, Play, SkipBack, SkipForward } from "lucide-react"
 import { Slider as SliderPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 /** Pressed state that works controlled or not. */
 function usePressed(pressed: boolean | undefined, defaultPressed: boolean, onChange?: (pressed: boolean) => void) {
@@ -26,7 +27,9 @@ type ControlCenterProps = React.ComponentProps<"section"> & {
 }
 
 /** The Control Center panel: frosted glass holding a grid of tiles, sliders and a media player. */
-function ControlCenter({ label = "Control Center", className, ...props }: ControlCenterProps) {
+function ControlCenter({ label, className, ...props }: ControlCenterProps) {
+  const msg = useMessages()
+  label ??= msg("control-center.label", "Control Center")
   return (
     <section
       data-slot="control-center"
@@ -73,7 +76,7 @@ function ControlTile({ icon, label, status, pressed, defaultPressed = false, onP
       }}
       className={cn(
         tile,
-        "group flex min-h-[4.25rem] items-center gap-2.5 p-2.5 text-left outline-none transition-[background-color,transform] duration-150 hover:bg-foreground/[0.11] focus-visible:ring-[3px] focus-visible:ring-ring/60 active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100",
+        "group flex min-h-[4.25rem] items-center gap-2.5 p-2.5 text-start outline-none transition-[background-color,transform] duration-150 hover:bg-foreground/[0.11] focus-visible:ring-[3px] focus-visible:ring-ring/60 active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100",
         stacked && "flex-col items-start justify-between",
         className
       )}
@@ -113,7 +116,7 @@ function ControlRow({ icon, label, status, pressed, defaultPressed = false, onPr
         if (!e.defaultPrevented) toggle()
       }}
       className={cn(
-        "group flex items-center gap-2.5 rounded-xl p-1 text-left outline-none transition-colors hover:bg-foreground/[0.06] focus-visible:ring-[3px] focus-visible:ring-ring/60 motion-reduce:transition-none",
+        "group flex items-center gap-2.5 rounded-xl p-1 text-start outline-none transition-colors hover:bg-foreground/[0.06] focus-visible:ring-[3px] focus-visible:ring-ring/60 motion-reduce:transition-none",
         className
       )}
       {...props}
@@ -167,7 +170,7 @@ function ControlSlider({ label, icon, value, defaultValue = 50, onValueChange, c
         <SliderPrimitive.Track className="relative h-full grow overflow-hidden rounded-full bg-foreground/15 shadow-[inset_0_1px_2px_rgb(0_0_0/0.15)]">
           <SliderPrimitive.Range className="absolute h-full bg-foreground/85 dark:bg-white/90" />
           {icon && (
-            <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-2 flex items-center text-background mix-blend-normal dark:text-neutral-800 [&_svg]:size-4">
+            <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 start-2 flex items-center text-background mix-blend-normal dark:text-neutral-800 [&_svg]:size-4">
               {icon}
             </span>
           )}
@@ -199,6 +202,7 @@ type ControlNowPlayingProps = Omit<React.ComponentProps<"div">, "title"> & {
 
 /** A media tile with artwork, title, artist and previous, play or pause, next buttons. */
 function ControlNowPlaying({ title, artist, artwork, playing, defaultPlaying = false, onPlayingChange, onPrevious, onNext, className, ...props }: ControlNowPlayingProps) {
+  const msg = useMessages()
   const [on, toggle] = usePressed(playing, defaultPlaying, onPlayingChange)
   const btn =
     "flex size-9 items-center justify-center rounded-full outline-none transition-colors hover:bg-foreground/10 focus-visible:ring-[3px] focus-visible:ring-ring/60 motion-reduce:transition-none [&_svg]:size-[1.15rem] [&_svg]:fill-current"
@@ -210,14 +214,14 @@ function ControlNowPlaying({ title, artist, artwork, playing, defaultPlaying = f
       <div className="min-w-0 flex-1 leading-tight">
         <p className="truncate text-[13px] font-semibold">{title}</p>
         <p className="truncate text-xs text-muted-foreground">{artist}</p>
-        <div className="-ml-2 mt-1 flex items-center">
-          <button type="button" aria-label="Previous track" onClick={onPrevious} className={btn}>
+        <div className="-ms-2 mt-1 flex items-center">
+          <button type="button" aria-label={msg("control-center.previousTrack", "Previous track")} onClick={onPrevious} className={btn}>
             <SkipBack aria-hidden="true" />
           </button>
-          <button type="button" aria-label={on ? "Pause" : "Play"} onClick={toggle} className={btn}>
+          <button type="button" aria-label={on ? msg("control-center.pause", "Pause") : msg("control-center.play", "Play")} onClick={toggle} className={btn}>
             {on ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
           </button>
-          <button type="button" aria-label="Next track" onClick={onNext} className={btn}>
+          <button type="button" aria-label={msg("control-center.nextTrack", "Next track")} onClick={onNext} className={btn}>
             <SkipForward aria-hidden="true" />
           </button>
         </div>

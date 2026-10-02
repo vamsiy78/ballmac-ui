@@ -6,6 +6,7 @@ import { Check, Sparkles } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useLocale, useMessages } from "@/lib/ballmac/i18n";
 
 type PlanOption = {
   /** Unique id; this is the selected value. */
@@ -67,11 +68,14 @@ function PlanSelector({
   onBillingChange,
   name,
   currency = "USD",
-  locale = "en-US",
+  locale,
   legend = "Choose a plan",
   className,
   ...props
 }: PlanSelectorProps) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
+  const msg = useMessages()
   const reduce = useReducedMotion();
   const generated = React.useId();
   const groupName = name ?? `plan-${generated}`;
@@ -97,7 +101,7 @@ function PlanSelector({
       <div className="flex justify-center">
         <div
           role="radiogroup"
-          aria-label="Billing period"
+          aria-label={msg("plan-selector.billingPeriod", "Billing period")}
           className="relative inline-flex rounded-full border bg-muted/60 p-1 text-sm font-medium"
         >
           {(["monthly", "yearly"] as const).map((period) => (
@@ -126,7 +130,7 @@ function PlanSelector({
               >
                 {period === "monthly" ? "Monthly" : "Yearly"}
                 {period === "yearly" && savings > 0 && (
-                  <span className="rounded-full bg-chart-2/20 px-1.5 py-px text-[10px] font-semibold text-foreground">Save {savings}%</span>
+                  <span className="rounded-full bg-chart-2/20 px-1.5 py-px text-[10px] font-semibold text-foreground">{msg("plan-selector.save", "Save")} {savings}%</span>
                 )}
               </span>
             </label>
@@ -200,7 +204,7 @@ function PlanSelector({
                 </span>
                 {!free && (
                   <span className="text-[13px] text-muted-foreground">
-                    / month{plan.priceNote ? ` ${plan.priceNote}` : ""}
+                    {msg("plan-selector.perMonth", "/ month")}{plan.priceNote ? ` ${plan.priceNote}` : ""}
                   </span>
                 )}
               </span>

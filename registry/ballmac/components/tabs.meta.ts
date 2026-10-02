@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["tabs", "views", "navigation", "radix"],
   files: [{ path: "components/tabs.tsx" }],
   dependencies: ["radix-ui"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     { name: "tabs-demo", title: "Workspace dashboard", file: "tabs-demo.tsx" },
     { name: "tabs-states", title: "Underline tabs", file: "tabs-states.tsx" },

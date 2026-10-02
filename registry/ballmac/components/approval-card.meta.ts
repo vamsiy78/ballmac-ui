@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "agent", "approval", "confirm", "safety", "human-in-the-loop"],
   files: [{ path: "components/approval-card.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "approval-card-demo", title: "Shell command", file: "approval-card-demo.tsx" },
     { name: "approval-card-risks", title: "Three risk levels", file: "approval-card-risks.tsx" },

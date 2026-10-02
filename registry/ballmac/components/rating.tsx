@@ -4,6 +4,7 @@
 import * as React from "react"
 import { Star } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type RatingProps = Omit<
   React.ComponentProps<"fieldset">,
@@ -31,7 +32,7 @@ function Rating({
   defaultValue = 0,
   onValueChange,
   max = 5,
-  label = "Rating",
+  label,
   name,
   showValue = true,
   readOnly = false,
@@ -39,6 +40,8 @@ function Rating({
   className,
   ...props
 }: RatingProps) {
+  const msg = useMessages()
+  label ??= msg("rating.label", "Rating")
   const [internal, setInternal] = React.useState(defaultValue)
   const [hovered, setHovered] = React.useState(0)
   const current = value ?? internal
@@ -79,7 +82,7 @@ function Rating({
                 value={number}
                 checked={current === number}
                 disabled={disabled || readOnly}
-                aria-label={`${number} of ${count} stars`}
+                aria-label={msg("rating.ofStars", "{number} of {count} stars", { number, count })}
                 onChange={() => {
                   if (!readOnly) commit(number)
                 }}
@@ -102,7 +105,7 @@ function Rating({
         {showValue && (
           <span
             data-slot="rating-value"
-            className="ml-2 text-sm text-muted-foreground tabular-nums"
+            className="ms-2 text-sm text-muted-foreground tabular-nums"
           >
             {current ? `${current} / ${count}` : "Not rated"}
           </span>
@@ -112,9 +115,9 @@ function Rating({
             type="button"
             disabled={disabled}
             onClick={() => commit(0)}
-            className="ml-1 rounded-md px-2 py-1 text-xs text-muted-foreground outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
+            className="ms-1 rounded-md px-2 py-1 text-xs text-muted-foreground outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
           >
-            Clear
+            {msg("rating.clear", "Clear")}
           </button>
         )}
       </div>

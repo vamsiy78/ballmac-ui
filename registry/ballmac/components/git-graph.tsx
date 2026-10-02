@@ -5,6 +5,7 @@ import * as React from "react"
 import { GitBranch, GitMerge, Tag } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type GitCommit = {
   /** Full commit hash (any unique string works). */
@@ -133,11 +134,13 @@ function GitGraph({
   selected: selectedProp,
   defaultSelected,
   onSelect,
-  label = "Commit history",
+  label,
   hideAuthors = false,
   className,
   ...props
 }: GitGraphProps) {
+  const msg = useMessages()
+  label ??= msg("git-graph.label", "Commit history")
   const uid = React.useId()
   const { rows, width } = React.useMemo(() => layout(commits), [commits])
   const [internal, setInternal] = React.useState(defaultSelected)
@@ -215,7 +218,7 @@ function GitGraph({
               data-active={active === i || undefined}
               onClick={() => choose(i)}
               className={cn(
-                "relative flex cursor-pointer items-center gap-3 pr-4 transition-colors duration-100 select-none hover:bg-accent/50 motion-reduce:transition-none",
+                "relative flex cursor-pointer items-center gap-3 pe-4 transition-colors duration-100 select-none hover:bg-accent/50 motion-reduce:transition-none",
                 isSelected && "bg-accent",
                 active === i && "outline-2 -outline-offset-2 outline-ring/60 [&:not(:focus-within)]:outline-0 group-focus-within:outline-2"
               )}
@@ -244,7 +247,7 @@ function GitGraph({
                   {merge && (
                     <span className="inline-flex items-center gap-0.5">
                       <GitMerge aria-hidden="true" className="size-3" />
-                      Merge
+                      {msg("git-graph.merge", "Merge")}
                     </span>
                   )}
                   <span className="flex items-center gap-1.5 @md:hidden">{refChips}</span>
@@ -258,7 +261,7 @@ function GitGraph({
                   <span className="max-w-24 truncate">{c.author}</span>
                 </span>
               )}
-              <time dateTime={c.date} className="w-12 shrink-0 text-right text-xs text-muted-foreground tabular-nums">
+              <time dateTime={c.date} className="w-12 shrink-0 text-end text-xs text-muted-foreground tabular-nums">
                 {shortDate(c.date)}
               </time>
             </div>

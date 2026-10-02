@@ -5,6 +5,7 @@ import * as React from "react";
 import { PanelLeft } from "lucide-react";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ballmac/sheet";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type AppShellContextValue = { sidebarOpen: boolean; setSidebarOpen: (open: boolean) => void };
 const AppShellContext = React.createContext<AppShellContextValue | null>(null);
@@ -73,7 +74,7 @@ function AppShellSkipLink({ className, children = "Skip to content", href = "#ap
       data-slot="app-shell-skip-link"
       href={href}
       className={cn(
-        "sr-only z-50 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "sr-only z-50 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus-visible:ring-[3px] focus-visible:ring-ring/50",
         className,
       )}
       {...props}
@@ -100,24 +101,25 @@ function AppShellHeader({ className, ...props }: AppShellHeaderProps) {
 type AppShellSidebarTriggerProps = React.ComponentProps<"button">;
 /** Opens the sidebar sheet below `lg`. Hidden on wider screens. */
 function AppShellSidebarTrigger({ className, onClick, ...props }: AppShellSidebarTriggerProps) {
+  const msg = useMessages()
   const { sidebarOpen, setSidebarOpen } = useAppShell();
   return (
     <button
       type="button"
       data-slot="app-shell-sidebar-trigger"
-      aria-label="Open navigation"
+      aria-label={msg("app-shell.openNavigation", "Open navigation")}
       aria-expanded={sidebarOpen}
       onClick={(event) => {
         onClick?.(event);
         setSidebarOpen(true);
       }}
       className={cn(
-        "-ml-1 inline-flex size-9 items-center justify-center rounded-md outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 lg:hidden",
+        "-ms-1 inline-flex size-9 items-center justify-center rounded-md outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 lg:hidden",
         className,
       )}
       {...props}
     >
-      <PanelLeft aria-hidden="true" className="size-5" />
+      <PanelLeft aria-hidden="true" className="size-5 rtl:-scale-x-100" />
     </button>
   );
 }
@@ -126,7 +128,9 @@ type AppShellSidebarProps = React.ComponentProps<"aside"> & {
   /** Accessible name of the landmark and the mobile sheet. */
   label?: string;
 };
-function AppShellSidebar({ label = "Sidebar", className, children, ...props }: AppShellSidebarProps) {
+function AppShellSidebar({ label, className, children, ...props }: AppShellSidebarProps) {
+  const msg = useMessages()
+  label ??= msg("app-shell.label", "Sidebar")
   const { sidebarOpen, setSidebarOpen } = useAppShell();
   return (
     <>
@@ -134,7 +138,7 @@ function AppShellSidebar({ label = "Sidebar", className, children, ...props }: A
         data-slot="app-shell-sidebar"
         aria-label={label}
         className={cn(
-          "sticky top-(--app-header-h) hidden h-[calc(100svh-var(--app-header-h))] flex-col overflow-y-auto border-r bg-card/50 lg:flex",
+          "sticky top-(--app-header-h) hidden h-[calc(100svh-var(--app-header-h))] flex-col overflow-y-auto border-e bg-card/50 lg:flex",
           className,
         )}
         {...props}
@@ -142,9 +146,9 @@ function AppShellSidebar({ label = "Sidebar", className, children, ...props }: A
         {children}
       </aside>
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-        <SheetContent side="left" showCloseButton={false} className="w-72 gap-0 p-0 sm:w-72 lg:hidden">
+        <SheetContent side="start" showCloseButton={false} className="w-72 gap-0 p-0 sm:w-72 lg:hidden">
           <SheetTitle className="sr-only">{label}</SheetTitle>
-          <SheetDescription className="sr-only">Navigation</SheetDescription>
+          <SheetDescription className="sr-only">{msg("app-shell.navigation", "Navigation")}</SheetDescription>
           <div className="flex h-full flex-col overflow-y-auto" onClick={(e) => (e.target as HTMLElement).closest("a") && setSidebarOpen(false)}>
             {children}
           </div>
@@ -169,13 +173,15 @@ function AppShellMain({ className, ...props }: AppShellMainProps) {
 
 type AppShellAsideProps = React.ComponentProps<"aside"> & { label?: string };
 /** A right column shown from `xl` up (details, activity, table of contents). */
-function AppShellAside({ label = "Details", className, ...props }: AppShellAsideProps) {
+function AppShellAside({ label, className, ...props }: AppShellAsideProps) {
+  const msg = useMessages()
+  label ??= msg("app-shell.label2", "Details")
   return (
     <aside
       data-slot="app-shell-aside"
       aria-label={label}
       className={cn(
-        "sticky top-(--app-header-h) hidden h-[calc(100svh-var(--app-header-h))] overflow-y-auto border-l p-5 xl:block",
+        "sticky top-(--app-header-h) hidden h-[calc(100svh-var(--app-header-h))] overflow-y-auto border-s p-5 xl:block",
         className,
       )}
       {...props}

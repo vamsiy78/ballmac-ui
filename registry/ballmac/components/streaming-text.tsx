@@ -13,7 +13,7 @@ type StreamingCaretProps = React.ComponentProps<"span">
 function StreamingCaret({ className, ...props }: StreamingCaretProps) {
   const reduceMotion = useReducedMotionSafe()
   const classes = cn(
-    "ml-0.5 inline-block h-[1.1em] w-[0.5ch] min-w-1.5 translate-y-[0.15em] rounded-[1px] bg-foreground/80",
+    "ms-0.5 inline-block h-[1.1em] w-[0.5ch] min-w-1.5 translate-y-[0.15em] rounded-[1px] bg-foreground/80",
     className
   )
   if (reduceMotion) {

@@ -55,7 +55,7 @@ export default function ItemDemo() {
           <ItemDescription>1 connected: GitHub</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <ChevronRight aria-hidden="true" className="size-4 text-muted-foreground" />
+          <ChevronRight aria-hidden="true" className="size-4 text-muted-foreground rtl:rotate-180" />
         </ItemActions>
       </a>
     </ItemGroup>

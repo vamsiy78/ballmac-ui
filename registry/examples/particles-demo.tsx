@@ -25,7 +25,7 @@ export default function ParticlesDemo() {
         className="mt-6 inline-flex h-9 items-center gap-1.5 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground outline-none transition-[opacity] duration-150 hover:opacity-90 focus-visible:ring-[3px] focus-visible:ring-ring/50"
       >
         Get early access
-        <ArrowRight className="size-4" aria-hidden="true" />
+        <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />
       </a>
     </div>
   )

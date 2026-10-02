@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["diff", "code", "comparison"],
   files: [{ path: "components/diff-viewer.tsx" }],
   dependencies: [],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "diff-viewer-demo",

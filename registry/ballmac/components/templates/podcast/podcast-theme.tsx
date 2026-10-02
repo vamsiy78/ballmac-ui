@@ -31,9 +31,9 @@ function ShowArt({ variant, className }: { variant: number; className?: string }
     <div aria-hidden="true" className={cn("@container relative isolate aspect-square w-full overflow-hidden", bg, className)}>
       <div className="bg-card/90 absolute top-1/2 left-1/2 size-[62%] -translate-x-1/2 -translate-y-1/2 rounded-full" />
       <div className="border-foreground/30 absolute top-1/2 left-1/2 size-[44%] -translate-x-1/2 -translate-y-1/2 rounded-full border-2" />
-      <div className="bg-chart-1 absolute top-[10%] left-[12%] size-[14%] rounded-full" />
-      <div className="bg-foreground/80 absolute right-[10%] bottom-[12%] h-[7%] w-[34%] rounded-full" style={{ transform: `rotate(${-20 + v * 12}deg)` }} />
-      <div className="bg-foreground/80 absolute bottom-[12%] left-[10%] h-[30%] w-[3%] rounded-full" />
+      <div className="bg-chart-1 absolute top-[10%] start-[12%] size-[14%] rounded-full" />
+      <div className="bg-foreground/80 absolute end-[10%] bottom-[12%] h-[7%] w-[34%] rounded-full" style={{ transform: `rotate(${-20 + v * 12}deg)` }} />
+      <div className="bg-foreground/80 absolute bottom-[12%] start-[10%] h-[30%] w-[3%] rounded-full" />
       <span className={cn("text-foreground absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30cqw] leading-none", display)}>{["42", "41", "40", "39", "38", "37"][v]}</span>
     </div>
   )
@@ -88,7 +88,7 @@ function PodcastShell({ page, hrefs: overrides, className, style, children, ...p
             </a>
             <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
               {links.map((l) => <a key={l.key} href={hrefs[l.key]} aria-current={active === l.key ? "page" : undefined} className="hover:bg-accent aria-[current=page]:bg-accent focus-visible:ring-ring/50 rounded-full px-4 py-2 text-sm font-semibold outline-none transition-colors focus-visible:ring-[3px]">{l.label}</a>)}
-              <a href={hrefs.subscribe} className="bg-chart-1 ml-2 inline-flex h-10 items-center gap-2 rounded-full px-5 text-sm font-bold text-[var(--podcast-on-amber)] outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none"><Rss className="size-4" aria-hidden="true" />Follow</a>
+              <a href={hrefs.subscribe} className="bg-chart-1 ms-2 inline-flex h-10 items-center gap-2 rounded-full px-5 text-sm font-bold text-[var(--podcast-on-amber)] outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none"><Rss className="size-4" aria-hidden="true" />Follow</a>
             </nav>
             <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="podcast-mobile-menu" onClick={() => setOpen((v) => !v)} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex size-10 items-center justify-center rounded-full outline-none focus-visible:ring-[3px] md:hidden">{open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}</button>
           </div>
@@ -106,7 +106,7 @@ function PodcastShell({ page, hrefs: overrides, className, style, children, ...p
         {now && (
           <div role="region" aria-label="Now playing" className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-3xl">
             <AudioPlayer key={now.slug} variant="compact" title={`${now.n}. ${now.title}`} duration={now.duration} className="shadow-[0_20px_50px_-12px_rgb(0_0_0/0.4)]" />
-            <button type="button" onClick={() => setNow(null)} className="bg-card hover:bg-accent focus-visible:ring-ring/50 absolute -top-3 -right-1 inline-flex size-8 items-center justify-center rounded-full border shadow-sm outline-none focus-visible:ring-[3px]" aria-label="Close the player"><X className="size-4" aria-hidden="true" /></button>
+            <button type="button" onClick={() => setNow(null)} className="bg-card hover:bg-accent focus-visible:ring-ring/50 absolute -top-3 -end-1 inline-flex size-8 items-center justify-center rounded-full border shadow-sm outline-none focus-visible:ring-[3px]" aria-label="Close the player"><X className="size-4" aria-hidden="true" /></button>
           </div>
         )}
       </div>

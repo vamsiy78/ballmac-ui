@@ -1,6 +1,9 @@
 // Ballmac UI: Contribution Graph. https://ui.ballmac.com/components/contribution-graph
+"use client"
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useLocale, useMessages } from "@/lib/ballmac/i18n"
 
 type ContributionDay = {
   /** ISO date (YYYY-MM-DD). */ date: string
@@ -18,6 +21,8 @@ function ContributionGraph({
   levels = 4,
   ...props
 }: ContributionGraphProps) {
+  const msg = useMessages()
+  const locale = useLocale()
   const total = data.reduce((sum, day) => sum + Math.max(0, day.count), 0)
   const max = Math.max(1, ...data.map((day) => day.count))
   return (
@@ -25,7 +30,7 @@ function ContributionGraph({
       data-slot="contribution-graph"
       role="img"
       tabIndex={0}
-      aria-label={`${label}: ${total} total across ${data.length} days${data.length ? `, ${data[0].date} to ${data.at(-1)?.date}` : ""}`}
+      aria-label={data.length ? msg("contribution-graph.summaryRange", { one: "{label}: {total} total across {count} day, {from} to {to}", other: "{label}: {total} total across {count} days, {from} to {to}" }, { label, total, count: data.length, from: data[0].date, to: data.at(-1)?.date ?? "" }) : msg("contribution-graph.summary", "{label}: {total} total across 0 days", { label, total })}
       className={cn(
         "min-w-0 max-w-full overflow-x-auto rounded-xl border border-border bg-card p-4",
         className,
@@ -64,9 +69,9 @@ function ContributionGraph({
         })}
       </div>
       <div className="text-muted-foreground mt-3 flex items-center justify-between gap-3 text-xs">
-        <span>{total.toLocaleString("en-US")} contributions</span>
+        <span>{msg("contribution-graph.total", { one: "{total} contribution", other: "{total} contributions" }, { count: total, total: total.toLocaleString(locale) })}</span>
         <span className="whitespace-nowrap">
-          Less{" "}
+          {msg("contribution-graph.less", "Less")}{" "}
           <span
             aria-hidden="true"
             className="bg-muted inline-block size-2 rounded-sm"
@@ -76,7 +81,7 @@ function ContributionGraph({
             aria-hidden="true"
             className="bg-primary inline-block size-2 rounded-sm"
           />{" "}
-          More
+          {msg("contribution-graph.more", "More")}
         </span>
       </div>
     </div>

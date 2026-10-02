@@ -27,7 +27,7 @@ function ProductCard({ product, href }: { product: Product; href: string }) {
       <a href={href} className="focus-visible:ring-ring/50 block rounded-3xl outline-none focus-visible:ring-[3px]">
         <div className="relative overflow-hidden rounded-3xl">
           <Piece shape={product.shape} glaze={product.glazes[0]} className="transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
-          {product.tag && <span className={cn("bg-chart-3 absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-bold", goodsOnClay)}>{product.tag}</span>}
+          {product.tag && <span className={cn("bg-chart-3 absolute top-3 start-3 rounded-full px-3 py-1 text-xs font-bold", goodsOnClay)}>{product.tag}</span>}
         </div>
         <span className="mt-4 flex items-start justify-between gap-3"><span className={cn("text-xl", goodsSerifClass)}>{product.name}</span><span className="font-semibold tabular-nums">{money(product.price)}</span></span>
         <span className="text-muted-foreground mt-1 block text-sm text-pretty">{product.tagline}</span>
@@ -66,13 +66,13 @@ function GoodsHome({ hrefs, ...props }: GoodsHomeProps) {
             <h1 id="gh-title" className={cn("mt-6 text-[clamp(3.2rem,8vw,7rem)] leading-[0.95] text-balance", goodsSerifClass)}>Made slowly.<br /><em className="text-chart-1">Used daily.</em></h1>
             <p className="text-muted-foreground mt-6 max-w-md text-xl text-pretty">Everyday ceramics thrown by hand in a shed in Bristol, fired in batches of forty and sent to your table.</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={link.shop} className="bg-primary text-primary-foreground focus-visible:ring-ring/50 inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0">Shop the collection <ArrowRight className="size-5" aria-hidden="true" /></a>
+              <a href={link.shop} className="bg-primary text-primary-foreground focus-visible:ring-ring/50 inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0">Shop the collection <ArrowRight className="size-5 rtl:rotate-180" aria-hidden="true" /></a>
               <a href={productLink(link.product, "morning-mug")} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-14 items-center rounded-full border-2 px-8 text-lg font-bold outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none">Meet the Morning mug</a>
             </div>
           </div>
           <div aria-hidden="true" className="grid grid-cols-2 gap-4">
-            <Piece shape="vase" glaze={3} view={0} className="rounded-[2.5rem] rounded-br-[6rem]" />
-            <div className="grid gap-4 pt-10"><Piece shape="mug" glaze={0} view={2} className="aspect-square rounded-[2.5rem] rounded-tl-[6rem]" /><Piece shape="bowl" glaze={1} view={3} className="aspect-square rounded-full" /></div>
+            <Piece shape="vase" glaze={3} view={0} className="rounded-[2.5rem] rounded-ee-[6rem]" />
+            <div className="grid gap-4 pt-10"><Piece shape="mug" glaze={0} view={2} className="aspect-square rounded-[2.5rem] rounded-ss-[6rem]" /><Piece shape="bowl" glaze={1} view={3} className="aspect-square rounded-full" /></div>
           </div>
         </section>
 
@@ -82,7 +82,7 @@ function GoodsHome({ hrefs, ...props }: GoodsHomeProps) {
 
         <section aria-labelledby="gh-cats" className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
           <h2 id="gh-cats" className={cn("text-4xl sm:text-5xl", goodsSerifClass)}>Shop by piece</h2>
-          <ul className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">{cats.map(([name, shape, g]) => <li key={name}><a href={link.shop} className="focus-visible:ring-ring/50 group block rounded-3xl outline-none focus-visible:ring-[3px]"><Piece shape={shape} glaze={g} view={1} className="aspect-square rounded-3xl transition-transform group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0" /><span className={cn("mt-3 flex items-center justify-between text-2xl", goodsSerifClass)}>{name}<ArrowRight className="size-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" /></span></a></li>)}</ul>
+          <ul className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">{cats.map(([name, shape, g]) => <li key={name}><a href={link.shop} className="focus-visible:ring-ring/50 group block rounded-3xl outline-none focus-visible:ring-[3px]"><Piece shape={shape} glaze={g} view={1} className="aspect-square rounded-3xl transition-transform group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0" /><span className={cn("mt-3 flex items-center justify-between text-2xl", goodsSerifClass)}>{name}<ArrowRight className="size-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden="true" /></span></a></li>)}</ul>
         </section>
 
         <section aria-labelledby="gh-best" className="mx-auto max-w-7xl px-4 pb-20 sm:px-6">

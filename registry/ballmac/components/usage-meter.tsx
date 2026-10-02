@@ -6,6 +6,7 @@ import { AlertTriangle, CircleCheck, OctagonAlert } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { ease } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/ballmac/i18n";
 
 type UsageSegment = {
   /** Name of this part of the total, for example "Images". */
@@ -53,10 +54,12 @@ function UsageMeter({
   variant = "bar",
   note,
   action,
-  locale = "en-US",
+  locale,
   className,
   ...props
 }: UsageMeterProps) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const reduce = useReducedMotion();
   const labelId = React.useId();
   const used = segments ? segments.reduce((sum, s) => sum + s.value, 0) : (usedProp ?? 0);
@@ -84,11 +87,11 @@ function UsageMeter({
             {segments.map((s, i) => (
               <motion.span
                 key={s.label}
-                className={cn("h-full first:rounded-l-full last:rounded-r-full", SEGMENT_COLORS[i % SEGMENT_COLORS.length])}
+                className={cn("h-full first:rounded-s-full last:rounded-e-full", SEGMENT_COLORS[i % SEGMENT_COLORS.length])}
                 initial={reduce ? false : { width: 0 }}
                 animate={{ width: `${used ? (s.value / used) * 100 : 0}%` }}
                 transition={{ duration: 0.7, ease: ease.out, delay: reduce ? 0 : i * 0.06 }}
-                style={{ marginRight: i < segments.length - 1 ? 1 : 0 }}
+                style={{ marginInlineEnd: i < segments.length - 1 ? 1 : 0 }}
               />
             ))}
           </div>
@@ -128,7 +131,7 @@ function UsageMeter({
             </p>
             <p className="mt-0.5 text-2xl font-semibold tracking-tight tabular-nums">
               {fmt.format(used)}
-              <span className="ml-1 text-sm font-normal text-muted-foreground">
+              <span className="ms-1 text-sm font-normal text-muted-foreground">
                 / {fmt.format(limit)}
                 {unit ? ` ${unit}` : ""}
               </span>
@@ -158,7 +161,7 @@ function UsageMeter({
               <li key={s.label} className="flex items-center gap-2">
                 <span aria-hidden="true" className={cn("size-2 shrink-0 rounded-[3px]", SEGMENT_COLORS[i % SEGMENT_COLORS.length])} />
                 <span className="truncate text-muted-foreground">{s.label}</span>
-                <span className="ml-auto font-medium tabular-nums">
+                <span className="ms-auto font-medium tabular-nums">
                   {fmt.format(s.value)}
                   {unit ? ` ${unit}` : ""}
                 </span>

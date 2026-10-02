@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["table", "sorting", "filter", "pagination", "tanstack"],
   files: [{ path: "components/data-table.tsx" }],
   dependencies: ["@tanstack/react-table@^8", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "button", "checkbox", "dropdown-menu", "table"],
+  registryDependencies: ["shadcn:utils", "button", "checkbox", "dropdown-menu", "table", "i18n"],
   examples: [
     { name: "data-table-demo", title: "Invoices", file: "data-table-demo.tsx" },
     { name: "data-table-states", title: "Loading and empty", file: "data-table-states.tsx" },

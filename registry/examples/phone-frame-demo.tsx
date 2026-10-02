@@ -24,7 +24,7 @@ function Wallet() {
         <div className="absolute inset-x-3 top-0 h-[200px] rounded-2xl bg-[linear-gradient(135deg,var(--chart-2),var(--chart-1))] opacity-60" />
         <div className="absolute inset-x-1.5 top-3 h-[200px] rounded-2xl bg-[linear-gradient(135deg,var(--chart-3),var(--chart-5))] opacity-80" />
         <div className="absolute inset-x-0 top-7 flex h-[208px] flex-col overflow-hidden rounded-2xl bg-[linear-gradient(140deg,var(--chart-1),var(--chart-4)_70%,var(--chart-5))] p-5 text-white shadow-[0_18px_40px_-16px_rgb(0_0_0/0.5)]">
-          <span className="pointer-events-none absolute -top-16 -right-10 size-48 rounded-full bg-white/15 blur-2xl" />
+          <span className="pointer-events-none absolute -top-16 -end-10 size-48 rounded-full bg-white/15 blur-2xl" />
           <div className="relative flex items-center justify-between text-[13px] font-medium text-white/85">
             <span>Acme Card</span>
             <span className="font-mono">•••• 4821</span>

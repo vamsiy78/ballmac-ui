@@ -7,6 +7,7 @@ import { Keyboard, Search } from "lucide-react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ballmac/dialog"
 import { Kbd, KbdGroup } from "@/components/ballmac/kbd"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ShortcutPlatform = "mac" | "other"
 
@@ -93,11 +94,13 @@ function KeyboardShortcuts({
   groups,
   searchable = true,
   platform: platformProp = "auto",
-  searchPlaceholder = "Search shortcuts",
+  searchPlaceholder,
   columns = 2,
   className,
   ...props
 }: KeyboardShortcutsProps) {
+  const msg = useMessages()
+  searchPlaceholder ??= msg("keyboard-shortcuts.searchPlaceholder", "Search shortcuts")
   const platform = usePlatform(platformProp)
   const [query, setQuery] = React.useState("")
   const q = query.trim().toLowerCase()
@@ -119,14 +122,14 @@ function KeyboardShortcuts({
     <div data-slot="keyboard-shortcuts" className={cn("@container w-full", className)} {...props}>
       {searchable && (
         <div className="relative mb-4">
-          <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 start-3 size-4 -translate-y-1/2 text-muted-foreground" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             aria-label={searchPlaceholder}
             placeholder={searchPlaceholder}
-            className="h-10 w-full rounded-lg border bg-background pr-3 pl-9 text-sm outline-none transition-[border-color,box-shadow] placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="h-10 w-full rounded-lg border bg-background pe-3 ps-9 text-sm outline-none transition-[border-color,box-shadow] placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
           <span className="sr-only" role="status" aria-live="polite">
             {q ? `${count} ${count === 1 ? "shortcut" : "shortcuts"} found` : ""}
@@ -135,7 +138,7 @@ function KeyboardShortcuts({
       )}
       {filtered.length === 0 ? (
         <p className="rounded-lg border border-dashed px-4 py-8 text-center text-sm text-muted-foreground">
-          No shortcut matches “{query}”.
+          {msg("keyboard-shortcuts.noShortcutMatches", "No shortcut matches “{query}”.", { query })}
         </p>
       ) : (
         <div className={cn("grid gap-x-10 gap-y-6", columns === 2 && "@xl:grid-cols-2")}>
@@ -184,11 +187,14 @@ function KeyboardShortcutsDialog({
   defaultOpen = false,
   onOpenChange,
   hotkey = "?",
-  title = "Keyboard shortcuts",
-  description = "Work faster without leaving the keyboard.",
+  title,
+  description,
   className,
   ...props
 }: KeyboardShortcutsDialogProps) {
+  const msg = useMessages()
+  title ??= msg("keyboard-shortcuts.title", "Keyboard shortcuts")
+  description ??= msg("keyboard-shortcuts.description", "Work faster without leaving the keyboard.")
   const [internal, setInternal] = React.useState(defaultOpen)
   const open = openProp ?? internal
   const onOpenChangeRef = React.useRef(onOpenChange)
@@ -216,7 +222,7 @@ function KeyboardShortcutsDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className={cn("max-h-[85dvh] grid-rows-[auto_minmax(0,1fr)_auto] gap-0 overflow-hidden p-0 sm:max-w-3xl sm:p-0", className)}>
-        <DialogHeader className="border-b px-5 py-4 pr-12">
+        <DialogHeader className="border-b px-5 py-4 pe-12">
           <DialogTitle className="flex items-center gap-2">
             <Keyboard aria-hidden="true" className="size-4 text-muted-foreground" />
             {title}
@@ -228,7 +234,7 @@ function KeyboardShortcutsDialog({
         </div>
         {hotkey && (
           <p className="border-t bg-muted/40 px-5 py-2.5 text-xs text-muted-foreground">
-            Press <Kbd size="sm">{hotkey}</Kbd> anywhere to open this list.
+            {msg.rich("keyboard-shortcuts.press", "Press {key} anywhere to open this list.", { key: <Kbd size="sm">{hotkey}</Kbd> })}
           </p>
         )}
       </DialogContent>

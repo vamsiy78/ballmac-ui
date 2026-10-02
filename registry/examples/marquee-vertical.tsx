@@ -25,12 +25,12 @@ export default function MarqueeVertical() {
     <div className="flex h-80 w-full max-w-xl justify-center gap-4 overflow-hidden">
       <Marquee vertical speed={24} gap={12} className="h-full">
         {quotes.slice(0, 3).map((q) => (
-          <Quote key={q.name} {...q} />
+          <Quote key={q.name} {...q}/>
         ))}
       </Marquee>
       <Marquee vertical reverse speed={24} gap={12} className="hidden h-full sm:flex">
         {quotes.slice(3).map((q) => (
-          <Quote key={q.name} {...q} />
+          <Quote key={q.name} {...q}/>
         ))}
       </Marquee>
     </div>

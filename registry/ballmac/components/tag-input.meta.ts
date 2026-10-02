@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["tags", "chips", "text-input"],
   files: [{ path: "components/tag-input.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "tag-input-demo", title: "Overview", file: "tag-input-demo.tsx" },
     {

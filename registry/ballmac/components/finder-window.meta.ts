@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["finder", "files", "macos", "window", "browser"],
   files: [{ path: "components/finder-window.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "mac-window", "mac-icons"],
+  registryDependencies: ["shadcn:utils", "mac-window", "mac-icons", "i18n"],
   examples: [
     { name: "finder-window-demo", title: "Home folder", file: "finder-window-demo.tsx" },
     { name: "finder-window-list", title: "List view", file: "finder-window-list.tsx" },

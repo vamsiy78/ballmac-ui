@@ -146,10 +146,10 @@ function ForgotPassword1({
                   <FieldInput type="email" autoComplete="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, email: true }))} />
                   <FieldError errors={[emailError]} />
                 </Field>
-                <Button type="submit" size="lg" shape="pill" loading={busy} className="w-full">Send reset link <ArrowRight /></Button>
+                <Button type="submit" size="lg" shape="pill" loading={busy} className="w-full">Send reset link <ArrowRight  className="rtl:rotate-180"/></Button>
               </FieldGroup>
             </form>
-            <a href={loginHref} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 mt-6 inline-flex items-center gap-1.5 rounded-sm text-sm outline-none focus-visible:ring-[3px]"><ArrowLeft className="size-4" aria-hidden="true" />Back to sign in</a>
+            <a href={loginHref} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 mt-6 inline-flex items-center gap-1.5 rounded-sm text-sm outline-none focus-visible:ring-[3px]"><ArrowLeft className="size-4 rtl:rotate-180" aria-hidden="true" />Back to sign in</a>
           </>
         )}
 

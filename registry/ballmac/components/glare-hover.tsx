@@ -32,7 +32,7 @@ function GlareHover({ angle = 18, duration = 800, intensity = 0.55, tone = "ligh
       {!reduce && (
         <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 overflow-hidden rounded-[inherit]">
           <span
-            className="absolute -inset-y-[40%] left-0 w-[45%] -translate-x-[130%] transition-none group-focus-within/glare:translate-x-[300%] group-focus-within/glare:transition-transform group-focus-within/glare:duration-[var(--glare-ms)] group-focus-within/glare:ease-out group-hover/glare:translate-x-[300%] group-hover/glare:transition-transform group-hover/glare:duration-[var(--glare-ms)] group-hover/glare:ease-out"
+            className="absolute -inset-y-[40%] start-0 w-[45%] -translate-x-[130%] rtl:translate-x-[130%] transition-none group-focus-within/glare:translate-x-[300%] group-focus-within/glare:transition-transform group-focus-within/glare:duration-[var(--glare-ms)] group-focus-within/glare:ease-out group-hover/glare:translate-x-[300%] group-hover/glare:transition-transform group-hover/glare:duration-[var(--glare-ms)] group-hover/glare:ease-out rtl:group-focus-within/glare:-translate-x-[300%] rtl:group-hover/glare:-translate-x-[300%]"
             style={{ background: `linear-gradient(90deg, transparent, ${color} 50%, transparent)`, transform: `skewX(${-angle}deg)`, mixBlendMode: tone === "light" ? "overlay" : "normal" }}
           />
         </span>

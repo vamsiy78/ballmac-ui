@@ -58,7 +58,7 @@ function Pin({ n, id, active, onSelect }: { n: number; id: StepId; active: StepI
       aria-hidden="true"
       data-pin={id}
       onClick={() => onSelect(id)}
-      className={cn("absolute -top-3 -left-3 z-10 flex size-7 items-center justify-center rounded-full border-2 text-xs font-semibold shadow-sm outline-none transition-colors", on ? "bg-chart-2 border-card text-white" : "bg-card text-foreground hover:bg-accent")}
+      className={cn("absolute -top-3 -start-3 z-10 flex size-7 items-center justify-center rounded-full border-2 text-xs font-semibold shadow-sm outline-none transition-colors", on ? "bg-chart-2 border-card text-white" : "bg-card text-foreground hover:bg-accent")}
     >
       {n}
     </button>
@@ -79,13 +79,13 @@ function NorthwindTour({ className }: { className?: string }) {
               <RadioGroupPrimitive.Item
                 key={s.id}
                 value={s.id}
-                className={cn("focus-visible:ring-ring/50 group block w-full rounded-xl border border-transparent p-4 text-left outline-none transition-colors focus-visible:ring-[3px]", on ? "bg-card border-border shadow-sm" : "hover:bg-accent/60")}
+                className={cn("focus-visible:ring-ring/50 group block w-full rounded-xl border border-transparent p-4 text-start outline-none transition-colors focus-visible:ring-[3px]", on ? "bg-card border-border shadow-sm" : "hover:bg-accent/60")}
               >
                 <span className="flex items-center gap-3">
                   <span className={cn("flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-colors", on ? "bg-chart-2 text-white" : "bg-secondary")}>{i + 1}</span>
                   <NorthwindHeading as="h3" className="text-xl">{s.title}</NorthwindHeading>
                 </span>
-                {on && <span className="text-muted-foreground mt-2 block pl-10 text-[15px] leading-relaxed text-pretty">{s.text}</span>}
+                {on && <span className="text-muted-foreground mt-2 block ps-10 text-[15px] leading-relaxed text-pretty">{s.text}</span>}
               </RadioGroupPrimitive.Item>
             )
           })}
@@ -124,7 +124,7 @@ function NorthwindTour({ className }: { className?: string }) {
             </Region>
             <Region id="approvals" active={active}>
               <Pin n={2} id="approvals" active={active} onSelect={setActive} />
-              <p className="text-xs font-semibold">Needs approval <span className="bg-chart-2/20 ml-1 rounded-full px-1.5">3</span></p>
+              <p className="text-xs font-semibold">Needs approval <span className="bg-chart-2/20 ms-1 rounded-full px-1.5">3</span></p>
               <ul className="mt-2 space-y-1.5 text-xs">
                 {queue.map((q) => (
                   <li key={q[0]} className="bg-secondary/70 flex items-center justify-between gap-2 rounded-lg px-2.5 py-1.5">

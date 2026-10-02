@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["navigation", "layout", "app shell", "collapsible"],
   files: [{ path: "components/sidebar.tsx" }],
   dependencies: ["class-variance-authority", "radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "sheet", "tooltip"],
+  registryDependencies: ["shadcn:utils", "sheet", "tooltip", "direction", "i18n"],
   examples: [
     { name: "sidebar-demo", title: "Workspace navigation", file: "sidebar-demo.tsx" },
     { name: "sidebar-states", title: "Icon rail", file: "sidebar-states.tsx" },

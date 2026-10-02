@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["chart", "trend", "data"],
   files: [{ path: "components/sparkline.tsx" }],
   dependencies: [],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "sparkline-demo", title: "Overview", file: "sparkline-demo.tsx" },
     {

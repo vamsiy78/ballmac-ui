@@ -10,7 +10,7 @@ export default function VoiceInputButton() {
   const { level, error } = useMicrophoneLevel(listening)
   return (
     <div className="grid w-full max-w-md gap-2">
-      <div className="flex items-center gap-2 rounded-full border bg-card py-1.5 pr-1.5 pl-4 shadow-xs transition-shadow has-[input:focus-visible]:border-ring has-[input:focus-visible]:ring-[3px] has-[input:focus-visible]:ring-ring/30 motion-reduce:transition-none">
+      <div className="flex items-center gap-2 rounded-full border bg-card py-1.5 pe-1.5 ps-4 shadow-xs transition-shadow has-[input:focus-visible]:border-ring has-[input:focus-visible]:ring-[3px] has-[input:focus-visible]:ring-ring/30 motion-reduce:transition-none">
         <input
           aria-label="Message"
           placeholder={listening ? "Listening…" : "Message the assistant"}

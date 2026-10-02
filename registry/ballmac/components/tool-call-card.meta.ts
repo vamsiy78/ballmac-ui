@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "agent", "tool", "function-calling", "json", "status", "llm"],
   files: [{ path: "components/tool-call-card.tsx" }],
   dependencies: ["lucide-react", "radix-ui"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "tool-call-card-demo", title: "Default", file: "tool-call-card-demo.tsx" },
     { name: "tool-call-card-states", title: "All states", file: "tool-call-card-states.tsx" },

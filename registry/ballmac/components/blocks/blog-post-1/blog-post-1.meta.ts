@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["blog", "article", "post", "prose", "table of contents", "reading progress"],
   files: [{ path: "components/blocks/blog-post-1/blog-post-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "blog-1", "breadcrumb", "copy-button", "scroll-progress", "table-of-contents"],
+  registryDependencies: ["shadcn:utils", "blog-1", "breadcrumb", "copy-button", "scroll-progress", "table-of-contents", "i18n"],
   examples: [
     { name: "blog-post-1-demo", title: "Default", file: "blog-post-1-demo.tsx" },
     { name: "blog-post-1-short", title: "Your own content", file: "blog-post-1-short.tsx" },

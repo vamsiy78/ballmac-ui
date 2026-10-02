@@ -80,7 +80,7 @@ function Team1({
         </div>
         {action && (
           <a href={action.href} className={buttonVariants({ variant: "outline", shape: "pill", className: "w-fit" })}>
-            {action.label} <ArrowRight />
+            {action.label} <ArrowRight  className="rtl:rotate-180"/>
           </a>
         )}
       </div>

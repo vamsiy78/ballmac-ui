@@ -41,7 +41,7 @@ const columns: ColumnDef<Invoice>[] = [
     accessorKey: "amount",
     meta: { label: "Amount" },
     header: ({ column }) => <DataTableColumnHeader column={column} title="Amount" numeric />,
-    cell: ({ row }) => <div className="text-right tabular-nums">{money.format(row.original.amount)}</div>,
+    cell: ({ row }) => <div className="text-end tabular-nums">{money.format(row.original.amount)}</div>,
   },
 ];
 export default function DataTableDemo() {

@@ -4,6 +4,7 @@
 import * as React from "react"
 import { PenLine, RotateCcw, Trash2, Type } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type SignatureValue =
   | {
@@ -38,6 +39,7 @@ function SignaturePad({
   disabled = false,
   ...props
 }: SignaturePadProps) {
+  const msg = useMessages()
   const [internal, setInternal] = React.useState<SignatureValue>(defaultValue)
   const [preview, setPreview] = React.useState<string | null>(null)
   const active = React.useRef<string | null>(null)
@@ -103,11 +105,11 @@ function SignaturePad({
     >
       <div className="flex items-center justify-between gap-3">
         <span className="text-sm font-medium">{label}</span>
-        <span className="text-muted-foreground text-xs">Draw or type</span>
+        <span className="text-muted-foreground text-xs">{msg("signature-pad.drawOrType", "Draw or type")}</span>
       </div>
       <div
         role="group"
-        aria-label="Signature method"
+        aria-label={msg("signature-pad.signatureMethod", "Signature method")}
         className="bg-muted mt-3 inline-flex rounded-lg p-1"
       >
         <button
@@ -123,7 +125,7 @@ function SignaturePad({
           )}
         >
           <PenLine aria-hidden="true" className="size-3.5" />
-          Draw
+          {msg("signature-pad.draw", "Draw")}
         </button>
         <button
           type="button"
@@ -138,7 +140,7 @@ function SignaturePad({
           )}
         >
           <Type aria-hidden="true" className="size-3.5" />
-          Type
+          {msg("signature-pad.type", "Type")}
         </button>
       </div>
       {current.mode === "draw" ? (
@@ -146,7 +148,7 @@ function SignaturePad({
           <svg
             data-slot="signature-pad-canvas"
             role="img"
-            aria-label={`${label} drawing area`}
+            aria-label={msg("signature-pad.drawingArea", "{label} drawing area", { label })}
             viewBox="0 0 600 200"
             preserveAspectRatio="none"
             onPointerDown={begin}
@@ -197,8 +199,8 @@ function SignaturePad({
           data-slot="signature-pad-type"
           type="text"
           value={current.text}
-          aria-label={`Type ${label.toLowerCase()}`}
-          placeholder="Type your full name"
+          aria-label={msg("signature-pad.typeLabel", "Type {label}", { label: label.toLowerCase() })}
+          placeholder={msg("signature-pad.typeYourFullName", "Type your full name")}
           disabled={disabled}
           onChange={(event) =>
             update({ mode: "type", text: event.target.value })
@@ -216,7 +218,7 @@ function SignaturePad({
           {current.mode === "draw" && (
             <button
               type="button"
-              aria-label="Undo last stroke"
+              aria-label={msg("signature-pad.undoLastStroke", "Undo last stroke")}
               disabled={disabled || !hasValue}
               onClick={() =>
                 update({ mode: "draw", strokes: current.strokes.slice(0, -1) })
@@ -228,7 +230,7 @@ function SignaturePad({
           )}
           <button
             type="button"
-            aria-label="Clear signature"
+            aria-label={msg("signature-pad.clearSignature", "Clear signature")}
             disabled={disabled || !hasValue}
             onClick={clear}
             className="text-muted-foreground hover:bg-accent flex size-8 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40"

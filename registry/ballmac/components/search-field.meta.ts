@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["search", "filter", "input"],
   files: [{ path: "components/search-field.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "search-field-demo",

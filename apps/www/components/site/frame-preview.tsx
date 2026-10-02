@@ -1,6 +1,6 @@
 "use client"
 
-import { ExternalLink, Monitor, Moon, RotateCcw, Smartphone, Sun, Tablet, Terminal } from "lucide-react"
+import { ExternalLink, Languages, Monitor, Moon, RotateCcw, Smartphone, Sun, Tablet, Terminal } from "lucide-react"
 import * as React from "react"
 
 import { CopyButton } from "@/components/site/copy-button"
@@ -46,12 +46,18 @@ export function FramePreview({
   const [run, setRun] = React.useState(0)
   const [pageIndex, setPageIndex] = React.useState(0)
   const [theme, setTheme] = React.useState<"site" | "light" | "dark">("site")
+  const [dir, setDir] = React.useState<"ltr" | "rtl">("ltr")
   const frame = React.useRef<HTMLIFrameElement>(null)
   const current = pages?.[pageIndex]?.src ?? src
   const applyTheme = React.useCallback((t: "site" | "light" | "dark") => {
     if (t === "site") return
     try {
       frame.current?.contentDocument?.documentElement.classList.toggle("dark", t === "dark")
+    } catch {}
+  }, [])
+  const applyDir = React.useCallback((d: "ltr" | "rtl") => {
+    try {
+      if (frame.current?.contentDocument) frame.current.contentDocument.documentElement.dir = d
     } catch {}
   }, [])
   const width = viewports.find((v) => v.id === viewport)!.width
@@ -129,6 +135,20 @@ export function FramePreview({
             >
               {theme === "dark" ? <Moon /> : <Sun />}
             </button>
+            <button
+              type="button"
+              aria-pressed={dir === "rtl"}
+              aria-label="Preview right-to-left"
+              title={dir === "rtl" ? "Preview left-to-right" : "Preview right-to-left (Arabic, Hebrew, Persian)"}
+              onClick={() => {
+                const next = dir === "rtl" ? "ltr" : "rtl"
+                setDir(next)
+                applyDir(next)
+              }}
+              className={cn(iconButton, dir === "rtl" && "bg-accent text-foreground")}
+            >
+              <Languages />
+            </button>
             <button type="button" onClick={() => setRun((r) => r + 1)} aria-label="Reload preview" title="Reload" className={iconButton}>
               <RotateCcw />
             </button>
@@ -161,7 +181,10 @@ export function FramePreview({
             key={`${run}-${current}`}
             ref={frame}
             src={current}
-            onLoad={() => applyTheme(theme)}
+            onLoad={() => {
+              applyTheme(theme)
+              applyDir(dir)
+            }}
             title={title}
             loading="lazy"
             className="bg-background block max-w-full transition-[width] duration-300 ease-[var(--bm-ease-out)] data-[narrow=true]:border-x"

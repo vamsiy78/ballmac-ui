@@ -171,7 +171,7 @@ function Mail1({
       <p role="status" className="sr-only">{announce}</p>
 
       {/* Folders */}
-      <nav aria-label="Folders" className="bg-muted/30 hidden w-52 shrink-0 flex-col border-r p-3 md:flex">
+      <nav aria-label="Folders" className="bg-muted/30 hidden w-52 shrink-0 flex-col border-e p-3 md:flex">
         <Dialog open={compose} onOpenChange={setCompose}>
           <DialogTrigger className={buttonVariants({ className: "w-full" })}><PenSquare /> Compose</DialogTrigger>
           <DialogContent>
@@ -187,7 +187,7 @@ function Mail1({
               </div>
               <DialogFooter>
                 <Button type="button" variant="ghost" onClick={() => setCompose(false)}>Discard</Button>
-                <Button type="submit"><Send /> Send</Button>
+                <Button type="submit"><Send  className="rtl:-scale-x-100"/> Send</Button>
               </DialogFooter>
             </form>
           </DialogContent>
@@ -197,21 +197,21 @@ function Mail1({
             <li key={f.id}>
               <button type="button" aria-current={folder === f.id ? "true" : undefined} onClick={() => { setFolder(f.id); setOpenId(null); setMobileView("list") }} className={cn("focus-visible:ring-ring/50 flex h-9 w-full items-center gap-2.5 rounded-lg px-2.5 text-sm font-medium outline-none transition-colors focus-visible:ring-[3px]", folder === f.id ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:bg-accent/60 hover:text-foreground")}>
                 <f.icon className="size-4" aria-hidden="true" />
-                <span className="flex-1 text-left">{f.label}</span>
+                <span className="flex-1 text-start">{f.label}</span>
                 {f.id === "inbox" && unread > 0 && <span className="bg-foreground text-background rounded-full px-1.5 py-px text-[11px] font-semibold tabular-nums">{unread}<span className="sr-only"> unread</span></span>}
               </button>
             </li>
           ))}
           <li>
             <button type="button" aria-current={folder === "starred" ? "true" : undefined} onClick={() => { setFolder("starred"); setOpenId(null); setMobileView("list") }} className={cn("focus-visible:ring-ring/50 flex h-9 w-full items-center gap-2.5 rounded-lg px-2.5 text-sm font-medium outline-none transition-colors focus-visible:ring-[3px]", folder === "starred" ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:bg-accent/60 hover:text-foreground")}>
-              <Star className="size-4" aria-hidden="true" /><span className="flex-1 text-left">Starred</span>
+              <Star className="size-4" aria-hidden="true" /><span className="flex-1 text-start">Starred</span>
             </button>
           </li>
         </ul>
       </nav>
 
       {/* Message list */}
-      <section aria-label="Messages" className={cn("flex w-full min-w-0 flex-col border-r md:w-80 md:shrink-0 lg:w-96", mobileView === "read" && "hidden md:flex")}>
+      <section aria-label="Messages" className={cn("flex w-full min-w-0 flex-col border-e md:w-80 md:shrink-0 lg:w-96", mobileView === "read" && "hidden md:flex")}>
         <div className="space-y-2 border-b p-3">
           <div className="flex items-center gap-2 md:hidden">
             <Select value={folder} onValueChange={(v) => { setFolder(v as Mail1Folder | "starred"); setOpenId(null) }}>
@@ -228,7 +228,7 @@ function Mail1({
         <ul ref={listRef} onKeyDown={keyNav} aria-label={`${folder === "starred" ? "Starred" : folderMeta.find((f) => f.id === folder)?.label} messages`} className="min-h-0 flex-1 divide-y overflow-y-auto">
           {visible.map((m) => (
             <li key={m.id} className="relative">
-              <button type="button" data-mail="" aria-current={shown?.id === m.id ? "true" : undefined} onClick={() => select(m.id)} className={cn("focus-visible:ring-ring/50 flex w-full gap-3 p-4 pr-11 text-left outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-inset", shown?.id === m.id ? "bg-accent/70" : "hover:bg-accent/40")}>
+              <button type="button" data-mail="" aria-current={shown?.id === m.id ? "true" : undefined} onClick={() => select(m.id)} className={cn("focus-visible:ring-ring/50 flex w-full gap-3 p-4 pe-11 text-start outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-inset", shown?.id === m.id ? "bg-accent/70" : "hover:bg-accent/40")}>
                 <Avatar size="sm"><AvatarFallback className={cn("text-foreground text-[11px] font-semibold", toneOf(m.from.name))}>{initials(m.from.name)}</AvatarFallback></Avatar>
                 <span className="min-w-0 flex-1">
                   <span className="flex items-baseline justify-between gap-2">
@@ -240,7 +240,7 @@ function Mail1({
                 </span>
                 {m.unread && <span aria-hidden="true" className="bg-chart-1 mt-1.5 size-2 shrink-0 rounded-full" />}
               </button>
-              <button type="button" aria-label={m.starred ? "Remove star" : "Star"} aria-pressed={!!m.starred} onClick={() => update(m.id, { starred: !m.starred })} className="hover:bg-accent focus-visible:ring-ring/50 absolute right-2 bottom-2 flex size-8 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px]">
+              <button type="button" aria-label={m.starred ? "Remove star" : "Star"} aria-pressed={!!m.starred} onClick={() => update(m.id, { starred: !m.starred })} className="hover:bg-accent focus-visible:ring-ring/50 absolute end-2 bottom-2 flex size-8 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px]">
                 <Star className={cn("size-4", m.starred ? "fill-chart-3 text-chart-3" : "text-muted-foreground")} aria-hidden="true" />
               </button>
             </li>
@@ -260,11 +260,11 @@ function Mail1({
         {shown ? (
           <>
             <div className="flex items-center gap-1 border-b p-2">
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Back to messages" onClick={() => setMobileView("list")}><ArrowLeft /></Button>
+              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Back to messages" onClick={() => setMobileView("list")}><ArrowLeft  className="rtl:rotate-180"/></Button>
               <Button variant="ghost" size="icon" aria-label="Archive" onClick={() => { update(shown.id, { folder: "archive" }); after(shown.id, "Conversation archived.") }}><Archive /></Button>
               <Button variant="ghost" size="icon" aria-label="Delete" onClick={() => { setMails((all) => all.filter((m) => m.id !== shown.id)); after(shown.id, "Conversation deleted.") }}><Trash2 /></Button>
               <Button variant="ghost" size="icon" aria-label="Mark as unread" onClick={() => { update(shown.id, { unread: true }); after(shown.id, "Marked as unread.") }}><MailOpen /></Button>
-              <Button variant="ghost" size="sm" className="ml-auto" onClick={() => setReply("")}><Reply /> Reply</Button>
+              <Button variant="ghost" size="sm" className="ms-auto" onClick={() => setReply("")}><Reply  className="rtl:-scale-x-100"/> Reply</Button>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto p-5 sm:p-8" tabIndex={0}>
               <h2 className="text-xl font-semibold tracking-[-0.02em] text-balance sm:text-2xl">{shown.subject}</h2>
@@ -274,7 +274,7 @@ function Mail1({
                   <p className="font-medium">{shown.from.name}</p>
                   <p className="text-muted-foreground truncate">{shown.from.email}</p>
                 </div>
-                <p className="text-muted-foreground ml-auto text-xs">{shown.time}</p>
+                <p className="text-muted-foreground ms-auto text-xs">{shown.time}</p>
               </div>
               <div className="mt-6 space-y-4 text-[15px] leading-7">
                 {shown.body.map((p, i) => <p key={i} className="whitespace-pre-line">{p}</p>)}
@@ -294,7 +294,7 @@ function Mail1({
                   <Textarea aria-label={`Reply to ${shown.from.name}`} autoFocus rows={4} placeholder={`Reply to ${shown.from.name}…`} value={reply} onChange={(e) => setReply(e.target.value)} className="border-0 shadow-none focus-visible:ring-0" />
                   <div className="flex justify-end gap-2 pt-2">
                     <Button type="button" variant="ghost" size="sm" onClick={() => setReply(null)}>Discard</Button>
-                    <Button type="submit" size="sm" disabled={!reply.trim()}><Send /> Send</Button>
+                    <Button type="submit" size="sm" disabled={!reply.trim()}><Send  className="rtl:-scale-x-100"/> Send</Button>
                   </div>
                 </form>
               )}

@@ -102,7 +102,7 @@ function DocsGuide({ hrefs, ...props }: DocsGuideProps) {
           <div className="mt-10">
             <Step n={1} id="before" title="Before you begin">
               <p className="text-pretty">You need a Tern account and a test API key. Test keys only touch test queues, so nothing here can affect production.</p>
-              <div className="bg-card flex items-center justify-between gap-3 rounded-xl border p-3 pl-4">
+              <div className="bg-card flex items-center justify-between gap-3 rounded-xl border p-3 ps-4">
                 <div className="min-w-0"><p className="text-muted-foreground text-xs">Your test key</p><p className={cn("truncate text-sm", docsMonoClass)}>tern_test_4fJ2kQ9xN7mB1c</p></div>
                 <CopyButton value="tern_test_4fJ2kQ9xN7mB1c" ariaLabel="Copy the test key" variant="outline" size="sm" />
               </div>
@@ -133,7 +133,7 @@ function DocsGuide({ hrefs, ...props }: DocsGuideProps) {
             <h2 id="next" className={cn("scroll-mt-24 text-3xl", docsSerifClass)}>Next steps</h2>
             <ul className="mt-5 grid gap-4 sm:grid-cols-2">
               {[["Delivery guarantees", "What at-least-once really means for your code.", link.guide], ["Dead-letter queues", "Park messages that keep failing and replay them later.", link.guide], ["Idempotent consumers", "Make retries safe.", link.guide], ["API reference", "Every endpoint, with examples.", link.reference]].map(([t, d, h]) => (
-                <li key={t}><a href={h} className="bg-card hover:border-primary/50 focus-visible:ring-ring/50 group block h-full rounded-xl border p-5 outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none"><span className="flex items-center justify-between font-semibold">{t}<ArrowRight className="size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" /></span><span className="text-muted-foreground mt-1 block text-sm">{d}</span></a></li>
+                <li key={t}><a href={h} className="bg-card hover:border-primary/50 focus-visible:ring-ring/50 group block h-full rounded-xl border p-5 outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none"><span className="flex items-center justify-between font-semibold">{t}<ArrowRight className="size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden="true" /></span><span className="text-muted-foreground mt-1 block text-sm">{d}</span></a></li>
               ))}
             </ul>
           </section>
@@ -141,8 +141,8 @@ function DocsGuide({ hrefs, ...props }: DocsGuideProps) {
           <div className="mt-12"><Helpful /></div>
 
           <nav aria-label="Previous and next page" className="mt-8 grid gap-4 sm:grid-cols-2">
-            <a href={link.guide} className="hover:border-primary/50 focus-visible:ring-ring/50 group rounded-xl border p-5 outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none"><span className="text-muted-foreground flex items-center gap-1 text-xs"><ArrowLeft className="size-3.5" aria-hidden="true" />Previous</span><span className="mt-1 block font-semibold">Core concepts</span></a>
-            <a href={link.guide} className="hover:border-primary/50 focus-visible:ring-ring/50 group rounded-xl border p-5 text-right outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none"><span className="text-muted-foreground flex items-center justify-end gap-1 text-xs">Next<ArrowRight className="size-3.5" aria-hidden="true" /></span><span className="mt-1 block font-semibold">Delivery guarantees</span></a>
+            <a href={link.guide} className="hover:border-primary/50 focus-visible:ring-ring/50 group rounded-xl border p-5 outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none"><span className="text-muted-foreground flex items-center gap-1 text-xs"><ArrowLeft className="size-3.5 rtl:rotate-180" aria-hidden="true" />Previous</span><span className="mt-1 block font-semibold">Core concepts</span></a>
+            <a href={link.guide} className="hover:border-primary/50 focus-visible:ring-ring/50 group rounded-xl border p-5 text-end outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none"><span className="text-muted-foreground flex items-center justify-end gap-1 text-xs">Next<ArrowRight className="size-3.5 rtl:rotate-180" aria-hidden="true" /></span><span className="mt-1 block font-semibold">Delivery guarantees</span></a>
           </nav>
         </main>
         <aside className="hidden xl:block" aria-label="On this page"><div className="sticky top-24"><TableOfContents items={toc} title="On this page" offset={96} /></div></aside>

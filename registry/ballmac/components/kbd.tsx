@@ -21,7 +21,7 @@ const kbdVariants = cva(
 type KbdProps = React.ComponentProps<"kbd"> & VariantProps<typeof kbdVariants>
 
 function Kbd({ className, size = "default", ...props }: KbdProps) {
-  return <kbd data-slot="kbd" className={cn(kbdVariants({ size }), className)} {...props} />
+  return <kbd data-slot="kbd" dir="ltr" className={cn(kbdVariants({ size }), className)} {...props} />
 }
 
 type KbdGroupProps = React.ComponentProps<"kbd">
@@ -30,7 +30,7 @@ type KbdGroupProps = React.ComponentProps<"kbd">
  * Groups keys that are pressed together. Renders a nested <kbd>, the HTML pattern for a key combination.
  */
 function KbdGroup({ className, ...props }: KbdGroupProps) {
-  return <kbd data-slot="kbd-group" className={cn("inline-flex items-center gap-1 font-sans", className)} {...props} />
+  return <kbd data-slot="kbd-group" dir="ltr" className={cn("inline-flex items-center gap-1 font-sans", className)} {...props} />
 }
 
 export { Kbd, KbdGroup, kbdVariants, type KbdGroupProps, type KbdProps }

@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["settings", "form", "preferences", "save bar"],
   files: [{ path: "components/settings-panel.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n"],
   examples: [
     { name: "settings-panel-demo", title: "Workspace settings", file: "settings-panel-demo.tsx" },
     { name: "settings-panel-states", title: "Unsaved changes", file: "settings-panel-states.tsx" },

@@ -19,21 +19,21 @@ const card = "bg-card w-64 rounded-2xl border p-4 shadow-lg"
 function HeroCards() {
   return (
     <>
-      <Hero6Float depth={22} bob={6.5} className="xl:top-[50%] xl:left-0 2xl:left-[3%]">
+      <Hero6Float depth={22} bob={6.5} className="xl:top-[50%] xl:start-0 2xl:start-[3%]">
         <div className={card}>
           <p className="flex items-center gap-2 text-sm font-semibold"><Rocket className="text-primary size-4" aria-hidden="true" />Preview ready</p>
           <p className={cn("text-muted-foreground mt-2 text-xs", launchMono.className)}>feat/checkout-v2 · 41s</p>
-          <p className="mt-3 flex items-center gap-1.5 text-xs font-medium"><span className="bg-chart-2 size-2 rounded-full" aria-hidden="true" />Live at pr-482.beacon.app</p>
+          <p className="mt-3 flex items-center gap-1.5 text-xs font-medium"><span className="bg-chart-2 size-2 rounded-full" aria-hidden="true" />Live at pe-482.beacon.app</p>
         </div>
       </Hero6Float>
-      <Hero6Float depth={34} bob={7.5} delay={1.2} className="xl:top-[44%] xl:right-0 2xl:right-[3%]">
+      <Hero6Float depth={34} bob={7.5} delay={1.2} className="xl:top-[44%] xl:end-0 2xl:end-[3%]">
         <div className={card}>
           <p className="flex items-center gap-2 text-sm font-semibold"><Gauge className="text-primary size-4" aria-hidden="true" />Performance budget</p>
           <p className="mt-2 text-2xl font-semibold tabular-nums">94 <span className="text-muted-foreground text-xs font-medium">/ 90 required</span></p>
           <div className="bg-muted mt-2 h-1.5 overflow-hidden rounded-full" aria-hidden="true"><div className="bg-chart-2 h-full w-[94%]" /></div>
         </div>
       </Hero6Float>
-      <Hero6Float depth={14} bob={8} delay={0.6} className="xl:right-[3%] xl:bottom-[1%] 2xl:right-[9%]">
+      <Hero6Float depth={14} bob={8} delay={0.6} className="xl:end-[3%] xl:bottom-[1%] 2xl:end-[9%]">
         <div className={card}>
           <p className="flex items-center gap-2 text-sm font-semibold"><RotateCcw className="text-primary size-4" aria-hidden="true" />Rolled back</p>
           <p className="text-muted-foreground mt-2 text-xs">Error rate crossed 2%. Production returned to <span className={launchMono.className}>v2.18.3</span> in 6s.</p>

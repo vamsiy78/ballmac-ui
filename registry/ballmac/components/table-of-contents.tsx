@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { scrollToId, useScrollSpy, type ScrollContainer } from "@/lib/ballmac/scroll";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type TocItem = {
   /** The id of the heading in the page. */
@@ -49,13 +50,15 @@ function TableOfContents({
   items: itemsProp,
   headingsFrom,
   levels = [2, 3],
-  title = "On this page",
+  title,
   offset = 96,
   container,
   onNavigate,
   className,
   ...props
 }: TableOfContentsProps) {
+  const msg = useMessages()
+  title ??= msg("table-of-contents.title", "On this page")
   const reduce = useReducedMotion();
   const indicatorId = `toc-${React.useId()}`;
   const [found, setFound] = React.useState<TocItem[]>([]);
@@ -86,7 +89,7 @@ function TableOfContents({
   return (
     <nav aria-label={title} data-slot="table-of-contents" className={cn("text-sm", className)} {...props}>
       <p className="mb-3 text-xs font-semibold tracking-wide text-foreground uppercase">{title}</p>
-      <ul className="relative grid gap-0.5 border-l border-border">
+      <ul className="relative grid gap-0.5 border-s border-border">
         {items.map((item) => {
           const isActive = item.id === active;
           return (
@@ -102,14 +105,14 @@ function TableOfContents({
                     onNavigate?.(item.id);
                   }
                 }}
-                style={{ paddingLeft: `${0.75 + ((item.level ?? 2) - base) * 0.75}rem` }}
-                className="relative -ml-px block rounded-r-md py-1.5 pr-2 leading-snug text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active]:font-medium data-[active]:text-foreground"
+                style={{ paddingInlineStart: `${0.75 + ((item.level ?? 2) - base) * 0.75}rem` }}
+                className="relative -ms-px block rounded-e-md py-1.5 pe-2 leading-snug text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active]:font-medium data-[active]:text-foreground"
               >
                 {isActive && (
                   <motion.span
                     layoutId={indicatorId}
                     aria-hidden="true"
-                    className="absolute inset-y-1 left-0 w-0.5 rounded-full bg-primary"
+                    className="absolute inset-y-1 start-0 w-0.5 rounded-full bg-primary"
                     transition={reduce ? { duration: 0 } : spring.snappy}
                   />
                 )}

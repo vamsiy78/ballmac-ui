@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "citation", "source", "reference", "hover"],
   files: [{ path: "components/citation.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "hover-card"],
+  registryDependencies: ["shadcn:utils", "hover-card", "i18n"],
   examples: [
     { name: "citation-demo", title: "Numbered markers in an answer", file: "citation-demo.tsx" },
     { name: "citation-pill", title: "Site pills with several sources", file: "citation-pill.tsx" },

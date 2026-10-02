@@ -9,6 +9,7 @@ dist
 next-env.d.ts
 # generated registry output
 apps/www/public/r
+apps/www/public/i18n
 apps/www/.registry-pro
 registry-pro.json
 apps/www/lib/generated

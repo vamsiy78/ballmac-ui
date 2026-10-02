@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["calendar", "agenda", "events"],
   files: [{ path: "components/calendar-agenda.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "calendar-agenda-demo",

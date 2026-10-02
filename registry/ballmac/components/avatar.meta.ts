@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["avatar", "user", "profile", "presence", "radix"],
   files: [{ path: "components/avatar.tsx" }],
   dependencies: ["radix-ui", "class-variance-authority"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "avatar-demo", title: "Default", file: "avatar-demo.tsx" },
     { name: "avatar-group", title: "Group", file: "avatar-group.tsx" },

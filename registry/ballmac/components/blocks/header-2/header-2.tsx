@@ -100,15 +100,15 @@ function Header2({
           {brand}
         </a>
         <MegaMenu items={items} label="Main" viewportAlign="start" />
-        <div className="ml-auto hidden items-center gap-2 md:flex">
+        <div className="ms-auto hidden items-center gap-2 md:flex">
           <a className={buttonVariants({ variant: "ghost" })} href={secondaryAction.href}>{secondaryAction.label}</a>
           <a className={buttonVariants({ shape: "pill" })} href={primaryAction.href}>{primaryAction.label}</a>
         </div>
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger className={buttonVariants({ variant: "ghost", size: "icon", className: "ml-auto md:hidden" })} aria-label="Open menu">
+          <SheetTrigger className={buttonVariants({ variant: "ghost", size: "icon", className: "ms-auto md:hidden" })} aria-label="Open menu">
             <Menu />
           </SheetTrigger>
-          <SheetContent side="right" closeLabel="Close menu" className="w-[min(22rem,90vw)]">
+          <SheetContent side="end" closeLabel="Close menu" className="w-[min(22rem,90vw)]">
             <SheetHeader>
               <SheetTitle>{brand}</SheetTitle>
               <SheetDescription className="sr-only">Site navigation</SheetDescription>

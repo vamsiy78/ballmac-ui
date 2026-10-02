@@ -5,6 +5,7 @@ import * as React from "react"
 import { useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type IconCloudProps = Omit<React.ComponentProps<"ul">, "children"> & {
   /** The items on the sphere: icons, logos, short labels, links or buttons. Each one is a list item. */
@@ -35,7 +36,9 @@ function spherePoints(n: number): Vec[] {
  * Items orbiting on a 3D sphere. Drag to spin it; it eases to a stop under the pointer and while any item has
  * focus, so links stay clickable. Updates go straight to the DOM, so React does not re-render each frame.
  */
-function IconCloud({ children, size = 320, speed = 1.2, label = "Items", className, style, ...props }: IconCloudProps) {
+function IconCloud({ children, size = 320, speed = 1.2, label, className, style, ...props }: IconCloudProps) {
+  const msg = useMessages()
+  label ??= msg("icon-cloud.label", "Items")
   const reduce = useReducedMotion()
   const items = React.Children.toArray(children)
   const refs = React.useRef<(HTMLLIElement | null)[]>([])

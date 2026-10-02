@@ -6,6 +6,7 @@ import { AlertCircle, Check, ChevronRight, Circle, Loader2, MinusCircle, RotateC
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type PlanStatus = "pending" | "running" | "done" | "failed" | "skipped"
 
@@ -91,7 +92,7 @@ function StatusIcon({ status, reduce }: { status: PlanStatus; reduce: boolean | 
 
 function AgentPlan({
   steps,
-  title = "Plan",
+  title,
   description,
   expanded: expandedProp,
   onExpandedChange,
@@ -100,6 +101,8 @@ function AgentPlan({
   className,
   ...props
 }: AgentPlanProps) {
+  const msg = useMessages()
+  title ??= msg("agent-plan.title", "Plan")
   const reduce = useReducedMotion()
   const baseId = React.useId()
   const everyStep = React.useMemo(() => flatten(steps), [steps])
@@ -167,7 +170,7 @@ function AgentPlan({
             aria-hidden="true"
             className={cn(
               "mt-1 size-4 shrink-0 text-muted-foreground transition-transform duration-200 motion-reduce:transition-none",
-              open && "rotate-90"
+              open ? "rotate-90" : "rtl:rotate-180"
             )}
           />
         )}
@@ -179,7 +182,7 @@ function AgentPlan({
           <span
             aria-hidden="true"
             className={cn(
-              "absolute top-6 bottom-0 left-3 -ml-px w-0.5 rounded-full",
+              "absolute top-6 bottom-0 start-3 -ms-px w-0.5 rounded-full",
               step.status === "done" ? "bg-foreground/80" : "bg-border"
             )}
           />
@@ -192,7 +195,7 @@ function AgentPlan({
               aria-expanded={open}
               aria-controls={panelId}
               onClick={() => toggle(step.id)}
-              className="-my-px flex w-full items-start gap-2 rounded-md text-left outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+              className="-my-px flex w-full items-start gap-2 rounded-md text-start outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
             >
               <span className="sr-only">{`${STATUS_WORD[step.status]}:`}</span>{" "}
               {body}
@@ -211,11 +214,11 @@ function AgentPlan({
                 <button
                   type="button"
                   onClick={() => onRetry(step)}
-                  aria-label={`Retry ${step.title}`}
+                  aria-label={msg("agent-plan.retry", "Retry {title}", { title: step.title })}
                   className="inline-flex h-7 items-center gap-1 rounded-md border bg-background px-2 text-xs font-medium outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
                 >
                   <RotateCw aria-hidden="true" className="size-3" />
-                  Retry
+                  {msg("agent-plan.retry", "Retry")}
                 </button>
               )}
             </div>
@@ -262,7 +265,7 @@ function AgentPlan({
       <div className="mb-4 flex items-center gap-3">
         <div
           role="progressbar"
-          aria-label={`${title} progress`}
+          aria-label={msg("agent-plan.progress", "{title} progress", { title })}
           aria-valuemin={0}
           aria-valuemax={total}
           aria-valuenow={done}

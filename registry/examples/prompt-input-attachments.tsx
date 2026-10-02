@@ -24,7 +24,7 @@ export default function PromptInputAttachmentsDemo() {
         <PromptInputTextarea placeholder="Ask about the attached files…" />
         <PromptInputToolbar>
           <PromptInputAttachButton accept=".md,.json,.csv,.txt" />
-          <PromptInputSubmit className="ml-auto" />
+          <PromptInputSubmit className="ms-auto" />
         </PromptInputToolbar>
       </PromptInput>
     </div>

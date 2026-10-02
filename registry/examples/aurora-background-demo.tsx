@@ -8,7 +8,7 @@ export default function AuroraBackgroundDemo() {
       <AuroraBackground className="-z-10" />
       <span className="inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-background/50 px-3 py-1 text-xs font-medium backdrop-blur">
         Introducing Acme 3
-        <ArrowRight className="size-3 text-muted-foreground" aria-hidden="true" />
+        <ArrowRight className="size-3 text-muted-foreground rtl:rotate-180" aria-hidden="true" />
       </span>
       <h2 className="mt-5 max-w-lg text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
         Quiet software for loud ideas.

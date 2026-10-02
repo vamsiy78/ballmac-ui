@@ -4,6 +4,7 @@
 import * as React from "react"
 import { Check } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ProgressStep = {
   /** Stable step ID. */ id: string
@@ -32,9 +33,11 @@ function ProgressSteps({
   defaultActiveIndex = 0,
   onActiveIndexChange,
   navigable = false,
-  label = "Progress",
+  label,
   ...props
 }: ProgressStepsProps) {
+  const msg = useMessages()
+  label ??= msg("progress-steps.label", "Progress")
   const [internal, setInternal] = React.useState(defaultActiveIndex)
   const active = Math.max(
     0,
@@ -69,7 +72,7 @@ function ProgressSteps({
             >
               {complete ? <Check className="size-3.5" /> : index + 1}
             </span>
-            <span className="min-w-0 text-left">
+            <span className="min-w-0 text-start">
               <span
                 className={cn(
                   "block text-sm font-medium",
@@ -90,12 +93,12 @@ function ProgressSteps({
           <li
             key={step.id}
             data-slot="progress-steps-item"
-            className="relative min-w-0 pb-2 before:absolute before:top-8 before:bottom-0 before:left-3.5 before:w-px before:bg-border last:pb-0 last:before:hidden"
+            className="relative min-w-0 pb-2 before:absolute before:top-8 before:bottom-0 before:start-3.5 before:w-px before:bg-border last:pb-0 last:before:hidden"
           >
             {navigable && complete ? (
               <button
                 type="button"
-                aria-label={`Return to ${step.label}`}
+                aria-label={msg("progress-steps.returnTo", "Return to {label}", { label: step.label })}
                 onClick={() => choose(index)}
                 className="hover:bg-accent relative flex min-h-9 w-full items-center gap-3 rounded-md px-1 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
               >

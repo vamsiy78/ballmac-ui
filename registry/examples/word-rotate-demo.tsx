@@ -13,7 +13,7 @@ export default function WordRotateDemo() {
         Ship{" "}
         <WordRotate
           words={["faster", "safer", "together"]}
-          wordClassName="bg-[linear-gradient(100deg,var(--chart-1),var(--chart-4)_55%,var(--chart-5))] bg-clip-text pr-[0.04em] text-transparent"
+          wordClassName="bg-[linear-gradient(100deg,var(--chart-1),var(--chart-4)_55%,var(--chart-5))] bg-clip-text pe-[0.04em] text-transparent"
         />
         <br />
         without the pager.
@@ -23,7 +23,7 @@ export default function WordRotateDemo() {
       </p>
       <div className="mt-6 flex gap-3">
         <a href="#" className={buttonVariants({ shape: "pill" })}>
-          Start free <ArrowRight aria-hidden="true" />
+          Start free <ArrowRight aria-hidden="true"  className="rtl:rotate-180"/>
         </a>
         <a href="#" className={buttonVariants({ variant: "outline", shape: "pill" })}>
           Read the docs

@@ -6,6 +6,7 @@ import { Pause, Play, RotateCcw, RotateCw } from "lucide-react"
 
 import { Slider } from "@/components/ballmac/slider"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type AudioChapter = {
   /** Start time in seconds. */
@@ -67,6 +68,7 @@ function AudioPlayer({
   className,
   ...props
 }: AudioPlayerProps) {
+  const msg = useMessages()
   const audio = React.useRef<HTMLAudioElement>(null)
   const [inner, setInner] = React.useState(0)
   const [length, setLength] = React.useState(durationProp)
@@ -145,14 +147,14 @@ function AudioPlayer({
 
   const controls = (
     <div className="flex items-center gap-1.5">
-      <button type="button" onClick={() => seek(time - skip.back)} className={cn(btn, "relative size-10")} aria-label={`Back ${skip.back} seconds`}>
+      <button type="button" onClick={() => seek(time - skip.back)} className={cn(btn, "relative size-10")} aria-label={msg("audio-player.backSeconds", "Back {back} seconds", { back: skip.back })}>
         <RotateCcw className="size-[22px]" aria-hidden="true" />
         <span className="absolute text-[9px] font-bold tabular-nums" aria-hidden="true">{skip.back}</span>
       </button>
-      <button type="button" onClick={toggle} className={cn(btn, "bg-primary text-primary-foreground hover:bg-primary/90 size-12")} aria-label={playing ? "Pause" : "Play"}>
+      <button type="button" onClick={toggle} className={cn(btn, "bg-primary text-primary-foreground hover:bg-primary/90 size-12")} aria-label={playing ? msg("audio-player.pause", "Pause") : msg("audio-player.play", "Play")}>
         {playing ? <Pause className="size-5 fill-current" aria-hidden="true" /> : <Play className="size-5 translate-x-px fill-current" aria-hidden="true" />}
       </button>
-      <button type="button" onClick={() => seek(time + skip.forward)} className={cn(btn, "relative size-10")} aria-label={`Forward ${skip.forward} seconds`}>
+      <button type="button" onClick={() => seek(time + skip.forward)} className={cn(btn, "relative size-10")} aria-label={msg("audio-player.forwardSeconds", "Forward {forward} seconds", { forward: skip.forward })}>
         <RotateCw className="size-[22px]" aria-hidden="true" />
         <span className="absolute text-[9px] font-bold tabular-nums" aria-hidden="true">{skip.forward}</span>
       </button>
@@ -163,7 +165,7 @@ function AudioPlayer({
     <div className="min-w-0 flex-1">
       <div className="relative">
         <Slider
-          aria-label="Seek"
+          aria-label={msg("audio-player.seek", "Seek")}
           min={0}
           max={Math.max(total, 1)}
           step={1}
@@ -185,13 +187,13 @@ function AudioPlayer({
   )
 
   const speed = (
-    <button type="button" onClick={() => setRateIndex((i) => (i + 1) % rates.length)} className={cn(btn, "h-9 min-w-12 px-2.5 text-sm font-semibold tabular-nums")} aria-label={`Playback speed ${rate}×. Change speed`}>
+    <button type="button" onClick={() => setRateIndex((i) => (i + 1) % rates.length)} className={cn(btn, "h-9 min-w-12 px-2.5 text-sm font-semibold tabular-nums")} aria-label={msg("audio-player.playbackSpeedChangeSpeed", "Playback speed {rate}×. Change speed", { rate })}>
       {rate}×
     </button>
   )
 
   return (
-    <div data-slot="audio-player" data-playing={playing || undefined} className={cn("bg-card text-card-foreground rounded-2xl border", variant === "compact" ? "p-3" : "p-4 sm:p-5", className)} role="group" aria-label={`Audio player: ${title}`} {...props}>
+    <div data-slot="audio-player" data-playing={playing || undefined} className={cn("bg-card text-card-foreground rounded-2xl border", variant === "compact" ? "p-3" : "p-4 sm:p-5", className)} role="group" aria-label={msg("audio-player.audioPlayer", "Audio player: {title}", { title })} {...props}>
       {src && <audio ref={audio} src={src} preload="metadata" onLoadedMetadata={(e) => setLength(e.currentTarget.duration)} onTimeUpdate={(e) => setInner(e.currentTarget.currentTime)} onEnded={() => setPlaying(false)} />}
       {variant === "compact" ? (
         <div className="flex items-center gap-3">
@@ -206,7 +208,7 @@ function AudioPlayer({
             <div className="min-w-0 flex-1">
               <p className="truncate text-base font-semibold">{title}</p>
               {subtitle && <p className="text-muted-foreground truncate text-sm">{subtitle}</p>}
-              {chapter && <p className="text-muted-foreground mt-1 truncate text-xs" aria-live="polite">Chapter: <span className="text-foreground font-medium">{chapter.title}</span></p>}
+              {chapter && <p className="text-muted-foreground mt-1 truncate text-xs" aria-live="polite">{msg("audio-player.chapter", "Chapter:")} <span className="text-foreground font-medium">{chapter.title}</span></p>}
             </div>
             {speed}
           </div>

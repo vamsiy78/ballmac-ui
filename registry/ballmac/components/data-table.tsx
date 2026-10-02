@@ -12,6 +12,7 @@ import {
   useReactTable,
   type Column,
   type ColumnDef,
+  type Row,
   type RowSelectionState,
   type SortingState,
   type Table as TanstackTable,
@@ -37,6 +38,7 @@ import {
   TableRow,
 } from "@/components/ballmac/table";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type DataTableProps<TData, TValue = unknown> = Omit<React.ComponentProps<"div">, "children"> & {
   /** Column definitions from TanStack Table. Use `DataTableColumnHeader` in `header` for sortable columns, and `meta: { label: "Name" }` to name a column in the Columns menu. */
@@ -73,25 +75,35 @@ type DataTableProps<TData, TValue = unknown> = Omit<React.ComponentProps<"div">,
   maxHeightClassName?: string;
 };
 
+function SelectAllCheckbox<TData>({ table }: { table: TanstackTable<TData> }) {
+  const msg = useMessages();
+  return (
+    <Checkbox
+      aria-label={msg("data-table.selectAllRows", "Select all rows on this page")}
+      checked={table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? "indeterminate" : false}
+      onCheckedChange={(v) => table.toggleAllPageRowsSelected(!!v)}
+    />
+  );
+}
+
+function SelectRowCheckbox<TData>({ row }: { row: Row<TData> }) {
+  const msg = useMessages();
+  return (
+    <Checkbox
+      aria-label={msg("data-table.selectRow", "Select row {n}", { n: row.index + 1 })}
+      checked={row.getIsSelected()}
+      onCheckedChange={(v) => row.toggleSelected(!!v)}
+    />
+  );
+}
+
 function selectionColumn<TData>(): ColumnDef<TData> {
   return {
     id: "select",
     enableSorting: false,
     enableHiding: false,
-    header: ({ table }) => (
-      <Checkbox
-        aria-label="Select all rows on this page"
-        checked={table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? "indeterminate" : false}
-        onCheckedChange={(v) => table.toggleAllPageRowsSelected(!!v)}
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        aria-label={`Select row ${row.index + 1}`}
-        checked={row.getIsSelected()}
-        onCheckedChange={(v) => row.toggleSelected(!!v)}
-      />
-    ),
+    header: SelectAllCheckbox,
+    cell: SelectRowCheckbox,
   };
 }
 
@@ -106,11 +118,11 @@ function DataTable<TData, TValue = unknown>({
   selectable = false,
   onSelectionChange,
   searchable = true,
-  searchPlaceholder = "Search",
+  searchPlaceholder,
   columnToggle = true,
   pageSize = 8,
   loading = false,
-  emptyMessage = "No results.",
+  emptyMessage,
   initialSorting = [],
   toolbar,
   getRowId,
@@ -119,6 +131,9 @@ function DataTable<TData, TValue = unknown>({
   className,
   ...props
 }: DataTableProps<TData, TValue>) {
+  const msg = useMessages()
+  searchPlaceholder ??= msg("data-table.searchPlaceholder", "Search")
+  emptyMessage ??= msg("data-table.emptyMessage", "No results.")
   const [sorting, setSorting] = React.useState<SortingState>(initialSorting);
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
@@ -167,21 +182,21 @@ function DataTable<TData, TValue = unknown>({
         <div className="flex flex-wrap items-center gap-2">
           {searchable && (
             <div className="relative min-w-0 flex-1 sm:max-w-xs">
-              <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+              <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 start-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
               <input
                 type="search"
-                aria-label={`Search ${label}`}
+                aria-label={msg("data-table.search", "Search {label}", { label })}
                 placeholder={searchPlaceholder}
                 value={globalFilter}
                 onChange={(e) => {
                   setGlobalFilter(e.target.value);
                   table.setPageIndex(0);
                 }}
-                className="h-9 w-full rounded-md border border-input bg-background pr-3 pl-8 text-sm shadow-xs outline-none transition-[color,border-color,box-shadow] placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 dark:bg-input/30"
+                className="h-9 w-full rounded-md border border-input bg-background pe-3 ps-8 text-sm shadow-xs outline-none transition-[color,border-color,box-shadow] placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 dark:bg-input/30"
               />
             </div>
           )}
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ms-auto flex items-center gap-2">
             {toolbar}
             {columnToggle && <ColumnMenu table={table} />}
           </div>
@@ -256,23 +271,23 @@ function DataTable<TData, TValue = unknown>({
             <Button
               variant="outline"
               size="icon-sm"
-              aria-label="Previous page"
+              aria-label={msg("data-table.previousPage", "Previous page")}
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              <ChevronLeft aria-hidden="true" />
+              <ChevronLeft aria-hidden="true"  className="rtl:rotate-180"/>
             </Button>
             <span className="min-w-20 text-center tabular-nums">
-              Page {Math.min(page.pageIndex + 1, Math.max(table.getPageCount(), 1))} of {Math.max(table.getPageCount(), 1)}
+              {msg("data-table.pageOf", "Page {page} of {total}", { page: Math.min(page.pageIndex + 1, Math.max(table.getPageCount(), 1)), total: Math.max(table.getPageCount(), 1) })}
             </span>
             <Button
               variant="outline"
               size="icon-sm"
-              aria-label="Next page"
+              aria-label={msg("data-table.nextPage", "Next page")}
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              <ChevronRight aria-hidden="true" />
+              <ChevronRight aria-hidden="true"  className="rtl:rotate-180"/>
             </Button>
           </div>
         )}
@@ -290,6 +305,7 @@ function columnLabel<TData>(column: Column<TData, unknown>) {
 }
 
 function ColumnMenu<TData>({ table }: { table: TanstackTable<TData> }) {
+  const msg = useMessages()
   const hideable = table.getAllColumns().filter((c) => c.getCanHide());
   return (
     <DropdownMenu>
@@ -298,7 +314,7 @@ function ColumnMenu<TData>({ table }: { table: TanstackTable<TData> }) {
         Columns
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
-        <DropdownMenuLabel>Show columns</DropdownMenuLabel>
+        <DropdownMenuLabel>{msg("data-table.showColumns", "Show columns")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {hideable.map((column) => (
           <DropdownMenuCheckboxItem
@@ -332,7 +348,7 @@ function DataTableColumnHeader<TData, TValue>({
   className,
   ...props
 }: DataTableColumnHeaderProps<TData, TValue>) {
-  if (!column.getCanSort()) return <span className={cn(numeric && "block text-right")}>{title}</span>;
+  if (!column.getCanSort()) return <span className={cn(numeric && "block text-end")}>{title}</span>;
   const sorted = column.getIsSorted();
   const Icon = sorted === "asc" ? ArrowUp : sorted === "desc" ? ArrowDown : ChevronsUpDown;
   return (

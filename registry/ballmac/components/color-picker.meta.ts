@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["color", "picker", "hex"],
   files: [{ path: "components/color-picker.tsx" }],
   dependencies: [],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "color-picker-demo",

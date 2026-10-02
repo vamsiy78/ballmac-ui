@@ -7,6 +7,7 @@ import { Command as Primitive } from "cmdk";
 import { Check, Search } from "lucide-react";
 import { Dialog as DialogPrimitive } from "radix-ui";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 /**
  * cmdk scrolls the highlighted row into view with scrollIntoView, which also scrolls the page when
@@ -31,7 +32,9 @@ function setRef<T>(ref: React.Ref<T> | undefined, value: T | null) {
 
 type CommandProps = React.ComponentProps<typeof Primitive>;
 /** Root. Accepts cmdk props such as `filter`, `shouldFilter`, `value`, `onValueChange` and `loop`. */
-function Command({ className, loop = true, label = "Command menu", ...props }: CommandProps) {
+function Command({ className, loop = true, label, ...props }: CommandProps) {
+  const msg = useMessages()
+  label ??= msg("command.label", "Command menu")
   return (
     <Primitive
       data-slot="command"
@@ -66,12 +69,15 @@ function CommandDialog({
   defaultOpen = false,
   onOpenChange,
   hotkey = "k",
-  title = "Command menu",
-  description = "Type a command or search. Use the arrow keys to move and Enter to run.",
+  title,
+  description,
   className,
   children,
   ...props
 }: CommandDialogProps) {
+  const msg = useMessages()
+  title ??= msg("command.title", "Command menu")
+  description ??= msg("command.description", "Type a command or search. Use the arrow keys to move and Enter to run.")
   const [uncontrolled, setUncontrolled] = React.useState(defaultOpen);
   const open = openProp ?? uncontrolled;
   const setOpen = React.useCallback(
@@ -247,7 +253,7 @@ function CommandItem({
       ) : (
         children
       )}
-      {selected && <Check aria-hidden="true" className="ml-auto size-4 !text-foreground" />}
+      {selected && <Check aria-hidden="true" className="ms-auto size-4 !text-foreground" />}
     </Primitive.Item>
   );
 }
@@ -259,7 +265,7 @@ function CommandShortcut({ className, ...props }: CommandShortcutProps) {
       data-slot="command-shortcut"
       aria-hidden="true"
       className={cn(
-        "ml-auto font-mono text-xs tracking-wide text-muted-foreground",
+        "ms-auto font-mono text-xs tracking-wide text-muted-foreground",
         className,
       )}
       {...props}

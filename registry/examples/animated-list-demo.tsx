@@ -35,7 +35,7 @@ export default function AnimatedListDemo() {
               <span className="block truncate text-sm font-medium text-foreground">{title}</span>
               <span className="block truncate text-xs text-muted-foreground">{detail}</span>
             </span>
-            <span className="ml-auto font-mono text-[11px] text-muted-foreground">now</span>
+            <span className="ms-auto font-mono text-[11px] text-muted-foreground">now</span>
           </AnimatedListItem>
         ))}
       </AnimatedList>

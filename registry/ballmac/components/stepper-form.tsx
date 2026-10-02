@@ -4,6 +4,7 @@
 import * as React from "react"
 import { ArrowLeft, ArrowRight, Check } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type StepperStep = {
   /** Stable step ID. */
@@ -38,9 +39,11 @@ function StepperForm({
   defaultValue = 0,
   onValueChange,
   onComplete,
-  completeLabel = "Complete",
+  completeLabel,
   ...props
 }: StepperFormProps) {
+  const msg = useMessages()
+  completeLabel ??= msg("stepper-form.completeLabel", "Complete")
   const [internal, setInternal] = React.useState(defaultValue)
   const [furthest, setFurthest] = React.useState(defaultValue)
   const [error, setError] = React.useState("")
@@ -71,13 +74,13 @@ function StepperForm({
       )}
       {...props}
     >
-      <ol aria-label="Progress" className="flex items-start gap-1">
+      <ol aria-label={msg("stepper-form.progress", "Progress")} className="flex items-start gap-1">
         {steps.map((item, index) => (
           <li key={item.id} className="flex min-w-0 flex-1 items-start gap-2">
             <button
               type="button"
               aria-current={index === current ? "step" : undefined}
-              aria-label={`${item.title}, step ${index + 1} of ${steps.length}${index < current ? ", completed" : ""}`}
+              aria-label={index < current ? msg("stepper-form.stepCompleted", "{title}, step {n} of {total}, completed", { title: item.title, n: index + 1, total: steps.length }) : msg("stepper-form.stepLabel", "{title}, step {n} of {total}", { title: item.title, n: index + 1, total: steps.length })}
               disabled={index > furthest}
               onClick={() => change(index)}
               className={cn(
@@ -107,7 +110,7 @@ function StepperForm({
       </ol>
       <div className="mt-6 border-t border-border pt-5">
         <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
-          Step {current + 1} of {steps.length}
+          {msg("stepper-form.stepOf", "Step {n} of {total}", { n: current + 1, total: steps.length })}
         </p>
         <h3 className="mt-1 text-lg font-semibold">{step.title}</h3>
         {step.description && (
@@ -123,7 +126,7 @@ function StepperForm({
           aria-live="polite"
           className={cn("text-destructive mt-3 text-xs", !error && "sr-only")}
         >
-          {error || "Ready"}
+          {error || msg("stepper-form.ready", "Ready")}
         </p>
       </div>
       <div className="mt-5 flex items-center justify-between gap-3 border-t border-border pt-4">
@@ -133,8 +136,8 @@ function StepperForm({
           disabled={current === 0}
           className="text-muted-foreground hover:text-foreground inline-flex h-9 items-center gap-2 rounded-md px-2 text-sm font-medium outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40"
         >
-          <ArrowLeft aria-hidden="true" className="size-4" />
-          Back
+          <ArrowLeft aria-hidden="true" className="size-4 rtl:rotate-180" />
+          {msg("stepper-form.back", "Back")}
         </button>
         <button
           type="button"
@@ -143,7 +146,7 @@ function StepperForm({
         >
           {current === steps.length - 1 ? completeLabel : "Continue"}
           {current < steps.length - 1 && (
-            <ArrowRight aria-hidden="true" className="size-4" />
+            <ArrowRight aria-hidden="true" className="size-4 rtl:rotate-180" />
           )}
         </button>
       </div>

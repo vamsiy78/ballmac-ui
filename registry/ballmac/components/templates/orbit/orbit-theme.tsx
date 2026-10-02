@@ -81,7 +81,7 @@ function OrbitShell({ page, hrefs: hrefOverrides, bare, className, children, sty
     >
       {!bare && (
         <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6">
-          <div className="bg-background/70 mx-auto flex h-14 max-w-6xl items-center justify-between rounded-2xl border pr-2 pl-4 backdrop-blur-xl">
+          <div className="bg-background/70 mx-auto flex h-14 max-w-6xl items-center justify-between rounded-2xl border pe-2 ps-4 backdrop-blur-xl">
             <a href={hrefs.home} className="focus-visible:ring-ring/50 flex items-center gap-2 rounded-md font-semibold tracking-tight outline-none focus-visible:ring-[3px]">
               <OrbitMark />
               Orbit
@@ -98,7 +98,7 @@ function OrbitShell({ page, hrefs: hrefOverrides, bare, className, children, sty
                 </a>
               ))}
               <a href="#" className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm outline-none transition-colors focus-visible:ring-[3px]">
-                Docs <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                Docs <ArrowUpRight className="size-3.5 rtl:-scale-x-100" aria-hidden="true" />
               </a>
             </nav>
             <div className="flex items-center gap-1.5">

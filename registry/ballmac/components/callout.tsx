@@ -35,7 +35,7 @@ function Callout({
       <span
         aria-hidden="true"
         className={cn(
-          "absolute inset-y-0 left-0 w-1",
+          "absolute inset-y-0 start-0 w-1",
           kind === "tip" && "bg-primary",
           kind === "note" && "bg-chart-2",
           kind === "caution" && "bg-chart-3",

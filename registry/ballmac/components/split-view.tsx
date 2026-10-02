@@ -4,6 +4,8 @@
 import * as React from "react";
 import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
+import { useDirection } from "@/lib/ballmac/direction";
 
 type SplitViewContextValue = {
   detailOpen: boolean;
@@ -49,6 +51,8 @@ function SplitView({
   children,
   ...props
 }: SplitViewProps) {
+  const dir = useDirection()
+  const msg = useMessages()
   const [inner, setInner] = React.useState(defaultDetailOpen);
   const detailOpen = detailOpenProp ?? inner;
   const setDetailOpen = React.useCallback(
@@ -78,7 +82,7 @@ function SplitView({
           <div
             role="separator"
             aria-orientation="vertical"
-            aria-label="Resize list"
+            aria-label={msg("split-view.resizeList", "Resize list")}
             aria-valuemin={minListWidth}
             aria-valuemax={maxListWidth}
             aria-valuenow={width}
@@ -89,13 +93,13 @@ function SplitView({
               drag.current = { x: event.clientX, w: width };
             }}
             onPointerMove={(event) => {
-              if (drag.current) setWidth(clamp(drag.current.w + event.clientX - drag.current.x));
+              if (drag.current) setWidth(clamp(drag.current.w + (dir === "rtl" ? -1 : 1) * (event.clientX - drag.current.x)));
             }}
             onPointerUp={() => (drag.current = null)}
             onKeyDown={(event) => {
               const step = event.shiftKey ? 64 : 16;
-              if (event.key === "ArrowLeft") setWidth((w) => clamp(w - step));
-              else if (event.key === "ArrowRight") setWidth((w) => clamp(w + step));
+              if (event.key === "ArrowLeft") setWidth((w) => clamp(w + (dir === "rtl" ? step : -step)));
+              else if (event.key === "ArrowRight") setWidth((w) => clamp(w + (dir === "rtl" ? -step : step)));
               else if (event.key === "Home") setWidth(minListWidth);
               else if (event.key === "End") setWidth(maxListWidth);
               else return;
@@ -115,7 +119,9 @@ type SplitViewPaneProps = React.ComponentProps<"section"> & {
 };
 
 /** The list (master) pane. Hidden on narrow containers while the detail pane is open. */
-function SplitViewList({ label = "List", className, ...props }: SplitViewPaneProps) {
+function SplitViewList({ label, className, ...props }: SplitViewPaneProps) {
+  const msg = useMessages()
+  label ??= msg("split-view.label", "List")
   return (
     <section
       aria-label={label}
@@ -130,7 +136,9 @@ function SplitViewList({ label = "List", className, ...props }: SplitViewPanePro
 }
 
 /** The detail pane. Hidden on narrow containers until something is opened. */
-function SplitViewDetail({ label = "Detail", className, ...props }: SplitViewPaneProps) {
+function SplitViewDetail({ label, className, ...props }: SplitViewPaneProps) {
+  const msg = useMessages()
+  label ??= msg("split-view.label2", "Detail")
   return (
     <section
       aria-label={label}
@@ -162,7 +170,7 @@ function SplitViewBack({ className, children = "Back", onClick, ...props }: Spli
       )}
       {...props}
     >
-      <ArrowLeft aria-hidden="true" className="size-4" />
+      <ArrowLeft aria-hidden="true" className="size-4 rtl:rotate-180" />
       {children}
     </button>
   );

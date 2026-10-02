@@ -91,7 +91,7 @@ function CommandMenu() {
       <div className="flex items-center gap-2 border-b px-3 py-2 text-muted-foreground">
         <Search className="size-3.5" aria-hidden="true" />
         Deploy
-        <span className="ml-auto rounded border px-1 font-mono text-[10px]">⌘K</span>
+        <span className="ms-auto rounded border px-1 font-mono text-[10px]">⌘K</span>
       </div>
       {["Deploy main to production", "Roll back last deploy"].map((item, i) => (
         <div key={item} className={`flex items-center gap-2 px-3 py-1.5 ${i === 0 ? "bg-accent text-accent-foreground" : ""}`}>
@@ -113,7 +113,7 @@ function Previews() {
         <div key={b.branch} className="relative flex items-center gap-2 rounded-md border bg-background px-2.5 py-1.5">
           <GitBranch className="size-3.5 text-muted-foreground" aria-hidden="true" />
           {b.branch}
-          <span className={`ml-auto ${b.live ? "text-[color-mix(in_oklch,var(--chart-1),black_42%)] dark:text-chart-1" : "text-muted-foreground"}`}>{b.state}</span>
+          <span className={`ms-auto ${b.live ? "text-[color-mix(in_oklch,var(--chart-1),black_42%)] dark:text-chart-1" : "text-muted-foreground"}`}>{b.state}</span>
           {b.live && <BorderBeam size={50} duration={3} />}
         </div>
       ))}

@@ -6,6 +6,7 @@ import { CalendarDays, X } from "lucide-react";
 import { Calendar } from "@/components/ballmac/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ballmac/popover";
 import { cn } from "@/lib/utils";
+import { useLocale, useMessages } from "@/lib/ballmac/i18n";
 
 type DatePickerPreset = {
   /** Button label, for example "Tomorrow". */
@@ -58,8 +59,8 @@ function DatePicker({
   value: valueProp,
   defaultValue,
   onValueChange,
-  placeholder = "Pick a date",
-  locale = "en-US",
+  placeholder,
+  locale,
   format = { dateStyle: "medium" },
   minDate,
   maxDate,
@@ -73,6 +74,10 @@ function DatePicker({
   "aria-label": ariaLabel,
   ...props
 }: DatePickerProps) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
+  const msg = useMessages()
+  placeholder ??= msg("date-picker.placeholder", "Pick a date")
   const [open, setOpen] = React.useState(false);
   const [inner, setInner] = React.useState<Date | undefined>(defaultValue);
   const value = valueProp === undefined ? inner : (valueProp ?? undefined);
@@ -91,9 +96,9 @@ function DatePicker({
           aria-invalid={invalid || undefined}
           aria-label={ariaLabel ? `${ariaLabel}${value ? `, ${text}` : ""}` : undefined}
           className={cn(
-            "flex h-9 w-full min-w-0 items-center gap-2 rounded-md border border-input bg-background px-3 text-left text-sm shadow-xs outline-none transition-[color,border-color,box-shadow] duration-150 hover:bg-accent/40 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30",
+            "flex h-9 w-full min-w-0 items-center gap-2 rounded-md border border-input bg-background px-3 text-start text-sm shadow-xs outline-none transition-[color,border-color,box-shadow] duration-150 hover:bg-accent/40 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30",
             !value && "text-muted-foreground",
-            clearable && value && "pr-10",
+            clearable && value && "pe-10",
             className,
           )}
           {...props}
@@ -104,9 +109,9 @@ function DatePicker({
         {clearable && value && !disabled && (
           <button
             type="button"
-            aria-label="Clear date"
+            aria-label={msg("date-picker.clearDate", "Clear date")}
             onClick={() => choose(undefined)}
-            className="absolute top-1/2 right-2 inline-flex size-6 -translate-y-1/2 items-center justify-center rounded text-muted-foreground outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="absolute top-1/2 end-2 inline-flex size-6 -translate-y-1/2 items-center justify-center rounded text-muted-foreground outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             <X aria-hidden="true" className="size-3.5" />
           </button>
@@ -120,14 +125,14 @@ function DatePicker({
       >
         <div className="flex flex-col sm:flex-row">
           {presets && presets.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 border-b p-3 sm:w-36 sm:flex-col sm:flex-nowrap sm:border-r sm:border-b-0">
+            <div className="flex flex-wrap gap-1.5 border-b p-3 sm:w-36 sm:flex-col sm:flex-nowrap sm:border-e sm:border-b-0">
               {presets.map((p) => (
                 <button
                   key={p.label}
                   type="button"
                   aria-pressed={sameDay(p.date, value)}
                   onClick={() => choose(p.date)}
-                  className="h-8 rounded-md px-2.5 text-left text-sm outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-pressed:bg-accent aria-pressed:font-medium"
+                  className="h-8 rounded-md px-2.5 text-start text-sm outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-pressed:bg-accent aria-pressed:font-medium"
                 >
                   {p.label}
                 </button>

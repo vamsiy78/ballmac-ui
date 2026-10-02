@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["logs", "stream", "console", "debug", "tail"],
   files: [{ path: "components/log-stream.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "copy-button"],
+  registryDependencies: ["shadcn:utils", "copy-button", "i18n"],
   examples: [
     { name: "log-stream-demo", title: "Live deploy logs", file: "log-stream-demo.tsx" },
     { name: "log-stream-static", title: "Filtered build output", file: "log-stream-static.tsx" },

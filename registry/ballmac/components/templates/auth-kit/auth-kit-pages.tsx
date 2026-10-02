@@ -71,7 +71,7 @@ function AuthKitPlayground({ defaultPage = "sign-in", defaultLayout: initialLayo
             <button key={k} type="button" aria-pressed={page === k} onClick={() => setPage(k)} className={cn("focus-visible:ring-ring/50 h-8 shrink-0 rounded-lg px-3 text-[13px] font-medium outline-none transition-colors focus-visible:ring-[3px]", page === k ? "bg-primary text-primary-foreground" : "hover:bg-accent text-muted-foreground")}>{labels[k]}</button>
           ))}
         </div>
-        <SegmentedControl aria-label="Layout" value={layout} onValueChange={(v) => setLayout(v as AuthLayout)} size="sm" className="sm:ml-auto">
+        <SegmentedControl aria-label="Layout" value={layout} onValueChange={(v) => setLayout(v as AuthLayout)} size="sm" className="sm:ms-auto">
           <SegmentedControlItem value="centered">Centered</SegmentedControlItem>
           <SegmentedControlItem value="split">Split</SegmentedControlItem>
           <SegmentedControlItem value="glass">Glass</SegmentedControlItem>

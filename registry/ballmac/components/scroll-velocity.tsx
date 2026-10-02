@@ -6,6 +6,7 @@ import { motion, useAnimationFrame, useMotionValue, useScroll, useSpring, useTra
 
 import { cn } from "@/lib/utils"
 import { useReducedMotionSafe } from "@/lib/ballmac/motion"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ScrollVelocityProps = Omit<React.ComponentProps<"div">, "children"> & {
   /** What runs along the row: words, logos, anything. It is repeated to fill the width. */
@@ -29,6 +30,7 @@ const wrap = (min: number, max: number, v: number) => {
 
 /** A row that drifts sideways and speeds up, or reverses, with how fast you scroll. */
 function ScrollVelocity({ children, baseVelocity = 60, direction = "left", sensitivity = 1, scrollContainer, gap = "2rem", className, ...props }: ScrollVelocityProps) {
+  const msg = useMessages()
   const reduce = useReducedMotionSafe()
   const rootRef = React.useRef<HTMLDivElement>(null)
   const copyRef = React.useRef<HTMLDivElement>(null)
@@ -74,7 +76,15 @@ function ScrollVelocity({ children, baseVelocity = 60, direction = "left", sensi
 
   if (reduce) {
     return (
-      <div data-slot="scroll-velocity" className={cn("overflow-x-auto", className)} {...props}>
+      <div
+        data-slot="scroll-velocity"
+        // With reduced motion the row is a plain scroll area, so it must be reachable by keyboard.
+        tabIndex={0}
+        role="group"
+        aria-label={msg("scroll-velocity.label", "Scrolling content")}
+        className={cn("overflow-x-auto outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50", className)}
+        {...props}
+      >
         <div className="flex w-max items-center" style={{ gap }}>
           {children}
         </div>
@@ -93,7 +103,7 @@ function ScrollVelocity({ children, baseVelocity = 60, direction = "left", sensi
             // The repeats are for looks only, so they are removed from tab order and screen readers.
             {...(i > 0 ? { inert: true } : {})}
             className="flex shrink-0 items-center"
-            style={{ gap, paddingRight: gap }}
+            style={{ gap, paddingInlineEnd: gap }}
           >
             {children}
           </div>

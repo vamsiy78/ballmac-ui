@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["input", "range", "form", "radix"],
   files: [{ path: "components/slider.tsx" }],
   dependencies: ["radix-ui"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     { name: "slider-demo", title: "Volume and price", file: "slider-demo.tsx" },
     { name: "slider-states", title: "Vertical and disabled", file: "slider-states.tsx" },

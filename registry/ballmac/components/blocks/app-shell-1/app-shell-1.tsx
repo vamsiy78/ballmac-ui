@@ -120,7 +120,7 @@ function SidebarBody({
         <DropdownMenu>
           <DropdownMenuTrigger
             aria-label={`Workspace: ${workspace}`}
-            className="hover:bg-accent focus-visible:ring-ring/50 flex w-full items-center gap-2.5 rounded-xl p-1.5 text-left outline-none focus-visible:ring-[3px]"
+            className="hover:bg-accent focus-visible:ring-ring/50 flex w-full items-center gap-2.5 rounded-xl p-1.5 text-start outline-none focus-visible:ring-[3px]"
           >
             <span aria-hidden="true" className="bg-foreground text-background flex size-8 shrink-0 items-center justify-center rounded-lg text-sm font-bold">{workspace[0]}</span>
             {!collapsed && (
@@ -168,7 +168,7 @@ function SidebarBody({
                       <span aria-hidden="true">{item.icon}</span>
                       {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
                       {item.badge && !collapsed && <span className="bg-foreground text-background rounded-full px-1.5 py-px text-[11px] font-semibold tabular-nums">{item.badge}</span>}
-                      {item.badge && collapsed && <span aria-hidden="true" className="bg-foreground ring-background absolute top-1.5 right-2.5 size-2 rounded-full ring-2" />}
+                      {item.badge && collapsed && <span aria-hidden="true" className="bg-foreground ring-background absolute top-1.5 end-2.5 size-2 rounded-full ring-2" />}
                     </a>
                   </li>
                 )
@@ -260,17 +260,17 @@ function AppShell1({
       style={{ height, ...style }}
       {...props}
     >
-      <a href={`#${mainId}`} className="bg-background focus-visible:ring-ring/50 sr-only z-50 rounded-md px-3 py-2 text-sm focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus-visible:ring-[3px]">Skip to content</a>
+      <a href={`#${mainId}`} className="bg-background focus-visible:ring-ring/50 sr-only z-50 rounded-md px-3 py-2 text-sm focus:not-sr-only focus:absolute focus:top-2 focus:start-2 focus-visible:ring-[3px]">Skip to content</a>
 
       <aside
         aria-label="Sidebar"
-        className={cn("bg-muted/30 hidden shrink-0 border-r transition-[width] duration-200 ease-out motion-reduce:transition-none md:block", collapsed ? "w-[4.25rem]" : "w-60")}
+        className={cn("bg-muted/30 hidden shrink-0 border-e transition-[width] duration-200 ease-out motion-reduce:transition-none md:block", collapsed ? "w-[4.25rem]" : "w-60")}
       >
         <SidebarBody nav={nav} value={value} onPick={pick} collapsed={collapsed} workspace={workspace} workspaces={workspaces} user={user} />
       </aside>
 
       <Sheet open={drawer} onOpenChange={setDrawer}>
-        <SheetContent side="left" className="w-72 p-0" closeLabel="Close navigation">
+        <SheetContent side="start" className="w-72 p-0" closeLabel="Close navigation">
           <SheetTitle className="sr-only">Navigation</SheetTitle>
           <SheetDescription className="sr-only">Pages in {workspace}</SheetDescription>
           <SidebarBody nav={nav} value={value} onPick={pick} collapsed={false} workspace={workspace} workspaces={workspaces} user={user} />
@@ -279,17 +279,17 @@ function AppShell1({
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex h-14 shrink-0 items-center gap-2 border-b px-3 sm:px-4">
-          <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open navigation" onClick={() => setDrawer(true)}><PanelLeft /></Button>
-          <Button variant="ghost" size="icon" className="hidden md:inline-flex" aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} aria-pressed={collapsed} onClick={() => setCollapsed((c) => !c)}><PanelLeft /></Button>
+          <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open navigation" onClick={() => setDrawer(true)}><PanelLeft  className="rtl:-scale-x-100"/></Button>
+          <Button variant="ghost" size="icon" className="hidden md:inline-flex" aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} aria-pressed={collapsed} onClick={() => setCollapsed((c) => !c)}><PanelLeft  className="rtl:-scale-x-100"/></Button>
           <h2 className="truncate text-sm font-medium"><span className="text-muted-foreground hidden sm:inline">{workspace} / </span>{page.label}</h2>
-          <div className="ml-auto flex items-center gap-1.5">
+          <div className="ms-auto flex items-center gap-1.5">
             <button
               type="button"
               onClick={() => setPalette(true)}
               className="text-muted-foreground hover:bg-accent focus-visible:ring-ring/50 hidden h-9 w-56 items-center gap-2 rounded-lg border px-3 text-sm outline-none transition-colors focus-visible:ring-[3px] sm:flex"
             >
               <Search className="size-4" aria-hidden="true" />
-              <span className="flex-1 text-left">Search</span>
+              <span className="flex-1 text-start">Search</span>
               <Kbd>⌘K</Kbd>
             </button>
             <Button variant="ghost" size="icon" className="sm:hidden" aria-label="Search" onClick={() => setPalette(true)}><Search /></Button>

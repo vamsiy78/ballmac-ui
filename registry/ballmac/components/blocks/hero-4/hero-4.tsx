@@ -67,7 +67,7 @@ function Hero4({
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-pretty text-muted-foreground">{description}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={primaryAction.href} className={buttonVariants({ size: "lg", shape: "pill" })}>
-              {primaryAction.label} <ArrowRight />
+              {primaryAction.label} <ArrowRight  className="rtl:rotate-180"/>
             </a>
             <a href={secondaryAction.href} className={buttonVariants({ size: "lg", shape: "pill", variant: "outline" })}>
               {secondaryAction.label}
@@ -84,7 +84,7 @@ function Hero4({
             </dl>
           )}
         </div>
-        <div className="relative -mx-4 aspect-square sm:mx-auto sm:w-full sm:max-w-[560px] lg:-mr-24 lg:max-w-none">
+        <div className="relative -mx-4 aspect-square sm:mx-auto sm:w-full sm:max-w-[560px] lg:-me-24 lg:max-w-none">
           <div aria-hidden="true" className="absolute inset-[12%] -z-10 rounded-full bg-chart-1/20 blur-3xl" />
           <Globe markers={markers} label={`Globe with ${markers.length} highlighted regions`} className="size-full" />
         </div>

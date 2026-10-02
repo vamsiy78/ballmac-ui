@@ -6,7 +6,7 @@ function Reader() {
   return (
     <div className="flex h-full flex-col bg-[color-mix(in_oklch,var(--chart-3)_8%,var(--background))] px-16 pt-6 text-[22px]">
       <div className="flex items-center justify-between text-muted-foreground">
-        <span className="flex items-center gap-1 font-medium text-foreground"><ChevronLeft className="size-7" aria-hidden="true" /> Library</span>
+        <span className="flex items-center gap-1 font-medium text-foreground"><ChevronLeft className="size-7 rtl:rotate-180" aria-hidden="true" /> Library</span>
         <span className="flex items-center gap-5">
           <Type className="size-7" aria-hidden="true" />
           <Bookmark className="size-7" aria-hidden="true" />
@@ -23,7 +23,7 @@ function Reader() {
         She had promised herself she would not look at the letter again. It lay folded in her pocket, soft at the creases, as if it had already been
         read a hundred times by someone else.
       </p>
-      <blockquote className="mt-10 border-l-4 border-chart-5 pl-6 font-serif text-[34px] leading-snug text-foreground italic">
+      <blockquote className="mt-10 border-s-4 border-chart-5 ps-6 font-serif text-[34px] leading-snug text-foreground italic">
         Some distances are only measured in what you chose not to say.
       </blockquote>
       <p className="mt-8 font-serif text-[31px] leading-[1.6] text-foreground/85">

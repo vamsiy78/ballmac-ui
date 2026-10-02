@@ -6,6 +6,7 @@ import { AlertCircle, ChevronDown, LoaderCircle, Mail, RotateCw, Send, X } from 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type InviteRole = {
   /** Value sent to `onInvite`. */
@@ -62,12 +63,15 @@ function InviteMembers({
   onResend,
   onRevoke,
   existing = [],
-  title = "Invite teammates",
-  description = "They will get an email with a link to join.",
+  title,
+  description,
   max = 20,
   className,
   ...props
 }: InviteMembersProps) {
+  const msg = useMessages()
+  title ??= msg("invite-members.title", "Invite teammates")
+  description ??= msg("invite-members.description", "They will get an email with a link to join.")
   const reduce = useReducedMotion();
   const inputId = React.useId();
   const helpId = React.useId();
@@ -129,7 +133,7 @@ function InviteMembers({
 
         <div className="grid gap-2">
           <label htmlFor={inputId} className="text-sm font-medium">
-            Email addresses
+            {msg("invite-members.emailAddresses", "Email addresses")}
           </label>
           <div
             onClick={() => inputRef.current?.focus()}
@@ -148,7 +152,7 @@ function InviteMembers({
                     transition={spring.snappy}
                     title={issue ?? undefined}
                     className={cn(
-                      "inline-flex max-w-full items-center gap-1 rounded-lg py-1 pr-1 pl-2.5 text-[13px] font-medium",
+                      "inline-flex max-w-full items-center gap-1 rounded-lg py-1 pe-1 ps-2.5 text-[13px] font-medium",
                       issue ? "bg-destructive/10 text-foreground ring-1 ring-destructive/40" : "bg-muted text-foreground",
                     )}
                   >
@@ -157,7 +161,7 @@ function InviteMembers({
                     {issue && <span className="sr-only">: {issue}</span>}
                     <button
                       type="button"
-                      aria-label={`Remove ${chip}`}
+                      aria-label={msg("invite-members.remove", "Remove {chip}", { chip })}
                       onClick={(e) => {
                         e.stopPropagation();
                         setChips((prev) => prev.filter((_, i) => i !== index));
@@ -178,7 +182,7 @@ function InviteMembers({
               inputMode="email"
               autoComplete="off"
               value={draft}
-              placeholder={chips.length ? "" : "name@company.com"}
+              placeholder={chips.length ? "" : msg("invite-members.nameCompanyCom", "name@company.com")}
               aria-describedby={helpId}
               onChange={(e) => {
                 const v = e.target.value;
@@ -210,21 +214,21 @@ function InviteMembers({
             />
           </div>
           <p id={helpId} className="text-xs text-muted-foreground">
-            Separate addresses with a comma, space or Enter. You can paste a list.
+            {msg("invite-members.separateAddressesWithAComma", "Separate addresses with a comma, space or Enter. You can paste a list.")}
           </p>
         </div>
 
         <div className="flex flex-wrap items-end gap-3">
           <div className="grid gap-1.5">
             <label htmlFor={`${inputId}-role`} className="text-sm font-medium">
-              Role
+              {msg("invite-members.role", "Role")}
             </label>
             <div className="relative">
               <select
                 id={`${inputId}-role`}
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="h-9 w-44 cursor-pointer appearance-none rounded-md border border-input bg-background pr-8 pl-3 text-sm shadow-xs outline-none transition-[border-color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 dark:bg-input/30"
+                className="h-9 w-44 cursor-pointer appearance-none rounded-md border border-input bg-background pe-8 ps-3 text-sm shadow-xs outline-none transition-[border-color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 dark:bg-input/30"
               >
                 {roles.map((r) => (
                   <option key={r.value} value={r.value}>
@@ -232,19 +236,19 @@ function InviteMembers({
                   </option>
                 ))}
               </select>
-              <ChevronDown aria-hidden="true" className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+              <ChevronDown aria-hidden="true" className="pointer-events-none absolute top-1/2 end-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
             </div>
           </div>
           <button
             type="button"
             onClick={() => void send()}
             disabled={!valid.length || sending}
-            className="ml-auto inline-flex h-9 items-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow-xs outline-none transition-colors hover:bg-primary/90 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
+            className="ms-auto inline-flex h-9 items-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow-xs outline-none transition-colors hover:bg-primary/90 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
           >
             {sending ? (
               <LoaderCircle aria-hidden="true" className="size-4 animate-spin motion-reduce:animate-none" />
             ) : (
-              <Send aria-hidden="true" className="size-4" />
+              <Send aria-hidden="true" className="size-4 rtl:-scale-x-100" />
             )}
             {valid.length ? `Send ${valid.length} invitation${valid.length === 1 ? "" : "s"}` : "Send invitations"}
           </button>
@@ -256,7 +260,7 @@ function InviteMembers({
 
       {pending.length > 0 && (
         <div className="border-t bg-muted/30 px-2 py-3">
-          <h4 className="px-4 pb-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">Pending ({pending.length})</h4>
+          <h4 className="px-4 pb-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">{msg("invite-members.pending", "Pending ({count})", { count: pending.length })}</h4>
           <ul>
             {pending.map((p) => (
               <li key={p.email} className="flex items-center gap-3 rounded-lg px-4 py-2 hover:bg-muted/60">
@@ -274,7 +278,7 @@ function InviteMembers({
                   <button
                     type="button"
                     onClick={() => onResend(p.email)}
-                    aria-label={`Resend invitation to ${p.email}`}
+                    aria-label={msg("invite-members.resendInvitationTo", "Resend invitation to {email}", { email: p.email })}
                     className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   >
                     <RotateCw aria-hidden="true" className="size-4" />
@@ -284,7 +288,7 @@ function InviteMembers({
                   <button
                     type="button"
                     onClick={() => onRevoke(p.email)}
-                    aria-label={`Revoke invitation for ${p.email}`}
+                    aria-label={msg("invite-members.revokeInvitationFor", "Revoke invitation for {email}", { email: p.email })}
                     className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-destructive/10 hover:text-destructive focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   >
                     <X aria-hidden="true" className="size-4" />

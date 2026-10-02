@@ -11,7 +11,7 @@ const content =
   "z-50 min-w-[13.5rem] overflow-hidden rounded-[10px] border border-foreground/10 bg-popover/80 p-1.5 text-[13px] text-popover-foreground shadow-[0_12px_40px_-8px_rgb(0_0_0/0.35),0_2px_8px_rgb(0_0_0/0.12)] backdrop-blur-2xl backdrop-saturate-150 outline-none dark:bg-popover/70 [--mac-accent:oklch(0.53_0.2_258)] data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 motion-reduce:animate-none"
 
 const item =
-  "relative flex h-[22px] cursor-default items-center gap-2 rounded-[5px] pr-2.5 pl-[22px] outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:text-foreground/35 data-[highlighted]:bg-(--mac-accent) data-[highlighted]:text-white [&_svg]:size-3.5 [&_svg]:shrink-0"
+  "relative flex h-[22px] cursor-default items-center gap-2 rounded-[5px] pe-2.5 ps-[22px] outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:text-foreground/35 data-[highlighted]:bg-(--mac-accent) data-[highlighted]:text-white [&_svg]:size-3.5 [&_svg]:shrink-0"
 
 function MacContextMenu(props: React.ComponentProps<typeof Primitive.Root>) {
   return <Primitive.Root {...props} />
@@ -40,8 +40,8 @@ type MacContextMenuItemProps = React.ComponentProps<typeof Primitive.Item> & {
 
 function MacContextMenuItem({ icon, shortcut, destructive, className, children, ...props }: MacContextMenuItemProps) {
   return (
-    <Primitive.Item data-slot="mac-context-menu-item" data-destructive={destructive ? "" : undefined} className={cn(item, icon && "pl-[30px]", destructive && "text-destructive data-[highlighted]:text-white", className)} {...props}>
-      {icon && <span aria-hidden="true" className="absolute left-2 flex items-center">{icon}</span>}
+    <Primitive.Item data-slot="mac-context-menu-item" data-destructive={destructive ? "" : undefined} className={cn(item, icon && "ps-[30px]", destructive && "text-destructive data-[highlighted]:text-white", className)} {...props}>
+      {icon && <span aria-hidden="true" className="absolute start-2 flex items-center">{icon}</span>}
       <span className="flex-1 truncate">{children}</span>
       {shortcut && <MacContextMenuShortcut>{shortcut}</MacContextMenuShortcut>}
     </Primitive.Item>
@@ -51,7 +51,7 @@ function MacContextMenuItem({ icon, shortcut, destructive, className, children, 
 function MacContextMenuCheckboxItem({ className, children, shortcut, ...props }: React.ComponentProps<typeof Primitive.CheckboxItem> & { shortcut?: string }) {
   return (
     <Primitive.CheckboxItem data-slot="mac-context-menu-checkbox-item" className={cn(item, className)} {...props}>
-      <Primitive.ItemIndicator className="absolute left-1.5 flex items-center">
+      <Primitive.ItemIndicator className="absolute start-1.5 flex items-center">
         <Check aria-hidden="true" strokeWidth={3} />
       </Primitive.ItemIndicator>
       <span className="flex-1 truncate">{children}</span>
@@ -67,7 +67,7 @@ function MacContextMenuRadioGroup(props: React.ComponentProps<typeof Primitive.R
 function MacContextMenuRadioItem({ className, children, ...props }: React.ComponentProps<typeof Primitive.RadioItem>) {
   return (
     <Primitive.RadioItem data-slot="mac-context-menu-radio-item" className={cn(item, className)} {...props}>
-      <Primitive.ItemIndicator className="absolute left-1.5 flex items-center">
+      <Primitive.ItemIndicator className="absolute start-1.5 flex items-center">
         <Check aria-hidden="true" strokeWidth={3} />
       </Primitive.ItemIndicator>
       <span className="flex-1 truncate">{children}</span>
@@ -84,7 +84,7 @@ function MacContextMenuSeparator({ className, ...props }: React.ComponentProps<t
 }
 
 function MacContextMenuShortcut({ className, ...props }: React.ComponentProps<"span">) {
-  return <span data-slot="mac-context-menu-shortcut" aria-hidden="true" className={cn("ml-6 text-[12px] tracking-wide text-muted-foreground group-data-[highlighted]:text-white/80 [[data-highlighted]_&]:text-white/80", className)} {...props} />
+  return <span data-slot="mac-context-menu-shortcut" aria-hidden="true" className={cn("ms-6 text-[12px] tracking-wide text-muted-foreground group-data-[highlighted]:text-white/80 [[data-highlighted]_&]:text-white/80", className)} {...props} />
 }
 
 function MacContextMenuSub(props: React.ComponentProps<typeof Primitive.Sub>) {
@@ -93,10 +93,10 @@ function MacContextMenuSub(props: React.ComponentProps<typeof Primitive.Sub>) {
 
 function MacContextMenuSubTrigger({ className, children, icon, ...props }: React.ComponentProps<typeof Primitive.SubTrigger> & { icon?: React.ReactNode }) {
   return (
-    <Primitive.SubTrigger data-slot="mac-context-menu-sub-trigger" className={cn(item, icon && "pl-[30px]", "data-[state=open]:bg-foreground/10", className)} {...props}>
-      {icon && <span aria-hidden="true" className="absolute left-2 flex items-center">{icon}</span>}
+    <Primitive.SubTrigger data-slot="mac-context-menu-sub-trigger" className={cn(item, icon && "ps-[30px]", "data-[state=open]:bg-foreground/10", className)} {...props}>
+      {icon && <span aria-hidden="true" className="absolute start-2 flex items-center">{icon}</span>}
       <span className="flex-1 truncate">{children}</span>
-      <ChevronRight aria-hidden="true" className="ml-4 -mr-1" strokeWidth={2.5} />
+      <ChevronRight aria-hidden="true" className="ms-4 -me-1 rtl:rotate-180" strokeWidth={2.5} />
     </Primitive.SubTrigger>
   )
 }

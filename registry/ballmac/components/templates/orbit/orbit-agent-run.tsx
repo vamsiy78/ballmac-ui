@@ -96,7 +96,7 @@ function OrbitAgentRun({ className }: { className?: string }) {
 
       <div className="grid lg:grid-cols-[1.15fr_1fr]">
         <div className="min-w-0 space-y-4 p-4 sm:p-6">
-          <div className="bg-secondary/70 ml-auto max-w-[88%] rounded-2xl rounded-br-md px-4 py-3 text-sm text-pretty">{task}</div>
+          <div className="bg-secondary/70 ms-auto max-w-[88%] rounded-2xl rounded-ee-md px-4 py-3 text-sm text-pretty">{task}</div>
           <ol className="space-y-2.5" aria-label="Agent steps">
             {steps.map((s, i) => {
               const state = i < done ? "done" : i === done && started && !finished ? "active" : "waiting"
@@ -138,7 +138,7 @@ function OrbitAgentRun({ className }: { className?: string }) {
           </ol>
         </div>
 
-        <div className="bg-background/40 min-w-0 border-t p-4 sm:p-6 lg:border-t-0 lg:border-l">
+        <div className="bg-background/40 min-w-0 border-t p-4 sm:p-6 lg:border-t-0 lg:border-s">
           <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">Trace</p>
           <div className="mt-4 space-y-2.5" role="img" aria-label={`Trace of ${done} of ${steps.length} steps, ${formatMs(elapsed)} elapsed`}>
             {steps.map((s, i) => {

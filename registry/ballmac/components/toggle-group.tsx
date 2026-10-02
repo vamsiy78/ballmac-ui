@@ -3,6 +3,7 @@
 
 import * as React from "react";
 import { ToggleGroup as Primitive } from "radix-ui";
+import { useDirection } from "@/lib/ballmac/direction";
 import { cn } from "@/lib/utils";
 
 type ToggleGroupProps = React.ComponentProps<typeof Primitive.Root> & {
@@ -17,8 +18,10 @@ function ToggleGroup({
   size = "default",
   ...props
 }: ToggleGroupProps) {
+  const dir = useDirection(props.dir);
   return (
     <Primitive.Root
+      dir={dir}
       data-slot="toggle-group"
       data-variant={variant}
       data-size={size}

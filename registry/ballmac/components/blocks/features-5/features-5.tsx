@@ -46,7 +46,7 @@ function CaptureVisual() {
   return (
     <div className={panel}>
       <div className="flex items-center gap-2 text-sm font-medium">
-        <Inbox className="size-4" /> Inbox <Badge variant="secondary" className="ml-auto">3 new</Badge>
+        <Inbox className="size-4" /> Inbox <Badge variant="secondary" className="ms-auto">3 new</Badge>
       </div>
       <ul className="mt-4 space-y-2.5">
         {items.map((i) => (
@@ -103,7 +103,7 @@ function AutomateVisual() {
         Overdue invoices <Badge status="success">Active</Badge>
       </div>
       <ol className="relative mt-5 space-y-3">
-        <span aria-hidden="true" className="bg-border absolute top-6 bottom-6 left-[1.1rem] w-px" />
+        <span aria-hidden="true" className="bg-border absolute top-6 bottom-6 start-[1.1rem] w-px" />
         {steps.map(({ icon: Icon, label, value }) => (
           <li key={label} className="relative flex items-center gap-3">
             <span className="bg-background relative flex size-9 shrink-0 items-center justify-center rounded-full border"><Icon className="size-4" /></span>
@@ -138,7 +138,7 @@ function ShareVisual() {
       </div>
       <div className="text-muted-foreground mt-5 flex items-center gap-2 rounded-xl border px-3 py-2.5 text-sm">
         <Lock className="size-4" /> Only people with the link
-        <Check className="text-chart-2 ml-auto size-4" />
+        <Check className="text-chart-2 ms-auto size-4" />
       </div>
     </div>
   )
@@ -219,10 +219,10 @@ function Features5({
               data-active={active === i}
               className="group/step relative lg:flex lg:min-h-[26rem] lg:items-center"
             >
-              <div className="lg:border-l lg:pl-10">
+              <div className="lg:border-s lg:ps-10">
                 <span
                   aria-hidden="true"
-                  className="bg-foreground absolute top-[18%] bottom-[18%] left-0 hidden w-0.5 origin-top scale-y-0 rounded-full transition-transform duration-500 ease-out group-data-[active=true]/step:scale-y-100 motion-reduce:transition-none lg:block"
+                  className="bg-foreground absolute top-[18%] bottom-[18%] start-0 hidden w-0.5 origin-top scale-y-0 rounded-full transition-transform duration-500 ease-out group-data-[active=true]/step:scale-y-100 motion-reduce:transition-none lg:block"
                 />
                 <p className="text-muted-foreground font-mono text-sm tabular-nums">{String(i + 1).padStart(2, "0")}</p>
                 <h3 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-balance lg:text-3xl lg:text-muted-foreground lg:transition-colors lg:duration-300 lg:group-data-[active=true]/step:text-foreground">

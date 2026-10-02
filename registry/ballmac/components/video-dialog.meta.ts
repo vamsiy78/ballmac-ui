@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["video", "dialog", "modal", "youtube", "thumbnail"],
   files: [{ path: "components/video-dialog.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "dialog"],
+  registryDependencies: ["shadcn:utils", "dialog", "i18n"],
   examples: [
     { name: "video-dialog-demo", title: "Hero video", file: "video-dialog-demo.tsx" },
     { name: "video-dialog-aspects", title: "Shapes", file: "video-dialog-aspects.tsx" },

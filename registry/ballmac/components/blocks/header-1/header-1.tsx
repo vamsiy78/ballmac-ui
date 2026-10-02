@@ -64,14 +64,14 @@ function Header1({
             ))}
           </ul>
         </nav>
-        <div className="ml-auto hidden items-center gap-2 md:flex">
+        <div className="ms-auto hidden items-center gap-2 md:flex">
           <a className={buttonVariants({ variant: "ghost" })} href={secondaryAction.href}>{secondaryAction.label}</a>
           <a className={buttonVariants({ shape: "pill" })} href={primaryAction.href}>{primaryAction.label}</a>
         </div>
         <Button
           variant="ghost"
           size="icon"
-          className="ml-auto md:hidden"
+          className="ms-auto md:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           aria-label={open ? "Close menu" : "Open menu"}

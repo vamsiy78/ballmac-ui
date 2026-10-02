@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["menu", "application", "desktop", "radix"],
   files: [{ path: "components/menubar.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     { name: "menubar-demo", title: "Editor menu", file: "menubar-demo.tsx" },
     { name: "menubar-states", title: "Preferences", file: "menubar-states.tsx" },

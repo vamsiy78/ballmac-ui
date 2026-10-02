@@ -1,6 +1,9 @@
 // Ballmac UI: Activity Feed. https://ui.ballmac.com/components/activity-feed
+"use client"
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type Activity = {
   /** Stable item identifier. */ id: string
@@ -18,9 +21,11 @@ type ActivityFeedProps = React.ComponentProps<"ol"> & {
 function ActivityFeed({
   className,
   items,
-  emptyMessage = "No activity yet",
+  emptyMessage,
   ...props
 }: ActivityFeedProps) {
+  const msg = useMessages()
+  emptyMessage ??= msg("activity-feed.emptyMessage", "No activity yet")
   return (
     <ol
       data-slot="activity-feed"

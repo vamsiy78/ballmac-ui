@@ -6,6 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { MotionConfig, motion } from "motion/react"
 import { RadioGroup as RadioGroupPrimitive } from "radix-ui"
 
+import { useDirection } from "@/lib/ballmac/direction"
 import { cn } from "@/lib/utils"
 
 const segmentedControlVariants = cva(
@@ -57,6 +58,7 @@ function SegmentedControl({
   const [uncontrolled, setUncontrolled] = React.useState(defaultValue ?? values[0] ?? "")
   const value = valueProp ?? uncontrolled
   const layoutId = `segmented-pill-${React.useId()}`
+  const dir = useDirection(props.dir)
 
   return (
     <SegmentedControlContext.Provider value={{ value, layoutId, values }}>
@@ -64,6 +66,7 @@ function SegmentedControl({
         <RadioGroupPrimitive.Root
           data-slot="segmented-control"
           orientation="horizontal"
+          dir={dir}
           value={value}
           onValueChange={(next) => {
             if (valueProp === undefined) setUncontrolled(next)
@@ -106,7 +109,7 @@ function SegmentedControlItem({ value, className, children, ...props }: Segmente
         aria-hidden="true"
         data-slot="segmented-control-divider"
         className={cn(
-          "pointer-events-none absolute top-1/2 -left-px h-[45%] w-px -translate-y-1/2 bg-foreground/15 transition-opacity duration-150",
+          "pointer-events-none absolute top-1/2 -start-px h-[45%] w-px -translate-y-1/2 bg-foreground/15 transition-opacity duration-150",
           showDivider ? "opacity-100" : "opacity-0"
         )}
       />

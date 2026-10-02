@@ -76,7 +76,7 @@ function PocketDownload({ hrefs, ...props }: PocketDownloadProps) {
 
           <div className="relative mx-auto grid w-full max-w-sm justify-items-center gap-6">
             <PocketApp defaultTab="save" className="w-[min(100%,290px)]" />
-            <div className="bg-chart-1 relative z-10 -mt-20 flex items-center gap-4 self-end rounded-3xl p-4 text-[var(--pocket-on-lime)] shadow-xl sm:-mr-8"><QrArt className="size-24" /><p className="max-w-[9rem] text-sm font-extrabold">Point your camera here to download</p></div>
+            <div className="bg-chart-1 relative z-10 -mt-20 flex items-center gap-4 self-end rounded-3xl p-4 text-[var(--pocket-on-lime)] shadow-xl sm:-me-8"><QrArt className="size-24" /><p className="max-w-[9rem] text-sm font-extrabold">Point your camera here to download</p></div>
           </div>
         </div>
 

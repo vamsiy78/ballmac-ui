@@ -149,7 +149,7 @@ function Testimonials2({
 
         <div className="mt-12 flex items-center gap-3">
           <Button variant="outline" size="icon" shape="pill" aria-label="Previous testimonial" onClick={() => go(index - 1)} className="hidden sm:inline-flex">
-            <ArrowLeft />
+            <ArrowLeft  className="rtl:rotate-180"/>
           </Button>
           <TabsPrimitive.List aria-label="Choose a testimonial" className="flex items-center gap-1 rounded-full border p-1.5">
             {items.map((item, i) => (
@@ -167,7 +167,7 @@ function Testimonials2({
             ))}
           </TabsPrimitive.List>
           <Button variant="outline" size="icon" shape="pill" aria-label="Next testimonial" onClick={() => go(index + 1)} className="hidden sm:inline-flex">
-            <ArrowRight />
+            <ArrowRight  className="rtl:rotate-180"/>
           </Button>
         </div>
       </TabsPrimitive.Root>

@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["segmented control", "toggle group", "radio group", "tabs", "macos", "switcher", "form"],
   files: [{ path: "components/segmented-control.tsx" }],
   dependencies: ["motion@^12", "radix-ui", "class-variance-authority"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [{ name: "segmented-control-demo", title: "Settings panel", file: "segmented-control-demo.tsx" }],
   ai: {
     summary:

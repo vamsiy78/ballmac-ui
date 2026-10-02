@@ -15,7 +15,7 @@ export default function ProgressiveBlurSides() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={scene()} alt="" className="size-full object-cover" />
           <ProgressiveBlur position={position} size="45%" strength={14} />
-          <span className="absolute top-2 left-2 z-20 rounded bg-black/55 px-1.5 py-0.5 font-mono text-[11px] text-white">{position}</span>
+          <span className="absolute top-2 start-2 z-20 rounded bg-black/55 px-1.5 py-0.5 font-mono text-[11px] text-white">{position}</span>
         </div>
       ))}
     </div>

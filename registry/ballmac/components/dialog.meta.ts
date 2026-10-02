@@ -11,7 +11,7 @@ export default defineItem({
   files: [{ path: "components/dialog.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
   devDependencies: ["tw-animate-css"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "dialog-demo", title: "Edit profile", file: "dialog-demo.tsx" },
     { name: "dialog-confirm", title: "Confirm", file: "dialog-confirm.tsx" },

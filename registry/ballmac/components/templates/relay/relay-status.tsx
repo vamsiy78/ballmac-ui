@@ -73,9 +73,9 @@ function RelayStatus({ hrefs, ...props }: RelayStatusProps) {
           <h2 id="relay-incidents" className="text-xl font-semibold tracking-[-0.02em]">Past incidents</h2>
           <ol className="mt-5 space-y-6">
             {incidents.map((i) => (
-              <li key={i.title} className="border-l-2 pl-5">
+              <li key={i.title} className="border-s-2 ps-5">
                 <p className="text-muted-foreground text-xs" style={mono}>{i.date} · {i.duration}</p>
-                <h3 className="mt-1 font-semibold">{i.title} <span className="bg-chart-2/15 ml-1 rounded px-1.5 py-0.5 text-[11px] font-medium">{i.status}</span></h3>
+                <h3 className="mt-1 font-semibold">{i.title} <span className="bg-chart-2/15 ms-1 rounded px-1.5 py-0.5 text-[11px] font-medium">{i.status}</span></h3>
                 <p className="text-muted-foreground mt-2 text-sm text-pretty">{i.body}</p>
               </li>
             ))}

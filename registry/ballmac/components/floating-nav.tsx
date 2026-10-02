@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useScrollDirection, useScrolled, type ScrollContainer } from "@/lib/ballmac/scroll";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type FloatingNavItem = {
   /** Unique value; used for `value` and `onValueChange`. */
@@ -48,11 +49,13 @@ function FloatingNav({
   onValueChange,
   position = "top",
   autoHide = false,
-  label = "Primary",
+  label,
   scrollContainer,
   className,
   ...props
 }: FloatingNavProps) {
+  const msg = useMessages()
+  label ??= msg("floating-nav.label", "Primary")
   const reduce = useReducedMotion();
   const indicatorId = `floating-nav-${React.useId()}`;
   const [inner, setInner] = React.useState(defaultValue ?? items[0]?.value);

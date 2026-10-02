@@ -17,11 +17,11 @@ function Para({ children, note, n }: { children: React.ReactNode; note?: string;
     <div className="relative">
       <p className={cn("text-[1.1875rem] leading-[1.8] text-pretty", pubTextClass)}>
         {children}
-        {n && <sup className="ml-0.5"><a href={`#note-${n}`} id={`ref-${n}`} className="text-chart-1 focus-visible:ring-ring/50 rounded px-0.5 font-sans text-xs font-bold outline-none focus-visible:ring-[3px]" aria-label={`Note ${n}`}>{n}</a></sup>}
+        {n && <sup className="ms-0.5"><a href={`#note-${n}`} id={`ref-${n}`} className="text-chart-1 focus-visible:ring-ring/50 rounded px-0.5 font-sans text-xs font-bold outline-none focus-visible:ring-[3px]" aria-label={`Note ${n}`}>{n}</a></sup>}
       </p>
       {note && n && (
-        <aside id={`note-${n}`} aria-label={`Note ${n}`} className="text-muted-foreground border-chart-1 mt-3 border-l-2 pl-4 text-sm leading-relaxed xl:absolute xl:top-0 xl:left-full xl:mt-0 xl:ml-10 xl:w-56 xl:border-l-0 xl:pl-0">
-          <span className="text-chart-1 mr-1.5 font-bold">{n}</span>{note}
+        <aside id={`note-${n}`} aria-label={`Note ${n}`} className="text-muted-foreground border-chart-1 mt-3 border-s-2 ps-4 text-sm leading-relaxed xl:absolute xl:top-0 xl:start-full xl:mt-0 xl:ms-10 xl:w-56 xl:border-s-0 xl:ps-0">
+          <span className="text-chart-1 me-1.5 font-bold">{n}</span>{note}
         </aside>
       )}
     </div>
@@ -45,17 +45,17 @@ function PublicationArticle({ hrefs, ...props }: PublicationArticleProps) {
           <p className={cn("text-muted-foreground mt-5 text-xl leading-relaxed text-pretty", pubTextClass)}>{a.dek}</p>
           <div className="mt-7 flex items-center justify-center gap-3 text-sm">
             <span className={cn("bg-chart-3 text-[var(--publication-on-accent)] flex size-11 items-center justify-center rounded-full text-base", pubSerifClass)} aria-hidden="true">IM</span>
-            <p className="text-left"><span className="block font-semibold">By {au.name}</span><span className="text-muted-foreground">{formatDate(a.date)} · {a.read} min read</span></p>
+            <p className="text-start"><span className="block font-semibold">By {au.name}</span><span className="text-muted-foreground">{formatDate(a.date)} · {a.read} min read</span></p>
           </div>
         </header>
         <div className="mx-auto mt-10 max-w-5xl px-4 sm:px-6"><MagArt variant={a.art} className="aspect-[16/8]" /><p className="text-muted-foreground mt-2 text-xs">Scaffolding on Rua da Madalena, Lisbon. Illustration.</p></div>
 
         <article className="mx-auto mt-12 max-w-[40rem] space-y-7 px-4 sm:px-6">
           <div className="relative">
-            <p className={cn("first-letter:float-left first-letter:mr-3 first-letter:text-[5.2rem] first-letter:leading-[0.8] first-letter:font-bold first-letter:[font-family:var(--pub-display)] text-[1.1875rem] leading-[1.8] text-pretty", pubTextClass)}>
-              There is a street near my flat that has been covered in scaffolding for as long as I have lived here. The poles have weathered, a pigeon has opinions about the third floor, and the building behind it appears to be neither getting worse nor better. I used to find it depressing.<sup className="ml-0.5"><a href="#note-1" id="ref-1" className="text-chart-1 focus-visible:ring-ring/50 rounded px-0.5 font-sans text-xs font-bold outline-none focus-visible:ring-[3px]" aria-label="Note 1">1</a></sup>
+            <p className={cn("first-letter:float-start first-letter:me-3 first-letter:text-[5.2rem] first-letter:leading-[0.8] first-letter:font-bold first-letter:[font-family:var(--pub-display)] text-[1.1875rem] leading-[1.8] text-pretty", pubTextClass)}>
+              There is a street near my flat that has been covered in scaffolding for as long as I have lived here. The poles have weathered, a pigeon has opinions about the third floor, and the building behind it appears to be neither getting worse nor better. I used to find it depressing.<sup className="ms-0.5"><a href="#note-1" id="ref-1" className="text-chart-1 focus-visible:ring-ring/50 rounded px-0.5 font-sans text-xs font-bold outline-none focus-visible:ring-[3px]" aria-label="Note 1">1</a></sup>
             </p>
-            <aside id="note-1" aria-label="Note 1" className="text-muted-foreground border-chart-1 mt-3 border-l-2 pl-4 text-sm leading-relaxed xl:absolute xl:top-0 xl:left-full xl:mt-0 xl:ml-10 xl:w-56 xl:border-l-0 xl:pl-0"><span className="text-chart-1 mr-1.5 font-bold">1</span>The building is a 1920s tenement. The scaffold went up in 2019 after a cornice fell on a parked car.</aside>
+            <aside id="note-1" aria-label="Note 1" className="text-muted-foreground border-chart-1 mt-3 border-s-2 ps-4 text-sm leading-relaxed xl:absolute xl:top-0 xl:start-full xl:mt-0 xl:ms-10 xl:w-56 xl:border-s-0 xl:ps-0"><span className="text-chart-1 me-1.5 font-bold">1</span>The building is a 1920s tenement. The scaffold went up in 2019 after a cornice fell on a parked car.</aside>
           </div>
           <Para n={2} note="Jane Jacobs made this point in 1961. Cities, she wrote, need old buildings, and a great many of them, mixed in with the new.">Then I started to notice how many of the places I love are unfinished in exactly this way: the cathedral with a crane, the square half dug up, the market that is always about to be renovated. A city that is finished is a museum.</Para>
           <h2 className={cn("pt-4 text-3xl leading-tight text-balance", pubSerifClass)}>What patience looks like in stone</h2>

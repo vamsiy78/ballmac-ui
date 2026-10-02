@@ -43,7 +43,7 @@ function CapturePanel() {
     <div className={panelShell}>
       <div className="flex items-center justify-between border-b px-4 py-2.5 text-xs"><span className="font-semibold">Quick capture</span><span className="text-muted-foreground">Inbox</span></div>
       <div className="space-y-3 p-4">
-        <p className="min-h-16 text-[15px] leading-6">Call Maya about the Q4 budget before Friday<span className="bg-foreground ml-0.5 inline-block h-4 w-px translate-y-0.5 animate-pulse align-middle motion-reduce:animate-none" /></p>
+        <p className="min-h-16 text-[15px] leading-6">Call Maya about the Q4 budget before Friday<span className="bg-foreground ms-0.5 inline-block h-4 w-px translate-y-0.5 animate-pulse align-middle motion-reduce:animate-none" /></p>
         <div className="flex flex-wrap gap-1.5">{["#finance", "#follow-up", "Today"].map((t) => <span key={t} className="bg-muted rounded-full px-2.5 py-1 text-xs">{t}</span>)}</div>
       </div>
       <div className="bg-muted/50 flex items-center justify-between border-t px-4 py-2.5 text-xs"><span className="text-muted-foreground">Saves to Inbox</span><span className="flex items-center gap-1.5">Save <Kbd>⌘</Kbd><Kbd>↩</Kbd></span></div>
@@ -139,7 +139,7 @@ function Features7({
                 <RadioGroupPrimitive.Item
                   key={f.id}
                   value={f.id}
-                  className={cn("focus-visible:ring-ring/50 group/feature flex items-start gap-4 rounded-2xl border p-4 text-left outline-none transition-colors focus-visible:ring-[3px]", on ? "border-foreground bg-accent/50" : "hover:bg-accent/30")}
+                  className={cn("focus-visible:ring-ring/50 group/feature flex items-start gap-4 rounded-2xl border p-4 text-start outline-none transition-colors focus-visible:ring-[3px]", on ? "border-foreground bg-accent/50" : "hover:bg-accent/30")}
                 >
                   <span aria-hidden="true" className={cn("flex size-10 shrink-0 items-center justify-center rounded-xl [&_svg]:size-5", on ? "bg-foreground text-background" : "bg-muted")}>{f.icon}</span>
                   <span className="min-w-0 flex-1">
@@ -166,14 +166,14 @@ function Features7({
           </div>
           <div className="bg-background/55 text-foreground flex h-7 items-center gap-3 border-b border-white/20 px-3 text-[13px] backdrop-blur-2xl dark:border-white/[0.06]">
             <Command className="size-3.5" /><span className="font-bold">Finder</span><span className="max-sm:hidden">File</span><span className="max-sm:hidden">Edit</span><span className="max-sm:hidden">View</span>
-            <span className="ml-auto flex items-center gap-3">
+            <span className="ms-auto flex items-center gap-3">
               <span className="bg-foreground/15 flex size-5 items-center justify-center rounded-md"><span className="bg-foreground text-background flex size-4 items-center justify-center rounded-[4px] text-[10px] font-bold">L</span></span>
               <Wifi className="size-3.5 max-sm:hidden" /><BatteryFull className="size-4" /><span className="tabular-nums max-sm:hidden">{time}</span>
             </span>
           </div>
           <div className="flex min-h-[26rem] items-start justify-end px-3 pt-2 pb-8 sm:px-6">
             <div className="relative">
-              <span className="bg-popover absolute -top-1.5 right-6 size-3 rotate-45 rounded-[3px] border-t border-l" />
+              <span className="bg-popover absolute -top-1.5 end-6 size-3 rotate-45 rounded-[3px] border-t border-s" />
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={current.id}

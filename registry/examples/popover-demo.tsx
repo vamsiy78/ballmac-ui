@@ -36,21 +36,21 @@ export default function PopoverDemo() {
               <button
                 type="button"
                 onClick={() => setAccess("Team only")}
-                className="flex h-9 items-center gap-2 rounded-md px-2 text-left text-sm outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                className="flex h-9 items-center gap-2 rounded-md px-2 text-start text-sm outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
               >
                 <LockKeyhole aria-hidden="true" className="size-4" /> Team only{" "}
                 {access === "Team only" && (
-                  <span className="ml-auto text-xs text-primary">Selected</span>
+                  <span className="ms-auto text-xs text-primary">Selected</span>
                 )}
               </button>
               <button
                 type="button"
                 onClick={() => setAccess("Anyone with link")}
-                className="flex h-9 items-center gap-2 rounded-md px-2 text-left text-sm outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                className="flex h-9 items-center gap-2 rounded-md px-2 text-start text-sm outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
               >
                 <Link2 aria-hidden="true" className="size-4" /> Anyone with link{" "}
                 {access === "Anyone with link" && (
-                  <span className="ml-auto text-xs text-primary">Selected</span>
+                  <span className="ms-auto text-xs text-primary">Selected</span>
                 )}
               </button>
             </div>

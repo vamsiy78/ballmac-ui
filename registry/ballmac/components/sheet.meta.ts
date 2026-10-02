@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["overlay", "panel", "drawer", "dialog", "radix"],
   files: [{ path: "components/sheet.tsx" }],
   dependencies: ["radix-ui", "lucide-react", "class-variance-authority"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "sheet-demo", title: "Edit project", file: "sheet-demo.tsx" },
     { name: "sheet-states", title: "Four edges", file: "sheet-states.tsx" },

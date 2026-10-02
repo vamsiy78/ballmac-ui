@@ -6,10 +6,12 @@ import * as React from "react"
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 import { Select as SelectPrimitive } from "radix-ui"
 
+import { useDirection } from "@/lib/ballmac/direction"
 import { cn } from "@/lib/utils"
 
 function Select(props: React.ComponentProps<typeof SelectPrimitive.Root>) {
-  return <SelectPrimitive.Root data-slot="select" {...props} />
+  const dir = useDirection(props.dir)
+  return <SelectPrimitive.Root data-slot="select" dir={dir} {...props} />
 }
 
 function SelectGroup(props: React.ComponentProps<typeof SelectPrimitive.Group>) {
@@ -112,7 +114,7 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "relative flex w-full cursor-default select-none items-center gap-2 rounded-md py-1.5 pr-8 pl-2 text-sm outline-hidden",
+        "relative flex w-full cursor-default select-none items-center gap-2 rounded-md py-1.5 pe-8 ps-2 text-sm outline-hidden",
         "focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
         "*:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
@@ -120,7 +122,7 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
       )}
       {...props}
     >
-      <span data-slot="select-item-indicator" className="absolute right-2 flex size-3.5 items-center justify-center">
+      <span data-slot="select-item-indicator" className="absolute end-2 flex size-3.5 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
           <CheckIcon className="size-4 text-foreground" aria-hidden="true" />
         </SelectPrimitive.ItemIndicator>

@@ -23,6 +23,8 @@ export const docsNav = [
     title: "Reference",
     items: [
       { href: "/docs/registry", label: "CLI & registry" },
+      { href: "/docs/rtl", label: "Right-to-left" },
+      { href: "/docs/i18n", label: "Translations" },
     ],
   },
 ]

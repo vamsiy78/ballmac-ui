@@ -43,7 +43,7 @@ export default function AppShellDemo() {
       <AppShellHeader>
         <AppShellSidebarTrigger />
         <span className="text-[15px] font-semibold tracking-tight">Acme</span>
-        <span className="ml-auto text-xs text-muted-foreground">Q3 planning</span>
+        <span className="ms-auto text-xs text-muted-foreground">Q3 planning</span>
       </AppShellHeader>
       <AppShellSidebar label="Workspace" className="h-[calc(24rem-var(--app-header-h))]">
         <NavList />

@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["dashboard", "analytics", "traffic", "line chart", "donut", "visitors", "web"],
   files: [{ path: "components/blocks/dashboard-2/dashboard-2.tsx" }],
   dependencies: ["lucide-react", "recharts@^3"],
-  registryDependencies: ["shadcn:utils", "chart", "segmented-control", "status-dot", "switch"],
+  registryDependencies: ["shadcn:utils", "chart", "segmented-control", "status-dot", "switch", "i18n"],
   examples: [
     { name: "dashboard-2-demo", title: "Default", file: "dashboard-2-demo.tsx" },
     { name: "dashboard-2-week", title: "Compact, no live pill", file: "dashboard-2-week.tsx" },

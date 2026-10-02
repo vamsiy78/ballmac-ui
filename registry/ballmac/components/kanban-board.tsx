@@ -4,6 +4,8 @@
 import * as React from "react"
 import { ArrowLeft, ArrowRight, GripVertical } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
+import { useDirection } from "@/lib/ballmac/direction"
 
 type KanbanCard = {
   /** Stable card ID. */ id: string
@@ -31,9 +33,12 @@ function KanbanBoard({
   columns,
   defaultColumns = [],
   onColumnsChange,
-  label = "Task board",
+  label,
   ...props
 }: KanbanBoardProps) {
+  const dir = useDirection()
+  const msg = useMessages()
+  label ??= msg("kanban-board.label", "Task board")
   const [internal, setInternal] = React.useState(defaultColumns)
   const [dragging, setDragging] = React.useState<string | null>(null)
   const [announcement, setAnnouncement] = React.useState("")
@@ -114,7 +119,7 @@ function KanbanBoard({
                   data-slot="kanban-card"
                   draggable
                   tabIndex={0}
-                  aria-label={`${card.title}, ${column.title}. Use Alt and arrow keys to move.`}
+                  aria-label={msg("kanban-board.useAltAndArrowKeys", "{title}, {column}. Use Alt and arrow keys to move.", { title: card.title, column: column.title })}
                   onDragStart={(event) => {
                     setDragging(card.id)
                     event.dataTransfer.effectAllowed = "move"
@@ -123,9 +128,9 @@ function KanbanBoard({
                   onDragEnd={() => setDragging(null)}
                   onKeyDown={(event) => {
                     if (!event.altKey) return
-                    if (event.key === "ArrowLeft")
+                    if (event.key === (dir === "rtl" ? "ArrowRight" : "ArrowLeft"))
                       move(card.id, columnIndex - 1)
-                    else if (event.key === "ArrowRight")
+                    else if (event.key === (dir === "rtl" ? "ArrowLeft" : "ArrowRight"))
                       move(card.id, columnIndex + 1)
                     else if (event.key === "ArrowUp")
                       move(card.id, columnIndex, -1)
@@ -160,21 +165,21 @@ function KanbanBoard({
                   <div className="mt-3 flex items-center justify-end gap-1 border-t border-border pt-2">
                     <button
                       type="button"
-                      aria-label={`Move ${card.title} to previous column`}
+                      aria-label={msg("kanban-board.moveToPreviousColumn", "Move {title} to previous column", { title: card.title })}
                       disabled={columnIndex === 0}
                       onClick={() => move(card.id, columnIndex - 1)}
                       className="text-muted-foreground hover:bg-accent hover:text-foreground flex size-7 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40"
                     >
-                      <ArrowLeft aria-hidden="true" className="size-3.5" />
+                      <ArrowLeft aria-hidden="true" className="size-3.5 rtl:rotate-180" />
                     </button>
                     <button
                       type="button"
-                      aria-label={`Move ${card.title} to next column`}
+                      aria-label={msg("kanban-board.moveToNextColumn", "Move {title} to next column", { title: card.title })}
                       disabled={columnIndex === current.length - 1}
                       onClick={() => move(card.id, columnIndex + 1)}
                       className="text-muted-foreground hover:bg-accent hover:text-foreground flex size-7 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40"
                     >
-                      <ArrowRight aria-hidden="true" className="size-3.5" />
+                      <ArrowRight aria-hidden="true" className="size-3.5 rtl:rotate-180" />
                     </button>
                   </div>
                 </article>

@@ -8,6 +8,8 @@ import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { useReducedMotionSafe } from "@/lib/ballmac/motion";
+import { useDirection } from "@/lib/ballmac/direction"
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type CarouselOptions = NonNullable<Parameters<typeof useEmblaCarousel>[0]>;
@@ -56,7 +58,7 @@ function Carousel({
   opts,
   setApi,
   autoplay = false,
-  label = "Carousel",
+  label,
   className,
   children,
   onKeyDownCapture,
@@ -66,9 +68,12 @@ function Carousel({
   onBlur,
   ...props
 }: CarouselProps) {
+  const msg = useMessages()
+  label ??= msg("carousel.label", "Carousel")
   const reduce = useReducedMotionSafe();
+  const dir = useDirection();
   const [viewportRef, api] = useEmblaCarousel(
-    { ...opts, axis: orientation === "horizontal" ? "x" : "y", ...(reduce ? { duration: 0 } : {}) },
+    { ...opts, axis: orientation === "horizontal" ? "x" : "y", direction: dir, ...(reduce ? { duration: 0 } : {}) },
   );
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
   const [canScrollNext, setCanScrollNext] = React.useState(false);
@@ -135,8 +140,8 @@ function Carousel({
           if (event.defaultPrevented) return;
           const target = event.target as HTMLElement;
           if (target.closest("input, textarea, select, [contenteditable=true]")) return;
-          const prev = orientation === "horizontal" ? "ArrowLeft" : "ArrowUp";
-          const next = orientation === "horizontal" ? "ArrowRight" : "ArrowDown";
+          const prev = orientation === "horizontal" ? (dir === "rtl" ? "ArrowRight" : "ArrowLeft") : "ArrowUp";
+          const next = orientation === "horizontal" ? (dir === "rtl" ? "ArrowLeft" : "ArrowRight") : "ArrowDown";
           if (event.key === prev) {
             event.preventDefault();
             api?.scrollPrev();
@@ -185,7 +190,7 @@ function CarouselContent({ className, viewportClassName, children, ...props }: C
       <div
         data-slot="carousel-content"
         aria-live={autoplay && playing ? "off" : "polite"}
-        className={cn("flex", orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col", className)}
+        className={cn("flex", orientation === "horizontal" ? "-ms-4" : "-mt-4 flex-col", className)}
         {...props}
       >
         {slides.map((child, index) => (
@@ -210,7 +215,7 @@ function CarouselItem({ className, ...props }: CarouselItemProps) {
       data-slot="carousel-item"
       className={cn(
         "min-w-0 shrink-0 grow-0 basis-full",
-        orientation === "horizontal" ? "pl-4" : "pt-4",
+        orientation === "horizontal" ? "ps-4" : "pt-4",
         className,
       )}
       {...props}
@@ -223,50 +228,52 @@ const controlClass =
 
 type CarouselPreviousProps = React.ComponentProps<"button">;
 function CarouselPrevious({ className, ...props }: CarouselPreviousProps) {
+  const msg = useMessages()
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
   return (
     <button
       type="button"
       data-slot="carousel-previous"
-      aria-label="Previous slide"
+      aria-label={msg("carousel.previousSlide", "Previous slide")}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       className={cn(
         controlClass,
         "absolute z-10",
         orientation === "horizontal"
-          ? "top-1/2 left-3 -translate-y-1/2"
+          ? "top-1/2 start-3 -translate-y-1/2"
           : "top-3 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
       {...props}
     >
-      <ArrowLeft aria-hidden="true" />
+      <ArrowLeft aria-hidden="true" className={orientation === "horizontal" ? "rtl:rotate-180" : undefined} />
     </button>
   );
 }
 
 type CarouselNextProps = React.ComponentProps<"button">;
 function CarouselNext({ className, ...props }: CarouselNextProps) {
+  const msg = useMessages()
   const { orientation, scrollNext, canScrollNext } = useCarousel();
   return (
     <button
       type="button"
       data-slot="carousel-next"
-      aria-label="Next slide"
+      aria-label={msg("carousel.nextSlide", "Next slide")}
       disabled={!canScrollNext}
       onClick={scrollNext}
       className={cn(
         controlClass,
         "absolute z-10",
         orientation === "horizontal"
-          ? "top-1/2 right-3 -translate-y-1/2"
+          ? "top-1/2 end-3 -translate-y-1/2"
           : "bottom-3 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
       {...props}
     >
-      <ArrowRight aria-hidden="true" />
+      <ArrowRight aria-hidden="true" className={orientation === "horizontal" ? "rtl:rotate-180" : undefined} />
     </button>
   );
 }
@@ -274,13 +281,14 @@ function CarouselNext({ className, ...props }: CarouselNextProps) {
 type CarouselDotsProps = React.ComponentProps<"div">;
 /** Pagination dots. The active dot stretches into a pill. Each dot is a labelled button. */
 function CarouselDots({ className, ...props }: CarouselDotsProps) {
+  const msg = useMessages()
   const { count, selectedIndex, scrollTo } = useCarousel();
   if (count < 2) return null;
   return (
     <div
       data-slot="carousel-dots"
       role="group"
-      aria-label="Choose slide"
+      aria-label={msg("carousel.chooseSlide", "Choose slide")}
       className={cn("flex items-center justify-center gap-1", className)}
       {...props}
     >
@@ -288,7 +296,7 @@ function CarouselDots({ className, ...props }: CarouselDotsProps) {
         <button
           key={i}
           type="button"
-          aria-label={`Go to slide ${i + 1}`}
+          aria-label={msg("carousel.goToSlide", "Go to slide {n}", { n: i + 1 })}
           aria-current={i === selectedIndex ? "true" : undefined}
           onClick={() => scrollTo(i)}
           className="group/dot inline-flex h-6 min-w-6 items-center justify-center rounded-full outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
@@ -310,13 +318,14 @@ function CarouselDots({ className, ...props }: CarouselDotsProps) {
 type CarouselPlayPauseProps = React.ComponentProps<"button">;
 /** Pause and resume autoplay. Renders nothing when `autoplay` is off or reduced motion is on. */
 function CarouselPlayPause({ className, ...props }: CarouselPlayPauseProps) {
+  const msg = useMessages()
   const { autoplay, playing, setPlaying } = useCarousel();
   if (!autoplay) return null;
   return (
     <button
       type="button"
       data-slot="carousel-play-pause"
-      aria-label={playing ? "Pause autoplay" : "Start autoplay"}
+      aria-label={playing ? msg("carousel.pauseAutoplay", "Pause autoplay") : msg("carousel.startAutoplay", "Start autoplay")}
       onClick={() => setPlaying(!playing)}
       className={cn(controlClass, "size-8", className)}
       {...props}

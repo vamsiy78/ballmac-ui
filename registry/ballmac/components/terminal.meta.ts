@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["terminal", "cli", "shell", "command", "typing", "developer", "docs"],
   files: [{ path: "components/terminal.tsx" }],
   dependencies: ["class-variance-authority", "lucide-react", "motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "terminal-demo", title: "Default", file: "terminal-demo.tsx" },
     { name: "terminal-typing", title: "Typing animation", file: "terminal-typing.tsx" },

@@ -129,7 +129,7 @@ function MuseChat({ start = "conversation", hrefs, ...props }: MuseChatProps) {
                         </p>
                       )}
                       {t.artifact && (
-                        <button type="button" onClick={() => setPanel(true)} className="bg-card hover:bg-accent/50 focus-visible:ring-ring/50 flex w-full max-w-sm items-center gap-3 rounded-2xl border p-3 text-left outline-none transition-colors focus-visible:ring-[3px]">
+                        <button type="button" onClick={() => setPanel(true)} className="bg-card hover:bg-accent/50 focus-visible:ring-ring/50 flex w-full max-w-sm items-center gap-3 rounded-2xl border p-3 text-start outline-none transition-colors focus-visible:ring-[3px]">
                           <span aria-hidden="true" className="bg-chart-1/15 text-chart-1 flex size-10 items-center justify-center rounded-xl"><FileText className="size-5" /></span>
                           <span className="min-w-0 flex-1"><span className="block text-sm font-medium">{plan.title}</span><span className="text-muted-foreground block text-xs">Document · open to edit</span></span>
                         </button>
@@ -147,7 +147,7 @@ function MuseChat({ start = "conversation", hrefs, ...props }: MuseChatProps) {
               <PromptInputTextarea placeholder="Message Muse" aria-label="Message Muse" />
               <PromptInputToolbar>
                 <span className="text-muted-foreground flex items-center gap-1.5 text-xs"><Sparkles className="size-3.5" aria-hidden="true" />{models.find((m) => m.id === model)?.name}</span>
-                <PromptInputSubmit className="ml-auto" />
+                <PromptInputSubmit className="ms-auto" />
               </PromptInputToolbar>
             </PromptInput>
             <p className="text-muted-foreground mt-2 text-center text-xs">Muse can make mistakes. Check anything that matters.</p>
@@ -155,13 +155,13 @@ function MuseChat({ start = "conversation", hrefs, ...props }: MuseChatProps) {
         </Chat>
 
         {panel && !empty && (
-          <div className="bg-background absolute inset-0 z-10 flex xl:static xl:z-auto xl:w-[26rem] xl:shrink-0 xl:border-l 2xl:w-[32rem]">
+          <div className="bg-background absolute inset-0 z-10 flex xl:static xl:z-auto xl:w-[26rem] xl:shrink-0 xl:border-s 2xl:w-[32rem]">
             <ArtifactPanel title={plan.title} kind="Document" icon={<FileText />} code={plan.body} filename={plan.filename} language={plan.language} onClose={() => setPanel(false)} className="h-full w-full rounded-none border-0">
               <div className="space-y-5 p-6 [font-family:var(--muse-serif),ui-serif,Georgia,serif]">
                 <h2 className="text-2xl font-semibold tracking-tight">Q4 design plan</h2>
-                <section><h3 className="text-chart-1 text-sm font-semibold tracking-wide uppercase [font-family:var(--muse-sans)]">Goals</h3><ul className="mt-2 list-disc space-y-1.5 pl-5 text-[16px] leading-7"><li>Ship the new onboarding flow by Oct 31</li><li>Cut design-to-dev handoff time in half</li><li>Run two customer research rounds</li></ul></section>
-                <section><h3 className="text-chart-1 text-sm font-semibold tracking-wide uppercase [font-family:var(--muse-sans)]">Three bets</h3><ol className="mt-2 list-decimal space-y-1.5 pl-5 text-[16px] leading-7"><li>Onboarding rebuild</li><li>Component library v2</li><li>Research ops</li></ol></section>
-                <section><h3 className="text-chart-1 text-sm font-semibold tracking-wide uppercase [font-family:var(--muse-sans)]">Risks and owners</h3><ul className="mt-2 list-disc space-y-1.5 pl-5 text-[16px] leading-7"><li>Scope creep on onboarding (Priya)</li><li>Engineering capacity in November (Dev)</li></ul></section>
+                <section><h3 className="text-chart-1 text-sm font-semibold tracking-wide uppercase [font-family:var(--muse-sans)]">Goals</h3><ul className="mt-2 list-disc space-y-1.5 ps-5 text-[16px] leading-7"><li>Ship the new onboarding flow by Oct 31</li><li>Cut design-to-dev handoff time in half</li><li>Run two customer research rounds</li></ul></section>
+                <section><h3 className="text-chart-1 text-sm font-semibold tracking-wide uppercase [font-family:var(--muse-sans)]">Three bets</h3><ol className="mt-2 list-decimal space-y-1.5 ps-5 text-[16px] leading-7"><li>Onboarding rebuild</li><li>Component library v2</li><li>Research ops</li></ol></section>
+                <section><h3 className="text-chart-1 text-sm font-semibold tracking-wide uppercase [font-family:var(--muse-sans)]">Risks and owners</h3><ul className="mt-2 list-disc space-y-1.5 ps-5 text-[16px] leading-7"><li>Scope creep on onboarding (Priya)</li><li>Engineering capacity in November (Dev)</li></ul></section>
               </div>
             </ArtifactPanel>
           </div>

@@ -6,6 +6,8 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { Search } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
+import { useDirection } from "@/lib/ballmac/direction"
 
 type LaunchpadApp = {
   /** Unique id. */
@@ -38,7 +40,10 @@ type LaunchpadProps = Omit<React.ComponentProps<"div">, "children"> & {
  * It fills its positioned parent. Arrow keys move between apps and across pages, PageUp and PageDown turn pages,
  * and typing filters. Escape closes it.
  */
-function Launchpad({ apps, open, onClose, onLaunch, cellWidth = 120, cellHeight = 112, label = "Launchpad", className, ...props }: LaunchpadProps) {
+function Launchpad({ apps, open, onClose, onLaunch, cellWidth = 120, cellHeight = 112, label, className, ...props }: LaunchpadProps) {
+  const dir = useDirection()
+  const msg = useMessages()
+  label ??= msg("launchpad.label", "Launchpad")
   const reduce = useReducedMotion()
   const rootRef = React.useRef<HTMLDivElement>(null)
   const searchRef = React.useRef<HTMLInputElement>(null)
@@ -89,17 +94,17 @@ function Launchpad({ apps, open, onClose, onLaunch, cellWidth = 120, cellHeight 
     if (e.key === "Escape") {
       e.preventDefault()
       onClose?.()
-    } else if (e.key === "PageDown" || (e.key === "ArrowRight" && e.ctrlKey)) {
+    } else if (e.key === "PageDown" || (e.key === (dir === "rtl" ? "ArrowLeft" : "ArrowRight") && e.ctrlKey)) {
       e.preventDefault()
       goPage(current + 1)
-    } else if (e.key === "PageUp" || (e.key === "ArrowLeft" && e.ctrlKey)) {
+    } else if (e.key === "PageUp" || (e.key === (dir === "rtl" ? "ArrowRight" : "ArrowLeft") && e.ctrlKey)) {
       e.preventDefault()
       goPage(current - 1)
     }
   }
 
   function onAppKey(e: React.KeyboardEvent, index: number) {
-    const move: Record<string, number> = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: cols, ArrowUp: -cols }
+    const move: Record<string, number> = { ArrowRight: dir === "rtl" ? -1 : 1, ArrowLeft: dir === "rtl" ? 1 : -1, ArrowDown: cols, ArrowUp: -cols }
     if (e.key in move && !e.ctrlKey) {
       e.preventDefault()
       focusApp(index + move[e.key]!)
@@ -139,13 +144,13 @@ function Launchpad({ apps, open, onClose, onLaunch, cellWidth = 120, cellHeight 
           }}
         >
           <div className="relative mt-5 w-56 max-w-[70%] shrink-0">
-            <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 left-2.5 size-3.5 -translate-y-1/2 text-white/70" />
+            <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 start-2.5 size-3.5 -translate-y-1/2 text-white/70" />
             <input
               ref={searchRef}
               type="search"
               value={query}
-              aria-label="Search apps"
-              placeholder="Search"
+              aria-label={msg("launchpad.searchApps", "Search apps")}
+              placeholder={msg("launchpad.search", "Search")}
               onChange={(e) => {
                 setQuery(e.target.value)
                 setPage(0)
@@ -158,7 +163,7 @@ function Launchpad({ apps, open, onClose, onLaunch, cellWidth = 120, cellHeight 
                   focusApp(0)
                 }
               }}
-              className="h-7 w-full rounded-lg border border-white/20 bg-white/15 pr-3 pl-8 text-center text-[13px] text-white outline-none placeholder:text-white/70 focus-visible:bg-white/25 focus-visible:ring-[3px] focus-visible:ring-white/40 [&::-webkit-search-cancel-button]:hidden"
+              className="h-7 w-full rounded-lg border border-white/20 bg-white/15 pe-3 ps-8 text-center text-[13px] text-white outline-none placeholder:text-white/70 focus-visible:bg-white/25 focus-visible:ring-[3px] focus-visible:ring-white/40 [&::-webkit-search-cancel-button]:hidden"
             />
           </div>
 
@@ -171,7 +176,7 @@ function Launchpad({ apps, open, onClose, onLaunch, cellWidth = 120, cellHeight 
             >
               {Array.from({ length: pages }, (_, p) => (
                 <div key={p} className="flex h-full items-center justify-center" style={{ width: `${100 / pages}%` }} aria-hidden={p !== current ? true : undefined} {...(p !== current ? { inert: true } : {})}>
-                  <ul className="grid" style={{ gridTemplateColumns: `repeat(${cols}, ${cellWidth}px)`, gridAutoRows: `${cellHeight}px` }} aria-label={`Page ${p + 1} of ${pages}`}>
+                  <ul className="grid" style={{ gridTemplateColumns: `repeat(${cols}, ${cellWidth}px)`, gridAutoRows: `${cellHeight}px` }} aria-label={msg("launchpad.pageOf", "Page {n} of {pages}", { n: p + 1, pages })}>
                     {shown.slice(p * perPage, (p + 1) * perPage).map((app, i) => {
                       const index = p * perPage + i
                       return (
@@ -195,16 +200,16 @@ function Launchpad({ apps, open, onClose, onLaunch, cellWidth = 120, cellHeight 
                 </div>
               ))}
             </motion.div>
-            {shown.length === 0 && <p className="absolute inset-0 flex items-center justify-center text-sm text-white/80">No apps match “{query}”.</p>}
+            {shown.length === 0 && <p className="absolute inset-0 flex items-center justify-center text-sm text-white/80">{msg("launchpad.noAppsMatch", "No apps match “{query}”.", { query })}</p>}
           </div>
 
-          <div className="flex h-9 shrink-0 items-center gap-2" role="group" aria-label="Pages">
+          <div className="flex h-9 shrink-0 items-center gap-2" role="group" aria-label={msg("launchpad.pages", "Pages")}>
             {pages > 1 &&
               Array.from({ length: pages }, (_, p) => (
                 <button
                   key={p}
                   type="button"
-                  aria-label={`Page ${p + 1}`}
+                  aria-label={msg("launchpad.page", "Page {n}", { n: p + 1 })}
                   aria-current={p === current ? "true" : undefined}
                   onClick={() => goPage(p)}
                   className={cn("size-2 rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-white", p === current ? "bg-white" : "bg-white/40 hover:bg-white/70")}
@@ -212,7 +217,7 @@ function Launchpad({ apps, open, onClose, onLaunch, cellWidth = 120, cellHeight 
               ))}
           </div>
           <p className="sr-only" role="status">
-            {shown.length} {shown.length === 1 ? "app" : "apps"}, page {current + 1} of {pages}
+            {msg("launchpad.summary", { one: "{count} app, page {page} of {pages}", other: "{count} apps, page {page} of {pages}" }, { count: shown.length, page: current + 1, pages })}
           </p>
         </motion.div>
       )}

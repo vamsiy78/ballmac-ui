@@ -39,7 +39,7 @@ function DocsReference({ hrefs, ...props }: DocsReferenceProps) {
           <Crumbs items={["API reference", "Overview"]} />
           <h1 className={cn("mt-5 text-[clamp(2.4rem,5vw,3.8rem)] leading-[1.05] text-balance", docsSerifClass)}>API reference</h1>
           <p className="text-muted-foreground mt-4 text-xl text-pretty">A small, regular HTTP API. Every endpoint takes and returns JSON, and every SDK method maps to exactly one of them.</p>
-          <div className="bg-card mt-6 flex items-center justify-between gap-3 rounded-xl border p-3 pl-4">
+          <div className="bg-card mt-6 flex items-center justify-between gap-3 rounded-xl border p-3 ps-4">
             <div className="min-w-0"><p className="text-muted-foreground text-xs">Base URL</p><p className={cn("truncate text-sm", docsMonoClass)}>https://eu.api.tern.dev</p></div>
             <CopyButton value="https://eu.api.tern.dev" ariaLabel="Copy the base URL" variant="outline" size="sm" />
           </div>
@@ -61,8 +61,8 @@ function DocsReference({ hrefs, ...props }: DocsReferenceProps) {
           <div className="mt-14 flex flex-wrap items-center gap-3" role="group" aria-label="Filter endpoints">
             <div className="relative min-w-52 flex-1">
               <label htmlFor="dr-q" className="sr-only">Filter endpoints</label>
-              <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2" aria-hidden="true" />
-              <input id="dr-q" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Filter endpoints" className="bg-card focus-visible:ring-ring/50 h-10 w-full rounded-lg border pr-3 pl-9 text-sm outline-none focus-visible:ring-[3px]" />
+              <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-3 size-4 -translate-y-1/2" aria-hidden="true" />
+              <input id="dr-q" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Filter endpoints" className="bg-card focus-visible:ring-ring/50 h-10 w-full rounded-lg border pe-3 ps-9 text-sm outline-none focus-visible:ring-[3px]" />
             </div>
             <div className="flex gap-1.5">
               {methods.map((m) => (

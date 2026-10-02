@@ -16,7 +16,7 @@ export default function DynamicIslandPill() {
           <span className="flex size-6 items-center justify-center rounded-full bg-chart-2 text-black">
             <Phone className="size-3.5" aria-hidden="true" />
           </span>
-          <span className="pr-1 text-[13px] font-medium tabular-nums text-chart-2">12:04</span>
+          <span className="pe-1 text-[13px] font-medium tabular-nums text-chart-2">12:04</span>
         </DynamicIslandView>
         <DynamicIslandView value="expanded" radius={34} label="Call with Design Review, 12 minutes" className="w-[min(340px,calc(100vw-3rem))] flex-col items-stretch gap-4 p-4">
           <div className="flex items-center gap-3">

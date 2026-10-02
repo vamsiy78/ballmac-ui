@@ -20,7 +20,7 @@ const bars = [38, 52, 44, 66, 58, 74, 62, 84, 70, 92, 80, 96]
 function Dashboard() {
   return (
     <div className="flex h-full text-[15px]">
-      <aside className="flex w-[210px] shrink-0 flex-col gap-1 border-r bg-muted/40 p-4">
+      <aside className="flex w-[210px] shrink-0 flex-col gap-1 border-e bg-muted/40 p-4">
         <p className="px-3 pt-1 pb-3 text-[19px] font-bold tracking-tight">Northwind</p>
         {nav.map((n) => (
           <span key={n.label} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 font-medium ${n.active ? "bg-foreground text-background" : "text-muted-foreground"}`}>
@@ -35,7 +35,7 @@ function Dashboard() {
             <p className="text-[26px] font-bold tracking-tight">Good morning, Alex</p>
             <p className="text-muted-foreground">Here is how the store is doing this week.</p>
           </div>
-          <span className="ml-auto flex h-10 w-56 items-center gap-2 rounded-full border bg-background px-4 text-muted-foreground">
+          <span className="ms-auto flex h-10 w-56 items-center gap-2 rounded-full border bg-background px-4 text-muted-foreground">
             <Search className="size-4" aria-hidden="true" /> Search
           </span>
           <span className="flex size-10 items-center justify-center rounded-full border bg-background">

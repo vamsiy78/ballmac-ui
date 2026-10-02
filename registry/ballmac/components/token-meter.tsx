@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "motion/react"
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ballmac/popover"
 import { cn } from "@/lib/utils"
+import { useMessages, type Msg } from "@/lib/ballmac/i18n"
 
 type TokenSegment = {
   /** What these tokens are, for example "Conversation". */
@@ -57,10 +58,10 @@ function summarize(segments: TokenSegment[], limit: number, warnAt: number) {
   return { used, reserved, percent, state } as const
 }
 
-function stateText(state: "ok" | "warning" | "full", left: number) {
-  if (state === "full") return "Context is full"
-  if (state === "warning") return `Nearing the limit, ${formatTokens(left)} left`
-  return `${formatTokens(left)} left`
+function stateText(msg: Msg, state: "ok" | "warning" | "full", left: number) {
+  if (state === "full") return msg("token-meter.full", "Context is full")
+  if (state === "warning") return msg("token-meter.nearingLimit", "Nearing the limit, {left} left", { left: formatTokens(left) })
+  return msg("token-meter.left", "{left} left", { left: formatTokens(left) })
 }
 
 function Track({
@@ -96,7 +97,7 @@ function Track({
             key={s.label}
             aria-hidden="true"
             className={cn(
-              "block h-full first:rounded-l-full last:rounded-r-full",
+              "block h-full first:rounded-s-full last:rounded-e-full",
               s.reserved
                 ? "bg-[repeating-linear-gradient(135deg,var(--border)_0_3px,transparent_3px_6px)]"
                 : FILLS[fillIndex % FILLS.length]
@@ -129,7 +130,7 @@ function Legend({ segments }: { segments: TokenSegment[] }) {
             />
             <span className="text-foreground">{s.label}</span>
             {s.reserved && <span className="text-xs text-muted-foreground">reserved</span>}
-            <span className="ml-auto font-mono text-xs text-muted-foreground tabular-nums">{formatTokens(s.tokens)}</span>
+            <span className="ms-auto font-mono text-xs text-muted-foreground tabular-nums">{formatTokens(s.tokens)}</span>
           </li>
         )
       })}
@@ -137,10 +138,12 @@ function Legend({ segments }: { segments: TokenSegment[] }) {
   )
 }
 
-function TokenMeter({ segments, limit, title = "Context window", warnAt = 80, cost, action, className, ...props }: TokenMeterProps) {
+function TokenMeter({ segments, limit, title, warnAt = 80, cost, action, className, ...props }: TokenMeterProps) {
+  const msg = useMessages()
+  title ??= msg("token-meter.title", "Context window")
   const { used, percent, state } = summarize(segments, limit, warnAt)
   const left = Math.max(0, limit - used)
-  const text = `${formatTokens(used)} of ${formatTokens(limit)} tokens used, ${Math.round(percent)}%. ${stateText(state, left)}.`
+  const text = msg("token-meter.summary", "{used} of {limit} tokens used, {percent}%. {state}.", { used: formatTokens(used), limit: formatTokens(limit), percent: Math.round(percent), state: stateText(msg, state, left) })
   return (
     <div
       data-slot="token-meter"
@@ -166,7 +169,7 @@ function TokenMeter({ segments, limit, title = "Context window", warnAt = 80, co
           ) : (
             <AlertTriangle aria-hidden="true" className={cn("size-3.5", state === "full" ? "text-destructive" : "text-chart-3")} />
           )}
-          {stateText(state, left)}
+          {stateText(msg, state, left)}
         </p>
         {cost && <p className="text-muted-foreground tabular-nums">≈ {cost}</p>}
         {state !== "ok" && action}
@@ -188,11 +191,13 @@ function TokenMeterPill({
   warnAt = 80,
   cost,
   action,
-  title = "Context window",
+  title,
   side = "top",
   className,
   ...props
 }: TokenMeterPillProps) {
+  const msg = useMessages()
+  title ??= msg("token-meter.title", "Context window")
   const { used, percent, state } = summarize(segments, limit, warnAt)
   const shown = Math.min(100, Math.round(percent))
   const r = 7
@@ -202,7 +207,7 @@ function TokenMeterPill({
       <PopoverTrigger
         data-slot="token-meter-pill"
         data-state-meter={state}
-        aria-label={`${title}: ${shown}% used. ${stateText(state, Math.max(0, limit - used))}.`}
+        aria-label={msg("token-meter.pill", "{title}: {percent}% used. {state}.", { title, percent: shown, state: stateText(msg, state, Math.max(0, limit - used)) })}
         className={cn(
           "inline-flex h-8 items-center gap-1.5 rounded-full border bg-background px-2.5 text-xs font-medium text-foreground tabular-nums outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=open]:bg-accent",
           className

@@ -32,7 +32,7 @@ function CollapsibleTrigger({
     <Primitive.Trigger
       data-slot="collapsible-trigger"
       className={cn(
-        "group flex min-h-11 w-full items-center justify-between gap-3 rounded-lg px-3 text-left text-sm font-medium outline-none transition-colors duration-150 hover:bg-accent/70 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50 motion-reduce:transition-none",
+        "group flex min-h-11 w-full items-center justify-between gap-3 rounded-lg px-3 text-start text-sm font-medium outline-none transition-colors duration-150 hover:bg-accent/70 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50 motion-reduce:transition-none",
         className,
       )}
       {...props}

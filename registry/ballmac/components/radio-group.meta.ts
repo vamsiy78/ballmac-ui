@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["choice", "form", "radio", "radix"],
   files: [{ path: "components/radio-group.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     {
       name: "radio-group-demo",

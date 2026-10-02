@@ -1,0 +1,30 @@
+[
+  {
+    "file": "registry/ballmac/components/light-rays.tsx",
+    "reason": "Rays fan out from a point centred with left-1/2 and a negative margin; both are physical and symmetric, so the picture is the same in either direction."
+  },
+  {
+    "file": "registry/ballmac/components/sparkles-text.tsx",
+    "reason": "Sparkles are placed by random percentages from the left edge and centred with a negative margin; decoration with no reading direction."
+  },
+  {
+    "file": "registry/ballmac/components/android-frame.tsx",
+    "reason": "Hardware buttons and bezels sit on fixed physical edges of the device, so the frame keeps its shape; the screen content you place inside follows the page direction."
+  },
+  {
+    "file": "registry/ballmac/components/laptop-frame.tsx",
+    "reason": "Hardware buttons and bezels sit on fixed physical edges of the device, so the frame keeps its shape; the screen content you place inside follows the page direction."
+  },
+  {
+    "file": "registry/ballmac/components/phone-frame.tsx",
+    "reason": "Hardware buttons and bezels sit on fixed physical edges of the device, so the frame keeps its shape; the screen content you place inside follows the page direction."
+  },
+  {
+    "file": "registry/ballmac/components/tablet-frame.tsx",
+    "reason": "Hardware buttons and bezels sit on fixed physical edges of the device, so the frame keeps its shape; the screen content you place inside follows the page direction."
+  },
+  {
+    "file": "registry/ballmac/components/watch-frame.tsx",
+    "reason": "Hardware buttons and bezels sit on fixed physical edges of the device, so the frame keeps its shape; the screen content you place inside follows the page direction."
+  }
+]

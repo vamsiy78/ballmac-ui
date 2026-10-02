@@ -215,7 +215,7 @@ function FieldError({ className, errors, children, id, ...props }: FieldErrorPro
     (messages.length === 0 ? null : messages.length === 1 ? (
       messages[0]
     ) : (
-      <ul className="ml-4 flex list-disc flex-col gap-1">
+      <ul className="ms-4 flex list-disc flex-col gap-1">
         {messages.map((m) => (
           <li key={m}>{m}</li>
         ))}

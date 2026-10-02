@@ -14,6 +14,7 @@ import { SectionHeading } from "@/components/site/section-heading"
 import { Toc } from "@/components/site/toc"
 import { loadExample } from "@/lib/examples"
 import { addCommand, categoryLabels, componentNeighbors, getComponents, getItem, getRelated, isNew, itemHref, isPro, readSource } from "@/lib/registry"
+import rtlFixed from "@/lib/generated/rtl-exceptions.json"
 
 export function generateStaticParams() {
   return getComponents().map((i) => ({ slug: i.name }))
@@ -35,6 +36,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
   if (!item || !getComponents().includes(item)) notFound()
 
   const pro = isPro(item)
+  const fixedInRtl = (rtlFixed as { name: string; reason: string }[]).find((f) => f.name === item.name)
   const importPath = shownPath(item.files[0].target).replace(/^/, "@/").replace(/\.tsx?$/, "")
   const usage = `import { ${item.exports.join(", ")} } from "${importPath}"`
   const examples = await Promise.all(item.examples.map(async (e) => ({ ...e, Component: await loadExample(e.name), code: pro ? "" : readSource(e.source) })))
@@ -92,6 +94,11 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             </div>
           </div>
           <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
+          {fixedInRtl && (
+            <p className="text-muted-foreground max-w-2xl text-sm">
+              <Link href="/docs/rtl" className="text-foreground underline underline-offset-4">Right-to-left</Link>: {fixedInRtl.reason}
+            </p>
+          )}
         </header>
 
         {first?.Component && (

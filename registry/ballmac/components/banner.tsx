@@ -4,6 +4,7 @@
 import * as React from "react"
 import { CheckCircle2, Info, TriangleAlert, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type BannerProps = Omit<React.ComponentProps<"section">, "title"> & {
   /** Short headline that names the announcement. */
@@ -36,6 +37,7 @@ function Banner({
   onVisibleChange,
   ...props
 }: BannerProps) {
+  const msg = useMessages()
   const [internalVisible, setInternalVisible] = React.useState(defaultVisible)
   const shown = visible ?? internalVisible
   if (!shown) return null
@@ -66,7 +68,7 @@ function Banner({
       <div className="col-start-2 row-start-1 min-w-0 flex-1 leading-5">
         <strong className="font-semibold">{title}</strong>
         {description && (
-          <span className="text-muted-foreground block sm:ml-1.5 sm:inline">{description}</span>
+          <span className="text-muted-foreground block sm:ms-1.5 sm:inline">{description}</span>
         )}
       </div>
       {action && (
@@ -77,7 +79,7 @@ function Banner({
       {dismissible && (
         <button
           type="button"
-          aria-label={`Dismiss ${title}`}
+          aria-label={msg("banner.dismiss", "Dismiss {title}", { title })}
           onClick={dismiss}
           className="text-muted-foreground hover:bg-accent hover:text-foreground col-start-3 row-start-1 flex size-8 shrink-0 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
         >

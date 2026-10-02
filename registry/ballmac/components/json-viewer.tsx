@@ -4,6 +4,7 @@
 import * as React from "react"
 import { ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type JsonViewerProps = Omit<React.ComponentProps<"div">, "children"> & {
   /** JSON-compatible value to inspect. */
@@ -17,10 +18,12 @@ type JsonViewerProps = Omit<React.ComponentProps<"div">, "children"> & {
 function JsonViewer({
   className,
   value,
-  label = "JSON data",
+  label,
   defaultExpandedDepth = 1,
   ...props
 }: JsonViewerProps) {
+  const msg = useMessages()
+  label ??= msg("json-viewer.label", "JSON data")
   const [overrides, setOverrides] = React.useState<Record<string, boolean>>({})
   function renderNode(
     name: string | undefined,
@@ -46,7 +49,7 @@ function JsonViewer({
             <button
               type="button"
               data-slot="json-viewer-toggle"
-              aria-label={`${expanded ? "Collapse" : "Expand"} ${name ?? "root"}`}
+              aria-label={expanded ? msg("json-viewer.collapse", "Collapse {name}", { name: name ?? msg("json-viewer.root", "root") }) : msg("json-viewer.expand", "Expand {name}", { name: name ?? msg("json-viewer.root", "root") })}
               aria-expanded={expanded}
               onClick={() =>
                 setOverrides((current) => ({ ...current, [path]: !expanded }))
@@ -57,7 +60,7 @@ function JsonViewer({
                 aria-hidden="true"
                 className={cn(
                   "size-3.5 transition-transform duration-150 motion-reduce:transition-none",
-                  expanded && "rotate-90",
+                  expanded ? "rotate-90" : "rtl:rotate-180",
                 )}
               />
             </button>
@@ -105,6 +108,7 @@ function JsonViewer({
   return (
     <div
       data-slot="json-viewer"
+      dir="ltr"
       role="region"
       aria-label={label}
       tabIndex={0}

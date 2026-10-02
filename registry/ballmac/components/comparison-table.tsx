@@ -1,7 +1,10 @@
 // Ballmac UI: Comparison Table. https://ui.ballmac.com/components/comparison-table
+"use client"
+
 import * as React from "react"
 import { Check, Minus, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ComparisonColumn = {
   /** Stable key. */ key: string
@@ -29,6 +32,7 @@ function ComparisonTable({
   rows,
   ...props
 }: ComparisonTableProps) {
+  const msg = useMessages()
   return (
     <div
       data-slot="comparison-table"
@@ -47,9 +51,9 @@ function ComparisonTable({
           <tr className="bg-muted/50">
             <th
               scope="col"
-              className="text-muted-foreground min-w-28 p-3 text-left font-medium sm:p-4"
+              className="text-muted-foreground min-w-28 p-3 text-start font-medium sm:p-4"
             >
-              Feature
+              {msg("comparison-table.feature", "Feature")}
             </th>
             {columns.map((column) => (
               <th
@@ -73,7 +77,7 @@ function ComparisonTable({
         <tbody>
           {rows.map((row) => (
             <tr key={row.label} className="border-t border-border">
-              <th scope="row" className="p-3 text-left font-medium sm:p-4">
+              <th scope="row" className="p-3 text-start font-medium sm:p-4">
                 {row.label}
                 {row.description && (
                   <span className="text-muted-foreground mt-1 block text-xs font-normal">
@@ -92,7 +96,7 @@ function ComparisonTable({
                     )}
                   >
                     {typeof value === "boolean" ? (
-                      <span role="img" aria-label={value ? "Available" : "Unavailable"} className="inline-flex items-center justify-center gap-1">
+                      <span role="img" aria-label={value ? msg("comparison-table.available", "Available") : msg("comparison-table.unavailable", "Unavailable")} className="inline-flex items-center justify-center gap-1">
                         {value ? (
                           <Check
                             aria-hidden="true"
@@ -108,7 +112,7 @@ function ComparisonTable({
                     ) : (
                       (value ?? (
                         <Minus
-                          aria-label="Not specified"
+                          aria-label={msg("comparison-table.notSpecified", "Not specified")}
                           className="text-muted-foreground mx-auto size-4"
                         />
                       ))

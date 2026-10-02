@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["command palette", "search", "spotlight", "cmdk", "macos", "⌘k", "launcher", "keyboard"],
   files: [{ path: "components/spotlight-search.tsx" }],
   dependencies: ["cmdk@^1", "radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "spotlight-search-demo", title: "Spotlight", file: "spotlight-search-demo.tsx" },
     { name: "spotlight-search-dialog", title: "⌘K dialog", file: "spotlight-search-dialog.tsx" },

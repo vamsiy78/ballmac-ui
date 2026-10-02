@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "chat", "input", "textarea", "composer", "attachments", "llm"],
   files: [{ path: "components/prompt-input.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["button", "shadcn:utils"],
+  registryDependencies: ["button", "shadcn:utils", "i18n"],
   examples: [
     { name: "prompt-input-demo", title: "Default", file: "prompt-input-demo.tsx" },
     { name: "prompt-input-attachments", title: "With attachments", file: "prompt-input-attachments.tsx" },

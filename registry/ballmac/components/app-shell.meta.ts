@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["layout", "dashboard", "sidebar", "landmarks"],
   files: [{ path: "components/app-shell.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "sheet"],
+  registryDependencies: ["shadcn:utils", "sheet", "i18n"],
   examples: [
     { name: "app-shell-demo", title: "Dashboard frame", file: "app-shell-demo.tsx" },
     { name: "app-shell-states", title: "Compact shell", file: "app-shell-states.tsx" },

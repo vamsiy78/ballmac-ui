@@ -44,7 +44,7 @@ function MuseProjects({ hrefs, ...props }: MuseProjectsProps) {
               const on = p.id === sel.id
               return (
                 <li key={p.id}>
-                  <button type="button" aria-pressed={on} onClick={() => setSelectedId(p.id)} className={cn("focus-visible:ring-ring/50 flex w-full items-center gap-3 rounded-2xl border p-3 text-left outline-none transition-colors focus-visible:ring-[3px]", on ? "bg-card border-foreground/25 shadow-sm" : "hover:bg-accent/60 border-transparent")}>
+                  <button type="button" aria-pressed={on} onClick={() => setSelectedId(p.id)} className={cn("focus-visible:ring-ring/50 flex w-full items-center gap-3 rounded-2xl border p-3 text-start outline-none transition-colors focus-visible:ring-[3px]", on ? "bg-card border-foreground/25 shadow-sm" : "hover:bg-accent/60 border-transparent")}>
                     <span className={cn("flex size-11 shrink-0 items-center justify-center rounded-xl text-base font-semibold", tones[(p.tone - 1) % tones.length])} aria-hidden="true">{p.name[0]}</span>
                     <span className="min-w-0"><span className="block truncate text-sm font-medium">{p.name}</span><span className="text-muted-foreground block truncate text-xs">{p.chats} chats · {p.files.length} {p.files.length === 1 ? "file" : "files"}</span></span>
                   </button>

@@ -48,11 +48,11 @@ function Hero2({
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-muted-foreground">{description}</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <a className={buttonVariants({ size: "lg", shape: "pill" })} href={primaryAction.href}>
-            {primaryAction.label} <ArrowRight />
+            {primaryAction.label} <ArrowRight  className="rtl:rotate-180"/>
           </a>
           <a className={buttonVariants({ variant: "outline", size: "lg", shape: "pill" })} href={secondaryAction.href}>{secondaryAction.label}</a>
         </div>
-        <InstallTabs command={command} className="mx-auto mt-10 max-w-lg text-left" />
+        <InstallTabs command={command} className="mx-auto mt-10 max-w-lg text-start" />
       </div>
       <div className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
         <div className="relative rounded-xl">

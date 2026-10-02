@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["rating", "stars", "feedback"],
   files: [{ path: "components/rating.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "rating-demo", title: "Overview", file: "rating-demo.tsx" },
     {

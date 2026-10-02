@@ -36,8 +36,8 @@ function DocsSearch({ hrefs, initialQuery = "message", ...props }: DocsSearchPro
         <form role="search" onSubmit={(e) => e.preventDefault()} className="mt-8">
           <label htmlFor="ds-q" className="sr-only">Search the docs</label>
           <div className="bg-card focus-within:ring-ring/50 relative rounded-xl border shadow-sm focus-within:ring-[3px]">
-            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2" aria-hidden="true" />
-            <input id="ds-q" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search guides, endpoints and releases" className="h-14 w-full rounded-xl bg-transparent pr-4 pl-12 text-base outline-none" />
+            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-4 size-5 -translate-y-1/2" aria-hidden="true" />
+            <input id="ds-q" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search guides, endpoints and releases" className="h-14 w-full rounded-xl bg-transparent pe-4 ps-12 text-base outline-none" />
           </div>
         </form>
         <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Filter by type">

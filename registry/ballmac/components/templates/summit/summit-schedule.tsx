@@ -34,7 +34,7 @@ function SummitSchedule({ hrefs, defaultSaved = [], ...props }: SummitSchedulePr
 
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-y py-4">
           <div role="group" aria-label="Day" className="flex gap-2">
-            {days.map((d) => <button key={d.n} type="button" aria-pressed={day === d.n} onClick={() => setDay(d.n)} className="hover:bg-accent focus-visible:ring-ring/50 aria-pressed:bg-primary aria-pressed:text-primary-foreground rounded-2xl border px-5 py-2 text-left outline-none focus-visible:ring-[3px]"><span className="block text-sm font-bold">{d.label}</span><span className="block text-xs">{d.date}</span></button>)}
+            {days.map((d) => <button key={d.n} type="button" aria-pressed={day === d.n} onClick={() => setDay(d.n)} className="hover:bg-accent focus-visible:ring-ring/50 aria-pressed:bg-primary aria-pressed:text-primary-foreground rounded-2xl border px-5 py-2 text-start outline-none focus-visible:ring-[3px]"><span className="block text-sm font-bold">{d.label}</span><span className="block text-xs">{d.date}</span></button>)}
           </div>
           <div role="group" aria-label="Tracks" className="flex flex-wrap gap-2">
             {tracks.map((t) => <button key={t} type="button" aria-pressed={active.includes(t)} onClick={() => toggleTrack(t)} className="hover:bg-accent focus-visible:ring-ring/50 aria-pressed:bg-secondary inline-flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-semibold outline-none focus-visible:ring-[3px]"><span className={cn("size-2.5 rounded-full", trackDot[t])} aria-hidden="true" />{t}</button>)}

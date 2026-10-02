@@ -34,8 +34,8 @@ export default function TiltCardDemo() {
       >
         {/* Surface: aurora and fine texture, clipped to the card. */}
         <div aria-hidden="true" className="absolute inset-0 overflow-hidden rounded-[inherit]">
-          <div className="absolute -top-1/2 -left-1/4 size-[120%] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--chart-1)_55%,transparent),transparent)] opacity-70 blur-2xl" />
-          <div className="absolute -right-1/3 -bottom-2/3 size-[110%] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--chart-4)_55%,transparent),transparent)] opacity-60 blur-2xl" />
+          <div className="absolute -top-1/2 -start-1/4 size-[120%] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--chart-1)_55%,transparent),transparent)] opacity-70 blur-2xl" />
+          <div className="absolute -end-1/3 -bottom-2/3 size-[110%] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--chart-4)_55%,transparent),transparent)] opacity-60 blur-2xl" />
           <div className="absolute inset-0 bg-[repeating-linear-gradient(115deg,rgb(255_255_255/0.035)_0_1px,transparent_1px_6px)]" />
         </div>
 
@@ -56,7 +56,7 @@ export default function TiltCardDemo() {
             {/* Holographic foil: its gradient slides with the tilt via --tilt-x / --tilt-y. */}
             <span
               aria-hidden="true"
-              className="ml-auto h-8 w-12 rounded-md bg-[linear-gradient(115deg,var(--chart-1),var(--chart-2),var(--chart-3),var(--chart-5),var(--chart-4),var(--chart-1))] bg-[length:300%_300%] opacity-80 shadow-[inset_0_0_0_1px_rgb(255_255_255/0.3)] [background-position:var(--tilt-x,50%)_var(--tilt-y,50%)]"
+              className="ms-auto h-8 w-12 rounded-md bg-[linear-gradient(115deg,var(--chart-1),var(--chart-2),var(--chart-3),var(--chart-5),var(--chart-4),var(--chart-1))] bg-[length:300%_300%] opacity-80 shadow-[inset_0_0_0_1px_rgb(255_255_255/0.3)] [background-position:var(--tilt-x,50%)_var(--tilt-y,50%)]"
             />
           </TiltCardLayer>
 
@@ -65,7 +65,7 @@ export default function TiltCardDemo() {
               <span className="block text-[9px] font-medium tracking-[0.2em] opacity-60">MEMBER</span>
               <span className="block text-[15px] font-medium tracking-wide">Jordan Avery</span>
             </span>
-            <span className="text-right">
+            <span className="text-end">
               <span className="block font-mono text-[13px] tracking-widest opacity-80">•••• 2048</span>
               <span className="block text-[10px] opacity-60">Since 2024</span>
             </span>

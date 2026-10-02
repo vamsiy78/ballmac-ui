@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["code", "snippet", "syntax", "copy", "shiki", "tabs", "developer", "docs"],
   files: [{ path: "components/code-block.tsx" }],
   dependencies: ["lucide-react", "radix-ui"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "code-block-demo", title: "Default", file: "code-block-demo.tsx" },
     { name: "code-block-tabs", title: "File tabs", file: "code-block-tabs.tsx" },

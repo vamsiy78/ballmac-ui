@@ -147,7 +147,7 @@ function Onboarding1({
     <section data-slot="onboarding-1" className={cn("mx-auto flex min-h-[40rem] max-w-5xl items-center px-4 py-12 sm:px-6", className)} {...props}>
       <div className="bg-card grid w-full overflow-hidden rounded-3xl border shadow-[0_30px_80px_-50px_rgb(0_0_0/0.4)] md:grid-cols-[15rem_1fr]">
         {/* Progress: a rail on tablets and up, a compact bar on phones. */}
-        <div className="bg-muted/40 border-b p-5 md:border-r md:border-b-0 md:p-8">
+        <div className="bg-muted/40 border-b p-5 md:border-e md:border-b-0 md:p-8">
           <p className="text-sm font-semibold tracking-tight">{product}</p>
           <p className="text-muted-foreground mt-4 text-xs md:hidden">{done ? "Complete" : `Step ${step + 1} of ${stepNames.length}`}: {stepNames[Math.min(step, 3)]}</p>
           <div className="bg-muted mt-2 h-1.5 overflow-hidden rounded-full md:hidden" aria-hidden="true">
@@ -192,8 +192,8 @@ function Onboarding1({
                       <Field invalid={!!slugError}>
                         <FieldLabel required>Web address</FieldLabel>
                         <div className="flex">
-                          <span className="bg-muted text-muted-foreground flex items-center rounded-l-md border border-r-0 px-3 text-sm">{domain}/</span>
-                          <FieldInput className="rounded-l-none" autoCapitalize="none" spellCheck={false} placeholder="northwind" value={slug} onChange={(e) => { setSlug(slugify(e.target.value)); setSlugEdited(true) }} />
+                          <span className="bg-muted text-muted-foreground flex items-center rounded-s-md border border-e-0 px-3 text-sm">{domain}/</span>
+                          <FieldInput className="rounded-s-none" autoCapitalize="none" spellCheck={false} placeholder="northwind" value={slug} onChange={(e) => { setSlug(slugify(e.target.value)); setSlugEdited(true) }} />
                         </div>
                         <FieldError errors={[slugError]} />
                       </Field>
@@ -269,7 +269,7 @@ function Onboarding1({
                     {invites.length > 0 && (
                       <ul aria-label="People to invite" className="mt-5 flex flex-wrap gap-2">
                         {invites.map((e) => (
-                          <li key={e} className="bg-secondary flex items-center gap-1 rounded-full py-1 pr-1 pl-3 text-sm">
+                          <li key={e} className="bg-secondary flex items-center gap-1 rounded-full py-1 pe-1 ps-3 text-sm">
                             {e}
                             <button type="button" aria-label={`Remove ${e}`} onClick={() => setInvites((i) => i.filter((x) => x !== e))} className="hover:bg-background focus-visible:ring-ring/50 flex size-6 items-center justify-center rounded-full outline-none focus-visible:ring-[3px]">
                               <X className="size-3.5" aria-hidden="true" />
@@ -299,7 +299,7 @@ function Onboarding1({
                       </div>
                       <div className="flex items-center justify-between gap-4 p-4">
                         <dt className="text-muted-foreground text-sm">Goals</dt>
-                        <dd className="text-right text-sm font-medium">{picked.map((id) => goals.find((g) => g.id === id)?.title).join(", ")}</dd>
+                        <dd className="text-end text-sm font-medium">{picked.map((id) => goals.find((g) => g.id === id)?.title).join(", ")}</dd>
                       </div>
                       <div className="flex items-center justify-between gap-4 p-4">
                         <dt className="text-muted-foreground text-sm">Invitations</dt>
@@ -318,7 +318,7 @@ function Onboarding1({
                       Your workspace is set up{invites.length ? ` and ${invites.length} ${invites.length === 1 ? "invitation is" : "invitations are"} on the way` : ""}. Let’s get to work.
                     </p>
                     <a href={continueHref} className={buttonVariants({ size: "lg", shape: "pill", className: "mt-8" })}>
-                      Open your workspace <ArrowRight />
+                      Open your workspace <ArrowRight  className="rtl:rotate-180"/>
                     </a>
                   </div>
                 )}
@@ -328,11 +328,11 @@ function Onboarding1({
 
           {!done && (
             <div className="mt-10 flex items-center justify-between gap-3">
-              {step > 0 ? <Button variant="ghost" onClick={() => go(step - 1)}><ArrowLeft /> Back</Button> : <span />}
+              {step > 0 ? <Button variant="ghost" onClick={() => go(step - 1)}><ArrowLeft  className="rtl:rotate-180"/> Back</Button> : <span />}
               <div className="flex items-center gap-2">
                 {step === 2 && <Button variant="ghost" onClick={() => go(3)}>Skip for now</Button>}
                 <Button shape="pill" size="lg" loading={busy} onClick={next}>
-                  {step === 3 ? "Create workspace" : "Continue"} {step < 3 && <ArrowRight />}
+                  {step === 3 ? "Create workspace" : "Continue"} {step < 3 && <ArrowRight  className="rtl:rotate-180"/>}
                 </Button>
               </div>
             </div>

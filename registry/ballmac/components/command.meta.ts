@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["command palette", "search", "cmdk", "keyboard"],
   files: [{ path: "components/command.tsx" }],
   dependencies: ["cmdk@^1", "radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "command-demo", title: "Inline menu", file: "command-demo.tsx" },
     { name: "command-dialog", title: "Cmd+K dialog", file: "command-dialog.tsx" },

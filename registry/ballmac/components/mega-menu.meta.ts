@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["navigation", "dropdown", "header", "radix"],
   files: [{ path: "components/mega-menu.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "navigation-menu"],
+  registryDependencies: ["shadcn:utils", "navigation-menu", "i18n"],
   examples: [
     { name: "mega-menu-demo", title: "Product menu", file: "mega-menu-demo.tsx" },
     { name: "mega-menu-states", title: "Mobile list", file: "mega-menu-states.tsx" },

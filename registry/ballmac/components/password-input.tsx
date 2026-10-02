@@ -4,6 +4,7 @@
 import * as React from "react"
 import { Eye, EyeOff } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type PasswordInputProps = Omit<
   React.ComponentProps<"input">,
@@ -25,11 +26,13 @@ function PasswordInput({
   defaultValue = "",
   onValueChange,
   showStrength = true,
-  label = "Password",
+  label,
   className,
   disabled,
   ...props
 }: PasswordInputProps) {
+  const msg = useMessages()
+  label ??= msg("password-input.label", "Password")
   const [internal, setInternal] = React.useState(defaultValue)
   const [visible, setVisible] = React.useState(false)
   const current = value ?? internal
@@ -38,7 +41,7 @@ function PasswordInput({
     Number(/[a-z]/.test(current) && /[A-Z]/.test(current)) +
     Number(/\d/.test(current)) +
     Number(/[^a-zA-Z\d]/.test(current))
-  const strength = ["Too short", "Needs work", "Fair", "Good", "Strong"][score]
+  const strength = [msg("password-input.tooShort", "Too short"), msg("password-input.needsWork", "Needs work"), msg("password-input.fair", "Fair"), msg("password-input.good", "Good"), msg("password-input.strong", "Strong")][score]
   function commit(next: string) {
     if (value === undefined) setInternal(next)
     onValueChange?.(next)
@@ -59,11 +62,11 @@ function PasswordInput({
         />
         <button
           type="button"
-          aria-label={visible ? "Hide password" : "Show password"}
+          aria-label={visible ? msg("password-input.hidePassword", "Hide password") : msg("password-input.showPassword", "Show password")}
           aria-pressed={visible}
           disabled={disabled}
           onClick={() => setVisible(!visible)}
-          className="mr-1 flex size-8 shrink-0 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
+          className="me-1 flex size-8 shrink-0 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
         >
           {visible ? (
             <EyeOff aria-hidden="true" className="size-4" />
@@ -87,8 +90,7 @@ function PasswordInput({
             ))}
           </div>
           <p className="mt-1.5 text-xs text-muted-foreground">
-            Strength: {strength}. Use 8+ characters, mixed case, a number, and a
-            symbol.
+            {msg("password-input.strengthHint", "Strength: {strength}. Use 8+ characters, mixed case, a number, and a symbol.", { strength })}
           </p>
         </div>
       )}

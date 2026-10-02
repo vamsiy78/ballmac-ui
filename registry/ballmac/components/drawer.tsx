@@ -39,8 +39,8 @@ function DrawerContent({ className, children, handle, ...props }: DrawerContentP
           "group/drawer-content fixed z-50 flex h-auto flex-col bg-card text-card-foreground shadow-[0_24px_48px_-12px_rgb(0_0_0/0.3)] outline-none",
           "data-[vaul-drawer-direction=bottom]:inset-x-0 data-[vaul-drawer-direction=bottom]:bottom-0 data-[vaul-drawer-direction=bottom]:mt-24 data-[vaul-drawer-direction=bottom]:max-h-[90dvh] data-[vaul-drawer-direction=bottom]:rounded-t-2xl data-[vaul-drawer-direction=bottom]:border-t",
           "data-[vaul-drawer-direction=top]:inset-x-0 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[90dvh] data-[vaul-drawer-direction=top]:rounded-b-2xl data-[vaul-drawer-direction=top]:border-b",
-          "data-[vaul-drawer-direction=right]:inset-y-0 data-[vaul-drawer-direction=right]:right-0 data-[vaul-drawer-direction=right]:w-[min(24rem,calc(100vw-2.5rem))] data-[vaul-drawer-direction=right]:border-l",
-          "data-[vaul-drawer-direction=left]:inset-y-0 data-[vaul-drawer-direction=left]:left-0 data-[vaul-drawer-direction=left]:w-[min(24rem,calc(100vw-2.5rem))] data-[vaul-drawer-direction=left]:border-r",
+          "data-[vaul-drawer-direction=right]:inset-y-0 data-[vaul-drawer-direction=right]:end-0 data-[vaul-drawer-direction=right]:w-[min(24rem,calc(100vw-2.5rem))] data-[vaul-drawer-direction=right]:border-s",
+          "data-[vaul-drawer-direction=left]:inset-y-0 data-[vaul-drawer-direction=left]:start-0 data-[vaul-drawer-direction=left]:w-[min(24rem,calc(100vw-2.5rem))] data-[vaul-drawer-direction=left]:border-e",
           "motion-reduce:!transition-none",
           className,
         )}
@@ -64,7 +64,7 @@ function DrawerHeader({ className, ...props }: DrawerHeaderProps) {
   return (
     <div
       data-slot="drawer-header"
-      className={cn("grid gap-1.5 px-5 pt-4 text-center sm:text-left group-data-[vaul-drawer-direction=bottom]/drawer-content:text-center", className)}
+      className={cn("grid gap-1.5 px-5 pt-4 text-center sm:text-start group-data-[vaul-drawer-direction=bottom]/drawer-content:text-center", className)}
       {...props}
     />
   );

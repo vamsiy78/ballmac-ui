@@ -100,7 +100,7 @@ function Error1({
           <Home /> Take me home
         </a>
         <Button variant="outline" size="lg" shape="pill" onClick={() => window.history.back()}>
-          <ArrowLeft /> Go back
+          <ArrowLeft  className="rtl:rotate-180"/> Go back
         </Button>
       </div>
       {reference && <p className="text-muted-foreground mt-6 font-mono text-xs">Reference: {reference}</p>}
@@ -119,16 +119,16 @@ function Error1({
       )}
 
       {links.length > 0 && (
-        <ul className="mt-8 grid w-full gap-3 text-left sm:grid-cols-2">
+        <ul className="mt-8 grid w-full gap-3 text-start sm:grid-cols-2">
           {links.map((l) => (
             <li key={l.label}>
               <a href={l.href} className="group/link hover:bg-accent focus-visible:ring-ring/50 flex h-full items-center gap-4 rounded-2xl border p-4 outline-none transition-colors focus-visible:ring-[3px]">
-                <span aria-hidden="true" className="bg-muted flex size-10 shrink-0 items-center justify-center rounded-xl [&_svg]:size-5">{l.icon ?? <ArrowUpRight />}</span>
+                <span aria-hidden="true" className="bg-muted flex size-10 shrink-0 items-center justify-center rounded-xl [&_svg]:size-5">{l.icon ?? <ArrowUpRight  className="rtl:-scale-x-100"/>}</span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm font-medium">{l.label}</span>
                   {l.description && <span className="text-muted-foreground block text-sm">{l.description}</span>}
                 </span>
-                <ArrowUpRight className="text-muted-foreground size-4 shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 motion-reduce:transition-none" aria-hidden="true" />
+                <ArrowUpRight className="text-muted-foreground size-4 shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 motion-reduce:transition-none rtl:-scale-x-100 rtl:group-hover/link:-translate-x-0.5" aria-hidden="true" />
               </a>
             </li>
           ))}

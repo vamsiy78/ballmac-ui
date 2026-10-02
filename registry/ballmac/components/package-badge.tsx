@@ -6,6 +6,7 @@ import { Boxes, ExternalLink, Scale, Terminal } from "lucide-react"
 
 import { CopyButton } from "@/components/ballmac/copy-button"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type PackageManager = "npm" | "pnpm" | "yarn" | "bun"
 
@@ -100,6 +101,7 @@ function PackageBadge({
   className,
   ...props
 }: PackageBadgeProps) {
+  const msg = useMessages()
   const command = `${INSTALL[manager]} ${name}`
   const title = href ? (
     <a
@@ -123,14 +125,14 @@ function PackageBadge({
         className={cn("inline-flex h-7 max-w-full items-center overflow-hidden rounded-full border bg-card text-xs shadow-xs", className)}
         {...props}
       >
-        <span className="flex h-full items-center gap-1.5 truncate bg-muted/60 pr-2 pl-2.5 font-mono font-medium text-foreground">
+        <span className="flex h-full items-center gap-1.5 truncate bg-muted/60 pe-2 ps-2.5 font-mono font-medium text-foreground">
           <Boxes aria-hidden="true" className="size-3.5 shrink-0 text-muted-foreground" />
           <span className="truncate">{title}</span>
         </span>
-        <span className="flex h-full items-center border-l px-2.5 font-mono text-foreground tabular-nums">v{version}</span>
+        <span className="flex h-full items-center border-s px-2.5 font-mono text-foreground tabular-nums">v{version}</span>
         {downloads !== undefined && (
-          <span className="hidden h-full items-center border-l px-2.5 text-muted-foreground tabular-nums sm:flex">
-            {formatCount(downloads)}/wk
+          <span className="hidden h-full items-center border-s px-2.5 text-muted-foreground tabular-nums sm:flex">
+            {msg("package-badge.perWeek", "{count}/wk", { count: formatCount(downloads) })}
           </span>
         )}
       </div>
@@ -185,7 +187,7 @@ function PackageBadge({
       {(types || !hideInstall) && (
         <div className="flex flex-wrap items-center gap-2 p-3">
           {!hideInstall && (
-            <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border bg-muted/40 py-1 pr-1 pl-3">
+            <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border bg-muted/40 py-1 pe-1 ps-3">
               <Terminal aria-hidden="true" className="size-3.5 shrink-0 text-muted-foreground" />
               <code className="min-w-0 flex-1 truncate font-mono text-xs text-foreground">{command}</code>
               <CopyButton size="sm" value={command} ariaLabel={`Copy install command: ${command}`} />
@@ -194,9 +196,9 @@ function PackageBadge({
           {types && (
             <span className="inline-flex h-7 items-center gap-1 rounded-full border px-2.5 text-xs font-medium text-foreground">
               <span aria-hidden="true" className="flex size-4 items-center justify-center rounded-[4px] bg-foreground font-mono text-[9px] font-bold text-background">
-                TS
+                {"TS"}
               </span>
-              Types included
+              {msg("package-badge.typesIncluded", "Types included")}
             </span>
           )}
         </div>

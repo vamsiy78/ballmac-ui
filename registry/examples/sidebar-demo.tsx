@@ -34,11 +34,11 @@ export default function SidebarDemo() {
             <SidebarMenuItem>
               <SidebarMenuButton size="lg" tooltip="Acme Inc." aria-label="Acme Inc. workspace">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-xs font-semibold text-primary-foreground">A</span>
-                <span className="grid flex-1 text-left text-sm leading-tight">
+                <span className="grid flex-1 text-start text-sm leading-tight">
                   <span className="truncate font-semibold">Acme Inc.</span>
                   <span className="truncate text-xs text-muted-foreground">Pro plan</span>
                 </span>
-                <ChevronsUpDown aria-hidden="true" className="ml-auto" />
+                <ChevronsUpDown aria-hidden="true" className="ms-auto" />
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

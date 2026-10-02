@@ -27,12 +27,12 @@ function StudioArt({ variant, className }: { variant: number; className?: string
   const v = ((variant % 6) + 6) % 6
   return (
     <div aria-hidden="true" className={cn("relative isolate aspect-[4/3] w-full overflow-hidden", className)}>
-      {v === 0 && (<><div className="bg-chart-1 absolute inset-0" /><div className="bg-foreground absolute -bottom-[20%] -left-[10%] w-[80%] aspect-square rounded-full" /><div className="bg-chart-3 absolute top-[12%] right-[12%] w-[26%] aspect-square rounded-full" /></>)}
-      {v === 1 && (<><div className="bg-chart-2 absolute inset-0" /><div className="bg-chart-3 absolute inset-y-0 left-[18%] w-[22%]" /><div className="bg-chart-4 absolute inset-y-0 left-[48%] w-[12%]" /><div className="bg-primary-foreground absolute top-[18%] right-[10%] h-[64%] w-[16%] rounded-full" /></>)}
-      {v === 2 && (<><div className="bg-foreground absolute inset-0" />{[0, 1, 2, 3, 4].map((i) => <div key={i} className="border-primary-foreground absolute inset-x-[10%] rounded-full border-[3px]" style={{ top: `${10 + i * 12}%`, height: `${60 - i * 8}%`, opacity: 1 - i * 0.16 }} />)}<div className="bg-chart-1 absolute right-[14%] bottom-[14%] w-[20%] aspect-square rounded-full" /></>)}
+      {v === 0 && (<><div className="bg-chart-1 absolute inset-0" /><div className="bg-foreground absolute -bottom-[20%] -start-[10%] w-[80%] aspect-square rounded-full" /><div className="bg-chart-3 absolute top-[12%] end-[12%] w-[26%] aspect-square rounded-full" /></>)}
+      {v === 1 && (<><div className="bg-chart-2 absolute inset-0" /><div className="bg-chart-3 absolute inset-y-0 start-[18%] w-[22%]" /><div className="bg-chart-4 absolute inset-y-0 start-[48%] w-[12%]" /><div className="bg-primary-foreground absolute top-[18%] end-[10%] h-[64%] w-[16%] rounded-full" /></>)}
+      {v === 2 && (<><div className="bg-foreground absolute inset-0" />{[0, 1, 2, 3, 4].map((i) => <div key={i} className="border-primary-foreground absolute inset-x-[10%] rounded-full border-[3px]" style={{ top: `${10 + i * 12}%`, height: `${60 - i * 8}%`, opacity: 1 - i * 0.16 }} />)}<div className="bg-chart-1 absolute end-[14%] bottom-[14%] w-[20%] aspect-square rounded-full" /></>)}
       {v === 3 && (<><div className="bg-chart-4 absolute inset-0" /><div className="absolute inset-[8%] grid grid-cols-4 grid-rows-3 gap-[2%]">{Array.from({ length: 12 }, (_, i) => <div key={i} className={cn("rounded-full", i % 5 === 0 ? "bg-chart-3" : i % 3 === 0 ? "bg-foreground" : "bg-primary-foreground")} />)}</div></>)}
-      {v === 4 && (<><div className="bg-chart-3 absolute inset-0" /><div className="bg-foreground absolute top-[16%] left-[22%] h-[68%] w-[56%] rounded-t-[999px]" /><div className="bg-chart-1 absolute bottom-[16%] left-[34%] w-[32%] aspect-square rounded-full" /></>)}
-      {v === 5 && (<><div className="bg-chart-5 absolute inset-0" /><div className="bg-foreground absolute inset-x-0 bottom-0 h-[38%]" /><div className="bg-chart-2 absolute bottom-[38%] left-[12%] h-[34%] w-[28%]" /><div className="bg-chart-1 absolute right-[14%] bottom-[38%] h-[52%] w-[22%] rounded-t-full" /></>)}
+      {v === 4 && (<><div className="bg-chart-3 absolute inset-0" /><div className="bg-foreground absolute top-[16%] start-[22%] h-[68%] w-[56%] rounded-t-[999px]" /><div className="bg-chart-1 absolute bottom-[16%] start-[34%] w-[32%] aspect-square rounded-full" /></>)}
+      {v === 5 && (<><div className="bg-chart-5 absolute inset-0" /><div className="bg-foreground absolute inset-x-0 bottom-0 h-[38%]" /><div className="bg-chart-2 absolute bottom-[38%] start-[12%] h-[34%] w-[28%]" /><div className="bg-chart-1 absolute end-[14%] bottom-[38%] h-[52%] w-[22%] rounded-t-full" /></>)}
     </div>
   )
 }
@@ -90,7 +90,7 @@ function StudioShell({ page, hrefs: overrides, className, style, children, ...pr
         <div className="mx-auto max-w-[100rem] px-4 pt-16 pb-8 sm:px-8">
           <div className="flex flex-wrap items-end justify-between gap-8">
             <p className="max-w-md text-xl text-pretty opacity-80">New project, new idea, or just a question? We reply to every email within two working days.</p>
-            <a href={hrefs.contact} className="bg-chart-1 text-[var(--studio-on-accent)] focus-visible:ring-ring inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none">Start a project <ArrowUpRight className="size-5" aria-hidden="true" /></a>
+            <a href={hrefs.contact} className="bg-chart-1 text-[var(--studio-on-accent)] focus-visible:ring-ring inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none">Start a project <ArrowUpRight className="size-5 rtl:-scale-x-100" aria-hidden="true" /></a>
           </div>
           <p aria-hidden="true" className={cn("mt-14 text-[clamp(3.4rem,17.5vw,19rem)] whitespace-nowrap", display)}>Hollis&amp;Vane</p>
           <div className="mt-8 flex flex-wrap justify-between gap-4 border-t border-current/25 pt-6 text-sm opacity-70">

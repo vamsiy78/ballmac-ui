@@ -94,7 +94,7 @@ function Invite1({
             <span aria-hidden="true" className="bg-chart-2/15 flex size-14 items-center justify-center rounded-full"><Check className="size-7" /></span>
             <h1 ref={headingRef} tabIndex={-1} className={cn(heading, "mt-6")}>Welcome to {workspace.name}</h1>
             <p role="status" className="text-muted-foreground mt-2 text-pretty">You joined with the {role} role. {inviter.name} and the team are glad you’re here.</p>
-            <a href={continueHref} className={buttonVariants({ size: "lg", shape: "pill", className: "mt-8 w-full" })}>Open workspace <ArrowRight /></a>
+            <a href={continueHref} className={buttonVariants({ size: "lg", shape: "pill", className: "mt-8 w-full" })}>Open workspace <ArrowRight  className="rtl:rotate-180"/></a>
           </div>
         ) : view === "declined" ? (
           <div className="relative flex flex-col items-center py-4">
@@ -129,7 +129,7 @@ function Invite1({
             </div>
 
             {access.length > 0 && (
-              <ul className="bg-muted/40 mt-7 space-y-2.5 rounded-2xl border p-4 text-left text-sm">
+              <ul className="bg-muted/40 mt-7 space-y-2.5 rounded-2xl border p-4 text-start text-sm">
                 {access.map((a) => (
                   <li key={a} className="flex items-start gap-2.5">
                     <Check className="text-chart-2 mt-0.5 size-4 shrink-0" aria-hidden="true" />

@@ -1,6 +1,9 @@
 // Ballmac UI: Diff Viewer. https://ui.ballmac.com/components/diff-viewer
+"use client"
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type DiffViewerProps = React.ComponentProps<"div"> & {
   /** Original text. */
@@ -62,14 +65,16 @@ function DiffViewer({
   lineNumbers = true,
   ...props
 }: DiffViewerProps) {
+  const msg = useMessages()
   const lines = compare(before, after)
   const added = lines.filter((line) => line.kind === "added").length
   const removed = lines.filter((line) => line.kind === "removed").length
   return (
     <div
       data-slot="diff-viewer"
+      dir="ltr"
       role="region"
-      aria-label={`${label} diff`}
+      aria-label={msg("diff-viewer.diff", "{label} diff", { label })}
       tabIndex={0}
       className={cn(
         "bg-card min-w-0 max-w-full overflow-auto rounded-xl border border-border outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
@@ -83,7 +88,7 @@ function DiffViewer({
       >
         <span className="truncate font-mono font-medium">{label}</span>
         <span className="text-muted-foreground shrink-0 tabular-nums">
-          {added} added · {removed} removed
+          {msg("diff-viewer.summary", "{added} added · {removed} removed", { added, removed })}
         </span>
       </div>
       <div className="min-w-max py-2 font-mono text-xs leading-6">
@@ -93,14 +98,14 @@ function DiffViewer({
             data-slot="diff-viewer-line"
             data-kind={line.kind}
             className={cn(
-              "relative flex min-h-6 pr-4",
+              "relative flex min-h-6 pe-4",
               line.kind === "added" && "bg-primary/10",
               line.kind === "removed" && "bg-destructive/10",
             )}
           >
             <span
               aria-hidden="true"
-              className="text-muted-foreground w-10 shrink-0 select-none pr-2 text-right tabular-nums"
+              className="text-muted-foreground w-10 shrink-0 select-none pe-2 text-end tabular-nums"
             >
               {lineNumbers ? (line.after ?? line.before) : ""}
             </span>

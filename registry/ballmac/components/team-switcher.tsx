@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ballmac/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type Team = {
   /** Unique id; used for `value`. */
@@ -68,13 +69,15 @@ function TeamSwitcher({
   defaultValue,
   onValueChange,
   onAddTeam,
-  addLabel = "Add team",
+  addLabel,
   compact = false,
   align = "start",
   side = "bottom",
   className,
   ...props
 }: TeamSwitcherProps) {
+  const msg = useMessages()
+  addLabel ??= msg("team-switcher.addLabel", "Add team")
   const [inner, setInner] = React.useState(defaultValue ?? teams[0]?.id);
   const value = valueProp ?? inner;
   const active = teams.find((t) => t.id === value) ?? teams[0];
@@ -85,8 +88,8 @@ function TeamSwitcher({
         data-slot="team-switcher"
         aria-label={compact ? `Team: ${active.name}` : undefined}
         className={cn(
-          "flex w-full min-w-0 items-center gap-2.5 rounded-lg border bg-background p-1.5 pr-2 text-left shadow-xs outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=open]:bg-accent",
-          compact && "size-11 justify-center p-1.5 pr-1.5",
+          "flex w-full min-w-0 items-center gap-2.5 rounded-lg border bg-background p-1.5 pe-2 text-start shadow-xs outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=open]:bg-accent",
+          compact && "size-11 justify-center p-1.5 pe-1.5",
           className,
         )}
         {...props}
@@ -103,7 +106,7 @@ function TeamSwitcher({
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent align={align} side={side} className="w-(--radix-dropdown-menu-trigger-width) min-w-60">
-        <DropdownMenuLabel>Teams</DropdownMenuLabel>
+        <DropdownMenuLabel>{msg("team-switcher.teams", "Teams")}</DropdownMenuLabel>
         <DropdownMenuRadioGroup
           value={value}
           onValueChange={(id) => {
@@ -112,13 +115,13 @@ function TeamSwitcher({
           }}
         >
           {teams.map((team) => (
-            <DropdownMenuRadioItem key={team.id} value={team.id} className="gap-2.5 py-1.5 pl-2 [&>span:first-child]:hidden">
+            <DropdownMenuRadioItem key={team.id} value={team.id} className="gap-2.5 py-1.5 ps-2 [&>span:first-child]:hidden">
               <Logo team={team} className="size-7 rounded-md text-xs" />
               <span className="grid min-w-0 flex-1 leading-tight">
                 <span className="truncate text-sm">{team.name}</span>
                 {team.description && <span className="truncate text-xs text-muted-foreground">{team.description}</span>}
               </span>
-              {team.id === value && <Check aria-hidden="true" className="ml-auto size-4 !text-foreground" />}
+              {team.id === value && <Check aria-hidden="true" className="ms-auto size-4 !text-foreground" />}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>

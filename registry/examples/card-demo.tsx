@@ -31,7 +31,7 @@ export default function CardDemo() {
           href="#analytics"
           className="inline-flex items-center gap-1 rounded-sm text-sm font-medium text-primary outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
         >
-          View analytics <ArrowUpRight aria-hidden="true" className="size-4" />
+          View analytics <ArrowUpRight aria-hidden="true" className="size-4 rtl:-scale-x-100" />
         </a>
       </CardFooter>
     </Card>

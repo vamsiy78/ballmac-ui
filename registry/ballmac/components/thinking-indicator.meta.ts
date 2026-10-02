@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "loading", "thinking", "typing", "status"],
   files: [{ path: "components/thinking-indicator.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "thinking-indicator-demo", title: "Cycling labels with a timer", file: "thinking-indicator-demo.tsx" },
     { name: "thinking-indicator-variants", title: "Four animations", file: "thinking-indicator-variants.tsx" },

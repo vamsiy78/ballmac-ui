@@ -7,6 +7,7 @@ import { Bug, ChevronDown, Rss, Sparkles, Wand2 } from "lucide-react"
 import { BlogCover } from "@/components/ballmac/blocks/blog-1/blog-1"
 import { buttonVariants } from "@/components/ballmac/button"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type Changelog1Kind = "new" | "improved" | "fixed"
 
@@ -108,10 +109,12 @@ function Changelog1({
   releases = defaults,
   initialCount = 3,
   feed = { label: "Subscribe via RSS", href: "#" },
-  locale = "en-US",
+  locale,
   className,
   ...props
 }: Changelog1Props) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const [filter, setFilter] = React.useState<"all" | Changelog1Kind>("all")
   const [expanded, setExpanded] = React.useState(false)
   const counts = { all: releases.reduce((n, r) => n + r.changes.length, 0), new: 0, improved: 0, fixed: 0 }

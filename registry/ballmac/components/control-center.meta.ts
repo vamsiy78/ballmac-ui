@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["control-center", "macos", "toggles", "slider", "settings", "panel", "media"],
   files: [{ path: "components/control-center.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "control-center-demo", title: "Full panel", file: "control-center-demo.tsx" },
     { name: "control-center-compact", title: "Tiles only", file: "control-center-compact.tsx" },

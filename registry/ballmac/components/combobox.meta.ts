@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["select", "search", "autocomplete", "form"],
   files: [{ path: "components/combobox.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "command", "popover"],
+  registryDependencies: ["shadcn:utils", "command", "popover", "i18n"],
   examples: [
     { name: "combobox-demo", title: "Framework picker", file: "combobox-demo.tsx" },
     { name: "combobox-states", title: "Groups and states", file: "combobox-states.tsx" },

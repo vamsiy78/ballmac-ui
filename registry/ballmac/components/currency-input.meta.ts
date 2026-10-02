@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["currency", "money", "input"],
   files: [{ path: "components/currency-input.tsx" }],
   dependencies: [],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "currency-input-demo",

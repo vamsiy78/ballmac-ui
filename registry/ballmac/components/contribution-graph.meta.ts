@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["heatmap", "activity", "calendar"],
   files: [{ path: "components/contribution-graph.tsx" }],
   dependencies: [],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "contribution-graph-demo",

@@ -6,6 +6,7 @@ import createGlobe from "cobe"
 
 import { cn } from "@/lib/utils"
 import { cssColorToRgba, observeTheme } from "@/lib/ballmac/color"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type GlobeMarker = {
   /** [latitude, longitude] in degrees. */
@@ -58,10 +59,12 @@ function Globe({
   mapBrightness,
   mapSamples = 16000,
   interactive = true,
-  label = "Rotating globe",
+  label,
   className,
   ...props
 }: GlobeProps) {
+  const msg = useMessages()
+  label ??= msg("globe.label", "Rotating globe")
   const canvasRef = React.useRef<HTMLCanvasElement>(null)
   // Rotation lives in refs so pointer input never re-renders the component.
   const motion = React.useRef({ phi, theta, velocity: 0, thetaVelocity: 0, dragging: false, lastX: 0, lastY: 0 })

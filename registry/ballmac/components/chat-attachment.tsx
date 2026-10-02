@@ -18,19 +18,20 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useMessages, defineMessage, type Message } from "@/lib/ballmac/i18n"
 
 type AttachmentKind = "image" | "pdf" | "code" | "sheet" | "doc" | "archive" | "audio" | "video" | "file"
 
-const KIND_META: Record<AttachmentKind, { label: string; icon: React.ComponentType<{ className?: string }>; tone: string }> = {
-  image: { label: "Image", icon: ImageIcon, tone: "bg-chart-2/15 text-chart-2" },
-  pdf: { label: "PDF", icon: FileText, tone: "bg-destructive/15 text-destructive" },
-  code: { label: "Code", icon: FileCode2, tone: "bg-chart-1/15 text-chart-1" },
-  sheet: { label: "Sheet", icon: FileSpreadsheet, tone: "bg-chart-2/15 text-chart-2" },
-  doc: { label: "Doc", icon: FileText, tone: "bg-chart-1/15 text-chart-1" },
-  archive: { label: "Archive", icon: Archive, tone: "bg-chart-3/15 text-chart-3" },
-  audio: { label: "Audio", icon: AudioLines, tone: "bg-chart-4/15 text-chart-4" },
-  video: { label: "Video", icon: Film, tone: "bg-chart-5/15 text-chart-5" },
-  file: { label: "File", icon: FileIcon, tone: "bg-muted text-muted-foreground" },
+const KIND_META: Record<AttachmentKind, { label: Message; icon: React.ComponentType<{ className?: string }>; tone: string }> = {
+  image: { label: defineMessage("chat-attachment.KIND_META.image", "Image"), icon: ImageIcon, tone: "bg-chart-2/15 text-chart-2" },
+  pdf: { label: defineMessage("chat-attachment.KIND_META.pdf", "PDF"), icon: FileText, tone: "bg-destructive/15 text-destructive" },
+  code: { label: defineMessage("chat-attachment.KIND_META.code", "Code"), icon: FileCode2, tone: "bg-chart-1/15 text-chart-1" },
+  sheet: { label: defineMessage("chat-attachment.KIND_META.sheet", "Sheet"), icon: FileSpreadsheet, tone: "bg-chart-2/15 text-chart-2" },
+  doc: { label: defineMessage("chat-attachment.KIND_META.doc", "Doc"), icon: FileText, tone: "bg-chart-1/15 text-chart-1" },
+  archive: { label: defineMessage("chat-attachment.KIND_META.archive", "Archive"), icon: Archive, tone: "bg-chart-3/15 text-chart-3" },
+  audio: { label: defineMessage("chat-attachment.KIND_META.audio", "Audio"), icon: AudioLines, tone: "bg-chart-4/15 text-chart-4" },
+  video: { label: defineMessage("chat-attachment.KIND_META.video", "Video"), icon: Film, tone: "bg-chart-5/15 text-chart-5" },
+  file: { label: defineMessage("chat-attachment.KIND_META.file", "File"), icon: FileIcon, tone: "bg-muted text-muted-foreground" },
 }
 
 const EXT: Record<string, AttachmentKind> = {
@@ -110,6 +111,7 @@ function ChatAttachment({
   className,
   ...props
 }: ChatAttachmentProps) {
+  const msg = useMessages()
   const reduce = useReducedMotion()
   const kind = attachmentKind(name, type)
   const meta = KIND_META[kind]
@@ -119,7 +121,7 @@ function ChatAttachment({
   const failed = status === "error"
   const pct = progress === undefined ? undefined : Math.min(100, Math.max(0, Math.round(progress)))
   const sizeText = size === undefined ? "" : formatFileSize(size)
-  const detail = failed ? error : uploading ? (pct === undefined ? "Uploading…" : `Uploading ${pct}%`) : [meta.label, sizeText].filter(Boolean).join(" · ")
+  const detail = failed ? error : uploading ? (pct === undefined ? msg("chat-attachment.uploadingEllipsis", "Uploading…") : msg("chat-attachment.uploadingPercent", "Uploading {percent}%", { percent: pct })) : [msg.of(meta.label), sizeText].filter(Boolean).join(" · ")
 
   const enter = {
     layout: (reduce ? false : true) as boolean,
@@ -132,7 +134,7 @@ function ChatAttachment({
   const progressBar = uploading && (
     <span
       role="progressbar"
-      aria-label={`Uploading ${name}`}
+      aria-label={msg("chat-attachment.uploading", "Uploading {name}", { name })}
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={pct}
@@ -152,10 +154,10 @@ function ChatAttachment({
     <button
       type="button"
       onClick={onRemove}
-      aria-label={`Remove ${name}`}
+      aria-label={msg("chat-attachment.remove", "Remove {name}", { name })}
       className={cn(
         "inline-flex shrink-0 items-center justify-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-foreground hover:text-background focus-visible:ring-[3px] focus-visible:ring-ring/50",
-        variant === "chip" ? "size-6" : "absolute top-1.5 right-1.5 size-6 bg-background/90 text-foreground shadow-sm backdrop-blur"
+        variant === "chip" ? "size-6" : "absolute top-1.5 end-1.5 size-6 bg-background/90 text-foreground shadow-sm backdrop-blur"
       )}
     >
       <X aria-hidden="true" className="size-3.5" />
@@ -166,14 +168,14 @@ function ChatAttachment({
     <button
       type="button"
       onClick={onRetry}
-      aria-label={`Retry uploading ${name}`}
+      aria-label={msg("chat-attachment.retryUploading", "Retry uploading {name}", { name })}
       className={cn(
         "inline-flex shrink-0 items-center gap-1 rounded-md text-xs font-medium text-foreground outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50",
         variant === "chip" ? "h-6 px-1.5" : "h-7 px-2"
       )}
     >
       <RotateCw aria-hidden="true" className="size-3" />
-      Retry
+      {msg("chat-attachment.retry", "Retry")}
     </button>
   )
 
@@ -197,7 +199,7 @@ function ChatAttachment({
               <Icon className="size-4" />
             )}
           </span>
-          <span className="grid min-w-0 flex-1 text-left">
+          <span className="grid min-w-0 flex-1 text-start">
             <span className="truncate text-[13px] leading-5 font-medium text-foreground">{name}</span>
             <span className="truncate text-xs leading-4 text-muted-foreground tabular-nums">{detail}</span>
           </span>
@@ -220,7 +222,7 @@ function ChatAttachment({
           )}
           <span
             className={cn(
-              "absolute inset-x-0 bottom-0 grid gap-px px-2.5 pb-2 text-left",
+              "absolute inset-x-0 bottom-0 grid gap-px px-2.5 pb-2 text-start",
               isImage && !failed ? "bg-gradient-to-t from-black/70 via-black/45 to-transparent pt-7" : "pt-2"
             )}
           >
@@ -235,7 +237,7 @@ function ChatAttachment({
   const shell =
     variant === "chip"
       ? cn(
-          "relative flex h-14 w-72 max-w-full items-center gap-2.5 overflow-hidden rounded-xl border bg-card py-2 pr-2 pl-2 text-card-foreground shadow-xs",
+          "relative flex h-14 w-72 max-w-full items-center gap-2.5 overflow-hidden rounded-xl border bg-card py-2 pe-2 ps-2 text-card-foreground shadow-xs",
           failed && "border-destructive/50"
         )
       : cn(
@@ -258,10 +260,10 @@ function ChatAttachment({
         <button
           type="button"
           onClick={onOpen}
-          aria-label={`Open ${name}`}
+          aria-label={msg("chat-attachment.open", "Open {name}", { name })}
           className={cn(
             "absolute inset-0 z-0 flex items-center rounded-[inherit] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
-            variant === "chip" ? "gap-2.5 py-2 pr-9 pl-2 hover:bg-accent/50" : ""
+            variant === "chip" ? "gap-2.5 py-2 pe-9 ps-2 hover:bg-accent/50" : ""
           )}
         >
           {variant === "chip" ? body : <>{body}</>}
@@ -271,14 +273,14 @@ function ChatAttachment({
       )}
       {progressBar}
       {variant === "chip" ? (
-        <span className="relative z-10 ml-auto flex shrink-0 items-center gap-0.5">
+        <span className="relative z-10 ms-auto flex shrink-0 items-center gap-0.5">
           {retryButton}
           {removeButton}
         </span>
       ) : (
         <>
           {removeButton && <span className="opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-focus-within/tile:opacity-100 [@media(hover:hover)]:group-hover/tile:opacity-100">{removeButton}</span>}
-          {retryButton && <span className="absolute top-1.5 left-1.5 rounded-md bg-background/90 backdrop-blur">{retryButton}</span>}
+          {retryButton && <span className="absolute top-1.5 start-1.5 rounded-md bg-background/90 backdrop-blur">{retryButton}</span>}
         </>
       )}
     </motion.div>
@@ -291,7 +293,9 @@ type ChatAttachmentListProps = React.ComponentProps<"div"> & {
 }
 
 /** A wrapping row of attachments. Removing one animates the others into place. */
-function ChatAttachmentList({ label = "Attachments", className, children, ...props }: ChatAttachmentListProps) {
+function ChatAttachmentList({ label, className, children, ...props }: ChatAttachmentListProps) {
+  const msg = useMessages()
+  label ??= msg("chat-attachment.label", "Attachments")
   return (
     <div
       data-slot="chat-attachment-list"

@@ -3,6 +3,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type DateRange = {
   /** Inclusive start date in YYYY-MM-DD form. */ from: string
@@ -47,6 +48,7 @@ function DateRangePicker({
   name,
   ...props
 }: DateRangePickerProps) {
+  const msg = useMessages()
   const [internal, setInternal] = React.useState(defaultValue)
   const current = value ?? internal
   function set(next: DateRange) {
@@ -81,7 +83,7 @@ function DateRangePicker({
       <legend className="px-1 text-sm font-medium">{label}</legend>
       <div className="grid min-w-0 gap-3 sm:grid-cols-2">
         <label className="flex min-w-0 flex-col gap-1.5 text-xs font-medium text-muted-foreground">
-          <span>From</span>
+          <span>{msg("date-range-picker.from", "From")}</span>
           <span>
             <input
               data-slot="date-range-from"
@@ -97,7 +99,7 @@ function DateRangePicker({
           </span>
         </label>
         <label className="flex min-w-0 flex-col gap-1.5 text-xs font-medium text-muted-foreground">
-          <span>To</span>
+          <span>{msg("date-range-picker.to", "To")}</span>
           <span>
             <input
               data-slot="date-range-to"

@@ -138,7 +138,7 @@ function Faq2({
               {visible.map((item) => (
                 <AccordionItem key={item.question} value={item.question} className="border-b-0">
                   <AccordionTrigger className="py-5 text-base">
-                    <span className="flex flex-col items-start gap-1 text-left">
+                    <span className="flex flex-col items-start gap-1 text-start">
                       {category === "All" && <span className="text-muted-foreground text-xs font-normal">{item.category}</span>}
                       {highlight(item.question, query)}
                     </span>

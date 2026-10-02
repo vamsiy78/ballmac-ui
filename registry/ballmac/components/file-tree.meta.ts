@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["files", "folders", "tree"],
   files: [{ path: "components/file-tree.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["tree-view"],
+  registryDependencies: ["tree-view", "i18n"],
   examples: [
     { name: "file-tree-demo", title: "Overview", file: "file-tree-demo.tsx" },
     {

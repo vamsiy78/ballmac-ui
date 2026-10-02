@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["window manager", "drag", "resize", "desktop", "macos"],
   files: [{ path: "components/window-manager.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils", "mac-window"],
+  registryDependencies: ["shadcn:utils", "mac-window", "i18n"],
   examples: [
     { name: "window-manager-demo", title: "Three apps on a desktop", file: "window-manager-demo.tsx" },
     { name: "window-manager-controlled", title: "Open and close windows", file: "window-manager-controlled.tsx" },

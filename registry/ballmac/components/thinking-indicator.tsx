@@ -5,6 +5,7 @@ import * as React from "react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ThinkingIndicatorProps = Omit<React.ComponentProps<"div">, "children"> & {
   /** Animation shown beside the text. "dots" bounces three dots, "bars" is an equalizer, "wave" is a soft sine ribbon and "shimmer" sweeps light across the text only. */
@@ -85,15 +86,18 @@ function Wave({ reduce }: { reduce: boolean | null }) {
 
 function ThinkingIndicator({
   variant = "dots",
-  label = "Thinking",
+  label,
   interval = 2600,
   showTimer = false,
   elapsed,
-  statusLabel = "Assistant is thinking",
+  statusLabel,
   size = "default",
   className,
   ...props
 }: ThinkingIndicatorProps) {
+  const msg = useMessages()
+  label ??= msg("thinking-indicator.label", "Thinking")
+  statusLabel ??= msg("thinking-indicator.statusLabel", "Assistant is thinking")
   const reduce = useReducedMotion()
   const labels = React.useMemo(() => (Array.isArray(label) ? label : [label]), [label])
   const [index, setIndex] = React.useState(0)
@@ -168,7 +172,7 @@ function ThinkingIndicator({
       {showTimer && (
         <span
           aria-hidden="true"
-          className="font-mono text-[11px] text-muted-foreground tabular-nums before:mr-2 before:text-border before:content-['·']"
+          className="font-mono text-[11px] text-muted-foreground tabular-nums before:me-2 before:text-border before:content-['·']"
         >
           {formatElapsed(shown)}
         </span>

@@ -1,8 +1,11 @@
 // Ballmac UI: Widgets. https://ui.ballmac.com/components/widgets
+"use client"
+
 import * as React from "react"
 import { Cloud, CloudLightning, CloudRain, CloudSnow, CloudSun, Moon, Navigation, Sun, Zap } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type WidgetSize = "small" | "medium" | "large"
 
@@ -122,12 +125,12 @@ function WeatherWidget({ city, temperature, condition = "clear", high, low, hour
               <span className="truncate">{city}</span>
               <Navigation className="shrink-0 fill-current" style={{ width: sp(8), height: sp(8) }} />
             </p>
-            <p className="font-light tracking-tight tabular-nums" style={{ ...fs(size === "small" ? 31 : size === "medium" ? 27 : 38), lineHeight: 1.05, marginLeft: sp(-1) }}>
+            <p className="font-light tracking-tight tabular-nums" style={{ ...fs(size === "small" ? 31 : size === "medium" ? 27 : 38), lineHeight: 1.05, marginInlineStart: sp(-1) }}>
               {temperature}°
             </p>
           </div>
           {size !== "small" && (
-            <div className="flex flex-col items-end text-right" style={{ gap: sp(1) }}>
+            <div className="flex flex-col items-end text-end" style={{ gap: sp(1) }}>
               <SkyIcon condition={condition} style={{ width: sp(size === "medium" ? 14 : 20), height: sp(size === "medium" ? 14 : 20) }} />
               <p className="font-semibold" style={fs(9.5)}>{SKY_WORD[condition]}</p>
               <p className="tabular-nums" style={fs(9.5)}>H:{high}° L:{low}°</p>
@@ -161,7 +164,7 @@ function WeatherWidget({ city, temperature, condition = "clear", high, low, hour
                 <span className="font-semibold">{d.day}</span>
                 <SkyIcon condition={d.condition} style={{ width: sp(12), height: sp(12) }} />
                 <span className="flex items-center" style={{ gap: sp(6) }}>
-                  <span className="w-[14%] text-right tabular-nums opacity-85">{d.low}°</span>
+                  <span className="w-[14%] text-end tabular-nums opacity-85">{d.low}°</span>
                   <span className="relative h-[calc(var(--u)*3.5)] flex-1 rounded-full bg-white/25">
                     <span
                       className="absolute inset-y-0 rounded-full bg-gradient-to-r from-[oklch(0.85_0.13_200)] to-[oklch(0.85_0.15_80)]"
@@ -208,7 +211,8 @@ function monthGrid(year: number, month: number) {
 }
 
 function Events({ events, limit }: { events: CalendarEvent[]; limit: number }) {
-  if (events.length === 0) return <p className="text-muted-foreground" style={fs(9.5)}>No events today</p>
+  const msg = useMessages()
+  if (events.length === 0) return <p className="text-muted-foreground" style={fs(9.5)}>{msg("widgets.noEventsToday", "No events today")}</p>
   return (
     <ul className="flex flex-col" style={{ gap: sp(5) }}>
       {events.slice(0, limit).map((e) => (
@@ -325,7 +329,7 @@ function Ring({ device, big }: { device: BatteryDevice; big?: boolean }) {
         {device.icon}
       </span>
       {device.charging && (
-        <span className="absolute -right-[4%] -bottom-[4%] flex size-[34%] items-center justify-center rounded-full bg-background text-[oklch(0.62_0.19_150)] shadow-sm">
+        <span className="absolute -end-[4%] -bottom-[4%] flex size-[34%] items-center justify-center rounded-full bg-background text-[oklch(0.62_0.19_150)] shadow-sm">
           <Zap className="size-[70%] fill-current" />
         </span>
       )}

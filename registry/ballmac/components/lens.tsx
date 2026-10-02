@@ -5,6 +5,7 @@ import * as React from "react"
 import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type LensProps = Omit<React.ComponentProps<"div">, "children"> & {
   /** What to magnify: usually an image, but any visual content works. */
@@ -19,7 +20,9 @@ type LensProps = Omit<React.ComponentProps<"div">, "children"> & {
 
 const STEP = 24
 
-function Lens({ children, zoom = 2.2, lensSize = 160, label = "Zoomable image", className, onPointerMove, onPointerLeave, onKeyDown, onFocus, onBlur, ...props }: LensProps) {
+function Lens({ children, zoom = 2.2, lensSize = 160, label, className, onPointerMove, onPointerLeave, onKeyDown, onFocus, onBlur, ...props }: LensProps) {
+  const msg = useMessages()
+  label ??= msg("lens.label", "Zoomable image")
   const reduce = useReducedMotion()
   const ref = React.useRef<HTMLDivElement>(null)
   const [pos, setPos] = React.useState<{ x: number; y: number } | null>(null)
@@ -44,7 +47,7 @@ function Lens({ children, zoom = 2.2, lensSize = 160, label = "Zoomable image", 
       data-slot="lens"
       role="group"
       tabIndex={0}
-      aria-label={`${label}. Move the pointer over it, or use the arrow keys, to magnify. Escape hides the lens.`}
+      aria-label={msg("lens.moveThePointerOverIt", "{label}. Move the pointer over it, or use the arrow keys, to magnify. Escape hides the lens.", { label })}
       onPointerMove={(e) => {
         onPointerMove?.(e)
         if (e.pointerType === "touch") return
@@ -95,7 +98,7 @@ function Lens({ children, zoom = 2.2, lensSize = 160, label = "Zoomable image", 
       {pos && box.w > 0 && (
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute top-0 left-0 z-10 overflow-hidden rounded-full border-2 border-white/90 bg-background shadow-[0_12px_32px_-6px_rgb(0_0_0/0.45),inset_0_0_0_1px_rgb(0_0_0/0.15)]"
+          className="pointer-events-none absolute top-0 start-0 z-10 overflow-hidden rounded-full border-2 border-white/90 bg-background shadow-[0_12px_32px_-6px_rgb(0_0_0/0.45),inset_0_0_0_1px_rgb(0_0_0/0.15)]"
           style={{ width: lensSize, height: lensSize, x: pos.x - lensSize / 2, y: pos.y - lensSize / 2 }}
           initial={reduce ? false : { opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -104,7 +107,7 @@ function Lens({ children, zoom = 2.2, lensSize = 160, label = "Zoomable image", 
           {/* A second copy of the content, scaled up around the pointer. It is hidden from assistive tech and cannot be focused. */}
           <div
             inert
-            className="absolute top-0 left-0 origin-top-left"
+            className="absolute top-0 left-0 origin-top-left" // rtl-fixed: scaled from its top-left corner
             style={{
               width: box.w,
               height: box.h,

@@ -4,6 +4,7 @@
 import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useLocale, useMessages } from "@/lib/ballmac/i18n"
 
 type AgendaEvent = {
   /** Stable event ID. */ id: string
@@ -38,10 +39,14 @@ function CalendarAgenda({
   value,
   defaultValue,
   onValueChange,
-  locale = "en-US",
-  emptyMessage = "No events scheduled",
+  locale,
+  emptyMessage,
   ...props
 }: CalendarAgendaProps) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
+  const msg = useMessages()
+  emptyMessage ??= msg("calendar-agenda.emptyMessage", "No events scheduled")
   const [internal, setInternal] = React.useState(
     defaultValue ?? events[0]?.date ?? "",
   )
@@ -75,35 +80,35 @@ function CalendarAgenda({
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
         <div>
           <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
-            Agenda
+            {msg("calendar-agenda.agenda", "Agenda")}
           </p>
           <h3 className="mt-1 text-base font-semibold">{heading}</h3>
         </div>
         <div className="flex items-center gap-1">
           <button
             type="button"
-            aria-label="Previous day"
+            aria-label={msg("calendar-agenda.previousDay", "Previous day")}
             disabled={!selected}
             onClick={() => choose(shiftDay(selected, -1))}
             className="hover:bg-accent flex size-8 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40"
           >
-            <ChevronLeft aria-hidden="true" className="size-4" />
+            <ChevronLeft aria-hidden="true" className="size-4 rtl:rotate-180" />
           </button>
           <input
             type="date"
-            aria-label="Choose date"
+            aria-label={msg("calendar-agenda.chooseDate", "Choose date")}
             value={selected}
             onChange={(event) => choose(event.target.value)}
             className="border-input bg-background h-8 max-w-32 rounded-md border px-1 text-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
           <button
             type="button"
-            aria-label="Next day"
+            aria-label={msg("calendar-agenda.nextDay", "Next day")}
             disabled={!selected}
             onClick={() => choose(shiftDay(selected, 1))}
             className="hover:bg-accent flex size-8 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40"
           >
-            <ChevronRight aria-hidden="true" className="size-4" />
+            <ChevronRight aria-hidden="true" className="size-4 rtl:rotate-180" />
           </button>
         </div>
       </div>
@@ -129,7 +134,7 @@ function CalendarAgenda({
                     }).format(new Date(`${event.date}T${event.time}:00Z`))
                   : "All day"}
               </time>
-              <div className="min-w-0 border-l-2 border-primary pl-3">
+              <div className="min-w-0 border-s-2 border-primary ps-3">
                 <p className="text-sm font-medium">{event.title}</p>
                 {event.description && (
                   <p className="text-muted-foreground mt-1 text-xs">

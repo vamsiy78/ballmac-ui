@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["billing", "upgrade", "downgrade", "proration", "seats", "plans", "checkout"],
   files: [{ path: "components/blocks/billing-2/billing-2.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "badge", "button", "segmented-control"],
+  registryDependencies: ["shadcn:utils", "badge", "button", "segmented-control", "i18n"],
   examples: [
     { name: "billing-2-demo", title: "Default", file: "billing-2-demo.tsx" },
     { name: "billing-2-yearly", title: "Yearly account", file: "billing-2-yearly.tsx" },

@@ -4,6 +4,7 @@
 import * as React from "react";
 import { AlertTriangle, CalendarClock, CircleCheck, Clock, Download, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLocale, useMessages, defineMessage } from "@/lib/ballmac/i18n";
 
 type BillingStatus = "active" | "trialing" | "past_due" | "canceled";
 
@@ -62,16 +63,16 @@ type BillingCardProps = Omit<React.ComponentProps<"section">, "title"> & {
 };
 
 const STATUS = {
-  active: { label: "Active", icon: CircleCheck, tone: "bg-chart-2/12 text-foreground", iconTone: "text-chart-2" },
-  trialing: { label: "Trial", icon: Clock, tone: "bg-chart-1/12 text-foreground", iconTone: "text-chart-1" },
-  past_due: { label: "Payment failed", icon: AlertTriangle, tone: "bg-destructive/12 text-foreground", iconTone: "text-destructive" },
-  canceled: { label: "Canceled", icon: XCircle, tone: "bg-muted text-foreground", iconTone: "text-muted-foreground" },
+  active: { label: defineMessage("billing-card.STATUS.active", "Active"), icon: CircleCheck, tone: "bg-chart-2/12 text-foreground", iconTone: "text-chart-2" },
+  trialing: { label: defineMessage("billing-card.STATUS.trialing", "Trial"), icon: Clock, tone: "bg-chart-1/12 text-foreground", iconTone: "text-chart-1" },
+  past_due: { label: defineMessage("billing-card.STATUS.past_due", "Payment failed"), icon: AlertTriangle, tone: "bg-destructive/12 text-foreground", iconTone: "text-destructive" },
+  canceled: { label: defineMessage("billing-card.STATUS.canceled", "Canceled"), icon: XCircle, tone: "bg-muted text-foreground", iconTone: "text-muted-foreground" },
 } as const;
 
 const INVOICE_STATUS = {
-  paid: { label: "Paid", dot: "bg-chart-2" },
-  open: { label: "Open", dot: "bg-chart-3" },
-  failed: { label: "Failed", dot: "bg-destructive" },
+  paid: { label: defineMessage("billing-card.INVOICE_STATUS.paid", "Paid"), dot: "bg-chart-2" },
+  open: { label: defineMessage("billing-card.INVOICE_STATUS.open", "Open"), dot: "bg-chart-3" },
+  failed: { label: defineMessage("billing-card.INVOICE_STATUS.failed", "Failed"), dot: "bg-destructive" },
 } as const;
 
 /**
@@ -85,10 +86,13 @@ function BillingCard({
   onChangePlan,
   onUpdatePayment,
   onCancel,
-  locale = "en-US",
+  locale,
   className,
   ...props
 }: BillingCardProps) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
+  const msg = useMessages()
   const currency = plan.currency ?? "USD";
   const money = (n: number, digits = 2) =>
     new Intl.NumberFormat(locale, { style: "currency", currency, minimumFractionDigits: digits, maximumFractionDigits: digits }).format(n);
@@ -116,24 +120,24 @@ function BillingCard({
       {...props}
     >
       <div className="relative overflow-hidden border-b bg-gradient-to-br from-chart-1/[0.10] via-chart-4/[0.06] to-transparent p-6">
-        <div aria-hidden="true" className="pointer-events-none absolute -top-16 -right-10 size-48 rounded-full bg-chart-1/10 blur-3xl" />
+        <div aria-hidden="true" className="pointer-events-none absolute -top-16 -end-10 size-48 rounded-full bg-chart-1/10 blur-3xl" />
         <div className="relative flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Current plan</p>
+            <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">{msg("billing-card.currentPlan", "Current plan")}</p>
             <h3 id={headingId} className="mt-1 text-xl font-semibold tracking-tight">
               {plan.name}
             </h3>
           </div>
           <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium", status.tone)}>
             <StatusIcon aria-hidden="true" className={cn("size-3.5", status.iconTone)} />
-            {status.label}
+            {msg.of(status.label)}
           </span>
         </div>
         <p className="relative mt-5 flex items-baseline tabular-nums">
-          <span className="mr-0.5 text-2xl font-medium text-muted-foreground">{symbol}</span>
+          <span className="me-0.5 text-2xl font-medium text-muted-foreground">{symbol}</span>
           <span className="text-5xl font-semibold tracking-tight">{whole.toLocaleString(locale)}</span>
           {cents > 0 && <span className="text-xl font-medium text-muted-foreground">.{String(cents).padStart(2, "0")}</span>}
-          <span className="ml-1.5 text-sm text-muted-foreground">/ {plan.interval}</span>
+          <span className="ms-1.5 text-sm text-muted-foreground">/ {plan.interval}</span>
         </p>
       </div>
 
@@ -157,14 +161,14 @@ function BillingCard({
         {plan.seats && (
           <div className="grid content-center gap-2 p-5">
             <div className="flex items-baseline justify-between gap-3 text-sm">
-              <p className="text-xs text-muted-foreground">Seats</p>
+              <p className="text-xs text-muted-foreground">{msg("billing-card.seats", "Seats")}</p>
               <p className="font-medium tabular-nums">
-                {plan.seats.used} of {plan.seats.total} used
+                {msg("billing-card.seatsOf", "{used} of {total} used", { used: plan.seats.used, total: plan.seats.total })}
               </p>
             </div>
             <div
               role="meter"
-              aria-label="Seats used"
+              aria-label={msg("billing-card.seatsUsed", "Seats used")}
               aria-valuemin={0}
               aria-valuemax={plan.seats.total}
               aria-valuenow={plan.seats.used}
@@ -180,14 +184,14 @@ function BillingCard({
               aria-hidden="true"
               className="relative flex h-8 w-12 shrink-0 items-end justify-end overflow-hidden rounded-md bg-gradient-to-br from-foreground to-foreground/70 p-1 shadow-sm"
             >
-              <span className="absolute top-1.5 left-1.5 h-2 w-3 rounded-[2px] bg-background/30" />
+              <span className="absolute top-1.5 start-1.5 h-2 w-3 rounded-[2px] bg-background/30" />
               <span className="text-[8px] font-bold tracking-wider text-background/90 uppercase">{paymentMethod.brand.slice(0, 4)}</span>
             </span>
             <div className="min-w-0 flex-1">
-              <p className="text-xs text-muted-foreground">Payment method</p>
+              <p className="text-xs text-muted-foreground">{msg("billing-card.paymentMethod", "Payment method")}</p>
               <p className="mt-0.5 truncate text-sm font-medium tabular-nums">
                 {paymentMethod.brand} •••• {paymentMethod.last4}
-                <span className="ml-2 text-xs font-normal text-muted-foreground">Exp {paymentMethod.expires}</span>
+                <span className="ms-2 text-xs font-normal text-muted-foreground">{msg("billing-card.exp", "Exp {date}", { date: paymentMethod.expires })}</span>
               </p>
             </div>
             {onUpdatePayment && (
@@ -196,7 +200,7 @@ function BillingCard({
                 onClick={onUpdatePayment}
                 className="rounded-md px-2 py-1 text-[13px] font-medium underline-offset-4 outline-none hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50"
               >
-                Update
+                {msg("billing-card.update", "Update")}
               </button>
             )}
           </div>
@@ -205,7 +209,7 @@ function BillingCard({
 
       {invoices.length > 0 && (
         <div className="border-t">
-          <h4 className="px-6 pt-4 pb-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">Recent invoices</h4>
+          <h4 className="px-6 pt-4 pb-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">{msg("billing-card.recentInvoices", "Recent invoices")}</h4>
           <ul className="px-3 pb-3">
             {invoices.slice(0, 3).map((inv) => {
               const s = INVOICE_STATUS[inv.status];
@@ -215,12 +219,12 @@ function BillingCard({
                   <span className="flex-1 font-medium tabular-nums">{money(inv.amount)}</span>
                   <span className="inline-flex items-center gap-1.5 text-xs font-medium">
                     <span aria-hidden="true" className={cn("size-1.5 rounded-full", s.dot)} />
-                    {s.label}
+                    {msg.of(s.label)}
                   </span>
                   {inv.href && (
                     <a
                       href={inv.href}
-                      aria-label={`Download invoice ${inv.id}`}
+                      aria-label={msg("billing-card.downloadInvoice", "Download invoice {id}", { id: inv.id })}
                       className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
                     >
                       <Download aria-hidden="true" className="size-4" />
@@ -241,16 +245,16 @@ function BillingCard({
               onClick={onChangePlan}
               className="inline-flex h-9 items-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow-xs outline-none transition-colors hover:bg-primary/90 focus-visible:ring-[3px] focus-visible:ring-ring/50"
             >
-              Change plan
+              {msg("billing-card.changePlan", "Change plan")}
             </button>
           )}
           {onCancel && plan.status !== "canceled" && (
             <button
               type="button"
               onClick={onCancel}
-              className="ml-auto rounded-md px-2 py-1 text-[13px] text-muted-foreground underline-offset-4 outline-none hover:text-destructive hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50"
+              className="ms-auto rounded-md px-2 py-1 text-[13px] text-muted-foreground underline-offset-4 outline-none hover:text-destructive hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50"
             >
-              Cancel subscription
+              {msg("billing-card.cancelSubscription", "Cancel subscription")}
             </button>
           )}
         </div>

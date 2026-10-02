@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["invite", "team", "email", "roles"],
   files: [{ path: "components/invite-members.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n"],
   examples: [
     { name: "invite-members-demo", title: "With pending invitations", file: "invite-members-demo.tsx" },
     { name: "invite-members-states", title: "Minimal", file: "invite-members-states.tsx" },

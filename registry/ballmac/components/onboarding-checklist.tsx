@@ -6,6 +6,7 @@ import { Check, ChevronDown, PartyPopper, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { duration, ease, spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type OnboardingStep = {
   /** Unique id. */
@@ -78,14 +79,18 @@ function OnboardingChecklist({
   completed: completedProp,
   defaultCompleted = [],
   onCompletedChange,
-  title = "Get started",
-  description = "Finish these steps to set up your workspace.",
-  completeMessage = "You're all set. Nice work.",
+  title,
+  description,
+  completeMessage,
   defaultOpenId,
   onDismiss,
   className,
   ...props
 }: OnboardingChecklistProps) {
+  const msg = useMessages()
+  title ??= msg("onboarding-checklist.title", "Get started")
+  description ??= msg("onboarding-checklist.description", "Finish these steps to set up your workspace.")
+  completeMessage ??= msg("onboarding-checklist.completeMessage", "You're all set. Nice work.")
   const reduce = useReducedMotion();
   const [inner, setInner] = React.useState(defaultCompleted);
   const completed = completedProp ?? inner;
@@ -131,9 +136,9 @@ function OnboardingChecklist({
         {onDismiss && (
           <button
             type="button"
-            aria-label="Dismiss checklist"
+            aria-label={msg("onboarding-checklist.dismissChecklist", "Dismiss checklist")}
             onClick={onDismiss}
-            className="-mt-1 -mr-1 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="-mt-1 -me-1 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             <X aria-hidden="true" className="size-4" />
           </button>
@@ -178,7 +183,7 @@ function OnboardingChecklist({
               }}
               className="text-xs font-medium text-muted-foreground underline-offset-4 outline-none hover:text-foreground hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50"
             >
-              Review the steps again
+              {msg("onboarding-checklist.reviewTheStepsAgain", "Review the steps again")}
             </button>
           </motion.div>
         ) : (
@@ -201,7 +206,7 @@ function OnboardingChecklist({
                       type="button"
                       role="checkbox"
                       aria-checked={done}
-                      aria-label={`${step.title}: mark as ${done ? "not done" : "done"}`}
+                      aria-label={done ? msg("onboarding-checklist.markNotDone", "{title}: mark as not done", { title: step.title }) : msg("onboarding-checklist.markDone", "{title}: mark as done", { title: step.title })}
                       onClick={() => toggle(step.id)}
                       className={cn(
                         "relative flex size-6 shrink-0 items-center justify-center rounded-full border outline-none transition-[background-color,border-color,box-shadow] duration-200 focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none",
@@ -234,7 +239,7 @@ function OnboardingChecklist({
                       aria-expanded={open}
                       aria-controls={panelId}
                       onClick={() => setOpenId(open ? undefined : step.id)}
-                      className="flex min-w-0 flex-1 items-center justify-between gap-2 rounded-md text-left outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                      className="flex min-w-0 flex-1 items-center justify-between gap-2 rounded-md text-start outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
                     >
                       <span
                         className={cn(
@@ -265,7 +270,7 @@ function OnboardingChecklist({
                         transition={{ duration: reduce ? 0 : duration.base, ease: ease.out }}
                         className="overflow-hidden"
                       >
-                        <div className="grid gap-3 pr-3 pb-3.5 pl-[3.25rem] text-sm text-muted-foreground">
+                        <div className="grid gap-3 pe-3 pb-3.5 ps-[3.25rem] text-sm text-muted-foreground">
                           {step.description && <p className="leading-relaxed">{step.description}</p>}
                           {step.action &&
                             (step.action.href ? (

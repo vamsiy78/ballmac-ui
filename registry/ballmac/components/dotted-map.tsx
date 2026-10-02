@@ -7,6 +7,7 @@ import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
 import { useReducedMotionSafe } from "@/lib/ballmac/motion"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type MapTone = "foreground" | "primary" | "chart-1" | "chart-2" | "chart-3" | "chart-4" | "chart-5" | "destructive"
 
@@ -85,7 +86,9 @@ function project(lat: number, lng: number, top: number, span: number, height: nu
 }
 
 /** A world map made of dots, with markers and flowing routes. Pure SVG. */
-function DottedMap({ markers = [], arcs = [], dots = 150, latRange = [-56, 73], tone = "foreground", labels = false, label = "World map", className, ...props }: DottedMapProps) {
+function DottedMap({ markers = [], arcs = [], dots = 150, latRange = [-56, 73], tone = "foreground", labels = false, label, className, ...props }: DottedMapProps) {
+  const msg = useMessages()
+  label ??= msg("dotted-map.label", "World map")
   const reduce = useReducedMotionSafe()
   const [south, north] = latRange
   const span = north - south

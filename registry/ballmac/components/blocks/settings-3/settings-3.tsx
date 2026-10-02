@@ -141,7 +141,7 @@ function Settings3({
             <SelectTrigger aria-label="Role for the invitation" className="w-full sm:w-36"><SelectValue /></SelectTrigger>
             <SelectContent>{roles.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}</SelectContent>
           </Select>
-          <Button type="submit" loading={sending}><Send /> Send invite</Button>
+          <Button type="submit" loading={sending}><Send  className="rtl:-scale-x-100"/> Send invite</Button>
         </div>
         <p id={`${emailId}-error`} role="alert" className="text-destructive mt-2 min-h-5 text-sm">{error}</p>
       </form>
@@ -188,7 +188,7 @@ function Settings3({
                   <DropdownMenu>
                     <DropdownMenuTrigger aria-label={`Actions for ${m.status === "invited" ? m.email : m.name}`} className="hover:bg-accent focus-visible:ring-ring/50 flex size-9 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px]"><MoreHorizontal className="size-4" aria-hidden="true" /></DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      {m.status === "invited" && <DropdownMenuItem onSelect={() => setNotice(`Invitation resent to ${m.email}.`)}><Send /> Resend invite</DropdownMenuItem>}
+                      {m.status === "invited" && <DropdownMenuItem onSelect={() => setNotice(`Invitation resent to ${m.email}.`)}><Send  className="rtl:-scale-x-100"/> Resend invite</DropdownMenuItem>}
                       {m.status === "invited" && <DropdownMenuSeparator />}
                       <DropdownMenuItem destructive onSelect={() => setRemoving(m)}><Trash2 /> {m.status === "invited" ? "Cancel invite" : "Remove from team"}</DropdownMenuItem>
                     </DropdownMenuContent>

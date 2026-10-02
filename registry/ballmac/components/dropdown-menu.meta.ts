@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["menu", "overlay", "actions", "radix"],
   files: [{ path: "components/dropdown-menu.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     { name: "dropdown-menu-demo", title: "Account menu", file: "dropdown-menu-demo.tsx" },
     { name: "dropdown-menu-states", title: "Radio choices", file: "dropdown-menu-states.tsx" },

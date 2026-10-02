@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["button", "scroll", "floating", "progress"],
   files: [{ path: "components/back-to-top.tsx" }],
   dependencies: ["lucide-react", "motion@^12"],
-  registryDependencies: ["shadcn:utils", "scroll", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "scroll", "motion-presets", "i18n"],
   examples: [
     { name: "back-to-top-demo", title: "Progress ring", file: "back-to-top-demo.tsx" },
     { name: "back-to-top-states", title: "Labelled", file: "back-to-top-states.tsx" },

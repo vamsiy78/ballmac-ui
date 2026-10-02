@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["navigation", "header", "mega menu", "radix"],
   files: [{ path: "components/navigation-menu.tsx" }],
   dependencies: ["radix-ui", "lucide-react", "class-variance-authority"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     { name: "navigation-menu-demo", title: "Product menu", file: "navigation-menu-demo.tsx" },
     { name: "navigation-menu-states", title: "Without viewport", file: "navigation-menu-states.tsx" },

@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["privacy", "cookies", "consent", "gdpr"],
   files: [{ path: "components/cookie-consent.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n"],
   examples: [
     { name: "cookie-consent-demo", title: "Banner", file: "cookie-consent-demo.tsx" },
     { name: "cookie-consent-states", title: "Controlled", file: "cookie-consent-states.tsx" },

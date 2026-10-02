@@ -5,7 +5,7 @@ import { Button } from "@/components/ballmac/button"
 export default function ButtonDemo() {
   return (
     <Button>
-      Get started <ArrowRight />
+      Get started <ArrowRight  className="rtl:rotate-180"/>
     </Button>
   )
 }

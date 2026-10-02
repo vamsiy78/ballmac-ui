@@ -39,8 +39,8 @@ const items = [
     description: "Comment on a task, a file or a single line. Mentions notify the right person, and the conversation stays attached to the work.",
     visual: (
       <Panel icon={MessageSquare} tone="from-chart-1/20">
-        <div className="w-4/5 rounded-2xl rounded-bl-sm border bg-background p-3 text-sm shadow-sm">Can we move the review to Thursday?</div>
-        <div className="ml-auto w-3/5 rounded-2xl rounded-br-sm bg-primary p-3 text-sm text-primary-foreground shadow-sm">Done, invites updated.</div>
+        <div className="w-4/5 rounded-2xl rounded-es-sm border bg-background p-3 text-sm shadow-sm">Can we move the review to Thursday?</div>
+        <div className="ms-auto w-3/5 rounded-2xl rounded-ee-sm bg-primary p-3 text-sm text-primary-foreground shadow-sm">Done, invites updated.</div>
       </Panel>
     ),
   },

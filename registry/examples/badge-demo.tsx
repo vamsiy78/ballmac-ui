@@ -13,7 +13,7 @@ export default function BadgeDemo() {
         Draft
       </Badge>
       <a href="#changelog" className={badgeVariants({ variant: "outline" })}>
-        Changelog <ArrowUpRight aria-hidden="true" />
+        Changelog <ArrowUpRight aria-hidden="true"  className="rtl:-scale-x-100"/>
       </a>
     </div>
   )

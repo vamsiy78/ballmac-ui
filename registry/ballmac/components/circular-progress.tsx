@@ -139,7 +139,7 @@ function CircularProgress({
             <li key={i} className="flex items-center gap-2 text-[13px]">
               <span aria-hidden="true" className={cn("size-2.5 rounded-full", DOT[r.tone])} />
               <span className="text-foreground">{r.label}</span>
-              <span className="ml-auto pl-4 font-mono text-xs text-muted-foreground tabular-nums">{r.display ?? `${r.percent}%`}</span>
+              <span className="ms-auto ps-4 font-mono text-xs text-muted-foreground tabular-nums">{r.display ?? `${r.percent}%`}</span>
             </li>
           ))}
         </ul>

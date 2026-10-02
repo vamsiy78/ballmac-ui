@@ -44,6 +44,18 @@ Names are permanent public API: kebab-case, no prefixes (`magnetic-button`, `ai-
 8. **No `asChild` in JSX** (in item files and examples). The shadcn CLI rewrites it to Base UI's `render` prop in `base-*` projects, the `shadcn init` default. Style links and triggers directly instead: `<a className={buttonVariants({ variant: "outline" })}>`, `<DialogTrigger className={buttonVariants()}>`. Components may still *accept* `asChild`. `pnpm check` enforces this.
 9. **SSR-safe:** no `window` or `document` during render; ids via `React.useId()`; any number or date formatting uses a fixed default locale (`"en-US"`) with a `locale` prop, or the server and browser disagree and React throws a hydration error.
 
+## Right-to-left and translation
+
+Both are enforced by `pnpm check` (`scripts/rtl.ts`, `scripts/i18n.ts`); `--fix` rewrites the safe cases.
+
+- **Logical classes only:** `ms-` `me-` `ps-` `pe-` `start-` `end-` `text-start` `text-end` `border-s` `border-e` `rounded-s` `rounded-e` (and `ss/se/es/ee` corners). Never `ml-` `mr-` `pl-` `pr-` `left-` `right-` `text-left` `border-l` `rounded-l`. `left-1/2` with `-translate-x-1/2` is symmetric and fine. Inline styles use `marginInlineStart`, `paddingInlineEnd`, `insetInlineStart`.
+- **Directional icons** (ArrowRight, ChevronLeft, ArrowUpRight, PanelLeft, Undo, …) get `rtl:rotate-180` (straight arrows and chevrons) or `rtl:-scale-x-100` (diagonals). A chevron that rotates when open uses `open ? "rotate-90" : "rtl:rotate-180"`. A hover nudge needs its mirror: `group-hover:translate-x-1 rtl:group-hover:-translate-x-1`.
+- **Keyboard:** Radix roots take `dir={useDirection(props.dir)}` (`@/lib/ballmac/direction`). Custom ArrowLeft/ArrowRight handlers swap in RTL. Side props offer `start` and `end` next to the fixed `left` and `right`.
+- **Code stays left-to-right:** `<pre>`, terminals, logs, JSON, shortcuts and keys get `dir="ltr"`.
+- **Anything physical on purpose** (a hardware button, a fixed screen edge) has `// rtl-fixed: reason` on the line, or an entry with a reason in `scripts/rtl-exceptions.json`.
+- **Every built-in string goes through `msg`:** `const msg = useMessages()` from `@/lib/ballmac/i18n`, then `aria-label={msg("my-item.close", "Close")}`. Put the whole sentence in one message with `{placeholders}` (`msg("x.pageOf", "Page {page} of {total}", { page, total })`), never in fragments. Plurals: `msg("x.items", { one: "{count} item", other: "{count} items" }, { count })`. Module-level label tables use `defineMessage` and render with `msg.of(...)`. A label prop keeps working and falls back to the dictionary (`label ??= msg(...)`). Use `useLocale()` for `Intl` formatting; never hard-code `"en-US"`. Sample values: `// i18n-ignore`. Blocks and templates are exempt: their copy is content.
+- **Preview it:** the toolbar RTL toggle, or `/preview/<example>?dir=rtl`; `pnpm rtl:sweep` compares every preview with its mirror image.
+
 ## Design language
 
 - **Tokens only.** `bg-background`, `bg-card`, `bg-muted`, `bg-accent`, `bg-primary`, `text-foreground`, `text-muted-foreground`, `text-primary-foreground`, `border-border`, `border-input`, `ring-ring`, `bg-destructive`, `chart-1…5`. No hex or named colors. White/black alpha is fine for overlays and shadows (`bg-black/50`, `shadow-[0_1px_2px_0_rgb(0_0_0/0.12)]`). Use `dark:` only when a token can't express it.

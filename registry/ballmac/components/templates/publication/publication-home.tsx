@@ -61,7 +61,7 @@ function PublicationHome({ hrefs, ...props }: PublicationHomeProps) {
               <p className="text-muted-foreground mt-4 text-sm">By <span className="text-foreground font-semibold">{getAuthor(lead.author).name}</span> · {lead.read} min read</p>
             </a>
           </article>
-          <aside aria-label="More stories" className="lg:border-l lg:pl-10">
+          <aside aria-label="More stories" className="lg:border-s lg:ps-10">
             <ul className="divide-y">
               {side.map((s) => (
                 <li key={s.id} className="py-5 first:pt-0 lg:last:pb-0">

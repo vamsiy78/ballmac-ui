@@ -116,11 +116,11 @@ function MuseShell({ page, title, activeChat, hrefs: overrides, actions, fill, c
       {...props}
     >
       <style>{museCss}</style>
-      <aside className="bg-surface hidden w-64 shrink-0 border-r lg:block">
+      <aside className="bg-surface hidden w-64 shrink-0 border-e lg:block">
         <SidebarBody page={page} hrefs={hrefs} activeChat={activeChat} />
       </aside>
       <Sheet open={drawer} onOpenChange={setDrawer}>
-        <SheetContent side="left" className="w-72 p-0" closeLabel="Close menu">
+        <SheetContent side="start" className="w-72 p-0" closeLabel="Close menu">
           <SheetTitle className="sr-only">Menu</SheetTitle>
           <SheetDescription className="sr-only">Chats, projects and settings</SheetDescription>
           <SidebarBody page={page} hrefs={hrefs} activeChat={activeChat} onNavigate={() => setDrawer(false)} />
@@ -132,7 +132,7 @@ function MuseShell({ page, title, activeChat, hrefs: overrides, actions, fill, c
             <Menu className="size-5" aria-hidden="true" />
           </button>
           <h1 className="min-w-0 truncate text-[15px] font-medium">{title}</h1>
-          <div className="ml-auto flex items-center gap-1.5">{actions}</div>
+          <div className="ms-auto flex items-center gap-1.5">{actions}</div>
         </header>
         <div className={cn("flex-1", fill && "flex min-h-0")}>{children}</div>
       </div>

@@ -45,7 +45,7 @@ function NorthwindHome({ hrefs, ...props }: NorthwindHomeProps) {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <a href={contact} className="bg-primary text-primary-foreground focus-visible:ring-ring/50 inline-flex h-13 items-center justify-center gap-2 rounded-full px-7 text-base font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]">
-                  Book a demo <ArrowRight className="size-4" aria-hidden="true" />
+                  Book a demo <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />
                 </a>
                 <a href="#tour" className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-13 items-center justify-center rounded-full border px-7 text-base font-medium outline-none transition-colors focus-visible:ring-[3px]">Take the tour</a>
               </div>
@@ -134,7 +134,7 @@ function NorthwindHome({ hrefs, ...props }: NorthwindHomeProps) {
 
         <section className="bg-primary text-primary-foreground">
           <figure className="mx-auto max-w-4xl px-4 py-24 text-center sm:px-6">
-            <Quote className="mx-auto size-8 opacity-50" aria-hidden="true" />
+            <Quote className="mx-auto size-8 opacity-50 rtl:-scale-x-100" aria-hidden="true" />
             <blockquote className={cn("mt-6 text-3xl leading-snug tracking-[-0.02em] text-balance sm:text-5xl", serif)}>
               “We went from nine days to three to close the books, and nobody on my team has asked me for a receipt since March.”
             </blockquote>
@@ -145,7 +145,7 @@ function NorthwindHome({ hrefs, ...props }: NorthwindHomeProps) {
         <section className="mx-auto max-w-6xl px-4 py-24 text-center sm:px-6">
           <NorthwindHeading className="mx-auto max-w-3xl text-4xl sm:text-6xl">See it with <em>your</em> numbers.</NorthwindHeading>
           <p className="text-muted-foreground mx-auto mt-5 max-w-lg text-lg text-pretty">A 30-minute walkthrough, built around how your team spends today.</p>
-          <a href={contact} className="bg-primary text-primary-foreground focus-visible:ring-ring/50 mt-8 inline-flex h-13 items-center gap-2 rounded-full px-7 text-base font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]">Book a demo <ArrowRight className="size-4" aria-hidden="true" /></a>
+          <a href={contact} className="bg-primary text-primary-foreground focus-visible:ring-ring/50 mt-8 inline-flex h-13 items-center gap-2 rounded-full px-7 text-base font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]">Book a demo <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" /></a>
         </section>
       </main>
     </NorthwindShell>

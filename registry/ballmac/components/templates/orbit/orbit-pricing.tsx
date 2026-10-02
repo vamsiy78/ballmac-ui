@@ -95,7 +95,7 @@ function OrbitPricing({ hrefs, ...props }: OrbitPricingProps) {
             const price = p.price === null ? null : p.price === 0 ? 0 : billing === "yearly" ? Math.round(p.price * 0.8) : p.price
             return (
               <article key={p.id} className={cn("bg-card/60 relative flex flex-col rounded-3xl border p-7", "featured" in p && p.featured && "border-chart-1/60 shadow-[0_30px_80px_-40px_oklch(0.6_0.2_285/0.7)]")}>
-                {"featured" in p && p.featured && <span className="bg-chart-1 text-background absolute -top-3 left-7 rounded-full px-3 py-0.5 text-xs font-medium">Most popular</span>}
+                {"featured" in p && p.featured && <span className="bg-chart-1 text-background absolute -top-3 start-7 rounded-full px-3 py-0.5 text-xs font-medium">Most popular</span>}
                 <h2 className="text-lg font-semibold">{p.name}</h2>
                 <p className="text-muted-foreground mt-1 text-sm text-pretty">{p.blurb}</p>
                 <p className="mt-6 flex items-baseline gap-1.5">

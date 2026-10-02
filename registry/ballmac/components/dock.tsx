@@ -14,6 +14,7 @@ import {
 } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useDirection } from "@/lib/ballmac/direction"
 
 type DockOrientation = "horizontal" | "vertical"
 
@@ -71,6 +72,7 @@ function Dock({
   onFocus,
   ...props
 }: DockProps) {
+  const dir = useDirection()
   const ref = React.useRef<HTMLDivElement>(null)
   const pointer = useMotionValue(Number.POSITIVE_INFINITY)
   const reduceMotion = useReducedMotion() ?? false
@@ -129,8 +131,8 @@ function Dock({
           const items = visibleItems(ref.current)
           const index = items.indexOf(document.activeElement as HTMLElement)
           if (index === -1) return
-          const prev = vertical ? "ArrowUp" : "ArrowLeft"
-          const next = vertical ? "ArrowDown" : "ArrowRight"
+          const prev = vertical ? "ArrowUp" : dir === "rtl" ? "ArrowRight" : "ArrowLeft"
+          const next = vertical ? "ArrowDown" : dir === "rtl" ? "ArrowLeft" : "ArrowRight"
           let target = -1
           if (event.key === next) target = (index + 1) % items.length
           else if (event.key === prev) target = (index - 1 + items.length) % items.length
@@ -219,7 +221,7 @@ function DockItem({
             transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
               "pointer-events-none absolute z-10 whitespace-nowrap rounded-md border border-foreground/10 bg-background/80 px-2.5 py-1 text-xs font-medium text-foreground shadow-[0_4px_14px_-4px_rgb(0_0_0/0.3)] backdrop-blur-xl",
-              vertical ? "left-full ml-3" : "bottom-full mb-2.5"
+              vertical ? "start-full ms-3" : "bottom-full mb-2.5"
             )}
             aria-hidden="true"
           >
@@ -293,7 +295,7 @@ function DockItem({
           data-slot="dock-item-indicator"
           className={cn(
             "pointer-events-none absolute size-1 rounded-full bg-foreground/70",
-            vertical ? "-left-[4.5px] top-1/2 -mt-0.5" : "-bottom-[5px] left-1/2 -ml-0.5"
+            vertical ? "-start-[4.5px] top-1/2 -mt-0.5" : "-bottom-[5px] left-1/2 -ms-0.5"
           )}
         />
       ) : null}

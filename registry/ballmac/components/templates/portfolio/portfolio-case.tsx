@@ -103,7 +103,7 @@ function PortfolioCase({ hrefs, ...props }: PortfolioCaseProps) {
 
         <section aria-label="Next project" className="mx-auto mt-24 max-w-7xl px-4 sm:px-8">
           <a href={hrefs?.case ?? "/portfolio/work/lumen"} className="group bg-foreground text-background focus-visible:ring-ring/50 grid items-center gap-8 overflow-hidden rounded-3xl p-6 outline-none focus-visible:ring-[3px] focus-visible:ring-offset-4 focus-visible:ring-offset-background sm:grid-cols-[1fr_20rem] sm:p-10">
-            <div><p className="text-sm opacity-60" style={mono}>Next project</p><p className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-6xl">{next.title}</p><p className="mt-5 inline-flex items-center gap-2 font-semibold">{next.client}<ArrowRight className="size-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" /></p></div>
+            <div><p className="text-sm opacity-60" style={mono}>Next project</p><p className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-6xl">{next.title}</p><p className="mt-5 inline-flex items-center gap-2 font-semibold">{next.client}<ArrowRight className="size-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden="true" /></p></div>
             <Cover variant={next.cover} className="rounded-2xl" />
           </a>
         </section>

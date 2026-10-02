@@ -4,6 +4,7 @@
 import * as React from "react"
 import { Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type TimePreset = { label: string; value: string }
 type TimePickerProps = Omit<
@@ -25,12 +26,14 @@ function TimePicker({
   value,
   defaultValue = "",
   onValueChange,
-  label = "Time",
+  label,
   presets = [],
   className,
   disabled,
   ...props
 }: TimePickerProps) {
+  const msg = useMessages()
+  label ??= msg("time-picker.label", "Time")
   const [internal, setInternal] = React.useState(defaultValue)
   const current = value ?? internal
   function commit(next: string) {

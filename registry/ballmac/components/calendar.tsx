@@ -5,6 +5,7 @@
 import * as React from "react";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker } from "react-day-picker";
+import { useDirection } from "@/lib/ballmac/direction";
 import { cn } from "@/lib/utils";
 
 type CalendarProps = React.ComponentProps<typeof DayPicker> & {
@@ -27,8 +28,10 @@ function Calendar({
   components,
   ...props
 }: CalendarProps) {
+  const dir = useDirection(props.dir === "rtl" || props.dir === "ltr" ? props.dir : undefined);
   return (
     <DayPicker
+      dir={dir}
       data-slot="calendar"
       showOutsideDays={showOutsideDays}
       captionLayout={captionLayout}
@@ -48,7 +51,7 @@ function Calendar({
         caption_label: cn(
           "text-sm font-semibold",
           captionLayout !== "label" &&
-            "flex h-8 items-center gap-1 rounded-md pr-1 pl-2 text-sm font-medium [&>svg]:size-3.5 [&>svg]:text-muted-foreground",
+            "flex h-8 items-center gap-1 rounded-md pe-1 ps-2 text-sm font-medium [&>svg]:size-3.5 [&>svg]:text-muted-foreground",
         ),
         dropdowns: "flex h-(--cell-size) items-center justify-center gap-1.5 text-sm font-medium",
         dropdown_root:
@@ -64,9 +67,9 @@ function Calendar({
         week_number: "w-(--cell-size) text-center text-xs text-muted-foreground",
         day: dayCell,
         day_button: dayButton,
-        range_start: "rounded-l-md bg-accent [&>button]:rounded-md",
+        range_start: "rounded-s-md bg-accent [&>button]:rounded-md",
         range_middle: "rounded-none bg-accent [&>button]:!bg-transparent [&>button]:!text-accent-foreground [&>button]:hover:!bg-foreground/10",
-        range_end: "rounded-r-md bg-accent [&>button]:rounded-md",
+        range_end: "rounded-e-md bg-accent [&>button]:rounded-md",
         selected: "[&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary",
         today:
           "[&>button]:font-semibold [&:not([aria-selected=true])>button:not([data-range-middle])]:bg-accent [&:not([aria-selected=true])>button]:after:absolute [&:not([aria-selected=true])>button]:after:bottom-1 [&:not([aria-selected=true])>button]:after:left-1/2 [&:not([aria-selected=true])>button]:after:size-1 [&:not([aria-selected=true])>button]:after:-translate-x-1/2 [&:not([aria-selected=true])>button]:after:rounded-full [&:not([aria-selected=true])>button]:after:bg-primary",

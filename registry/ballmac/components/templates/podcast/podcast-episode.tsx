@@ -57,8 +57,8 @@ function PodcastEpisode({ hrefs, slug = "the-optimised-life", ...props }: Podcas
               <label className="flex cursor-pointer items-center gap-2 text-sm font-semibold"><input type="checkbox" checked={follow} onChange={(e) => setFollow(e.target.checked)} className="accent-primary size-4" />Follow along</label>
             </div>
             <div className="relative mt-4">
-              <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2" aria-hidden="true" />
-              <input type="search" aria-label="Search the transcript" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search the transcript" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-11 w-full rounded-full border pr-4 pl-11 outline-none focus-visible:ring-[3px]" />
+              <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-4 size-4 -translate-y-1/2" aria-hidden="true" />
+              <input type="search" aria-label="Search the transcript" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search the transcript" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-11 w-full rounded-full border pe-4 ps-11 outline-none focus-visible:ring-[3px]" />
             </div>
             <p className="text-muted-foreground mt-2 text-sm" role="status">{q ? `${matches} ${matches === 1 ? "match" : "matches"}` : "Click any line to jump to it."}</p>
             <div tabIndex={0} role="region" aria-label="Transcript" className="focus-visible:ring-ring/50 bg-card mt-3 max-h-[28rem] overflow-y-auto rounded-3xl border p-3 outline-none focus-visible:ring-[3px]">
@@ -67,7 +67,7 @@ function PodcastEpisode({ hrefs, slug = "the-optimised-life", ...props }: Podcas
                   const on = current?.t === l.t
                   return (
                     <li key={l.t} data-current={on}>
-                      <button type="button" onClick={() => setTime(l.t)} aria-current={on ? "true" : undefined} className={cn("focus-visible:ring-ring/50 grid w-full grid-cols-[3.2rem_4rem_1fr] gap-2 rounded-2xl px-3 py-3 text-left outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none", on ? "bg-chart-1 text-[var(--podcast-on-amber)]" : "hover:bg-accent")}>
+                      <button type="button" onClick={() => setTime(l.t)} aria-current={on ? "true" : undefined} className={cn("focus-visible:ring-ring/50 grid w-full grid-cols-[3.2rem_4rem_1fr] gap-2 rounded-2xl px-3 py-3 text-start outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none", on ? "bg-chart-1 text-[var(--podcast-on-amber)]" : "hover:bg-accent")}>
                         <span className={cn("text-xs font-bold tabular-nums", !on && "text-chart-2")}>{formatTime(l.t)}</span>
                         <span className="text-sm font-extrabold">{l.who}</span>
                         <span className="text-pretty">{marks(l.text)}</span>
@@ -82,7 +82,7 @@ function PodcastEpisode({ hrefs, slug = "the-optimised-life", ...props }: Podcas
           <aside className="space-y-8">
             <section aria-labelledby="pe-chapters">
               <h2 id="pe-chapters" className={cn("text-2xl", podcastDisplayClass)}>Chapters</h2>
-              <ol className="mt-3 divide-y border-y">{ep.chapters.map((c) => <li key={c.start}><button type="button" onClick={() => setTime(c.start)} className="hover:bg-accent focus-visible:ring-ring/50 flex w-full items-baseline justify-between gap-3 rounded px-1 py-3 text-left outline-none focus-visible:ring-[3px]"><span className="font-semibold text-pretty">{c.title}</span><span className="text-muted-foreground text-sm tabular-nums">{formatTime(c.start)}</span></button></li>)}</ol>
+              <ol className="mt-3 divide-y border-y">{ep.chapters.map((c) => <li key={c.start}><button type="button" onClick={() => setTime(c.start)} className="hover:bg-accent focus-visible:ring-ring/50 flex w-full items-baseline justify-between gap-3 rounded px-1 py-3 text-start outline-none focus-visible:ring-[3px]"><span className="font-semibold text-pretty">{c.title}</span><span className="text-muted-foreground text-sm tabular-nums">{formatTime(c.start)}</span></button></li>)}</ol>
             </section>
             <section aria-labelledby="pe-guest" className="bg-secondary rounded-3xl p-5">
               <h2 id="pe-guest" className="text-xs font-extrabold tracking-[0.14em] uppercase">Today’s guest</h2>

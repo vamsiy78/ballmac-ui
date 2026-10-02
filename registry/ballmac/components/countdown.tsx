@@ -3,6 +3,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useLocale, useMessages } from "@/lib/ballmac/i18n"
 
 type CountdownProps = Omit<React.ComponentProps<"div">, "defaultValue"> & {
   /** Controlled seconds remaining. */
@@ -26,9 +27,12 @@ function Countdown({
   onValueChange,
   onComplete,
   running = true,
-  label = "Time remaining",
+  label,
   ...props
 }: CountdownProps) {
+  const msg = useMessages()
+  const locale = useLocale()
+  label ??= msg("countdown.label", "Time remaining")
   const [internal, setInternal] = React.useState(
     Math.max(0, Math.floor(defaultValue)),
   )
@@ -63,11 +67,13 @@ function Countdown({
           [minutes, "minutes"],
           [seconds, "seconds"],
         ] as const)
+  const unitFormat = (n: number, unit: "hour" | "minute" | "second") => new Intl.NumberFormat(locale, { style: "unit", unit, unitDisplay: "long" }).format(n)
+  const spoken = new Intl.ListFormat(locale, { type: "unit", style: "short" }).format([...(hours ? [unitFormat(hours, "hour")] : []), unitFormat(minutes, "minute"), unitFormat(seconds, "second")])
   return (
     <div
       data-slot="countdown"
       role="timer"
-      aria-label={`${label}: ${hours ? `${hours} ${hours === 1 ? "hour" : "hours"}, ` : ""}${minutes} ${minutes === 1 ? "minute" : "minutes"}, ${seconds} ${seconds === 1 ? "second" : "seconds"}`}
+      aria-label={`${label}: ${spoken}`}
       className={cn(
         "inline-flex min-w-0 items-center gap-1.5 font-mono tabular-nums",
         className,
@@ -91,7 +97,7 @@ function Countdown({
         </React.Fragment>
       ))}
       <span className="sr-only" aria-live="polite">
-        {remaining === 0 ? `${label} complete` : ""}
+        {remaining === 0 ? msg("countdown.complete", "{label} complete", { label }) : ""}
       </span>
     </div>
   )

@@ -116,13 +116,13 @@ function ReasoningDisclosure({
         <span className="font-medium">{heading}</span>
         <ChevronRight
           aria-hidden="true"
-          className="size-3.5 transition-transform duration-150 group-data-[state=open]/reasoning:rotate-90 motion-reduce:transition-none"
+          className="size-3.5 transition-transform duration-150 group-data-[state=open]/reasoning:rotate-90 rtl:group-data-[state=closed]/reasoning:rotate-180 motion-reduce:transition-none"
         />
       </CollapsiblePrimitive.Trigger>
       <CollapsiblePrimitive.Content
         data-slot="reasoning-disclosure-content"
         className={cn(
-          "mt-1.5 border-l-2 border-border pl-4 text-[13px] leading-6 whitespace-pre-wrap break-words text-muted-foreground",
+          "mt-1.5 border-s-2 border-border ps-4 text-[13px] leading-6 whitespace-pre-wrap break-words text-muted-foreground",
           contentClassName
         )}
       >

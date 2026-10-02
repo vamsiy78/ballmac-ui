@@ -8,6 +8,7 @@ import { Collapsible as CollapsiblePrimitive } from "radix-ui"
 
 import { SourceFavicon, hostOf, type CitationSource } from "@/components/ballmac/citation"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type SourcesListProps = Omit<React.ComponentProps<"div">, "onChange" | "title"> & {
   /** The pages the answer drew on, in citation order: the first is [1]. */
@@ -35,7 +36,7 @@ type SourcesListProps = Omit<React.ComponentProps<"div">, "onChange" | "title"> 
 function SourcesList({
   sources,
   variant = "list",
-  title = "Sources",
+  title,
   open: openProp,
   defaultOpen = false,
   onOpenChange,
@@ -46,6 +47,8 @@ function SourcesList({
   className,
   ...props
 }: SourcesListProps) {
+  const msg = useMessages()
+  title ??= msg("sources-list.title", "Sources")
   const reduce = useReducedMotion()
   const autoId = React.useId()
   const prefix = idPrefix ?? `sources${autoId.replace(/:/g, "")}`
@@ -105,7 +108,7 @@ function SourcesList({
                   <span className="flex min-w-0 items-center gap-1.5 text-xs text-muted-foreground">
                     <SourceFavicon source={source} className="size-4 text-[9px]" />
                     <span className="truncate">{source.site ?? hostOf(source.url)}</span>
-                    {source.date && <span className="shrink-0 before:mr-1.5 before:content-['·']">{source.date}</span>}
+                    {source.date && <span className="shrink-0 before:me-1.5 before:content-['·']">{source.date}</span>}
                   </span>
                   <span
                     className={cn(
@@ -132,9 +135,9 @@ function SourcesList({
     <button
       type="button"
       onClick={() => setAll(true)}
-      className="mt-1 ml-2 inline-flex h-8 items-center rounded-md px-2 text-[13px] font-medium text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+      className="mt-1 ms-2 inline-flex h-8 items-center rounded-md px-2 text-[13px] font-medium text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
     >
-      Show all {sources.length}
+      {msg("sources-list.showAll", "Show all")} {sources.length}
     </button>
   )
 
@@ -161,7 +164,7 @@ function SourcesList({
     >
       <CollapsiblePrimitive.Trigger
         data-slot="sources-trigger"
-        className="group flex min-h-11 w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm outline-none transition-colors duration-150 hover:bg-accent/50 focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none"
+        className="group flex min-h-11 w-full items-center gap-3 rounded-xl px-3 py-2 text-start text-sm outline-none transition-colors duration-150 hover:bg-accent/50 focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none"
       >
         <span aria-hidden="true" className="flex -space-x-1.5">
           {stack.map((s, i) => (
@@ -177,7 +180,7 @@ function SourcesList({
         <span className="text-muted-foreground tabular-nums">{count}</span>
         <ChevronDown
           aria-hidden="true"
-          className="ml-auto size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]:rotate-180 motion-reduce:transition-none"
+          className="ms-auto size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]:rotate-180 motion-reduce:transition-none"
         />
       </CollapsiblePrimitive.Trigger>
       <CollapsiblePrimitive.Content className="overflow-hidden data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0 motion-reduce:animate-none">

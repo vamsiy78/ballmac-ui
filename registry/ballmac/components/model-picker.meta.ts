@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "model", "select", "combobox", "llm", "picker"],
   files: [{ path: "components/model-picker.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "popover", "command"],
+  registryDependencies: ["shadcn:utils", "popover", "command", "i18n"],
   examples: [
     { name: "model-picker-demo", title: "Grouped with details", file: "model-picker-demo.tsx" },
     { name: "model-picker-compact", title: "Compact in a composer", file: "model-picker-compact.tsx" },

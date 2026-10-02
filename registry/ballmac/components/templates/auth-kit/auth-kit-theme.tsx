@@ -128,8 +128,8 @@ function AuthPassword({ label = "Password", error, id, ...props }: Omit<React.Co
     <div>
       <label htmlFor={id} className="text-sm font-medium">{label}</label>
       <div className="relative mt-1.5">
-        <input id={id} type={show ? "text" : "password"} aria-invalid={!!error} aria-describedby={error ? `${id}-err` : undefined} className={cn(inputClass, "pr-11")} {...props} />
-        <button type="button" onClick={() => setShow((v) => !v)} aria-label={show ? "Hide password" : "Show password"} aria-pressed={show} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 absolute top-1/2 right-1.5 inline-flex size-8 -translate-y-1/2 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px]">
+        <input id={id} type={show ? "text" : "password"} aria-invalid={!!error} aria-describedby={error ? `${id}-err` : undefined} className={cn(inputClass, "pe-11")} {...props} />
+        <button type="button" onClick={() => setShow((v) => !v)} aria-label={show ? "Hide password" : "Show password"} aria-pressed={show} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 absolute top-1/2 end-1.5 inline-flex size-8 -translate-y-1/2 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px]">
           {show ? <EyeOff className="size-4" aria-hidden="true" /> : <Eye className="size-4" aria-hidden="true" />}
         </button>
       </div>

@@ -79,8 +79,8 @@ function Newsletter1({
     <section data-slot="newsletter-1" className={cn("mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28", className)} {...props}>
       <div className="bg-card relative isolate overflow-hidden rounded-[2rem] border">
         <div aria-hidden="true" className="absolute inset-0 -z-10">
-          <div className="bg-chart-3/20 absolute -top-24 -right-16 size-[24rem] rounded-full blur-[100px]" />
-          <div className="bg-chart-1/15 absolute -bottom-32 -left-10 size-[22rem] rounded-full blur-[100px]" />
+          <div className="bg-chart-3/20 absolute -top-24 -end-16 size-[24rem] rounded-full blur-[100px]" />
+          <div className="bg-chart-1/15 absolute -bottom-32 -start-10 size-[22rem] rounded-full blur-[100px]" />
         </div>
         <div className="grid items-center gap-12 p-8 sm:p-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:p-16">
           <div className="min-w-0">
@@ -135,7 +135,7 @@ function Newsletter1({
                     className="bg-background/80 sm:flex-1"
                   />
                   <Button type="submit" size="lg" shape="pill" loading={state === "sending"}>
-                    {state === "sending" ? "Subscribing…" : <>{buttonLabel} <ArrowRight /></>}
+                    {state === "sending" ? "Subscribing…" : <>{buttonLabel} <ArrowRight  className="rtl:rotate-180"/></>}
                   </Button>
                 </div>
                 <p id={errorId} role="alert" className="text-destructive mt-2 min-h-5 text-sm">

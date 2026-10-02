@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["time", "schedule", "input"],
   files: [{ path: "components/time-picker.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "time-picker-demo",

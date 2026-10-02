@@ -1,6 +1,9 @@
 // Ballmac UI: Sparkline. https://ui.ballmac.com/components/sparkline
+"use client"
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type SparklineProps = Omit<React.ComponentProps<"svg">, "values"> & {
   /** Ordered numeric samples. */ values: number[]
@@ -16,6 +19,7 @@ function Sparkline({
   showEnd = true,
   ...props
 }: SparklineProps) {
+  const msg = useMessages()
   const safe = values.filter(Number.isFinite)
   const minimum = Math.min(...safe)
   const maximum = Math.max(...safe)
@@ -35,7 +39,7 @@ function Sparkline({
     <svg
       data-slot="sparkline"
       role="img"
-      aria-label={`${label}: ${safe.length ? `from ${safe[0]} to ${safe.at(-1)}` : "no data"}`}
+      aria-label={safe.length ? msg("sparkline.range", "{label}: from {from} to {to}", { label, from: safe[0], to: safe.at(-1) ?? "" }) : msg("sparkline.noData", "{label}: no data", { label })}
       viewBox="0 0 100 48"
       preserveAspectRatio="none"
       height={height}

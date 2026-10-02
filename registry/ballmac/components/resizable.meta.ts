@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["panels", "split", "layout", "resize"],
   files: [{ path: "components/resizable.tsx" }],
   dependencies: ["react-resizable-panels@^3", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "resizable-demo", title: "Editor layout", file: "resizable-demo.tsx" },
     { name: "resizable-states", title: "Collapsible panel", file: "resizable-states.tsx" },

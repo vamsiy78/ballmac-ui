@@ -71,10 +71,10 @@ function OrbitHome({ hrefs, ...props }: OrbitHomeProps) {
         <section className="relative -mt-[4.25rem] overflow-hidden px-4 pt-36 pb-16 sm:px-6 sm:pt-44">
           <AuroraBackground aria-hidden="true" className="absolute inset-0 -z-10" colors={["var(--chart-1)", "var(--chart-5)", "var(--chart-4)"]} intensity={0.55} radialMask />
           <div className="mx-auto max-w-4xl text-center">
-            <a href="#" className="bg-card/60 hover:bg-card focus-visible:ring-ring/50 mx-auto inline-flex items-center gap-2 rounded-full border py-1 pr-3 pl-1 text-sm backdrop-blur outline-none transition-colors focus-visible:ring-[3px]">
+            <a href="#" className="bg-card/60 hover:bg-card focus-visible:ring-ring/50 mx-auto inline-flex items-center gap-2 rounded-full border py-1 pe-3 ps-1 text-sm backdrop-blur outline-none transition-colors focus-visible:ring-[3px]">
               <span className="bg-chart-1 text-background rounded-full px-2 py-0.5 text-xs font-medium">New</span>
               Computer use is generally available
-              <ArrowRight className="size-3.5" aria-hidden="true" />
+              <ArrowRight className="size-3.5 rtl:rotate-180" aria-hidden="true" />
             </a>
             <h1 className={cn("mt-7 text-[2.6rem] leading-[1.02] sm:text-6xl lg:text-7xl", display)}>
               Agents that <span className="from-chart-1 via-chart-5 to-chart-2 bg-gradient-to-r bg-clip-text text-transparent">finish the job.</span>
@@ -84,9 +84,9 @@ function OrbitHome({ hrefs, ...props }: OrbitHomeProps) {
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href="#" className="bg-foreground text-background focus-visible:ring-ring/50 inline-flex h-12 items-center gap-2 rounded-2xl px-6 font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]">
-                Start building <ArrowRight className="size-4" aria-hidden="true" />
+                Start building <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />
               </a>
-              <div className="bg-card/70 flex h-12 items-center gap-2 rounded-2xl border pr-1.5 pl-4 text-sm backdrop-blur" style={mono}>
+              <div className="bg-card/70 flex h-12 items-center gap-2 rounded-2xl border pe-1.5 ps-4 text-sm backdrop-blur" style={mono}>
                 <span className="text-muted-foreground" aria-hidden="true">$</span> npm i @orbit/sdk
                 <CopyButton value="npm i @orbit/sdk" ariaLabel="Copy install command" />
               </div>
@@ -173,11 +173,11 @@ function OrbitHome({ hrefs, ...props }: OrbitHomeProps) {
                 { depth: 1, name: "gmail.send_draft", ms: "1.5 s", w: 32, tone: "bg-chart-3" },
               ].map((r, i) => (
                 <li key={r.name} className="grid grid-cols-[1fr_5rem] items-center gap-4 px-5 py-3 sm:grid-cols-[minmax(0,16rem)_1fr_5rem]">
-                  <span className="truncate" style={{ paddingLeft: `${r.depth * 1.25}rem` }}>{r.name}</span>
+                  <span className="truncate" style={{ paddingInlineStart: `${r.depth * 1.25}rem` }}>{r.name}</span>
                   <span className="bg-muted/60 relative hidden h-2 overflow-hidden rounded-full sm:block">
                     <span className={cn("absolute inset-y-0 rounded-full", r.tone)} style={{ left: `${i === 0 ? 0 : [0, 14, 32, 57][i - 1]}%`, width: `${r.w}%` }} />
                   </span>
-                  <span className="text-muted-foreground text-right tabular-nums">{r.ms}</span>
+                  <span className="text-muted-foreground text-end tabular-nums">{r.ms}</span>
                 </li>
               ))}
             </ul>
@@ -227,7 +227,7 @@ function OrbitHome({ hrefs, ...props }: OrbitHomeProps) {
             </p>
             <footer className="text-muted-foreground mt-8 flex items-center justify-center gap-3 text-sm">
               <span className="bg-chart-4/25 flex size-10 items-center justify-center rounded-full font-medium text-foreground" aria-hidden="true">PN</span>
-              <span className="text-left"><span className="text-foreground block font-medium">Priya Nair</span>VP Engineering, Fieldly</span>
+              <span className="text-start"><span className="text-foreground block font-medium">Priya Nair</span>VP Engineering, Fieldly</span>
             </footer>
           </blockquote>
         </section>
@@ -240,7 +240,7 @@ function OrbitHome({ hrefs, ...props }: OrbitHomeProps) {
             <p className="text-muted-foreground mx-auto mt-4 max-w-lg text-pretty">Free for your first 10,000 runs. No credit card, no sales call.</p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href="#" className="bg-foreground text-background focus-visible:ring-ring/50 inline-flex h-12 items-center gap-2 rounded-2xl px-6 font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]">
-                Start building <ArrowRight className="size-4" aria-hidden="true" />
+                Start building <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />
               </a>
               <a href="#" className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-12 items-center gap-2 rounded-2xl border px-6 font-medium outline-none transition-colors focus-visible:ring-[3px]">
                 <Network className="size-4" aria-hidden="true" /> Talk to an engineer

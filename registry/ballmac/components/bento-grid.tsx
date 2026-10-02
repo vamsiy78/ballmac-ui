@@ -109,7 +109,7 @@ function BentoCard({
             className="mt-3 inline-flex items-center gap-1 text-sm font-medium outline-none transition-opacity duration-300 after:absolute after:inset-0 after:content-[''] [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover/bento:opacity-100 [@media(hover:hover)]:focus-visible:opacity-100"
           >
             {cta}
-            <ArrowRight aria-hidden="true" className="size-3.5 transition-transform duration-200 group-hover/bento:translate-x-0.5" />
+            <ArrowRight aria-hidden="true" className="size-3.5 transition-transform duration-200 group-hover/bento:translate-x-0.5 rtl:rotate-180 rtl:group-hover/bento:-translate-x-0.5" />
           </a>
         )}
       </div>

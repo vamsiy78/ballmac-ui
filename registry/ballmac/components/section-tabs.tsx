@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { scrollToId, useScrollSpy, useScrolled, type ScrollContainer } from "@/lib/ballmac/scroll";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type SectionTab = {
   /** The id of the section in the page. */
@@ -38,7 +39,7 @@ type SectionTabsProps = Omit<React.ComponentProps<"nav">, "children"> & {
  */
 function SectionTabs({
   sections,
-  label = "Sections",
+  label,
   offset = 72,
   container,
   variant = "underline",
@@ -48,6 +49,8 @@ function SectionTabs({
   style,
   ...props
 }: SectionTabsProps) {
+  const msg = useMessages()
+  label ??= msg("section-tabs.label", "Sections")
   const reduce = useReducedMotion();
   const indicatorId = `section-tabs-${React.useId()}`;
   const ids = React.useMemo(() => sections.map((s) => s.id), [sections]);

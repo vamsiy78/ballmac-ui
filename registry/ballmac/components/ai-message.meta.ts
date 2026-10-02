@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "chat", "message", "llm", "assistant", "copy"],
   files: [{ path: "components/ai-message.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["button", "shadcn:utils"],
+  registryDependencies: ["button", "shadcn:utils", "i18n"],
   examples: [
     { name: "ai-message-demo", title: "Default", file: "ai-message-demo.tsx" },
     { name: "ai-message-actions", title: "With actions", file: "ai-message-actions.tsx" },

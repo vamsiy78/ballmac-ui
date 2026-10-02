@@ -10,6 +10,7 @@ import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/seg
 import { StatusDot } from "@/components/ballmac/status-dot"
 import { Switch } from "@/components/ballmac/switch"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type Dashboard2Range = "7d" | "30d" | "12m"
 
@@ -93,10 +94,12 @@ function Dashboard2({
   pages = defaultPages,
   countries = defaultCountries,
   live = 128,
-  locale = "en-US",
+  locale,
   className,
   ...props
 }: Dashboard2Props) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const [range, setRange] = React.useState<Dashboard2Range>(defaultRange)
   const [compare, setCompare] = React.useState(true)
   const compareId = React.useId()
@@ -230,7 +233,7 @@ function Dashboard2({
           <p className="text-sm font-medium">Devices</p>
           <div className="mt-5 flex h-3 gap-0.5 overflow-hidden rounded-full" role="img" aria-label={deviceRows.map((d) => `${d.label} ${d.value} percent`).join(", ")}>
             {deviceRows.map((d) => (
-              <span key={d.key} className={cn("h-full first:rounded-l-full last:rounded-r-full", d.tone)} style={{ width: `${d.value}%` }} />
+              <span key={d.key} className={cn("h-full first:rounded-s-full last:rounded-e-full", d.tone)} style={{ width: `${d.value}%` }} />
             ))}
           </div>
           <ul className="mt-5 space-y-4">
@@ -239,7 +242,7 @@ function Dashboard2({
                 <span className="bg-muted flex size-9 items-center justify-center rounded-lg"><d.icon className="size-4" aria-hidden="true" /></span>
                 <span className="flex-1">{d.label}</span>
                 <span className={cn("size-2.5 rounded-sm", d.tone)} aria-hidden="true" />
-                <span className="w-10 text-right font-medium tabular-nums">{d.value}%</span>
+                <span className="w-10 text-end font-medium tabular-nums">{d.value}%</span>
               </li>
             ))}
           </ul>
@@ -266,12 +269,12 @@ function Dashboard2({
       <div className="bg-card mt-3 overflow-hidden rounded-2xl border">
         <p className="px-4 py-4 text-sm font-medium sm:px-5">Top pages</p>
         <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Top pages">
-          <table className="w-full min-w-[28rem] text-left text-sm">
+          <table className="w-full min-w-[28rem] text-start text-sm">
             <thead>
               <tr className="text-muted-foreground border-y text-xs">
                 <th scope="col" className="px-4 py-2.5 font-medium sm:px-5">Page</th>
                 <th scope="col" className="px-4 py-2.5 font-medium">Views</th>
-                <th scope="col" className="px-4 py-2.5 text-right font-medium sm:px-5">Bounce rate</th>
+                <th scope="col" className="px-4 py-2.5 text-end font-medium sm:px-5">Bounce rate</th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -284,7 +287,7 @@ function Dashboard2({
                       <span aria-hidden="true" className="bg-muted hidden h-1.5 w-32 overflow-hidden rounded-full sm:block"><span className="bg-chart-1 block h-full rounded-full" style={{ width: `${(p.views / maxViews) * 100}%` }} /></span>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-right tabular-nums sm:px-5">{p.bounce}%</td>
+                  <td className="px-4 py-3 text-end tabular-nums sm:px-5">{p.bounce}%</td>
                 </tr>
               ))}
             </tbody>

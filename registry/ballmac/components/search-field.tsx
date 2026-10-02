@@ -4,6 +4,7 @@
 import * as React from "react"
 import { Search, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type SearchFieldProps = Omit<
   React.ComponentProps<"input">,
@@ -25,12 +26,14 @@ function SearchField({
   defaultValue = "",
   onValueChange,
   onSearch,
-  label = "Search",
+  label,
   className,
   disabled,
   onKeyDown,
   ...props
 }: SearchFieldProps) {
+  const msg = useMessages()
+  label ??= msg("search-field.label", "Search")
   const [internal, setInternal] = React.useState(defaultValue)
   const current = value ?? internal
   const inputRef = React.useRef<HTMLInputElement>(null)
@@ -69,7 +72,7 @@ function SearchField({
       {current && (
         <button
           type="button"
-          aria-label="Clear search"
+          aria-label={msg("search-field.clearSearch", "Clear search")}
           disabled={disabled}
           onClick={() => {
             commit("")

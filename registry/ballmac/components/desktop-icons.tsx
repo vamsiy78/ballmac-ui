@@ -5,6 +5,7 @@ import * as React from "react"
 
 import { AppIcon, DriveIcon, FileIcon, FolderIcon, type IconTone } from "@/components/ballmac/mac-icons"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type DesktopItem = {
   /** Unique id. */
@@ -49,7 +50,9 @@ function Glyph({ item }: { item: DesktopItem }) {
  * A macOS desktop: icons on a grid. Click or drag a box to select, drag icons to move them (they snap to cells),
  * double-click or press Return to open. Arrow keys move focus; Alt plus an arrow key moves the focused icon.
  */
-function DesktopIcons({ items: initial, onItemsChange, onOpen, cell = 96, label = "Desktop", className, style, ...props }: DesktopIconsProps) {
+function DesktopIcons({ items: initial, onItemsChange, onOpen, cell = 96, label, className, style, ...props }: DesktopIconsProps) {
+  const msg = useMessages()
+  label ??= msg("desktop-icons.label", "Desktop")
   const rootRef = React.useRef<HTMLDivElement>(null)
   const [items, setItems] = React.useState(initial)
   const [selected, setSelected] = React.useState<string[]>([])

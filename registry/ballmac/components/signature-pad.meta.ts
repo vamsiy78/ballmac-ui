@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["signature", "drawing", "form"],
   files: [{ path: "components/signature-pad.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "signature-pad-demo",

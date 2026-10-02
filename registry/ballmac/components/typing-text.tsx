@@ -107,7 +107,7 @@ function TypingText({
         {visible}
         {cursor && !reduce && (
           <motion.span
-            className="ml-px inline-block h-[1.05em] w-[0.1em] translate-y-[0.14em] bg-current"
+            className="ms-px inline-block h-[1.05em] w-[0.1em] translate-y-[0.14em] bg-current"
             animate={blinking ? { opacity: [1, 1, 0, 0] } : { opacity: 1 }}
             transition={blinking ? { duration: 1, repeat: Infinity, times: [0, 0.5, 0.5, 1] } : { duration: 0 }}
           />

@@ -4,12 +4,15 @@
 import * as React from "react";
 import { Circle } from "lucide-react";
 import { RadioGroup as Primitive } from "radix-ui";
+import { useDirection } from "@/lib/ballmac/direction";
 import { cn } from "@/lib/utils";
 
 type RadioGroupProps = React.ComponentProps<typeof Primitive.Root>;
 function RadioGroup({ className, ...props }: RadioGroupProps) {
+  const dir = useDirection(props.dir);
   return (
     <Primitive.Root
+      dir={dir}
       data-slot="radio-group"
       className={cn("grid gap-2", className)}
       {...props}

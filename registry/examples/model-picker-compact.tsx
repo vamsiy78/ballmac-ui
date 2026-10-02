@@ -34,7 +34,7 @@ export default function ModelPickerCompact() {
           <button
             type="button"
             aria-label="Send message"
-            className="ml-auto inline-flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground outline-none hover:bg-primary/90 focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="ms-auto inline-flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground outline-none hover:bg-primary/90 focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             <ArrowUp aria-hidden="true" className="size-4" />
           </button>

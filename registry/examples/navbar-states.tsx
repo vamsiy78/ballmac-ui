@@ -10,7 +10,7 @@ export default function NavbarStates() {
         <NavbarBrand href="#top">
           <Hexagon aria-hidden="true" className="size-5 text-primary" /> Acme
         </NavbarBrand>
-        <NavbarLinks className="ml-auto">
+        <NavbarLinks className="ms-auto">
           <NavbarLink href="#a" active>Overview</NavbarLink>
           <NavbarLink href="#b">Guides</NavbarLink>
         </NavbarLinks>

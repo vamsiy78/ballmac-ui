@@ -20,7 +20,7 @@ function ButtonGroup({
       className={cn(
         "group/button-group inline-flex max-w-full items-stretch rounded-md shadow-xs [&>*]:relative [&>*]:min-w-0 [&>*]:shadow-none [&>*:focus-visible]:z-10",
         orientation === "horizontal"
-          ? "flex-row [&>*:not(:first-child)]:-ml-px [&>*:not(:first-child)]:rounded-l-none [&>*:not(:last-child)]:rounded-r-none"
+          ? "flex-row [&>*:not(:first-child)]:-ms-px [&>*:not(:first-child)]:rounded-s-none [&>*:not(:last-child)]:rounded-e-none"
           : "flex-col [&>*:not(:first-child)]:-mt-px [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none",
         className,
       )}

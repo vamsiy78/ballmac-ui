@@ -11,6 +11,7 @@ import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartToo
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
 import { Sparkline } from "@/components/ballmac/sparkline"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type Dashboard1Range = "7d" | "30d" | "90d"
 
@@ -119,10 +120,12 @@ function Dashboard1({
   channels = defaultChannels,
   orders = defaultOrders,
   currency = "USD",
-  locale = "en-US",
+  locale,
   className,
   ...props
 }: Dashboard1Props) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const [range, setRange] = React.useState<Dashboard1Range>(defaultRange)
   const series = React.useMemo(() => getSeries(range), [getSeries, range])
   const money = React.useMemo(() => new Intl.NumberFormat(locale, { style: "currency", currency, maximumFractionDigits: 0 }), [locale, currency])
@@ -237,14 +240,14 @@ function Dashboard1({
           <a href="#orders" className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 rounded-sm text-sm underline-offset-4 outline-none hover:underline focus-visible:ring-[3px]">View all</a>
         </div>
         <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Recent orders">
-          <table className="w-full min-w-[34rem] text-left text-sm">
+          <table className="w-full min-w-[34rem] text-start text-sm">
             <thead>
               <tr className="text-muted-foreground border-y text-xs">
                 <th scope="col" className="px-4 py-2.5 font-medium sm:px-5">Order</th>
                 <th scope="col" className="px-4 py-2.5 font-medium">Customer</th>
                 <th scope="col" className="px-4 py-2.5 font-medium">Status</th>
                 <th scope="col" className="px-4 py-2.5 font-medium">Date</th>
-                <th scope="col" className="px-4 py-2.5 text-right font-medium sm:px-5">Total</th>
+                <th scope="col" className="px-4 py-2.5 text-end font-medium sm:px-5">Total</th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -257,7 +260,7 @@ function Dashboard1({
                   </td>
                   <td className="px-4 py-3"><Badge status={statusTone[o.status]}>{statusLabel[o.status]}</Badge></td>
                   <td className="text-muted-foreground px-4 py-3">{dateFmt.format(new Date(`${o.date}T00:00:00Z`))}</td>
-                  <td className="px-4 py-3 text-right font-medium tabular-nums sm:px-5">{money.format(o.total)}</td>
+                  <td className="px-4 py-3 text-end font-medium tabular-nums sm:px-5">{money.format(o.total)}</td>
                 </tr>
               ))}
             </tbody>

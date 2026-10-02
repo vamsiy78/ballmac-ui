@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["code", "snippet", "tabs", "api", "curl"],
   files: [{ path: "components/snippet-tabs.tsx" }],
   dependencies: ["radix-ui"],
-  registryDependencies: ["shadcn:utils", "copy-button", "highlight"],
+  registryDependencies: ["shadcn:utils", "copy-button", "highlight", "i18n"],
   examples: [
     { name: "snippet-tabs-demo", title: "cURL, JavaScript, Python and Go", file: "snippet-tabs-demo.tsx" },
     { name: "snippet-tabs-variables", title: "With your API key filled in", file: "snippet-tabs-variables.tsx" },

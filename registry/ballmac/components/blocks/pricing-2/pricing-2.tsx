@@ -171,7 +171,7 @@ function Pricing2({
                 className={buttonVariants({ variant: plan.featured ? "default" : "outline", size: "lg", shape: "pill", className: "mt-6 w-full" })}
               >
                 {plan.cta.label}
-                {plan.featured && <ArrowRight />}
+                {plan.featured && <ArrowRight  className="rtl:rotate-180"/>}
               </a>
               <div className="mt-7 border-t pt-6">
                 {plan.lead && <p className="mb-3 text-sm font-medium">{plan.lead}</p>}
@@ -196,7 +196,7 @@ function Pricing2({
             <p className="text-muted-foreground mt-1 text-sm">{enterprise.description}</p>
           </div>
           <a className={buttonVariants({ variant: "outline", shape: "pill" })} href={enterprise.cta.href}>
-            {enterprise.cta.label} <ArrowRight />
+            {enterprise.cta.label} <ArrowRight  className="rtl:rotate-180"/>
           </a>
         </div>
       )}

@@ -5,6 +5,7 @@ import * as React from "react"
 import { ArrowUpRight, Clock } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type Blog1Post = {
   title: string
@@ -84,15 +85,15 @@ function BlogCover({ variant = 0, className, ...props }: BlogCoverProps) {
       {i === 2 && (
         <>
           <div className="absolute inset-0 bg-[radial-gradient(color-mix(in_oklch,var(--foreground)_20%,transparent)_1px,transparent_1px)] [background-size:16px_16px]" />
-          <span className={cn("absolute top-[18%] left-[16%] size-[46%] rotate-12 rounded-[22%]", t.solid)} />
-          <span className={cn("absolute right-[14%] bottom-[16%] size-[34%] -rotate-6 rounded-[28%] border border-foreground/10", t.soft)} />
+          <span className={cn("absolute top-[18%] start-[16%] size-[46%] rotate-12 rounded-[22%]", t.solid)} />
+          <span className={cn("absolute end-[14%] bottom-[16%] size-[34%] -rotate-6 rounded-[28%] border border-foreground/10", t.soft)} />
         </>
       )}
       {i === 3 && (
         <>
-          <span className={cn("absolute -top-[20%] -left-[10%] size-[70%] rounded-full blur-2xl", t.soft)} />
-          <span className={cn("absolute top-[22%] right-[8%] size-[56%] rounded-[45%_55%_60%_40%]", t.solid)} />
-          <span className="bg-background/60 absolute bottom-[12%] left-[18%] h-[22%] w-[44%] rounded-full backdrop-blur-sm" />
+          <span className={cn("absolute -top-[20%] -start-[10%] size-[70%] rounded-full blur-2xl", t.soft)} />
+          <span className={cn("absolute top-[22%] end-[8%] size-[56%] rounded-[45%_55%_60%_40%]", t.solid)} />
+          <span className="bg-background/60 absolute bottom-[12%] start-[18%] h-[22%] w-[44%] rounded-full backdrop-blur-sm" />
         </>
       )}
       {i === 4 && (
@@ -147,10 +148,12 @@ function Blog1({
   description = "What we are building, how we think about it and what we learn from the teams who use it.",
   posts = defaults,
   filterable = true,
-  locale = "en-US",
+  locale,
   className,
   ...props
 }: Blog1Props) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const [category, setCategory] = React.useState("All")
   const categories = ["All", ...Array.from(new Set(posts.map((p) => p.category)))]
   const shown = posts.filter((p) => category === "All" || p.category === category)
@@ -216,7 +219,7 @@ function Blog1({
                   <h3 className="mt-2 text-lg leading-snug font-semibold tracking-[-0.02em] text-balance">
                     <a href={post.href} className="focus-visible:ring-ring/50 rounded-sm outline-none after:absolute after:inset-0 focus-visible:ring-[3px]">
                       {post.title}
-                      <ArrowUpRight className="ml-1 inline size-4 -translate-x-1 opacity-0 transition-all group-hover/post:translate-x-0 group-hover/post:opacity-100 motion-reduce:transition-none" aria-hidden="true" />
+                      <ArrowUpRight className="ms-1 inline size-4 -translate-x-1 opacity-0 transition-all group-hover/post:translate-x-0 group-hover/post:opacity-100 motion-reduce:transition-none rtl:-scale-x-100" aria-hidden="true" />
                     </a>
                   </h3>
                   <p className="text-muted-foreground mt-2 line-clamp-2 text-sm text-pretty">{post.excerpt}</p>

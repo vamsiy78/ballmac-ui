@@ -7,6 +7,7 @@ import { Dialog as DialogPrimitive } from "radix-ui"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type DrawerSide = "bottom" | "left" | "right"
 
@@ -119,7 +120,10 @@ type SpringDrawerContentProps = Omit<React.ComponentProps<"div">, "ref" | "title
   maxWidth?: string
 }
 
-function SpringDrawerContent({ className, children, showCloseButton = true, closeLabel = "Close", handleLabel = "Resize drawer", maxWidth, style, ...props }: SpringDrawerContentProps) {
+function SpringDrawerContent({ className, children, showCloseButton = true, closeLabel, handleLabel, maxWidth, style, ...props }: SpringDrawerContentProps) {
+  const msg = useMessages()
+  closeLabel ??= msg("spring-drawer.closeLabel", "Close")
+  handleLabel ??= msg("spring-drawer.handleLabel", "Resize drawer")
   const { open, side, snapPoints, snap, setSnap } = useDrawer()
   const reduce = useReducedMotion()
   const bottom = side === "bottom"
@@ -226,8 +230,8 @@ function SpringDrawerContent({ className, children, showCloseButton = true, clos
                 className={cn(
                   "fixed z-50 flex flex-col bg-card text-card-foreground shadow-[0_-12px_48px_-12px_rgb(0_0_0/0.35)] outline-none",
                   bottom && "inset-x-0 bottom-0 mx-auto w-full rounded-t-2xl border border-b-0",
-                  side === "right" && "inset-y-0 right-0 border-l",
-                  side === "left" && "inset-y-0 left-0 border-r",
+                  side === "right" && "inset-y-0 right-0 border-l", // rtl-fixed: fixed right edge
+                  side === "left" && "inset-y-0 left-0 border-r", // rtl-fixed: fixed left edge
                   className
                 )}
                 {...(props as object)}
@@ -263,7 +267,7 @@ function SpringDrawerContent({ className, children, showCloseButton = true, clos
                   <div
                     onPointerDown={(e) => controls.start(e)}
                     aria-hidden="true"
-                    className={cn("absolute top-1/2 z-10 flex h-16 w-3 -translate-y-1/2 cursor-grab touch-none items-center justify-center active:cursor-grabbing", side === "right" ? "left-0.5" : "right-0.5")}
+                    className={cn("absolute top-1/2 z-10 flex h-16 w-3 -translate-y-1/2 cursor-grab touch-none items-center justify-center active:cursor-grabbing", side === "right" ? "left-0.5" : "right-0.5")} // rtl-fixed: grab handle sits on the drawer's fixed inner edge
                   >
                     <span className="block h-10 w-1 rounded-full bg-border" />
                   </div>
@@ -273,7 +277,7 @@ function SpringDrawerContent({ className, children, showCloseButton = true, clos
                   <DialogPrimitive.Close
                     ref={closeRef}
                     aria-label={closeLabel}
-                    className="absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                    className="absolute top-3 end-3 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   >
                     <X aria-hidden="true" className="size-4" />
                   </DialogPrimitive.Close>

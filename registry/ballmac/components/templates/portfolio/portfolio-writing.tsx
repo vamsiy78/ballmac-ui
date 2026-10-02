@@ -31,9 +31,9 @@ function PortfolioWriting({ hrefs, ...props }: PortfolioWritingProps) {
           <div role="group" aria-label="Filter by topic" className="flex flex-wrap gap-2">
             {tags.map((t) => <button key={t} type="button" aria-pressed={tag === t} onClick={() => setTag(t)} className={cn("focus-visible:ring-ring/50 h-10 rounded-full border px-4 text-sm font-semibold outline-none transition-colors focus-visible:ring-[3px]", tag === t ? "bg-foreground text-background border-transparent" : "hover:bg-accent")}>{t}</button>)}
           </div>
-          <div className="relative w-full sm:ml-auto sm:w-64">
-            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2" aria-hidden="true" />
-            <input type="search" aria-label="Search posts" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search posts" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-10 w-full rounded-full border pr-4 pl-10 text-sm outline-none focus-visible:ring-[3px]" />
+          <div className="relative w-full sm:ms-auto sm:w-64">
+            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-3.5 size-4 -translate-y-1/2" aria-hidden="true" />
+            <input type="search" aria-label="Search posts" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search posts" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-10 w-full rounded-full border pe-4 ps-10 text-sm outline-none focus-visible:ring-[3px]" />
           </div>
         </div>
         <p className="sr-only" role="status">{shown.length} posts</p>

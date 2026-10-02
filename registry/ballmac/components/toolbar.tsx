@@ -6,6 +6,7 @@ import { Search, X } from "lucide-react"
 import { Toolbar as Primitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ToolbarProps = Omit<React.ComponentProps<typeof Primitive.Root>, "title"> & {
   /** Accessible name of the toolbar. */
@@ -29,7 +30,7 @@ function Toolbar({ label, title, subtitle, className, children, ...props }: Tool
       {...props}
     >
       {(title || subtitle) && (
-        <div className="mr-3 grid min-w-0 shrink-0 leading-tight">
+        <div className="me-3 grid min-w-0 shrink-0 leading-tight">
           {title && <span className="truncate text-[15px] font-semibold">{title}</span>}
           {subtitle && <span className="truncate text-[11px] text-muted-foreground">{subtitle}</span>}
         </div>
@@ -117,7 +118,9 @@ type ToolbarSearchProps = Omit<React.ComponentProps<"input">, "type"> & {
 }
 
 /** A search field that widens when focused, with a clear button. */
-function ToolbarSearch({ collapsedWidth = "9rem", expandedWidth = "15rem", className, value, onClear, "aria-label": ariaLabel = "Search", ...props }: ToolbarSearchProps) {
+function ToolbarSearch({ collapsedWidth = "9rem", expandedWidth = "15rem", className, value, onClear, "aria-label": ariaLabel, ...props }: ToolbarSearchProps) {
+  const msg = useMessages()
+  ariaLabel ??= msg("toolbar.ariaLabel", "Search")
   const filled = typeof value === "string" ? value.length > 0 : false
   return (
     <div
@@ -125,14 +128,14 @@ function ToolbarSearch({ collapsedWidth = "9rem", expandedWidth = "15rem", class
       className="group/search relative w-(--collapsed) shrink-0 transition-[width] duration-200 ease-out focus-within:w-(--expanded) motion-reduce:transition-none"
       style={{ ["--collapsed" as string]: collapsedWidth, ["--expanded" as string]: expandedWidth }}
     >
-      <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 left-2 size-3.5 -translate-y-1/2 text-muted-foreground" />
+      <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 start-2 size-3.5 -translate-y-1/2 text-muted-foreground" />
       <input
         type="search"
         value={value}
         aria-label={ariaLabel}
-        placeholder="Search"
+        placeholder={msg("toolbar.search", "Search")}
         className={cn(
-          "h-7 w-full rounded-md border border-foreground/10 bg-foreground/[0.05] pr-7 pl-7 text-[13px] outline-none transition-[box-shadow,background-color] placeholder:text-muted-foreground focus:bg-background focus-visible:ring-[3px] focus-visible:ring-ring/50 [&::-webkit-search-cancel-button]:hidden",
+          "h-7 w-full rounded-md border border-foreground/10 bg-foreground/[0.05] pe-7 ps-7 text-[13px] outline-none transition-[box-shadow,background-color] placeholder:text-muted-foreground focus:bg-background focus-visible:ring-[3px] focus-visible:ring-ring/50 [&::-webkit-search-cancel-button]:hidden",
           className
         )}
         {...props}
@@ -140,9 +143,9 @@ function ToolbarSearch({ collapsedWidth = "9rem", expandedWidth = "15rem", class
       {filled && onClear && (
         <button
           type="button"
-          aria-label="Clear search"
+          aria-label={msg("toolbar.clearSearch", "Clear search")}
           onClick={onClear}
-          className="absolute top-1/2 right-1.5 flex size-4 -translate-y-1/2 items-center justify-center rounded-full bg-foreground/30 text-background outline-none hover:bg-foreground/50 focus-visible:ring-2 focus-visible:ring-ring"
+          className="absolute top-1/2 end-1.5 flex size-4 -translate-y-1/2 items-center justify-center rounded-full bg-foreground/30 text-background outline-none hover:bg-foreground/50 focus-visible:ring-2 focus-visible:ring-ring"
         >
           <X aria-hidden="true" className="size-2.5" strokeWidth={3} />
         </button>

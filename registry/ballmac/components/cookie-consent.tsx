@@ -6,6 +6,7 @@ import { ChevronLeft, Cookie, Lock } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type ConsentCategory = {
   /** Key used in the saved choice, for example "analytics". */
@@ -62,13 +63,16 @@ function CookieConsent({
   onConsent,
   storageKey,
   open: openProp,
-  title = "We value your privacy",
-  description = "We use cookies to make the site work, understand how it is used and, with your permission, personalize content.",
+  title,
+  description,
   policyHref,
   placement = "bottom-left",
   className,
   ...props
 }: CookieConsentProps) {
+  const msg = useMessages()
+  title ??= msg("cookie-consent.title", "We value your privacy")
+  description ??= msg("cookie-consent.description", "We use cookies to make the site work, understand how it is used and, with your permission, personalize content.")
   const reduce = useReducedMotion();
   const [view, setView] = React.useState<"summary" | "preferences">("summary");
   const [decided, setDecided] = React.useState<boolean | null>(null);
@@ -117,8 +121,8 @@ function CookieConsent({
           transition={reduce ? { duration: 0.1 } : spring.gentle}
           className={cn(
             "fixed bottom-4 z-50 max-h-[calc(100dvh-2rem)] w-[min(26rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border bg-popover text-popover-foreground shadow-[0_24px_64px_-16px_rgb(0_0_0/0.35)]",
-            placement === "bottom-left" && "left-4",
-            placement === "bottom-right" && "right-4",
+            placement === "bottom-left" && "start-4",
+            placement === "bottom-right" && "end-4",
             placement === "bottom-center" && "left-1/2 -translate-x-1/2",
             className,
           )}
@@ -140,7 +144,7 @@ function CookieConsent({
                       <>
                         {" "}
                         <a href={policyHref} className="rounded-sm font-medium text-foreground underline underline-offset-4 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50">
-                          Cookie policy
+                          {msg("cookie-consent.cookiePolicy", "Cookie policy")}
                         </a>
                         .
                       </>
@@ -162,7 +166,7 @@ function CookieConsent({
                           {c.label}
                           {c.required && (
                             <span className="inline-flex items-center gap-1 rounded-full bg-muted px-1.5 py-px text-[10px] font-medium text-muted-foreground">
-                              <Lock aria-hidden="true" className="size-2.5" /> Always on
+                              <Lock aria-hidden="true" className="size-2.5" /> {msg("cookie-consent.alwaysOn", "Always on")}
                             </span>
                           )}
                         </label>
@@ -184,7 +188,7 @@ function CookieConsent({
                           aria-hidden="true"
                           className={cn(
                             "size-4 rounded-full bg-background shadow transition-transform duration-200 motion-reduce:transition-none",
-                            on ? "translate-x-[18px]" : "translate-x-0.5",
+                            on ? "translate-x-[18px] rtl:-translate-x-[18px]" : "translate-x-0.5 rtl:-translate-x-0.5",
                           )}
                         />
                       </button>
@@ -202,21 +206,21 @@ function CookieConsent({
                     onClick={() => decide(all(false))}
                     className="h-9 rounded-md border bg-background text-sm font-medium shadow-xs outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   >
-                    Reject non-essential
+                    {msg("cookie-consent.rejectNonEssential", "Reject non-essential")}
                   </button>
                   <button
                     type="button"
                     onClick={() => decide(all(true))}
                     className="h-9 rounded-md border bg-background text-sm font-medium shadow-xs outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   >
-                    Accept all
+                    {msg("cookie-consent.acceptAll", "Accept all")}
                   </button>
                   <button
                     type="button"
                     onClick={() => show("preferences")}
                     className="col-span-2 h-9 rounded-md text-sm font-medium text-muted-foreground underline-offset-4 outline-none hover:text-foreground hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   >
-                    Customize
+                    {msg("cookie-consent.customize", "Customize")}
                   </button>
                 </>
               ) : (
@@ -226,14 +230,14 @@ function CookieConsent({
                     onClick={() => decide({ ...draft, ...Object.fromEntries(categories.filter((c) => c.required).map((c) => [c.id, true])) })}
                     className="h-9 rounded-md bg-primary text-sm font-medium text-primary-foreground shadow-xs outline-none transition-colors hover:bg-primary/90 focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   >
-                    Save preferences
+                    {msg("cookie-consent.savePreferences", "Save preferences")}
                   </button>
                   <button
                     type="button"
                     onClick={() => show("summary")}
                     className="inline-flex h-9 items-center justify-center gap-1 rounded-md text-sm font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   >
-                    <ChevronLeft aria-hidden="true" className="size-4" /> Back
+                    <ChevronLeft aria-hidden="true" className="size-4 rtl:rotate-180" /> {msg("cookie-consent.back", "Back")}
                   </button>
                 </>
               )}

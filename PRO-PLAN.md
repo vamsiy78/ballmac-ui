@@ -25,7 +25,7 @@ Owner to provide later: a Lemon Squeezy or Polar product, its IDs and checkout l
 - 12 theme presets as free `registry:theme` items (installable with the CLI), each validated for contrast in light and dark.
 - `/themes` builder: pick a preset, adjust hue, radius, fonts and density with a live preview of real components and blocks, export CSS or install through a generated registry item. Builder is free (it brings traffic); Pro adds saved themes later if wanted.
 
-## Phase 3: Right-to-left and i18n
+## Phase 3: Right-to-left and i18n (done 2026-10-02)
 
 - Convert physical spacing and positioning to logical properties (`ms-`/`me-`, `ps-`/`pe-`, `start-`/`end-`, `text-start`) across components, blocks and templates; mirror directional icons with `rtl:`.
 - Every hard-coded user-facing string becomes a prop with an English default (`labels` objects).

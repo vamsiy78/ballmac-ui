@@ -30,7 +30,7 @@ function MenuBarVisual() {
           </span>
           <span>Tue 9:41</span>
         </div>
-        <div className="mt-2 ml-auto w-60 rounded-xl border bg-card p-2 text-left text-xs shadow-[0_12px_30px_-12px_rgb(0_0_0/0.35)]">
+        <div className="mt-2 ms-auto w-60 rounded-xl border bg-card p-2 text-start text-xs shadow-[0_12px_30px_-12px_rgb(0_0_0/0.35)]">
           {["Reply to beta feedback", "Notarize the build", "Schedule the announcement"].map((t, i) => (
             <div key={t} className={cn("flex items-center gap-2 rounded-md px-2 py-1.5", i === 0 && "bg-accent")}>
               <span className="size-3 rounded-full border border-muted-foreground/50" />
@@ -68,7 +68,7 @@ function PrivacyVisual() {
     <Visual className="pt-9">
       <div className="relative flex size-20 items-center justify-center rounded-3xl border bg-card shadow-[0_12px_30px_-14px_rgb(0_0_0/0.4)]">
         <Lock className="size-8" aria-hidden="true" />
-        <span className="absolute -right-2 -bottom-2 flex size-7 items-center justify-center rounded-full border bg-background text-muted-foreground">
+        <span className="absolute -end-2 -bottom-2 flex size-7 items-center justify-center rounded-full border bg-background text-muted-foreground">
           <WifiOff className="size-3.5" aria-hidden="true" />
         </span>
       </div>
@@ -103,7 +103,7 @@ function NotificationVisual() {
     <Visual className="pt-5">
       <div className="relative w-full max-w-sm">
         <div className="absolute inset-x-4 -bottom-2 h-full rounded-2xl border bg-card/60" />
-        <div className="relative flex items-start gap-3 rounded-2xl border bg-card/95 p-3 text-left shadow-[0_12px_30px_-14px_rgb(0_0_0/0.4)] backdrop-blur">
+        <div className="relative flex items-start gap-3 rounded-2xl border bg-card/95 p-3 text-start shadow-[0_12px_30px_-14px_rgb(0_0_0/0.4)] backdrop-blur">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <Check className="size-4" strokeWidth={3} aria-hidden="true" />
           </span>

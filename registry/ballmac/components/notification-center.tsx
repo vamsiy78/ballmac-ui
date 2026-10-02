@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ballmac/popover";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type NotificationItem = {
   /** Unique id. */
@@ -65,12 +66,15 @@ function NotificationCenter({
   open,
   defaultOpen,
   onOpenChange,
-  label = "Notifications",
-  emptyText = "You're all caught up.",
+  label,
+  emptyText,
   align = "end",
   className,
   ...props
 }: NotificationCenterProps) {
+  const msg = useMessages()
+  label ??= msg("notification-center.label", "Notifications")
+  emptyText ??= msg("notification-center.emptyText", "You're all caught up.")
   const reduce = useReducedMotion();
   const [tab, setTab] = React.useState<"all" | "unread">("all");
   const unread = notifications.filter((n) => !n.read).length;
@@ -104,7 +108,7 @@ function NotificationCenter({
               animate={{ scale: 1 }}
               exit={reduce ? { opacity: 0 } : { scale: 0 }}
               transition={spring.bouncy}
-              className="absolute -top-1 -right-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-semibold text-white tabular-nums ring-2 ring-background"
+              className="absolute -top-1 -end-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-semibold text-white tabular-nums ring-2 ring-background"
             >
               {unread > 9 ? "9+" : unread}
             </motion.span>
@@ -124,10 +128,10 @@ function NotificationCenter({
             disabled={!unread}
             className="inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-xs font-medium text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
           >
-            <CheckCheck aria-hidden="true" className="size-3.5" /> Mark all as read
+            <CheckCheck aria-hidden="true" className="size-3.5" /> {msg("notification-center.markAllAsRead", "Mark all as read")}
           </button>
         </div>
-        <div role="tablist" aria-label="Filter notifications" className="flex gap-1 border-b px-3">
+        <div role="tablist" aria-label={msg("notification-center.filterNotifications", "Filter notifications")} className="flex gap-1 border-b px-3">
           {(["all", "unread"] as const).map((t) => (
             <button
               key={t}
@@ -151,7 +155,7 @@ function NotificationCenter({
           ))}
         </div>
 
-        <div role="tabpanel" aria-label={tab === "all" ? "All notifications" : "Unread notifications"} tabIndex={0} className="max-h-[22rem] overflow-y-auto outline-none focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50">
+        <div role="tabpanel" aria-label={tab === "all" ? msg("notification-center.allNotifications", "All notifications") : msg("notification-center.unreadNotifications", "Unread notifications")} tabIndex={0} className="max-h-[22rem] overflow-y-auto outline-none focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50">
           {groups.length === 0 ? (
             <div className="flex flex-col items-center gap-2 px-6 py-12 text-center text-muted-foreground">
               <BellOff aria-hidden="true" className="size-8 opacity-60" />
@@ -192,15 +196,15 @@ function NotificationCenter({
                               }
                             }}
                             className={cn(
-                              "flex gap-3 px-4 py-3 pr-16 text-left outline-none transition-colors hover:bg-accent/60 focus-visible:bg-accent focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50",
+                              "flex gap-3 px-4 py-3 pe-16 text-start outline-none transition-colors hover:bg-accent/60 focus-visible:bg-accent focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50",
                               !n.read && "bg-chart-1/[0.05]",
                             )}
                           >
                             <span className="relative mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground [&_svg]:size-4">
                               {n.icon ?? <Bell aria-hidden="true" />}
                               {!n.read && (
-                                <span className="absolute -top-0.5 -right-0.5 size-2.5 rounded-full bg-chart-1 ring-2 ring-popover">
-                                  <span className="sr-only">Unread</span>
+                                <span className="absolute -top-0.5 -end-0.5 size-2.5 rounded-full bg-chart-1 ring-2 ring-popover">
+                                  <span className="sr-only">{msg("notification-center.unread", "Unread")}</span>
                                 </span>
                               )}
                             </span>
@@ -210,11 +214,11 @@ function NotificationCenter({
                               <span className="mt-1 block text-xs text-muted-foreground tabular-nums">{n.time}</span>
                             </span>
                           </Row>
-                          <div className="absolute top-2.5 right-2 flex gap-0.5 opacity-0 transition-opacity group-focus-within/n:opacity-100 group-hover/n:opacity-100 motion-reduce:transition-none">
+                          <div className="absolute top-2.5 end-2 flex gap-0.5 opacity-0 transition-opacity group-focus-within/n:opacity-100 group-hover/n:opacity-100 motion-reduce:transition-none">
                             {!n.read && onMarkRead && (
                               <button
                                 type="button"
-                                aria-label={`Mark "${n.title}" as read`}
+                                aria-label={msg("notification-center.markAsRead", "Mark \"{title}\" as read", { title: n.title })}
                                 onClick={() => onMarkRead(n.id)}
                                 className="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-background hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
                               >
@@ -224,7 +228,7 @@ function NotificationCenter({
                             {onDismiss && (
                               <button
                                 type="button"
-                                aria-label={`Dismiss "${n.title}"`}
+                                aria-label={msg("notification-center.dismiss", "Dismiss \"{title}\"", { title: n.title })}
                                 onClick={() => onDismiss(n.id)}
                                 className="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-background hover:text-destructive focus-visible:ring-[3px] focus-visible:ring-ring/50"
                               >

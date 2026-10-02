@@ -33,7 +33,7 @@ function KpiItem({ className, label, value, detail, ...props }: KpiItemProps) {
     <div
       data-slot="kpi-item"
       className={cn(
-        "flex min-w-0 flex-col gap-2 border-b border-border p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0",
+        "flex min-w-0 flex-col gap-2 border-b border-border p-5 last:border-b-0 sm:border-b-0 sm:border-e sm:last:border-e-0",
         className,
       )}
       {...props}

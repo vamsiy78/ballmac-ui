@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["wizard", "form", "steps"],
   files: [{ path: "components/stepper-form.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "stepper-form-demo",

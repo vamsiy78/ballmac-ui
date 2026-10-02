@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["dock", "macos", "magnification", "toolbar", "navigation", "motion", "app launcher"],
   files: [{ path: "components/dock.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     { name: "dock-demo", title: "App dock", file: "dock-demo.tsx" },
     { name: "dock-vertical", title: "Vertical", file: "dock-vertical.tsx" },

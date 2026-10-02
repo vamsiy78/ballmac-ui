@@ -165,7 +165,7 @@ function Signup1({
                   </div>
                 </Field>
                 <Button type="submit" size="lg" shape="pill" loading={state === "sending"} className="w-full">
-                  {buttonLabel} <ArrowRight />
+                  {buttonLabel} <ArrowRight  className="rtl:rotate-180"/>
                 </Button>
               </FieldGroup>
             </form>

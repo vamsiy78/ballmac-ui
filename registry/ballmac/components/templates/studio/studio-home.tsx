@@ -42,7 +42,7 @@ function WorkReel({ href }: { href: string }) {
               <span className="text-muted-foreground group-hover:text-[var(--studio-on-accent)] group-focus-visible:text-[var(--studio-on-accent)] hidden text-sm sm:block" style={mono}>{String(i + 1).padStart(2, "0")}</span>
               <span className={cn("text-[clamp(2rem,6.4vw,5.5rem)] text-balance", studioDisplay)}>{p.name}</span>
               <span className="group-hover:text-[var(--studio-on-accent)] group-focus-visible:text-[var(--studio-on-accent)] text-muted-foreground hidden text-sm sm:block" style={mono}>{p.discipline}</span>
-              <span className="group-hover:text-[var(--studio-on-accent)] group-focus-visible:text-[var(--studio-on-accent)] text-muted-foreground text-right text-sm tabular-nums" style={mono}>{p.year}</span>
+              <span className="group-hover:text-[var(--studio-on-accent)] group-focus-visible:text-[var(--studio-on-accent)] text-muted-foreground text-end text-sm tabular-nums" style={mono}>{p.year}</span>
             </a>
           </li>
         ))}
@@ -50,7 +50,7 @@ function WorkReel({ href }: { href: string }) {
       <div
         ref={card}
         aria-hidden="true"
-        className={cn("pointer-events-none absolute top-0 left-0 z-10 hidden w-72 will-change-transform md:block", shown ? "opacity-100" : "opacity-0", "transition-opacity duration-200 motion-reduce:transition-none")}
+        className={cn("pointer-events-none absolute top-0 start-0 z-10 hidden w-72 will-change-transform md:block", shown ? "opacity-100" : "opacity-0", "transition-opacity duration-200 motion-reduce:transition-none")}
         style={mode === "focus" || reduce ? { transform: `translate(calc(100% - 20rem), ${(active ?? 0) * 7.2}rem)` } : undefined}
       >
         {shown && (<div className="border-foreground bg-background overflow-hidden rounded border-2 shadow-2xl"><StudioArt variant={shown.art} /><p className="border-t-2 px-3 py-2 text-sm font-semibold">{shown.line}</p></div>)}
@@ -76,7 +76,7 @@ function StudioHome({ hrefs, ...props }: StudioHomeProps) {
           </h1>
           <div className="mt-12 grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
             <p className="max-w-xl text-xl text-pretty sm:text-2xl">Hollis &amp; Vane is a 14-person studio in Lisbon and Berlin. We design identities, websites and campaigns for people who would rather be remembered than liked.</p>
-            <a href={h.work} className="bg-foreground text-background focus-visible:ring-ring/50 inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none">See the work <ArrowUpRight className="size-5" aria-hidden="true" /></a>
+            <a href={h.work} className="bg-foreground text-background focus-visible:ring-ring/50 inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none">See the work <ArrowUpRight className="size-5 rtl:-scale-x-100" aria-hidden="true" /></a>
           </div>
         </section>
 
@@ -93,7 +93,7 @@ function StudioHome({ hrefs, ...props }: StudioHomeProps) {
 
         <section aria-labelledby="st-services" className="border-t-2 border-current">
           <div className="mx-auto grid max-w-[100rem] gap-12 px-4 py-24 sm:px-8 lg:grid-cols-[1fr_2fr]">
-            <div><h2 id="st-services" className={cn("text-[clamp(2.4rem,6vw,5rem)]", studioDisplay)}>What we do</h2><a href={h.services} className="mt-6 inline-flex items-center gap-2 font-bold underline decoration-2 underline-offset-8">All services <ArrowUpRight className="size-4" aria-hidden="true" /></a></div>
+            <div><h2 id="st-services" className={cn("text-[clamp(2.4rem,6vw,5rem)]", studioDisplay)}>What we do</h2><a href={h.services} className="mt-6 inline-flex items-center gap-2 font-bold underline decoration-2 underline-offset-8">All services <ArrowUpRight className="size-4 rtl:-scale-x-100" aria-hidden="true" /></a></div>
             <ul className="divide-y-2 border-y-2">
               {services.map((s) => (
                 <li key={s.n} className="grid gap-3 py-8 sm:grid-cols-[4rem_1fr]">
@@ -128,7 +128,7 @@ function StudioHome({ hrefs, ...props }: StudioHomeProps) {
         <section className="bg-chart-1 text-[var(--studio-on-accent)]">
           <a href={h.contact} className="group focus-visible:ring-ring mx-auto flex max-w-[100rem] items-center justify-between gap-6 px-4 py-16 outline-none focus-visible:ring-[3px] focus-visible:ring-inset sm:px-8 sm:py-24">
             <span className={cn("text-[clamp(3rem,11vw,10rem)]", studioDisplay)}>Let’s talk</span>
-            <ArrowUpRight className="size-[clamp(3rem,10vw,9rem)] shrink-0 transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-2 motion-reduce:transition-none" strokeWidth={1.5} aria-hidden="true" />
+            <ArrowUpRight className="size-[clamp(3rem,10vw,9rem)] shrink-0 transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-2 motion-reduce:transition-none rtl:-scale-x-100 rtl:group-hover:-translate-x-2" strokeWidth={1.5} aria-hidden="true" />
           </a>
         </section>
       </main>

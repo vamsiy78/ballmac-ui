@@ -89,17 +89,17 @@ function AiOrb({ state = "idle", level = 0, label, size, className, style, ...pr
           animate={reduce ? undefined : { rotate: 360 }}
           transition={reduce ? undefined : { duration: spin, repeat: Infinity, ease: "linear" }}
         >
-          <span className="absolute top-[12%] left-[10%] size-[62%] rounded-full bg-chart-1 opacity-90 blur-[14px]" />
-          <span className="absolute right-[6%] bottom-[8%] size-[58%] rounded-full bg-chart-2 opacity-90 blur-[14px]" />
-          <span className="absolute top-[38%] left-[34%] size-[48%] rounded-full bg-chart-4 opacity-80 blur-[12px]" />
+          <span className="absolute top-[12%] start-[10%] size-[62%] rounded-full bg-chart-1 opacity-90 blur-[14px]" />
+          <span className="absolute end-[6%] bottom-[8%] size-[58%] rounded-full bg-chart-2 opacity-90 blur-[14px]" />
+          <span className="absolute top-[38%] start-[34%] size-[48%] rounded-full bg-chart-4 opacity-80 blur-[12px]" />
         </motion.div>
         <motion.div
           className="absolute -inset-[30%]"
           animate={reduce ? undefined : { rotate: -360 }}
           transition={reduce ? undefined : { duration: spin * 1.4, repeat: Infinity, ease: "linear" }}
         >
-          <span className="absolute top-[6%] right-[18%] size-[40%] rounded-full bg-chart-5 opacity-70 blur-[12px]" />
-          <span className="absolute bottom-[14%] left-[16%] size-[36%] rounded-full bg-chart-3 opacity-70 blur-[12px]" />
+          <span className="absolute top-[6%] end-[18%] size-[40%] rounded-full bg-chart-5 opacity-70 blur-[12px]" />
+          <span className="absolute bottom-[14%] start-[16%] size-[36%] rounded-full bg-chart-3 opacity-70 blur-[12px]" />
         </motion.div>
         {/* Glass highlight. */}
         <span className="absolute inset-0 rounded-full bg-[radial-gradient(120%_120%_at_30%_14%,rgb(255_255_255/0.55),transparent_46%)]" />

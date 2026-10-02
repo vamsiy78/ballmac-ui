@@ -55,7 +55,7 @@ function OrbitLogin({ hrefs, ...props }: OrbitLoginProps) {
                     className="bg-card/60 focus-visible:ring-ring/50 placeholder:text-muted-foreground mt-2 h-11 w-full rounded-xl border px-3.5 text-sm outline-none focus-visible:ring-[3px]"
                   />
                   <button type="submit" className="bg-foreground text-background focus-visible:ring-ring/50 mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl text-sm font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]">
-                    Email me a sign-in link <ArrowRight className="size-4" aria-hidden="true" />
+                    Email me a sign-in link <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />
                   </button>
                 </form>
                 <p className="text-muted-foreground mt-6 text-xs text-pretty">New to Orbit? Signing in creates your workspace. By continuing you agree to the Terms and Privacy Policy.</p>
@@ -64,7 +64,7 @@ function OrbitLogin({ hrefs, ...props }: OrbitLoginProps) {
           </div>
         </div>
 
-        <div aria-hidden="true" className="bg-surface relative hidden overflow-hidden border-l lg:block">
+        <div aria-hidden="true" className="bg-surface relative hidden overflow-hidden border-s lg:block">
           <div className="from-chart-1/25 to-chart-5/10 absolute inset-0 bg-gradient-to-br via-transparent" />
           <div className="relative flex h-full flex-col justify-center gap-4 px-14">
             {[
@@ -74,7 +74,7 @@ function OrbitLogin({ hrefs, ...props }: OrbitLoginProps) {
               { t: "09:40:55", n: "warehouse.query", s: "208 matched", tone: "text-chart-1" },
               { t: "09:40:51", n: "onboarding-guide", s: "completed", tone: "text-chart-2" },
             ].map((r, i) => (
-              <div key={r.t} className="bg-card/70 flex items-center justify-between rounded-2xl border px-5 py-4 text-sm backdrop-blur" style={{ ...mono, marginLeft: `${(i % 3) * 1.5}rem`, opacity: 1 - i * 0.14 }}>
+              <div key={r.t} className="bg-card/70 flex items-center justify-between rounded-2xl border px-5 py-4 text-sm backdrop-blur" style={{ ...mono, marginInlineStart: `${(i % 3) * 1.5}rem`, opacity: 1 - i * 0.14 }}>
                 <span className="text-muted-foreground">{r.t}</span>
                 <span>{r.n}</span>
                 <span className={r.tone}>{r.s}</span>

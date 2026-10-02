@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["date", "input", "popover", "form"],
   files: [{ path: "components/date-picker.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "calendar", "popover"],
+  registryDependencies: ["shadcn:utils", "calendar", "popover", "i18n"],
   examples: [
     { name: "date-picker-demo", title: "Delivery date with presets", file: "date-picker-demo.tsx" },
     { name: "date-picker-states", title: "Birthday, invalid, disabled", file: "date-picker-states.tsx" },

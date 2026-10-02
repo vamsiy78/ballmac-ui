@@ -20,7 +20,7 @@ export default function GlowBorderButton() {
           className="inline-flex h-9 items-center gap-1.5 rounded-[9px] px-4 text-sm font-medium outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
         >
           Start free trial
-          <ArrowRight className="size-4" aria-hidden="true" />
+          <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />
         </a>
       </GlowBorder>
     </div>

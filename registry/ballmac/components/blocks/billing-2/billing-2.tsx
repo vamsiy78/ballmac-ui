@@ -8,6 +8,7 @@ import { Badge } from "@/components/ballmac/badge"
 import { Button } from "@/components/ballmac/button"
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type Billing2Plan = {
   id: string
@@ -70,11 +71,13 @@ function Billing2({
   renewsOn = "2026-10-28",
   minSeats = 7,
   currency = "USD",
-  locale = "en-US",
+  locale,
   onConfirm,
   className,
   ...props
 }: Billing2Props) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const [planId, setPlanId] = React.useState(defaultPlan ?? plans[plans.findIndex((p) => p.id === currentPlan) + 1]?.id ?? currentPlan)
   const [seats, setSeats] = React.useState(currentSeats)
   const [period, setPeriod] = React.useState<"monthly" | "yearly">(currentInterval)
@@ -151,7 +154,7 @@ function Billing2({
                             <span className="text-muted-foreground mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs">{p.features.map((f) => <span key={f} className="flex items-center gap-1"><Check className="size-3" aria-hidden="true" />{f}</span>)}</span>
                           </span>
                         </span>
-                        <span className="sm:text-right">
+                        <span className="sm:text-end">
                           <span className="text-2xl font-semibold tracking-[-0.03em] tabular-nums">{whole.format(price)}</span>
                           <span className="text-muted-foreground block text-xs">per seat / month</span>
                         </span>

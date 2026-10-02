@@ -6,6 +6,7 @@ import { ArrowUp, FileText, Image as ImageIcon, Paperclip, Square, X } from "luc
 
 import { Button } from "@/components/ballmac/button"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type PromptInputStatus = "idle" | "streaming"
 
@@ -145,7 +146,7 @@ type PromptInputTextareaProps = Omit<React.ComponentProps<"textarea">, "value" |
 
 function PromptInputTextarea({
   maxHeight = 200,
-  placeholder = "Send a message…",
+  placeholder,
   className,
   onKeyDown,
   onChange,
@@ -153,6 +154,8 @@ function PromptInputTextarea({
   style,
   ...props
 }: PromptInputTextareaProps) {
+  const msg = useMessages()
+  placeholder ??= msg("prompt-input.placeholder", "Send a message…")
   const { value, setValue, submit, disabled, textareaRef } = usePromptInput()
 
   const setRefs = React.useCallback(
@@ -178,7 +181,7 @@ function PromptInputTextarea({
       ref={setRefs}
       data-slot="prompt-input-textarea"
       rows={1}
-      aria-label={props["aria-labelledby"] ? undefined : "Message"}
+      aria-label={props["aria-labelledby"] ? undefined : msg("prompt-input.message", "Message")}
       placeholder={placeholder}
       disabled={disabled}
       value={value}
@@ -226,12 +229,15 @@ type PromptInputSubmitProps = Omit<React.ComponentProps<typeof Button>, "type" |
 }
 
 function PromptInputSubmit({
-  submitLabel = "Send message",
-  stopLabel = "Stop generating",
+  submitLabel,
+  stopLabel,
   className,
   children,
   ...props
 }: PromptInputSubmitProps) {
+  const msg = useMessages()
+  submitLabel ??= msg("prompt-input.submitLabel", "Send message")
+  stopLabel ??= msg("prompt-input.stopLabel", "Stop generating")
   const { status, canSubmit, stop, disabled } = usePromptInput()
   const streaming = status === "streaming"
   return (
@@ -245,7 +251,7 @@ function PromptInputSubmit({
       title={streaming ? stopLabel : submitLabel}
       disabled={streaming ? disabled || !stop : !canSubmit}
       onClick={streaming ? () => stop?.() : undefined}
-      className={cn("ml-auto", className)}
+      className={cn("ms-auto", className)}
       {...props}
     >
       {children ?? (streaming ? <Square className="size-3 fill-current" /> : <ArrowUp />)}
@@ -265,11 +271,13 @@ type PromptInputAttachButtonProps = Omit<React.ComponentProps<typeof Button>, "t
 function PromptInputAttachButton({
   accept,
   multiple = true,
-  label = "Attach files",
+  label,
   className,
   children,
   ...props
 }: PromptInputAttachButtonProps) {
+  const msg = useMessages()
+  label ??= msg("prompt-input.label", "Attach files")
   const { files, setFiles, disabled } = usePromptInput()
   const inputRef = React.useRef<HTMLInputElement>(null)
   return (
@@ -317,12 +325,13 @@ type PromptInputAttachmentsProps = React.ComponentProps<"ul">
 
 /** Removable chips for the attached files. Renders nothing when there are none. */
 function PromptInputAttachments({ className, ...props }: PromptInputAttachmentsProps) {
+  const msg = useMessages()
   const { files, setFiles, disabled } = usePromptInput()
   if (!files.length) return null
   return (
     <ul
       data-slot="prompt-input-attachments"
-      aria-label="Attachments"
+      aria-label={msg("prompt-input.attachments", "Attachments")}
       className={cn("flex flex-wrap gap-1.5 px-2.5 pt-2.5", className)}
       {...props}
     >
@@ -332,14 +341,14 @@ function PromptInputAttachments({ className, ...props }: PromptInputAttachmentsP
           <li
             key={`${file.name}-${file.size}-${file.lastModified}-${index}`}
             data-slot="prompt-input-attachment"
-            className="flex h-8 max-w-full items-center gap-1.5 rounded-md border bg-muted/50 pr-1 pl-2 text-xs"
+            className="flex h-8 max-w-full items-center gap-1.5 rounded-md border bg-muted/50 pe-1 ps-2 text-xs"
           >
             <Icon aria-hidden="true" className="size-3.5 shrink-0 text-muted-foreground" />
             <span className="max-w-40 truncate font-medium">{file.name}</span>
             <span className="shrink-0 font-mono text-[11px] text-muted-foreground tabular-nums">{formatBytes(file.size)}</span>
             <button
               type="button"
-              aria-label={`Remove ${file.name}`}
+              aria-label={msg("prompt-input.remove", "Remove {name}", { name: file.name })}
               disabled={disabled}
               onClick={() => setFiles(files.filter((_, i) => i !== index))}
               className="flex size-6 shrink-0 items-center justify-center rounded-sm text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"

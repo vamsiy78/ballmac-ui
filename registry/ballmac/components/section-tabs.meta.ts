@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["tabs", "scrollspy", "sticky", "anchor links"],
   files: [{ path: "components/section-tabs.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils", "scroll", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "scroll", "motion-presets", "i18n"],
   examples: [
     { name: "section-tabs-demo", title: "Product page", file: "section-tabs-demo.tsx" },
     { name: "section-tabs-states", title: "Pill, narrow", file: "section-tabs-states.tsx" },

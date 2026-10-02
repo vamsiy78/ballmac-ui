@@ -16,7 +16,7 @@ export default function Hero6Custom() {
       highlights={["Passkeys ready", "SAML and SCIM", "99.99% uptime"]}
       cards={
         <>
-          <Hero6Float depth={24} className="xl:top-[52%] xl:left-[2%]">
+          <Hero6Float depth={24} className="xl:top-[52%] xl:start-[2%]">
             <div className={`${card} w-full xl:w-64`}>
               <span className="bg-chart-2/15 text-chart-2 flex size-10 shrink-0 items-center justify-center rounded-xl" aria-hidden="true">
                 <ShieldCheck className="size-5" />
@@ -27,7 +27,7 @@ export default function Hero6Custom() {
               </div>
             </div>
           </Hero6Float>
-          <Hero6Float depth={30} delay={1} className="xl:right-[2%] xl:bottom-[12%]">
+          <Hero6Float depth={30} delay={1} className="xl:end-[2%] xl:bottom-[12%]">
             <div className={`${card} w-full xl:w-64`}>
               <span className="bg-chart-3/15 text-chart-3 flex size-10 shrink-0 items-center justify-center rounded-xl" aria-hidden="true">
                 <Bell className="size-5" />

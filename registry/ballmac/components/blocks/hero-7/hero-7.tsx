@@ -52,7 +52,7 @@ const KPIS = [
 function SampleDashboard() {
   return (
     <div aria-hidden="true" inert className="bg-background text-foreground flex h-[700px] w-[1180px] text-[15px]">
-      <aside className="bg-muted/40 flex w-[210px] shrink-0 flex-col gap-1 border-r p-4">
+      <aside className="bg-muted/40 flex w-[210px] shrink-0 flex-col gap-1 border-e p-4">
         <div className="mb-4 flex items-center gap-2.5 px-2">
           <span className="bg-foreground text-background flex size-7 items-center justify-center rounded-lg text-sm font-bold">A</span>
           <span className="text-base font-semibold">Acme</span>
@@ -167,7 +167,7 @@ function Hero7({
           <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed text-pretty">{description}</p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <a className={buttonVariants({ size: "lg", shape: "pill" })} href={primaryAction.href}>
-              {primaryAction.label} <ArrowRight />
+              {primaryAction.label} <ArrowRight  className="rtl:rotate-180"/>
             </a>
             <a className={buttonVariants({ variant: "outline", size: "lg", shape: "pill" })} href={secondaryAction.href}>{secondaryAction.label}</a>
           </div>

@@ -1,8 +1,11 @@
 // Ballmac UI: Spinner. https://ui.ballmac.com/components/spinner
 // Based on shadcn/ui Spinner (MIT, Copyright (c) 2023 shadcn), adding size variants and an announced loading state.
+"use client"
+
 import * as React from "react"
 import { LoaderCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type SpinnerProps = React.ComponentProps<"span"> & {
   /** Size of the loading indicator. */
@@ -13,9 +16,11 @@ type SpinnerProps = React.ComponentProps<"span"> & {
 function Spinner({
   className,
   size = "default",
-  label = "Loading",
+  label,
   ...props
 }: SpinnerProps) {
+  const msg = useMessages()
+  label ??= msg("spinner.label", "Loading")
   return (
     <span
       data-slot="spinner"

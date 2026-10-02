@@ -5,6 +5,8 @@ import * as React from "react"
 import { CheckCircle2, CircleAlert, OctagonAlert, Wrench } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useLocale, useMessages, defineMessage, type Message, type Msg } from "@/lib/ballmac/i18n"
+import { useDirection } from "@/lib/ballmac/direction"
 
 type ServiceStatus = "operational" | "degraded" | "outage" | "maintenance"
 
@@ -23,22 +25,22 @@ type ServiceItem = {
   days?: ServiceDay[]
 }
 
-const META: Record<ServiceStatus, { label: string; icon: React.ComponentType<{ className?: string }>; bar: string; height: string; chip: string; order: number }> = {
-  operational: { label: "Operational", icon: CheckCircle2, bar: "bg-chart-2", height: "100%", chip: "border-chart-2/30 bg-chart-2/10", order: 0 },
-  maintenance: { label: "Maintenance", icon: Wrench, bar: "bg-chart-1", height: "82%", chip: "border-chart-1/30 bg-chart-1/10", order: 1 },
-  degraded: { label: "Degraded performance", icon: CircleAlert, bar: "bg-chart-3", height: "66%", chip: "border-chart-3/30 bg-chart-3/10", order: 2 },
-  outage: { label: "Outage", icon: OctagonAlert, bar: "bg-destructive", height: "44%", chip: "border-destructive/30 bg-destructive/10", order: 3 },
+const META: Record<ServiceStatus, { label: Message; icon: React.ComponentType<{ className?: string }>; bar: string; height: string; chip: string; order: number }> = {
+  operational: { label: defineMessage("status-badge-row.META.operational", "Operational"), icon: CheckCircle2, bar: "bg-chart-2", height: "100%", chip: "border-chart-2/30 bg-chart-2/10", order: 0 },
+  maintenance: { label: defineMessage("status-badge-row.META.maintenance", "Maintenance"), icon: Wrench, bar: "bg-chart-1", height: "82%", chip: "border-chart-1/30 bg-chart-1/10", order: 1 },
+  degraded: { label: defineMessage("status-badge-row.META.degraded", "Degraded performance"), icon: CircleAlert, bar: "bg-chart-3", height: "66%", chip: "border-chart-3/30 bg-chart-3/10", order: 2 },
+  outage: { label: defineMessage("status-badge-row.META.outage", "Outage"), icon: OctagonAlert, bar: "bg-destructive", height: "44%", chip: "border-destructive/30 bg-destructive/10", order: 3 },
 }
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 /** "2026-09-30" minus `back` days, as "Sep 21". UTC, so the server and browser agree. */
-function dayLabel(endDate: string | undefined, back: number) {
-  if (!endDate) return back === 0 ? "Today" : `${back} days ago`
+function dayLabel(locale: string, msg: Msg, endDate: string | undefined, back: number) {
+  const relative = () => (back === 0 ? msg("status-badge-row.today", "Today") : new Intl.RelativeTimeFormat(locale, { numeric: "always" }).format(-back, "day"))
+  if (!endDate) return relative()
   const t = Date.parse(endDate.length === 10 ? `${endDate}T00:00:00Z` : endDate)
-  if (Number.isNaN(t)) return `${back} days ago`
-  const d = new Date(t - back * 86_400_000)
-  return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}`
+  if (Number.isNaN(t)) return relative()
+  // UTC, so the server and browser agree.
+  return new Intl.DateTimeFormat(locale, { month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(t - back * 86_400_000))
 }
 
 function normalize(day: ServiceDay) {
@@ -46,13 +48,15 @@ function normalize(day: ServiceDay) {
 }
 
 /** The text shown for one day, such as "Sep 21 · Outage · Queue backlog". */
-function readout(service: ServiceItem, endDate: string | undefined, index: number) {
+function readout(locale: string, msg: Msg, service: ServiceItem, endDate: string | undefined, index: number) {
   const days = service.days ?? []
   const day = normalize(days[index]!)
-  return `${dayLabel(endDate, days.length - 1 - index)} · ${META[day.status].label}${day.note ? ` · ${day.note}` : ""}`
+  return `${dayLabel(locale, msg, endDate, days.length - 1 - index)} · ${msg.of(META[day.status].label)}${day.note ? ` · ${day.note}` : ""}`
 }
 
 function ServiceRow({ service, endDate }: { service: ServiceItem; endDate?: string }) {
+  const msg = useMessages()
+  const locale = useLocale()
   const meta = META[service.status]
   const Icon = meta.icon
   const [cursor, setCursor] = React.useState<number | null>(null)
@@ -65,11 +69,11 @@ function ServiceRow({ service, endDate }: { service: ServiceItem; endDate?: stri
         </div>
         {cursor !== null && service.days ? (
           <span aria-hidden="true" className="truncate rounded-md bg-muted px-2 py-0.5 text-xs text-foreground">
-            {readout(service, endDate, cursor)}
+            {readout(locale, msg, service, endDate, cursor)}
           </span>
         ) : (
           service.uptime !== undefined && (
-            <span className="hidden font-mono text-xs text-muted-foreground tabular-nums sm:block">{service.uptime.toFixed(2)}% uptime</span>
+            <span className="hidden font-mono text-xs text-muted-foreground tabular-nums sm:block">{msg("status-badge-row.uptime", "{percent}% uptime", { percent: service.uptime.toFixed(2) })}</span>
           )
         )}
         <span
@@ -79,7 +83,7 @@ function ServiceRow({ service, endDate }: { service: ServiceItem; endDate?: stri
           )}
         >
           <Icon aria-hidden="true" className="size-3.5" />
-          {meta.label}
+          {msg.of(meta.label)}
         </span>
       </div>
       <HistoryStrip service={service} endDate={endDate} cursor={cursor} setCursor={setCursor} />
@@ -98,18 +102,21 @@ function HistoryStrip({
   cursor: number | null
   setCursor: React.Dispatch<React.SetStateAction<number | null>>
 }) {
+  const dir = useDirection()
+  const msg = useMessages()
+  const locale = useLocale()
   const days = service.days ?? []
   const [focused, setFocused] = React.useState(false)
   if (days.length === 0) return null
   const last = days.length - 1
   const at = cursor ?? last
   const day = normalize(days[at]!)
-  const text = `${dayLabel(endDate, last - at)}: ${META[day.status].label}${day.note ? `, ${day.note}` : ""}`
+  const text = `${dayLabel(locale, msg, endDate, last - at)}: ${msg.of(META[day.status].label)}${day.note ? `, ${day.note}` : ""}`
 
   function onKeyDown(event: React.KeyboardEvent) {
     const step = event.shiftKey ? 7 : 1
     const next =
-      event.key === "ArrowLeft" ? at - step : event.key === "ArrowRight" ? at + step : event.key === "Home" ? 0 : event.key === "End" ? last : null
+      event.key === (dir === "rtl" ? "ArrowRight" : "ArrowLeft") ? at - step : event.key === (dir === "rtl" ? "ArrowLeft" : "ArrowRight") ? at + step : event.key === "Home" ? 0 : event.key === "End" ? last : null
     if (next === null) return
     event.preventDefault()
     setCursor(Math.min(last, Math.max(0, next)))
@@ -120,7 +127,7 @@ function HistoryStrip({
       <div
         role="slider"
         tabIndex={0}
-        aria-label={`${service.name} history, ${days.length} days`}
+        aria-label={msg("status-badge-row.historyDays", "{name} history, {length} days", { name: service.name, length: days.length })}
         aria-orientation="horizontal"
         aria-valuemin={0}
         aria-valuemax={last}
@@ -177,7 +184,10 @@ type StatusBadgeRowProps = Omit<React.ComponentProps<"section">, "title"> & {
   summary?: string
 }
 
-function StatusBadgeRow({ services, title = "System status", endDate, updated, summary, className, ...props }: StatusBadgeRowProps) {
+function StatusBadgeRow({ services, title, endDate, updated, summary, className, ...props }: StatusBadgeRowProps) {
+  const msg = useMessages()
+  const locale = useLocale()
+  title ??= msg("status-badge-row.title", "System status")
   const worst = services.reduce<ServiceStatus>((w, s) => (META[s.status].order > META[w].order ? s.status : w), "operational")
   const bannerText =
     summary ??
@@ -213,8 +223,8 @@ function StatusBadgeRow({ services, title = "System status", endDate, updated, s
       </ul>
       {historyDays > 0 && (
         <footer className="flex items-center justify-between border-t bg-muted/30 px-4 py-2 text-xs text-muted-foreground" aria-hidden="true">
-          <span>{historyDays} days ago</span>
-          <span>Today</span>
+          <span>{new Intl.RelativeTimeFormat(locale, { numeric: "always" }).format(-historyDays, "day")}</span>
+          <span>{msg("status-badge-row.today", "Today")}</span>
         </footer>
       )}
     </section>

@@ -38,8 +38,8 @@ const addonVariants = cva(
   {
     variants: {
       align: {
-        "inline-start": "order-first pl-3 has-[>button]:-ml-1.5",
-        "inline-end": "order-last pr-3 has-[>button]:-mr-1.5",
+        "inline-start": "order-first ps-3 has-[>button]:-ms-1.5",
+        "inline-end": "order-last pe-3 has-[>button]:-me-1.5",
         "block-start": "order-first w-full justify-start px-3 pt-3 group-has-[>input]/input-group:pt-2.5",
         "block-end": "order-last w-full justify-start px-3 pb-3 group-has-[>input]/input-group:pb-2.5",
       },
@@ -138,7 +138,7 @@ function InputGroupInput({ className, ...props }: InputGroupInputProps) {
       data-slot="input-group-control"
       className={cn(
         "h-full min-w-0 flex-1 bg-transparent px-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed",
-        "group-has-[[data-align=inline-start]]/input-group:pl-1.5 group-has-[[data-align=inline-end]]/input-group:pr-1.5",
+        "group-has-[[data-align=inline-start]]/input-group:ps-1.5 group-has-[[data-align=inline-end]]/input-group:pe-1.5",
         className,
       )}
       {...props}

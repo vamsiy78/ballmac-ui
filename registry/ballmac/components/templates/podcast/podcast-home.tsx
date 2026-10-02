@@ -53,7 +53,7 @@ function PodcastHome({ hrefs, ...props }: PodcastHomeProps) {
             <p className="text-muted-foreground mt-6 max-w-lg text-xl leading-relaxed text-pretty">The Long Table is a podcast recorded at an actual table, every other Tuesday, with someone worth listening to for an hour.</p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <PlayButton ep={latest} big />
-              <a href={ep} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-14 items-center gap-2 rounded-full border px-6 font-bold outline-none transition-colors focus-visible:ring-[3px]">Show notes <ArrowRight className="size-4" aria-hidden="true" /></a>
+              <a href={ep} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-14 items-center gap-2 rounded-full border px-6 font-bold outline-none transition-colors focus-visible:ring-[3px]">Show notes <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" /></a>
             </div>
             <ul aria-label="Listen on" className="mt-8 flex flex-wrap gap-2">{["Apple Podcasts", "Spotify", "YouTube", "RSS"].map((p) => <li key={p}><a href={hrefs?.subscribe ?? "/podcast/subscribe"} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-9 items-center rounded-full border px-4 text-sm font-semibold outline-none transition-colors focus-visible:ring-[3px]">{p}</a></li>)}</ul>
           </div>
@@ -64,7 +64,7 @@ function PodcastHome({ hrefs, ...props }: PodcastHomeProps) {
         </section>
 
         <section aria-labelledby="pc-recent" className="mx-auto mt-24 max-w-6xl px-4 sm:px-6">
-          <div className="flex items-end justify-between gap-4"><h2 id="pc-recent" className={cn("text-4xl sm:text-5xl", podcastDisplayClass)}>Recent episodes</h2><a href={hrefs?.episodes ?? "/podcast/episodes"} className="text-chart-2 inline-flex items-center gap-1.5 font-bold underline-offset-4 hover:underline">All {episodes.length + 34} episodes <ArrowRight className="size-4" aria-hidden="true" /></a></div>
+          <div className="flex items-end justify-between gap-4"><h2 id="pc-recent" className={cn("text-4xl sm:text-5xl", podcastDisplayClass)}>Recent episodes</h2><a href={hrefs?.episodes ?? "/podcast/episodes"} className="text-chart-2 inline-flex items-center gap-1.5 font-bold underline-offset-4 hover:underline">All {episodes.length + 34} episodes <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" /></a></div>
           <ul className="mt-8 divide-y border-y">
             {rest.slice(0, 5).map((e) => (
               <li key={e.slug} className="grid grid-cols-[3.5rem_1fr_auto] items-center gap-4 py-5 sm:grid-cols-[5rem_1fr_auto] sm:gap-6">
@@ -84,7 +84,7 @@ function PodcastHome({ hrefs, ...props }: PodcastHomeProps) {
           <div>
             <h2 id="pc-hosts" className={cn("text-4xl sm:text-5xl", podcastDisplayClass)}>Two friends, one table.</h2>
             <p className="text-muted-foreground mt-5 max-w-md text-lg leading-relaxed text-pretty">Nora Vale is a food writer. Sam Okoye is a former radio producer. They started the show to have the long conversations they kept promising each other.</p>
-            <a href={hrefs?.hosts ?? "/podcast/hosts"} className="text-chart-2 mt-5 inline-flex items-center gap-1.5 font-bold underline-offset-4 hover:underline">Meet the hosts <ArrowRight className="size-4" aria-hidden="true" /></a>
+            <a href={hrefs?.hosts ?? "/podcast/hosts"} className="text-chart-2 mt-5 inline-flex items-center gap-1.5 font-bold underline-offset-4 hover:underline">Meet the hosts <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" /></a>
           </div>
           <div aria-hidden="true" className="flex items-center justify-center gap-4">{[["NV", "bg-chart-4"], ["SO", "bg-chart-3"]].map(([i, c], idx) => <div key={i} className={cn("text-[var(--podcast-on-amber)] flex size-40 items-center justify-center rounded-full text-5xl sm:size-52", c, podcastDisplayClass, idx === 1 && "translate-y-8")}>{i}</div>)}</div>
         </section>

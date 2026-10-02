@@ -28,7 +28,7 @@ function PortfolioWork({ hrefs, ...props }: PortfolioWorkProps) {
             const n = f === "All" ? projects.length : projects.filter((p) => p.discipline === f).length
             return (
               <button key={f} type="button" aria-pressed={filter === f} onClick={() => setFilter(f)} className={cn("focus-visible:ring-ring/50 h-11 rounded-full border px-5 text-sm font-semibold outline-none transition-colors focus-visible:ring-[3px]", filter === f ? "bg-foreground text-background border-transparent" : "hover:bg-accent")}>
-                {f} <span className={cn("ml-1 tabular-nums", filter === f ? "opacity-70" : "text-muted-foreground")}>{n}</span>
+                {f} <span className={cn("ms-1 tabular-nums", filter === f ? "opacity-70" : "text-muted-foreground")}>{n}</span>
               </button>
             )
           })}
@@ -40,7 +40,7 @@ function PortfolioWork({ hrefs, ...props }: PortfolioWorkProps) {
               <a href={caseHref} className="group focus-visible:ring-ring/50 block rounded-3xl outline-none focus-visible:ring-[3px] focus-visible:ring-offset-4 focus-visible:ring-offset-background">
                 <div className="relative overflow-hidden rounded-3xl border">
                   <Cover variant={p.cover} className="transition-transform duration-700 group-hover:scale-[1.04] group-focus-visible:scale-[1.04] motion-reduce:transition-none" />
-                  <span className="bg-chart-1 text-[var(--portfolio-on-accent)] absolute right-3 bottom-3 inline-flex translate-y-2 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">{p.result}<ArrowUpRight className="size-3.5" aria-hidden="true" /></span>
+                  <span className="bg-chart-1 text-[var(--portfolio-on-accent)] absolute end-3 bottom-3 inline-flex translate-y-2 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">{p.result}<ArrowUpRight className="size-3.5 rtl:-scale-x-100" aria-hidden="true" /></span>
                 </div>
                 <div className="mt-4">
                   <p className="text-muted-foreground text-xs" style={{ fontFamily: "var(--portfolio-mono)" }}>{p.client} · {p.year} · {p.discipline}</p>

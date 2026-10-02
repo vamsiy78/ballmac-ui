@@ -37,7 +37,7 @@ const icons = { mac: Laptop, ipad: Tablet, iphone: Smartphone, watch: Watch }
 function MacScreen() {
   return (
     <div className="bg-background flex h-full w-[1280px] text-[15px]">
-      <aside className="bg-muted/40 w-[220px] shrink-0 space-y-1 border-r p-4">
+      <aside className="bg-muted/40 w-[220px] shrink-0 space-y-1 border-e p-4">
         <div className="mb-4 flex items-center gap-2.5 px-2"><span className="bg-foreground text-background flex size-7 items-center justify-center rounded-lg text-sm font-bold">L</span><span className="text-base font-semibold">Ledger</span></div>
         {[["Overview", Home], ["Invoices", Receipt], ["Customers", Users], ["Reports", PieChart]].map(([l, I], i) => {
           const Icon = I as typeof Home
@@ -87,7 +87,7 @@ function PhoneScreen() {
       <p className="text-chart-2 text-sm font-medium">+$4,200 today</p>
       <ul className="mt-5 divide-y rounded-2xl border">
         {[["Northwind", "Paid", "$4,200"], ["Globex", "Due", "$12,800"], ["Initech", "Paid", "$960"]].map(([a, s, v]) => (
-          <li key={a} className="flex items-center gap-3 px-4 py-3.5"><span className="flex-1 font-medium">{a}</span><span className={`rounded-full px-2 py-0.5 text-xs ${s === "Paid" ? "bg-chart-2/15" : "bg-chart-3/20"}`}>{s}</span><span className="w-16 text-right tabular-nums">{v}</span></li>
+          <li key={a} className="flex items-center gap-3 px-4 py-3.5"><span className="flex-1 font-medium">{a}</span><span className={`rounded-full px-2 py-0.5 text-xs ${s === "Paid" ? "bg-chart-2/15" : "bg-chart-3/20"}`}>{s}</span><span className="w-16 text-end tabular-nums">{v}</span></li>
         ))}
       </ul>
       <div className="mt-auto -mx-5 flex justify-around border-t px-4 pt-3 pb-8 text-xs">
@@ -139,10 +139,10 @@ function Devices1({
         <div className="relative aspect-[2/1] sm:aspect-[2.5/1] w-full">
           <div className="bg-chart-1/15 absolute inset-x-[8%] bottom-0 h-1/2 rounded-[50%] blur-3xl" />
           {[
-            { d: "ipad" as const, pos: "left-[1%] bottom-[2%] w-[20cqw] z-0", node: <TabletFrame orientation="portrait" screenWidth={834}>{screens?.ipad ?? <IpadScreen />}</TabletFrame> },
-            { d: "mac" as const, pos: "left-[18%] bottom-0 w-[62cqw] z-10", node: <LaptopFrame screenWidth={1280}>{screens?.mac ?? <MacScreen />}</LaptopFrame> },
-            { d: "iphone" as const, pos: "right-[6%] bottom-0 w-[14cqw] z-20", node: <PhoneFrame screenWidth={393}>{screens?.iphone ?? <PhoneScreen />}</PhoneFrame> },
-            { d: "watch" as const, pos: "right-[0.5%] bottom-[3%] w-[7.5cqw] z-20", node: <WatchFrame screenWidth={208} band="sport" bandTone="blue" variant="black">{screens?.watch ?? <WatchScreen />}</WatchFrame> },
+            { d: "ipad" as const, pos: "start-[1%] bottom-[2%] w-[20cqw] z-0", node: <TabletFrame orientation="portrait" screenWidth={834}>{screens?.ipad ?? <IpadScreen />}</TabletFrame> },
+            { d: "mac" as const, pos: "start-[18%] bottom-0 w-[62cqw] z-10", node: <LaptopFrame screenWidth={1280}>{screens?.mac ?? <MacScreen />}</LaptopFrame> },
+            { d: "iphone" as const, pos: "end-[6%] bottom-0 w-[14cqw] z-20", node: <PhoneFrame screenWidth={393}>{screens?.iphone ?? <PhoneScreen />}</PhoneFrame> },
+            { d: "watch" as const, pos: "end-[0.5%] bottom-[3%] w-[7.5cqw] z-20", node: <WatchFrame screenWidth={208} band="sport" bandTone="blue" variant="black">{screens?.watch ?? <WatchScreen />}</WatchFrame> },
           ].map(({ d, pos, node }) => (
             <div key={d} className={cn("absolute origin-bottom transition-[transform,opacity,filter] duration-500 ease-out motion-reduce:transition-none", pos, dim(d) && "opacity-40 blur-[2px] saturate-50", lift(d) && "-translate-y-[3%] scale-[1.04]")}>{node}</div>
           ))}
@@ -162,7 +162,7 @@ function Devices1({
               onClick={() => setPinned(on ? null : d)}
               onMouseEnter={() => setHovered(d)}
               onMouseLeave={() => setHovered(null)}
-              className={cn("focus-visible:ring-ring/50 rounded-2xl border p-4 text-left outline-none transition-colors focus-visible:ring-[3px]", lit ? "border-foreground bg-accent/50" : "hover:bg-accent/30")}
+              className={cn("focus-visible:ring-ring/50 rounded-2xl border p-4 text-start outline-none transition-colors focus-visible:ring-[3px]", lit ? "border-foreground bg-accent/50" : "hover:bg-accent/30")}
             >
               <span className="flex items-center gap-2 font-semibold"><Icon className="size-4" aria-hidden="true" />{text[d].title}</span>
               <span className="text-muted-foreground mt-1.5 block text-sm text-pretty">{text[d].description}</span>

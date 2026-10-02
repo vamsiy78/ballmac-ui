@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "motion/react"
 import { Tabs as TabsPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ArtifactPanelProps = Omit<React.ComponentProps<"section">, "title" | "onChange"> & {
   /** Name of the generated thing, such as "Pricing table". */
@@ -66,6 +67,7 @@ function ArtifactPanel({
   className,
   ...props
 }: ArtifactPanelProps) {
+  const msg = useMessages()
   const reduce = useReducedMotion()
   const [internalVersion, setInternalVersion] = React.useState(versions)
   const version = Math.min(Math.max(versionProp ?? internalVersion, 1), versions)
@@ -141,7 +143,7 @@ function ArtifactPanel({
 
           {hasPreview && hasCode && (
             <TabsPrimitive.List
-              aria-label="View"
+              aria-label={msg("artifact-panel.view", "View")}
               className="inline-flex items-center gap-0.5 rounded-lg bg-muted p-0.5"
             >
               <TabsPrimitive.Trigger value="preview" className={tabClass}>
@@ -155,28 +157,28 @@ function ArtifactPanel({
 
           <div className="flex items-center gap-0.5">
             {versions > 1 && (
-              <span className="mr-1 inline-flex items-center" role="group" aria-label="Versions">
+              <span className="me-1 inline-flex items-center" role="group" aria-label={msg("artifact-panel.versions", "Versions")}>
                 <button
                   type="button"
-                  aria-label="Previous version"
+                  aria-label={msg("artifact-panel.previousVersion", "Previous version")}
                   disabled={version <= 1 || streaming}
                   onClick={() => go(version - 1)}
                   className={iconButton}
                 >
-                  <ChevronLeft aria-hidden="true" />
+                  <ChevronLeft aria-hidden="true"  className="rtl:rotate-180"/>
                 </button>
                 <span className="min-w-12 text-center font-mono text-xs text-muted-foreground tabular-nums" aria-live="polite">
                   v{version} <span aria-hidden="true">/ {versions}</span>
-                  <span className="sr-only"> of {versions}</span>
+                  <span className="sr-only"> {msg("artifact-panel.versionOf", "of {total}", { total: versions })}</span>
                 </span>
                 <button
                   type="button"
-                  aria-label="Next version"
+                  aria-label={msg("artifact-panel.nextVersion", "Next version")}
                   disabled={version >= versions || streaming}
                   onClick={() => go(version + 1)}
                   className={iconButton}
                 >
-                  <ChevronRight aria-hidden="true" />
+                  <ChevronRight aria-hidden="true"  className="rtl:rotate-180"/>
                 </button>
               </span>
             )}
@@ -185,8 +187,8 @@ function ArtifactPanel({
               <>
                 <button
                   type="button"
-                  aria-label={copied ? "Copied" : "Copy code"}
-                  title={copied ? "Copied" : "Copy code"}
+                  aria-label={copied ? msg("artifact-panel.copied", "Copied") : msg("artifact-panel.copyCode", "Copy code")}
+                  title={copied ? msg("artifact-panel.copied", "Copied") : msg("artifact-panel.copyCode", "Copy code")}
                   disabled={streaming}
                   onClick={copy}
                   className={iconButton}
@@ -195,8 +197,8 @@ function ArtifactPanel({
                 </button>
                 <button
                   type="button"
-                  aria-label={`Download ${filename ?? "file"}`}
-                  title="Download"
+                  aria-label={msg("artifact-panel.downloadFile", "Download {name}", { name: filename ?? msg("artifact-panel.file", "file") })}
+                  title={msg("artifact-panel.download", "Download")}
                   disabled={streaming}
                   onClick={download}
                   className={iconButton}
@@ -206,7 +208,7 @@ function ArtifactPanel({
               </>
             )}
             {onClose && (
-              <button type="button" aria-label="Close artifact" title="Close" onClick={onClose} className={iconButton}>
+              <button type="button" aria-label={msg("artifact-panel.closeArtifact", "Close artifact")} title={msg("artifact-panel.close", "Close")} onClick={onClose} className={iconButton}>
                 <X aria-hidden="true" />
               </button>
             )}
@@ -247,15 +249,15 @@ function ArtifactPanel({
             {filename || language ? (
               <div className="sticky top-0 flex h-8 items-center gap-2 border-b bg-muted/60 px-4 font-mono text-[11px] text-muted-foreground backdrop-blur">
                 {filename}
-                {language && <span className="ml-auto uppercase">{language}</span>}
+                {language && <span className="ms-auto uppercase">{language}</span>}
               </div>
             ) : null}
-            <pre className="p-4 font-mono text-xs leading-5 text-foreground">
+            <pre dir="ltr" className="p-4 font-mono text-xs leading-5 text-foreground">
               <code>{code}</code>
               {streaming && (
                 <span
                   aria-hidden="true"
-                  className="ml-0.5 inline-block h-3.5 w-1.5 translate-y-0.5 animate-pulse bg-foreground motion-reduce:animate-none"
+                  className="ms-0.5 inline-block h-3.5 w-1.5 translate-y-0.5 animate-pulse bg-foreground motion-reduce:animate-none"
                 />
               )}
             </pre>

@@ -63,7 +63,7 @@ function RelayPricing({ hrefs, ...props }: RelayPricingProps) {
             <p className="text-muted-foreground mt-5 max-w-xl text-lg text-pretty">No seats, no endpoint fees, no surprise tiers. Every plan gets the full delivery engine.</p>
             <div className="mt-12 grid overflow-hidden rounded-lg border lg:grid-cols-3">
               {plans.map((p) => (
-                <article key={p.name} className={cn("bg-card flex flex-col border-b p-7 last:border-b-0 lg:border-r lg:border-b-0 lg:last:border-r-0", p.featured && "bg-surface")}>
+                <article key={p.name} className={cn("bg-card flex flex-col border-b p-7 last:border-b-0 lg:border-e lg:border-b-0 lg:last:border-e-0", p.featured && "bg-surface")}>
                   <div className="flex items-center justify-between">
                     <h2 className="text-lg font-semibold" style={mono}>{p.name}</h2>
                     {p.featured && <span className="bg-chart-1 text-background rounded-sm px-2 py-0.5 text-[11px] font-semibold" style={mono}>POPULAR</span>}
@@ -104,18 +104,18 @@ function RelayPricing({ hrefs, ...props }: RelayPricingProps) {
 
         <section className="border-b">
           <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6"><div tabIndex={0} role="region" aria-label="Plan comparison" className="focus-visible:ring-ring/50 overflow-x-auto rounded-md outline-none focus-visible:ring-[3px]">
-            <table className="w-full min-w-[34rem] text-left">
+            <table className="w-full min-w-[34rem] text-start">
               <caption className="sr-only">Plan comparison</caption>
               <thead>
                 <tr className="border-b text-xs tracking-wider uppercase" style={mono}>
-                  <th scope="col" className="py-3 pr-4 font-semibold">Feature</th>
+                  <th scope="col" className="py-3 pe-4 font-semibold">Feature</th>
                   {plans.map((p) => <th key={p.name} scope="col" className="px-4 py-3 text-center font-semibold">{p.name}</th>)}
                 </tr>
               </thead>
               <tbody>
                 {rows.map((r) => (
                   <tr key={r.feature} className="border-b">
-                    <th scope="row" className="py-3.5 pr-4 text-sm font-normal">{r.feature}</th>
+                    <th scope="row" className="py-3.5 pe-4 text-sm font-normal">{r.feature}</th>
                     <td className="px-4 py-3.5 text-center"><Cell v={r.free} /></td>
                     <td className="bg-surface px-4 py-3.5 text-center"><Cell v={r.pro} /></td>
                     <td className="px-4 py-3.5 text-center"><Cell v={r.scale} /></td>

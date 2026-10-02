@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["comparison", "pricing", "features"],
   files: [{ path: "components/comparison-table.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "comparison-table-demo",

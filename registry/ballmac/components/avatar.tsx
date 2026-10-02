@@ -7,6 +7,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { Avatar as AvatarPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
+import { useMessages, defineMessage } from "@/lib/ballmac/i18n"
 
 const avatarVariants = cva(
   "relative flex shrink-0 select-none rounded-full bg-muted align-middle [&_[data-slot=avatar-fallback]]:font-medium",
@@ -27,10 +28,10 @@ type AvatarSize = NonNullable<VariantProps<typeof avatarVariants>["size"]>
 const AvatarGroupContext = React.createContext<{ size?: AvatarSize } | null>(null)
 
 const statusStyles = {
-  online: { className: "bg-chart-2", label: "Online" },
-  away: { className: "bg-chart-3", label: "Away" },
-  busy: { className: "bg-destructive", label: "Busy" },
-  offline: { className: "bg-muted-foreground", label: "Offline" },
+  online: { className: "bg-chart-2", label: defineMessage("avatar.statusStyles.online", "Online") },
+  away: { className: "bg-chart-3", label: defineMessage("avatar.statusStyles.away", "Away") },
+  busy: { className: "bg-destructive", label: defineMessage("avatar.statusStyles.busy", "Busy") },
+  offline: { className: "bg-muted-foreground", label: defineMessage("avatar.statusStyles.offline", "Offline") },
 } as const
 
 type AvatarStatus = keyof typeof statusStyles
@@ -44,6 +45,7 @@ type AvatarProps = React.ComponentProps<typeof AvatarPrimitive.Root> &
   }
 
 function Avatar({ className, size, status, statusLabel, children, ...props }: AvatarProps) {
+  const msg = useMessages()
   const group = React.useContext(AvatarGroupContext)
   const resolvedSize = size ?? group?.size ?? "default"
   return (
@@ -59,12 +61,12 @@ function Avatar({ className, size, status, statusLabel, children, ...props }: Av
           data-slot="avatar-status"
           data-status={status}
           className={cn(
-            "absolute right-0 bottom-0 block rounded-full ring-2 ring-background",
+            "absolute end-0 bottom-0 block rounded-full ring-2 ring-background",
             resolvedSize === "sm" ? "size-1.5" : resolvedSize === "lg" ? "size-3" : "size-2.5",
             statusStyles[status].className
           )}
         >
-          <span className="sr-only">{statusLabel ?? statusStyles[status].label}</span>
+          <span className="sr-only">{statusLabel ?? msg.of(statusStyles[status].label)}</span>
         </span>
       ) : null}
     </AvatarPrimitive.Root>
@@ -104,6 +106,7 @@ type AvatarGroupProps = React.ComponentProps<"div"> & {
 }
 
 function AvatarGroup({ className, size = "default", max, total, children, ...props }: AvatarGroupProps) {
+  const msg = useMessages()
   const items = React.Children.toArray(children).filter(React.isValidElement)
   const visible = max !== undefined && max >= 0 ? items.slice(0, max) : items
   const hidden = Math.max((total ?? items.length) - visible.length, 0)
@@ -131,7 +134,7 @@ function AvatarGroup({ className, size = "default", max, total, children, ...pro
             )}
           >
             <span aria-hidden="true">+{hidden}</span>
-            <span className="sr-only">{hidden} more</span>
+            <span className="sr-only">{msg("avatar.more", "{count} more", { count: hidden })}</span>
           </span>
         ) : null}
       </div>

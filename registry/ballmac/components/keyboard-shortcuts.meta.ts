@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["keyboard", "shortcuts", "hotkeys", "help", "dialog"],
   files: [{ path: "components/keyboard-shortcuts.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "dialog", "kbd"],
+  registryDependencies: ["shadcn:utils", "dialog", "kbd", "i18n"],
   examples: [
     { name: "keyboard-shortcuts-demo", title: "Searchable cheat sheet", file: "keyboard-shortcuts-demo.tsx" },
     { name: "keyboard-shortcuts-dialog", title: "Dialog opened with ?", file: "keyboard-shortcuts-dialog.tsx" },

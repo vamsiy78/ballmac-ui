@@ -5,6 +5,7 @@
 import * as React from "react";
 import { Check, ChevronRight, Circle } from "lucide-react";
 import { Menubar as Primitive } from "radix-ui";
+import { useDirection } from "@/lib/ballmac/direction";
 import { cn } from "@/lib/utils";
 
 const itemBase =
@@ -16,8 +17,10 @@ const surface =
 type MenubarProps = React.ComponentProps<typeof Primitive.Root>;
 /** The horizontal bar. Arrow keys move between menus; Enter or ArrowDown opens one. */
 function Menubar({ className, ...props }: MenubarProps) {
+  const dir = useDirection(props.dir);
   return (
     <Primitive.Root
+      dir={dir}
       data-slot="menubar"
       className={cn(
         "flex h-9 w-fit items-center gap-1 rounded-lg border bg-background p-1 shadow-xs",
@@ -109,7 +112,7 @@ function MenubarItem({
       data-variant={destructive ? "destructive" : "default"}
       className={cn(
         itemBase,
-        "data-[inset]:pl-8",
+        "data-[inset]:ps-8",
         "data-[variant=destructive]:text-destructive data-[variant=destructive]:data-[highlighted]:bg-destructive/10 data-[variant=destructive]:data-[highlighted]:text-destructive data-[variant=destructive]:[&_svg]:!text-destructive",
         className,
       )}
@@ -129,10 +132,10 @@ function MenubarCheckboxItem({
   return (
     <Primitive.CheckboxItem
       data-slot="menubar-checkbox-item"
-      className={cn(itemBase, "pl-8", className)}
+      className={cn(itemBase, "ps-8", className)}
       {...props}
     >
-      <span className="pointer-events-none absolute left-2 flex size-4 items-center justify-center">
+      <span className="pointer-events-none absolute start-2 flex size-4 items-center justify-center">
         <Primitive.ItemIndicator>
           <Check aria-hidden="true" className="size-4 !text-foreground" />
         </Primitive.ItemIndicator>
@@ -153,10 +156,10 @@ function MenubarRadioItem({
   return (
     <Primitive.RadioItem
       data-slot="menubar-radio-item"
-      className={cn(itemBase, "pl-8", className)}
+      className={cn(itemBase, "ps-8", className)}
       {...props}
     >
-      <span className="pointer-events-none absolute left-2 flex size-4 items-center justify-center">
+      <span className="pointer-events-none absolute start-2 flex size-4 items-center justify-center">
         <Primitive.ItemIndicator>
           <Circle
             aria-hidden="true"
@@ -183,7 +186,7 @@ function MenubarLabel({
       data-slot="menubar-label"
       data-inset={inset ? "" : undefined}
       className={cn(
-        "px-2 py-1.5 text-xs font-medium text-muted-foreground data-[inset]:pl-8",
+        "px-2 py-1.5 text-xs font-medium text-muted-foreground data-[inset]:ps-8",
         className,
       )}
       {...props}
@@ -218,7 +221,7 @@ function MenubarShortcut({
       data-slot="menubar-shortcut"
       aria-hidden="true"
       className={cn(
-        "ml-auto pl-4 font-mono text-xs tracking-wide text-muted-foreground",
+        "ms-auto ps-4 font-mono text-xs tracking-wide text-muted-foreground",
         className,
       )}
       {...props}
@@ -244,13 +247,13 @@ function MenubarSubTrigger({
       data-inset={inset ? "" : undefined}
       className={cn(
         itemBase,
-        "data-[inset]:pl-8 data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
+        "data-[inset]:ps-8 data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
         className,
       )}
       {...props}
     >
       {children}
-      <ChevronRight aria-hidden="true" className="ml-auto size-4" />
+      <ChevronRight aria-hidden="true" className="ms-auto size-4 rtl:rotate-180" />
     </Primitive.SubTrigger>
   );
 }

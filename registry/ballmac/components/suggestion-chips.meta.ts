@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "chat", "prompts", "suggestions", "chips"],
   files: [{ path: "components/suggestion-chips.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "suggestion-chips-demo", title: "Follow-up pills with refresh", file: "suggestion-chips-demo.tsx" },
     { name: "suggestion-chips-cards", title: "Starter cards", file: "suggestion-chips-cards.tsx" },

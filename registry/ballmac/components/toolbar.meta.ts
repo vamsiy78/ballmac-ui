@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["toolbar", "macos", "segmented", "buttons", "search"],
   files: [{ path: "components/toolbar.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "toolbar-demo", title: "Document toolbar", file: "toolbar-demo.tsx" },
     { name: "toolbar-labeled", title: "Labeled buttons", file: "toolbar-labeled.tsx" },

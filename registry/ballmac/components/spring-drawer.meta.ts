@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["drawer", "sheet", "snap", "drag", "dialog"],
   files: [{ path: "components/spring-drawer.tsx" }],
   dependencies: ["motion@^12", "lucide-react", "radix-ui"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "spring-drawer-demo", title: "Bottom drawer with snap points", file: "spring-drawer-demo.tsx" },
     { name: "spring-drawer-side", title: "Side drawers", file: "spring-drawer-side.tsx" },

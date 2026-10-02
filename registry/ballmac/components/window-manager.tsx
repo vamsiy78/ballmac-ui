@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { MacWindow, MacWindowContent, MacWindowTitleBar } from "@/components/ballmac/mac-window"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ManagedWindow = {
   /** Unique id. */
@@ -46,14 +47,14 @@ type WindowManagerProps = Omit<React.ComponentProps<"div">, "children"> & {
 
 const EDGES = ["n", "s", "e", "w", "ne", "nw", "se", "sw"] as const
 const EDGE_STYLE: Record<(typeof EDGES)[number], string> = {
-  n: "top-[-3px] left-3 right-3 h-1.5 cursor-ns-resize",
-  s: "bottom-[-3px] left-3 right-3 h-1.5 cursor-ns-resize",
-  e: "right-[-3px] top-3 bottom-3 w-1.5 cursor-ew-resize",
-  w: "left-[-3px] top-3 bottom-3 w-1.5 cursor-ew-resize",
-  ne: "top-[-4px] right-[-4px] size-3.5 cursor-nesw-resize",
-  nw: "top-[-4px] left-[-4px] size-3.5 cursor-nwse-resize",
-  se: "bottom-[-4px] right-[-4px] size-3.5 cursor-nwse-resize",
-  sw: "bottom-[-4px] left-[-4px] size-3.5 cursor-nesw-resize",
+  n: "top-[-3px] start-3 end-3 h-1.5 cursor-ns-resize",
+  s: "bottom-[-3px] start-3 end-3 h-1.5 cursor-ns-resize",
+  e: "end-[-3px] top-3 bottom-3 w-1.5 cursor-ew-resize",
+  w: "start-[-3px] top-3 bottom-3 w-1.5 cursor-ew-resize",
+  ne: "top-[-4px] end-[-4px] size-3.5 cursor-nesw-resize",
+  nw: "top-[-4px] start-[-4px] size-3.5 cursor-nwse-resize",
+  se: "bottom-[-4px] end-[-4px] size-3.5 cursor-nwse-resize",
+  sw: "bottom-[-4px] start-[-4px] size-3.5 cursor-nesw-resize",
 }
 
 function initial(w: ManagedWindow, index: number, z: number): WinState {
@@ -65,7 +66,10 @@ function initial(w: ManagedWindow, index: number, z: number): WinState {
  * double-clicking the title bar zooms, the yellow light tucks a window into the tray.
  * With a window focused, Alt plus an arrow key moves it (Shift for bigger steps), Alt+Shift+arrows resize it.
  */
-function WindowManager({ windows, onClose, children, label = "Desktop", trayLabel = "Minimized windows", className, ...props }: WindowManagerProps) {
+function WindowManager({ windows, onClose, children, label, trayLabel, className, ...props }: WindowManagerProps) {
+  const msg = useMessages()
+  label ??= msg("window-manager.label", "Desktop")
+  trayLabel ??= msg("window-manager.trayLabel", "Minimized windows")
   const reduce = useReducedMotion()
   const deskRef = React.useRef<HTMLDivElement>(null)
   const [states, setStates] = React.useState<WinState[]>(() => windows.map((w, i) => initial(w, i, i + 1)))
@@ -231,7 +235,7 @@ function WindowManager({ windows, onClose, children, label = "Desktop", trayLabe
               key={s.id}
               data-slot="managed-window"
               role="group"
-              aria-label={`${win.title} window. Alt and arrow keys move it; Alt, Shift and arrow keys resize it.`}
+              aria-label={msg("window-manager.windowAltAndArrowKeys", "{title} window. Alt and arrow keys move it; Alt, Shift and arrow keys resize it.", { title: win.title })}
               tabIndex={s.minimized ? -1 : 0}
               {...(s.minimized ? { inert: true } : {})}
               onPointerDownCapture={() => raise(s.id)}
@@ -278,7 +282,7 @@ function WindowManager({ windows, onClose, children, label = "Desktop", trayLabe
             <li key={s.id}>
               <button
                 type="button"
-                aria-label={`Restore ${spec(s.id)?.title ?? s.id}`}
+                aria-label={msg("window-manager.restore", "Restore {title}", { title: spec(s.id)?.title ?? s.id })}
                 onClick={() => raise(s.id)}
                 className="flex h-8 max-w-40 items-center rounded-xl bg-white/15 px-3 text-[12px] font-medium text-white outline-none transition-colors hover:bg-white/25 focus-visible:ring-[3px] focus-visible:ring-white/60"
               >

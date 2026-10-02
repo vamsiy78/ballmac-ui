@@ -10,6 +10,7 @@ import { CopyButton } from "@/components/ballmac/copy-button"
 import { ScrollProgress } from "@/components/ballmac/scroll-progress"
 import { TableOfContents, type TocItem } from "@/components/ballmac/table-of-contents"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type BlogPostRelated = { title: string; category: string; href: string; readMinutes: number }
 
@@ -55,10 +56,10 @@ const proseClass = cn(
   "[&_h2]:mt-14 [&_h2]:scroll-mt-28 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-[-0.025em] [&_h2]:text-balance sm:[&_h2]:text-[1.7rem]",
   "[&_h3]:mt-10 [&_h3]:scroll-mt-28 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-[-0.02em]",
   "[&_p]:mt-5 [&_p]:text-[1.0625rem] [&_p]:leading-8 [&_p]:text-pretty",
-  "[&_ul]:mt-5 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6 [&_ul]:text-[1.0625rem] [&_ul]:leading-8 [&_ul]:marker:text-muted-foreground",
-  "[&_ol]:mt-5 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-6 [&_ol]:text-[1.0625rem] [&_ol]:leading-8 [&_ol]:marker:text-muted-foreground",
+  "[&_ul]:mt-5 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:ps-6 [&_ul]:text-[1.0625rem] [&_ul]:leading-8 [&_ul]:marker:text-muted-foreground",
+  "[&_ol]:mt-5 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:ps-6 [&_ol]:text-[1.0625rem] [&_ol]:leading-8 [&_ol]:marker:text-muted-foreground",
   "[&_a]:font-medium [&_a]:underline [&_a]:decoration-border [&_a]:underline-offset-4 hover:[&_a]:decoration-foreground",
-  "[&_blockquote]:my-10 [&_blockquote]:border-l-2 [&_blockquote]:border-foreground [&_blockquote]:pl-6 [&_blockquote]:text-2xl [&_blockquote]:leading-snug [&_blockquote]:font-medium [&_blockquote]:tracking-[-0.02em] [&_blockquote]:text-balance",
+  "[&_blockquote]:my-10 [&_blockquote]:border-s-2 [&_blockquote]:border-foreground [&_blockquote]:ps-6 [&_blockquote]:text-2xl [&_blockquote]:leading-snug [&_blockquote]:font-medium [&_blockquote]:tracking-[-0.02em] [&_blockquote]:text-balance",
   "[&_pre]:mt-6 [&_pre]:overflow-x-auto [&_pre]:rounded-2xl [&_pre]:border [&_pre]:bg-muted/50 [&_pre]:p-5 [&_pre]:font-mono [&_pre]:text-[13px] [&_pre]:leading-6",
   "[&_code:not(pre_code)]:rounded-md [&_code:not(pre_code)]:bg-muted [&_code:not(pre_code)]:px-1.5 [&_code:not(pre_code)]:py-0.5 [&_code:not(pre_code)]:font-mono [&_code:not(pre_code)]:text-[0.9em]",
   "[&_hr]:my-12"
@@ -138,11 +139,13 @@ function BlogPost1({
   stickyOffset = 24,
   related = defaultRelated,
   blogHref = "#",
-  locale = "en-US",
+  locale,
   children,
   className,
   ...props
 }: BlogPost1Props) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const formatted = new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${date}T00:00:00Z`))
   const initials = author.split(" ").map((w) => w[0]).join("").slice(0, 2)
   return (
@@ -162,7 +165,7 @@ function BlogPost1({
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 text-sm">
             <div className="flex items-center gap-3">
               <span aria-hidden="true" className="bg-chart-1/25 flex size-9 items-center justify-center rounded-full text-xs font-semibold">{initials}</span>
-              <p className="text-left leading-tight">
+              <p className="text-start leading-tight">
                 <span className="font-medium">{author}</span>
                 <span className="text-muted-foreground block">{role}</span>
               </p>

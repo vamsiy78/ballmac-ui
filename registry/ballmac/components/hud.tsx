@@ -92,7 +92,7 @@ function Hud({ kind = "volume", value, muted = false, visible, onVisibleChange, 
                 <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/25">
                   <span className="block h-full rounded-full bg-white transition-[width] duration-150 motion-reduce:transition-none" style={{ width: `${shown}%` }} />
                 </span>
-                <span className="w-9 text-right text-sm font-medium tabular-nums">{shown}%</span>
+                <span className="w-9 text-end text-sm font-medium tabular-nums">{shown}%</span>
               </>
             ) : (
               <>

@@ -7,6 +7,7 @@ import { XIcon } from "lucide-react"
 import { Dialog as DialogPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 function Dialog(props: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
@@ -49,9 +50,11 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
-  closeLabel = "Close",
+  closeLabel,
   ...props
 }: DialogContentProps) {
+  const msg = useMessages()
+  closeLabel ??= msg("dialog.closeLabel", "Close")
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -69,7 +72,7 @@ function DialogContent({
           <DialogPrimitive.Close
             data-slot="dialog-close"
             aria-label={closeLabel}
-            className="absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-[color,background-color,box-shadow] duration-150 hover:bg-accent hover:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none [&_svg]:size-4"
+            className="absolute top-3 end-3 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-[color,background-color,box-shadow] duration-150 hover:bg-accent hover:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none [&_svg]:size-4"
           >
             <XIcon aria-hidden="true" />
           </DialogPrimitive.Close>
@@ -83,7 +86,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("flex flex-col gap-1.5 text-left [[data-slot=dialog-content]:has(>[data-slot=dialog-close])_&]:pr-8", className)}
+      className={cn("flex flex-col gap-1.5 text-start [[data-slot=dialog-content]:has(>[data-slot=dialog-close])_&]:pe-8", className)}
       {...props}
     />
   )

@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["window", "macos", "traffic lights", "chrome", "mockup", "sidebar", "frame"],
   files: [{ path: "components/mac-window.tsx" }],
   dependencies: [],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "mac-window-demo", title: "Notes app", file: "mac-window-demo.tsx" },
     { name: "mac-window-stack", title: "Active and inactive", file: "mac-window-stack.tsx" },

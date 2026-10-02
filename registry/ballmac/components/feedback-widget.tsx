@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ballmac/popover";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useMessages, defineMessage } from "@/lib/ballmac/i18n";
 
 type FeedbackSubmission = {
   /** 1 (very unhappy) to 5 (delighted). */
@@ -38,11 +39,11 @@ type FeedbackWidgetProps = Omit<React.ComponentProps<"button">, "onSubmit"> & {
 };
 
 const FACES = [
-  { value: 1, label: "Very unhappy", icon: Angry, tone: "text-destructive" },
-  { value: 2, label: "Unhappy", icon: Frown, tone: "text-chart-3" },
-  { value: 3, label: "Neutral", icon: Meh, tone: "text-muted-foreground" },
-  { value: 4, label: "Happy", icon: Smile, tone: "text-chart-2" },
-  { value: 5, label: "Delighted", icon: Laugh, tone: "text-chart-1" },
+  { value: 1, label: defineMessage("feedback-widget.FACES.0", "Very unhappy"), icon: Angry, tone: "text-destructive" },
+  { value: 2, label: defineMessage("feedback-widget.FACES.1", "Unhappy"), icon: Frown, tone: "text-chart-3" },
+  { value: 3, label: defineMessage("feedback-widget.FACES.2", "Neutral"), icon: Meh, tone: "text-muted-foreground" },
+  { value: 4, label: defineMessage("feedback-widget.FACES.3", "Happy"), icon: Smile, tone: "text-chart-2" },
+  { value: 5, label: defineMessage("feedback-widget.FACES.4", "Delighted"), icon: Laugh, tone: "text-chart-1" },
 ] as const;
 
 /**
@@ -52,7 +53,7 @@ const FACES = [
 function FeedbackWidget({
   onSubmit,
   topics,
-  triggerLabel = "Feedback",
+  triggerLabel,
   question = "How is your experience?",
   requireMessage = false,
   closeAfter = 2200,
@@ -62,6 +63,8 @@ function FeedbackWidget({
   className,
   ...props
 }: FeedbackWidgetProps) {
+  const msg = useMessages()
+  triggerLabel ??= msg("feedback-widget.triggerLabel", "Feedback")
   const reduce = useReducedMotion();
   const name = React.useId();
   const messageId = React.useId();
@@ -135,8 +138,8 @@ function FeedbackWidget({
                 <CircleCheck aria-hidden="true" className="size-6" />
               </motion.span>
               <div>
-                <p className="text-sm font-semibold">Thank you</p>
-                <p className="mt-1 text-sm text-muted-foreground">Your feedback helps us improve.</p>
+                <p className="text-sm font-semibold">{msg("feedback-widget.thankYou", "Thank you")}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{msg("feedback-widget.yourFeedbackHelpsUsImprove", "Your feedback helps us improve.")}</p>
               </div>
             </motion.div>
           ) : (
@@ -162,7 +165,7 @@ function FeedbackWidget({
                         )}
                       >
                         <Icon aria-hidden="true" className="size-6" strokeWidth={1.75} />
-                        <span className="sr-only">{label}</span>
+                        <span className="sr-only">{msg.of(label)}</span>
                       </span>
                     </label>
                   ))}
@@ -170,7 +173,7 @@ function FeedbackWidget({
               </fieldset>
 
               {topics && topics.length > 0 && (
-                <div role="group" aria-label="Topic" className="flex flex-wrap gap-1.5">
+                <div role="group" aria-label={msg("feedback-widget.topic", "Topic")} className="flex flex-wrap gap-1.5">
                   {topics.map((t) => (
                     <button
                       key={t}
@@ -187,7 +190,7 @@ function FeedbackWidget({
 
               <div className="grid gap-1.5">
                 <label htmlFor={messageId} className="text-xs font-medium text-muted-foreground">
-                  Tell us more {requireMessage ? "" : "(optional)"}
+                  {msg("feedback-widget.tellUsMore", "Tell us more")} {requireMessage ? "" : "(optional)"}
                 </label>
                 <textarea
                   id={messageId}
@@ -195,7 +198,7 @@ function FeedbackWidget({
                   required={requireMessage}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="What worked well, or what could be better?"
+                  placeholder={msg("feedback-widget.whatWorkedWellOrWhat", "What worked well, or what could be better?")}
                   className="min-h-20 w-full resize-none rounded-lg border border-input bg-background px-3 py-2 text-sm shadow-xs outline-none transition-[border-color,box-shadow] placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 dark:bg-input/30"
                 />
               </div>

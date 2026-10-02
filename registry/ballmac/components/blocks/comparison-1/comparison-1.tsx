@@ -136,7 +136,7 @@ function Comparison1({
 
       {/* Tablets and up: the product column is lifted into its own card. */}
       <div className="mt-16 hidden md:block">
-        <table className="w-full border-separate border-spacing-0 text-left">
+        <table className="w-full border-separate border-spacing-0 text-start">
           <caption className="sr-only">{product} compared with {competitors.map((c) => c.name).join(" and ")}</caption>
           <thead>
             <tr>
@@ -155,7 +155,7 @@ function Comparison1({
               const last = i === rows.length - 1
               return (
                 <tr key={r.label}>
-                  <th scope="row" className="border-t py-4 pr-4 text-left font-normal">
+                  <th scope="row" className="border-t py-4 pe-4 text-start font-normal">
                     <span className="block text-[15px] font-medium">{r.label}</span>
                     {r.hint && <span className="text-muted-foreground block text-sm">{r.hint}</span>}
                   </th>

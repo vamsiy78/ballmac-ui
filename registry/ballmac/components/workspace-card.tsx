@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ballmac/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type WorkspaceMember = {
   name: string;
@@ -87,12 +88,13 @@ function WorkspaceCard({
   className,
   ...props
 }: WorkspaceCardProps) {
+  const msg = useMessages()
   if (loading) {
     return (
       <article
         data-slot="workspace-card"
         aria-busy="true"
-        aria-label="Loading workspace"
+        aria-label={msg("workspace-card.loadingWorkspace", "Loading workspace")}
         className={cn("overflow-hidden rounded-2xl border bg-card", className)}
         {...props}
       >
@@ -130,10 +132,10 @@ function WorkspaceCard({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgb(255_255_255/0.35),transparent_55%)] dark:bg-[radial-gradient(circle_at_20%_0%,rgb(255_255_255/0.08),transparent_55%)]" />
       </div>
       {actions.length > 0 && (
-        <div className="absolute top-2.5 right-2.5 z-10">
+        <div className="absolute top-2.5 end-2.5 z-10">
           <DropdownMenu>
             <DropdownMenuTrigger
-              aria-label={`${workspace.name} actions`}
+              aria-label={msg("workspace-card.actions", "{name} actions", { name: workspace.name })}
               className="inline-flex size-8 items-center justify-center rounded-full bg-background/70 text-foreground backdrop-blur outline-none transition-colors hover:bg-background focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=open]:bg-background"
             >
               <MoreHorizontal aria-hidden="true" className="size-4" />
@@ -171,13 +173,13 @@ function WorkspaceCard({
                   {workspace.name}
                 </a>
               ) : (
-                <button type="button" onClick={onOpen} className={cn(titleClass, "text-left")}>
+                <button type="button" onClick={onOpen} className={cn(titleClass, "text-start")}>
                   {workspace.name}
                 </button>
               )}
               {current && (
                 <span className="relative inline-flex items-center gap-1 rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold tracking-wide text-primary-foreground uppercase">
-                  <Check aria-hidden="true" className="size-3" strokeWidth={3} /> Current
+                  <Check aria-hidden="true" className="size-3" strokeWidth={3} /> {msg("workspace-card.current", "Current")}
                 </span>
               )}
             </h3>
@@ -185,7 +187,7 @@ function WorkspaceCard({
           </div>
           <ArrowUpRight
             aria-hidden="true"
-            className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] group-hover/ws:translate-x-0.5 group-hover/ws:-translate-y-0.5 group-hover/ws:opacity-100 motion-reduce:transition-none"
+            className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] group-hover/ws:translate-x-0.5 group-hover/ws:-translate-y-0.5 group-hover/ws:opacity-100 motion-reduce:transition-none rtl:-scale-x-100"
           />
         </div>
 
@@ -200,7 +202,7 @@ function WorkspaceCard({
               ))}
             </AvatarGroup>
           ) : (
-            <span className="text-xs text-muted-foreground">{total} members</span>
+            <span className="text-xs text-muted-foreground">{msg("workspace-card.members", { one: "{count} member", other: "{count} members" }, { count: total })}</span>
           )}
           {workspace.plan && (
             <span className="rounded-full border bg-muted/60 px-2.5 py-0.5 text-xs font-medium">{workspace.plan}</span>
@@ -227,7 +229,7 @@ function WorkspaceCard({
                   </span>
                   <span
                     role="meter"
-                    aria-label="Storage used"
+                    aria-label={msg("workspace-card.storageUsed", "Storage used")}
                     aria-valuemin={0}
                     aria-valuemax={workspace.storage.total}
                     aria-valuenow={workspace.storage.used}

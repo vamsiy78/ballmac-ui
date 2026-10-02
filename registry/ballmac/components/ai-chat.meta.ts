@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "chat", "conversation", "llm", "scroll", "streaming", "layout"],
   files: [{ path: "components/ai-chat.tsx" }],
   dependencies: ["lucide-react", "motion@^12"],
-  registryDependencies: ["button", "motion-presets", "shadcn:utils"],
+  registryDependencies: ["button", "motion-presets", "shadcn:utils", "i18n"],
   examples: [
     { name: "ai-chat-demo", title: "Default", file: "ai-chat-demo.tsx" },
     { name: "ai-chat-empty", title: "Empty state with suggestions", file: "ai-chat-empty.tsx" },

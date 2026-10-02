@@ -10,7 +10,7 @@ export default function BackToTopStates() {
           <p key={i} className="mb-3">Scroll to show the labelled version, line {i + 1}.</p>
         ))}
       </div>
-      <BackToTop container={scroller} threshold={60} showLabel focusTarget="[aria-label='Long page']" className="absolute right-3 bottom-3" />
+      <BackToTop container={scroller} threshold={60} showLabel focusTarget="[aria-label='Long page']" className="absolute end-3 bottom-3" />
     </div>
   );
 }

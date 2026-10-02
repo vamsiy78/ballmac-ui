@@ -6,6 +6,7 @@ import * as React from "react";
 import { cva } from "class-variance-authority";
 import { ChevronDown } from "lucide-react";
 import { NavigationMenu as Primitive } from "radix-ui";
+import { useDirection } from "@/lib/ballmac/direction";
 import { cn } from "@/lib/utils";
 
 type NavigationMenuProps = React.ComponentProps<typeof Primitive.Root> & {
@@ -21,8 +22,10 @@ function NavigationMenu({
   viewportAlign = "start",
   ...props
 }: NavigationMenuProps) {
+  const dir = useDirection(props.dir);
   return (
     <Primitive.Root
+      dir={dir}
       data-slot="navigation-menu"
       data-viewport={viewport}
       className={cn(
@@ -91,7 +94,7 @@ function NavigationMenuContent({ className, ...props }: NavigationMenuContentPro
     <Primitive.Content
       data-slot="navigation-menu-content"
       className={cn(
-        "top-0 left-0 w-full p-2 pr-2.5 data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-32 data-[motion=from-start]:slide-in-from-left-32 data-[motion=to-end]:slide-out-to-right-32 data-[motion=to-start]:slide-out-to-left-32 motion-reduce:animate-none md:absolute md:w-auto",
+        "top-0 start-0 w-full p-2 pe-2.5 data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-32 data-[motion=from-start]:slide-in-from-left-32 data-[motion=to-end]:slide-out-to-right-32 data-[motion=to-start]:slide-out-to-left-32 motion-reduce:animate-none md:absolute md:w-auto",
         "group-data-[viewport=false]/navigation-menu:top-full group-data-[viewport=false]/navigation-menu:mt-1.5 group-data-[viewport=false]/navigation-menu:overflow-hidden group-data-[viewport=false]/navigation-menu:rounded-xl group-data-[viewport=false]/navigation-menu:border group-data-[viewport=false]/navigation-menu:bg-popover group-data-[viewport=false]/navigation-menu:text-popover-foreground group-data-[viewport=false]/navigation-menu:shadow-lg",
         className,
       )}
@@ -106,7 +109,7 @@ type NavigationMenuViewportProps = React.ComponentProps<typeof Primitive.Viewpor
 };
 function NavigationMenuViewport({ className, align = "start", ...props }: NavigationMenuViewportProps) {
   return (
-    <div className={cn("absolute top-full left-0 isolate z-50 flex justify-center", align === "center" && "w-full")}>
+    <div className={cn("absolute top-full start-0 isolate z-50 flex justify-center", align === "center" && "w-full")}>
       <Primitive.Viewport
         data-slot="navigation-menu-viewport"
         className={cn(
@@ -147,7 +150,7 @@ function NavigationMenuIndicator({ className, ...props }: NavigationMenuIndicato
       )}
       {...props}
     >
-      <div className="relative top-[60%] size-2 rotate-45 rounded-tl-sm border-t border-l bg-popover shadow-md" />
+      <div className="relative top-[60%] size-2 rotate-45 rounded-ss-sm border-t border-s bg-popover shadow-md" />
     </Primitive.Indicator>
   );
 }

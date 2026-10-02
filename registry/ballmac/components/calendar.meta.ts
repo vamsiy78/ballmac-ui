@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["date", "calendar", "range", "day-picker"],
   files: [{ path: "components/calendar.tsx" }],
   dependencies: ["react-day-picker@^9", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     { name: "calendar-demo", title: "Date range", file: "calendar-demo.tsx" },
     { name: "calendar-states", title: "Dropdowns and multiple", file: "calendar-states.tsx" },

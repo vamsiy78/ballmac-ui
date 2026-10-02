@@ -7,6 +7,7 @@ import { SearchIcon } from "lucide-react"
 import { Dialog as DialogPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type SpotlightSearchProps = React.ComponentProps<typeof CommandPrimitive>
 
@@ -58,7 +59,9 @@ type SpotlightSearchInputProps = React.ComponentProps<typeof CommandPrimitive.In
   trailing?: React.ReactNode
 }
 
-function SpotlightSearchInput({ className, placeholder = "Spotlight Search", trailing, ...props }: SpotlightSearchInputProps) {
+function SpotlightSearchInput({ className, placeholder, trailing, ...props }: SpotlightSearchInputProps) {
+  const msg = useMessages()
+  placeholder ??= msg("spotlight-search.placeholder", "Spotlight Search")
   return (
     <div data-slot="spotlight-search-field" className="flex h-14 shrink-0 items-center gap-3 px-4">
       <SearchIcon className="size-5 shrink-0 text-foreground/50" aria-hidden="true" />
@@ -224,11 +227,13 @@ function SpotlightSearchDialog({
   defaultOpen = false,
   onOpenChange,
   hotkey = "k",
-  title = "Spotlight Search",
+  title,
   className,
   children,
   ...props
 }: SpotlightSearchDialogProps) {
+  const msg = useMessages()
+  title ??= msg("spotlight-search.title", "Spotlight Search")
   const [uncontrolled, setUncontrolled] = React.useState(defaultOpen)
   const open = openProp ?? uncontrolled
   const setOpen = (next: boolean) => {

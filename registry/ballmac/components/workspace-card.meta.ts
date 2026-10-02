@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["workspace", "team", "card", "members"],
   files: [{ path: "components/workspace-card.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "avatar", "dropdown-menu"],
+  registryDependencies: ["shadcn:utils", "avatar", "dropdown-menu", "i18n"],
   examples: [
     { name: "workspace-card-demo", title: "Workspace grid", file: "workspace-card-demo.tsx" },
     { name: "workspace-card-states", title: "Loading and minimal", file: "workspace-card-states.tsx" },

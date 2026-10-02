@@ -68,7 +68,7 @@ function SummitTickets({ hrefs, ...props }: SummitTicketsProps) {
                   {tiers.map((x) => (
                     <label key={x.id} className={cn("bg-card focus-within:ring-ring/50 relative flex cursor-pointer flex-col rounded-3xl border-2 p-6 transition-colors focus-within:ring-[3px] motion-reduce:transition-none", tier === x.id ? "border-primary bg-accent/40" : "hover:border-primary/40")}>
                       <input type="radio" name="tier" value={x.id} checked={tier === x.id} onChange={() => setTier(x.id)} className="sr-only" />
-                      {x.badge && <span className={cn("bg-chart-2 absolute -top-3 left-6 rounded-full px-3 py-0.5 text-xs font-bold", summitOnSun)}>{x.badge}</span>}
+                      {x.badge && <span className={cn("bg-chart-2 absolute -top-3 start-6 rounded-full px-3 py-0.5 text-xs font-bold", summitOnSun)}>{x.badge}</span>}
                       <span className="flex items-baseline justify-between gap-2"><span className="text-lg font-bold">{x.name}</span><span className={cn("text-3xl tabular-nums", summitDisplayClass)}>${x.price}</span></span>
                       <span className="text-muted-foreground mt-1 text-sm">{x.blurb}</span>
                       <ul className="mt-4 grid gap-1.5 text-sm">{x.perks.map((p) => <li key={p} className="flex gap-2"><Check className="mt-0.5 size-4 shrink-0" aria-hidden="true" />{p}</li>)}</ul>

@@ -224,6 +224,7 @@ server.registerTool(
         cmds.setup,
         `${cmds.add}   # optional: the Ballmac theme tokens`,
         "Or pick one of 12 themes (graphite, ocean, indigo, violet, rose, ember, amber, forest, teal, sand, mono, midnight): add @ballmac/theme-<name>. Preview and tune them at https://ui.ballmac.com/themes",
+        "For Arabic, Hebrew, Persian or Urdu: set <html lang dir=\"rtl\">, add @ballmac/direction and wrap the app in DirectionProvider; every component mirrors. To translate built-in text and set the locale for dates and numbers, add @ballmac/i18n and wrap the app in I18nProvider with a messages object (keys: https://ui.ballmac.com/i18n/en.json). Guides: https://ui.ballmac.com/docs/rtl and https://ui.ballmac.com/docs/i18n",
         `For Pro items (tier "pro"), add to components.json "registries": ${JSON.stringify(PRO_REGISTRY)} and put BALLMAC_LICENSE_KEY=<key> in .env.local${catalog.hasLicense ? " (this MCP server has a licence key, so get_item returns Pro source)" : ""}. Guide: https://ui.ballmac.com/docs/pro`,
       ],
       installLocation: "components/ballmac (blocks in components/ballmac/blocks, templates in components/ballmac/templates plus app routes)",

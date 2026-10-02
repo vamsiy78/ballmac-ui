@@ -5,6 +5,7 @@ import * as React from "react";
 import { X } from "lucide-react";
 import { Popover as Primitive } from "radix-ui";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type PopoverProps = React.ComponentProps<typeof Primitive.Root>;
 function Popover(props: PopoverProps) {
@@ -39,9 +40,11 @@ function PopoverContent({
   align = "center",
   sideOffset = 8,
   showCloseButton = false,
-  closeLabel = "Close popover",
+  closeLabel,
   ...props
 }: PopoverContentProps) {
+  const msg = useMessages()
+  closeLabel ??= msg("popover.closeLabel", "Close popover")
   return (
     <Primitive.Portal>
       <Primitive.Content
@@ -61,7 +64,7 @@ function PopoverContent({
           <Primitive.Close
             data-slot="popover-close"
             aria-label={closeLabel}
-            className="absolute top-2.5 right-2.5 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="absolute top-2.5 end-2.5 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             <X aria-hidden="true" className="size-4" />
           </Primitive.Close>
@@ -75,7 +78,7 @@ function PopoverHeader({ className, ...props }: PopoverHeaderProps) {
   return (
     <div
       data-slot="popover-header"
-      className={cn("grid gap-1 pr-6", className)}
+      className={cn("grid gap-1 pe-6", className)}
       {...props}
     />
   );

@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["menu", "right-click", "overlay", "radix"],
   files: [{ path: "components/context-menu.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     { name: "context-menu-demo", title: "File actions", file: "context-menu-demo.tsx" },
     { name: "context-menu-states", title: "View options", file: "context-menu-states.tsx" },

@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "voice", "microphone", "audio", "recorder", "input"],
   files: [{ path: "components/voice-input.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "voice-input-demo", title: "Recorder bar", file: "voice-input-demo.tsx" },
     { name: "voice-input-button", title: "Button with live glow", file: "voice-input-button.tsx" },

@@ -37,9 +37,9 @@ function MuseLibrary({ hrefs, ...props }: MuseLibraryProps) {
               </button>
             ))}
           </div>
-          <div className="relative ml-auto w-full sm:w-64">
-            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2" aria-hidden="true" />
-            <input type="search" aria-label="Search the library" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-9 w-full rounded-full border pr-4 pl-10 text-sm outline-none focus-visible:ring-[3px]" />
+          <div className="relative ms-auto w-full sm:w-64">
+            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-3.5 size-4 -translate-y-1/2" aria-hidden="true" />
+            <input type="search" aria-label="Search the library" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-9 w-full rounded-full border pe-4 ps-10 text-sm outline-none focus-visible:ring-[3px]" />
           </div>
         </div>
         <p className="sr-only" role="status">{shown.length} items</p>
@@ -52,7 +52,7 @@ function MuseLibrary({ hrefs, ...props }: MuseLibraryProps) {
               const Icon = icons[a.kind]
               return (
                 <li key={a.id}>
-                  <button type="button" onClick={() => setOpenId(a.id)} className="bg-card hover:border-foreground/25 focus-visible:ring-ring/50 group flex h-full w-full flex-col overflow-hidden rounded-3xl border text-left outline-none transition-all hover:shadow-md focus-visible:ring-[3px]">
+                  <button type="button" onClick={() => setOpenId(a.id)} className="bg-card hover:border-foreground/25 focus-visible:ring-ring/50 group flex h-full w-full flex-col overflow-hidden rounded-3xl border text-start outline-none transition-all hover:shadow-md focus-visible:ring-[3px]">
                     <div aria-hidden="true" className={cn("bg-surface h-36 overflow-hidden border-b p-5 text-[11px] leading-5", a.kind === "Code" || a.kind === "Data" ? "font-mono" : "[font-family:var(--muse-serif),ui-serif,Georgia,serif] text-[13px]")}>
                       {a.lines.map((l, i) => <p key={i} className={cn("truncate", i === 0 && a.kind === "Document" ? "text-foreground font-semibold" : "text-muted-foreground")}>{l}</p>)}
                     </div>
@@ -78,7 +78,7 @@ function MuseLibrary({ hrefs, ...props }: MuseLibraryProps) {
               </DialogHeader>
               <div className="relative">
                 <pre tabIndex={0} aria-label={`${open.title} contents`} className={cn("bg-surface focus-visible:ring-ring/50 max-h-[50dvh] overflow-auto rounded-2xl border p-5 text-sm leading-7 whitespace-pre-wrap outline-none focus-visible:ring-[3px]", open.kind === "Document" ? "[font-family:var(--muse-serif),ui-serif,Georgia,serif] text-[15px]" : "font-mono text-[13px] leading-6")}>{open.body}</pre>
-                <CopyButton value={open.body} ariaLabel="Copy contents" className="absolute top-2 right-2" />
+                <CopyButton value={open.body} ariaLabel="Copy contents" className="absolute top-2 end-2" />
               </div>
             </>
           )}

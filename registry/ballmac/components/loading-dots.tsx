@@ -1,6 +1,9 @@
 // Ballmac UI: Loading Dots. https://ui.ballmac.com/components/loading-dots
+"use client"
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type LoadingDotsProps = React.ComponentProps<"span"> & {
   /** Status text available to screen readers. */
@@ -11,10 +14,12 @@ type LoadingDotsProps = React.ComponentProps<"span"> & {
 
 function LoadingDots({
   className,
-  label = "Loading",
+  label,
   size = "default",
   ...props
 }: LoadingDotsProps) {
+  const msg = useMessages()
+  label ??= msg("loading-dots.label", "Loading")
   return (
     <span
       data-slot="loading-dots"

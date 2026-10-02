@@ -6,6 +6,7 @@ import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ballmac/sheet";
 import { useScrollDirection, useScrolled, type ScrollContainer } from "@/lib/ballmac/scroll";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type NavbarContextValue = { closeMobile: () => void; scrolled: boolean };
 const NavbarContext = React.createContext<NavbarContextValue>({ closeMobile: () => {}, scrolled: false });
@@ -68,7 +69,7 @@ function NavbarBrand({ className, ...props }: NavbarBrandProps) {
     <a
       data-slot="navbar-brand"
       className={cn(
-        "-ml-1 flex shrink-0 items-center gap-2 rounded-md px-1 text-[15px] font-semibold tracking-tight outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "-ms-1 flex shrink-0 items-center gap-2 rounded-md px-1 text-[15px] font-semibold tracking-tight outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
         className,
       )}
       {...props}
@@ -81,7 +82,9 @@ type NavbarLinksProps = React.ComponentProps<"nav"> & {
   label?: string;
 };
 /** The primary links. Hidden below the `md` breakpoint; put the same links in NavbarMobileMenu. */
-function NavbarLinks({ className, label = "Main", children, ...props }: NavbarLinksProps) {
+function NavbarLinks({ className, label, children, ...props }: NavbarLinksProps) {
+  const msg = useMessages()
+  label ??= msg("navbar.label", "Main")
   return (
     <nav aria-label={label} data-slot="navbar-links" className={cn("hidden md:block", className)} {...props}>
       <ul className="flex items-center gap-1">{children}</ul>
@@ -116,7 +119,7 @@ function NavbarLink({ active = false, className, children, ...props }: NavbarLin
 type NavbarActionsProps = React.ComponentProps<"div">;
 /** Buttons on the right: sign in, theme toggle, call to action. */
 function NavbarActions({ className, ...props }: NavbarActionsProps) {
-  return <div data-slot="navbar-actions" className={cn("ml-auto flex items-center gap-2", className)} {...props} />;
+  return <div data-slot="navbar-actions" className={cn("ms-auto flex items-center gap-2", className)} {...props} />;
 }
 
 type NavbarMobileMenuProps = Omit<React.ComponentProps<typeof SheetContent>, "side"> & {
@@ -124,7 +127,9 @@ type NavbarMobileMenuProps = Omit<React.ComponentProps<typeof SheetContent>, "si
   label?: string;
 };
 /** A menu button (shown below `md`) that opens the links in a sheet. Links inside close it when chosen. */
-function NavbarMobileMenu({ label = "Menu", className, children, ...props }: NavbarMobileMenuProps) {
+function NavbarMobileMenu({ label, className, children, ...props }: NavbarMobileMenuProps) {
+  const msg = useMessages()
+  label ??= msg("navbar.label2", "Menu")
   const [open, setOpen] = React.useState(false);
   const parent = React.useContext(NavbarContext);
   const value = React.useMemo(() => ({ ...parent, closeMobile: () => setOpen(false) }), [parent]);
@@ -133,13 +138,13 @@ function NavbarMobileMenu({ label = "Menu", className, children, ...props }: Nav
       <SheetTrigger
         data-slot="navbar-mobile-trigger"
         aria-label={label}
-        className="ml-auto inline-flex size-9 items-center justify-center rounded-md outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 md:hidden"
+        className="ms-auto inline-flex size-9 items-center justify-center rounded-md outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 md:hidden"
       >
         <Menu aria-hidden="true" className="size-5" />
       </SheetTrigger>
-      <SheetContent side="right" className={cn("w-72 sm:w-80", className)} {...props}>
+      <SheetContent side="end" className={cn("w-72 sm:w-80", className)} {...props}>
         <SheetTitle className="px-5 pt-5 text-base font-semibold">{label}</SheetTitle>
-        <SheetDescription className="sr-only">Site navigation</SheetDescription>
+        <SheetDescription className="sr-only">{msg("navbar.siteNavigation", "Site navigation")}</SheetDescription>
         <NavbarContext.Provider value={value}>
           <nav aria-label={label} className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-3 pb-5">
             {children}

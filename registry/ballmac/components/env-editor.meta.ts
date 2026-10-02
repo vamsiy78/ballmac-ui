@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["env", "environment", "variables", "secrets", "config"],
   files: [{ path: "components/env-editor.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "copy-button"],
+  registryDependencies: ["shadcn:utils", "copy-button", "i18n"],
   examples: [
     { name: "env-editor-demo", title: "Project variables", file: "env-editor-demo.tsx" },
     { name: "env-editor-controlled", title: "Controlled with a live .env preview", file: "env-editor-controlled.tsx" },

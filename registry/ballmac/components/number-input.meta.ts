@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["number", "stepper", "spinbutton"],
   files: [{ path: "components/number-input.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "number-input-demo",

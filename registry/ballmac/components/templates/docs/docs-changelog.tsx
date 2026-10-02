@@ -30,7 +30,7 @@ function DocsChangelog({ hrefs, ...props }: DocsChangelogProps) {
           <p className="text-muted-foreground mt-4 text-xl text-pretty">What shipped, what changed and what to do about it. Breaking changes always get a major version and a month of notice.</p>
           <div className="mt-6 flex flex-wrap items-center gap-2" role="group" aria-label="Filter releases">
             {tags.map((t) => <button key={t} type="button" aria-pressed={tag === t} onClick={() => setTag(t)} className="hover:bg-accent focus-visible:ring-ring/50 aria-pressed:bg-primary aria-pressed:text-primary-foreground h-9 rounded-full border px-4 text-sm font-semibold outline-none focus-visible:ring-[3px]">{t}</button>)}
-            <a href="/docs/changelog.xml" className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 ml-auto inline-flex items-center gap-1.5 rounded-md text-sm font-medium outline-none focus-visible:ring-[3px]"><Rss className="size-4" aria-hidden="true" />RSS</a>
+            <a href="/docs/changelog.xml" className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 ms-auto inline-flex items-center gap-1.5 rounded-md text-sm font-medium outline-none focus-visible:ring-[3px]"><Rss className="size-4" aria-hidden="true" />RSS</a>
           </div>
           <p role="status" className="text-muted-foreground mt-4 text-sm">{list.length} {list.length === 1 ? "release" : "releases"}</p>
           <ol className="mt-4">
@@ -52,7 +52,7 @@ function DocsChangelog({ hrefs, ...props }: DocsChangelogProps) {
           </ol>
           {list.length === 0 && <p className="text-muted-foreground py-10 text-center">No releases with this tag yet.</p>}
         </main>
-        <aside className="hidden xl:block" aria-label="Versions"><div className="sticky top-24"><h2 className="text-xs font-bold tracking-[0.12em] uppercase">Versions</h2><ul className="mt-3 grid gap-1 border-l text-sm">{releases.map((r) => <li key={r.version}><a href={`#v${r.version}`} className={cn("text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 -ml-px block rounded-r-md border-l-2 border-transparent px-3 py-1 outline-none hover:border-current focus-visible:ring-[3px]", docsMonoClass)}>{r.version}</a></li>)}</ul></div></aside>
+        <aside className="hidden xl:block" aria-label="Versions"><div className="sticky top-24"><h2 className="text-xs font-bold tracking-[0.12em] uppercase">Versions</h2><ul className="mt-3 grid gap-1 border-s text-sm">{releases.map((r) => <li key={r.version}><a href={`#v${r.version}`} className={cn("text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 -ms-px block rounded-e-md border-s-2 border-transparent px-3 py-1 outline-none hover:border-current focus-visible:ring-[3px]", docsMonoClass)}>{r.version}</a></li>)}</ul></div></aside>
       </div>
     </DocsShell>
   )

@@ -8,7 +8,7 @@ const tile = "bg-background/70 text-foreground/80 dark:bg-white/10"
 
 export default function DockVertical() {
   return (
-    <div className="relative isolate flex h-[400px] w-full max-w-[560px] items-center overflow-hidden rounded-2xl border border-foreground/10 pl-3">
+    <div className="relative isolate flex h-[400px] w-full max-w-[560px] items-center overflow-hidden rounded-2xl border border-foreground/10 ps-3">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 dark:brightness-[0.55]">
         <div className="absolute inset-0 bg-linear-to-bl from-chart-4 via-chart-1 to-chart-2" />
         <div className="absolute inset-x-0 top-1/2 h-full rounded-[50%] bg-white/15 blur-2xl" />

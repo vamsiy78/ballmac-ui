@@ -9,7 +9,7 @@ export default function ShimmerTextDemo() {
         <Sparkles className="size-4 text-muted-foreground" aria-hidden="true" />
         <ShimmerText className="font-medium">Thinking…</ShimmerText>
       </div>
-      <p className="mt-2 pl-6 font-mono text-xs text-muted-foreground">Reading 3 files in src/billing</p>
+      <p className="mt-2 ps-6 font-mono text-xs text-muted-foreground">Reading 3 files in src/billing</p>
     </div>
   )
 }

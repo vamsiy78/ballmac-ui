@@ -5,6 +5,7 @@ import * as React from "react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type AnimatedNumberFlowProps = Omit<React.ComponentProps<"span">, "children"> & {
   /** The number to show. Change it and the digits roll to the new value. */
@@ -57,7 +58,7 @@ function Digit({ digit, reduce, fade }: { digit: number; reduce: boolean | null;
 
 function AnimatedNumberFlow({
   value,
-  locale = "en-US",
+  locale,
   format,
   prefix,
   suffix,
@@ -66,6 +67,8 @@ function AnimatedNumberFlow({
   className,
   ...props
 }: AnimatedNumberFlowProps) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const reduce = useReducedMotion()
   const formatter = React.useMemo(() => new Intl.NumberFormat(locale, format), [locale, format])
   const parts = formatter.formatToParts(Number.isFinite(value) ? value : 0)
@@ -102,11 +105,11 @@ function AnimatedNumberFlow({
         {text}
       </span>
       <span aria-hidden="true" className="inline-flex items-center">
-        {prefix && <span className="mr-[0.25em] whitespace-pre">{prefix}</span>}
+        {prefix && <span className="me-[0.25em] whitespace-pre">{prefix}</span>}
         <AnimatePresence initial={false} mode="popLayout">
           {nodes}
         </AnimatePresence>
-        {suffix && <span className="ml-[0.25em] whitespace-pre">{suffix}</span>}
+        {suffix && <span className="ms-[0.25em] whitespace-pre">{suffix}</span>}
       </span>
     </span>
   )

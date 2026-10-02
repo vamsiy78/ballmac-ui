@@ -21,7 +21,7 @@ function List({ selected, onPick }: { selected: string; onPick: (id: string) => 
               onPick(m.id);
               setDetailOpen(true);
             }}
-            className="grid w-full gap-0.5 px-4 py-3 text-left outline-none transition-colors hover:bg-accent/60 focus-visible:bg-accent focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50 aria-[current=true]:bg-accent"
+            className="grid w-full gap-0.5 px-4 py-3 text-start outline-none transition-colors hover:bg-accent/60 focus-visible:bg-accent focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50 aria-[current=true]:bg-accent"
           >
             <span className="flex items-baseline justify-between gap-2">
               <span className="truncate text-sm font-semibold">{m.from}</span>
@@ -50,7 +50,7 @@ export default function SplitViewDemo() {
         <SplitViewDetail label="Message">
           <div className="flex h-11 items-center gap-2 border-b px-3">
             <SplitViewBack>Inbox</SplitViewBack>
-            <span className="ml-auto text-muted-foreground"><Star aria-hidden="true" className="size-4" /></span>
+            <span className="ms-auto text-muted-foreground"><Star aria-hidden="true" className="size-4" /></span>
           </div>
           <article className="grid gap-2 p-5">
             <h3 className="text-lg font-semibold tracking-tight">{message.subject}</h3>

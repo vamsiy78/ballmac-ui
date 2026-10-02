@@ -19,7 +19,7 @@ function Deploys() {
             <span className={`size-2.5 rounded-full ${dot}`} />
             <span className="flex-1 font-mono">{name}</span>
             <span className="text-muted-foreground w-28">{status}</span>
-            <span className="text-muted-foreground w-24 text-right tabular-nums">{time}</span>
+            <span className="text-muted-foreground w-24 text-end tabular-nums">{time}</span>
           </li>
         ))}
       </ul>

@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["command palette", "search", "pages", "keyboard"],
   files: [{ path: "components/command-bar.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "command", "kbd"],
+  registryDependencies: ["shadcn:utils", "command", "kbd", "i18n"],
   examples: [
     { name: "command-bar-demo", title: "Global commands", file: "command-bar-demo.tsx" },
     { name: "command-bar-states", title: "Own trigger", file: "command-bar-states.tsx" },

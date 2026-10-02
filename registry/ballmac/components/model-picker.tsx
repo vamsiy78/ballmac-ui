@@ -14,6 +14,7 @@ import {
 } from "@/components/ballmac/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ballmac/popover"
 import { cn } from "@/lib/utils"
+import { useMessages, defineMessage, type Message } from "@/lib/ballmac/i18n"
 
 type ModelCapability = "vision" | "reasoning" | "tools" | "fast"
 
@@ -40,11 +41,11 @@ type ModelOption = {
   lockedLabel?: string
 }
 
-const CAPABILITY_META: Record<ModelCapability, { label: string; help: string; icon: React.ComponentType<{ className?: string }> }> = {
-  vision: { label: "Vision", help: "Reads images and screenshots", icon: Eye },
-  reasoning: { label: "Reasoning", help: "Thinks before answering", icon: Brain },
-  tools: { label: "Tools", help: "Calls functions and apps", icon: Wrench },
-  fast: { label: "Fast", help: "Low latency replies", icon: Zap },
+const CAPABILITY_META: Record<ModelCapability, { label: Message; help: Message; icon: React.ComponentType<{ className?: string }> }> = {
+  vision: { label: defineMessage("model-picker.CAPABILITY_META.vision", "Vision"), help: defineMessage("model-picker.CAPABILITY_META.vision.help", "Reads images and screenshots"), icon: Eye },
+  reasoning: { label: defineMessage("model-picker.CAPABILITY_META.reasoning", "Reasoning"), help: defineMessage("model-picker.CAPABILITY_META.reasoning.help", "Thinks before answering"), icon: Brain },
+  tools: { label: defineMessage("model-picker.CAPABILITY_META.tools", "Tools"), help: defineMessage("model-picker.CAPABILITY_META.tools.help", "Calls functions and apps"), icon: Wrench },
+  fast: { label: defineMessage("model-picker.CAPABILITY_META.fast", "Fast"), help: defineMessage("model-picker.CAPABILITY_META.fast.help", "Low latency replies"), icon: Zap },
 }
 
 const TONES = ["bg-chart-1", "bg-chart-2", "bg-chart-3", "bg-chart-4", "bg-chart-5"]
@@ -108,8 +109,8 @@ function ModelPicker({
   value: valueProp,
   defaultValue,
   onValueChange,
-  placeholder = "Select a model",
-  searchPlaceholder = "Search models…",
+  placeholder,
+  searchPlaceholder,
   searchable,
   showDetails = true,
   onLockedSelect,
@@ -119,6 +120,9 @@ function ModelPicker({
   disabled,
   ...props
 }: ModelPickerProps) {
+  const msg = useMessages()
+  placeholder ??= msg("model-picker.placeholder", "Select a model")
+  searchPlaceholder ??= msg("model-picker.searchPlaceholder", "Search models…")
   const [internal, setInternal] = React.useState(defaultValue)
   const value = valueProp ?? internal
   const [open, setOpen] = React.useState(false)
@@ -177,7 +181,7 @@ function ModelPicker({
       >
         {variant === "default" && selected && <ProviderMark model={selected} />}
         <span className={cn("truncate", !selected && "text-muted-foreground")}>{selected?.name ?? placeholder}</span>
-        <ChevronsUpDown aria-hidden="true" className="ml-auto size-4 shrink-0 text-muted-foreground" />
+        <ChevronsUpDown aria-hidden="true" className="ms-auto size-4 shrink-0 text-muted-foreground" />
       </PopoverTrigger>
       <PopoverContent
         label="Choose a model"
@@ -223,13 +227,13 @@ function ModelPicker({
                         {m.isNew && (
                           <span className="inline-flex shrink-0 items-center gap-0.5 rounded-full bg-muted px-1.5 py-px text-[10px] font-medium text-foreground">
                             <Sparkles aria-hidden="true" className="size-2.5" />
-                            New
+                            {msg("model-picker.new", "New")}
                           </span>
                         )}
                         {m.locked && (
                           <span className="inline-flex shrink-0 items-center gap-0.5 rounded-full border px-1.5 py-px text-[10px] font-medium text-foreground">
                             <Lock aria-hidden="true" className="size-2.5" />
-                            {m.lockedLabel ?? "Locked"}
+                            {m.lockedLabel ?? msg("model-picker.locked", "Locked")}
                           </span>
                         )}
                       </span>
@@ -247,8 +251,8 @@ function ModelPicker({
           {showDetails && detail && (
             <aside
               aria-live="polite"
-              aria-label="Model details"
-              className="hidden w-60 shrink-0 flex-col gap-4 border-l bg-muted/30 p-4 sm:flex"
+              aria-label={msg("model-picker.modelDetails", "Model details")}
+              className="hidden w-60 shrink-0 flex-col gap-4 border-s bg-muted/30 p-4 sm:flex"
             >
               <div className="flex items-center gap-2.5">
                 <ProviderMark model={detail} className="size-8 text-xs" />
@@ -262,7 +266,7 @@ function ModelPicker({
                 {detail.contextWindow !== undefined && (
                   <div className="flex items-center justify-between gap-2">
                     <dt className="text-muted-foreground">Context</dt>
-                    <dd className="font-medium text-foreground tabular-nums">{formatContext(detail.contextWindow)} tokens</dd>
+                    <dd className="font-medium text-foreground tabular-nums">{msg("model-picker.contextTokens", "{size} tokens", { size: formatContext(detail.contextWindow) })}</dd>
                   </div>
                 )}
                 {detail.cost !== undefined && (
@@ -273,7 +277,7 @@ function ModelPicker({
                         {"$".repeat(detail.cost)}
                         <span className="text-border">{"$".repeat(3 - detail.cost)}</span>
                       </span>
-                      <span className="sr-only">{["Low", "Medium", "High"][detail.cost - 1]} cost</span>
+                      <span className="sr-only">{msg("model-picker.costLevel", "{level} cost", { level: [msg("model-picker.costLow", "Low"), msg("model-picker.costMedium", "Medium"), msg("model-picker.costHigh", "High")][detail.cost - 1] ?? "" })}</span>
                     </dd>
                   </div>
                 )}
@@ -287,8 +291,8 @@ function ModelPicker({
                       <li key={c} className="flex items-start gap-2 text-[13px]">
                         <Icon aria-hidden="true" className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
                         <span>
-                          <span className="font-medium text-foreground">{meta.label}</span>
-                          <span className="text-muted-foreground"> · {meta.help}</span>
+                          <span className="font-medium text-foreground">{msg.of(meta.label)}</span>
+                          <span className="text-muted-foreground"> · {msg.of(meta.help)}</span>
                         </span>
                       </li>
                     )
@@ -298,7 +302,7 @@ function ModelPicker({
               {detail.locked && (
                 <p className="mt-auto flex items-center gap-1.5 rounded-lg border bg-background px-2.5 py-2 text-xs text-foreground">
                   <Lock aria-hidden="true" className="size-3.5 shrink-0" />
-                  Available with {detail.lockedLabel ?? "a higher plan"}
+                  {msg("model-picker.availableWith", "Available with {plan}", { plan: detail.lockedLabel ?? msg("model-picker.higherPlan", "a higher plan") })}
                 </p>
               )}
             </aside>

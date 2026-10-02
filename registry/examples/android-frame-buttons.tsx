@@ -24,7 +24,7 @@ function Settings() {
               <span className="block truncate text-[16px] font-medium">{r.name}</span>
               <span className="block truncate text-[13px] text-muted-foreground">{r.detail}</span>
             </span>
-            <ChevronRight className="size-4 text-muted-foreground" aria-hidden="true" />
+            <ChevronRight className="size-4 text-muted-foreground rtl:rotate-180" aria-hidden="true" />
           </li>
         ))}
       </ul>

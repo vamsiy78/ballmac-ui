@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["kanban", "tasks", "board"],
   files: [{ path: "components/kanban-board.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n", "direction"],
   examples: [
     {
       name: "kanban-board-demo",

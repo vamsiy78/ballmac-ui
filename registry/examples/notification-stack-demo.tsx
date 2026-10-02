@@ -52,7 +52,7 @@ export default function NotificationStackDemo() {
         <div className="absolute inset-0 bg-linear-to-bl from-chart-4 via-chart-1 to-chart-2" />
         <div className="absolute -inset-x-1/4 top-1/2 h-full rounded-[50%] bg-white/20 blur-2xl" />
       </div>
-      <div aria-hidden="true" className="pointer-events-none absolute bottom-6 left-6 text-white [text-shadow:0_1px_12px_rgb(0_0_0/0.2)]">
+      <div aria-hidden="true" className="pointer-events-none absolute bottom-6 start-6 text-white [text-shadow:0_1px_12px_rgb(0_0_0/0.2)]">
         <p className="text-sm font-medium opacity-90">Tuesday, September 29</p>
         <p className="text-6xl font-semibold tracking-tight">9:41</p>
       </div>

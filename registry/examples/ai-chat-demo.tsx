@@ -56,7 +56,7 @@ export default function AiChatDemo() {
           <PromptInput onSubmit={send} status={streaming ? "streaming" : "idle"} onStop={stop}>
             <PromptInputTextarea placeholder="Ask about Ballmac UI…" />
             <PromptInputToolbar>
-              <PromptInputSubmit className="ml-auto" />
+              <PromptInputSubmit className="ms-auto" />
             </PromptInputToolbar>
           </PromptInput>
         </ChatFooter>

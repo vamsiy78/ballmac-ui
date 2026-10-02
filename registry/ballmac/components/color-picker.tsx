@@ -3,6 +3,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type ColorPickerProps = Omit<
   React.ComponentProps<"div">,
@@ -25,12 +26,14 @@ function ColorPicker({
   value,
   defaultValue = "",
   onValueChange,
-  label = "Color",
+  label,
   name,
   disabled = false,
   className,
   ...props
 }: ColorPickerProps) {
+  const msg = useMessages()
+  label ??= msg("color-picker.label", "Color")
   const [internal, setInternal] = React.useState(defaultValue)
   const current = value ?? internal
   const valid = /^#[0-9a-fA-F]{6}$/.test(current)
@@ -50,7 +53,7 @@ function ColorPicker({
       <input
         data-slot="color-picker-native"
         type="color"
-        aria-label={`Choose ${label.toLowerCase()}`}
+        aria-label={msg("color-picker.choose", "Choose {label}", { label: label.toLowerCase() })}
         disabled={disabled}
         value={current}
         onChange={(event) => commit(event.currentTarget.value)}
@@ -59,13 +62,13 @@ function ColorPicker({
       <input
         data-slot="color-picker-text"
         type="text"
-        aria-label={`${label} hex value`}
+        aria-label={msg("color-picker.hexValue", "{label} hex value", { label })}
         aria-invalid={current && !valid ? true : undefined}
         name={name}
         disabled={disabled}
         value={current}
         onChange={(event) => commit(event.currentTarget.value)}
-        placeholder="Hex color"
+        placeholder={msg("color-picker.hexColor", "Hex color")}
         maxLength={7}
         spellCheck={false}
         className="min-w-0 flex-1 bg-transparent font-mono text-sm text-foreground outline-none placeholder:font-sans placeholder:text-muted-foreground disabled:opacity-50"

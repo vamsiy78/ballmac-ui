@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["api", "endpoint", "docs", "rest", "reference"],
   files: [{ path: "components/api-endpoint.tsx" }],
   dependencies: ["lucide-react", "radix-ui"],
-  registryDependencies: ["shadcn:utils", "copy-button", "highlight"],
+  registryDependencies: ["shadcn:utils", "copy-button", "highlight", "i18n"],
   examples: [
     { name: "api-endpoint-demo", title: "Create a customer", file: "api-endpoint-demo.tsx" },
     { name: "api-endpoint-list", title: "A stack of endpoints", file: "api-endpoint-list.tsx" },

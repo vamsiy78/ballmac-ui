@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "tokens", "context", "meter", "usage", "llm"],
   files: [{ path: "components/token-meter.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "popover"],
+  registryDependencies: ["shadcn:utils", "popover", "i18n"],
   examples: [
     { name: "token-meter-demo", title: "Breakdown with warning", file: "token-meter-demo.tsx" },
     { name: "token-meter-pill", title: "Composer pill", file: "token-meter-pill.tsx" },

@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["pricing", "plans", "radio", "billing toggle"],
   files: [{ path: "components/plan-selector.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n"],
   examples: [
     { name: "plan-selector-demo", title: "Three plans", file: "plan-selector-demo.tsx" },
     { name: "plan-selector-states", title: "Controlled, one unavailable", file: "plan-selector-states.tsx" },

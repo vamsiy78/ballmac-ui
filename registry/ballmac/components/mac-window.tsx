@@ -4,6 +4,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type MacWindowContextValue = {
   active: boolean
@@ -112,11 +113,12 @@ type MacWindowControlsProps = React.ComponentProps<"div"> & {
 /** The red, yellow and green traffic lights. Glyphs appear when the pointer is over any of them. */
 function MacWindowControls({ labels, className, ...props }: MacWindowControlsProps) {
   const { onClose, onMinimize, onZoom } = React.useContext(MacWindowContext)
+  const msg = useMessages()
   return (
-    <div data-slot="mac-window-controls" className={cn("group/lights flex shrink-0 items-center gap-2", className)} {...props}>
-      <TrafficLight kind="close" label={labels?.close ?? "Close window"} onPress={onClose} />
-      <TrafficLight kind="minimize" label={labels?.minimize ?? "Minimize window"} onPress={onMinimize} />
-      <TrafficLight kind="zoom" label={labels?.zoom ?? "Zoom window"} onPress={onZoom} />
+    <div data-slot="mac-window-controls" dir="ltr" className={cn("group/lights flex shrink-0 items-center gap-2", className)} {...props}>
+      <TrafficLight kind="close" label={labels?.close ?? msg("mac-window.close", "Close window")} onPress={onClose} />
+      <TrafficLight kind="minimize" label={labels?.minimize ?? msg("mac-window.minimize", "Minimize window")} onPress={onMinimize} />
+      <TrafficLight kind="zoom" label={labels?.zoom ?? msg("mac-window.zoom", "Zoom window")} onPress={onZoom} />
     </div>
   )
 }
@@ -157,7 +159,7 @@ function MacWindowTitleBar({ title, controls = true, className, children, ...pro
         </div>
       ) : null}
       {hasToolbar ? (
-        <div data-slot="mac-window-toolbar" className="ml-auto flex min-w-0 items-center gap-1 text-foreground/70 group-data-[state=inactive]/mac-window:text-foreground/35">
+        <div data-slot="mac-window-toolbar" className="ms-auto flex min-w-0 items-center gap-1 text-foreground/70 group-data-[state=inactive]/mac-window:text-foreground/35">
           {children}
         </div>
       ) : null}
@@ -193,7 +195,7 @@ function MacWindowSidebar({ controls = true, className, children, ...props }: Ma
     <div
       data-slot="mac-window-sidebar"
       className={cn(
-        "flex w-52 shrink-0 flex-col border-r border-foreground/[0.08] bg-background/60 backdrop-blur-2xl backdrop-saturate-150 dark:bg-background/50",
+        "flex w-52 shrink-0 flex-col border-e border-foreground/[0.08] bg-background/60 backdrop-blur-2xl backdrop-saturate-150 dark:bg-background/50",
         className
       )}
       {...props}
@@ -222,7 +224,7 @@ function MacWindowSidebarItem({ selected = false, className, type = "button", ..
       data-selected={selected ? "" : undefined}
       aria-current={selected ? "true" : undefined}
       className={cn(
-        "flex h-7 w-full items-center gap-2 rounded-md px-2 text-left text-[13px] text-foreground/85 outline-none transition-colors duration-100 hover:bg-foreground/[0.05] focus-visible:ring-[3px] focus-visible:ring-ring/50 data-selected:bg-foreground/[0.09] data-selected:font-medium data-selected:text-foreground [&_svg]:size-4 [&_svg]:shrink-0",
+        "flex h-7 w-full items-center gap-2 rounded-md px-2 text-start text-[13px] text-foreground/85 outline-none transition-colors duration-100 hover:bg-foreground/[0.05] focus-visible:ring-[3px] focus-visible:ring-ring/50 data-selected:bg-foreground/[0.09] data-selected:font-medium data-selected:text-foreground [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}

@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useAnimationControls } from "motion/react"
 
 import { cn } from "@/lib/utils"
 import { useReducedMotionSafe } from "@/lib/ballmac/motion"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type LockScreenProps = Omit<React.ComponentProps<"section">, "onSubmit"> & {
   /** "mac" shows a password field under the user's avatar; "ios" shows notifications and a swipe-up unlock. */
@@ -67,9 +68,9 @@ function format(now: Date | null, variant: "mac" | "ios") {
 function DefaultWallpaper() {
   return (
     <div aria-hidden="true" data-slot="lock-screen-wallpaper" className="absolute inset-0 overflow-hidden bg-[oklch(0.3_0.1_282)]">
-      <div className="absolute -top-1/4 -left-1/4 size-[85%] rounded-full bg-[oklch(0.5_0.2_305)] opacity-70 blur-[70px]" />
-      <div className="absolute -right-1/4 bottom-[-20%] size-[90%] rounded-full bg-[oklch(0.5_0.17_28)] opacity-70 blur-[80px]" />
-      <div className="absolute top-1/3 left-1/3 size-[55%] rounded-full bg-[oklch(0.45_0.15_235)] opacity-60 blur-[70px]" />
+      <div className="absolute -top-1/4 -start-1/4 size-[85%] rounded-full bg-[oklch(0.5_0.2_305)] opacity-70 blur-[70px]" />
+      <div className="absolute -end-1/4 bottom-[-20%] size-[90%] rounded-full bg-[oklch(0.5_0.17_28)] opacity-70 blur-[80px]" />
+      <div className="absolute top-1/3 start-1/3 size-[55%] rounded-full bg-[oklch(0.45_0.15_235)] opacity-60 blur-[70px]" />
     </div>
   )
 }
@@ -90,12 +91,14 @@ function LockScreen({
   avatar,
   password,
   onUnlock,
-  hint = "Touch ID or enter password",
+  hint,
   wallpaper,
   children,
   className,
   ...props
 }: LockScreenProps) {
+  const msg = useMessages()
+  hint ??= msg("lock-screen.hint", "Touch ID or enter password")
   const reduce = useReducedMotionSafe()
   const uid = React.useId()
   const [lockedState, setLockedState] = React.useState(defaultLocked)
@@ -147,7 +150,7 @@ function LockScreen({
           key="lock"
           data-slot="lock-screen"
           data-variant={variant}
-          aria-label="Lock screen"
+          aria-label={msg("lock-screen.lockScreen", "Lock screen")}
           className={cn("@container absolute inset-0 z-50 flex select-none flex-col overflow-hidden text-white", className)}
           initial={false}
           exit={exit}
@@ -213,7 +216,7 @@ function LockScreen({
                 <p className="mt-3 text-lg font-semibold [text-shadow:0_1px_6px_rgb(0_0_0/0.35)]">{name}</p>
                 <motion.form animate={shake} onSubmit={submit} className="relative mt-3 w-full max-w-[15rem]" noValidate>
                   <label htmlFor={`${uid}-pw`} className="sr-only">
-                    Password for {name}
+                    {msg("lock-screen.passwordFor", "Password for {name}", { name })}
                   </label>
                   <input
                     ref={inputRef}
@@ -222,17 +225,17 @@ function LockScreen({
                     autoComplete="current-password"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    placeholder="Enter Password"
+                    placeholder={msg("lock-screen.enterPassword", "Enter Password")}
                     aria-invalid={failed || undefined}
                     aria-describedby={`${uid}-hint`}
-                    className="h-9 w-full rounded-full border border-white/25 bg-white/20 pr-10 pl-4 text-[15px] text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.2)] outline-none backdrop-blur-xl placeholder:text-white/80 focus-visible:border-white/60 focus-visible:ring-[3px] focus-visible:ring-white/40"
+                    className="h-9 w-full rounded-full border border-white/25 bg-white/20 pe-10 ps-4 text-[15px] text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.2)] outline-none backdrop-blur-xl placeholder:text-white/80 focus-visible:border-white/60 focus-visible:ring-[3px] focus-visible:ring-white/40"
                   />
                   <button
                     type="submit"
-                    aria-label="Unlock"
-                    className="absolute top-1/2 right-1.5 flex size-6 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 text-white outline-none transition-colors hover:bg-white/45 focus-visible:ring-2 focus-visible:ring-white"
+                    aria-label={msg("lock-screen.unlock", "Unlock")}
+                    className="absolute top-1/2 end-1.5 flex size-6 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 text-white outline-none transition-colors hover:bg-white/45 focus-visible:ring-2 focus-visible:ring-white"
                   >
-                    <ArrowRight aria-hidden="true" className="size-3.5" strokeWidth={2.75} />
+                    <ArrowRight aria-hidden="true" className="size-3.5 rtl:rotate-180" strokeWidth={2.75} />
                   </button>
                 </motion.form>
                 <p id={`${uid}-hint`} role={failed ? "alert" : undefined} className="mt-2 flex items-center gap-1.5 text-xs font-medium text-white/85 [text-shadow:0_1px_4px_rgb(0_0_0/0.4)]">

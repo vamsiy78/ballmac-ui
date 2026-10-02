@@ -9,6 +9,7 @@ import { CopyButton } from "@/components/ballmac/copy-button"
 import { AppIcon } from "@/components/ballmac/mac-icons"
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type Download1Arch = "arm64" | "x64"
 type Download1Kind = "new" | "improved" | "fixed"
@@ -87,10 +88,12 @@ function Download1({
   brew = "brew install --cask ledger",
   steps = ["Open the downloaded disk image.", "Drag Ledger into your Applications folder.", "Open Ledger and sign in with your account."],
   releases = defaultReleases,
-  locale = "en-US",
+  locale,
   className,
   ...props
 }: Download1Props) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const [arch, setArch] = React.useState<Download1Arch>("arm64")
   const [version, setVersion] = React.useState(releases[0]?.version ?? "")
   const [started, setStarted] = React.useState(false)

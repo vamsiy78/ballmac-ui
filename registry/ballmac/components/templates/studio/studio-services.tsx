@@ -26,7 +26,7 @@ function StudioServices({ hrefs, ...props }: StudioServicesProps) {
             return (
               <li key={s.n} className="border-b-2">
                 <h2>
-                  <button type="button" aria-expanded={on} aria-controls={`ss-${s.n}`} onClick={() => setOpen(on ? null : s.n)} className="hover:bg-accent focus-visible:ring-ring/50 grid w-full grid-cols-[3.5rem_1fr_auto] items-center gap-4 px-2 py-7 text-left outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-inset sm:grid-cols-[6rem_1fr_auto] sm:px-4 motion-reduce:transition-none">
+                  <button type="button" aria-expanded={on} aria-controls={`ss-${s.n}`} onClick={() => setOpen(on ? null : s.n)} className="hover:bg-accent focus-visible:ring-ring/50 grid w-full grid-cols-[3.5rem_1fr_auto] items-center gap-4 px-2 py-7 text-start outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-inset sm:grid-cols-[6rem_1fr_auto] sm:px-4 motion-reduce:transition-none">
                     <span className="bg-chart-1 h-fit w-fit px-2 py-0.5 text-lg font-bold text-[var(--studio-on-accent)]" style={mono}>{s.n}</span>
                     <span className={cn("text-[clamp(1.8rem,5vw,4.5rem)]", studioDisplay)}>{s.title}</span>
                     {on ? <Minus className="size-8" aria-hidden="true" /> : <Plus className="size-8" aria-hidden="true" />}

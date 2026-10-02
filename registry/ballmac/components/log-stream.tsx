@@ -6,6 +6,7 @@ import { ArrowDown, Pause, Play, Search, WrapText } from "lucide-react"
 
 import { CopyButton } from "@/components/ballmac/copy-button"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type LogLevel = "debug" | "info" | "warn" | "error"
 
@@ -85,17 +86,20 @@ type LogStreamProps = Omit<React.ComponentProps<"div">, "title"> & {
 
 function LogStream({
   lines,
-  title = "Logs",
+  title,
   maxLines = 1000,
   follow = true,
   height = "20rem",
   wrap: wrapProp = false,
   hideSource = false,
   onClear,
-  emptyText = "Waiting for output…",
+  emptyText,
   className,
   ...props
 }: LogStreamProps) {
+  const msg = useMessages()
+  title ??= msg("log-stream.title", "Logs")
+  emptyText ??= msg("log-stream.emptyText", "Waiting for output…")
   const [active, setActive] = React.useState<Set<LogLevel>>(new Set(LEVELS))
   const [query, setQuery] = React.useState("")
   const [wrap, setWrap] = React.useState(wrapProp)
@@ -137,12 +141,13 @@ function LogStream({
   return (
     <div
       data-slot="log-stream"
+      dir="ltr"
       className={cn("@container flex w-full flex-col overflow-hidden rounded-xl border bg-card text-card-foreground", className)}
       {...props}
     >
       <div className="flex flex-wrap items-center gap-2 border-b px-3 py-2">
-        <h3 className="mr-1 text-sm font-semibold text-foreground">{title}</h3>
-        <div role="group" aria-label="Show levels" className="flex items-center gap-1">
+        <h3 className="me-1 text-sm font-semibold text-foreground">{title}</h3>
+        <div role="group" aria-label={msg("log-stream.showLevels", "Show levels")} className="flex items-center gap-1">
           {LEVELS.map((level) => (
             <button
               key={level}
@@ -167,23 +172,23 @@ function LogStream({
             </button>
           ))}
         </div>
-        <div className="relative ml-auto min-w-36 flex-1 @xl:max-w-56 @xl:flex-none">
-          <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 left-2 size-3.5 -translate-y-1/2 text-muted-foreground" />
+        <div className="relative ms-auto min-w-36 flex-1 @xl:max-w-56 @xl:flex-none">
+          <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 start-2 size-3.5 -translate-y-1/2 text-muted-foreground" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            aria-label="Filter log lines"
-            placeholder="Filter"
-            className="h-7 w-full rounded-md border bg-background pr-2 pl-7 text-xs outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            aria-label={msg("log-stream.filterLogLines", "Filter log lines")}
+            placeholder={msg("log-stream.filter", "Filter")}
+            className="h-7 w-full rounded-md border bg-background pe-2 ps-7 text-xs outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
         </div>
         <div className="flex items-center gap-0.5">
           <button
             type="button"
             aria-pressed={wrap}
-            aria-label="Wrap long lines"
-            title="Wrap long lines"
+            aria-label={msg("log-stream.wrapLongLines", "Wrap long lines")}
+            title={msg("log-stream.wrapLongLines", "Wrap long lines")}
             onClick={() => setWrap((w) => !w)}
             className="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-pressed:bg-accent aria-pressed:text-foreground"
           >
@@ -192,8 +197,8 @@ function LogStream({
           <button
             type="button"
             aria-pressed={paused}
-            aria-label={paused ? "Resume stream" : "Pause stream"}
-            title={paused ? "Resume stream" : "Pause stream"}
+            aria-label={paused ? msg("log-stream.resumeStream", "Resume stream") : msg("log-stream.pauseStream", "Pause stream")}
+            title={paused ? msg("log-stream.resumeStream", "Resume stream") : msg("log-stream.pauseStream", "Pause stream")}
             onClick={() => {
               setPausedAt(lines.length)
               setPaused((p) => !p)
@@ -207,9 +212,9 @@ function LogStream({
             <button
               type="button"
               onClick={onClear}
-              className="ml-0.5 h-7 rounded-md px-2 text-xs font-medium text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+              className="ms-0.5 h-7 rounded-md px-2 text-xs font-medium text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
             >
-              Clear
+              {msg("log-stream.clear", "Clear")}
             </button>
           )}
         </div>
@@ -219,7 +224,7 @@ function LogStream({
         <div
           ref={scroller}
           role="log"
-          aria-label={`${title}, ${visible.length} lines`}
+          aria-label={msg("log-stream.lines", "{title}, {length} lines", { title, length: visible.length })}
           aria-live="off"
           tabIndex={0}
           onScroll={onScroll}
@@ -234,13 +239,13 @@ function LogStream({
                 key={l.id}
                 data-level={l.level}
                 className={cn(
-                  "relative flex gap-3 py-px pr-4 pl-4 hover:bg-accent/60",
+                  "relative flex gap-3 py-px pe-4 ps-4 hover:bg-accent/60",
                   l.level === "error" && "bg-destructive/5",
                   l.level === "warn" && "bg-chart-3/5",
                   wrap ? "" : "w-max min-w-full"
                 )}
               >
-                <span aria-hidden="true" className={cn("absolute inset-y-0 left-0 w-0.5", LEVEL_META[l.level].bar)} />
+                <span aria-hidden="true" className={cn("absolute inset-y-0 start-0 w-0.5", LEVEL_META[l.level].bar)} />
                 <time dateTime={isoOf(l.time)} className="shrink-0 text-muted-foreground tabular-nums">
                   {clock(l.time)}
                 </time>
@@ -257,7 +262,7 @@ function LogStream({
           <button
             type="button"
             onClick={jump}
-            className="absolute right-3 bottom-3 inline-flex h-8 items-center gap-1.5 rounded-full border bg-popover px-3 text-xs font-medium text-popover-foreground shadow-md outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="absolute end-3 bottom-3 inline-flex h-8 items-center gap-1.5 rounded-full border bg-popover px-3 text-xs font-medium text-popover-foreground shadow-md outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             <ArrowDown aria-hidden="true" className="size-3.5" />
             {hiddenNew > 0 ? `${hiddenNew} new ${hiddenNew === 1 ? "line" : "lines"}` : "Jump to latest"}

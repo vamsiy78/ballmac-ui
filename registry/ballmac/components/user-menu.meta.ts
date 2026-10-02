@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["account", "avatar", "menu", "theme"],
   files: [{ path: "components/user-menu.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "avatar", "dropdown-menu"],
+  registryDependencies: ["shadcn:utils", "avatar", "dropdown-menu", "i18n"],
   examples: [
     { name: "user-menu-demo", title: "Sidebar account", file: "user-menu-demo.tsx" },
     { name: "user-menu-states", title: "Avatar only", file: "user-menu-states.tsx" },

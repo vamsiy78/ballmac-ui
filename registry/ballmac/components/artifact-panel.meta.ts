@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "artifact", "canvas", "preview", "code", "panel"],
   files: [{ path: "components/artifact-panel.tsx" }],
   dependencies: ["motion@^12", "lucide-react", "radix-ui"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "artifact-panel-demo", title: "Component with code", file: "artifact-panel-demo.tsx" },
     { name: "artifact-panel-streaming", title: "Writing and versions", file: "artifact-panel-streaming.tsx" },

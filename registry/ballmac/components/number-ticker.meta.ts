@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["animation", "counter", "stats", "motion"],
   files: [{ path: "components/number-ticker.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n"],
   examples: [
     { name: "number-ticker-demo", title: "Default", file: "number-ticker-demo.tsx" },
     { name: "number-ticker-currency", title: "Currency", file: "number-ticker-currency.tsx" },

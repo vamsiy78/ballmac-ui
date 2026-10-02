@@ -30,13 +30,13 @@ function PodcastEpisodes({ hrefs, ...props }: PodcastEpisodesProps) {
         <p className="text-muted-foreground mt-4 max-w-xl text-xl text-pretty">Every conversation, newest first. Search a guest or an idea.</p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <div className="relative w-full sm:w-72">
-            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2" aria-hidden="true" />
-            <input type="search" aria-label="Search episodes" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search episodes" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-11 w-full rounded-full border pr-4 pl-11 outline-none focus-visible:ring-[3px]" />
+            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-4 size-4 -translate-y-1/2" aria-hidden="true" />
+            <input type="search" aria-label="Search episodes" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search episodes" className="bg-card focus-visible:ring-ring/50 placeholder:text-muted-foreground h-11 w-full rounded-full border pe-4 ps-11 outline-none focus-visible:ring-[3px]" />
           </div>
           <div role="group" aria-label="Season" className="flex gap-1.5">
             {(["All", "3", "2"] as const).map((s) => <button key={s} type="button" aria-pressed={season === s} onClick={() => setSeason(s)} className={cn("focus-visible:ring-ring/50 h-11 rounded-full border px-5 text-sm font-bold outline-none transition-colors focus-visible:ring-[3px]", season === s ? "bg-primary text-primary-foreground border-transparent" : "hover:bg-accent")}>{s === "All" ? "All seasons" : `Season ${s}`}</button>)}
           </div>
-          <label className="text-muted-foreground ml-auto flex items-center gap-2 text-sm font-semibold">Sort <select value={sort} onChange={(e) => setSort(e.target.value as "new" | "long")} className="bg-card text-foreground focus-visible:ring-ring/50 h-11 rounded-full border px-4 outline-none focus-visible:ring-[3px]"><option value="new">Newest</option><option value="long">Longest</option></select></label>
+          <label className="text-muted-foreground ms-auto flex items-center gap-2 text-sm font-semibold">Sort <select value={sort} onChange={(e) => setSort(e.target.value as "new" | "long")} className="bg-card text-foreground focus-visible:ring-ring/50 h-11 rounded-full border px-4 outline-none focus-visible:ring-[3px]"><option value="new">Newest</option><option value="long">Longest</option></select></label>
         </div>
         <p className="sr-only" role="status">{list.length} episodes</p>
         {list.length === 0 ? (

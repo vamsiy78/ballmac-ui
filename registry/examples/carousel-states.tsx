@@ -14,8 +14,8 @@ export default function CarouselStates() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="-left-1 size-8" />
-        <CarouselNext className="-right-1 size-8" />
+        <CarouselPrevious className="-start-1 size-8" />
+        <CarouselNext className="-end-1 size-8" />
       </Carousel>
       <Carousel label="Vertical tips" orientation="vertical" className="mx-auto w-56 py-2">
         <CarouselContent viewportClassName="h-28">

@@ -6,6 +6,7 @@ import { ArrowUpRight, RefreshCw } from "lucide-react"
 import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type Suggestion = {
   /** Text on the chip. */
@@ -44,14 +45,17 @@ function SuggestionChips({
   suggestions,
   onSelect,
   variant = "pills",
-  label = "Suggested prompts",
+  label,
   onRefresh,
-  refreshLabel = "Show other suggestions",
+  refreshLabel,
   disabled = false,
   loading = false,
   className,
   ...props
 }: SuggestionChipsProps) {
+  const msg = useMessages()
+  label ??= msg("suggestion-chips.label", "Suggested prompts")
+  refreshLabel ??= msg("suggestion-chips.refreshLabel", "Show other suggestions")
   const reduce = useReducedMotion()
   const [spins, setSpins] = React.useState(0)
 
@@ -102,7 +106,7 @@ function SuggestionChips({
                 disabled={disabled}
                 onClick={() => choose(s)}
                 {...item(i)}
-                className="group/chip flex min-w-0 items-start gap-3 rounded-xl border bg-card p-3.5 text-left shadow-xs outline-none transition-[border-color,background-color,box-shadow] duration-150 hover:border-foreground/25 hover:bg-accent/60 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none"
+                className="group/chip flex min-w-0 items-start gap-3 rounded-xl border bg-card p-3.5 text-start shadow-xs outline-none transition-[border-color,background-color,box-shadow] duration-150 hover:border-foreground/25 hover:bg-accent/60 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none"
               >
                 {s.icon && (
                   <span
@@ -120,7 +124,7 @@ function SuggestionChips({
                 </span>
                 <ArrowUpRight
                   aria-hidden="true"
-                  className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] duration-150 group-hover/chip:translate-x-0.5 group-hover/chip:-translate-y-0.5 group-hover/chip:opacity-100 group-focus-visible/chip:opacity-100 motion-reduce:transition-none"
+                  className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] duration-150 group-hover/chip:translate-x-0.5 group-hover/chip:-translate-y-0.5 group-hover/chip:opacity-100 group-focus-visible/chip:opacity-100 motion-reduce:transition-none rtl:-scale-x-100"
                 />
               </motion.button>
             ) : (
@@ -130,7 +134,7 @@ function SuggestionChips({
                 disabled={disabled}
                 onClick={() => choose(s)}
                 {...item(i)}
-                className={cn(chipBase, "h-9 px-3.5", variant === "scroll" && "snap-start", s.icon && "pl-3")}
+                className={cn(chipBase, "h-9 px-3.5", variant === "scroll" && "snap-start", s.icon && "ps-3")}
               >
                 {s.icon}
                 <span className="whitespace-nowrap">{s.label}</span>

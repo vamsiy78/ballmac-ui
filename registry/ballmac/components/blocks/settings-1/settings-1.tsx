@@ -150,11 +150,11 @@ function Settings1({
             <Field invalid={!!usernameError}>
               <FieldLabel required>Username</FieldLabel>
               <div className="flex">
-                <span className="bg-muted text-muted-foreground flex items-center rounded-l-md border border-r-0 px-3 text-sm">@</span>
-                <FieldInput className="rounded-l-none" autoCapitalize="none" spellCheck={false} value={v.username} onChange={(e) => set("username", e.target.value.replace(/\s/g, ""))} />
+                <span className="bg-muted text-muted-foreground flex items-center rounded-s-md border border-e-0 px-3 text-sm">@</span>
+                <FieldInput className="rounded-s-none" autoCapitalize="none" spellCheck={false} value={v.username} onChange={(e) => set("username", e.target.value.replace(/\s/g, ""))} />
               </div>
               <FieldError errors={[usernameError]} />
-              {!usernameError && handle !== saved.username && <p role="status" className="text-sm"><Check className="text-chart-2 mr-1 inline size-4" aria-hidden="true" />@{handle} is available.</p>}
+              {!usernameError && handle !== saved.username && <p role="status" className="text-sm"><Check className="text-chart-2 me-1 inline size-4" aria-hidden="true" />@{handle} is available.</p>}
             </Field>
             <Field>
               <FieldLabel>Bio</FieldLabel>
@@ -256,7 +256,7 @@ function Settings1({
       <div
         aria-hidden={!dirty && state !== "saved" ? true : undefined}
         className={cn(
-          "sticky bottom-4 z-10 mt-4 flex items-center justify-between gap-3 rounded-2xl border bg-background/90 p-3 pl-5 shadow-[0_20px_50px_-20px_rgb(0_0_0/0.35)] backdrop-blur-xl transition-all duration-300 motion-reduce:transition-none",
+          "sticky bottom-4 z-10 mt-4 flex items-center justify-between gap-3 rounded-2xl border bg-background/90 p-3 ps-5 shadow-[0_20px_50px_-20px_rgb(0_0_0/0.35)] backdrop-blur-xl transition-all duration-300 motion-reduce:transition-none",
           dirty || state === "saved" || state === "error" ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
         )}
       >

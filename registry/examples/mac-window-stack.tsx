@@ -15,7 +15,7 @@ export default function MacWindowStack() {
         onClose={() => {}}
         onMinimize={() => {}}
         onZoom={() => {}}
-        className={`absolute top-0 left-0 h-[250px] w-[88%] sm:w-[440px] ${front === "terminal" ? "z-10" : "z-0"}`}
+        className={`absolute top-0 start-0 h-[250px] w-[88%] sm:w-[440px] ${front === "terminal" ? "z-10" : "z-0"}`}
       >
         <MacWindowTitleBar title="acme — zsh — 80×24" />
         <MacWindowContent className="bg-card p-3 font-mono text-xs leading-relaxed text-foreground/80">
@@ -40,7 +40,7 @@ export default function MacWindowStack() {
         active={front === "about"}
         onPointerDown={() => setFront("about")}
         onClose={() => {}}
-        className={`absolute right-0 bottom-0 w-[260px] ${front === "about" ? "z-10" : "z-0"}`}
+        className={`absolute end-0 bottom-0 w-[260px] ${front === "about" ? "z-10" : "z-0"}`}
       >
         <MacWindowTitleBar className="border-b-0" />
         <MacWindowContent className="flex flex-col items-center px-6 pt-2 pb-6 text-center">

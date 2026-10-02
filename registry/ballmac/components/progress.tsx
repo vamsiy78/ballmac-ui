@@ -41,7 +41,7 @@ function Progress({
       {showValue && (
         <span
           data-slot="progress-value"
-          className="text-muted-foreground mt-2 block text-right text-xs tabular-nums"
+          className="text-muted-foreground mt-2 block text-end text-xs tabular-nums"
         >
           {percent == null ? "In progress" : `${percent}%`}
         </span>

@@ -6,14 +6,15 @@ import { Check, OctagonAlert, ShieldAlert, ShieldCheck, Timer, X } from "lucide-
 import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useMessages, defineMessage, type Message } from "@/lib/ballmac/i18n"
 
 type ApprovalRisk = "low" | "medium" | "high"
 type ApprovalStatus = "pending" | "approved" | "denied" | "expired"
 
-const RISK: Record<ApprovalRisk, { label: string; hint: string; icon: React.ComponentType<{ className?: string }>; bar: string; chip: string }> = {
-  low: { label: "Low risk", hint: "Reads data or changes nothing", icon: ShieldCheck, bar: "bg-chart-2", chip: "border-chart-2/30 bg-chart-2/10" },
-  medium: { label: "Medium risk", hint: "Changes files or settings you can undo", icon: ShieldAlert, bar: "bg-chart-3", chip: "border-chart-3/30 bg-chart-3/10" },
-  high: { label: "High risk", hint: "Hard to undo or sends data out", icon: OctagonAlert, bar: "bg-destructive", chip: "border-destructive/30 bg-destructive/10" },
+const RISK: Record<ApprovalRisk, { label: Message; hint: Message; icon: React.ComponentType<{ className?: string }>; bar: string; chip: string }> = {
+  low: { label: defineMessage("approval-card.RISK.low", "Low risk"), hint: defineMessage("approval-card.RISK.low.hint", "Reads data or changes nothing"), icon: ShieldCheck, bar: "bg-chart-2", chip: "border-chart-2/30 bg-chart-2/10" },
+  medium: { label: defineMessage("approval-card.RISK.medium", "Medium risk"), hint: defineMessage("approval-card.RISK.medium.hint", "Changes files or settings you can undo"), icon: ShieldAlert, bar: "bg-chart-3", chip: "border-chart-3/30 bg-chart-3/10" },
+  high: { label: defineMessage("approval-card.RISK.high", "High risk"), hint: defineMessage("approval-card.RISK.high.hint", "Hard to undo or sends data out"), icon: OctagonAlert, bar: "bg-destructive", chip: "border-destructive/30 bg-destructive/10" },
 }
 
 type ApprovalDetail = {
@@ -64,20 +65,25 @@ function ApprovalCard({
   risk = "medium",
   details,
   preview,
-  previewLabel = "Exactly what will run",
+  previewLabel,
   status: statusProp,
   onApprove,
   onDeny,
   onAlwaysAllow,
-  alwaysAllowLabel = "Always allow",
+  alwaysAllowLabel,
   expiresIn,
   onExpire,
   resolvedNote,
-  approveLabel = "Approve",
-  denyLabel = "Deny",
+  approveLabel,
+  denyLabel,
   className,
   ...props
 }: ApprovalCardProps) {
+  const msg = useMessages()
+  previewLabel ??= msg("approval-card.previewLabel", "Exactly what will run")
+  alwaysAllowLabel ??= msg("approval-card.alwaysAllowLabel", "Always allow")
+  approveLabel ??= msg("approval-card.approveLabel", "Approve")
+  denyLabel ??= msg("approval-card.denyLabel", "Deny")
   const reduce = useReducedMotion()
   const id = React.useId()
   const [internal, setInternal] = React.useState<ApprovalStatus>("pending")
@@ -141,8 +147,8 @@ function ApprovalCard({
       )}
       {...props}
     >
-      <span aria-hidden="true" className={cn("absolute inset-y-0 left-0 w-1", pending ? meta.bar : "bg-border")} />
-      <div className="grid gap-3.5 p-4 pl-5 sm:p-5 sm:pl-6">
+      <span aria-hidden="true" className={cn("absolute inset-y-0 start-0 w-1", pending ? meta.bar : "bg-border")} />
+      <div className="grid gap-3.5 p-4 ps-5 sm:p-5 sm:ps-6">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div className="min-w-0">
             <h3 id={`${id}-title`} className="text-sm leading-6 font-semibold text-foreground">
@@ -151,15 +157,15 @@ function ApprovalCard({
             {description && <p className="mt-0.5 text-[13px] leading-5 text-muted-foreground">{description}</p>}
           </div>
           <span
-            title={meta.hint}
+            title={msg.of(meta.hint)}
             className={cn(
               "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2 py-0.5 text-xs font-medium text-foreground",
               meta.chip
             )}
           >
             <RiskIcon aria-hidden="true" className="size-3.5" />
-            {meta.label}
-            <span className="sr-only">. {meta.hint}</span>
+            {msg.of(meta.label)}
+            <span className="sr-only">. {msg.of(meta.hint)}</span>
           </span>
         </div>
 
@@ -213,9 +219,9 @@ function ApprovalCard({
               </button>
             )}
             {expiresIn !== undefined && (
-              <span className="ml-auto inline-flex items-center gap-1.5 text-xs text-muted-foreground tabular-nums">
+              <span className="ms-auto inline-flex items-center gap-1.5 text-xs text-muted-foreground tabular-nums">
                 <Timer aria-hidden="true" className="size-3.5" />
-                Denies itself in {left}s
+                {msg("approval-card.deniesItselfIn", "Denies itself in {seconds}s", { seconds: left })}
               </span>
             )}
           </div>

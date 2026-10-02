@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["copy", "clipboard", "button", "developer"],
   files: [{ path: "components/copy-button.tsx" }],
   dependencies: ["motion@^12", "lucide-react", "class-variance-authority"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "copy-button-demo", title: "Icon, label and variants", file: "copy-button-demo.tsx" },
     { name: "copy-button-inline", title: "Inline with a value", file: "copy-button-inline.tsx" },

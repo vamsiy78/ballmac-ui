@@ -131,8 +131,8 @@ function TableHead({
       scope={scope}
       aria-sort={sort}
       className={cn(
-        "h-10 border-b px-3 text-left align-middle text-xs font-medium whitespace-nowrap text-muted-foreground",
-        numeric && "text-right tabular-nums",
+        "h-10 border-b px-3 text-start align-middle text-xs font-medium whitespace-nowrap text-muted-foreground",
+        numeric && "text-end tabular-nums",
         className,
       )}
       {...props}
@@ -164,7 +164,7 @@ function TableCell({ className, numeric, ...props }: TableCellProps) {
       data-slot="table-cell"
       className={cn(
         "border-b px-3 align-middle group-data-[density=compact]/table:h-9 group-data-[density=default]/table:h-12 group-data-[density=comfortable]/table:h-16",
-        numeric && "text-right tabular-nums",
+        numeric && "text-end tabular-nums",
         className,
       )}
       {...props}

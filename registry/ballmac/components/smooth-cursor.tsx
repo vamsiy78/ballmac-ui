@@ -96,7 +96,7 @@ function SmoothCursor({ children, cursor, hideNative = true, stiffness = 420, cl
         {visible && !overField && (
           <motion.div
             aria-hidden="true"
-            className="pointer-events-none absolute top-0 left-0 z-50 hidden [@media(pointer:fine)]:block"
+            className="pointer-events-none absolute top-0 start-0 z-50 hidden [@media(pointer:fine)]:block"
             style={{ x: sx, y: sy }}
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: pressed ? 0.82 : label ? 1.1 : 1 }}
@@ -108,7 +108,7 @@ function SmoothCursor({ children, cursor, hideNative = true, stiffness = 420, cl
               <motion.span
                 initial={{ opacity: 0, x: -4 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="absolute top-5 left-6 rounded-full bg-foreground px-2.5 py-1 text-xs font-medium whitespace-nowrap text-background shadow-md"
+                className="absolute top-5 start-6 rounded-full bg-foreground px-2.5 py-1 text-xs font-medium whitespace-nowrap text-background shadow-md"
               >
                 {label}
               </motion.span>

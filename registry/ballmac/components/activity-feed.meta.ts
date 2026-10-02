@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["activity", "history", "events"],
   files: [{ path: "components/activity-feed.tsx" }],
   dependencies: [],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "activity-feed-demo",

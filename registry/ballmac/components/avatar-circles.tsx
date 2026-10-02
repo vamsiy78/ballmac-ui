@@ -5,6 +5,7 @@ import * as React from "react"
 import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type AvatarPerson = {
   /** Full name. Used for the tooltip and the accessible name. */
@@ -27,9 +28,9 @@ const TONES = [
   "bg-[color-mix(in_oklab,var(--chart-5)_62%,var(--background))]",
 ]
 const SIZES = {
-  sm: { box: "size-8 text-[11px]", overlap: "-ml-2.5", spread: "group-hover/circles:-ml-1 group-focus-within/circles:-ml-1", dot: "size-2" },
-  default: { box: "size-10 text-xs", overlap: "-ml-3", spread: "group-hover/circles:-ml-1.5 group-focus-within/circles:-ml-1.5", dot: "size-2.5" },
-  lg: { box: "size-14 text-sm", overlap: "-ml-4", spread: "group-hover/circles:-ml-2 group-focus-within/circles:-ml-2", dot: "size-3" },
+  sm: { box: "size-8 text-[11px]", overlap: "-ms-2.5", spread: "group-hover/circles:-ms-1 group-focus-within/circles:-ms-1", dot: "size-2" },
+  default: { box: "size-10 text-xs", overlap: "-ms-3", spread: "group-hover/circles:-ms-1.5 group-focus-within/circles:-ms-1.5", dot: "size-2.5" },
+  lg: { box: "size-14 text-sm", overlap: "-ms-4", spread: "group-hover/circles:-ms-2 group-focus-within/circles:-ms-2", dot: "size-3" },
 }
 const STATUS_DOT = { online: "bg-chart-2", busy: "bg-destructive", away: "bg-chart-3" }
 const STATUS_WORD = { online: "online", busy: "busy", away: "away" }
@@ -82,6 +83,7 @@ type AvatarCirclesProps = Omit<React.ComponentProps<"div">, "children"> & {
 }
 
 function AvatarCircles({ people, max = 5, total, size = "default", onOverflowClick, label, className, ...props }: AvatarCirclesProps) {
+  const msg = useMessages()
   const reduce = useReducedMotion()
   const shown = people.slice(0, max)
   const extra = Math.max((total ?? people.length) - shown.length, 0)
@@ -96,7 +98,7 @@ function AvatarCircles({ people, max = 5, total, size = "default", onOverflowCli
           <>
             <Face person={person} size={size} />
             {person.status && (
-              <span aria-hidden="true" className={cn("absolute right-0 bottom-0 z-10 rounded-full ring-2 ring-background", s.dot, STATUS_DOT[person.status])} />
+              <span aria-hidden="true" className={cn("absolute end-0 bottom-0 z-10 rounded-full ring-2 ring-background", s.dot, STATUS_DOT[person.status])} />
             )}
             <span
               aria-hidden="true"
@@ -138,7 +140,7 @@ function AvatarCircles({ people, max = 5, total, size = "default", onOverflowCli
           <button
             type="button"
             onClick={onOverflowClick}
-            aria-label={`and ${extra} more`}
+            aria-label={msg("avatar-circles.andMore", "and {extra} more", { extra })}
             className={cn("relative z-0 flex shrink-0 items-center justify-center rounded-full bg-muted font-semibold text-foreground ring-2 ring-background outline-none transition-[margin,background-color] duration-200 hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50", s.box, s.overlap, s.spread)}
           >
             +{extra}
@@ -146,7 +148,7 @@ function AvatarCircles({ people, max = 5, total, size = "default", onOverflowCli
         ) : (
           <span
             role="img"
-            aria-label={`and ${extra} more`}
+            aria-label={msg("avatar-circles.andMore", "and {extra} more", { extra })}
             className={cn("relative z-0 flex shrink-0 items-center justify-center rounded-full bg-muted font-semibold text-foreground ring-2 ring-background transition-[margin] duration-200", s.box, s.overlap, s.spread)}
           >
             +{extra}

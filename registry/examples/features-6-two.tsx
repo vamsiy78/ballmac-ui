@@ -22,8 +22,8 @@ export default function Features6Two() {
             <div className={card}>
               <p className="text-muted-foreground">// create an invoice</p>
               <p className="mt-2"><span className="font-semibold">await</span> acme.invoices.<span className="font-semibold">create</span>({"{"}</p>
-              <p className="pl-4">customer: <span className="font-semibold">&quot;cus_8f2&quot;</span>,</p>
-              <p className="pl-4">amount: <span className="font-semibold">4200</span></p>
+              <p className="ps-4">customer: <span className="font-semibold">&quot;cus_8f2&quot;</span>,</p>
+              <p className="ps-4">amount: <span className="font-semibold">4200</span></p>
               <p>{"}"})</p>
             </div>
           ),

@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ballmac/hover-card"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type CitationSource = {
   /** Page title. */
@@ -76,6 +77,7 @@ type CitationProps = Omit<React.ComponentProps<"a">, "href" | "children"> & {
 }
 
 function Citation({ sources, index = 1, variant = "number", className, ...props }: CitationProps) {
+  const msg = useMessages()
   const list = Array.isArray(sources) ? sources : [sources]
   const [page, setPage] = React.useState(0)
   const active = list[Math.min(page, list.length - 1)]
@@ -119,26 +121,26 @@ function Citation({ sources, index = 1, variant = "number", className, ...props 
         {many && (
           <div className="flex items-center justify-between text-xs text-muted-foreground">
             <span className="tabular-nums" aria-live="polite">
-              Source {page + 1} of {list.length}
+              {msg("citation.sourceOf", "Source {n} of {total}", { n: page + 1, total: list.length })}
             </span>
             <span className="flex items-center gap-0.5">
               <button
                 type="button"
-                aria-label="Previous source"
+                aria-label={msg("citation.previousSource", "Previous source")}
                 disabled={page === 0}
                 onClick={() => setPage((p) => Math.max(0, p - 1))}
                 className="inline-flex size-6 items-center justify-center rounded-md outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40 disabled:hover:bg-transparent"
               >
-                <ChevronLeft aria-hidden="true" className="size-4" />
+                <ChevronLeft aria-hidden="true" className="size-4 rtl:rotate-180" />
               </button>
               <button
                 type="button"
-                aria-label="Next source"
+                aria-label={msg("citation.nextSource", "Next source")}
                 disabled={page === list.length - 1}
                 onClick={() => setPage((p) => Math.min(list.length - 1, p + 1))}
                 className="inline-flex size-6 items-center justify-center rounded-md outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40 disabled:hover:bg-transparent"
               >
-                <ChevronRight aria-hidden="true" className="size-4" />
+                <ChevronRight aria-hidden="true" className="size-4 rtl:rotate-180" />
               </button>
             </span>
           </div>
@@ -146,7 +148,7 @@ function Citation({ sources, index = 1, variant = "number", className, ...props 
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <SourceFavicon source={active} />
           <span className="truncate">{active.site ?? hostOf(active.url)}</span>
-          {active.date && <span className="shrink-0 before:mr-2 before:content-['·']">{active.date}</span>}
+          {active.date && <span className="shrink-0 before:me-2 before:content-['·']">{active.date}</span>}
         </div>
         <p className="line-clamp-2 text-sm leading-5 font-medium text-foreground">{active.title}</p>
         {active.snippet && (
@@ -158,7 +160,7 @@ function Citation({ sources, index = 1, variant = "number", className, ...props 
           rel="noreferrer noopener"
           className="inline-flex w-fit items-center gap-1 rounded-sm text-xs font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50"
         >
-          Open source
+          {msg("citation.openSource", "Open source")}
           <ExternalLink aria-hidden="true" className="size-3" />
         </a>
       </HoverCardContent>

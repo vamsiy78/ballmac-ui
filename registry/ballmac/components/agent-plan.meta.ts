@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ai", "agent", "plan", "steps", "timeline", "tasks"],
   files: [{ path: "components/agent-plan.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "agent-plan-demo", title: "Plan that runs", file: "agent-plan-demo.tsx" },
     { name: "agent-plan-failed", title: "Failure with retry", file: "agent-plan-failed.tsx" },

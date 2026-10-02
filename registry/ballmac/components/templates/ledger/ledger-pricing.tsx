@@ -35,7 +35,7 @@ function LedgerPricing({ hrefs, ...props }: LedgerPricingProps) {
         <section aria-labelledby="ledger-compare" className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
           <h2 id="ledger-compare" className="text-2xl font-semibold tracking-[-0.03em]">Free trial or licensed</h2>
           <div tabIndex={0} role="region" aria-label="Trial compared with a license" className="bg-card focus-visible:ring-ring/50 mt-6 overflow-x-auto rounded-2xl border outline-none focus-visible:ring-[3px]">
-            <table className="w-full min-w-[30rem] text-left">
+            <table className="w-full min-w-[30rem] text-start">
               <caption className="sr-only">Trial and licensed features</caption>
               <thead><tr className="border-b text-sm"><th scope="col" className="p-4 font-medium"><span className="sr-only">Feature</span></th><th scope="col" className="p-4 text-center font-medium">14-day trial</th><th scope="col" className="p-4 text-center font-medium">Licensed</th></tr></thead>
               <tbody>

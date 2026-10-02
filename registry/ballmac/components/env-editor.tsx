@@ -7,6 +7,7 @@ import { AlertCircle, Eye, EyeOff, Plus, Trash2, ClipboardPaste } from "lucide-r
 
 import { CopyButton } from "@/components/ballmac/copy-button"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type EnvVariable = {
   /** Stable id for the row. */
@@ -82,12 +83,14 @@ function EnvEditor({
   defaultValue = [],
   onChange,
   maskAll = true,
-  title = "Environment variables",
+  title,
   description,
   disabled = false,
   className,
   ...props
 }: EnvEditorProps) {
+  const msg = useMessages()
+  title ??= msg("env-editor.title", "Environment variables")
   const reduce = useReducedMotion()
   const uid = React.useId()
   const counter = React.useRef(0)
@@ -152,6 +155,7 @@ function EnvEditor({
   return (
     <div
       data-slot="env-editor"
+      dir="ltr"
       className={cn("@container w-full overflow-hidden rounded-xl border bg-card text-card-foreground", className)}
       {...props}
     >
@@ -159,8 +163,8 @@ function EnvEditor({
         <div className="min-w-0 flex-1">
           <h3 className="text-sm font-semibold text-foreground">{title}</h3>
           <p className="text-xs text-muted-foreground">
-            {description ?? `${variables.length} ${variables.length === 1 ? "variable" : "variables"}`}
-            {bad > 0 && <span className="text-foreground"> · {bad} to fix</span>}
+            {description ?? msg("env-editor.variableCount", { one: "{count} variable", other: "{count} variables" }, { count: variables.length })}
+            {bad > 0 && <span className="text-foreground"> · {msg("env-editor.toFix", "{count} to fix", { count: bad })}</span>}
           </p>
         </div>
         <button
@@ -184,7 +188,7 @@ function EnvEditor({
 
       {variables.length === 0 ? (
         <div className="px-4 py-10 text-center">
-          <p className="text-sm font-medium text-foreground">No variables yet</p>
+          <p className="text-sm font-medium text-foreground">{msg("env-editor.noVariablesYet", "No variables yet")}</p>
           <p className="mx-auto mt-1 max-w-xs text-[13px] text-muted-foreground">
             Add one by hand, or paste the contents of a .env file to import them all at once.
           </p>
@@ -214,8 +218,8 @@ function EnvEditor({
                       spellCheck={false}
                       autoCapitalize="characters"
                       autoComplete="off"
-                      placeholder="KEY"
-                      aria-label={`Name of variable ${i + 1}`}
+                      placeholder={msg("env-editor.key", "KEY")}
+                      aria-label={msg("env-editor.nameOfVariable", "Name of variable {n}", { n: i + 1 })}
                       aria-invalid={problem ? true : undefined}
                       aria-describedby={problem ? errId : undefined}
                       onChange={(e) => update(v.id, { key: e.target.value })}
@@ -240,16 +244,16 @@ function EnvEditor({
                         autoComplete="off"
                         data-1p-ignore
                         data-lpignore="true"
-                        placeholder="value"
-                        aria-label={`Value of ${v.key || `variable ${i + 1}`}`}
+                        placeholder={msg("env-editor.value", "value")}
+                        aria-label={msg("env-editor.valueOf", "Value of {name}", { name: v.key || msg("env-editor.variableN", "variable {n}", { n: i + 1 }) })}
                         onChange={(e) => update(v.id, { value: e.target.value })}
-                        className="h-9 w-full rounded-md border bg-background pr-9 pl-2.5 font-mono text-[13px] outline-none transition-[border-color,box-shadow] placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-60"
+                        className="h-9 w-full rounded-md border bg-background pe-9 ps-2.5 font-mono text-[13px] outline-none transition-[border-color,box-shadow] placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-60"
                       />
                       {maskAll && (
                         <button
                           type="button"
                           aria-pressed={shown}
-                          aria-label={`${shown ? "Hide" : "Show"} value of ${v.key || `variable ${i + 1}`}`}
+                          aria-label={shown ? msg("env-editor.hideValueOf", "Hide value of {name}", { name: v.key || msg("env-editor.variableN", "variable {n}", { n: i + 1 }) }) : msg("env-editor.showValueOf", "Show value of {name}", { name: v.key || msg("env-editor.variableN", "variable {n}", { n: i + 1 }) })}
                           onClick={() =>
                             setRevealed((set) => {
                               const next = new Set(set)
@@ -258,7 +262,7 @@ function EnvEditor({
                               return next
                             })
                           }
-                          className="absolute top-1 right-1 inline-flex size-7 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                          className="absolute top-1 end-1 inline-flex size-7 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
                         >
                           {shown ? <EyeOff aria-hidden="true" className="size-4" /> : <Eye aria-hidden="true" className="size-4" />}
                         </button>
@@ -267,7 +271,7 @@ function EnvEditor({
                     <button
                       type="button"
                       disabled={disabled}
-                      aria-label={`Remove ${v.key || `variable ${i + 1}`}`}
+                      aria-label={msg("env-editor.remove", "Remove {name}", { name: v.key || msg("env-editor.variableN", "variable {n}", { n: i + 1 }) })}
                       onClick={() => remove(v, i)}
                       className="inline-flex size-9 items-center justify-center justify-self-end rounded-md text-muted-foreground outline-none transition-colors hover:bg-destructive/10 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 @lg:justify-self-auto"
                     >
@@ -290,7 +294,7 @@ function EnvEditor({
       {pasteOpen && (
         <div className="border-t bg-muted/30 p-4">
           <label htmlFor={`${uid}-paste`} className="mb-1.5 block text-[13px] font-medium text-foreground">
-            Paste a .env file
+            {msg("env-editor.pasteAEnvFile", "Paste a .env file")}
           </label>
           <textarea
             id={`${uid}-paste`}
@@ -298,7 +302,7 @@ function EnvEditor({
             onChange={(e) => setPasteText(e.target.value)}
             rows={5}
             spellCheck={false}
-            placeholder={"DATABASE_URL=postgres://…\nAPI_KEY=…"}
+            placeholder={"DATABASE_URL=postgres://…\nAPI_KEY=…"} // i18n-ignore: sample .env text
             className="w-full resize-y rounded-md border bg-background p-2.5 font-mono text-[13px] outline-none placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
           <div className="mt-2 flex justify-end gap-2">
@@ -310,7 +314,7 @@ function EnvEditor({
               }}
               className="h-8 rounded-md px-3 text-[13px] font-medium text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
             >
-              Cancel
+              {msg("env-editor.cancel", "Cancel")}
             </button>
             <button
               type="button"
@@ -322,7 +326,7 @@ function EnvEditor({
               }}
               className="h-8 rounded-md bg-primary px-3 text-[13px] font-medium text-primary-foreground outline-none hover:bg-primary/90 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50"
             >
-              Import {parseEnv(pasteText).length || ""} {parseEnv(pasteText).length === 1 ? "variable" : "variables"}
+              {msg("env-editor.import", "Import")} {parseEnv(pasteText).length || ""} {parseEnv(pasteText).length === 1 ? "variable" : "variables"}
             </button>
           </div>
         </div>
@@ -337,7 +341,7 @@ function EnvEditor({
           className="inline-flex h-8 items-center gap-1.5 rounded-md border bg-background px-3 text-[13px] font-medium shadow-xs outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
         >
           <Plus aria-hidden="true" className="size-4" />
-          Add variable
+          {msg("env-editor.addVariable", "Add variable")}
         </button>
         <button
           type="button"
@@ -347,9 +351,9 @@ function EnvEditor({
           className="inline-flex h-8 items-center gap-1.5 rounded-md px-3 text-[13px] font-medium text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
         >
           <ClipboardPaste aria-hidden="true" className="size-4" />
-          Paste .env
+          {msg("env-editor.pasteEnv", "Paste .env")}
         </button>
-        <span className="ml-auto hidden text-xs text-muted-foreground @md:block">Tip: paste several lines into any name field to import them.</span>
+        <span className="ms-auto hidden text-xs text-muted-foreground @md:block">{msg("env-editor.tipPasteSeveralLinesInto", "Tip: paste several lines into any name field to import them.")}</span>
       </div>
       <span className="sr-only" role="status" aria-live="polite">
         {announce}

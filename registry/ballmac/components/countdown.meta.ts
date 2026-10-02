@@ -14,7 +14,7 @@ export default defineItem({
     },
   ],
   dependencies: [],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     {
       name: "countdown-demo",

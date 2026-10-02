@@ -11,7 +11,7 @@ export default defineItem({
   files: [{ path: "components/select.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
   devDependencies: ["tw-animate-css"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     { name: "select-demo", title: "Default", file: "select-demo.tsx" },
     { name: "select-grouped", title: "Grouped", file: "select-grouped.tsx" },

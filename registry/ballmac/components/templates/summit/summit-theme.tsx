@@ -41,7 +41,7 @@ function Portrait({ speaker, className }: { speaker: Pick<Speaker, "tone" | "nam
 function Ridge({ className }: { className?: string }) {
   return (
     <div aria-hidden="true" className={cn("pointer-events-none absolute inset-0 -z-10 overflow-hidden", className)} style={{ backgroundImage: "linear-gradient(to bottom, var(--summit-sky-1) 0%, var(--summit-sky-2) 38%, var(--summit-sky-3) 74%, var(--summit-sky-4) 100%)" }}>
-      <div className="bg-[var(--summit-sky-4)] summit-float absolute right-[12%] bottom-[24%] aspect-square w-[min(22vw,15rem)] rounded-full opacity-95 shadow-[0_0_120px_40px_var(--summit-sky-3)]" />
+      <div className="bg-[var(--summit-sky-4)] summit-float absolute end-[12%] bottom-[24%] aspect-square w-[min(22vw,15rem)] rounded-full opacity-95 shadow-[0_0_120px_40px_var(--summit-sky-3)]" />
       <svg viewBox="0 0 1440 420" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 h-[46%] w-full">
         <path className="fill-[var(--summit-ridge-1)]" d="M0 250 L120 190 L210 230 L340 130 L470 210 L560 170 L700 250 L820 150 L930 220 L1060 120 L1190 210 L1300 160 L1440 230 L1440 420 L0 420 Z" />
         <path className="fill-[var(--summit-ridge-2)]" d="M0 310 L90 270 L200 320 L330 240 L450 300 L590 230 L720 310 L860 250 L980 320 L1100 260 L1240 320 L1340 280 L1440 320 L1440 420 L0 420 Z" />

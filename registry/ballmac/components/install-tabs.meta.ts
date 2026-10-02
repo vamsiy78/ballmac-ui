@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["install", "cli", "npm", "pnpm", "yarn", "bun", "tabs", "copy", "docs"],
   files: [{ path: "components/install-tabs.tsx" }],
   dependencies: ["lucide-react", "radix-ui"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [{ name: "install-tabs-demo", title: "Default", file: "install-tabs-demo.tsx" }],
   ai: {
     summary:

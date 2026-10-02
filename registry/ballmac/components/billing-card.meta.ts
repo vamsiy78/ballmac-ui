@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["billing", "subscription", "invoices", "plan"],
   files: [{ path: "components/billing-card.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "billing-card-demo", title: "Team plan", file: "billing-card-demo.tsx" },
     { name: "billing-card-states", title: "Payment failed and trial", file: "billing-card-states.tsx" },

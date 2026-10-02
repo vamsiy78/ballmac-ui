@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["loading", "busy", "indicator"],
   files: [{ path: "components/spinner.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "spinner-demo", title: "Overview", file: "spinner-demo.tsx" },
     {

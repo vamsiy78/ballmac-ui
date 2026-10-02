@@ -29,8 +29,8 @@ function SummitSpeakers({ hrefs, ...props }: SummitSpeakersProps) {
         <div className="mt-10 flex flex-wrap items-center gap-3 border-y py-4">
           <div className="relative min-w-52 flex-1 sm:max-w-xs">
             <label htmlFor="sp-q" className="sr-only">Search speakers</label>
-            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2" aria-hidden="true" />
-            <input id="sp-q" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search speakers or talks" className="bg-card focus-visible:ring-ring/50 h-11 w-full rounded-full border pr-4 pl-10 text-sm outline-none focus-visible:ring-[3px]" />
+            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 start-4 size-4 -translate-y-1/2" aria-hidden="true" />
+            <input id="sp-q" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search speakers or talks" className="bg-card focus-visible:ring-ring/50 h-11 w-full rounded-full border pe-4 ps-10 text-sm outline-none focus-visible:ring-[3px]" />
           </div>
           <div role="group" aria-label="Filter by track" className="flex flex-wrap gap-2">
             {filters.map((f) => <button key={f} type="button" aria-pressed={filter === f} onClick={() => setFilter(f)} className="hover:bg-accent focus-visible:ring-ring/50 aria-pressed:bg-primary aria-pressed:text-primary-foreground h-11 rounded-full border px-5 text-sm font-semibold outline-none focus-visible:ring-[3px]">{f}</button>)}
@@ -40,7 +40,7 @@ function SummitSpeakers({ hrefs, ...props }: SummitSpeakersProps) {
         <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4">
           {list.map((s) => (
             <li key={s.id}>
-              <button type="button" onClick={() => setOpen(s)} aria-haspopup="dialog" className="focus-visible:ring-ring/50 group block w-full rounded-3xl text-left outline-none focus-visible:ring-[3px]">
+              <button type="button" onClick={() => setOpen(s)} aria-haspopup="dialog" className="focus-visible:ring-ring/50 group block w-full rounded-3xl text-start outline-none focus-visible:ring-[3px]">
                 <Portrait speaker={s} className="rounded-3xl transition-transform group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0" />
                 <span className="mt-4 block text-lg font-bold">{s.name}</span>
                 <span className="text-muted-foreground block text-sm">{s.role}, {s.company}</span>
@@ -58,7 +58,7 @@ function SummitSpeakers({ hrefs, ...props }: SummitSpeakersProps) {
             <div className="grid sm:grid-cols-[14rem_minmax(0,1fr)]">
               <Portrait speaker={open} className="aspect-[4/3] sm:aspect-auto sm:h-full" />
               <div className="p-6 sm:p-8">
-                <DialogHeader className="text-left"><DialogTitle className={cn("text-2xl", summitDisplayClass)}>{open.name}</DialogTitle><DialogDescription>{open.role}, {open.company}</DialogDescription></DialogHeader>
+                <DialogHeader className="text-start"><DialogTitle className={cn("text-2xl", summitDisplayClass)}>{open.name}</DialogTitle><DialogDescription>{open.role}, {open.company}</DialogDescription></DialogHeader>
                 <p className="mt-4 text-pretty">{open.bio}</p>
                 {session && (
                   <div className="bg-surface mt-6 rounded-2xl border p-4">

@@ -44,8 +44,8 @@ function Cta3({
       <div className="bg-card relative isolate overflow-hidden rounded-[2rem] border">
         <div aria-hidden="true" className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(color-mix(in_oklch,var(--foreground)_16%,transparent)_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(60%_90%_at_85%_20%,black,transparent)]" />
-          <div className="bg-chart-1/20 absolute -top-32 -right-20 size-[26rem] rounded-full blur-[110px]" />
-          <div className="bg-chart-5/15 absolute -bottom-40 left-0 size-[22rem] rounded-full blur-[110px]" />
+          <div className="bg-chart-1/20 absolute -top-32 -end-20 size-[26rem] rounded-full blur-[110px]" />
+          <div className="bg-chart-5/15 absolute -bottom-40 start-0 size-[22rem] rounded-full blur-[110px]" />
         </div>
         <div className="grid items-center gap-10 p-8 sm:p-12 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:p-16">
           <div>
@@ -53,7 +53,7 @@ function Cta3({
             <p className="text-muted-foreground mt-4 max-w-lg text-lg text-pretty">{description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className={buttonVariants({ size: "lg", shape: "pill" })} href={primaryAction.href}>
-                {primaryAction.label} <ArrowRight />
+                {primaryAction.label} <ArrowRight  className="rtl:rotate-180"/>
               </a>
               <a className={buttonVariants({ variant: "outline", size: "lg", shape: "pill" })} href={secondaryAction.href}>{secondaryAction.label}</a>
             </div>

@@ -5,6 +5,7 @@ import * as React from "react"
 import { Check, Copy, Eye, EyeOff, RefreshCw } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 const MASK = "••••••••"
 
@@ -44,7 +45,7 @@ type ApiKeyFieldProps = Omit<React.ComponentProps<"div">, "children"> & {
 
 function ApiKeyField({
   value,
-  label = "API key",
+  label,
   description,
   visiblePrefix = 8,
   visibleSuffix = 4,
@@ -57,6 +58,8 @@ function ApiKeyField({
   className,
   ...props
 }: ApiKeyFieldProps) {
+  const msg = useMessages()
+  label ??= msg("api-key-field.label", "API key")
   const id = React.useId()
   const labelId = `${id}-label`
   const descriptionId = `${id}-description`
@@ -102,10 +105,11 @@ function ApiKeyField({
       <div id={labelId} className="text-sm font-medium">
         {label}
       </div>
-      <div className="flex h-10 min-w-0 items-center gap-1 rounded-md border border-input bg-card pr-1 pl-3 shadow-xs">
+      <div className="flex h-10 min-w-0 items-center gap-1 rounded-md border border-input bg-card pe-1 ps-3 shadow-xs">
         <code
           data-slot="api-key-field-value"
           translate="no"
+          dir="ltr"
           // Focusable so keyboard users can scroll a long key in a narrow field.
           tabIndex={0}
           className={cn(
@@ -125,17 +129,17 @@ function ApiKeyField({
             </>
           )}
         </code>
-        <button type="button" aria-label="Show key" aria-pressed={revealed} title={revealed ? "Hide key" : "Show key"} onClick={toggle} className={iconButton}>
+        <button type="button" aria-label={msg("api-key-field.showKey", "Show key")} aria-pressed={revealed} title={revealed ? msg("api-key-field.hideKey", "Hide key") : msg("api-key-field.showKey", "Show key")} onClick={toggle} className={iconButton}>
           {revealed ? <EyeOff aria-hidden="true" className="size-4" /> : <Eye aria-hidden="true" className="size-4" />}
         </button>
-        <button type="button" aria-label={copied ? "Copied" : "Copy key"} title="Copy key" onClick={copy} className={iconButton}>
+        <button type="button" aria-label={copied ? msg("api-key-field.copied", "Copied") : msg("api-key-field.copyKey", "Copy key")} title={msg("api-key-field.copyKey", "Copy key")} onClick={copy} className={iconButton}>
           {copied ? <Check aria-hidden="true" className="size-4" /> : <Copy aria-hidden="true" className="size-4" />}
         </button>
         {onRegenerate ? (
           <button
             type="button"
-            aria-label="Regenerate key"
-            title="Regenerate key"
+            aria-label={msg("api-key-field.regenerateKey", "Regenerate key")}
+            title={msg("api-key-field.regenerateKey", "Regenerate key")}
             disabled={regenerating}
             aria-busy={regenerating || undefined}
             onClick={onRegenerate}

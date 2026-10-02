@@ -27,11 +27,11 @@ export default function CheckboxIndeterminate() {
           onCheckedChange={(checked) => setSelected(checked === true ? events.map((e) => e.id) : [])}
         />
         <Label htmlFor="events-all">All events</Label>
-        <span className="ml-auto text-xs text-muted-foreground tabular-nums">
+        <span className="ms-auto text-xs text-muted-foreground tabular-nums">
           {selected.length}/{events.length}
         </span>
       </div>
-      <div className="flex flex-col gap-3 pt-3 pl-7">
+      <div className="flex flex-col gap-3 pt-3 ps-7">
         {events.map((event) => (
           <div key={event.id} className="flex items-center gap-3">
             <Checkbox

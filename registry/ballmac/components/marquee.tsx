@@ -170,7 +170,7 @@ function Marquee({
             inert={i > 0 || undefined}
             className={cn(
               "flex shrink-0 gap-(--marquee-gap)",
-              vertical ? "flex-col pb-(--marquee-gap)" : "flex-row pr-(--marquee-gap)"
+              vertical ? "flex-col pb-(--marquee-gap)" : "flex-row pe-(--marquee-gap)"
             )}
           >
             {children}

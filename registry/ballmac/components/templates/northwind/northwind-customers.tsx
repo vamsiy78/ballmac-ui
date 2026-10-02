@@ -34,11 +34,11 @@ function NorthwindCustomers({ hrefs, ...props }: NorthwindCustomersProps) {
               <p className="text-sm font-semibold opacity-70">Case study · Professional services</p>
               <h2 id="nw-featured" className={cn("mt-4 text-4xl leading-tight tracking-[-0.02em] text-balance sm:text-5xl", serif)}>Harlow &amp; Pine closes the books in three days, not nine.</h2>
               <p className="mt-5 max-w-lg text-lg opacity-85 text-pretty">A 340-person consultancy replaced spreadsheets, a shared inbox and four card programs with one system finance trusts.</p>
-              <a href="#" className="bg-primary-foreground text-primary focus-visible:ring-ring mt-8 inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]">Read the story <ArrowUpRight className="size-4" aria-hidden="true" /></a>
+              <a href="#" className="bg-primary-foreground text-primary focus-visible:ring-ring mt-8 inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px]">Read the story <ArrowUpRight className="size-4 rtl:-scale-x-100" aria-hidden="true" /></a>
             </div>
-            <dl className="grid grid-cols-2 border-t border-current/20 lg:border-t-0 lg:border-l">
+            <dl className="grid grid-cols-2 border-t border-current/20 lg:border-t-0 lg:border-s">
               {[["9 → 3", "days to close"], ["97%", "receipts matched"], ["$1.2M", "cash found in dormant subscriptions"], ["340", "employees, live in 2 weeks"]].map(([v, l], i) => (
-                <div key={l} className={cn("flex flex-col justify-end p-6 sm:p-8", i % 2 === 0 && "border-r border-current/20", i < 2 && "border-b border-current/20")}>
+                <div key={l} className={cn("flex flex-col justify-end p-6 sm:p-8", i % 2 === 0 && "border-e border-current/20", i < 2 && "border-b border-current/20")}>
                   <dd className={cn("text-4xl tracking-[-0.03em] sm:text-5xl", serif)}>{v}</dd>
                   <dt className="mt-2 text-sm opacity-75">{l}</dt>
                 </div>

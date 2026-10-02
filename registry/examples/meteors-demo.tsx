@@ -9,7 +9,7 @@ export default function MeteorsDemo() {
     <div className="relative isolate w-full max-w-md overflow-hidden rounded-xl border bg-card p-6 text-card-foreground shadow-sm">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-32 -right-32 -z-10 size-80 rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--chart-1)_18%,transparent),transparent)]"
+        className="pointer-events-none absolute -top-32 -end-32 -z-10 size-80 rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--chart-1)_18%,transparent),transparent)]"
       />
       <Meteors className="-z-10" />
       <span className="font-mono text-xs text-muted-foreground">v2.0 · released today</span>

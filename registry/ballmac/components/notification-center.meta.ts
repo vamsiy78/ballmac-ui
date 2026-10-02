@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["notifications", "inbox", "bell", "popover"],
   files: [{ path: "components/notification-center.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets", "popover"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "popover", "i18n"],
   examples: [
     { name: "notification-center-demo", title: "Inbox", file: "notification-center-demo.tsx" },
     { name: "notification-center-states", title: "Empty", file: "notification-center-states.tsx" },

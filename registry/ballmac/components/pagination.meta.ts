@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["pages", "navigation", "links"],
   files: [{ path: "components/pagination.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "pagination-demo", title: "Overview", file: "pagination-demo.tsx" },
     {

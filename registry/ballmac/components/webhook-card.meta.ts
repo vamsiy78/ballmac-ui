@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["webhook", "endpoint", "events", "deliveries", "integration"],
   files: [{ path: "components/webhook-card.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "copy-button", "switch", "highlight"],
+  registryDependencies: ["shadcn:utils", "copy-button", "switch", "highlight", "i18n"],
   examples: [
     { name: "webhook-card-demo", title: "Healthy endpoint", file: "webhook-card-demo.tsx" },
     { name: "webhook-card-failing", title: "Failing endpoint", file: "webhook-card-failing.tsx" },

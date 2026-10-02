@@ -128,7 +128,7 @@ function AtlasDashboard({ hrefs, ...props }: AtlasDashboardProps) {
                   <a href={a.href} className="hover:bg-accent focus-visible:ring-ring/50 flex items-center gap-3 px-4 py-3 outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-inset sm:px-5">
                     <span className={cn("flex size-9 shrink-0 items-center justify-center rounded-lg", a.tone)}><a.icon className="size-4" aria-hidden="true" /></span>
                     <span className="min-w-0 flex-1"><span className="block text-sm font-semibold">{a.text}</span><span className="text-muted-foreground block truncate text-xs">{a.hint}</span></span>
-                    <ArrowRight className="text-muted-foreground size-4" aria-hidden="true" />
+                    <ArrowRight className="text-muted-foreground size-4 rtl:rotate-180" aria-hidden="true" />
                   </a>
                 </li>
               ))}
@@ -157,11 +157,11 @@ function AtlasDashboard({ hrefs, ...props }: AtlasDashboardProps) {
             <a href={h.orders} className="text-chart-1 focus-visible:ring-ring/50 rounded text-sm font-semibold underline-offset-4 outline-none hover:underline focus-visible:ring-[3px]">View all</a>
           </div>
           <div tabIndex={0} role="region" aria-label="Recent orders" className="focus-visible:ring-ring/50 overflow-x-auto outline-none focus-visible:ring-[3px] focus-visible:ring-inset">
-            <table className="w-full min-w-[40rem] text-left text-sm">
+            <table className="w-full min-w-[40rem] text-start text-sm">
               <caption className="sr-only">Most recent orders</caption>
               <thead>
                 <tr className="text-muted-foreground bg-surface border-y text-xs">
-                  {["Order", "Date", "Customer", "Payment", "Fulfilment", "Total"].map((c, i) => <th key={c} scope="col" className={cn("px-4 py-2.5 font-semibold sm:px-5", i === 5 && "text-right")}>{c}</th>)}
+                  {["Order", "Date", "Customer", "Payment", "Fulfilment", "Total"].map((c, i) => <th key={c} scope="col" className={cn("px-4 py-2.5 font-semibold sm:px-5", i === 5 && "text-end")}>{c}</th>)}
                 </tr>
               </thead>
               <tbody className="divide-y">
@@ -174,7 +174,7 @@ function AtlasDashboard({ hrefs, ...props }: AtlasDashboardProps) {
                       <td className="px-4 py-3 sm:px-5"><span className="flex items-center gap-2.5"><span className={cn("flex size-7 items-center justify-center rounded-full text-[11px] font-bold", ["bg-chart-1/20", "bg-chart-2/20", "bg-chart-3/25", "bg-chart-4/20", "bg-chart-5/20"][c.tone - 1])} aria-hidden="true">{initials(c.name)}</span>{c.name}</span></td>
                       <td className="px-4 py-3 sm:px-5"><PaymentBadge value={o.payment} /></td>
                       <td className="px-4 py-3 sm:px-5"><FulfilmentBadge value={o.fulfillment} /></td>
-                      <td className="px-4 py-3 text-right font-semibold tabular-nums sm:px-5">{moneyExact.format(orderGrand(o))}</td>
+                      <td className="px-4 py-3 text-end font-semibold tabular-nums sm:px-5">{moneyExact.format(orderGrand(o))}</td>
                     </tr>
                   )
                 })}

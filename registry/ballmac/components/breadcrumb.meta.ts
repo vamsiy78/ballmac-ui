@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["navigation", "hierarchy", "links"],
   files: [{ path: "components/breadcrumb.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "breadcrumb-demo", title: "Overview", file: "breadcrumb-demo.tsx" },
     {

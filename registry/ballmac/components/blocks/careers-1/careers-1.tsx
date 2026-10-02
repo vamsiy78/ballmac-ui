@@ -130,7 +130,7 @@ function Careers1({
                     </span>
                     <span className="text-muted-foreground group-hover/job:text-foreground inline-flex items-center gap-1 text-sm font-medium transition-colors">
                       <span className="hidden sm:inline">Apply</span>
-                      <ArrowUpRight className="size-4 transition-transform group-hover/job:translate-x-0.5 group-hover/job:-translate-y-0.5 motion-reduce:transition-none" aria-hidden="true" />
+                      <ArrowUpRight className="size-4 transition-transform group-hover/job:translate-x-0.5 group-hover/job:-translate-y-0.5 motion-reduce:transition-none rtl:-scale-x-100 rtl:group-hover/job:-translate-x-0.5" aria-hidden="true" />
                     </span>
                   </a>
                 </li>

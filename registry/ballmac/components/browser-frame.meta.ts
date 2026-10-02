@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["mockup", "browser", "safari", "window", "screenshot", "website", "hero"],
   files: [{ path: "components/browser-frame.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "browser-frame-demo", title: "Landing page with tabs", file: "browser-frame-demo.tsx" },
     { name: "browser-frame-minimal", title: "Natural size", file: "browser-frame-minimal.tsx" },

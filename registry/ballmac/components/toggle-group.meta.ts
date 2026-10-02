@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["toggle", "selection", "toolbar", "radix"],
   files: [{ path: "components/toggle-group.tsx" }],
   dependencies: ["radix-ui"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "direction"],
   examples: [
     {
       name: "toggle-group-demo",

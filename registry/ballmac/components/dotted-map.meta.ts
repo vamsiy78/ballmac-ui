@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["map", "world", "dots", "markers", "locations"],
   files: [{ path: "components/dotted-map.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n"],
   examples: [
     { name: "dotted-map-demo", title: "Offices with routes", file: "dotted-map-demo.tsx" },
     { name: "dotted-map-regions", title: "Dense map with labels", file: "dotted-map-regions.tsx" },

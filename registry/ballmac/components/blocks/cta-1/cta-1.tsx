@@ -33,7 +33,7 @@ function Cta1({
         <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">{description}</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <a className={buttonVariants({ size: "lg", shape: "pill" })} href={primaryAction.href}>
-            {primaryAction.label} <ArrowRight />
+            {primaryAction.label} <ArrowRight  className="rtl:rotate-180"/>
           </a>
           <a className={buttonVariants({ variant: "outline", size: "lg", shape: "pill" })} href={secondaryAction.href}>{secondaryAction.label}</a>
         </div>

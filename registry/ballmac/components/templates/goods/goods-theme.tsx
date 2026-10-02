@@ -42,27 +42,27 @@ function Piece({ shape, glaze = 0, view = 0, className }: { shape: Shape; glaze?
   )
   const art: Record<Shape, React.ReactNode> = {
     mug: (<>
-      <div className={cn("absolute top-[40%] left-[54%] aspect-square w-[22%] rounded-full border-[7px] border-solid bg-transparent", gl.border)} />
-      {body("top-[34%] left-[28%] h-[34%] w-[38%] rounded-t-md rounded-b-[26%]", <div className="absolute inset-x-0 top-0 h-[10%] rounded-t-md bg-black/20" />)}
+      <div className={cn("absolute top-[40%] start-[54%] aspect-square w-[22%] rounded-full border-[7px] border-solid bg-transparent", gl.border)} />
+      {body("top-[34%] start-[28%] h-[34%] w-[38%] rounded-t-md rounded-b-[26%]", <div className="absolute inset-x-0 top-0 h-[10%] rounded-t-md bg-black/20" />)}
     </>),
     cup: (<>
-      {body("top-[40%] left-[30%] h-[28%] w-[40%] rounded-t-sm rounded-b-[45%]", <div className="absolute inset-x-0 top-0 h-[12%] rounded-t-sm bg-black/20" />)}
+      {body("top-[40%] start-[30%] h-[28%] w-[40%] rounded-t-sm rounded-b-[45%]", <div className="absolute inset-x-0 top-0 h-[12%] rounded-t-sm bg-black/20" />)}
     </>),
     bowl: (<>
-      {body("top-[42%] left-[16%] h-[28%] w-[68%] rounded-t-md rounded-b-full", <div className="absolute inset-x-0 top-0 h-[14%] rounded-t-md bg-black/20" />)}
+      {body("top-[42%] start-[16%] h-[28%] w-[68%] rounded-t-md rounded-b-full", <div className="absolute inset-x-0 top-0 h-[14%] rounded-t-md bg-black/20" />)}
     </>),
     vase: (<>
-      {body("top-[16%] left-[43%] h-[16%] w-[14%] rounded-t-md", <div className="absolute inset-x-0 top-0 h-[16%] bg-black/25" />)}
-      {body("top-[28%] left-[27%] h-[44%] w-[46%] rounded-[50%_50%_30%_30%/45%_45%_22%_22%]")}
+      {body("top-[16%] start-[43%] h-[16%] w-[14%] rounded-t-md", <div className="absolute inset-x-0 top-0 h-[16%] bg-black/25" />)}
+      {body("top-[28%] start-[27%] h-[44%] w-[46%] rounded-[50%_50%_30%_30%/45%_45%_22%_22%]")}
     </>),
     plate: (<>
-      {body("top-[52%] left-[10%] h-[10%] w-[80%] rounded-[50%]")}
-      <div className="absolute top-[53.5%] left-[18%] h-[5%] w-[64%] rounded-[50%] bg-black/15" />
+      {body("top-[52%] start-[10%] h-[10%] w-[80%] rounded-[50%]")}
+      <div className="absolute top-[53.5%] start-[18%] h-[5%] w-[64%] rounded-[50%] bg-black/15" />
     </>),
     pitcher: (<>
-      <div className={cn("absolute top-[36%] left-[56%] aspect-square w-[20%] rounded-full border-[7px] bg-transparent", gl.border)} />
-      {body("top-[28%] left-[26%] h-[44%] w-[40%] rounded-[30%_30%_26%_26%/20%_20%_22%_22%]", <div className="absolute inset-x-0 top-0 h-[8%] rounded-t-[30%] bg-black/20" />)}
-      {body("top-[28%] left-[18%] h-[8%] w-[14%] -rotate-[28deg] rounded-md")}
+      <div className={cn("absolute top-[36%] start-[56%] aspect-square w-[20%] rounded-full border-[7px] bg-transparent", gl.border)} />
+      {body("top-[28%] start-[26%] h-[44%] w-[40%] rounded-[30%_30%_26%_26%/20%_20%_22%_22%]", <div className="absolute inset-x-0 top-0 h-[8%] rounded-t-[30%] bg-black/20" />)}
+      {body("top-[28%] start-[18%] h-[8%] w-[14%] -rotate-[28deg] rounded-md")}
     </>),
   }
   const ground = shape === "plate" ? "top-[60%]" : shape === "vase" ? "top-[70%]" : shape === "bowl" ? "top-[68%]" : "top-[66%]"
@@ -134,8 +134,8 @@ function GoodsShell({ page, hrefs: overrides, className, style, children, ...pro
       </header>
 
       <Sheet open={bag} onOpenChange={setBag}>
-        <SheetContent side="right" className="goods-theme bg-background flex w-full flex-col gap-0 p-0 sm:max-w-md">
-          <SheetHeader className="border-b p-5 text-left"><SheetTitle className={cn("text-2xl", serif)}>Your bag</SheetTitle><SheetDescription>{count === 0 ? "Nothing in here yet." : `${count} ${count === 1 ? "piece" : "pieces"} picked out.`}</SheetDescription></SheetHeader>
+        <SheetContent side="end" className="goods-theme bg-background flex w-full flex-col gap-0 p-0 sm:max-w-md">
+          <SheetHeader className="border-b p-5 text-start"><SheetTitle className={cn("text-2xl", serif)}>Your bag</SheetTitle><SheetDescription>{count === 0 ? "Nothing in here yet." : `${count} ${count === 1 ? "piece" : "pieces"} picked out.`}</SheetDescription></SheetHeader>
           <div className="flex-1 overflow-y-auto p-5">
             {lines.length === 0 ? (
               <div className="grid h-full place-items-center text-center"><div><ShoppingBag className="text-muted-foreground mx-auto size-10" aria-hidden="true" /><p className={cn("mt-4 text-2xl", serif)}>Your bag is empty.</p><a href={hrefs.shop} className="bg-primary text-primary-foreground focus-visible:ring-ring/50 mt-5 inline-flex h-11 items-center rounded-full px-6 font-semibold outline-none focus-visible:ring-[3px]">Browse the shop</a></div></div>

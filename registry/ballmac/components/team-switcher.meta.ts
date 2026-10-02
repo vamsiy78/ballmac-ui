@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["workspace", "switcher", "menu", "dropdown"],
   files: [{ path: "components/team-switcher.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "dropdown-menu"],
+  registryDependencies: ["shadcn:utils", "dropdown-menu", "i18n"],
   examples: [
     { name: "team-switcher-demo", title: "Workspace menu", file: "team-switcher-demo.tsx" },
     { name: "team-switcher-states", title: "Compact", file: "team-switcher-states.tsx" },

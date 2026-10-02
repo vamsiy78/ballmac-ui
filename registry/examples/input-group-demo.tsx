@@ -54,7 +54,7 @@ export default function InputGroupDemo() {
           <InputGroupButton size="icon-sm" variant="ghost" aria-label="Mention someone">
             <AtSign aria-hidden="true" />
           </InputGroupButton>
-          <InputGroupButton size="sm" variant="default" className="ml-auto">
+          <InputGroupButton size="sm" variant="default" className="ms-auto">
             Send <ArrowUp aria-hidden="true" />
           </InputGroupButton>
         </InputGroupAddon>

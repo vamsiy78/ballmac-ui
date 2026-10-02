@@ -254,16 +254,16 @@ function Kanban1({
                           className={cn("bg-card focus-visible:ring-ring/50 cursor-grab rounded-xl border p-3.5 shadow-xs outline-none transition-shadow focus-visible:ring-[3px] active:cursor-grabbing motion-reduce:transition-none hover:shadow-md", picked && "ring-foreground ring-2 shadow-lg")}
                         >
                           {t.tags && t.tags.length > 0 && <div className="mb-2 flex flex-wrap gap-1">{t.tags.map((tag) => <Badge key={tag} variant="secondary" className="px-1.5 py-0 text-[11px]">{tag}</Badge>)}</div>}
-                          <p className="pr-6 text-sm leading-snug font-medium text-pretty">{t.title}</p>
+                          <p className="pe-6 text-sm leading-snug font-medium text-pretty">{t.title}</p>
                           <div className="mt-3 flex items-center gap-3 text-xs">
                             {t.priority && <span className="text-muted-foreground flex items-center gap-1.5"><span aria-hidden="true" className={cn("size-2 rounded-full", priorityTone[t.priority])} />{t.priority[0].toUpperCase() + t.priority.slice(1)}</span>}
                             {t.due && <span className="text-muted-foreground flex items-center gap-1"><CalendarDays className="size-3.5" aria-hidden="true" />{t.due}</span>}
                             {t.comments ? <span className="text-muted-foreground flex items-center gap-1"><MessageSquare className="size-3.5" aria-hidden="true" />{t.comments}<span className="sr-only"> comments</span></span> : null}
-                            {t.assignee && <Avatar size="sm" className="ml-auto size-6"><AvatarFallback className={cn("text-foreground text-[10px] font-semibold", toneOf(t.assignee))}>{initials(t.assignee)}</AvatarFallback></Avatar>}
+                            {t.assignee && <Avatar size="sm" className="ms-auto size-6"><AvatarFallback className={cn("text-foreground text-[10px] font-semibold", toneOf(t.assignee))}>{initials(t.assignee)}</AvatarFallback></Avatar>}
                           </div>
                         </div>
                         <DropdownMenu>
-                          <DropdownMenuTrigger aria-label={`Actions for ${t.title}`} className="hover:bg-accent focus-visible:ring-ring/50 absolute top-2 right-2 flex size-7 items-center justify-center rounded-md opacity-0 outline-none group-focus-within/card:opacity-100 group-hover/card:opacity-100 focus-visible:ring-[3px] data-[state=open]:opacity-100 motion-reduce:transition-none"><MoreHorizontal className="size-4" aria-hidden="true" /></DropdownMenuTrigger>
+                          <DropdownMenuTrigger aria-label={`Actions for ${t.title}`} className="hover:bg-accent focus-visible:ring-ring/50 absolute top-2 end-2 flex size-7 items-center justify-center rounded-md opacity-0 outline-none group-focus-within/card:opacity-100 group-hover/card:opacity-100 focus-visible:ring-[3px] data-[state=open]:opacity-100 motion-reduce:transition-none"><MoreHorizontal className="size-4" aria-hidden="true" /></DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Move to</DropdownMenuLabel>
                             {cols.filter((c) => c.id !== col.id).map((c) => <DropdownMenuItem key={c.id} onSelect={() => { move(t.id, c.id, c.tasks.length); setAnnounce(`${t.title} moved to ${c.title}.`) }}>{c.title}</DropdownMenuItem>)}

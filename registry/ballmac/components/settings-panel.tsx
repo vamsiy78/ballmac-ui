@@ -6,6 +6,7 @@ import { Check, LoaderCircle } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { spring } from "@/lib/ballmac/motion";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type SettingsStatus = "idle" | "dirty" | "saving" | "saved";
 
@@ -32,13 +33,17 @@ function SettingsPanel({
   status = "idle",
   onSave,
   onDiscard,
-  dirtyMessage = "You have unsaved changes",
-  saveLabel = "Save changes",
-  label = "Settings",
+  dirtyMessage,
+  saveLabel,
+  label,
   className,
   children,
   ...props
 }: SettingsPanelProps) {
+  const msg = useMessages()
+  dirtyMessage ??= msg("settings-panel.dirtyMessage", "You have unsaved changes")
+  saveLabel ??= msg("settings-panel.saveLabel", "Save changes")
+  label ??= msg("settings-panel.label", "Settings")
   const reduce = useReducedMotion();
   const showBar = status !== "idle";
   return (
@@ -91,14 +96,14 @@ function SettingsPanel({
                 </>
               )}
             </p>
-            <div className="ml-auto flex items-center gap-2">
+            <div className="ms-auto flex items-center gap-2">
               <button
                 type="button"
                 onClick={onDiscard}
                 disabled={status !== "dirty"}
                 className="inline-flex h-8 items-center rounded-md px-3 text-[13px] font-medium text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
               >
-                Discard
+                {msg("settings-panel.discard", "Discard")}
               </button>
               <button
                 type="submit"

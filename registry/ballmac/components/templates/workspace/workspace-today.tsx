@@ -139,7 +139,7 @@ function WorkspaceToday({ hrefs, ...props }: WorkspaceTodayProps) {
                     <span className="bg-chart-1/15 flex size-9 shrink-0 items-center justify-center rounded-full text-xs font-bold" aria-hidden="true">{m.from.split(" ").map((w) => w[0]).join("")}</span>
                     <div className="min-w-0 flex-1"><p className="truncate text-sm"><span className="font-semibold">{m.from}</span> <span className="text-muted-foreground">· {m.time}</span></p><p className="truncate text-sm font-medium">{m.subject}</p><p className="text-muted-foreground truncate text-xs">{m.preview}</p></div>
                     <div className="flex shrink-0 gap-1">
-                      <a href={hrefs?.mail ?? "/workspace/mail"} aria-label={`Reply to ${m.from}`} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex size-8 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px]"><Reply className="size-4" aria-hidden="true" /></a>
+                      <a href={hrefs?.mail ?? "/workspace/mail"} aria-label={`Reply to ${m.from}`} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex size-8 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px]"><Reply className="size-4 rtl:-scale-x-100" aria-hidden="true" /></a>
                       <button type="button" aria-label={`Archive: ${m.subject}`} onClick={() => { setMail((all) => all.filter((x) => x.id !== m.id)); setNote(`Archived ${m.subject}`) }} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex size-8 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px]"><Archive className="size-4" aria-hidden="true" /></button>
                     </div>
                   </li>

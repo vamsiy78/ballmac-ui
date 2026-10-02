@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["master detail", "split", "list", "responsive"],
   files: [{ path: "components/split-view.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n", "direction"],
   examples: [
     { name: "split-view-demo", title: "Mail layout", file: "split-view-demo.tsx" },
     { name: "split-view-states", title: "Stacked on narrow", file: "split-view-states.tsx" },

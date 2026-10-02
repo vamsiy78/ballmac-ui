@@ -19,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ballmac/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { useMessages, defineMessage } from "@/lib/ballmac/i18n";
 
 type UserMenuUser = {
   name: string;
@@ -91,9 +92,9 @@ function UserAvatar({ user, size }: { user: UserMenuUser; size?: AvatarProps["si
 }
 
 const THEMES = [
-  { value: "light", label: "Light", icon: Sun },
-  { value: "dark", label: "Dark", icon: Moon },
-  { value: "system", label: "System", icon: Monitor },
+  { value: "light", label: defineMessage("user-menu.THEMES.0", "Light"), icon: Sun },
+  { value: "dark", label: defineMessage("user-menu.THEMES.1", "Dark"), icon: Moon },
+  { value: "system", label: defineMessage("user-menu.THEMES.2", "System"), icon: Monitor },
 ] as const;
 
 /**
@@ -116,6 +117,7 @@ function UserMenu({
   className,
   ...props
 }: UserMenuProps) {
+  const msg = useMessages()
   return (
     <DropdownMenu open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange} modal={modal}>
       <DropdownMenuTrigger
@@ -124,7 +126,7 @@ function UserMenu({
         className={cn(
           variant === "avatar"
             ? "rounded-full outline-none transition-shadow hover:ring-4 hover:ring-ring/15 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=open]:ring-4 data-[state=open]:ring-ring/20"
-            : "flex w-full min-w-0 items-center gap-3 rounded-xl border bg-background p-2 pr-3 text-left shadow-xs outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=open]:bg-accent",
+            : "flex w-full min-w-0 items-center gap-3 rounded-xl border bg-background p-2 pe-3 text-start shadow-xs outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=open]:bg-accent",
           className,
         )}
         {...props}
@@ -164,7 +166,7 @@ function UserMenu({
                       {item.icon}
                       {item.label}
                       {item.badge && (
-                        <span className="ml-auto rounded-full bg-muted px-1.5 py-px text-[10px] font-semibold text-muted-foreground">{item.badge}</span>
+                        <span className="ms-auto rounded-full bg-muted px-1.5 py-px text-[10px] font-semibold text-muted-foreground">{item.badge}</span>
                       )}
                       {item.shortcut && <DropdownMenuShortcut>{item.shortcut}</DropdownMenuShortcut>}
                     </>
@@ -193,14 +195,14 @@ function UserMenu({
                 <DropdownMenuSubTrigger>
                   <Palette aria-hidden="true" />
                   Theme
-                  <span className="ml-auto pr-1 text-xs text-muted-foreground capitalize">{theme}</span>
+                  <span className="ms-auto pe-1 text-xs text-muted-foreground capitalize">{theme}</span>
                 </DropdownMenuSubTrigger>
                 <DropdownMenuSubContent>
                   <DropdownMenuRadioGroup value={theme} onValueChange={(v) => onThemeChange(v as UserMenuTheme)}>
                     {THEMES.map(({ value, label, icon: Icon }) => (
                       <DropdownMenuRadioItem key={value} value={value}>
                         <Icon aria-hidden="true" />
-                        {label}
+                        {msg.of(label)}
                       </DropdownMenuRadioItem>
                     ))}
                   </DropdownMenuRadioGroup>
@@ -213,7 +215,7 @@ function UserMenu({
               <DropdownMenuSeparator />
               <DropdownMenuItem destructive onSelect={onSignOut}>
                 <LogOut aria-hidden="true" />
-                Sign out
+                {msg("user-menu.signOut", "Sign out")}
               </DropdownMenuItem>
             </>
           )}

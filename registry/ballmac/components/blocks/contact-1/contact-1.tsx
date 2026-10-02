@@ -192,7 +192,7 @@ function Contact1({
                   <MessageBox rows={5} maxLength={maxLength} placeholder="How can we help?" value={values.message} onChange={(e) => set("message", e.target.value)} onBlur={() => setTouched((t) => ({ ...t, message: true }))} />
                   <div className="flex items-start justify-between gap-3">
                     <FieldError errors={[show("message")]} />
-                    <FieldDescription className="ml-auto text-xs tabular-nums">{values.message.length}/{maxLength}</FieldDescription>
+                    <FieldDescription className="ms-auto text-xs tabular-nums">{values.message.length}/{maxLength}</FieldDescription>
                   </div>
                 </Field>
                 <Field orientation="horizontal" invalid={!!show("consent")} data-field="consent">
@@ -204,7 +204,7 @@ function Contact1({
                 </Field>
                 {state === "error" && <p role="alert" className="text-destructive text-sm">Something went wrong sending your message. Please try again, or email us directly.</p>}
                 <Button type="submit" size="lg" shape="pill" loading={state === "sending"} className="w-full">
-                  {state === "sending" ? "Sending…" : <>Send message <ArrowRight /></>}
+                  {state === "sending" ? "Sending…" : <>Send message <ArrowRight  className="rtl:rotate-180"/></>}
                 </Button>
               </FieldGroup>
             </form>

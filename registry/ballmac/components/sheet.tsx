@@ -7,6 +7,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
 import { Dialog as Primitive } from "radix-ui";
 import { cn } from "@/lib/utils";
+import { useMessages } from "@/lib/ballmac/i18n";
 
 type SheetProps = React.ComponentProps<typeof Primitive.Root>;
 function Sheet(props: SheetProps) {
@@ -28,22 +29,26 @@ const sheetVariants = cva(
   {
     variants: {
       side: {
+        // `start` and `end` follow the reading direction; `left` and `right` are fixed edges.
+        end: "inset-y-0 end-0 h-full w-[min(24rem,calc(100vw-2.5rem))] border-s data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right rtl:data-[state=open]:slide-in-from-left rtl:data-[state=closed]:slide-out-to-left sm:w-[min(28rem,calc(100vw-4rem))]",
+        start:
+          "inset-y-0 start-0 h-full w-[min(24rem,calc(100vw-2.5rem))] border-e data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left rtl:data-[state=open]:slide-in-from-right rtl:data-[state=closed]:slide-out-to-right sm:w-[min(28rem,calc(100vw-4rem))]",
         right:
-          "inset-y-0 right-0 h-full w-[min(24rem,calc(100vw-2.5rem))] border-l data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right sm:w-[min(28rem,calc(100vw-4rem))]",
-        left: "inset-y-0 left-0 h-full w-[min(24rem,calc(100vw-2.5rem))] border-r data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left sm:w-[min(28rem,calc(100vw-4rem))]",
+          "inset-y-0 right-0 h-full w-[min(24rem,calc(100vw-2.5rem))] border-l data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right sm:w-[min(28rem,calc(100vw-4rem))]", // rtl-fixed: fixed right edge
+        left: "inset-y-0 left-0 h-full w-[min(24rem,calc(100vw-2.5rem))] border-r data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left sm:w-[min(28rem,calc(100vw-4rem))]", // rtl-fixed: fixed left edge
         top: "inset-x-0 top-0 max-h-[85dvh] rounded-b-2xl border-b data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top",
         bottom:
           "inset-x-0 bottom-0 max-h-[85dvh] rounded-t-2xl border-t data-[state=open]:slide-in-from-bottom data-[state=closed]:slide-out-to-bottom",
       },
     },
-    defaultVariants: { side: "right" },
+    defaultVariants: { side: "end" },
   },
 );
 
 type SheetContentProps = React.ComponentProps<typeof Primitive.Content> &
   VariantProps<typeof sheetVariants> & {
-    /** Edge the sheet slides in from. */
-    side?: "top" | "right" | "bottom" | "left";
+    /** Edge the sheet slides in from. `end` (the default) and `start` follow the reading direction; `right` and `left` are fixed. */
+    side?: "top" | "end" | "bottom" | "start" | "right" | "left";
     /** Show the close control in the corner. */
     showCloseButton?: boolean;
     /** Accessible name for the close control. */
@@ -52,11 +57,13 @@ type SheetContentProps = React.ComponentProps<typeof Primitive.Content> &
 function SheetContent({
   className,
   children,
-  side = "right",
+  side = "end",
   showCloseButton = true,
-  closeLabel = "Close",
+  closeLabel,
   ...props
 }: SheetContentProps) {
+  const msg = useMessages()
+  closeLabel ??= msg("sheet.closeLabel", "Close")
   return (
     <Primitive.Portal>
       <Primitive.Overlay
@@ -80,7 +87,7 @@ function SheetContent({
           <Primitive.Close
             data-slot="sheet-close"
             aria-label={closeLabel}
-            className="absolute top-3.5 right-3.5 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="absolute top-3.5 end-3.5 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             <X aria-hidden="true" className="size-4" />
           </Primitive.Close>
@@ -95,7 +102,7 @@ function SheetHeader({ className, ...props }: SheetHeaderProps) {
   return (
     <div
       data-slot="sheet-header"
-      className={cn("grid gap-1.5 px-5 pt-5 pr-14", className)}
+      className={cn("grid gap-1.5 px-5 pt-5 pe-14", className)}
       {...props}
     />
   );

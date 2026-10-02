@@ -7,6 +7,7 @@ import { Tabs as TabsPrimitive } from "radix-ui"
 import { CopyButton } from "@/components/ballmac/copy-button"
 import { highlightLines, languageFromName, tokenClass, type HighlightLanguage } from "@/lib/ballmac/highlight"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type Snippet = {
   /** Tab text, such as "cURL" or "Python". Also picks the highlighter unless `language` is set. */
@@ -105,6 +106,7 @@ function SnippetTabs({
   className,
   ...props
 }: SnippetTabsProps) {
+  const msg = useMessages()
   const labels = snippets.map((s) => s.label)
   const stored = useStoredLabel(storageKey)
   const [internal, setInternal] = React.useState(defaultValue ?? labels[0] ?? "")
@@ -126,14 +128,14 @@ function SnippetTabs({
       className={cn("w-full overflow-hidden rounded-xl border bg-card text-card-foreground", className)}
       {...props}
     >
-      <div className="flex min-h-11 items-center gap-2 border-b bg-muted/40 pr-1.5 pl-1.5">
+      <div className="flex min-h-11 items-center gap-2 border-b bg-muted/40 pe-1.5 ps-1.5">
         {title && (
-          <span id={titleId} className="hidden shrink-0 pl-2 text-[13px] font-medium text-foreground sm:block">
+          <span id={titleId} className="hidden shrink-0 ps-2 text-[13px] font-medium text-foreground sm:block">
             {title}
           </span>
         )}
         <TabsPrimitive.List
-          aria-label={title ?? "Language"}
+          aria-label={title ?? msg("snippet-tabs.language", "Language")}
           className="flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto py-1 [scrollbar-width:none] sm:justify-end [&::-webkit-scrollbar]:hidden"
         >
           {snippets.map((s) => (
@@ -162,9 +164,9 @@ function SnippetTabs({
             tabIndex={-1}
             className="outline-none data-[state=inactive]:hidden"
           >
-            <pre
+            <pre dir="ltr"
               role="region"
-              aria-label={`${s.label} code`}
+              aria-label={msg("snippet-tabs.code", "{label} code", { label: s.label })}
               tabIndex={0}
               className={cn(
                 "overflow-auto p-4 font-mono text-[13px] leading-6 text-foreground outline-none focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50",
@@ -175,7 +177,7 @@ function SnippetTabs({
                 {lines.map((line, i) => (
                   <span key={i} className="flex min-w-max">
                     {lineNumbers && (
-                      <span aria-hidden="true" className="mr-4 w-5 shrink-0 text-right text-muted-foreground tabular-nums select-none">
+                      <span aria-hidden="true" className="me-4 w-5 shrink-0 text-end text-muted-foreground tabular-nums select-none">
                         {i + 1}
                       </span>
                     )}

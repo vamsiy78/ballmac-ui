@@ -55,7 +55,7 @@ function LedgerHome({ hrefs, ...props }: LedgerHomeProps) {
             </div>
             <p className="text-muted-foreground mt-5 text-xs">Free for 14 days · macOS 13 or later · Apple silicon and Intel</p>
           </BlurFade>
-          <BlurFade className="mx-auto mt-14 max-w-6xl text-left" delay={0.12}>
+          <BlurFade className="mx-auto mt-14 max-w-6xl text-start" delay={0.12}>
             <Showcase1 app="Ledger" height="38rem" className="shadow-[0_40px_100px_-30px_rgb(0_0_0/0.45)]" />
           </BlurFade>
         </section>

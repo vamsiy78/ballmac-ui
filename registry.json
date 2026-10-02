@@ -144,7 +144,8 @@
       "description": "A compact actor and action feed with timestamps and an empty state.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -253,7 +254,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -385,7 +387,8 @@
       "registryDependencies": [
         "https://ui.ballmac.com/r/button.json",
         "https://ui.ballmac.com/r/motion-presets.json",
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -523,7 +526,8 @@
       ],
       "registryDependencies": [
         "https://ui.ballmac.com/r/button.json",
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -1499,7 +1503,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -1756,7 +1761,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/copy-button.json",
-        "https://ui.ballmac.com/r/highlight.json"
+        "https://ui.ballmac.com/r/highlight.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -1880,7 +1886,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -1982,7 +1989,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/sheet.json"
+        "https://ui.ballmac.com/r/sheet.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -2112,7 +2120,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -2242,7 +2251,8 @@
         "radix-ui"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -2484,7 +2494,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/slider.json"
+        "https://ui.ballmac.com/r/slider.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -2722,7 +2733,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -2954,7 +2966,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -3077,7 +3090,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/scroll.json",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -3321,7 +3335,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -3677,7 +3692,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -4168,7 +4184,8 @@
         "https://ui.ballmac.com/r/button.json",
         "https://ui.ballmac.com/r/dialog.json",
         "https://ui.ballmac.com/r/field.json",
-        "https://ui.ballmac.com/r/input.json"
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -4297,7 +4314,8 @@
         "utils",
         "https://ui.ballmac.com/r/badge.json",
         "https://ui.ballmac.com/r/button.json",
-        "https://ui.ballmac.com/r/segmented-control.json"
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -4423,7 +4441,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -4551,7 +4570,8 @@
         "https://ui.ballmac.com/r/breadcrumb.json",
         "https://ui.ballmac.com/r/copy-button.json",
         "https://ui.ballmac.com/r/scroll-progress.json",
-        "https://ui.ballmac.com/r/table-of-contents.json"
+        "https://ui.ballmac.com/r/table-of-contents.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -4931,7 +4951,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/blog-1.json",
-        "https://ui.ballmac.com/r/button.json"
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -5607,7 +5628,8 @@
         "https://ui.ballmac.com/r/button.json",
         "https://ui.ballmac.com/r/chart.json",
         "https://ui.ballmac.com/r/segmented-control.json",
-        "https://ui.ballmac.com/r/sparkline.json"
+        "https://ui.ballmac.com/r/sparkline.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -5739,7 +5761,8 @@
         "https://ui.ballmac.com/r/chart.json",
         "https://ui.ballmac.com/r/segmented-control.json",
         "https://ui.ballmac.com/r/status-dot.json",
-        "https://ui.ballmac.com/r/switch.json"
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -5999,7 +6022,8 @@
         "https://ui.ballmac.com/r/button.json",
         "https://ui.ballmac.com/r/copy-button.json",
         "https://ui.ballmac.com/r/mac-icons.json",
-        "https://ui.ballmac.com/r/segmented-control.json"
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -11337,7 +11361,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -11453,7 +11478,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -11843,7 +11869,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -11953,7 +11980,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -12325,7 +12353,9 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -12461,7 +12491,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -12745,7 +12776,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -13126,7 +13158,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/hover-card.json"
+        "https://ui.ballmac.com/r/hover-card.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -13252,7 +13285,8 @@
         "radix-ui"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -13500,7 +13534,8 @@
       "description": "A native color chooser paired with an editable hex field and a live swatch.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -13616,7 +13651,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/command.json",
-        "https://ui.ballmac.com/r/popover.json"
+        "https://ui.ballmac.com/r/popover.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -13750,7 +13786,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/command.json",
-        "https://ui.ballmac.com/r/kbd.json"
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -13891,7 +13928,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -14039,7 +14077,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -14395,7 +14434,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -14533,7 +14573,8 @@
       "description": "A compact daily activity heatmap with token-based intensity and an accessible summary.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -14642,7 +14683,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -14776,7 +14818,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -14902,7 +14945,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -15024,7 +15068,8 @@
       "description": "An SSR-safe timer with controlled or local seconds, pause support, and a completion announcement.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -15131,7 +15176,8 @@
       "description": "A locale-aware money field that formats on blur while keeping editing and caret behavior simple.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -15245,7 +15291,8 @@
         "https://ui.ballmac.com/r/button.json",
         "https://ui.ballmac.com/r/checkbox.json",
         "https://ui.ballmac.com/r/dropdown-menu.json",
-        "https://ui.ballmac.com/r/table.json"
+        "https://ui.ballmac.com/r/table.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -15377,7 +15424,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/calendar.json",
-        "https://ui.ballmac.com/r/popover.json"
+        "https://ui.ballmac.com/r/popover.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -15502,7 +15550,8 @@
       "description": "Two native date controls with inclusive range correction and quick-select presets.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -15714,7 +15763,8 @@
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/mac-icons.json"
+        "https://ui.ballmac.com/r/mac-icons.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -15852,7 +15902,8 @@
         "tw-animate-css"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -15991,7 +16042,8 @@
       "description": "A line-by-line text diff with change counts, line numbers, and accessible change labels.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -16100,7 +16152,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -16347,7 +16400,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -16611,7 +16665,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -17119,7 +17174,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/copy-button.json"
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -17247,7 +17303,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/motion-presets.json",
-        "https://ui.ballmac.com/r/popover.json"
+        "https://ui.ballmac.com/r/popover.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -17507,7 +17564,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -17636,7 +17695,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -17754,7 +17814,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://ui.ballmac.com/r/tree-view.json"
+        "https://ui.ballmac.com/r/tree-view.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -17865,7 +17926,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/mac-window.json",
-        "https://ui.ballmac.com/r/mac-icons.json"
+        "https://ui.ballmac.com/r/mac-icons.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -18112,7 +18174,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/scroll.json",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -18382,7 +18445,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -18633,7 +18697,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/color.json"
+        "https://ui.ballmac.com/r/color.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -19609,7 +19674,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -20395,7 +20461,8 @@
         "radix-ui"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -20619,7 +20686,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -20874,7 +20942,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -20983,7 +21052,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -21179,7 +21250,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/dialog.json",
-        "https://ui.ballmac.com/r/kbd.json"
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -21630,7 +21702,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -21767,7 +21841,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -22007,7 +22082,8 @@
       "description": "A compact loading status with staggered token-colored dots that stop for reduced motion.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -22120,7 +22196,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -22260,7 +22337,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/copy-button.json"
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -22630,7 +22708,8 @@
       "description": "macOS window chrome: traffic lights whose glyphs appear on hover, a centered title or unified toolbar, an optional translucent sidebar with vibrancy, and active and inactive appearances.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -23222,7 +23301,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/navigation-menu.json"
+        "https://ui.ballmac.com/r/navigation-menu.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -23468,7 +23548,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -23714,7 +23795,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/popover.json",
-        "https://ui.ballmac.com/r/command.json"
+        "https://ui.ballmac.com/r/command.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -23970,7 +24052,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -24090,7 +24173,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/sheet.json",
-        "https://ui.ballmac.com/r/scroll.json"
+        "https://ui.ballmac.com/r/scroll.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -24223,7 +24307,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -24608,7 +24693,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/motion-presets.json",
-        "https://ui.ballmac.com/r/popover.json"
+        "https://ui.ballmac.com/r/popover.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -24736,7 +24822,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -24841,7 +24928,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -24956,7 +25044,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -25067,7 +25156,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -25308,7 +25398,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/copy-button.json"
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -25429,7 +25520,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -25663,7 +25755,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -25890,7 +25983,8 @@
       "description": "A native dialing-code selector paired with a telephone field that preserves the user’s formatting.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -26006,7 +26100,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -26131,7 +26226,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -26361,7 +26457,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -26701,7 +26798,8 @@
       ],
       "registryDependencies": [
         "https://ui.ballmac.com/r/button.json",
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -26957,7 +27055,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -27204,7 +27303,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -27419,7 +27519,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -28154,7 +28255,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -28274,7 +28376,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -28390,7 +28493,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/scroll.json",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -28516,7 +28620,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -28626,7 +28731,8 @@
         "tw-animate-css"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -28886,7 +28992,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -29149,7 +29256,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -29494,7 +29602,8 @@
       "description": "A compact accessible keycap sequence paired with the action it performs.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -29609,7 +29718,9 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/sheet.json",
-        "https://ui.ballmac.com/r/tooltip.json"
+        "https://ui.ballmac.com/r/tooltip.json",
+        "https://ui.ballmac.com/r/direction.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -29747,7 +29858,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -29964,7 +30076,9 @@
         "radix-ui"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -30073,7 +30187,8 @@
         "radix-ui"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -30335,7 +30450,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/copy-button.json",
-        "https://ui.ballmac.com/r/highlight.json"
+        "https://ui.ballmac.com/r/highlight.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -30465,7 +30581,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/citation.json"
+        "https://ui.ballmac.com/r/citation.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -30709,7 +30826,8 @@
       "description": "A lightweight accessible SVG trend line with a marked latest value and no chart dependency.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -30817,7 +30935,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -31051,7 +31170,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -31299,7 +31420,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -31441,7 +31563,8 @@
         "radix-ui"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -31803,7 +31926,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -32036,7 +32161,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -32363,7 +32489,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -32630,7 +32757,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/scroll.json",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -33010,7 +33138,8 @@
         "radix-ui"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -33135,7 +33264,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -33254,7 +33384,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/dropdown-menu.json"
+        "https://ui.ballmac.com/r/dropdown-menu.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -37851,7 +37982,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -38342,7 +38474,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -38590,7 +38723,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -38809,7 +38943,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -39052,7 +39187,8 @@
         "radix-ui"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -39304,7 +39440,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/popover.json"
+        "https://ui.ballmac.com/r/popover.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -39431,7 +39568,8 @@
         "radix-ui"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -39561,7 +39699,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -39802,7 +39941,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/direction.json"
       ],
       "files": [
         {
@@ -40036,7 +40176,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/motion-presets.json"
+        "https://ui.ballmac.com/r/motion-presets.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -40162,7 +40303,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/avatar.json",
-        "https://ui.ballmac.com/r/dropdown-menu.json"
+        "https://ui.ballmac.com/r/dropdown-menu.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -40294,7 +40436,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/dialog.json"
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -40420,7 +40563,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -40804,7 +40948,8 @@
         "utils",
         "https://ui.ballmac.com/r/copy-button.json",
         "https://ui.ballmac.com/r/switch.json",
-        "https://ui.ballmac.com/r/highlight.json"
+        "https://ui.ballmac.com/r/highlight.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -40928,7 +41073,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -41058,7 +41204,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/mac-window.json"
+        "https://ui.ballmac.com/r/mac-window.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -41312,7 +41459,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/avatar.json",
-        "https://ui.ballmac.com/r/dropdown-menu.json"
+        "https://ui.ballmac.com/r/dropdown-menu.json",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -41468,6 +41616,60 @@
       }
     },
     {
+      "name": "direction",
+      "type": "registry:lib",
+      "title": "Direction Utilities",
+      "description": "Right-to-left support helpers: useDirection reads the reading direction, DirectionProvider tells Radix-based components, and Dir scopes a region to ltr or rtl.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "radix-ui@^1"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/lib/direction.tsx",
+          "type": "registry:lib",
+          "target": "@lib/ballmac/direction.tsx"
+        }
+      ],
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "rtl",
+          "ltr",
+          "direction",
+          "i18n",
+          "arabic",
+          "hebrew",
+          "persian"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Import useDirection, DirectionProvider and Dir from @/lib/ballmac/direction. Set <html dir> and wrap the app in DirectionProvider so keyboard arrows, sliders, menus and tabs follow the reading direction.",
+          "whenToUse": [
+            "Shipping the app in Arabic, Hebrew, Persian or Urdu",
+            "A region of mixed-direction content",
+            "Code that must know which way is forward"
+          ],
+          "whenNotToUse": [
+            "Layout alone: logical properties (ms-, me-, start-, end-) already follow dir with no JavaScript"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "dir: pass it to useDirection to force a direction",
+            "Dir renders a div with display: contents"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/direction"
+      }
+    },
+    {
       "name": "highlight",
       "type": "registry:lib",
       "title": "Highlight",
@@ -41513,6 +41715,56 @@
         },
         "examples": [],
         "url": "https://ui.ballmac.com/components/highlight"
+      }
+    },
+    {
+      "name": "i18n",
+      "type": "registry:lib",
+      "title": "i18n Utilities",
+      "description": "Translate every built-in string and set the locale in one place: I18nProvider takes a messages object, useMessages looks text up, useLocale feeds Intl formatting.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "files": [
+        {
+          "path": "registry/ballmac/lib/i18n.tsx",
+          "type": "registry:lib",
+          "target": "@lib/ballmac/i18n.tsx"
+        }
+      ],
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "i18n",
+          "translation",
+          "locale",
+          "internationalization",
+          "arabic",
+          "labels",
+          "plural"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-02",
+        "ai": {
+          "summary": "Wrap the app in <I18nProvider locale messages>. Every Ballmac component looks its built-in text up by key with the English text as the default, so nothing breaks when a key is missing. The key list is at /i18n/en.json.",
+          "whenToUse": [
+            "Localising an app that uses Ballmac components",
+            "Setting one locale for dates, numbers and sorting"
+          ],
+          "whenNotToUse": [
+            "Your own app copy: use your i18n library (next-intl, i18next, Lingui) and pass its output in through props or messages"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "messages: a flat key to text object, with {name} placeholders and _one/_few/_many/_other plural suffixes",
+            "locale: a BCP 47 tag such as ar, he, fa-IR, de-DE"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/i18n"
       }
     },
     {

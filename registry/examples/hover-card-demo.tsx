@@ -21,7 +21,7 @@ export default function HoverCardDemo() {
               className="inline-flex items-center gap-1 text-sm font-semibold underline-offset-4 hover:underline"
             >
               Atlas launch{" "}
-              <ArrowUpRight aria-hidden="true" className="size-3.5" />
+              <ArrowUpRight aria-hidden="true" className="size-3.5 rtl:-scale-x-100" />
             </HoverCardTrigger>
             <HoverCardContent>
               <p className="text-sm font-semibold">Atlas launch</p>

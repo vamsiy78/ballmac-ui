@@ -1,8 +1,9 @@
 "use client"
 
-import { Maximize2, RotateCcw } from "lucide-react"
+import { Languages, Maximize2, RotateCcw } from "lucide-react"
 import * as React from "react"
 
+import { Dir } from "@/lib/ballmac/direction"
 import { cn } from "@/lib/utils"
 
 const SITE_URL = "https://ui.ballmac.com"
@@ -53,6 +54,7 @@ export function PreviewTabs({
 }) {
   const [tab, setTab] = React.useState<"preview" | "code">("preview")
   const [run, setRun] = React.useState(0)
+  const [dir, setDir] = React.useState<"ltr" | "rtl">("ltr")
   const id = React.useId()
   const tabs = ["preview", "code"] as const
   return (
@@ -100,6 +102,9 @@ export function PreviewTabs({
                 <span className="sr-only">v0 (opens in a new tab)</span>
               </a>
             )}
+            <ToolbarButton label="Preview right-to-left" aria-pressed={dir === "rtl"} className={dir === "rtl" ? "bg-accent text-foreground" : undefined} onClick={() => setDir((d) => (d === "rtl" ? "ltr" : "rtl"))}>
+              <Languages />
+            </ToolbarButton>
             <ToolbarButton
               label="Replay preview"
               onClick={() => {
@@ -122,7 +127,9 @@ export function PreviewTabs({
               </a>
             )}
           </div>
-          <React.Fragment key={run}>{preview}</React.Fragment>
+          <React.Fragment key={run}>
+            <Dir dir={dir}>{preview}</Dir>
+          </React.Fragment>
         </div>
       </div>
       <div id={`${id}-code-panel`} role="tabpanel" aria-labelledby={`${id}-code`} hidden={tab !== "code"} className="max-h-[640px] overflow-auto rounded-xl border">

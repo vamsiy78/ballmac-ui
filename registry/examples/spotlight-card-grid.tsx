@@ -20,7 +20,7 @@ export default function SpotlightCardGrid() {
             href={href}
             className="mt-4 inline-flex items-center gap-1 self-start rounded-sm text-sm font-medium outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
-            Learn more <ArrowUpRight className="size-3.5" aria-hidden="true" />
+            Learn more <ArrowUpRight className="size-3.5 rtl:-scale-x-100" aria-hidden="true" />
           </a>
         </SpotlightCard>
       ))}

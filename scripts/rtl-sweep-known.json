@@ -1,0 +1,102 @@
+[
+  {
+    "prefix": "log-stream",
+    "reason": "Log lines are left-to-right inside by design."
+  },
+  {
+    "prefix": "snippet-tabs",
+    "reason": "Code is left-to-right inside by design."
+  },
+  {
+    "prefix": "diff-viewer",
+    "reason": "Code is left-to-right inside by design."
+  },
+  {
+    "prefix": "env-editor",
+    "reason": "KEY=value rows are left-to-right inside by design."
+  },
+  {
+    "prefix": "json-viewer",
+    "reason": "JSON is left-to-right inside by design."
+  },
+  {
+    "prefix": "terminal",
+    "reason": "Terminals are left-to-right inside by design."
+  },
+  {
+    "prefix": "template-docs-guide",
+    "reason": "Contains code samples, which stay left-to-right."
+  },
+  {
+    "prefix": "template-relay-docs",
+    "reason": "Contains code samples, which stay left-to-right."
+  },
+  {
+    "prefix": "chart-",
+    "reason": "Recharts draws its axes in SVG coordinates, which do not mirror."
+  },
+  {
+    "prefix": "window-manager",
+    "reason": "Window positions are pixels from the left edge."
+  },
+  {
+    "prefix": "desktop-icons",
+    "reason": "Icon positions are pixels from the left edge."
+  },
+  {
+    "prefix": "icon-cloud",
+    "reason": "Decorative 3D layout with no reading direction."
+  },
+  {
+    "prefix": "orbiting-circles",
+    "reason": "Decorative orbit with no reading direction."
+  },
+  {
+    "prefix": "light-rays",
+    "reason": "Decorative rays, symmetric."
+  },
+  {
+    "prefix": "word-rotate",
+    "reason": "Animated word swap; width changes between words."
+  },
+  {
+    "prefix": "typing-text",
+    "reason": "Animated typing; width changes while typing."
+  },
+  {
+    "prefix": "highlighter",
+    "reason": "Animated highlight drawn over text."
+  },
+  {
+    "prefix": "dotted-map",
+    "reason": "A map; geography does not mirror."
+  },
+  {
+    "prefix": "aurora-background",
+    "reason": "Decorative background."
+  },
+  {
+    "prefix": "progressive-blur",
+    "reason": "The blur edges are named physical sides."
+  },
+  {
+    "prefix": "spinning-text",
+    "reason": "Text laid out around a circle."
+  },
+  {
+    "prefix": "citation",
+    "reason": "Inline text reflows differently in the other direction; checked by eye."
+  },
+  {
+    "prefix": "marquee",
+    "reason": "Scrolling strip; the direction prop is physical."
+  },
+  {
+    "prefix": "showcase-1",
+    "reason": "A composed desktop whose windows sit at fixed pixel positions; the windows themselves mirror."
+  },
+  {
+    "prefix": "newsletter-1",
+    "reason": "Text reflows differently in the other direction; checked by eye."
+  }
+]

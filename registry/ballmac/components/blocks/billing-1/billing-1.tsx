@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Field, FieldError, FieldGroup, FieldLabel, useFieldControl } from "@/components/ballmac/field"
 import { Input } from "@/components/ballmac/input"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/ballmac/i18n"
 
 type Billing1Usage = {
   label: string
@@ -85,12 +86,14 @@ function Billing1({
   contact = { email: "billing@acme.com", address: "Rua das Flores 12, 1200-195 Lisbon, Portugal" },
   invoices = defaultInvoices,
   currency = "USD",
-  locale = "en-US",
+  locale,
   onChangePlan,
   onUpdateCard,
   className,
   ...props
 }: Billing1Props) {
+  const defaultLocale = useLocale()
+  locale ??= defaultLocale
   const money = React.useMemo(() => new Intl.NumberFormat(locale, { style: "currency", currency, maximumFractionDigits: 0 }), [locale, currency])
   const int = React.useMemo(() => new Intl.NumberFormat(locale), [locale])
   const date = React.useMemo(() => new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeZone: "UTC" }), [locale])
@@ -150,7 +153,7 @@ function Billing1({
               <p className="mt-1 flex items-center gap-2 text-2xl font-semibold tracking-[-0.03em]">{plan.name} <Badge status="success">Active</Badge></p>
               <p className="text-muted-foreground mt-1 text-sm">{money.format(plan.price)} per {plan.per} · {plan.seats} seats · renews {fmt(plan.renews)}</p>
             </div>
-            <div className="text-right">
+            <div className="text-end">
               <p className="text-3xl font-semibold tracking-[-0.04em] tabular-nums">{money.format(monthly)}</p>
               <p className="text-muted-foreground text-sm">per month</p>
             </div>
@@ -254,7 +257,7 @@ function Billing1({
                 <p className="text-muted-foreground text-xs">{fmt(inv.date)}</p>
               </div>
               <Badge status={tone[inv.status]}>{label[inv.status]}</Badge>
-              <span className="w-20 text-right font-medium tabular-nums">{money.format(inv.amount)}</span>
+              <span className="w-20 text-end font-medium tabular-nums">{money.format(inv.amount)}</span>
               <a href={inv.href ?? "#"} aria-label={`Download invoice ${inv.id}`} className="hover:bg-accent focus-visible:ring-ring/50 flex size-9 items-center justify-center rounded-lg outline-none focus-visible:ring-[3px]"><Download className="size-4" aria-hidden="true" /></a>
             </li>
           ))}

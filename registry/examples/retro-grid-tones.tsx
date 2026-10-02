@@ -13,7 +13,7 @@ export default function RetroGridTones() {
       {sets.map(({ tone, angle }) => (
         <div key={tone} className="relative h-36 overflow-hidden rounded-xl border bg-background">
           <RetroGrid tone={tone} angle={angle} cellSize={44} />
-          <span className="absolute bottom-2 left-3 z-10 font-mono text-[11px] text-muted-foreground">
+          <span className="absolute bottom-2 start-3 z-10 font-mono text-[11px] text-muted-foreground">
             {tone} · {angle}°
           </span>
         </div>

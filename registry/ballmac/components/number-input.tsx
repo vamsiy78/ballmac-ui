@@ -4,6 +4,7 @@
 import * as React from "react"
 import { Minus, Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type NumberInputProps = Omit<
   React.ComponentProps<"div">,
@@ -35,12 +36,14 @@ function NumberInput({
   min,
   max,
   step = 1,
-  label = "Number",
+  label,
   name,
   disabled = false,
   className,
   ...props
 }: NumberInputProps) {
+  const msg = useMessages()
+  label ??= msg("number-input.label", "Number")
   const [internal, setInternal] = React.useState<number | null>(defaultValue)
   const current = value !== undefined ? value : internal
   const safeStep = Number.isFinite(step) && step > 0 ? step : 1
@@ -68,12 +71,12 @@ function NumberInput({
     >
       <button
         type="button"
-        aria-label={`Decrease ${label}`}
+        aria-label={msg("number-input.decrease", "Decrease {label}", { label })}
         disabled={
           disabled || (current != null && min != null && current <= min)
         }
         onClick={() => change(-1)}
-        className="flex size-9 shrink-0 items-center justify-center rounded-l-md outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
+        className="flex size-9 shrink-0 items-center justify-center rounded-s-md outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
       >
         <Minus aria-hidden="true" className="size-4" />
       </button>
@@ -99,12 +102,12 @@ function NumberInput({
       />
       <button
         type="button"
-        aria-label={`Increase ${label}`}
+        aria-label={msg("number-input.increase", "Increase {label}", { label })}
         disabled={
           disabled || (current != null && max != null && current >= max)
         }
         onClick={() => change(1)}
-        className="flex size-9 shrink-0 items-center justify-center rounded-r-md outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
+        className="flex size-9 shrink-0 items-center justify-center rounded-e-md outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
       >
         <Plus aria-hidden="true" className="size-4" />
       </button>

@@ -15,7 +15,7 @@ const initial: ManagedWindow[] = [
     content: (
       <div className="p-4 text-sm">
         <h3 className="font-semibold">Ideas</h3>
-        <ul className="mt-2 list-disc space-y-1 pl-4 text-muted-foreground">
+        <ul className="mt-2 list-disc space-y-1 ps-4 text-muted-foreground">
           <li>Ship the window manager</li>
           <li>Drag me by the title bar</li>
           <li>Resize from any edge</li>

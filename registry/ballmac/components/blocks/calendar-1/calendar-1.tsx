@@ -155,7 +155,7 @@ function Calendar1({
 
   return (
     <div data-slot="calendar-1" className={cn("bg-background flex overflow-hidden rounded-2xl border shadow-[0_30px_80px_-50px_rgb(0_0_0/0.4)]", className)} style={{ height, ...style }} {...props}>
-      <aside aria-label="Calendars" className="bg-muted/30 hidden w-64 shrink-0 flex-col gap-5 overflow-y-auto border-r p-4 lg:flex">
+      <aside aria-label="Calendars" className="bg-muted/30 hidden w-64 shrink-0 flex-col gap-5 overflow-y-auto border-e p-4 lg:flex">
         <Dialog open={adding} onOpenChange={setAdding}>
           <DialogTrigger className={buttonVariants({ className: "w-full" })}><Plus /> New event</DialogTrigger>
           <DialogContent>
@@ -199,16 +199,16 @@ function Calendar1({
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex flex-wrap items-center gap-2 border-b p-3">
-          <h2 className="mr-2 text-lg font-semibold tracking-[-0.02em]">{title}</h2>
+          <h2 className="me-2 text-lg font-semibold tracking-[-0.02em]">{title}</h2>
           <Button variant="outline" size="sm" onClick={() => setSelected(today)}>Today</Button>
           <div className="hidden md:flex">
-            <Button variant="ghost" size="icon" aria-label="Previous week" onClick={() => shift(-7)}><ChevronLeft /></Button>
-            <Button variant="ghost" size="icon" aria-label="Next week" onClick={() => shift(7)}><ChevronRight /></Button>
+            <Button variant="ghost" size="icon" aria-label="Previous week" onClick={() => shift(-7)}><ChevronLeft  className="rtl:rotate-180"/></Button>
+            <Button variant="ghost" size="icon" aria-label="Next week" onClick={() => shift(7)}><ChevronRight  className="rtl:rotate-180"/></Button>
           </div>
-          <Button variant="outline" size="icon" className="ml-auto lg:hidden" aria-label="New event" onClick={() => setAdding(true)}><Plus /></Button>
+          <Button variant="outline" size="icon" className="ms-auto lg:hidden" aria-label="New event" onClick={() => setAdding(true)}><Plus /></Button>
           <div className="flex items-center gap-1 md:hidden">
-            <Button variant="ghost" size="icon" aria-label="Previous day" onClick={() => shift(-1)}><ChevronLeft /></Button>
-            <Button variant="ghost" size="icon" aria-label="Next day" onClick={() => shift(1)}><ChevronRight /></Button>
+            <Button variant="ghost" size="icon" aria-label="Previous day" onClick={() => shift(-1)}><ChevronLeft  className="rtl:rotate-180"/></Button>
+            <Button variant="ghost" size="icon" aria-label="Next day" onClick={() => shift(1)}><ChevronRight  className="rtl:rotate-180"/></Button>
           </div>
         </header>
 
@@ -231,9 +231,9 @@ function Calendar1({
               </div>
               {visible.some((e) => e.allDay) && (
                 <div className="grid grid-cols-[3.5rem_repeat(7,minmax(0,1fr))] border-t max-md:grid-cols-[3.5rem_minmax(0,1fr)]">
-                  <span className="text-muted-foreground py-1.5 pr-2 text-right text-[10px]">all-day</span>
+                  <span className="text-muted-foreground py-1.5 pe-2 text-end text-[10px]">all-day</span>
                   {week.map((d) => (
-                    <div key={d} className={cn("min-h-7 space-y-0.5 border-l p-0.5", iso(d) !== selected && "max-md:hidden")}>
+                    <div key={d} className={cn("min-h-7 space-y-0.5 border-s p-0.5", iso(d) !== selected && "max-md:hidden")}>
                       {visible.filter((e) => e.allDay && parseDay(e.start) === d).map((e) => (
                         <div key={e.id} className={cn("truncate rounded px-1.5 py-0.5 text-xs font-medium", colorOf(e.calendar).bg)}>{e.title}</div>
                       ))}
@@ -246,18 +246,18 @@ function Calendar1({
             <div className="relative grid grid-cols-[3.5rem_repeat(7,minmax(0,1fr))] max-md:grid-cols-[3.5rem_minmax(0,1fr)]" style={{ height: gridHeight }}>
               <div aria-hidden="true">
                 {hours.map((h) => (
-                  <div key={h} className="text-muted-foreground relative pr-2 text-right text-[10px]" style={{ height: ROW }}><span className="absolute -top-2 right-2">{h === startHour ? "" : clock(h * 60)}</span></div>
+                  <div key={h} className="text-muted-foreground relative pe-2 text-end text-[10px]" style={{ height: ROW }}><span className="absolute -top-2 end-2">{h === startHour ? "" : clock(h * 60)}</span></div>
                 ))}
               </div>
               {week.map((d) => {
                 const day = iso(d)
                 const items = lanes(visible.filter((e) => !e.allDay && parseDay(e.start) === d))
                 return (
-                  <div key={day} className={cn("relative border-l", day !== selected && "max-md:hidden", day === today && "bg-accent/20")}>
+                  <div key={day} className={cn("relative border-s", day !== selected && "max-md:hidden", day === today && "bg-accent/20")}>
                     {hours.map((h) => <div key={h} className="border-b" style={{ height: ROW }} />)}
                     {day === today && nowMin !== null && nowMin >= startHour * 60 && nowMin <= endHour * 60 && (
                       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 z-10 flex items-center" style={{ top: ((nowMin - startHour * 60) / 60) * ROW }}>
-                        <span className="bg-destructive -ml-1 size-2 rounded-full" />
+                        <span className="bg-destructive -ms-1 size-2 rounded-full" />
                         <span className="bg-destructive h-px flex-1" />
                       </div>
                     )}
@@ -268,7 +268,7 @@ function Calendar1({
                       return (
                         <Popover key={e.id}>
                           <PopoverTrigger
-                            className={cn("focus-visible:ring-ring/50 absolute z-[5] overflow-hidden rounded-md border-l-[3px] px-1.5 py-1 text-left text-xs leading-tight outline-none transition-[filter] hover:brightness-95 focus-visible:z-20 focus-visible:ring-[3px]", c.bg, c.bar.replace("bg-", "border-"))}
+                            className={cn("focus-visible:ring-ring/50 absolute z-[5] overflow-hidden rounded-md border-s-[3px] px-1.5 py-1 text-start text-xs leading-tight outline-none transition-[filter] hover:brightness-95 focus-visible:z-20 focus-visible:ring-[3px]", c.bg, c.bar.replace("bg-", "border-"))}
                             style={{ top, height: h - 2, left: `calc(${(lane / of) * 100}% + 2px)`, width: `calc(${100 / of}% - 4px)` }}
                             aria-label={`${e.title}, ${clock(minutes(e.start))} to ${clock(minutes(e.end))}${e.location ? `, ${e.location}` : ""}`}
                           >

@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["widgets", "weather", "calendar", "battery", "macos", "dashboard", "desktop"],
   files: [{ path: "components/widgets.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "widgets-demo", title: "Weather, calendar and battery", file: "widgets-demo.tsx" },
     { name: "widgets-sizes", title: "All three sizes", file: "widgets-sizes.tsx" },

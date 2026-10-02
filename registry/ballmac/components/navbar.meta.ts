@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["header", "navigation", "sticky", "responsive"],
   files: [{ path: "components/navbar.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "sheet", "scroll"],
+  registryDependencies: ["shadcn:utils", "sheet", "scroll", "i18n"],
   examples: [
     { name: "navbar-demo", title: "Marketing header", file: "navbar-demo.tsx" },
     { name: "navbar-states", title: "Hide on scroll", file: "navbar-states.tsx" },

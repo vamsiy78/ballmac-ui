@@ -23,7 +23,7 @@ export default function SpotlightSearchDialogExample() {
         className="inline-flex h-9 w-64 items-center gap-2 rounded-full border bg-background px-3.5 text-sm text-muted-foreground shadow-xs outline-none transition-colors hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
       >
         <Search className="size-4" aria-hidden="true" />
-        <span className="flex-1 text-left">Search…</span>
+        <span className="flex-1 text-start">Search…</span>
         <kbd className="font-sans text-xs">⌘K</kbd>
       </button>
       <SpotlightSearchDialog open={open} onOpenChange={setOpen}>

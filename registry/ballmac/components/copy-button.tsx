@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { AlertCircle, Check, Copy } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 const copyButtonVariants = cva(
   "relative inline-flex shrink-0 items-center justify-center gap-1.5 rounded-md text-sm font-medium whitespace-nowrap outline-none transition-[color,background-color,border-color,box-shadow] duration-150 select-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none [&_svg]:shrink-0",
@@ -73,8 +74,8 @@ function CopyButton({
   value,
   getValue,
   label,
-  copiedLabel = "Copied",
-  ariaLabel = "Copy to clipboard",
+  copiedLabel,
+  ariaLabel,
   resetAfter = 1800,
   onCopied,
   onError,
@@ -84,6 +85,9 @@ function CopyButton({
   onClick,
   ...props
 }: CopyButtonProps) {
+  const msg = useMessages()
+  copiedLabel ??= msg("copy-button.copiedLabel", "Copied")
+  ariaLabel ??= msg("copy-button.ariaLabel", "Copy to clipboard")
   const reduce = useReducedMotion()
   const [state, setState] = React.useState<"idle" | "copied" | "failed">("idle")
   const timer = React.useRef<ReturnType<typeof setTimeout>>(undefined)

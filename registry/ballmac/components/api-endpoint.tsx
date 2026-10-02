@@ -8,6 +8,7 @@ import { Collapsible as CollapsiblePrimitive, Tabs as TabsPrimitive } from "radi
 import { CopyButton } from "@/components/ballmac/copy-button"
 import { highlightLines, tokenClass, type HighlightLanguage } from "@/lib/ballmac/highlight"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
 
@@ -65,7 +66,7 @@ function Code({ code, language, label }: { code: string; language: HighlightLang
   const lines = React.useMemo(() => highlightLines(code, language), [code, language])
   return (
     <div className="relative">
-      <pre
+      <pre dir="ltr"
         role="region"
         aria-label={label}
         tabIndex={0}
@@ -79,7 +80,7 @@ function Code({ code, language, label }: { code: string; language: HighlightLang
           ))}
         </code>
       </pre>
-      <CopyButton size="sm" variant="outline" value={code} ariaLabel={`Copy ${label}`} className="absolute top-2 right-2 bg-background/90 backdrop-blur" />
+      <CopyButton size="sm" variant="outline" value={code} ariaLabel={`Copy ${label}`} className="absolute top-2 end-2 bg-background/90 backdrop-blur" />
     </div>
   )
 }
@@ -132,6 +133,7 @@ function ApiEndpoint({
   className,
   ...props
 }: ApiEndpointProps) {
+  const msg = useMessages()
   const panelId = React.useId()
   const tabs = [
     ...(requestExample ? [{ id: "request", label: "Request", dot: "bg-muted-foreground" }] : []),
@@ -149,10 +151,10 @@ function ApiEndpoint({
       className={cn("w-full overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs", className)}
       {...props}
     >
-      <div className="flex items-center gap-1 pr-2">
+      <div className="flex items-center gap-1 pe-2">
         <CollapsiblePrimitive.Trigger
           aria-controls={panelId}
-          className="group flex min-h-14 min-w-0 flex-1 items-center gap-3 px-4 py-2.5 text-left outline-none transition-colors hover:bg-accent/40 focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50 motion-reduce:transition-none"
+          className="group flex min-h-14 min-w-0 flex-1 items-center gap-3 px-4 py-2.5 text-start outline-none transition-colors hover:bg-accent/40 focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50 motion-reduce:transition-none"
         >
           <span
             className={cn(
@@ -206,7 +208,7 @@ function ApiEndpoint({
             const items = parameters.filter((p) => p.in === group)
             if (items.length === 0) return null
             return (
-              <section key={group} aria-label={`${group} parameters`}>
+              <section key={group} aria-label={msg("api-endpoint.parameters", "{group} parameters", { group })}>
                 <h4 className="mb-1.5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
                   {group === "body" ? "Body" : `${group[0]!.toUpperCase()}${group.slice(1)} parameters`}
                 </h4>
@@ -226,7 +228,7 @@ function ApiEndpoint({
                         {p.description}
                         {p.default !== undefined && (
                           <span>
-                            {p.description ? " " : ""}Default: <code className="font-mono text-foreground">{p.default}</code>
+                            {p.description ? " " : ""}{msg.rich("api-endpoint.defaultValue", "Default: {value}", { value: <code className="font-mono text-foreground">{p.default}</code> })}
                           </span>
                         )}
                       </p>
@@ -239,7 +241,7 @@ function ApiEndpoint({
 
           {tabs.length > 0 && (
             <TabsPrimitive.Root value={tab} onValueChange={setTab} className="grid gap-2.5">
-              <TabsPrimitive.List aria-label="Request and responses" className="flex flex-wrap items-center gap-1">
+              <TabsPrimitive.List aria-label={msg("api-endpoint.requestAndResponses", "Request and responses")} className="flex flex-wrap items-center gap-1">
                 {tabs.map((t) => (
                   <TabsPrimitive.Trigger
                     key={t.id}

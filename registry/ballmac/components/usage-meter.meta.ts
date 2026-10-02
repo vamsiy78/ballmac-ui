@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["usage", "limit", "quota", "meter"],
   files: [{ path: "components/usage-meter.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n"],
   examples: [
     { name: "usage-meter-demo", title: "Storage with segments", file: "usage-meter-demo.tsx" },
     { name: "usage-meter-states", title: "Warning, over and ring", file: "usage-meter-states.tsx" },

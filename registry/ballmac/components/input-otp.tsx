@@ -55,7 +55,7 @@ function InputOTPSlot({ index, className, invalid, ...props }: InputOTPSlotProps
       data-filled={char ? "true" : undefined}
       data-invalid={invalid || undefined}
       className={cn(
-        "relative flex h-11 w-10 items-center justify-center border-y border-r border-input bg-background text-base font-medium tabular-nums shadow-xs transition-[border-color,box-shadow] first:rounded-l-md first:border-l last:rounded-r-md dark:bg-input/30",
+        "relative flex h-11 w-10 items-center justify-center border-y border-e border-input bg-background text-base font-medium tabular-nums shadow-xs transition-[border-color,box-shadow] first:rounded-s-md first:border-s last:rounded-e-md dark:bg-input/30",
         "data-[active=true]:z-10 data-[active=true]:border-ring data-[active=true]:ring-[3px] data-[active=true]:ring-ring/50",
         "data-[invalid=true]:border-destructive data-[invalid=true]:data-[active=true]:ring-destructive/30!",
         "group-has-[[aria-invalid=true]]/otp:border-destructive group-has-[[aria-invalid=true]]/otp:data-[active=true]:ring-destructive/30!",

@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["changelog", "release notes", "updates", "timeline"],
   files: [{ path: "components/changelog-feed.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n"],
   examples: [
     { name: "changelog-feed-demo", title: "Release notes", file: "changelog-feed-demo.tsx" },
     { name: "changelog-feed-states", title: "Single release with media", file: "changelog-feed-states.tsx" },

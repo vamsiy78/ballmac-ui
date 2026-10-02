@@ -71,7 +71,7 @@ function AtlasOrder({ orderId = "ORD-10479", hrefs, ...props }: AtlasOrderProps)
       <main className="mx-auto max-w-6xl space-y-5 px-4 py-6 sm:px-6">
         <nav aria-label="Breadcrumb" className="text-muted-foreground flex items-center gap-1 text-sm">
           <a href={hrefs?.orders ?? "/atlas/orders"} className="hover:text-foreground focus-visible:ring-ring/50 rounded outline-none focus-visible:ring-[3px]">Orders</a>
-          <ChevronRight className="size-3.5" aria-hidden="true" />
+          <ChevronRight className="size-3.5 rtl:rotate-180" aria-hidden="true" />
           <span className="text-foreground font-medium" aria-current="page">{base.id}</span>
         </nav>
 
@@ -119,7 +119,7 @@ function AtlasOrder({ orderId = "ORD-10479", hrefs, ...props }: AtlasOrderProps)
                         <p className="text-muted-foreground text-sm">{p.category} · {moneyExact.format(p.price)} each</p>
                       </div>
                       <p className="text-muted-foreground text-sm tabular-nums">× {l.qty}</p>
-                      <p className="w-20 text-right font-semibold tabular-nums">{moneyExact.format(p.price * l.qty)}</p>
+                      <p className="w-20 text-end font-semibold tabular-nums">{moneyExact.format(p.price * l.qty)}</p>
                     </li>
                   )
                 })}
@@ -137,7 +137,7 @@ function AtlasOrder({ orderId = "ORD-10479", hrefs, ...props }: AtlasOrderProps)
               <ol className="mt-4">
                 {events.map((e, i) => (
                   <li key={e.id} className="relative flex gap-3.5 pb-5 last:pb-0">
-                    {i < events.length - 1 && <span className="bg-border absolute top-5 bottom-0 left-[7px] w-px" aria-hidden="true" />}
+                    {i < events.length - 1 && <span className="bg-border absolute top-5 bottom-0 start-[7px] w-px" aria-hidden="true" />}
                     <span className={cn("relative mt-1 size-3.5 shrink-0 rounded-full border-2", i === 0 ? "border-chart-1 bg-chart-1" : "bg-card border-muted-foreground/50")} aria-hidden="true" />
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-semibold">{e.title}</p>

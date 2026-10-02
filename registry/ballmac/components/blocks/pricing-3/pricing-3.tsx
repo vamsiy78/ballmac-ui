@@ -152,7 +152,7 @@ function Pricing3({
                 {g.rows.map((r) => (
                   <li key={r.label} className="flex items-center justify-between gap-4 px-4 py-3">
                     <span className="text-sm">{r.label}</span>
-                    <span className="shrink-0 text-right"><Value value={r.values[selected.key] ?? false} label={r.label} /></span>
+                    <span className="shrink-0 text-end"><Value value={r.values[selected.key] ?? false} label={r.label} /></span>
                   </li>
                 ))}
               </ul>
@@ -163,7 +163,7 @@ function Pricing3({
 
       {/* Tablets and up: the full table with a sticky header. */}
       <div className="mt-14 hidden md:block">
-        <table className="w-full border-separate border-spacing-0 text-left">
+        <table className="w-full border-separate border-spacing-0 text-start">
           <caption className="sr-only">Plan comparison</caption>
           <thead>
             <tr>
@@ -198,7 +198,7 @@ function Pricing3({
             return (
               <tbody key={g.title}>
                 <tr>
-                  <th scope="colgroup" colSpan={plans.length + 1} className="p-0 pt-8 text-left">
+                  <th scope="colgroup" colSpan={plans.length + 1} className="p-0 pt-8 text-start">
                     <button
                       type="button"
                       aria-expanded={open}
@@ -214,7 +214,7 @@ function Pricing3({
                 {open &&
                   g.rows.map((r, ri) => (
                     <tr key={r.label} id={ri === 0 ? panelId : undefined} className="group/row">
-                      <th scope="row" className="border-t px-1 py-3.5 text-left text-sm font-normal">
+                      <th scope="row" className="border-t px-1 py-3.5 text-start text-sm font-normal">
                         {r.label}
                         {r.hint && <span className="text-muted-foreground block text-xs">{r.hint}</span>}
                       </th>

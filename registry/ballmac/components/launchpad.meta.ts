@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["launchpad", "apps", "grid", "overlay", "macos"],
   files: [{ path: "components/launchpad.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n", "direction"],
   examples: [
     { name: "launchpad-demo", title: "Open launcher", file: "launchpad-demo.tsx" },
     { name: "launchpad-many", title: "Many apps and paging", file: "launchpad-many.tsx" },

@@ -131,7 +131,7 @@ function Login2({
                 <FieldLabel htmlFor="login-2-remember" className="font-normal">Keep me signed in</FieldLabel>
               </Field>
               <Button type="submit" size="lg" shape="pill" loading={state === "sending"} className="w-full">
-                Sign in <ArrowRight />
+                Sign in <ArrowRight  className="rtl:rotate-180"/>
               </Button>
             </FieldGroup>
           </form>
@@ -143,17 +143,17 @@ function Login2({
         </div>
       </div>
 
-      <div className="bg-muted/40 relative hidden overflow-hidden border-l lg:block" aria-hidden={visual ? undefined : true}>
+      <div className="bg-muted/40 relative hidden overflow-hidden border-s lg:block" aria-hidden={visual ? undefined : true}>
         {visual ?? (
           <>
             <div className="absolute inset-0">
-              <div className="bg-chart-1/25 absolute -top-24 -right-16 size-[30rem] rounded-full blur-[100px]" />
-              <div className="bg-chart-3/25 absolute top-1/2 -left-24 size-[26rem] rounded-full blur-[100px]" />
-              <div className="bg-chart-5/20 absolute -bottom-24 right-1/4 size-[24rem] rounded-full blur-[100px]" />
+              <div className="bg-chart-1/25 absolute -top-24 -end-16 size-[30rem] rounded-full blur-[100px]" />
+              <div className="bg-chart-3/25 absolute top-1/2 -start-24 size-[26rem] rounded-full blur-[100px]" />
+              <div className="bg-chart-5/20 absolute -bottom-24 end-1/4 size-[24rem] rounded-full blur-[100px]" />
               <div className="absolute inset-0 bg-[radial-gradient(color-mix(in_oklch,var(--foreground)_14%,transparent)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(70%_70%_at_50%_50%,black,transparent)]" />
             </div>
             <div className="relative flex h-full flex-col justify-between p-12 xl:p-16">
-              <div className="bg-card/80 ml-auto w-64 rounded-2xl border p-4 shadow-[0_24px_60px_-30px_rgb(0_0_0/0.4)] backdrop-blur-xl">
+              <div className="bg-card/80 ms-auto w-64 rounded-2xl border p-4 shadow-[0_24px_60px_-30px_rgb(0_0_0/0.4)] backdrop-blur-xl">
                 <p className="text-muted-foreground text-xs">Paid this week</p>
                 <p className="mt-1 text-2xl font-semibold tracking-tight">$128,430</p>
                 <div className="mt-3 flex h-10 items-end gap-1">
@@ -163,7 +163,7 @@ function Login2({
                 </div>
               </div>
               <figure className="bg-card/80 max-w-lg rounded-3xl border p-8 shadow-[0_30px_80px_-40px_rgb(0_0_0/0.45)] backdrop-blur-xl">
-                <Quote className="text-chart-1 size-8" />
+                <Quote className="text-chart-1 size-8 rtl:-scale-x-100" />
                 <blockquote className="mt-4 text-xl leading-snug font-medium tracking-[-0.02em] text-balance">{quote}</blockquote>
                 <figcaption className="mt-6 flex items-center gap-3">
                   <span className="bg-chart-1/25 flex size-10 items-center justify-center rounded-full text-sm font-semibold">{author.name.split(" ").map((w) => w[0]).join("")}</span>

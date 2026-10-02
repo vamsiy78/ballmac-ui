@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["overlay", "panel", "editor", "radix"],
   files: [{ path: "components/popover.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "popover-demo", title: "Share settings", file: "popover-demo.tsx" },
     {

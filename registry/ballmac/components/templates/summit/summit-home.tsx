@@ -41,7 +41,7 @@ function SummitHome({ hrefs, ...props }: SummitHomeProps) {
             <h1 id="sh-title" className={cn("mt-8 max-w-4xl text-[clamp(3.2rem,11vw,9.5rem)] leading-[0.92]", summitDisplayClass)}>Look further.</h1>
             <p className="mt-6 max-w-xl text-xl text-pretty">Two days of talks about design, engineering and the long view, held where the sun barely sets. Twelve speakers, nine hundred seats.</p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <a href={link.tickets} className={cn("bg-chart-2 focus-visible:ring-ring inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0", summitOnSun)}>Get tickets from $190 <ArrowRight className="size-5" aria-hidden="true" /></a>
+              <a href={link.tickets} className={cn("bg-chart-2 focus-visible:ring-ring inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0", summitOnSun)}>Get tickets from $190 <ArrowRight className="size-5 rtl:rotate-180" aria-hidden="true" /></a>
               <a href={link.schedule} className="focus-visible:ring-ring inline-flex h-14 items-center rounded-full border-2 border-white/60 px-8 text-lg font-bold outline-none transition-colors hover:bg-white/10 focus-visible:ring-[3px] motion-reduce:transition-none">See the schedule</a>
             </div>
             <div className="mt-12" role="group" aria-label="Time until the first talk">
@@ -73,7 +73,7 @@ function SummitHome({ hrefs, ...props }: SummitHomeProps) {
 
         <section aria-labelledby="sh-day" className="bg-surface border-y">
           <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1.4fr]">
-            <div><h2 id="sh-day" className={cn("text-[clamp(2rem,5vw,3.5rem)] leading-none", summitDisplayClass)}>Day one, at a glance</h2><p className="text-muted-foreground mt-4 max-w-sm text-lg text-pretty">Three rooms, no overlap you will regret. Star the talks you want and we will build your day.</p><a href={link.schedule} className="bg-primary text-primary-foreground focus-visible:ring-ring/50 mt-6 inline-flex h-12 items-center gap-2 rounded-full px-6 font-bold outline-none focus-visible:ring-[3px]">Build my agenda <ArrowRight className="size-4" aria-hidden="true" /></a></div>
+            <div><h2 id="sh-day" className={cn("text-[clamp(2rem,5vw,3.5rem)] leading-none", summitDisplayClass)}>Day one, at a glance</h2><p className="text-muted-foreground mt-4 max-w-sm text-lg text-pretty">Three rooms, no overlap you will regret. Star the talks you want and we will build your day.</p><a href={link.schedule} className="bg-primary text-primary-foreground focus-visible:ring-ring/50 mt-6 inline-flex h-12 items-center gap-2 rounded-full px-6 font-bold outline-none focus-visible:ring-[3px]">Build my agenda <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" /></a></div>
             <ol className="divide-y rounded-3xl border bg-card">
               {sessions.filter((s) => s.day === 1).slice(0, 5).map((s) => (
                 <li key={s.id} className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-4 p-4 sm:grid-cols-[5.5rem_minmax(0,1fr)_auto] sm:p-5">
@@ -93,10 +93,10 @@ function SummitHome({ hrefs, ...props }: SummitHomeProps) {
 
         <section aria-labelledby="sh-tix" className="mx-auto max-w-7xl px-4 pb-8 sm:px-6">
           <div className={cn("bg-chart-1 relative overflow-hidden rounded-[2rem] p-8 sm:p-14", summitOnSun)}>
-            <div aria-hidden="true" className="bg-chart-2 absolute -top-24 -right-16 aspect-square w-80 rounded-full" />
+            <div aria-hidden="true" className="bg-chart-2 absolute -top-24 -end-16 aspect-square w-80 rounded-full" />
             <div className="relative grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
               <div><h2 id="sh-tix" className={cn("text-[clamp(2rem,5vw,3.8rem)] leading-none text-balance", summitDisplayClass)}>The early bird is $200 cheaper.</h2><p className="mt-4 max-w-lg text-lg text-pretty">Early bird ends on 15 January or at 200 tickets, whichever comes first. Refundable until 30 days before.</p></div>
-              <div className="flex flex-wrap items-center gap-4 lg:justify-end"><span className={cn("text-6xl", summitDisplayClass)}>${tiers[1]!.price}</span><a href={link.tickets} className="bg-[var(--summit-ridge-3)] focus-visible:ring-ring inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold text-[var(--summit-hero-fg)] outline-none focus-visible:ring-[3px]">Get tickets <ArrowRight className="size-5" aria-hidden="true" /></a></div>
+              <div className="flex flex-wrap items-center gap-4 lg:justify-end"><span className={cn("text-6xl", summitDisplayClass)}>${tiers[1]!.price}</span><a href={link.tickets} className="bg-[var(--summit-ridge-3)] focus-visible:ring-ring inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold text-[var(--summit-hero-fg)] outline-none focus-visible:ring-[3px]">Get tickets <ArrowRight className="size-5 rtl:rotate-180" aria-hidden="true" /></a></div>
             </div>
           </div>
         </section>

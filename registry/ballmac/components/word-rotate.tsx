@@ -85,7 +85,7 @@ function WordRotate({
           <motion.span
             key={`${current}-${word}`}
             data-slot="word-rotate-word"
-            className={cn("absolute top-0 left-0", wordClassName)}
+            className={cn("absolute top-0 start-0", wordClassName)}
             initial={hidden}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={leaving}
@@ -99,7 +99,7 @@ function WordRotate({
       <span
         ref={measureRef}
         aria-hidden="true"
-        className="pointer-events-none invisible absolute top-0 left-0 flex h-0 w-0 overflow-hidden whitespace-nowrap"
+        className="pointer-events-none invisible absolute top-0 start-0 flex h-0 w-0 overflow-hidden whitespace-nowrap"
       >
         {words.map((w, i) => (
           <span key={i} className={cn("shrink-0", wordClassName)}>

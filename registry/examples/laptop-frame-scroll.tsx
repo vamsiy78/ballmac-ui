@@ -21,18 +21,18 @@ function Editor() {
         <span>meter.ts</span>
       </div>
       <div className="flex min-h-0 flex-1">
-        <div className="w-40 shrink-0 space-y-1.5 border-r bg-card/60 p-3 text-[11px] text-muted-foreground">
+        <div className="w-40 shrink-0 space-y-1.5 border-e bg-card/60 p-3 text-[11px] text-muted-foreground">
           <p className="text-foreground">app</p>
-          <p className="pl-3">api</p>
-          <p className="pl-6 text-foreground">route.ts</p>
-          <p className="pl-3">lib</p>
-          <p className="pl-6">auth.ts</p>
-          <p className="pl-6">meter.ts</p>
+          <p className="ps-3">api</p>
+          <p className="ps-6 text-foreground">route.ts</p>
+          <p className="ps-3">lib</p>
+          <p className="ps-6">auth.ts</p>
+          <p className="ps-6">meter.ts</p>
         </div>
         <div className="flex-1 p-4 leading-7">
           {code.map((row, i) => (
             <div key={i} className="flex gap-5 whitespace-pre">
-              <span className="w-4 text-right text-muted-foreground/60 tabular-nums">{i + 1}</span>
+              <span className="w-4 text-end text-muted-foreground/60 tabular-nums">{i + 1}</span>
               <span>
                 {[0, 2, 4].map((j) => (
                   <span key={j} className={color[row[j] as keyof typeof color]}>

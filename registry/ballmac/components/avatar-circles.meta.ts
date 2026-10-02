@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["avatar", "people", "stack", "presence", "team"],
   files: [{ path: "components/avatar-circles.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "avatar-circles-demo", title: "Team with presence", file: "avatar-circles-demo.tsx" },
     { name: "avatar-circles-sizes", title: "Sizes and overflow button", file: "avatar-circles-sizes.tsx" },

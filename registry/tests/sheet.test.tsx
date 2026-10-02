@@ -29,7 +29,7 @@ describe("Sheet", () => {
     const trigger = screen.getByRole("button", { name: "Open" });
     await user.click(trigger);
     const dialog = await screen.findByRole("dialog", { name: "Settings" });
-    expect(dialog).toHaveAttribute("data-side", "right");
+    expect(dialog).toHaveAttribute("data-side", "end");
     expect(dialog).toHaveAccessibleDescription("Adjust preferences.");
     await user.keyboard("{Escape}");
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());

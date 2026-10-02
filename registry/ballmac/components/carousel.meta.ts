@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["slider", "swipe", "slides", "embla"],
   files: [{ path: "components/carousel.tsx" }],
   dependencies: ["embla-carousel-react@^8", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n", "direction"],
   examples: [
     { name: "carousel-demo", title: "Product highlights", file: "carousel-demo.tsx" },
     { name: "carousel-states", title: "Multiple and vertical", file: "carousel-states.tsx" },

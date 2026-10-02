@@ -8,7 +8,7 @@ export default function LightRaysTones() {
       {tones.map((tone, i) => (
         <div key={tone} className="relative h-36 overflow-hidden rounded-xl border bg-background">
           <LightRays tone={tone} count={4 + i} intensity={0.6} />
-          <span className="absolute bottom-2 left-3 z-10 font-mono text-[11px] text-muted-foreground">
+          <span className="absolute bottom-2 start-3 z-10 font-mono text-[11px] text-muted-foreground">
             {tone} · {4 + i} rays
           </span>
         </div>

@@ -1,8 +1,11 @@
 // Ballmac UI: Breadcrumb. https://ui.ballmac.com/components/breadcrumb
 // Based on shadcn/ui Breadcrumb (MIT, Copyright (c) 2023 shadcn), adding truncation and a keyboard-visible link treatment.
+"use client"
+
 import * as React from "react"
 import { ChevronRight, MoreHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useMessages } from "@/lib/ballmac/i18n"
 
 type BreadcrumbProps = React.ComponentProps<"nav"> & {
   /** Accessible name of the navigation landmark. */
@@ -10,9 +13,11 @@ type BreadcrumbProps = React.ComponentProps<"nav"> & {
 }
 function Breadcrumb({
   className,
-  "aria-label": label = "Breadcrumb",
+  "aria-label": label,
   ...props
 }: BreadcrumbProps) {
+  const msg = useMessages()
+  label ??= msg("breadcrumb.label", "Breadcrumb")
   return (
     <nav
       data-slot="breadcrumb"
@@ -81,7 +86,7 @@ function BreadcrumbSeparator({
       className={cn("text-muted-foreground [&>svg]:size-3.5", className)}
       {...props}
     >
-      {children ?? <ChevronRight />}
+      {children ?? <ChevronRight  className="rtl:rotate-180"/>}
     </li>
   )
 }
@@ -89,6 +94,7 @@ function BreadcrumbEllipsis({
   className,
   ...props
 }: React.ComponentProps<"span">) {
+  const msg = useMessages()
   return (
     <span
       data-slot="breadcrumb-ellipsis"
@@ -99,7 +105,7 @@ function BreadcrumbEllipsis({
       {...props}
     >
       <MoreHorizontal aria-hidden="true" />
-      <span className="sr-only">More pages</span>
+      <span className="sr-only">{msg("breadcrumb.morePages", "More pages")}</span>
     </span>
   )
 }
