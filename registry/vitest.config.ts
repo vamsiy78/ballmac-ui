@@ -10,7 +10,8 @@ export default defineConfig({
     // The same import paths users get after `shadcn add`.
     alias: [
       // Pro blocks live in the private checkout at registry/pro (absent in public clones).
-      { find: /^@\/components\/ballmac\/blocks\/([a-z]+-pro-\d+)\/(.*)$/, replacement: r("./pro/ballmac/components/blocks/$1/$2") },
+      { find: /^@\/components\/ballmac\/dashboard-kit$/, replacement: r("./pro/ballmac/components/dashboard-kit") },
+      { find: /^@\/components\/ballmac\/blocks\/([a-z-]+-pro-\d+)\/(.*)$/, replacement: r("./pro/ballmac/components/blocks/$1/$2") },
       { find: /^@\/components\/ballmac\/(.*)$/, replacement: r("./ballmac/components/$1") },
       { find: /^@\/hooks\/ballmac\/(.*)$/, replacement: r("./ballmac/hooks/$1") },
       { find: /^@\/lib\/ballmac\/(.*)$/, replacement: r("./ballmac/lib/$1") },

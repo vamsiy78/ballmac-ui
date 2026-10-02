@@ -142,5 +142,9 @@
   {
     "prefix": "pricing-pro-8-",
     "reason": "Prices roll between currencies and keep their left-to-right digit order."
+  },
+  {
+    "prefix": "dashboard-pro-4-",
+    "reason": "The chart updates every second, so two captures differ."
   }
 ]
