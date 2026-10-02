@@ -126,5 +126,21 @@
   {
     "prefix": "features-pro-11-",
     "reason": "The terminal is left-to-right inside by design and types over time."
+  },
+  {
+    "prefix": "pricing-pro-1-",
+    "reason": "Sample copy is English, so punctuation and unit order differ in a right-to-left page; the layout itself mirrors."
+  },
+  {
+    "prefix": "pricing-pro-2-",
+    "reason": "The slider runs from the right in a right-to-left page and number ranges keep their left-to-right order."
+  },
+  {
+    "prefix": "pricing-pro-3-",
+    "reason": "The sliders run from the right in a right-to-left page; amounts keep their left-to-right order."
+  },
+  {
+    "prefix": "pricing-pro-8-",
+    "reason": "Prices roll between currencies and keep their left-to-right digit order."
   }
 ]
