@@ -114,5 +114,17 @@
   {
     "prefix": "hero-pro-14-",
     "reason": "The countdown ticks between the two captures."
+  },
+  {
+    "prefix": "features-pro-1-",
+    "reason": "The comparison slider is drawn left-to-right on purpose: the pictures are not mirrored."
+  },
+  {
+    "prefix": "features-pro-10-",
+    "reason": "Keyboard shortcuts keep their key order and the key labels differ by platform."
+  },
+  {
+    "prefix": "features-pro-11-",
+    "reason": "The terminal is left-to-right inside by design and types over time."
   }
 ]
