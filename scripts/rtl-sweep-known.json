@@ -150,5 +150,21 @@
   {
     "prefix": "calendar-pro-1",
     "reason": "The time axis runs left to right in every language, so the timeline is not mirrored by design."
+  },
+  {
+    "prefix": "testimonials-pro-4",
+    "reason": "The large result numbers are kept left-to-right so digits and signs read correctly; mirrored comparison differs on those glyphs."
+  },
+  {
+    "prefix": "stats-pro-3",
+    "reason": "Large estimate numbers are kept left-to-right by design, and the slider reverses direction with the page."
+  },
+  {
+    "prefix": "cta-pro-4",
+    "reason": "The countdown reads left to right in every language (days to seconds) by design."
+  },
+  {
+    "prefix": "logo-cloud-pro-4",
+    "reason": "The rings are always turning, so two captures never match; the layout is symmetric."
   }
 ]
