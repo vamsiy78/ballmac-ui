@@ -35,7 +35,7 @@ Owner to provide later: a Lemon Squeezy or Polar product, its IDs and checkout l
 
 - Heroes, features, cards, galleries and templates accept `image`/`media` props (URL or element) with fixed aspect ratios, required alt text and the current generated art as the fallback.
 
-## Phase 5: Premium blocks (about 150, in batches of 15 to 20). Batch 1 (20 heroes), batch 2 (20 features) and batch 3 (15 pricing), batch 4 (25 dashboards and app screens) and batch 5 (20 testimonials, logos, stats and CTA) done 2026-10-02
+## Phase 5: Premium blocks (about 150, in batches of 15 to 20). Batch 1 (20 heroes), batch 2 (20 features) and batch 3 (15 pricing), batch 4 (25 dashboards and app screens), batch 5 (20 testimonials, logos, stats and CTA) and batch 6 (15 ecommerce) done 2026-10-02
 
 Order by what people buy: heroes (20), features (20), pricing (15), dashboards and app screens (25), testimonials, logos, stats and CTA (20), ecommerce (15), content and blog (15), auth and onboarding (10), marketing extras (10). Same research and quality bar as free blocks. Free blocks stay at 63 plus occasional additions.
 

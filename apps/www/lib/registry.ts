@@ -152,6 +152,7 @@ export const blockCategoryLabels: Record<string, string> = {
   showcase: "Desktop showcase",
   download: "Download",
   devices: "Devices",
+  ecommerce: "Ecommerce",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -179,6 +180,12 @@ export const blockGroups = [
     label: "Application",
     description: "Screens inside a product: shell, dashboards, settings, billing, inbox, boards and AI chat.",
     categories: ["app-shell", "dashboard", "settings", "billing", "mail", "kanban", "calendar", "ai-chat"],
+  },
+  {
+    id: "shop",
+    label: "Ecommerce",
+    description: "Shop screens: catalogue, product page, cart, checkout, orders and delivery.",
+    categories: ["ecommerce"],
   },
   {
     id: "mac",
