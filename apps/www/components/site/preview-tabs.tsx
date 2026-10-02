@@ -38,6 +38,7 @@ export function PreviewTabs({
   className,
   minHeight = 440,
   example,
+  v0 = true,
 }: {
   preview: React.ReactNode
   code: React.ReactNode
@@ -47,6 +48,8 @@ export function PreviewTabs({
   name?: string
   /** Example name, for Open in v0 and full screen. */
   example?: string
+  /** Show "Open in v0"; off for Pro items, whose registry JSON needs a licence key. */
+  v0?: boolean
 }) {
   const [tab, setTab] = React.useState<"preview" | "code">("preview")
   const [run, setRun] = React.useState(0)
@@ -86,7 +89,7 @@ export function PreviewTabs({
       <div id={`${id}-preview-panel`} role="tabpanel" aria-labelledby={`${id}-preview`} hidden={tab !== "preview"}>
         <div className="bm-stage relative flex items-center justify-center overflow-hidden rounded-xl border px-4 pt-16 pb-10 sm:px-10" style={{ minHeight }}>
           <div className="absolute top-3 right-3 z-10 flex items-center gap-1">
-            {example && (
+            {example && v0 && (
               <a
                 href={`https://v0.dev/chat/api/open?url=${encodeURIComponent(`${SITE_URL}/r/${example}.json`)}`}
                 target="_blank"

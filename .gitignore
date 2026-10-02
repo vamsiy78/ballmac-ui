@@ -10,6 +10,7 @@ next-env.d.ts
 # generated registry output
 apps/www/public/r
 apps/www/.registry-pro
+registry-pro.json
 apps/www/lib/generated
 # private Pro source (git submodule, Phase 3)
 registry/pro

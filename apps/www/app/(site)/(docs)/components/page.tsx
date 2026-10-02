@@ -6,8 +6,9 @@ import { CatalogProvider, CopyInstallButton, QuickLookButton, ViewToggle, type C
 import { CatalogDeepLink } from "@/components/site/catalog-deep-link"
 import { FitPreview } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
+import { ProBadge } from "@/components/site/pro-notice"
 import { loadExample } from "@/lib/examples"
-import { addCommand, categoryLabels, categoryOrder, getComponents, isNew, packageManagers, type PackageManager, type SiteItem } from "@/lib/registry"
+import { addCommand, categoryLabels, categoryOrder, getComponents, isNew, isPro, packageManagers, type PackageManager, type SiteItem } from "@/lib/registry"
 
 export const metadata: Metadata = {
   title: "Components",
@@ -52,6 +53,7 @@ function Card({ item }: { item: CatalogItem }) {
           {item.title}
         </Link>
         {isNew(item) && <NewBadge />}
+        {isPro(item) && <ProBadge />}
       </div>
       <p className="text-muted-foreground mt-1 line-clamp-2 text-sm leading-relaxed">{item.description}</p>
     </div>
@@ -71,6 +73,7 @@ function Row({ item }: { item: CatalogItem }) {
             {item.title}
           </Link>
           {isNew(item) && <NewBadge />}
+          {isPro(item) && <ProBadge />}
         </div>
         <p className="text-muted-foreground mt-0.5 truncate text-sm sm:mt-0">{item.description}</p>
       </div>

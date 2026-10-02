@@ -79,6 +79,7 @@ And axe (zero serious/critical) on every `/preview/*` and the main site pages, l
 
 ### 13. Pricing
 - [x] Pricing page (Free now, Pro coming)
+- [x] Pro infrastructure (2026-10-02): licence validation (Lemon Squeezy or Polar), private registry `/r/pro/{name}.json`, Pro install flow on item pages, `/docs/pro`, Pro-aware MCP. Plan: `PRO-PLAN.md`
 
 ### 14. Final polish
 - [x] OG images, sitemap, robots, JSON-LD
@@ -259,3 +260,6 @@ Also added: `accordion` (primitive, needed by faq-1).
 - **Docs and components share one layout** (the `(docs)` route group), so the sidebar stays mounted between them; its scroll position is also kept per tab (sessionStorage), so reloads and remounts do not jump it back to the top.
 - **The catalog has no search box or category chips.** ⌘K in the header already searches everything, and section headings plus the collapsible sidebar categories cover navigation. The page offers Gallery / List / Index views (remembered) and Quick Look; `?category=` links still land on their section.
 - **Sidebar component categories are collapsible** under one "Components" heading: collapsed on the catalog and docs, the current component's category open on its page, so the sidebar never repeats the catalog.
+- **Pro source never reaches a public surface.** Pro items live in `registry/pro/` (git-ignored here; meant to be a private submodule or checkout), build to `apps/www/.registry-pro`, and are served only by `/r/pro/{name}.json` with `Authorization: Bearer <licence key>` and `Cache-Control: private, no-store` (the public `/r/*` cache rule excludes `pro/`). The site shows previews and the import line, never the code; `sources.json`, the public API and `llms.txt` hold free source only. Pro items depend on each other as `@ballmac-pro/<name>`, because the shadcn CLI only sends a registry's headers for namespaced items. Free items may not depend on or import Pro items (`build-registry` fails). Interactive Pro previews still ship their compiled client JS, as any live demo does.
+- **The licence provider is configuration.** `lib/license-core.ts` validates against Lemon Squeezy or Polar (both are merchants of record and issue keys), caches valid answers for ten minutes and invalid ones for one, never caches an outage, and accepts `BALLMAC_PRO_TEST_KEYS` for development. Prices and checkout links on `/pricing` come from `NEXT_PUBLIC_PRO_*` variables; without them the page shows "Soon" and a launch-news link.
+

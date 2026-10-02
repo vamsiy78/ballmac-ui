@@ -24,13 +24,16 @@
     ],
     "paths": {
       "@/components/ballmac/*": [
-        "../../registry/ballmac/components/*"
+        "../../registry/ballmac/components/*",
+        "../../registry/pro/ballmac/components/*"
       ],
       "@/hooks/ballmac/*": [
-        "../../registry/ballmac/hooks/*"
+        "../../registry/ballmac/hooks/*",
+        "../../registry/pro/ballmac/hooks/*"
       ],
       "@/lib/ballmac/*": [
-        "../../registry/ballmac/lib/*"
+        "../../registry/ballmac/lib/*",
+        "../../registry/pro/ballmac/lib/*"
       ],
       "@/registry/*": [
         "../../registry/*"

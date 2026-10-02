@@ -50,7 +50,7 @@ export default async function TemplatesPage() {
           <div className="grid grid-cols-1 gap-x-6 gap-y-12 lg:grid-cols-2">
             {g.items.map((t) => (
               <div key={t.name}>
-                <PageCard href={`/templates/${t.name}`} title={t.title} description={t.description} name={t.name} Preview={t.Preview} height={420} scale={0.5} />
+                <PageCard href={`/templates/${t.name}`} title={t.title} description={t.description} name={t.name} pro={t.tier === "pro"} Preview={t.Preview} height={420} scale={0.5} />
                 {(t.templatePages.length > 1 || t.fonts.length > 0) && (
                   <p className="text-muted-foreground mt-2 text-xs">
                     {t.templatePages.length > 1 && `${t.templatePages.length} pages`}

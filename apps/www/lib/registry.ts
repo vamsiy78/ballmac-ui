@@ -11,6 +11,8 @@ export const SITE_URL = "https://ui.ballmac.com"
 export type PropDoc = { name: string; type: string; required: boolean; default?: string; description?: string }
 export type SiteItem = Omit<ItemMeta, "files" | "examples"> & {
   props: { component: string; props: PropDoc[] }[]
+  /** Export names of the main file (recorded at build time, so Pro items have them without their source). */
+  exports: string[]
   files: { path: string; source: string; target: string }[]
   examples: { name: string; title: string; file: string; source: string; description?: string }[]
 }
@@ -93,8 +95,14 @@ export const packageManagers = ["pnpm", "npm", "yarn", "bun"] as const
 export type PackageManager = (typeof packageManagers)[number]
 
 /** One command model, rendered per package manager. */
+/** True for items sold in Ballmac UI Pro. */
+export const isPro = (item: Pick<SiteItem, "tier">) => item.tier === "pro"
+
+/** The registry namespace an item installs from: @ballmac for free items, @ballmac-pro for Pro items. */
+export const namespaceOf = (name: string) => (getItem(name)?.tier === "pro" ? "@ballmac-pro" : "@ballmac")
+
 export function addCommand(names: string[], pm: PackageManager) {
-  const args = `shadcn@latest add ${names.map((n) => `@ballmac/${n}`).join(" ")}`
+  const args = `shadcn@latest add ${names.map((n) => `${namespaceOf(n)}/${n}`).join(" ")}`
   return { pnpm: `pnpm dlx ${args}`, npm: `npx ${args}`, yarn: `yarn dlx ${args}`, bun: `bunx --bun ${args}` }[pm]
 }
 export function installCommand(deps: string[], pm: PackageManager) {

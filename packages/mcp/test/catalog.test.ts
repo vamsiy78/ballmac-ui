@@ -103,3 +103,50 @@ describe("catalog", () => {
     expect(md).toContain("- Enter: Sends")
   })
 })
+
+describe("pro items", () => {
+  const proItem = item({ name: "hero-pro-1", kind: "block", category: "blocks", blockCategory: "hero", tier: "pro", title: "Hero Pro 1", examples: ["hero-pro-1-demo"] })
+  const detail = { ...proItem, exports: ["HeroPro1"], props: [], a11y: [], customization: [], files: [{ path: "components/blocks/hero-pro-1/hero-pro-1.tsx", target: "x" }], exampleCode: [{ name: "hero-pro-1-demo", title: "Demo" }] }
+  const calls: { url: string; auth?: string }[] = []
+  const proFetch = (async (url: string, init?: RequestInit) => {
+    const u = String(url)
+    const auth = (init?.headers as Record<string, string> | undefined)?.authorization
+    calls.push({ url: u, auth })
+    if (u.endsWith("/api/v1/items/hero-pro-1.json")) return new Response(JSON.stringify(detail))
+    if (u.includes("/r/pro/")) {
+      if (!auth) return new Response("", { status: 401 })
+      if (auth !== "Bearer good") return new Response("", { status: 403 })
+      const file = u.includes("demo") ? "demo source" : "main source"
+      return new Response(JSON.stringify({ files: [{ path: u.includes("demo") ? "registry/pro/examples/hero-pro-1-demo.tsx" : `registry/pro/ballmac/${detail.files[0]!.path}`, content: file }] }))
+    }
+    return new Response("", { status: 404 })
+  }) as typeof fetch
+
+  it("installs Pro items through the @ballmac-pro namespace", () => {
+    const c = installCommands(["button", "hero-pro-1"], "npm", new Set(["hero-pro-1"]))
+    expect(c.add).toBe("npx shadcn@latest add @ballmac/button @ballmac-pro/hero-pro-1")
+    expect(c.byUrl).toBe("npx shadcn@latest add https://ui.ballmac.com/r/button.json @ballmac-pro/hero-pro-1")
+    expect(c.proSetup).toContain("BALLMAC_LICENSE_KEY")
+    expect(installCommands(["button"]).proSetup).toBeUndefined()
+  })
+
+  it("returns no Pro source without a key", async () => {
+    const d = await new Catalog("https://ui.test", proFetch, Date.now, undefined).detail("hero-pro-1")
+    expect(d.files[0]!.content).toBeUndefined()
+    expect(d.licence).toContain("BALLMAC_LICENSE_KEY")
+    expect(calls.some((c) => c.url.includes("/r/pro/"))).toBe(false)
+  })
+
+  it("reads Pro source from the private registry with a key", async () => {
+    const d = await new Catalog("https://ui.test", proFetch, Date.now, "good").detail("hero-pro-1")
+    expect(d.files[0]!.content).toBe("main source")
+    expect(d.exampleCode[0]!.code).toBe("demo source")
+    expect(calls.filter((c) => c.url.includes("/r/pro/")).every((c) => c.auth === "Bearer good")).toBe(true)
+  })
+
+  it("explains a rejected key", async () => {
+    const d = await new Catalog("https://ui.test", proFetch, Date.now, "bad").detail("hero-pro-1")
+    expect(d.files[0]!.content).toBeUndefined()
+    expect(d.licence).toContain("not accepted")
+  })
+})

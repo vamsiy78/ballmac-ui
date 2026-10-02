@@ -30,8 +30,12 @@ const defaultFileType: Record<string, string> = {
 }
 
 /** "shadcn:utils" -> "utils" (shadcn's registry); "button" -> Ballmac URL. */
+// Pro items are served by the private registry, which needs the licence key. The shadcn CLI only sends the key
+// for a namespaced registry, so dependencies on Pro items are written as @ballmac-pro/<name>.
+let proNames = new Set<string>()
 function dep(name: string) {
-  return name.startsWith("shadcn:") ? name.slice("shadcn:".length) : `${REGISTRY_URL}/r/${name}.json`
+  if (name.startsWith("shadcn:")) return name.slice("shadcn:".length)
+  return proNames.has(name) ? `@ballmac-pro/${name}` : `${REGISTRY_URL}/r/${name}.json`
 }
 
 // Which item owns each installable import path (for example dependencies).
@@ -46,6 +50,15 @@ function exampleDependencies(item: LoadedItem, file: string) {
     if (owner) deps.add(owner)
   }
   return [...[...deps].map(dep), ...(utils ? ["utils"] : [])]
+}
+function exportsOf(code: string) {
+  const m = code.match(/export\s*\{([^}]+)\}/)
+  if (!m) return []
+  return m[1]!
+    .split(",")
+    .map((x) => x.trim())
+    .filter((x) => x && !x.startsWith("type ") && !/Variants$/.test(x))
+    .map((x) => x.split(/\s+as\s+/).pop()!.trim())
 }
 const npmOf = (spec: string) => (spec.startsWith("@") ? spec.split("/").slice(0, 2).join("/") : spec.split("/")[0])
 // Version range for each npm package, taken from the items that declare it, so examples install the same major.
@@ -131,12 +144,28 @@ specs = new Map(
 )
 const free = items.filter((i) => i.tier === "free")
 const pro = items.filter((i) => i.tier === "pro")
+proNames = new Set(pro.map((i) => i.name))
+// Free items and their examples must never pull in Pro code.
+for (const i of free) {
+  const proDep = i.registryDependencies.find((d) => proNames.has(d))
+  if (proDep) throw new Error(`${i.name} is free but depends on the Pro item ${proDep}`)
+  for (const e of i.examples) {
+    for (const m of readFileSync(join(i.examplesDir, e.file), "utf8").matchAll(/from\s+["'](@\/[^"']+)["']/g)) {
+      const owner = owners.get(m[1]!) ?? owners.get(`${m[1]}/index`)
+      if (owner && proNames.has(owner)) throw new Error(`${e.name} (free) imports the Pro item ${owner}`)
+    }
+  }
+}
 
 const freeCount = writeRegistry(join(ROOT, "registry.json"), free)
 shadcnBuild("registry.json", join(WWW, "public/r"))
 if (pro.length) {
   writeRegistry(join(ROOT, "registry-pro.json"), pro)
   shadcnBuild("registry-pro.json", join(WWW, ".registry-pro"))
+} else {
+  // No Pro source in this checkout: clear any earlier Pro build so removed items are not served.
+  rmSync(join(WWW, ".registry-pro"), { recursive: true, force: true })
+  rmSync(join(ROOT, "registry-pro.json"), { force: true })
 }
 
 // Website index: metadata only (source code is read from disk at build time).
@@ -146,6 +175,8 @@ const index = items.map(({ metaPath, baseDir, examplesDir, ...meta }) => ({
   ...meta,
   files: meta.files.map((f) => ({ ...f, source: relative(ROOT, join(baseDir, f.path)), target: targetFor(f.path) })),
   props: meta.files.filter((f) => f.path.endsWith(".tsx")).flatMap((f) => extractProps(readFileSync(join(baseDir, f.path), "utf8"), f.path)),
+  // Export names of the main file, so Pro items can show an import line without their source.
+  exports: meta.files[0] ? exportsOf(readFileSync(join(baseDir, meta.files[0].path), "utf8")) : [],
   examples: meta.examples.map((e) => ({ ...e, source: relative(ROOT, join(examplesDir, e.file)) })),
 }))
 writeFileSync(join(generated, "index.json"), JSON.stringify(index, null, 2) + "\n")

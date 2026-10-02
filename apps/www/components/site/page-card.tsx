@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { LazyMount } from "@/components/site/lazy-mount"
+import { ProBadge } from "@/components/site/pro-notice"
 import { ScaledPreview } from "@/components/site/scaled-preview"
 
 /** A page-sized thumbnail (block or template) in a quiet window frame, with its name and description below. */
@@ -10,6 +11,7 @@ export function PageCard({
   description,
   name,
   Preview,
+  pro = false,
   height = 300,
   scale = 0.46,
 }: {
@@ -18,6 +20,8 @@ export function PageCard({
   description: string
   name: string
   Preview: React.ComponentType | null
+  /** Show the Pro label. */
+  pro?: boolean
   height?: number
   scale?: number
 }) {
@@ -39,6 +43,7 @@ export function PageCard({
         <Link href={href} className="font-medium outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">
           {title}
         </Link>
+        {pro && <ProBadge className="ms-2 align-middle" />}
         <span className="text-muted-foreground hidden font-mono text-xs sm:inline">@ballmac/{name}</span>
       </div>
       <p className="text-muted-foreground mt-1 line-clamp-2 text-sm leading-relaxed">{description}</p>

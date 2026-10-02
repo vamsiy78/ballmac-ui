@@ -4,11 +4,12 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { CodePanel } from "@/components/site/code-panel"
+import { ProBadge, ProNotice } from "@/components/site/pro-notice"
 import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { SectionHeading } from "@/components/site/section-heading"
-import { blockCategoryLabels, getBlocks, getItem, readSource } from "@/lib/registry"
+import { blockCategoryLabels, getBlocks, getItem, isPro, readSource } from "@/lib/registry"
 
 export function generateStaticParams() {
   return getBlocks().map((b) => ({ slug: b.name }))
@@ -35,7 +36,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
           <ChevronRight className="size-3.5" aria-hidden="true" />
           <Link href={`/blocks#${item.blockCategory}`} className="hover:text-foreground">{blockCategoryLabels[item.blockCategory ?? ""] ?? "Block"}</Link>
         </nav>
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}</h1>
+        <h1 className="flex items-center gap-3 text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}{isPro(item) && <ProBadge />}</h1>
         <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
       </header>
       {example && (
@@ -43,12 +44,15 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
           src={`/preview/${example.name}`}
           name={item.name}
           example={example.name}
+          v0={!isPro(item)}
           title={`${item.title} preview`}
           code={
             <div className="space-y-4 p-4">
-              {item.files.map((f) => (
-                <CodePanel key={f.path} code={readSource(f.source)} title={shownPath(f.target)} />
-              ))}
+              {isPro(item) ? (
+                <ProNotice />
+              ) : (
+                item.files.map((f) => <CodePanel key={f.path} code={readSource(f.source)} title={shownPath(f.target)} />)
+              )}
             </div>
           }
         />
@@ -61,7 +65,11 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
         {example && (
           <section className="space-y-4">
             <SectionHeading id="usage">Usage</SectionHeading>
-            <CodePanel code={readSource(example.source)} title={`Example: ${example.file}`} />
+            {isPro(item) ? (
+              <CodePanel code={`import { ${item.exports.join(", ")} } from "@/${shownPath(item.files[0]!.target).replace(/\.tsx?$/, "")}"`} />
+            ) : (
+              <CodePanel code={readSource(example.source)} title={`Example: ${example.file}`} />
+            )}
           </section>
         )}
         <section className="space-y-4">

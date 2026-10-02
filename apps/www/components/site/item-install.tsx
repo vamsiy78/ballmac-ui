@@ -4,7 +4,8 @@ import { CodePanel } from "@/components/site/code-panel"
 import { CopyButton } from "@/components/site/copy-button"
 import { InstallSwitcher } from "@/components/site/install-switcher"
 import { InstallTabs } from "@/components/site/install-tabs"
-import { addCommand, getItem, installCommand, itemHref, packageManagers, readSource, SITE_URL, type PackageManager, type SiteItem } from "@/lib/registry"
+import { ProNotice } from "@/components/site/pro-notice"
+import { addCommand, getItem, installCommand, isPro, itemHref, namespaceOf, packageManagers, readSource, SITE_URL, type PackageManager, type SiteItem } from "@/lib/registry"
 
 const perPm = (fn: (pm: PackageManager) => string) =>
   Object.fromEntries(packageManagers.map((pm) => [pm, fn(pm)])) as Record<PackageManager, string>
@@ -27,6 +28,22 @@ export function Step({ title, children }: { title: React.ReactNode; children?: R
 /** CLI and Manual installation. Manual lists the npm packages, the other items it needs, and the source. */
 export function ItemInstall({ item }: { item: SiteItem }) {
   const ballmac = item.registryDependencies.filter((d) => !d.startsWith("shadcn:"))
+  if (isPro(item)) {
+    return (
+      <Steps>
+        <Step title="Once per project: add the Pro registry and your licence key.">
+          <CodePanel lang="json" title="components.json" code={PRO_REGISTRY_SNIPPET} />
+          <CodePanel lang="bash" title=".env.local" code="BALLMAC_LICENSE_KEY=your-licence-key" />
+        </Step>
+        <Step title="Add it.">
+          <InstallTabs commands={perPm((pm) => addCommand([item.name], pm))} />
+        </Step>
+        <Step title="Need a licence or help with setup?">
+          <ProNotice />
+        </Step>
+      </Steps>
+    )
+  }
   return (
     <InstallSwitcher
       cli={<InstallTabs commands={perPm((pm) => addCommand([item.name], pm))} />}
@@ -54,6 +71,16 @@ export function ItemInstall({ item }: { item: SiteItem }) {
   )
 }
 
+export const PRO_REGISTRY_SNIPPET = `{
+  "registries": {
+    "@ballmac": "${SITE_URL}/r/{name}.json",
+    "@ballmac-pro": {
+      "url": "${SITE_URL}/r/pro/{name}.json",
+      "headers": { "Authorization": "Bearer \${BALLMAC_LICENSE_KEY}" }
+    }
+  }
+}`
+
 /** npm and registry dependencies, linked. */
 export function ItemDependencies({ item }: { item: SiteItem }) {
   const ballmac = item.registryDependencies.filter((d) => !d.startsWith("shadcn:"))
@@ -80,7 +107,7 @@ export function ItemDependencies({ item }: { item: SiteItem }) {
         <dd className="mt-2 flex flex-wrap gap-2">
           {ballmac.map((d) => (
             <Link key={d} href={getItem(d) ? itemHref(getItem(d)!) : `/components/${d}`} className={chip}>
-              @ballmac/{d}
+              {namespaceOf(d)}/{d}
             </Link>
           ))}
           {shadcn.map((d) => (
@@ -97,8 +124,9 @@ export function ItemDependencies({ item }: { item: SiteItem }) {
 
 /** "Use with AI": summary, a copyable prompt, when to use and not, and the registry URL. */
 export function ItemAi({ item }: { item: SiteItem }) {
-  const prompt = `Add the Ballmac UI ${item.title} (@ballmac/${item.name}) to this project with the shadcn MCP, then use it where it fits.`
-  const url = `${SITE_URL}/r/${item.name}.json`
+  const pro = isPro(item)
+  const prompt = `Add the Ballmac UI ${item.title} (${namespaceOf(item.name)}/${item.name}) to this project with the shadcn MCP, then use it where it fits.`
+  const url = pro ? `${SITE_URL}/r/pro/${item.name}.json` : `${SITE_URL}/r/${item.name}.json`
   return (
     <div className="space-y-4">
       <p className="text-muted-foreground text-sm leading-relaxed [overflow-wrap:anywhere]">
@@ -129,7 +157,7 @@ export function ItemAi({ item }: { item: SiteItem }) {
         </div>
       ) : null}
       <p className="text-muted-foreground text-sm">
-        Registry JSON:{" "}
+        {pro ? "Registry JSON (needs your licence key):" : "Registry JSON:"}{" "}
         <a href={url} className="text-foreground font-mono text-[13px] underline underline-offset-4">
           {url}
         </a>

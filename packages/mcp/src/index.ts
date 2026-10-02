@@ -10,7 +10,7 @@ import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mc
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod"
 
-import { Catalog, composePage, installCommands, NotFoundError, toMarkdown, type Summary } from "./catalog.js"
+import { Catalog, composePage, installCommands, NotFoundError, PRO_REGISTRY, toMarkdown, type Summary } from "./catalog.js"
 
 const { version } = createRequire(import.meta.url)("../package.json") as { version: string }
 
@@ -33,6 +33,7 @@ Docs: https://ui.ballmac.com/docs/mcp`)
 }
 
 const catalog = new Catalog()
+const proNames = async () => new Set((await catalog.list()).filter((i) => i.tier === "pro").map((i) => i.name))
 const kinds = z.enum(["component", "block", "template"])
 const pms = z.enum(["pnpm", "npm", "yarn", "bun"])
 const readOnly = { readOnlyHint: true, openWorldHint: true } as const
@@ -131,7 +132,7 @@ server.registerTool(
   "get_item",
   {
     title: "Get a Ballmac UI item",
-    description: "Everything about one item: description, when to use and not, import line, props, keyboard behaviour, dependencies, composition hints, template pages and (for free items) the full source. Set includeSource to false for a shorter answer.",
+    description: "Everything about one item: description, when to use and not, import line, props, keyboard behaviour, dependencies, composition hints, template pages and the full source (for Pro items only when the server has BALLMAC_LICENSE_KEY; see the `licence` field). Set includeSource to false for a shorter answer.",
     inputSchema: { name: z.string().min(1), includeSource: z.boolean().optional() },
     annotations: readOnly,
   },
@@ -167,12 +168,18 @@ server.registerTool(
   "get_install_command",
   {
     title: "Get install commands",
-    description: "The shadcn CLI commands to add one or more items to the user's project. Run `setup` once if components.json has no @ballmac registry, then `add`. `byUrl` works without setup.",
+    description: "The shadcn CLI commands to add one or more items to the user's project. Run `setup` once if components.json has no @ballmac registry, then `add`. `byUrl` works without setup for free items. Pro items install as @ballmac-pro/<name> and need `proSetup` once.",
     inputSchema: { names: z.array(z.string().min(1)).min(1), packageManager: pms.optional() },
-    outputSchema: { setup: z.string(), add: z.string(), byUrl: z.string() },
+    outputSchema: { setup: z.string(), add: z.string(), byUrl: z.string(), proSetup: z.string().optional() },
     annotations: readOnly,
   },
-  async ({ names, packageManager }) => result(installCommands(names, packageManager))
+  async ({ names, packageManager }) => {
+    try {
+      return result(installCommands(names, packageManager, await proNames()))
+    } catch (e) {
+      return failure(e)
+    }
+  }
 )
 
 server.registerTool(
@@ -184,7 +191,7 @@ server.registerTool(
     outputSchema: {
       sections: z.array(z.record(z.string(), z.unknown())),
       missing: z.array(z.string()),
-      commands: z.object({ setup: z.string(), add: z.string(), byUrl: z.string() }),
+      commands: z.object({ setup: z.string(), add: z.string(), byUrl: z.string(), proSetup: z.string().optional() }),
       scaffold: z.string(),
       templates: z.array(z.record(z.string(), z.unknown())),
     },
@@ -216,6 +223,7 @@ server.registerTool(
         `${cmds.setup.split(" shadcn@latest")[0]} shadcn@latest init   # only if components.json is missing`,
         cmds.setup,
         `${cmds.add}   # optional: the Ballmac theme tokens`,
+        `For Pro items (tier "pro"), add to components.json "registries": ${JSON.stringify(PRO_REGISTRY)} and put BALLMAC_LICENSE_KEY=<key> in .env.local${catalog.hasLicense ? " (this MCP server has a licence key, so get_item returns Pro source)" : ""}. Guide: https://ui.ballmac.com/docs/pro`,
       ],
       installLocation: "components/ballmac (blocks in components/ballmac/blocks, templates in components/ballmac/templates plus app routes)",
     })

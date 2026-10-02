@@ -7,36 +7,56 @@ import { Eyebrow } from "@/components/site/section-heading"
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Ballmac UI's components, blocks and templates are free to use. Ballmac UI Pro, with premium blocks and templates, is coming.",
+  description: "Ballmac UI's components, blocks and templates are free to use. Ballmac UI Pro adds premium blocks, templates and SaaS starter apps.",
   alternates: { canonical: "/pricing" },
 }
+
+const checkout = process.env.NEXT_PUBLIC_PRO_CHECKOUT_URL
+const teamCheckout = process.env.NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL
+const proPrice = process.env.NEXT_PUBLIC_PRO_PRICE ?? "249"
+const teamPrice = process.env.NEXT_PUBLIC_PRO_TEAM_PRICE ?? "799"
+const onSale = Boolean(checkout)
 
 const plans = [
   {
     name: "Free",
     price: "$0",
     note: "Free forever.",
-    cta: { label: "Browse components", href: "/components" },
+    cta: { label: "Browse components", href: "/components", external: false },
     features: [
       [true, "Every free component, block and template"],
       [true, "shadcn CLI and MCP installs"],
       [true, "Commercial use, no attribution in your UI"],
       [true, "Source you own and can change"],
       [false, "Premium blocks and templates"],
-      [false, "Priority requests"],
+      [false, "SaaS starter apps"],
     ],
   },
   {
     name: "Pro",
-    price: "Soon",
-    note: "One-time purchase, lifetime updates.",
-    cta: null,
+    price: onSale ? `$${proPrice}` : "Soon",
+    note: "One person. One-time purchase, lifetime updates.",
+    cta: onSale ? { label: "Get Pro", href: checkout!, external: true } : null,
     features: [
       [true, "Everything in Free"],
-      [true, "Premium blocks and full templates"],
-      [true, "Private registry access for the CLI and MCP"],
+      [true, "Premium blocks and multi-page templates"],
+      [true, "SaaS starter apps with auth, billing and a database (rolling out)"],
+      [true, "Figma kit (rolling out)"],
+      [true, "Early access to new templates"],
+      [true, "Private registry for the shadcn CLI and MCP"],
       [true, "Unlimited projects for you and your clients"],
-      [true, "Priority requests"],
+    ],
+  },
+  {
+    name: "Team",
+    price: onSale ? `$${teamPrice}` : "Soon",
+    note: "Up to 10 people. One-time purchase, lifetime updates.",
+    cta: onSale && teamCheckout ? { label: "Get Team", href: teamCheckout, external: true } : null,
+    features: [
+      [true, "Everything in Pro"],
+      [true, "Licences for up to 10 people"],
+      [true, "One key for CI and shared environments"],
+      [true, "Priority requests and support"],
     ],
   },
 ] as const
@@ -44,7 +64,8 @@ const plans = [
 const faqs = [
   { q: "Is the free tier really free for commercial work?", a: "Yes. Use free items in personal, client and commercial projects, and change them however you like. The license notice stays in the source files." },
   { q: "Will free components become paid?", a: "No. Anything released as free stays free. Pro adds new premium items; it doesn't take any away." },
-  { q: "How will Pro work with the CLI?", a: "You'll add your license key once as an environment variable, and the shadcn CLI and MCP server will install Pro items the same way as free ones." },
+  { q: "How does Pro work with the CLI?", a: "Add your licence key once as an environment variable and the @ballmac-pro registry to components.json. The shadcn CLI and the MCP server then install Pro items the same way as free ones. The Pro guide walks through it." },
+  { q: "Who handles tax and invoices?", a: "Our payment provider acts as the merchant of record: it charges the right sales tax or VAT and sends you an invoice." },
 ]
 
 export default function PricingPage() {
@@ -56,17 +77,17 @@ export default function PricingPage() {
         </div>
         <h1 className="text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Free to build with. Pro when you want more.</h1>
         <p className="text-muted-foreground text-lg leading-relaxed">
-          The core library is free for any project. Pro will add premium blocks and templates.
+          The core library is free for any project. Pro adds premium blocks, templates and complete SaaS starters.
         </p>
       </header>
-      <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2">
+      <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3">
         {plans.map((plan) => {
           const pro = plan.name === "Pro"
           return (
             <div key={plan.name} className={pro ? "bg-foreground text-background flex flex-col rounded-2xl p-8" : "bg-card flex flex-col rounded-2xl border p-8"}>
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold">{plan.name}</h2>
-                {pro && <span className="rounded-full border border-current/20 px-2 py-0.5 text-xs font-medium opacity-80">Coming soon</span>}
+                {pro && !onSale && <span className="rounded-full border border-current/20 px-2 py-0.5 text-xs font-medium opacity-80">Coming soon</span>}
               </div>
               <p className="mt-6 text-5xl font-semibold tracking-[-0.04em]">{plan.price}</p>
               <p className={pro ? "mt-2 opacity-70" : "text-muted-foreground mt-2"}>{plan.note}</p>
@@ -79,12 +100,12 @@ export default function PricingPage() {
                 ))}
               </ul>
               {plan.cta ? (
-                <Button asChild size="lg" shape="pill" variant="outline" className="mt-8">
-                  <Link href={plan.cta.href}>{plan.cta.label}</Link>
+                <Button asChild size="lg" shape="pill" variant={pro ? "secondary" : "outline"} className="mt-8">
+                  {plan.cta.external ? <a href={plan.cta.href}>{plan.cta.label}</a> : <Link href={plan.cta.href}>{plan.cta.label}</Link>}
                 </Button>
               ) : (
-                <Button asChild size="lg" shape="pill" variant="secondary" className="mt-8">
-                  <a href="https://x.com/ballmacapps">Follow @ballmacapps for launch news</a>
+                <Button asChild size="lg" shape="pill" variant={pro ? "secondary" : "outline"} className="mt-8">
+                  <a href="https://x.com/ballmacapps">Get launch news on X</a>
                 </Button>
               )}
             </div>

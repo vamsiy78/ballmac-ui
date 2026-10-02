@@ -1,6 +1,6 @@
 import "server-only"
 
-import { exportsOf, getAllItems, itemHref, readSource, SITE_URL, type SiteItem } from "@/lib/registry"
+import { getAllItems, itemHref, readSource, SITE_URL, type SiteItem } from "@/lib/registry"
 
 /** Public, versioned metadata for tools and agents (read by @ballmac/mcp). */
 export const API_VERSION = 1
@@ -22,7 +22,7 @@ export function summary(i: SiteItem) {
     updated: i.updated,
     url: `${SITE_URL}${i.category === "foundation" ? "/docs/theming" : itemHref(i)}`,
     registryUrl: `${SITE_URL}/r/${i.name}.json`,
-    install: `npx shadcn@latest add @ballmac/${i.name}`,
+    install: `npx shadcn@latest add ${i.tier === "pro" ? "@ballmac-pro" : "@ballmac"}/${i.name}`,
     summary: i.ai?.summary,
     whenToUse: i.ai?.whenToUse ?? [],
     whenNotToUse: i.ai?.whenNotToUse ?? [],
@@ -43,11 +43,10 @@ export function summary(i: SiteItem) {
 
 export function detail(i: SiteItem) {
   const free = i.tier === "free"
-  const main = i.files[0] ? readSource(i.files[0].source) : ""
   return {
     ...summary(i),
-    exports: exportsOf(main),
-    import: i.files[0] && !i.files[0].target.startsWith("app/") ? `import { ${exportsOf(main).join(", ")} } from "${i.files[0].target.replace(/^@(components|hooks|lib)\//, "@/$1/").replace(/\.tsx?$/, "")}"` : undefined,
+    exports: i.exports,
+    import: i.files[0] && !i.files[0].target.startsWith("app/") ? `import { ${i.exports.join(", ")} } from "${i.files[0].target.replace(/^@(components|hooks|lib)\//, "@/$1/").replace(/\.tsx?$/, "")}"` : undefined,
     props: i.props,
     a11y: i.ai?.a11y ?? [],
     customization: i.ai?.customization ?? [],

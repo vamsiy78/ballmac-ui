@@ -36,6 +36,8 @@ export type Detail = Summary & {
   docs?: string
   files: { path: string; target: string; content?: string }[]
   exampleCode: { name: string; title: string; code?: string }[]
+  /** For Pro items: whether the source above came through the licence key, and what to do if not. */
+  licence?: string
 }
 export type Index = { version: number; setup: string; namespace: string; items: Summary[] }
 
@@ -49,20 +51,26 @@ export class Catalog {
   constructor(
     readonly baseUrl = process.env.BALLMAC_UI_URL ?? "https://ui.ballmac.com",
     private readonly fetchImpl: typeof fetch = fetch,
-    private readonly now: () => number = Date.now
+    private readonly now: () => number = Date.now,
+    private readonly licenseKey = process.env.BALLMAC_LICENSE_KEY?.trim() || undefined
   ) {}
 
-  private async get<T>(path: string): Promise<T> {
+  get hasLicense() {
+    return !!this.licenseKey
+  }
+
+  private async get<T>(path: string, headers: Record<string, string> = {}): Promise<T> {
     const url = `${this.baseUrl.replace(/\/$/, "")}${path}`
     let lastError: unknown
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        const res = await this.fetchImpl(url, { headers: { accept: "application/json" }, signal: AbortSignal.timeout(TIMEOUT) })
+        const res = await this.fetchImpl(url, { headers: { accept: "application/json", ...headers }, signal: AbortSignal.timeout(TIMEOUT) })
         if (res.status === 404) throw new NotFoundError(path)
+        if (res.status === 401 || res.status === 403) throw new LicenseError(res.status)
         if (!res.ok) throw new Error(`Ballmac UI API ${path} returned ${res.status}`)
         return (await res.json()) as T
       } catch (e) {
-        if (e instanceof NotFoundError) throw e
+        if (e instanceof NotFoundError || e instanceof LicenseError) throw e
         lastError = e
       }
     }
@@ -124,11 +132,28 @@ export class Catalog {
   detail(name: string) {
     let d = this.details.get(name)
     if (!d) {
-      d = this.get<Detail>(`/api/v1/items/${encodeURIComponent(name)}.json`)
+      d = this.get<Detail>(`/api/v1/items/${encodeURIComponent(name)}.json`).then((detail) => (detail.tier === "pro" ? this.withProSource(detail) : detail))
       d.catch(() => this.details.delete(name))
       this.details.set(name, d)
     }
     return d
+  }
+
+  /** The public API never carries Pro source; with a licence key, read it from the private registry like the shadcn CLI does. */
+  private async withProSource(d: Detail): Promise<Detail> {
+    if (!this.licenseKey) return { ...d, licence: PRO_NO_KEY }
+    const auth = { authorization: `Bearer ${this.licenseKey}` }
+    const proItem = (n: string) => this.get<{ files?: { path: string; content?: string }[] }>(`/r/pro/${encodeURIComponent(n)}.json`, auth)
+    try {
+      const main = await proItem(d.name)
+      // The API lists paths relative to the item's registry folder; registry JSON has them from the repository root.
+      const contentOf = (path: string) => main.files?.find((f) => f.path === path || f.path.endsWith(`/${path}`))?.content
+      const examples = await Promise.all(d.exampleCode.map(async (e) => ({ ...e, code: (await proItem(e.name).catch(() => undefined))?.files?.[0]?.content })))
+      return { ...d, files: d.files.map((f) => ({ ...f, content: contentOf(f.path) })), exampleCode: examples, licence: "Source loaded with your licence key." }
+    } catch (e) {
+      if (e instanceof LicenseError) return { ...d, licence: e.status === 401 ? PRO_NO_KEY : "The licence key in BALLMAC_LICENSE_KEY was not accepted (expired, revoked or mistyped). Check it at https://ui.ballmac.com/docs/pro." }
+      throw e
+    }
   }
 
   /** Names close to a mistyped one, for helpful errors. */
@@ -146,6 +171,12 @@ export class Catalog {
 export class NotFoundError extends Error {
   constructor(path: string) {
     super(`Not found: ${path}`)
+  }
+}
+
+export class LicenseError extends Error {
+  constructor(readonly status: number) {
+    super(status === 401 ? "A Ballmac UI Pro licence key is required." : "The Ballmac UI Pro licence key was not accepted.")
   }
 }
 
@@ -237,12 +268,26 @@ const runners = {
 } as const
 export type PackageManager = keyof typeof runners
 
-export function installCommands(names: string[], pm: PackageManager = "npm") {
+const PRO_NO_KEY = "This is a Pro item: the public API has no source for it. Set BALLMAC_LICENSE_KEY in the MCP server's environment to read it, and see https://ui.ballmac.com/docs/pro to install it."
+
+/** The components.json entry for the Pro registry. The shadcn CLI reads BALLMAC_LICENSE_KEY from .env.local or the environment. */
+export const PRO_REGISTRY = {
+  "@ballmac-pro": { url: "https://ui.ballmac.com/r/pro/{name}.json", headers: { Authorization: "Bearer ${BALLMAC_LICENSE_KEY}" } },
+}
+
+/** Install commands. Pro items install through the @ballmac-pro namespace, which needs `proSetup` once. */
+export function installCommands(names: string[], pm: PackageManager = "npm", pro: ReadonlySet<string> = new Set()) {
   const run = runners[pm]
+  const ns = (n: string) => `${pro.has(n) ? "@ballmac-pro" : "@ballmac"}/${n}`
+  const proSetup = names.some((n) => pro.has(n))
+    ? `Pro items need a licence key. Once per project, add to components.json "registries": ${JSON.stringify(PRO_REGISTRY)} and put BALLMAC_LICENSE_KEY=<key> in .env.local.`
+    : undefined
   return {
     setup: `${run} shadcn@latest registry add @ballmac=https://ui.ballmac.com/r/{name}.json`,
-    add: `${run} shadcn@latest add ${names.map((n) => `@ballmac/${n}`).join(" ")}`,
-    byUrl: `${run} shadcn@latest add ${names.map((n) => `https://ui.ballmac.com/r/${n}.json`).join(" ")}`,
+    add: `${run} shadcn@latest add ${names.map(ns).join(" ")}`,
+    // Pro items have no public URL; they always go through the namespace.
+    byUrl: `${run} shadcn@latest add ${names.map((n) => (pro.has(n) ? ns(n) : `https://ui.ballmac.com/r/${n}.json`)).join(" ")}`,
+    ...(proSetup ? { proSetup } : {}),
   }
 }
 
@@ -280,6 +325,7 @@ export async function composePage(catalog: Catalog, intent: string, opts: { pm?:
   if (!sections.length) sections = LANDING
   const [blocks, templates] = await Promise.all([catalog.list({ kind: "block" }), catalog.list({ kind: "template" })])
   const terms = expand(text).filter((t) => t.length > 2)
+  const proSet = new Set([...blocks, ...templates].filter((i) => i.tier === "pro").map((i) => i.name))
   const picked: { section: string; block: Summary }[] = []
   const missing: string[] = []
   for (const section of sections) {
@@ -310,11 +356,11 @@ export async function composePage(catalog: Catalog, intent: string, opts: { pm?:
     .filter((r) => r.s >= 6)
     .sort((a, b) => b.s - a.s)
     .slice(0, 2)
-    .map(({ t }) => ({ name: t.name, title: t.title, description: t.description, pages: t.pages?.map((p) => p.path ?? p.title) ?? [], install: installCommands([t.name], opts.pm).add }))
+    .map(({ t }) => ({ name: t.name, title: t.title, description: t.description, pages: t.pages?.map((p) => p.path ?? p.title) ?? [], install: installCommands([t.name], opts.pm, proSet).add }))
   return {
     sections: picked.map((p) => ({ section: p.section, block: p.block.name, title: p.block.title, description: p.block.description, tier: p.block.tier })),
     missing,
-    commands: installCommands(picked.map((p) => p.block.name), opts.pm),
+    commands: installCommands(picked.map((p) => p.block.name), opts.pm, proSet),
     scaffold,
     templates: templateMatches,
   }

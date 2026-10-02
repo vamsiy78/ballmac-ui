@@ -2,7 +2,7 @@
 
 An [MCP](https://modelcontextprotocol.io) server for [Ballmac UI](https://ui.ballmac.com). It lets Claude, Cursor, VS Code, Windsurf, Codex and any other MCP client search the catalog of components, blocks and templates, read an item's props, keyboard behaviour and source, get the exact install command, and plan whole pages from blocks.
 
-It is read-only: it answers questions and returns commands, and never writes files or runs anything on your machine. No account or API key is needed.
+It is read-only: it answers questions and returns commands, and never writes files or runs anything on your machine. No account or API key is needed for the free catalog.
 
 ## Install
 
@@ -105,6 +105,17 @@ Tools that return lists also return structured content, so clients that support 
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `BALLMAC_UI_URL` | `https://ui.ballmac.com` | The catalog to read, for example a local copy of the site. |
+| `BALLMAC_LICENSE_KEY` | none | A Ballmac UI Pro licence key. With it, `get_item` and `get_examples` return the source of Pro items too. |
+
+## Pro items
+
+Pro items appear in search with `tier: "pro"`. Their install commands use the `@ballmac-pro` namespace, and `get_install_command` returns a `proSetup` line with the `components.json` entry the shadcn CLI needs. To let the agent read Pro source, pass your key to the server:
+
+```bash
+claude mcp add ballmac --env BALLMAC_LICENSE_KEY=your-licence-key -- npx -y @ballmac/mcp
+```
+
+In JSON configs, add `"env": { "BALLMAC_LICENSE_KEY": "your-licence-key" }` next to `args`. The key is only sent to the Ballmac UI site. Setup guide: [ui.ballmac.com/docs/pro](https://ui.ballmac.com/docs/pro).
 
 `npx @ballmac/mcp --help` and `--version` work from a terminal.
 

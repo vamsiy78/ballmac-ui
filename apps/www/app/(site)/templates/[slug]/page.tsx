@@ -3,11 +3,12 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { CodePanel } from "@/components/site/code-panel"
+import { ProBadge, ProNotice } from "@/components/site/pro-notice"
 import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { SectionHeading } from "@/components/site/section-heading"
-import { getItem, getTemplates, itemHref, readSource } from "@/lib/registry"
+import { getItem, getTemplates, itemHref, isPro, namespaceOf, readSource } from "@/lib/registry"
 
 export function generateStaticParams() {
   return getTemplates().map((t) => ({ slug: t.name }))
@@ -35,7 +36,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
           
           
         </nav>
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}</h1>
+        <h1 className="flex items-center gap-3 text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}{isPro(item) && <ProBadge />}</h1>
         <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
       </header>
       {example && (
@@ -44,13 +45,16 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
           pages={pages.map((p) => ({ title: p.title, src: `/preview/${p.example}` }))}
           name={item.name}
           example={example.name}
+          v0={!isPro(item)}
           title={`${item.title} preview`}
           height={900}
           code={
             <div className="space-y-4 p-4">
-              {item.files.map((f) => (
-                <CodePanel key={f.path} code={readSource(f.source)} title={shownPath(f.target)} />
-              ))}
+              {isPro(item) ? (
+                <ProNotice />
+              ) : (
+                item.files.map((f) => <CodePanel key={f.path} code={readSource(f.source)} title={shownPath(f.target)} />)
+              )}
             </div>
           }
         />
@@ -91,7 +95,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
             <div className="flex flex-wrap gap-2">
               {uses.map((u) => (
                 <Link key={u!.name} href={itemHref(u!)} className="bg-muted rounded-md px-2.5 py-1 font-mono text-[12px] hover:underline">
-                  @ballmac/{u!.name}
+                  {namespaceOf(u!.name)}/{u!.name}
                 </Link>
               ))}
             </div>

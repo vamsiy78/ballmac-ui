@@ -25,6 +25,7 @@ export function FramePreview({
   height = 720,
   name,
   example,
+  v0 = true,
   pages,
 }: {
   src: string
@@ -35,6 +36,8 @@ export function FramePreview({
   name?: string
   /** Example name, for Open in v0. */
   example?: string
+  /** Show "Open in v0"; off for Pro items, whose registry JSON needs a licence key. */
+  v0?: boolean
   /** Extra pages of a multi-page template. When given, a page switcher replaces `src`. */
   pages?: { title: string; src: string }[]
 }) {
@@ -140,7 +143,7 @@ export function FramePreview({
               <CopyButton value={command} label="Copy install command" />
             </div>
           )}
-          {example && (
+          {example && v0 && (
             <a
               href={`https://v0.dev/chat/api/open?url=${encodeURIComponent(`${SITE_URL}/r/${example}.json`)}`}
               target="_blank"

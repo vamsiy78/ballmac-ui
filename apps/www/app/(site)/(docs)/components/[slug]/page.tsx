@@ -4,6 +4,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { CodePanel } from "@/components/site/code-panel"
+import { ProBadge, ProNotice } from "@/components/site/pro-notice"
 import { CopyPageButton } from "@/components/site/copy-page-button"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { PreviewTabs } from "@/components/site/preview-tabs"
@@ -12,7 +13,7 @@ import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { SectionHeading } from "@/components/site/section-heading"
 import { Toc } from "@/components/site/toc"
 import { loadExample } from "@/lib/examples"
-import { addCommand, categoryLabels, componentNeighbors, exportsOf, getComponents, getItem, getRelated, isNew, itemHref, readSource } from "@/lib/registry"
+import { addCommand, categoryLabels, componentNeighbors, getComponents, getItem, getRelated, isNew, itemHref, isPro, readSource } from "@/lib/registry"
 
 export function generateStaticParams() {
   return getComponents().map((i) => ({ slug: i.name }))
@@ -33,10 +34,10 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
   const item = getItem((await params).slug)
   if (!item || !getComponents().includes(item)) notFound()
 
-  const mainSource = readSource(item.files[0].source)
+  const pro = isPro(item)
   const importPath = shownPath(item.files[0].target).replace(/^/, "@/").replace(/\.tsx?$/, "")
-  const usage = `import { ${exportsOf(mainSource).join(", ")} } from "${importPath}"`
-  const examples = await Promise.all(item.examples.map(async (e) => ({ ...e, Component: await loadExample(e.name), code: readSource(e.source) })))
+  const usage = `import { ${item.exports.join(", ")} } from "${importPath}"`
+  const examples = await Promise.all(item.examples.map(async (e) => ({ ...e, Component: await loadExample(e.name), code: pro ? "" : readSource(e.source) })))
   const [first, ...rest] = examples
   const related = getRelated(item)
 
@@ -73,7 +74,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
           </nav>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-2.5">
-              <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}</h1>
+              <h1 className="flex items-center gap-3 text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}{pro && <ProBadge />}</h1>
               {isNew(item) && <span className="bg-chart-1/12 rounded-full px-2 py-0.5 text-xs font-semibold">New</span>}
             </div>
             <div className="flex items-center gap-1.5">
@@ -94,7 +95,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
         </header>
 
         {first?.Component && (
-          <PreviewTabs name={item.name} example={first.name} preview={<first.Component />} code={<CodePanel code={first.code} className="rounded-none border-0" />} />
+          <PreviewTabs name={item.name} example={first.name} v0={!pro} preview={<first.Component />} code={pro ? <ProNotice className="m-4" /> : <CodePanel code={first.code} className="rounded-none border-0" />} />
         )}
 
         <section className="space-y-5">
@@ -120,7 +121,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
                 <div key={e.name} className="space-y-4">
                   <h3 id={e.name} className="scroll-mt-24 font-semibold tracking-tight">{e.title}</h3>
                   {e.description && <p className="text-muted-foreground -mt-2 text-sm">{e.description}</p>}
-                  <PreviewTabs minHeight={340} example={e.name} preview={<e.Component />} code={<CodePanel code={e.code} className="rounded-none border-0" />} />
+                  <PreviewTabs minHeight={340} example={e.name} v0={!pro} preview={<e.Component />} code={pro ? <ProNotice className="m-4" /> : <CodePanel code={e.code} className="rounded-none border-0" />} />
                 </div>
               ) : null
             )}
@@ -197,7 +198,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
           <Toc sections={sections} />
           <div className="space-y-2 border-t pt-6 text-[13px]">
             <p className="text-foreground text-xs font-medium">Resources</p>
-            <a href={`/r/${item.name}.json`} className="text-muted-foreground hover:text-foreground block">Registry JSON</a>
+            {!pro && <a href={`/r/${item.name}.json`} className="text-muted-foreground hover:text-foreground block">Registry JSON</a>}
             {first && <a href={`/preview/${first.name}`} className="text-muted-foreground hover:text-foreground block">Full-screen preview</a>}
             <Link href="/docs/mcp" className="text-muted-foreground hover:text-foreground block">Install with an agent</Link>
           </div>
