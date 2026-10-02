@@ -1,7 +1,9 @@
 # Publishes @ballmac/mcp to npm.
 # Trigger: push a tag named mcp-v<version> (for example mcp-v1.0.0) that matches packages/mcp/package.json,
 # or run it by hand from the Actions tab. Needs the NPM_TOKEN repository secret (an npm automation or
-# granular token with publish rights on the @ballmac scope). Publishes with provenance.
+# granular token with publish rights on the @ballmac scope).
+# Provenance (the "built and signed by GitHub Actions" badge on npm) only works from a public repository,
+# so it switches on by itself when this repository is public.
 name: Release MCP
 
 on:
@@ -36,6 +38,7 @@ jobs:
           test "mcp-v$version" = "${GITHUB_REF_NAME}" || { echo "Tag ${GITHUB_REF_NAME} does not match package version $version"; exit 1; }
       - run: pnpm run build
       - run: pnpm test
-      - run: npm publish --provenance --access public
+      - name: Publish
+        run: npm publish --access public ${{ github.event.repository.private == false && '--provenance' || '' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
