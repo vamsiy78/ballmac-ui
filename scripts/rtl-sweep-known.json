@@ -166,5 +166,13 @@
   {
     "prefix": "logo-cloud-pro-4",
     "reason": "The rings are always turning, so two captures never match; the layout is symmetric."
+  },
+  {
+    "prefix": "blog-pro-7",
+    "reason": "Code, commands and line numbers are left-to-right inside by design."
+  },
+  {
+    "prefix": "blog-pro-8",
+    "reason": "The character counter and relative times are kept left to right; the difference is only just over the threshold."
   }
 ]
