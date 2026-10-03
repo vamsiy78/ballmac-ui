@@ -14,7 +14,7 @@ What is built and what still needs the owner. Everything marked **Owner** cannot
 
 ## Owner checklist
 
-1. **Choose the payment provider** (Polar or Lemon Squeezy). Create a product with a licence key benefit.
+1. **Payment provider.** Polar, Lemon Squeezy and Dodo Payments are supported (`BALLMAC_LICENSE_PROVIDER` = `polar`, `lemonsqueezy` or `dodopayments`). For Dodo Payments: create the Pro product with the licence key feature on, set `BALLMAC_LICENSE_PROVIDER=dodopayments`, buy it once in test mode (`DODO_MODE=test`) and run `pnpm launch:check --live --key <that key>`. The adapter was written from Dodo's public licence-validate call and could not be run against Dodo from the build environment, so this live check is the proof. It also prints which fields Dodo answers with: if the answer does not name the product, `DODO_PRODUCT_IDS` cannot restrict keys, so sell Pro from a Dodo business where Pro is the only licensed product (a licence key for any other product of that business would unlock Pro).
 2. **Decide the prices and what Team means.** The site shows no price until you set the variables below. Nothing is invented.
 3. **Write the Pro licence terms** (yourself or with a lawyer) and publish them. Set `NEXT_PUBLIC_PRO_LICENSE_URL`.
 4. **Create `PRO_REPO_TOKEN`**: a fine-grained GitHub personal access token, Repository access limited to `vamsiy78/ballmac-ui-pro`, permission Contents read-only, with an expiry. Put a reminder in your calendar before it expires; builds fail loudly when it does.
@@ -27,6 +27,7 @@ What is built and what still needs the owner. Everything marked **Owner** cannot
 | `BALLMAC_LICENSE_PROVIDER` | `polar` or `lemonsqueezy` |
 | Polar: `POLAR_ORGANIZATION_ID`, `POLAR_BENEFIT_IDS` | from the Polar dashboard. The benefit IDs matter: without them any key from your organisation unlocks Pro |
 | Lemon Squeezy: `LEMONSQUEEZY_STORE_ID`, `LEMONSQUEEZY_PRODUCT_IDS` | from the Lemon Squeezy dashboard, same warning |
+| Dodo Payments: `DODO_PRODUCT_IDS` (optional), `DODO_MODE` | product ids from the Dodo dashboard if the validate answer names the product (see step 1); leave `DODO_MODE` empty for live |
 | `NEXT_PUBLIC_PRO_CHECKOUT_URL`, `NEXT_PUBLIC_PRO_PRICE` | the checkout link and price in whole dollars |
 | `NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL`, `NEXT_PUBLIC_PRO_TEAM_PRICE` | only if you sell Team |
 | `NEXT_PUBLIC_PRO_LICENSE_URL` | link to the licence terms |

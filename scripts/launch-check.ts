@@ -23,7 +23,8 @@ export function evaluate({ env, proSource, proBuilt, production }: CheckInput): 
 
   need(proSource > 0, `Pro source present (${proSource} items)`)
   need(proBuilt > 0 && proBuilt >= proSource, `Private registry built (${proBuilt} files for ${proSource} items)`)
-  need(provider === "lemonsqueezy" || provider === "polar", `Licence provider configured (${provider || "none"})`)
+  const dodoName = provider === "dodopayments" || provider === "dodo"
+  need(provider === "lemonsqueezy" || provider === "polar" || dodoName, `Licence provider configured (${provider || "none"})`)
   if (provider === "lemonsqueezy") {
     need(env.LEMONSQUEEZY_STORE_ID, "LEMONSQUEEZY_STORE_ID set")
     need(env.LEMONSQUEEZY_PRODUCT_IDS, "LEMONSQUEEZY_PRODUCT_IDS set (otherwise any key from your store unlocks Pro)")
@@ -31,6 +32,10 @@ export function evaluate({ env, proSource, proBuilt, production }: CheckInput): 
   if (provider === "polar") {
     need(env.POLAR_ORGANIZATION_ID, "POLAR_ORGANIZATION_ID set")
     need(env.POLAR_BENEFIT_IDS, "POLAR_BENEFIT_IDS set (otherwise any key from your organisation unlocks Pro)")
+  }
+  if (dodoName) {
+    need(env.DODO_MODE !== "test" || !production, "DODO_MODE is not \"test\" in production")
+    need(env.DODO_PRODUCT_IDS, "DODO_PRODUCT_IDS set (otherwise any licence key from this Dodo account unlocks Pro; confirm with --live that the answer names the product)", "warn")
   }
   need(!env.BALLMAC_PRO_TEST_KEYS || !production, "BALLMAC_PRO_TEST_KEYS empty in production (ignored by the server, but remove it)", "warn")
   const checkout = env.NEXT_PUBLIC_PRO_CHECKOUT_URL
@@ -53,6 +58,15 @@ async function live(env: Record<string, string | undefined>, key?: string) {
     if (key) {
       const good = await v(key)
       out.push(good.valid ? { level: "ok", msg: "provider accepts the supplied key" } : { level: "fail", msg: `provider rejected the supplied key: ${good.reason}` })
+    }
+    // Dodo's validate answer may or may not name the product. Show what it contains so product restriction can be judged.
+    const provider = (env.BALLMAC_LICENSE_PROVIDER ?? "").toLowerCase()
+    if ((provider === "dodopayments" || provider === "dodo") && key) {
+      const base = env.DODO_API_URL ?? (env.DODO_MODE === "test" ? "https://test.dodopayments.com" : "https://live.dodopayments.com")
+      const res = await fetch(`${base}/licenses/validate`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ license_key: key }) })
+      const body = (await res.json().catch(() => ({}))) as Record<string, unknown>
+      const named = Object.keys(body).some((k) => /product/i.test(k))
+      out.push({ level: named ? "ok" : "warn", msg: `Dodo answer fields: ${Object.keys(body).join(", ") || "(none)"}${named ? "" : ". It does not name the product, so DODO_PRODUCT_IDS cannot restrict keys: sell Pro from a Dodo business where Pro is the only licensed product"}` })
     }
   } catch (e) {
     out.push({ level: "fail", msg: `provider unreachable: ${(e as Error).message}` })

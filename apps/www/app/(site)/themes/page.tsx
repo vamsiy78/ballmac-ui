@@ -4,7 +4,7 @@ import { ThemePage } from "./theme-page"
 
 export const metadata: Metadata = {
   title: "Theme builder",
-  description: "Twelve free shadcn themes and a live theme builder. Change hue, radius, density and font on real components, check WCAG contrast in light and dark, then copy the CSS or install with the CLI.",
+  description: "Twelve free shadcn themes and a live builder. Change hue, radius, density and font on real components, check contrast in light and dark, then install.",
   alternates: { canonical: "/themes" },
 }
 

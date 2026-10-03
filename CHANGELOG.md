@@ -1,0 +1,40 @@
+# Changelog
+
+New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
+
+## 2026-10-03: Ballmac UI Pro and the first public release
+
+- Ballmac UI Pro: 150 premium blocks (heroes, features, pricing, dashboards, app screens, ecommerce, content, sign-in and onboarding, marketing extras), all with light, dark and right-to-left support
+- A private registry for Pro items, installed with the shadcn CLI and the MCP server using a licence key
+- Beacon SaaS, the first Pro starter app: sign-in, workspaces with teams and invitations, Stripe billing, a dashboard and API keys
+- Figma design tokens (W3C format) for all 13 themes, plus capture tooling for building a Figma library
+- @ballmac/mcp 1.0 on npm: search the catalog, read when to use each item and get the install command from your agent
+- A designed 404 and error page, tidier page titles and descriptions across the site, and stricter security headers
+
+## 2026-10-02: Themes, right-to-left, translations and image slots
+
+- Twelve free themes and a live builder: change hue, radius, density and font, check contrast in light and dark, then install
+- Right-to-left support across components, blocks and templates, with an RTL toggle on every preview
+- Built-in text moved behind one translation provider, with the full key list available as JSON
+- Heroes, features, cards, galleries and templates take an image or media prop with required alt text and dark-mode variants
+
+## 2026-10-01: Templates, blocks and a full audit
+
+- Seventeen templates with their own look, from product sites to admin apps, docs, stores and a podcast
+- Sixty-three free blocks grouped by purpose, from marketing sections to application screens
+- Desktop and device components: windows, docks, menu bars, Finder-style browsing, Launchpad, lock screen and device frames
+- Audit fixes: page weight cut from 7.5 to 11.8 MB of JavaScript down to 1.3 to 2.0 MB, hydration fixes for visitors who prefer reduced motion, focus rings and pinned dependency versions
+
+## 2026-09-30: Forms, data, SaaS patterns and AI interfaces
+
+- Forms: date and range pickers, currency, phone, tags, multi-select, stepper and signature pad
+- Data display: calendar, data table, charts, carousel, drawer and resizable panels
+- SaaS patterns: onboarding checklist, settings panel, usage meter, billing card, plan selector and notification center
+- AI interfaces: chat messages, reasoning, tool calls, citations, a prompt box, agent plans and approval cards
+
+## 2026-09-28: Ballmac UI preview
+
+- Registry at ui.ballmac.com/r with the Ballmac theme and motion presets
+- Primitives, motion, AI interface and developer components
+- Blocks and a launch-page template
+- Docs for installation, the CLI and registry, and MCP

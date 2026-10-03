@@ -9,7 +9,7 @@ export default function WordRotateDemo() {
       <span className="rounded-full border bg-background px-3 py-1 font-mono text-xs text-muted-foreground">
         v3.0 · now with branch previews
       </span>
-      <h1 className="mt-5 text-4xl font-semibold tracking-[-0.035em] sm:text-6xl">
+      <h2 className="mt-5 text-4xl font-semibold tracking-[-0.035em] sm:text-6xl">
         Ship{" "}
         <WordRotate
           words={["faster", "safer", "together"]}
@@ -17,7 +17,7 @@ export default function WordRotateDemo() {
         />
         <br />
         without the pager.
-      </h1>
+      </h2>
       <p className="mt-4 max-w-md text-balance text-muted-foreground">
         Previews, rollbacks and logs in one calm place, so releases stop being events.
       </p>

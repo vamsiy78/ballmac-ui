@@ -1,6 +1,6 @@
 /**
  * Licence checks for Ballmac UI Pro, with no Next.js imports so it can be tested on its own.
- * Providers: Lemon Squeezy or Polar (both are merchants of record and issue licence keys), plus test keys for development.
+ * Providers: Lemon Squeezy, Polar or Dodo Payments (all are merchants of record and issue licence keys), plus test keys for development.
  */
 export type LicenseResult = { valid: boolean; reason?: string }
 
@@ -13,6 +13,11 @@ export type LicenseEnv = {
   POLAR_ORGANIZATION_ID?: string
   POLAR_BENEFIT_IDS?: string
   POLAR_API_URL?: string
+  /** Dodo Payments: "test" uses test.dodopayments.com, anything else the live API. */
+  DODO_MODE?: string
+  DODO_API_URL?: string
+  /** When set, the validate answer must name one of these products, otherwise the key is refused. */
+  DODO_PRODUCT_IDS?: string
 }
 
 const VALID_TTL = 10 * 60 * 1000
@@ -64,6 +69,32 @@ export function createLicenseValidator(env: LicenseEnv, fetchImpl: typeof fetch 
     return { valid: true }
   }
 
+  /**
+   * Dodo Payments: POST /licenses/validate with the key; the answer says whether it is valid. Dodo's public validate call
+   * needs no API key. If the answer also names the product, DODO_PRODUCT_IDS restricts which products unlock Pro. When
+   * DODO_PRODUCT_IDS is set and the answer names no product, keys are refused rather than accepted unchecked.
+   */
+  async function dodo(key: string): Promise<LicenseResult> {
+    const base = env.DODO_API_URL ?? (env.DODO_MODE === "test" ? "https://test.dodopayments.com" : "https://live.dodopayments.com")
+    const res = await fetchImpl(`${base}/licenses/validate`, {
+      method: "POST",
+      headers: { accept: "application/json", "content-type": "application/json" },
+      body: JSON.stringify({ license_key: key }),
+      signal: AbortSignal.timeout(10_000),
+    })
+    if (res.status >= 400 && res.status < 500) return { valid: false, reason: "This licence key is not valid." }
+    if (!res.ok) throw new Error(`Dodo Payments returned ${res.status}`)
+    const data = (await res.json().catch(() => ({}))) as { valid?: boolean; product_id?: string; product?: { product_id?: string; id?: string } }
+    if (data.valid !== true) return { valid: false, reason: "This licence key is not valid." }
+    const products = list(env.DODO_PRODUCT_IDS)
+    if (products.length) {
+      const product = data.product_id ?? data.product?.product_id ?? data.product?.id
+      if (!product) return { valid: false, reason: "This licence key could not be matched to a product." }
+      if (!products.includes(String(product))) return { valid: false, reason: "This licence key is for another product." }
+    }
+    return { valid: true }
+  }
+
   /** Checks a key. Answers are cached: ten minutes when valid, one minute when not. Provider outages are not cached. */
   return async function validate(rawKey: string | null | undefined): Promise<LicenseResult> {
     const key = (rawKey ?? "").trim()
@@ -75,6 +106,7 @@ export function createLicenseValidator(env: LicenseEnv, fetchImpl: typeof fetch 
     let result: LicenseResult
     if (provider === "lemonsqueezy") result = await lemonSqueezy(key)
     else if (provider === "polar") result = await polar(key)
+    else if (provider === "dodopayments" || provider === "dodo") result = await dodo(key)
     else return { valid: false, reason: "Licence checks are not configured yet." }
     if (cache.size >= MAX_CACHE) cache.delete(cache.keys().next().value!)
     cache.set(key, { result, until: now() + (result.valid ? VALID_TTL : INVALID_TTL) })

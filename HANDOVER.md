@@ -164,6 +164,8 @@ That is about 180 new items, reaching roughly 240. Blocks (pricing-2, signup-1, 
 
 
 
+**Public release push (2026-10-03).** Added: designed 404, error and global-error pages; SEO helpers (`lib/seo.ts`) so every title and description fits search snippets; canonical on `/`; `pnpm seo:audit` (all sitemap pages: title, description, canonical, h1, OG image loads; 502 pass); security headers (CSP `frame-ancestors/base-uri/form-action/object-src`, HSTS, Permissions-Policy, no `X-Powered-By`); Dodo Payments licence provider (unverified live, see `LAUNCH.md`); real changelog data shared by the site and `CHANGELOG.md` (`pnpm changelog`, checked by a test); demo copy no longer claims Ballmac Pro features, fake keys renamed `*_EXAMPLE_NOT_REAL`, duplicate h1 removed from three demos; `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, issue and PR templates, dependabot; `RELEASE.md` runbook. Owner-only items are in `LAUNCH.md` and `RELEASE.md`. Nothing is merged to `main`.
+
 ## 7. Lessons already paid for (avoid these)
 
 - **No `asChild` in JSX.** The shadcn CLI rewrites it for Base UI projects and breaks Radix files. `pnpm check` fails on it.

@@ -33,9 +33,9 @@ function Landing() {
           Release 3.0 is out
           <ArrowRight className="size-3.5 rtl:rotate-180" aria-hidden="true" />
         </span>
-        <h1 className="mt-6 text-[64px] leading-[1.02] font-semibold tracking-[-0.04em]">
+        <h2 className="mt-6 text-[64px] leading-[1.02] font-semibold tracking-[-0.04em]">
           Ship calmer software.
-        </h1>
+        </h2>
         <p className="mt-5 max-w-[560px] text-[18px] text-muted-foreground">
           Previews for every branch, rollbacks in one click, and logs that read like a story.
         </p>

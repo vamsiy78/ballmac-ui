@@ -2,25 +2,13 @@ import type { Metadata } from "next"
 
 import { DocsPage } from "@/components/site/docs-page"
 import { DocsShell } from "@/components/site/docs-shell"
+import { changelog as entries } from "@/lib/changelog"
 
 export const metadata: Metadata = {
   title: "Changelog",
   description: "What's new in Ballmac UI: new components, blocks and templates, and changes to existing items.",
   alternates: { canonical: "/changelog" },
 }
-
-const entries = [
-  {
-    date: "2026-09-28",
-    title: "Ballmac UI preview",
-    items: [
-      "Registry at ui.ballmac.com/r with the Ballmac theme and motion presets",
-      "Primitives, motion, AI interface and developer components",
-      "Blocks and a launch-page template",
-      "Docs for installation, the CLI and registry, and MCP",
-    ],
-  },
-]
 
 export default function ChangelogPage() {
   return (

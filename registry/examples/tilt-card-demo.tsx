@@ -28,7 +28,7 @@ export default function TiltCardDemo() {
       <TiltCard
         tabIndex={0}
         role="group"
-        aria-label="Ballmac Pro membership card, member Jordan Avery, since 2024"
+        aria-label="Acme membership card, member Jordan Avery, since 2024"
         maxTilt={14}
         className="aspect-[1.586] w-full max-w-[360px] rounded-[22px] border-0 bg-primary text-primary-foreground shadow-[0_30px_60px_-24px_rgb(0_0_0/0.55),0_0_0_1px_rgb(255_255_255/0.06)_inset]"
       >

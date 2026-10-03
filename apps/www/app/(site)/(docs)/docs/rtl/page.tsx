@@ -7,7 +7,7 @@ import fixed from "@/lib/generated/rtl-exceptions.json"
 
 export const metadata: Metadata = {
   title: "Right-to-left (RTL)",
-  description: "Ballmac UI components, blocks and templates mirror for Arabic, Hebrew, Persian and Urdu: logical CSS, mirrored icons, direction-aware keyboard handling and an RTL toggle on every preview.",
+  description: "Components, blocks and templates mirror for Arabic, Hebrew, Persian and Urdu: logical CSS, mirrored icons, direction-aware keys and an RTL toggle on every preview.",
   alternates: { canonical: "/docs/rtl" },
 }
 

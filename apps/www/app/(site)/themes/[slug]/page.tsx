@@ -1,3 +1,4 @@
+import { seoDescription, seoTitle } from "@/lib/seo"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getPreset, PRESETS } from "@ballmac-ui/theme-engine"
@@ -14,7 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/themes/[slug]">):
   if (!preset) return {}
   return {
     title: `${preset.title} theme for shadcn and Tailwind`,
-    description: `${preset.description} Free; preview it on real components and install with the shadcn CLI.`,
+    description: seoDescription(`${preset.description} Free; preview it on real components and install with the shadcn CLI.`),
     alternates: { canonical: `/themes/${preset.slug}` },
   }
 }

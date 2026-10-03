@@ -1,4 +1,5 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react"
+import type { Metadata } from "next"
 import Link from "next/link"
 
 import { buttonVariants } from "@/components/ballmac/button"
@@ -10,6 +11,8 @@ import { LazyMount } from "@/components/site/lazy-mount"
 import { loadExample } from "@/lib/examples"
 import { blockGroups, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
 import { cn } from "@/lib/utils"
+
+export const metadata: Metadata = { alternates: { canonical: "/" } }
 
 // The collection as an asymmetric bento: two large anchors (desktop top left, devices bottom right),
 // a tall AI tile, a wide motion strip and small tiles filling the gaps. Each shows a real example.

@@ -9,6 +9,12 @@ npx shadcn@latest add @ballmac/button
 
 Files install into `components/ballmac/`, so they never overwrite your shadcn/ui components.
 
+- **Free items (MIT):** components, blocks, templates and themes, each with examples, accessibility notes and RTL support.
+- **Pro:** a private registry behind a licence key (`@ballmac-pro`), plus the Beacon SaaS starter and the Figma token kit.
+- **AI ready:** `llms.txt`, per-item JSON at `/api/v1/items/*` and the `@ballmac/mcp` server.
+
+Docs and the full catalogue: https://ui.ballmac.com. Release notes: [`CHANGELOG.md`](CHANGELOG.md).
+
 ## Repository
 
 | Path | What |
@@ -45,6 +51,11 @@ On a new machine, install the browser once with
 2. Add `<name>.meta.ts` next to it with `defineItem({...})`: description, category, dependencies, examples, AI notes, and `source` if any code came from elsewhere.
 3. Add examples under `registry/examples/`.
 4. Run `pnpm build:registry && pnpm check && pnpm smoke && pnpm a11y`.
+
+## Contributing and security
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Report vulnerabilities privately as
+described in [`SECURITY.md`](SECURITY.md).
 
 ## License
 

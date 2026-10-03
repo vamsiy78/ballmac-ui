@@ -1,3 +1,4 @@
+import { seoDescription, seoTitle } from "@/lib/seo"
 import type { Metadata } from "next"
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
@@ -19,7 +20,7 @@ export const dynamicParams = false
 export async function generateMetadata({ params }: PageProps<"/blocks/[slug]">): Promise<Metadata> {
   const item = getItem((await params).slug)
   if (!item) return {}
-  return { title: `${item.title}: React + Tailwind block`, description: item.description, alternates: { canonical: `/blocks/${item.name}` } }
+  return { title: seoTitle(item.title, `${item.title}: React + Tailwind block`), description: seoDescription(item.description), alternates: { canonical: `/blocks/${item.name}` } }
 }
 
 export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">) {

@@ -6,7 +6,7 @@ export default function SnippetTabsVariables() {
       <SnippetTabs
         lineNumbers
         title="Your first request"
-        variables={{ api_key: "sk_test_4eC39HqLyjWDarjtT1zdp7dc", project: "prj_8f3a1c92e7" }}
+        variables={{ api_key: "sk_test_EXAMPLE_NOT_REAL", project: "prj_8f3a1c92e7" }}
         snippets={[
           {
             label: "cURL",

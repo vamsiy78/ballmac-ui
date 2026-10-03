@@ -3,6 +3,7 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   transpilePackages: ["@ballmac-ui/metadata", "@ballmac-ui/theme-engine"],
   productionBrowserSourceMaps: false,
+  poweredByHeader: false,
   // The private Pro registry route reads the Pro build from disk at request time.
   outputFileTracingIncludes: { "/r/pro/\\[name\\]": ["./.registry-pro/**/*"], "/r/pro/starters/\\[file\\]": ["./.registry-pro/starters/**/*"], "/r/pro/kits/\\[file\\]": ["./.registry-pro/kits/**/*"] },
   async redirects() {
@@ -31,6 +32,11 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          // Only this site may frame its pages (the previews are same-origin iframes); no plugins; forms post to this site only.
+          { key: "Content-Security-Policy", value: "frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'" },
+          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
+          // Camera and microphone stay available to this site because the voice and recording component previews use them.
+          { key: "Permissions-Policy", value: "camera=(self), microphone=(self), geolocation=(), payment=(), usb=(), interest-cohort=()" },
         ],
       },
     ]

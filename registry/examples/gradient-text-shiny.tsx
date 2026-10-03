@@ -4,7 +4,7 @@ export default function GradientTextShiny() {
   return (
     <div className="flex flex-col items-center gap-6 text-center">
       <GradientText as="h2" variant="shiny" className="text-5xl font-bold tracking-[-0.04em]">
-        Ballmac Pro
+        Acme Plus
       </GradientText>
       <GradientText
         variant="shiny"
@@ -13,7 +13,7 @@ export default function GradientTextShiny() {
         duration={1.2}
         className="text-sm font-medium"
       >
-        Lifetime updates included
+        New every week
       </GradientText>
     </div>
   )

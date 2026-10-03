@@ -1,0 +1,15 @@
+name: Item or feature request
+description: Suggest a new component, block, template or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What would you like
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What you do today instead
+      description: Existing libraries or workarounds you have tried

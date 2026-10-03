@@ -8,7 +8,7 @@ import messages from "@/lib/generated/messages.json"
 
 export const metadata: Metadata = {
   title: "Translating Ballmac UI (i18n)",
-  description: "Translate every built-in string, set the locale for dates and numbers, and ship Arabic, Hebrew, German or any language with one provider. The full key list is free to download.",
+  description: "Translate every built-in string, set the locale for dates and numbers, and ship any language with one provider. The full key list is free to download.",
   alternates: { canonical: "/docs/i18n" },
 }
 

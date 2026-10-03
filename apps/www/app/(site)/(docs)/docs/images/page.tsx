@@ -5,7 +5,7 @@ import { DocsPage } from "@/components/site/docs-page"
 
 export const metadata: Metadata = {
   title: "Using your own images",
-  description: "Drop your product screenshots and photos into heroes, features, cards, galleries and templates with one image prop. Alt text, aspect ratios, lazy loading and dark-mode variants are built in.",
+  description: "Drop screenshots and photos into heroes, features, cards and templates with one image prop. Alt text, aspect ratios and dark-mode variants are built in.",
   alternates: { canonical: "/docs/images" },
 }
 

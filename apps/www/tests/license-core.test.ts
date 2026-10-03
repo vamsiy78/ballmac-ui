@@ -78,4 +78,35 @@ describe("licence validation", () => {
     expect(keyFromHeaders(new Headers({ "x-ballmac-license": "xyz" }))).toBe("xyz")
     expect(keyFromHeaders(new Headers())).toBeNull()
   })
+
+  it("validates with Dodo Payments", async () => {
+    let url = ""
+    let body = ""
+    const dodo = (async (u: string, init?: RequestInit) => {
+      url = u
+      body = String(init?.body)
+      return json({ valid: true })
+    }) as typeof fetch
+    const live = createLicenseValidator({ BALLMAC_LICENSE_PROVIDER: "dodopayments" }, dodo)
+    expect(await live("key-1")).toEqual({ valid: true })
+    expect(url).toBe("https://live.dodopayments.com/licenses/validate")
+    expect(JSON.parse(body)).toEqual({ license_key: "key-1" })
+    await createLicenseValidator({ BALLMAC_LICENSE_PROVIDER: "dodo", DODO_MODE: "test" }, dodo)("key-2")
+    expect(url).toBe("https://test.dodopayments.com/licenses/validate")
+  })
+
+  it("rejects invalid Dodo Payments keys, and treats a provider error as an outage", async () => {
+    const env = { BALLMAC_LICENSE_PROVIDER: "dodopayments" }
+    expect(await createLicenseValidator(env, (async () => json({ valid: false })) as typeof fetch)("k")).toEqual({ valid: false, reason: "This licence key is not valid." })
+    expect((await createLicenseValidator(env, (async () => json({ message: "not found" }, 404)) as typeof fetch)("k")).valid).toBe(false)
+    await expect(createLicenseValidator(env, (async () => json({}, 503)) as typeof fetch)("k")).rejects.toThrow(/503/)
+  })
+
+  it("restricts Dodo Payments to the configured products and fails closed when the answer names none", async () => {
+    const env = { BALLMAC_LICENSE_PROVIDER: "dodopayments", DODO_PRODUCT_IDS: "pdt_pro" }
+    expect((await createLicenseValidator(env, (async () => json({ valid: true, product_id: "pdt_pro" })) as typeof fetch)("k")).valid).toBe(true)
+    expect((await createLicenseValidator(env, (async () => json({ valid: true, product: { product_id: "pdt_pro" } })) as typeof fetch)("k")).valid).toBe(true)
+    expect((await createLicenseValidator(env, (async () => json({ valid: true, product_id: "pdt_other" })) as typeof fetch)("k")).reason).toMatch(/another product/)
+    expect((await createLicenseValidator(env, (async () => json({ valid: true })) as typeof fetch)("k")).reason).toMatch(/could not be matched/)
+  })
 })

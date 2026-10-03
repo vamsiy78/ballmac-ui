@@ -10,6 +10,8 @@
     "starter:pack": "tsx scripts/starter-pack.ts",
     "figma:tokens": "tsx scripts/figma-tokens.ts",
     "figma:capture": "tsx scripts/figma-capture.ts",
+    "seo:audit": "tsx scripts/seo-audit.ts",
+    "changelog": "tsx scripts/changelog.ts",
     "verify:pro": "tsx scripts/verify-pro.ts",
     "launch:check": "tsx scripts/launch-check.ts",
     "build:registry": "tsx scripts/build-registry.ts",
