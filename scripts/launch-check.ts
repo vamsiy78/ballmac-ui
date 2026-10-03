@@ -44,7 +44,7 @@ export function evaluate({ env, proSource, proBuilt, production }: CheckInput): 
   const team = env.NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL
   need(!team || (team.startsWith("https://") && env.NEXT_PUBLIC_PRO_TEAM_PRICE), "Team checkout URL and price set together", "warn")
   need(env.NEXT_PUBLIC_PRO_LICENSE_URL?.startsWith("https://"), "NEXT_PUBLIC_PRO_LICENSE_URL points at the Pro licence terms")
-  if (process.env.CI) need(env.PRO_REPO_TOKEN, "PRO_REPO_TOKEN available to CI")
+  if (env.CI) need(env.PRO_REPO_TOKEN, "PRO_REPO_TOKEN available to CI")
   return out
 }
 
