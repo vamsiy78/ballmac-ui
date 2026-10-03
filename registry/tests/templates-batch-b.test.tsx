@@ -273,6 +273,8 @@ describe("Auth Kit", () => {
     expect(screen.getByRole("heading", { name: "Name your workspace" })).toBeInTheDocument()
     expect(screen.getByText("Your address: fieldnote-goods.keystone.app")).toBeInTheDocument()
     await user.click(screen.getByRole("button", { name: /Continue/ }))
+    // Focus moves to the new step's heading on the next frame; let it settle before typing.
+    await waitFor(() => expect(screen.getByRole("heading", { name: "Invite your team" })).toHaveFocus())
     await user.type(screen.getByLabelText("Email addresses"), "not-an-email")
     await user.click(screen.getByRole("button", { name: /Send invitations/ }))
     expect(screen.getByText(/doesn’t look like an email/)).toBeInTheDocument()

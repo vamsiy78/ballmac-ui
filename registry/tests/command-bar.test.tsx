@@ -41,6 +41,8 @@ describe("CommandBar", () => {
     expect(await screen.findByText("Dark")).toBeInTheDocument();
     expect(screen.getByText("Change theme…", { selector: "[aria-current=page]" })).toBeInTheDocument();
     expect(screen.queryByText("Invite teammate")).not.toBeInTheDocument();
+    // Focus returns to the field on the next frame; Backspace goes to whatever has focus, so wait for it.
+    await waitFor(() => expect(screen.getByRole("combobox")).toHaveFocus());
     await user.keyboard("{Backspace}");
     expect(await screen.findByText("Invite teammate")).toBeInTheDocument();
     expect(onTheme).not.toHaveBeenCalled();
