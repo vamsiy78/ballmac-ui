@@ -6,6 +6,7 @@
     "dev": "turbo run dev --filter=@ballmac-ui/www",
     "build": "turbo run build",
     "pro:fetch": "tsx scripts/fetch-pro.ts",
+    "starter:vendor": "tsx scripts/starter-vendor.ts",
     "verify:pro": "tsx scripts/verify-pro.ts",
     "launch:check": "tsx scripts/launch-check.ts",
     "build:registry": "tsx scripts/build-registry.ts",

@@ -54,6 +54,8 @@
     "../../registry/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "../../registry/**/node_modules",
+    "../../registry/pro/starters"
   ]
 }
