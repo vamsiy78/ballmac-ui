@@ -107,6 +107,22 @@ async function runtime(base: string, key: string | undefined, names: string[], f
     const pub = await get(`/r/${probe}.json`)
     pub.status === 404 ? ok("/r/<pro-name> is not public") : fail(`/r/${probe}.json → ${pub.status} (want 404)`)
   }
+  const startersDir = join(ROOT, "registry/pro/starters")
+  const starters = existsSync(startersDir) ? readdirSync(startersDir).filter((n) => existsSync(join(startersDir, n, "package.json"))) : []
+  for (const starter of starters) {
+    const path = `/r/pro/starters/${starter}.tar.gz`
+    const anon = await get(path)
+    anon.status === 401 ? ok(`${path} without key → 401`) : fail(`${path} without key → ${anon.status} (want 401)`)
+    const wrong = await get(path, "definitely-not-a-real-key-0000")
+    wrong.status === 403 ? ok(`${path} with bad key → 403`) : fail(`${path} with bad key → ${wrong.status} (want 403)`)
+    if (key) {
+      const good = await get(path, key)
+      const bytes = good.status === 200 ? new Uint8Array(await good.arrayBuffer()) : null
+      bytes && bytes[0] === 0x1f && bytes[1] === 0x8b && bytes.length > 10_000 ? ok(`${path} with key → ${Math.round(bytes.length / 1024)} KB archive`) : fail(`${path} with key → ${good.status} or not a gzip archive`)
+    }
+    const open = await get(`/starters/${starter}.tar.gz`)
+    open.status === 404 ? ok(`/starters/${starter}.tar.gz is not public`) : fail(`/starters/${starter}.tar.gz → ${open.status} (want 404)`)
+  }
   for (const path of ["/api/v1/index.json", "/llms.txt", ...names.slice(0, 5).flatMap((n) => [`/api/v1/items/${n}.json`, `/components/${n}`, `/preview/${n}`])]) {
     const res = await get(path)
     if (!res.ok) { if (!path.startsWith("/preview") && !path.startsWith("/components")) fail(`${path} → ${res.status}`); continue }

@@ -37,6 +37,16 @@ export default function ProDocsPage() {
       <p>Pro items use the <code>@ballmac-pro</code> namespace. Their page shows the exact command.</p>
       <CodePanel lang="bash" code="npx shadcn@latest add @ballmac-pro/<name>" />
       <p>Free items keep working as before, and a Pro item can depend on free ones.</p>
+      <h2>Starter apps</h2>
+      <p>
+        A starter is a complete app you download and own. <strong>Beacon SaaS</strong> is a Next.js app with sign-in, workspaces with
+        teams and invitations, Stripe billing, a dashboard, settings and API keys. Download it with the same key:
+      </p>
+      <CodePanel lang="bash" code={`mkdir my-app && curl -fsSL -H "Authorization: Bearer $BALLMAC_LICENSE_KEY" ${SITE_URL}/r/pro/starters/beacon-saas.tar.gz | tar -xz -C my-app --strip-components=1 && cd my-app && pnpm install && pnpm dev`} />
+      <p>
+        It runs on an embedded database in development, so there is nothing else to install. The README in the download covers
+        customising it, billing and deployment.
+      </p>
       <h2>With the MCP server</h2>
       <p>
         Give the Ballmac MCP server your key and it can read Pro items and give your agent the right install commands.

@@ -9,6 +9,7 @@ What is built and what still needs the owner. Everything marked **Owner** cannot
 - `pnpm verify:pro` scans the built site for Pro source and checks git history for Pro paths. With `--base-url` it also checks gating: 401 without a key, 403 with a bad key, 200 with a good key, Pro names not public.
 - `pnpm launch:check` lists what is missing in the environment (`--production` to treat gaps as failures, `--live` to call the provider).
 - `.github/workflows/ci.yml` runs the full gate on every push and pull request, and the leak scan when `PRO_REPO_TOKEN` is a repository secret.
+- Starter apps are packed into the private build (`pnpm starter:pack`, run by `pnpm build:registry`) and downloaded with the licence key from `/r/pro/starters/<name>.tar.gz`. `pnpm starter:pack beacon-saas --verify` proves a fresh copy installs, lints, typechecks, passes its tests and builds.
 - The pricing page shows a price only when the owner sets one, lists only what exists today (150 blocks, private registry), and shows the Team plan only when its checkout URL and price are set.
 
 ## Owner checklist

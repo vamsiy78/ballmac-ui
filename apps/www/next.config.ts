@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@ballmac-ui/metadata", "@ballmac-ui/theme-engine"],
   productionBrowserSourceMaps: false,
   // The private Pro registry route reads the Pro build from disk at request time.
-  outputFileTracingIncludes: { "/r/pro/\\[name\\]": ["./.registry-pro/**/*"] },
+  outputFileTracingIncludes: { "/r/pro/\\[name\\]": ["./.registry-pro/**/*"], "/r/pro/starters/\\[file\\]": ["./.registry-pro/starters/**/*"] },
   async redirects() {
     return [{ source: "/docs/licensing", destination: "/license", permanent: true }]
   },

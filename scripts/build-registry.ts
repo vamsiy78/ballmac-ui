@@ -8,7 +8,7 @@
  * Env: REGISTRY_URL (default https://ui.ballmac.com), used for registry dependencies.
  */
 import { execFileSync } from "node:child_process"
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { join, relative } from "node:path"
 
 import { SCHEMA_VERSION } from "@ballmac-ui/metadata"
@@ -162,6 +162,14 @@ shadcnBuild("registry.json", join(WWW, "public/r"))
 if (pro.length) {
   writeRegistry(join(ROOT, "registry-pro.json"), pro)
   shadcnBuild("registry-pro.json", join(WWW, ".registry-pro"))
+  // Pro starter apps are packed into the private build too, served only with a licence key (see /r/pro/starters).
+  const startersDir = join(ROOT, "registry/pro/starters")
+  rmSync(join(WWW, ".registry-pro/starters"), { recursive: true, force: true })
+  if (existsSync(startersDir)) {
+    for (const starter of readdirSync(startersDir).filter((n) => existsSync(join(startersDir, n, "package.json")))) {
+      execFileSync("npx", ["tsx", "scripts/starter-pack.ts", starter, "--out", "apps/www/.registry-pro/starters", "--latest"], { cwd: ROOT, stdio: "inherit" })
+    }
+  }
 } else {
   // No Pro source in this checkout: clear any earlier Pro build so removed items are not served.
   rmSync(join(WWW, ".registry-pro"), { recursive: true, force: true })
