@@ -9,7 +9,7 @@
  * Left alone on purpose: `left-1/2` and `right-1/2` (centering with a translate is symmetric), and anything listed in
  * `scripts/rtl-exceptions.json` with a reason. Directional icons (arrows and chevrons) must carry an `rtl:` class.
  */
-import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs"
+import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs"
 import { join, relative } from "node:path"
 
 const ROOT = join(import.meta.dirname, "..")
@@ -145,7 +145,7 @@ function scan(file: string, code: string): Finding[] {
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const fix = process.argv.includes("--fix")
-  const files = DIRS.flatMap((d) => walk(join(ROOT, d)))
+  const files = DIRS.filter((d) => existsSync(join(ROOT, d))).flatMap((d) => walk(join(ROOT, d)))
   const problems: Finding[] = []
   const manualAll: string[] = []
   let changed = 0

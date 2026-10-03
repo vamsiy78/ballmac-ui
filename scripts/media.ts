@@ -6,7 +6,7 @@
  *
  * A line with `media-ignore` in a comment is skipped. Small avatars and favicons in components are out of scope.
  */
-import { readFileSync, readdirSync, statSync } from "node:fs"
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
 import { join, relative } from "node:path"
 
 const ROOT = join(import.meta.dirname, "..")
@@ -24,7 +24,7 @@ function walk(dir: string): string[] {
 }
 
 const bad: string[] = []
-for (const scope of SCOPES)
+for (const scope of SCOPES.filter((s) => existsSync(join(ROOT, s))))
   for (const file of walk(join(ROOT, scope))) {
     readFileSync(file, "utf8")
       .split("\n")
