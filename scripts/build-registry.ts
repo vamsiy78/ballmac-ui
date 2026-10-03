@@ -170,6 +170,13 @@ if (pro.length) {
       execFileSync("npx", ["tsx", "scripts/starter-pack.ts", starter, "--out", "apps/www/.registry-pro/starters", "--latest"], { cwd: ROOT, stdio: "inherit" })
     }
   }
+  // The Figma design tokens (W3C format) for every theme, as a licensed download.
+  const kits = join(WWW, ".registry-pro/kits")
+  rmSync(kits, { recursive: true, force: true })
+  mkdirSync(join(kits, "ballmac-figma-tokens"), { recursive: true })
+  execFileSync("npx", ["tsx", "scripts/figma-tokens.ts", "--out", "apps/www/.registry-pro/kits/ballmac-figma-tokens"], { cwd: ROOT, stdio: "inherit" })
+  execFileSync("tar", ["-czf", join(kits, "ballmac-figma-tokens.tar.gz"), "-C", kits, "ballmac-figma-tokens"], { stdio: "inherit" })
+  rmSync(join(kits, "ballmac-figma-tokens"), { recursive: true, force: true })
 } else {
   // No Pro source in this checkout: clear any earlier Pro build so removed items are not served.
   rmSync(join(WWW, ".registry-pro"), { recursive: true, force: true })

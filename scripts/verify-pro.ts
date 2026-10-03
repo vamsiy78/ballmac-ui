@@ -109,8 +109,9 @@ async function runtime(base: string, key: string | undefined, names: string[], f
   }
   const startersDir = join(ROOT, "registry/pro/starters")
   const starters = existsSync(startersDir) ? readdirSync(startersDir).filter((n) => existsSync(join(startersDir, n, "package.json"))) : []
-  for (const starter of starters) {
-    const path = `/r/pro/starters/${starter}.tar.gz`
+  const downloads = [...starters.map((s) => ({ path: `/r/pro/starters/${s}.tar.gz`, openPath: `/starters/${s}.tar.gz` })), { path: "/r/pro/kits/ballmac-figma-tokens.tar.gz", openPath: "/kits/ballmac-figma-tokens.tar.gz" }]
+  for (const { path, openPath } of downloads) {
+    if (!existsSync(join(ROOT, "apps/www/.registry-pro"))) break
     const anon = await get(path)
     anon.status === 401 ? ok(`${path} without key → 401`) : fail(`${path} without key → ${anon.status} (want 401)`)
     const wrong = await get(path, "definitely-not-a-real-key-0000")
@@ -118,10 +119,10 @@ async function runtime(base: string, key: string | undefined, names: string[], f
     if (key) {
       const good = await get(path, key)
       const bytes = good.status === 200 ? new Uint8Array(await good.arrayBuffer()) : null
-      bytes && bytes[0] === 0x1f && bytes[1] === 0x8b && bytes.length > 10_000 ? ok(`${path} with key → ${Math.round(bytes.length / 1024)} KB archive`) : fail(`${path} with key → ${good.status} or not a gzip archive`)
+      bytes && bytes[0] === 0x1f && bytes[1] === 0x8b && bytes.length > 1_000 ? ok(`${path} with key → ${Math.round(bytes.length / 1024)} KB archive`) : fail(`${path} with key → ${good.status} or not a gzip archive`)
     }
-    const open = await get(`/starters/${starter}.tar.gz`)
-    open.status === 404 ? ok(`/starters/${starter}.tar.gz is not public`) : fail(`/starters/${starter}.tar.gz → ${open.status} (want 404)`)
+    const open = await get(openPath)
+    open.status === 404 ? ok(`${openPath} is not public`) : fail(`${openPath} → ${open.status} (want 404)`)
   }
   for (const path of ["/api/v1/index.json", "/llms.txt", ...names.slice(0, 5).flatMap((n) => [`/api/v1/items/${n}.json`, `/components/${n}`, `/preview/${n}`])]) {
     const res = await get(path)

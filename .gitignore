@@ -15,3 +15,4 @@ registry-pro.json
 apps/www/lib/generated
 # private Pro source (git submodule, Phase 3)
 registry/pro
+figma-kit

@@ -39,11 +39,13 @@ Owner to provide later: a Lemon Squeezy or Polar product, its IDs and checkout l
 
 Order by what people buy: heroes (20), features (20), pricing (15), dashboards and app screens (25), testimonials, logos, stats and CTA (20), ecommerce (15), content and blog (15), auth and onboarding (10), marketing extras (10). Same research and quality bar as free blocks. Free blocks stay at 63 plus occasional additions.
 
-## Phase 6: SaaS starter apps (Pro)
+## Phase 6: SaaS starter apps (Pro). First starter, Beacon SaaS, done 2026-10-03
 
-A complete Next.js app per starter: Better Auth (MIT) for sign-in, Drizzle ORM with Postgres, Stripe subscriptions and customer portal, email, settings, team invites, dashboard, marketing site from Ballmac templates. Delivered as a private repository or download after purchase, not through the registry. First starter: "Beacon SaaS"; then an AI app starter.
+A complete Next.js app per starter: Better Auth (MIT) for sign-in and workspaces, Drizzle ORM with Postgres (PGlite in development), Stripe subscriptions and customer portal, React Email with Resend, settings, team invitations, API keys, activity log, dashboard, marketing site from Ballmac blocks. Source lives in the private repository at `starters/beacon-saas`; it is packed into the private build and downloaded with the licence key from `/r/pro/starters/beacon-saas.tar.gz` (not through the registry). Research and findings: `research/pro-saas-starter-and-figma.md`. Next: the AI app starter, when the owner says go.
 
-## Phase 7: Figma kit
+## Phase 7: Figma kit. Sources done 2026-10-03 (tokens and captures; the Figma component library needs a designer)
+
+See `FIGMA-KIT.md`. Tokens for 13 themes ship as a licensed download; `pnpm figma:capture` writes PNG and HTML captures at 1440 and 390 px in light and dark with a manifest.
 
 - Export tokens in the W3C design token format (imports into Figma variables through a plugin) and every block and template as SVG or HTML capture at desktop and mobile widths.
 - Assembling components and auto-layout in Figma needs a designer and Figma itself; this repository provides the sources.

@@ -47,6 +47,12 @@ export default function ProDocsPage() {
         It runs on an embedded database in development, so there is nothing else to install. The README in the download covers
         customising it, billing and deployment.
       </p>
+      <h2>Figma design tokens</h2>
+      <p>
+        Every Ballmac theme as W3C design tokens, with light and dark as separate groups (one Figma variable mode each) and the
+        original colour kept beside each hex value. Import them with a Figma plugin that reads the W3C token format, such as Tokens Studio.
+      </p>
+      <CodePanel lang="bash" code={`curl -fsSL -H "Authorization: Bearer $BALLMAC_LICENSE_KEY" ${SITE_URL}/r/pro/kits/ballmac-figma-tokens.tar.gz | tar -xz`} />
       <h2>With the MCP server</h2>
       <p>
         Give the Ballmac MCP server your key and it can read Pro items and give your agent the right install commands.

@@ -14,6 +14,9 @@ importers:
       '@ballmac-ui/metadata':
         specifier: workspace:*
         version: link:packages/metadata
+      '@ballmac-ui/theme-engine':
+        specifier: workspace:*
+        version: link:packages/theme-engine
       playwright:
         specifier: ^1.63.0
         version: 1.63.0

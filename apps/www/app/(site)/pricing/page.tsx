@@ -49,7 +49,8 @@ const plans: Plan[] = [
       [true, "Beacon SaaS starter app: sign-in, teams, Stripe billing and a dashboard"],
       [true, "Light, dark and RTL support on every block"],
       [false, "More starter apps (planned)"],
-      [false, "Figma kit (planned)"],
+      [true, "Figma design tokens for every theme"],
+      [false, "Figma component library (planned)"],
     ],
   },
   ...(teamOnSale
