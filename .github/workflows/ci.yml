@@ -1,0 +1,50 @@
+# Checks every push and pull request. When the PRO_REPO_TOKEN secret exists, the Pro source is cloned
+# and built too, and the leak scan runs against the built site. Without it, only the free registry is checked.
+name: CI
+
+on:
+  push:
+    branches: [main, preprod]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      PRO_REPO_TOKEN: ${{ secrets.PRO_REPO_TOKEN }}
+      PRO_REPO_REF: ${{ github.ref_name == 'main' && 'main' || 'preprod' }}
+      BALLMAC_PRO_TEST_KEYS: ci-test-key
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Fetch Pro source
+        run: |
+          if [ -z "$PRO_REPO_TOKEN" ]; then echo "::warning::PRO_REPO_TOKEN is not set, so Pro is not built or checked in this run"; fi
+          pnpm pro:fetch
+      - run: pnpm build:registry
+      - run: pnpm check
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - name: Build site
+        run: pnpm --filter @ballmac-ui/www exec next build
+      - name: Leak scan and licence gating
+        run: |
+          pnpm --filter @ballmac-ui/www exec next start -p 3400 &
+          for i in $(seq 1 30); do curl -fs http://localhost:3400/ >/dev/null && break; sleep 2; done
+          pnpm verify:pro --base-url http://localhost:3400 --key ci-test-key

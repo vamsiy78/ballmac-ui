@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm -w build:registry && next dev",
-    "build": "pnpm -w build:registry && next build",
+    "build": "pnpm -w pro:fetch && pnpm -w build:registry && next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "pnpm -w build:registry && next typegen && tsc --noEmit",

@@ -5,6 +5,7 @@
 export type LicenseResult = { valid: boolean; reason?: string }
 
 export type LicenseEnv = {
+  VERCEL_ENV?: string
   BALLMAC_LICENSE_PROVIDER?: string
   BALLMAC_PRO_TEST_KEYS?: string
   LEMONSQUEEZY_STORE_ID?: string
@@ -22,7 +23,8 @@ const list = (v?: string) => (v ?? "").split(",").map((s) => s.trim()).filter(Bo
 
 export function createLicenseValidator(env: LicenseEnv, fetchImpl: typeof fetch = fetch, now: () => number = Date.now) {
   const cache = new Map<string, { result: LicenseResult; until: number }>()
-  const testKeys = new Set(list(env.BALLMAC_PRO_TEST_KEYS))
+  // Test keys never unlock anything on Vercel production, even if the variable is set by mistake.
+  const testKeys = new Set(env.VERCEL_ENV === "production" ? [] : list(env.BALLMAC_PRO_TEST_KEYS))
   const provider = (env.BALLMAC_LICENSE_PROVIDER ?? "").toLowerCase()
 
   async function lemonSqueezy(key: string): Promise<LicenseResult> {

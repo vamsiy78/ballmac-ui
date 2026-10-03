@@ -12,6 +12,11 @@ describe("licence validation", () => {
     expect(calls).toBe(0)
   })
 
+  it("ignores test keys on Vercel production", async () => {
+    const v = createLicenseValidator({ VERCEL_ENV: "production", BALLMAC_PRO_TEST_KEYS: "dev-key" })
+    expect((await v("dev-key")).valid).toBe(false)
+  })
+
   it("rejects empty keys and unconfigured providers", async () => {
     const v = createLicenseValidator({})
     expect((await v("")).valid).toBe(false)

@@ -13,11 +13,16 @@ export const metadata: Metadata = {
 
 const checkout = process.env.NEXT_PUBLIC_PRO_CHECKOUT_URL
 const teamCheckout = process.env.NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL
-const proPrice = process.env.NEXT_PUBLIC_PRO_PRICE ?? "249"
-const teamPrice = process.env.NEXT_PUBLIC_PRO_TEAM_PRICE ?? "799"
-const onSale = Boolean(checkout)
+const proPrice = process.env.NEXT_PUBLIC_PRO_PRICE
+const teamPrice = process.env.NEXT_PUBLIC_PRO_TEAM_PRICE
+const licenseUrl = process.env.NEXT_PUBLIC_PRO_LICENSE_URL
+// Prices and plans appear only when the owner has set them in the environment.
+const onSale = Boolean(checkout && proPrice)
+const teamOnSale = Boolean(onSale && teamCheckout && teamPrice)
 
-const plans = [
+type Plan = { name: string; price: string; note: string; cta: { label: string; href: string; external: boolean } | null; features: [boolean, string][] }
+
+const plans: Plan[] = [
   {
     name: "Free",
     price: "$0",
@@ -35,36 +40,38 @@ const plans = [
   {
     name: "Pro",
     price: onSale ? `$${proPrice}` : "Soon",
-    note: "One person. One-time purchase, lifetime updates.",
+    note: onSale ? "One licence for one person." : "Premium blocks for the shadcn CLI.",
     cta: onSale ? { label: "Get Pro", href: checkout!, external: true } : null,
     features: [
       [true, "Everything in Free"],
-      [true, "Premium blocks and multi-page templates"],
-      [true, "SaaS starter apps with auth, billing and a database (rolling out)"],
-      [true, "Figma kit (rolling out)"],
-      [true, "Early access to new templates"],
+      [true, "150 premium blocks: heroes, features, pricing, dashboards, app screens, ecommerce, content and more"],
       [true, "Private registry for the shadcn CLI and MCP"],
-      [true, "Unlimited projects for you and your clients"],
+      [true, "Light, dark and RTL support on every block"],
+      [false, "SaaS starter apps (planned)"],
+      [false, "Figma kit (planned)"],
     ],
   },
-  {
-    name: "Team",
-    price: onSale ? `$${teamPrice}` : "Soon",
-    note: "Up to 10 people. One-time purchase, lifetime updates.",
-    cta: onSale && teamCheckout ? { label: "Get Team", href: teamCheckout, external: true } : null,
-    features: [
-      [true, "Everything in Pro"],
-      [true, "Licences for up to 10 people"],
-      [true, "One key for CI and shared environments"],
-      [true, "Priority requests and support"],
-    ],
-  },
-] as const
+  ...(teamOnSale
+    ? ([
+        {
+          name: "Team",
+          price: `$${teamPrice}`,
+          note: "For teams that share one licence.",
+          cta: { label: "Get Team", href: teamCheckout!, external: true },
+          features: [
+            [true, "Everything in Pro"] as [boolean, string],
+            [true, "One key for CI and shared environments"],
+          ],
+        },
+      ] satisfies Plan[])
+    : []),
+]
 
 const faqs = [
   { q: "Is the free tier really free for commercial work?", a: "Yes. Use free items in personal, client and commercial projects, and change them however you like. The license notice stays in the source files." },
   { q: "Will free components become paid?", a: "No. Anything released as free stays free. Pro adds new premium items; it doesn't take any away." },
   { q: "How does Pro work with the CLI?", a: "Add your licence key once as an environment variable and the @ballmac-pro registry to components.json. The shadcn CLI and the MCP server then install Pro items the same way as free ones. The Pro guide walks through it." },
+  ...(licenseUrl ? [{ q: "What can I do with a Pro licence?", a: `The Pro licence terms are published at ${licenseUrl}. Read them before you buy.` }] : []),
   { q: "Who handles tax and invoices?", a: "Our payment provider acts as the merchant of record: it charges the right sales tax or VAT and sends you an invoice." },
 ]
 
@@ -80,7 +87,7 @@ export default function PricingPage() {
           The core library is free for any project. Pro adds premium blocks, templates and complete SaaS starters.
         </p>
       </header>
-      <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3">
+      <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-[repeat(var(--plans),minmax(0,1fr))]" style={{ "--plans": plans.length } as React.CSSProperties}>
         {plans.map((plan) => {
           const pro = plan.name === "Pro"
           return (

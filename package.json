@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "turbo run dev --filter=@ballmac-ui/www",
     "build": "turbo run build",
+    "pro:fetch": "tsx scripts/fetch-pro.ts",
+    "verify:pro": "tsx scripts/verify-pro.ts",
+    "launch:check": "tsx scripts/launch-check.ts",
     "build:registry": "tsx scripts/build-registry.ts",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
