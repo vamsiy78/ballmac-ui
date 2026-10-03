@@ -17,6 +17,7 @@ pnpm build:registry && pnpm check
 pnpm lint && pnpm typecheck && pnpm test
 (cd apps/www && npx next build)
 pnpm seo:audit --base-url http://localhost:3400     # after `next start -p 3400`
+pnpm link:crawl --base-url http://localhost:3400    # every link on every sitemap page (drop --no-external on a machine with open internet)
 pnpm verify:pro --base-url http://localhost:3400 --key <test key>
 pnpm launch:check --production                       # with the production env vars loaded
 pnpm a11y                                            # axe, light and dark
@@ -53,7 +54,15 @@ check `/llms.txt`, `/sitemap.xml`, and an Open Graph card in a link preview.
 - Bad licence provider config: unset `BALLMAC_LICENSE_PROVIDER`; the gate then refuses all keys (fails closed) until fixed.
 - MCP: `npm deprecate @ballmac/mcp@<bad version> "<reason>"` and publish a fixed patch version.
 
-## 7. Known, accepted
+## 7. Last verified results (2026-10-03, `preprod`)
+
+- Axe: 1,642 previews in light and dark, 0 findings. RTL sweep: no preview over 30% mirror mismatch, 0 axe findings.
+- Link crawl: 502 pages, 4,041 internal link targets, none broken. External links (about 590) could not be checked from the build sandbox (its network allowlist answers 403); run `pnpm link:crawl` once from a normal machine.
+- `https://github.com/vamsiy78/ballmac-ui` is linked from the home page and docs and answers 404 to the public while the repository is private. Make the repository public before launch, or remove the links.
+- Lighthouse (local production build): accessibility, best practices and SEO 100 on all sampled pages. Performance: desktop 80 to 100; mobile (simulated slow 4G, 4x CPU) 56 to 90, lowest on `/templates` (many live previews, TBT about 900 ms) and about 75 on the home page (LCP 4.6 s).
+- `@ballmac/mcp` end to end: all tools, resources and prompts pass, and Pro source is withheld without a valid key.
+
+## 8. Known, accepted
 
 - `pnpm audit` reports one high advisory (`braces`) reachable only through the shadcn CLI (dev tooling, no patched release).
   Production dependencies of the site and the starter audit clean.
