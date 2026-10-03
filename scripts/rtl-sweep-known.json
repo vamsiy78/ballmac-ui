@@ -174,5 +174,9 @@
   {
     "prefix": "blog-pro-8",
     "reason": "The character counter and relative times are kept left to right; the difference is only just over the threshold."
+  },
+  {
+    "prefix": "auth-pro-3",
+    "reason": "One-time code digits run left to right in every language by design."
   }
 ]
