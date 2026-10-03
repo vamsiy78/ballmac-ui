@@ -32,7 +32,7 @@ What is built and what still needs the owner. Everything marked **Owner** cannot
 | `BALLMAC_PRO_TEST_KEYS` | leave empty |
 
    Vercel project settings: Root Directory `apps/www`, and enable "Include source files outside of the Root Directory in the Build Step" (the build reads `registry/` and `scripts/`).
-7. **Add the GitHub secret** `PRO_REPO_TOKEN` to this repository so CI can build Pro. Optional: `NPM_TOKEN` and tag `mcp-v1.0.0` to publish `@ballmac/mcp`.
+7. **Add the GitHub secret** `PRO_REPO_TOKEN` to this repository so CI can build Pro. `@ballmac/mcp` 1.0.0 is published. Later releases use npm trusted publishing (configured on npmjs.com, no token): bump the version in `packages/mcp/package.json`, then push the tag `mcp-v<version>`.
 8. **Run a real purchase** in the provider's test mode, then verify:
 
 ```bash
