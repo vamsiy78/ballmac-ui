@@ -15,6 +15,7 @@ export function PageCard({
   frame,
   thumb,
   tall = false,
+  priority = false,
   pro = false,
   height = 300,
 }: {
@@ -29,6 +30,8 @@ export function PageCard({
   thumb?: string
   /** Templates are captured taller than blocks. */
   tall?: boolean
+  /** Load the thumbnail at once (for cards visible without scrolling) instead of lazily. */
+  priority?: boolean
   /** Show the Pro label. */
   pro?: boolean
   height?: number
@@ -52,7 +55,8 @@ export function PageCard({
                 width={800}
                 height={tall ? 525 : 400}
                 unoptimized
-                loading="lazy"
+                loading={priority ? "eager" : "lazy"}
+                fetchPriority={priority ? "high" : "auto"}
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className={mode === "light" ? "absolute inset-0 size-full object-cover object-top dark:hidden" : "absolute inset-0 hidden size-full object-cover object-top dark:block"}
               />

@@ -68,8 +68,8 @@ export default async function BlocksPage() {
                 <span className="text-muted-foreground text-sm font-normal tabular-nums">{s.items.length}</span>
               </h3>
               <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2">
-                {s.items.map((b) => (
-                  <PageCard key={b.name} href={`/blocks/${b.name}`} title={b.title} description={b.description} name={b.name} pro={b.tier === "pro"} Preview={b.Preview} frame={b.frame} thumb={b.thumb} />
+                {s.items.map((b, i) => (
+                  <PageCard key={b.name} href={`/blocks/${b.name}`} title={b.title} description={b.description} name={b.name} pro={b.tier === "pro"} Preview={b.Preview} frame={b.frame} thumb={b.thumb} priority={g.id === groups[0]?.id && s.id === g.sections[0]?.id && i < 2} />
                 ))}
               </div>
             </div>
