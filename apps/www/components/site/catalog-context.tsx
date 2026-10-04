@@ -6,6 +6,7 @@ import { Dialog as DialogPrimitive } from "radix-ui"
 import * as React from "react"
 
 import { InstallTabs } from "@/components/site/install-tabs"
+import { ProBadge } from "@/components/site/pro-notice"
 import { usePackageManager, type PM } from "@/components/site/use-package-manager"
 import { cn } from "@/lib/utils"
 
@@ -16,6 +17,8 @@ export type CatalogEntry = {
   category: string
   categoryLabel: string
   isNew: boolean
+  pro: boolean
+  featured: boolean
   commands: Record<PM, string>
 }
 
@@ -27,6 +30,7 @@ type CatalogState = {
   setView: (view: View) => void
   open: (name: string) => void
   entry: (name: string) => CatalogEntry | undefined
+  entries: CatalogEntry[]
 }
 
 // The remembered view, read like the package-manager preference: server HTML is the gallery,
@@ -103,7 +107,7 @@ export function CatalogProvider({
     return () => document.removeEventListener("keydown", onKey)
   }, [current])
 
-  const state = React.useMemo<CatalogState>(() => ({ view, setView, open: setCurrent, entry: (n) => byName.get(n) }), [view, setView, byName])
+  const state = React.useMemo<CatalogState>(() => ({ view, setView, open: setCurrent, entry: (n) => byName.get(n), entries }), [view, setView, byName, entries])
 
   const step = (dir: 1 | -1) => {
     if (!current) return
@@ -257,5 +261,68 @@ export function ViewToggle() {
         </button>
       ))}
     </div>
+  )
+}
+
+function NewBadge() {
+  return <span className="bg-chart-1/12 text-foreground rounded-full px-1.5 py-px text-[10px] font-semibold">New</span>
+}
+
+/** One category's entries in browse order (featured first). */
+function useCategoryEntries(category: string) {
+  const { entries } = useCatalog()
+  return React.useMemo(() => entries.filter((e) => e.category === category).sort((a, b) => Number(b.featured) - Number(a.featured)), [entries, category])
+}
+
+/**
+ * The List and Index views are built here from the entry data, and only while they are showing. Rendering all three views on the
+ * server put every component in the page three times (hundreds of links and buttons to send and hydrate for nothing).
+ */
+export function CatalogList({ category }: { category: string }) {
+  const { view } = useCatalog()
+  const list = useCategoryEntries(category)
+  if (view !== "list") return null
+  return (
+    <ul className="-mx-3 divide-y">
+      {list.map((item) => (
+        <li key={item.name} data-ql={item.name} data-kind="row" className="group hover:bg-accent/50 relative flex items-center gap-4 rounded-lg px-3 py-3 transition-colors">
+          <div className="min-w-0 flex-1 sm:flex sm:items-baseline sm:gap-4">
+            <div className="flex shrink-0 items-center gap-2 sm:w-56">
+              <Link
+                href={`/components/${item.name}`}
+                className="text-[15px] font-medium outline-none after:absolute after:inset-0 after:rounded-lg focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50"
+              >
+                {item.title}
+              </Link>
+              {item.isNew && <NewBadge />}
+              {item.pro && <ProBadge />}
+            </div>
+            <p className="text-muted-foreground mt-0.5 truncate text-sm sm:mt-0">{item.description}</p>
+          </div>
+          <div className="relative z-10 flex shrink-0 gap-1.5 opacity-0 transition-opacity duration-150 group-hover:opacity-100 focus-within:opacity-100 [@media(hover:none)]:opacity-100">
+            <QuickLookButton name={item.name} label={false} />
+            <CopyInstallButton name={item.name} />
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export function CatalogIndex({ category }: { category: string }) {
+  const { view } = useCatalog()
+  const list = useCategoryEntries(category)
+  if (view !== "index") return null
+  return (
+    <ul className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3">
+      {list.map((item) => (
+        <li key={item.name} data-ql={item.name} data-kind="index" className="flex items-center gap-2">
+          <Link href={`/components/${item.name}`} className="hover:text-foreground/80 text-[15px] underline-offset-4 outline-none hover:underline focus-visible:underline">
+            {item.title}
+          </Link>
+          {item.isNew && <span className="bg-chart-1 size-1.5 shrink-0 rounded-full" aria-label="New" role="img" />}
+        </li>
+      ))}
+    </ul>
   )
 }

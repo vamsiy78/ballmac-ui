@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { ChevronRight } from "lucide-react"
 import Link from "@/components/site/link"
 
-import { CatalogProvider, CopyInstallButton, QuickLookButton, ViewToggle, type CatalogEntry } from "@/components/site/catalog-context"
+import { CatalogIndex, CatalogList, CatalogProvider, CopyInstallButton, QuickLookButton, ViewToggle, type CatalogEntry } from "@/components/site/catalog-context"
 import { CatalogDeepLink } from "@/components/site/catalog-deep-link"
 import { FitPreview } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
@@ -68,45 +68,6 @@ function Card({ item }: { item: CatalogItem }) {
   )
 }
 
-/** List row: name and description, with Quick Look and copy. */
-function Row({ item }: { item: CatalogItem }) {
-  return (
-    <li data-ql={item.name} data-kind="row" className="group hover:bg-accent/50 relative flex items-center gap-4 rounded-lg px-3 py-3 transition-colors">
-      <div className="min-w-0 flex-1 sm:flex sm:items-baseline sm:gap-4">
-        <div className="flex shrink-0 items-center gap-2 sm:w-56">
-          <Link
-            href={`/components/${item.name}`}
-            className="text-[15px] font-medium outline-none after:absolute after:inset-0 after:rounded-lg focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50"
-          >
-            {item.title}
-          </Link>
-          {isNew(item) && <NewBadge />}
-          {isPro(item) && <ProBadge />}
-        </div>
-        <p className="text-muted-foreground mt-0.5 truncate text-sm sm:mt-0">{item.description}</p>
-      </div>
-      <div className="relative z-10 flex shrink-0 gap-1.5 opacity-0 transition-opacity duration-150 group-hover:opacity-100 focus-within:opacity-100 [@media(hover:none)]:opacity-100">
-        <QuickLookButton name={item.name} label={false} />
-        <CopyInstallButton name={item.name} />
-      </div>
-    </li>
-  )
-}
-
-/** Index entry: just the name, like a table of contents. Space on it opens Quick Look. */
-function IndexEntry({ item }: { item: CatalogItem }) {
-  return (
-    <li data-ql={item.name} data-kind="index" className="flex items-center gap-2">
-      <Link href={`/components/${item.name}`} className="hover:text-foreground/80 text-[15px] underline-offset-4 outline-none hover:underline focus-visible:underline">
-        {item.title}
-      </Link>
-      {isNew(item) && (
-        <span className="bg-chart-1 size-1.5 shrink-0 rounded-full" aria-label="New" role="img" />
-      )}
-    </li>
-  )
-}
-
 export default async function ComponentsPage() {
   const items: CatalogItem[] = await Promise.all(
     getComponents().map(async (i) => ({ ...i, Preview: i.examples[0] ? (i.tier === "pro" ? proFrame(i.title, i.examples[0].name) : await loadThumb(i.examples[0].name)) : null }))
@@ -121,6 +82,8 @@ export default async function ComponentsPage() {
     category: i.category,
     categoryLabel: categoryLabels[i.category] ?? i.category,
     isNew: isNew(i),
+    pro: isPro(i),
+    featured: Boolean(i.featured),
     commands: Object.fromEntries(packageManagers.map((pm) => [pm, addCommand([i.name], pm)])) as Record<PackageManager, string>,
   }))
   // Live, interactive instances for Quick Look; only the open one is ever mounted.
@@ -152,16 +115,8 @@ export default async function ComponentsPage() {
               <Card key={i.name} item={i} />
             ))}
           </div>
-          <ul className="-mx-3 hidden divide-y group-data-[view=list]/catalog:block">
-            {inCategory(cat).map((i) => (
-              <Row key={i.name} item={i} />
-            ))}
-          </ul>
-          <ul className="hidden grid-cols-2 gap-x-6 gap-y-4 group-data-[view=index]/catalog:grid sm:grid-cols-3">
-            {inCategory(cat).map((i) => (
-              <IndexEntry key={i.name} item={i} />
-            ))}
-          </ul>
+          <CatalogList category={cat} />
+          <CatalogIndex category={cat} />
         </section>
       ))}
     </CatalogProvider>
