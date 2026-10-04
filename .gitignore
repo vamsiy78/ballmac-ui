@@ -10,6 +10,8 @@ next-env.d.ts
 # generated registry output
 apps/www/public/r
 apps/www/public/i18n
+# Pro gallery thumbnails are copied here from the private repo at build time
+apps/www/public/thumbs/pro
 apps/www/.registry-pro
 registry-pro.json
 apps/www/lib/generated

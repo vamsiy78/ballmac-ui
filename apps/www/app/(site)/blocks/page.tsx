@@ -3,6 +3,7 @@ import Link from "@/components/site/link"
 
 import { PageCard } from "@/components/site/page-card"
 import { loadThumb } from "@/lib/examples"
+import { thumbFor } from "@/lib/thumbs"
 import { blockCategoryLabels, blockGroups, getBlocks } from "@/lib/registry"
 
 export const metadata: Metadata = {
@@ -15,8 +16,10 @@ export default async function BlocksPage() {
   const blocks = await Promise.all(
     getBlocks().map(async (b) => {
       const example = b.examples[0]?.name
+      const thumb = thumbFor(b.name, b.tier)
+      if (thumb) return { ...b, Preview: null, frame: undefined, thumb }
       // Pro previews render on the server; in a gallery they go in lazy iframes so their markup is not part of this page.
-      return { ...b, Preview: example && b.tier !== "pro" ? await loadThumb(example) : null, frame: example && b.tier === "pro" ? `/preview/${example}` : undefined }
+      return { ...b, Preview: example && b.tier !== "pro" ? await loadThumb(example) : null, frame: example && b.tier === "pro" ? `/preview/${example}` : undefined, thumb: undefined as string | undefined }
     })
   )
   const groups = blockGroups
@@ -66,7 +69,7 @@ export default async function BlocksPage() {
               </h3>
               <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2">
                 {s.items.map((b) => (
-                  <PageCard key={b.name} href={`/blocks/${b.name}`} title={b.title} description={b.description} name={b.name} pro={b.tier === "pro"} Preview={b.Preview} frame={b.frame} />
+                  <PageCard key={b.name} href={`/blocks/${b.name}`} title={b.title} description={b.description} name={b.name} pro={b.tier === "pro"} Preview={b.Preview} frame={b.frame} thumb={b.thumb} />
                 ))}
               </div>
             </div>

@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 import Link from "@/components/site/link"
 
 import { PageThumb } from "@/components/site/page-thumb"
@@ -11,6 +13,8 @@ export function PageCard({
   name,
   Preview,
   frame,
+  thumb,
+  tall = false,
   pro = false,
   height = 300,
 }: {
@@ -21,6 +25,10 @@ export function PageCard({
   Preview: React.ComponentType | null
   /** A /preview/<name> address. Shown in a lazy iframe instead of `Preview` (used for Pro items, which render on the server). */
   frame?: string
+  /** A captured thumbnail (see `pnpm thumbs`), as a path without mode and extension. Used instead of a live preview. */
+  thumb?: string
+  /** Templates are captured taller than blocks. */
+  tall?: boolean
   /** Show the Pro label. */
   pro?: boolean
   height?: number
@@ -33,9 +41,28 @@ export function PageCard({
           <span className="bg-foreground/15 size-2 rounded-full" />
           <span className="bg-foreground/15 size-2 rounded-full" />
         </div>
-        <PageThumb height={height} title={`${title} preview`} frame={frame}>
-          {Preview ? <Preview /> : null}
-        </PageThumb>
+        {thumb ? (
+          // Both pictures are in the page; the one that does not match the colour scheme is display:none, so the browser never downloads it.
+          <div className="bg-muted/30 relative w-full overflow-hidden" style={{ aspectRatio: tall ? "1280 / 840" : "1280 / 640" }}>
+            {(["light", "dark"] as const).map((mode) => (
+              <Image
+                key={mode}
+                src={`${thumb}.${mode}.webp`}
+                alt={`${title} preview`}
+                width={800}
+                height={tall ? 525 : 400}
+                unoptimized
+                loading="lazy"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className={mode === "light" ? "absolute inset-0 size-full object-cover object-top dark:hidden" : "absolute inset-0 hidden size-full object-cover object-top dark:block"}
+              />
+            ))}
+          </div>
+        ) : (
+          <PageThumb height={height} title={`${title} preview`} frame={frame}>
+            {Preview ? <Preview /> : null}
+          </PageThumb>
+        )}
       </div>
       <div className="mt-3 flex items-baseline justify-between gap-3">
         <Link href={href} className="font-medium outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">

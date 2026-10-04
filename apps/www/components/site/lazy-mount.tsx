@@ -2,6 +2,8 @@
 
 import * as React from "react"
 
+import { enqueueMount } from "@/lib/mount-queue"
+
 /**
  * Mounts children only once the wrapper comes near the viewport. Keeps long galleries of live
  * previews (canvases, WebGL, springs) from hydrating and animating all at once on page load.
@@ -10,7 +12,7 @@ export function LazyMount({
   children,
   className,
   style,
-  rootMargin = "300px",
+  rootMargin = "150px",
 }: {
   children: React.ReactNode
   className?: string
@@ -22,24 +24,20 @@ export function LazyMount({
   React.useEffect(() => {
     const el = ref.current
     if (!el) return
-    let idle = 0
-    let timer = 0
+    let cancel = () => {}
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          io.disconnect()
-          // Mount when the browser is idle, so heavy previews never block the first interaction.
-          if (typeof window.requestIdleCallback === "function") idle = window.requestIdleCallback(() => setShown(true), { timeout: 1200 })
-          else timer = window.setTimeout(() => setShown(true), 200)
-        }
+        if (!entries.some((e) => e.isIntersecting)) return
+        io.disconnect()
+        // Mount in turn, after the page has loaded, so heavy previews never block the first interaction.
+        cancel = enqueueMount(() => setShown(true))
       },
       { rootMargin }
     )
     io.observe(el)
     return () => {
       io.disconnect()
-      if (idle) window.cancelIdleCallback(idle)
-      if (timer) window.clearTimeout(timer)
+      cancel()
     }
   }, [rootMargin])
   return (

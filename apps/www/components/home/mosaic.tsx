@@ -338,7 +338,7 @@ function IslandTile() {
           </span>
           <span className="min-w-0 leading-tight">
             <span className="block text-[12px] font-semibold text-white">Build uploaded</span>
-            <span className="block truncate font-mono text-[10px] text-white/60">acme-2.4.0.dmg</span>
+            <span className="block truncate font-mono text-[10px] text-white/85">acme-2.4.0.dmg</span>
           </span>
         </DynamicIslandView>
       </DynamicIsland>

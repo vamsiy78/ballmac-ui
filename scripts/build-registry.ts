@@ -8,7 +8,7 @@
  * Env: REGISTRY_URL (default https://ui.ballmac.com), used for registry dependencies.
  */
 import { execFileSync } from "node:child_process"
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { join, relative } from "node:path"
 
 import { SCHEMA_VERSION } from "@ballmac-ui/metadata"
@@ -272,3 +272,11 @@ writeFileSync(
 
 console.log(`\n✓ ${free.length} free item(s) → ${freeCount} registry entries (with examples) in apps/www/public/r`)
 if (pro.length) console.log(`✓ ${pro.length} Pro item(s) → apps/www/.registry-pro (private)`)
+
+// Gallery thumbnails of Pro items live in the private repo (registry/pro/thumbs); the site build serves them from public/thumbs/pro (git-ignored).
+const proThumbs = join(ROOT, "registry/pro/thumbs")
+rmSync(join(ROOT, "apps/www/public/thumbs/pro"), { recursive: true, force: true })
+if (existsSync(proThumbs)) {
+  cpSync(proThumbs, join(ROOT, "apps/www/public/thumbs/pro"), { recursive: true })
+  console.log("✓ Pro gallery thumbnails → apps/www/public/thumbs/pro")
+}

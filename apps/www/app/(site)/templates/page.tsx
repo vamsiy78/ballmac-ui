@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 import { PageCard } from "@/components/site/page-card"
 import { loadThumb } from "@/lib/examples"
+import { thumbFor } from "@/lib/thumbs"
 import { getTemplates, templateGroups } from "@/lib/registry"
 
 export const metadata: Metadata = {
@@ -14,7 +15,9 @@ export default async function TemplatesPage() {
   const templates = await Promise.all(
     getTemplates().map(async (t) => {
       const example = t.examples[0]?.name
-      return { ...t, Preview: example && t.tier !== "pro" ? await loadThumb(example) : null, frame: example && t.tier === "pro" ? `/preview/${example}` : undefined }
+      const thumb = thumbFor(t.name, t.tier)
+      if (thumb) return { ...t, Preview: null, frame: undefined, thumb }
+      return { ...t, Preview: example && t.tier !== "pro" ? await loadThumb(example) : null, frame: example && t.tier === "pro" ? `/preview/${example}` : undefined, thumb: undefined as string | undefined }
     })
   )
   const groups = templateGroups
@@ -55,7 +58,7 @@ export default async function TemplatesPage() {
           <div className="grid grid-cols-1 gap-x-6 gap-y-12 lg:grid-cols-2">
             {g.items.map((t) => (
               <div key={t.name}>
-                <PageCard href={`/templates/${t.name}`} title={t.title} description={t.description} name={t.name} pro={t.tier === "pro"} Preview={t.Preview} frame={t.frame} height={420} />
+                <PageCard href={`/templates/${t.name}`} title={t.title} description={t.description} name={t.name} pro={t.tier === "pro"} Preview={t.Preview} frame={t.frame} thumb={t.thumb} tall height={420} />
                 {(t.templatePages.length > 1 || t.fonts.length > 0) && (
                   <p className="text-muted-foreground mt-2 text-xs">
                     {t.templatePages.length > 1 && `${t.templatePages.length} pages`}
