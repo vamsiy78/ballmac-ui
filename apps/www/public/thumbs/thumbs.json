@@ -63,15 +63,18 @@
   "template-auth-kit": "2fe52a2fd570f464",
   "template-docs": "33495295f3d45ec3",
   "template-goods": "4879649e08243578",
-  "template-launch": "cc01798c62493276",
-  "template-ledger": "e069eaa28e115231",
+  "template-launch": "570cdb9bc66249af",
+  "template-ledger": "e692404c0ceecc19",
   "template-muse": "8e1a30b7858994bb",
   "template-northwind": "1675e261c0bc7f2d",
-  "template-orbit": "098bb6716c723772",
+  "template-orbit": "7949031b42a54725",
   "template-pocket": "d33b6b5600a61ccc",
   "template-podcast": "2ea5da772defba3a",
+  "template-portfolio": "757f14ed27433da2",
+  "template-relay": "699f02a30794c714",
   "template-studio": "91a510e6d1af6462",
+  "template-summit": "269b463fd1478ed3",
   "testimonials-1": "21dfe98c82b90dd3",
   "testimonials-2": "a01c8e47b1184d0d",
-  "verify-1": "d4360ef36549bdd9"
+  "verify-1": "60acef6afb927e69"
 }
