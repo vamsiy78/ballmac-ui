@@ -19,3 +19,4 @@ apps/www/lib/generated
 registry/pro
 figma-kit
 .next-*
+.lighthouse
