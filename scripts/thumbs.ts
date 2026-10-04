@@ -6,6 +6,7 @@
  *   pnpm thumbs --base-url http://localhost:3700 --check   list stale or missing thumbnails and exit 1 if there are any
  *     --filter hero-pro,template-orbit   only items whose name starts with one of these
  *     --force                            recapture everything
+ *     --shard 0/4                        take every 4th item (run four processes with 0/4 … 3/4 to go faster)
  *
  * Needs the production site running (with Pro mounted to capture Pro items) and Playwright's Chromium.
  * Free thumbnails go to apps/www/public/thumbs (committed). Pro thumbnails go to registry/pro/thumbs (the private repo) and
@@ -63,7 +64,8 @@ async function main() {
   const force = flag("force")
   const check = flag("check")
   const index = (JSON.parse(readFileSync(join(ROOT, "apps/www/lib/generated/index.json"), "utf8")) as Item[]).filter((i) => !filter || filter.some((f) => i.name.startsWith(f)))
-  const items = thumbItems(index)
+  const [shard, shards] = (arg("shard") ?? "0/1").split("/").map(Number) as [number, number]
+  const items = thumbItems(index).filter((_, n) => n % shards === shard)
 
   const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined })
   const stale: string[] = []
@@ -117,8 +119,9 @@ async function main() {
         writeFileSync(join(dir, thumbFile(item.name, mode)), Buffer.from(webp, "base64"))
         await page.close()
       }
-      manifest[item.name] = hash
-      writeFileSync(join(dir, "thumbs.json"), JSON.stringify(Object.fromEntries(Object.entries(manifest).sort()), null, 2) + "\n")
+      // Read again just before writing: other shards may have recorded their items meanwhile.
+      const latest = { ...readManifest(dir), [item.name]: hash }
+      writeFileSync(join(dir, "thumbs.json"), JSON.stringify(Object.fromEntries(Object.entries(latest).sort()), null, 2) + "\n")
       done++
       if (done % 10 === 0) console.log(`  ${done} captured…`)
     } finally {
