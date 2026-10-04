@@ -4,7 +4,7 @@ import Link from "@/components/site/link"
 
 import { buttonVariants } from "@/components/ballmac/button"
 import { AgentDiagram } from "@/components/home/agent-diagram"
-import { Mosaic } from "@/components/home/mosaic"
+import { LazyMosaic } from "@/components/home/lazy-mosaic"
 import { CopyButton } from "@/components/site/copy-button"
 import { FitPreview, FitWidth } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
@@ -89,7 +89,7 @@ export default async function Home() {
         <h2 id="live-examples" className="sr-only">
           Live examples
         </h2>
-        <Mosaic />
+        <LazyMosaic />
       </section>
 
       {/* Collections */}
