@@ -59,7 +59,7 @@ check `/llms.txt`, `/sitemap.xml`, and an Open Graph card in a link preview.
 - Axe: 1,642 previews in light and dark, 0 findings. RTL sweep: no preview over 30% mirror mismatch, 0 axe findings.
 - Link crawl: 502 pages, 4,041 internal link targets, none broken. External links (about 590) could not be checked from the build sandbox (its network allowlist answers 403); run `pnpm link:crawl` once from a normal machine.
 - `https://github.com/vamsiy78/ballmac-ui` is linked from the home page and docs and answers 404 to the public while the repository is private. Make the repository public before launch, or remove the links.
-- Lighthouse (local production build): accessibility, best practices and SEO 100 on all sampled pages. Performance: desktop 80 to 100; mobile (simulated slow 4G, 4x CPU) 56 to 90, lowest on `/templates` (many live previews, TBT about 900 ms) and about 75 on the home page (LCP 4.6 s).
+- Lighthouse (local production build with Pro mounted, run with `pnpm lighthouse`): accessibility, best practices and SEO 100 on all sampled pages. Performance, desktop 94 to 100. Mobile (simulated slow 4G, 4x CPU) 68 to 95: home 81, `/templates` 80, `/blocks` 71, `/components` 68, `/themes` 77, docs and pricing 92 to 95, blocks and components detail pages 82 to 92, template detail pages 69 to 78 (a whole template runs inside the page). Before the performance pass the same pages scored 51 to 87. Lab numbers move a few points between runs; the script keeps a floor per page.
 - `@ballmac/mcp` end to end: all tools, resources and prompts pass, and Pro source is withheld without a valid key.
 
 ## 8. Known, accepted

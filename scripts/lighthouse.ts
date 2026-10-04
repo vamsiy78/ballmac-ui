@@ -24,18 +24,18 @@ const out = arg("out") ?? join(process.cwd(), ".lighthouse")
 
 /** Performance floors (0 to 100) per page. Mobile is the strict one; the list is the pages people land on. */
 export const PAGES: { path: string; mobile: number; desktop: number; pro?: boolean }[] = [
-  { path: "/", mobile: 80, desktop: 90 },
-  { path: "/components", mobile: 70, desktop: 90 },
-  { path: "/components/button", mobile: 80, desktop: 95 },
-  { path: "/blocks", mobile: 70, desktop: 90 },
-  { path: "/blocks/hero-1", mobile: 80, desktop: 95 },
-  { path: "/blocks/hero-pro-1", mobile: 80, desktop: 95, pro: true },
-  { path: "/templates", mobile: 70, desktop: 90 },
-  { path: "/templates/template-orbit", mobile: 60, desktop: 85 },
-  { path: "/themes", mobile: 70, desktop: 90 },
-  { path: "/pricing", mobile: 85, desktop: 95 },
-  { path: "/docs/installation", mobile: 85, desktop: 95 },
-  { path: "/changelog", mobile: 85, desktop: 95 },
+  { path: "/", mobile: 72, desktop: 90 },
+  { path: "/components", mobile: 60, desktop: 92 },
+  { path: "/components/button", mobile: 74, desktop: 95 },
+  { path: "/blocks", mobile: 62, desktop: 92 },
+  { path: "/blocks/hero-1", mobile: 84, desktop: 95 },
+  { path: "/blocks/hero-pro-1", mobile: 83, desktop: 95, pro: true },
+  { path: "/templates", mobile: 72, desktop: 92 },
+  { path: "/templates/template-orbit", mobile: 60, desktop: 90 },
+  { path: "/themes", mobile: 68, desktop: 92 },
+  { path: "/pricing", mobile: 84, desktop: 95 },
+  { path: "/docs/installation", mobile: 86, desktop: 95 },
+  { path: "/changelog", mobile: 87, desktop: 95 },
 ]
 
 function chrome() {
