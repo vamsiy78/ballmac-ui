@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import { ChevronRight } from "lucide-react"
-import Link from "next/link"
+import Link from "@/components/site/link"
 
 import { CatalogProvider, CopyInstallButton, QuickLookButton, ViewToggle, type CatalogEntry } from "@/components/site/catalog-context"
 import { CatalogDeepLink } from "@/components/site/catalog-deep-link"
 import { FitPreview } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
 import { ProBadge } from "@/components/site/pro-notice"
-import { loadExample } from "@/lib/examples"
+import { loadThumb } from "@/lib/examples"
 import { addCommand, categoryLabels, categoryOrder, getComponents, isNew, isPro, packageManagers, type PackageManager, type SiteItem } from "@/lib/registry"
 
 export const metadata: Metadata = {
@@ -18,6 +18,14 @@ export const metadata: Metadata = {
 
 // Small controls get a smaller design size so their thumbnails aren't lost in empty space.
 const compact = new Set(["primitives", "forms", "feedback"])
+
+/** Pro examples render on the server, so the catalog shows them in a lazy iframe instead of carrying their markup. */
+function proFrame(title: string, example: string) {
+  function Frame() {
+    return <iframe src={`/preview/${example}`} title={`${title} preview`} loading="lazy" tabIndex={-1} className="border-0" style={{ width: 600, height: 450 }} />
+  }
+  return Frame
+}
 
 type CatalogItem = SiteItem & { Preview: React.ComponentType | null }
 
@@ -101,7 +109,7 @@ function IndexEntry({ item }: { item: CatalogItem }) {
 
 export default async function ComponentsPage() {
   const items: CatalogItem[] = await Promise.all(
-    getComponents().map(async (i) => ({ ...i, Preview: i.examples[0] ? await loadExample(i.examples[0].name) : null }))
+    getComponents().map(async (i) => ({ ...i, Preview: i.examples[0] ? (i.tier === "pro" ? proFrame(i.title, i.examples[0].name) : await loadThumb(i.examples[0].name)) : null }))
   )
   const rank = (c: string) => categoryOrder.indexOf(c) + 1 || 99
   const categories = [...new Set(items.map((i) => i.category))].sort((a, b) => rank(a) - rank(b))

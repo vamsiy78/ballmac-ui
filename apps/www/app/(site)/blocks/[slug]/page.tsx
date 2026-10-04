@@ -1,7 +1,7 @@
 import { seoDescription, seoTitle } from "@/lib/seo"
 import type { Metadata } from "next"
 import { ChevronRight } from "lucide-react"
-import Link from "next/link"
+import Link from "@/components/site/link"
 import { notFound } from "next/navigation"
 
 import { CodePanel } from "@/components/site/code-panel"

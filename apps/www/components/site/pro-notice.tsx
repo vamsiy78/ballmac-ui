@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "@/components/site/link"
 import { LockKeyhole } from "lucide-react"
 
 import { buttonVariants } from "@/components/ballmac/button"

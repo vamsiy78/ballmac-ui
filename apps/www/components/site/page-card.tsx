@@ -1,8 +1,7 @@
-import Link from "next/link"
+import Link from "@/components/site/link"
 
-import { LazyMount } from "@/components/site/lazy-mount"
+import { PageThumb } from "@/components/site/page-thumb"
 import { ProBadge } from "@/components/site/pro-notice"
-import { ScaledPreview } from "@/components/site/scaled-preview"
 
 /** A page-sized thumbnail (block or template) in a quiet window frame, with its name and description below. */
 export function PageCard({
@@ -11,19 +10,20 @@ export function PageCard({
   description,
   name,
   Preview,
+  frame,
   pro = false,
   height = 300,
-  scale = 0.46,
 }: {
   href: string
   title: string
   description: string
   name: string
   Preview: React.ComponentType | null
+  /** A /preview/<name> address. Shown in a lazy iframe instead of `Preview` (used for Pro items, which render on the server). */
+  frame?: string
   /** Show the Pro label. */
   pro?: boolean
   height?: number
-  scale?: number
 }) {
   return (
     <div className="group relative">
@@ -33,11 +33,9 @@ export function PageCard({
           <span className="bg-foreground/15 size-2 rounded-full" />
           <span className="bg-foreground/15 size-2 rounded-full" />
         </div>
-        <LazyMount className="relative" style={{ height }} rootMargin="400px">
-          <ScaledPreview scale={scale} height={height} width={1280}>
-            {Preview ? <Preview /> : null}
-          </ScaledPreview>
-        </LazyMount>
+        <PageThumb height={height} title={`${title} preview`} frame={frame}>
+          {Preview ? <Preview /> : null}
+        </PageThumb>
       </div>
       <div className="mt-3 flex items-baseline justify-between gap-3">
         <Link href={href} className="font-medium outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react"
-import Link from "next/link"
+import Link from "@/components/site/link"
 import { notFound } from "next/navigation"
 
 import { CodePanel } from "@/components/site/code-panel"

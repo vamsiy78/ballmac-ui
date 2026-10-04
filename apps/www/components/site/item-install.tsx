@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "@/components/site/link"
 
 import { CodePanel } from "@/components/site/code-panel"
 import { CopyButton } from "@/components/site/copy-button"

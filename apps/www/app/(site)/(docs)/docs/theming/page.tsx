@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import Link from "next/link"
+import Link from "@/components/site/link"
 
 import { CodePanel } from "@/components/site/code-panel"
 import { DocsPage } from "@/components/site/docs-page"

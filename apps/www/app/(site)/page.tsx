@@ -1,6 +1,6 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import type { Metadata } from "next"
-import Link from "next/link"
+import Link from "@/components/site/link"
 
 import { buttonVariants } from "@/components/ballmac/button"
 import { AgentDiagram } from "@/components/home/agent-diagram"
@@ -8,7 +8,7 @@ import { Mosaic } from "@/components/home/mosaic"
 import { CopyButton } from "@/components/site/copy-button"
 import { FitPreview, FitWidth } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
-import { loadExample } from "@/lib/examples"
+import { loadThumb } from "@/lib/examples"
 import { blockGroups, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
 import { cn } from "@/lib/utils"
 
@@ -38,10 +38,10 @@ export default async function Home() {
       ...c,
       label: categoryLabels[c.category] ?? c.category,
       count: components.filter((i) => i.category === c.category).length,
-      Preview: await loadExample(c.example),
+      Preview: await loadThumb(c.example),
     }))
   )
-  const templateCards = await Promise.all([...templates].sort((a, b) => Number(b.featured) - Number(a.featured)).slice(0, 2).reverse().map(async (t) => ({ ...t, Preview: t.examples[0] ? await loadExample(t.examples[0].name) : null })))
+  const templateCards = await Promise.all([...templates].sort((a, b) => Number(b.featured) - Number(a.featured)).slice(0, 2).reverse().map(async (t) => ({ ...t, Preview: t.examples[0] ? await loadThumb(t.examples[0].name) : null })))
   const blockCategoryLinks = blockGroups.map((g) => ({
     id: g.id,
     label: g.label,

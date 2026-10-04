@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "@/components/site/link"
 
 import { ThemeBuilder } from "@/components/themes/theme-builder"
 import { Eyebrow } from "@/components/site/section-heading"

@@ -2,7 +2,7 @@
 
 import { Check, CircleDollarSign, Command, Folder, Mail, MessageCircle, Monitor, Moon, Music2, Rocket, Sparkles, SquareTerminal, StickyNote, Sun, TrendingUp, UploadCloud } from "lucide-react"
 import { motion, useReducedMotion } from "motion/react"
-import Link from "next/link"
+import Link from "@/components/site/link"
 import * as React from "react"
 
 import { Message, MessageAvatar, MessageContent } from "@/components/ballmac/ai-message"

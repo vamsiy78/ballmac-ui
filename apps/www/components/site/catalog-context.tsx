@@ -1,7 +1,7 @@
 "use client"
 
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Columns3, Copy, Eye, LayoutGrid, List, X } from "lucide-react"
-import Link from "next/link"
+import Link from "@/components/site/link"
 import { Dialog as DialogPrimitive } from "radix-ui"
 import * as React from "react"
 

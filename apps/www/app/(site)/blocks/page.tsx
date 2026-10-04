@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
-import Link from "next/link"
+import Link from "@/components/site/link"
 
 import { PageCard } from "@/components/site/page-card"
-import { loadExample } from "@/lib/examples"
+import { loadThumb } from "@/lib/examples"
 import { blockCategoryLabels, blockGroups, getBlocks } from "@/lib/registry"
 
 export const metadata: Metadata = {
@@ -12,7 +12,13 @@ export const metadata: Metadata = {
 }
 
 export default async function BlocksPage() {
-  const blocks = await Promise.all(getBlocks().map(async (b) => ({ ...b, Preview: b.examples[0] ? await loadExample(b.examples[0].name) : null })))
+  const blocks = await Promise.all(
+    getBlocks().map(async (b) => {
+      const example = b.examples[0]?.name
+      // Pro previews render on the server; in a gallery they go in lazy iframes so their markup is not part of this page.
+      return { ...b, Preview: example && b.tier !== "pro" ? await loadThumb(example) : null, frame: example && b.tier === "pro" ? `/preview/${example}` : undefined }
+    })
+  )
   const groups = blockGroups
     .map((g) => ({
       ...g,
@@ -60,7 +66,7 @@ export default async function BlocksPage() {
               </h3>
               <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2">
                 {s.items.map((b) => (
-                  <PageCard key={b.name} href={`/blocks/${b.name}`} title={b.title} description={b.description} name={b.name} pro={b.tier === "pro"} Preview={b.Preview} />
+                  <PageCard key={b.name} href={`/blocks/${b.name}`} title={b.title} description={b.description} name={b.name} pro={b.tier === "pro"} Preview={b.Preview} frame={b.frame} />
                 ))}
               </div>
             </div>

@@ -1,36 +1,13 @@
-import Link from "next/link"
-import { PRESETS } from "@ballmac-ui/theme-engine"
+import Link from "@/components/site/link"
 
-import { CommandMenu, type MenuEntry } from "@/components/site/command-menu"
+import { CommandMenu } from "@/components/site/command-menu"
 import { sidebarGroups } from "@/components/site/docs-shell"
 import { Logo } from "@/components/site/logo"
 import { MainNav } from "@/components/site/main-nav"
 import { MobileNav } from "@/components/site/mobile-nav"
 import { ThemeToggle } from "@/components/site/theme-toggle"
-import { blockCategoryLabels, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
 
 export function SiteHeader() {
-  const entries: MenuEntry[] = [
-    ...getComponents().map((i) => ({
-      name: i.name,
-      title: i.title,
-      description: i.description,
-      group: categoryLabels[i.category] ?? i.category,
-      href: `/components/${i.name}`,
-    })),
-    ...getBlocks().map((b) => ({ name: b.name, title: b.title, description: b.description, group: `Blocks · ${blockCategoryLabels[b.blockCategory ?? ""] ?? ""}`, href: `/blocks/${b.name}` })),
-    ...getTemplates().map((t) => ({ name: t.name, title: t.title, description: t.description, group: "Templates", href: `/templates/${t.name}` })),
-    { name: "themes", title: "Theme builder", description: "Twelve free themes and a live builder with contrast checks.", group: "Docs", href: "/themes" },
-    ...PRESETS.map((p) => ({ name: `theme-${p.slug}`, title: `${p.title} theme`, description: p.tagline, group: "Themes", href: `/themes/${p.slug}` })),
-    { name: "rtl", title: "Right-to-left", description: "Mirror the whole UI for Arabic, Hebrew, Persian and Urdu.", group: "Docs", href: "/docs/rtl" },
-    { name: "i18n", title: "Translations", description: "Translate every built-in string and set the locale.", group: "Docs", href: "/docs/i18n" },
-    { name: "images", title: "Your own images", description: "Drop product images into blocks and templates with one prop.", group: "Docs", href: "/docs/images" },
-    { name: "introduction", title: "Introduction", description: "What Ballmac UI is and how it works.", group: "Docs", href: "/docs" },
-    { name: "registry", title: "CLI & registry", description: "Namespaces, URLs, search, view and updates.", group: "Docs", href: "/docs/registry" },
-    { name: "theming", title: "Theming", description: "Tokens, brand color and dark mode.", group: "Docs", href: "/docs/theming" },
-    { name: "installation", title: "Installation", description: "Set up a project and add your first component.", group: "Docs", href: "/docs/installation" },
-    { name: "mcp", title: "MCP", description: "Let Claude Code, Cursor or VS Code install Ballmac UI for you.", group: "Docs", href: "/docs/mcp" },
-  ]
   return (
     <header className="bg-background/80 supports-[backdrop-filter]:bg-background/70 sticky top-0 z-40 border-b backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-[1440px] items-center gap-2 px-4 sm:px-6">
@@ -44,7 +21,7 @@ export function SiteHeader() {
         <MainNav />
         <div className="ml-auto flex flex-1 items-center justify-end gap-1">
           <div className="mr-1 sm:w-full sm:max-w-72">
-            <CommandMenu entries={entries} />
+            <CommandMenu />
           </div>
           <a
             href="https://github.com/vamsiy78/ballmac-ui"

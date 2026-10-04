@@ -1,6 +1,6 @@
 import { Check, Minus } from "lucide-react"
 import type { Metadata } from "next"
-import Link from "next/link"
+import Link from "@/components/site/link"
 
 import { Button } from "@/components/ballmac/button"
 import { Eyebrow } from "@/components/site/section-heading"

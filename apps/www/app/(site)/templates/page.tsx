@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 import { PageCard } from "@/components/site/page-card"
-import { loadExample } from "@/lib/examples"
+import { loadThumb } from "@/lib/examples"
 import { getTemplates, templateGroups } from "@/lib/registry"
 
 export const metadata: Metadata = {
@@ -11,7 +11,12 @@ export const metadata: Metadata = {
 }
 
 export default async function TemplatesPage() {
-  const templates = await Promise.all(getTemplates().map(async (t) => ({ ...t, Preview: t.examples[0] ? await loadExample(t.examples[0].name) : null })))
+  const templates = await Promise.all(
+    getTemplates().map(async (t) => {
+      const example = t.examples[0]?.name
+      return { ...t, Preview: example && t.tier !== "pro" ? await loadThumb(example) : null, frame: example && t.tier === "pro" ? `/preview/${example}` : undefined }
+    })
+  )
   const groups = templateGroups
     .map((g) => ({ ...g, items: templates.filter((t) => t.templateKind === g.id).sort((a, b) => Number(b.featured) - Number(a.featured) || a.title.localeCompare(b.title)) }))
     .filter((g) => g.items.length > 0)
@@ -50,7 +55,7 @@ export default async function TemplatesPage() {
           <div className="grid grid-cols-1 gap-x-6 gap-y-12 lg:grid-cols-2">
             {g.items.map((t) => (
               <div key={t.name}>
-                <PageCard href={`/templates/${t.name}`} title={t.title} description={t.description} name={t.name} pro={t.tier === "pro"} Preview={t.Preview} height={420} scale={0.5} />
+                <PageCard href={`/templates/${t.name}`} title={t.title} description={t.description} name={t.name} pro={t.tier === "pro"} Preview={t.Preview} frame={t.frame} height={420} />
                 {(t.templatePages.length > 1 || t.fonts.length > 0) && (
                   <p className="text-muted-foreground mt-2 text-xs">
                     {t.templatePages.length > 1 && `${t.templatePages.length} pages`}

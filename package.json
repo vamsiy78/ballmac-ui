@@ -13,6 +13,7 @@
     "link:crawl": "tsx scripts/link-crawl.ts",
     "seo:audit": "tsx scripts/seo-audit.ts",
     "changelog": "tsx scripts/changelog.ts",
+    "lighthouse": "tsx scripts/lighthouse.ts",
     "verify:pro": "tsx scripts/verify-pro.ts",
     "launch:check": "tsx scripts/launch-check.ts",
     "build:registry": "tsx scripts/build-registry.ts",
