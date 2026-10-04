@@ -3,6 +3,14 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2026-10-04",
+    title: "Quire, a second Pro starter, and a new look for Beacon",
+    items: [
+      "Quire: an AI starter that answers from your own documents and shows its sources. Streaming chat with numbered citations that highlight the exact sentence, a document library with full-text search, usage limits per plan, Stripe billing, teams and a public API. It runs without an AI key on a built-in demo model",
+      "Beacon SaaS was redesigned: a new landing page, sign-in and onboarding, and app shell",
+    ],
+  },
+  {
     date: "2026-10-03",
     title: "Ballmac UI Pro and the first public release",
     items: [

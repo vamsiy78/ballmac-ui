@@ -10,7 +10,7 @@ npx shadcn@latest add @ballmac/button
 Files install into `components/ballmac/`, so they never overwrite your shadcn/ui components.
 
 - **Free items (MIT):** components, blocks, templates and themes, each with examples, accessibility notes and RTL support.
-- **Pro:** a private registry behind a licence key (`@ballmac-pro`), plus the Beacon SaaS starter and the Figma token kit.
+- **Pro:** a private registry behind a licence key (`@ballmac-pro`), plus two starter apps (Beacon SaaS and Quire, an AI assistant that cites its sources) and the Figma token kit.
 - **AI ready:** `llms.txt`, per-item JSON at `/api/v1/items/*` and the `@ballmac/mcp` server.
 
 Docs and the full catalogue: https://ui.ballmac.com. Release notes: [`CHANGELOG.md`](CHANGELOG.md).

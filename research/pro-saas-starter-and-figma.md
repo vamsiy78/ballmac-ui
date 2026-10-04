@@ -1,5 +1,7 @@
 # Pro phases 6 and 7: Beacon SaaS starter and Figma kit sources
 
+See also `research/pro-ai-starter.md` for the second starter, Quire (an AI assistant that cites its sources).
+
 Written 2026-10-03. Nothing here copies code from another starter or kit: the pieces are Better Auth, Drizzle, Stripe's official SDK, React Email and Resend (all MIT or Apache-2.0 libraries used through their public APIs) plus Ballmac UI itself.
 
 ## What a SaaS starter has to get right

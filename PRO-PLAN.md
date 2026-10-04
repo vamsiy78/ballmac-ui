@@ -39,9 +39,11 @@ Owner to provide later: a Lemon Squeezy or Polar product, its IDs and checkout l
 
 Order by what people buy: heroes (20), features (20), pricing (15), dashboards and app screens (25), testimonials, logos, stats and CTA (20), ecommerce (15), content and blog (15), auth and onboarding (10), marketing extras (10). Same research and quality bar as free blocks. Free blocks stay at 63 plus occasional additions.
 
-## Phase 6: SaaS starter apps (Pro). First starter, Beacon SaaS, done 2026-10-03
+## Phase 6: SaaS starter apps (Pro). Beacon SaaS done 2026-10-03, Quire (AI) done 2026-10-04
 
 A complete Next.js app per starter: Better Auth (MIT) for sign-in and workspaces, Drizzle ORM with Postgres (PGlite in development), Stripe subscriptions and customer portal, React Email with Resend, settings, team invitations, API keys, activity log, dashboard, marketing site from Ballmac blocks. Source lives in the private repository at `starters/beacon-saas`; it is packed into the private build and downloaded with the licence key from `/r/pro/starters/beacon-saas.tar.gz` (not through the registry). Research and findings: `research/pro-saas-starter-and-figma.md`. Next: the AI app starter, when the owner says go.
+
+Second starter, Quire (`starters/quire-ai`): the same foundations (auth, workspaces, Stripe, API keys, Drizzle) with an AI product on top: streaming chat with citations, a document library searched with Postgres full-text search, per-plan answer limits, Anthropic and OpenAI through the AI SDK and a keyless demo model. Research and design decisions are in `research/pro-ai-starter.md`. More starters (an e-commerce store, a content site) stay planned; each needs its own research note first.
 
 ## Phase 7: Figma kit. Sources done 2026-10-03 (tokens and captures; the Figma component library needs a designer)
 

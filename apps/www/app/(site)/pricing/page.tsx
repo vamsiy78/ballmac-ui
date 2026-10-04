@@ -47,7 +47,7 @@ const plans: Plan[] = [
       [true, "150 premium blocks: heroes, features, pricing, dashboards, app screens, ecommerce, content and more"],
       [true, "Private registry for the shadcn CLI and MCP"],
       [true, "Light, dark and RTL support on every block"],
-      [true, "Beacon SaaS starter app: sign-in, teams, Stripe billing and a dashboard"],
+      [true, "Two starter apps: Beacon SaaS (teams, Stripe billing, dashboard) and Quire (an AI assistant that cites its sources)"],
       [true, "Figma design tokens for every theme"],
       [false, "More starter apps (planned)"],
       [false, "Figma component library (planned)"],

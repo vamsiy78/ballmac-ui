@@ -2,6 +2,11 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
+## 2026-10-04: Quire, a second Pro starter, and a new look for Beacon
+
+- Quire: an AI starter that answers from your own documents and shows its sources. Streaming chat with numbered citations that highlight the exact sentence, a document library with full-text search, usage limits per plan, Stripe billing, teams and a public API. It runs without an AI key on a built-in demo model
+- Beacon SaaS was redesigned: a new landing page, sign-in and onboarding, and app shell
+
 ## 2026-10-03: Ballmac UI Pro and the first public release
 
 - Ballmac UI Pro: 150 premium blocks (heroes, features, pricing, dashboards, app screens, ecommerce, content, sign-in and onboarding, marketing extras), all with light, dark and right-to-left support
