@@ -5,6 +5,8 @@ import Link from "@/components/site/link"
 import { buttonVariants } from "@/components/ballmac/button"
 import { AgentDiagram } from "@/components/home/agent-diagram"
 import { LazyMosaic } from "@/components/home/lazy-mosaic"
+import { FoundingBanner } from "@/components/site/founding-banner"
+import { founding } from "@/lib/founding"
 import { CopyButton } from "@/components/site/copy-button"
 import { FitPreview, FitWidth } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
@@ -50,8 +52,10 @@ export default async function Home() {
   const macCount = components.filter((c) => c.category === "macos").length
   const categoryCount = new Set(components.map((c) => c.category)).size
 
+  const offer = founding()
   return (
     <>
+      {offer && <FoundingBanner offer={offer} />}
       {/* Hero */}
       <section className="mx-auto max-w-[1440px] px-4 pt-16 pb-12 text-center sm:px-6 md:pt-24 md:pb-16">
         <Link

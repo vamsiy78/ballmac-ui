@@ -8,7 +8,7 @@ import { SITE_URL } from "@/lib/site-url"
 
 export const metadata: Metadata = {
   title: "Ballmac UI Pro",
-  description: "Set up Ballmac UI Pro: add your licence key and the private registry, then install Pro blocks, templates and starters with the shadcn CLI or the MCP server.",
+  description: "Set up Ballmac UI Pro: add your licence key and the private registry, then install Pro blocks and starter apps with the shadcn CLI or the MCP server.",
   alternates: { canonical: "/docs/pro" },
 }
 
@@ -101,6 +101,10 @@ export default function ProDocsPage() {
           <code>components.json</code>.
         </li>
       </ul>
+      <p>
+        Still stuck? <Link href="/support?topic=help">Contact support</Link> and include the item name and the error you see. Never send your licence key: we find
+        your purchase from your email.
+      </p>
       <p>
         Pro items are covered by the Ballmac UI Pro licence, described on the <Link href="/license">licence page</Link>.
       </p>

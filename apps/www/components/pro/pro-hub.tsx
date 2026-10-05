@@ -205,6 +205,9 @@ function Library({ licenseKey, downloads, sampleItem, licenseUrl, children }: Pr
             <Link href="/docs/mcp" className={buttonVariants({ size: "sm", variant: "outline" })}>
               MCP server
             </Link>
+            <Link href="/support?topic=help" className={buttonVariants({ size: "sm", variant: "ghost" })}>
+              Get help
+            </Link>
           </div>
         </div>
       </section>

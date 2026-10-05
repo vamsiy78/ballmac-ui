@@ -33,6 +33,8 @@ What is built and what still needs the owner. Everything marked **Owner** cannot
 | `NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL`, `NEXT_PUBLIC_PRO_TEAM_PRICE` | only if you sell Team |
 | `NEXT_PUBLIC_PRO_LICENSE_URL` | link to the licence terms |
 | `PRO_SESSION_SECRET` | 32 or more random characters (`openssl rand -base64 32`), secret. Without it `/pro` cannot log anyone in. Changing it logs every buyer out |
+| `NEXT_PUBLIC_PRO_FOUNDING_LIMIT` | optional, for example `25`: shows the founding price banner (home and pricing) and a note on the Pro card, "first 25 buyers at $49, then the price goes up". It is a notice, not a lock: when the last founding licence is sold, archive or disable the founding payment link in Dodo, put the regular price and link in `NEXT_PUBLIC_PRO_PRICE` and `NEXT_PUBLIC_PRO_CHECKOUT_URL`, and unset this variable |
+| `RESEND_API_KEY`, `RESEND_FROM`, `CONTACT_TO_EMAIL`, `CONTACT_REPLY_TO` | the `/support` form, same setup as ballmac.com. `RESEND_API_KEY` (secret) can be the key ballmac.com uses; `RESEND_FROM` like `Ballmac UI <hello@ballmac.com>` (the domain is already verified in Resend); `CONTACT_TO_EMAIL` (secret) is your private inbox and is never shown; `CONTACT_REPLY_TO` is `hello@ballmac.com`. Mail sent to `hello@ballmac.com` is already forwarded privately by the inbound route on ballmac.com, so the public address needs nothing new. Optional `NEXT_PUBLIC_SUPPORT_EMAIL` changes the address shown on the page |
 | `NEXT_PUBLIC_PRO_PORTAL_URL` | optional: the provider's customer portal, where buyers find their key again. Shown under "I can't find my key" |
 | `BALLMAC_PRO_TEST_KEYS` | leave empty |
 

@@ -113,6 +113,9 @@ export function UnlockCard({ portalUrl }: { portalUrl?: string }) {
                 Open your <a href={portalUrl} className="text-foreground underline underline-offset-4">customer portal</a> to see it again.
               </li>
             )}
+            <li>
+              Still stuck? <a href="/support?topic=license" className="text-foreground underline underline-offset-4">Contact support</a> from the email you bought with.
+            </li>
           </ul>
         </details>
       </form>

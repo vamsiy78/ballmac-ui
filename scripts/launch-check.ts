@@ -51,6 +51,7 @@ export function evaluate({ env, proSource, proBuilt, production }: CheckInput): 
   need(env.NEXT_PUBLIC_PRO_LICENSE_URL?.startsWith("https://"), "NEXT_PUBLIC_PRO_LICENSE_URL points at the Pro licence terms")
   need((env.PRO_SESSION_SECRET ?? "").length >= 32, "PRO_SESSION_SECRET set, 32 characters or more (without it buyers cannot log in on /pro; generate one with: openssl rand -base64 32)")
   need(!env.NEXT_PUBLIC_PRO_PORTAL_URL || env.NEXT_PUBLIC_PRO_PORTAL_URL.startsWith("https://"), "NEXT_PUBLIC_PRO_PORTAL_URL is an https URL (the page where buyers find their key again)", "warn")
+  need(env.RESEND_API_KEY && env.RESEND_FROM && env.CONTACT_TO_EMAIL, "Support form configured (RESEND_API_KEY, RESEND_FROM, CONTACT_TO_EMAIL); without them /support says it is not set up and points to the email address", "warn")
   if (env.CI) need(env.PRO_REPO_TOKEN, "PRO_REPO_TOKEN available to CI")
   return out
 }

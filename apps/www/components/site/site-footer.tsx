@@ -25,6 +25,7 @@ const columns = [
   {
     title: "Resources",
     links: [
+      { href: "/support", label: "Support" },
       { href: "/changelog", label: "Changelog" },
       { href: "/llms.txt", label: "llms.txt" },
       { href: "/r/registry.json", label: "Registry JSON" },

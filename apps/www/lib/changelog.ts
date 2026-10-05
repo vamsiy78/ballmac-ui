@@ -11,6 +11,8 @@ export const changelog: ChangelogEntry[] = [
       "Pro block pages show the real source with copy buttons once you are logged in, while the pages stay public and static for everyone else",
       "A Log in and Get Pro button in the header, which becomes a Pro library link after you log in",
       "Buyers are logged in automatically when they return from checkout, with no key to paste",
+      "A support page for bugs, questions, licence and billing help, and suggestions; messages go to a private inbox and you get a confirmation by email",
+      "Pricing copy corrected: Pro adds 150 blocks and two starter apps (it has no templates)",
     ],
   },
   {
