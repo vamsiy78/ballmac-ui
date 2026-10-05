@@ -1,0 +1,29 @@
+# Tells Bing and other IndexNow search engines about changed pages after every successful production deploy.
+# Run it by hand from the Actions tab with "all" ticked to send every URL in the sitemap.
+name: IndexNow
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      all:
+        description: Send every URL in the sitemap, not only recent changes
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    if: github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm indexnow ${{ inputs.all && '--all' || '' }}

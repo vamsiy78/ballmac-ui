@@ -16,6 +16,8 @@ export const metadata: Metadata = {
     "Crafted React and Tailwind components with native-app motion, accessibility built in and code you own. Install with one command or your AI agent.",
   openGraph: { siteName: "Ballmac UI", type: "website" },
   twitter: { card: "summary_large_image", site: "@ballmacapps" },
+  // Proves to Bing Webmaster Tools that we own the site. Keep it: removing it un-verifies the site.
+  verification: { other: { "msvalidate.01": "F5C35C8FE8CCD8D2C21A4EAD3443CDD0" } },
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

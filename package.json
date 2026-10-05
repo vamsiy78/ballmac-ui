@@ -14,6 +14,7 @@
     "seo:audit": "tsx scripts/seo-audit.ts",
     "changelog": "tsx scripts/changelog.ts",
     "lighthouse": "tsx scripts/lighthouse.ts",
+    "indexnow": "tsx scripts/indexnow.ts",
     "thumbs": "tsx scripts/thumbs.ts",
     "verify:pro": "tsx scripts/verify-pro.ts",
     "launch:check": "tsx scripts/launch-check.ts",
