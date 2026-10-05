@@ -15,7 +15,7 @@ export function SiteHeader() {
         <MobileNav groups={sidebarGroups()} />
         <Link href="/" className="focus-visible:ring-ring/50 mr-3 flex items-center rounded-md outline-none focus-visible:ring-[3px]">
           <span className="sr-only">Ballmac UI home</span>
-          <span aria-hidden="true">
+          <span aria-hidden="true" className="flex">
             <Logo />
           </span>
         </Link>
