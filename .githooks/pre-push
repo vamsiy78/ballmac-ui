@@ -30,6 +30,14 @@ while read -r local_ref local_sha remote_ref remote_sha; do
     echo "pre-push: CI has not passed on ${local_sha:0:7} (status: ${status}). Push it to preprod first and wait for the green check." >&2
     exit 1
   fi
+  # Pro CI lives in the private Pro repository (this repository's logs are public). pro-ci.mode says whether a missing run only warns or blocks.
+  mode=$(cat "$(dirname "$0")/pro-ci.mode" 2>/dev/null || echo warn)
+  pro=$(gh run list --repo vamsiy78/ballmac-ui-pro --workflow ci.yml --limit 50 --json displayTitle,conclusion --jq "[.[] | select(.displayTitle | contains(\"${local_sha}\")) | .conclusion] | if length == 0 then \"no run\" elif any(. == \"success\") then \"success\" else \"failed\" end" 2>/dev/null || echo "unknown")
+  if [ "$pro" != "success" ]; then
+    msg="Pro CI has not passed on ${local_sha:0:7} (${pro}). Run: pnpm pro:ci"
+    if [ "$mode" = "require" ]; then echo "pre-push: ${msg}" >&2; exit 1; fi
+    echo "pre-push: warning: ${msg}" >&2
+  fi
   echo "pre-push: CI is green on ${local_sha:0:7}; pushing to main (this deploys production)."
 done
 exit 0

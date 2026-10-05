@@ -17,7 +17,7 @@ Harassment, insults, threats, sexualised language or imagery, and sustained disr
 ## Enforcement
 
 Maintainers may edit or remove comments, close or lock threads, and block people who break these rules. To raise a
-conduct concern, open an issue asking a maintainer to get in touch, without putting details in it, and we will move the
-conversation somewhere private.
+conduct concern privately, write to hello@ballmac.com with "Conduct" in the subject. Please do not put the details in a public issue
+or pull request. We read every report, keep it confidential, and tell you what we decided.
 
 This applies in the repository's issues, pull requests and discussions, and wherever someone represents the project.

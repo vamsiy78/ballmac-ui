@@ -1,5 +1,6 @@
-# Checks every push and pull request. When the PRO_REPO_TOKEN secret exists, the Pro source is cloned
-# and built too, and the leak scan runs against the built site. Without it, only the free registry is checked.
+# Checks every push and pull request. The Pro source is never checked out here: this repository's logs are public, so everything that
+# needs the Pro source runs in a private workflow in the Pro repository ("Pro CI"). This job still guards against Pro ever being
+# committed to this repository (verify:pro looks at git history).
 name: CI
 
 on:
@@ -18,12 +19,6 @@ jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 40
-    env:
-      PRO_REPO_TOKEN: ${{ secrets.PRO_REPO_TOKEN }}
-      PRO_REPO_REF: ${{ github.ref_name == 'main' && 'main' || 'preprod' }}
-      BALLMAC_PRO_TEST_KEYS: ci-test-key
-      # Throwaway value so the browser login (/pro) can be exercised by verify:pro. Production sets its own secret.
-      PRO_SESSION_SECRET: ci-only-session-secret-not-for-production-use
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,19 +29,12 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Fetch Pro source
-        run: |
-          if [ -z "$PRO_REPO_TOKEN" ]; then echo "::warning::PRO_REPO_TOKEN is not set, so Pro is not built or checked in this run"; fi
-          pnpm pro:fetch
       - run: pnpm build:registry
       - run: pnpm check
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
+      - name: No Pro source in git history
+        run: pnpm verify:pro
       - name: Build site
         run: pnpm --filter @ballmac-ui/www exec next build
-      - name: Leak scan and licence gating
-        run: |
-          pnpm --filter @ballmac-ui/www exec next start -p 3400 &
-          for i in $(seq 1 30); do curl -fs http://localhost:3400/ >/dev/null && break; sleep 2; done
-          pnpm verify:pro --base-url http://localhost:3400 --key ci-test-key
