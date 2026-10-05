@@ -6,7 +6,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
       "cache": false,
-      "passThroughEnv": ["PRO_REPO_TOKEN", "PRO_REPO", "PRO_REPO_REF", "PRO_FORCE_REFRESH", "BALLMAC_REQUIRE_PRO", "VERCEL_ENV", "VERCEL_BRANCH_URL", "REGISTRY_URL"]
+      "passThroughEnv": ["PRO_REPO_TOKEN", "PRO_REPO", "PRO_REPO_REF", "PRO_FORCE_REFRESH", "BALLMAC_REQUIRE_PRO", "VERCEL_ENV", "VERCEL_BRANCH_URL", "REGISTRY_URL", "DODO_MODE"]
     },
     "dev": { "cache": false, "persistent": true },
     "lint": {},

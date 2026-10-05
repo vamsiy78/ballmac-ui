@@ -7,6 +7,7 @@ import { FoundingBanner } from "@/components/site/founding-banner"
 import { CheckoutLink } from "@/components/pro/checkout-link"
 import { Eyebrow } from "@/components/site/section-heading"
 import { founding } from "@/lib/founding"
+import { paymentsLive } from "@/lib/payments"
 import { getBlocks, isPro } from "@/lib/registry"
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ const proPrice = process.env.NEXT_PUBLIC_PRO_PRICE
 const teamPrice = process.env.NEXT_PUBLIC_PRO_TEAM_PRICE
 const licenseUrl = process.env.NEXT_PUBLIC_PRO_LICENSE_URL
 // Prices and plans appear only when the owner has set them in the environment.
-const onSale = Boolean(checkout && proPrice)
+const onSale = Boolean(paymentsLive() && checkout && proPrice)
 const teamOnSale = Boolean(onSale && teamCheckout && teamPrice)
 const offer = founding()
 // The number of Pro blocks comes from the registry when Pro is part of this build.

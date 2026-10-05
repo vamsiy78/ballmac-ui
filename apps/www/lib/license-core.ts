@@ -127,6 +127,8 @@ export function createLicenseValidator(env: LicenseEnv, fetchImpl: typeof fetch 
    * the key is looked up in the keys issued for those products; with neither, keys are refused rather than accepted unchecked.
    */
   async function dodo(key: string): Promise<LicenseResult> {
+    // Production in test mode would accept test purchases as real licences, so it accepts nothing (see lib/payments.ts).
+    if (env.VERCEL_ENV === "production" && env.DODO_MODE === "test") return { valid: false, reason: "Licence checks are not live yet." }
     const res = await fetchImpl(`${dodoBase()}/licenses/validate`, {
       method: "POST",
       headers: { accept: "application/json", "content-type": "application/json" },
