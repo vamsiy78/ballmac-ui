@@ -5,6 +5,7 @@ import { sidebarGroups } from "@/components/site/docs-shell"
 import { Logo } from "@/components/site/logo"
 import { MainNav } from "@/components/site/main-nav"
 import { MobileNav } from "@/components/site/mobile-nav"
+import { ProAccount } from "@/components/pro/pro-account"
 import { ThemeToggle } from "@/components/site/theme-toggle"
 
 export function SiteHeader() {
@@ -42,6 +43,7 @@ export function SiteHeader() {
             </svg>
           </a>
           <ThemeToggle />
+          <ProAccount className="ml-1" />
         </div>
       </div>
     </header>

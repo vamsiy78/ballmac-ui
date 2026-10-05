@@ -5,6 +5,7 @@ import { CopyButton } from "@/components/site/copy-button"
 import { InstallSwitcher } from "@/components/site/install-switcher"
 import { InstallTabs } from "@/components/site/install-tabs"
 import { ProNotice } from "@/components/site/pro-notice"
+import { PRO_REGISTRY_SNIPPET } from "@/lib/pro-snippets"
 import { addCommand, getItem, installCommand, isPro, itemHref, namespaceOf, packageManagers, readSource, SITE_URL, type PackageManager, type SiteItem } from "@/lib/registry"
 
 const perPm = (fn: (pm: PackageManager) => string) =>
@@ -70,16 +71,6 @@ export function ItemInstall({ item }: { item: SiteItem }) {
     />
   )
 }
-
-export const PRO_REGISTRY_SNIPPET = `{
-  "registries": {
-    "@ballmac": "${SITE_URL}/r/{name}.json",
-    "@ballmac-pro": {
-      "url": "${SITE_URL}/r/pro/{name}.json",
-      "headers": { "Authorization": "Bearer \${BALLMAC_LICENSE_KEY}" }
-    }
-  }
-}`
 
 /** npm and registry dependencies, linked. */
 export function ItemDependencies({ item }: { item: SiteItem }) {

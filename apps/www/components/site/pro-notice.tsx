@@ -12,11 +12,11 @@ export function ProNotice({ className = "" }: { className?: string }) {
       </span>
       <div className="min-w-0 flex-1">
         <p className="font-medium">The source is part of Ballmac UI Pro.</p>
-        <p className="text-muted-foreground mt-1 text-sm">Install it with your licence key through the shadcn CLI or the MCP server. You own the code once it is in your project.</p>
+        <p className="text-muted-foreground mt-1 text-sm">Log in with your licence key to read and copy it here, or install it through the shadcn CLI or the MCP server. You own the code once it is in your project.</p>
       </div>
       <div className="flex shrink-0 gap-2">
         <Link href="/pricing" className={buttonVariants({ size: "sm" })}>Get Pro</Link>
-        <Link href="/docs/pro" className={buttonVariants({ size: "sm", variant: "outline" })}>How it works</Link>
+        <Link href="/pro" className={buttonVariants({ size: "sm", variant: "outline" })}>Log in</Link>
       </div>
     </div>
   )

@@ -5,7 +5,7 @@
  *
  * Start the production build first (`pnpm --filter www build && pnpm --filter www start -p 3700`). Numbers from a laptop or CI runner are
  * lab numbers (simulated slow 4G, 4x CPU slowdown on mobile) and move by a few points between runs, so the floors below sit under the
- * scores we measured. Accessibility, best practices and SEO must be 100 everywhere. Exits 1 when any page misses its floor.
+ * scores we measured. Accessibility, best practices and SEO must be 100 everywhere (a page marked noindex on purpose, such as the log in page, scores about 69 on SEO for exactly that reason, so only 60 is required there). Exits 1 when any page misses its floor.
  *
  * Needs Lighthouse (`npx --yes lighthouse`, or set LIGHTHOUSE_BIN) and a Chrome (CHROME_PATH, or the Playwright Chromium if installed).
  * Pro pages are included when the Pro checkout is mounted, because the build then contains them.
@@ -23,7 +23,7 @@ const only = arg("only")
 const out = arg("out") ?? join(process.cwd(), ".lighthouse")
 
 /** Performance floors (0 to 100) per page. Mobile is the strict one; the list is the pages people land on. */
-export const PAGES: { path: string; mobile: number; desktop: number; pro?: boolean }[] = [
+export const PAGES: { path: string; mobile: number; desktop: number; pro?: boolean; noindex?: boolean }[] = [
   { path: "/", mobile: 72, desktop: 90 },
   { path: "/components", mobile: 60, desktop: 92 },
   { path: "/components/button", mobile: 74, desktop: 95 },
@@ -33,6 +33,7 @@ export const PAGES: { path: string; mobile: number; desktop: number; pro?: boole
   { path: "/templates", mobile: 72, desktop: 92 },
   { path: "/templates/template-orbit", mobile: 60, desktop: 90 },
   { path: "/themes", mobile: 68, desktop: 92 },
+  { path: "/pro", mobile: 80, desktop: 95, noindex: true },
   { path: "/pricing", mobile: 84, desktop: 95 },
   { path: "/docs/installation", mobile: 86, desktop: 95 },
   { path: "/changelog", mobile: 87, desktop: 95 },
@@ -86,7 +87,7 @@ async function main() {
     for (const mode of ["mobile", "desktop"] as const) {
       if (only && only !== mode) continue
       const r = run(p.path, mode)
-      const problems = [r.perf < p[mode] ? `performance ${r.perf} < ${p[mode]}` : "", ...(["a11y", "bp", "seo"] as const).filter((k) => r[k] < 100).map((k) => `${k} ${r[k]} < 100`)].filter(Boolean)
+      const problems = [r.perf < p[mode] ? `performance ${r.perf} < ${p[mode]}` : "", ...(["a11y", "bp", "seo"] as const).filter((k) => r[k] < (k === "seo" && p.noindex ? 60 : 100)).map((k) => `${k} ${r[k]} < ${k === "seo" && p.noindex ? 60 : 100}`)].filter(Boolean)
       if (problems.length) failed++
       console.log(`${problems.length ? "FAIL" : "ok  "} ${mode.padEnd(7)} ${p.path.padEnd(28)} perf ${String(r.perf).padStart(3)} a11y ${r.a11y} bp ${r.bp} seo ${r.seo} | FCP ${Math.round(r.fcp)} LCP ${Math.round(r.lcp)} TBT ${Math.round(r.tbt)} CLS ${r.cls.toFixed(3)}${problems.length ? `  <- ${problems.join(", ")}` : ""}`)
     }

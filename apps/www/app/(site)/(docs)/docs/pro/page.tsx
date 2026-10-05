@@ -3,8 +3,8 @@ import Link from "@/components/site/link"
 
 import { CodePanel } from "@/components/site/code-panel"
 import { DocsPage } from "@/components/site/docs-page"
-import { PRO_REGISTRY_SNIPPET } from "@/components/site/item-install"
-import { SITE_URL } from "@/lib/registry"
+import { PRO_REGISTRY_SNIPPET } from "@/lib/pro-snippets"
+import { SITE_URL } from "@/lib/site-url"
 
 export const metadata: Metadata = {
   title: "Ballmac UI Pro",
@@ -20,8 +20,14 @@ export default function ProDocsPage() {
     >
       <h2>1. Get a licence key</h2>
       <p>
-        Buy Pro on the <Link href="/pricing">pricing page</Link>. Your licence key arrives by email and is also in your
-        receipt. Keep it private: anyone with the key can install Pro items.
+        Buy Pro on the <Link href="/pricing">pricing page</Link>. Your licence key arrives by email from our payment partner.
+        Keep it private: anyone with the key can install Pro items.
+      </p>
+      <h2>Prefer to browse? Log in</h2>
+      <p>
+        You do not need the command line to use Pro. <Link href="/pro">Log in with your licence key</Link> to read and copy the code of any
+        Pro block on its page, download the starter apps as a zip, and get install commands with your key already filled in. There is no
+        password and no account: the key is the login, and it is kept in an encrypted cookie in your browser until you log out.
       </p>
       <h2>2. Add the key to your project</h2>
       <p>
@@ -79,12 +85,16 @@ export default function ProDocsPage() {
       <h2>Troubleshooting</h2>
       <ul>
         <li>
+          <strong>I logged in but the code does not show</strong>: reload the page. If you still see the lock, your session ended (for
+          example after you revoked the key); <Link href="/pro">log in again</Link>.
+        </li>
+        <li>
           <strong>401 licence required</strong>: the CLI did not send a key. Check that <code>BALLMAC_LICENSE_KEY</code>{" "}
           is in <code>.env.local</code> and that the <code>@ballmac-pro</code> entry has the <code>headers</code> block.
         </li>
         <li>
           <strong>403 licence invalid</strong>: the key was mistyped or is no longer active. Copy it again from your
-          receipt.
+          purchase email.
         </li>
         <li>
           <strong>Unknown registry @ballmac-pro</strong>: the <code>registries</code> block is missing from{" "}

@@ -4,7 +4,8 @@ import Link from "@/components/site/link"
 import { notFound } from "next/navigation"
 
 import { CodePanel } from "@/components/site/code-panel"
-import { ProBadge, ProNotice } from "@/components/site/pro-notice"
+import { ProCode } from "@/components/pro/pro-code"
+import { ProBadge } from "@/components/site/pro-notice"
 import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { ItemJsonLd } from "@/components/site/item-jsonld"
@@ -53,7 +54,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
           code={
             <div className="space-y-4 p-4">
               {isPro(item) ? (
-                <ProNotice />
+                <ProCode name={item.name} />
               ) : (
                 item.files.map((f) => <CodePanel key={f.path} code={readSource(f.source)} title={shownPath(f.target)} />)
               )}

@@ -5,8 +5,9 @@ import { createHighlighter, type Highlighter } from "shiki"
 import type { ItemMeta } from "@ballmac-ui/metadata"
 import rawIndex from "@/lib/generated/index.json"
 import sources from "@/lib/generated/sources.json"
+import { SITE_URL } from "@/lib/site-url"
 
-export const SITE_URL = "https://ui.ballmac.com"
+export { SITE_URL }
 
 export type PropDoc = { name: string; type: string; required: boolean; default?: string; description?: string }
 export type SiteItem = Omit<ItemMeta, "files" | "examples"> & {

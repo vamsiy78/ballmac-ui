@@ -14,18 +14,22 @@ export function createProGate({
   keyFromHeaders,
   clientId,
   siteUrl,
+  missing,
 }: {
   validate: (key: string) => Promise<LicenseResult>
   limiter: Limiter
-  keyFromHeaders: (h: Headers) => string | null
+  /** Reads the key from the request: from a header for the CLI and MCP, from the session cookie for the browser. */
+  keyFromHeaders: (h: Headers) => string | null | Promise<string | null>
   clientId: (h: Headers) => string
   siteUrl: string
+  /** The message sent when no key is found. Defaults to the CLI setup hint. */
+  missing?: string
 }) {
   return async function gate(req: Request): Promise<Response | null> {
-    const key = keyFromHeaders(req.headers)
+    const key = await keyFromHeaders(req.headers)
     if (!key) {
       return Response.json(
-        { error: "license_required", message: `Ballmac UI Pro items need a licence key. Set BALLMAC_LICENSE_KEY and add the @ballmac-pro registry: ${siteUrl}/docs/pro` },
+        { error: "license_required", message: missing ?? `Ballmac UI Pro items need a licence key. Set BALLMAC_LICENSE_KEY and add the @ballmac-pro registry: ${siteUrl}/docs/pro` },
         { status: 401, headers: { ...proHeaders, "www-authenticate": 'Bearer realm="Ballmac UI Pro"' } }
       )
     }

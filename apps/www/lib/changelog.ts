@@ -3,6 +3,16 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2026-10-05",
+    title: "Log in to Pro with your licence key",
+    items: [
+      "A Pro log in page at /pro: paste your licence key once, with no password and no account. The key stays in an encrypted cookie in your browser and is checked again on every request, so a revoked key stops working within minutes",
+      "Your Pro library: install commands with your key already filled in (hidden on screen, real on the clipboard) for the shadcn CLI, AI agents through MCP and the starter apps, plus browser downloads of Beacon SaaS, Quire and the Figma tokens",
+      "Pro block pages show the real source with copy buttons once you are logged in, while the pages stay public and static for everyone else",
+      "A Log in and Get Pro button in the header, which becomes a Pro library link after you log in",
+    ],
+  },
+  {
     date: "2026-10-04",
     title: "Quire, a second Pro starter, and a new look for Beacon",
     items: [

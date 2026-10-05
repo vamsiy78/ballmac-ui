@@ -72,6 +72,7 @@ const plans: Plan[] = [
 const faqs = [
   { q: "Is the free tier really free for commercial work?", a: "Yes. Use free items in personal, client and commercial projects, and change them however you like. The license notice stays in the source files." },
   { q: "Will free components become paid?", a: "No. Anything released as free stays free. Pro adds new premium items; it doesn't take any away." },
+  { q: "I bought Pro. How do I get my code?", a: "Open the Pro log in page and paste the licence key from your purchase email. There is no account to create: the key is the login. You can then read and copy any Pro block, download the starter apps, and get install commands with your key filled in. The shadcn CLI and the MCP server work with the same key." },
   { q: "How does Pro work with the CLI?", a: "Add your licence key once as an environment variable and the @ballmac-pro registry to components.json. The shadcn CLI and the MCP server then install Pro items the same way as free ones. The Pro guide walks through it." },
   ...(licenseUrl ? [{ q: "What can I do with a Pro licence?", a: `The Pro licence terms are published at ${licenseUrl}. Read them before you buy.` }] : []),
   { q: "Who handles tax and invoices?", a: "Our payment provider acts as the merchant of record: it charges the right sales tax or VAT and sends you an invoice." },
@@ -121,6 +122,12 @@ export default function PricingPage() {
           )
         })}
       </div>
+      <p className="text-muted-foreground mt-8 text-center text-sm">
+        Already have a licence?{" "}
+        <Link href="/pro" className="text-foreground font-medium underline underline-offset-4">
+          Log in to your Pro library
+        </Link>
+      </p>
       <section className="mx-auto mt-20 max-w-3xl">
         <h2 className="text-xl font-semibold tracking-tight">Questions</h2>
         <dl className="mt-6 divide-y border-y">

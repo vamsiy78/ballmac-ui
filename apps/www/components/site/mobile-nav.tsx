@@ -39,7 +39,7 @@ export function MobileNav({ groups }: { groups: NavGroup[] }) {
           <div className="flex-1 overflow-y-auto px-2 py-6">
             <DocsSidebar
               groups={[
-                { title: "Ballmac UI", items: [{ href: "/", label: "Home" }, { href: "/pricing", label: "Pricing" }] },
+                { title: "Ballmac UI", items: [{ href: "/", label: "Home" }, { href: "/pricing", label: "Pricing" }, { href: "/pro", label: "Pro log in" }] },
                 ...groups,
               ]}
             />

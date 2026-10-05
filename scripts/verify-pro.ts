@@ -107,6 +107,30 @@ async function runtime(base: string, key: string | undefined, names: string[], f
     const pub = await get(`/r/${probe}.json`)
     pub.status === 404 ? ok("/r/<pro-name> is not public") : fail(`/r/${probe}.json → ${pub.status} (want 404)`)
   }
+  // The browser login (/pro): nothing opens without a session, and the session cookie is httpOnly and does not carry the key in the clear.
+  if (probe) {
+    const none = await get(`/api/pro/items/${probe}`)
+    none.status === 401 ? ok("/api/pro/items without a session → 401") : fail(`/api/pro/items without a session → ${none.status} (want 401)`)
+    const sess = await get("/api/pro/session")
+    sess.status === 401 ? ok("/api/pro/session without a cookie → 401") : fail(`/api/pro/session without a cookie → ${sess.status} (want 401)`)
+    if (key) {
+      const login = await fetch(`${base}/api/pro/session`, { method: "POST", headers: { "content-type": "application/json", origin: new URL(base).origin }, body: JSON.stringify({ key }) })
+      const cookies = login.headers.getSetCookie()
+      const session = cookies.find((c) => c.startsWith("bm_pro="))
+      if (login.status !== 200 || !session) fail(`/api/pro/session login with the key → ${login.status} (want 200 and a cookie)`)
+      else {
+        ;/HttpOnly/i.test(session) && !session.includes(key) ? ok("login cookie is httpOnly and does not contain the key") : fail("login cookie is not httpOnly, or contains the key")
+        const cookie = cookies.map((c) => c.split(";")[0]).join("; ")
+        const item = await fetch(`${base}/api/pro/items/${probe}`, { headers: { cookie } })
+        const body = item.status === 200 ? ((await item.json()) as { files?: { code?: string }[] }) : null
+        body?.files?.length && body.files.every((f) => f.code) ? ok("/api/pro/items with a session → 200 with code") : fail(`/api/pro/items with a session → ${item.status} or empty`)
+        const registry = await fetch(`${base}/r/pro/${probe}.json`, { headers: { cookie } })
+        registry.status === 401 ? ok("the session cookie does not open /r/pro (that stays header-only)") : fail(`/r/pro with only a session cookie → ${registry.status} (want 401)`)
+      }
+      const evil = await fetch(`${base}/api/pro/session`, { method: "POST", headers: { "content-type": "application/json", origin: "https://evil.example" }, body: JSON.stringify({ key }) })
+      evil.status === 403 ? ok("login from another origin → 403") : fail(`login from another origin → ${evil.status} (want 403)`)
+    }
+  }
   const startersDir = join(ROOT, "registry/pro/starters")
   const starters = existsSync(startersDir) ? readdirSync(startersDir).filter((n) => existsSync(join(startersDir, n, "package.json"))) : []
   const downloads = [...starters.map((s) => ({ path: `/r/pro/starters/${s}.tar.gz`, openPath: `/starters/${s}.tar.gz` })), { path: "/r/pro/kits/ballmac-figma-tokens.tar.gz", openPath: "/kits/ballmac-figma-tokens.tar.gz" }]

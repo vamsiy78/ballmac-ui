@@ -2,6 +2,13 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
+## 2026-10-05: Log in to Pro with your licence key
+
+- A Pro log in page at /pro: paste your licence key once, with no password and no account. The key stays in an encrypted cookie in your browser and is checked again on every request, so a revoked key stops working within minutes
+- Your Pro library: install commands with your key already filled in (hidden on screen, real on the clipboard) for the shadcn CLI, AI agents through MCP and the starter apps, plus browser downloads of Beacon SaaS, Quire and the Figma tokens
+- Pro block pages show the real source with copy buttons once you are logged in, while the pages stay public and static for everyone else
+- A Log in and Get Pro button in the header, which becomes a Pro library link after you log in
+
 ## 2026-10-04: Quire, a second Pro starter, and a new look for Beacon
 
 - Quire: an AI starter that answers from your own documents and shows its sources. Streaming chat with numbered citations that highlight the exact sentence, a document library with full-text search, usage limits per plan, Stripe billing, teams and a public API. It runs without an AI key on a built-in demo model

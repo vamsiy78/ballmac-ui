@@ -44,6 +44,8 @@ export function evaluate({ env, proSource, proBuilt, production }: CheckInput): 
   const team = env.NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL
   need(!team || (team.startsWith("https://") && env.NEXT_PUBLIC_PRO_TEAM_PRICE), "Team checkout URL and price set together", "warn")
   need(env.NEXT_PUBLIC_PRO_LICENSE_URL?.startsWith("https://"), "NEXT_PUBLIC_PRO_LICENSE_URL points at the Pro licence terms")
+  need((env.PRO_SESSION_SECRET ?? "").length >= 32, "PRO_SESSION_SECRET set, 32 characters or more (without it buyers cannot log in on /pro; generate one with: openssl rand -base64 32)")
+  need(!env.NEXT_PUBLIC_PRO_PORTAL_URL || env.NEXT_PUBLIC_PRO_PORTAL_URL.startsWith("https://"), "NEXT_PUBLIC_PRO_PORTAL_URL is an https URL (the page where buyers find their key again)", "warn")
   if (env.CI) need(env.PRO_REPO_TOKEN, "PRO_REPO_TOKEN available to CI")
   return out
 }
