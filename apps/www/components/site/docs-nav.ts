@@ -7,6 +7,7 @@ export const docsNav = [
       { href: "/docs/theming", label: "Theming" },
       { href: "/docs/mcp", label: "MCP & AI agents" },
       { href: "/docs/pro", label: "Pro" },
+      { href: "/support", label: "Support" },
     ],
   },
   {

@@ -1,5 +1,9 @@
 # Ballmac UI
 
+[![CI](https://github.com/vamsiy78/ballmac-ui/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/vamsiy78/ballmac-ui/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![npm @ballmac/mcp](https://img.shields.io/npm/v/@ballmac/mcp?label=%40ballmac%2Fmcp)](https://www.npmjs.com/package/@ballmac/mcp)
+
 Accessible React + Tailwind v4 components, blocks and templates in one design language, distributed as a
 [shadcn](https://ui.shadcn.com) registry and usable from AI agents through MCP. Site: https://ui.ballmac.com
 
@@ -9,9 +13,13 @@ npx shadcn@latest add @ballmac/button
 
 Files install into `components/ballmac/`, so they never overwrite your shadcn/ui components.
 
-- **Free items (MIT):** components, blocks, templates and themes, each with examples, accessibility notes and RTL support.
-- **Pro:** a private registry behind a licence key (`@ballmac-pro`), plus two starter apps (Beacon SaaS and Quire, an AI assistant that cites its sources) and the Figma token kit.
-- **AI ready:** `llms.txt`, per-item JSON at `/api/v1/items/*` and the `@ballmac/mcp` server.
+- **Free items (MIT):** components, blocks, templates and themes, each with examples, accessibility notes and RTL support. Everything in this repository is free and MIT licensed.
+- **Pro (commercial, separate licence):** 150 premium blocks in a private registry behind a licence key (`@ballmac-pro`), two starter apps (Beacon SaaS and Quire, an AI assistant that cites its sources) and the Figma token kit. Pro source is not in this repository. See [pricing](https://ui.ballmac.com/pricing).
+- **AI ready:** `llms.txt`, per-item JSON at `/api/v1/items/*` and the [`@ballmac/mcp`](packages/mcp) server:
+
+```bash
+claude mcp add ballmac -- npx -y @ballmac/mcp
+```
 
 Docs and the full catalogue: https://ui.ballmac.com. Release notes: [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -55,8 +63,10 @@ On a new machine, install the browser once with
 ## Contributing and security
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Report vulnerabilities privately as
-described in [`SECURITY.md`](SECURITY.md).
+described in [`SECURITY.md`](SECURITY.md). For help with an item, a bug that is not a security problem, or a Pro licence or purchase,
+use [ui.ballmac.com/support](https://ui.ballmac.com/support) or open an issue.
 
 ## License
 
-Free components are MIT. See `THIRD_PARTY_NOTICES.md` for credited sources.
+Free components, blocks, templates and the MCP server are MIT licensed (see [`LICENSE`](LICENSE)). See
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for credited sources. Ballmac UI Pro is licensed separately.

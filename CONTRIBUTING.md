@@ -6,7 +6,8 @@ Thanks for helping. Bug reports, fixes and new items are all welcome.
 
 - Open an issue for anything larger than a small fix, so we can agree on the direction first.
 - Read `AUTHORING.md`: it defines what an item must include (metadata, examples, accessibility, RTL, reduced motion).
-- Work from `preprod`. `main` is production and only changes through a reviewed merge.
+- Branches: open pull requests against `preprod`. `main` is what runs in production and only changes through a reviewed merge.
+- Questions, help with an item or a Pro licence: [ui.ballmac.com/support](https://ui.ballmac.com/support). Issues are for bugs and requests.
 
 ## Setup
 

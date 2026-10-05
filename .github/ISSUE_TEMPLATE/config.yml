@@ -3,3 +3,6 @@ contact_links:
   - name: Security vulnerability
     url: https://github.com/vamsiy78/ballmac-ui/security/advisories/new
     about: Report security problems privately, not in a public issue.
+  - name: Questions and Pro licence help
+    url: https://ui.ballmac.com/support
+    about: Help with an item, a purchase or a licence key. A person answers by email.

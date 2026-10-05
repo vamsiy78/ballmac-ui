@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "@/components/site/link"
 
 import { DocsPage } from "@/components/site/docs-page"
+import { getBlocks, isPro } from "@/lib/registry"
 
 export const metadata: Metadata = {
   title: "Introduction",
@@ -10,6 +11,8 @@ export const metadata: Metadata = {
 }
 
 export default function IntroductionPage() {
+  // The count comes from the registry when Pro is part of this build.
+  const proBlocks = getBlocks().filter(isPro).length || 150
   return (
     <DocsPage
       title="Introduction"
@@ -17,7 +20,8 @@ export default function IntroductionPage() {
     >
       <p>
         You don&apos;t install Ballmac UI as a package. You add the components you need with the shadcn CLI, and the source
-        lands in your project, ready to read and change. Your AI coding agent can do the same through the shadcn MCP server.
+        lands in your project, ready to read and change. Your AI coding agent can do the same through the{" "}
+        <Link href="/docs/mcp">Ballmac MCP server</Link> (<code>@ballmac/mcp</code>) or the shadcn MCP server.
       </p>
       <h2>What makes it different</h2>
       <ul>
@@ -46,6 +50,11 @@ export default function IntroductionPage() {
           and builds it.
         </li>
       </ul>
+      <h2>Free and Pro</h2>
+      <p>
+        Every component, block, template and theme is free and MIT licensed. <Link href="/pricing">Ballmac UI Pro</Link> adds {proBlocks} premium blocks, two
+        complete starter apps and the Figma tokens, delivered through a private registry with a licence key. <Link href="/docs/pro">Set up Pro</Link>.
+      </p>
       <h2>Requirements</h2>
       <ul>
         <li>React 19 and Tailwind CSS v4</li>
@@ -55,7 +64,8 @@ export default function IntroductionPage() {
       </ul>
       <p>
         Next: <Link href="/docs/installation">install your first component</Link>, or{" "}
-        <Link href="/docs/mcp">connect your AI agent</Link>.
+        <Link href="/docs/mcp">connect your AI agent</Link>. Stuck, or found a bug? <Link href="/support">Contact support</Link>, or open an issue on{" "}
+        <a href="https://github.com/vamsiy78/ballmac-ui/issues">GitHub</a>.
       </p>
     </DocsPage>
   )

@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import Link from "@/components/site/link"
+
 import { CodePanel } from "@/components/site/code-panel"
 import { DocsPage } from "@/components/site/docs-page"
 
@@ -20,7 +22,8 @@ const tools = [
   ["search_items", "Best matches for a need, such as “chat input with attachments” or “online store”."],
   ["list_items · list_categories", "Browse components, blocks and templates by kind, category or tier."],
   ["get_item · get_examples", "Props, keyboard behaviour, import line, template pages, full source and working examples."],
-  ["get_install_command · get_setup", "The exact shadcn CLI commands for pnpm, npm, yarn or bun."],
+  ["get_install_command", "The exact shadcn CLI commands for pnpm, npm, yarn or bun."],
+  ["get_setup", "How to prepare a project: shadcn init, the registry entry and the optional theme."],
   ["compose_page", "A page plan from blocks in order, with a page.tsx scaffold, and any template that already fits."],
 ]
 
@@ -67,6 +70,31 @@ export default function McpPage() {
       <p>
         It also offers the resources <code>ballmac://catalog</code> and <code>ballmac://items/{"{name}"}</code>, and the
         prompts <code>build_page</code> and <code>choose_component</code>.
+      </p>
+      <h3>Options</h3>
+      <p>Both are environment variables of the server. Neither is needed for the free catalog.</p>
+      <ul>
+        <li>
+          <code>BALLMAC_UI_URL</code> (default <code>https://ui.ballmac.com</code>): the catalog to read, for example a local copy of the
+          site.
+        </li>
+        <li>
+          <code>BALLMAC_LICENSE_KEY</code>: your <Link href="/docs/pro">Ballmac UI Pro</Link> licence key. With it, <code>get_item</code> and{" "}
+          <code>get_examples</code> also return the source of Pro items. The key is only sent to the Ballmac UI site.
+        </li>
+      </ul>
+      <p>
+        <code>npx @ballmac/mcp --help</code> and <code>--version</code> work from a terminal.
+      </p>
+      <h3>Pro items</h3>
+      <p>
+        Pro items show up in search with <code>tier: &quot;pro&quot;</code> and install from the <code>@ballmac-pro</code> namespace. Without a key the agent
+        still sees their description, props and install command, but not the source. To let it read the source, give the server your key:
+      </p>
+      <CodePanel lang="bash" title="Claude Code" code="claude mcp add ballmac --env BALLMAC_LICENSE_KEY=your-licence-key -- npx -y @ballmac/mcp" />
+      <p>
+        In a JSON config, add <code>&quot;env&quot;: {"{"} &quot;BALLMAC_LICENSE_KEY&quot;: &quot;your-licence-key&quot; {"}"}</code> next to <code>args</code>. Your{" "}
+        <Link href="/pro">Pro library</Link> shows these commands with your own key filled in.
       </p>
       <h2>Or use the shadcn MCP server</h2>
       <p>Ballmac UI is a standard shadcn registry, so the official server works too once the registry is in your project.</p>
