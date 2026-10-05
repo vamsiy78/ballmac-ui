@@ -36,6 +36,8 @@ What is built and what still needs the owner. Everything marked **Owner** cannot
 | `NEXT_PUBLIC_PRO_PORTAL_URL` | optional: the provider's customer portal, where buyers find their key again. Shown under "I can't find my key" |
 | `BALLMAC_PRO_TEST_KEYS` | leave empty |
 
+   Turborepo runs the Vercel build in strict environment mode: only variables listed in `turbo.json` reach the build. `PRO_REPO_TOKEN`, `PRO_REPO`, `PRO_REPO_REF`, `PRO_FORCE_REFRESH`, `BALLMAC_REQUIRE_PRO` and `VERCEL_ENV` are listed under `passThroughEnv` of `@ballmac-ui/www#build` (and its cache is off, so a free-only build can never be restored for a build that should contain Pro). A new build-time variable that is not `NEXT_PUBLIC_*` must be added there. Check a deployment's build log for `pro:fetch` and a Pro item count: `PRO_REPO_TOKEN is not set; building the free registry only` means the token did not reach the build.
+
    Vercel project settings: Root Directory `apps/www`, and enable "Include source files outside of the Root Directory in the Build Step" (the build reads `registry/` and `scripts/`).
 7. **Add the GitHub secret** `PRO_REPO_TOKEN` to this repository so CI can build Pro. `@ballmac/mcp` 1.0.0 is published. Later releases use npm trusted publishing (configured on npmjs.com, no token): bump the version in `packages/mcp/package.json`, then push the tag `mcp-v<version>`.
 8. **Send buyers to the log in page after payment.** In the provider's product or payment link settings, set the return (redirect) URL after purchase to `https://<your-site>/pro?welcome=1`. `/pro` shows a thank-you and the key field; the key itself comes in the provider's purchase email.

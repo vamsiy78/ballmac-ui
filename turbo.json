@@ -2,6 +2,12 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "build": { "dependsOn": ["^build"], "outputs": [".next/**", "!.next/cache/**", "dist/**"] },
+    "@ballmac-ui/www#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "cache": false,
+      "passThroughEnv": ["PRO_REPO_TOKEN", "PRO_REPO", "PRO_REPO_REF", "PRO_FORCE_REFRESH", "BALLMAC_REQUIRE_PRO", "VERCEL_ENV"]
+    },
     "dev": { "cache": false, "persistent": true },
     "lint": {},
     "typecheck": { "dependsOn": ["^build"] }
