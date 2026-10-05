@@ -22,6 +22,8 @@ jobs:
       PRO_REPO_TOKEN: ${{ secrets.PRO_REPO_TOKEN }}
       PRO_REPO_REF: ${{ github.ref_name == 'main' && 'main' || 'preprod' }}
       BALLMAC_PRO_TEST_KEYS: ci-test-key
+      # Throwaway value so the browser login (/pro) can be exercised by verify:pro. Production sets its own secret.
+      PRO_SESSION_SECRET: ci-only-session-secret-not-for-production-use
     steps:
       - uses: actions/checkout@v4
         with:
