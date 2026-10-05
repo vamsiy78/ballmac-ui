@@ -8,6 +8,7 @@ New components, blocks and changes, newest first. The same list is at https://ui
 - Your Pro library: install commands with your key already filled in (hidden on screen, real on the clipboard) for the shadcn CLI, AI agents through MCP and the starter apps, plus browser downloads of Beacon SaaS, Quire and the Figma tokens
 - Pro block pages show the real source with copy buttons once you are logged in, while the pages stay public and static for everyone else
 - A Log in and Get Pro button in the header, which becomes a Pro library link after you log in
+- Buyers are logged in automatically when they return from checkout, with no key to paste
 
 ## 2026-10-04: Quire, a second Pro starter, and a new look for Beacon
 

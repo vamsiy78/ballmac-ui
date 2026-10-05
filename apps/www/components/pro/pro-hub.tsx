@@ -6,10 +6,11 @@ import * as React from "react"
 
 import { buttonVariants } from "@/components/ballmac/button"
 import { KeyChip } from "@/components/pro/key-chip"
-import { ensureSession, useProFlag, useProSession } from "@/components/pro/session"
+import { ensureSession, login, useProFlag, useProSession } from "@/components/pro/session"
 import { SetupTabs } from "@/components/pro/setup-tabs"
 import { UnlockCard } from "@/components/pro/unlock-card"
 import Link from "@/components/site/link"
+import { cameFromCheckout, keysFromReturn } from "@/lib/pro-checkout"
 import type { Download as DownloadItem } from "@/lib/pro-downloads"
 import { cn } from "@/lib/utils"
 
@@ -26,18 +27,48 @@ type Props = {
 
 const rise = "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-3 motion-safe:duration-500 motion-safe:fill-mode-both"
 
-/** A short thank-you for people sent back from checkout (`?welcome=1`, or the payment parameters the provider adds). */
+/**
+ * What happens when a buyer comes back from checkout. Dodo appends `license_key` to the return address, so the buyer is logged in
+ * at once, and the key is then removed from the address bar. Without a key (or if it is refused) the page says to paste it.
+ */
 function Welcome() {
   const params = useSearchParams()
-  if (!(params.get("welcome") || params.get("payment_id") || params.get("status") === "succeeded")) return null
+  // The address is read once: it is rewritten below so the key does not stay in the address bar or the history.
+  const [initial] = React.useState(() => params.toString())
+  const search = React.useMemo(() => new URLSearchParams(initial), [initial])
+  const keys = React.useMemo(() => keysFromReturn(search), [search])
+  const [failed, setFailed] = React.useState(false)
+  React.useEffect(() => {
+    if (!keys.length) return
+    let live = true
+    void (async () => {
+      let ok = false
+      for (const key of keys) {
+        if ((await login(key)).ok) {
+          ok = true
+          break
+        }
+      }
+      window.history.replaceState(null, "", window.location.pathname)
+      if (live && !ok) setFailed(true)
+    })()
+    return () => {
+      live = false
+    }
+  }, [keys])
+  if (!cameFromCheckout(search)) return null
   return (
     <p className="bg-card mx-auto mt-8 flex max-w-[1100px] items-start gap-3 rounded-xl border p-4 text-sm leading-6 shadow-xs" role="status">
       <span className="bg-foreground text-background mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full" aria-hidden="true">
         <Check className="size-3" />
       </span>
       <span>
-        <strong className="font-medium">Thank you, your payment went through.</strong> Your licence key is in the email from our payment partner (check spam if it is not there yet).
-        Paste it below to open your library.
+        <strong className="font-medium">Thank you, your payment went through.</strong>{" "}
+        {keys.length && !failed
+          ? "Opening your library…"
+          : failed
+            ? "We could not open it automatically. Paste the licence key from the email we sent you below."
+            : "Your licence key is in the email from our payment partner (check spam if it is not there yet). Paste it below to open your library."}
       </span>
     </p>
   )

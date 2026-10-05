@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import Link from "@/components/site/link"
 
 import { Button } from "@/components/ballmac/button"
+import { CheckoutLink } from "@/components/pro/checkout-link"
 import { Eyebrow } from "@/components/site/section-heading"
 
 export const metadata: Metadata = {
@@ -111,7 +112,7 @@ export default function PricingPage() {
               </ul>
               {plan.cta ? (
                 <Button asChild size="lg" shape="pill" variant={pro ? "secondary" : "outline"} className="mt-8">
-                  {plan.cta.external ? <a href={plan.cta.href}>{plan.cta.label}</a> : <Link href={plan.cta.href}>{plan.cta.label}</Link>}
+                  {plan.cta.external ? <CheckoutLink href={plan.cta.href}>{plan.cta.label}</CheckoutLink> : <Link href={plan.cta.href}>{plan.cta.label}</Link>}
                 </Button>
               ) : (
                 <Button asChild size="lg" shape="pill" variant={pro ? "secondary" : "outline"} className="mt-8">

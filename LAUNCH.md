@@ -40,7 +40,7 @@ What is built and what still needs the owner. Everything marked **Owner** cannot
 
    Vercel project settings: Root Directory `apps/www`, and enable "Include source files outside of the Root Directory in the Build Step" (the build reads `registry/` and `scripts/`).
 7. **Add the GitHub secret** `PRO_REPO_TOKEN` to this repository so CI can build Pro. `@ballmac/mcp` 1.0.0 is published. Later releases use npm trusted publishing (configured on npmjs.com, no token): bump the version in `packages/mcp/package.json`, then push the tag `mcp-v<version>`.
-8. **Send buyers to the log in page after payment.** In the provider's product or payment link settings, set the return (redirect) URL after purchase to `https://<your-site>/pro?welcome=1`. `/pro` shows a thank-you and the key field; the key itself comes in the provider's purchase email.
+8. **Return after payment: nothing to set in Dodo.** The Get Pro button adds `redirect_url=<this site>/pro` to the payment link, so a purchase on a preview returns to that preview. Dodo sends the buyer back with `payment_id`, `status`, `email` and `license_key`; `/pro` logs them in automatically and removes the key from the address bar (if anything fails it asks them to paste the key from the email). A payment link shared elsewhere needs `&redirect_url=https://<your-site>/pro` added by hand.
 9. **Run a real purchase** in the provider's test mode, then verify:
 
 ```bash
