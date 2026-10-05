@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 
 import { ThemeScript } from "@/components/site/theme-script"
@@ -18,6 +18,14 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", site: "@ballmacapps" },
   // Proves to Bing Webmaster Tools that we own the site. Keep it: removing it un-verifies the site.
   verification: { other: { "msvalidate.01": "F5C35C8FE8CCD8D2C21A4EAD3443CDD0" } },
+}
+
+// The browser bar colour on phones follows the colour scheme.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

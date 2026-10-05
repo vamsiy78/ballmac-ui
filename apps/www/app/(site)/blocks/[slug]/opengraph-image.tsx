@@ -1,5 +1,5 @@
 import { ogImage, ogSize } from "@/lib/og"
-import { getItem } from "@/lib/registry"
+import { getItem, namespaceOf } from "@/lib/registry"
 
 export const size = ogSize
 export const contentType = "image/png"
@@ -11,6 +11,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     eyebrow: "blocks".replace(/s$/, ""),
     title: item?.title ?? "Ballmac UI",
     subtitle: item?.description,
-    command: item ? `npx shadcn add @ballmac/${item.name}` : undefined,
+    command: item ? `npx shadcn add ${namespaceOf(item.name)}/${item.name}` : undefined,
   })
 }
