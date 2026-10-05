@@ -3,6 +3,7 @@
   "private": true,
   "packageManager": "pnpm@10.34.5",
   "scripts": {
+    "prepare": "git config core.hooksPath .githooks || true",
     "dev": "turbo run dev --filter=@ballmac-ui/www",
     "build": "turbo run build",
     "pro:fetch": "tsx scripts/fetch-pro.ts",

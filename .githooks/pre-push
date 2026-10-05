@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Guards production. Pushing to main deploys the site, so this refuses a push to main of this repository unless
+#   1. it is a fast-forward (no force push, no deleting main), and
+#   2. CI has finished green on the exact commit being pushed.
+# It only applies to vamsiy78/ballmac-ui, so forks are unaffected. It is a local safeguard: GitHub's branch protection
+# (see the owner notes) is what enforces it for everyone. Emergency override: git push --no-verify.
+set -euo pipefail
+
+remote_url="${2:-}"
+case "$remote_url" in *vamsiy78/ballmac-ui*) ;; *) exit 0 ;; esac
+
+zero="0000000000000000000000000000000000000000"
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ "$remote_ref" = "refs/heads/main" ] || continue
+
+  if [ "$local_sha" = "$zero" ]; then
+    echo "pre-push: refusing to delete main." >&2
+    exit 1
+  fi
+  if [ "$remote_sha" != "$zero" ] && ! git merge-base --is-ancestor "$remote_sha" "$local_sha" 2>/dev/null; then
+    echo "pre-push: refusing a non fast-forward push to main (that would rewrite production history)." >&2
+    exit 1
+  fi
+  if ! command -v gh >/dev/null 2>&1; then
+    echo "pre-push: the GitHub CLI (gh) is needed to check CI before pushing to main." >&2
+    exit 1
+  fi
+  status=$(gh api "repos/vamsiy78/ballmac-ui/commits/${local_sha}/check-runs" --jq '[.check_runs[] | select(.name == "check") | .conclusion] | if length == 0 then "none" elif any(. == null) then "still running" elif all(. == "success") then "success" else "failed" end' 2>/dev/null || echo "unknown")
+  if [ "$status" != "success" ]; then
+    echo "pre-push: CI has not passed on ${local_sha:0:7} (status: ${status}). Push it to preprod first and wait for the green check." >&2
+    exit 1
+  fi
+  echo "pre-push: CI is green on ${local_sha:0:7}; pushing to main (this deploys production)."
+done
+exit 0

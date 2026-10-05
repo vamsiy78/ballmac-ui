@@ -6,9 +6,15 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    # Minor and patch updates arrive as one pull request. Major versions are never opened automatically: this registry's
+    # components are built on these libraries, so a major update (lucide-react, react-day-picker, react-resizable-panels,
+    # next, react ...) is a deliberate piece of work with its own testing, not something to merge on a green check.
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     target-branch: preprod
