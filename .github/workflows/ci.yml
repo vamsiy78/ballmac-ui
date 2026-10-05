@@ -25,7 +25,7 @@ jobs:
       # Throwaway value so the browser login (/pro) can be exercised by verify:pro. Production sets its own secret.
       PRO_SESSION_SECRET: ci-only-session-secret-not-for-production-use
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: pnpm/action-setup@v4
