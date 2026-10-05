@@ -5,7 +5,8 @@ import * as React from "react"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ballmac/tabs"
 import { maskKey } from "@/lib/pro-session-core"
-import { PRO_REGISTRY_SNIPPET, proCommands } from "@/lib/pro-snippets"
+import { proCommands, proRegistrySnippet } from "@/lib/pro-snippets"
+import { SITE_URL } from "@/lib/site-url"
 
 /** A code block that shows one text and copies another, so the key can be hidden on screen but real on the clipboard. */
 function Snippet({ title, shown, copy }: { title?: string; shown: string; copy: string }) {
@@ -56,10 +57,23 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
 
 /** The three ways to use a licence, with the buyer's own key filled in. */
 export function SetupTabs({ licenseKey, sampleItem }: { licenseKey: string; sampleItem: string }) {
-  const real = proCommands(licenseKey)
-  const masked = proCommands(maskKey(licenseKey))
+  // The commands point at the site the buyer is on, so a preview shows commands that test that preview.
+  const origin = React.useSyncExternalStore(
+    () => () => {},
+    () => window.location.origin,
+    () => SITE_URL
+  )
+  const registry = proRegistrySnippet(origin)
+  const real = proCommands(licenseKey, origin)
+  const masked = proCommands(maskKey(licenseKey), origin)
   return (
     <Tabs defaultValue="cli" className="gap-5">
+      {origin !== SITE_URL && (
+        <p role="note" className="bg-muted/60 text-muted-foreground rounded-lg border px-3.5 py-2.5 text-[13px] leading-5">
+          You are on <code className="text-foreground font-mono">{origin}</code>, not {SITE_URL.replace("https://", "")}, so these commands use this site. If it is a Vercel preview, the CLI and agents are
+          blocked by its login unless deployment protection is off or you add the bypass header.
+        </p>
+      )}
       <TabsList aria-label="How to install">
         <TabsTrigger value="cli">shadcn CLI</TabsTrigger>
         <TabsTrigger value="mcp">AI agents (MCP)</TabsTrigger>
@@ -72,7 +86,7 @@ export function SetupTabs({ licenseKey, sampleItem }: { licenseKey: string; samp
             <Snippet title=".env.local" shown={masked.env} copy={real.env} />
           </Step>
           <Step n={2} title="Add the Pro registry to components.json">
-            <Snippet title="components.json" shown={PRO_REGISTRY_SNIPPET} copy={PRO_REGISTRY_SNIPPET} />
+            <Snippet title="components.json" shown={registry} copy={registry} />
           </Step>
           <Step n={3} title="Install any Pro block">
             <Snippet shown={`npx shadcn@latest add @ballmac-pro/${sampleItem}`} copy={`npx shadcn@latest add @ballmac-pro/${sampleItem}`} />

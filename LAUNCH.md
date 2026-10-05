@@ -15,7 +15,7 @@ What is built and what still needs the owner. Everything marked **Owner** cannot
 
 ## Owner checklist
 
-1. **Payment provider.** Polar, Lemon Squeezy and Dodo Payments are supported (`BALLMAC_LICENSE_PROVIDER` = `polar`, `lemonsqueezy` or `dodopayments`). For Dodo Payments: create the Pro product with the licence key feature on, set `BALLMAC_LICENSE_PROVIDER=dodopayments`, buy it once in test mode (`DODO_MODE=test`) and run `pnpm launch:check --live --key <that key>`. The adapter was written from Dodo's public licence-validate call and could not be run against Dodo from the build environment, so this live check is the proof. It also prints which fields Dodo answers with: if the answer does not name the product, `DODO_PRODUCT_IDS` cannot restrict keys, so sell Pro from a Dodo business where Pro is the only licensed product (a licence key for any other product of that business would unlock Pro).
+1. **Payment provider.** Polar, Lemon Squeezy and Dodo Payments are supported (`BALLMAC_LICENSE_PROVIDER` = `polar`, `lemonsqueezy` or `dodopayments`). For Dodo Payments: create the Pro product with the licence key feature on, set `BALLMAC_LICENSE_PROVIDER=dodopayments`, buy it once in test mode (`DODO_MODE=test`) and run `pnpm launch:check --live --key <that key>`. The adapter was written from Dodo's public licence-validate call and could not be run against Dodo from the build environment, so this live check is the proof. Dodo's validate answer is only `valid` (checked against Dodo's docs and a real test purchase), so the product restriction uses `DODO_PRODUCT_IDS` with `DODO_API_KEY`; `--live` also lists the Pro keys to prove the API key works.
 2. **Decide the prices and what Team means.** The site shows no price until you set the variables below. Nothing is invented.
 3. **Write the Pro licence terms** (yourself or with a lawyer) and publish them. Set `NEXT_PUBLIC_PRO_LICENSE_URL`.
 4. **Create `PRO_REPO_TOKEN`**: a fine-grained GitHub personal access token, Repository access limited to `vamsiy78/ballmac-ui-pro`, permission Contents read-only, with an expiry. Put a reminder in your calendar before it expires; builds fail loudly when it does.
@@ -28,7 +28,7 @@ What is built and what still needs the owner. Everything marked **Owner** cannot
 | `BALLMAC_LICENSE_PROVIDER` | `polar` or `lemonsqueezy` |
 | Polar: `POLAR_ORGANIZATION_ID`, `POLAR_BENEFIT_IDS` | from the Polar dashboard. The benefit IDs matter: without them any key from your organisation unlocks Pro |
 | Lemon Squeezy: `LEMONSQUEEZY_STORE_ID`, `LEMONSQUEEZY_PRODUCT_IDS` | from the Lemon Squeezy dashboard, same warning |
-| Dodo Payments: `DODO_PRODUCT_IDS` (optional), `DODO_MODE` | product ids from the Dodo dashboard if the validate answer names the product (see step 1); leave `DODO_MODE` empty for live |
+| Dodo Payments: `DODO_PRODUCT_IDS`, `DODO_API_KEY`, `DODO_MODE` | `DODO_PRODUCT_IDS` is the `pdt_` id of the Pro product and `DODO_API_KEY` a Dodo API key of the same mode (secret). Dodo's public validate answer is only `valid`, so a key from another product in the same business would unlock Pro; with both set the site also checks the key against the list of keys issued for the Pro product (cached five minutes, reloaded at most every thirty seconds for a key it has not seen). Set `DODO_PRODUCT_IDS` only together with `DODO_API_KEY`, otherwise every key is refused. Leave `DODO_MODE` empty for live |
 | `NEXT_PUBLIC_PRO_CHECKOUT_URL`, `NEXT_PUBLIC_PRO_PRICE` | the checkout link and price in whole dollars |
 | `NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL`, `NEXT_PUBLIC_PRO_TEAM_PRICE` | only if you sell Team |
 | `NEXT_PUBLIC_PRO_LICENSE_URL` | link to the licence terms |
@@ -51,6 +51,15 @@ pnpm verify:pro --base-url https://<your-site> --key <real-test-key>
 10. **Smoke install** on a machine that can reach `ui.shadcn.com`: `pnpm smoke`.
 11. **Manual screen-reader pass** on a few Pro blocks (VoiceOver or NVDA).
 12. **Approve the public `preprod` → `main` merge.** Nothing in this repository merges to `main` without you.
+
+## Testing the CLI and MCP before the production merge
+
+The install commands on `/pro` follow the site you are on, so a preview shows commands that use that preview (the MCP one adds `BALLMAC_UI_URL`). A Vercel preview is behind Vercel Authentication, which answers the CLI and the MCP server with a login page instead of JSON. To test them against a preview, either:
+
+1. turn Vercel Authentication off for previews while you test (Project, Settings, Deployment Protection). Pro code stays behind the licence key either way; or
+2. for the shadcn CLI only, enable Protection Bypass for Automation, then add `"x-vercel-protection-bypass": "${VERCEL_BYPASS}"` to the `headers` of both registries in `components.json` and set that variable. The MCP server cannot send extra headers, so for MCP use option 1 or test after the merge.
+
+Otherwise the real CLI and MCP check happens right after `preprod` is merged to `main`, against `https://ui.ballmac.com`.
 
 ## Rollback and key leaks
 

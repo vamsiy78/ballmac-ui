@@ -32,6 +32,13 @@ describe("launch readiness", () => {
     expect(l).toContain("warn")
     expect(l).not.toContain("fail")
   })
+  it("needs an API key whenever Dodo products are restricted, and warns when nothing restricts them", () => {
+    const dodo = { ...good, BALLMAC_LICENSE_PROVIDER: "dodopayments", DODO_MODE: "", POLAR_ORGANIZATION_ID: "", POLAR_BENEFIT_IDS: "" }
+    expect(levels({ ...dodo, DODO_PRODUCT_IDS: "pdt_1" })).toContain("fail")
+    expect(levels({ ...dodo, DODO_PRODUCT_IDS: "pdt_1", DODO_API_KEY: "k" })).not.toContain("fail")
+    expect(levels(dodo)).not.toContain("fail")
+    expect(levels(dodo)).toContain("warn")
+  })
   it("only warns outside production", () => {
     expect(levels({}, false)).not.toContain("fail")
   })

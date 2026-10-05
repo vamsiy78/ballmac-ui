@@ -35,7 +35,12 @@ export function evaluate({ env, proSource, proBuilt, production }: CheckInput): 
   }
   if (dodoName) {
     need(env.DODO_MODE !== "test" || !production, "DODO_MODE is not \"test\" in production")
-    need(env.DODO_PRODUCT_IDS, "DODO_PRODUCT_IDS set (otherwise any licence key from this Dodo account unlocks Pro; confirm with --live that the answer names the product)", "warn")
+    const products = Boolean(env.DODO_PRODUCT_IDS?.trim())
+    const apiKey = Boolean(env.DODO_API_KEY?.trim())
+    if (products && !apiKey) add(production ? "fail" : "warn", "DODO_PRODUCT_IDS is set but DODO_API_KEY is not. Dodo's validate answer does not name the product, so every licence key would be refused. Add a Dodo API key (Developer → API Keys) of the same mode")
+    else if (!products) add("warn", "DODO_PRODUCT_IDS and DODO_API_KEY are not set, so any licence key from this Dodo business unlocks Pro. That is only safe if Pro is the only licensed product in it")
+    else add("ok", "Dodo product check configured (DODO_PRODUCT_IDS and DODO_API_KEY)")
+    if (apiKey && !products) add("warn", "DODO_API_KEY is set without DODO_PRODUCT_IDS, so it is not used. Set DODO_PRODUCT_IDS to the Pro product id")
   }
   need(!env.BALLMAC_PRO_TEST_KEYS || !production, "BALLMAC_PRO_TEST_KEYS empty in production (ignored by the server, but remove it)", "warn")
   const checkout = env.NEXT_PUBLIC_PRO_CHECKOUT_URL
@@ -61,14 +66,26 @@ async function live(env: Record<string, string | undefined>, key?: string) {
       const good = await v(key)
       out.push(good.valid ? { level: "ok", msg: "provider accepts the supplied key" } : { level: "fail", msg: `provider rejected the supplied key: ${good.reason}` })
     }
-    // Dodo's validate answer may or may not name the product. Show what it contains so product restriction can be judged.
+    // Dodo's public validate answer is only `valid`, so the product check lists the keys issued for the Pro product with an API key.
     const provider = (env.BALLMAC_LICENSE_PROVIDER ?? "").toLowerCase()
-    if ((provider === "dodopayments" || provider === "dodo") && key) {
+    if (provider === "dodopayments" || provider === "dodo") {
       const base = env.DODO_API_URL ?? (env.DODO_MODE === "test" ? "https://test.dodopayments.com" : "https://live.dodopayments.com")
-      const res = await fetch(`${base}/licenses/validate`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ license_key: key }) })
-      const body = (await res.json().catch(() => ({}))) as Record<string, unknown>
-      const named = Object.keys(body).some((k) => /product/i.test(k))
-      out.push({ level: named ? "ok" : "warn", msg: `Dodo answer fields: ${Object.keys(body).join(", ") || "(none)"}${named ? "" : ". It does not name the product, so DODO_PRODUCT_IDS cannot restrict keys: sell Pro from a Dodo business where Pro is the only licensed product"}` })
+      const products = (env.DODO_PRODUCT_IDS ?? "").split(",").map((x) => x.trim()).filter(Boolean)
+      if (products.length && env.DODO_API_KEY?.trim()) {
+        let total = 0
+        for (const product of products) {
+          const res = await fetch(`${base}/license_keys?${new URLSearchParams({ product_id: product, status: "active", page_size: "100" })}`, { headers: { authorization: `Bearer ${env.DODO_API_KEY}` } })
+          if (!res.ok) {
+            out.push({ level: "fail", msg: `Dodo licence key list for ${product} returned ${res.status}. Check that DODO_API_KEY is a ${env.DODO_MODE === "test" ? "test" : "live"} mode key and the product id is right` })
+            continue
+          }
+          const body = (await res.json().catch(() => ({}))) as { items?: unknown[] }
+          total += body.items?.length ?? 0
+        }
+        out.push({ level: "ok", msg: `Dodo licence key list reachable (${total} active key(s) on page one for the Pro product)` })
+      } else if (key) {
+        out.push({ level: "warn", msg: "Dodo's validate answer is only `valid`, so without DODO_PRODUCT_IDS and DODO_API_KEY it cannot tell which product a key is for" })
+      }
     }
   } catch (e) {
     out.push({ level: "fail", msg: `provider unreachable: ${(e as Error).message}` })

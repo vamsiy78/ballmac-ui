@@ -109,4 +109,88 @@ describe("licence validation", () => {
     expect((await createLicenseValidator(env, (async () => json({ valid: true, product_id: "pdt_other" })) as typeof fetch)("k")).reason).toMatch(/another product/)
     expect((await createLicenseValidator(env, (async () => json({ valid: true })) as typeof fetch)("k")).reason).toMatch(/could not be matched/)
   })
+
+  describe("Dodo Payments product check with an API key", () => {
+    const env = { BALLMAC_LICENSE_PROVIDER: "dodopayments", DODO_MODE: "test", DODO_PRODUCT_IDS: "pdt_pro", DODO_API_KEY: "dodo_test_secret" }
+    /** A fake Dodo: every key validates; the list holds the keys given for pdt_pro. */
+    const fakeDodo = (proKeys: () => string[]) => {
+      const calls: { url: string; auth: string | null }[] = []
+      const fetchImpl = (async (input: string, init?: RequestInit) => {
+        const url = String(input)
+        calls.push({ url, auth: new Headers(init?.headers).get("authorization") })
+        if (url.endsWith("/licenses/validate")) return json({ valid: true })
+        const q = new URL(url).searchParams
+        const size = Number(q.get("page_size"))
+        const all = q.get("product_id") === "pdt_pro" ? proKeys() : []
+        return json({ items: all.slice(Number(q.get("page_number")) * size, (Number(q.get("page_number")) + 1) * size).map((key) => ({ key, product_id: q.get("product_id") })) })
+      }) as typeof fetch
+      return { fetchImpl, listCalls: () => calls.filter((c) => c.url.includes("/license_keys")), calls }
+    }
+
+    it("accepts a key issued for the Pro product and refuses a key from another product", async () => {
+      const { fetchImpl, listCalls } = fakeDodo(() => ["PRO-1", "PRO-2"])
+      const v = createLicenseValidator(env, fetchImpl)
+      expect(await v("PRO-1")).toEqual({ valid: true })
+      expect(await v("SIDEME-9")).toEqual({ valid: false, reason: "This licence key is for another product." })
+      const first = listCalls()[0]!
+      expect(first.url.startsWith("https://test.dodopayments.com/license_keys?")).toBe(true)
+      expect(new URL(first.url).searchParams.get("product_id")).toBe("pdt_pro")
+      expect(new URL(first.url).searchParams.get("status")).toBe("active")
+      expect(first.auth).toBe("Bearer dodo_test_secret")
+    })
+
+    it("never sends the API key to the public validate endpoint", async () => {
+      const { fetchImpl, calls } = fakeDodo(() => ["PRO-1"])
+      await createLicenseValidator(env, fetchImpl)("PRO-1")
+      expect(calls.find((c) => c.url.endsWith("/licenses/validate"))?.auth).toBeNull()
+    })
+
+    it("reads every page of keys", async () => {
+      const many = Array.from({ length: 250 }, (_, i) => `PRO-${i}`)
+      const { fetchImpl, listCalls } = fakeDodo(() => many)
+      const v = createLicenseValidator(env, fetchImpl)
+      expect((await v("PRO-249")).valid).toBe(true)
+      expect(listCalls()).toHaveLength(3)
+    })
+
+    it("uses the cached list, and reloads for an unknown key only after thirty seconds", async () => {
+      let keys = ["PRO-1"]
+      let t = 1_000_000
+      const { fetchImpl, listCalls } = fakeDodo(() => keys)
+      const v = createLicenseValidator(env, fetchImpl, () => t)
+      expect((await v("PRO-1")).valid).toBe(true)
+      keys = ["PRO-1", "PRO-NEW"]
+      t += 5_000
+      expect((await v("PRO-NEW")).valid).toBe(false) // bought a moment ago, list reloaded too recently
+      expect(listCalls()).toHaveLength(1)
+      t += 61_000 // the one-minute cache for refused keys has passed, and so have thirty seconds
+      expect((await v("PRO-NEW")).valid).toBe(true)
+      expect(listCalls()).toHaveLength(2)
+    })
+
+    it("loads the list once for several keys arriving together", async () => {
+      const { fetchImpl, listCalls } = fakeDodo(() => ["PRO-1", "PRO-2", "PRO-3"])
+      const v = createLicenseValidator(env, fetchImpl)
+      const results = await Promise.all(["PRO-1", "PRO-2", "PRO-3", "OTHER"].map((k) => v(k)))
+      expect(results.map((r) => r.valid)).toEqual([true, true, true, false])
+      expect(listCalls()).toHaveLength(1)
+    })
+
+    it("fails closed when the list cannot be read", async () => {
+      const failing = (async (u: string) => (String(u).endsWith("/licenses/validate") ? json({ valid: true }) : json({ message: "unauthorized" }, 401))) as typeof fetch
+      await expect(createLicenseValidator(env, failing)("PRO-1")).rejects.toThrow(/401/)
+    })
+
+    it("refuses every key when a product is set but there is no API key", async () => {
+      const { fetchImpl } = fakeDodo(() => ["PRO-1"])
+      const { DODO_API_KEY, ...noKey } = env
+      void DODO_API_KEY
+      expect((await createLicenseValidator(noKey, fetchImpl)("PRO-1")).reason).toMatch(/could not be matched/)
+    })
+
+    it("still trusts the product id when Dodo's answer names it", async () => {
+      const named = (async (u: string) => (String(u).endsWith("/licenses/validate") ? json({ valid: true, product_id: "pdt_pro" }) : json({ items: [] }))) as typeof fetch
+      expect((await createLicenseValidator(env, named)("PRO-1")).valid).toBe(true)
+    })
+  })
 })
