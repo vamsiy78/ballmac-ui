@@ -3,6 +3,7 @@
 [![CI](https://github.com/vamsiy78/ballmac-ui/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/vamsiy78/ballmac-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![npm @ballmac/mcp](https://img.shields.io/npm/v/@ballmac/mcp?label=%40ballmac%2Fmcp)](https://www.npmjs.com/package/@ballmac/mcp)
+[![M8ven Verified](https://m8ven.ai/badge/mcp/vamsiy78/ballmac-ui?variant=verified)](https://m8ven.ai/mcp/vamsiy78/ballmac-ui?s=readme)
 
 Accessible React + Tailwind v4 components, blocks and templates in one design language. You add what you need with the
 [shadcn](https://ui.shadcn.com) CLI and the source lands in your project, ready to read and change. Your AI coding agent can search and
