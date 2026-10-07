@@ -4,10 +4,11 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![npm @ballmac/mcp](https://img.shields.io/npm/v/@ballmac/mcp?label=%40ballmac%2Fmcp)](https://www.npmjs.com/package/@ballmac/mcp)
 [![M8ven Verified](https://m8ven.ai/badge/mcp/vamsiy78/ballmac-ui?variant=verified)](https://m8ven.ai/mcp/vamsiy78/ballmac-ui?s=readme)
+[![shadcn registry](https://img.shields.io/badge/shadcn-registry-black)](https://ui.shadcn.com/docs/directory)
 
 Accessible React + Tailwind v4 components, blocks and templates in one design language. You add what you need with the
 [shadcn](https://ui.shadcn.com) CLI and the source lands in your project, ready to read and change. Your AI coding agent can search and
-install them too, through MCP.
+install them too, through MCP. Now listed in the official [shadcn registry directory](https://ui.shadcn.com/docs/directory).
 
 **Site and docs: [ui.ballmac.com](https://ui.ballmac.com)**
 
