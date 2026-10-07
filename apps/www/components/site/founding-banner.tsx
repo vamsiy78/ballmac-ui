@@ -4,7 +4,7 @@ import { ArrowRight, X } from "lucide-react"
 import * as React from "react"
 
 import Link from "@/components/site/link"
-import type { Founding } from "@/lib/founding"
+import { endsShort, type Founding } from "@/lib/founding"
 
 const KEY = "founding-banner"
 const EVENT = "founding-banner-change"
@@ -32,7 +32,8 @@ const subscribe = (onChange: () => void) => {
  * about 0.1 on the home and pricing pages). A visitor who dismissed it earlier gets `data-founding-off` on <html> from the script below before first
  * paint, and the rule in globals.css hides it, so a dismissed banner never flashes either.
  */
-export function FoundingBanner({ offer, href = "/pricing" }: { offer: Founding; href?: string }) {
+/** `phrase` is how long is left ("ends in 5 days"), worked out on the server so the banner matches what was rendered. */
+export function FoundingBanner({ offer, phrase, href = "/pricing" }: { offer: Founding; phrase?: string | null; href?: string }) {
   const id = `${offer.limit}-${offer.price}`
   // Read from storage as an external store: the server renders it visible, then the browser adopts what the visitor chose.
   const stored = React.useSyncExternalStore(subscribe, () => readStored() === id, () => false)
@@ -48,8 +49,14 @@ export function FoundingBanner({ offer, href = "/pricing" }: { offer: Founding; 
       <div data-founding-banner className="bg-foreground text-background relative" role="region" aria-label="Founding price">
         <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-center gap-x-3 gap-y-1 py-2.5 pr-12 pl-4 text-center text-[13px] leading-5 sm:px-12">
           <p>
-            <span className="font-semibold">Founding price:</span> Ballmac UI Pro is <span className="font-semibold">${offer.price}</span> for the first{" "}
-            <span className="font-semibold">{offer.limit}</span> buyers, then the price goes up.
+            <span className="font-semibold">Founding price: ${offer.price}</span>
+            {offer.listPrice ? (
+              <>
+                , then <span className="font-semibold">${offer.listPrice}</span>
+                {offer.endsAt ? <> after {endsShort(offer.endsAt)}</> : null}
+              </>
+            ) : null}
+            . First <span className="font-semibold">{offer.limit}</span> buyers only{phrase ? <>. {phrase.charAt(0).toUpperCase() + phrase.slice(1)}</> : null}.
           </p>
           <Link href={href} className="focus-visible:ring-background/60 inline-flex items-center gap-1 rounded-sm font-medium underline underline-offset-4 outline-none focus-visible:ring-2">
             Get Pro <ArrowRight className="size-3.5" aria-hidden="true" />

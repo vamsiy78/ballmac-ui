@@ -4,6 +4,18 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-07",
+    title: "Founding offer: $49 until 21 October, then $99",
+    items: [
+      "Pricing page rebuilt around the founding offer: a live countdown to 21 Oct 2026, 11:59 pm IST, the $99 list price struck through, and a 7-day refund on every purchase",
+      "See what is inside before you buy: the 40 second film with captions and six Pro block previews",
+      "A free sampler of three Pro blocks for your email, and a reminder email 72 hours and 24 hours before the founding price ends",
+      "Pro block pages and the locked copy-code prompt say when the founding price ends",
+      "A Founders page and a desk in the Pro library: opt in to be listed by name and vote on the next blocks",
+      "After 21 October, or when the 25 founding licences are gone, the site switches to $99 by itself",
+    ],
+  },
+  {
+    date: "2026-10-07",
     title: "Install with no setup, and cleaner theme links",
     items: [
       "Ballmac UI is now in the official shadcn registry directory, so `npx shadcn@latest add @ballmac/button` works with nothing to configure. The registry entry is kept as a fallback for older CLIs and for the shadcn MCP server, which only reads components.json",

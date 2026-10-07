@@ -52,6 +52,16 @@ export function evaluate({ env, proSource, proBuilt, production }: CheckInput): 
   need((env.PRO_SESSION_SECRET ?? "").length >= 32, "PRO_SESSION_SECRET set, 32 characters or more (without it buyers cannot log in on /pro; generate one with: openssl rand -base64 32)")
   need(!env.NEXT_PUBLIC_PRO_PORTAL_URL || env.NEXT_PUBLIC_PRO_PORTAL_URL.startsWith("https://"), "NEXT_PUBLIC_PRO_PORTAL_URL is an https URL (the page where buyers find their key again)", "warn")
   need(env.RESEND_API_KEY && env.RESEND_FROM && env.CONTACT_TO_EMAIL, "Support form configured (RESEND_API_KEY, RESEND_FROM, CONTACT_TO_EMAIL); without them /support says it is not set up and points to the email address", "warn")
+  // The founding offer: a deadline needs a regular price and a regular checkout to switch to, or Pro would sell nothing after it.
+  const ends = env.NEXT_PUBLIC_PRO_FOUNDING_ENDS?.trim()
+  if (ends || env.NEXT_PUBLIC_PRO_FOUNDING_LIMIT) {
+    need(!ends || Number.isFinite(Date.parse(ends)), "NEXT_PUBLIC_PRO_FOUNDING_ENDS is a real date with a zone, for example 2026-10-21T18:29:00Z (11:59 pm IST)")
+    need(!ends || Date.parse(ends) > Date.now(), "NEXT_PUBLIC_PRO_FOUNDING_ENDS is in the future", "warn")
+    need(!ends || (Number(env.NEXT_PUBLIC_PRO_LIST_PRICE) > Number(env.NEXT_PUBLIC_PRO_PRICE) && env.NEXT_PUBLIC_PRO_STANDARD_CHECKOUT_URL?.startsWith("https://")), "A founding deadline needs NEXT_PUBLIC_PRO_LIST_PRICE (higher than the founding price) and NEXT_PUBLIC_PRO_STANDARD_CHECKOUT_URL (the regular product's link); without them nothing is for sale after the deadline")
+    need(env.DODO_FOUNDING_PRODUCT_ID?.trim() && env.DODO_API_KEY?.trim(), "DODO_FOUNDING_PRODUCT_ID and DODO_API_KEY set: they end the offer at the licence cap and open the Founders desk; without them the offer ends only at the deadline", "warn")
+    need(!env.DODO_FOUNDING_PRODUCT_ID?.trim() || (env.DODO_PRODUCT_IDS ?? "").split(",").map((x) => x.trim()).includes(env.DODO_FOUNDING_PRODUCT_ID.trim()), "DODO_FOUNDING_PRODUCT_ID is also listed in DODO_PRODUCT_IDS, or founding buyers' keys would be refused")
+    need(env.RESEND_AUDIENCE_ID && env.RESEND_API_KEY && env.RESEND_FROM, "Reminder emails configured (RESEND_AUDIENCE_ID, RESEND_API_KEY, RESEND_FROM); without them the reminder form says it is not set up", "warn")
+  }
   if (env.CI) need(env.PRO_REPO_TOKEN, "PRO_REPO_TOKEN available to CI")
   return out
 }

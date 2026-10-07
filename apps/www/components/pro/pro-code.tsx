@@ -20,7 +20,7 @@ function Skeleton() {
  * The source of a Pro item. Visitors see the notice; a buyer who is logged in sees the real code with copy buttons, fetched from
  * the licence-checked API, so the page itself stays static and public.
  */
-export function ProCode({ name }: { name: string }) {
+export function ProCode({ name, nudge = null }: { name: string; nudge?: string | null }) {
   const signedIn = useProFlag()
   // undefined while loading, null when the session turned out not to be valid.
   const [loaded, setLoaded] = React.useState<{ name: string; item: ProItem | null } | undefined>()
@@ -35,10 +35,10 @@ export function ProCode({ name }: { name: string }) {
     }
   }, [name, signedIn])
 
-  if (!signedIn) return <ProNotice />
+  if (!signedIn) return <ProNotice nudge={nudge} />
   const item = loaded?.name === name ? loaded.item : undefined
   if (item === undefined) return <Skeleton />
-  if (item === null) return <ProNotice />
+  if (item === null) return <ProNotice nudge={nudge} />
 
   return (
     <div className="space-y-4">

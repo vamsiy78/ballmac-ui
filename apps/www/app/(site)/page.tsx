@@ -7,7 +7,8 @@ import { AgentDiagram } from "@/components/home/agent-diagram"
 import { LazyMosaic } from "@/components/home/lazy-mosaic"
 import { FoundingBanner } from "@/components/site/founding-banner"
 import { SiteJsonLd } from "@/components/site/site-jsonld"
-import { founding } from "@/lib/founding"
+import { leftPhrase } from "@/lib/founding"
+import { getOffer } from "@/lib/offer"
 import { CopyButton } from "@/components/site/copy-button"
 import { FitPreview, FitWidth } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
@@ -16,6 +17,9 @@ import { blockGroups, categoryLabels, getBlocks, getComponents, getTemplates } f
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = { alternates: { canonical: "/" } }
+
+// The founding-price banner counts down to a deadline, so the page is rebuilt every few minutes.
+export const revalidate = 300
 
 // The collection as an asymmetric bento: two large anchors (desktop top left, devices bottom right),
 // a tall AI tile, a wide motion strip and small tiles filling the gaps. Each shows a real example.
@@ -53,11 +57,12 @@ export default async function Home() {
   const macCount = components.filter((c) => c.category === "macos").length
   const categoryCount = new Set(components.map((c) => c.category)).size
 
-  const offer = founding()
+  const now = new Date()
+  const offer = (await getOffer(now)).founding
   return (
     <>
       <SiteJsonLd />
-      {offer && <FoundingBanner offer={offer} />}
+      {offer && <FoundingBanner offer={offer} phrase={offer.endsAt ? leftPhrase(offer.endsAt, now) : null} />}
       {/* Hero */}
       <section className="mx-auto max-w-[1440px] px-4 pt-16 pb-12 text-center sm:px-6 md:pt-24 md:pb-16">
         <Link

@@ -7,6 +7,7 @@ import * as React from "react"
 import { buttonVariants } from "@/components/ballmac/button"
 import { KeyChip } from "@/components/pro/key-chip"
 import { ensureSession, login, useProFlag, useProSession } from "@/components/pro/session"
+import { FoundersDesk } from "@/components/pro/founders-desk"
 import { SetupTabs } from "@/components/pro/setup-tabs"
 import { UnlockCard } from "@/components/pro/unlock-card"
 import Link from "@/components/site/link"
@@ -234,6 +235,7 @@ function Library({ licenseKey, downloads, sampleItem, licenseUrl, children }: Pr
           </div>
         </section>
       )}
+      <FoundersDesk />
       {children}
     </>
   )

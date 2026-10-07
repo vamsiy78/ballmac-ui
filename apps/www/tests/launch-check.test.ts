@@ -42,4 +42,27 @@ describe("launch readiness", () => {
   it("only warns outside production", () => {
     expect(levels({}, false)).not.toContain("fail")
   })
+
+  describe("founding offer", () => {
+    const soon = new Date(Date.now() + 5 * 86_400_000).toISOString()
+    const offer = { ...good, NEXT_PUBLIC_PRO_PRICE: "49", NEXT_PUBLIC_PRO_FOUNDING_LIMIT: "25", NEXT_PUBLIC_PRO_FOUNDING_ENDS: soon, NEXT_PUBLIC_PRO_LIST_PRICE: "99", NEXT_PUBLIC_PRO_STANDARD_CHECKOUT_URL: "https://buy.example.com/regular" }
+    it("fails production when a deadline has nothing to switch to, so Pro would sell nothing after it", () => {
+      expect(levels({ ...offer, NEXT_PUBLIC_PRO_STANDARD_CHECKOUT_URL: "" })).toContain("fail")
+      expect(levels({ ...offer, NEXT_PUBLIC_PRO_LIST_PRICE: "" })).toContain("fail")
+      expect(levels({ ...offer, NEXT_PUBLIC_PRO_LIST_PRICE: "30" })).toContain("fail")
+    })
+    it("fails a deadline that is not a real date, and warns about one in the past", () => {
+      expect(levels({ ...offer, NEXT_PUBLIC_PRO_FOUNDING_ENDS: "soon" })).toContain("fail")
+      const past = levels({ ...offer, NEXT_PUBLIC_PRO_FOUNDING_ENDS: "2020-01-01T00:00:00Z" })
+      expect(past).toContain("warn")
+    })
+    it("warns, without failing, when the licence cap and the reminder emails are not set up", () => {
+      const l = levels(offer)
+      expect(l).toContain("warn")
+      expect(l).not.toContain("fail")
+    })
+    it("is quiet about all of it when there is no offer", () => {
+      expect(levels(good)).not.toContain("fail")
+    })
+  })
 })

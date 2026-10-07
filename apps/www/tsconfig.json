@@ -51,7 +51,9 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "../../registry/**/*.tsx",
-    "../../registry/**/*.ts"
+    "../../registry/**/*.ts",
+    ".next-dev/types/**/*.ts",
+    ".next-dev/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

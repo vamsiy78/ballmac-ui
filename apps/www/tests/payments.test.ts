@@ -32,7 +32,7 @@ describe("test mode never goes live in production", () => {
 
   it("hides the founding offer in production test mode, and shows it elsewhere", () => {
     expect(founding({ ...on, VERCEL_ENV: "production", DODO_MODE: "test" })).toBeNull()
-    expect(founding({ ...on, VERCEL_ENV: "production" })).toEqual({ limit: 25, price: "49" })
-    expect(founding({ ...on, VERCEL_ENV: "preview", DODO_MODE: "test" })).toEqual({ limit: 25, price: "49" })
+    expect(founding({ ...on, VERCEL_ENV: "production" })).toEqual({ limit: 25, price: "49", listPrice: null, endsAt: null })
+    expect(founding({ ...on, VERCEL_ENV: "preview", DODO_MODE: "test" })).toEqual({ limit: 25, price: "49", listPrice: null, endsAt: null })
   })
 })
