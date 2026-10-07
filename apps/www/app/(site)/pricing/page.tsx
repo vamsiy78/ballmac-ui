@@ -1,4 +1,4 @@
-import { Check, Clock, Minus, ShieldCheck } from "lucide-react"
+import { Check, Clock, Lock, Mail, Minus, ShieldCheck, Users, Vote } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "@/components/site/link"
 
@@ -239,18 +239,26 @@ export default async function PricingPage() {
               </h2>
               <p className="text-muted-foreground mt-3 leading-relaxed">Only the first {f.limit} licences. It costs us little, and it is yours for good.</p>
             </div>
-            <dl className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <dl className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2">
               {[
-                ["Your price is locked", `You pay $${f.price} once. Every future update to Pro is included for your key: new blocks, fixes and new starter apps added to Pro. Separately sold products are not covered.`],
-                ["Your name on the Founders page", "If you want it. Ask from the Founders desk in your Pro library and we add you by hand."],
-                ["A vote on what we build next", "Founding members choose the next batch of blocks from a short list."],
-                ["A direct line", `Write to ${FOUNDERS_EMAIL} with “Founding member” in the subject. It reaches a person.`],
-              ].map(([t, d]) => (
-                <div key={t} className="bg-card rounded-2xl border p-6">
-                  <dt className="font-semibold">{t}</dt>
-                  <dd className="text-muted-foreground mt-2 text-sm leading-relaxed">{d}</dd>
-                </div>
-              ))}
+                [Lock, "Your price is locked", `Pay $${f.price} once. Every future Pro update is included for your key: new blocks, fixes and new starter apps. Separately sold products are not covered.`],
+                [Users, "Your name on the Founders page", "Optional. Ask from the Founders desk in your Pro library and we add you by hand."],
+                [Vote, "A vote on what we build next", "Founding members pick the next batch of blocks from a short list."],
+                [Mail, "A direct line", `Write to ${FOUNDERS_EMAIL} with “Founding member” in the subject. It reaches a person.`],
+              ].map(([Icon, t, d]) => {
+                const I = Icon as typeof Lock
+                return (
+                  <div key={t as string} className="bg-card flex gap-4 rounded-2xl border p-5 sm:p-6">
+                    <span className="bg-muted text-foreground flex size-10 shrink-0 items-center justify-center rounded-xl">
+                      <I className="size-5" aria-hidden="true" />
+                    </span>
+                    <div className="min-w-0">
+                      <dt className="font-semibold tracking-tight">{t as string}</dt>
+                      <dd className="text-muted-foreground mt-1.5 text-sm leading-relaxed text-pretty">{d as string}</dd>
+                    </div>
+                  </div>
+                )
+              })}
             </dl>
             <p className="text-muted-foreground mt-6 text-center text-sm">
               See the <Link href="/founders" className="text-foreground underline underline-offset-4">Founders page</Link>.
@@ -264,11 +272,20 @@ export default async function PricingPage() {
               <h2 id="sampler-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">
                 Try three Pro blocks free
               </h2>
-              <p className="text-muted-foreground mt-3 leading-relaxed">
-                {sampler.map((s) => s.title).join(", ")}. Leave your email and the source appears right here. Use it in any project.
-              </p>
+              <p className="text-muted-foreground mt-3 leading-relaxed">Real Pro source, yours to use in any project. Leave your email and the code appears right here.</p>
+              <ul className="mt-6 flex flex-wrap justify-center gap-2" aria-label="The three blocks">
+                {sampler.map((x) => {
+                  const [name, what] = (x.title ?? x.name).split(/:\s*/)
+                  return (
+                    <li key={x.name} className="bg-card rounded-full border px-3.5 py-1.5 text-sm">
+                      <span className="font-medium">{name}</span>
+                      {what && <span className="text-muted-foreground"> · {what}</span>}
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
-            <div className="bg-card mt-8 rounded-2xl border p-6 sm:p-8">
+            <div className="bg-card mt-8 rounded-2xl border p-5 shadow-xs sm:p-8">
               <Sampler reminders={Boolean(f?.endsAt)} />
             </div>
           </section>
