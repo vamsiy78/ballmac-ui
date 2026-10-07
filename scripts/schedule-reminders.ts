@@ -57,7 +57,7 @@ async function main() {
       console.log("  already exists, skipped")
       continue
     }
-    const created = await resend<{ id: string }>("/broadcasts", { method: "POST", body: { audience_id: env.RESEND_AUDIENCE_ID, from: env.RESEND_FROM, name, subject: email.subject, html: email.html, text: email.text } })
+    const created = await resend<{ id: string }>("/broadcasts", { method: "POST", body: { segment_id: env.RESEND_AUDIENCE_ID, from: env.RESEND_FROM, name, subject: email.subject, html: email.html, text: email.text } })
     await resend(`/broadcasts/${created.id}/send`, { method: "POST", body: { scheduled_at: sendAt.toISOString() } })
     console.log(`  scheduled (${created.id})`)
   }

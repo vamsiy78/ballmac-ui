@@ -36,7 +36,7 @@ export async function POST(request: Request) {
   const audience = process.env.RESEND_AUDIENCE_ID
   if (audience && process.env.RESEND_API_KEY && reminderContextFromEnv(process.env, SITE_URL)) {
     try {
-      await resend(`/audiences/${audience}/contacts`, { method: "POST", body: { email: parsed.email, unsubscribed: false } })
+      await resend("/contacts", { method: "POST", body: { email: parsed.email, unsubscribed: false, segments: [{ id: audience }] } })
     } catch (err) {
       console.error("sampler: could not save the address", err instanceof Error ? err.message : err)
     }

@@ -37,7 +37,7 @@ export async function POST(request: Request) {
   if (limited(clientId(request.headers))) return json({ error: "Too many requests. Please try again in a few minutes." }, 429)
 
   try {
-    await resend(`/audiences/${audience}/contacts`, { method: "POST", body: { email: parsed.email, unsubscribed: false } })
+    await resend("/contacts", { method: "POST", body: { email: parsed.email, unsubscribed: false, segments: [{ id: audience }] } })
   } catch (err) {
     console.error("reminders: could not save the address", err instanceof Error ? err.message : err)
     return json({ error: "We could not save your address. Please try again." }, 502)
