@@ -99,7 +99,10 @@ export default function McpPage() {
       <h2>Or use the shadcn MCP server</h2>
       <p>Ballmac UI is a standard shadcn registry, so the official server works too once the registry is in your project.</p>
       <h3>1. Add the registry to your project</h3>
-      <p>The MCP server reads the registries in <code>components.json</code>:</p>
+      <p>
+        The <code>shadcn</code> CLI knows <code>@ballmac</code> from the official registry directory, but the MCP server only reads
+        the registries listed in <code>components.json</code>, so add it there:
+      </p>
       <CodePanel lang="bash" code="npx shadcn@latest registry add @ballmac=https://ui.ballmac.com/r/{name}.json" />
       <h3>2. Connect your client</h3>
       <div className="space-y-3">

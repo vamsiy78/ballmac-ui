@@ -45,7 +45,7 @@ export default function InstallationPage() {
       <h2>Older CLI, or your own registry entry</h2>
       <p>
         Recent versions of the shadcn CLI resolve <code>@ballmac</code> on their own. If yours does not, or you want to pin the
-        address (for a mirror or a preview deployment), add the registry once per project:
+        address (for a mirror or a preview deployment), add the registry once per project. The shadcn MCP server also needs this entry, because it only reads <code>components.json</code>:
       </p>
       <InstallTabs commands={per((pm) => run(pm, "shadcn@latest registry add @ballmac=https://ui.ballmac.com/r/{name}.json"))} />
       <p>It adds this to your <code>components.json</code>:</p>
