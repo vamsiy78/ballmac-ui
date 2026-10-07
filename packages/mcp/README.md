@@ -85,7 +85,7 @@ args = ["-y", "@ballmac/mcp"]
 | `get_examples` | The working examples shown on the item's page. |
 | `get_install_command` | The shadcn CLI commands for pnpm, npm, yarn or bun. |
 | `compose_page` | A page plan from blocks in the right order, install commands, a `page.tsx` scaffold, and any complete template that already fits. |
-| `get_setup` | How to prepare a project (shadcn init, registry entry, optional theme). |
+| `get_setup` | How to prepare a project (shadcn init, optional theme, and the registry entry older CLIs need). |
 
 Resources: `ballmac://catalog` (every item with a one-line description) and `ballmac://items/{name}` (one item as Markdown).
 
@@ -121,7 +121,7 @@ In JSON configs, add `"env": { "BALLMAC_LICENSE_KEY": "your-licence-key" }` next
 
 ## Without MCP
 
-Ballmac UI is also a standard shadcn registry, so the official shadcn MCP server can browse it once the registry is in your `components.json`:
+Ballmac UI is also a standard shadcn registry, so the official shadcn MCP server can browse it. The shadcn CLI knows `@ballmac` from the official registry directory, but that MCP server only reads the registries listed in `components.json`, so add it there:
 
 ```bash
 npx shadcn@latest registry add @ballmac=https://ui.ballmac.com/r/{name}.json

@@ -8,7 +8,7 @@ import { addCommand, packageManagers, type PackageManager } from "@/lib/registry
 
 export const metadata: Metadata = {
   title: "Installation",
-  description: "Add Ballmac UI to a React + Tailwind v4 project with the shadcn CLI: set up once, then add components by name or URL.",
+  description: "Add Ballmac UI to a React + Tailwind v4 project with the shadcn CLI: then add components by name or URL with one command. No registry setup.",
   alternates: { canonical: "/docs/installation" },
 }
 

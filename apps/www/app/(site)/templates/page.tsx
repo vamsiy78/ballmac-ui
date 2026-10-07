@@ -6,7 +6,7 @@ import { thumbFor } from "@/lib/thumbs"
 import { getTemplates, templateGroups } from "@/lib/registry"
 
 export const metadata: Metadata = {
-  title: "Templates",
+  title: "React site and app templates",
   description: "Complete multi-page React + Tailwind sites and apps with their own art direction, built from Ballmac UI blocks. Install one with a single shadcn command.",
   alternates: { canonical: "/templates" },
 }

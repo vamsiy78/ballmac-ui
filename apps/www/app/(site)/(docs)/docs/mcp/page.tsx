@@ -7,7 +7,7 @@ import { DocsPage } from "@/components/site/docs-page"
 
 export const metadata: Metadata = {
   title: "MCP & AI agents",
-  description: "Connect Claude, Cursor, VS Code, Windsurf or Codex to Ballmac UI with the @ballmac/mcp server: search components, blocks and templates, read their props and install them.",
+  description: "Connect Claude, Cursor, VS Code, Windsurf or Codex to Ballmac UI with the @ballmac/mcp server: search, read props and install components.",
   alternates: { canonical: "/docs/mcp" },
 }
 

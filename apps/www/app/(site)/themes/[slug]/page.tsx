@@ -1,4 +1,4 @@
-import { seoDescription, seoTitle } from "@/lib/seo"
+import { seoDescription } from "@/lib/seo"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getPreset, PRESETS } from "@ballmac-ui/theme-engine"

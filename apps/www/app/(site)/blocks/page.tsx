@@ -7,7 +7,7 @@ import { thumbFor } from "@/lib/thumbs"
 import { blockCategoryLabels, blockGroups, getBlocks } from "@/lib/registry"
 
 export const metadata: Metadata = {
-  title: "Blocks",
+  title: "React page blocks for shadcn and Tailwind",
   description: "Responsive page sections for React and Tailwind: heroes, features, pricing, FAQ, footers, auth and AI chat. Install any block with one command.",
   alternates: { canonical: "/blocks" },
 }

@@ -3,6 +3,16 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2026-10-07",
+    title: "Install with no setup, and cleaner theme links",
+    items: [
+      "Ballmac UI is now in the official shadcn registry directory, so `npx shadcn@latest add @ballmac/button` works with nothing to configure. The registry entry is kept as a fallback for older CLIs and for the shadcn MCP server, which only reads components.json",
+      "Theme builder: every preset has its own clean link (for example /themes/rose), a customised design is /themes?h=…, a note beside Copy link explains that your design lives in the link and is never stored, and copying is announced to screen readers",
+      "Clearer page titles and descriptions for the components, blocks, templates and themes pages, structured data for the organisation and the website, and an llms.txt that now lists blocks, templates and Pro",
+      "The analytics scripts load only on Vercel, so running the site locally or on your own host no longer logs console errors",
+    ],
+  },
+  {
     date: "2026-10-05",
     title: "Log in to Pro with your licence key",
     items: [

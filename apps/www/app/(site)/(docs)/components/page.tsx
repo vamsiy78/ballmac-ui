@@ -11,7 +11,7 @@ import { loadThumb } from "@/lib/examples"
 import { addCommand, categoryLabels, categoryOrder, getComponents, isNew, isPro, packageManagers, type PackageManager, type SiteItem } from "@/lib/registry"
 
 export const metadata: Metadata = {
-  title: "Components",
+  title: "React components for shadcn and Tailwind",
   description: "Polished React components for shadcn projects: app windows, docks, globes, beams, text effects, AI chat and more. Free to use.",
   alternates: { canonical: "/components" },
 }

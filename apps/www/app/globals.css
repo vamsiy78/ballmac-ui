@@ -196,3 +196,8 @@
 .bm-range:focus-visible::-moz-range-thumb {
   box-shadow: 0 0 0 4px color-mix(in oklch, var(--ring) 55%, transparent);
 }
+
+/* The founding-price banner is in the server HTML; a visitor who dismissed it gets this attribute on <html> before first paint (see founding-banner.tsx). */
+html[data-founding-off] [data-founding-banner] {
+  display: none;
+}

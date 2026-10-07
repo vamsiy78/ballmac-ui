@@ -168,7 +168,7 @@ server.registerTool(
   "get_install_command",
   {
     title: "Get install commands",
-    description: "The shadcn CLI commands to add one or more items to the user's project. Run `setup` once if components.json has no @ballmac registry, then `add`. `byUrl` works without setup for free items. Pro items install as @ballmac-pro/<name> and need `proSetup` once.",
+    description: "The shadcn CLI commands to add one or more items to the user's project. `setup` is optional: a current shadcn CLI resolves @ballmac without it, so run it only for an older CLI. Then run `add`. `byUrl` works without setup for free items. Pro items install as @ballmac-pro/<name> and need `proSetup` once.",
     inputSchema: { names: z.array(z.string().min(1)).min(1), packageManager: pms.optional() },
     outputSchema: { setup: z.string(), add: z.string(), byUrl: z.string(), proSetup: z.string().optional() },
     annotations: readOnly,
@@ -210,7 +210,7 @@ server.registerTool(
   "get_setup",
   {
     title: "Project setup",
-    description: "How to prepare a project for Ballmac UI (shadcn init, registry entry, optional theme) and its requirements.",
+    description: "How to prepare a project for Ballmac UI (shadcn init, optional theme, and the registry entry older CLIs need) and its requirements.",
     inputSchema: { packageManager: pms.optional() },
     outputSchema: { requirements: z.array(z.string()), steps: z.array(z.string()), installLocation: z.string() },
     annotations: readOnly,
@@ -221,7 +221,7 @@ server.registerTool(
       requirements: ["React 19", "Tailwind CSS v4", "a shadcn-initialized project (components.json and lib/utils)"],
       steps: [
         `${cmds.setup.split(" shadcn@latest")[0]} shadcn@latest init   # only if components.json is missing`,
-        cmds.setup,
+        `@ballmac is in the official shadcn registry directory, so a current shadcn CLI needs no registry entry. Run this once only if your CLI is older, or if the shadcn MCP server should browse it: ${cmds.setup}`,
         `${cmds.add}   # optional: the Ballmac theme tokens`,
         "Or pick one of 12 themes (graphite, ocean, indigo, violet, rose, ember, amber, forest, teal, sand, mono, midnight): add @ballmac/theme-<name>. Preview and tune them at https://ui.ballmac.com/themes",
         "For Arabic, Hebrew, Persian or Urdu: set <html lang dir=\"rtl\">, add @ballmac/direction and wrap the app in DirectionProvider; every component mirrors. To translate built-in text and set the locale for dates and numbers, add @ballmac/i18n and wrap the app in I18nProvider with a messages object (keys: https://ui.ballmac.com/i18n/en.json). Guides: https://ui.ballmac.com/docs/rtl and https://ui.ballmac.com/docs/i18n",
@@ -272,7 +272,7 @@ server.registerPrompt(
         role: "user",
         content: {
           type: "text",
-          text: `Build this with Ballmac UI: ${intent}\n\n1. Call compose_page with that intent. If it suggests a template that fits, prefer installing the template.\n2. Run get_setup's steps if the project has no @ballmac registry yet, then the add command.\n3. Create the page from the scaffold, then replace each block's default copy through its props (read get_item for the props).\n4. Keep the blocks' accessibility behaviour; do not remove labels or keyboard handling.`,
+          text: `Build this with Ballmac UI: ${intent}\n\n1. Call compose_page with that intent. If it suggests a template that fits, prefer installing the template.\n2. Run get_setup's steps if the project has no components.json yet (a current shadcn CLI needs no registry entry for @ballmac), then the add command.\n3. Create the page from the scaffold, then replace each block's default copy through its props (read get_item for the props).\n4. Keep the blocks' accessibility behaviour; do not remove labels or keyboard handling.`,
         },
       },
     ],

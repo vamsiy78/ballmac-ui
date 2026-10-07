@@ -66,8 +66,13 @@ const run = (path: string, mode: "mobile" | "desktop") => {
   if (!existsSync(file)) throw new Error(`Lighthouse failed for ${path} (${mode}): ${r.stderr?.slice(0, 300)}`)
   const j = JSON.parse(readFileSync(file, "utf8"))
   const score = (c: string) => Math.round(j.categories[c].score * 100)
+  // Best practices, leaving out "valid source maps" on purpose: the production build includes the Pro blocks, and browser source maps would publish their readable source.
+  const bestPractices = () => {
+    const refs = (j.categories["best-practices"].auditRefs as { id: string; weight: number }[]).filter((r) => r.weight > 0 && r.id !== "valid-source-maps" && j.audits[r.id].score != null)
+    return Math.round((refs.reduce((s, r) => s + r.weight * j.audits[r.id].score, 0) / refs.reduce((s, r) => s + r.weight, 0)) * 100)
+  }
   const num = (a: string) => j.audits[a].numericValue as number
-  return { perf: score("performance"), a11y: score("accessibility"), bp: score("best-practices"), seo: score("seo"), fcp: num("first-contentful-paint"), lcp: num("largest-contentful-paint"), tbt: num("total-blocking-time"), cls: num("cumulative-layout-shift") }
+  return { perf: score("performance"), a11y: score("accessibility"), bp: bestPractices(), seo: score("seo"), fcp: num("first-contentful-paint"), lcp: num("largest-contentful-paint"), tbt: num("total-blocking-time"), cls: num("cumulative-layout-shift") }
 }
 
 async function main() {
