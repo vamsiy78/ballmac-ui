@@ -21,6 +21,7 @@ import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/seg
 import { Switch } from "@/components/ballmac/switch"
 import { CopyButton } from "@/components/site/copy-button"
 import { InstallTabs } from "@/components/site/install-tabs"
+import { themeUrl } from "@/lib/theme-url"
 import { cn } from "@/lib/utils"
 
 import { PresetMini } from "./preset-card"
@@ -65,15 +66,12 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
   const setSpec = setEdited
   const setLinkNeutral = setLinkEdit
 
-  // Keep the address bar in step with the design, so the URL is always a shareable link.
+  // Keep the address bar in step with the design, so the URL is always a shareable link. replaceState, not pushState: a slider drag would otherwise add dozens of history entries.
+  const basePath = presetSlug ? `/themes/${presetSlug}` : "/themes"
   React.useEffect(() => {
     if (!edited && !viewEdit) return
-    const next = same(spec, initial) ? new URLSearchParams() : encodeSpec(spec)
-    if (next.size && !next.has("h")) next.set("h", String(spec.hue))
-    if (view !== "light") next.set("view", view)
-    const query = next.toString()
-    window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}`)
-  }, [edited, viewEdit, spec, view, initial])
+    window.history.replaceState(null, "", themeUrl({ spec, view, initial, basePath }))
+  }, [edited, viewEdit, spec, view, initial, basePath])
 
   const update = (patch: Partial<ThemeSpec>) => setSpec(normalizeSpec({ ...spec, ...patch, ...(linkNeutral && patch.hue !== undefined ? { neutralHue: patch.hue } : {}) }))
   const choose = (next: ThemeSpec) => {
@@ -302,12 +300,19 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
                   setTimeout(() => setShared(false), 1800)
                 }
               }}
+              aria-describedby={`${baseId}-link-hint`}
               className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-8 items-center gap-2 rounded-lg border px-3 text-[13px] font-medium outline-none focus-visible:ring-[3px]"
             >
               {shared ? <Check className="size-3.5" aria-hidden="true" /> : <Link2 className="size-3.5" aria-hidden="true" />}
               {shared ? "Link copied" : "Copy link to this theme"}
             </button>
+            <span role="status" className="sr-only">
+              {shared ? "Link copied to the clipboard" : ""}
+            </span>
           </div>
+          <p id={`${baseId}-link-hint`} className="text-muted-foreground -mt-2 text-xs">
+            Your design is saved in the address bar, not on our servers. Copy the link to share this exact theme.
+          </p>
 
           <div className={cn("grid gap-4", view === "split" && "2xl:grid-cols-2")}>
             {modes.map((m) => (
