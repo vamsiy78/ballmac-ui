@@ -19,18 +19,17 @@ const run = (pm: PackageManager, args: string) =>
 
 export default function InstallationPage() {
   return (
-    <DocsPage title="Installation" lead="Set up once, then add any component by name. It takes about a minute.">
+    <DocsPage title="Installation" lead="Add any component by name with one command. It takes about a minute.">
       <h2>1. Set up shadcn</h2>
       <p>
         Skip this if your project already has a <code>components.json</code>. Ballmac UI needs React 19 and Tailwind CSS v4.
       </p>
       <InstallTabs commands={per((pm) => run(pm, "shadcn@latest init"))} />
-      <h2>2. Add the Ballmac registry</h2>
-      <p>This tells the CLI where <code>@ballmac</code> components live. You only do it once per project.</p>
-      <InstallTabs commands={per((pm) => run(pm, "shadcn@latest registry add @ballmac=https://ui.ballmac.com/r/{name}.json"))} />
-      <p>It adds this to your <code>components.json</code>:</p>
-      <CodePanel lang="json" title="components.json" code={`{\n  "registries": {\n    "@ballmac": "https://ui.ballmac.com/r/{name}.json"\n  }\n}`} />
-      <h2>3. Add components</h2>
+      <h2>2. Add components</h2>
+      <p>
+        <code>@ballmac</code> is listed in the official shadcn registry directory, so the CLI already knows it. There is nothing
+        to configure.
+      </p>
       <InstallTabs commands={per((pm) => addCommand(["button", "number-ticker"], pm))} />
       <p>
         Files are written to <code>components/ballmac/</code> and npm dependencies are installed for you. Import them like
@@ -43,8 +42,15 @@ export default function InstallationPage() {
         (neutral light mode, ink-navy dark mode, blue focus ring), add the theme:
       </p>
       <InstallTabs commands={per((pm) => addCommand(["theme"], pm))} />
-      <h2>Installing without the registry entry</h2>
-      <p>You can always install straight from a URL:</p>
+      <h2>Older CLI, or your own registry entry</h2>
+      <p>
+        Recent versions of the shadcn CLI resolve <code>@ballmac</code> on their own. If yours does not, or you want to pin the
+        address (for a mirror or a preview deployment), add the registry once per project:
+      </p>
+      <InstallTabs commands={per((pm) => run(pm, "shadcn@latest registry add @ballmac=https://ui.ballmac.com/r/{name}.json"))} />
+      <p>It adds this to your <code>components.json</code>:</p>
+      <CodePanel lang="json" title="components.json" code={`{\n  "registries": {\n    "@ballmac": "https://ui.ballmac.com/r/{name}.json"\n  }\n}`} />
+      <p>You can also always install straight from a URL:</p>
       <CodePanel lang="bash" code="npx shadcn@latest add https://ui.ballmac.com/r/button.json" />
       <p>
         More on URLs, namespaces and updating components: <Link href="/docs/registry">CLI &amp; registry</Link>.

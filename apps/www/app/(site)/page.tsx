@@ -86,6 +86,18 @@ export default async function Home() {
           <span className="text-foreground truncate">{install}</span>
           <CopyButton value={install} label="Copy install command" />
         </div>
+        <p className="text-muted-foreground mt-3 text-[13px]">
+          No setup needed. Listed in the{" "}
+          <a
+            href="https://ui.shadcn.com/docs/directory"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-foreground focus-visible:ring-ring/50 rounded-sm underline underline-offset-4 outline-none focus-visible:ring-[3px]"
+          >
+            official shadcn registry directory
+          </a>
+          .
+        </p>
       </section>
 
       {/* Live mosaic */}

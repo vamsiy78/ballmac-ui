@@ -31,9 +31,6 @@ You need a project with React 19, Tailwind CSS v4 and shadcn set up (`npx shadcn
 Radix styles work.
 
 ```bash
-# once per project: tell the CLI where @ballmac lives
-npx shadcn@latest registry add "@ballmac=https://ui.ballmac.com/r/{name}.json"
-
 # add components by name; npm dependencies are installed for you
 npx shadcn@latest add @ballmac/button @ballmac/dock
 ```
@@ -42,7 +39,7 @@ npx shadcn@latest add @ballmac/button @ballmac/dock
 import { Button } from "@/components/ballmac/button"
 ```
 
-No setup either: `npx shadcn@latest add https://ui.ballmac.com/r/button.json`. Browse and preview everything at
+`@ballmac` is in the official shadcn registry directory, so there is no registry to configure. On an older CLI, or to pin the address, run `npx shadcn@latest registry add "@ballmac=https://ui.ballmac.com/r/{name}.json"` once, or install by URL: `npx shadcn@latest add https://ui.ballmac.com/r/button.json`. Browse and preview everything at
 [ui.ballmac.com/components](https://ui.ballmac.com/components), and see the [installation guide](https://ui.ballmac.com/docs/installation) for
 the optional Ballmac theme.
 

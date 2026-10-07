@@ -20,7 +20,7 @@ export default function RegistryPage() {
       <p>Every item has a permanent name and a JSON URL:</p>
       <CodePanel
         lang="bash"
-        code={`# by namespace (after "registry add", see Installation)\nnpx shadcn@latest add @ballmac/button\n\n# by URL, no setup needed\nnpx shadcn@latest add ${SITE_URL}/r/button.json`}
+        code={`# by namespace: @ballmac is in the official shadcn registry directory, no setup\nnpx shadcn@latest add @ballmac/button\n\n# by URL, no setup needed\nnpx shadcn@latest add ${SITE_URL}/r/button.json`}
       />
       <h2>Search and inspect before installing</h2>
       <CodePanel
