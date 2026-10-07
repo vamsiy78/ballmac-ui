@@ -1,13 +1,13 @@
 /**
  * The two deadline reminders (about 72 and 24 hours before the founding price ends) and the note sent when someone signs up. Plain, true statements only: the
- * price, the deadline, what is included and the refund. No framework imports, so they can be tested on their own.
+ * price, the deadline, and what is included. No framework imports, so they can be tested on their own.
  */
-import { endsLabel, founding, REFUND_DAYS } from "./founding"
+import { endsLabel, founding } from "./founding"
 
 export type ReminderKind = "72h" | "24h"
 export const REMINDER_HOURS: Record<ReminderKind, number> = { "72h": 72, "24h": 24 }
 
-export type ReminderContext = { endsAt: string; price: string; listPrice: string | null; limit: number; siteUrl: string; refundDays: number }
+export type ReminderContext = { endsAt: string; price: string; listPrice: string | null; limit: number; siteUrl: string }
 
 /** When a reminder goes out: the stated number of hours before the deadline. */
 export const reminderSendAt = (endsAt: string, kind: ReminderKind) => new Date(Date.parse(endsAt) - REMINDER_HOURS[kind] * 3_600_000)
@@ -30,7 +30,6 @@ function offerLines(c: ReminderContext) {
   return {
     price: `$${esc(c.price)}${after}`,
     when: esc(endsLabel(c.endsAt)),
-    refund: `${c.refundDays}-day refund if it is not for you.`,
     included: "150 premium blocks, two SaaS starter apps (Beacon and Quire) and Figma tokens, with light, dark and right-to-left support.",
   }
 }
@@ -44,7 +43,7 @@ export function reminderEmail(kind: ReminderKind, c: ReminderContext): { subject
   const paragraphs = [
     lead,
     `Price: <strong>${o.price}</strong>. It ends <strong>${o.when}</strong>, or earlier if all ${c.limit} founding licences are taken.`,
-    `Included: ${o.included} Founding buyers also keep their price for every future Pro update, can vote on the next blocks, and can ask to be listed on the Founders page. ${o.refund}`,
+    `Included: ${o.included} Founding buyers also keep their price for every future Pro update, can vote on the next blocks, and can ask to be listed on the Founders page.`,
   ]
   const footer = `You are getting this because you asked for a reminder on ui.ballmac.com. This is the ${kind === "72h" ? "first of two" : "second and last"} reminder. <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:#5c5953">Unsubscribe</a>.`
   const text = [
@@ -52,7 +51,7 @@ export function reminderEmail(kind: ReminderKind, c: ReminderContext): { subject
     "",
     `Price: $${c.price}${c.listPrice ? `, then $${c.listPrice}` : ""}. It ends ${endsLabel(c.endsAt)}, or earlier if all ${c.limit} founding licences are taken.`,
     "",
-    `Included: ${o.included} Founding buyers also keep their price for every future Pro update, can vote on the next blocks, and can ask to be listed on the Founders page. ${o.refund}`,
+    `Included: ${o.included} Founding buyers also keep their price for every future Pro update, can vote on the next blocks, and can ask to be listed on the Founders page.`,
     "",
     `Get Pro: ${pricing}`,
     "",
@@ -67,10 +66,10 @@ export function reminderConfirmEmail(c: ReminderContext): { subject: string; htm
   const subject = "You will get two reminders before the founding price ends"
   const paragraphs = [
     `Thanks. We will email you twice: about 72 hours and about 24 hours before the founding price ends on <strong>${o.when}</strong>. After that, nothing more unless you buy.`,
-    `The price is <strong>${o.price}</strong> for the first ${c.limit} buyers. ${o.refund}`,
+    `The price is <strong>${o.price}</strong> for the first ${c.limit} buyers.`,
   ]
   const footer = "Wrong address? Ignore this and you will not hear from us again, or reply to this email and ask to be removed."
-  const text = `Thanks. We will email you twice: about 72 hours and about 24 hours before the founding price ends on ${endsLabel(c.endsAt)}. After that, nothing more unless you buy.\n\nThe price is $${c.price}${c.listPrice ? `, then $${c.listPrice}` : ""} for the first ${c.limit} buyers. ${o.refund}\n\n${c.siteUrl}/pricing\n\n${footer}`
+  const text = `Thanks. We will email you twice: about 72 hours and about 24 hours before the founding price ends on ${endsLabel(c.endsAt)}. After that, nothing more unless you buy.\n\nThe price is $${c.price}${c.listPrice ? `, then $${c.listPrice}` : ""} for the first ${c.limit} buyers.\n\n${c.siteUrl}/pricing\n\n${footer}`
   return { subject, html: shell(subject, paragraphs, "See the offer", `${c.siteUrl}/pricing`, footer), text }
 }
 
@@ -83,5 +82,5 @@ export function planReminders(endsAt: string, now: Date): { kind: ReminderKind; 
 export function reminderContextFromEnv(env: Record<string, string | undefined>, siteUrl: string, now: Date = new Date()): ReminderContext | null {
   const f = founding(env, now)
   if (!f?.endsAt) return null
-  return { endsAt: f.endsAt, price: f.price, listPrice: f.listPrice, limit: f.limit, siteUrl, refundDays: REFUND_DAYS }
+  return { endsAt: f.endsAt, price: f.price, listPrice: f.listPrice, limit: f.limit, siteUrl }
 }

@@ -4,7 +4,7 @@ New components, blocks and changes, newest first. The same list is at https://ui
 
 ## 2026-10-07: Founding offer: $49 until 21 October, then $99
 
-- Pricing page rebuilt around the founding offer: a live countdown to 21 Oct 2026, 11:59 pm IST, the $99 list price struck through, and a 7-day refund on every purchase
+- Pricing page rebuilt around the founding offer: a live countdown to 21 Oct 2026, 11:59 pm IST, the $99 list price struck through
 - See what is inside before you buy: the 40 second film with captions and six Pro block previews
 - A free sampler of three Pro blocks for your email, and a reminder email 72 hours and 24 hours before the founding price ends
 - Pro block pages and the locked copy-code prompt say when the founding price ends

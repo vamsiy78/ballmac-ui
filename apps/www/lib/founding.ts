@@ -13,8 +13,6 @@
  */
 import { paymentsLive, testModeInProduction } from "./payments"
 
-/** The refund promise on the pricing page and in the emails. Dodo handles the refund itself; this is the window we honour. */
-export const REFUND_DAYS = 7
 
 type Env = Record<string, string | undefined>
 

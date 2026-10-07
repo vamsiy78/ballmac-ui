@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 
 import { planReminders, reminderConfirmEmail, reminderEmail, reminderSendAt } from "../lib/reminder-emails"
 
-const ctx = { endsAt: "2026-10-21T18:29:00.000Z", price: "49", listPrice: "99", limit: 25, siteUrl: "https://ui.ballmac.com", refundDays: 7 }
+const ctx = { endsAt: "2026-10-21T18:29:00.000Z", price: "49", listPrice: "99", limit: 25, siteUrl: "https://ui.ballmac.com" }
 
 describe("reminder emails", () => {
   it("send at exactly 72 and 24 hours before the deadline", () => {
@@ -14,7 +14,7 @@ describe("reminder emails", () => {
     expect(planReminders(ctx.endsAt, new Date("2026-10-19T00:00:00Z")).map((r) => r.kind)).toEqual(["24h"])
     expect(planReminders(ctx.endsAt, new Date("2026-10-21T00:00:00Z"))).toEqual([])
   })
-  it("state only true things: price, the real deadline in IST, the cap, the refund", () => {
+  it("state only true things: price, the real deadline in IST, the cap", () => {
     for (const kind of ["72h", "24h"] as const) {
       const e = reminderEmail(kind, ctx)
       for (const body of [e.html, e.text]) {
@@ -22,7 +22,7 @@ describe("reminder emails", () => {
         expect(body).toContain("$99")
         expect(body).toContain("Wed 21 Oct 2026, 11:59 pm IST")
         expect(body).toContain("25 founding licences")
-        expect(body).toContain("7-day refund")
+        expect(body).not.toMatch(/refund/i)
         expect(body).toContain("https://ui.ballmac.com/pricing")
       }
     }

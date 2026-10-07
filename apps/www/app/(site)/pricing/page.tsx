@@ -10,7 +10,7 @@ import { FoundingCountdown } from "@/components/site/founding-countdown"
 import { PageCard } from "@/components/site/page-card"
 import { Eyebrow } from "@/components/site/section-heading"
 import { Sampler } from "@/components/site/sampler"
-import { endsLabel, leftPhrase, REFUND_DAYS } from "@/lib/founding"
+import { endsLabel, leftPhrase } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { getOffer } from "@/lib/offer"
 import { getBlocks, getItem, isPro } from "@/lib/registry"
@@ -105,7 +105,6 @@ export default async function PricingPage() {
   ]
 
   const faqs = [
-    { q: "What if Pro is not for me?", a: `Ask within ${REFUND_DAYS} days of buying and you get your money back. Write from the Support page; we do not ask you to justify it.` },
     ...(f
       ? [
           {
@@ -194,7 +193,7 @@ export default async function PricingPage() {
                 {pro && onSale && (
                   <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs opacity-75">
                     <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
-                    {REFUND_DAYS}-day refund. Tax and invoice handled for you.
+                    Tax and invoice handled for you.
                   </p>
                 )}
               </div>
