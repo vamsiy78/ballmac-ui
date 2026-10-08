@@ -34,6 +34,7 @@ const columns = [
   {
     title: "Ballmac",
     links: [
+      { href: "https://ballmac.com/services?ref=ui-footer", label: "Hire us" },
       { href: "https://ballmac.com", label: "ballmac.com" },
       { href: "https://ballmac.com/binzide", label: "Binzide" },
       { href: "https://x.com/ballmacapps", label: "X" },

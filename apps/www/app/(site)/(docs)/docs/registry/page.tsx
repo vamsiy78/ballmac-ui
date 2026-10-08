@@ -60,6 +60,11 @@ export default function RegistryPage() {
         <a href={`${SITE_URL}/r/registry.json`}>{`${SITE_URL}/r/registry.json`}</a>. Each item&apos;s <code>meta</code> adds
         Ballmac fields for tools and agents: tier, tags, version, when to use it, what it composes with, and keyboard notes.
       </p>
+      <h2>A registry for your own team</h2>
+      <p>
+        This is the same setup we build for clients: your components, in your brand, installable with one command and available to AI
+        agents over MCP. <a href="https://ballmac.com/services?offer=registry&ref=ui-registry#start">Talk to us about it</a>.
+      </p>
     </DocsPage>
   )
 }

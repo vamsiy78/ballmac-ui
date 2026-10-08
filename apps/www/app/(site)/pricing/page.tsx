@@ -309,6 +309,30 @@ export default async function PricingPage() {
           </section>
         )}
 
+        <section aria-labelledby="hire-h" className="bg-card mx-auto mt-20 max-w-3xl rounded-2xl border p-6 sm:p-8">
+          <h2 id="hire-h" className="text-xl font-semibold tracking-tight">
+            Rather have it built for you?
+          </h2>
+          <p className="text-muted-foreground mt-2 leading-relaxed">
+            The studio behind Ballmac UI takes on a few client projects at a time: a product UI built on these components, or a private
+            registry with an MCP server for your own team. Fixed price in writing, and you own the code.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <a
+              href="https://ballmac.com/services?offer=ui&ref=ui-pricing#start"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring/50 inline-flex h-10 items-center rounded-full px-5 text-sm font-medium outline-none focus-visible:ring-[3px]"
+            >
+              Hire us to build it
+            </a>
+            <a
+              href="https://ballmac.com/services?ref=ui-pricing"
+              className="hover:bg-accent focus-visible:ring-ring/50 inline-flex h-10 items-center rounded-full border px-5 text-sm font-medium outline-none focus-visible:ring-[3px]"
+            >
+              See services and prices
+            </a>
+          </div>
+        </section>
+
         <section className="mx-auto mt-20 max-w-3xl">
           <h2 className="text-xl font-semibold tracking-tight">Questions</h2>
           <dl className="mt-6 divide-y border-y">

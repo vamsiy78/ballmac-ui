@@ -134,6 +134,11 @@ export default function McpPage() {
         Point any assistant at <a href="/llms.txt">ui.ballmac.com/llms.txt</a>. It lists every component with its purpose
         and install command.
       </p>
+      <h2>Want this for your own design system?</h2>
+      <p>
+        We build private, shadcn-compatible registries with an MCP server for teams, so their AI coding agents use their own
+        components. <a href="https://ballmac.com/services?offer=registry&ref=ui-mcp#start">See how it works and what it costs</a>.
+      </p>
     </DocsPage>
   )
 }
