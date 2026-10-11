@@ -84,6 +84,16 @@ describe("add", () => {
   })
 })
 
+describe("add when shadcn writes nothing", () => {
+  it("fails loudly instead of recording items that were never installed", async () => {
+    const root = makeProject()
+    const { ctx, shadcn } = makeCtx(root, world())
+    shadcn.add = async () => {} // what shadcn does when it stops at an overwrite question nobody can answer: exit 0, write nothing
+    await expect(addItems(ctx, ["button"])).rejects.toThrow(/shadcn did not write 1 file\(s\): src\/components\/ballmac\/button\.tsx.*interactive terminal/s)
+    expect(Object.keys(readLock(root, BASE).items)).toEqual([])
+  })
+})
+
 describe("tests that ship with items", () => {
   it("installs setup, test files and tracks them", async () => {
     const root = makeProject()
