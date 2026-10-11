@@ -3591,7 +3591,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/media.json"
+        "https://ui.ballmac.com/r/media.json",
+        "https://ui.ballmac.com/r/media-image.json"
       ],
       "files": [
         {
@@ -3614,8 +3615,16 @@
           "cards",
           "layout"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-29",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Fixes a crash when it is rendered from a server component: isMediaImage now comes from the new media-image helper, not from the client-only media file. Adds media-image as a dependency.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "<BentoGrid columns={3}> with <BentoCard colSpan rowSpan icon title description href background />. The grid responds to its own width (container queries): one column below 36rem. The background slot takes any decorative node, such as animated-grid, marquee or number-ticker visuals.",
           "whenToUse": [
@@ -14758,7 +14767,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/i18n.json",
-        "https://ui.ballmac.com/r/media.json"
+        "https://ui.ballmac.com/r/media.json",
+        "https://ui.ballmac.com/r/media-image.json"
       ],
       "files": [
         {
@@ -14782,8 +14792,16 @@
           "panel",
           "media"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Fixes a crash when it is rendered from a server component: isMediaImage now comes from the new media-image helper, not from the client-only media file. Adds media-image as a dependency.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "<ControlCenter> is a 2-column grid. Put <ControlCluster> with <ControlRow> toggles first, then <ControlTile>, <ControlSlider label icon> and <ControlNowPlaying>. Toggles are controlled with pressed / onPressedChange or uncontrolled.",
@@ -22320,7 +22338,8 @@
         "utils",
         "https://ui.ballmac.com/r/motion-presets.json",
         "https://ui.ballmac.com/r/i18n.json",
-        "https://ui.ballmac.com/r/media.json"
+        "https://ui.ballmac.com/r/media.json",
+        "https://ui.ballmac.com/r/media-image.json"
       ],
       "files": [
         {
@@ -22344,8 +22363,16 @@
           "password",
           "wallpaper"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Fixes a crash when it is rendered from a server component: isMediaImage now comes from the new media-image helper, not from the client-only media file. Adds media-image as a dependency.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "<LockScreen variant=\"mac\" password=\"hello\" /> fills its positioned parent until unlocked. variant=\"ios\" takes notifications as children and unlocks by swiping up or pressing the button. Control with locked / onLockedChange.",
@@ -23428,7 +23455,8 @@
       "description": "A picture slot: reserves the space, lazy-loads, takes a URL, an image with required alt text and a dark-mode file, or your own element, and falls back to artwork if there is no image or it fails.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/media-image.json"
       ],
       "files": [
         {
@@ -23453,8 +23481,16 @@
           "aspect ratio",
           "dark mode"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "isMediaImage and the MediaImage type moved to the new media-image helper so server components can call it; both are still exported from here. Adds media-image as a dependency.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Pass media as a URL (with alt), an object { src, alt, srcDark? }, or any element such as a next/image. aspect reserves the box (video, photo, square, wide, portrait or '3/2'); fit is cover | contain | fill; priority loads an above-the-fold image eagerly. fallback shows when there is no media or the file fails.",
@@ -33732,7 +33768,8 @@
         "utils",
         "https://ui.ballmac.com/r/dropdown-menu.json",
         "https://ui.ballmac.com/r/i18n.json",
-        "https://ui.ballmac.com/r/media.json"
+        "https://ui.ballmac.com/r/media.json",
+        "https://ui.ballmac.com/r/media-image.json"
       ],
       "files": [
         {
@@ -33753,8 +33790,16 @@
           "menu",
           "dropdown"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Fixes a crash when it is rendered from a server component: isMediaImage now comes from the new media-image helper, not from the client-only media file. Adds media-image as a dependency.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "teams: {id,name,description,logo}. value/defaultValue/onValueChange choose the active team; onAddTeam adds the last row; compact shows only the logo.",
@@ -33971,8 +34016,16 @@
           "customers",
           "settings"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "The page that reads params now does so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires. Nothing else changes.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Installs a six-page store admin with working client-side filtering, sorting, selection, drawers and forms over sample data. Replace atlas-data.ts with your API, and edit atlasCss for the palette.",
           "whenToUse": [
@@ -34864,8 +34917,16 @@
           "checkout",
           "ceramics"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "The page that reads params now does so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires. Nothing else changes.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Installs a five-page store with a shared bag drawer, filters, a product page, a bag page with free-shipping progress and a validated checkout. Edit goods-data.ts and goodsCss; replace Piece with photos.",
           "whenToUse": [
@@ -36632,8 +36693,16 @@
           "player",
           "show notes"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "The page that reads params now does so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires. Nothing else changes.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Installs a five-page podcast site on the audio-player component. Change episodes in podcast-data.ts, add src URLs for real audio, and edit podcastCss for the palette.",
           "whenToUse": [
@@ -37155,8 +37224,16 @@
           "newsletter",
           "serif"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "The page that reads params now does so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires. Nothing else changes.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Installs a five-page magazine. Change stories and authors in publication-data.ts, the palette in publicationCss, and the duotone MagArt illustrations (or swap them for photographs).",
           "whenToUse": [
@@ -42147,6 +42224,49 @@
         },
         "examples": [],
         "url": "https://ui.ballmac.com/components/i18n"
+      }
+    },
+    {
+      "name": "media-image",
+      "type": "registry:lib",
+      "title": "Media image check",
+      "description": "The MediaImage type and isMediaImage(), which tells a picture (a URL or { src, alt }) from an element. A plain module, so server components can call it.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "files": [
+        {
+          "path": "registry/ballmac/lib/media-image.ts",
+          "type": "registry:lib",
+          "target": "@lib/ballmac/media-image.ts"
+        }
+      ],
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "image",
+          "media",
+          "server components"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-11",
+        "tests": true,
+        "ai": {
+          "summary": "isMediaImage(value) is true for an image URL or { src, alt }. Import it from here, not from media.tsx, when a server component needs it.",
+          "whenToUse": [
+            "A server component that accepts either a picture or your own element in a slot and renders pictures through Media"
+          ],
+          "whenNotToUse": [
+            "Rendering a picture: use the Media component"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": []
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/media-image"
       }
     },
     {

@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["bento", "grid", "features", "landing", "cards", "layout"],
   files: [{ path: "components/bento-grid.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "media"],
+  registryDependencies: ["shadcn:utils", "media", "media-image"],
   examples: [
     { name: "bento-grid-demo", title: "Live feature grid", file: "bento-grid-demo.tsx" },
     { name: "bento-grid-features", title: "Two columns", file: "bento-grid-features.tsx" },
@@ -37,6 +37,7 @@ export default defineItem({
       "On touch screens the link is always visible",
     ],
   },
-  version: "1.0.0",
-  updated: "2026-09-29",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "Fixes a crash when it is rendered from a server component: isMediaImage now comes from the new media-image helper, not from the client-only media file. Adds media-image as a dependency." }],
 })

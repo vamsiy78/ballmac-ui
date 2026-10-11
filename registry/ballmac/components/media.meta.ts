@@ -8,7 +8,7 @@ export default defineItem({
   category: "primitives",
   tags: ["image", "picture", "slot", "screenshot", "photo", "alt text", "aspect ratio", "dark mode"],
   files: [{ path: "components/media.tsx" }],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "media-image"],
   examples: [
     { name: "media-demo", title: "Image, element and fallback", file: "media-demo.tsx" },
     { name: "media-dark", title: "A different file in dark mode", file: "media-dark.tsx" },
@@ -24,6 +24,7 @@ export default defineItem({
     ],
     customization: ["aspect, fit and priority", "srcDark for a dark-mode file", "position for object-position", "fallback for the artwork shown with no image", "onImageError"],
   },
-  version: "1.0.0",
-  updated: "2026-10-02",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "isMediaImage and the MediaImage type moved to the new media-image helper so server components can call it; both are still exported from here. Adds media-image as a dependency." }],
 })

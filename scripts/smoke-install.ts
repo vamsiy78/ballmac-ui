@@ -4,7 +4,7 @@
  * runs `shadcn init` then `shadcn add` for every free item and example, and finally
  * `tsc --noEmit` and `next build`. Any failure means users would hit it too.
  *
- * Usage: pnpm smoke   (SMOKE_DIR to reuse a folder)
+ * Usage: pnpm smoke   (SMOKE_DIR to reuse a folder, SMOKE_BASE=radix, SMOKE_CACHE_COMPONENTS=1 to keep Next.js 16.4's new defaults)
  */
 import { execSync, spawn } from "node:child_process"
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
@@ -42,6 +42,16 @@ try {
     dir,
   )
   const app = join(dir, "app")
+  // `create-next-app@latest` moves on: Next.js 16.4 turns on Cache Components, which rejects `new Date()` and similar reads during
+  // prerender (react-day-picker's "today" in the calendar and date picker, for example). Ballmac UI is not compatible with that yet,
+  // so the smoke test builds the Next.js version this repo pins, with the options that version defaults to.
+  // SMOKE_CACHE_COMPONENTS=1 keeps the new defaults to see how far the gap goes.
+  if (!process.env.SMOKE_CACHE_COMPONENTS) {
+    const pinned = (JSON.parse(readFileSync(join(ROOT, "apps/www/package.json"), "utf8")) as { dependencies: Record<string, string> }).dependencies.next!
+    run(`npm install next@${pinned} --save-exact --silent`, app)
+    const config = join(app, "next.config.ts")
+    writeFileSync(config, readFileSync(config, "utf8").replace(/^\s*(cacheComponents|partialPrefetching):.*\n/gm, ""))
+  }
   // Default init uses Base UI (base-nova); SMOKE_BASE=radix tests a Radix project instead.
   run(
     `npx -y shadcn@latest init -d -y${process.env.SMOKE_BASE ? ` -b ${process.env.SMOKE_BASE}` : ""}`,

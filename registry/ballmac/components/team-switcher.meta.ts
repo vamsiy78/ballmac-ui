@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["workspace", "switcher", "menu", "dropdown"],
   files: [{ path: "components/team-switcher.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "dropdown-menu", "i18n", "media"],
+  registryDependencies: ["shadcn:utils", "dropdown-menu", "i18n", "media", "media-image"],
   examples: [
     { name: "team-switcher-demo", title: "Workspace menu", file: "team-switcher-demo.tsx" },
     { name: "team-switcher-states", title: "Compact", file: "team-switcher-states.tsx" },
@@ -28,6 +28,7 @@ export default defineItem({
     ],
     customization: ["compact", "logo per team", "onAddTeam and addLabel", "side and align"],
   },
-  version: "1.0.0",
-  updated: "2026-09-30",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "Fixes a crash when it is rendered from a server component: isMediaImage now comes from the new media-image helper, not from the client-only media file. Adds media-image as a dependency." }],
 });

@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["lock-screen", "login", "macos", "ios", "clock", "password", "wallpaper"],
   files: [{ path: "components/lock-screen.tsx" }],
   dependencies: ["motion@^12", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "motion-presets", "i18n", "media"],
+  registryDependencies: ["shadcn:utils", "motion-presets", "i18n", "media", "media-image"],
   examples: [
     { name: "lock-screen-demo", title: "macOS password lock", file: "lock-screen-demo.tsx" },
     { name: "lock-screen-ios", title: "iOS in a phone", file: "lock-screen-ios.tsx" },
@@ -29,6 +29,7 @@ export default defineItem({
     ],
     customization: ["variant: mac | ios", "password, onUnlock, hint, name, avatar", "time and date for a fixed clock (omit for live)", "wallpaper replaces the default", "locked / defaultLocked / onLockedChange"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "Fixes a crash when it is rendered from a server component: isMediaImage now comes from the new media-image helper, not from the client-only media file. Adds media-image as a dependency." }],
 })

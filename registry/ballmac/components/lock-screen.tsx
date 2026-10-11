@@ -8,7 +8,8 @@ import { AnimatePresence, motion, useAnimationControls } from "motion/react"
 import { cn } from "@/lib/utils"
 import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 import { useMessages } from "@/lib/ballmac/i18n"
-import { Media, isMediaImage, type MediaSource } from "@/components/ballmac/media"
+import { Media, type MediaSource } from "@/components/ballmac/media"
+import { isMediaImage } from "@/lib/ballmac/media-image"
 
 type LockScreenProps = Omit<React.ComponentProps<"section">, "onSubmit"> & {
   /** "mac" shows a password field under the user's avatar; "ios" shows notifications and a swipe-up unlock. */

@@ -7,7 +7,8 @@ import { Slider as SliderPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 import { useMessages } from "@/lib/ballmac/i18n"
-import { Media, isMediaImage, type MediaSource } from "@/components/ballmac/media"
+import { Media, type MediaSource } from "@/components/ballmac/media"
+import { isMediaImage } from "@/lib/ballmac/media-image"
 
 /** Pressed state that works controlled or not. */
 function usePressed(pressed: boolean | undefined, defaultPressed: boolean, onChange?: (pressed: boolean) => void) {

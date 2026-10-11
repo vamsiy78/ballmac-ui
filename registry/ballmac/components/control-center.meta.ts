@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["control-center", "macos", "toggles", "slider", "settings", "panel", "media"],
   files: [{ path: "components/control-center.tsx" }],
   dependencies: ["radix-ui", "lucide-react"],
-  registryDependencies: ["shadcn:utils", "i18n", "media"],
+  registryDependencies: ["shadcn:utils", "i18n", "media", "media-image"],
   examples: [
     { name: "control-center-demo", title: "Full panel", file: "control-center-demo.tsx" },
     { name: "control-center-compact", title: "Tiles only", file: "control-center-compact.tsx" },
@@ -28,6 +28,7 @@ export default defineItem({
     ],
     customization: ["ControlTile: icon, label, status, pressed, stacked", "ControlSlider: label, icon, value, onValueChange", "ControlNowPlaying: title, artist, artwork, playing"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "Fixes a crash when it is rendered from a server component: isMediaImage now comes from the new media-image helper, not from the client-only media file. Adds media-image as a dependency." }],
 })

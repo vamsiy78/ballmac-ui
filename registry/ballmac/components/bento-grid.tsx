@@ -3,7 +3,8 @@ import * as React from "react"
 import { ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { Media, isMediaImage, type MediaSource } from "@/components/ballmac/media"
+import { Media, type MediaSource } from "@/components/ballmac/media"
+import { isMediaImage } from "@/lib/ballmac/media-image"
 
 type BentoGridProps = React.ComponentProps<"div"> & {
   /** Columns once the grid is wider than 36rem; narrower grids stack in one column. */

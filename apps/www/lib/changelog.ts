@@ -4,6 +4,16 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-11",
+    title: "Fixes: four components crashed in server components, and four template pages needed Suspense",
+    items: [
+      "Bento Grid, Team Switcher, Lock Screen and Control Center failed with \"Attempted to call isMediaImage() from the server\" when a server component rendered them. The helper now lives in its own small item, media-image, and the components import it from there (Media still exports it for code that used it). Each is now 1.0.1, so `ballmac update` merges the fix into your copy",
+      "The pages that read params in the Atlas, Goods, Podcast and Publication templates now do so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires: 1.0.1 each",
+      "A new build check fails when a file that runs on the server imports a function from a file marked \"use client\", so this kind of crash is caught before it ships",
+      "Known gap: Next.js 16.4 turns on Cache Components in new projects, and a few items still read the current date while prerendering (the calendar and date picker through react-day-picker's \"today\", for one). They work on Next.js 16.3 and in 16.4 projects without Cache Components. We are working through them",
+    ],
+  },
+  {
+    date: "2026-10-11",
     title: "Update components without losing your edits, and install their tests",
     items: [
       "New command line tool, `npx @ballmac/cli`: it runs the shadcn CLI for you and remembers what it installed (ballmac.lock.json), so `ballmac update` can merge a new version into your edited copy instead of overwriting it. Files you never touched are replaced, edits in other places are merged, and overlapping edits become conflict markers",

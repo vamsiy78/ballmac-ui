@@ -15,7 +15,8 @@ import {
 } from "@/components/ballmac/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { useMessages } from "@/lib/ballmac/i18n";
-import { Media, isMediaImage, type MediaSource } from "@/components/ballmac/media";
+import { Media, type MediaSource } from "@/components/ballmac/media";
+import { isMediaImage } from "@/lib/ballmac/media-image";
 
 type Team = {
   /** Unique id; used for `value`. */

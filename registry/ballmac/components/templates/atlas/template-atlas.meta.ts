@@ -59,6 +59,7 @@ export default defineItem({
     ],
     customization: ["Replace atlas-data.ts with your data", "Edit atlasCss for the light and dark palettes", "Swap the sidebar items in the nav array of atlas-theme.tsx"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "The page that reads params now does so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires. Nothing else changes." }],
 })

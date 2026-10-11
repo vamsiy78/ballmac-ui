@@ -4,21 +4,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-
-/** An image with the text that describes it. `alt` is required: use "" only when the picture is pure decoration. */
-export type MediaImage = {
-  src: string
-  alt: string
-  /** Shown instead of `src` in dark mode (when an ancestor has the `dark` class). */
-  srcDark?: string
-  srcSet?: string
-  sizes?: string
-  /** Intrinsic size, so the browser can reserve space before the file arrives. */
-  width?: number
-  height?: number
-  /** CSS object-position, for example "top" or "50% 20%". */
-  position?: string
-}
+import { isMediaImage, type MediaImage } from "@/lib/ballmac/media-image"
 
 /** What a slot accepts: an image URL, an image with its alt text, or your own element (a next/image, a video, a component). */
 export type MediaSource = string | MediaImage | React.ReactElement
@@ -138,9 +124,5 @@ function Media({ media, alt, fallback, aspect = "auto", fit = "cover", priority 
   )
 }
 
-/** True for an image URL or a `{ src, alt }` object, false for an element or nothing: lets a slot that used to take any element accept pictures too. */
-function isMediaImage(value: unknown): value is string | MediaImage {
-  return typeof value === "string" || (typeof value === "object" && value !== null && !React.isValidElement(value) && "src" in value)
-}
-
-export { Media, isMediaImage, type MediaProps }
+// isMediaImage lives in lib/media-image so server components can call it; it stays exported here for code that imported it from this file.
+export { Media, isMediaImage, type MediaImage, type MediaProps }

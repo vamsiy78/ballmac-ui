@@ -57,6 +57,7 @@ export default defineItem({
     ],
     customization: ["Replace products and reviews in goods-data.ts", "Swap the cart store for your cart or commerce API", "Replace Piece with product photography", "Edit goodsCss for the palette"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "The page that reads params now does so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires. Nothing else changes." }],
 })
