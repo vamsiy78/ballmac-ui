@@ -1,3 +1,5 @@
+"use client"
+
 import { ChevronLeft, FileText, Share } from "lucide-react"
 
 import { AppWindow, AppWindowContent, AppWindowTitleBar } from "@/components/ballmac/app-window"
