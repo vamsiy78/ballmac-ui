@@ -15,6 +15,7 @@ import { SCHEMA_VERSION } from "@ballmac-ui/metadata"
 
 import { extractProps } from "./extract-props"
 import { importPathFor, loadItems, ROOT, targetFor, type LoadedItem } from "./lib"
+import { planTests, writeTests, writeVersions } from "./registry-extras"
 import { registryUrl } from "./registry-url"
 
 const REGISTRY_URL = registryUrl(process.env)
@@ -34,6 +35,7 @@ const defaultFileType: Record<string, string> = {
 // Pro items are served by the private registry, which needs the licence key. The shadcn CLI only sends the key
 // for a namespaced registry, so dependencies on Pro items are written as @ballmac-pro/<name>.
 let proNames = new Set<string>()
+let testPlan = new Map<string, unknown>()
 function dep(name: string) {
   if (name.startsWith("shadcn:")) return name.slice("shadcn:".length)
   return proNames.has(name) ? `@ballmac-pro/${name}` : `${REGISTRY_URL}/r/${name}.json`
@@ -102,6 +104,8 @@ function toRegistryItems(item: LoadedItem) {
       tags: item.tags,
       version: item.version,
       updated: item.updated,
+      changelog: item.changelog.length ? item.changelog : undefined,
+      tests: testPlan.has(item.name) ? true : undefined,
       ai: item.ai,
       source: item.source,
       examples: item.examples.map((e) => e.name),
@@ -146,6 +150,7 @@ specs = new Map(
 const free = items.filter((i) => i.tier === "free")
 const pro = items.filter((i) => i.tier === "pro")
 proNames = new Set(pro.map((i) => i.name))
+testPlan = planTests(items)
 // Free items and their examples must never pull in Pro code.
 for (const i of free) {
   const proDep = i.registryDependencies.find((d) => proNames.has(d))
@@ -160,9 +165,15 @@ for (const i of free) {
 
 const freeCount = writeRegistry(join(ROOT, "registry.json"), free)
 shadcnBuild("registry.json", join(WWW, "public/r"))
+// What `ballmac outdated`, `update` and `add --with-tests` read (see scripts/registry-extras.ts).
+writeVersions(free, REGISTRY_URL, join(WWW, "public/r"))
+const freeTests = writeTests(items, join(WWW, "public/r/tests"))
+console.log(`✓ versions.json and ${freeTests} test file(s) → apps/www/public/r`)
 if (pro.length) {
   writeRegistry(join(ROOT, "registry-pro.json"), pro)
   shadcnBuild("registry-pro.json", join(WWW, ".registry-pro"))
+  writeVersions(pro, REGISTRY_URL, join(WWW, ".registry-pro"))
+  console.log("✓ Pro versions.json → apps/www/.registry-pro (private)")
   // Pro starter apps are packed into the private build too, served only with a licence key (see /r/pro/starters).
   const startersDir = join(ROOT, "registry/pro/starters")
   rmSync(join(WWW, ".registry-pro/starters"), { recursive: true, force: true })
@@ -191,6 +202,8 @@ const index = items.map(({ metaPath, baseDir, examplesDir, ...meta }) => ({
   ...meta,
   files: meta.files.map((f) => ({ ...f, source: relative(ROOT, join(baseDir, f.path)), target: targetFor(f.path) })),
   props: meta.files.filter((f) => f.path.endsWith(".tsx")).flatMap((f) => extractProps(readFileSync(join(baseDir, f.path), "utf8"), f.path)),
+  // Whether a test ships with the item (`ballmac add --with-tests`).
+  tests: testPlan.has(meta.name),
   // Export names of the main file, so Pro items can show an import line without their source.
   exports: meta.files[0] ? exportsOf(readFileSync(join(baseDir, meta.files[0].path), "utf8")) : [],
   examples: meta.examples.map((e) => ({ ...e, source: relative(ROOT, join(examplesDir, e.file)) })),

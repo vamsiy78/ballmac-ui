@@ -37,5 +37,6 @@ export default defineItem({
     ],
   },
   version: "1.0.1",
-  updated: "2026-09-29",
+  updated: "2026-10-02",
+  changelog: [{ version: "1.0.1", date: "2026-10-02", note: "Labels (show, hide, copy, regenerate) come from the i18n messages, padding uses start/end so the field mirrors in right-to-left, and the key stays left-to-right. Adds the i18n helper." }],
 })

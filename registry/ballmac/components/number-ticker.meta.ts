@@ -23,5 +23,6 @@ export default defineItem({
     customization: ["format accepts any Intl.NumberFormat options", "locale defaults to en-US so server and browser render identical text; pass your locale explicitly", "duration and delay in seconds"],
   },
   version: "1.0.1",
-  updated: "2026-09-28",
+  updated: "2026-10-02",
+  changelog: [{ version: "1.0.1", date: "2026-10-02", note: "The locale prop now defaults to the I18nProvider locale (still en-US without a provider) instead of a fixed en-US. Adds the i18n helper as a dependency." }],
 })

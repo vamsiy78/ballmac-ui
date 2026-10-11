@@ -7,7 +7,7 @@ export function PropsTable({ docs }: { docs: SiteItem["props"] }) {
       {docs.map((d) => (
         <div key={d.component} className="space-y-2">
           {docs.length > 1 && <h3 className="font-mono text-sm font-medium">{`<${d.component}>`}</h3>}
-          <div className="overflow-x-auto rounded-xl border">
+          <div className="overflow-x-auto rounded-xl border" role="region" aria-label={`${d.component} props`} tabIndex={0}>
             <table className="w-full min-w-[560px] text-sm">
               <thead className="bg-card text-left">
                 <tr>

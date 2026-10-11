@@ -27,6 +27,7 @@ export function searchEntries(): MenuEntry[] {
     { name: "registry", title: "CLI & registry", description: "Namespaces, URLs, search, view and updates.", group: "Docs", href: "/docs/registry" },
     { name: "theming", title: "Theming", description: "Tokens, brand color and dark mode.", group: "Docs", href: "/docs/theming" },
     { name: "installation", title: "Installation", description: "Set up a project and add your first component.", group: "Docs", href: "/docs/installation" },
+    { name: "cli", title: "Updates & tests", description: "Update components without losing your edits, and install the tests that ship with them.", group: "Docs", href: "/docs/cli" },
     { name: "mcp", title: "MCP", description: "Let Claude Code, Cursor or VS Code install Ballmac UI for you.", group: "Docs", href: "/docs/mcp" },
   ]
 }

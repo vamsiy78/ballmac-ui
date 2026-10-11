@@ -2,6 +2,15 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
+## 2026-10-11: Update components without losing your edits, and install their tests
+
+- New command line tool, `npx @ballmac/cli`: it runs the shadcn CLI for you and remembers what it installed (ballmac.lock.json), so `ballmac update` can merge a new version into your edited copy instead of overwriting it. Files you never touched are replaced, edits in other places are merged, and overlapping edits become conflict markers
+- `ballmac outdated` lists what is behind with a note on what changed, `ballmac diff` shows your own changes, and `ballmac track` adopts items you installed with plain shadcn. Originals are backed up before anything is written, and `--dry-run` previews everything
+- Every item now has a version and a changelog written for people who customised the file; component pages show them under What changed
+- 199 free components ship with the test we run on them. `ballmac add dialog --with-tests` installs it next to the component, with the packages it needs and a vitest config if you have none
+- The Ballmac MCP server gets two tools: `get_changes` (what changed since a version, breaking changes flagged) and `get_tests`
+- A build check now fails when an item's files change without a version bump and a changelog entry
+
 ## 2026-10-07: Founding offer: $49 until 21 October, then $99
 
 - Pricing page rebuilt around the founding offer: a live countdown to 21 Oct 2026, 11:59 pm IST, the $99 list price struck through

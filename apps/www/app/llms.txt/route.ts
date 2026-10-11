@@ -15,6 +15,7 @@ export function GET() {
     "## Docs",
     `- [Installation](${SITE_URL}/docs/installation): add components by name; a registry entry is only for older CLIs`,
     `- [MCP](${SITE_URL}/docs/mcp): use Ballmac UI from Claude Code, Cursor, VS Code and Codex (npx -y @ballmac/mcp)`,
+    `- [Updates and tests](${SITE_URL}/docs/cli): npx @ballmac/cli keeps installed components up to date without losing your edits (three-way merge) and installs the tests that ship with them`,
     `- [CLI and registry](${SITE_URL}/docs/registry): namespaces, direct URLs, search, view and update`,
     `- [Right-to-left](${SITE_URL}/docs/rtl): every component mirrors for Arabic, Hebrew, Persian and Urdu`,
     `- [Translations](${SITE_URL}/docs/i18n): translate all built-in strings with one provider; keys at ${SITE_URL}/i18n/en.json`,

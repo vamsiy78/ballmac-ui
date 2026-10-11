@@ -165,6 +165,54 @@ server.registerTool(
 )
 
 server.registerTool(
+  "get_changes",
+  {
+    title: "What changed in an item",
+    description: "The changelog of an item: what changed in each version, newest first, and whether anything is breaking. Pass `since` (the version the user has, for example from ballmac.lock.json) to see only newer changes. Use it before updating an installed item; `npx @ballmac/cli outdated` lists which installed items are behind and `npx @ballmac/cli update` merges new versions into the user's edited copies.",
+    inputSchema: { name: z.string().min(1), since: z.string().regex(/^\d+\.\d+\.\d+$/).optional() },
+    outputSchema: {
+      name: z.string(),
+      version: z.string(),
+      updated: z.string(),
+      since: z.string().nullable(),
+      upToDate: z.boolean(),
+      breaking: z.boolean(),
+      changes: z.array(z.object({ version: z.string(), date: z.string(), note: z.string(), breaking: z.boolean().optional() })),
+      tests: z.boolean(),
+      update: z.string(),
+    },
+    annotations: readOnly,
+  },
+  async ({ name, since }) => {
+    try {
+      return result(await catalog.changes(name, since))
+    } catch (e) {
+      return e instanceof NotFoundError ? notFound(name) : failure(e)
+    }
+  }
+)
+
+server.registerTool(
+  "get_tests",
+  {
+    title: "Get an item's tests",
+    description: "The vitest + Testing Library test file that ships with an item (keyboard use, states, ARIA). Use it to check an item still works after you or the user changed it. `npx @ballmac/cli add <name> --with-tests` installs it next to the component with the packages and config it needs, and `npx @ballmac/cli test` runs it. Returns shipped:false when the item has no test of its own.",
+    inputSchema: { name: z.string().min(1) },
+    outputSchema: { name: z.string(), shipped: z.boolean(), version: z.string().optional(), file: z.string().optional(), content: z.string().optional(), requires: z.array(z.string()), devDependencies: z.array(z.string()), install: z.string() },
+    annotations: readOnly,
+  },
+  async ({ name }) => {
+    try {
+      const t = await catalog.tests(name)
+      const install = `npx @ballmac/cli add ${name} --with-tests`
+      return result(t ? { name, shipped: true, version: t.version, file: t.file, content: t.content, requires: t.requires, devDependencies: t.devDependencies, install } : { name, shipped: false, requires: [], devDependencies: [], install })
+    } catch (e) {
+      return e instanceof NotFoundError ? notFound(name) : failure(e)
+    }
+  }
+)
+
+server.registerTool(
   "get_install_command",
   {
     title: "Get install commands",

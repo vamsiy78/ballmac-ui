@@ -26,6 +26,10 @@ export default function IntroductionPage() {
       <h2>What makes it different</h2>
       <ul>
         <li>
+          <strong>Updates that keep your edits.</strong> Copy-paste libraries usually leave you stranded on the version you copied.{" "}
+          <Link href="/docs/cli">The ballmac CLI</Link> merges new versions into your edited copies, and installs the tests that ship with components.
+        </li>
+        <li>
           <strong>Native-app polish.</strong> Ballmac builds native apps, and brings the same care for springs, depth and
           hairlines to the web: app windows, docks, a live notch, menus and notifications that work in any product.
         </li>

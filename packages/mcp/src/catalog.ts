@@ -41,6 +41,11 @@ export type Detail = Summary & {
 }
 export type Index = { version: number; setup: string; namespace: string; items: Summary[] }
 
+export type ChangeEntry = { version: string; date: string; note: string; breaking?: boolean }
+export type VersionItem = { title: string; type: string; version: string; updated: string; tier: "free" | "pro"; files: string[]; requires: string[]; tests: boolean; changelog: ChangeEntry[] }
+export type Versions = { schema: number; items: Record<string, VersionItem> }
+export type TestFile = { name: string; version: string; file: string; content: string; requires: string[]; devDependencies: string[] }
+
 const INDEX_TTL = 10 * 60 * 1000
 const TIMEOUT = 15_000
 
@@ -156,6 +161,50 @@ export class Catalog {
     }
   }
 
+  /** Version, changelog and test availability of every item (the registry's versions.json). Pro items are included with a licence key. */
+  private versionsCache?: { at: number; data: Promise<Versions> }
+  versions() {
+    if (!this.versionsCache || this.now() - this.versionsCache.at > INDEX_TTL) {
+      const data = (async () => {
+        const free = await this.get<Versions>("/r/versions.json")
+        if (!this.licenseKey) return free
+        const pro = await this.get<Versions>("/r/pro/versions.json", { authorization: `Bearer ${this.licenseKey}` }).catch(() => null)
+        return pro ? { ...free, items: { ...free.items, ...pro.items } } : free
+      })()
+      this.versionsCache = { at: this.now(), data }
+      data.catch(() => {
+        if (this.versionsCache?.data === data) this.versionsCache = undefined
+      })
+    }
+    return this.versionsCache.data
+  }
+
+  /** What changed in an item, newest first. With `since`, only versions after it. */
+  async changes(name: string, since?: string) {
+    const item = (await this.versions()).items[name]
+    if (!item) throw new NotFoundError(name)
+    const after = (v: string) => !since || compareVersions(v, since) > 0
+    return {
+      name,
+      version: item.version,
+      updated: item.updated,
+      since: since ?? null,
+      upToDate: since ? compareVersions(item.version, since) <= 0 : false,
+      breaking: item.changelog.some((e) => after(e.version) && e.breaking),
+      changes: item.changelog.filter((e) => after(e.version)),
+      tests: item.tests,
+      update: `npx @ballmac/cli update ${name}`,
+    }
+  }
+
+  /** The test file that ships with an item, or null when none does. */
+  async tests(name: string): Promise<TestFile | null> {
+    const item = (await this.versions()).items[name]
+    if (!item) throw new NotFoundError(name)
+    if (!item.tests) return null
+    return this.get<TestFile>(`/r/tests/${encodeURIComponent(name)}.json`)
+  }
+
   /** Names close to a mistyped one, for helpful errors. */
   async suggest(name: string, limit = 3) {
     const items = await this.list()
@@ -166,6 +215,13 @@ export class Catalog {
       .filter((r) => r.d <= Math.max(3, name.length / 2))
       .map((r) => r.name)
   }
+}
+
+function compareVersions(a: string, b: string) {
+  const x = a.split(".").map(Number)
+  const y = b.split(".").map(Number)
+  for (let i = 0; i < 3; i++) if ((x[i] ?? 0) !== (y[i] ?? 0)) return (x[i] ?? 0) - (y[i] ?? 0)
+  return 0
 }
 
 export class NotFoundError extends Error {

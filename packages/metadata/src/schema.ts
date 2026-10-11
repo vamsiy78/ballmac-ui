@@ -163,8 +163,17 @@ export const itemMeta = z
     version: z.string().regex(/^\d+\.\d+\.\d+$/),
     /** ISO date of the last meaningful change. */
     updated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    /**
+     * What changed in each version after the first, newest first. `ballmac outdated` and `ballmac update` show these notes, so write
+     * them for someone who customised the file: what behaviour changed and whether props were added, renamed or removed.
+     * The first entry must match `version`.
+     */
+    changelog: z.array(z.object({ version: z.string().regex(/^\d+\.\d+\.\d+$/), date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), note: z.string().min(10).max(300), breaking: z.boolean().default(false) })).default([]),
   })
   .superRefine((item, ctx) => {
+    if (item.changelog.length && item.changelog[0]!.version !== item.version) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: `the newest changelog entry (${item.changelog[0]!.version}) must match version (${item.version})`, path: ["changelog"] })
+    }
     if (item.category === "blocks" && !item.blockCategory) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: "blocks need a blockCategory", path: ["blockCategory"] })
     }

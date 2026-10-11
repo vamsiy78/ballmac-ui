@@ -1,0 +1,54 @@
+{
+  "name": "@ballmac/cli",
+  "version": "0.1.0",
+  "description": "Keep Ballmac UI components up to date without losing your changes, and install their tests. Works next to the shadcn CLI.",
+  "keywords": [
+    "shadcn",
+    "shadcn-ui",
+    "ballmac",
+    "components",
+    "update",
+    "three-way-merge",
+    "vitest",
+    "react",
+    "tailwindcss"
+  ],
+  "type": "module",
+  "license": "MIT",
+  "author": "Ballmac <https://ui.ballmac.com>",
+  "homepage": "https://ui.ballmac.com/docs/cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vamsiy78/ballmac-ui.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/vamsiy78/ballmac-ui/issues"
+  },
+  "bin": {
+    "ballmac": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json && chmod +x dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "node test/e2e.mjs",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5",
+    "vitest": "^4.1.11"
+  }
+}

@@ -14,6 +14,8 @@ export type SiteItem = Omit<ItemMeta, "files" | "examples"> & {
   props: { component: string; props: PropDoc[] }[]
   /** Export names of the main file (recorded at build time, so Pro items have them without their source). */
   exports: string[]
+  /** A test file ships with this item. */
+  tests?: boolean
   files: { path: string; source: string; target: string }[]
   examples: { name: string; title: string; file: string; source: string; description?: string }[]
 }

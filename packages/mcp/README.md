@@ -83,6 +83,8 @@ args = ["-y", "@ballmac/mcp"]
 | `list_categories` | Totals and every category with its count, so the agent knows what exists. |
 | `get_item` | Description, when to use and when not to, import line, props, keyboard behaviour, dependencies, template pages and the full source. |
 | `get_examples` | The working examples shown on the item's page. |
+| `get_changes` | What changed in an item, version by version (with `since` to see only newer changes), and whether anything is breaking. |
+| `get_tests` | The vitest + Testing Library test that ships with an item, to check it still works after an edit. |
 | `get_install_command` | The shadcn CLI commands for pnpm, npm, yarn or bun. |
 | `compose_page` | A page plan from blocks in the right order, install commands, a `page.tsx` scaffold, and any complete template that already fits. |
 | `get_setup` | How to prepare a project (shadcn init, optional theme, and the registry entry older CLIs need). |

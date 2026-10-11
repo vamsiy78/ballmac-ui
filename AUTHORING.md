@@ -128,6 +128,21 @@ Write descriptions for two readers: a developer scanning a catalog and a coding 
 
 Add `registry/tests/<name>.test.tsx` for anything interactive: keyboard behavior, ARIA state, controlled and uncontrolled usage. Pure presentational components don't need tests.
 
+A test named exactly `<name>.test.tsx` ships with the item: `ballmac add <name> --with-tests` installs it next to the component. So keep it
+self-contained: import only the item, its own `registryDependencies` and at most one other Ballmac item (the build skips a test that needs more),
+and use only the globals in `registry/tests/setup.ts`. Tests that cover a whole batch of items (`*-batch-*.test.tsx`) are for us and do not ship.
+
+## Versions and the changelog
+
+`ballmac update` merges new versions into people's edited copies, so every change to an item's files must be a new version. `pnpm check` fails
+(`scripts/versions.ts`) if an item's files changed but its `version` did not.
+
+- Bump `version` in the meta file (semver: fix = patch, new prop or behaviour = minor, renamed or removed prop = major).
+- Add a `changelog` entry for it, newest first, and set `updated`. Write the note for someone who customised the file: what behaviour changed, whether props
+  were added, renamed or removed. Set `breaking: true` when their edits may stop working.
+- Run `pnpm versions:write` to record the new hash. Commit `registry/versions.lock.json`.
+
+
 ## Checks while authoring (safe in parallel)
 
 ```bash

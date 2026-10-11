@@ -6,6 +6,7 @@ import { notFound } from "next/navigation"
 import { CodePanel } from "@/components/site/code-panel"
 import { ProBadge, ProNotice } from "@/components/site/pro-notice"
 import { CopyPageButton } from "@/components/site/copy-page-button"
+import { ItemVersion } from "@/components/site/item-version"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { PreviewTabs } from "@/components/site/preview-tabs"
 import { PropsTable } from "@/components/site/props-table"
@@ -95,6 +96,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             </div>
           </div>
           <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
+          <ItemVersion item={item} />
           {fixedInRtl && (
             <p className="text-muted-foreground max-w-2xl text-sm">
               <Link href="/docs/rtl" className="text-foreground underline underline-offset-4">Right-to-left</Link>: {fixedInRtl.reason}

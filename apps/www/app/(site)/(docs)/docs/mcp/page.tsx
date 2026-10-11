@@ -22,6 +22,8 @@ const tools = [
   ["search_items", "Best matches for a need, such as “chat input with attachments” or “online store”."],
   ["list_items · list_categories", "Browse components, blocks and templates by kind, category or tier."],
   ["get_item · get_examples", "Props, keyboard behaviour, import line, template pages, full source and working examples."],
+  ["get_changes", "What changed in an item version by version, and whether anything is breaking: read it before updating an installed item."],
+  ["get_tests", "The test that ships with an item, to check it still works after an edit."],
   ["get_install_command", "The exact shadcn CLI commands for pnpm, npm, yarn or bun."],
   ["get_setup", "How to prepare a project: shadcn init, the registry entry and the optional theme."],
   ["compose_page", "A page plan from blocks in order, with a page.tsx scaffold, and any template that already fits."],

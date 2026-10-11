@@ -43,5 +43,6 @@ export default defineItem({
     ],
   },
   version: "1.0.1",
-  updated: "2026-09-29",
+  updated: "2026-10-02",
+  changelog: [{ version: "1.0.1", date: "2026-10-02", note: "The default placeholder and title come from the i18n messages and can be translated; props you pass still win. Adds the i18n helper as a dependency." }],
 })

@@ -18,7 +18,7 @@ const check = (label, ok, detail = "") => {
 }
 
 const { tools } = await client.listTools()
-check("lists 8 tools", tools.length === 8, tools.map((t) => t.name).join(", "))
+check("lists 10 tools", tools.length === 10, tools.map((t) => t.name).join(", "))
 
 const blocksRes = await client.callTool({ name: "list_items", arguments: { kind: "block" } })
 const blocks = json(blocksRes).items
@@ -37,6 +37,12 @@ check("search_items ranks prompt-input first", found[0]?.name === "prompt-input"
 const item = json(await client.callTool({ name: "get_item", arguments: { name: "button" } }))
 check("get_item returns props and source", item.props?.length > 0 && item.files?.[0]?.content?.includes("function Button"), item.import)
 
+const changes = json(await client.callTool({ name: "get_changes", arguments: { name: "button" } }))
+check("get_changes reports the version and update command", /^\d+\.\d+\.\d+$/.test(changes.version) && changes.update === "npx @ballmac/cli update button", changes.version)
+const tests = json(await client.callTool({ name: "get_tests", arguments: { name: "button" } }))
+check("get_tests returns the shipped test", tests.shipped === true && tests.content.includes("@vitest-environment jsdom") && tests.install.includes("--with-tests"), tests.file)
+const noTests = json(await client.callTool({ name: "get_tests", arguments: { name: "i18n" } }))
+check("get_tests says when an item has none", noTests.shipped === false)
 const examples = json(await client.callTool({ name: "get_examples", arguments: { name: "dialog" } }))
 check("get_examples returns code", examples.length >= 1 && examples[0].code?.includes("Dialog"))
 

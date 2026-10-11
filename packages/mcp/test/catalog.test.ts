@@ -150,3 +150,68 @@ describe("pro items", () => {
     expect(d.licence).toContain("not accepted")
   })
 })
+
+describe("changes and tests", () => {
+  const versions = {
+    schema: 1,
+    items: {
+      button: {
+        title: "Button", type: "registry:ui", version: "1.2.0", updated: "2026-10-12", tier: "free", files: ["@components/ballmac/button.tsx"], requires: [], tests: true,
+        changelog: [
+          { version: "1.2.0", date: "2026-10-12", note: "Icon size is 40px." },
+          { version: "1.1.0", date: "2026-10-11", note: "The lg size is taller.", breaking: true },
+        ],
+      },
+      badge: { title: "Badge", type: "registry:ui", version: "1.0.0", updated: "2026-10-01", tier: "free", files: ["@components/ballmac/badge.tsx"], requires: [], tests: false, changelog: [] },
+    },
+  }
+  const calls: string[] = []
+  const f = (async (url: string) => {
+    const u = String(url)
+    calls.push(u)
+    if (u.endsWith("/r/versions.json")) return new Response(JSON.stringify(versions))
+    if (u.endsWith("/r/tests/button.json")) return new Response(JSON.stringify({ name: "button", version: "1.2.0", file: "button.test.tsx", content: "// test", requires: [], devDependencies: ["vitest@^4"] }))
+    return new Response("", { status: 404 })
+  }) as typeof fetch
+  const catalog = new Catalog("https://ui.test", f)
+
+  it("lists every change, newest first, and flags breaking ones", async () => {
+    const c = await catalog.changes("button")
+    expect(c.changes.map((e) => e.version)).toEqual(["1.2.0", "1.1.0"])
+    expect(c).toMatchObject({ version: "1.2.0", breaking: true, upToDate: false, tests: true, update: "npx @ballmac/cli update button" })
+  })
+
+  it("shows only what is newer than the version the user has", async () => {
+    expect((await catalog.changes("button", "1.1.0")).changes.map((e) => e.version)).toEqual(["1.2.0"])
+    expect(await catalog.changes("button", "1.1.0")).toMatchObject({ breaking: false, upToDate: false })
+    expect(await catalog.changes("button", "1.2.0")).toMatchObject({ changes: [], upToDate: true })
+  })
+
+  it("fetches the versions manifest once", async () => {
+    const before = calls.filter((u) => u.endsWith("/r/versions.json")).length
+    await catalog.changes("badge")
+    await catalog.changes("button")
+    expect(calls.filter((u) => u.endsWith("/r/versions.json")).length).toBe(before)
+  })
+
+  it("returns the shipped test, or null when the item has none, or throws for an unknown item", async () => {
+    expect((await catalog.tests("button"))!.content).toBe("// test")
+    expect(await catalog.tests("badge")).toBeNull()
+    await expect(catalog.tests("nope")).rejects.toThrow(/Not found/)
+    await expect(catalog.changes("nope")).rejects.toThrow(/Not found/)
+  })
+
+  it("includes Pro items only with a licence key", async () => {
+    const seen: (string | undefined)[] = []
+    const pf = (async (url: string, init?: RequestInit) => {
+      const u = String(url)
+      seen.push((init?.headers as Record<string, string> | undefined)?.authorization)
+      if (u.endsWith("/r/pro/versions.json")) return new Response(JSON.stringify({ schema: 1, items: { "hero-pro-1": { ...versions.items.badge, title: "Hero", tier: "pro", version: "1.3.0" } } }))
+      return new Response(JSON.stringify(versions))
+    }) as typeof fetch
+    expect((await new Catalog("https://ui.test", pf, Date.now, undefined).changes("badge")).version).toBe("1.0.0")
+    await expect(new Catalog("https://ui.test", pf, Date.now, undefined).changes("hero-pro-1")).rejects.toThrow(/Not found/)
+    expect((await new Catalog("https://ui.test", pf, Date.now, "good").changes("hero-pro-1")).version).toBe("1.3.0")
+    expect(seen).toContain("Bearer good")
+  })
+})

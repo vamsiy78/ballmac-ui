@@ -41,6 +41,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Show and hide sections of content one at a time (type=\"single\" collapsible) or several at once (type=\"multiple\").",
           "whenToUse": [
@@ -280,6 +281,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "steps is [{ id, title, status, description?, duration?, detail?, error?, steps? }]. Update statuses as the agent works and the timeline, progress bar and screen reader summary follow. onRetry adds a Retry button to failed steps.",
           "whenToUse": [
@@ -684,6 +686,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "state is idle | listening | thinking | speaking. Pass level (0 to 1) to make it swell with audio. size is sm | default | lg | xl. Colors come from chart-1 to chart-5, so it follows the theme.",
           "whenToUse": [
@@ -804,6 +807,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Ask for explicit confirmation before a consequential action; cancel remains the safe keyboard path.",
           "whenToUse": [
@@ -1057,6 +1061,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Wrap a mobile screen in <AndroidFrame screenWidth={412}>: children render below a status bar at 412 CSS px wide and are scaled to the frame's width. Set the width with className (e.g. w-64).",
           "whenToUse": [
@@ -1187,6 +1192,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-29",
+        "tests": true,
         "ai": {
           "summary": "Give a relative container a ref, give each endpoint element a ref, and render <AnimatedBeam containerRef fromRef toRef /> inside the container once per connection. Put endpoint nodes above the beams with relative z-10. The SVG is aria-hidden and pointer-events-none.",
           "whenToUse": [
@@ -1403,6 +1409,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<AnimatedList max fadeEnd announce><AnimatedListItem key={id}>…</AnimatedListItem></AnimatedList>. Each item needs a stable key. Prepend new entries to your array; layout animation does the rest.",
           "whenToUse": [
@@ -1529,6 +1536,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<AnimatedNumberFlow value format locale prefix suffix announce fade />. Change value and each digit rolls to its new place. Uses Intl.NumberFormat with a fixed default locale so server and browser agree.",
           "whenToUse": [
@@ -1653,6 +1661,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-29",
+        "tests": true,
         "ai": {
           "summary": "Same API as Radix Tabs: <AnimatedTabs defaultValue variant=\"pill\" | \"underline\"> with AnimatedTabsList, AnimatedTabsTrigger value and AnimatedTabsContent value. The indicator is a Motion layoutId element inside the active trigger.",
           "whenToUse": [
@@ -1787,6 +1796,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "method, path (use {id} for path parameters), summary, description, auth, parameters [{ name, in, type, required, description }], requestExample and responses [{ status, description, example }]. Collapsible; copies the full URL when baseUrl is set.",
           "whenToUse": [
@@ -1913,7 +1923,16 @@
           "developer"
         ],
         "version": "1.0.1",
-        "updated": "2026-09-29",
+        "updated": "2026-10-02",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-02",
+            "note": "Labels (show, hide, copy, regenerate) come from the i18n messages, padding uses start/end so the field mirrors in right-to-left, and the key stays left-to-right. Adds the i18n helper.",
+            "breaking": false
+          }
+        ],
+        "tests": true,
         "ai": {
           "summary": "Show an existing secret: <ApiKeyField value={key} label='Secret key' onRegenerate={confirmThenRotate} />. It is read-only; copy always copies the full value, even while masked.",
           "whenToUse": [
@@ -2014,6 +2033,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "AppShell > AppShellSkipLink, AppShellHeader (with AppShellSidebarTrigger), AppShellSidebar, AppShellMain, AppShellAside, AppShellFooter. Sizes are CSS variables set by props.",
           "whenToUse": [
@@ -2147,6 +2167,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "title, description, risk (low | medium | high), details rows and a preview of the exact action. onApprove, onDeny, optional onAlwaysAllow. expiresIn counts down and denies. After a decision the card shows the outcome and moves focus to it.",
           "whenToUse": [
@@ -2278,6 +2299,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "title, kind, icon, code, filename, language and children as the preview. versions > 1 adds steppers (version/onVersionChange). streaming shows a progress edge and disables copy and download. onClose adds a close button.",
           "whenToUse": [
@@ -2522,6 +2544,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Pass src (omit it for a silent demo), title, duration and optional chapters=[{ start, title }]. Control the position with time and onTimeChange to sync a transcript. variant='compact' is a one-row mini player.",
           "whenToUse": [
@@ -2759,6 +2782,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<AvatarCircles people={[{ name, src, role, status, href }]} max total size onOverflowClick />. Each face is a link or button named with its person (and status). total adds the +N when only some are loaded.",
           "whenToUse": [
@@ -2992,6 +3016,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "User or team picture with initials fallback while the image loads or if it fails. Add status for presence, and wrap several in AvatarGroup with max to cap the visible count.",
           "whenToUse": [
@@ -3115,6 +3140,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Render <BackToTop /> once. threshold sets when it appears; container follows a scrollable element; focusTarget chooses where focus lands.",
           "whenToUse": [
@@ -3359,6 +3385,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A page-wide announcement with semantic tones, optional action, and controlled or local dismissal.",
           "whenToUse": [
@@ -3718,6 +3745,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "plan {name,price,interval,status,renewsOn,seats}, paymentMethod, invoices[], and onChangePlan / onUpdatePayment / onCancel. Dates are ISO strings formatted in UTC.",
           "whenToUse": [
@@ -6393,6 +6421,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "A help-centre style FAQ. Pass categories=[{ name, questions: [{ question, answer }] }]; an All filter and search are built in.",
           "whenToUse": [
@@ -6978,6 +7007,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "A compact way to show several feature areas without a long scroll. Pass tabs=[{ value, label, icon?, title, description, points?, link?, visual }].",
           "whenToUse": [
@@ -7652,6 +7682,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "A navigation header for products with many pages. Pass items (the same shape as mega-menu), brand, logo, secondaryAction and primaryAction.",
           "whenToUse": [
@@ -9540,6 +9571,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Standard SaaS pricing with a billing toggle. Pass plans=[{ name, description, price: { monthly, yearly } | string, unit?, lead?, features, cta, featured? }].",
           "whenToUse": [
@@ -9666,6 +9698,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "The detailed pricing table for buyers who compare. Pass plans=[{ key, name, price, period?, cta, featured? }] and groups=[{ title, rows: [{ label, hint?, values: { [planKey]: boolean | string } }] }].",
           "whenToUse": [
@@ -10903,6 +10936,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "A focused testimonial section. Pass items=[{ quote, name, role, company, image?, result? }]; control the index with value/onValueChange or let it manage itself.",
           "whenToUse": [
@@ -11156,6 +11190,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Wrap anything in <BlurFade delay direction offset blur inView once>. <BlurFadeGroup stagger> wraps each child and staggers them. Shows content instantly under reduced motion.",
           "whenToUse": [
@@ -11633,6 +11668,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Groups closely related actions without turning them into a selection widget.",
           "whenToUse": [
@@ -11756,6 +11792,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "The base action control. Use variant for emphasis, size for density, and loading while an async action runs.",
           "whenToUse": [
@@ -11910,6 +11947,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A day agenda with native date entry, adjacent-day controls, and accessible event times.",
           "whenToUse": [
@@ -12022,6 +12060,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Use mode single, multiple or range with selected and onSelect. All DayPicker props work: disabled, numberOfMonths, captionLayout dropdown, locale.",
           "whenToUse": [
@@ -12396,6 +12435,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Compose Carousel, CarouselContent and CarouselItem with CarouselPrevious, CarouselNext, CarouselDots and CarouselPlayPause. Give Carousel a label.",
           "whenToUse": [
@@ -12533,6 +12573,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "entries[] with {id,version,date (ISO),title,summary,changes:[{type,text}],media}. Types: new | improved | fixed | removed. Dates format in UTC.",
           "whenToUse": [
@@ -12656,6 +12697,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Wrap any Recharts chart in ChartContainer with a config of label and color per series. Use ChartTooltipContent and ChartLegendContent. Always pass label and summary.",
           "whenToUse": [
@@ -12820,6 +12862,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "<ChatAttachmentList> holds <ChatAttachment name size type previewUrl status progress onRemove onRetry onOpen variant='chip'|'tile'>. Kind and icon come from the MIME type or extension. Also exports formatFileSize and attachmentKind.",
           "whenToUse": [
@@ -12944,6 +12987,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Binary or tri-state choice. Pass checked=\"indeterminate\" for a parent row whose children are partly selected; aria-checked becomes \"mixed\". Pair with Label via id/htmlFor.",
           "whenToUse": [
@@ -13073,6 +13117,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<CircularProgress rings={[{ label, value, max, tone, display }]} size thickness gap sweep legend>center</CircularProgress>. One ring is role=meter; several are a named group whose value text lists every ring. sweep=270 makes a gauge.",
           "whenToUse": [
@@ -13201,6 +13246,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Place <Citation index={1} sources={{ title, url, snippet }} /> right after the claim. Pass an array for several sources. variant is number | pill. The marker is a real link, so touch users open the page directly. Also exports SourceFavicon and hostOf.",
           "whenToUse": [
@@ -13331,6 +13377,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "<CodeBlock code filename language lineNumbers highlight={[2,3]} /> renders plain monospace text. For syntax colors, highlight on the server (e.g. Shiki) and pass the result as children plus the raw code for copying. <CodeBlockTabs files={[…]}> shows several files.",
           "whenToUse": [
@@ -13459,6 +13506,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Reveals one optional section of information with a keyboard-accessible disclosure trigger.",
           "whenToUse": [
@@ -13575,6 +13623,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A native color chooser paired with an editable hex field and a live swatch.",
           "whenToUse": [
@@ -13693,6 +13742,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Pass options with value and label. It opens a filterable list; the trigger is a combobox button that submits through name.",
           "whenToUse": [
@@ -13828,6 +13878,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "groups: {heading, items:[{id,label,icon,shortcut,keywords,onSelect,pages}]}. An item with pages opens a second page. hotkey toggles with Cmd/Ctrl; trigger={false} hides the button.",
           "whenToUse": [
@@ -13970,6 +14021,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Compose Command, CommandInput, CommandList, CommandGroup and CommandItem. CommandDialog adds the modal and the ⌘K hotkey.",
           "whenToUse": [
@@ -14235,6 +14287,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-29",
+        "tests": true,
         "ai": {
           "summary": "Call fireConfetti({ preset, colors, element }) from an event handler, or useConfetti().fireFrom(buttonRef.current) after an async success. <ConfettiButton options={{ preset: \"stars\" }}> is a Ballmac button that bursts from itself on click. Colors default to --chart-1…5.",
           "whenToUse": [
@@ -14354,6 +14407,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "<ContainerScroll title={...}>{screenshot or live demo}</ContainerScroll>. tilt sets the starting angle; container tracks a scrollable element.",
           "whenToUse": [
@@ -14476,6 +14530,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Shows actions at the pointer on right-click or long-press. Keyboard users open it with Shift+F10 or the Menu key on a focusable trigger.",
           "whenToUse": [
@@ -14729,6 +14784,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<ControlCenter> is a 2-column grid. Put <ControlCluster> with <ControlRow> toggles first, then <ControlTile>, <ControlSlider label icon> and <ControlNowPlaying>. Toggles are controlled with pressed / onPressedChange or uncontrolled.",
           "whenToUse": [
@@ -14861,6 +14917,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "categories[] with {id,label,description,required}. onConsent receives a map of category to boolean. storageKey saves and remembers the choice in localStorage.",
           "whenToUse": [
@@ -14988,6 +15045,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Pass value (or getValue for content read at click time). label adds visible text, variant is ghost | outline | solid, size sm | default | lg. Falls back to execCommand when navigator.clipboard is blocked and shows 'Copy failed' if both fail.",
           "whenToUse": [
@@ -15110,6 +15168,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "An SSR-safe timer with controlled or local seconds, pause support, and a completion announcement.",
           "whenToUse": [
@@ -15218,6 +15277,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A locale-aware money field that formats on blur while keeping editing and caret behavior simple.",
           "whenToUse": [
@@ -15335,6 +15395,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Pass columns (TanStack ColumnDef) and data. Use DataTableColumnHeader for sortable headers. selectable adds checkboxes; pageSize sets rows per page.",
           "whenToUse": [
@@ -15467,6 +15528,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Give it a defaultValue or value and onValueChange. presets add quick picks, dropdowns adds month and year selects, name submits YYYY-MM-DD.",
           "whenToUse": [
@@ -15592,6 +15654,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Two native date controls with inclusive range correction and quick-select presets.",
           "whenToUse": [
@@ -15807,6 +15870,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<DesktopIcons items={[{ id, name, kind, col, row }]} onItemsChange onOpen cell />. Positions are grid cells. Icons that land on an occupied cell move to the nearest free one.",
           "whenToUse": [
@@ -15945,6 +16009,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Modal window that traps focus. Compose Dialog > DialogTrigger (style it with buttonVariants) + DialogContent with DialogHeader (DialogTitle, DialogDescription) and DialogFooter; use DialogClose with buttonVariants for cancel buttons. Avoid asChild so the files also work in Base UI projects.",
           "whenToUse": [
@@ -16084,6 +16149,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A line-by-line text diff with change counts, line numbers, and accessible change labels.",
           "whenToUse": [
@@ -16198,6 +16264,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-29",
+        "tests": true,
         "ai": {
           "summary": "<Dock> is a role=toolbar row (or column with orientation=\"vertical\") of <DockItem label icon /> buttons with cursor-proximity magnification; <DockSeparator /> draws the divider. Style each tile through DockItem's className (gradients, colors); icons are sized to about half the tile.",
           "whenToUse": [
@@ -16444,6 +16511,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<DottedMap markers={[{ lat, lng, label, tone }]} arcs={[{ from:[lat,lng], to:[lat,lng] }]} dots latRange tone labels />. The land mask is built in; nothing is fetched. Higher dots gives finer coastlines.",
           "whenToUse": [
@@ -16571,6 +16639,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Bottom drawers suit mobile actions; use direction left or right for side panels. Compose DrawerHeader, DrawerBody and DrawerFooter.",
           "whenToUse": [
@@ -16708,6 +16777,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Opens a menu of actions from a button. Supports groups, labels, checkbox and radio items, nested submenus, shortcuts and a destructive style.",
           "whenToUse": [
@@ -17218,6 +17288,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Uncontrolled with defaultValue [{ key, value }] or controlled with value [{ id, key, value }] and onChange. Pasting KEY=value lines into a name field, or into the Paste .env box, imports them. parseEnv and formatEnv are exported.",
           "whenToUse": [
@@ -17346,6 +17417,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "<FeedbackWidget onSubmit topics question />. onSubmit receives {rating, message, topic}; return a promise to show sending. Dock it in a corner with your own positioning.",
           "whenToUse": [
@@ -17471,6 +17543,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Wrap a control in Field, spread useFieldControl() on it, and label, description, error, aria-invalid and disabled are connected for you.",
           "whenToUse": [
@@ -17609,6 +17682,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<FileBrowser entries rootLabel view onOpenFile onDelete onDownload />. entries is a FileEntry tree. Sort by name, modified or size (aria-sort). Space selects, Enter opens, arrow keys move.",
           "whenToUse": [
@@ -17737,6 +17811,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Drop files or browse with native file selection, type and size validation, removable file rows, and live errors.",
           "whenToUse": [
@@ -17856,6 +17931,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A folder and file explorer with semantic tree navigation and file-type icons.",
           "whenToUse": [
@@ -17970,6 +18046,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<FinderWindow root={tree} sidebar defaultFolder view onOpenFile onSelectionChange />. root is a FinderNode tree (folder, file or drive). Double-click or Return opens; Cmd+Up goes to the parent folder.",
           "whenToUse": [
@@ -18217,6 +18294,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "items: {value,label,href,icon}. position top or bottom; autoHide slides it away on scroll; value/defaultValue/onValueChange pick the active item.",
           "whenToUse": [
@@ -18348,6 +18426,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "const form = useForm(); <Form form onSubmit><FormField name label render={(props) => <Input {...props}/>}/><FormSubmit/></Form>. Use rules or a resolver for validation.",
           "whenToUse": [
@@ -18489,6 +18568,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "commits is newest first: [{ hash, parents, message, author, date, branches?, tags? }]. Lanes are computed for you (layoutCommits is exported). selected/onSelect for a detail view. Rows are listbox options.",
           "whenToUse": [
@@ -18615,6 +18695,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<GlareHover angle duration intensity tone='light|dark'>anything</GlareHover>. The sweep runs once per hover and resets instantly when the pointer leaves. Pure CSS transitions; nothing renders on pointer move.",
           "whenToUse": [
@@ -18743,6 +18824,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-29",
+        "tests": true,
         "ai": {
           "summary": "Render <Globe markers={[{ location: [lat, lng], size: 0.06 }]} /> in a sized container (it is a square, w-full, max 600px). The canvas has role=img and an aria-label; pass label to describe what it shows. It starts WebGL only when scrolled near the viewport.",
           "whenToUse": [
@@ -19101,6 +19183,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<GridPattern cell strokeDasharray squares={[[col,row]]} flicker={n} fade='radial|top|bottom|none' /> in a relative parent. Random cells are picked after mount so server and browser agree.",
           "whenToUse": [
@@ -19224,6 +19307,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<Highlighter action='highlight|underline|box|circle|strike|bracket' tone padding duration delay>phrase</Highlighter>. Short phrases only: the mark is drawn around one box.",
           "whenToUse": [
@@ -19347,6 +19431,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Adds optional context to a link for pointer and keyboard users; the link remains useful without the preview.",
           "whenToUse": [
@@ -19470,6 +19555,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<Hud kind=\"volume\" value={60} visible={visible} onVisibleChange={setVisible} /> inside a relative container. useTransientHud() gives { visible, show, hide, onVisibleChange }.",
           "whenToUse": [
@@ -19593,6 +19679,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<HyperText trigger='mount|inView|hover' variant='plain|tiles' speed spread>TEXT</HyperText>. Text is uppercased. The hover trigger is focusable and replays on focus.",
           "whenToUse": [
@@ -19718,6 +19805,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<IconCloud size speed label>{items}</IconCloud>. Each child becomes a list item. Positions come from a Fibonacci sphere and update straight on the DOM. Links inside stay clickable because dragging only starts after a few pixels of movement.",
           "whenToUse": [
@@ -19843,6 +19931,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<InView effect='fade|slide-up|slide-down|scale|blur|none' amount margin once onInViewChange>{content or (inView)=>content}</InView>. data-in-view is true or false for Tailwind's data-[in-view=true] variants.",
           "whenToUse": [
@@ -20074,6 +20163,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Put InputGroupInput or InputGroupTextarea plus InputGroupAddon parts inside InputGroup. The group draws the border, focus ring and invalid state.",
           "whenToUse": [
@@ -20208,6 +20298,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "<InputOTP maxLength={6}> with InputOTPGroup, InputOTPSlot index and InputOTPSeparator. onComplete fires when every slot is filled.",
           "whenToUse": [
@@ -20341,6 +20432,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Single-line text field. Use size to match neighbouring buttons, wrap in InputGroup with InputGroupAddon (align start or end) for icons or text like \".com\", and set aria-invalid for error styling.",
           "whenToUse": [
@@ -20509,6 +20601,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "<InstallTabs command='shadcn@latest add @ballmac/button' storageKey='pm' /> renders pnpm dlx / npx / yarn dlx / bunx --bun variants. Use commands={{ npm: 'npm i x', pnpm: 'pnpm add x' }} for install (not run) commands.",
           "whenToUse": [
@@ -20605,6 +20698,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<InteractiveGrid cell color lineColor radius decay fade /> inside a relative parent. Colors are CSS variable names. It listens to the parent, repaints on theme changes and stops its frame loop when idle.",
           "whenToUse": [
@@ -20729,6 +20823,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "roles[], onInvite(invitations), pending[], onResend/onRevoke, existing[]. Addresses split on comma, space, semicolon or Enter and validate as you go.",
           "whenToUse": [
@@ -20854,6 +20949,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Compose rows from ItemMedia, ItemContent, ItemTitle, ItemDescription and ItemActions. asChild styles a link or button as a whole-row target.",
           "whenToUse": [
@@ -20984,6 +21080,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A collapsible JSON inspector with compact type styling and keyboard-operable branches.",
           "whenToUse": [
@@ -21095,6 +21192,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A responsive task board with pointer drag and keyboard movement between columns.",
           "whenToUse": [
@@ -21294,6 +21392,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "groups is [{ title, shortcuts: [{ label, keys, sequence?, description? }] }]. Use 'Mod' for Cmd on Mac and Ctrl elsewhere. <KeyboardShortcutsDialog hotkey='?'> opens from anywhere outside a text field. platform='auto' corrects after hydration.",
           "whenToUse": [
@@ -21748,6 +21847,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<Launchpad apps={[{ id, name, icon }]} open onClose onLaunch />. It fills its positioned parent. Pages, rows and columns are computed from the available size.",
           "whenToUse": [
@@ -21886,6 +21986,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<Lens zoom lensSize label>{image or content}</Lens>. Works with any child. The magnified copy is inert and aria-hidden. Touch pointers are ignored so scrolling is never blocked.",
           "whenToUse": [
@@ -22008,6 +22109,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<LightRays count tone spread intensity duration /> inside a relative, overflow-hidden parent. Tone is a theme token, so it follows any palette.",
           "whenToUse": [
@@ -22244,6 +22346,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<LockScreen variant=\"mac\" password=\"hello\" /> fills its positioned parent until unlocked. variant=\"ios\" takes notifications as children and unlocks by swiping up or pressing the button. Control with locked / onLockedChange.",
           "whenToUse": [
@@ -22383,6 +22486,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "lines is [{ id, time, level, message, source? }], oldest first; append as lines arrive. Follows the tail while you are at the bottom, shows 'N new lines' when paused or scrolled up. maxLines limits what is rendered.",
           "whenToUse": [
@@ -22511,6 +22615,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Compose <MacContextMenu><MacContextMenuTrigger/><MacContextMenuContent> with MacContextMenuItem (icon, shortcut, destructive), CheckboxItem, RadioGroup/RadioItem, Label, Separator and Sub parts. Shift+F10 and long-press also open it.",
           "whenToUse": [
@@ -22636,6 +22741,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<FolderIcon size tone />, <FileIcon label='PDF' tone />, <DriveIcon />, <AppIcon tone size>{glyph}</AppIcon>. tone is blue | teal | green | amber | orange | red | purple | graphite. All are decorative (aria-hidden): put the name in text next to them.",
           "whenToUse": [
@@ -22882,6 +22988,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<MagicCard from to size glow contentClassName>content</MagicCard>. from and to are chart tokens. Use spotlight-card for a single soft glow and this for a colored border light.",
           "whenToUse": [
@@ -23009,6 +23116,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Use like Button (variant, size, shape, loading, onClick…). The pull only reacts to a mouse, stops while disabled or loading, and is off under reduced motion, where it is a plain Button.",
           "whenToUse": [
@@ -23108,6 +23216,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Put the items directly inside <Marquee>; it measures one copy, clones as many as the viewport needs (clones are aria-hidden and inert) and loops them with a GPU transform. Under reduced motion it renders a single copy in a scrollable row.",
           "whenToUse": [
@@ -23226,6 +23335,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "<MasonryGrid columns={{base:2, lg:4}} gap reveal><MasonryItem/>…</MasonryGrid>. DOM order is reading order: down the first column, then the next.",
           "whenToUse": [
@@ -23345,6 +23455,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-02",
+        "tests": true,
         "ai": {
           "summary": "Pass media as a URL (with alt), an object { src, alt, srcDark? }, or any element such as a next/image. aspect reserves the box (video, photo, square, wide, portrait or '3/2'); fit is cover | contain | fill; priority loads an above-the-fold image eagerly. fallback shows when there is no media or the file fails.",
           "whenToUse": [
@@ -23468,6 +23579,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Pass items: a plain link ({label, href}) or a panel ({label, columns, featured}). MegaMenuMobileList renders the same data for the mobile menu.",
           "whenToUse": [
@@ -23715,6 +23827,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A File / Edit / View style bar. Left and Right move between menus, Down opens one, and hovering across open menus switches them.",
           "whenToUse": [
@@ -23964,6 +24077,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "models is an array of { id, name, provider?, description?, capabilities?, contextWindow?, cost?, isNew?, locked? }. value/onValueChange or defaultValue. Locked models call onLockedSelect. variant default | compact.",
           "whenToUse": [
@@ -24098,6 +24212,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<MorphingText texts={['Build','Ship','Scale']} hold morph className='text-6xl' />. The size comes from className. Uses an SVG threshold filter; the loop stops when off screen or when reduced motion is on.",
           "whenToUse": [
@@ -24218,6 +24333,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Search and select several options in a Radix popover with native checkboxes and a selection cap.",
           "whenToUse": [
@@ -24340,6 +24456,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Compose Navbar with NavbarBrand, NavbarLinks/NavbarLink (active sets aria-current), NavbarActions and NavbarMobileMenu with NavbarMobileLink.",
           "whenToUse": [
@@ -24474,6 +24591,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Top-level triggers open content panels of links. Use navigationMenuTriggerStyle for plain top-level links.",
           "whenToUse": [
@@ -24611,6 +24729,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<NeonCard from to borderWidth glow flicker radius contentClassName>content</NeonCard>. Colors are theme tokens, so it follows any theme. The light is strongest in dark mode.",
           "whenToUse": [
@@ -24736,6 +24855,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<NoiseTexture opacity frequency tile blend animated /> absolutely fills its relative parent. No image file is needed; the grain is an inline SVG data URI.",
           "whenToUse": [
@@ -24860,6 +24980,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "notifications[] with {id,title,description,time,group,read,icon,href}. Handle onMarkRead, onMarkAllRead, onDismiss and onOpenItem in your own state.",
           "whenToUse": [
@@ -24991,7 +25112,16 @@
           "vibrancy"
         ],
         "version": "1.0.1",
-        "updated": "2026-09-29",
+        "updated": "2026-10-02",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-02",
+            "note": "Labels (Show less, Clear all, Show all) come from the i18n messages and can be translated; the close button moved to the start side so it mirrors in right-to-left. Adds the i18n helper.",
+            "breaking": false
+          }
+        ],
+        "tests": true,
         "ai": {
           "summary": "Render <NotificationStack> with <Notification key icon iconClassName title time onDismiss>body</Notification> children, newest first. Keep items in state; prepend to add (animates in), filter to dismiss. expanded/defaultExpanded/onExpandedChange control the stack; onClearAll adds a clear button.",
           "whenToUse": [
@@ -25094,6 +25224,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A bounded numeric field with native spinbutton semantics, step buttons, and controlled or uncontrolled state.",
           "whenToUse": [
@@ -25210,7 +25341,15 @@
           "motion"
         ],
         "version": "1.0.1",
-        "updated": "2026-09-28",
+        "updated": "2026-10-02",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-02",
+            "note": "The locale prop now defaults to the I18nProvider locale (still en-US without a provider) instead of a fixed en-US. Adds the i18n helper as a dependency.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Animated number for stats and KPIs. Respects reduced motion by showing the final value immediately.",
           "whenToUse": [
@@ -25323,6 +25462,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "steps: {id,title,description,action}. completed/defaultCompleted/onCompletedChange track progress. The open step shows its description and action.",
           "whenToUse": [
@@ -25566,6 +25706,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Pass the facts you already have: name, version, description, downloads, trend, size, license, types, formats. variant is card | inline. manager picks npm | pnpm | yarn | bun for the copyable install command. Nothing is fetched.",
           "whenToUse": [
@@ -25686,6 +25827,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-29",
+        "tests": true,
         "ai": {
           "summary": "A semantic page navigation set with current-page feedback, generous targets, and small-screen labels.",
           "whenToUse": [
@@ -25921,6 +26063,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A password field with a visibility toggle and a four-step strength guide that explains how to improve the entry.",
           "whenToUse": [
@@ -26150,6 +26293,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A native dialing-code selector paired with a telephone field that preserves the user’s formatting.",
           "whenToUse": [
@@ -26268,6 +26412,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "plans: {id,name,price:{monthly,yearly},features,highlight,disabled}. value/onValueChange pick a plan; billing/onBillingChange switch period; name submits with a form.",
           "whenToUse": [
@@ -26394,6 +26539,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Displays a small interactive panel anchored to a control, with managed focus and Escape dismissal.",
           "whenToUse": [
@@ -26624,6 +26770,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "An ordered progress sequence with current-step semantics and optional navigation to completed steps.",
           "whenToUse": [
@@ -26846,6 +26993,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<ProgressiveBlur position='top|bottom|left|right' size strength layers /> inside a relative parent that scrolls or holds an image. Pointer events pass through it. A server component with no JavaScript.",
           "whenToUse": [
@@ -26969,6 +27117,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "The message composer for chat UIs. <PromptInput onSubmit={(text, files) => …} status onStop> renders a textarea, attachment chips and a send button by default; compose PromptInputTextarea, PromptInputAttachments, PromptInputToolbar, PromptInputAttachButton and PromptInputSubmit for custom layouts.",
           "whenToUse": [
@@ -27097,6 +27246,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<PulseButton tone rings duration active>Label</PulseButton>. Rings stop on hover and focus, and when active is false or the button is disabled.",
           "whenToUse": [
@@ -27223,6 +27373,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Choose exactly one option in a form; use descriptive card labels when choices need context.",
           "whenToUse": [
@@ -27346,6 +27497,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Use like <Button>: <RainbowButton size variant shape duration glow>Label</RainbowButton>. Best with default, secondary or outline variants (the inside needs a background).",
           "whenToUse": [
@@ -27470,6 +27622,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A native radio-group star rating with keyboard arrows, value text, and a clear action.",
           "whenToUse": [
@@ -27589,6 +27742,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Wrap a model's reasoning text: <ReasoningDisclosure streaming={isReasoning} duration={seconds}>{text}</ReasoningDisclosure>. It opens while streaming and collapses when streaming ends unless you control open.",
           "whenToUse": [
@@ -27687,6 +27841,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "ResizablePanelGroup with ResizablePanel children separated by ResizableHandle. Sizes are percentages. Give each handle a label.",
           "whenToUse": [
@@ -27826,6 +27981,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Place <RetroGrid angle cellSize tone speed glow /> inside a relative, overflow-hidden parent and put content above it. It fades into the page background at the horizon.",
           "whenToUse": [
@@ -27948,6 +28104,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<Ripple circles size gap duration /> fills its positioned parent. <ClickRipple centered duration> wraps a surface and ripples on pointer down, and from the center on Enter or Space when the wrapper itself has focus.",
           "whenToUse": [
@@ -28069,6 +28226,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-29",
+        "tests": true,
         "ai": {
           "summary": "<ScrambleText trigger=\"mount\" | \"inView\" | \"hover\">Final text</ScrambleText>. Children must be a string. Frames are written straight to the DOM (no re-renders); an invisible copy of the final text reserves the layout and an sr-only copy is what assistive tech reads.",
           "whenToUse": [
@@ -28183,6 +28341,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Constrains long content in an accessible keyboard-scrollable region without changing native scroll behavior.",
           "whenToUse": [
@@ -28303,6 +28462,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Render <ScrollProgress /> once. Pass container (a ref) to follow a scrollable element and add className='absolute' inside its wrapper.",
           "whenToUse": [
@@ -28424,6 +28584,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<ScrollVelocity baseVelocity direction sensitivity scrollContainer gap>content</ScrollVelocity>. Stack rows with opposite directions. Repeats are aria-hidden and inert; reduced motion shows one scrollable row.",
           "whenToUse": [
@@ -28543,6 +28704,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A compact search control with a clear action, Enter callback, and preserved keyboard focus.",
           "whenToUse": [
@@ -28661,6 +28823,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "sections: {id,label} matching element ids in the page. offset is the space to leave for this bar and any header. variant underline or pill.",
           "whenToUse": [
@@ -28791,6 +28954,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-29",
+        "tests": true,
         "ai": {
           "summary": "<SegmentedControl aria-label value|defaultValue onValueChange size><SegmentedControlItem value>Label</SegmentedControlItem>…</SegmentedControl>. Exactly one segment is always selected. Icon-only items need aria-label; fullWidth stretches segments equally.",
           "whenToUse": [
@@ -28900,6 +29064,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Pick one value from a list. Compose Select > SelectTrigger > SelectValue and SelectContent > SelectItem (group with SelectGroup + SelectLabel). The menu is portalled and keyboard navigable with typeahead.",
           "whenToUse": [
@@ -29160,6 +29325,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "<SettingsPanel status onSave onDiscard><SettingsSection title><SettingsRow label htmlFor>{control}</SettingsRow></SettingsSection></SettingsPanel>. Drive status: idle | dirty | saving | saved.",
           "whenToUse": [
@@ -29288,6 +29454,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<SheetDialog container={windowRef}> with SheetDialogTrigger and SheetDialogContent (Header, Title, Description, Footer, Button primary). Give it the window element so it attaches there; without it it drops from the page.",
           "whenToUse": [
@@ -29425,6 +29592,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A dialog attached to a screen edge. Use side right for settings panels, bottom for mobile actions, left for navigation.",
           "whenToUse": [
@@ -29653,6 +29821,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<ShinyButton shine='hover|loop' interval>Label</ShinyButton>. Accepts every Button prop. No shine under reduced motion.",
           "whenToUse": [
@@ -29887,6 +30056,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "SidebarProvider wraps Sidebar and SidebarInset. Menu entries use SidebarMenuButton with href and isActive. SidebarTrigger toggles it.",
           "whenToUse": [
@@ -30025,6 +30195,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A responsive pointer signature surface with a full keyboard-accessible typed alternative and undo.",
           "whenToUse": [
@@ -30244,6 +30415,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A two-thumb Radix slider with a labeled value span, keyboard operation, and minimum thumb spacing.",
           "whenToUse": [
@@ -30355,6 +30527,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Drag or use the keyboard to pick a number or a range. Give every thumb a name with thumbLabels; showValue adds a bubble on hover, focus and drag.",
           "whenToUse": [
@@ -30491,6 +30664,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<SmoothCursor cursor hideNative stiffness>area</SmoothCursor>. It only covers its own area, ignores touch, leaves text fields on the normal cursor and sets no global styles. data-cursor-label='View' on any child adds a label.",
           "whenToUse": [
@@ -30619,6 +30793,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "snippets is [{ label, code, language? }]. Language comes from the label (cURL, Python, Go, JavaScript). storageKey remembers the reader's pick and syncs every instance. variables replaces {{name}} in code and in what Copy puts on the clipboard.",
           "whenToUse": [
@@ -30750,6 +30925,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "sources is the array used by citations, in order. variant is list | cards. collapsible={false} keeps it open. highlight={n} emphasizes row n, and each row has id `${idPrefix}-${n}` so a citation can link to it.",
           "whenToUse": [
@@ -30877,6 +31053,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<SparklesText count gradient>Text</SparklesText>. Sparkles are decorative and positioned after mount, so the server markup stays identical.",
           "whenToUse": [
@@ -31216,6 +31393,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<SpinningText text duration reverse pauseOnHover className='size-40'>{center}</SpinningText>. The string is fitted to the circle, so shorter text spreads wider.",
           "whenToUse": [
@@ -31339,6 +31517,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "SplitView > SplitViewList, SplitViewDetail and SplitViewBack. Use useSplitView().setDetailOpen(true) when an item is chosen. Responds to its own width, not the screen's.",
           "whenToUse": [
@@ -31591,7 +31770,16 @@
           "keyboard"
         ],
         "version": "1.0.1",
-        "updated": "2026-09-29",
+        "updated": "2026-10-02",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-02",
+            "note": "The default placeholder and title come from the i18n messages and can be translated; props you pass still win. Adds the i18n helper as a dependency.",
+            "breaking": false
+          }
+        ],
+        "tests": true,
         "ai": {
           "summary": "Inline: <SpotlightSearch><SpotlightSearchInput /><SpotlightSearchList><SpotlightSearchEmpty/><SpotlightSearchGroup heading><SpotlightSearchItem icon iconClassName detail onSelect>Title</SpotlightSearchItem></SpotlightSearchGroup></SpotlightSearchList></SpotlightSearch>. Overlay: swap the root for <SpotlightSearchDialog open onOpenChange hotkey=\"k\">. Root props are cmdk Command props (filter, shouldFilter, value).",
           "whenToUse": [
@@ -31732,6 +31920,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<SpringDrawer side snapPoints defaultSnap><SpringDrawerTrigger/><SpringDrawerContent><SpringDrawerHeader><SpringDrawerTitle/></SpringDrawerHeader><SpringDrawerBody/></SpringDrawerContent></SpringDrawer>. snapPoints are fractions of the screen height. The handle is a keyboard slider.",
           "whenToUse": [
@@ -31864,6 +32053,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<StaggerList stagger direction distance inView reorder><StaggerItem key={id}>…</StaggerItem></StaggerList>. Keep each item's key stable and filtering or sorting animates automatically.",
           "whenToUse": [
@@ -32096,6 +32286,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "services is [{ name, status, description?, uptime?, days? }]; days holds one status (or { status, note }) per day, oldest first. endDate labels the bars. The banner shows the worst status. Bar height as well as color encodes status.",
           "whenToUse": [
@@ -32328,6 +32519,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A guided multistep form shell with gated progression, review states, and keyboard-accessible navigation.",
           "whenToUse": [
@@ -32439,6 +32631,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "items: {id,title,description,visual}. The step nearest the middle of the viewport is active (aria-current=step) and its visual shows in the pinned panel.",
           "whenToUse": [
@@ -32564,6 +32757,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Pass the accumulated text and streaming={true} while chunks arrive; it shows a caret and sets aria-busy until you set streaming={false}. Use animate + speed to type out text you already have.",
           "whenToUse": [
@@ -32658,6 +32852,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "suggestions is an array of { label, prompt?, description?, icon? }. onSelect receives the prompt text. variant is pills | scroll | cards. loading shows placeholders and onRefresh adds a shuffle button.",
           "whenToUse": [
@@ -32790,6 +32985,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "On/off control for settings that apply immediately. Pair with a Label via id/htmlFor; use size=\"sm\" in dense lists.",
           "whenToUse": [
@@ -32925,6 +33121,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Leave items out to collect h2 and h3 headings (they need text; missing ids are created). Current section gets aria-current=location.",
           "whenToUse": [
@@ -33048,6 +33245,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Static table parts. The wrapper scrolls on narrow screens and is keyboard focusable; pass label to name it and sort on TableHead for aria-sort.",
           "whenToUse": [
@@ -33178,6 +33376,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Wrap a tablet screen in <TabletFrame screenWidth={1194}>: children render below a status bar at 1194 CSS px wide (834 in portrait) and are scaled to the frame's width. Set the width with className; the height follows the aspect ratio.",
           "whenToUse": [
@@ -33307,6 +33506,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Switches between a small number of peer views while retaining Radix tablist semantics and roving focus.",
           "whenToUse": [
@@ -33432,6 +33632,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Enter, paste, and remove text tags with duplicate prevention, limits, and keyboard shortcuts.",
           "whenToUse": [
@@ -33554,6 +33755,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "teams: {id,name,description,logo}. value/defaultValue/onValueChange choose the active team; onAddTeam adds the last row; compact shows only the logo.",
           "whenToUse": [
@@ -34924,6 +35126,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Installs a four-page product site built entirely from Ballmac blocks in one palette. Change copy through block props, swap blocks freely, and edit launchCss for the look.",
           "whenToUse": [
@@ -38283,6 +38486,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<TextAnimate by='word|character|line' animation='blurIn|fadeIn|slideUp|slideDown|slideLeft|slideRight|scaleUp|rotateIn'>Text</TextAnimate>. Newlines make lines. as picks the element.",
           "whenToUse": [
@@ -38406,6 +38610,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Wrap a plain string: <TextReveal as=\"h1\">Ship the interface</TextReveal>. Screen readers get the full text once from a visually hidden copy; the animated pieces are aria-hidden. Under reduced motion it renders plain text.",
           "whenToUse": [
@@ -38516,6 +38721,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Multi-line text input. Set autoResize with minRows and maxRows for chat composers and comment boxes; leave it off for a user-resizable box with a fixed rows count.",
           "whenToUse": [
@@ -38650,6 +38856,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Show it while a reply has not started. variant picks the animation, label takes a string or an array of phrases, showTimer adds a clock. Screen readers hear statusLabel once instead of every phrase.",
           "whenToUse": [
@@ -38897,6 +39104,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A native time field with optional quick-pick presets and controlled or uncontrolled state.",
           "whenToUse": [
@@ -39117,6 +39325,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A token-based notification stack with dismissal, optional actions, and pause-on-interaction timing.",
           "whenToUse": [
@@ -39227,6 +39436,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Render <Toaster /> once, then call toast(), toast.success(), toast.error() or toast.promise() from anywhere.",
           "whenToUse": [
@@ -39362,6 +39572,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Lets users choose one or multiple options from a short row while Radix handles roving focus.",
           "whenToUse": [
@@ -39489,6 +39700,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "An on/off action such as pinning or formatting that communicates its pressed state to assistive technology.",
           "whenToUse": [
@@ -39617,6 +39829,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "segments is [{ label, tokens, reserved? }], limit is the window. The meter warns at warnAt percent (80) and again when full, with words and an icon. <TokenMeterPill> shows a ring and percentage. Exports formatTokens and estimateTokens.",
           "whenToUse": [
@@ -39746,6 +39959,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Render each tool invocation of an agent: <ToolCallCard name status duration input result />. Objects are shown as indented JSON, strings as-is; the details panel is a disclosure (collapsed by default).",
           "whenToUse": [
@@ -39875,6 +40089,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<Toolbar label title subtitle> with ToolbarButton (icon, labeled, pressed), ToolbarGroup, ToolbarSegmented + ToolbarSegment (single choice), ToolbarSeparator, ToolbarSpacer and ToolbarSearch. Arrow keys move between buttons.",
           "whenToUse": [
@@ -40007,6 +40222,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-28",
+        "tests": true,
         "ai": {
           "summary": "Short text hint for a control, shown on hover and focus. Compose Tooltip > TooltipTrigger (style it with buttonVariants and give icon triggers an aria-label) + TooltipContent. Put Kbd inside the content for shortcut hints.",
           "whenToUse": [
@@ -40115,6 +40331,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "A keyboard-operable hierarchical tree with selection, expansion, and optional node icons.",
           "whenToUse": [
@@ -40227,6 +40444,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<TypingText text={['one','two']} typingSpeed deleteSpeed pause loop cursor startOnView onComplete />. A single string types once unless loop is set.",
           "whenToUse": [
@@ -40351,6 +40569,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "label, used (or segments), limit, unit. warnAt sets the warning percent. variant bar | ring. Exposes role=meter with a readable value.",
           "whenToUse": [
@@ -40478,6 +40697,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "user {name,email,image,plan,status}, groups: UserMenuItem[][], theme/onThemeChange, onSignOut, variant avatar | full.",
           "whenToUse": [
@@ -40612,6 +40832,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<VideoDialog title thumbnail duration youtubeId | embedUrl | src aspect />. The player is created on open and removed on close, so nothing loads or keeps playing until asked.",
           "whenToUse": [
@@ -40740,6 +40961,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "The component draws the control; you record. onStart, onStop, onCancel fire; state (idle | listening | processing) can be controlled. Feed level (0 to 1) from useMicrophoneLevel(active) for a real waveform.",
           "whenToUse": [
@@ -40868,6 +41090,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<WarpBackground density speed colors vignette parallax>content</WarpBackground>. colors takes CSS variable names. The content sits on its own layer above the canvas.",
           "whenToUse": [
@@ -40996,6 +41219,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<WatchFrame screenWidth={208} band=\"sport\" bandTone=\"blue\"> renders children as the watch screen at 208 CSS px wide, scaled to fit. Set the width with className (about w-40).",
           "whenToUse": [
@@ -41125,6 +41349,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "url, enabled/onEnabledChange, secret, events, deliveries [{ id, event, status, duration, time, payload, response }], onRedeliver, onTest. Health is Active, Failing (half or more of the last five failed) or Disabled, shown with icon and word.",
           "whenToUse": [
@@ -41252,6 +41477,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<WeatherWidget city temperature condition high low hourly daily size />, <CalendarWidget date=\"2026-10-01\" events size />, <BatteryWidget devices size />. Width is set with className; height follows the size (small square, medium 2:1, large near-square). <Widget> is the bare frame.",
           "whenToUse": [
@@ -41381,6 +41607,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "<WindowManager windows={[{ id, title, content, x, y, width, height, minWidth, minHeight }]} onClose>background</WindowManager>. Add or remove entries to open or close windows. Children render behind the windows.",
           "whenToUse": [
@@ -41518,6 +41745,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-29",
+        "tests": true,
         "ai": {
           "summary": "Place <WordRotate words={[\"faster\", \"safer\"]} /> inside a heading or paragraph; it inherits the font. Style the words with wordClassName (gradients, highlights). The accessible text is srText or the words joined with commas; the animated part is aria-hidden and not a live region.",
           "whenToUse": [
@@ -41635,6 +41863,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "workspace {name,description,plan,members,memberCount,projects,storage,lastActive}, href or onOpen, current, actions[], loading. The title is the card's single link.",
           "whenToUse": [
@@ -41848,6 +42077,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-10-01",
+        "tests": true,
         "ai": {
           "summary": "Import highlightLines(code, language) from @/lib/ballmac/highlight to get tokens grouped by line, and map each token to tokenClass[token.type]. languageFromName('app.ts') picks a language from a file name or label. Not a full grammar: use Shiki for exact highlighting of large files.",
           "whenToUse": [
@@ -41996,6 +42226,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-30",
+        "tests": true,
         "ai": {
           "summary": "Import useScrolled, useScrollDirection, useScrollSpy, scrollToId, scrollToElement and prefersReducedMotion from @/lib/ballmac/scroll. Pass a container ref to watch an element instead of the page.",
           "whenToUse": [

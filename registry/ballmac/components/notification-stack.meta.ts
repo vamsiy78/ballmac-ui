@@ -39,5 +39,6 @@ export default defineItem({
     ],
   },
   version: "1.0.1",
-  updated: "2026-09-29",
+  updated: "2026-10-02",
+  changelog: [{ version: "1.0.1", date: "2026-10-02", note: "Labels (Show less, Clear all, Show all) come from the i18n messages and can be translated; the close button moved to the start side so it mirrors in right-to-left. Adds the i18n helper." }],
 })
