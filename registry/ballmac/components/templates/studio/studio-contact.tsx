@@ -62,7 +62,7 @@ function StudioContact({ hrefs, ...props }: StudioContactProps) {
                 <div className="mt-3 flex flex-wrap gap-2">{budgets.map((b) => <label key={b} className={cn("focus-within:ring-ring/50 cursor-pointer rounded-full border-2 border-current px-5 py-2.5 font-semibold transition-colors focus-within:ring-[3px]", budget === b ? "bg-foreground text-background" : "hover:bg-chart-3 hover:text-[var(--studio-on-accent)]")}><input type="radio" name="budget" value={b} checked={budget === b} onChange={() => setBudget(b)} className="sr-only" />{b}</label>)}</div>
               </fieldset>
               <div><label htmlFor="sc-brief" className="text-sm font-bold uppercase">The brief</label><textarea id="sc-brief" name="brief" rows={5} aria-invalid={!!errors.brief} aria-describedby={errors.brief ? "sc-brief-err" : undefined} className={cn(field, "h-auto py-3")} />{errors.brief && <p id="sc-brief-err" className="text-destructive mt-2 text-sm font-semibold">{errors.brief}</p>}</div>
-              <button type="submit" className="bg-foreground text-background focus-visible:ring-ring/50 inline-flex h-16 items-center rounded-full px-10 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none">Send the brief</button>
+              <button type="submit" className="bg-foreground text-background focus-visible:ring-ring/50 inline-flex h-16 items-center rounded-full px-10 text-lg font-bold outline-none transition-transform hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] motion-reduce:transition-none">Send the brief</button>
             </form>
           )}
           <aside aria-label="Offices" className="space-y-10">

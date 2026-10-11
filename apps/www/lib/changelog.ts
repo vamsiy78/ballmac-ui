@@ -4,6 +4,20 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-11",
+    title: "Motion is part of the theme",
+    items: [
+      "Six settings describe how a product moves: speed, bounce, travel, hover, stagger and decorative loops. Durations, easings, hover lift, button press and the CSS spring curve are all derived from them, and the defaults reproduce the current look exactly",
+      "Tailwind's own scales follow: duration-75 to duration-1000, delay-* and ease-out, ease-in and ease-in-out read the theme, and a new ease-spring class is a real spring written as a CSS linear() easing. Dialogs, popovers, menus and accordions follow too, through tw-animate-css's enter and exit animations. Existing components pick this up with no edits",
+      "Five ready-made feels, each its own registry theme: @ballmac/motion-native, -calm, -snappy, -playful and -still. The twelve colour themes each carry a feel that suits them, so installing Violet brings its motion too",
+      "The theme builder has a Motion group (a personality picker and a slider for each setting) and a motion lab that shows easing curves drawn from the real spring, hover and press, stagger, durations, JavaScript springs and loops, with a Preview reduced motion switch. A link such as /themes?mo=playful opens a feel",
+      "Reduced motion is part of the theme: a prefers-reduced-motion rule removes travel, lift, bounce and loops and keeps fades. Still ships those values to every visitor",
+      "Motion presets 1.1.0: spring, duration, variants and stagger read the theme's variables, and new useMotion, useLoopsPaused and MotionProvider hooks give the same numbers in JavaScript. Decorative loops (13 components) hold still when loops are turned off; spinners and thinking indicators keep running",
+      "Hover lift and button press follow the theme in Card, Button, Suggestion Chips, Workspace Card, three blocks and seven templates. A new `pnpm bump` command writes the version bump and changelog entry the version check asks for",
+      "The Figma tokens export now includes the motion settings as W3C duration and number tokens",
+    ],
+  },
+  {
+    date: "2026-10-11",
     title: "Fixes: server-component crashes, and support for Next.js 16.4 Cache Components",
     items: [
       "Bento Grid, Team Switcher, Lock Screen and Control Center failed with \"Attempted to call isMediaImage() from the server\" when a server component rendered them. The helper now lives in its own small item, media-image, and the components import it from there (Media still exports it for code that used it). Each is now 1.0.1, so `ballmac update` merges the fix into your copy",

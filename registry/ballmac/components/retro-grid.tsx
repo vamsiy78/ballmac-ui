@@ -2,7 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { cn } from "@/lib/utils"
 
@@ -33,7 +34,7 @@ type RetroGridProps = Omit<React.ComponentProps<"div">, "children"> & {
 
 /** A perspective floor of grid lines that glides toward you, with a glowing horizon. Decorative. */
 function RetroGrid({ angle = 62, cellSize = 64, tone = "foreground", speed = 1.4, glow = true, className, ...props }: RetroGridProps) {
-  const reduce = useReducedMotion()
+  const reduce = useLoopsPaused()
   const line = `color-mix(in oklab, ${VAR[tone]} 52%, transparent)`
   return (
     <div

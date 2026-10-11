@@ -1,5 +1,5 @@
 import { defineItem } from "@ballmac-ui/metadata"
-import { buildTheme, getPreset } from "@ballmac-ui/theme-engine"
+import { buildTheme, getPreset, reducedMotionRule } from "@ballmac-ui/theme-engine"
 
 const preset = getPreset("sand")!
 const vars = buildTheme(preset.spec)
@@ -12,13 +12,18 @@ export default defineItem({
   category: "foundation",
   tags: ["theme", "preset", "tokens", "dark mode", "sand"],
   cssVars: { ...(Object.keys(vars.theme).length ? { theme: vars.theme } : {}), light: vars.light, dark: vars.dark },
+  ...(Object.keys(vars.reducedMotion).length ? { css: reducedMotionRule(vars.reducedMotion) } : {}),
   docs: `Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/sand`,
   ai: {
-    summary: `${preset.tagline}. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.`,
+    summary: `${preset.tagline}. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a ${preset.motion} feel for motion.`,
     whenToUse: preset.suits,
     whenNotToUse: ["The project already has a brand theme you want to keep"],
     customization: ["Open https://ui.ballmac.com/themes/sand to change hue, intensity, radius, density and font, then copy the CSS or install the result"],
   },
-  version: "1.0.0",
-  updated: "2026-10-02",
+  version: "1.1.0",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-11", note: "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback." },
+    { version: "1.0.0", date: "2026-10-02", note: "First release." },
+  ],
 })

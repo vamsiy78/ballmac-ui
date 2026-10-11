@@ -26,6 +26,10 @@ export default defineItem({
     ],
     customization: ["current", "actions", "href vs onOpen", "cover and logo color come from the name"],
   },
-  version: "1.0.0",
-  updated: "2026-09-30",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default." },
+    { version: "1.0.0", date: "2026-09-30", note: "First release." },
+  ],
 });

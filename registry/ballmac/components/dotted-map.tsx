@@ -6,7 +6,7 @@ import * as React from "react"
 import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
-import { useReducedMotionSafe } from "@/lib/ballmac/motion"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 import { useMessages } from "@/lib/ballmac/i18n"
 
 type MapTone = "foreground" | "primary" | "chart-1" | "chart-2" | "chart-3" | "chart-4" | "chart-5" | "destructive"
@@ -89,7 +89,7 @@ function project(lat: number, lng: number, top: number, span: number, height: nu
 function DottedMap({ markers = [], arcs = [], dots = 150, latRange = [-56, 73], tone = "foreground", labels = false, label, className, ...props }: DottedMapProps) {
   const msg = useMessages()
   label ??= msg("dotted-map.label", "World map")
-  const reduce = useReducedMotionSafe()
+  const reduce = useLoopsPaused()
   const [south, north] = latRange
   const span = north - south
   const height = (WIDTH * span) / 360

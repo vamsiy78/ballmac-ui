@@ -11,7 +11,7 @@ import { mkdirSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { pathToFileURL } from "node:url"
 
-import { buildTheme, DEFAULT_SPEC, fitGamut, PRESETS, type Oklch, type ThemeVars } from "@ballmac-ui/theme-engine"
+import { BASE_DURATIONS, buildTheme, DEFAULT_MOTION, DEFAULT_SPEC, fitGamut, MOTION_RANGES, normalizeMotion, PRESETS, type MotionFields, type Oklch, type ThemeVars } from "@ballmac-ui/theme-engine"
 
 const ROOT = join(import.meta.dirname, "..")
 
@@ -69,7 +69,7 @@ const token = (type: string, value: unknown, description?: string, ext?: Record<
 function colorGroup(vars: Record<string, string>) {
   const group: Record<string, unknown> = {}
   for (const [name, value] of Object.entries(vars)) {
-    if (name === "radius" || name === "spacing" || name === "font-sans") continue
+    if (name === "radius" || name === "spacing" || name === "font-sans" || name.startsWith("bm-")) continue
     const parsed = parseOklch(value)
     if (!parsed) throw new Error(`Cannot convert "${name}: ${value}" (expected oklch)`)
     const key = name.replace(/^chart-(\d)$/, "chart.$1")
@@ -87,7 +87,10 @@ function colorGroup(vars: Record<string, string>) {
 const rem = (v: string) => Number.parseFloat(v)
 
 /** One theme as a DTCG token tree. */
-export function themeTokens(slug: string, title: string, vars: ThemeVars, description: string) {
+export function themeTokens(slug: string, title: string, vars: ThemeVars, description: string, motionFields: MotionFields = DEFAULT_MOTION) {
+  const m = normalizeMotion(motionFields)
+  const ms = (base: number) => `${Math.round(base / m.speed)}ms`
+  const num = (key: keyof typeof MOTION_RANGES, description: string) => token("number", m[key], description, { cssVariable: `--bm-${key}` })
   const radius = rem(vars.light.radius ?? "0.625rem")
   const px = (r: number) => `${Math.round(r * 16 * 100) / 100}px`
   return {
@@ -105,10 +108,17 @@ export function themeTokens(slug: string, title: string, vars: ThemeVars, descri
     spacing: { unit: token("dimension", px(rem(vars.theme.spacing ?? "0.25rem")), "Tailwind spacing step; multiply for 2, 4, 8 and so on") },
     motion: {
       duration: {
-        fast: token("duration", "140ms"),
-        base: token("duration", "220ms"),
-        slow: token("duration", "320ms"),
+        fast: token("duration", ms(BASE_DURATIONS.fast), "Hover and press feedback", { cssVariable: "--bm-duration-fast" }),
+        base: token("duration", ms(BASE_DURATIONS.base), "Most transitions", { cssVariable: "--bm-duration-base" }),
+        slow: token("duration", ms(BASE_DURATIONS.slow), "Panels and larger moves", { cssVariable: "--bm-duration-slow" }),
+        reveal: token("duration", ms(BASE_DURATIONS.reveal), "Entrances", { cssVariable: "--bm-duration-reveal" }),
       },
+      // The modulators the durations and distances are derived from. 1 is the default for each.
+      speed: num("speed", "Playback speed: 2 halves every duration"),
+      bounce: num("bounce", "Springiness, 0 to 1"),
+      travel: num("travel", "Enter distance multiplier"),
+      hover: num("hover", "Hover lift and press depth multiplier"),
+      stagger: num("stagger", "Delay between staggered items, multiplier"),
       easing: {
         out: token("cubicBezier", [0.22, 1, 0.36, 1]),
         inOut: token("cubicBezier", [0.65, 0, 0.35, 1]),
@@ -129,7 +139,7 @@ function main() {
   mkdirSync(out, { recursive: true })
   const index: { slug: string; title: string; file: string; colors: number }[] = []
   for (const t of allThemes()) {
-    const tokens = themeTokens(t.slug, t.title, buildTheme(t.spec), t.description)
+    const tokens = themeTokens(t.slug, t.title, buildTheme(t.spec), t.description, t.spec)
     const file = `${t.slug}.tokens.json`
     writeFileSync(join(out, file), JSON.stringify(tokens, null, 2) + "\n")
     index.push({ slug: t.slug, title: t.title, file, colors: Object.keys(tokens.color.light).length })

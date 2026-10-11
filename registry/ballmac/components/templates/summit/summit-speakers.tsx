@@ -41,7 +41,7 @@ function SummitSpeakers({ hrefs, ...props }: SummitSpeakersProps) {
           {list.map((s) => (
             <li key={s.id}>
               <button type="button" onClick={() => setOpen(s)} aria-haspopup="dialog" className="focus-visible:ring-ring/50 group block w-full rounded-3xl text-start outline-none focus-visible:ring-[3px]">
-                <Portrait speaker={s} className="rounded-3xl transition-transform group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0" />
+                <Portrait speaker={s} className="rounded-3xl transition-transform group-hover:translate-y-[calc(var(--bm-lift,-2px)*2)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0" />
                 <span className="mt-4 block text-lg font-bold">{s.name}</span>
                 <span className="text-muted-foreground block text-sm">{s.role}, {s.company}</span>
                 <span className="mt-2 block text-sm font-semibold text-pretty">“{s.talk}”</span>

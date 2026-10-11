@@ -4900,8 +4900,22 @@
           "filter",
           "perks"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "A jobs section. Pass jobs=[{ title, team, location, type?, href }] and optionally perks=[{ icon?, title, description }]; teams and filters are derived from the jobs.",
           "whenToUse": [
@@ -6204,7 +6218,8 @@
       "registryDependencies": [
         "utils",
         "https://ui.ballmac.com/r/button.json",
-        "https://ui.ballmac.com/r/search-field.json"
+        "https://ui.ballmac.com/r/search-field.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -6228,8 +6243,22 @@
           "403",
           "page"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "The drifting background pauses with the theme's ambient setting, and the link lift follows --bm-lift. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Drop into not-found.tsx or error.tsx. Set status ('404' | '403' | '500'); override title and description if you like; pass onSearch to wire the search box, links for next steps and reference for a request id.",
           "whenToUse": [
@@ -8258,7 +8287,8 @@
         "https://ui.ballmac.com/r/badge.json",
         "https://ui.ballmac.com/r/button.json",
         "https://ui.ballmac.com/r/gradient-text.json",
-        "https://ui.ballmac.com/r/sparkline.json"
+        "https://ui.ballmac.com/r/sparkline.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -8282,8 +8312,22 @@
           "floating cards",
           "saas"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Floating cards and the drifting background hold still when the theme turns decorative loops off; the pointer parallax is unchanged. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "A bold, friendly landing hero. Edit eyebrow, title, highlight (the gradient words), description, actions and highlights; pass `cards` to replace the floating cards.",
           "whenToUse": [
@@ -10630,8 +10674,22 @@
           "social proof",
           "sparkline"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Social proof as numbers. Pass stats=[{ label, value, prefix?, suffix?, decimals?, delta?, trend?, trendLabel?, note? }].",
           "whenToUse": [
@@ -11305,7 +11363,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -11327,8 +11386,22 @@
           "decorative",
           "motion"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-28",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-28",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Drop <BorderBeam /> as the last child of any element with position: relative and a border radius; it inherits the radius and draws only in a borderWidth-thick ring (aria-hidden, pointer-events-none). Renders a span, so it is valid inside buttons.",
           "whenToUse": [
@@ -11807,8 +11880,22 @@
           "loading",
           "radix"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-28",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-28",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "The base action control. Use variant for emphasis, size for density, and loading while an async action runs.",
@@ -12331,8 +12418,22 @@
           "panel",
           "dashboard"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-29",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-29",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "A composable content surface with compact spacing, an action slot, and optional interactive feedback.",
           "whenToUse": [
@@ -16551,8 +16652,22 @@
           "markers",
           "locations"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "<DottedMap markers={[{ lat, lng, label, tone }]} arcs={[{ from:[lat,lng], to:[lat,lng] }]} dots latRange tone labels />. The land mask is built in; nothing is fetched. Higher dots gives finer coastlines.",
@@ -19088,7 +19203,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -19111,8 +19227,22 @@
           "hero",
           "motion"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-29",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-29",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Wrap a few words: <GradientText>ship software</GradientText> inside a heading, or as=\"h2\". variant=\"flow\" (default) drifts the gradient; variant=\"shiny\" adds a periodic white glint. Colors default to --chart-1/4/5/3.",
           "whenToUse": [
@@ -22127,7 +22257,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -22149,8 +22280,22 @@
           "background",
           "hero"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "<LightRays count tone spread intensity duration /> inside a relative, overflow-hidden parent. Tone is a theme token, so it follows any palette.",
@@ -24765,7 +24910,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -24787,8 +24933,22 @@
           "border",
           "gradient"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "<NeonCard from to borderWidth glow flicker radius contentClassName>content</NeonCard>. Colors are theme tokens, so it follows any theme. The light is strongest in dark mode.",
@@ -24891,7 +25051,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -24913,8 +25074,22 @@
           "overlay",
           "gradient"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "<NoiseTexture opacity frequency tile blend animated /> absolutely fills its relative parent. No image file is needed; the grain is an inline SVG data URI.",
@@ -27282,7 +27457,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/button.json"
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -27304,8 +27480,22 @@
           "cta",
           "notification"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "<PulseButton tone rings duration active>Label</PulseButton>. Rings stop on hover and focus, and when active is false or the button is disabled.",
@@ -27533,7 +27723,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/button.json"
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -27555,8 +27746,22 @@
           "glow",
           "cta"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Use like <Button>: <RainbowButton size variant shape duration glow>Label</RainbowButton>. Best with default, secondary or outline variants (the inside needs a background).",
@@ -28017,7 +28222,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -28039,8 +28245,22 @@
           "background",
           "hero"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Place <RetroGrid angle cellSize tone speed glow /> inside a relative, overflow-hidden parent and put content above it. It fades into the page background at the horizon.",
@@ -28140,7 +28360,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -28162,8 +28383,22 @@
           "click",
           "material"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "<Ripple circles size gap duration /> fills its positioned parent. <ClickRipple centered duration> wraps a surface and ripples on pointer down, and from the center on Enter or Space when the wrapper itself has focus.",
@@ -29765,7 +30000,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -29788,8 +30024,22 @@
           "shimmer",
           "motion"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-28",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-28",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Wrap short text: <ShimmerText>Thinking…</ShimmerText>. The base color is --muted-foreground, so the text stays readable at every frame; the sweep brightens it to --foreground. In forced-colors mode it falls back to plain system text.",
           "whenToUse": [
@@ -29857,7 +30107,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/button.json"
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -29879,8 +30130,22 @@
           "cta",
           "motion"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "<ShinyButton shine='hover|loop' interval>Label</ShinyButton>. Accepts every Button prop. No shine under reduced motion.",
@@ -31429,7 +31694,8 @@
         "motion@^12"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -31451,8 +31717,22 @@
           "badge",
           "marketing"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "<SpinningText text duration reverse pauseOnHover className='size-40'>{center}</SpinningText>. The string is fitted to the circle, so shorter text spreads wider.",
@@ -32910,8 +33190,22 @@
           "suggestions",
           "chips"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-30",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "suggestions is an array of { label, prompt?, description?, icon? }. onSelect receives the prompt text. variant is pills | scroll | cards. loading shows placeholders and onRefresh adds a shuffle button.",
@@ -34666,8 +34960,22 @@
           "changelog",
           "developer"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Hover lift and the decorative loop follow the theme's --bm-lift, --bm-hover and ambient tokens. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Installs a five-page documentation site with ⌘K search, synced language tabs, an on-this-page list, endpoint cards and a changelog. Change content in docs-data.ts and the palette in docsCss.",
           "whenToUse": [
@@ -34941,9 +35249,15 @@
           "checkout",
           "ceramics"
         ],
-        "version": "1.0.1",
+        "version": "1.0.2",
         "updated": "2026-10-11",
         "changelog": [
+          {
+            "version": "1.0.2",
+            "date": "2026-10-11",
+            "note": "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default.",
+            "breaking": false
+          },
           {
             "version": "1.0.1",
             "date": "2026-10-11",
@@ -36452,8 +36766,22 @@
           "phone",
           "download"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Hover lift and the decorative loop follow the theme's --bm-lift, --bm-hover and ambient tokens. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Installs a five-page mobile-app landing site with a working app in a phone frame, live feature demos, pricing with a yearly toggle, a security page and a download page. Edit pocket-data.ts and pocketCss.",
           "whenToUse": [
@@ -36717,9 +37045,15 @@
           "player",
           "show notes"
         ],
-        "version": "1.0.1",
+        "version": "1.0.2",
         "updated": "2026-10-11",
         "changelog": [
+          {
+            "version": "1.0.2",
+            "date": "2026-10-11",
+            "note": "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default.",
+            "breaking": false
+          },
           {
             "version": "1.0.1",
             "date": "2026-10-11",
@@ -37248,9 +37582,15 @@
           "newsletter",
           "serif"
         ],
-        "version": "1.0.1",
+        "version": "1.0.2",
         "updated": "2026-10-11",
         "changelog": [
+          {
+            "version": "1.0.2",
+            "date": "2026-10-11",
+            "note": "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default.",
+            "breaking": false
+          },
           {
             "version": "1.0.1",
             "date": "2026-10-11",
@@ -37740,8 +38080,22 @@
           "creative",
           "contact"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Installs a five-page agency site. Change the content in studio-data.ts, the palette in studioCss, and the painted posters in StudioArt (or swap them for real imagery).",
           "whenToUse": [
@@ -38000,8 +38354,22 @@
           "tickets",
           "countdown"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Hover lift and the decorative loop follow the theme's --bm-lift, --bm-hover and ambient tokens. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-01",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Installs a five-page conference site with a countdown, a starrable schedule that warns about clashes, speaker dialogs, a ticket calculator with group and promo discounts, and a venue guide. Edit summit-data.ts and summitCss.",
           "whenToUse": [
@@ -41962,8 +42330,22 @@
           "card",
           "members"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-30",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "workspace {name,description,plan,members,memberCount,projects,storage,lastActive}, href or onOpen, current, actions[], loading. The title is the card's single link.",
@@ -42297,7 +42679,7 @@
       "name": "motion-presets",
       "type": "registry:lib",
       "title": "Motion Presets",
-      "description": "Shared easings, durations, springs and enter variants for Motion, so every animated component moves with the same rhythm.",
+      "description": "Shared easings, durations, springs and enter variants for Motion that follow the theme's motion tokens (speed, bounce, travel, hover, stagger), plus a useMotion hook.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "dependencies": [
         "motion@^12"
@@ -42321,10 +42703,24 @@
           "easing",
           "spring"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-28",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Durations, springs, variants and stagger follow the theme's --bm-* motion variables (defaults are unchanged). Adds useMotion, MotionProvider, getMotion and refreshMotion.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-28",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Import ease, duration, spring, variants and stagger from @/lib/ballmac/motion instead of hard-coding animation values.",
+          "summary": "Import ease, duration, spring, variants and stagger from @/lib/ballmac/motion instead of hard-coding animation values. They read the theme's --bm-* motion variables, so a motion theme changes them with no code changes. useMotion() gives the same numbers reactively.",
           "whenToUse": [
             "Writing a new animated component that should match Ballmac UI",
             "Page or section entrance animations"
@@ -42336,7 +42732,8 @@
           "a11y": [],
           "customization": [
             "spring.snappy for controls, spring.gentle for panels, spring.bouncy for accents",
-            "variants.fadeUp with stagger() for lists"
+            "variants.fadeUp with stagger() for lists",
+            "useMotion() for live durations, springs, distance, lift, press and loop; MotionProvider scopes a setting to a preview"
           ]
         },
         "examples": [],
@@ -42394,12 +42791,564 @@
       }
     },
     {
+      "name": "motion-calm",
+      "type": "registry:theme",
+      "title": "Calm motion",
+      "description": "Longer, softer transitions with no bounce and short travel. Suits products people use for a long time, like editors, health and finance.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
+        "light": {
+          "bm-speed": "0.75",
+          "bm-bounce": "0",
+          "bm-travel": "0.7",
+          "bm-hover": "0.5",
+          "bm-stagger": "1.4",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "7px",
+          "bm-lift": "-1px",
+          "bm-press": "0.985",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+        }
+      },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
+      "docs": "Changes how everything moves and leaves your colours alone. Tune it, preview it on real components and copy the CSS at https://ui.ballmac.com/themes?mo=calm#motion",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "motion",
+          "theme",
+          "tokens",
+          "animation",
+          "calm"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-11",
+        "ai": {
+          "summary": "Slower, no overshoot, small moves. Sets speed, bounce, travel, hover lift and stagger as CSS variables that Tailwind's duration and easing scales and every Ballmac component follow, with a reduced-motion fallback.",
+          "whenToUse": [
+            "Editors, health, finance and reading apps",
+            "Products people use for hours"
+          ],
+          "whenNotToUse": [
+            "The project needs its own timing system and does not use Tailwind's duration and ease utilities"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger by hand, or tune them at https://ui.ballmac.com/themes#motion"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/motion-calm"
+      }
+    },
+    {
+      "name": "motion-native",
+      "type": "registry:theme",
+      "title": "Native motion",
+      "description": "The Ballmac default: short fades, a soft settle on spatial moves and a light lift on hover. Reads as the platform, not as an effect.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
+        "light": {
+          "bm-speed": "1",
+          "bm-bounce": "0.25",
+          "bm-travel": "1",
+          "bm-hover": "1",
+          "bm-stagger": "1",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "10px",
+          "bm-lift": "-2px",
+          "bm-press": "0.97",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+        }
+      },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
+      "docs": "Changes how everything moves and leaves your colours alone. Tune it, preview it on real components and copy the CSS at https://ui.ballmac.com/themes?mo=native#motion",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "motion",
+          "theme",
+          "tokens",
+          "animation",
+          "native"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-11",
+        "ai": {
+          "summary": "Quick, quiet, a hint of spring. Sets speed, bounce, travel, hover lift and stagger as CSS variables that Tailwind's duration and easing scales and every Ballmac component follow, with a reduced-motion fallback.",
+          "whenToUse": [
+            "The default feel for most products",
+            "Pairing with any colour theme without changing how it moves"
+          ],
+          "whenNotToUse": [
+            "The project needs its own timing system and does not use Tailwind's duration and ease utilities"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger by hand, or tune them at https://ui.ballmac.com/themes#motion"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/motion-native"
+      }
+    },
+    {
+      "name": "motion-playful",
+      "type": "registry:theme",
+      "title": "Playful motion",
+      "description": "Clear overshoot, longer travel and a pronounced hover lift. Suits consumer apps, creative tools and marketing pages.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
+        "light": {
+          "bm-speed": "1.1",
+          "bm-bounce": "0.8",
+          "bm-travel": "1.4",
+          "bm-hover": "1.5",
+          "bm-stagger": "1.2",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0819, 0.2862, 0.5499, 0.8166, 1.044, 1.2065, 1.2953, 1.3154, 1.2812, 1.2117, 1.127, 1.044, 0.9753, 0.928, 0.9039, 0.9011, 0.9143, 0.9376, 0.9647, 0.9904, 1.011, 1.0247, 1.031, 1.0309, 1.026, 1.0182, 1.0096, 1.0017, 0.9956, 0.9917, 0.9901, 0.9904, 0.9922, 0.9947, 0.9974, 0.9998, 1.0017, 1.0028, 1.0032, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "14px",
+          "bm-lift": "-3px",
+          "bm-press": "0.955",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+        }
+      },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
+      "docs": "Changes how everything moves and leaves your colours alone. Tune it, preview it on real components and copy the CSS at https://ui.ballmac.com/themes?mo=playful#motion",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "motion",
+          "theme",
+          "tokens",
+          "animation",
+          "playful"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-11",
+        "ai": {
+          "summary": "Bouncy, bigger moves, eager hover. Sets speed, bounce, travel, hover lift and stagger as CSS variables that Tailwind's duration and easing scales and every Ballmac component follow, with a reduced-motion fallback.",
+          "whenToUse": [
+            "Consumer apps, creative tools and marketing pages",
+            "Brands that want personality in every interaction"
+          ],
+          "whenNotToUse": [
+            "The project needs its own timing system and does not use Tailwind's duration and ease utilities"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger by hand, or tune them at https://ui.ballmac.com/themes#motion"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/motion-playful"
+      }
+    },
+    {
+      "name": "motion-snappy",
+      "type": "registry:theme",
+      "title": "Snappy motion",
+      "description": "Short durations, tight stagger and very little bounce. Suits dense tools and dashboards where speed is the feature.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
+        "light": {
+          "bm-speed": "1.6",
+          "bm-bounce": "0.05",
+          "bm-travel": "0.7",
+          "bm-hover": "0.8",
+          "bm-stagger": "0.5",
+          "bm-ambient": "0",
+          "bm-ambient-state": "paused",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0141, 0.0505, 0.1017, 0.1621, 0.2274, 0.2945, 0.361, 0.4254, 0.4865, 0.5437, 0.5966, 0.6449, 0.6888, 0.7283, 0.7636, 0.7951, 0.8229, 0.8474, 0.8689, 0.8877, 0.9041, 0.9183, 0.9306, 0.9412, 0.9503, 0.9581, 0.9647, 0.9704, 0.9752, 0.9793, 0.9828, 0.9857, 0.9882, 0.9902, 0.992, 0.9934, 0.9946, 0.9956, 0.9964, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "7px",
+          "bm-lift": "-1.6px",
+          "bm-press": "0.976",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+        }
+      },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
+      "docs": "Changes how everything moves and leaves your colours alone. Tune it, preview it on real components and copy the CSS at https://ui.ballmac.com/themes?mo=snappy#motion",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "motion",
+          "theme",
+          "tokens",
+          "animation",
+          "snappy"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-11",
+        "ai": {
+          "summary": "Fast, tight, almost instant. Sets speed, bounce, travel, hover lift and stagger as CSS variables that Tailwind's duration and easing scales and every Ballmac component follow, with a reduced-motion fallback.",
+          "whenToUse": [
+            "Dashboards, admin tools and developer products",
+            "Anywhere speed is the feature"
+          ],
+          "whenNotToUse": [
+            "The project needs its own timing system and does not use Tailwind's duration and ease utilities"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger by hand, or tune them at https://ui.ballmac.com/themes#motion"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/motion-snappy"
+      }
+    },
+    {
+      "name": "motion-still",
+      "type": "registry:theme",
+      "title": "Still motion",
+      "description": "Ships the reduced-motion values to every visitor: no travel, no lift, no loops, no bounce. Opacity changes stay so state remains visible.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
+        "light": {
+          "bm-speed": "2",
+          "bm-bounce": "0",
+          "bm-travel": "0",
+          "bm-hover": "0",
+          "bm-stagger": "0.4",
+          "bm-ambient": "0",
+          "bm-ambient-state": "paused",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "0px",
+          "bm-lift": "0px",
+          "bm-press": "1",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+        }
+      },
+      "docs": "Changes how everything moves and leaves your colours alone. Tune it, preview it on real components and copy the CSS at https://ui.ballmac.com/themes?mo=still#motion",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "motion",
+          "theme",
+          "tokens",
+          "animation",
+          "still"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-11",
+        "ai": {
+          "summary": "Fades only, for everyone. Sets speed, bounce, travel, hover lift and stagger as CSS variables that Tailwind's duration and easing scales and every Ballmac component follow, with a reduced-motion fallback.",
+          "whenToUse": [
+            "Products that must hold perfectly still for everyone",
+            "Kiosks, trading screens and high-focus tools"
+          ],
+          "whenNotToUse": [
+            "The project needs its own timing system and does not use Tailwind's duration and ease utilities"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger by hand, or tune them at https://ui.ballmac.com/themes#motion"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/motion-still"
+      }
+    },
+    {
       "name": "theme-amber",
       "type": "registry:theme",
       "title": "Amber theme",
       "description": "Near-black buttons with amber focus rings and charts on warm paper-tinted greys.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0.375rem",
           "background": "oklch(0.978 0.012 80)",
@@ -42424,7 +43373,26 @@
           "chart-2": "oklch(0.644 0.129 230)",
           "chart-3": "oklch(0.636 0.136 155)",
           "chart-4": "oklch(0.58 0.136 10)",
-          "chart-5": "oklch(0.64 0.136 295)"
+          "chart-5": "oklch(0.64 0.136 295)",
+          "bm-speed": "1",
+          "bm-bounce": "0.25",
+          "bm-travel": "1",
+          "bm-hover": "1",
+          "bm-stagger": "1",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "10px",
+          "bm-lift": "-2px",
+          "bm-press": "0.97",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.026 80)",
@@ -42452,6 +43420,23 @@
           "chart-5": "oklch(0.74 0.128 295)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/amber",
       "categories": [
         "foundation"
@@ -42466,10 +43451,24 @@
           "dark mode",
           "amber"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Ink buttons, golden accents. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Ink buttons, golden accents. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a native feel for motion.",
           "whenToUse": [
             "Editorial and docs sites",
             "Brands that want warmth without a coloured button"
@@ -42494,6 +43493,34 @@
       "description": "Orange buttons on warm greys with tighter corners. Energetic but readable.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0.5rem",
           "background": "oklch(1 0 0)",
@@ -42518,7 +43545,26 @@
           "chart-2": "oklch(0.656 0.112 195)",
           "chart-3": "oklch(0.66 0.145 120)",
           "chart-4": "oklch(0.58 0.145 335)",
-          "chart-5": "oklch(0.64 0.145 260)"
+          "chart-5": "oklch(0.64 0.145 260)",
+          "bm-speed": "1.1",
+          "bm-bounce": "0.8",
+          "bm-travel": "1.4",
+          "bm-hover": "1.5",
+          "bm-stagger": "1.2",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0819, 0.2862, 0.5499, 0.8166, 1.044, 1.2065, 1.2953, 1.3154, 1.2812, 1.2117, 1.127, 1.044, 0.9753, 0.928, 0.9039, 0.9011, 0.9143, 0.9376, 0.9647, 0.9904, 1.011, 1.0247, 1.031, 1.0309, 1.026, 1.0182, 1.0096, 1.0017, 0.9956, 0.9917, 0.9901, 0.9904, 0.9922, 0.9947, 0.9974, 0.9998, 1.0017, 1.0028, 1.0032, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "14px",
+          "bm-lift": "-3px",
+          "bm-press": "0.955",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.026 60)",
@@ -42546,6 +43592,23 @@
           "chart-5": "oklch(0.74 0.134 260)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/ember",
       "categories": [
         "foundation"
@@ -42560,10 +43623,24 @@
           "dark mode",
           "ember"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Burnt orange, crisp. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Burnt orange, crisp. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a playful feel for motion.",
           "whenToUse": [
             "Developer platforms and media",
             "Calls to action that must stand out"
@@ -42588,6 +43665,34 @@
       "description": "A deep green brand colour with slightly green greys and medium corners.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0.5rem",
           "background": "oklch(1 0 0)",
@@ -42612,7 +43717,26 @@
           "chart-2": "oklch(0.66 0.119 302)",
           "chart-3": "oklch(0.66 0.119 227)",
           "chart-4": "oklch(0.58 0.119 82)",
-          "chart-5": "oklch(0.64 0.119 7)"
+          "chart-5": "oklch(0.64 0.119 7)",
+          "bm-speed": "0.75",
+          "bm-bounce": "0",
+          "bm-travel": "0.7",
+          "bm-hover": "0.5",
+          "bm-stagger": "1.4",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "7px",
+          "bm-lift": "-1px",
+          "bm-press": "0.985",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.026 152)",
@@ -42640,6 +43764,21 @@
           "chart-5": "oklch(0.74 0.112 7)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/forest",
       "categories": [
         "foundation"
@@ -42654,10 +43793,24 @@
           "dark mode",
           "forest"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Deep green, grounded. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Deep green, grounded. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a calm feel for motion.",
           "whenToUse": [
             "Sustainability, finance and wellness",
             "Products that should feel calm and established"
@@ -42682,6 +43835,34 @@
       "description": "Neutral greys with near-black buttons and a calm blue focus ring. The safest starting point for any product.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0.5rem",
           "background": "oklch(1 0 0)",
@@ -42706,7 +43887,26 @@
           "chart-2": "oklch(0.66 0.102 45)",
           "chart-3": "oklch(0.68 0.102 330)",
           "chart-4": "oklch(0.58 0.102 185)",
-          "chart-5": "oklch(0.64 0.102 110)"
+          "chart-5": "oklch(0.64 0.102 110)",
+          "bm-speed": "1.6",
+          "bm-bounce": "0.05",
+          "bm-travel": "0.7",
+          "bm-hover": "0.8",
+          "bm-stagger": "0.5",
+          "bm-ambient": "0",
+          "bm-ambient-state": "paused",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0141, 0.0505, 0.1017, 0.1621, 0.2274, 0.2945, 0.361, 0.4254, 0.4865, 0.5437, 0.5966, 0.6449, 0.6888, 0.7283, 0.7636, 0.7951, 0.8229, 0.8474, 0.8689, 0.8877, 0.9041, 0.9183, 0.9306, 0.9412, 0.9503, 0.9581, 0.9647, 0.9704, 0.9752, 0.9793, 0.9828, 0.9857, 0.9882, 0.9902, 0.992, 0.9934, 0.9946, 0.9956, 0.9964, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "7px",
+          "bm-lift": "-1.6px",
+          "bm-press": "0.976",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.013 255)",
@@ -42734,6 +43934,21 @@
           "chart-5": "oklch(0.74 0.096 110)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/graphite",
       "categories": [
         "foundation"
@@ -42748,10 +43963,24 @@
           "dark mode",
           "graphite"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Quiet greys, ink buttons. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Quiet greys, ink buttons. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a snappy feel for motion.",
           "whenToUse": [
             "Dashboards and admin tools",
             "Products that should look neutral and let content lead"
@@ -42776,6 +44005,34 @@
       "description": "Indigo buttons and accents with generous corners. Feels modern without being loud.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0.75rem",
           "background": "oklch(1 0 0)",
@@ -42800,7 +44057,26 @@
           "chart-2": "oklch(0.66 0.146 67)",
           "chart-3": "oklch(0.688 0.17 352)",
           "chart-4": "oklch(0.58 0.1 207)",
-          "chart-5": "oklch(0.64 0.17 132)"
+          "chart-5": "oklch(0.64 0.17 132)",
+          "bm-speed": "1",
+          "bm-bounce": "0.25",
+          "bm-travel": "1",
+          "bm-hover": "1",
+          "bm-stagger": "1",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "10px",
+          "bm-lift": "-2px",
+          "bm-press": "0.97",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.026 277)",
@@ -42828,6 +44104,23 @@
           "chart-5": "oklch(0.74 0.16 132)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/indigo",
       "categories": [
         "foundation"
@@ -42842,10 +44135,24 @@
           "dark mode",
           "indigo"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Deep blue-violet, rounder. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Deep blue-violet, rounder. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a native feel for motion.",
           "whenToUse": [
             "Developer tools and AI products",
             "Marketing sites that want a distinct colour"
@@ -42870,6 +44177,34 @@
       "description": "A bright sky-blue brand colour with strong outlines. Built to look best in dark mode.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0.625rem",
           "background": "oklch(1 0 0)",
@@ -42894,7 +44229,26 @@
           "chart-2": "oklch(0.66 0.136 15)",
           "chart-3": "oklch(0.68 0.136 300)",
           "chart-4": "oklch(0.58 0.136 155)",
-          "chart-5": "oklch(0.64 0.133 80)"
+          "chart-5": "oklch(0.64 0.133 80)",
+          "bm-speed": "0.75",
+          "bm-bounce": "0",
+          "bm-travel": "0.7",
+          "bm-hover": "0.5",
+          "bm-stagger": "1.4",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "7px",
+          "bm-lift": "-1px",
+          "bm-press": "0.985",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.035 250)",
@@ -42922,6 +44276,21 @@
           "chart-5": "oklch(0.74 0.128 80)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/midnight",
       "categories": [
         "foundation"
@@ -42936,10 +44305,24 @@
           "dark mode",
           "midnight"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Electric sky blue, strong edges. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Electric sky blue, strong edges. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a calm feel for motion.",
           "whenToUse": [
             "Developer and gaming products",
             "Apps used mostly in dark mode"
@@ -42964,6 +44347,34 @@
       "description": "No colour at all: black, white and greys, square corners and borders strong enough to meet 3:1 contrast.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0rem",
           "background": "oklch(1 0 0)",
@@ -42988,7 +44399,26 @@
           "chart-2": "oklch(0.4 0 0)",
           "chart-3": "oklch(0.56 0 0)",
           "chart-4": "oklch(0.3 0 0)",
-          "chart-5": "oklch(0.48 0 0)"
+          "chart-5": "oklch(0.48 0 0)",
+          "bm-speed": "1.6",
+          "bm-bounce": "0.05",
+          "bm-travel": "0.7",
+          "bm-hover": "0.8",
+          "bm-stagger": "0.5",
+          "bm-ambient": "0",
+          "bm-ambient-state": "paused",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0141, 0.0505, 0.1017, 0.1621, 0.2274, 0.2945, 0.361, 0.4254, 0.4865, 0.5437, 0.5966, 0.6449, 0.6888, 0.7283, 0.7636, 0.7951, 0.8229, 0.8474, 0.8689, 0.8877, 0.9041, 0.9183, 0.9306, 0.9412, 0.9503, 0.9581, 0.9647, 0.9704, 0.9752, 0.9793, 0.9828, 0.9857, 0.9882, 0.9902, 0.992, 0.9934, 0.9946, 0.9956, 0.9964, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "7px",
+          "bm-lift": "-1.6px",
+          "bm-press": "0.976",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.145 0 0)",
@@ -43016,6 +44446,21 @@
           "chart-5": "oklch(0.62 0 0)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/mono",
       "categories": [
         "foundation"
@@ -43030,10 +44475,24 @@
           "dark mode",
           "mono"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Pure black and white, square. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Pure black and white, square. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a snappy feel for motion.",
           "whenToUse": [
             "Brutalist and technical products",
             "Teams that need maximum contrast"
@@ -43058,6 +44517,34 @@
       "description": "A confident blue brand colour on cool, lightly tinted greys with soft corners.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0.625rem",
           "background": "oklch(1 0 0)",
@@ -43082,7 +44569,26 @@
           "chart-2": "oklch(0.66 0.145 38)",
           "chart-3": "oklch(0.684 0.145 323)",
           "chart-4": "oklch(0.58 0.107 178)",
-          "chart-5": "oklch(0.64 0.135 103)"
+          "chart-5": "oklch(0.64 0.135 103)",
+          "bm-speed": "1",
+          "bm-bounce": "0.25",
+          "bm-travel": "1",
+          "bm-hover": "1",
+          "bm-stagger": "1",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "10px",
+          "bm-lift": "-2px",
+          "bm-press": "0.97",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.026 248)",
@@ -43110,6 +44616,23 @@
           "chart-5": "oklch(0.74 0.136 103)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/ocean",
       "categories": [
         "foundation"
@@ -43124,10 +44647,24 @@
           "dark mode",
           "ocean"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Clear blue, friendly corners. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Clear blue, friendly corners. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a native feel for motion.",
           "whenToUse": [
             "SaaS and fintech products",
             "Anything that should feel trustworthy"
@@ -43152,6 +44689,34 @@
       "description": "A warm rose brand colour with blush-tinted greys and soft corners.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0.75rem",
           "background": "oklch(1 0 0)",
@@ -43176,7 +44741,26 @@
           "chart-2": "oklch(0.652 0.143 162)",
           "chart-3": "oklch(0.668 0.137 87)",
           "chart-4": "oklch(0.58 0.162 302)",
-          "chart-5": "oklch(0.64 0.124 227)"
+          "chart-5": "oklch(0.64 0.124 227)",
+          "bm-speed": "1",
+          "bm-bounce": "0.25",
+          "bm-travel": "1",
+          "bm-hover": "1",
+          "bm-stagger": "1",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "10px",
+          "bm-lift": "-2px",
+          "bm-press": "0.97",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.026 12)",
@@ -43204,6 +44788,23 @@
           "chart-5": "oklch(0.74 0.143 227)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/rose",
       "categories": [
         "foundation"
@@ -43218,10 +44819,24 @@
           "dark mode",
           "rose"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Warm pink-red, soft. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Warm pink-red, soft. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a native feel for motion.",
           "whenToUse": [
             "Lifestyle, health and community products",
             "Shops with a friendly voice"
@@ -43246,6 +44861,34 @@
       "description": "Off-white paper tones with terracotta accents and small, precise corners. Reads like print.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0.375rem",
           "background": "oklch(0.978 0.018 80)",
@@ -43270,7 +44913,26 @@
           "chart-2": "oklch(0.636 0.11 190)",
           "chart-3": "oklch(0.644 0.111 115)",
           "chart-4": "oklch(0.58 0.111 330)",
-          "chart-5": "oklch(0.64 0.111 255)"
+          "chart-5": "oklch(0.64 0.111 255)",
+          "bm-speed": "0.75",
+          "bm-bounce": "0",
+          "bm-travel": "0.7",
+          "bm-hover": "0.5",
+          "bm-stagger": "1.4",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "7px",
+          "bm-lift": "-1px",
+          "bm-press": "0.985",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.035 80)",
@@ -43298,6 +44960,21 @@
           "chart-5": "oklch(0.74 0.104 255)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/sand",
       "categories": [
         "foundation"
@@ -43312,10 +44989,24 @@
           "dark mode",
           "sand"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Warm paper, terracotta. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Warm paper, terracotta. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a calm feel for motion.",
           "whenToUse": [
             "Portfolios, publications and studios",
             "Shops with a crafted feel"
@@ -43340,6 +45031,34 @@
       "description": "A fresh teal with cool greys and rounded corners.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "0.875rem",
           "background": "oklch(1 0 0)",
@@ -43364,7 +45083,26 @@
           "chart-2": "oklch(0.66 0.102 342)",
           "chart-3": "oklch(0.672 0.102 267)",
           "chart-4": "oklch(0.58 0.102 122)",
-          "chart-5": "oklch(0.64 0.102 47)"
+          "chart-5": "oklch(0.64 0.102 47)",
+          "bm-speed": "1",
+          "bm-bounce": "0.25",
+          "bm-travel": "1",
+          "bm-hover": "1",
+          "bm-stagger": "1",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "10px",
+          "bm-lift": "-2px",
+          "bm-press": "0.97",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.026 200)",
@@ -43392,6 +45130,23 @@
           "chart-5": "oklch(0.74 0.096 47)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/teal",
       "categories": [
         "foundation"
@@ -43406,10 +45161,24 @@
           "dark mode",
           "teal"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Fresh blue-green, round. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Fresh blue-green, round. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a native feel for motion.",
           "whenToUse": [
             "Health, data and productivity apps",
             "Dashboards that want a friendly tone"
@@ -43434,6 +45203,34 @@
       "description": "A saturated purple with pill-like corners and slightly warm greys for a playful, creative feel.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+        },
         "light": {
           "radius": "1rem",
           "background": "oklch(1 0 0)",
@@ -43458,7 +45255,26 @@
           "chart-2": "oklch(0.66 0.136 95)",
           "chart-3": "oklch(0.692 0.187 20)",
           "chart-4": "oklch(0.58 0.123 235)",
-          "chart-5": "oklch(0.64 0.145 160)"
+          "chart-5": "oklch(0.64 0.145 160)",
+          "bm-speed": "1.1",
+          "bm-bounce": "0.8",
+          "bm-travel": "1.4",
+          "bm-hover": "1.5",
+          "bm-stagger": "1.2",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0819, 0.2862, 0.5499, 0.8166, 1.044, 1.2065, 1.2953, 1.3154, 1.2812, 1.2117, 1.127, 1.044, 0.9753, 0.928, 0.9039, 0.9011, 0.9143, 0.9376, 0.9647, 0.9904, 1.011, 1.0247, 1.031, 1.0309, 1.026, 1.0182, 1.0096, 1.0017, 0.9956, 0.9917, 0.9901, 0.9904, 0.9922, 0.9947, 0.9974, 0.9998, 1.0017, 1.0028, 1.0032, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "14px",
+          "bm-lift": "-3px",
+          "bm-press": "0.955",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
         },
         "dark": {
           "background": "oklch(0.16 0.033 305)",
@@ -43486,6 +45302,23 @@
           "chart-5": "oklch(0.74 0.168 160)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "docs": "Tune this theme, preview it on real components and copy the CSS at https://ui.ballmac.com/themes/violet",
       "categories": [
         "foundation"
@@ -43500,10 +45333,24 @@
           "dark mode",
           "violet"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-02",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-02",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
-          "summary": "Rich purple, very round. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts.",
+          "summary": "Rich purple, very round. A complete set of light and dark tokens, with contrast checked for text, focus rings and charts, and a playful feel for motion.",
           "whenToUse": [
             "Creative tools and communities",
             "Consumer apps"
@@ -43525,17 +45372,57 @@
       "name": "theme",
       "type": "registry:theme",
       "title": "Ballmac Theme",
-      "description": "Ballmac UI design tokens in OKLCH: neutral light mode, ink-navy dark mode, the Ballmac blue focus ring, chart colors, and motion easings.",
+      "description": "Ballmac UI design tokens in OKLCH: neutral light mode, ink-navy dark mode, the Ballmac blue focus ring, chart colors, and motion (speed, bounce, travel, hover, stagger) with a reduced-motion fallback.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
         "theme": {
-          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
-          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
-          "bm-duration-fast": "140ms",
-          "bm-duration-base": "220ms",
-          "bm-duration-slow": "320ms"
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
         },
         "light": {
+          "bm-speed": "1",
+          "bm-bounce": "0.25",
+          "bm-travel": "1",
+          "bm-hover": "1",
+          "bm-stagger": "1",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "10px",
+          "bm-lift": "-2px",
+          "bm-press": "0.97",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
           "radius": "0.625rem",
           "background": "oklch(1 0 0)",
           "foreground": "oklch(0.17 0.012 265)",
@@ -43587,6 +45474,23 @@
           "chart-5": "oklch(0.7 0.17 35)"
         }
       },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
       "categories": [
         "foundation"
       ],
@@ -43598,8 +45502,22 @@
           "tokens",
           "dark mode"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-28",
+        "version": "1.1.0",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-11",
+            "note": "Motion is part of the theme: speed, bounce, travel, hover and stagger drive Tailwind's duration and easing scales, with a reduced-motion fallback.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-28",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "Installs Ballmac UI's color, radius and motion tokens as CSS variables. Optional: every Ballmac item also works with any shadcn theme.",
           "whenToUse": [
@@ -43613,7 +45531,8 @@
           "a11y": [],
           "customization": [
             "Change --ring and --chart-1 to your brand color",
-            "Adjust --radius for rounder or sharper corners"
+            "Adjust --radius for rounder or sharper corners",
+            "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger to change how everything moves"
           ]
         },
         "examples": [],

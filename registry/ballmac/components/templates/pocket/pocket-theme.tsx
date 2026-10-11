@@ -21,7 +21,7 @@ const pocketCss = `
 .dark .pocket-theme,.dark body:not(:has([data-gallery])):has(.pocket-theme){--background:oklch(0.16 0.045 265);--foreground:oklch(0.96 0.015 165);--card:oklch(0.21 0.05 265);--card-foreground:oklch(0.96 0.015 165);--popover:oklch(0.23 0.05 265);--popover-foreground:oklch(0.96 0.015 165);--primary:oklch(0.9 0.2 125);--primary-foreground:oklch(0.2 0.06 265);--secondary:oklch(0.26 0.05 265);--secondary-foreground:oklch(0.96 0.015 165);--muted:oklch(0.25 0.05 265);--muted-foreground:oklch(0.76 0.04 250);--accent:oklch(0.3 0.06 265);--accent-foreground:oklch(0.96 0.015 165);--border:oklch(1 0 0 / 11%);--input:oklch(1 0 0 / 16%);--ring:oklch(0.9 0.2 125);--surface:oklch(0.19 0.047 265);--destructive:oklch(0.7 0.19 27);--chart-1:oklch(0.9 0.2 125);--chart-2:oklch(0.76 0.15 30);--chart-3:oklch(0.74 0.17 300);--chart-4:oklch(0.8 0.12 200);--chart-5:oklch(0.86 0.13 85);--pocket-navy:oklch(0.12 0.045 265)}
 body:not(:has([data-gallery])):has(.pocket-theme){font-family:var(--pocket-sans),ui-sans-serif,system-ui,sans-serif}
 @keyframes pocket-bob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-8px) rotate(var(--r,0deg))}}
-.pocket-bob{animation:pocket-bob 5s ease-in-out infinite}
+.pocket-bob{animation:pocket-bob 5s ease-in-out infinite;animation-play-state:var(--bm-ambient-state,running)}
 @media (prefers-reduced-motion:reduce){.pocket-bob{animation:none}}
 `
 
@@ -85,7 +85,7 @@ function PocketApp({ className, defaultTab = "home" }: { className?: string; def
 
 /** App Store and Google Play buttons that go to the download page. */
 function StoreButtons({ href, className }: { href: string; className?: string }) {
-  const b = "bg-[var(--pocket-navy)] text-[var(--pocket-on-navy)] focus-visible:ring-ring inline-flex h-14 items-center gap-3 rounded-2xl px-5 outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+  const b = "bg-[var(--pocket-navy)] text-[var(--pocket-on-navy)] focus-visible:ring-ring inline-flex h-14 items-center gap-3 rounded-2xl px-5 outline-none transition-transform hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
   return (
     <div className={cn("flex flex-wrap gap-3", className)}>
       <a href={href} className={b}><Apple className="size-7" aria-hidden="true" /><span className="text-start leading-tight"><span className="block text-[11px] font-medium">Download on the</span><span className="block text-lg font-extrabold">App Store</span></span></a>

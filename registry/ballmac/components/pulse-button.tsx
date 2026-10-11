@@ -2,7 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { Button, type ButtonProps } from "@/components/ballmac/button"
 import { cn } from "@/lib/utils"
@@ -33,7 +34,7 @@ type PulseButtonProps = Omit<ButtonProps, "asChild"> & {
 }
 
 function PulseButton({ tone = "primary", rings = 2, duration = 2, active = true, shape, disabled, wrapperClassName, className, children, ...props }: PulseButtonProps) {
-  const reduce = useReducedMotion()
+  const reduce = useLoopsPaused()
   const [calm, setCalm] = React.useState(false)
   const pulsing = active && !disabled && !calm
   const radius = shape === "pill" ? "rounded-full" : "rounded-md"

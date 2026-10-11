@@ -2,7 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { animate, useReducedMotion } from "motion/react"
+import { animate } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { cn } from "@/lib/utils"
 
@@ -39,7 +40,7 @@ function GradientText({
 }: GradientTextProps) {
   const Comp = as as React.ElementType
   const ref = React.useRef<HTMLElement>(null)
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useLoopsPaused()
   const seconds = duration ?? (variant === "flow" ? 6 : 1.4)
 
   React.useEffect(() => {

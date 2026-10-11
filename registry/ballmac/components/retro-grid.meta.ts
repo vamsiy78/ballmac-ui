@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["grid", "perspective", "synthwave", "background", "hero"],
   files: [{ path: "components/retro-grid.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [
     { name: "retro-grid-demo", title: "Hero with horizon glow", file: "retro-grid-demo.tsx" },
     { name: "retro-grid-tones", title: "Tones and tilt", file: "retro-grid-tones.tsx" },
@@ -27,6 +27,10 @@ export default defineItem({
     ],
     customization: ["angle", "cellSize", "tone", "speed", "glow"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

@@ -30,7 +30,7 @@ function Subscribe() {
     <div className="w-full max-w-md"><form noValidate onSubmit={(e) => { e.preventDefault(); if (!/^\S+@\S+\.\S+$/.test(email.trim())) return setError("Enter an email like you@example.com."); setError(""); setDone(true) }} className="flex w-full flex-col gap-2 sm:flex-row">
       <label htmlFor="pc-email" className="sr-only">Email address</label>
       <input id="pc-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-invalid={!!error} aria-describedby={error ? "pc-err" : undefined} placeholder="you@example.com" className="bg-background text-foreground focus-visible:ring-ring/50 placeholder:text-muted-foreground aria-[invalid=true]:border-destructive h-12 flex-1 rounded-full border px-5 outline-none focus-visible:ring-[3px]" />
-      <button type="submit" className="bg-chart-1 h-12 rounded-full px-6 font-bold text-[var(--podcast-on-amber)] outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] focus-visible:ring-ring motion-reduce:transition-none">Send me show notes</button>
+      <button type="submit" className="bg-chart-1 h-12 rounded-full px-6 font-bold text-[var(--podcast-on-amber)] outline-none transition-transform hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] focus-visible:ring-ring motion-reduce:transition-none">Send me show notes</button>
     </form>
     {error && <p id="pc-err" role="alert" className="bg-background text-destructive mt-3 inline-block rounded-full px-4 py-1.5 text-sm font-semibold">{error}</p>}
     </div>

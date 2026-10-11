@@ -2,7 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { cn } from "@/lib/utils"
 
@@ -43,7 +44,7 @@ const RADIUS = {
 }
 
 function NeonCard({ from = "chart-1", to = "chart-4", borderWidth = 1.5, glow = 0.6, flicker = false, radius = "xl", className, contentClassName, children, style, ...props }: NeonCardProps) {
-  const reduce = useReducedMotion()
+  const reduce = useLoopsPaused()
   const gradient = `linear-gradient(135deg, ${VAR[from]}, ${VAR[to]})`
   const [outer, inner] = RADIUS[radius]
   const flickers = flicker && !reduce

@@ -3,7 +3,8 @@
 "use client"
 
 import * as React from "react"
-import { animate, useReducedMotion } from "motion/react"
+import { animate } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { cn } from "@/lib/utils"
 
@@ -44,7 +45,7 @@ function BorderBeam({
   ...props
 }: BorderBeamProps) {
   const beamRef = React.useRef<HTMLSpanElement>(null)
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useLoopsPaused()
 
   React.useEffect(() => {
     const beam = beamRef.current

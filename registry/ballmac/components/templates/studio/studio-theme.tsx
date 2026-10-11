@@ -92,7 +92,7 @@ function StudioShell({ page, hrefs: overrides, className, style, children, ...pr
         <div className="mx-auto max-w-[100rem] px-4 pt-16 pb-8 sm:px-8">
           <div className="flex flex-wrap items-end justify-between gap-8">
             <p className="max-w-md text-xl text-pretty opacity-80">New project, new idea, or just a question? We reply to every email within two working days.</p>
-            <a href={hrefs.contact} className="bg-chart-1 text-[var(--studio-on-accent)] focus-visible:ring-ring inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none">Start a project <ArrowUpRight className="size-5 rtl:-scale-x-100" aria-hidden="true" /></a>
+            <a href={hrefs.contact} className="bg-chart-1 text-[var(--studio-on-accent)] focus-visible:ring-ring inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] motion-reduce:transition-none">Start a project <ArrowUpRight className="size-5 rtl:-scale-x-100" aria-hidden="true" /></a>
           </div>
           <p aria-hidden="true" className={cn("mt-14 text-[clamp(3.4rem,17.5vw,19rem)] whitespace-nowrap", display)}>Hollis&amp;Vane</p>
           <div className="mt-8 flex flex-wrap justify-between gap-4 border-t border-current/25 pt-6 text-sm opacity-70">

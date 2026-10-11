@@ -124,7 +124,7 @@ function SuggestionChips({
                 </span>
                 <ArrowUpRight
                   aria-hidden="true"
-                  className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] duration-150 group-hover/chip:translate-x-0.5 group-hover/chip:-translate-y-0.5 group-hover/chip:opacity-100 group-focus-visible/chip:opacity-100 motion-reduce:transition-none rtl:-scale-x-100"
+                  className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] duration-150 group-hover/chip:translate-x-0.5 group-hover/chip:translate-y-[var(--bm-lift,-2px)] group-hover/chip:opacity-100 group-focus-visible/chip:opacity-100 motion-reduce:transition-none rtl:-scale-x-100"
                 />
               </motion.button>
             ) : (

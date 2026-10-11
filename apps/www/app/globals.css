@@ -124,6 +124,24 @@
   );
 }
 
+/* Motion lab loops. They read the theme's ambient switch, so "loops off" really holds them still. */
+@keyframes bm-lab-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1); }
+}
+@keyframes bm-lab-sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(300%); }
+}
+.bm-lab-pulse {
+  animation: bm-lab-pulse calc(2s / var(--bm-speed, 1)) ease-in-out infinite;
+  animation-play-state: var(--bm-ambient-state, running);
+}
+.bm-lab-sweep {
+  animation: bm-lab-sweep calc(2.4s / var(--bm-speed, 1)) linear infinite;
+  animation-play-state: var(--bm-ambient-state, running);
+}
+
 /* Preview stage: a quiet surface that lets the component be the only thing on it. */
 .bm-stage {
   background-color: var(--surface);

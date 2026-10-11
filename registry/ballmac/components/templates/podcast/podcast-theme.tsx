@@ -90,7 +90,7 @@ function PodcastShell({ page, hrefs: overrides, className, style, children, ...p
             </a>
             <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
               {links.map((l) => <a key={l.key} href={hrefs[l.key]} aria-current={active === l.key ? "page" : undefined} className="hover:bg-accent aria-[current=page]:bg-accent focus-visible:ring-ring/50 rounded-full px-4 py-2 text-sm font-semibold outline-none transition-colors focus-visible:ring-[3px]">{l.label}</a>)}
-              <a href={hrefs.subscribe} className="bg-chart-1 ms-2 inline-flex h-10 items-center gap-2 rounded-full px-5 text-sm font-bold text-[var(--podcast-on-amber)] outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none"><Rss className="size-4" aria-hidden="true" />Follow</a>
+              <a href={hrefs.subscribe} className="bg-chart-1 ms-2 inline-flex h-10 items-center gap-2 rounded-full px-5 text-sm font-bold text-[var(--podcast-on-amber)] outline-none transition-transform hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none"><Rss className="size-4" aria-hidden="true" />Follow</a>
             </nav>
             <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="podcast-mobile-menu" onClick={() => setOpen((v) => !v)} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex size-10 items-center justify-center rounded-full outline-none focus-visible:ring-[3px] md:hidden">{open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}</button>
           </div>

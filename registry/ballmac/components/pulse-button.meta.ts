@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["button", "pulse", "attention", "cta", "notification"],
   files: [{ path: "components/pulse-button.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils", "button"],
+  registryDependencies: ["shadcn:utils", "button", "motion-presets"],
   examples: [
     { name: "pulse-button-demo", title: "Attention ring", file: "pulse-button-demo.tsx" },
     { name: "pulse-button-tones", title: "Tones and states", file: "pulse-button-tones.tsx" },
@@ -28,6 +28,10 @@ export default defineItem({
     ],
     customization: ["tone", "rings", "duration", "active"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

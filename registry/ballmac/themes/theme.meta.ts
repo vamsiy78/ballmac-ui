@@ -1,22 +1,20 @@
 import { defineItem } from "@ballmac-ui/metadata"
+import { DEFAULT_MOTION, motionVars, reducedMotionRule } from "@ballmac-ui/theme-engine"
+
+const motion = motionVars(DEFAULT_MOTION)
 
 export default defineItem({
   name: "theme",
   type: "registry:theme",
   title: "Ballmac Theme",
   description:
-    "Ballmac UI design tokens in OKLCH: neutral light mode, ink-navy dark mode, the Ballmac blue focus ring, chart colors, and motion easings.",
+    "Ballmac UI design tokens in OKLCH: neutral light mode, ink-navy dark mode, the Ballmac blue focus ring, chart colors, and motion (speed, bounce, travel, hover, stagger) with a reduced-motion fallback.",
   category: "foundation",
   tags: ["theme", "tokens", "dark mode"],
   cssVars: {
-    theme: {
-      "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
-      "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
-      "bm-duration-fast": "140ms",
-      "bm-duration-base": "220ms",
-      "bm-duration-slow": "320ms",
-    },
+    theme: motion.theme,
     light: {
+      ...motion.root,
       radius: "0.625rem",
       background: "oklch(1 0 0)",
       foreground: "oklch(0.17 0.012 265)",
@@ -68,12 +66,17 @@ export default defineItem({
       "chart-5": "oklch(0.7 0.17 35)",
     },
   },
+  css: reducedMotionRule(motion.reduced),
   ai: {
     summary: "Installs Ballmac UI's color, radius and motion tokens as CSS variables. Optional: every Ballmac item also works with any shadcn theme.",
     whenToUse: ["Starting a new project that should look like Ballmac UI", "Matching the Ballmac demos exactly"],
     whenNotToUse: ["The project already has a brand theme you want to keep"],
-    customization: ["Change --ring and --chart-1 to your brand color", "Adjust --radius for rounder or sharper corners"],
+    customization: ["Change --ring and --chart-1 to your brand color", "Adjust --radius for rounder or sharper corners", "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger to change how everything moves"],
   },
-  version: "1.0.0",
-  updated: "2026-09-28",
+  version: "1.1.0",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-11", note: "Motion is part of the theme: speed, bounce, travel, hover and stagger drive Tailwind's duration and easing scales, with a reduced-motion fallback." },
+    { version: "1.0.0", date: "2026-09-28", note: "First release." },
+  ],
 })

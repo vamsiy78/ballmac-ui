@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["card", "neon", "glow", "border", "gradient"],
   files: [{ path: "components/neon-card.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [
     { name: "neon-card-demo", title: "Pricing tier", file: "neon-card-demo.tsx" },
     { name: "neon-card-tones", title: "Tones and flicker", file: "neon-card-tones.tsx" },
@@ -27,6 +27,10 @@ export default defineItem({
     ],
     customization: ["from and to", "borderWidth", "glow", "flicker", "radius"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

@@ -65,7 +65,7 @@ function DocsHome({ hrefs, ...props }: DocsHomeProps) {
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {paths.map((p) => (
               <li key={p.title}>
-                <a href={link[p.key]} className="bg-card hover:border-primary/50 focus-visible:ring-ring/50 group flex h-full flex-col rounded-2xl border p-6 outline-none transition-[border-color,transform] hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+                <a href={link[p.key]} className="bg-card hover:border-primary/50 focus-visible:ring-ring/50 group flex h-full flex-col rounded-2xl border p-6 outline-none transition-[border-color,transform] hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
                   <span className={cn("inline-flex size-11 items-center justify-center rounded-xl", p.tint)}><p.icon className="size-5" aria-hidden="true" /></span>
                   <span className={cn("mt-5 text-2xl", docsSerifClass)}>{p.title}</span>
                   <span className="text-muted-foreground mt-2 flex-1 text-sm text-pretty">{p.body}</span>

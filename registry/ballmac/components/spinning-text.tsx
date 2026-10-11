@@ -2,7 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { cn } from "@/lib/utils"
 
@@ -22,7 +23,7 @@ type SpinningTextProps = Omit<React.ComponentProps<"div">, "children"> & {
 }
 
 function SpinningText({ text, separator = " • ", duration = 14, reverse = false, pauseOnHover = true, className, children, ...props }: SpinningTextProps) {
-  const reduce = useReducedMotion()
+  const reduce = useLoopsPaused()
   const id = React.useId().replace(/:/g, "")
   const [paused, setPaused] = React.useState(false)
   const label = text.trim()

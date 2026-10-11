@@ -122,7 +122,7 @@ function WorkspaceCard({
       data-slot="workspace-card"
       data-current={current || undefined}
       className={cn(
-        "group/ws relative overflow-hidden rounded-2xl border bg-card text-card-foreground shadow-[0_1px_2px_rgb(0_0_0/0.04)] transition-[box-shadow,transform,border-color] duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-20px_rgb(0_0_0/0.3)] motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+        "group/ws relative overflow-hidden rounded-2xl border bg-card text-card-foreground shadow-[0_1px_2px_rgb(0_0_0/0.04)] transition-[box-shadow,transform,border-color] duration-200 hover:translate-y-[var(--bm-lift,-2px)] hover:shadow-[0_16px_40px_-20px_rgb(0_0_0/0.3)] motion-reduce:transition-none motion-reduce:hover:translate-y-0",
         current && "border-primary/60",
         className,
       )}
@@ -187,7 +187,7 @@ function WorkspaceCard({
           </div>
           <ArrowUpRight
             aria-hidden="true"
-            className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] group-hover/ws:translate-x-0.5 group-hover/ws:-translate-y-0.5 group-hover/ws:opacity-100 motion-reduce:transition-none rtl:-scale-x-100"
+            className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] group-hover/ws:translate-x-0.5 group-hover/ws:translate-y-[var(--bm-lift,-2px)] group-hover/ws:opacity-100 motion-reduce:transition-none rtl:-scale-x-100"
           />
         </div>
 

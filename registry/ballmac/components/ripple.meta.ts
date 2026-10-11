@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["ripple", "rings", "background", "click", "material"],
   files: [{ path: "components/ripple.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [
     { name: "ripple-demo", title: "Ring background behind a hero", file: "ripple-demo.tsx" },
     { name: "ripple-click", title: "Press ripple on cards", file: "ripple-click.tsx" },
@@ -27,6 +27,10 @@ export default defineItem({
     ],
     customization: ["circles, size, gap", "duration", "ClickRipple centered"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

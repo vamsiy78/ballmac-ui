@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["border", "glow", "highlight", "decorative", "motion"],
   files: [{ path: "components/border-beam.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [
     { name: "border-beam-demo", title: "Card", file: "border-beam-demo.tsx" },
     { name: "border-beam-button", title: "Button", file: "border-beam-button.tsx" },
@@ -43,6 +43,10 @@ export default defineItem({
     copyright: "Copyright (c) Magic UI",
     modified: true,
   },
-  version: "1.0.0",
-  updated: "2026-09-28",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default." },
+    { version: "1.0.0", date: "2026-09-28", note: "First release." },
+  ],
 })

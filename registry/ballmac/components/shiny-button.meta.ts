@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["button", "shine", "hover", "cta", "motion"],
   files: [{ path: "components/shiny-button.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils", "button"],
+  registryDependencies: ["shadcn:utils", "button", "motion-presets"],
   examples: [
     { name: "shiny-button-demo", title: "Hover and loop", file: "shiny-button-demo.tsx" },
     { name: "shiny-button-variants", title: "On every variant", file: "shiny-button-variants.tsx" },
@@ -27,6 +27,10 @@ export default defineItem({
     ],
     customization: ["shine", "interval", "all Button props"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

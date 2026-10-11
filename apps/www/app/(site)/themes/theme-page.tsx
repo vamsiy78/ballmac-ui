@@ -20,7 +20,7 @@ export function ThemePage({ preset }: { preset?: ThemePreset }) {
         <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">
           {preset
             ? `${preset.description} Tune it below, check it in light and dark, then install it.`
-            : `Twelve ready-made themes and a builder with a live preview on real components. Contrast is checked for you, in light and dark. Free, and nothing is stored: your design lives in the link.`}
+            : `Twelve ready-made themes and a builder with a live preview on real components. Colour, shape and motion are all part of the theme, and contrast is checked for you, in light and dark. Free, and nothing is stored: your design lives in the link.`}
         </p>
       </header>
       <ThemeBuilder initial={preset?.spec ?? PRESETS[1]?.spec ?? DEFAULT_SPEC} presetSlug={preset?.slug} siteUrl={SITE_URL} />

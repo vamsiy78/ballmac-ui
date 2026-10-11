@@ -8,8 +8,12 @@ import {
   DEFAULT_SPEC,
   decodeSpec,
   encodeSpec,
+  matchPersonality,
+  MOTION_PERSONALITIES,
+  MOTION_RANGES,
   normalizeSpec,
   PRESETS,
+  SPEC_PARAMS,
   themeCss,
   themeRegistryItem,
   type Density,
@@ -24,6 +28,7 @@ import { InstallTabs } from "@/components/site/install-tabs"
 import { themeUrl } from "@/lib/theme-url"
 import { cn } from "@/lib/utils"
 
+import { MotionLab } from "./motion-lab"
 import { PresetMini } from "./preset-card"
 import { Group, RangeField, Row } from "./theme-controls"
 import { ThemeStage } from "./theme-stage"
@@ -32,6 +37,13 @@ import { type Mode } from "./theme-style"
 type View = "light" | "dark" | "split"
 
 const subscribeNever = () => () => {}
+const subscribeReduced = (cb: () => void) => {
+  const q = window.matchMedia("(prefers-reduced-motion: reduce)")
+  q.addEventListener("change", cb)
+  return () => q.removeEventListener("change", cb)
+}
+const fmtX = (n: number) => `${n.toFixed(2).replace(/\.?0+$/, "")}×`
+const pct = (n: number) => `${Math.round(n * 100)}%`
 const same = (a: ThemeSpec, b: ThemeSpec) => (Object.keys(a) as (keyof ThemeSpec)[]).every((k) => a[k] === b[k])
 const hueTrack = `linear-gradient(to right, ${Array.from({ length: 13 }, (_, i) => `oklch(0.72 0.15 ${i * 30})`).join(", ")})`
 const RADII = [
@@ -51,7 +63,9 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
   const search = React.useSyncExternalStore(subscribeNever, () => window.location.search, () => "")
   const siteDark = React.useSyncExternalStore(subscribeNever, () => document.documentElement.classList.contains("dark"), () => false)
   const params = React.useMemo(() => new URLSearchParams(search), [search])
-  const fromUrl = React.useMemo(() => (params.has("h") ? decodeSpec(params, DEFAULT_SPEC) : null), [params])
+  const fromUrl = React.useMemo(() => ([...params.keys()].some((k) => SPEC_PARAMS.has(k)) ? decodeSpec(params, DEFAULT_SPEC) : null), [params])
+  const osReduced = React.useSyncExternalStore(subscribeReduced, () => window.matchMedia("(prefers-reduced-motion: reduce)").matches, () => false)
+  const [reducePreview, setReducePreview] = React.useState(false)
   const [edited, setEdited] = React.useState<ThemeSpec | null>(null)
   const [viewEdit, setViewEdit] = React.useState<View | null>(null)
   const [linkEdit, setLinkEdit] = React.useState<boolean | null>(null)
@@ -84,6 +98,8 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
   const checks = React.useMemo(() => auditTheme(vars), [vars])
   const failing = checks.filter((c) => !c.pass)
   const css = React.useMemo(() => themeCss(spec), [spec])
+  const personality = matchPersonality(spec)
+  const previewReduced = reducePreview || osReduced
   const modes: Mode[] = view === "split" ? ["light", "dark"] : [view]
   const previewMode: Mode = view === "dark" ? "dark" : "light"
 
@@ -100,6 +116,7 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
         primary: pick(["brand", "ink"] as const),
         paper: Math.random() < 0.25,
         edge: Math.random() < 0.2 ? "strong" : "soft",
+        ...pick(MOTION_PERSONALITIES).motion,
       })
     )
   }
@@ -159,6 +176,7 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
                     {selected && <Check className="size-4" aria-label="Selected" />}
                   </span>
                   <span className="text-muted-foreground mt-0.5 block text-xs leading-snug">{p.tagline}</span>
+                  <span className="text-muted-foreground/80 mt-0.5 block text-[11px] leading-snug capitalize">{p.motion} motion</span>
                 </span>
               </button>
             )
@@ -277,6 +295,47 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
               </SegmentedControl>
             </Row>
           </Group>
+
+          <Group title="Motion">
+            <div className="flex flex-wrap gap-1.5" role="group" aria-label="Motion personality">
+              {MOTION_PERSONALITIES.map((p) => (
+                <button
+                  key={p.slug}
+                  type="button"
+                  aria-pressed={personality?.slug === p.slug}
+                  title={p.tagline}
+                  onClick={() => update(p.motion)}
+                  className={cn(
+                    "focus-visible:ring-ring/50 rounded-md border px-2.5 py-1 text-xs outline-none focus-visible:ring-[3px]",
+                    personality?.slug === p.slug ? "bg-foreground text-background border-foreground" : "hover:bg-accent"
+                  )}
+                >
+                  {p.title}
+                </button>
+              ))}
+            </div>
+            <p className="text-muted-foreground -mt-2 text-xs">{personality ? personality.tagline : "Custom: a mix of the settings below."}</p>
+            <RangeField label="Speed" value={spec.speed} {...MOTION_RANGES.speed} display={fmtX(spec.speed)} valueText={`${fmtX(spec.speed)} speed`} onChange={(speed) => update({ speed })} />
+            <RangeField label="Bounce" value={spec.bounce} {...MOTION_RANGES.bounce} display={pct(spec.bounce)} onChange={(bounce) => update({ bounce })} hint="How far springs overshoot before they settle." />
+            <RangeField label="Travel" value={spec.travel} {...MOTION_RANGES.travel} display={fmtX(spec.travel)} onChange={(travel) => update({ travel })} hint="How far things move when they enter." />
+            <RangeField label="Hover" value={spec.hover} {...MOTION_RANGES.hover} display={fmtX(spec.hover)} onChange={(hover) => update({ hover })} hint="Lift on hover and depth on press." />
+            <RangeField label="Stagger" value={spec.stagger} {...MOTION_RANGES.stagger} display={fmtX(spec.stagger)} onChange={(stagger) => update({ stagger })} hint="The gap between items that enter one after another." />
+            <div className="flex items-center justify-between gap-3">
+              <label htmlFor={`${baseId}-ambient`} className="text-sm">
+                Decorative loops
+              </label>
+              <Switch id={`${baseId}-ambient`} checked={spec.ambient} onCheckedChange={(ambient) => update({ ambient })} />
+            </div>
+            <Row label="Reduced motion" hint={spec.reduce === "always" ? "Every visitor gets the reduced values." : "Visitors who ask for less motion get no travel, lift, bounce or loops. Fades stay."}>
+              <SegmentedControl aria-label="Reduced motion" fullWidth value={spec.reduce} onValueChange={(v) => update({ reduce: v as ThemeSpec["reduce"] })}>
+                <SegmentedControlItem value="system">Follow system</SegmentedControlItem>
+                <SegmentedControlItem value="always">Always</SegmentedControlItem>
+              </SegmentedControl>
+            </Row>
+            <p className="text-muted-foreground text-xs">
+              Your own components follow too: Tailwind&apos;s <code className="bg-muted rounded px-1 py-0.5 font-mono text-[0.9em]">duration-*</code> and <code className="bg-muted rounded px-1 py-0.5 font-mono text-[0.9em]">ease-*</code> classes read these tokens.
+            </p>
+          </Group>
         </div>
 
         <div className="min-w-0 space-y-6">
@@ -321,11 +380,37 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
                   <span className="text-muted-foreground font-medium">{m === "light" ? "Light" : "Dark"} preview</span>
                   <span className="text-muted-foreground">Real Ballmac components</span>
                 </div>
-                <ThemeStage spec={spec} mode={m} id={`${baseId}-${m}`} />
+                <ThemeStage spec={spec} mode={m} id={`${baseId}-${m}`} reduced={previewReduced} />
               </div>
             ))}
           </div>
           <p className="text-muted-foreground text-xs">Menus and dialogs open outside the preview, so they are left out. In your app they follow the same tokens.</p>
+        </div>
+      </section>
+
+
+      <section id="motion" aria-labelledby={`${baseId}-motion`} className="scroll-mt-24 space-y-4">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 id={`${baseId}-motion`} className="text-xl font-semibold tracking-tight">
+              Feel the motion
+            </h2>
+            <p className="text-muted-foreground mt-1 max-w-2xl text-sm">Hover, press and replay. Every panel reads the tokens your settings produce, so what you feel here is what your components do.</p>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <label htmlFor={`${baseId}-reduce-preview`} className="text-sm">
+              Preview reduced motion
+            </label>
+            <Switch id={`${baseId}-reduce-preview`} checked={previewReduced} disabled={osReduced} onCheckedChange={setReducePreview} />
+          </div>
+        </div>
+        {osReduced && <p className="text-muted-foreground text-xs">Your system asks for reduced motion, so this preview already shows it.</p>}
+        <div className={cn("grid gap-4", view === "split" && "2xl:grid-cols-2")}>
+          {modes.map((m) => (
+            <div key={m} className="overflow-hidden rounded-2xl border shadow-sm">
+              <MotionLab spec={spec} mode={m} reduced={previewReduced} id={`${baseId}-lab-${m}`} />
+            </div>
+          ))}
         </div>
       </section>
 
@@ -437,7 +522,7 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
               <p className="text-muted-foreground mb-2 text-xs font-medium">{m === "light" ? "Light" : "Dark"}</p>
               <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-4">
                 {Object.entries(vars[m])
-                  .filter(([k]) => !k.endsWith("-foreground") && k !== "radius")
+                  .filter(([k]) => !k.endsWith("-foreground") && k !== "radius" && !k.startsWith("bm-"))
                   .map(([k, v]) => (
                     <li key={k}>
                       <TokenSwatch name={k} value={v} />

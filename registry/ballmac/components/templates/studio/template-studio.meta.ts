@@ -55,6 +55,10 @@ export default defineItem({
     ],
     customization: ["Replace StudioArt with real images", "Edit studioCss for the light and dark palettes", "Tune the headline width in the studioDisplay class"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

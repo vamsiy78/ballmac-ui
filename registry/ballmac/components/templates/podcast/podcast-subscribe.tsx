@@ -51,7 +51,7 @@ function PodcastSubscribe({ hrefs, ...props }: PodcastSubscribeProps) {
               )
             })}
           </div>
-          <a href="#" className="bg-primary text-primary-foreground focus-visible:ring-ring/50 mt-8 inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none"><Heart className="size-5" aria-hidden="true" />Support at ${tiers.find((t) => t.id === tier)?.price} a month</a>
+          <a href="#" className="bg-primary text-primary-foreground focus-visible:ring-ring/50 mt-8 inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] motion-reduce:transition-none"><Heart className="size-5" aria-hidden="true" />Support at ${tiers.find((t) => t.id === tier)?.price} a month</a>
         </section>
       </main>
     </PodcastShell>

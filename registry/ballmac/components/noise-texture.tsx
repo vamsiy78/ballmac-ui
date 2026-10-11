@@ -2,7 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { cn } from "@/lib/utils"
 
@@ -26,7 +27,7 @@ function noiseImage(frequency: number, tile: number) {
 
 /** A film-grain layer for gradients, cards and photos. Put it inside a positioned parent. Decorative. */
 function NoiseTexture({ opacity = 0.14, frequency = 0.8, tile = 220, blend = "overlay", animated = false, className, style, ...props }: NoiseTextureProps) {
-  const reduce = useReducedMotion()
+  const reduce = useLoopsPaused()
   const image = React.useMemo(() => noiseImage(frequency, tile), [frequency, tile])
   const steps = [0, 0.3, 0.6, 0.15, 0.85, 0.45].map((n) => `${Math.round(n * tile)}px ${Math.round(((n * 7) % 1) * tile)}px`)
   return (

@@ -64,10 +64,10 @@ describe("any spec stays accessible", () => {
 
 describe("output", () => {
   it("only emits density and font when they are changed", () => {
-    expect(buildTheme(DEFAULT_SPEC).theme).toEqual({})
+    expect(buildTheme(DEFAULT_SPEC).theme).not.toHaveProperty("spacing")
+    expect(buildTheme(DEFAULT_SPEC).theme).not.toHaveProperty("font-sans")
     expect(buildTheme({ density: "compact", font: "serif" }).theme).toMatchObject({ spacing: "0.225rem" })
-    expect(themeCss(DEFAULT_SPEC)).not.toContain("@theme")
-    expect(themeCss({ font: "mono" })).toContain("@theme inline")
+    expect(themeCss({ font: "mono" })).toContain("--font-sans")
   })
   it("makes a registry item the CLI accepts", () => {
     const item = themeRegistryItem(DEFAULT_SPEC, { name: "theme-custom", title: "Custom", description: "A custom theme." })

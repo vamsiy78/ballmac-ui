@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["hero", "gradient", "mesh", "parallax", "floating cards", "saas"],
   files: [{ path: "components/blocks/hero-6/hero-6.tsx" }],
   dependencies: ["lucide-react", "motion@^12"],
-  registryDependencies: ["shadcn:utils", "badge", "button", "gradient-text", "sparkline"],
+  registryDependencies: ["shadcn:utils", "badge", "button", "gradient-text", "sparkline", "motion-presets"],
   examples: [
     { name: "hero-6-demo", title: "Default", file: "hero-6-demo.tsx" },
     { name: "hero-6-custom", title: "Custom cards", file: "hero-6-custom.tsx" },
@@ -23,6 +23,10 @@ export default defineItem({
     a11y: [{ keys: "Pointer only", action: "The parallax and bobbing are decorative; they stop for reduced motion and on touch" }],
     customization: ["cards: wrap each card in <Hero6Float depth bob delay className=positions> to place it", "The mesh uses --chart-1, --chart-3 and --chart-5, so it follows your theme"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Floating cards and the drifting background hold still when the theme turns decorative loops off; the pointer parallax is unchanged. Unchanged by default." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

@@ -55,7 +55,10 @@ export default defineItem({
     ],
     customization: ["Replace MagArt with photographs", "Edit publicationCss for the light and dark palettes", "Change the masthead name in publication-theme.tsx"],
   },
-  version: "1.0.1",
+  version: "1.0.2",
   updated: "2026-10-11",
-  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "The page that reads params now does so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires. Nothing else changes." }],
+  changelog: [
+    { version: "1.0.2", date: "2026-10-11", note: "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default." },
+    { version: "1.0.1", date: "2026-10-11", note: "The page that reads params now does so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires. Nothing else changes." },
+  ],
 })

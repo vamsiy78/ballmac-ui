@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import { ArrowRight, Bell, Check, CircleAlert, Search, TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
@@ -16,10 +17,11 @@ import { Progress } from "@/components/ballmac/progress"
 import { Slider } from "@/components/ballmac/slider"
 import { Switch } from "@/components/ballmac/switch"
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
+import { MotionProvider } from "@/lib/ballmac/motion"
 import { cn } from "@/lib/utils"
 
 import { themeStyle, type Mode } from "./theme-style"
-import type { ThemeSpec } from "@ballmac-ui/theme-engine"
+import { reducedMotionFields, type ThemeSpec } from "@ballmac-ui/theme-engine"
 
 const data = [
   { month: "Jan", new: 42, expansion: 18, churn: 8 },
@@ -44,9 +46,12 @@ const roles = [
 ]
 
 /** A small real app built from Ballmac components, themed by inline variables. Nothing here portals out of the stage. */
-export function ThemeStage({ spec, mode, className, id }: { spec: ThemeSpec; mode: Mode; className?: string; id: string }) {
+export function ThemeStage({ spec, mode, className, id, reduced = false }: { spec: ThemeSpec; mode: Mode; className?: string; id: string; reduced?: boolean }) {
+  const m = reduced ? reducedMotionFields(spec) : spec
+  const motion = React.useMemo(() => ({ speed: m.speed, bounce: m.bounce, travel: m.travel, hover: m.hover, stagger: m.stagger, ambient: m.ambient }), [m.speed, m.bounce, m.travel, m.hover, m.stagger, m.ambient])
   return (
-    <div data-theme-scope={mode} className={cn(mode === "dark" && "dark", "@container", className)} style={themeStyle(spec, mode)}>
+    <div data-theme-scope={mode} className={cn(mode === "dark" && "dark", "@container", className)} style={themeStyle(spec, mode, reduced)}>
+      <MotionProvider value={motion}>
       <div className="bg-background text-foreground">
         <div className="flex items-center gap-3 border-b px-4 py-3 @xl:px-6">
           <span className="bg-primary text-primary-foreground grid size-7 place-items-center rounded-lg text-sm font-semibold" aria-hidden="true">
@@ -199,6 +204,7 @@ export function ThemeStage({ spec, mode, className, id }: { spec: ThemeSpec; mod
           </div>
         </div>
       </div>
+      </MotionProvider>
     </div>
   )
 }

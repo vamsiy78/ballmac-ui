@@ -44,9 +44,12 @@ export default function ThemingPage() {
       />
       <h2 id="motion-tokens">Motion tokens</h2>
       <p>
-        The Ballmac theme adds <code>--bm-ease-out</code>, <code>--bm-ease-in-out</code> and <code>--bm-duration-fast</code>,{" "}
-        <code>-base</code>, <code>-slow</code>. Animated components also import the same values from{" "}
-        <code>@ballmac/motion-presets</code>, so CSS and Motion animations share one rhythm.
+        Motion is part of the theme. The Ballmac theme sets <code>--bm-speed</code>, <code>--bm-bounce</code>, <code>--bm-travel</code>,{" "}
+        <code>--bm-hover</code> and <code>--bm-stagger</code>, and derives <code>--bm-ease-out</code>, <code>--bm-ease-spring</code> and{" "}
+        <code>--bm-duration-fast</code>, <code>-base</code>, <code>-slow</code> from them. Tailwind&apos;s <code>duration-*</code> and{" "}
+        <code>ease-*</code> classes follow, and animated components import the same values from <code>@ballmac/motion-presets</code>, so CSS and
+        Motion animations share one rhythm. <Link href="/docs/motion">Read about motion</Link> or feel it in the{" "}
+        <Link href="/themes#motion">theme builder</Link>.
       </p>
       <h2>Dark mode</h2>
       <p>

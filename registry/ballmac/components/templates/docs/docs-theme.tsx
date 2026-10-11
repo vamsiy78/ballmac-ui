@@ -22,7 +22,7 @@ const docsCss = `
 .dark .docs-theme,.dark body:not(:has([data-gallery])):has(.docs-theme){--background:oklch(0.165 0.02 235);--foreground:oklch(0.95 0.01 205);--card:oklch(0.2 0.022 235);--card-foreground:oklch(0.95 0.01 205);--popover:oklch(0.22 0.024 235);--popover-foreground:oklch(0.95 0.01 205);--primary:oklch(0.8 0.11 190);--primary-foreground:oklch(0.18 0.03 235);--secondary:oklch(0.25 0.025 235);--secondary-foreground:oklch(0.95 0.01 205);--muted:oklch(0.25 0.025 235);--muted-foreground:oklch(0.72 0.03 215);--accent:oklch(0.28 0.03 225);--accent-foreground:oklch(0.95 0.01 205);--border:oklch(1 0 0 / 10%);--input:oklch(1 0 0 / 15%);--ring:oklch(0.8 0.11 190);--surface:oklch(0.19 0.021 235);--destructive:oklch(0.7 0.19 27);--chart-1:oklch(0.8 0.11 190);--chart-2:oklch(0.76 0.12 265);--chart-3:oklch(0.82 0.13 80);--chart-4:oklch(0.78 0.13 150);--chart-5:oklch(0.74 0.14 20)}
 body:not(:has([data-gallery])):has(.docs-theme){font-family:var(--docs-sans),ui-sans-serif,system-ui,sans-serif}
 @keyframes docs-packet{0%{transform:translateX(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateX(var(--docs-travel,10rem));opacity:0}}
-.docs-packet{animation:docs-packet 2.6s ease-in-out infinite}
+.docs-packet{animation:docs-packet 2.6s ease-in-out infinite;animation-play-state:var(--bm-ambient-state,running)}
 @media (prefers-reduced-motion:reduce){.docs-packet{animation:none;opacity:1}}
 `
 

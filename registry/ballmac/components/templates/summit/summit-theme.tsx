@@ -19,7 +19,7 @@ const summitCss = `
 .dark .summit-theme,.dark body:not(:has([data-gallery])):has(.summit-theme){--background:oklch(0.17 0.06 277);--foreground:oklch(0.96 0.015 80);--card:oklch(0.21 0.07 277);--card-foreground:oklch(0.96 0.015 80);--popover:oklch(0.23 0.07 277);--popover-foreground:oklch(0.96 0.015 80);--primary:oklch(0.85 0.14 85);--primary-foreground:oklch(0.2 0.07 277);--secondary:oklch(0.26 0.07 277);--secondary-foreground:oklch(0.96 0.015 80);--muted:oklch(0.25 0.07 277);--muted-foreground:oklch(0.75 0.05 280);--accent:oklch(0.3 0.08 280);--accent-foreground:oklch(0.96 0.015 80);--border:oklch(1 0 0 / 11%);--input:oklch(1 0 0 / 16%);--ring:oklch(0.85 0.14 85);--surface:oklch(0.195 0.065 277);--destructive:oklch(0.7 0.19 27);--chart-1:oklch(0.75 0.17 40);--chart-2:oklch(0.86 0.14 88);--chart-3:oklch(0.76 0.11 190);--chart-4:oklch(0.72 0.17 300);--chart-5:oklch(0.78 0.14 350)}
 body:not(:has([data-gallery])):has(.summit-theme){font-family:var(--summit-sans),ui-sans-serif,system-ui,sans-serif}
 @keyframes summit-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.summit-float{animation:summit-float 6s ease-in-out infinite}
+.summit-float{animation:summit-float 6s ease-in-out infinite;animation-play-state:var(--bm-ambient-state,running)}
 @media (prefers-reduced-motion:reduce){.summit-float{animation:none}}
 `
 
@@ -104,7 +104,7 @@ function SummitShell({ page, hrefs: overrides, className, style, children, ...pr
             {links.map((l) => <a key={l.key} href={hrefs[l.key]} aria-current={page === l.key ? "page" : undefined} className="hover:bg-accent aria-[current=page]:bg-accent focus-visible:ring-ring/50 rounded-full px-4 py-2 text-sm font-semibold outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none">{l.label}</a>)}
           </nav>
           <div className="flex items-center gap-2">
-            <a href={hrefs.tickets} aria-current={page === "tickets" ? "page" : undefined} className={cn("bg-chart-1 focus-visible:ring-ring/50 inline-flex h-10 items-center rounded-full px-5 text-sm font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0", onSun)}>Get tickets</a>
+            <a href={hrefs.tickets} aria-current={page === "tickets" ? "page" : undefined} className={cn("bg-chart-1 focus-visible:ring-ring/50 inline-flex h-10 items-center rounded-full px-5 text-sm font-bold outline-none transition-transform hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0", onSun)}>Get tickets</a>
             <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="summit-mobile-menu" onClick={() => setOpen((v) => !v)} className="hover:bg-accent focus-visible:ring-ring/50 inline-flex size-10 items-center justify-center rounded-full outline-none focus-visible:ring-[3px] md:hidden">{open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}</button>
           </div>
         </div>

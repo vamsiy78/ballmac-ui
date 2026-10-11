@@ -40,7 +40,7 @@ function PodcastHosts({ hrefs, ...props }: PodcastHostsProps) {
         <section aria-labelledby="ph-write" className="bg-chart-1 mt-20 rounded-[2rem] p-8 text-[var(--podcast-on-amber)] sm:p-12">
           <h2 id="ph-write" className={cn("text-4xl", podcastDisplayClass)}>Write to the table</h2>
           <p className="mt-3 max-w-lg text-lg text-pretty">Suggest a guest, argue with an episode or send us a recipe. We read every message and answer the good questions on air.</p>
-          <a href="mailto:hello@longtable.example" className="bg-primary text-primary-foreground focus-visible:ring-ring mt-6 inline-flex h-12 items-center gap-2 rounded-full px-6 font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none"><Mail className="size-4" aria-hidden="true" />hello@longtable.example</a>
+          <a href="mailto:hello@longtable.example" className="bg-primary text-primary-foreground focus-visible:ring-ring mt-6 inline-flex h-12 items-center gap-2 rounded-full px-6 font-bold outline-none transition-transform hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] motion-reduce:transition-none"><Mail className="size-4" aria-hidden="true" />hello@longtable.example</a>
         </section>
       </main>
     </PodcastShell>

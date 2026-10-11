@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["light", "rays", "glow", "background", "hero"],
   files: [{ path: "components/light-rays.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [
     { name: "light-rays-demo", title: "Hero spotlight", file: "light-rays-demo.tsx" },
     { name: "light-rays-tones", title: "Tones and count", file: "light-rays-tones.tsx" },
@@ -27,6 +27,10 @@ export default defineItem({
     ],
     customization: ["count", "tone", "spread", "intensity", "duration"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

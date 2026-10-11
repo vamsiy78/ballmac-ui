@@ -39,6 +39,20 @@ describe("themeUrl", () => {
     expect(new URL(url, "https://x.test").searchParams.has("h")).toBe(true)
   })
 
+  it("a motion-only change is a custom link that carries the motion and round-trips", () => {
+    const moved = normalizeSpec({ ...ocean, speed: 1.3, bounce: 0.6, ambient: false })
+    const url = themeUrl({ spec: moved, view: "light", initial: ocean, basePath: "/themes" })
+    expect(url.startsWith("/themes?")).toBe(true)
+    const back = decodeSpec(new URL(url, "https://ui.ballmac.com").searchParams, DEFAULT_SPEC)
+    expect(back).toEqual(moved)
+  })
+
+  it("names a ready-made feel with one short word", () => {
+    const playful = normalizeSpec({ ...ocean, ...getPreset("violet")!.spec, hue: ocean.hue })
+    const url = themeUrl({ spec: playful, view: "light", initial: ocean, basePath: "/themes" })
+    expect(new URL(url, "https://x.test").searchParams.get("mo")).toBe("playful")
+  })
+
   it("adds view only for dark and split", () => {
     expect(themeUrl({ spec: ocean, view: "dark", initial: ocean, basePath: "/themes" })).toBe("/themes?view=dark")
     expect(themeUrl({ spec: violet, view: "split", initial: ocean, basePath: "/themes" })).toBe("/themes/violet?view=split")

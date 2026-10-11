@@ -2,7 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { useLoopsPaused, useReducedMotionSafe } from "@/lib/ballmac/motion"
 
 import { cn } from "@/lib/utils"
 
@@ -19,7 +20,7 @@ type RippleProps = Omit<React.ComponentProps<"div">, "children"> & {
 
 /** Concentric rings that breathe outward from the center of the nearest positioned parent. Decorative. */
 function Ripple({ circles = 7, size = 200, gap = 70, duration = 4, className, ...props }: RippleProps) {
-  const reduce = useReducedMotion()
+  const reduce = useLoopsPaused()
   return (
     <div
       data-slot="ripple"
@@ -54,7 +55,7 @@ type ClickRippleProps = React.ComponentProps<"div"> & {
 
 /** Wrap any surface so a press sends a ripple out from the pointer. Keyboard activation ripples from the center. */
 function ClickRipple({ duration = 0.7, centered = false, className, children, onPointerDown, onKeyDown, ...props }: ClickRippleProps) {
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotionSafe()
   const ref = React.useRef<HTMLDivElement>(null)
   const [bursts, setBursts] = React.useState<RippleBurst[]>([])
   const next = React.useRef(0)

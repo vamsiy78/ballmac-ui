@@ -41,7 +41,7 @@ function SummitHome({ hrefs, ...props }: SummitHomeProps) {
             <h1 id="sh-title" className={cn("mt-8 max-w-4xl text-[clamp(3.2rem,11vw,9.5rem)] leading-[0.92]", summitDisplayClass)}>Look further.</h1>
             <p className="mt-6 max-w-xl text-xl text-pretty">Two days of talks about design, engineering and the long view, held where the sun barely sets. Twelve speakers, nine hundred seats.</p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <a href={link.tickets} className={cn("bg-chart-2 focus-visible:ring-ring inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0", summitOnSun)}>Get tickets from $190 <ArrowRight className="size-5 rtl:rotate-180" aria-hidden="true" /></a>
+              <a href={link.tickets} className={cn("bg-chart-2 focus-visible:ring-ring inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0", summitOnSun)}>Get tickets from $190 <ArrowRight className="size-5 rtl:rotate-180" aria-hidden="true" /></a>
               <a href={link.schedule} className="focus-visible:ring-ring inline-flex h-14 items-center rounded-full border-2 border-white/60 px-8 text-lg font-bold outline-none transition-colors hover:bg-white/10 focus-visible:ring-[3px] motion-reduce:transition-none">See the schedule</a>
             </div>
             <div className="mt-12" role="group" aria-label="Time until the first talk">
@@ -66,7 +66,7 @@ function SummitHome({ hrefs, ...props }: SummitHomeProps) {
           <div className="flex items-end justify-between gap-4"><h2 id="sh-speakers" className={cn("text-[clamp(2rem,5vw,3.5rem)] leading-none", summitDisplayClass)}>On stage</h2><a href={link.speakers} className="text-primary text-sm font-bold underline-offset-4 hover:underline">All 12 speakers</a></div>
           <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
             {speakers.slice(0, 6).map((s) => (
-              <li key={s.id}><a href={link.speakers} className="focus-visible:ring-ring/50 group block rounded-3xl outline-none focus-visible:ring-[3px]"><Portrait speaker={s} className="rounded-3xl transition-transform group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0" /><span className="mt-3 block font-bold">{s.name}</span><span className="text-muted-foreground block text-sm">{s.role}, {s.company}</span></a></li>
+              <li key={s.id}><a href={link.speakers} className="focus-visible:ring-ring/50 group block rounded-3xl outline-none focus-visible:ring-[3px]"><Portrait speaker={s} className="rounded-3xl transition-transform group-hover:translate-y-[calc(var(--bm-lift,-2px)*2)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0" /><span className="mt-3 block font-bold">{s.name}</span><span className="text-muted-foreground block text-sm">{s.role}, {s.company}</span></a></li>
             ))}
           </ul>
         </section>

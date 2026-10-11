@@ -1,10 +1,11 @@
 import { contrast, format, parse, solve, type Oklch } from "./color"
+import { DEFAULT_MOTION, matchPersonality, getPersonality, motionVars, normalizeMotion, reducedMotionCss, type MotionFields } from "./motion"
 
 export type Density = "compact" | "default" | "comfortable"
 export type FontChoice = "keep" | "system" | "serif" | "mono"
 
 /** Everything a theme is made of. Colours are derived from these few numbers, so every result is accessible by construction. */
-export type ThemeSpec = {
+export type ThemeSpec = MotionFields & {
   /** Brand hue, 0-360 (OKLCH degrees). */
   hue: number
   /** Brand colour intensity: OKLCH chroma, 0 (grey) to 0.26. */
@@ -36,6 +37,7 @@ export const DEFAULT_SPEC: ThemeSpec = {
   edge: "soft",
   density: "default",
   font: "keep",
+  ...DEFAULT_MOTION,
 }
 
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, Number.isFinite(v) ? v : min))
@@ -55,10 +57,17 @@ export function normalizeSpec(input: Partial<ThemeSpec> = {}): ThemeSpec {
     edge: s.edge === "strong" ? "strong" : "soft",
     density: s.density === "compact" || s.density === "comfortable" ? s.density : "default",
     font: s.font === "system" || s.font === "serif" || s.font === "mono" ? s.font : "keep",
+    ...normalizeMotion(s),
   }
 }
 
-export type ThemeVars = { theme: Record<string, string>; light: Record<string, string>; dark: Record<string, string> }
+export type ThemeVars = {
+  theme: Record<string, string>
+  light: Record<string, string>
+  dark: Record<string, string>
+  /** What `prefers-reduced-motion: reduce` changes on `:root`. Ship it as a media rule; it cannot live in `cssVars`. */
+  reducedMotion: Record<string, string>
+}
 
 const SPACING: Record<Density, string | undefined> = { compact: "0.225rem", default: undefined, comfortable: "0.275rem" }
 const FONTS: Record<FontChoice, string | undefined> = {
@@ -166,7 +175,9 @@ export function buildTheme(input: Partial<ThemeSpec> = {}): ThemeVars {
   const font = FONTS[s.font]
   if (spacing) theme.spacing = spacing
   if (font) theme["font-sans"] = font
-  return { theme, light: light(s), dark: dark(s) }
+  const motion = motionVars(s)
+  Object.assign(theme, motion.theme)
+  return { theme, light: { ...light(s), ...motion.root }, dark: dark(s), reducedMotion: motion.reduced }
 }
 
 /** CSS to paste into globals.css. */
@@ -176,8 +187,15 @@ export function themeCss(input: Partial<ThemeSpec> = {}): string {
     `${selector} {\n${Object.entries(vars).map(([k, val]) => `  --${k}: ${val};`).join("\n")}\n}`
   const out = [block(":root", v.light), block(".dark", v.dark)]
   if (Object.keys(v.theme).length) out.push(block("@theme inline", v.theme))
+  const reduced = reducedMotionCss(v.reducedMotion)
+  if (reduced) out.push(reduced)
   return out.join("\n\n") + "\n"
 }
+
+/** The reduced-motion rule in the shape a registry item's `css` field takes. */
+export const reducedMotionRule = (reduced: Record<string, string>) => ({
+  "@media (prefers-reduced-motion: reduce)": { ":root": Object.fromEntries(Object.entries(reduced).map(([k, v]) => [`--${k}`, v])) },
+})
 
 export type RegistryThemeInfo = { name: string; title: string; description: string; docs?: string }
 
@@ -192,6 +210,7 @@ export function themeRegistryItem(input: Partial<ThemeSpec>, info: RegistryTheme
     description: info.description,
     author: "Ballmac <https://ui.ballmac.com>",
     cssVars: { ...(Object.keys(v.theme).length ? { theme: v.theme } : {}), light: v.light, dark: v.dark },
+    ...(Object.keys(v.reducedMotion).length ? { css: reducedMotionRule(v.reducedMotion) } : {}),
     ...(info.docs ? { docs: info.docs } : {}),
   }
 }
@@ -231,15 +250,26 @@ export function auditTheme(vars: ThemeVars): Check[] {
 
 // ---- URL encoding, shared by the builder page and the installable custom theme route ----
 
-const KEYS = { hue: "h", chroma: "c", neutralHue: "nh", neutralChroma: "nc", radius: "r", primary: "p", paper: "paper", edge: "e", density: "d", font: "f" } as const
+const KEYS = {
+  hue: "h", chroma: "c", neutralHue: "nh", neutralChroma: "nc", radius: "r", primary: "p", paper: "paper", edge: "e", density: "d", font: "f",
+  speed: "sp", bounce: "bn", travel: "tv", hover: "hv", stagger: "st", ambient: "am", reduce: "rm",
+} as const
+/** Every query parameter that describes a theme. A link with any of them opens the builder on that design. */
+export const SPEC_PARAMS: ReadonlySet<string> = new Set([...Object.values(KEYS), "mo"])
+/** `mo=<personality>` stands for the whole set of motion fields, so a link that uses a ready-made feel stays short. */
+const MOTION_KEYS = ["speed", "bounce", "travel", "hover", "stagger", "ambient", "reduce"] as const
+const MOTION_PARAM = "mo"
 
 /** Writes only the fields that differ from the default, so links stay short. */
 export function encodeSpec(input: Partial<ThemeSpec>): URLSearchParams {
   const s = normalizeSpec(input)
   const params = new URLSearchParams()
+  const personality = matchPersonality(s)
   for (const k of Object.keys(KEYS) as (keyof ThemeSpec)[]) {
-    if (s[k] !== DEFAULT_SPEC[k]) params.set(KEYS[k], String(s[k] === true ? 1 : s[k]))
+    if ((MOTION_KEYS as readonly string[]).includes(k) && personality) continue
+    if (s[k] !== DEFAULT_SPEC[k]) params.set(KEYS[k], String(s[k] === true ? 1 : s[k] === false ? 0 : s[k]))
   }
+  if (personality && personality.slug !== "native") params.set(MOTION_PARAM, personality.slug)
   return params
 }
 
@@ -259,5 +289,9 @@ export function decodeSpec(params: URLSearchParams | Record<string, string | str
   const d = get(KEYS.density); if (d === "compact" || d === "default" || d === "comfortable") out.density = d
   const f = get(KEYS.font); if (f === "keep" || f === "system" || f === "serif" || f === "mono") out.font = f
   const paper = get(KEYS.paper); if (paper !== undefined) out.paper = paper === "1" || paper === "true"
+  const mo = getPersonality(get(MOTION_PARAM) ?? ""); if (mo) Object.assign(out, mo.motion)
+  num("speed"); num("bounce"); num("travel"); num("hover"); num("stagger")
+  const am = get(KEYS.ambient); if (am !== undefined) out.ambient = !(am === "0" || am === "false")
+  const rm = get(KEYS.reduce); if (rm === "system" || rm === "always") out.reduce = rm
   return normalizeSpec(out)
 }

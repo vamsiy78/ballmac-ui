@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["error", "404", "not found", "500", "403", "page"],
   files: [{ path: "components/blocks/error-1/error-1.tsx" }],
   dependencies: ["lucide-react", "motion@^12"],
-  registryDependencies: ["shadcn:utils", "button", "search-field"],
+  registryDependencies: ["shadcn:utils", "button", "search-field", "motion-presets"],
   examples: [
     { name: "error-1-demo", title: "404", file: "error-1-demo.tsx" },
     { name: "error-1-server", title: "500 with reference", file: "error-1-server.tsx" },
@@ -26,6 +26,10 @@ export default defineItem({
     ],
     customization: ["status picks the numerals and default copy", "links: [] hides the cards, search: false hides the field", "The orbiting moon stops for reduced motion"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "The drifting background pauses with the theme's ambient setting, and the link lift follows --bm-lift. Unchanged by default." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

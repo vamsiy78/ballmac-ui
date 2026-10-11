@@ -3,7 +3,8 @@
 
 import * as React from "react"
 import { ArrowLeft, ArrowUpRight, BookOpen, Home, LifeBuoy, Tag } from "lucide-react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { Button, buttonVariants } from "@/components/ballmac/button"
 import { SearchField } from "@/components/ballmac/search-field"
@@ -47,7 +48,7 @@ const defaultLinks: Error1Link[] = [
 
 /** A zero drawn as a ring with a small moon in orbit. */
 function Ring() {
-  const reduce = useReducedMotion()
+  const reduce = useLoopsPaused()
   return (
     <span aria-hidden="true" className="relative inline-block size-[0.72em] align-[-0.02em]">
       <svg viewBox="0 0 100 100" className="absolute inset-0 size-full">
@@ -128,7 +129,7 @@ function Error1({
                   <span className="block text-sm font-medium">{l.label}</span>
                   {l.description && <span className="text-muted-foreground block text-sm">{l.description}</span>}
                 </span>
-                <ArrowUpRight className="text-muted-foreground size-4 shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 motion-reduce:transition-none rtl:-scale-x-100 rtl:group-hover/link:-translate-x-0.5" aria-hidden="true" />
+                <ArrowUpRight className="text-muted-foreground size-4 shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:translate-y-[var(--bm-lift,-2px)] motion-reduce:transition-none rtl:-scale-x-100 rtl:group-hover/link:-translate-x-0.5" aria-hidden="true" />
               </a>
             </li>
           ))}

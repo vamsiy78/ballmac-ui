@@ -2,7 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { Button, type ButtonProps } from "@/components/ballmac/button"
 import { cn } from "@/lib/utils"
@@ -15,7 +16,7 @@ type ShinyButtonProps = Omit<ButtonProps, "asChild"> & {
 }
 
 function ShinyButton({ shine = "hover", interval = 3.5, className, children, ...props }: ShinyButtonProps) {
-  const reduce = useReducedMotion()
+  const reduce = useLoopsPaused()
   return (
     <Button
       data-slot="shiny-button"

@@ -22,7 +22,7 @@ function Card({
       className={cn(
         "group/card bg-card text-card-foreground flex min-w-0 flex-col gap-5 rounded-xl border border-border py-5 shadow-sm transition-[border-color,box-shadow,transform] duration-200 data-[size=sm]:gap-3 data-[size=sm]:py-4",
         interactive &&
-          "hover:border-ring/50 hover:shadow-md focus-within:border-ring/50 motion-safe:hover:-translate-y-0.5 motion-reduce:transition-none",
+          "hover:border-ring/50 hover:shadow-md focus-within:border-ring/50 motion-safe:hover:translate-y-[var(--bm-lift,-2px)] motion-reduce:transition-none",
         className,
       )}
       {...props}

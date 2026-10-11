@@ -156,8 +156,8 @@
     "hash": "61728b21422981c1f19253b4f2644760d4e8a85c7dfc481a463b89db058ec30a"
   },
   "border-beam": {
-    "version": "1.0.0",
-    "hash": "9b57f0ef47b1e5e7ccf85c0f8bf93e4f94a3f90593ea9d037d0f465dc509c53b"
+    "version": "1.0.1",
+    "hash": "39d09d259093afe89a9a08d3f7b956bd6066c26bbc5ee791072065506836ddf3"
   },
   "breadcrumb": {
     "version": "1.0.0",
@@ -168,8 +168,8 @@
     "hash": "a2f4c6c1c2434ba4a009f39beea7c96a5002365a3c2a851a3006ef80043e4bfb"
   },
   "button": {
-    "version": "1.0.0",
-    "hash": "b74beedd3e775a3e3f9981ce3effc3ba76dfee4ce911b2707a68f10471fa1a99"
+    "version": "1.0.1",
+    "hash": "feb75719b4ddb8ecc1d43502ecb2070bf37bc49f2e7d350d30c3291f301eae7c"
   },
   "button-group": {
     "version": "1.0.0",
@@ -192,12 +192,12 @@
     "hash": "f61d35978d3343895149938926b71e597533f21f34e4449d2cff80a58940412a"
   },
   "card": {
-    "version": "1.0.0",
-    "hash": "669cc56a50cf1379f19ebe706612d4e9ae83b6318da70586ceef21acef880431"
+    "version": "1.0.1",
+    "hash": "7e5cc7512e12d86eae1d560afb73946c04365ee909361a248074383e87fb29e7"
   },
   "careers-1": {
-    "version": "1.0.0",
-    "hash": "2f92f00ee3ad8c7f970f8269ed357565b7f713f9b89a7c643a604be1b76240b1"
+    "version": "1.0.1",
+    "hash": "ae3abd1cc9dd714d5aa9bf164b0167c1a09561ab7a3bcc387b6deb88a12dc6dd"
   },
   "carousel": {
     "version": "1.0.0",
@@ -372,8 +372,8 @@
     "hash": "603ab6529c6aab34fe4e7eed8a90acef5df8083b200d4df98ba1ad776a843549"
   },
   "dotted-map": {
-    "version": "1.0.0",
-    "hash": "a7bae4715d0e8e37272f64eeb765d41723cb59e44c4d2d1c065929809a233b22"
+    "version": "1.0.1",
+    "hash": "fe33a20ecdda8da51129332a75decede4713fc996a78bfb9f6ddfd79b2731f4e"
   },
   "download-1": {
     "version": "1.0.0",
@@ -404,8 +404,8 @@
     "hash": "2df8b12bfb46c8f82899201569fcf3d7690024f79495e9e221a7e983c33564b8"
   },
   "error-1": {
-    "version": "1.0.0",
-    "hash": "687d0908f85ce0d5a762d46393c90dcca2220e64125f6cd21d91046935811754"
+    "version": "1.0.1",
+    "hash": "06ac941093e6ac5ad4959775dd4cae5f522a0eaa84a1328944cda75b6a5ee089"
   },
   "faq-1": {
     "version": "1.0.0",
@@ -508,8 +508,8 @@
     "hash": "f13ab901d0c1235f26414a9c50cfc89cc2e98ff2dbf0ae9f28aed487e4d9cf6d"
   },
   "gradient-text": {
-    "version": "1.0.0",
-    "hash": "590cf8270c66ba45c8541446b2239f0eb578851b19ff58099b5c3b3c5c563e69"
+    "version": "1.0.1",
+    "hash": "d564f49f80555577da1747a806fd44e91531df3873100f31531d6cc51ad73e54"
   },
   "grid-pattern": {
     "version": "1.0.0",
@@ -544,8 +544,8 @@
     "hash": "e1207271b963a0e1a5e6c521edfd5aabe482670c54efd2b6a9508d795cb31edf"
   },
   "hero-6": {
-    "version": "1.0.0",
-    "hash": "6f9b3b72413600cc2c27c14231d4758e80ceba5b86de646f557eaa9b3f416609"
+    "version": "1.0.1",
+    "hash": "2cf3972ae4383fab72b3f0b11bae2dd808d0aca67cd7517e59270c4f1037245e"
   },
   "hero-7": {
     "version": "1.0.0",
@@ -660,8 +660,8 @@
     "hash": "6cc53b7be1b5286e5f3fc5437c1aa07ad661aeef8e241f4b8181eded8920ed16"
   },
   "light-rays": {
-    "version": "1.0.0",
-    "hash": "59da89db27534289886d23fef456c368dde6819a956a8cc5d44263bf7b0590f2"
+    "version": "1.0.1",
+    "hash": "26d03e587d28c6c6de59dbcb5facac6497d5d936f036ed5620bbb8926d8d14d3"
   },
   "loading-dots": {
     "version": "1.0.0",
@@ -751,9 +751,29 @@
     "version": "1.0.0",
     "hash": "90bb90e88b44f703f95df36de9e0741d75336d9af607347c793529c1788cf810"
   },
-  "motion-presets": {
+  "motion-calm": {
     "version": "1.0.0",
-    "hash": "f1c0adfc5da409edc59118ac3fd8fb0f05bbc3bdc440978558d33cd03ef33725"
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "motion-native": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "motion-playful": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "motion-presets": {
+    "version": "1.1.0",
+    "hash": "9962cd78c415d139e2aab7b25471ea52feb8ae0298f252dab2a21a09ef63c1e0"
+  },
+  "motion-snappy": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "motion-still": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "multi-select": {
     "version": "1.0.0",
@@ -768,16 +788,16 @@
     "hash": "76b080e1e3a21964426db9ea20e905ce9284fd405fd786a2ab6c91a5d33484a1"
   },
   "neon-card": {
-    "version": "1.0.0",
-    "hash": "c2acc7f201c3519c5d9520347b8572df07f2cd44b96c249730d9cecbb9fa5c37"
+    "version": "1.0.1",
+    "hash": "5111a2eb67d71b8673373545a21d89937b89c79d4b1ff79c46da7c175ff3b040"
   },
   "newsletter-1": {
     "version": "1.0.0",
     "hash": "f4090fe4c111ecde38731f77be2db2d57e457d45a15a5e868a4aab45b21ebb53"
   },
   "noise-texture": {
-    "version": "1.0.0",
-    "hash": "f0ff6ec108d2c5ad6d64f9072a517f1e8d92720df5a3e551a848a270965c916c"
+    "version": "1.0.1",
+    "hash": "14747315cf5458cc9068bedb741ed712cfdbb4c98662e3c13146921b0a44cccd"
   },
   "notification-center": {
     "version": "1.0.0",
@@ -876,16 +896,16 @@
     "hash": "dc9059c6faffbc2990063a735cb67f21c1062e4f864f9039eaf4d649bb23040c"
   },
   "pulse-button": {
-    "version": "1.0.0",
-    "hash": "6346ccdfaec596b4b53bffb6d2a32970e4e2c815b9856f177bf030434e63aec7"
+    "version": "1.0.1",
+    "hash": "e4685d1dccf67b0d61d3c43adf51e7bb4cb922774a8f76e3cd7c979aa94e1098"
   },
   "radio-group": {
     "version": "1.0.0",
     "hash": "6433cf66b68d00be5f045c0635874bb53e547d5052872fe9d798573be440e0c7"
   },
   "rainbow-button": {
-    "version": "1.0.0",
-    "hash": "403fb50669b2c8b4cff0772120ebea435fc16074d49612be08889f8a88f9e98f"
+    "version": "1.0.1",
+    "hash": "c89bc44fd6b244781b32966722123a52d9233a636a0a25a4abe2e8e3b4105be3"
   },
   "rating": {
     "version": "1.0.0",
@@ -900,12 +920,12 @@
     "hash": "6155ec41d1f5aa06cf5bf82f04e4ec43547b19c744e1d4d97ae31c2941f3780b"
   },
   "retro-grid": {
-    "version": "1.0.0",
-    "hash": "8e2ad65c4fdf71829a41d902f84aef35fed1a0219f4b2f9051b56f8f19ef6264"
+    "version": "1.0.1",
+    "hash": "9b75df05cc1d4db1457f2bf4e21ba9ed620ac7e3d60b57ec2c8e5d0358107a6e"
   },
   "ripple": {
-    "version": "1.0.0",
-    "hash": "e11f8db3302556a760e0c00cc3f1d3b384a98b0b5c61ad62fcb600b209c96818"
+    "version": "1.0.1",
+    "hash": "b7f722fd9a9e5d04bb05e64b86a3424899f9d9ace55b22cde44b40e98446b0e0"
   },
   "scramble-text": {
     "version": "1.0.0",
@@ -972,12 +992,12 @@
     "hash": "ead0f5ed99814762fac9de29ad98f138da67095f225f86562a62a2137f419129"
   },
   "shimmer-text": {
-    "version": "1.0.0",
-    "hash": "e894334a14a12f152c06d6049b8c69335fd04ae0d6dfe1f26a6aec544a5acdf1"
+    "version": "1.0.1",
+    "hash": "a32118595a7df0ce01d9971e3aa52e15a017d9786d11ab1aeae3b3e206f32e2c"
   },
   "shiny-button": {
-    "version": "1.0.0",
-    "hash": "87e7e2e5b6d303c7e23e58d9ec8c3dd99979eaa4f6febebd318f44ec174e56cf"
+    "version": "1.0.1",
+    "hash": "7282f43036d204ea48dafb0694a812e0a36749ba7e747e6d2d58b21b1487096e"
   },
   "shortcut-hint": {
     "version": "1.0.0",
@@ -1036,8 +1056,8 @@
     "hash": "8daad1968f203a172ac359591c26d855ac4a8cfea72b268da3f631bb2c6d4745"
   },
   "spinning-text": {
-    "version": "1.0.0",
-    "hash": "9b799d29617012cf150f87b071c50aa0562aeefd9af184a4a746fd673c25bfed"
+    "version": "1.0.1",
+    "hash": "192183c966ac01e5fcefc469558119685c4738275e29e01c5c916c71b453445f"
   },
   "split-view": {
     "version": "1.0.0",
@@ -1064,8 +1084,8 @@
     "hash": "d6a3aa89e1f4f3cdf525998492ef991db9b7bf50395c9bc1b177acf781c6cc5b"
   },
   "stats-1": {
-    "version": "1.0.0",
-    "hash": "3c65c807679ca8f19a183bb117b5b9a38ad259173f060e32bb106e9d8a12e771"
+    "version": "1.0.1",
+    "hash": "fe8b2bd34d00c1e19af572ce6b4d7f5075587c4bd43e421541edaea6b210a2f2"
   },
   "status-badge-row": {
     "version": "1.0.0",
@@ -1088,8 +1108,8 @@
     "hash": "7b1806631f0a276cd09e0b3e17345ceae011f8af95dd83e3a14066ed170af463"
   },
   "suggestion-chips": {
-    "version": "1.0.0",
-    "hash": "fac0c39afeea1e514aa175305a416d9cdf93edf9f39a3d72342f91b126008bd4"
+    "version": "1.0.1",
+    "hash": "28f09ea8fc9ee17206544da092a7ac21b4fed04213258ace64f3c999f0441d04"
   },
   "switch": {
     "version": "1.0.0",
@@ -1132,12 +1152,12 @@
     "hash": "5e52560b585d6ee0d8e3f71d8c6e870994966e86193527a9999ebf8f3be74562"
   },
   "template-docs": {
-    "version": "1.0.0",
-    "hash": "c7f7fb591c9bae06fd0c112eea8bf9a0c5193dee3d689c66418410743411ae14"
+    "version": "1.0.1",
+    "hash": "f056b68e0fdf05b92eed6032b3de9754dc1f471ecf4b978be95b0723ceaa23f1"
   },
   "template-goods": {
-    "version": "1.0.1",
-    "hash": "fd0a3d4416f338e29d7ef0647026b0c41cc191702b64da4c32f3ed91b388386f"
+    "version": "1.0.2",
+    "hash": "f5e5670a6752042aa2f48ffbf532382e1cf1ba55956ee4110388e98438d7c9d3"
   },
   "template-launch": {
     "version": "1.0.0",
@@ -1160,32 +1180,32 @@
     "hash": "35cc756c2c051a6f9783bd7d546a70bcc34b85450e58b8ab0b6a25aa089952dc"
   },
   "template-pocket": {
-    "version": "1.0.0",
-    "hash": "bdfc32366c2bb075ac90d5e12fb0394e418f51e7126221bab7d6f50b0977b0e1"
+    "version": "1.0.1",
+    "hash": "55d1420c1d8e7f9d864ab287bcf0540275c41ab01b06bdbef7eb8c11be929222"
   },
   "template-podcast": {
-    "version": "1.0.1",
-    "hash": "f94548e202a75c158ead65e09825d69bbac29cef07e17c0b29123b7462b39ecc"
+    "version": "1.0.2",
+    "hash": "506e2c452a16ce066aa4bbd2fac41fccf0e6a9668b45ed24cf0a901877eba189"
   },
   "template-portfolio": {
     "version": "1.0.0",
     "hash": "813bc9df4c2b0730e976bbb04a011a5d237daca909dc7910d1ce5f99f20023e8"
   },
   "template-publication": {
-    "version": "1.0.1",
-    "hash": "416142938919554b0c6c22c38fff972884763585b61e4a3d783a71005f048a3f"
+    "version": "1.0.2",
+    "hash": "f9743492599caf0466b1e193460f6d0e75be1f6a29ae8691397cb6047458bf5d"
   },
   "template-relay": {
     "version": "1.0.0",
     "hash": "2c041549e23208023cc80594e80b5993b44f7e696e48b50f8d9bb792986a8532"
   },
   "template-studio": {
-    "version": "1.0.0",
-    "hash": "f875fa5a2781fe436f4bfd11525a0d475d16304011fef7dd3d4a7c3e62007810"
+    "version": "1.0.1",
+    "hash": "49741a19be10c925d972ba9efd412b64ab49939ba46c36882279739bf5273651"
   },
   "template-summit": {
-    "version": "1.0.0",
-    "hash": "45d8cd017e8f49e9fdcc1d6f77ab06bcdce9c01af6c1b7eb9eda09d75ef8fe81"
+    "version": "1.0.1",
+    "hash": "b72df6fd7382334b888a66e926e66ae9e65fc1d72133080fa716e8d62cbb471e"
   },
   "template-workspace": {
     "version": "1.0.0",
@@ -1216,55 +1236,55 @@
     "hash": "9ac0a4fb95ea0f27c3e0b7a7b444f128d235b7be73063e571b8ad95b5deb2662"
   },
   "theme": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-amber": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-ember": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-forest": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-graphite": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-indigo": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-midnight": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-mono": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-ocean": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-rose": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-sand": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-teal": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "theme-violet": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "thinking-indicator": {
@@ -1368,7 +1388,7 @@
     "hash": "068ae4af7e09b1d684665f507a19df9be00c9fb5ca03e3f88797d34ca21d6193"
   },
   "workspace-card": {
-    "version": "1.0.0",
-    "hash": "a05f172747961f39a9b084281365d13807cd31d31dd773e96989e3097ae65f05"
+    "version": "1.0.1",
+    "hash": "1a5f0411f681e33d5c229d689166ec0295dbf4844978d7a6840fd4e4faf7f527"
   }
 }

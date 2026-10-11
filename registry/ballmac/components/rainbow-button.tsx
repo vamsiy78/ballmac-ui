@@ -2,7 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { Button, type ButtonProps } from "@/components/ballmac/button"
 import { cn } from "@/lib/utils"
@@ -20,7 +21,7 @@ const GRADIENT =
   "conic-gradient(from 0deg, var(--chart-1), var(--chart-2), var(--chart-3), var(--chart-4), var(--chart-5), var(--chart-1))"
 
 function RainbowButton({ duration = 4, glow = true, shape, className, wrapperClassName, disabled, children, ...props }: RainbowButtonProps) {
-  const reduce = useReducedMotion()
+  const reduce = useLoopsPaused()
   const radius = shape === "pill" ? "rounded-full" : "rounded-md"
   const innerRadius = shape === "pill" ? "rounded-full" : "rounded-[calc(var(--radius-md)-2px)]"
 

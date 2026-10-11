@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["button", "gradient", "border", "glow", "cta"],
   files: [{ path: "components/rainbow-button.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils", "button"],
+  registryDependencies: ["shadcn:utils", "button", "motion-presets"],
   examples: [
     { name: "rainbow-button-demo", title: "Primary call to action", file: "rainbow-button-demo.tsx" },
     { name: "rainbow-button-sizes", title: "Sizes and pill", file: "rainbow-button-sizes.tsx" },
@@ -28,6 +28,10 @@ export default defineItem({
     ],
     customization: ["duration", "glow", "shape: default | pill", "all Button props"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

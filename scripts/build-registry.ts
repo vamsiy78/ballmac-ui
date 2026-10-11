@@ -249,9 +249,13 @@ console.log(`âœ“ ${Object.keys(sortedMessages).length} translatable message(s) â
 const theme = items.find((i) => i.name === "theme")
 if (theme?.cssVars) {
   const block = (vars: Record<string, string> = {}) => Object.entries(vars).map(([k, v]) => `  --${k}: ${v};`).join("\n")
+  // `theme` keys are Tailwind theme keys (duration scales, easings), so they belong in @theme, not :root.
+  const atRules = Object.entries((theme.css ?? {}) as Record<string, Record<string, Record<string, string>>>).map(
+    ([rule, selectors]) => `${rule} {\n${Object.entries(selectors).map(([sel, vars]) => `  ${sel} {\n${Object.entries(vars).map(([k, v]) => `    ${k}: ${v};`).join("\n")}\n  }`).join("\n")}\n}`
+  )
   writeFileSync(
     join(generated, "theme.css"),
-    `/* Generated from registry/ballmac/themes/theme.meta.ts. Do not edit. */\n:root {\n${block(theme.cssVars.theme)}\n${block(theme.cssVars.light)}\n}\n\n.dark {\n${block(theme.cssVars.dark)}\n}\n`
+    `/* Generated from registry/ballmac/themes/theme.meta.ts. Do not edit. */\n:root {\n${block(theme.cssVars.light)}\n}\n\n.dark {\n${block(theme.cssVars.dark)}\n}\n\n@theme inline {\n${block(theme.cssVars.theme)}\n}\n${atRules.length ? "\n" + atRules.join("\n\n") + "\n" : ""}`
   )
 }
 

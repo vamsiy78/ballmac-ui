@@ -2,7 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { useLoopsPaused } from "@/lib/ballmac/motion"
 
 import { cn } from "@/lib/utils"
 
@@ -39,7 +40,7 @@ const noise = (i: number, salt: number) => {
 
 /** Soft beams of light fanning down from the top edge, swaying slowly. Decorative. */
 function LightRays({ count = 7, tone = "chart-1", spread = 70, intensity = 0.55, duration = 9, className, ...props }: LightRaysProps) {
-  const reduce = useReducedMotion()
+  const reduce = useLoopsPaused()
   const color = VAR[tone]
   return (
     <div data-slot="light-rays" aria-hidden="true" className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)} {...props}>

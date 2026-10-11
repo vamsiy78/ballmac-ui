@@ -76,7 +76,7 @@ function StudioHome({ hrefs, ...props }: StudioHomeProps) {
           </h1>
           <div className="mt-12 grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
             <p className="max-w-xl text-xl text-pretty sm:text-2xl">Hollis &amp; Vane is a 14-person studio in Lisbon and Berlin. We design identities, websites and campaigns for people who would rather be remembered than liked.</p>
-            <a href={h.work} className="bg-foreground text-background focus-visible:ring-ring/50 inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-[3px] motion-reduce:transition-none">See the work <ArrowUpRight className="size-5 rtl:-scale-x-100" aria-hidden="true" /></a>
+            <a href={h.work} className="bg-foreground text-background focus-visible:ring-ring/50 inline-flex h-14 items-center gap-2 rounded-full px-8 text-lg font-bold outline-none transition-transform hover:translate-y-[var(--bm-lift,-2px)] focus-visible:ring-[3px] motion-reduce:transition-none">See the work <ArrowUpRight className="size-5 rtl:-scale-x-100" aria-hidden="true" /></a>
           </div>
         </section>
 
@@ -128,7 +128,7 @@ function StudioHome({ hrefs, ...props }: StudioHomeProps) {
         <section className="bg-chart-1 text-[var(--studio-on-accent)]">
           <a href={h.contact} className="group focus-visible:ring-ring mx-auto flex max-w-[100rem] items-center justify-between gap-6 px-4 py-16 outline-none focus-visible:ring-[3px] focus-visible:ring-inset sm:px-8 sm:py-24">
             <span className={cn("text-[clamp(3rem,11vw,10rem)]", studioDisplay)}>Let’s talk</span>
-            <ArrowUpRight className="size-[clamp(3rem,10vw,9rem)] shrink-0 transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-2 motion-reduce:transition-none rtl:-scale-x-100 rtl:group-hover:-translate-x-2" strokeWidth={1.5} aria-hidden="true" />
+            <ArrowUpRight className="size-[clamp(3rem,10vw,9rem)] shrink-0 transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-[calc(var(--bm-lift,-2px)*4)] motion-reduce:transition-none rtl:-scale-x-100 rtl:group-hover:-translate-x-2" strokeWidth={1.5} aria-hidden="true" />
           </a>
         </section>
       </main>

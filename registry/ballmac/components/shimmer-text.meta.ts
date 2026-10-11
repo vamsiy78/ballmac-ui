@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["text", "loading", "ai", "status", "shimmer", "motion"],
   files: [{ path: "components/shimmer-text.tsx" }],
   dependencies: ["motion@^12"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "motion-presets"],
   examples: [{ name: "shimmer-text-demo", title: "Thinking status", file: "shimmer-text-demo.tsx" }],
   ai: {
     summary:
@@ -32,6 +32,10 @@ export default defineItem({
       "Colors come from --muted-foreground and --foreground; override backgroundImage via style for other tokens",
     ],
   },
-  version: "1.0.0",
-  updated: "2026-09-28",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default." },
+    { version: "1.0.0", date: "2026-09-28", note: "First release." },
+  ],
 })
