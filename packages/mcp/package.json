@@ -1,6 +1,6 @@
 {
   "name": "@ballmac/mcp",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "mcpName": "io.github.vamsiy78/ballmac",
   "description": "MCP server for Ballmac UI: search, inspect and install Ballmac UI components, blocks and templates, and compose pages from them.",
   "keywords": [

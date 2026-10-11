@@ -1,0 +1,44 @@
+# Publishes @ballmac/cli to npm.
+# Trigger: push a tag named cli-v<version> (for example cli-v0.1.1) that matches packages/cli/package.json,
+# or run it by hand from the Actions tab. Publishes with npm trusted publishing (OIDC): no token is stored.
+# The trusted publisher is configured on npmjs.com for @ballmac/cli (repository vamsiy78/ballmac-ui, workflow release-cli.yml).
+# Provenance (the "built and signed by GitHub Actions" badge on npm) only works from a public repository,
+# so it switches on by itself when this repository is public.
+name: Release CLI
+
+on:
+  push:
+    tags: ["cli-v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/cli
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+        working-directory: .
+      - name: Check the tag matches the package version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          version=$(node -p "require('./package.json').version")
+          test "cli-v$version" = "${GITHUB_REF_NAME}" || { echo "Tag ${GITHUB_REF_NAME} does not match package version $version"; exit 1; }
+      - run: pnpm run build
+      - run: pnpm test
+      - name: Use an npm version that supports trusted publishing
+        run: npm install -g npm@latest
+      - name: Publish
+        run: npm publish --access public ${{ github.event.repository.private == false && '--provenance' || '' }}
