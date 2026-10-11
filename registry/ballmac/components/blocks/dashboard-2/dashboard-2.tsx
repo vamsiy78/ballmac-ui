@@ -9,6 +9,8 @@ import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartToo
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
 import { StatusDot } from "@/components/ballmac/status-dot"
 import { Switch } from "@/components/ballmac/switch"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 import { useLocale } from "@/lib/ballmac/i18n"
 
@@ -17,7 +19,7 @@ type Dashboard2Range = "7d" | "30d" | "12m"
 type Dashboard2Page = { path: string; views: number; bounce: number }
 type Dashboard2Country = { name: string; visitors: number }
 
-type Dashboard2Props = Omit<React.ComponentProps<"section">, "title"> & {
+type Dashboard2Props = Omit<React.ComponentProps<"section">, "title"> & StateProps & {
   /** Page heading. */
   title?: string
   /** One line under the heading. */
@@ -84,7 +86,7 @@ const defaultCountries: Dashboard2Country[] = [
 
 const chartColors = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)"]
 
-function Dashboard2({
+function Dashboard2Inner({
   title = "Traffic",
   description = "Who visits, where they come from and what they read.",
   defaultRange = "30d",
@@ -294,6 +296,95 @@ function Dashboard2({
           </table>
         </div>
       </div>
+    </section>
+  )
+}
+
+
+/** The same shapes as the ready view, so nothing jumps when data arrives. */
+function Dashboard2Skeleton() {
+  return (
+    <div aria-hidden="true">
+      <div className="bg-card rounded-2xl border p-4 sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="grid gap-2">
+            <Skeleton className="h-3.5 w-24" />
+            <Skeleton className="h-9 w-32" />
+          </div>
+          <Skeleton className="h-6 w-24 rounded-full" />
+        </div>
+        <Skeleton className="mt-6 h-64 w-full rounded-xl" />
+      </div>
+      <div className="mt-3 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div className="bg-card rounded-2xl border p-4 sm:p-5">
+          <Skeleton className="h-4 w-28" />
+          <Skeleton className="mx-auto mt-5 size-36 rounded-full" />
+          <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2">
+            {[0, 1, 2, 3].map((i) => (
+              <Skeleton key={i} className="h-3.5 w-full" />
+            ))}
+          </div>
+        </div>
+        {[0, 1].map((c) => (
+          <div key={c} className="bg-card rounded-2xl border p-4 sm:p-5">
+            <Skeleton className="h-4 w-24" />
+            <ul className="mt-5 space-y-4">
+              {[0, 1, 2, 3].map((i) => (
+                <li key={i}>
+                  <div className="flex justify-between">
+                    <Skeleton className="h-3.5 w-24" />
+                    <Skeleton className="h-3.5 w-8" />
+                  </div>
+                  <Skeleton className="mt-2 h-2 w-full rounded-full" />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div className="bg-card mt-3 overflow-hidden rounded-2xl border">
+        <div className="px-4 py-4 sm:px-5">
+          <Skeleton className="h-4 w-28" />
+        </div>
+        <ul className="divide-y border-t">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <li key={i} className="flex items-center justify-between gap-4 px-4 py-3 sm:px-5">
+              <Skeleton className="h-3.5 w-1/2" />
+              <Skeleton className="h-3.5 w-16" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * With `state="loading"` this shows a skeleton of its layout under the real heading, with `state="error"` an error with retry,
+ * and with `state="empty"` a message that there is nothing to show yet.
+ */
+function Dashboard2({ state = "ready", onRetry, emptyState, errorState, title = 'Traffic', description = 'Who visits, where they come from and what they read.', className, ...props }: Dashboard2Props) {
+  if (state === "ready") return <Dashboard2Inner title={title} description={description} className={className} {...props} />
+  return (
+    <section data-slot="dashboard-2" data-state={state} className={cn("mx-auto w-full max-w-6xl px-4 py-8 sm:px-6", className)} {...frameProps(props)}>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h2>
+          <p className="text-muted-foreground mt-1 text-sm">{description}</p>
+        </div>
+        {state === "loading" ? <Skeleton animated={false} className="h-9 w-56 rounded-lg" aria-hidden="true" /> : null}
+      </div>
+      <StateView
+        state={state}
+        className="mt-6"
+        loading={<Dashboard2Skeleton />}
+        label="Loading traffic"
+        empty={{ title: 'No traffic yet', description: 'Visits will show up here once people start arriving.', ...emptyState }}
+        error={{ title: 'Could not load traffic', description: 'The analytics service did not answer. Your numbers are safe.', ...errorState }}
+        onRetry={onRetry}
+      >
+        {null}
+      </StateView>
     </section>
   )
 }

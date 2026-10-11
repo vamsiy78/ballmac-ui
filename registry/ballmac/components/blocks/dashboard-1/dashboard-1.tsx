@@ -9,7 +9,9 @@ import { Badge } from "@/components/ballmac/badge"
 import { Button } from "@/components/ballmac/button"
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ballmac/chart"
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
+import { Skeleton } from "@/components/ballmac/skeleton"
 import { Sparkline } from "@/components/ballmac/sparkline"
+import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 import { useLocale } from "@/lib/ballmac/i18n"
 
@@ -27,7 +29,7 @@ type Dashboard1Order = {
 
 type Dashboard1Channel = { name: string; share: number }
 
-type Dashboard1Props = Omit<React.ComponentProps<"section">, "title"> & {
+type Dashboard1Props = Omit<React.ComponentProps<"section">, "title"> & StateProps & {
   /** Page heading. */
   title?: string
   /** One line under the heading. */
@@ -111,7 +113,7 @@ function pctChange(now: number, before: number) {
   return before === 0 ? 0 : ((now - before) / before) * 100
 }
 
-function Dashboard1({
+function Dashboard1Inner({
   title = "Overview",
   description = "How the store is doing compared with the previous period.",
   defaultRange = "30d",
@@ -267,6 +269,96 @@ function Dashboard1({
           </table>
         </div>
       </div>
+    </section>
+  )
+}
+
+
+/** The same cards, chart, side panel and table as the ready view, so nothing jumps when data arrives. */
+function Dashboard1Skeleton() {
+  return (
+    <div aria-hidden="true">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="bg-card rounded-2xl border p-4 sm:p-5">
+            <Skeleton className="h-3.5 w-20" />
+            <Skeleton className="mt-3 h-8 w-28" />
+            <Skeleton className="mt-2 h-3.5 w-24" />
+            <Skeleton className="mt-4 h-8 w-full" />
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 grid gap-3 lg:grid-cols-[1fr_20rem]">
+        <div className="bg-card rounded-2xl border p-4 sm:p-5">
+          <div className="flex justify-between gap-3">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-3.5 w-36" />
+          </div>
+          <Skeleton className="mt-4 aspect-[16/8] w-full rounded-xl" />
+        </div>
+        <div className="bg-card rounded-2xl border p-4 sm:p-5">
+          <Skeleton className="h-4 w-36" />
+          <ul className="mt-4 space-y-4">
+            {[0, 1, 2, 3].map((i) => (
+              <li key={i}>
+                <div className="flex justify-between">
+                  <Skeleton className="h-3.5 w-24" />
+                  <Skeleton className="h-3.5 w-8" />
+                </div>
+                <Skeleton className="mt-2 h-2 w-full rounded-full" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="bg-card mt-3 overflow-hidden rounded-2xl border">
+        <div className="px-4 py-4 sm:px-5">
+          <Skeleton className="h-4 w-28" />
+        </div>
+        <ul className="divide-y border-t">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <li key={i} className="flex items-center gap-4 px-4 py-3 sm:px-5">
+              <Skeleton className="h-3.5 w-16" />
+              <div className="grid flex-1 gap-1.5">
+                <Skeleton className="h-3.5 w-32" />
+                <Skeleton className="h-3 w-44" />
+              </div>
+              <Skeleton className="h-5 w-16 rounded-full" />
+              <Skeleton className="h-3.5 w-12" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * The store overview. `state="loading"` shows a skeleton of its cards, chart and table under the real heading, `state="error"`
+ * an error with retry, and `state="empty"` a message that there are no sales yet.
+ */
+function Dashboard1({ state = "ready", onRetry, emptyState, errorState, title = "Overview", description = "How the store is doing compared with the previous period.", className, ...props }: Dashboard1Props) {
+  if (state === "ready") return <Dashboard1Inner title={title} description={description} className={className} {...props} />
+  return (
+    <section data-slot="dashboard-1" data-state={state} className={cn("mx-auto w-full max-w-6xl px-4 py-8 sm:px-6", className)} {...frameProps(props)}>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h2>
+          <p className="text-muted-foreground mt-1 text-sm">{description}</p>
+        </div>
+        {state === "loading" ? <Skeleton animated={false} className="h-9 w-56 rounded-lg" aria-hidden="true" /> : null}
+      </div>
+      <StateView
+        state={state}
+        className="mt-6"
+        loading={<Dashboard1Skeleton />}
+        label="Loading the overview"
+        empty={{ title: "No sales yet", description: "Orders and revenue will show up here once your store starts selling.", ...emptyState }}
+        error={{ title: "Could not load the overview", description: "The reporting service did not answer. Your numbers are safe.", ...errorState }}
+        onRetry={onRetry}
+      >
+        {null}
+      </StateView>
     </section>
   )
 }

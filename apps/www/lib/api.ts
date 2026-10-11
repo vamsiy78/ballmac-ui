@@ -30,6 +30,9 @@ export function summary(i: SiteItem) {
     dependencies: i.dependencies,
     registryDependencies: i.registryDependencies,
     examples: i.examples.map((e) => e.name),
+    // What the item shows beyond ready, each with its example, or why it has none.
+    states: i.states.map((st) => ({ ...st, preview: `${SITE_URL}/preview/${st.example}` })),
+    statesNone: i.statesNone,
     ...(i.category === "templates"
       ? {
           templateKind: i.templateKind,

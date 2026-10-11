@@ -38,6 +38,10 @@ export default defineItem({
     copyright: "Copyright (c) 2023 shadcn",
     modified: true,
   },
-  version: "1.0.0",
-  updated: "2026-09-29",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "The pulse holds still when the theme turns decorative loops off (--bm-ambient-state). Unchanged by default." },
+    { version: "1.0.0", date: "2026-09-29", note: "First release." },
+  ],
 })

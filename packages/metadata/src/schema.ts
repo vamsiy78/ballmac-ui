@@ -105,6 +105,21 @@ const example = z.object({
   description: z.string().optional(),
 })
 
+/** The states an item can show. `ready` is the normal view and is never listed. */
+export const stateIds = ["loading", "empty", "error", "submitting", "success", "disabled", "expired", "offline"] as const
+
+const itemState = z.object({
+  id: z.enum(stateIds),
+  /** Short label for the preview switch on the item's page. */
+  title: z.string().min(2).max(30),
+  /** The example that shows it: one of this item's own examples. */
+  example: itemName,
+  /** How you get this state, usually a prop: `state="loading"`. */
+  trigger: z.string().min(3).max(120),
+  /** What the state shows and what a person can do in it. */
+  note: z.string().max(200).optional(),
+})
+
 export const sourceNotice = z.object({
   name: z.string(),
   url: z.string().url(),
@@ -138,6 +153,10 @@ export const itemMeta = z
     devDependencies: z.array(z.string()).default([]),
     registryDependencies: z.array(registryDependency).default([]),
     examples: z.array(example).default([]),
+    /** Every state this item can show beyond ready, each with an example. Data and form items list them; see `statesNone` for the rest. */
+    states: z.array(itemState).default([]),
+    /** Items with nothing to load, submit or fail say why, so a missing `states` is never an oversight. */
+    statesNone: z.string().min(10).max(160).optional(),
     cssVars: z
       .object({
         theme: z.record(z.string()).optional(),
@@ -174,6 +193,16 @@ export const itemMeta = z
     if (item.changelog.length && item.changelog[0]!.version !== item.version) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: `the newest changelog entry (${item.changelog[0]!.version}) must match version (${item.version})`, path: ["changelog"] })
     }
+    if (item.states.length && item.statesNone) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "an item lists states or says statesNone, not both", path: ["statesNone"] })
+    }
+    const exampleNames = new Set(item.examples.map((e) => e.name))
+    const seen = new Set<string>()
+    item.states.forEach((s, i) => {
+      if (!exampleNames.has(s.example)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `state "${s.id}" points at example "${s.example}", which is not one of this item's examples`, path: ["states", i, "example"] })
+      if (seen.has(s.id)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `state "${s.id}" is listed twice`, path: ["states", i, "id"] })
+      seen.add(s.id)
+    })
     if (item.category === "blocks" && !item.blockCategory) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: "blocks need a blockCategory", path: ["blockCategory"] })
     }

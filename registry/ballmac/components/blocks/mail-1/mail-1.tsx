@@ -10,6 +10,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ballmac/input"
 import { SearchField } from "@/components/ballmac/search-field"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ballmac/select"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { Textarea } from "@/components/ballmac/textarea"
 import { cn } from "@/lib/utils"
 
@@ -29,8 +31,8 @@ type Mail1Message = {
   attachments?: { name: string; size: string }[]
 }
 
-type Mail1Props = Omit<React.ComponentProps<"div">, "children"> & {
-  /** The messages. */
+type Mail1Props = Omit<React.ComponentProps<"div">, "children"> & StateProps & {
+  /** The messages. They seed the inbox when it appears; to load new ones, go through `state="loading"`. */
   messages?: Mail1Message[]
   /** Name shown on messages you send. */
   me?: { name: string; email: string }
@@ -103,7 +105,8 @@ const tones = ["bg-chart-1/25", "bg-chart-3/25", "bg-chart-5/25", "bg-chart-2/25
 const initials = (name: string) => name.split(" ").map((w) => w[0]).join("").slice(0, 2)
 const toneOf = (name: string) => tones[name.split("").reduce((n, c) => n + c.charCodeAt(0), 0) % tones.length]
 
-function Mail1({
+function Mail1Inner({
+  emptyState,
   messages: initial = defaults,
   me = { name: "Jordan Lee", email: "jordan@acme.com" },
   onSend,
@@ -248,8 +251,8 @@ function Mail1({
           {visible.length === 0 && (
             <li className="text-muted-foreground flex h-full flex-col items-center justify-center px-6 py-16 text-center text-sm">
               <MailOpen className="size-8" aria-hidden="true" />
-              <p className="mt-3 font-medium">{q ? "No messages match" : "Nothing here"}</p>
-              <p className="mt-1 text-xs">{q ? "Try a different search." : "Messages you move here will show up."}</p>
+              <p className="mt-3 font-medium">{q ? "No messages match" : (emptyState?.title ?? "Nothing here")}</p>
+              <p className="mt-1 text-xs">{q ? "Try a different search." : (emptyState?.description ?? "Messages you move here will show up.")}</p>
             </li>
           )}
         </ul>
@@ -310,6 +313,90 @@ function Mail1({
       </article>
     </div>
   )
+}
+
+
+/** The same three panes as the ready view, so nothing jumps when messages arrive. */
+function Mail1Skeleton() {
+  return (
+    <div className="flex h-full" aria-hidden="true">
+      <div className="bg-muted/30 hidden w-52 shrink-0 flex-col gap-2 border-e p-3 md:flex">
+        <Skeleton className="h-9 w-full rounded-lg" />
+        <div className="mt-3 grid gap-1.5">
+          {[0, 1, 2, 3].map((i) => (
+            <Skeleton key={i} className="h-8 w-full" />
+          ))}
+        </div>
+      </div>
+      <div className="flex w-full min-w-0 flex-col border-e md:w-80 md:shrink-0 lg:w-96">
+        <div className="border-b p-3">
+          <Skeleton className="h-9 w-full rounded-lg" />
+        </div>
+        <ul className="divide-y">
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <li key={i} className="flex gap-3 p-3.5">
+              <Skeleton className="size-8 shrink-0 rounded-full" />
+              <div className="grid min-w-0 flex-1 gap-2">
+                <div className="flex justify-between gap-6">
+                  <Skeleton className="h-3.5 w-1/3" />
+                  <Skeleton className="h-3 w-10" />
+                </div>
+                <Skeleton className="h-3.5 w-4/5" />
+                <Skeleton className="h-3 w-full" />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="hidden min-w-0 flex-1 flex-col gap-5 p-8 md:flex">
+        <Skeleton className="h-7 w-3/5" />
+        <div className="flex items-center gap-3">
+          <Skeleton className="size-10 rounded-full" />
+          <div className="grid gap-1.5">
+            <Skeleton className="h-3.5 w-32" />
+            <Skeleton className="h-3 w-44" />
+          </div>
+        </div>
+        <div className="mt-2 grid gap-2.5">
+          <Skeleton className="h-3.5 w-full" />
+          <Skeleton className="h-3.5 w-full" />
+          <Skeleton className="h-3.5 w-11/12" />
+          <Skeleton className="h-3.5 w-4/5" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * The mailbox. With `state="loading"` it shows a skeleton of its own three panes, with `state="error"` an error with retry in the
+ * same frame, and with `state="empty"` the real interface over an empty mailbox, so Compose still works.
+ */
+function Mail1({ state = "ready", onRetry, emptyState, errorState, messages, height = "44rem", className, style, ...props }: Mail1Props) {
+  if (state === "loading" || state === "error") {
+    return (
+      <div
+        data-slot="mail-1"
+        data-state={state}
+        className={cn("bg-background @container overflow-hidden rounded-2xl border shadow-[0_30px_80px_-50px_rgb(0_0_0/0.4)]", className)}
+        style={{ height, ...style }}
+        {...frameProps(props)}
+      >
+        <StateView
+          state={state}
+          bare
+          className="h-full"
+          loading={<Mail1Skeleton />}
+          label="Loading messages"
+          error={{ title: "Could not load your mail", description: "The mail service did not answer. Your messages are safe.", ...errorState }}
+          onRetry={onRetry}
+        >
+          {null}
+        </StateView>
+      </div>
+    )
+  }
+  return <Mail1Inner messages={state === "empty" ? [] : messages} emptyState={emptyState} height={height} className={className} style={style} {...props} />
 }
 
 export { Mail1, type Mail1Props, type Mail1Message, type Mail1Folder }

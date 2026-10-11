@@ -9,6 +9,8 @@ import { Calendar } from "@/components/ballmac/calendar"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ballmac/dialog"
 import { Input } from "@/components/ballmac/input"
 import { Popover, PopoverContent, PopoverDescription, PopoverTitle, PopoverTrigger } from "@/components/ballmac/popover"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 
 type Calendar1Event = {
@@ -25,7 +27,7 @@ type Calendar1Event = {
   allDay?: boolean
 }
 
-type Calendar1Props = Omit<React.ComponentProps<"div">, "children" | "onSelect"> & {
+type Calendar1Props = Omit<React.ComponentProps<"div">, "children" | "onSelect"> & Omit<StateProps, "emptyState"> & {
   /** Events to show. */
   defaultEvents?: Calendar1Event[]
   /** Calendars and their colours (chart tokens 1 to 5). */
@@ -111,7 +113,7 @@ function lanes(list: Calendar1Event[]) {
   return placed
 }
 
-function Calendar1({
+function Calendar1Inner({
   defaultEvents: initial = defaultEvents,
   calendars = defaultCalendars,
   today = "2026-10-01",
@@ -293,6 +295,72 @@ function Calendar1({
       </div>
     </div>
   )
+}
+
+
+/** The same sidebar and week grid as the ready view, so nothing jumps when events arrive. */
+function Calendar1Skeleton() {
+  return (
+    <div className="flex h-full" aria-hidden="true">
+      <div className="bg-muted/30 hidden w-64 shrink-0 flex-col gap-5 border-e p-4 lg:flex">
+        <Skeleton className="h-9 w-full rounded-lg" />
+        <Skeleton className="h-56 w-full rounded-xl" />
+        <div className="grid gap-2">
+          {[0, 1, 2].map((i) => (
+            <Skeleton key={i} className="h-7 w-full" />
+          ))}
+        </div>
+      </div>
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div className="flex items-center gap-2 border-b p-3">
+          <Skeleton className="h-6 w-36" />
+          <Skeleton className="h-8 w-16 rounded-md" />
+          <Skeleton className="size-8 rounded-md" />
+          <Skeleton className="size-8 rounded-md" />
+        </div>
+        <div className="grid flex-1 grid-cols-[3rem_repeat(5,1fr)] gap-px p-3">
+          {Array.from({ length: 6 }).map((_, c) => (
+            <div key={c} className="grid content-start gap-3">
+              {c > 0 ? <Skeleton className="mx-auto h-5 w-12" /> : null}
+              {c > 0 ? <Skeleton className="h-12 w-full rounded-md" style={{ marginTop: `${(c * 37) % 60}px` }} /> : null}
+              {c > 1 && c < 5 ? <Skeleton className="h-16 w-full rounded-md" /> : null}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * The calendar. `state="loading"` shows a skeleton of its sidebar and week, `state="error"` an error with retry in the same
+ * frame, and `state="empty"` the real week with no events, so adding one still works.
+ */
+function Calendar1({ state = "ready", onRetry, errorState, defaultEvents, height = "44rem", className, style, ...props }: Calendar1Props) {
+  if (state === "loading" || state === "error") {
+    return (
+      <div
+        data-slot="calendar-1"
+        data-state={state}
+        className={cn("bg-background overflow-hidden rounded-2xl border shadow-[0_30px_80px_-50px_rgb(0_0_0/0.4)]", className)}
+        style={{ height, ...style }}
+        {...frameProps(props)}
+      >
+        <StateView
+          state={state}
+          bare
+          className="h-full"
+          loading={<Calendar1Skeleton />}
+          label="Loading your calendar"
+          error={{ title: "Could not load your calendar", description: "The calendar service did not answer. Your events are safe.", ...errorState }}
+          onRetry={onRetry}
+        >
+          {null}
+        </StateView>
+      </div>
+    )
+  }
+  return <Calendar1Inner defaultEvents={state === "empty" ? [] : defaultEvents} height={height} className={className} style={style} {...props} />
 }
 
 export { Calendar1, type Calendar1Props, type Calendar1Event }

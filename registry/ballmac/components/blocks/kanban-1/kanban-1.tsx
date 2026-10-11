@@ -9,6 +9,8 @@ import { Badge } from "@/components/ballmac/badge"
 import { Button } from "@/components/ballmac/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ballmac/dropdown-menu"
 import { Input } from "@/components/ballmac/input"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 
 type Kanban1Task = {
@@ -26,7 +28,7 @@ type Kanban1Task = {
 
 type Kanban1Column = { id: string; title: string; tasks: Kanban1Task[] }
 
-type Kanban1Props = Omit<React.ComponentProps<"section">, "title" | "onChange"> & {
+type Kanban1Props = Omit<React.ComponentProps<"section">, "title" | "onChange"> & StateProps & {
   /** Board heading. */
   title?: string
   /** One line under the heading. */
@@ -74,7 +76,7 @@ const tones = ["bg-chart-1/25", "bg-chart-3/25", "bg-chart-5/25", "bg-chart-2/25
 const initials = (name: string) => name.split(" ").map((w) => w[0]).join("").slice(0, 2)
 const toneOf = (name: string) => tones[name.split("").reduce((n, c) => n + c.charCodeAt(0), 0) % tones.length]
 
-function Kanban1({
+function Kanban1Inner({
   title = "Launch plan",
   description = "Drag cards between columns, or pick one up with Space and move it with the arrow keys.",
   defaultColumns = defaults,
@@ -287,6 +289,60 @@ function Kanban1({
           )
         })}
       </div>
+    </section>
+  )
+}
+
+
+/** The same columns and cards as the ready board, so nothing jumps when tasks arrive. */
+function Kanban1Skeleton({ height }: { height: string }) {
+  return (
+    <div className="flex gap-3 overflow-hidden" style={{ height }} aria-hidden="true">
+      {[3, 2, 3].map((cards, c) => (
+        <div key={c} className="bg-muted/40 flex w-72 shrink-0 flex-col gap-2 rounded-2xl border p-2 md:min-w-64 md:flex-1">
+          <div className="flex items-center justify-between px-2 py-2">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="size-6 rounded-md" />
+          </div>
+          {Array.from({ length: cards }).map((_, i) => (
+            <div key={i} className="bg-card grid gap-2.5 rounded-xl border p-3">
+              <Skeleton className="h-4 w-4/5" />
+              <Skeleton className="h-3.5 w-3/5" />
+              <div className="mt-1 flex items-center justify-between">
+                <Skeleton className="h-5 w-14 rounded-full" />
+                <Skeleton className="size-6 rounded-full" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/**
+ * The board. `state="loading"` shows a skeleton of its columns under the real heading, `state="error"` an error with retry, and
+ * `state="empty"` a message that there are no cards yet.
+ */
+function Kanban1({ state = "ready", onRetry, emptyState, errorState, title = "Launch plan", description = "Drag cards between columns, or pick one up with Space and move it with the arrow keys.", height = "34rem", className, ...props }: Kanban1Props) {
+  if (state === "ready") return <Kanban1Inner title={title} description={description} height={height} className={className} {...props} />
+  return (
+    <section data-slot="kanban-1" data-state={state} className={cn("mx-auto w-full max-w-7xl px-4 py-8 sm:px-6", className)} {...frameProps(props)}>
+      <div className="max-w-xl px-1">
+        <h2 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h2>
+        <p className="text-muted-foreground mt-1 text-sm text-pretty">{description}</p>
+      </div>
+      <StateView
+        state={state}
+        className="mt-5"
+        loading={<Kanban1Skeleton height={height} />}
+        label="Loading the board"
+        empty={{ title: "No cards yet", description: "Add your first card to start planning.", ...emptyState }}
+        error={{ title: "Could not load the board", description: "The board did not load. Your cards are safe.", ...errorState }}
+        onRetry={onRetry}
+      >
+        {null}
+      </StateView>
     </section>
   )
 }

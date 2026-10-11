@@ -4,6 +4,8 @@
 import * as React from "react"
 import { ArrowUpRight, Clock } from "lucide-react"
 
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 import { useLocale } from "@/lib/ballmac/i18n"
 import { Media, type MediaSource } from "@/components/ballmac/media"
@@ -32,7 +34,7 @@ type Blog1Post = {
   cover?: number
 }
 
-type Blog1Props = Omit<React.ComponentProps<"section">, "title"> & {
+type Blog1Props = Omit<React.ComponentProps<"section">, "title"> & StateProps & {
   /** Label above the heading. */
   eyebrow?: string
   /** Section heading. */
@@ -142,7 +144,7 @@ function Cover({ post, index, className }: { post: Blog1Post; index: number; cla
   return <BlogCover variant={post.cover ?? index} className={className} />
 }
 
-function Blog1({
+function Blog1Inner({
   eyebrow = "The Acme blog",
   title = "Ideas, updates and field notes.",
   description = "What we are building, how we think about it and what we learn from the teams who use it.",
@@ -230,6 +232,63 @@ function Blog1({
           ))}
         </ul>
       )}
+    </section>
+  )
+}
+
+
+/** The same shapes as the ready view, so nothing jumps when data arrives. */
+function Blog1Skeleton() {
+  return (
+    <div aria-hidden="true">
+      <div className="bg-card grid overflow-hidden rounded-3xl border lg:grid-cols-2">
+        <Skeleton className="aspect-[16/10] w-full rounded-none" />
+        <div className="flex flex-col justify-center gap-4 p-6 sm:p-10 lg:p-12">
+          <Skeleton className="h-6 w-24 rounded-full" />
+          <Skeleton className="h-8 w-4/5" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="mt-4 h-8 w-48" />
+        </div>
+      </div>
+      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="grid gap-3">
+            <Skeleton className="aspect-[16/10] w-full rounded-2xl" />
+            <Skeleton className="h-5 w-20 rounded-full" />
+            <Skeleton className="h-6 w-5/6" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * With `state="loading"` this shows a skeleton of its layout under the real heading, with `state="error"` an error with retry, and with `state="empty"` a message that there is nothing to show yet.
+ */
+function Blog1({ state = "ready", onRetry, emptyState, errorState, eyebrow = "The Acme blog", title = "Ideas, updates and field notes.", description = "What we are building, how we think about it and what we learn from the teams who use it.", className, ...props }: Blog1Props) {
+  if (state === "ready") return <Blog1Inner eyebrow={eyebrow} title={title} description={description} className={className} {...props} />
+  return (
+    <section data-slot="blog-1" data-state={state} className={cn("mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28", className)} {...frameProps(props)}>
+      <div className="max-w-2xl">
+        <p className="text-muted-foreground text-sm font-medium">{eyebrow}</p>
+        <h2 className="mt-3 text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl lg:text-5xl">{title}</h2>
+        <p className="text-muted-foreground mt-4 text-lg text-pretty">{description}</p>
+      </div>
+      <StateView
+        state={state}
+        className="mt-10"
+        loading={<Blog1Skeleton />}
+        label="Loading posts"
+        empty={{ title: 'No posts yet', description: 'New articles will appear here as soon as they are published.', ...emptyState }}
+        error={{ title: 'Could not load the posts', description: 'The blog did not answer. Please try again.', ...errorState }}
+        onRetry={onRetry}
+      >
+        {null}
+      </StateView>
     </section>
   )
 }

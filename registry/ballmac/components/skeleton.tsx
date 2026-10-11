@@ -13,8 +13,10 @@ function Skeleton({ className, animated = true, ...props }: SkeletonProps) {
       data-slot="skeleton"
       aria-hidden="true"
       className={cn(
-        "bg-muted rounded-md",
-        animated && "motion-safe:animate-pulse",
+        // a little stronger than bg-muted, so a placeholder reads clearly on a white page; foreground-based, so every theme gets a matching tone
+        "bg-foreground/[0.07] rounded-md dark:bg-foreground/[0.1]",
+        // the pulse holds still when the theme turns decorative loops off; the placeholder still says "loading"
+        animated && "motion-safe:animate-pulse [animation-play-state:var(--bm-ambient-state,running)]",
         className,
       )}
       {...props}

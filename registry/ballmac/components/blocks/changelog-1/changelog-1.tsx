@@ -6,6 +6,8 @@ import { Bug, ChevronDown, Rss, Sparkles, Wand2 } from "lucide-react"
 
 import { BlogCover } from "@/components/ballmac/blocks/blog-1/blog-1"
 import { buttonVariants } from "@/components/ballmac/button"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 import { useLocale } from "@/lib/ballmac/i18n"
 import { Media, type MediaSource } from "@/components/ballmac/media"
@@ -37,7 +39,7 @@ type Changelog1Release = {
   imageAlt?: string
 }
 
-type Changelog1Props = Omit<React.ComponentProps<"section">, "title"> & {
+type Changelog1Props = Omit<React.ComponentProps<"section">, "title"> & StateProps & {
   /** Section heading. */
   title?: string
   /** One sentence under the heading. */
@@ -108,7 +110,7 @@ function formatDate(iso: string, locale: string) {
   return new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`))
 }
 
-function Changelog1({
+function Changelog1Inner({
   title = "What’s new",
   description = "Every improvement we ship, newest first.",
   releases = defaults,
@@ -207,6 +209,64 @@ function Changelog1({
           </button>
         </div>
       )}
+    </section>
+  )
+}
+
+
+/** The same shapes as the ready view, so nothing jumps when data arrives. */
+function Changelog1Skeleton() {
+  return (
+    <div aria-hidden="true">
+      <div className="flex flex-wrap gap-1.5">
+        {[0, 1, 2, 3].map((i) => (
+          <Skeleton key={i} className="h-9 w-28 rounded-full" />
+        ))}
+      </div>
+      <ol className="mt-12 space-y-14">
+        {[0, 1, 2].map((i) => (
+          <li key={i} className="grid gap-4 md:grid-cols-[9rem_1fr] md:gap-10">
+            <div className="grid gap-2">
+              <Skeleton className="h-8 w-24" />
+              <Skeleton className="h-4 w-28" />
+            </div>
+            <div className="grid gap-3">
+              <Skeleton className="h-6 w-2/3" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-11/12" />
+              <Skeleton className="h-4 w-3/5" />
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
+}
+
+/**
+ * With `state="loading"` this shows a skeleton of its layout under the real heading, with `state="error"` an error with retry, and with `state="empty"` a message that there is nothing to show yet.
+ */
+function Changelog1({ state = "ready", onRetry, emptyState, errorState, title = "What’s new", description = "Every improvement we ship, newest first.", className, ...props }: Changelog1Props) {
+  if (state === "ready") return <Changelog1Inner title={title} description={description} className={className} {...props} />
+  return (
+    <section data-slot="changelog-1" data-state={state} className={cn("mx-auto max-w-5xl px-4 py-20 sm:px-6 md:py-28", className)} {...frameProps(props)}>
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="max-w-xl">
+          <h2 className="text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl lg:text-5xl">{title}</h2>
+          <p className="text-muted-foreground mt-4 text-lg text-pretty">{description}</p>
+        </div>
+      </div>
+      <StateView
+        state={state}
+        className="mt-10"
+        loading={<Changelog1Skeleton />}
+        label="Loading releases"
+        empty={{ title: 'No releases yet', description: 'Release notes will appear here after the first update ships.', ...emptyState }}
+        error={{ title: 'Could not load the changelog', description: 'The release notes did not load. Please try again.', ...errorState }}
+        onRetry={onRetry}
+      >
+        {null}
+      </StateView>
     </section>
   )
 }

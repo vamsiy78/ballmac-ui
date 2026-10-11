@@ -9,6 +9,8 @@ import { Button, buttonVariants } from "@/components/ballmac/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ballmac/dialog"
 import { Field, FieldError, FieldGroup, FieldLabel, useFieldControl } from "@/components/ballmac/field"
 import { Input } from "@/components/ballmac/input"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 import { useLocale } from "@/lib/ballmac/i18n"
 
@@ -30,7 +32,7 @@ type Billing1Invoice = {
   href?: string
 }
 
-type Billing1Props = Omit<React.ComponentProps<"section">, "title"> & {
+type Billing1Props = Omit<React.ComponentProps<"section">, "title"> & StateProps & {
   /** Page heading. */
   title?: string
   /** One line under the heading. */
@@ -77,7 +79,7 @@ function FieldInput(props: React.ComponentProps<typeof Input>) {
   return <Input {...useFieldControl()} {...props} />
 }
 
-function Billing1({
+function Billing1Inner({
   title = "Billing",
   description = "Your plan, usage, payment method and invoices.",
   plan = { name: "Pro", price: 32, per: "seat / month", seats: 7, seatLimit: 10, renews: "2026-10-28" },
@@ -263,6 +265,91 @@ function Billing1({
           ))}
         </ul>
       </div>
+    </section>
+  )
+}
+
+
+/** The same shapes as the ready view, so nothing jumps when data arrives. */
+function Billing1Skeleton() {
+  return (
+    <div aria-hidden="true">
+      <div className="grid gap-4 lg:grid-cols-[1fr_20rem]">
+        <div className="bg-card rounded-2xl border p-5 sm:p-6">
+          <div className="flex justify-between gap-4">
+            <div className="grid gap-2">
+              <Skeleton className="h-3.5 w-24" />
+              <Skeleton className="h-8 w-36" />
+              <Skeleton className="h-3.5 w-64" />
+            </div>
+            <div className="grid justify-items-end gap-2">
+              <Skeleton className="h-9 w-24" />
+              <Skeleton className="h-3.5 w-16" />
+            </div>
+          </div>
+          <div className="mt-8 grid gap-4">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="grid gap-2">
+                <div className="flex justify-between">
+                  <Skeleton className="h-3.5 w-28" />
+                  <Skeleton className="h-3.5 w-20" />
+                </div>
+                <Skeleton className="h-2 w-full rounded-full" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="space-y-4">
+          <div className="bg-card grid gap-3 rounded-2xl border p-5">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-16 w-full rounded-xl" />
+          </div>
+          <div className="bg-card grid gap-3 rounded-2xl border p-5">
+            <Skeleton className="h-4 w-28" />
+            <Skeleton className="h-3.5 w-48" />
+            <Skeleton className="h-3.5 w-full" />
+          </div>
+        </div>
+      </div>
+      <div className="bg-card mt-4 overflow-hidden rounded-2xl border">
+        <div className="px-5 py-4">
+          <Skeleton className="h-4 w-24" />
+        </div>
+        <ul className="divide-y border-t">
+          {[0, 1, 2, 3].map((i) => (
+            <li key={i} className="flex items-center gap-4 px-5 py-3">
+              <Skeleton className="h-3.5 w-24" />
+              <Skeleton className="h-3.5 w-20" />
+              <Skeleton className="ms-auto h-5 w-14 rounded-full" />
+              <Skeleton className="h-3.5 w-14" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * With `state="loading"` this shows a skeleton of its layout under the real heading, with `state="error"` an error with retry, and with `state="empty"` a message that there is nothing to show yet.
+ */
+function Billing1({ state = "ready", onRetry, emptyState, errorState, title = "Billing", description = "Your plan, usage, payment method and invoices.", className, ...props }: Billing1Props) {
+  if (state === "ready") return <Billing1Inner title={title} description={description} className={className} {...props} />
+  return (
+    <section data-slot="billing-1" data-state={state} className={cn("mx-auto w-full max-w-5xl px-4 py-8 sm:px-6", className)} {...frameProps(props)}>
+      <h2 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h2>
+      <p className="text-muted-foreground mt-1 text-sm">{description}</p>
+      <StateView
+        state={state}
+        className="mt-6"
+        loading={<Billing1Skeleton />}
+        label="Loading billing"
+        empty={{ title: 'No billing details yet', description: 'Choose a plan and your invoices will show up here.', ...emptyState }}
+        error={{ title: 'Could not load billing', description: 'The billing service did not answer. You have not been charged.', ...errorState }}
+        onRetry={onRetry}
+      >
+        {null}
+      </StateView>
     </section>
   )
 }

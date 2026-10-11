@@ -136,20 +136,20 @@
     "hash": "90340a42c75cad23a8db0715972db826f7972b40c295474f527dc162e0f12ec2"
   },
   "billing-1": {
-    "version": "1.0.0",
-    "hash": "44130c3aff22108ee115964d503b775bdd92905fd55f3ad04ddbf61f6beab7ad"
+    "version": "1.1.0",
+    "hash": "fc17eebca8d9b07f5d6d8d47242a5cc7ddb8153d7c98c89943c0ea6d35cc5b44"
   },
   "billing-2": {
-    "version": "1.0.0",
-    "hash": "8030091ca076c5fd779db60ba70217d1f9a51fed74f6abdfaeadac7e6f5c2700"
+    "version": "1.1.0",
+    "hash": "170236395b891521dcb7e78cfdc070b775f22ea83cf732fc4837e5b8aaa5f0af"
   },
   "billing-card": {
     "version": "1.0.0",
     "hash": "32bf79cfc4d606e39afafd4b1de04b12636a59629a3f8aeb1425db46b7ef843f"
   },
   "blog-1": {
-    "version": "1.0.0",
-    "hash": "7b7672229b8a9745b25ddfab4627dbcf94bde1911c0e32d75f0d678360202b32"
+    "version": "1.1.0",
+    "hash": "b0a59fe13a211d63b50486f8a151ff26db4fef5a69e3852040d69c99c8e11501"
   },
   "blog-post-1": {
     "version": "1.0.0",
@@ -184,8 +184,8 @@
     "hash": "a0fe042260183a6a73609f20e60dac74cd0b42bc64015acf526c3d72698631dc"
   },
   "calendar-1": {
-    "version": "1.0.1",
-    "hash": "cfb54fa7ce21059bfd17606b3e870885c8d7cf694d69201e8638f0d666caef35"
+    "version": "1.1.0",
+    "hash": "82ebcb4f84d005f8306f2bd13104bf6688b67828d35891b74b4221105d41ac03"
   },
   "calendar-agenda": {
     "version": "1.0.0",
@@ -208,8 +208,8 @@
     "hash": "6996c43951f48cb440c38aed8bf7ac5757a85e913e50eccbd9a2394ca0a86e1a"
   },
   "changelog-1": {
-    "version": "1.0.0",
-    "hash": "15dea3065a215e205c55c62fe9810dc5bb2f17e1c9c54d75e5f68c895b657686"
+    "version": "1.1.0",
+    "hash": "c095e5d58efc5ec06cacabe93344f502f4607a31f6b2b7a8028eece3de09b649"
   },
   "changelog-feed": {
     "version": "1.0.0",
@@ -324,12 +324,12 @@
     "hash": "68ba4fccae5ecbe191784291fcd34a2747f089967cca75ce77a573e7349f3e6c"
   },
   "dashboard-1": {
-    "version": "1.0.0",
-    "hash": "4441f3a1c771149d7f70e6ad52f0bfdde68bbdd6709223ec172e47d2552e7a86"
+    "version": "1.1.0",
+    "hash": "1ed085a067a1a39375c7122e94f329b8f373b02d35cca502880177487c6c7258"
   },
   "dashboard-2": {
-    "version": "1.0.0",
-    "hash": "f913099b350768dfda61cef79c101bacc2f81782378106f0ba3f0cbfb8d545c0"
+    "version": "1.1.0",
+    "hash": "2dab261f07ab45d2985c580444a629c7cd011b9429f9a088dc48eb8b4e23783d"
   },
   "data-table": {
     "version": "1.0.0",
@@ -652,8 +652,8 @@
     "hash": "1f861d5d9d90c96ec9e7ed51d0e689155e5a35f87bfba1b7e0ab80f40c9c5a94"
   },
   "kanban-1": {
-    "version": "1.0.0",
-    "hash": "2c60738c8eeb1a3bb40ecd7bd91d81ab0a219984b58a450496d8b1047f9434db"
+    "version": "1.1.0",
+    "hash": "d0de886b2da81ac162d2dfa0ea2edf62daf6a711206ee31eb1c1517a0cebb60e"
   },
   "kanban-board": {
     "version": "1.0.0",
@@ -736,8 +736,8 @@
     "hash": "99201841c0446db1df1e680eab4a79905c2979c6e3aad360615a200316b4db12"
   },
   "mail-1": {
-    "version": "1.0.0",
-    "hash": "e4af009b2d194b014f0a857e45783451927df7ed7c8c3bdbee5c5306fe94cfd7"
+    "version": "1.1.0",
+    "hash": "3e7c1ea17f456d2028aca4a3f79761f16b9798f10fb050638ff5944bdc5e2163"
   },
   "marquee": {
     "version": "1.0.0",
@@ -1048,8 +1048,8 @@
     "hash": "ed825e6b843bbcd6d8bc4cccd51b3308dba90ebd373f3a423803066a8c9a3264"
   },
   "skeleton": {
-    "version": "1.0.0",
-    "hash": "c6b6c88d1ed3f1b4e29122323134a41fe93abdd7e676e003502249f852208796"
+    "version": "1.0.1",
+    "hash": "54558eec8fc23d94d9916b7234a0f86facc317dd941ad50958092eb9735367c3"
   },
   "slider": {
     "version": "1.0.0",
@@ -1110,6 +1110,10 @@
   "stat-card": {
     "version": "1.0.0",
     "hash": "d6a3aa89e1f4f3cdf525998492ef991db9b7bf50395c9bc1b177acf781c6cc5b"
+  },
+  "state-view": {
+    "version": "1.0.0",
+    "hash": "b09c3f95a1bcff41f4115471286cd97856540f8887e4e21eb301944b667e9531"
   },
   "stats-1": {
     "version": "1.0.1",
@@ -1374,6 +1378,10 @@
   "usage-meter": {
     "version": "1.0.0",
     "hash": "c5c6605e32aece1441db1e5f6d021bc42aa764d026840484bace12438c960343"
+  },
+  "use-resource": {
+    "version": "1.0.0",
+    "hash": "40345093a8f9818b119adccbe996006404400effd24317cb2cd7e4ab5074bd29"
   },
   "user-menu": {
     "version": "1.0.0",

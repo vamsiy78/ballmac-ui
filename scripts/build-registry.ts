@@ -107,6 +107,8 @@ function toRegistryItems(item: LoadedItem) {
       changelog: item.changelog.length ? item.changelog : undefined,
       tests: testPlan.has(item.name) ? true : undefined,
       ai: item.ai,
+      states: item.states.length ? item.states : undefined,
+      statesNone: item.statesNone,
       source: item.source,
       examples: item.examples.map((e) => e.name),
       url: `${REGISTRY_URL}/components/${item.name}`,

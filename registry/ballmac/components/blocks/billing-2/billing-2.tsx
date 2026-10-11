@@ -7,6 +7,8 @@ import { Check, Minus, Plus } from "lucide-react"
 import { Badge } from "@/components/ballmac/badge"
 import { Button } from "@/components/ballmac/button"
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 import { useLocale } from "@/lib/ballmac/i18n"
 
@@ -21,7 +23,7 @@ type Billing2Plan = {
   features: string[]
 }
 
-type Billing2Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
+type Billing2Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & StateProps & {
   /** Page heading. */
   title?: string
   /** One line under the heading. */
@@ -59,7 +61,7 @@ const defaultPlans: Billing2Plan[] = [
 const DAY = 86400000
 const utc = (iso: string) => Date.parse(`${iso}T00:00:00Z`)
 
-function Billing2({
+function Billing2Inner({
   title = "Change your plan",
   description = "Pick a plan and seats. You only pay the difference for the days left in this period.",
   plans = defaultPlans,
@@ -190,6 +192,65 @@ function Billing2({
           </aside>
         </div>
       )}
+    </section>
+  )
+}
+
+
+/** The same shapes as the ready view, so nothing jumps when data arrives. */
+function Billing2Skeleton() {
+  return (
+    <div className="grid gap-6 lg:grid-cols-[1fr_21rem]" aria-hidden="true">
+      <div className="min-w-0 space-y-6">
+        <div className="grid gap-3 sm:grid-cols-3">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="bg-card grid gap-3 rounded-2xl border p-5">
+              <Skeleton className="h-5 w-20" />
+              <Skeleton className="h-8 w-24" />
+              <Skeleton className="h-3.5 w-full" />
+              <Skeleton className="h-3.5 w-4/5" />
+            </div>
+          ))}
+        </div>
+        <div className="bg-card grid gap-4 rounded-2xl border p-5">
+          <Skeleton className="h-4 w-20" />
+          <Skeleton className="h-10 w-full rounded-lg" />
+        </div>
+      </div>
+      <div className="bg-card grid content-start gap-4 rounded-2xl border p-5">
+        <Skeleton className="h-4 w-28" />
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="flex justify-between">
+            <Skeleton className="h-3.5 w-28" />
+            <Skeleton className="h-3.5 w-14" />
+          </div>
+        ))}
+        <Skeleton className="mt-2 h-10 w-full rounded-lg" />
+      </div>
+    </div>
+  )
+}
+
+/**
+ * With `state="loading"` this shows a skeleton of its layout under the real heading, with `state="error"` an error with retry, and with `state="empty"` a message that there is nothing to show yet.
+ */
+function Billing2({ state = "ready", onRetry, emptyState, errorState, title = "Change your plan", description = "Pick a plan and seats. You only pay the difference for the days left in this period.", className, ...props }: Billing2Props) {
+  if (state === "ready") return <Billing2Inner title={title} description={description} className={className} {...props} />
+  return (
+    <section data-slot="billing-2" data-state={state} className={cn("mx-auto w-full max-w-5xl px-4 py-8 sm:px-6", className)} {...frameProps(props)}>
+      <h2 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h2>
+      <p className="text-muted-foreground mt-1 text-sm">{description}</p>
+      <StateView
+        state={state}
+        className="mt-8"
+        loading={<Billing2Skeleton />}
+        label="Loading plans"
+        empty={{ title: 'No plans available', description: 'There are no plans to choose from right now.', ...emptyState }}
+        error={{ title: 'Could not load the plans', description: 'The pricing service did not answer. Nothing has been changed.', ...errorState }}
+        onRetry={onRetry}
+      >
+        {null}
+      </StateView>
     </section>
   )
 }
