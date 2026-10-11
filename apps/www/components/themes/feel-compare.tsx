@@ -19,7 +19,7 @@ const rows = [
 ]
 
 /** The same small app drawn once per feel, in the theme being built, so the difference is the only thing to look at. */
-function MiniApp({ feel }: { feel: FeelId }) {
+export function MiniApp({ feel }: { feel: FeelId }) {
   const [on, setOn] = React.useState(true)
   const [row, setRow] = React.useState("Launch")
   return (

@@ -96,7 +96,7 @@ const lights = {
 
 function TrafficLight({ kind, glyph, label, onPress }: { kind: "close" | "minimize" | "zoom"; glyph: keyof typeof lights; label: string; onPress?: () => void }) {
   const shared = cn(
-    "relative flex size-3 shrink-0 items-center justify-center rounded-full text-black/60 outline-none",
+    "relative flex size-[12px] shrink-0 items-center justify-center rounded-full text-black/60 outline-none",
     "bg-(--light) shadow-[inset_0_0_0_0.5px_rgb(0_0_0/0.18)] dark:shadow-[inset_0_0_0_0.5px_rgb(255_255_255/0.12)]",
     "group-data-[state=inactive]/app-window:bg-foreground/15 group-data-[state=inactive]/app-window:group-hover/lights:bg-(--light)"
   )
@@ -129,8 +129,9 @@ function MacControls() {
     }
   }, [])
   const zoom = alt && onFullscreen ? onMaximize : (onFullscreen ?? onMaximize)
+  // 12 px lights 12 px apart keep every target 24 px from its neighbours, which is what WCAG 2.5.8 asks of small targets
   return (
-    <div data-slot="app-window-controls" dir="ltr" className="group/lights flex shrink-0 items-center gap-2" style={noDrag}>
+    <div data-slot="app-window-controls" dir="ltr" className="group/lights flex shrink-0 items-center gap-[12px]" style={noDrag}>
       <TrafficLight kind="close" glyph="close" label={msg("app-window.close", "Close window")} onPress={onClose} />
       <TrafficLight kind="minimize" glyph="minimize" label={msg("app-window.minimize", "Minimize window")} onPress={onMinimize} />
       <TrafficLight kind="zoom" glyph={alt ? "plus" : "zoom"} label={alt ? msg("app-window.zoom", "Zoom window") : msg("app-window.fullscreen", "Enter full screen")} onPress={zoom} />

@@ -47,6 +47,10 @@ export default defineItem({
       "AppWindowControls renders only the controls, for a custom title bar",
     ],
   },
-  version: "1.0.0",
-  updated: "2026-10-12",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "macOS traffic lights are 12 px apart so every target meets the 24 px target-size rule (WCAG 2.5.8)." },
+    { version: "1.0.0", date: "2026-10-12", note: "First release." },
+  ],
 })

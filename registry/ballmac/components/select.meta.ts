@@ -38,9 +38,10 @@ export default defineItem({
     copyright: "Copyright (c) 2023 shadcn",
     modified: true,
   },
-  version: "1.0.1",
+  version: "1.0.2",
   updated: "2026-10-11",
   changelog: [
+    { version: "1.0.2", date: "2026-10-11", note: "Switch track, thumb travel, and checkbox and radio size follow the platform feel tokens (--bm-switch-*, --bm-check-size); select and command surfaces take the feel's frosting. Unchanged without a feel." },
     { version: "1.0.1", date: "2026-10-11", note: "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel." },
     { version: "1.0.0", date: "2026-09-28", note: "First release." },
   ],

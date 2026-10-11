@@ -26,7 +26,7 @@ function Toolbar({ label, title, subtitle, className, children, ...props }: Tool
     <Primitive.Root
       data-slot="toolbar"
       aria-label={label}
-      className={cn("flex min-h-[52px] w-full items-center gap-1.5 border-b border-foreground/[0.08] bg-background/70 px-3 text-foreground backdrop-blur-xl backdrop-saturate-150 [scrollbar-width:none] max-sm:overflow-x-auto [&::-webkit-scrollbar]:hidden", className)}
+      className={cn("flex min-h-[var(--bm-toolbar-h,52px)] w-full items-center gap-1.5 border-b border-foreground/[0.08] bg-background/70 px-3 text-foreground backdrop-blur-xl backdrop-saturate-150 [scrollbar-width:none] max-sm:overflow-x-auto [&::-webkit-scrollbar]:hidden", className)}
       {...props}
     >
       {(title || subtitle) && (

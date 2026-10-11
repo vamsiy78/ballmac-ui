@@ -28,6 +28,10 @@ export default defineItem({
     ],
     customization: ["labeled buttons", "segmented groups", "ToolbarSearch widths"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Bar height follows the platform feel (--bm-toolbar-h): 52 px on macOS, 48 on Windows, 44 on iOS. Unchanged without a feel." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

@@ -80,8 +80,8 @@
     "hash": "7431b529cfeeddb84b244f7e885607daeac75fba5172e18b37bf84bd1cce373b"
   },
   "app-window": {
-    "version": "1.0.0",
-    "hash": "a62332ef81ccbbb241430359d2487f218208ce006c6ad31bc4c11aa560d76a09"
+    "version": "1.0.1",
+    "hash": "ec62e29f1be60a79e32eb3c432d1dbb556e5a300c14997abeaa7d88ed69a440e"
   },
   "approval-card": {
     "version": "1.0.0",
@@ -224,8 +224,8 @@
     "hash": "d2aa04641713bfa244f21458be5b19c09fd6b3f3831fab58589bcd80e57ed4be"
   },
   "checkbox": {
-    "version": "1.0.0",
-    "hash": "9c952eff2c0cec6bb27da40ecd6089f93a37d7cd84dc59957990c886513505f7"
+    "version": "1.0.1",
+    "hash": "780edfb220ffe5c360c0dfba3a0d059db63a26ba532566e09f93ae3f6bc308a1"
   },
   "circular-progress": {
     "version": "1.0.0",
@@ -256,8 +256,8 @@
     "hash": "7ddf8a93692a11ab41e7ff5153301e375d467eb0f3a3d28e200ff9c7bb289bf2"
   },
   "command": {
-    "version": "1.0.0",
-    "hash": "b504cfd8a65e72e39201ba2deefcf5b498756ddfd6e404166a3daa794fc9cc4c"
+    "version": "1.0.1",
+    "hash": "8eb63c30d74d6b6875ade91a11019719c910f4756d887a4767f0d82d7f05861b"
   },
   "command-bar": {
     "version": "1.0.0",
@@ -928,8 +928,8 @@
     "hash": "e4685d1dccf67b0d61d3c43adf51e7bb4cb922774a8f76e3cd7c979aa94e1098"
   },
   "radio-group": {
-    "version": "1.0.0",
-    "hash": "6433cf66b68d00be5f045c0635874bb53e547d5052872fe9d798573be440e0c7"
+    "version": "1.0.1",
+    "hash": "0c7c70605b378c0a2997a9b58b7787535a07c85da762c5ff1427792f4cf7d6cf"
   },
   "rainbow-button": {
     "version": "1.0.1",
@@ -988,8 +988,8 @@
     "hash": "f1f98cd884d7de93204516e5751e5a982dbffc7ea37719a20235c6a066a3e625"
   },
   "select": {
-    "version": "1.0.1",
-    "hash": "18061610555a3abca2cb32a341717a06e50bed47a4db51440c2cb5c8dc660032"
+    "version": "1.0.2",
+    "hash": "4eb22cd72abbfe11184209305b85bba907f79d9aec0e81887bb455344d29fc13"
   },
   "separator": {
     "version": "1.0.0",
@@ -1140,8 +1140,8 @@
     "hash": "28f09ea8fc9ee17206544da092a7ac21b4fed04213258ace64f3c999f0441d04"
   },
   "switch": {
-    "version": "1.0.0",
-    "hash": "7b888c05cb5054a8a384c621c8381264998ee2c8c12e083f84b38c6aefa72119"
+    "version": "1.0.1",
+    "hash": "acdf54581db42ea493936c2a15481a94f24bd486ca089daac5be1fc6720438e0"
   },
   "table": {
     "version": "1.0.0",
@@ -1356,8 +1356,8 @@
     "hash": "79690d0dd28c21a06f5cf6b66cdf355af78c7bf15a63fb1dd071a648f2c7c8a9"
   },
   "toolbar": {
-    "version": "1.0.0",
-    "hash": "444f4a28a7fc79179a52d42c6c710acfcb177c3cf302b9c4df0cc6f7dd2d5d27"
+    "version": "1.0.1",
+    "hash": "7d065572385dd10a73d3d029d3bb546b8774be9b98f9de2012d1554ef747e6e3"
   },
   "tooltip": {
     "version": "1.0.0",

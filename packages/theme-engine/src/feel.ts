@@ -35,6 +35,8 @@ export type FeelTokens = {
   text: { xs: [string, string]; sm: [string, string]; base: [string, string] }
   focus: { width: string; alpha: string; color: string }
   control: { h: string; hSm: string; hLg: string; target: string }
+  /** Checkbox and radio box size, and the default switch track. */
+  toggle: { check: string; switchW: string; switchH: string }
   /** Opacity the pressed control dims to; 1 means it does not dim. */
   pressDim: string
   material: { blur: string; alpha: string }
@@ -42,6 +44,7 @@ export type FeelTokens = {
   menu: { itemH: string; itemRadius: string; pad: string }
   scrollbar: "auto" | "thin" | "none"
   titlebarH: string
+  toolbarH: string
 }
 
 /** Tailwind's own values, so the web feel reproduces today's look exactly. */
@@ -59,12 +62,14 @@ const WEB: FeelTokens = {
   focus: { width: "3px", alpha: "50%", color: "var(--ring)" },
   // in spacing units (9, 8 and 11 steps, as the h-9, h-8 and h-11 they replace), so the density setting still scales web controls as it always has
   control: { h: "calc(var(--spacing) * 9)", hSm: "calc(var(--spacing) * 8)", hLg: "calc(var(--spacing) * 11)", target: "0px" },
+  toggle: { check: "calc(var(--spacing) * 4)", switchW: "calc(var(--spacing) * 9)", switchH: "calc(var(--spacing) * 5)" },
   pressDim: "1",
   material: { blur: "0px", alpha: "100%" },
   sidebar: { itemH: "2rem", itemRadius: "calc(var(--radius) - 2px)", indicator: "0px" },
   menu: { itemH: "2rem", itemRadius: "calc(var(--radius) - 4px)", pad: "0.25rem" },
   scrollbar: "auto",
   titlebarH: "2.5rem",
+  toolbarH: "52px",
 }
 
 /** A soft, large shadow with a hairline edge, as on a Mac. */
@@ -104,12 +109,14 @@ export const FEELS: FeelPreset[] = [
       text: { xs: ["0.6875rem", "0.875rem"], sm: ["0.8125rem", "1.125rem"], base: ["0.9375rem", "1.375rem"] },
       focus: { width: "3px", alpha: "50%", color: "var(--ring)" },
       control: { h: "1.75rem", hSm: "1.5rem", hLg: "2rem", target: "0px" },
+      toggle: { check: "0.875rem", switchW: "2.375rem", switchH: "1.375rem" },
       pressDim: "1",
       material: { blur: "24px", alpha: "78%" },
       sidebar: { itemH: "1.75rem", itemRadius: "0.375rem", indicator: "0px" },
       menu: { itemH: "1.5rem", itemRadius: "0.3125rem", pad: "0.3125rem" },
       scrollbar: "thin",
       titlebarH: "2.75rem",
+      toolbarH: "52px",
     },
   },
   {
@@ -133,12 +140,14 @@ export const FEELS: FeelPreset[] = [
       text: { xs: ["0.8125rem", "1.125rem"], sm: ["0.9375rem", "1.375rem"], base: ["1.0625rem", "1.5rem"] },
       focus: { width: "3px", alpha: "40%", color: "var(--ring)" },
       control: { h: "2.75rem", hSm: "2.25rem", hLg: "3rem", target: "2.75rem" },
+      toggle: { check: "1.375rem", switchW: "3.1875rem", switchH: "1.9375rem" },
       pressDim: "0.6",
       material: { blur: "30px", alpha: "80%" },
       sidebar: { itemH: "2.75rem", itemRadius: "0.625rem", indicator: "0px" },
       menu: { itemH: "2.75rem", itemRadius: "0px", pad: "0px" },
       scrollbar: "none",
       titlebarH: "2.75rem",
+      toolbarH: "44px",
     },
   },
   {
@@ -154,12 +163,14 @@ export const FEELS: FeelPreset[] = [
       text: { xs: ["0.75rem", "1rem"], sm: ["0.875rem", "1.25rem"], base: ["1rem", "1.375rem"] },
       focus: { width: "2px", alpha: "100%", color: "var(--foreground)" },
       control: { h: "2rem", hSm: "1.5rem", hLg: "2.5rem", target: "0px" },
+      toggle: { check: "1.25rem", switchW: "2.5rem", switchH: "1.25rem" },
       pressDim: "1",
       material: { blur: "30px", alpha: "85%" },
       sidebar: { itemH: "2.5rem", itemRadius: "0.25rem", indicator: "3px" },
       menu: { itemH: "2rem", itemRadius: "0.25rem", pad: "0.25rem" },
       scrollbar: "thin",
       titlebarH: "2rem",
+      toolbarH: "48px",
     },
   },
 ]
@@ -201,6 +212,9 @@ export function feelVars(id: FeelId): FeelVars {
     "bm-control-h-sm": t.control.hSm,
     "bm-control-h-lg": t.control.hLg,
     "bm-target-min": t.control.target,
+    "bm-check-size": t.toggle.check,
+    "bm-switch-w": t.toggle.switchW,
+    "bm-switch-h": t.toggle.switchH,
     "bm-press-dim": t.pressDim,
     "bm-material-blur": t.material.blur,
     "bm-material-alpha": t.material.alpha,
@@ -212,6 +226,7 @@ export function feelVars(id: FeelId): FeelVars {
     "bm-menu-pad": t.menu.pad,
     "bm-scrollbar-width": t.scrollbar,
     "bm-titlebar-h": t.titlebarH,
+    "bm-toolbar-h": t.toolbarH,
   })
   const theme: Record<string, string> = {}
   for (const k of Object.keys(t.shadow)) if (k !== "popover") theme[`shadow-${k}`] = `var(--bm-shadow-${k})`

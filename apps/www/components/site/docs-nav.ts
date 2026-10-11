@@ -20,6 +20,7 @@ export const docsNav = [
       { href: "/blocks", label: "Blocks" },
       { href: "/templates", label: "Templates" },
       { href: "/themes", label: "Themes" },
+      { href: "/feels", label: "Platform feels" },
       { href: "/changelog", label: "Changelog" },
     ],
   },

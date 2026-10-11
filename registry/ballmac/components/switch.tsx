@@ -14,7 +14,7 @@ const switchVariants = cva(
     variants: {
       size: {
         sm: "h-4 w-7",
-        default: "h-5 w-9",
+        default: "h-[var(--bm-switch-h,calc(var(--spacing)*5))] w-[var(--bm-switch-w,calc(var(--spacing)*9))]",
       },
     },
     defaultVariants: { size: "default" },
@@ -35,7 +35,7 @@ function Switch({ className, size = "default", ...props }: SwitchProps) {
         data-slot="switch-thumb"
         className={cn(
           "pointer-events-none block rounded-full bg-background shadow-[0_1px_2px_0_rgb(0_0_0/0.2)] ring-0 transition-transform duration-200 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none data-[state=unchecked]:translate-x-px data-[state=checked]:translate-x-[calc(100%+1px)] rtl:data-[state=unchecked]:-translate-x-px rtl:data-[state=checked]:-translate-x-[calc(100%+1px)] dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground",
-          "size-4 group-data-[size=sm]/switch:size-3"
+          "size-[calc(var(--bm-switch-h,calc(var(--spacing)*5))_-_var(--spacing))] group-data-[size=sm]/switch:size-3 group-data-[size=default]/switch:data-[state=checked]:translate-x-[calc(var(--bm-switch-w,calc(var(--spacing)*9))_-_var(--bm-switch-h,calc(var(--spacing)*5))_+_1px)] group-data-[size=default]/switch:rtl:data-[state=checked]:-translate-x-[calc(var(--bm-switch-w,calc(var(--spacing)*9))_-_var(--bm-switch-h,calc(var(--spacing)*5))_+_1px)]"
         )}
       />
     </SwitchPrimitive.Root>
