@@ -4764,8 +4764,16 @@
           "planner",
           "agenda"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-01",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "The mini calendar uses the block's own today, so the block prerenders with Cache Components (the Next.js 16.4 default). The highlighted day is unchanged.",
+            "breaking": false
+          }
+        ],
         "ai": {
           "summary": "A scheduling view. Pass defaultEvents=[{ id, title, start, end, calendar, location?, allDay? }] with local 'YYYY-MM-DDTHH:mm' times, calendars, today (YYYY-MM-DD) and now (HH:mm) so the page is identical on the server and in the browser.",
           "whenToUse": [
@@ -12067,8 +12075,16 @@
           "range",
           "day-picker"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "React DayPicker reads the current time for today. That now happens inside Suspense, with a same-size placeholder in the prerendered page, so it builds with Cache Components (the Next.js 16.4 default). Pass today to skip the boundary.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Use mode single, multiple or range with selected and onSelect. All DayPicker props work: disabled, numberOfMonths, captionLayout dropdown, locale.",
@@ -15544,8 +15560,16 @@
           "popover",
           "form"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "The dates for the year dropdown are worked out only when the popover opens, so a page with a date picker prerenders with Cache Components (the Next.js 16.4 default). Nothing else changes.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Give it a defaultValue or value and onValueChange. presets add quick picks, dropdowns adds month and year selects, name submits YYYY-MM-DD.",

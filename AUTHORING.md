@@ -132,6 +132,15 @@ A test named exactly `<name>.test.tsx` ships with the item: `ballmac add <name> 
 self-contained: import only the item, its own `registryDependencies` and at most one other Ballmac item (the build skips a test that needs more),
 and use only the globals in `registry/tests/setup.ts`. Tests that cover a whole batch of items (`*-batch-*.test.tsx`) are for us and do not ship.
 
+## Prerendering: Cache Components and server components
+
+New Next.js 16.4 apps turn on Cache Components, and every page that is prerendered must work with it. `pnpm smoke` builds a fresh app exactly like that.
+
+- **Never read the current time or randomness while rendering**: `new Date()`, `Date.now()` and `Math.random()` (and `crypto.randomUUID()`) belong in an effect or an event handler. If an item genuinely needs "now" at render time, read it inside `<Suspense>` with a same-size fallback (see `calendar.tsx`) and let callers pass the value instead (`today`).
+- **Do not read `params`, `searchParams`, `cookies()` or `headers()` at the top of a template page**: wrap the part that does inside `<Suspense>` (see the Atlas order page).
+- **A file without "use client" runs on the server.** It may import components and types from a client file, but not functions or constants (`pnpm check` fails otherwise): put shared helpers in their own module, like `lib/media-image.ts`.
+- Examples are prerendered too: do not call `new Date()` in an example's render body for a "today" preset; use fixed dates, or read it inside `<Suspense>` as `date-picker-demo` does.
+
 ## Versions and the changelog
 
 `ballmac update` merges new versions into people's edited copies, so every change to an item's files must be a new version. `pnpm check` fails

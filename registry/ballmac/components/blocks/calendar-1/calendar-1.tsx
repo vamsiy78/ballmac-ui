@@ -180,7 +180,7 @@ function Calendar1({
             </form>
           </DialogContent>
         </Dialog>
-        <Calendar mode="single" selected={sel} month={sel} onMonthChange={(m) => setSelected(iso(Date.UTC(m.getFullYear(), m.getMonth(), 1)))} onSelect={(d) => d && setSelected(iso(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())))} className="-mx-2 p-0" />
+        <Calendar mode="single" selected={sel} month={sel} today={new Date(Number(today.slice(0, 4)), Number(today.slice(5, 7)) - 1, Number(today.slice(8, 10)))} onMonthChange={(m) => setSelected(iso(Date.UTC(m.getFullYear(), m.getMonth(), 1)))} onSelect={(d) => d && setSelected(iso(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())))} className="-mx-2 p-0" />
         <fieldset>
           <legend className="text-muted-foreground mb-2 text-xs font-medium">My calendars</legend>
           <ul className="space-y-1">

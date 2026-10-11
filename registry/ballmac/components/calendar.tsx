@@ -29,17 +29,18 @@ function Calendar({
   ...props
 }: CalendarProps) {
   const dir = useDirection(props.dir === "rtl" || props.dir === "ltr" ? props.dir : undefined);
-  return (
+  const wrapper = cn(
+    "group/calendar w-fit select-none [--cell-size:2.25rem]",
+    bordered && "rounded-xl border bg-card p-3 text-card-foreground shadow-xs",
+    className,
+  );
+  const picker = (
     <DayPicker
       dir={dir}
       data-slot="calendar"
       showOutsideDays={showOutsideDays}
       captionLayout={captionLayout}
-      className={cn(
-        "group/calendar w-fit select-none [--cell-size:2.25rem]",
-        bordered && "rounded-xl border bg-card p-3 text-card-foreground shadow-xs",
-        className,
-      )}
+      className={wrapper}
       classNames={{
         root: "relative",
         months: "relative flex flex-col gap-4 sm:flex-row",
@@ -89,6 +90,24 @@ function Calendar({
       }}
       {...props}
     />
+  );
+  // React DayPicker reads the current time for "today". Next.js Cache Components (the default in new Next.js 16.4 apps) only allows that
+  // read inside <Suspense> on a prerendered page, so it sits in one with a same-size placeholder. Pass `today` to skip the boundary.
+  if (props.today) return picker;
+  const months = Math.max(1, props.numberOfMonths ?? 1);
+  return (
+    <React.Suspense
+      fallback={
+        <div
+          aria-hidden="true"
+          data-slot="calendar"
+          className={wrapper}
+          style={{ width: `calc(var(--cell-size) * 7 * ${months} + 1rem * ${months - 1})`, boxSizing: "content-box", height: "calc(var(--cell-size) * 8.7)" }}
+        />
+      }
+    >
+      {picker}
+    </React.Suspense>
   );
 }
 

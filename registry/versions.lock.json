@@ -176,12 +176,12 @@
     "hash": "4be091077f6cd234f1030a8fa3cbe28ff2f08a107af17e362609a7496b6e8c2b"
   },
   "calendar": {
-    "version": "1.0.0",
-    "hash": "75b6ed9b611b792eebac08f0ad3b81a35af7b089fd112e159e86f121dca87968"
+    "version": "1.0.1",
+    "hash": "a0fe042260183a6a73609f20e60dac74cd0b42bc64015acf526c3d72698631dc"
   },
   "calendar-1": {
-    "version": "1.0.0",
-    "hash": "a68d1d379fb58c40688873bd3408629d098cc27d280c881e9f40f6544312e1c8"
+    "version": "1.0.1",
+    "hash": "cfb54fa7ce21059bfd17606b3e870885c8d7cf694d69201e8638f0d666caef35"
   },
   "calendar-agenda": {
     "version": "1.0.0",
@@ -332,8 +332,8 @@
     "hash": "5e494217bb48960fbf44ebac07ceacd4e3739c4b877b490f7f8321411f791c63"
   },
   "date-picker": {
-    "version": "1.0.0",
-    "hash": "d31369e4b8f9b3298da3c31bd59c9cc603c75e3963003238cffa17b62b9b7256"
+    "version": "1.0.1",
+    "hash": "402f49d4006e092d534e486cc851e4e2913a7882c95a5eef21c8ff4c8b017033"
   },
   "date-range-picker": {
     "version": "1.0.0",

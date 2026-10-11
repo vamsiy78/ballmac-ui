@@ -55,6 +55,38 @@ function toIso(d: Date) {
 const sameDay = (a?: Date, b?: Date) => !!a && !!b && toIso(a) === toIso(b);
 
 /** A button that opens a calendar popover to choose one date, with optional presets and form submission. */
+/**
+ * The calendar inside the popover. It is its own component so the dates for the year dropdown (which read the current date) are only worked out
+ * when the popover opens, not while a page is prerendered.
+ */
+function PickerCalendar({
+  value,
+  onSelect,
+  minDate,
+  maxDate,
+  dropdowns,
+}: {
+  value: Date | undefined;
+  onSelect: (date: Date | undefined) => void;
+  minDate?: Date;
+  maxDate?: Date;
+  dropdowns?: boolean;
+}) {
+  return (
+    <Calendar
+      className="p-3"
+      mode="single"
+      selected={value}
+      defaultMonth={value}
+      onSelect={onSelect}
+      disabled={[...(minDate ? [{ before: minDate }] : []), ...(maxDate ? [{ after: maxDate }] : [])]}
+      captionLayout={dropdowns ? "dropdown" : "label"}
+      startMonth={dropdowns ? (minDate ?? new Date(new Date().getFullYear() - 100, 0)) : undefined}
+      endMonth={dropdowns ? (maxDate ?? new Date(new Date().getFullYear() + 10, 11)) : undefined}
+    />
+  );
+}
+
 function DatePicker({
   value: valueProp,
   defaultValue,
@@ -139,16 +171,12 @@ function DatePicker({
               ))}
             </div>
           )}
-          <Calendar
-            className="p-3"
-            mode="single"
-            selected={value}
-            defaultMonth={value}
+          <PickerCalendar
+            value={value}
             onSelect={choose}
-            disabled={[...(minDate ? [{ before: minDate }] : []), ...(maxDate ? [{ after: maxDate }] : [])]}
-            captionLayout={dropdowns ? "dropdown" : "label"}
-            startMonth={dropdowns ? (minDate ?? new Date(new Date().getFullYear() - 100, 0)) : undefined}
-            endMonth={dropdowns ? (maxDate ?? new Date(new Date().getFullYear() + 10, 11)) : undefined}
+            minDate={minDate}
+            maxDate={maxDate}
+            dropdowns={dropdowns}
           />
         </div>
       </PopoverContent>

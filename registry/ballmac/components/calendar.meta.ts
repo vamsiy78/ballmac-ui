@@ -35,6 +35,7 @@ export default defineItem({
     copyright: "Copyright (c) 2023 shadcn",
     modified: true,
   },
-  version: "1.0.0",
-  updated: "2026-09-30",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "React DayPicker reads the current time for today. That now happens inside Suspense, with a same-size placeholder in the prerendered page, so it builds with Cache Components (the Next.js 16.4 default). Pass today to skip the boundary." }],
 });

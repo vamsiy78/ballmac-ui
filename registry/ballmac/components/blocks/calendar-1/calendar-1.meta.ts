@@ -27,6 +27,7 @@ export default defineItem({
     ],
     customization: ["defaultEvents, calendars, today, now (null hides the line)", "startHour and endHour", "onAdd(event), height"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "The mini calendar uses the block's own today, so the block prerenders with Cache Components (the Next.js 16.4 default). The highlighted day is unchanged." }],
 })

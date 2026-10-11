@@ -34,4 +34,13 @@ describe("Calendar", () => {
     await user.click(screen.getByRole("button", { name: /next month/i }));
     expect(screen.getByText("October 2026")).toBeInTheDocument();
   });
+  it("renders the grid straight away; the placeholder is only for prerendering", () => {
+    render(<Calendar mode="single" defaultMonth={new Date(2026, 8)} />);
+    expect(screen.getByRole("grid")).toBeInTheDocument();
+    expect(document.querySelector('[data-slot="calendar"][aria-hidden="true"]')).toBeNull();
+  });
+  it("uses the day you pass as today", () => {
+    const { container } = render(<Calendar mode="single" today={new Date(2026, 8, 15)} defaultMonth={new Date(2026, 8)} />);
+    expect(container.querySelector('[data-today="true"]')).toHaveAttribute("data-day", "2026-09-15");
+  });
 });

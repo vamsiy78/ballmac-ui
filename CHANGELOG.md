@@ -2,12 +2,12 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
-## 2026-10-11: Fixes: four components crashed in server components, and four template pages needed Suspense
+## 2026-10-11: Fixes: server-component crashes, and support for Next.js 16.4 Cache Components
 
 - Bento Grid, Team Switcher, Lock Screen and Control Center failed with "Attempted to call isMediaImage() from the server" when a server component rendered them. The helper now lives in its own small item, media-image, and the components import it from there (Media still exports it for code that used it). Each is now 1.0.1, so `ballmac update` merges the fix into your copy
 - The pages that read params in the Atlas, Goods, Podcast and Publication templates now do so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires: 1.0.1 each
 - A new build check fails when a file that runs on the server imports a function from a file marked "use client", so this kind of crash is caught before it ships
-- Known gap: Next.js 16.4 turns on Cache Components in new projects, and a few items still read the current date while prerendering (the calendar and date picker through react-day-picker's "today", for one). They work on Next.js 16.3 and in 16.4 projects without Cache Components. We are working through them
+- Next.js 16.4 turns on Cache Components in new projects, which does not allow reading the current time while a page is prerendered. Calendar, Date Picker and the Calendar 1 block did (react-day-picker reads today), so any page using them failed to build. Calendar now reads it inside Suspense with a same-size placeholder (pass `today` to skip that), Date Picker works out its year dropdown only when it opens, and Calendar 1 uses its own today: 1.0.1 each. Every free component, block and template, and every Pro block, now builds in a fresh Next.js 16.4 app with Cache Components on
 
 ## 2026-10-11: Update components without losing your edits, and install their tests
 

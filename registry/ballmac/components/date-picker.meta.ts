@@ -27,6 +27,7 @@ export default defineItem({
     ],
     customization: ["presets", "dropdowns for distant dates", "minDate and maxDate", "format (Intl options) and locale", "clearable and invalid"],
   },
-  version: "1.0.0",
-  updated: "2026-09-30",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [{ version: "1.0.1", date: "2026-10-11", note: "The dates for the year dropdown are worked out only when the popover opens, so a page with a date picker prerenders with Cache Components (the Next.js 16.4 default). Nothing else changes." }],
 });

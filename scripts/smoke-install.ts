@@ -4,7 +4,7 @@
  * runs `shadcn init` then `shadcn add` for every free item and example, and finally
  * `tsc --noEmit` and `next build`. Any failure means users would hit it too.
  *
- * Usage: pnpm smoke   (SMOKE_DIR to reuse a folder, SMOKE_BASE=radix, SMOKE_CACHE_COMPONENTS=1 to keep Next.js 16.4's new defaults)
+ * Usage: pnpm smoke   (SMOKE_DIR to reuse a folder, SMOKE_BASE=radix, SMOKE_PIN=1 for the Next.js version pinned in apps/www)
  */
 import { execSync, spawn } from "node:child_process"
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
@@ -42,11 +42,10 @@ try {
     dir,
   )
   const app = join(dir, "app")
-  // `create-next-app@latest` moves on: Next.js 16.4 turns on Cache Components, which rejects `new Date()` and similar reads during
-  // prerender (react-day-picker's "today" in the calendar and date picker, for example). Ballmac UI is not compatible with that yet,
-  // so the smoke test builds the Next.js version this repo pins, with the options that version defaults to.
-  // SMOKE_CACHE_COMPONENTS=1 keeps the new defaults to see how far the gap goes.
-  if (!process.env.SMOKE_CACHE_COMPONENTS) {
+  // A fresh app is tested exactly as `create-next-app@latest` creates it today (Next.js 16.4 turns on Cache Components, which does not allow
+  // reading the current time while a page is prerendered; Ballmac UI items are written for that). SMOKE_PIN=1 instead builds the Next.js
+  // version this repo pins, without those options, to check the older setup.
+  if (process.env.SMOKE_PIN) {
     const pinned = (JSON.parse(readFileSync(join(ROOT, "apps/www/package.json"), "utf8")) as { dependencies: Record<string, string> }).dependencies.next!
     run(`npm install next@${pinned} --save-exact --silent`, app)
     const config = join(app, "next.config.ts")

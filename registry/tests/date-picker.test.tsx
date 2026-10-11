@@ -34,4 +34,13 @@ describe("DatePicker", () => {
     expect(trigger).toHaveAttribute("aria-invalid", "true");
     expect(trigger).toBeDisabled();
   });
+  it("builds the year dropdown from the current year only when the popover opens", async () => {
+    const user = userEvent.setup();
+    render(<DatePicker aria-label="Birthday" dropdowns />);
+    expect(screen.queryByRole("grid")).not.toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /birthday/i }));
+    const year = new Date().getFullYear();
+    expect(screen.getByRole("option", { name: String(year) })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: String(year - 100) })).toBeInTheDocument();
+  });
 });
