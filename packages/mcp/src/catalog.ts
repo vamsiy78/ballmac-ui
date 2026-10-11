@@ -373,8 +373,51 @@ const SECTION_WORDS: Record<string, RegExp> = {
 const LANDING = ["header", "hero", "features", "pricing", "faq", "cta", "footer"]
 const PAGE_WORDS = /\b(landing|homepage|home page|marketing|launch|website|site|saas)\b/
 
+export const FEEL_IDS = ["web", "macos", "ios", "windows"] as const
+export type FeelChoice = (typeof FEEL_IDS)[number]
+
+const PLATFORM_WORDS: [Exclude<FeelChoice, "web">, RegExp][] = [
+  ["macos", /\b(macos|mac os|mac app|mac application|for mac|on mac)\b/],
+  ["windows", /\b(windows|win ?11|win ?10)\b/],
+  ["ios", /\b(ios|iphone|ipad|mobile web|mobile app|pwa|webview)\b/],
+]
+const DESKTOP_WORDS = /\b(tauri|electron|desktop app|desktop application|desktop software|menu ?bar app)\b/
+
+/**
+ * Which platform feel fits, and what to install for it. An explicit feel wins. Otherwise the intent decides: one platform named
+ * picks it, several platforms or a desktop shell with no platform picks "auto" (the device chooses), and anything else gets none.
+ * Desktop shells (Tauri, Electron) also get app-window, the window chrome.
+ */
+export function planFeel(intent: string, explicit?: FeelChoice, pm?: PackageManager) {
+  const text = intent.toLowerCase()
+  const named = PLATFORM_WORDS.filter(([, re]) => re.test(text)).map(([id]) => id)
+  const desktop = DESKTOP_WORDS.test(text) || (named.length > 0 && !named.includes("ios") && /\b(app|application)\b/.test(text))
+  let id: FeelChoice | "auto" | null = explicit ?? null
+  let reason = explicit ? `You asked for the ${explicit} feel.` : ""
+  if (!id && named.length === 1) {
+    id = named[0]!
+    reason = `The request names ${id === "macos" ? "macOS" : id === "ios" ? "iOS" : "Windows"}.`
+  } else if (!id && (named.length > 1 || desktop)) {
+    id = "auto"
+    reason = named.length > 1 ? "Several platforms are named, so the device picks." : "A desktop app can run on more than one OS, so the device picks."
+  }
+  if (!id) return null
+  const items = [id === "auto" ? "feel-auto" : `feel-${id}`, ...(desktop && id !== "ios" && id !== "web" ? ["app-window"] : [])]
+  const notes = [
+    "A feel changes how everything handles (sizes, corners, focus ring, shadows, menus, sidebars) and never touches colours, so it works with any theme.",
+    id === "auto"
+      ? "Render <FeelScript /> from @/components/ballmac/feel-script once in <head> in the root layout and add suppressHydrationWarning to <html>. People can override with setFeel() from @/lib/ballmac/feel."
+      : "Nothing else to wire: the tokens are plain CSS variables.",
+    ...(items.includes("app-window")
+      ? ["app-window is the window chrome (title bar, drag region, platform window controls). It needs no Tauri or Electron package: pass onClose, onMinimize and onMaximize. With Tauri set decorations to false; with Electron set frame to false. See https://ui.ballmac.com/docs/feels#desktop"]
+      : []),
+    "These are web components that feel like each platform, not native controls.",
+  ]
+  return { id, reason, items, install: installCommands(items, pm).add, docs: "https://ui.ballmac.com/docs/feels", notes }
+}
+
 /** Picks one block per requested section, in page order, writes a page scaffold, and points at whole templates that fit. */
-export async function composePage(catalog: Catalog, intent: string, opts: { pm?: PackageManager; includePro?: boolean } = {}) {
+export async function composePage(catalog: Catalog, intent: string, opts: { pm?: PackageManager; includePro?: boolean; feel?: FeelChoice } = {}) {
   const text = intent.toLowerCase()
   let sections = SECTION_ORDER.filter((s) => SECTION_WORDS[s]!.test(text))
   if (PAGE_WORDS.test(text)) sections = [...new Set([...LANDING, ...sections])].sort((a, b) => SECTION_ORDER.indexOf(a) - SECTION_ORDER.indexOf(b))
@@ -419,6 +462,7 @@ export async function composePage(catalog: Catalog, intent: string, opts: { pm?:
     commands: installCommands(picked.map((p) => p.block.name), opts.pm, proSet),
     scaffold,
     templates: templateMatches,
+    feel: planFeel(intent, opts.feel, opts.pm),
   }
 }
 

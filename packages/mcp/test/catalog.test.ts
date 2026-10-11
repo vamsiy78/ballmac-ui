@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { Catalog, composePage, expand, installCommands, toMarkdown, type Detail, type Summary } from "../src/catalog"
+import { Catalog, composePage, expand, installCommands, planFeel, toMarkdown, type Detail, type Summary } from "../src/catalog"
 
 const item = (p: Partial<Summary>): Summary => ({
   name: "x", kind: "component", type: "registry:ui", title: "X", description: "", category: "primitives", tier: "free", tags: [],
@@ -215,3 +215,40 @@ describe("changes and tests", () => {
     expect(seen).toContain("Bearer good")
   })
 })
+
+describe("platform feel", () => {
+  it("picks the feel a request names", () => {
+    expect(planFeel("a notes app for macOS")).toMatchObject({ id: "macos", items: ["feel-macos", "app-window"] })
+    expect(planFeel("settings screen for the Windows app")).toMatchObject({ id: "windows", items: ["feel-windows", "app-window"] })
+    expect(planFeel("a checkout for iPhone users")).toMatchObject({ id: "ios", items: ["feel-ios"] })
+  })
+
+  it("lets the device pick when several platforms or a desktop shell are named", () => {
+    expect(planFeel("a Tauri app for Mac and Windows")).toMatchObject({ id: "auto", items: ["feel-auto", "app-window"] })
+    expect(planFeel("an Electron notes app")).toMatchObject({ id: "auto", items: ["feel-auto", "app-window"] })
+    expect(planFeel("a macOS and iOS companion")).toMatchObject({ id: "auto", items: ["feel-auto"] })
+  })
+
+  it("suggests nothing for an ordinary web request", () => {
+    expect(planFeel("SaaS landing page with pricing and FAQ")).toBeNull()
+    expect(planFeel("a login screen")).toBeNull()
+  })
+
+  it("lets an explicit feel win, and says what to wire", () => {
+    const plan = planFeel("an Electron app for macOS", "windows", "pnpm")!
+    expect(plan.id).toBe("windows")
+    expect(plan.install).toBe("pnpm dlx shadcn@latest add @ballmac/feel-windows @ballmac/app-window")
+    expect(plan.notes.join(" ")).toContain("decorations")
+    expect(planFeel("a Tauri app", "ios")!.items).toEqual(["feel-ios"])
+    expect(planFeel("anything", "web")!.items).toEqual(["feel-web"])
+    expect(planFeel("a Tauri app")!.notes.join(" ")).toContain("FeelScript")
+  })
+
+  it("is part of a composed page", async () => {
+    const catalog = new Catalog("https://ui.test", fakeFetch)
+    expect((await composePage(catalog, "a login screen for a Mac app")).feel).toMatchObject({ id: "macos" })
+    expect((await composePage(catalog, "a login screen")).feel).toBeNull()
+    expect((await composePage(catalog, "a login screen", { feel: "ios" })).feel).toMatchObject({ id: "ios" })
+  })
+})
+

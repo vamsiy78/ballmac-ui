@@ -86,7 +86,7 @@ args = ["-y", "@ballmac/mcp"]
 | `get_changes` | What changed in an item, version by version (with `since` to see only newer changes), and whether anything is breaking. |
 | `get_tests` | The vitest + Testing Library test that ships with an item, to check it still works after an edit. |
 | `get_install_command` | The shadcn CLI commands for pnpm, npm, yarn or bun. |
-| `compose_page` | A page plan from blocks in the right order, install commands, a `page.tsx` scaffold, and any complete template that already fits. |
+| `compose_page` | A page plan from blocks in the right order, install commands, a `page.tsx` scaffold, and any complete template that already fits. When the request names macOS, Windows, iOS, Tauri or Electron (or you pass `feel`), it also returns the platform feel to install, with the wiring notes. |
 | `get_setup` | How to prepare a project (shadcn init, optional theme, and the registry entry older CLIs need). |
 
 Resources: `ballmac://catalog` (every item with a one-line description) and `ballmac://items/{name}` (one item as Markdown).

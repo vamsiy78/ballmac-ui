@@ -234,20 +234,21 @@ server.registerTool(
   "compose_page",
   {
     title: "Compose a page from blocks",
-    description: "Plan a page from Ballmac UI blocks for an intent such as 'SaaS landing page with pricing and FAQ' or 'login screen'. Returns the chosen blocks in page order, install commands, a page.tsx scaffold that renders them, and any complete templates that already fit the intent.",
-    inputSchema: { intent: z.string().min(3), packageManager: pms.optional(), includePro: z.boolean().optional() },
+    description: "Plan a page from Ballmac UI blocks for an intent such as 'SaaS landing page with pricing and FAQ' or 'login screen'. Returns the chosen blocks in page order, install commands, a page.tsx scaffold that renders them, and any complete templates that already fit the intent. When the request names macOS, Windows, iOS, Tauri or Electron (or you pass feel), it also returns the platform feel to install so the whole app handles like that platform.",
+    inputSchema: { intent: z.string().min(3), packageManager: pms.optional(), includePro: z.boolean().optional(), feel: z.enum(["web", "macos", "ios", "windows"]).optional().describe("Platform feel to build for. Omit to let the intent decide: macOS, Windows, iOS, Tauri or Electron in the request pick one.") },
     outputSchema: {
       sections: z.array(z.record(z.string(), z.unknown())),
       missing: z.array(z.string()),
       commands: z.object({ setup: z.string(), add: z.string(), byUrl: z.string(), proSetup: z.string().optional() }),
       scaffold: z.string(),
       templates: z.array(z.record(z.string(), z.unknown())),
+      feel: z.record(z.string(), z.unknown()).nullable(),
     },
     annotations: readOnly,
   },
-  async ({ intent, packageManager, includePro }) => {
+  async ({ intent, packageManager, includePro, feel }) => {
     try {
-      return result(await composePage(catalog, intent, { pm: packageManager, includePro }))
+      return result(await composePage(catalog, intent, { pm: packageManager, includePro, feel }))
     } catch (e) {
       return failure(e)
     }
@@ -271,6 +272,7 @@ server.registerTool(
         `${cmds.setup.split(" shadcn@latest")[0]} shadcn@latest init   # only if components.json is missing`,
         `@ballmac is in the official shadcn registry directory, so a current shadcn CLI needs no registry entry. Run this once only if your CLI is older, or if the shadcn MCP server should browse it: ${cmds.setup}`,
         `${cmds.add}   # optional: the Ballmac theme tokens`,
+        "For an app that should handle like macOS, iOS or Windows (sizes, corners, focus ring, shadows, menus, sidebars): add @ballmac/feel-macos, feel-ios or feel-windows, or @ballmac/feel-auto to let the device pick. For a Tauri or Electron window add @ballmac/app-window. Guide: https://ui.ballmac.com/docs/feels",
         "Or pick one of 12 themes (graphite, ocean, indigo, violet, rose, ember, amber, forest, teal, sand, mono, midnight): add @ballmac/theme-<name>. Preview and tune them at https://ui.ballmac.com/themes",
         "For Arabic, Hebrew, Persian or Urdu: set <html lang dir=\"rtl\">, add @ballmac/direction and wrap the app in DirectionProvider; every component mirrors. To translate built-in text and set the locale for dates and numbers, add @ballmac/i18n and wrap the app in I18nProvider with a messages object (keys: https://ui.ballmac.com/i18n/en.json). Guides: https://ui.ballmac.com/docs/rtl and https://ui.ballmac.com/docs/i18n",
         `For Pro items (tier "pro"), add to components.json "registries": ${JSON.stringify(PRO_REGISTRY)} and put BALLMAC_LICENSE_KEY=<key> in .env.local${catalog.hasLicense ? " (this MCP server has a licence key, so get_item returns Pro source)" : ""}. Guide: https://ui.ballmac.com/docs/pro`,

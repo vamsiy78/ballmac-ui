@@ -1,7 +1,7 @@
-import { auditTheme, buildTheme } from "@ballmac-ui/theme-engine"
+import { auditTheme, buildTheme, FEELS } from "@ballmac-ui/theme-engine"
 import { describe, expect, it } from "vitest"
 
-import { allThemes, oklchToHex, parseOklch, themeTokens } from "../../../scripts/figma-tokens"
+import { allThemes, feelTokens, lengthPx, oklchToHex, parseOklch, parseShadow, themeTokens } from "../../../scripts/figma-tokens"
 
 const hexToRgb = (hex: string) => [1, 3, 5].map((i) => Number.parseInt(hex.slice(i, i + 2), 16) / 255)
 const lin = (v: number) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
@@ -76,3 +76,45 @@ describe("theme tokens", () => {
     expect(bg.$extensions.ballmac).toEqual({ oklch: expect.stringMatching(/^oklch\(/), cssVariable: "--background" })
   })
 })
+
+describe("feel tokens", () => {
+  it("converts the lengths feels use", () => {
+    expect(lengthPx("0.875rem")).toBe(14)
+    expect(lengthPx("3px")).toBe(3)
+    expect(lengthPx("calc(var(--spacing) * 9)")).toBe(36)
+    expect(() => lengthPx("auto")).toThrow()
+  })
+
+  it("splits a box-shadow list into W3C shadow layers", () => {
+    const layers = parseShadow("0 0 2px rgb(0 0 0 / 0.12), 0 1px 3px -1px rgb(0 0 0 / 0.5)")
+    expect(layers).toHaveLength(2)
+    expect(layers[0]).toEqual({ color: "#0000001f", offsetX: "0px", offsetY: "0px", blur: "2px", spread: "0px" })
+    expect(layers[1]).toMatchObject({ offsetY: "1px", blur: "3px", spread: "-1px", color: "#00000080" })
+    expect(parseShadow("0 0 0 0.5px rgb(0 0 0 / 0.06)")[0]).toMatchObject({ spread: "0.5px" })
+    expect(() => parseShadow("inset foo")).toThrow()
+  })
+
+  for (const f of FEELS) {
+    it(`${f.slug}: has no colours, valid dimensions and a shadow for every step`, () => {
+      const t = feelTokens(f) as unknown as Record<string, Record<string, unknown>>
+      expect(t.color).toBeUndefined()
+      expect(Object.keys(t.elevation!)).toEqual(["xs", "sm", "md", "lg", "xl", "2xl", "popover"])
+      const walk = (node: unknown): void => {
+        if (node && typeof node === "object" && "$type" in node) {
+          const n = node as { $type: string; $value: unknown }
+          if (n.$type === "dimension") expect(n.$value, JSON.stringify(n)).toMatch(/^-?[\d.]+px$/)
+          if (n.$type === "shadow") expect(Array.isArray(n.$value) && (n.$value as unknown[]).length > 0).toBe(true)
+        } else if (node && typeof node === "object") Object.values(node).forEach(walk)
+      }
+      walk(t)
+    })
+  }
+
+  it("matches the engine: Windows controls are 32 px with a 2 px solid focus ring", () => {
+    const t = feelTokens(FEELS.find((f) => f.slug === "windows")!) as { control: { height: { $value: string } }; focus: { width: { $value: string }; opacity: { $value: number } } }
+    expect(t.control.height.$value).toBe("32px")
+    expect(t.focus.width.$value).toBe("2px")
+    expect(t.focus.opacity.$value).toBe(1)
+  })
+})
+

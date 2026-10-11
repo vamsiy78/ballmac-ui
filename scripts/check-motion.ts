@@ -6,7 +6,7 @@
  *   - be listed in scripts/motion-functional.json with the reason it must keep moving (status indicators, carets, content).
  * The list is kept honest the other way too: an entry whose file no longer has a loop, or now listens, is an error.
  */
-import { readFileSync } from "node:fs"
+import { existsSync, readFileSync } from "node:fs"
 import { join, relative } from "node:path"
 
 import { ROOT } from "./lib"
@@ -36,13 +36,16 @@ export function motionProblems(files: Record<string, string>, functional: Record
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const files = Object.fromEntries(walk(join(ROOT, "registry/ballmac")).map((f) => [relative(ROOT, f), readFileSync(f, "utf8")]))
-  const functional = JSON.parse(readFileSync(join(ROOT, "scripts/motion-functional.json"), "utf8")) as Record<string, string>
+  // The private Pro checkout is scanned too when it is there; its exceptions live in the private repo, so public CI never sees Pro paths.
+  const roots = ["registry/ballmac", "registry/pro/ballmac"].filter((r) => existsSync(join(ROOT, r)))
+  const files = Object.fromEntries(roots.flatMap((r) => walk(join(ROOT, r))).map((f) => [relative(ROOT, f), readFileSync(f, "utf8")]))
+  const lists = ["scripts/motion-functional.json", "registry/pro/motion-functional.json"].filter((f) => existsSync(join(ROOT, f)))
+  const functional = Object.assign({}, ...lists.map((f) => JSON.parse(readFileSync(join(ROOT, f), "utf8")))) as Record<string, string>
   const problems = motionProblems(files, functional)
   if (problems.length) {
     console.error(`✗ Motion check failed:\n  - ${problems.join("\n  - ")}`)
     process.exit(1)
   }
   const loops = Object.values(files).filter((s) => LOOP.test(s)).length
-  console.log(`✓ Motion: ${loops} file(s) with endless loops, ${loops - Object.keys(functional).length} follow the theme, ${Object.keys(functional).length} are functional`)
+  console.log(`✓ Motion: ${loops} file(s) with endless loops, ${loops - Object.keys(functional).length} follow the theme, ${Object.keys(functional).length} are functional${roots.length > 1 ? " (Pro included)" : ""}`)
 }

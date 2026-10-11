@@ -4,7 +4,7 @@
  * would quietly opt out, so it has to be listed in scripts/feel-custom-focus.json. The list is kept honest the other way too:
  * an entry whose file no longer has a custom ring is an error, so migrating an item shrinks the list.
  */
-import { readdirSync, readFileSync, statSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs"
 import { join, relative } from "node:path"
 
 import { ROOT } from "./lib"
@@ -30,13 +30,16 @@ export function feelProblems(files: Record<string, string>, listed: Record<strin
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const files = Object.fromEntries(walk(join(ROOT, "registry/ballmac")).map((f) => [relative(ROOT, f), readFileSync(f, "utf8")]))
-  const listed = JSON.parse(readFileSync(join(ROOT, "scripts/feel-custom-focus.json"), "utf8")) as Record<string, string>
+  // The private Pro checkout is scanned too when it is there; its exceptions live in the private repo, so public CI never sees Pro paths.
+  const roots = ["registry/ballmac", "registry/pro/ballmac"].filter((r) => existsSync(join(ROOT, r)))
+  const files = Object.fromEntries(roots.flatMap((r) => walk(join(ROOT, r))).map((f) => [relative(ROOT, f), readFileSync(f, "utf8")]))
+  const lists = ["scripts/feel-custom-focus.json", "registry/pro/feel-custom-focus.json"].filter((f) => existsSync(join(ROOT, f)))
+  const listed = Object.assign({}, ...lists.map((f) => JSON.parse(readFileSync(join(ROOT, f), "utf8")))) as Record<string, string>
   const problems = feelProblems(files, listed)
   if (problems.length) {
     console.error(`✗ Feel check failed:\n  - ${problems.join("\n  - ")}`)
     process.exit(1)
   }
   const standard = Object.values(files).filter((s) => /focus-(visible|within):ring-\[3px\]/.test(s)).length
-  console.log(`✓ Feel: ${standard} file(s) follow the platform focus ring, ${Object.keys(listed).length} draw their own (listed)`)
+  console.log(`✓ Feel: ${standard} file(s) follow the platform focus ring, ${Object.keys(listed).length} draw their own (listed)${roots.length > 1 ? " (Pro included)" : ""}`)
 }

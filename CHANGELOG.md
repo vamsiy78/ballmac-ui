@@ -11,6 +11,7 @@ New components, blocks and changes, newest first. The same list is at https://ui
 - The theme builder has a Platform feel picker, a window in the preview, and a Compare view that shows your colours in all four feels side by side. A link such as /themes?fe=windows opens one. New /docs/feels covers Tauri v2 and Electron setup
 - The 12 colour themes and the base theme now carry the web-feel tokens. New checks fail the build when an endless loop ignores the theme or a component draws its own focus ring without being listed
 - These are web components that feel like each platform, not native controls, and Ballmac UI is not affiliated with Apple or Microsoft
+- The Ballmac MCP server (from 1.2.0) knows about feels: compose_page takes a `feel`, or reads macOS, Windows, iOS, Tauri or Electron from the request, and returns the feel to install plus how to wire it
 
 ## 2026-10-11: Motion is part of the theme
 
