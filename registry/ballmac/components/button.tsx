@@ -7,7 +7,7 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "relative inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium outline-none transition-[color,background-color,border-color,box-shadow,transform] duration-150 select-none active:translate-y-[calc(1px*var(--bm-hover,1))] disabled:pointer-events-none disabled:opacity-50 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-invalid:ring-destructive/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "relative inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium outline-none transition-[color,background-color,border-color,box-shadow,transform] duration-150 select-none active:opacity-[var(--bm-press-dim,1)] active:translate-y-[calc(1px*var(--bm-hover,1))] disabled:pointer-events-none disabled:opacity-50 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-invalid:ring-destructive/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -21,11 +21,11 @@ const buttonVariants = cva(
         destructive: "bg-destructive text-white hover:bg-destructive/90 dark:bg-destructive/60 dark:hover:bg-destructive/50 focus-visible:ring-destructive/40",
       },
       size: {
-        sm: "h-8 gap-1.5 px-3 text-[13px]",
-        default: "h-9 px-4",
-        lg: "h-11 px-6 text-[15px]",
-        icon: "size-9",
-        "icon-sm": "size-8",
+        sm: "h-[var(--bm-control-h-sm,calc(var(--spacing)*8))] gap-1.5 px-3 text-[13px]",
+        default: "h-[var(--bm-control-h,calc(var(--spacing)*9))] px-4",
+        lg: "h-[var(--bm-control-h-lg,calc(var(--spacing)*11))] px-6 text-[15px]",
+        icon: "size-[var(--bm-control-h,calc(var(--spacing)*9))]",
+        "icon-sm": "size-[var(--bm-control-h-sm,calc(var(--spacing)*8))]",
       },
       shape: {
         default: "",

@@ -8,6 +8,8 @@ import {
   DEFAULT_SPEC,
   decodeSpec,
   encodeSpec,
+  feelSpec,
+  FEELS,
   matchPersonality,
   MOTION_PERSONALITIES,
   MOTION_RANGES,
@@ -28,6 +30,7 @@ import { InstallTabs } from "@/components/site/install-tabs"
 import { themeUrl } from "@/lib/theme-url"
 import { cn } from "@/lib/utils"
 
+import { FeelCompare } from "./feel-compare"
 import { MotionLab } from "./motion-lab"
 import { PresetMini } from "./preset-card"
 import { Group, RangeField, Row } from "./theme-controls"
@@ -199,6 +202,37 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
               <RotateCcw className="size-3.5" aria-hidden="true" /> Reset
             </button>
           </div>
+
+          <Group title="Platform feel">
+            <div className="grid grid-cols-2 gap-2" role="group" aria-label="Platform feel">
+              {FEELS.map((f) => (
+                <button
+                  key={f.slug}
+                  type="button"
+                  aria-pressed={spec.feel === f.slug}
+                  onClick={() => update(feelSpec(f.slug))}
+                  className={cn(
+                    "focus-visible:ring-ring/50 grid gap-0.5 rounded-lg border p-2.5 text-left outline-none focus-visible:ring-[3px]",
+                    spec.feel === f.slug ? "border-foreground ring-foreground ring-1" : "hover:border-foreground/30"
+                  )}
+                >
+                  <span className="flex items-center justify-between gap-2 text-sm font-medium">
+                    {f.title}
+                    {spec.feel === f.slug && <Check className="size-3.5" aria-label="Selected" />}
+                  </span>
+                  <span className="text-muted-foreground text-xs leading-snug">{f.tagline}</span>
+                </button>
+              ))}
+            </div>
+            <p className="text-muted-foreground -mt-2 text-xs">
+              A feel sets radius, density, font, motion, focus ring, shadows, text and control sizes together. Change any of them below afterwards.
+            </p>
+            {spec.feel !== "web" && (
+              <p className="text-muted-foreground text-xs">
+                Only the feel, keeping your colours: <code className="bg-muted rounded px-1 py-0.5 font-mono text-[0.9em]">@ballmac/feel-{spec.feel}</code>
+              </p>
+            )}
+          </Group>
 
           <Group title="Colour">
             <RangeField label="Brand hue" value={spec.hue} min={0} max={360} step={1} display={`${Math.round(spec.hue)}°`} valueText={`${Math.round(spec.hue)} degrees`} track={hueTrack} onChange={(hue) => update({ hue })} />
@@ -412,6 +446,18 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
             </div>
           ))}
         </div>
+      </section>
+
+
+      <section id="feels" aria-labelledby={`${baseId}-feels`} className="scroll-mt-24 space-y-4">
+        <div>
+          <h2 id={`${baseId}-feels`} className="text-xl font-semibold tracking-tight">
+            Compare the feels
+          </h2>
+          <p className="text-muted-foreground mt-1 max-w-2xl text-sm">The same app in your colours, once per platform feel. Only the handling changes: sizes, corners, focus, shadows, menus and window controls.</p>
+        </div>
+        <FeelCompare spec={spec} mode={previewMode} reduced={previewReduced} id={`${baseId}-compare`} />
+        <p className="text-muted-foreground text-xs">These are web components that feel like each platform, not native controls. Ballmac UI is not affiliated with Apple or Microsoft.</p>
       </section>
 
       <section aria-labelledby={`${baseId}-export`} className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">

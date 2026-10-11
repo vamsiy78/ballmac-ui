@@ -20,9 +20,10 @@ export default defineItem({
     whenNotToUse: ["The project already has a brand theme you want to keep"],
     customization: ["Open https://ui.ballmac.com/themes/indigo to change hue, intensity, radius, density and font, then copy the CSS or install the result"],
   },
-  version: "1.1.0",
-  updated: "2026-10-11",
+  version: "1.2.0",
+  updated: "2026-10-12",
   changelog: [
+    { version: "1.2.0", date: "2026-10-12", note: "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows." },
     { version: "1.1.0", date: "2026-10-11", note: "Adds motion: speed, bounce, travel, hover and stagger tokens that drive Tailwind's duration and easing scales, plus a reduced-motion fallback." },
     { version: "1.0.0", date: "2026-10-02", note: "First release." },
   ],

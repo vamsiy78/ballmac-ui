@@ -35,6 +35,10 @@ export default defineItem({
     copyright: "Copyright (c) 2023 shadcn",
     modified: true,
   },
-  version: "1.0.0",
-  updated: "2026-09-30",
+  version: "1.0.1",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-11", note: "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel." },
+    { version: "1.0.0", date: "2026-09-30", note: "First release." },
+  ],
 });

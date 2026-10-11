@@ -44,7 +44,7 @@ function TabsTrigger({ className, ...props }: TabsTriggerProps) {
     <Primitive.Trigger
       data-slot="tabs-trigger"
       className={cn(
-        "inline-flex min-h-9 shrink-0 items-center justify-center gap-2 rounded-md px-3 text-sm font-medium whitespace-nowrap outline-none transition-[color,background-color,box-shadow] duration-150 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50 data-[state=active]:text-foreground [[data-variant=pills]_&]:data-[state=active]:bg-background [[data-variant=pills]_&]:data-[state=active]:shadow-xs [[data-variant=underline]_&]:rounded-none [[data-variant=underline]_&]:border-b-2 [[data-variant=underline]_&]:border-transparent [[data-variant=underline]_&]:data-[state=active]:border-primary motion-reduce:transition-none",
+        "inline-flex min-h-[var(--bm-control-h,calc(var(--spacing)*9))] shrink-0 items-center justify-center gap-2 rounded-md px-3 text-sm font-medium whitespace-nowrap outline-none transition-[color,background-color,box-shadow] duration-150 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50 data-[state=active]:text-foreground [[data-variant=pills]_&]:data-[state=active]:bg-background [[data-variant=pills]_&]:data-[state=active]:shadow-xs [[data-variant=underline]_&]:rounded-none [[data-variant=underline]_&]:border-b-2 [[data-variant=underline]_&]:border-transparent [[data-variant=underline]_&]:data-[state=active]:border-primary motion-reduce:transition-none",
         className,
       )}
       {...props}

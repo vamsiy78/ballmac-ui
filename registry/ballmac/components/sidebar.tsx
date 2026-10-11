@@ -207,7 +207,7 @@ function Sidebar({
           aria-label={label}
           data-sidebar="sidebar"
           className={cn(
-            "flex h-full w-full flex-col bg-card",
+            "flex h-full w-full flex-col bg-card/[var(--bm-material-alpha,100%)] backdrop-blur-[var(--bm-material-blur,0px)]",
             variant === "floating" && "rounded-xl border shadow-sm",
             variant === "inset" && "rounded-xl",
           )}
@@ -310,9 +310,9 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const menuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-lg px-2 text-start text-sm outline-none transition-[width,height,padding,background-color] hover:bg-accent hover:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 active:bg-accent disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-accent data-[active=true]:font-medium data-[active=true]:text-accent-foreground group-data-[collapsible=icon]:size-9! group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:[&>span:not(:first-child)]:sr-only group-data-[collapsible=icon]:[&>svg:not(:first-child)]:hidden [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button relative flex w-full items-center gap-2 overflow-hidden rounded-[var(--bm-sidebar-item-radius,var(--radius-lg))] px-2 before:absolute before:inset-y-[22%] before:start-0 before:w-[var(--bm-sidebar-indicator,0px)] before:rounded-full before:bg-primary before:opacity-0 before:content-[''] data-[active=true]:before:opacity-100 text-start text-sm outline-none transition-[width,height,padding,background-color] hover:bg-accent hover:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 active:bg-accent disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-accent data-[active=true]:font-medium data-[active=true]:text-accent-foreground group-data-[collapsible=icon]:size-9! group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:[&>span:not(:first-child)]:sr-only group-data-[collapsible=icon]:[&>svg:not(:first-child)]:hidden [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
-    variants: { size: { default: "h-9", sm: "h-8 text-[13px]", lg: "h-12 group-data-[collapsible=icon]:p-0!" } },
+    variants: { size: { default: "h-[var(--bm-sidebar-item-h,calc(var(--spacing)*9))]", sm: "h-8 text-[13px]", lg: "h-12 group-data-[collapsible=icon]:p-0!" } },
     defaultVariants: { size: "default" },
   },
 );

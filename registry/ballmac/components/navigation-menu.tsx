@@ -113,7 +113,7 @@ function NavigationMenuViewport({ className, align = "start", ...props }: Naviga
       <Primitive.Viewport
         data-slot="navigation-menu-viewport"
         className={cn(
-          "origin-top-center relative mt-1.5 shrink-0 h-(--radix-navigation-menu-viewport-height) w-full overflow-hidden rounded-xl border bg-popover text-popover-foreground shadow-[0_12px_36px_-10px_rgb(0_0_0/0.25)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-(--radix-navigation-menu-viewport-width) motion-reduce:animate-none",
+          "origin-top-center relative mt-1.5 shrink-0 h-(--radix-navigation-menu-viewport-height) w-full overflow-hidden rounded-xl border bg-popover/[var(--bm-material-alpha,100%)] backdrop-blur-[var(--bm-material-blur,0px)] text-popover-foreground shadow-[var(--bm-shadow-popover,0_12px_36px_-10px_rgb(0_0_0/0.25))] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-(--radix-navigation-menu-viewport-width) motion-reduce:animate-none",
           className,
         )}
         {...props}

@@ -1,20 +1,22 @@
 import { defineItem } from "@ballmac-ui/metadata"
-import { DEFAULT_MOTION, motionVars, reducedMotionRule } from "@ballmac-ui/theme-engine"
+import { DEFAULT_MOTION, feelVars, feelRules, motionVars, reducedMotionRule } from "@ballmac-ui/theme-engine"
 
 const motion = motionVars(DEFAULT_MOTION)
+const feel = feelVars("web")
 
 export default defineItem({
   name: "theme",
   type: "registry:theme",
   title: "Ballmac Theme",
   description:
-    "Ballmac UI design tokens in OKLCH: neutral light mode, ink-navy dark mode, the Ballmac blue focus ring, chart colors, and motion (speed, bounce, travel, hover, stagger) with a reduced-motion fallback.",
+    "Ballmac UI design tokens in OKLCH: colours, radius, chart colours, motion (speed, bounce, travel, hover, stagger) and the platform feel tokens (focus, shadows, text scale, control sizes), with a reduced-motion fallback.",
   category: "foundation",
   tags: ["theme", "tokens", "dark mode"],
   cssVars: {
-    theme: motion.theme,
+    theme: { ...motion.theme, ...feel.theme },
     light: {
       ...motion.root,
+      ...feel.root,
       radius: "0.625rem",
       background: "oklch(1 0 0)",
       foreground: "oklch(0.17 0.012 265)",
@@ -66,16 +68,17 @@ export default defineItem({
       "chart-5": "oklch(0.7 0.17 35)",
     },
   },
-  css: reducedMotionRule(motion.reduced),
+  css: { ...reducedMotionRule(motion.reduced), ...feelRules() },
   ai: {
     summary: "Installs Ballmac UI's color, radius and motion tokens as CSS variables. Optional: every Ballmac item also works with any shadcn theme.",
     whenToUse: ["Starting a new project that should look like Ballmac UI", "Matching the Ballmac demos exactly"],
     whenNotToUse: ["The project already has a brand theme you want to keep"],
-    customization: ["Change --ring and --chart-1 to your brand color", "Adjust --radius for rounder or sharper corners", "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger to change how everything moves"],
+    customization: ["Change --ring and --chart-1 to your brand color", "Adjust --radius for rounder or sharper corners", "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger to change how everything moves", "Install feel-macos, feel-ios or feel-windows to make everything handle like that platform"],
   },
-  version: "1.1.0",
-  updated: "2026-10-11",
+  version: "1.2.0",
+  updated: "2026-10-12",
   changelog: [
+    { version: "1.2.0", date: "2026-10-12", note: "Adds the platform feel tokens (focus ring, elevation, text scale, control, menu and sidebar sizes) at the web feel, which is what the components already do." },
     { version: "1.1.0", date: "2026-10-11", note: "Motion is part of the theme: speed, bounce, travel, hover and stagger drive Tailwind's duration and easing scales, with a reduced-motion fallback." },
     { version: "1.0.0", date: "2026-09-28", note: "First release." },
   ],

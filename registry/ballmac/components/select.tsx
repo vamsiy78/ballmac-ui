@@ -36,7 +36,7 @@ function SelectTrigger({ className, size = "default", children, ...props }: Sele
         "flex w-fit min-w-0 items-center justify-between gap-2 whitespace-nowrap rounded-md border border-input bg-background px-3 text-sm text-foreground shadow-xs outline-none transition-[color,border-color,box-shadow] duration-150 dark:bg-input/30 dark:hover:bg-input/50",
         "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20",
         "disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground",
-        "data-[size=default]:h-9 data-[size=sm]:h-8 data-[size=sm]:px-2.5 data-[size=sm]:text-[13px]",
+        "data-[size=default]:h-[var(--bm-control-h,calc(var(--spacing)*9))] data-[size=sm]:h-[var(--bm-control-h-sm,calc(var(--spacing)*8))] data-[size=sm]:px-2.5 data-[size=sm]:text-[13px]",
         "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
         className

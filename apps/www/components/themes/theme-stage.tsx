@@ -4,6 +4,7 @@ import * as React from "react"
 import { ArrowRight, Bell, Check, CircleAlert, Search, TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
+import { AppWindow, AppWindowContent, AppWindowTitleBar } from "@/components/ballmac/app-window"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ballmac/alert"
 import { Avatar, AvatarFallback } from "@/components/ballmac/avatar"
 import { Badge } from "@/components/ballmac/badge"
@@ -201,6 +202,18 @@ export function ThemeStage({ spec, mode, className, id, reduced = false }: { spe
                 </div>
               </CardContent>
             </Card>
+          </div>
+          <div className="@3xl:col-span-3">
+            <AppWindow feel={spec.feel} active onClose={() => {}} onMinimize={() => {}} onMaximize={() => {}}>
+              <AppWindowTitleBar title="Northwind" icon={<span className="bg-primary size-4 rounded-sm" />}>
+                <Button variant="ghost" size="icon-sm" aria-label="Notifications (preview)">
+                  <Bell />
+                </Button>
+              </AppWindowTitleBar>
+              <AppWindowContent className="text-muted-foreground p-4 text-sm">
+                The window chrome follows the platform feel: traffic lights on the left for macOS, caption buttons on the right for Windows, a plain bar otherwise.
+              </AppWindowContent>
+            </AppWindow>
           </div>
         </div>
       </div>

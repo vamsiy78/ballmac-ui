@@ -32,7 +32,7 @@ export const getAllItems = () => items
 
 /** Where an item's page lives on the site. */
 export function itemHref(item: Pick<SiteItem, "name" | "category">) {
-  if (item.category === "foundation") return item.name === "theme" ? "/docs/theming" : item.name.startsWith("motion-") ? "/docs/motion" : "/docs/theming#motion-tokens"
+  if (item.category === "foundation") return item.name === "theme" ? "/docs/theming" : item.name.startsWith("motion-") ? "/docs/motion" : item.name.startsWith("feel-") ? "/docs/feels" : "/docs/theming#motion-tokens"
   if (item.category === "blocks") return `/blocks/${item.name}`
   if (item.category === "templates") return `/templates/${item.name}`
   return `/components/${item.name}`

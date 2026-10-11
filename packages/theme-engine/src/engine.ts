@@ -1,11 +1,12 @@
 import { contrast, format, parse, solve, type Oklch } from "./color"
+import { DEFAULT_FEEL, feelSpec, feelVars, feelRules, isFeelId, normalizeFeel, type FeelFields } from "./feel"
 import { DEFAULT_MOTION, matchPersonality, getPersonality, motionVars, normalizeMotion, reducedMotionCss, type MotionFields } from "./motion"
 
 export type Density = "compact" | "default" | "comfortable"
 export type FontChoice = "keep" | "system" | "serif" | "mono"
 
 /** Everything a theme is made of. Colours are derived from these few numbers, so every result is accessible by construction. */
-export type ThemeSpec = MotionFields & {
+export type ThemeSpec = MotionFields & FeelFields & {
   /** Brand hue, 0-360 (OKLCH degrees). */
   hue: number
   /** Brand colour intensity: OKLCH chroma, 0 (grey) to 0.26. */
@@ -38,6 +39,7 @@ export const DEFAULT_SPEC: ThemeSpec = {
   density: "default",
   font: "keep",
   ...DEFAULT_MOTION,
+  feel: DEFAULT_FEEL,
 }
 
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, Number.isFinite(v) ? v : min))
@@ -58,6 +60,7 @@ export function normalizeSpec(input: Partial<ThemeSpec> = {}): ThemeSpec {
     density: s.density === "compact" || s.density === "comfortable" ? s.density : "default",
     font: s.font === "system" || s.font === "serif" || s.font === "mono" ? s.font : "keep",
     ...normalizeMotion(s),
+    feel: normalizeFeel(s.feel),
   }
 }
 
@@ -176,8 +179,9 @@ export function buildTheme(input: Partial<ThemeSpec> = {}): ThemeVars {
   if (spacing) theme.spacing = spacing
   if (font) theme["font-sans"] = font
   const motion = motionVars(s)
-  Object.assign(theme, motion.theme)
-  return { theme, light: { ...light(s), ...motion.root }, dark: dark(s), reducedMotion: motion.reduced }
+  const feel = feelVars(s.feel)
+  Object.assign(theme, motion.theme, feel.theme)
+  return { theme, light: { ...light(s), ...motion.root, ...feel.root }, dark: dark(s), reducedMotion: motion.reduced }
 }
 
 /** CSS to paste into globals.css. */
@@ -189,7 +193,28 @@ export function themeCss(input: Partial<ThemeSpec> = {}): string {
   if (Object.keys(v.theme).length) out.push(block("@theme inline", v.theme))
   const reduced = reducedMotionCss(v.reducedMotion)
   if (reduced) out.push(reduced)
+  // a feel other than web restyles the focus ring; web is what the components already do
+  if (normalizeSpec(input).feel !== DEFAULT_FEEL) out.push(rulesCss(feelRules()))
   return out.join("\n\n") + "\n"
+}
+
+/** Selector rules as CSS text. */
+export const rulesCss = (rules: Record<string, Record<string, string | Record<string, string>>>) => {
+  const decls = (props: Record<string, string>, pad: string) => Object.entries(props).map(([k, val]) => `${pad}${k}: ${val};`).join("\n")
+  return Object.entries(rules)
+    .map(([head, body]) =>
+      Object.values(body).every((v) => typeof v === "string")
+        ? `${head} {\n${decls(body as Record<string, string>, "  ")}\n}`
+        : `${head} {\n${Object.entries(body).map(([sel, props]) => `  ${sel} {\n${decls(props as Record<string, string>, "    ")}\n  }`).join("\n")}\n}`
+    )
+    .join("\n\n")
+}
+
+/** The `css` a theme's registry item carries beyond variables: the reduced-motion rule, and the focus rule under a feel. */
+export function themeRules(input: Partial<ThemeSpec>) {
+  const s = normalizeSpec(input)
+  const v = buildTheme(s)
+  return { ...(Object.keys(v.reducedMotion).length ? reducedMotionRule(v.reducedMotion) : {}), ...(s.feel !== DEFAULT_FEEL ? feelRules() : {}) }
 }
 
 /** The reduced-motion rule in the shape a registry item's `css` field takes. */
@@ -210,7 +235,7 @@ export function themeRegistryItem(input: Partial<ThemeSpec>, info: RegistryTheme
     description: info.description,
     author: "Ballmac <https://ui.ballmac.com>",
     cssVars: { ...(Object.keys(v.theme).length ? { theme: v.theme } : {}), light: v.light, dark: v.dark },
-    ...(Object.keys(v.reducedMotion).length ? { css: reducedMotionRule(v.reducedMotion) } : {}),
+    ...(Object.keys(themeRules(input)).length ? { css: themeRules(input) } : {}),
     ...(info.docs ? { docs: info.docs } : {}),
   }
 }
@@ -252,7 +277,7 @@ export function auditTheme(vars: ThemeVars): Check[] {
 
 const KEYS = {
   hue: "h", chroma: "c", neutralHue: "nh", neutralChroma: "nc", radius: "r", primary: "p", paper: "paper", edge: "e", density: "d", font: "f",
-  speed: "sp", bounce: "bn", travel: "tv", hover: "hv", stagger: "st", ambient: "am", reduce: "rm",
+  speed: "sp", bounce: "bn", travel: "tv", hover: "hv", stagger: "st", ambient: "am", reduce: "rm", feel: "fe",
 } as const
 /** Every query parameter that describes a theme. A link with any of them opens the builder on that design. */
 export const SPEC_PARAMS: ReadonlySet<string> = new Set([...Object.values(KEYS), "mo"])
@@ -260,16 +285,23 @@ export const SPEC_PARAMS: ReadonlySet<string> = new Set([...Object.values(KEYS),
 const MOTION_KEYS = ["speed", "bounce", "travel", "hover", "stagger", "ambient", "reduce"] as const
 const MOTION_PARAM = "mo"
 
-/** Writes only the fields that differ from the default, so links stay short. */
+/** The spec a feel starts from: the defaults with the feel's preset applied. */
+const feelBase = (feel: ThemeSpec["feel"]): ThemeSpec => normalizeSpec({ ...DEFAULT_SPEC, ...feelSpec(feel) })
+
+/** Writes only the fields that differ from the default (or, under a feel, from that feel's preset), so links stay short. */
 export function encodeSpec(input: Partial<ThemeSpec>): URLSearchParams {
   const s = normalizeSpec(input)
+  const base = feelBase(s.feel)
   const params = new URLSearchParams()
-  const personality = matchPersonality(s)
+  if (s.feel !== DEFAULT_FEEL) params.set(KEYS.feel, s.feel)
+  const sameMotion = (MOTION_KEYS as readonly (keyof ThemeSpec)[]).every((k) => s[k] === base[k])
+  const personality = sameMotion ? undefined : matchPersonality(s)
   for (const k of Object.keys(KEYS) as (keyof ThemeSpec)[]) {
-    if ((MOTION_KEYS as readonly string[]).includes(k) && personality) continue
-    if (s[k] !== DEFAULT_SPEC[k]) params.set(KEYS[k], String(s[k] === true ? 1 : s[k] === false ? 0 : s[k]))
+    if (k === "feel") continue
+    if ((MOTION_KEYS as readonly string[]).includes(k) && (sameMotion || personality)) continue
+    if (s[k] !== base[k]) params.set(KEYS[k], String(s[k] === true ? 1 : s[k] === false ? 0 : s[k]))
   }
-  if (personality && personality.slug !== "native") params.set(MOTION_PARAM, personality.slug)
+  if (personality) params.set(MOTION_PARAM, personality.slug)
   return params
 }
 
@@ -279,6 +311,7 @@ export function decodeSpec(params: URLSearchParams | Record<string, string | str
     return Array.isArray(v) ? v[0] : (v ?? undefined)
   }
   const out: Partial<ThemeSpec> = { ...base }
+  const fe = get(KEYS.feel); if (fe !== undefined && isFeelId(fe)) Object.assign(out, feelSpec(fe))
   const num = (k: keyof ThemeSpec) => {
     const v = get(KEYS[k])
     if (v !== undefined && v !== "" && Number.isFinite(Number(v))) (out as Record<string, unknown>)[k] = Number(v)

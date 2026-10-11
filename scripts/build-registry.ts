@@ -249,13 +249,21 @@ console.log(`âœ“ ${Object.keys(sortedMessages).length} translatable message(s) â
 const theme = items.find((i) => i.name === "theme")
 if (theme?.cssVars) {
   const block = (vars: Record<string, string> = {}) => Object.entries(vars).map(([k, v]) => `  --${k}: ${v};`).join("\n")
-  // `theme` keys are Tailwind theme keys (duration scales, easings), so they belong in @theme, not :root.
-  const atRules = Object.entries((theme.css ?? {}) as Record<string, Record<string, Record<string, string>>>).map(
-    ([rule, selectors]) => `${rule} {\n${Object.entries(selectors).map(([sel, vars]) => `  ${sel} {\n${Object.entries(vars).map(([k, v]) => `    ${k}: ${v};`).join("\n")}\n  }`).join("\n")}\n}`
-  )
+  // `theme` keys are Tailwind theme keys (duration scales, easings, shadows), so they belong in @theme, not :root.
+  // `css` holds at-rules such as `@media` (selectors nested inside) and plain selector rules (properties directly inside).
+  const decls = (props: Record<string, string>, indent: string) => Object.entries(props).map(([k, v]) => `${indent}${k}: ${v};`).join("\n")
+  const atRules = Object.entries((theme.css ?? {}) as Record<string, Record<string, string | Record<string, string>>>).map(([rule, body]) => {
+    if (Object.values(body).every((v) => typeof v === "string")) return `${rule} {\n${decls(body as Record<string, string>, "  ")}\n}`
+    return `${rule} {\n${Object.entries(body).map(([sel, vars]) => `  ${sel} {\n${decls(vars as Record<string, string>, "    ")}\n  }`).join("\n")}\n}`
+  })
+  // The scoped feel blocks (`[data-feel="macos"] { ... }`) from the Feel Auto item, so any part of the site can show any feel.
+  const auto = items.find((i) => i.name === "feel-auto")
+  const scopes = Object.entries((auto?.css ?? {}) as Record<string, Record<string, string>>)
+    .filter(([sel]) => sel.startsWith("[data-feel="))
+    .map(([sel, props]) => `${sel} {\n${decls(props, "  ")}\n}`)
   writeFileSync(
     join(generated, "theme.css"),
-    `/* Generated from registry/ballmac/themes/theme.meta.ts. Do not edit. */\n:root {\n${block(theme.cssVars.light)}\n}\n\n.dark {\n${block(theme.cssVars.dark)}\n}\n\n@theme inline {\n${block(theme.cssVars.theme)}\n}\n${atRules.length ? "\n" + atRules.join("\n\n") + "\n" : ""}`
+    `/* Generated from registry/ballmac/themes/theme.meta.ts. Do not edit. */\n:root {\n${block(theme.cssVars.light)}\n}\n\n.dark {\n${block(theme.cssVars.dark)}\n}\n\n@theme inline {\n${block(theme.cssVars.theme)}\n}\n${atRules.length ? "\n" + atRules.join("\n\n") + "\n" : ""}${scopes.length ? "\n" + scopes.join("\n\n") + "\n" : ""}`
   )
 }
 

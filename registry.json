@@ -2131,6 +2131,159 @@
       }
     },
     {
+      "name": "app-window",
+      "type": "registry:ui",
+      "title": "App Window",
+      "description": "The window chrome of a real desktop app (Tauri or Electron): a title bar that drags the window, double-click to maximize, and the controls the platform draws: traffic lights, Windows caption buttons, or none.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/feel-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/app-window.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/app-window.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "window",
+          "titlebar",
+          "tauri",
+          "electron",
+          "desktop",
+          "macos",
+          "windows",
+          "chrome",
+          "drag region",
+          "feel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-12",
+        "tests": true,
+        "ai": {
+          "summary": "Real window chrome for a Tauri or Electron app. <AppWindow onClose onMinimize onMaximize><AppWindowTitleBar title=\"…\">toolbar</AppWindowTitleBar><AppWindowContent/></AppWindow>. It draws the platform's controls (macOS traffic lights on the left, Windows caption buttons on the right, none on iOS or web) from the page's feel, drags the window, and maximizes on double-click. You wire the callbacks; there is no Tauri or Electron dependency.",
+          "whenToUse": [
+            "The window of a Tauri or Electron app with a hidden native title bar (decorations: false, or titleBarStyle hidden)",
+            "A desktop-style web app that should match the platform's window chrome"
+          ],
+          "whenNotToUse": [
+            "Landing-page mockups of a Mac app (use mac-window)",
+            "Modal dialogs inside a web app (use dialog)"
+          ],
+          "composesWith": [
+            "feel-auto",
+            "sidebar",
+            "toolbar",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Reaches the window controls when their handlers are set, then the toolbar"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Presses the focused window control"
+            },
+            {
+              "keys": "Double-click the bar",
+              "action": "Maximizes or restores (calls onMaximize)"
+            }
+          ],
+          "customization": [
+            "feel: 'macos' | 'windows' | 'ios' | 'web' overrides the page's feel for this window",
+            "active: defaults to following real window focus; maximized switches the Windows button to restore and squares the corners",
+            "onFullscreen: the macOS green button; hold Option to call onMaximize instead",
+            "Tauri v2: onClose={() => getCurrentWindow().close()}; Electron: send an IPC message from the handler",
+            "AppWindowControls renders only the controls, for a custom title bar"
+          ]
+        },
+        "source": {
+          "name": "tauri-controls",
+          "url": "https://github.com/agmmnn/tauri-controls",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 agmmnn",
+          "modified": true
+        },
+        "examples": [
+          "app-window-demo",
+          "app-window-feels"
+        ],
+        "url": "https://ui.ballmac.com/components/app-window"
+      }
+    },
+    {
+      "name": "app-window-demo",
+      "type": "registry:example",
+      "title": "App Window: Notes app, in any feel",
+      "description": "Notes app, in any feel example of App Window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/app-window.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/feel-presets.json",
+        "utils"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/app-window-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/app-window-demo.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "app-window",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "app-window-feels",
+      "type": "registry:example",
+      "title": "App Window: One window, three feels",
+      "description": "One window, three feels example of App Window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/app-window.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/feel-presets.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/app-window-feels.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/app-window-feels.tsx"
+        }
+      ],
+      "categories": [
+        "macos"
+      ],
+      "meta": {
+        "example": true,
+        "of": "app-window",
+        "tier": "free"
+      }
+    },
+    {
       "name": "approval-card",
       "type": "registry:ui",
       "title": "Approval Card",
@@ -11880,9 +12033,15 @@
           "loading",
           "radix"
         ],
-        "version": "1.0.1",
+        "version": "1.0.2",
         "updated": "2026-10-11",
         "changelog": [
+          {
+            "version": "1.0.2",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
           {
             "version": "1.0.1",
             "date": "2026-10-11",
@@ -14654,8 +14813,22 @@
           "overlay",
           "radix"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-30",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Shows actions at the pointer on right-click or long-press. Keyboard users open it with Shift+F10 or the Menu key on a focusable trigger.",
@@ -16932,8 +17105,22 @@
           "actions",
           "radix"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-30",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Opens a menu of actions from a button. Supports groups, labels, checkbox and radio items, nested submenus, shortcuts and a destructive style.",
@@ -17665,6 +17852,313 @@
         "example": true,
         "of": "feedback-widget",
         "tier": "free"
+      }
+    },
+    {
+      "name": "feel-auto",
+      "type": "registry:ui",
+      "title": "Feel Auto",
+      "description": "Picks the platform feel for you: macOS, iOS, Windows or web, from the device, before the first paint. All four feels are included and a user's override is remembered.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/feel-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/feel-script.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/feel-script.tsx"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
+        }
+      },
+      "css": {
+        "[data-feel=\"web\"]": {
+          "--radius": "0.625rem",
+          "--bm-speed": "1",
+          "--bm-bounce": "0.25",
+          "--bm-travel": "1",
+          "--bm-hover": "1",
+          "--bm-stagger": "1",
+          "--bm-ambient": "1",
+          "--bm-ambient-state": "running",
+          "--bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "--bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "--bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "--bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "--bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "--bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "--bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "--bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "--bm-distance": "10px",
+          "--bm-lift": "-2px",
+          "--bm-press": "0.97",
+          "--bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "--bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "--bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "--bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "--bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "--bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "--bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "--bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "--bm-text-xs": "0.75rem",
+          "--bm-text-xs-lh": "calc(1 / 0.75)",
+          "--bm-text-sm": "0.875rem",
+          "--bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "--bm-text-base": "1rem",
+          "--bm-text-base-lh": "calc(1.5 / 1)",
+          "--bm-focus-width": "3px",
+          "--bm-focus-alpha": "50%",
+          "--bm-focus-color": "var(--ring)",
+          "--bm-control-h": "calc(var(--spacing) * 9)",
+          "--bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "--bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "--bm-target-min": "0px",
+          "--bm-press-dim": "1",
+          "--bm-material-blur": "0px",
+          "--bm-material-alpha": "100%",
+          "--bm-sidebar-item-h": "2rem",
+          "--bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "--bm-sidebar-indicator": "0px",
+          "--bm-menu-item-h": "2rem",
+          "--bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "--bm-menu-pad": "0.25rem",
+          "--bm-scrollbar-width": "auto",
+          "--bm-titlebar-h": "2.5rem",
+          "--spacing": "0.25rem"
+        },
+        "[data-feel=\"macos\"]": {
+          "--radius": "0.375rem",
+          "--bm-speed": "1",
+          "--bm-bounce": "0.25",
+          "--bm-travel": "1",
+          "--bm-hover": "1",
+          "--bm-stagger": "1",
+          "--bm-ambient": "1",
+          "--bm-ambient-state": "running",
+          "--bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "--bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "--bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "--bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "--bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "--bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "--bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "--bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "--bm-distance": "10px",
+          "--bm-lift": "-2px",
+          "--bm-press": "0.97",
+          "--bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "--bm-shadow-xs": "0 0.5px 1px rgb(0 0 0 / 0.08), 0 0 0 0.5px rgb(0 0 0 / 0.04)",
+          "--bm-shadow-sm": "0 1px 3px rgb(0 0 0 / 0.12), 0 0 0 0.5px rgb(0 0 0 / 0.06)",
+          "--bm-shadow-md": "0 4px 12px -2px rgb(0 0 0 / 0.14), 0 0 0 0.5px rgb(0 0 0 / 0.06)",
+          "--bm-shadow-lg": "0 12px 32px -6px rgb(0 0 0 / 0.22), 0 0 0 0.5px rgb(0 0 0 / 0.08)",
+          "--bm-shadow-xl": "0 20px 48px -8px rgb(0 0 0 / 0.26), 0 0 0 0.5px rgb(0 0 0 / 0.08)",
+          "--bm-shadow-2xl": "0 28px 64px -12px rgb(0 0 0 / 0.32), 0 0 0 0.5px rgb(0 0 0 / 0.1)",
+          "--bm-shadow-popover": "0 8px 30px rgb(0 0 0 / 0.22), 0 0 0 0.5px rgb(0 0 0 / 0.12)",
+          "--bm-text-xs": "0.6875rem",
+          "--bm-text-xs-lh": "0.875rem",
+          "--bm-text-sm": "0.8125rem",
+          "--bm-text-sm-lh": "1.125rem",
+          "--bm-text-base": "0.9375rem",
+          "--bm-text-base-lh": "1.375rem",
+          "--bm-focus-width": "3px",
+          "--bm-focus-alpha": "50%",
+          "--bm-focus-color": "var(--ring)",
+          "--bm-control-h": "1.75rem",
+          "--bm-control-h-sm": "1.5rem",
+          "--bm-control-h-lg": "2rem",
+          "--bm-target-min": "0px",
+          "--bm-press-dim": "1",
+          "--bm-material-blur": "24px",
+          "--bm-material-alpha": "78%",
+          "--bm-sidebar-item-h": "1.75rem",
+          "--bm-sidebar-item-radius": "0.375rem",
+          "--bm-sidebar-indicator": "0px",
+          "--bm-menu-item-h": "1.5rem",
+          "--bm-menu-item-radius": "0.3125rem",
+          "--bm-menu-pad": "0.3125rem",
+          "--bm-scrollbar-width": "thin",
+          "--bm-titlebar-h": "2.75rem",
+          "--spacing": "0.225rem"
+        },
+        "[data-feel=\"ios\"]": {
+          "--radius": "0.75rem",
+          "--bm-speed": "1.1",
+          "--bm-bounce": "0.55",
+          "--bm-travel": "1.1",
+          "--bm-hover": "0",
+          "--bm-stagger": "1.1",
+          "--bm-ambient": "1",
+          "--bm-ambient-state": "running",
+          "--bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "--bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "--bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "--bm-ease-spring": "linear(0, 0.026, 0.0947, 0.1927, 0.3084, 0.4319, 0.5553, 0.6724, 0.7789, 0.8718, 0.9497, 1.0122, 1.0596, 1.0932, 1.1143, 1.1249, 1.1268, 1.1219, 1.1121, 1.0989, 1.0839, 1.0681, 1.0526, 1.038, 1.0249, 1.0136, 1.0042, 0.9967, 0.9912, 0.9873, 0.985, 0.984, 0.984, 0.9848, 0.9862, 0.9879, 0.9899, 0.9919, 0.9938, 0.9956, 1)",
+          "--bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "--bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "--bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "--bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "--bm-distance": "11px",
+          "--bm-lift": "0px",
+          "--bm-press": "1",
+          "--bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "--bm-shadow-xs": "0 0 0 0 rgb(0 0 0 / 0)",
+          "--bm-shadow-sm": "0 0 0 0.5px rgb(0 0 0 / 0.06)",
+          "--bm-shadow-md": "0 2px 10px rgb(0 0 0 / 0.08)",
+          "--bm-shadow-lg": "0 10px 40px rgb(0 0 0 / 0.18)",
+          "--bm-shadow-xl": "0 16px 56px rgb(0 0 0 / 0.22)",
+          "--bm-shadow-2xl": "0 24px 72px rgb(0 0 0 / 0.28)",
+          "--bm-shadow-popover": "0 10px 40px rgb(0 0 0 / 0.18)",
+          "--bm-text-xs": "0.8125rem",
+          "--bm-text-xs-lh": "1.125rem",
+          "--bm-text-sm": "0.9375rem",
+          "--bm-text-sm-lh": "1.375rem",
+          "--bm-text-base": "1.0625rem",
+          "--bm-text-base-lh": "1.5rem",
+          "--bm-focus-width": "3px",
+          "--bm-focus-alpha": "40%",
+          "--bm-focus-color": "var(--ring)",
+          "--bm-control-h": "2.75rem",
+          "--bm-control-h-sm": "2.25rem",
+          "--bm-control-h-lg": "3rem",
+          "--bm-target-min": "2.75rem",
+          "--bm-press-dim": "0.6",
+          "--bm-material-blur": "30px",
+          "--bm-material-alpha": "80%",
+          "--bm-sidebar-item-h": "2.75rem",
+          "--bm-sidebar-item-radius": "0.625rem",
+          "--bm-sidebar-indicator": "0px",
+          "--bm-menu-item-h": "2.75rem",
+          "--bm-menu-item-radius": "0px",
+          "--bm-menu-pad": "0px",
+          "--bm-scrollbar-width": "none",
+          "--bm-titlebar-h": "2.75rem",
+          "--spacing": "0.275rem"
+        },
+        "[data-feel=\"windows\"]": {
+          "--radius": "0.25rem",
+          "--bm-speed": "1.3",
+          "--bm-bounce": "0",
+          "--bm-travel": "0.6",
+          "--bm-hover": "0.5",
+          "--bm-stagger": "0.5",
+          "--bm-ambient": "1",
+          "--bm-ambient-state": "running",
+          "--bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "--bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "--bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+          "--bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "--bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "--bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "--bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "--bm-distance": "6px",
+          "--bm-lift": "-1px",
+          "--bm-press": "0.985",
+          "--bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "--bm-shadow-xs": "0 0 2px rgb(0 0 0 / 0.12), 0 1px 2px rgb(0 0 0 / 0.14)",
+          "--bm-shadow-sm": "0 0 2px rgb(0 0 0 / 0.12), 0 2px 4px rgb(0 0 0 / 0.14)",
+          "--bm-shadow-md": "0 0 2px rgb(0 0 0 / 0.12), 0 4px 8px rgb(0 0 0 / 0.14)",
+          "--bm-shadow-lg": "0 0 2px rgb(0 0 0 / 0.12), 0 8px 16px rgb(0 0 0 / 0.14)",
+          "--bm-shadow-xl": "0 0 8px rgb(0 0 0 / 0.12), 0 14px 28px rgb(0 0 0 / 0.14)",
+          "--bm-shadow-2xl": "0 0 8px rgb(0 0 0 / 0.12), 0 32px 64px rgb(0 0 0 / 0.14)",
+          "--bm-shadow-popover": "0 0 8px rgb(0 0 0 / 0.12), 0 14px 28px rgb(0 0 0 / 0.14)",
+          "--bm-text-xs": "0.75rem",
+          "--bm-text-xs-lh": "1rem",
+          "--bm-text-sm": "0.875rem",
+          "--bm-text-sm-lh": "1.25rem",
+          "--bm-text-base": "1rem",
+          "--bm-text-base-lh": "1.375rem",
+          "--bm-focus-width": "2px",
+          "--bm-focus-alpha": "100%",
+          "--bm-focus-color": "var(--foreground)",
+          "--bm-control-h": "2rem",
+          "--bm-control-h-sm": "1.5rem",
+          "--bm-control-h-lg": "2.5rem",
+          "--bm-target-min": "0px",
+          "--bm-press-dim": "1",
+          "--bm-material-blur": "30px",
+          "--bm-material-alpha": "85%",
+          "--bm-sidebar-item-h": "2.5rem",
+          "--bm-sidebar-item-radius": "0.25rem",
+          "--bm-sidebar-indicator": "3px",
+          "--bm-menu-item-h": "2rem",
+          "--bm-menu-item-radius": "0.25rem",
+          "--bm-menu-pad": "0.25rem",
+          "--bm-scrollbar-width": "thin",
+          "--bm-titlebar-h": "2rem",
+          "--spacing": "0.25rem"
+        },
+        "[class*=\"focus-visible:ring-[3px]\"]:focus-visible": {
+          "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
+          "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "[class*=\"focus-within:ring-[3px]\"]:focus-within": {
+          "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
+          "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "@layer base": {
+          "*": {
+            "scrollbar-width": "var(--bm-scrollbar-width, auto)"
+          }
+        }
+      },
+      "docs": "Render <FeelScript /> once in <head> in your root layout and add suppressHydrationWarning to <html>. Use setFeel('macos' | 'ios' | 'windows' | 'web' | 'auto') from @/lib/ballmac/feel to let people choose.",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "feel",
+          "auto",
+          "platform",
+          "macos",
+          "windows",
+          "ios",
+          "tauri",
+          "electron",
+          "detect"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-12",
+        "ai": {
+          "summary": "Install once, render <FeelScript /> in <head>, and the whole app handles like the platform it runs on. A Tauri or Electron app on a Mac becomes macOS and the same app on Windows becomes Windows, with no code branches.",
+          "whenToUse": [
+            "Desktop apps (Tauri, Electron) that ship to more than one OS",
+            "Web apps that should feel native on phones and desktops"
+          ],
+          "whenNotToUse": [
+            "Apps that always want one feel: install feel-macos, feel-ios or feel-windows instead",
+            "Server components that must not read the platform: the feel is applied on the client before paint"
+          ],
+          "composesWith": [
+            "app-window",
+            "feel-presets"
+          ],
+          "a11y": [],
+          "customization": [
+            "setFeel('auto') returns to the device's own feel",
+            "The font is inherited from data-feel on <html>; apps that set their own font on <body> keep it"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/feel-auto"
       }
     },
     {
@@ -19601,8 +20095,22 @@
           "link",
           "radix"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-30",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Adds optional context to a link for pointer and keyboard users; the link remains useful without the preview.",
@@ -20602,8 +21110,22 @@
           "form",
           "search"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-28",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-28",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Single-line text field. Use size to match neighbouring buttons, wrap in InputGroup with InputGroupAddon (align start or end) for icons or text like \".com\", and set aria-invalid for error styling.",
@@ -24030,8 +24552,22 @@
           "desktop",
           "radix"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-30",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "A File / Edit / View style bar. Left and Right move between menus, Down opens one, and hovering across open menus switches them.",
@@ -24794,8 +25330,22 @@
           "mega menu",
           "radix"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-30",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Top-level triggers open content panels of links. Use navigationMenuTriggerStyle for plain top-level links.",
@@ -26772,8 +27322,22 @@
           "editor",
           "radix"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-30",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Displays a small interactive panel anchored to a control, with managed focus and Escape dismissal.",
@@ -29357,8 +29921,22 @@
           "radix",
           "listbox"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-28",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-28",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Pick one value from a list. Compose Select > SelectTrigger > SelectValue and SelectContent > SelectItem (group with SelectGroup + SelectLabel). The menu is portalled and keyboard navigable with typeahead.",
@@ -30379,8 +30957,22 @@
           "app shell",
           "collapsible"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-30",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "SidebarProvider wraps Sidebar and SidebarInset. Menu entries use SidebarMenuButton with href and isActive. SidebarTrigger toggles it.",
@@ -33858,8 +34450,22 @@
           "navigation",
           "radix"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.0.1",
+        "updated": "2026-10-11",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-11",
+            "note": "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-30",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Switches between a small number of peer views while retaining Radix tablist semantics and roving focus.",
@@ -42534,6 +43140,57 @@
       }
     },
     {
+      "name": "feel-presets",
+      "type": "registry:lib",
+      "title": "Feel Presets",
+      "description": "Read and set the platform feel (web, macOS, iOS or Windows), detect the device's own, and remember an override. useFeel for components that need to know.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "files": [
+        {
+          "path": "registry/ballmac/lib/feel.ts",
+          "type": "registry:lib",
+          "target": "@lib/ballmac/feel.ts"
+        }
+      ],
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "feel",
+          "platform",
+          "macos",
+          "windows",
+          "ios",
+          "detect",
+          "tauri",
+          "electron"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-12",
+        "ai": {
+          "summary": "useFeel() returns the current feel and setFeel(). detectFeel() reads the platform from the user agent (browser, Tauri, Electron). setFeel('auto') returns to the device's own feel. The feel is the data-feel attribute on <html>.",
+          "whenToUse": [
+            "A component needs to behave differently per platform, such as which side the window controls sit on",
+            "Letting users override the detected feel in settings"
+          ],
+          "whenNotToUse": [
+            "Styling that tokens already handle: use the --bm-* variables and Tailwind classes, which follow the feel by themselves"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "setFeel('macos') | 'ios' | 'windows' | 'web' | 'auto'",
+            "Put data-feel on a container to scope a feel to part of the page"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/feel-presets"
+      }
+    },
+    {
       "name": "highlight",
       "type": "registry:lib",
       "title": "Highlight",
@@ -42788,6 +43445,669 @@
         },
         "examples": [],
         "url": "https://ui.ballmac.com/components/scroll"
+      }
+    },
+    {
+      "name": "feel-ios",
+      "type": "registry:theme",
+      "title": "iOS feel",
+      "description": "44 px touch targets, 17 px text, large corners, flat grouped surfaces and a springier motion. Controls dim when pressed and nothing reacts to hover. For mobile web apps and webviews.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "theme": {
+          "spacing": "0.275rem",
+          "font-sans": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
+        },
+        "light": {
+          "radius": "0.75rem",
+          "bm-speed": "1.1",
+          "bm-bounce": "0.55",
+          "bm-travel": "1.1",
+          "bm-hover": "0",
+          "bm-stagger": "1.1",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.026, 0.0947, 0.1927, 0.3084, 0.4319, 0.5553, 0.6724, 0.7789, 0.8718, 0.9497, 1.0122, 1.0596, 1.0932, 1.1143, 1.1249, 1.1268, 1.1219, 1.1121, 1.0989, 1.0839, 1.0681, 1.0526, 1.038, 1.0249, 1.0136, 1.0042, 0.9967, 0.9912, 0.9873, 0.985, 0.984, 0.984, 0.9848, 0.9862, 0.9879, 0.9899, 0.9919, 0.9938, 0.9956, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "11px",
+          "bm-lift": "0px",
+          "bm-press": "1",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 0 0 0 rgb(0 0 0 / 0)",
+          "bm-shadow-sm": "0 0 0 0.5px rgb(0 0 0 / 0.06)",
+          "bm-shadow-md": "0 2px 10px rgb(0 0 0 / 0.08)",
+          "bm-shadow-lg": "0 10px 40px rgb(0 0 0 / 0.18)",
+          "bm-shadow-xl": "0 16px 56px rgb(0 0 0 / 0.22)",
+          "bm-shadow-2xl": "0 24px 72px rgb(0 0 0 / 0.28)",
+          "bm-shadow-popover": "0 10px 40px rgb(0 0 0 / 0.18)",
+          "bm-text-xs": "0.8125rem",
+          "bm-text-xs-lh": "1.125rem",
+          "bm-text-sm": "0.9375rem",
+          "bm-text-sm-lh": "1.375rem",
+          "bm-text-base": "1.0625rem",
+          "bm-text-base-lh": "1.5rem",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "40%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "2.75rem",
+          "bm-control-h-sm": "2.25rem",
+          "bm-control-h-lg": "3rem",
+          "bm-target-min": "2.75rem",
+          "bm-press-dim": "0.6",
+          "bm-material-blur": "30px",
+          "bm-material-alpha": "80%",
+          "bm-sidebar-item-h": "2.75rem",
+          "bm-sidebar-item-radius": "0.625rem",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2.75rem",
+          "bm-menu-item-radius": "0px",
+          "bm-menu-pad": "0px",
+          "bm-scrollbar-width": "none",
+          "bm-titlebar-h": "2.75rem"
+        }
+      },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px"
+          }
+        },
+        "[class*=\"focus-visible:ring-[3px]\"]:focus-visible": {
+          "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
+          "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "[class*=\"focus-within:ring-[3px]\"]:focus-within": {
+          "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
+          "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "@layer base": {
+          "*": {
+            "scrollbar-width": "var(--bm-scrollbar-width, auto)"
+          }
+        }
+      },
+      "docs": "Changes how everything handles (shape, size, focus, shadows, motion) and leaves your colours alone. Tune it, preview it on real components and copy the CSS at https://ui.ballmac.com/themes?fe=ios",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "feel",
+          "theme",
+          "tokens",
+          "platform",
+          "ios",
+          "desktop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-12",
+        "ai": {
+          "summary": "Big targets, rounded, dims on press. Sets radius, density, text scale, control and menu sizes, focus ring, shadows and motion as CSS variables that Tailwind's shadow and text scales and every Ballmac component follow, without touching colours.",
+          "whenToUse": [
+            "Mobile web apps, PWAs and webviews",
+            "Anything used with a thumb"
+          ],
+          "whenNotToUse": [
+            "The project needs its own sizing system or does not use Tailwind",
+            "A native app UI is required; these are web components that feel like the platform, not native controls"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Change --radius, --spacing and the --bm-* variables by hand, or tune them at https://ui.ballmac.com/themes",
+            "Set data-feel on a container to scope a feel to part of the page"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/feel-ios"
+      }
+    },
+    {
+      "name": "feel-macos",
+      "type": "registry:theme",
+      "title": "macOS feel",
+      "description": "Compact 28 px controls, 13 px text, a soft focus halo, hairline-edged shadows and frosted popovers and sidebars. For desktop apps built with Tauri or Electron that should sit comfortably next to native Mac apps.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "theme": {
+          "spacing": "0.225rem",
+          "font-sans": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
+        },
+        "light": {
+          "radius": "0.375rem",
+          "bm-speed": "1",
+          "bm-bounce": "0.25",
+          "bm-travel": "1",
+          "bm-hover": "1",
+          "bm-stagger": "1",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "10px",
+          "bm-lift": "-2px",
+          "bm-press": "0.97",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 0.5px 1px rgb(0 0 0 / 0.08), 0 0 0 0.5px rgb(0 0 0 / 0.04)",
+          "bm-shadow-sm": "0 1px 3px rgb(0 0 0 / 0.12), 0 0 0 0.5px rgb(0 0 0 / 0.06)",
+          "bm-shadow-md": "0 4px 12px -2px rgb(0 0 0 / 0.14), 0 0 0 0.5px rgb(0 0 0 / 0.06)",
+          "bm-shadow-lg": "0 12px 32px -6px rgb(0 0 0 / 0.22), 0 0 0 0.5px rgb(0 0 0 / 0.08)",
+          "bm-shadow-xl": "0 20px 48px -8px rgb(0 0 0 / 0.26), 0 0 0 0.5px rgb(0 0 0 / 0.08)",
+          "bm-shadow-2xl": "0 28px 64px -12px rgb(0 0 0 / 0.32), 0 0 0 0.5px rgb(0 0 0 / 0.1)",
+          "bm-shadow-popover": "0 8px 30px rgb(0 0 0 / 0.22), 0 0 0 0.5px rgb(0 0 0 / 0.12)",
+          "bm-text-xs": "0.6875rem",
+          "bm-text-xs-lh": "0.875rem",
+          "bm-text-sm": "0.8125rem",
+          "bm-text-sm-lh": "1.125rem",
+          "bm-text-base": "0.9375rem",
+          "bm-text-base-lh": "1.375rem",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "1.75rem",
+          "bm-control-h-sm": "1.5rem",
+          "bm-control-h-lg": "2rem",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "24px",
+          "bm-material-alpha": "78%",
+          "bm-sidebar-item-h": "1.75rem",
+          "bm-sidebar-item-radius": "0.375rem",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "1.5rem",
+          "bm-menu-item-radius": "0.3125rem",
+          "bm-menu-pad": "0.3125rem",
+          "bm-scrollbar-width": "thin",
+          "bm-titlebar-h": "2.75rem"
+        }
+      },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        },
+        "[class*=\"focus-visible:ring-[3px]\"]:focus-visible": {
+          "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
+          "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "[class*=\"focus-within:ring-[3px]\"]:focus-within": {
+          "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
+          "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "@layer base": {
+          "*": {
+            "scrollbar-width": "var(--bm-scrollbar-width, auto)"
+          }
+        }
+      },
+      "docs": "Changes how everything handles (shape, size, focus, shadows, motion) and leaves your colours alone. Tune it, preview it on real components and copy the CSS at https://ui.ballmac.com/themes?fe=macos",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "feel",
+          "theme",
+          "tokens",
+          "platform",
+          "macos",
+          "desktop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-12",
+        "ai": {
+          "summary": "Compact, soft shadows, frosted menus. Sets radius, density, text scale, control and menu sizes, focus ring, shadows and motion as CSS variables that Tailwind's shadow and text scales and every Ballmac component follow, without touching colours.",
+          "whenToUse": [
+            "Tauri or Electron apps for Mac",
+            "Productivity and developer tools that should sit next to native Mac apps"
+          ],
+          "whenNotToUse": [
+            "The project needs its own sizing system or does not use Tailwind",
+            "A native app UI is required; these are web components that feel like the platform, not native controls"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Change --radius, --spacing and the --bm-* variables by hand, or tune them at https://ui.ballmac.com/themes",
+            "Set data-feel on a container to scope a feel to part of the page"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/feel-macos"
+      }
+    },
+    {
+      "name": "feel-web",
+      "type": "registry:theme",
+      "title": "Web feel",
+      "description": "Ballmac UI's own feel and the default: shadcn proportions, a soft focus halo and Tailwind's shadows. Nothing changes until you pick another feel.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "theme": {
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
+        },
+        "light": {
+          "radius": "0.625rem",
+          "bm-speed": "1",
+          "bm-bounce": "0.25",
+          "bm-travel": "1",
+          "bm-hover": "1",
+          "bm-stagger": "1",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0168, 0.0608, 0.1231, 0.1971, 0.2773, 0.3594, 0.4403, 0.5178, 0.5902, 0.6566, 0.7164, 0.7695, 0.816, 0.856, 0.8901, 0.9187, 0.9423, 0.9615, 0.9769, 0.989, 0.9982, 1.005, 1.0099, 1.0131, 1.0151, 1.0161, 1.0163, 1.0159, 1.0151, 1.0141, 1.0128, 1.0115, 1.0102, 1.0089, 1.0076, 1.0064, 1.0054, 1.0044, 1.0036, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "10px",
+          "bm-lift": "-2px",
+          "bm-press": "0.97",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
+        }
+      },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-bounce": "0",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        }
+      },
+      "docs": "Changes how everything handles (shape, size, focus, shadows, motion) and leaves your colours alone. Tune it, preview it on real components and copy the CSS at https://ui.ballmac.com/themes?fe=web",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "feel",
+          "theme",
+          "tokens",
+          "platform",
+          "web",
+          "desktop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-12",
+        "ai": {
+          "summary": "Neutral, as it is today. Sets radius, density, text scale, control and menu sizes, focus ring, shadows and motion as CSS variables that Tailwind's shadow and text scales and every Ballmac component follow, without touching colours.",
+          "whenToUse": [
+            "Going back to Ballmac UI's own default feel",
+            "Resetting after trying another feel"
+          ],
+          "whenNotToUse": [
+            "The project needs its own sizing system or does not use Tailwind",
+            "A native app UI is required; these are web components that feel like the platform, not native controls"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Change --radius, --spacing and the --bm-* variables by hand, or tune them at https://ui.ballmac.com/themes",
+            "Set data-feel on a container to scope a feel to part of the page"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/feel-web"
+      }
+    },
+    {
+      "name": "feel-windows",
+      "type": "registry:theme",
+      "title": "Windows feel",
+      "description": "4 px corners, 32 px controls, Fluent-style layered shadows, a 2 px solid focus outline and a fast, no-bounce motion. For desktop apps that should sit comfortably next to native Windows apps.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "cssVars": {
+        "theme": {
+          "font-sans": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          "ease-out": "var(--bm-ease-out)",
+          "ease-in": "var(--bm-ease-in)",
+          "ease-in-out": "var(--bm-ease-in-out)",
+          "ease-spring": "var(--bm-ease-spring)",
+          "animate-in": "enter var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-out": "exit var(--tw-animation-duration,var(--tw-duration,calc(150ms / var(--bm-speed))))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,calc(200ms / var(--bm-speed))))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+          "transition-duration-75": "calc(75ms / var(--bm-speed))",
+          "transition-delay-75": "calc(75ms / var(--bm-speed))",
+          "transition-duration-100": "calc(100ms / var(--bm-speed))",
+          "transition-delay-100": "calc(100ms / var(--bm-speed))",
+          "transition-duration-150": "calc(150ms / var(--bm-speed))",
+          "transition-delay-150": "calc(150ms / var(--bm-speed))",
+          "transition-duration-200": "calc(200ms / var(--bm-speed))",
+          "transition-delay-200": "calc(200ms / var(--bm-speed))",
+          "transition-duration-300": "calc(300ms / var(--bm-speed))",
+          "transition-delay-300": "calc(300ms / var(--bm-speed))",
+          "transition-duration-500": "calc(500ms / var(--bm-speed))",
+          "transition-delay-500": "calc(500ms / var(--bm-speed))",
+          "transition-duration-700": "calc(700ms / var(--bm-speed))",
+          "transition-delay-700": "calc(700ms / var(--bm-speed))",
+          "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
+        },
+        "light": {
+          "radius": "0.25rem",
+          "bm-speed": "1.3",
+          "bm-bounce": "0",
+          "bm-travel": "0.6",
+          "bm-hover": "0.5",
+          "bm-stagger": "0.5",
+          "bm-ambient": "1",
+          "bm-ambient-state": "running",
+          "bm-ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "bm-ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+          "bm-ease-in": "cubic-bezier(0.55, 0, 1, 0.45)",
+          "bm-ease-spring": "linear(0, 0.0177, 0.0622, 0.1231, 0.193, 0.2665, 0.3401, 0.4112, 0.4783, 0.5405, 0.5974, 0.6488, 0.6948, 0.7357, 0.7719, 0.8036, 0.8314, 0.8556, 0.8765, 0.8946, 0.9102, 0.9237, 0.9352, 0.945, 0.9534, 0.9606, 0.9667, 0.9719, 0.9763, 0.98, 0.9832, 0.9859, 0.9881, 0.99, 0.9916, 0.993, 0.9941, 0.9951, 0.9959, 0.9965, 1)",
+          "bm-duration-fast": "calc(140ms / var(--bm-speed))",
+          "bm-duration-base": "calc(220ms / var(--bm-speed))",
+          "bm-duration-slow": "calc(320ms / var(--bm-speed))",
+          "bm-duration-reveal": "calc(600ms / var(--bm-speed))",
+          "bm-distance": "6px",
+          "bm-lift": "-1px",
+          "bm-press": "0.985",
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 0 2px rgb(0 0 0 / 0.12), 0 1px 2px rgb(0 0 0 / 0.14)",
+          "bm-shadow-sm": "0 0 2px rgb(0 0 0 / 0.12), 0 2px 4px rgb(0 0 0 / 0.14)",
+          "bm-shadow-md": "0 0 2px rgb(0 0 0 / 0.12), 0 4px 8px rgb(0 0 0 / 0.14)",
+          "bm-shadow-lg": "0 0 2px rgb(0 0 0 / 0.12), 0 8px 16px rgb(0 0 0 / 0.14)",
+          "bm-shadow-xl": "0 0 8px rgb(0 0 0 / 0.12), 0 14px 28px rgb(0 0 0 / 0.14)",
+          "bm-shadow-2xl": "0 0 8px rgb(0 0 0 / 0.12), 0 32px 64px rgb(0 0 0 / 0.14)",
+          "bm-shadow-popover": "0 0 8px rgb(0 0 0 / 0.12), 0 14px 28px rgb(0 0 0 / 0.14)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "1rem",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "1.25rem",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "1.375rem",
+          "bm-focus-width": "2px",
+          "bm-focus-alpha": "100%",
+          "bm-focus-color": "var(--foreground)",
+          "bm-control-h": "2rem",
+          "bm-control-h-sm": "1.5rem",
+          "bm-control-h-lg": "2.5rem",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "30px",
+          "bm-material-alpha": "85%",
+          "bm-sidebar-item-h": "2.5rem",
+          "bm-sidebar-item-radius": "0.25rem",
+          "bm-sidebar-indicator": "3px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "0.25rem",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "thin",
+          "bm-titlebar-h": "2rem"
+        }
+      },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--bm-speed": "2",
+            "--bm-travel": "0",
+            "--bm-hover": "0",
+            "--bm-stagger": "0.4",
+            "--bm-ambient": "0",
+            "--bm-ambient-state": "paused",
+            "--bm-distance": "0px",
+            "--bm-lift": "0px",
+            "--bm-press": "1"
+          }
+        },
+        "[class*=\"focus-visible:ring-[3px]\"]:focus-visible": {
+          "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
+          "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "[class*=\"focus-within:ring-[3px]\"]:focus-within": {
+          "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
+          "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "@layer base": {
+          "*": {
+            "scrollbar-width": "var(--bm-scrollbar-width, auto)"
+          }
+        }
+      },
+      "docs": "Changes how everything handles (shape, size, focus, shadows, motion) and leaves your colours alone. Tune it, preview it on real components and copy the CSS at https://ui.ballmac.com/themes?fe=windows",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "feel",
+          "theme",
+          "tokens",
+          "platform",
+          "windows",
+          "desktop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-12",
+        "ai": {
+          "summary": "Square-ish, bordered, crisp 2 px focus. Sets radius, density, text scale, control and menu sizes, focus ring, shadows and motion as CSS variables that Tailwind's shadow and text scales and every Ballmac component follow, without touching colours.",
+          "whenToUse": [
+            "Tauri or Electron apps for Windows",
+            "Business and developer tools that should sit next to native Windows apps"
+          ],
+          "whenNotToUse": [
+            "The project needs its own sizing system or does not use Tailwind",
+            "A native app UI is required; these are web components that feel like the platform, not native controls"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "Change --radius, --spacing and the --bm-* variables by hand, or tune them at https://ui.ballmac.com/themes",
+            "Set data-feel on a container to scope a feel to part of the page"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/feel-windows"
       }
     },
     {
@@ -43347,7 +44667,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0.375rem",
@@ -43392,7 +44724,38 @@
           "bm-distance": "10px",
           "bm-lift": "-2px",
           "bm-press": "0.97",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.026 80)",
@@ -43451,9 +44814,15 @@
           "dark mode",
           "amber"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -43519,7 +44888,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0.5rem",
@@ -43564,7 +44945,38 @@
           "bm-distance": "14px",
           "bm-lift": "-3px",
           "bm-press": "0.955",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.026 60)",
@@ -43623,9 +45035,15 @@
           "dark mode",
           "ember"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -43691,7 +45109,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0.5rem",
@@ -43736,7 +45166,38 @@
           "bm-distance": "7px",
           "bm-lift": "-1px",
           "bm-press": "0.985",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.026 152)",
@@ -43793,9 +45254,15 @@
           "dark mode",
           "forest"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -43861,7 +45328,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0.5rem",
@@ -43906,7 +45385,38 @@
           "bm-distance": "7px",
           "bm-lift": "-1.6px",
           "bm-press": "0.976",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.013 255)",
@@ -43963,9 +45473,15 @@
           "dark mode",
           "graphite"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -44031,7 +45547,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0.75rem",
@@ -44076,7 +45604,38 @@
           "bm-distance": "10px",
           "bm-lift": "-2px",
           "bm-press": "0.97",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.026 277)",
@@ -44135,9 +45694,15 @@
           "dark mode",
           "indigo"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -44203,7 +45768,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0.625rem",
@@ -44248,7 +45825,38 @@
           "bm-distance": "7px",
           "bm-lift": "-1px",
           "bm-press": "0.985",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.035 250)",
@@ -44305,9 +45913,15 @@
           "dark mode",
           "midnight"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -44373,7 +45987,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0rem",
@@ -44418,7 +46044,38 @@
           "bm-distance": "7px",
           "bm-lift": "-1.6px",
           "bm-press": "0.976",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.145 0 0)",
@@ -44475,9 +46132,15 @@
           "dark mode",
           "mono"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -44543,7 +46206,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0.625rem",
@@ -44588,7 +46263,38 @@
           "bm-distance": "10px",
           "bm-lift": "-2px",
           "bm-press": "0.97",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.026 248)",
@@ -44647,9 +46353,15 @@
           "dark mode",
           "ocean"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -44715,7 +46427,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0.75rem",
@@ -44760,7 +46484,38 @@
           "bm-distance": "10px",
           "bm-lift": "-2px",
           "bm-press": "0.97",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.026 12)",
@@ -44819,9 +46574,15 @@
           "dark mode",
           "rose"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -44887,7 +46648,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0.375rem",
@@ -44932,7 +46705,38 @@
           "bm-distance": "7px",
           "bm-lift": "-1px",
           "bm-press": "0.985",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.035 80)",
@@ -44989,9 +46793,15 @@
           "dark mode",
           "sand"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -45057,7 +46867,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "0.875rem",
@@ -45102,7 +46924,38 @@
           "bm-distance": "10px",
           "bm-lift": "-2px",
           "bm-press": "0.97",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.026 200)",
@@ -45161,9 +47014,15 @@
           "dark mode",
           "teal"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -45229,7 +47088,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "radius": "1rem",
@@ -45274,7 +47145,38 @@
           "bm-distance": "14px",
           "bm-lift": "-3px",
           "bm-press": "0.955",
-          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))"
+          "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem"
         },
         "dark": {
           "background": "oklch(0.16 0.033 305)",
@@ -45333,9 +47235,15 @@
           "dark mode",
           "violet"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens at the web feel (no change to how components look). Pick a feel on top with feel-macos, feel-ios or feel-windows.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -45372,7 +47280,7 @@
       "name": "theme",
       "type": "registry:theme",
       "title": "Ballmac Theme",
-      "description": "Ballmac UI design tokens in OKLCH: neutral light mode, ink-navy dark mode, the Ballmac blue focus ring, chart colors, and motion (speed, bounce, travel, hover, stagger) with a reduced-motion fallback.",
+      "description": "Ballmac UI design tokens in OKLCH: colours, radius, chart colours, motion (speed, bounce, travel, hover, stagger) and the platform feel tokens (focus, shadows, text scale, control sizes), with a reduced-motion fallback.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "cssVars": {
         "theme": {
@@ -45401,7 +47309,19 @@
           "transition-duration-700": "calc(700ms / var(--bm-speed))",
           "transition-delay-700": "calc(700ms / var(--bm-speed))",
           "transition-duration-1000": "calc(1000ms / var(--bm-speed))",
-          "transition-delay-1000": "calc(1000ms / var(--bm-speed))"
+          "transition-delay-1000": "calc(1000ms / var(--bm-speed))",
+          "shadow-xs": "var(--bm-shadow-xs)",
+          "shadow-sm": "var(--bm-shadow-sm)",
+          "shadow-md": "var(--bm-shadow-md)",
+          "shadow-lg": "var(--bm-shadow-lg)",
+          "shadow-xl": "var(--bm-shadow-xl)",
+          "shadow-2xl": "var(--bm-shadow-2xl)",
+          "text-xs": "var(--bm-text-xs)",
+          "text-xs--line-height": "var(--bm-text-xs-lh)",
+          "text-sm": "var(--bm-text-sm)",
+          "text-sm--line-height": "var(--bm-text-sm-lh)",
+          "text-base": "var(--bm-text-base)",
+          "text-base--line-height": "var(--bm-text-base-lh)"
         },
         "light": {
           "bm-speed": "1",
@@ -45423,6 +47343,37 @@
           "bm-lift": "-2px",
           "bm-press": "0.97",
           "bm-stagger-step": "calc(50ms * var(--bm-stagger) / var(--bm-speed))",
+          "bm-shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "bm-shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "bm-shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "bm-shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "bm-shadow-xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "bm-shadow-2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "bm-shadow-popover": "0 12px 36px -10px rgb(0 0 0 / 0.25)",
+          "bm-text-xs": "0.75rem",
+          "bm-text-xs-lh": "calc(1 / 0.75)",
+          "bm-text-sm": "0.875rem",
+          "bm-text-sm-lh": "calc(1.25 / 0.875)",
+          "bm-text-base": "1rem",
+          "bm-text-base-lh": "calc(1.5 / 1)",
+          "bm-focus-width": "3px",
+          "bm-focus-alpha": "50%",
+          "bm-focus-color": "var(--ring)",
+          "bm-control-h": "calc(var(--spacing) * 9)",
+          "bm-control-h-sm": "calc(var(--spacing) * 8)",
+          "bm-control-h-lg": "calc(var(--spacing) * 11)",
+          "bm-target-min": "0px",
+          "bm-press-dim": "1",
+          "bm-material-blur": "0px",
+          "bm-material-alpha": "100%",
+          "bm-sidebar-item-h": "2rem",
+          "bm-sidebar-item-radius": "calc(var(--radius) - 2px)",
+          "bm-sidebar-indicator": "0px",
+          "bm-menu-item-h": "2rem",
+          "bm-menu-item-radius": "calc(var(--radius) - 4px)",
+          "bm-menu-pad": "0.25rem",
+          "bm-scrollbar-width": "auto",
+          "bm-titlebar-h": "2.5rem",
           "radius": "0.625rem",
           "background": "oklch(1 0 0)",
           "foreground": "oklch(0.17 0.012 265)",
@@ -45489,6 +47440,19 @@
             "--bm-lift": "0px",
             "--bm-press": "1"
           }
+        },
+        "[class*=\"focus-visible:ring-[3px]\"]:focus-visible": {
+          "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
+          "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "[class*=\"focus-within:ring-[3px]\"]:focus-within": {
+          "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
+          "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "@layer base": {
+          "*": {
+            "scrollbar-width": "var(--bm-scrollbar-width, auto)"
+          }
         }
       },
       "categories": [
@@ -45502,9 +47466,15 @@
           "tokens",
           "dark mode"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.2.0",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.2.0",
+            "date": "2026-10-12",
+            "note": "Adds the platform feel tokens (focus ring, elevation, text scale, control, menu and sidebar sizes) at the web feel, which is what the components already do.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -45532,7 +47502,8 @@
           "customization": [
             "Change --ring and --chart-1 to your brand color",
             "Adjust --radius for rounder or sharper corners",
-            "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger to change how everything moves"
+            "Change --bm-speed, --bm-bounce, --bm-travel, --bm-hover and --bm-stagger to change how everything moves",
+            "Install feel-macos, feel-ios or feel-windows to make everything handle like that platform"
           ]
         },
         "examples": [],

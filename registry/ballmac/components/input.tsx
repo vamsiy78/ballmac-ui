@@ -12,9 +12,9 @@ const inputVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-8 px-2.5 text-[13px]",
-        default: "h-9 px-3 text-sm",
-        lg: "h-11 px-4 text-[15px]",
+        sm: "h-[var(--bm-control-h-sm,calc(var(--spacing)*8))] px-2.5 text-[13px]",
+        default: "h-[var(--bm-control-h,calc(var(--spacing)*9))] px-3 text-sm",
+        lg: "h-[var(--bm-control-h-lg,calc(var(--spacing)*11))] px-4 text-[15px]",
       },
     },
     defaultVariants: { size: "default" },
@@ -42,9 +42,9 @@ function Input({ className, type = "text", size = "default", htmlSize, ...props 
 const inputGroupVariants = cva("", {
   variants: {
     size: {
-      sm: "h-8 [&>[data-slot=input]]:text-[13px]",
-      default: "h-9",
-      lg: "h-11 [&>[data-slot=input]]:text-[15px]",
+      sm: "h-[var(--bm-control-h-sm,calc(var(--spacing)*8))] [&>[data-slot=input]]:text-[13px]",
+      default: "h-[var(--bm-control-h,calc(var(--spacing)*9))]",
+      lg: "h-[var(--bm-control-h-lg,calc(var(--spacing)*11))] [&>[data-slot=input]]:text-[15px]",
     },
   },
   defaultVariants: { size: "default" },

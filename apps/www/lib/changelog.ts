@@ -3,6 +3,19 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2026-10-12",
+    title: "Platform feels: every component can handle like macOS, iOS or Windows",
+    items: [
+      "A feel is everything about a product except its colours: control and menu sizes, corners, text scale, focus ring, shadows, sidebar style, frosted surfaces, press feedback, scrollbars, window controls and motion. Four feels: Web (today's look, the default), macOS, iOS and Windows. They work on top of any colour theme",
+      "Install one with `@ballmac/feel-macos`, `-ios`, `-windows` or `-web`, or `@ballmac/feel-auto`, which includes all four and sets the right one from the device before the first paint (no flash). `useFeel()` and `setFeel()` let people override it",
+      "Tailwind's shadow and text scales follow the feel, and one rule restyles the focus ring on every component that uses shadcn's standard focus classes (250 Ballmac items, and shadcn's own). Button, Input, Select, Tabs, Sidebar, menus, popovers and hover cards read feel tokens for sizes, corners, frosting and press dimming; nothing changes without a feel",
+      "New `app-window`: the window chrome of a real Tauri or Electron app. A title bar that drags the window and maximizes on double-click, with traffic lights on the left for macOS, caption buttons on the right for Windows, none for iOS and web. No Tauri or Electron dependency: you pass the actions. Based on tauri-controls (MIT)",
+      "The theme builder has a Platform feel picker, a window in the preview, and a Compare view that shows your colours in all four feels side by side. A link such as /themes?fe=windows opens one. New /docs/feels covers Tauri v2 and Electron setup",
+      "The 12 colour themes and the base theme now carry the web-feel tokens. New checks fail the build when an endless loop ignores the theme or a component draws its own focus ring without being listed",
+      "These are web components that feel like each platform, not native controls, and Ballmac UI is not affiliated with Apple or Microsoft",
+    ],
+  },
+  {
     date: "2026-10-11",
     title: "Motion is part of the theme",
     items: [
