@@ -25,7 +25,7 @@ export default function ProDocsPage() {
       </p>
       <h2>Prefer to browse? Log in</h2>
       <p>
-        You do not need the command line to use Pro. <Link href="/pro">Log in with your licence key</Link> to read and copy the code of any
+        You do not need the command line to use Pro. <Link href="/pro/login">Log in with your licence key</Link> to read and copy the code of any
         Pro block on its page, download the starter apps as a zip, and get install commands with your key already filled in. There is no
         password and no account: the key is the login, and it is kept in an encrypted cookie in your browser until you log out.
       </p>
@@ -91,7 +91,7 @@ export default function ProDocsPage() {
       <ul>
         <li>
           <strong>I logged in but the code does not show</strong>: reload the page. If you still see the lock, your session ended (for
-          example after you revoked the key); <Link href="/pro">log in again</Link>.
+          example after you revoked the key); <Link href="/pro/login">log in again</Link>.
         </li>
         <li>
           <strong>401 licence required</strong>: the CLI did not send a key. Check that <code>BALLMAC_LICENSE_KEY</code>{" "}

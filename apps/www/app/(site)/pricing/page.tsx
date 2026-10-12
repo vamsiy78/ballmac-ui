@@ -13,7 +13,7 @@ import { Sampler } from "@/components/site/sampler"
 import { endsLabel, leftPhrase } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { getOffer } from "@/lib/offer"
-import { getBlocks, getItem, isPro } from "@/lib/registry"
+import { blockGroups, getBlocks, getItem, isPro } from "@/lib/registry"
 import { SAMPLER_BLOCKS } from "@/lib/sampler"
 import { thumbFor } from "@/lib/thumbs"
 
@@ -50,6 +50,15 @@ export default async function PricingPage() {
   // Only blocks that exist in this build, with a captured thumbnail.
   const previews = PREVIEWS.map((n) => getItem(n)).filter((i): i is NonNullable<typeof i> => Boolean(i && isPro(i) && thumbFor(i.name, "pro")))
   const sampler = SAMPLER_BLOCKS.map((n) => getItem(n)).filter((i): i is NonNullable<typeof i> => Boolean(i && isPro(i)))
+
+  // Free and Pro side by side, from the real catalogue: how many blocks of each kind exist in each tier.
+  const all = getBlocks()
+  const rows = blockGroups
+    .map((g) => {
+      const inGroup = all.filter((b) => (g.categories as readonly string[]).includes(b.blockCategory ?? ""))
+      return { label: g.label, free: inGroup.filter((b) => !isPro(b)).length, pro: inGroup.filter(isPro).length }
+    })
+    .filter((r) => r.pro > r.free)
 
   const plans: Plan[] = [
     {
@@ -202,10 +211,96 @@ export default async function PricingPage() {
         </div>
         <p className="text-muted-foreground mt-8 text-center text-sm">
           Already have a licence?{" "}
-          <Link href="/pro" className="text-foreground font-medium underline underline-offset-4">
+          <Link href="/pro/login" className="text-foreground font-medium underline underline-offset-4">
             Log in to your Pro library
           </Link>
         </p>
+
+        <section aria-labelledby="compare-h" className="mt-24">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 id="compare-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">
+              Which one is for what
+            </h2>
+            <p className="text-muted-foreground mt-3 leading-relaxed">
+              Free covers components, marketing pages and a starter set of app screens. Pro goes much deeper in every area, and adds whole apps to start from.
+            </p>
+          </div>
+          <div className="mt-10 overflow-x-auto rounded-2xl border">
+            <table className="w-full min-w-[560px] border-collapse text-start text-sm">
+              <caption className="sr-only">Free and Pro compared</caption>
+              <thead>
+                <tr className="bg-muted/40 border-b text-start">
+                  <th scope="col" className="px-5 py-4 font-medium">What you get</th>
+                  <th scope="col" className="px-5 py-4 font-medium">Free</th>
+                  <th scope="col" className="px-5 py-4 font-medium">Pro</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                <tr>
+                  <th scope="row" className="px-5 py-3.5 text-start font-normal">Components, with live previews and keyboard support</th>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                </tr>
+                {rows.map((r) => (
+                  <tr key={r.label}>
+                    <th scope="row" className="px-5 py-3.5 text-start font-normal">{r.label} blocks</th>
+                    <td className="text-muted-foreground px-5 py-3.5 tabular-nums">{r.free > 0 ? r.free : <Minus className="size-4" aria-label="None" />}</td>
+                    <td className="px-5 py-3.5 font-medium tabular-nums">{r.pro > 0 ? r.pro : <Minus className="text-muted-foreground size-4" aria-label="None" />}</td>
+                  </tr>
+                ))}
+                <tr>
+                  <th scope="row" className="px-5 py-3.5 text-start font-normal">Complete starter apps (SaaS, AI assistant, desktop)</th>
+                  <td className="px-5 py-3.5"><Minus className="text-muted-foreground size-4" aria-label="Not included" /></td>
+                  <td className="px-5 py-3.5 font-medium">3</td>
+                </tr>
+                <tr>
+                  <th scope="row" className="px-5 py-3.5 text-start font-normal">Loading, empty and error states in blocks that show data</th>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                </tr>
+                <tr>
+                  <th scope="row" className="px-5 py-3.5 text-start font-normal">Install with the shadcn CLI and the MCP server</th>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                </tr>
+                <tr>
+                  <th scope="row" className="px-5 py-3.5 text-start font-normal">Private registry with your licence key</th>
+                  <td className="px-5 py-3.5"><Minus className="text-muted-foreground size-4" aria-label="Not included" /></td>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                </tr>
+                <tr>
+                  <th scope="row" className="px-5 py-3.5 text-start font-normal">Figma design tokens for every theme</th>
+                  <td className="px-5 py-3.5"><Minus className="text-muted-foreground size-4" aria-label="Not included" /></td>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                </tr>
+                <tr>
+                  <th scope="row" className="px-5 py-3.5 text-start font-normal">Updates</th>
+                  <td className="text-muted-foreground px-5 py-3.5">Free stays free</td>
+                  <td className="px-5 py-3.5 font-medium">Every future Pro update</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link href="/pro?utm_source=ballmac-ui&utm_medium=pricing&utm_campaign=compare" className="text-foreground text-sm font-medium underline underline-offset-4">
+              See everything in Pro
+            </Link>
+          </div>
+        </section>
+
+        {!teamOnSale && (
+          <section aria-labelledby="team-h" className="bg-card mx-auto mt-16 flex max-w-3xl flex-col items-start gap-5 rounded-2xl border p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div>
+              <h2 id="team-h" className="text-xl font-semibold tracking-tight">
+                Buying for a team or an agency?
+              </h2>
+              <p className="text-muted-foreground mt-1.5 max-w-lg text-sm leading-relaxed">One licence is for one person. If several of you will use Pro, write to us and we will work out a team licence that fits.</p>
+            </div>
+            <Button asChild variant="outline" shape="pill" size="lg" className="shrink-0">
+              <a href={`mailto:${FOUNDERS_EMAIL}?subject=${encodeURIComponent("Team licence for Ballmac UI Pro")}`}>Email us</a>
+            </Button>
+          </section>
+        )}
 
         {previews.length > 0 && (
           <section aria-labelledby="inside-h" className="mt-24">

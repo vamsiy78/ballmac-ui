@@ -1,20 +1,23 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "@/components/site/link"
 
 import { buttonVariants } from "@/components/ballmac/button"
 import { AgentDiagram } from "@/components/home/agent-diagram"
 import { LazyMosaic } from "@/components/home/lazy-mosaic"
+import { Themed } from "@/components/pro/shots"
 import { FoundingBanner } from "@/components/site/founding-banner"
 import { ProCallout } from "@/components/site/pro-callout"
 import { SiteJsonLd } from "@/components/site/site-jsonld"
 import { leftPhrase } from "@/lib/founding"
+import { thumbFor } from "@/lib/thumbs"
 import { getOffer } from "@/lib/offer"
 import { CopyButton } from "@/components/site/copy-button"
 import { FitPreview, FitWidth } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
 import { loadThumb } from "@/lib/examples"
-import { blockGroups, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
+import { blockGroups, categoryLabels, getBlocks, getComponents, getTemplates, isPro } from "@/lib/registry"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = { alternates: { canonical: "/" } }
@@ -55,11 +58,13 @@ export default async function Home() {
     label: g.label,
     count: blocks.filter((b) => (g.categories as readonly string[]).includes(b.blockCategory ?? "")).length,
   })).filter((g) => g.count > 0)
-  const macCount = components.filter((c) => c.category === "macos").length
   const categoryCount = new Set(components.map((c) => c.category)).size
 
   const now = new Date()
-  const offer = (await getOffer(now)).founding
+  const proOffer = await getOffer(now)
+  const offer = proOffer.founding
+  const proBlockCount = blocks.filter(isPro).length || 150
+  const proHref = "/pro?utm_source=ballmac-ui&utm_medium=home-hero&utm_campaign=hero"
   return (
     <>
       <SiteJsonLd />
@@ -67,35 +72,44 @@ export default async function Home() {
       {/* Hero */}
       <section className="mx-auto max-w-[1440px] px-4 pt-16 pb-12 text-center sm:px-6 md:pt-24 md:pb-16">
         <Link
-          href="/components?category=macos"
+          href="/pro#starters"
           className="bg-muted/60 hover:bg-muted focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-medium outline-none transition-colors focus-visible:ring-[3px] dark:bg-white/[0.06] dark:hover:bg-white/10"
         >
           <span className="bg-chart-1 size-1.5 rounded-full" aria-hidden="true" />
-          New: the Desktop collection{macCount ? `, ${macCount} components` : ""}
+          New in Pro: Cove, a desktop starter that looks native on Mac and Windows
           <ArrowRight className="size-3.5" aria-hidden="true" />
         </Link>
         <h1 className="mx-auto mt-6 max-w-4xl text-4xl leading-[1.05] font-semibold tracking-[-0.045em] text-balance sm:text-6xl">
-          Make your web app feel native
+          Ship your SaaS dashboard this week
         </h1>
         <p className="text-muted-foreground mx-auto mt-5 max-w-2xl text-base leading-relaxed text-pretty sm:text-lg">
-          Crafted React components with native-app motion, accessibility built in, and code you own. Install any piece with
-          one command, or let your AI agent do it for you.
+          {proBlockCount} production-ready blocks and 3 starter apps for React, Tailwind and shadcn, with loading, empty and error states built in. Start with the free library, or go straight to Pro.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
-          <Link href="/docs/installation" className={buttonVariants({ shape: "pill" })}>
-            Get started
+          <Link href={proHref} className={buttonVariants({ shape: "pill", size: "lg" })}>
+            {proOffer.onSale && proOffer.price ? `Get Pro for $${proOffer.price}` : "See Ballmac UI Pro"}
+            <ArrowRight />
           </Link>
-          <Link href="/components" className={buttonVariants({ shape: "pill", variant: "ghost" })}>
-            Browse components <ArrowRight />
+          <Link href="/components" className={buttonVariants({ shape: "pill", size: "lg", variant: "outline" })}>
+            Browse free
           </Link>
         </div>
+        <p className="text-muted-foreground mt-3 text-[13px]">
+          {offer ? (
+            <>
+              Founding price: ${offer.price} once{offer.listPrice ? `, then $${offer.listPrice}` : ""}. First {offer.limit} buyers{offer.endsAt ? `. ${leftPhrase(offer.endsAt, now).replace(/^./, (c) => c.toUpperCase())}` : ""}.
+            </>
+          ) : (
+            "One payment. Every future update included."
+          )}
+        </p>
         <div className="text-muted-foreground mx-auto mt-6 inline-flex max-w-full items-center gap-1.5 rounded-lg border py-1 pr-1 pl-3 font-mono text-[13px]">
           <span className="select-none" aria-hidden="true">$</span>
           <span className="text-foreground truncate">{install}</span>
           <CopyButton value={install} label="Copy install command" />
         </div>
         <p className="text-muted-foreground mt-3 text-[13px]">
-          No setup needed. Listed in the{" "}
+          Free to start, no setup needed. Listed in the{" "}
           <a
             href="https://ui.shadcn.com/docs/directory"
             target="_blank"
@@ -240,6 +254,56 @@ export default async function Home() {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      {/* What Pro adds */}
+      <section aria-labelledby="pro-home-h" className="mx-auto max-w-[1440px] px-4 pt-28 sm:px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-muted-foreground text-sm font-medium">Ballmac UI Pro</p>
+          <h2 id="pro-home-h" className="mt-2 text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">
+            Free gets you started. Pro gets you to launch.
+          </h2>
+          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+            The free library covers components, marketing pages and a starter set of app screens. Pro goes much deeper, and adds whole apps to start from.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          <div className="bg-card overflow-hidden rounded-2xl border">
+            <div className="border-b">
+              {thumbFor("dashboard-pro-2", "pro") ? <Themed base={`${thumbFor("dashboard-pro-2", "pro")}`} alt="A Pro dashboard block" width={800} height={400} /> : null}
+            </div>
+            <div className="p-6">
+              <h3 className="font-semibold tracking-tight">{proBlockCount} real app screens</h3>
+              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">Dashboards, billing, settings, mail, calendars, shops and sign-in. The screens that take a team its first month.</p>
+            </div>
+          </div>
+          <div className="bg-card overflow-hidden rounded-2xl border">
+            <div className="border-b">
+              <Themed base="/marketing/state-error" alt="A Pro block showing an error with a Try again button" width={1200} height={383} />
+            </div>
+            <div className="p-6">
+              <h3 className="font-semibold tracking-tight">Loading, empty and error, built in</h3>
+              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">Skeletons, helpful empty states and errors with a retry. One prop switches between them.</p>
+            </div>
+          </div>
+          <div className="bg-card overflow-hidden rounded-2xl border">
+            <div className="border-b">
+              <Image src="/marketing/beacon-dashboard.webp" alt="Beacon, a SaaS starter app" width={1500} height={938} unoptimized loading="lazy" className="h-auto w-full" />
+            </div>
+            <div className="p-6">
+              <h3 className="font-semibold tracking-tight">Three complete starter apps</h3>
+              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">Beacon (SaaS), Quire (an AI assistant that cites its sources) and Cove (a desktop app for Mac and Windows).</p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <Link href="/pro?utm_source=ballmac-ui&utm_medium=home-section&utm_campaign=what-pro-adds" className={buttonVariants({ shape: "pill", size: "lg" })}>
+            See what Pro includes <ArrowRight />
+          </Link>
+          <Link href="/pricing" className={buttonVariants({ shape: "pill", size: "lg", variant: "ghost" })}>
+            Compare Free and Pro
+          </Link>
         </div>
       </section>
 

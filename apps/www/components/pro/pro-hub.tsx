@@ -1,7 +1,7 @@
 "use client"
 
 import { Archive, ArrowUpRight, Check, Download, Sparkles } from "lucide-react"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import * as React from "react"
 
 import { buttonVariants } from "@/components/ballmac/button"
@@ -17,12 +17,12 @@ import { cn } from "@/lib/utils"
 
 export type HubStat = { value: string; label: string }
 type Props = {
-  stats: HubStat[]
   downloads: { starters: DownloadItem[]; kits: DownloadItem[] }
   sampleItem: string
-  portalUrl?: string
   licenseUrl?: string
-  /** The public catalogue of Pro items, rendered on the server. */
+  /** What a visitor without a licence sees: the sales page, rendered on the server. */
+  sales: React.ReactNode
+  /** The public catalogue of Pro items shown under the library, rendered on the server. */
   children: React.ReactNode
 }
 
@@ -75,7 +75,7 @@ function Welcome() {
   )
 }
 
-function Lock({ portalUrl, stats }: Pick<Props, "portalUrl" | "stats">) {
+function Lock({ portalUrl, stats = [] }: { portalUrl?: string; stats?: HubStat[] }) {
   return (
     <>
       <section className="relative isolate overflow-hidden border-b">
@@ -241,19 +241,40 @@ function Library({ licenseKey, downloads, sampleItem, licenseUrl, children }: Pr
   )
 }
 
-/** /pro: the login for people without a session, the library for people with one. */
-export function ProHub(props: Props) {
+/** /pro: the library for people with a session, the sales page for everyone else. The login lives at /pro/login. */
+export function ProHub({ sales, ...props }: Props) {
   const flag = useProFlag()
   const session = useProSession()
   React.useEffect(() => {
     void ensureSession()
   }, [])
-  if (session.status === "in" && session.key) return <Library {...props} licenseKey={session.key} />
+  if (session.status === "in" && session.key) return <Library {...props} sales={sales} licenseKey={session.key} />
   if (session.status === "unknown" && flag) return <Loading />
   return (
     <>
-      <Lock portalUrl={props.portalUrl} stats={props.stats} />
-      {props.children}
+      {/* A buyer coming back from checkout lands here with their key in the address: this logs them in and opens the library. */}
+      <div className="px-4 sm:px-6">
+        <React.Suspense fallback={null}>
+          <Welcome />
+        </React.Suspense>
+      </div>
+      {sales}
     </>
   )
+}
+
+/** /pro/login: one field for the licence key. Someone who is already logged in goes straight to the library. */
+export function ProLogin({ portalUrl }: { portalUrl?: string }) {
+  const flag = useProFlag()
+  const session = useProSession()
+  const router = useRouter()
+  React.useEffect(() => {
+    void ensureSession()
+  }, [])
+  const signedIn = session.status === "in" && Boolean(session.key)
+  React.useEffect(() => {
+    if (signedIn) router.replace("/pro")
+  }, [signedIn, router])
+  if (signedIn || (session.status === "unknown" && flag)) return <Loading />
+  return <Lock portalUrl={portalUrl} />
 }

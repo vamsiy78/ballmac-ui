@@ -17,7 +17,7 @@ export function ProNotice({ className = "", nudge = null }: { className?: string
       </div>
       <div className="flex shrink-0 gap-2">
         <Link href="/pricing" className={buttonVariants({ size: "sm" })}>Get Pro</Link>
-        <Link href="/pro" className={buttonVariants({ size: "sm", variant: "outline" })}>Log in</Link>
+        <Link href="/pro/login" className={buttonVariants({ size: "sm", variant: "outline" })}>Log in</Link>
       </div>
     </div>
   )

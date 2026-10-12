@@ -20,7 +20,7 @@ export function ProAccount({ className }: { className?: string }) {
   }
   return (
     <div className={cn("flex items-center gap-1", className)}>
-      <Link href="/pro" className={cn(buttonVariants({ size: "sm", variant: "ghost" }), "hidden sm:inline-flex")}>
+      <Link href="/pro/login" className={cn(buttonVariants({ size: "sm", variant: "ghost" }), "hidden sm:inline-flex")}>
         Log in
       </Link>
       <Link href="/pricing" className={buttonVariants({ size: "sm" })}>
