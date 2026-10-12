@@ -6,6 +6,7 @@ import { notFound } from "next/navigation"
 
 import { CodePanel } from "@/components/site/code-panel"
 import { FoundingNudge } from "@/components/site/founding-nudge"
+import { ProCallout } from "@/components/site/pro-callout"
 import { ProCode } from "@/components/pro/pro-code"
 import { ProBadge } from "@/components/site/pro-notice"
 import { FramePreview } from "@/components/site/frame-preview"
@@ -112,6 +113,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
             </div>
           </section>
         )}
+        {!isPro(item) && <ProCallout where="block-page" />}
       </div>
     </div>
   )

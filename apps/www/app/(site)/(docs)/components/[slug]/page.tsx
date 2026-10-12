@@ -9,6 +9,7 @@ import { CopyPageButton } from "@/components/site/copy-page-button"
 import { ItemVersion } from "@/components/site/item-version"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { PreviewTabs } from "@/components/site/preview-tabs"
+import { ProCallout } from "@/components/site/pro-callout"
 import { PropsTable } from "@/components/site/props-table"
 import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { SectionHeading } from "@/components/site/section-heading"
@@ -22,6 +23,9 @@ export function generateStaticParams() {
   return getComponents().map((i) => ({ slug: i.name }))
 }
 export const dynamicParams = false
+
+// The Pro card counts down to the founding deadline, so the page is rebuilt every few minutes.
+export const revalidate = 300
 
 export async function generateMetadata({ params }: PageProps<"/components/[slug]">): Promise<Metadata> {
   const item = getItem((await params).slug)
@@ -187,6 +191,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             </div>
           </section>
         )}
+        {!pro && <ProCallout where="component-page" className="mt-4" />}
         {(prev || next) && (
           <nav aria-label="Previous and next component" className="flex items-center justify-between gap-3 pt-4">
             {prev ? (

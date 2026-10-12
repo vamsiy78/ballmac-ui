@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 import { PageCard } from "@/components/site/page-card"
+import { ProCallout } from "@/components/site/pro-callout"
 import { loadThumb } from "@/lib/examples"
 import { thumbFor } from "@/lib/thumbs"
 import { getTemplates, templateGroups } from "@/lib/registry"
@@ -10,6 +11,9 @@ export const metadata: Metadata = {
   description: "Complete multi-page React + Tailwind sites and apps with their own art direction, built from Ballmac UI blocks. Install one with a single shadcn command.",
   alternates: { canonical: "/templates" },
 }
+
+// The Pro card counts down to the founding deadline, so the page is rebuilt every few minutes.
+export const revalidate = 300
 
 export default async function TemplatesPage() {
   const templates = await Promise.all(
@@ -71,6 +75,7 @@ export default async function TemplatesPage() {
           </div>
         </section>
       ))}
+      <ProCallout where="templates" className="mx-auto mt-20 max-w-4xl" />
     </div>
   )
 }

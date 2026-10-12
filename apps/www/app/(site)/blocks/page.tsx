@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
+import * as React from "react"
 import Link from "@/components/site/link"
 
 import { PageCard } from "@/components/site/page-card"
+import { ProCallout } from "@/components/site/pro-callout"
 import { loadThumb } from "@/lib/examples"
 import { thumbFor } from "@/lib/thumbs"
 import { blockCategoryLabels, blockGroups, getBlocks } from "@/lib/registry"
@@ -11,6 +13,9 @@ export const metadata: Metadata = {
   description: "Responsive page sections for React and Tailwind: heroes, features, pricing, FAQ, footers, auth and AI chat. Install any block with one command.",
   alternates: { canonical: "/blocks" },
 }
+
+// The Pro card counts down to the founding deadline, so the page is rebuilt every few minutes.
+export const revalidate = 300
 
 export default async function BlocksPage() {
   const blocks = await Promise.all(
@@ -55,8 +60,10 @@ export default async function BlocksPage() {
         </ul>
       </nav>
       {blocks.length === 0 && <p className="text-muted-foreground mt-12">Blocks are on the way.</p>}
-      {groups.map((g) => (
-        <section key={g.id} id={g.id} className="mt-20 scroll-mt-32 first-of-type:mt-14">
+      {groups.map((g, n) => (
+        <React.Fragment key={g.id}>
+        {n === 1 && <ProCallout where="blocks" className="mx-auto mt-20 max-w-4xl" />}
+        <section id={g.id} className="mt-20 scroll-mt-32 first-of-type:mt-14">
           <header className="mb-2 max-w-2xl">
             <h2 className="text-2xl font-semibold tracking-[-0.03em]">{g.label}</h2>
             <p className="text-muted-foreground mt-1.5 text-[15px] leading-relaxed text-pretty">{g.description}</p>
@@ -75,6 +82,7 @@ export default async function BlocksPage() {
             </div>
           ))}
         </section>
+        </React.Fragment>
       ))}
       <p className="text-muted-foreground mt-20 text-center text-sm">
         Want the whole page? Start from a{" "}

@@ -6,6 +6,7 @@ import { buttonVariants } from "@/components/ballmac/button"
 import { AgentDiagram } from "@/components/home/agent-diagram"
 import { LazyMosaic } from "@/components/home/lazy-mosaic"
 import { FoundingBanner } from "@/components/site/founding-banner"
+import { ProCallout } from "@/components/site/pro-callout"
 import { SiteJsonLd } from "@/components/site/site-jsonld"
 import { leftPhrase } from "@/lib/founding"
 import { getOffer } from "@/lib/offer"
@@ -269,6 +270,10 @@ export default async function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-4 pt-20 pb-4 sm:px-6">
+        <ProCallout where="home" className="mx-auto max-w-4xl" />
       </section>
     </>
   )

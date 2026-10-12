@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import * as React from "react"
 import { ChevronRight } from "lucide-react"
 import Link from "@/components/site/link"
 
@@ -7,6 +8,7 @@ import { CatalogDeepLink } from "@/components/site/catalog-deep-link"
 import { FitPreview } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
 import { ProBadge } from "@/components/site/pro-notice"
+import { ProCallout } from "@/components/site/pro-callout"
 import { loadThumb } from "@/lib/examples"
 import { addCommand, categoryLabels, categoryOrder, getComponents, isNew, isPro, packageManagers, type PackageManager, type SiteItem } from "@/lib/registry"
 
@@ -15,6 +17,9 @@ export const metadata: Metadata = {
   description: "Polished React components for shadcn projects: app windows, docks, globes, beams, text effects, AI chat and more. Free to use.",
   alternates: { canonical: "/components" },
 }
+
+// The Pro card counts down to the founding deadline, so the page is rebuilt every few minutes.
+export const revalidate = 300
 
 // Small controls get a smaller design size so their thumbnails aren't lost in empty space.
 const compact = new Set(["primitives", "forms", "feedback"])
@@ -105,8 +110,10 @@ export default async function ComponentsPage() {
         </div>
         <ViewToggle />
       </header>
-      {categories.map((cat) => (
-        <section key={cat} data-category={cat} className="mt-12 group-data-[view=index]/catalog:mt-9">
+      {categories.map((cat, n) => (
+        <React.Fragment key={cat}>
+        {n === 3 && <ProCallout where="components" className="mt-12" />}
+        <section data-category={cat} className="mt-12 group-data-[view=index]/catalog:mt-9">
           <h2 id={`c-${cat}`} className="mb-5 flex items-baseline gap-2 text-lg font-semibold tracking-tight group-data-[view=index]/catalog:mb-4 group-data-[view=index]/catalog:text-base">
             {categoryLabels[cat] ?? cat}
           </h2>
@@ -118,6 +125,7 @@ export default async function ComponentsPage() {
           <CatalogList category={cat} />
           <CatalogIndex category={cat} />
         </section>
+        </React.Fragment>
       ))}
     </CatalogProvider>
   )
