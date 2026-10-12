@@ -255,7 +255,20 @@ export const focusRule = (): Record<string, Record<string, string>> => {
 }
 
 /** Everything a feel adds beyond variables: the focus ring, and the scrollbar style (in the base layer, so a utility still wins). */
+/**
+ * Windows High Contrast (and any forced-colors mode) removes box-shadow, which is how the standard focus ring is drawn, and
+ * paints a filled button as bare text. These give keyboard focus a real outline and a button an edge, in system colours.
+ */
+export const forcedColorsRule = (): Record<string, Record<string, Record<string, string>>> => ({
+  "@media (forced-colors: active)": {
+    '[class*="focus-visible:ring"]:focus-visible': { outline: "2px solid Highlight", "outline-offset": "2px" },
+    '[class*="focus-within:ring"]:focus-within': { outline: "2px solid Highlight", "outline-offset": "2px" },
+    '[data-slot="button"]': { border: "1px solid ButtonText" },
+  },
+})
+
 export const feelRules = (): Record<string, Record<string, string | Record<string, string>>> => ({
   ...focusRule(),
+  ...forcedColorsRule(),
   "@layer base": { "*": { "scrollbar-width": "var(--bm-scrollbar-width, auto)" } },
 })

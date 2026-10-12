@@ -34,9 +34,10 @@ export default defineItem({
     copyright: "Copyright (c) 2023 shadcn",
     modified: true,
   },
-  version: "1.0.3",
+  version: "1.0.4",
   updated: "2026-10-12",
   changelog: [
+    { version: "1.0.4", date: "2026-10-12", note: "Every size honours the platform feel's smallest touch target (--bm-target-min): 44 px under the iOS feel, no change otherwise." },
     { version: "1.0.3", date: "2026-10-12", note: "A loading button keeps its label in the accessibility tree (opacity instead of visibility), so a busy button still has a name." },
     { version: "1.0.2", date: "2026-10-11", note: "Control heights, menu and sidebar row sizes, press dimming and frosted surfaces follow the platform feel tokens (--bm-control-h, --bm-menu-*, --bm-sidebar-*, --bm-material-*). Unchanged without a feel." },
     { version: "1.0.1", date: "2026-10-11", note: "Hover lift and press depth follow the theme's --bm-lift and --bm-hover tokens. Unchanged by default." },

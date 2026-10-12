@@ -13,10 +13,19 @@ describe("states guard", () => {
     expect(stateProblems([block({ statesNone: "Static content." })], () => "")).toEqual([])
   })
 
-  it("rejects a free block that does neither, but not a Pro block or a component", () => {
+  it("rejects a block that does neither, but not a component", () => {
     expect(stateProblems([block({})], () => "")[0]).toContain("lists no states")
-    expect(stateProblems([block({ tier: "pro" as never })], () => "")).toEqual([])
+    expect(stateProblems([block({ tier: "pro" as never })], () => "")[0]).toContain("states-pending")
     expect(stateProblems([block({ category: "primitives" as never })], () => "")).toEqual([])
+  })
+
+  it("lets a Pro block wait on the pending list, and keeps the list honest", () => {
+    const pro = block({ name: "x-pro-1", tier: "pro" as never })
+    expect(stateProblems([pro], () => "", { "x-pro-1": "not built yet" })).toEqual([])
+    expect(stateProblems([block({ ...pro, statesNone: "Static content." })], () => "", { "x-pro-1": "not built yet" })[0]).toContain("Remove the entry")
+    expect(stateProblems([], () => "", { "gone-pro-1": "x" })[0]).toContain("does not exist")
+    // a free block cannot hide on the Pro list
+    expect(stateProblems([block({ name: "free-1" })], () => "", { "free-1": "x" })[0]).toContain("lists no states")
   })
 
   it("rejects a state example that passes a function but is not a client component", () => {

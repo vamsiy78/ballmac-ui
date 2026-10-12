@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { auditTheme, feelRules, focusRule, FOCUS_SELECTOR, FOCUS_WITHIN_SELECTOR, buildTheme, decodeSpec, DEFAULT_SPEC, encodeSpec, feelSpec, feelVars, FEELS, getFeel, matchPersonality, normalizeFeel, normalizeSpec, themeCss, themeRegistryItem } from "../src"
+import { auditTheme, feelRules, forcedColorsRule, focusRule, FOCUS_SELECTOR, FOCUS_WITHIN_SELECTOR, buildTheme, decodeSpec, DEFAULT_SPEC, encodeSpec, feelSpec, feelVars, FEELS, getFeel, matchPersonality, normalizeFeel, normalizeSpec, themeCss, themeRegistryItem } from "../src"
 
 const rem = (v: string) => (v.endsWith("rem") ? Number.parseFloat(v) * 16 : Number.parseFloat(v))
 
@@ -139,5 +139,14 @@ describe("focus rule", () => {
 describe("feel rules", () => {
   it("add the scrollbar style in the base layer, so utilities still win", () => {
     expect(feelRules()["@layer base"]).toEqual({ "*": { "scrollbar-width": "var(--bm-scrollbar-width, auto)" } })
+  })
+})
+
+describe("forced colours", () => {
+  it("give keyboard focus an outline and a button an edge, in system colours, because box-shadow rings vanish", () => {
+    const block = forcedColorsRule()["@media (forced-colors: active)"]!
+    expect(block['[class*="focus-visible:ring"]:focus-visible']).toMatchObject({ outline: "2px solid Highlight" })
+    expect(block['[data-slot="button"]']).toMatchObject({ border: "1px solid ButtonText" })
+    expect(themeCss({ feel: "macos" } as never)).toContain("@media (forced-colors: active)")
   })
 })

@@ -14724,9 +14724,15 @@
           "loading",
           "radix"
         ],
-        "version": "1.0.3",
+        "version": "1.0.4",
         "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.0.4",
+            "date": "2026-10-12",
+            "note": "Every size honours the platform feel's smallest touch target (--bm-target-min): 44 px under the iOS feel, no change otherwise.",
+            "breaking": false
+          },
           {
             "version": "1.0.3",
             "date": "2026-10-12",
@@ -20851,6 +20857,19 @@
         "[class*=\"focus-within:ring-[3px]\"]:focus-within": {
           "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
           "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "@media (forced-colors: active)": {
+          "[class*=\"focus-visible:ring\"]:focus-visible": {
+            "outline": "2px solid Highlight",
+            "outline-offset": "2px"
+          },
+          "[class*=\"focus-within:ring\"]:focus-within": {
+            "outline": "2px solid Highlight",
+            "outline-offset": "2px"
+          },
+          "[data-slot=\"button\"]": {
+            "border": "1px solid ButtonText"
+          }
         },
         "@layer base": {
           "*": {
@@ -46593,6 +46612,19 @@
           "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
           "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
         },
+        "@media (forced-colors: active)": {
+          "[class*=\"focus-visible:ring\"]:focus-visible": {
+            "outline": "2px solid Highlight",
+            "outline-offset": "2px"
+          },
+          "[class*=\"focus-within:ring\"]:focus-within": {
+            "outline": "2px solid Highlight",
+            "outline-offset": "2px"
+          },
+          "[data-slot=\"button\"]": {
+            "border": "1px solid ButtonText"
+          }
+        },
         "@layer base": {
           "*": {
             "scrollbar-width": "var(--bm-scrollbar-width, auto)"
@@ -46767,6 +46799,19 @@
         "[class*=\"focus-within:ring-[3px]\"]:focus-within": {
           "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
           "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "@media (forced-colors: active)": {
+          "[class*=\"focus-visible:ring\"]:focus-visible": {
+            "outline": "2px solid Highlight",
+            "outline-offset": "2px"
+          },
+          "[class*=\"focus-within:ring\"]:focus-within": {
+            "outline": "2px solid Highlight",
+            "outline-offset": "2px"
+          },
+          "[data-slot=\"button\"]": {
+            "border": "1px solid ButtonText"
+          }
         },
         "@layer base": {
           "*": {
@@ -47099,6 +47144,19 @@
         "[class*=\"focus-within:ring-[3px]\"]:focus-within": {
           "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
           "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "@media (forced-colors: active)": {
+          "[class*=\"focus-visible:ring\"]:focus-visible": {
+            "outline": "2px solid Highlight",
+            "outline-offset": "2px"
+          },
+          "[class*=\"focus-within:ring\"]:focus-within": {
+            "outline": "2px solid Highlight",
+            "outline-offset": "2px"
+          },
+          "[data-slot=\"button\"]": {
+            "border": "1px solid ButtonText"
+          }
         },
         "@layer base": {
           "*": {
@@ -50534,6 +50592,19 @@
         "[class*=\"focus-within:ring-[3px]\"]:focus-within": {
           "--tw-ring-color": "color-mix(in oklab, var(--bm-focus-color, var(--ring)) var(--bm-focus-alpha, 50%), transparent)",
           "--tw-ring-shadow": "var(--tw-ring-inset,) 0 0 0 calc(var(--bm-focus-width, 3px) + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color)"
+        },
+        "@media (forced-colors: active)": {
+          "[class*=\"focus-visible:ring\"]:focus-visible": {
+            "outline": "2px solid Highlight",
+            "outline-offset": "2px"
+          },
+          "[class*=\"focus-within:ring\"]:focus-within": {
+            "outline": "2px solid Highlight",
+            "outline-offset": "2px"
+          },
+          "[data-slot=\"button\"]": {
+            "border": "1px solid ButtonText"
+          }
         },
         "@layer base": {
           "*": {

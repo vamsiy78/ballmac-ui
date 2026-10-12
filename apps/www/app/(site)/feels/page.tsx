@@ -68,7 +68,7 @@ export default function FeelsPage() {
       </section>
 
       <section aria-labelledby="start" className="grid items-start gap-8 lg:grid-cols-2">
-        <div className="space-y-3">
+        <div className="min-w-0 space-y-3">
           <h2 id="start" className="text-2xl font-semibold tracking-tight">
             Start in a minute
           </h2>
@@ -82,7 +82,7 @@ export default function FeelsPage() {
           <CodePanel lang="bash" code={`npx shadcn@latest add @ballmac/feel-auto @ballmac/app-window`} />
           <CodePanel lang="bash" code={`npx shadcn@latest add @ballmac/feel-windows`} />
         </div>
-        <div className="space-y-3">
+        <div className="min-w-0 space-y-3">
           <CodePanel
             lang="tsx"
             title="Tauri v2"
