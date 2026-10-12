@@ -269,9 +269,10 @@ export default async function Home() {
           </p>
         </div>
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {/* Every picture sits in the same frame and is cropped to fit, so the three cards line up whatever shape the screenshot is. */}
           <div className="bg-card overflow-hidden rounded-2xl border">
-            <div className="border-b">
-              {thumbFor("dashboard-pro-2", "pro") ? <Themed base={`${thumbFor("dashboard-pro-2", "pro")}`} alt="A Pro dashboard block" width={800} height={400} /> : null}
+            <div className="bg-background relative aspect-[2/1] overflow-hidden border-b">
+              {thumbFor("mail-pro-1", "pro") ? <Themed base={`${thumbFor("mail-pro-1", "pro")}`} alt="A Pro mail inbox block" width={800} height={400} className="absolute inset-0 h-full object-cover object-top" /> : null}
             </div>
             <div className="p-6">
               <h3 className="font-semibold tracking-tight">{proBlockCount} real app screens</h3>
@@ -279,8 +280,8 @@ export default async function Home() {
             </div>
           </div>
           <div className="bg-card overflow-hidden rounded-2xl border">
-            <div className="border-b">
-              <Themed base="/marketing/state-error" alt="A Pro block showing an error with a Try again button" width={1200} height={383} />
+            <div className="bg-background relative aspect-[2/1] overflow-hidden border-b">
+              <Themed base="/marketing/state-error" alt="A Pro block showing an error with a Try again button" width={1800} height={575} className="absolute inset-0 h-full object-contain object-center" />
             </div>
             <div className="p-6">
               <h3 className="font-semibold tracking-tight">Loading, empty and error, built in</h3>
@@ -288,8 +289,8 @@ export default async function Home() {
             </div>
           </div>
           <div className="bg-card overflow-hidden rounded-2xl border">
-            <div className="border-b">
-              <Image src="/marketing/beacon-dashboard.webp" alt="Beacon, a SaaS starter app" width={1500} height={938} unoptimized loading="lazy" className="h-auto w-full" />
+            <div className="bg-background relative aspect-[2/1] overflow-hidden border-b">
+              <Image src="/marketing/beacon-dashboard.webp" alt="Beacon, a SaaS starter app" width={1500} height={938} unoptimized loading="lazy" className="absolute inset-0 size-full object-cover object-top" />
             </div>
             <div className="p-6">
               <h3 className="font-semibold tracking-tight">Three complete starter apps</h3>
