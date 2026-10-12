@@ -58,6 +58,7 @@ export function EmailForm<T = unknown>({
             {label}
           </label>
           <Input
+            size="lg"
             id={`${id}-email`}
             type="email"
             name="email"

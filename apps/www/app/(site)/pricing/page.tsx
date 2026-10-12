@@ -272,7 +272,7 @@ export default async function PricingPage() {
               <h2 id="sampler-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">
                 Try three Pro blocks free
               </h2>
-              <p className="text-muted-foreground mt-3 leading-relaxed">Real Pro source, yours to use in any project. Leave your email and the code appears right here.</p>
+              <p className="text-muted-foreground mt-3 leading-relaxed">Real Pro blocks, yours to use in any project. Leave your email and they appear right here, ready to copy.</p>
               <ul className="mt-6 flex flex-wrap justify-center gap-2" aria-label="The three blocks">
                 {sampler.map((x) => {
                   const [name, what] = (x.title ?? x.name).split(/:\s*/)

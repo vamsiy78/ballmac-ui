@@ -49,8 +49,8 @@ export async function ProCallout({ where, className }: { where: string; classNam
       {sampler && (
         <div className="mt-7 border-t pt-6">
           <h3 className="text-sm font-semibold">Not ready? Try three Pro blocks free</h3>
-          <p className="text-muted-foreground mt-1 mb-4 text-sm leading-relaxed">Leave your email and the source appears right here, yours to use in any project.</p>
-          <Sampler compact reminders={Boolean(offer?.endsAt)} />
+          <p className="text-muted-foreground mt-1 mb-4 text-sm leading-relaxed">Leave your email and the blocks appear right here, ready to copy. Yours to use in any project.</p>
+          <Sampler reminders={Boolean(offer?.endsAt)} />
         </div>
       )}
     </section>

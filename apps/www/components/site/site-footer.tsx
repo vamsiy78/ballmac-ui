@@ -1,5 +1,6 @@
 import Link from "@/components/site/link"
 
+import { FooterWordmark } from "@/components/site/footer-wordmark"
 import { Logo } from "@/components/site/logo"
 
 const columns = [
@@ -73,6 +74,9 @@ export function SiteFooter() {
             </ul>
           </div>
         ))}
+      </div>
+      <div className="mx-auto max-w-[1440px] overflow-hidden px-4 sm:px-6">
+        <FooterWordmark />
       </div>
       <div className="border-t">
         <div className="text-muted-foreground mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-3 px-4 py-6 text-[13px] sm:px-6">
