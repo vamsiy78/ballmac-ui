@@ -53,6 +53,11 @@ export default function ProDocsPage() {
         It runs on an embedded database in development, so there is nothing else to install. The README in the download covers
         customising it, billing and deployment.
       </p>
+      <p>
+        <strong>Cove</strong> (<code>cove-desktop</code>) is a Tauri 2 desktop app, a notes app that looks native on macOS and Windows:
+        traffic lights or caption buttons, the system blur behind the sidebar on a Mac, native menus, and a command palette. It runs in a
+        browser too, so you can build the interface without installing Rust.
+      </p>
       <h2>Figma design tokens</h2>
       <p>
         Every Ballmac theme as W3C design tokens, with light and dark as separate groups (one Figma variable mode each) and the

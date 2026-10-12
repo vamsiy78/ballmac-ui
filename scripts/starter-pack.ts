@@ -25,7 +25,7 @@ if (!name || !existsSync(join(dir, "package.json"))) {
   process.exit(1)
 }
 
-export const EXCLUDE = ["ballmac.vendor.json", "ballmac.vendor.lock.json", "node_modules", ".next", ".data", "test-results", "playwright-report", "coverage", ".turbo", "next-env.d.ts"]
+export const EXCLUDE = ["ballmac.vendor.json", "ballmac.vendor.lock.json", "node_modules", ".next", "dist", "src-tauri/target", "src-tauri/gen", ".data", "test-results", "playwright-report", "coverage", ".turbo", "next-env.d.ts"]
 const isExcluded = (rel: string) => EXCLUDE.some((e) => rel === e || rel.startsWith(`${e}/`) || rel.endsWith(".tsbuildinfo")) || /(^|\/)\.env($|\.)/.test(rel) && !rel.endsWith(".env.example")
 
 function walk(d: string): string[] {

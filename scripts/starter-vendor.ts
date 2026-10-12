@@ -4,6 +4,7 @@
  *   pnpm starter:vendor <starter-dir>            reads <starter-dir>/ballmac.vendor.json
  *
  * ballmac.vendor.json: { "items": ["button", "auth-pro-1"], "theme": "theme-indigo" }
+ * or, to carry the feel, motion and focus rules too: { "stack": ["theme", "theme-indigo", "feel-auto", "motion-native"], "themeFile": "src/theme.css" }
  * Writes src/components/ballmac, src/lib/ballmac and src/hooks/ballmac, src/app/theme.css, and
  * ballmac.vendor.lock.json (items, sha-free file list and the npm packages with the registry's ranges).
  * Needs `pnpm build:registry` to have run, with Pro present for Pro items.
@@ -22,6 +23,53 @@ type RegItem = {
   registryDependencies?: string[]
   files?: { path: string; content: string; target?: string }[]
   cssVars?: { light?: Record<string, string>; dark?: Record<string, string>; theme?: Record<string, string> }
+  css?: CssTree
+}
+
+type CssTree = { [selector: string]: string | CssTree }
+
+/** Renders the `css` field of a registry item (selectors, at-rules and nested rules) as CSS text. */
+export function renderCss(tree: CssTree, indent = ""): string {
+  return Object.entries(tree)
+    .map(([key, value]) =>
+      typeof value === "string" ? `${indent}${key}: ${value};` : `${indent}${key} {\n${renderCss(value, indent + "  ")}\n${indent}}`
+    )
+    .join("\n")
+}
+
+/** Merges two css trees; rules with the same selector are merged, later values win. */
+export function mergeCss(base: CssTree, over: CssTree): CssTree {
+  const out: CssTree = { ...base }
+  for (const [k, v] of Object.entries(over)) {
+    const prev = out[k]
+    out[k] = typeof v === "object" && typeof prev === "object" ? mergeCss(prev, v) : v
+  }
+  return out
+}
+
+/**
+ * The stylesheet for a stack of theme items, later ones overriding earlier ones: a Tailwind `@theme` block, the light and dark
+ * variables, then every rule the items carry (feel scopes, focus rings, reduced motion, forced colors).
+ */
+export function renderStack(names: string[], read: (n: string) => RegItem = load): string {
+  const merged = { theme: {} as Record<string, string>, light: {} as Record<string, string>, dark: {} as Record<string, string> }
+  let css: CssTree = {}
+  for (const name of names) {
+    const item = read(name)
+    Object.assign(merged.theme, item.cssVars?.theme)
+    Object.assign(merged.light, item.cssVars?.light)
+    Object.assign(merged.dark, item.cssVars?.dark)
+    if (item.css) css = mergeCss(css, item.css)
+  }
+  const vars = (o: Record<string, string>) => Object.entries(o).map(([k, v]) => `  --${k}: ${v};`).join("\n")
+  return [
+    `/* Generated from ${names.join(" + ")} by pnpm starter:vendor. Edit freely; re-running overwrites this file. */`,
+    `@theme {\n${vars(merged.theme)}\n}`,
+    `:root {\n${vars(merged.light)}\n}`,
+    `.dark {\n${vars(merged.dark)}\n}`,
+    renderCss(css),
+    "",
+  ].join("\n\n")
 }
 
 export function depName(ref: string) {
@@ -61,7 +109,7 @@ function main() {
     console.error("Usage: pnpm starter:vendor <starter-dir> (the folder needs ballmac.vendor.json)")
     process.exit(1)
   }
-  const cfg = JSON.parse(readFileSync(cfgPath, "utf8")) as { items: string[]; theme?: string }
+  const cfg = JSON.parse(readFileSync(cfgPath, "utf8")) as { items: string[]; theme?: string; stack?: string[]; themeFile?: string }
   const closure = resolveClosure(cfg.items)
   const versions = JSON.parse(readFileSync(join(ROOT, "registry/package.json"), "utf8")) as { dependencies: Record<string, string> }
 
@@ -86,7 +134,12 @@ function main() {
     }
   }
 
-  if (cfg.theme) {
+  if (cfg.stack?.length) {
+    // `stack` also carries the feel, motion and focus rules, which `theme` alone does not.
+    const out = join(dir, cfg.themeFile ?? "src/app/theme.css")
+    mkdirSync(dirname(out), { recursive: true })
+    writeFileSync(out, renderStack(cfg.stack))
+  } else if (cfg.theme) {
     // The base theme carries the shared tokens (easing, durations, surface); the chosen preset overrides colours.
     const base = load("theme").cssVars ?? {}
     const preset = load(cfg.theme).cssVars ?? {}

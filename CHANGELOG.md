@@ -2,6 +2,14 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
+## 2026-10-12: Cove: a Tauri desktop starter that looks native on macOS and Windows
+
+- Cove is a third Pro starter and the first for the desktop: a Tauri 2 notes app with folders, pinning, search that needs every word, trash with undo, Markdown with a preview, and a command palette. It is a real app you can ship, and the quickest way to see the platform feels in a working window
+- On a Mac it has traffic lights in the sidebar column that dim when the window is in the background, the system blur behind the sidebar (a real NSVisualEffectView), the native menu bar with the system's own undo and paste, and rounded corners. On Windows it has 46 px caption buttons, a title bar with the app icon and a menu bar, a 3 px accent bar on the current item and square corners the system rounds
+- Every command is defined once and runs from the palette, the keyboard and both menus, with shortcuts written the way each platform writes them (⇧⌘N, Ctrl+Shift+N). Settings switch the look between macOS, Windows, iOS and the web, the theme, and the motion
+- The interface also runs in a browser with no Rust installed. It is tested in WebKit and Chromium with each platform's user agent: both looks, light and dark, keyboard use, axe, High Contrast, reduced motion and the smallest window. Notes are one JSON file; replace the four-method storage to add sync
+- The README, a customisation guide and a release guide cover signing and notarizing on macOS, signing on Windows, and updates
+
 ## 2026-10-12: States: loading, empty and error built into the blocks
 
 - Every data block takes one prop, state: "loading", "ready", "empty" or "error", with onRetry, emptyState and errorState. Loading is a skeleton with the same shape as the block, empty is a clear message, error has a retry. 11 blocks: Mail 1, Dashboard 1 and 2, Kanban 1, Calendar 1, Blog 1, Changelog 1, Billing 1 and 2, Settings 3 and the two AI chats

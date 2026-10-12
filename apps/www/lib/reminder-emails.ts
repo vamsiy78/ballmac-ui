@@ -30,7 +30,7 @@ function offerLines(c: ReminderContext) {
   return {
     price: `$${esc(c.price)}${after}`,
     when: esc(endsLabel(c.endsAt)),
-    included: "150 premium blocks, two SaaS starter apps (Beacon and Quire) and Figma tokens, with light, dark and right-to-left support.",
+    included: "150 premium blocks, three starter apps (Beacon, Quire and Cove, a Tauri desktop app) and Figma tokens, with light, dark and right-to-left support.",
   }
 }
 

@@ -82,7 +82,7 @@ export default async function PricingPage() {
         [true, `${proBlocks} premium blocks: heroes, features, pricing, dashboards, app screens, ecommerce, content and more`],
         [true, "Private registry for the shadcn CLI and MCP"],
         [true, "Light, dark and RTL support on every block"],
-        [true, "Two starter apps: Beacon SaaS (teams, Stripe billing, dashboard) and Quire (an AI assistant that cites its sources)"],
+        [true, "Three starter apps: Beacon SaaS (teams, Stripe billing, dashboard), Quire (an AI assistant that cites its sources) and Cove (a Tauri desktop app that looks native on macOS and Windows)"],
         [true, "Figma design tokens for every theme"],
         [false, "More starter apps (planned)"],
         [false, "Figma component library (planned)"],

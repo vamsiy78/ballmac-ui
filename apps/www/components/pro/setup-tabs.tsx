@@ -113,7 +113,7 @@ export function SetupTabs({ licenseKey, sampleItem }: { licenseKey: string; samp
         <ol className="space-y-6">
           <Step n={1} title="Download and run a starter app">
             <Snippet shown={masked.starter("beacon-saas")} copy={real.starter("beacon-saas")} />
-            <p className="text-muted-foreground text-sm">Swap the name for <code className="font-mono text-[13px]">quire-ai</code> to get Quire. You can also download either as a zip below.</p>
+            <p className="text-muted-foreground text-sm">Swap the name for <code className="font-mono text-[13px]">quire-ai</code> to get Quire, or <code className="font-mono text-[13px]">cove-desktop</code> for the Tauri desktop app. You can also download any of them as a zip below.</p>
           </Step>
           <Step n={2} title="Make it yours">
             <p className="text-muted-foreground text-sm">It runs on an embedded database in development, so there is nothing else to install. The README covers customising it, billing and deployment.</p>

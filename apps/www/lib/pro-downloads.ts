@@ -13,6 +13,7 @@ export type Download = {
 
 const STARTERS: Record<string, { title: string; description: string }> = {
   "beacon-saas": { title: "Beacon SaaS", description: "A complete SaaS app: sign-in, workspaces with teams and invitations, Stripe billing, a dashboard, settings and API keys." },
+  "cove-desktop": { title: "Cove", description: "A Tauri 2 desktop notes app that looks native on macOS and Windows: real window controls, the system blur, native menus, a command palette and Markdown." },
   "quire-ai": { title: "Quire", description: "An AI assistant that answers from your documents and cites its sources, with sign-in, billing and a library." },
 }
 const KITS: Record<string, { title: string; description: string }> = {
