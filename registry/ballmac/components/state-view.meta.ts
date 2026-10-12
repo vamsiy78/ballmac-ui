@@ -10,7 +10,7 @@ export default defineItem({
   tags: ["state", "loading", "empty", "error", "skeleton", "retry", "boundary", "async"],
   files: [{ path: "components/state-view.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "button", "empty", "skeleton", "i18n", "use-resource"],
+  registryDependencies: ["shadcn:utils", "button", "empty", "skeleton", "i18n", "use-resource", "frame-props"],
   examples: [
     { name: "state-view-demo", title: "Every state", file: "state-view-demo.tsx" },
     { name: "state-view-resource", title: "With a real fetch", file: "state-view-resource.tsx" },
@@ -34,6 +34,10 @@ export default defineItem({
       "onRetry: draws the retry button",
     ],
   },
-  version: "1.0.0",
+  version: "1.0.1",
   updated: "2026-10-12",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-12", note: "Moves frameProps into its own frame-props module so server components can use it; state-view still exports it." },
+    { version: "1.0.0", date: "2026-10-12", note: "First release." },
+  ],
 })

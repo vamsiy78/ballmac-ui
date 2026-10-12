@@ -8,6 +8,7 @@ import { Button } from "@/components/ballmac/button"
 import { Empty, EmptyAction, EmptyDescription, EmptyMedia, EmptyTitle } from "@/components/ballmac/empty"
 import { Skeleton } from "@/components/ballmac/skeleton"
 import { useMessages } from "@/lib/ballmac/i18n"
+import { frameProps } from "@/lib/ballmac/frame-props"
 import { isBusy, type BlockState } from "@/lib/ballmac/use-resource"
 import { cn } from "@/lib/utils"
 
@@ -58,18 +59,6 @@ type StateProps = {
   emptyState?: EmptyConfig
   /** Copy for the error state. */
   errorState?: ErrorConfig
-}
-
-const FRAME_ATTRS = new Set(["id", "style", "lang", "dir", "role", "hidden", "title", "tabIndex"])
-
-/**
- * The props a block should put on its own frame while it shows a state instead of its content: plain HTML attributes only.
- * Without this a block's own props (`messages`, `onSend`, `getSeries`) would be spread onto a DOM element.
- */
-function frameProps(props: object): React.HTMLAttributes<HTMLElement> {
-  const out: Record<string, unknown> = {}
-  for (const [k, v] of Object.entries(props)) if (FRAME_ATTRS.has(k) || k.startsWith("aria-") || k.startsWith("data-")) out[k] = v
-  return out
 }
 
 const isNode = (v: unknown): v is React.ReactElement => React.isValidElement(v)

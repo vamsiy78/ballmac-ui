@@ -519,6 +519,10 @@
     "version": "1.0.0",
     "hash": "6b45c40756f71cdf042a54bca90e5d0e45da3586c60954c2cf467aaa6b90752b"
   },
+  "frame-props": {
+    "version": "1.0.0",
+    "hash": "62f55e6393252fa499e6ba72774cd0d7f1482c544a0862dc5156e1e3d0378626"
+  },
   "git-graph": {
     "version": "1.0.0",
     "hash": "7299d7d1ce29505941542bb8f2542f5617adcdcf2a5a0768cda6b32bbcb93914"
@@ -1112,8 +1116,8 @@
     "hash": "d6a3aa89e1f4f3cdf525998492ef991db9b7bf50395c9bc1b177acf781c6cc5b"
   },
   "state-view": {
-    "version": "1.0.0",
-    "hash": "b09c3f95a1bcff41f4115471286cd97856540f8887e4e21eb301944b667e9531"
+    "version": "1.0.1",
+    "hash": "e9d2b67922ed146f52f5b79c1fb92c090a0bcb713f9194ee5114b262f0bfca62"
   },
   "stats-1": {
     "version": "1.0.1",
