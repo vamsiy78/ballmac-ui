@@ -15,6 +15,7 @@ export default defineItem({
     { name: "showcase-1-demo", title: "Default", file: "showcase-1-demo.tsx" },
     { name: "showcase-1-custom", title: "Your own app window", file: "showcase-1-custom.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A hero-sized interactive screenshot. Set app, time (ISO, fixed) and pass your own window content as children; widgets={false} hides the desk widgets and notes={false} the sample Notes window. Windows can be dragged, resized, zoomed and minimized; the dock reopens closed apps.",
     whenToUse: ["Landing pages for Mac apps that want to be tried, not just seen", "Under a hero as a live product tour"],

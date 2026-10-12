@@ -13,6 +13,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "kbd", "number-ticker", "spotlight-card"],
   examples: [{ name: "features-1-demo", title: "Default", file: "features-1-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A four-cell bento grid for a product's main features. Edit the cells directly; each is a SpotlightCard with an icon, title, body and optional extra content.",
     whenToUse: ["Showing 3–6 headline features with visual variety", "SaaS and developer product landing pages"],

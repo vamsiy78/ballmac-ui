@@ -15,6 +15,7 @@ export default defineItem({
     { name: "app-shell-1-demo", title: "Default", file: "app-shell-1-demo.tsx" },
     { name: "app-shell-1-collapsed", title: "Collapsed, custom pages", file: "app-shell-1-collapsed.tsx" },
   ],
+  statesNone: "A layout around your own pages; each page inside shows its own states.",
   ai: {
     summary: "The frame around an app. Pass nav=[{ label?, items: [{ id, label, icon?, badge? }] }], workspace, user and a children render function (page) => node; value / onValueChange control the open page.",
     whenToUse: ["Dashboards, admin tools and any multi-page product", "A realistic frame for demos and screenshots"],

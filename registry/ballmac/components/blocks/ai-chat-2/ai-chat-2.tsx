@@ -2,7 +2,7 @@
 "use client"
 
 import * as React from "react"
-import { Check, FileCode2, MessageSquare, PanelLeft, Plus, Sparkles } from "lucide-react"
+import { Check, CircleAlert, FileCode2, MessageSquare, PanelLeft, Plus, RotateCw, Sparkles } from "lucide-react"
 
 import { Chat, ChatFooter, ChatMessages } from "@/components/ballmac/ai-chat"
 import { Message, MessageAvatar, MessageContent, MessageCopyAction, MessageActions } from "@/components/ballmac/ai-message"
@@ -10,6 +10,8 @@ import { ArtifactPanel } from "@/components/ballmac/artifact-panel"
 import { Button } from "@/components/ballmac/button"
 import { PromptInput, PromptInputSubmit, PromptInputTextarea, PromptInputToolbar } from "@/components/ballmac/prompt-input"
 import { StreamingText } from "@/components/ballmac/streaming-text"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import type { StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 
 type AiChat2Turn = {
@@ -30,7 +32,7 @@ type AiChat2Version = {
   note: string
 }
 
-type AiChat2Props = Omit<React.ComponentProps<"div">, "onSubmit"> & {
+type AiChat2Props = Omit<React.ComponentProps<"div">, "onSubmit"> & StateProps & {
   /** Conversations in the sidebar. */
   conversations?: { id: string; title: string }[]
   /** Name of the generated thing. */
@@ -127,6 +129,55 @@ const defaultConversations = [
 
 const defaultSuggestions = ["Add a monthly and yearly toggle", "Explain how the code works"]
 
+/** A conversation's worth of placeholder messages, so the thread keeps its shape while history loads. */
+function ChatThreadSkeleton() {
+  return (
+    <div className="grid gap-8" aria-hidden="true">
+      <div className="flex justify-end">
+        <Skeleton className="h-10 w-2/3 max-w-sm rounded-2xl" />
+      </div>
+      <div className="flex gap-3">
+        <Skeleton className="size-8 shrink-0 rounded-full" />
+        <div className="grid flex-1 content-start gap-2.5">
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-11/12" />
+          <Skeleton className="h-4 w-3/5" />
+        </div>
+      </div>
+      <div className="flex justify-end">
+        <Skeleton className="h-10 w-1/2 max-w-xs rounded-2xl" />
+      </div>
+      <div className="flex gap-3">
+        <Skeleton className="size-8 shrink-0 rounded-full" />
+        <div className="grid flex-1 content-start gap-2.5">
+          <Skeleton className="h-4 w-5/6" />
+          <Skeleton className="h-4 w-2/3" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/** The reply failed: say so where the reply would have been, and let the person try again. */
+function ChatReplyError({ onRetry, title, description }: { onRetry?: () => void; title?: string; description?: string }) {
+  return (
+    <div role="alert" data-slot="chat-error" className="border-destructive/25 bg-destructive/[0.04] flex items-start gap-3 rounded-xl border p-3.5">
+      <span aria-hidden="true" className="bg-destructive/10 text-destructive flex size-8 shrink-0 items-center justify-center rounded-full [&>svg]:size-4">
+        <CircleAlert />
+      </span>
+      <div className="min-w-0 flex-1 text-sm">
+        <p className="font-medium">{title ?? "That reply did not come through"}</p>
+        <p className="text-muted-foreground mt-0.5 text-pretty">{description ?? "The assistant stopped before it finished. Your message is saved."}</p>
+        {onRetry ? (
+          <Button variant="outline" size="sm" className="mt-3" onClick={onRetry}>
+            <RotateCw aria-hidden="true" /> Try again
+          </Button>
+        ) : null}
+      </div>
+    </div>
+  )
+}
+
 function AiChat2({
   conversations = defaultConversations,
   artifactTitle = "Pricing table",
@@ -138,6 +189,10 @@ function AiChat2({
   suggestions = defaultSuggestions,
   onSend,
   height = "46rem",
+  state = "ready",
+  onRetry,
+  emptyState,
+  errorState,
   className,
   style,
   ...props
@@ -187,7 +242,7 @@ function AiChat2({
   }
 
   return (
-    <div data-slot="ai-chat-2" className={cn("bg-background relative flex overflow-hidden rounded-2xl border shadow-[0_30px_80px_-50px_rgb(0_0_0/0.4)]", className)} style={{ height, ...style }} {...props}>
+    <div data-slot="ai-chat-2" data-state={state === "ready" ? undefined : state} aria-busy={state === "loading" || undefined} className={cn("bg-background relative flex overflow-hidden rounded-2xl border shadow-[0_30px_80px_-50px_rgb(0_0_0/0.4)]", className)} style={{ height, ...style }} {...props}>
       <aside hidden={!sidebar} className="bg-muted/30 hidden w-60 shrink-0 flex-col border-e lg:flex [&[hidden]]:hidden">
         <div className="p-3">
           <Button variant="outline" className="w-full justify-start" onClick={() => { setMessages([]); setActive(undefined); setChips([]); setPanel("closed") }}><Plus /> New chat</Button>
@@ -215,14 +270,21 @@ function AiChat2({
 
         <Chat className="min-h-0 flex-1">
           <ChatMessages contentClassName="mx-auto w-full max-w-2xl px-4 py-6">
-            {messages.length === 0 && (
-              <div className="text-muted-foreground flex min-h-64 flex-col items-center justify-center text-center">
+            {state === "loading" ? (
+              <div role="status" data-slot="chat-loading">
+                <span className="sr-only">Loading the conversation</span>
+                <ChatThreadSkeleton />
+              </div>
+            ) : null}
+            {state !== "loading" && (state === "empty" || messages.length === 0) && (
+              <div data-slot="chat-empty" className="text-muted-foreground flex min-h-64 flex-col items-center justify-center text-center">
                 <Sparkles className="size-8" aria-hidden="true" />
-                <p className="text-foreground mt-4 font-medium">What shall we build?</p>
-                <p className="mt-1 text-sm">Ask for a component, a page or a snippet. The result appears in a panel beside the chat.</p>
+                <p className="text-foreground mt-4 font-medium">{emptyState?.title ?? "What shall we build?"}</p>
+                <p className="mt-1 max-w-sm text-sm text-pretty">{emptyState?.description ?? "Ask for a component, a page or a snippet. The result appears in a panel beside the chat."}</p>
+                {emptyState?.action ? <div className="mt-5">{emptyState.action}</div> : null}
               </div>
             )}
-            {messages.map((m) =>
+            {state !== "loading" && state !== "empty" && messages.map((m) =>
               m.role === "user" ? (
                 <Message key={m.id} role="user"><MessageContent>{m.text}</MessageContent></Message>
               ) : (
@@ -241,6 +303,7 @@ function AiChat2({
                 </Message>
               )
             )}
+            {state === "error" ? <ChatReplyError onRetry={onRetry} title={errorState?.title} description={errorState?.description} /> : null}
           </ChatMessages>
           <ChatFooter contentClassName="mx-auto w-full max-w-2xl px-4 pb-4">
             {chips.length > 0 && (
@@ -248,7 +311,7 @@ function AiChat2({
                 {chips.map((c) => <button key={c} type="button" onClick={() => send(c)} className="hover:bg-accent focus-visible:ring-ring/50 rounded-full border px-3 py-1.5 text-sm outline-none transition-colors focus-visible:ring-[3px]">{c}</button>)}
               </div>
             )}
-            <PromptInput onSubmit={(v) => send(v)} status={busy ? "streaming" : "idle"}>
+            <PromptInput onSubmit={(v) => send(v)} status={busy ? "streaming" : "idle"} disabled={state === "loading"}>
               <PromptInputTextarea placeholder="Ask for a change…" />
               <PromptInputToolbar>
                 <PromptInputSubmit className="ms-auto" />

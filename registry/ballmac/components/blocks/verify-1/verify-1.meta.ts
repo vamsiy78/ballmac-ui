@@ -10,10 +10,17 @@ export default defineItem({
   tags: ["verify", "otp", "code", "two-factor", "email", "resend"],
   files: [{ path: "components/blocks/verify-1/verify-1.tsx" }],
   dependencies: ["lucide-react", "motion@^12"],
-  registryDependencies: ["shadcn:utils", "button", "input-otp"],
-  examples: [
-    { name: "verify-1-demo", title: "Default", file: "verify-1-demo.tsx" },
+  registryDependencies: ["shadcn:utils", "button", "input-otp", "use-resource"],
+  examples: [{ name: "verify-1-demo", title: "Default", file: "verify-1-demo.tsx" },
     { name: "verify-1-four", title: "Four digits", file: "verify-1-four.tsx" },
+    { name: "verify-1-checking", title: "Checking the code", file: "verify-1-checking.tsx" },
+    { name: "verify-1-verified", title: "Verified", file: "verify-1-verified.tsx" },
+    { name: "verify-1-wrong-code", title: "Wrong code", file: "verify-1-wrong-code.tsx" },
+  ],
+  states: [
+    { id: "submitting", title: "Checking the code", example: "verify-1-checking", trigger: "state=\"submitting\"", note: "The code slots are disabled and the status says it is being checked." },
+    { id: "success", title: "Verified", example: "verify-1-verified", trigger: "state=\"success\"", note: "The confirmation screen the flow ends on." },
+    { id: "error", title: "Wrong code", example: "verify-1-wrong-code", trigger: "state=\"error\"", note: "The slots turn red, shake once (not under reduced motion) and the status says the code is wrong." },
   ],
   ai: {
     summary: "Email or SMS code verification. Pass email, length, onVerify(code) (throw for a wrong code) and onResend. Without onVerify any code except all zeros succeeds, so you can try every state.",
@@ -25,8 +32,12 @@ export default defineItem({
       { keys: "Wrong code", action: "Announced as an alert, the field is marked invalid and focus returns to it" },
       { keys: "Resend", action: "The countdown is shown as text; the button is disabled until it ends" },
     ],
-    customization: ["length: digits in the code", "onVerify, onResend, onChangeEmail (null hides)", "resendAfter: seconds"],
+    customization: ["length: digits in the code", "onVerify, onResend, onChangeEmail (null hides)", "resendAfter: seconds", "state: \"submitting\" | \"success\" | \"error\" (omit it and the form runs by itself); errorState.description sets the failure message. Pair with your own async handler: state={pending ? \"submitting\" : failed ? \"error\" : done ? \"success\" : undefined}"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.1.0",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-11", note: "Adds state (submitting, success, error) to drive the form from your own async code, and defaultValues or defaultEmail to prefill. Fields lock while a request is in flight. Unchanged without state." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

@@ -13,6 +13,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "border-beam", "button", "install-tabs", "terminal", "text-reveal"],
   examples: [{ name: "hero-2-demo", title: "Default", file: "hero-2-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "The top section for a CLI, SDK or library: the install command is the call to action. Set `command` to your package's command without the runner.",
     whenToUse: ["Developer tools, SDKs and open-source libraries", "Pages where installing is the first step"],

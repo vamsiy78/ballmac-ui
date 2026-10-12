@@ -8,9 +8,12 @@ import { Button } from "@/components/ballmac/button"
 import { Checkbox } from "@/components/ballmac/checkbox"
 import { Input } from "@/components/ballmac/input"
 import { Label } from "@/components/ballmac/label"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
 import { cn } from "@/lib/utils"
 
-type Login1Props = Omit<React.ComponentProps<"section">, "onSubmit"> & {
+type Login1Props = Omit<React.ComponentProps<"section">, "onSubmit"> & FormStateProps & {
+  /** The email to start with. */
+  defaultEmail?: string
   /** Brand name or logo above the form. */
   brand?: React.ReactNode
   /** Heading. */
@@ -21,7 +24,7 @@ type Login1Props = Omit<React.ComponentProps<"section">, "onSubmit"> & {
   onSso?: (() => void) | null
   /** Called when "Email me a sign-in link" is pressed. Pass null to hide the button. */
   onMagicLink?: (() => void) | null
-  /** Error message shown above the form. */
+  /** Error message shown above the form. With `state="error"` it is the message too, unless `errorState.description` is given. */
   error?: string
   /** Where the "Forgot password?" link goes. */
   forgotHref?: string
@@ -38,11 +41,18 @@ function Login1({
   error,
   forgotHref = "#",
   signupHref = "#",
+  defaultEmail,
+  state: stateProp,
+  errorState,
   className,
   ...props
 }: Login1Props) {
   const id = React.useId()
-  const [pending, setPending] = React.useState(false)
+  const [pendingInternal, setPending] = React.useState(false)
+  // a `state` prop drives the form; without it the form runs by itself. This form has no confirmation screen, so success looks like ready.
+  const phase = formPhase(stateProp)
+  const pending = phase === "sending" || pendingInternal
+  const message = phase === "error" ? (errorState?.description ?? error ?? "The email or password is not right. Check them and try again.") : phase === undefined ? error : undefined
   return (
     <section data-slot="login-1" className={cn("flex min-h-[640px] items-center justify-center px-4 py-16", className)} {...props}>
       <div className="w-full max-w-sm">
@@ -70,6 +80,7 @@ function Login1({
           </div>
           <form
             className="grid gap-4"
+            aria-busy={pending || undefined}
             onSubmit={async (e) => {
               e.preventDefault()
               const data = new FormData(e.currentTarget)
@@ -81,14 +92,16 @@ function Login1({
               }
             }}
           >
-            {error && (
-              <p role="alert" className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-                {error}
+            {/* while the request is in flight nothing in the form can be changed or sent twice */}
+            <fieldset disabled={pending} className="contents">
+            {message && (
+              <p role="alert" className="rounded-md border border-destructive/40 px-3 py-2 text-sm text-destructive">
+                {message}
               </p>
             )}
             <div className="grid gap-2">
               <Label htmlFor={`${id}-email`}>Email</Label>
-              <Input id={`${id}-email`} name="email" type="email" autoComplete="email" required aria-invalid={error ? true : undefined} />
+              <Input id={`${id}-email`} name="email" type="email" autoComplete="email" defaultValue={defaultEmail} required aria-invalid={message ? true : undefined} />
             </div>
             <div className="grid gap-2">
               <div className="flex items-center justify-between">
@@ -97,7 +110,7 @@ function Login1({
                   Forgot password?
                 </a>
               </div>
-              <Input id={`${id}-password`} name="password" type="password" autoComplete="current-password" required aria-invalid={error ? true : undefined} />
+              <Input id={`${id}-password`} name="password" type="password" autoComplete="current-password" required aria-invalid={message ? true : undefined} />
             </div>
             <div className="flex items-center gap-2">
               <Checkbox id={`${id}-remember`} name="remember" />
@@ -108,6 +121,7 @@ function Login1({
             <Button type="submit" loading={pending} className="mt-2 w-full">
               Sign in
             </Button>
+            </fieldset>
           </form>
         </div>
         <p className="mt-6 text-center text-sm text-muted-foreground">

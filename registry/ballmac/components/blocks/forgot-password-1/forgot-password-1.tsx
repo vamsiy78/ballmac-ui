@@ -8,11 +8,12 @@ import { Button, buttonVariants } from "@/components/ballmac/button"
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel, useFieldControl } from "@/components/ballmac/field"
 import { Input } from "@/components/ballmac/input"
 import { PasswordInput } from "@/components/ballmac/password-input"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
 import { cn } from "@/lib/utils"
 
 type ForgotPassword1View = "request" | "sent" | "reset" | "done"
 
-type ForgotPassword1Props = Omit<React.ComponentProps<"section">, "onSubmit"> & {
+type ForgotPassword1Props = Omit<React.ComponentProps<"section">, "onSubmit"> & FormStateProps & {
   /** Which screen to start on. Use "reset" on the page the emailed link opens. */
   initialView?: ForgotPassword1View
   /** Email shown on the confirmation screen when you start past the request. */
@@ -47,16 +48,23 @@ function ForgotPassword1({
   onReset,
   resendAfter = 30,
   loginHref = "#",
+  state: stateProp,
+  errorState,
   className,
   ...props
 }: ForgotPassword1Props) {
-  const [view, setView] = React.useState<ForgotPassword1View>(initialView)
+  const [viewInternal, setView] = React.useState<ForgotPassword1View>(initialView)
   const [email, setEmail] = React.useState(defaultEmail)
   const [password, setPassword] = React.useState("")
   const [confirm, setConfirm] = React.useState("")
   const [touched, setTouched] = React.useState<Record<string, boolean>>({})
-  const [busy, setBusy] = React.useState(false)
-  const [failed, setFailed] = React.useState(false)
+  const [busyInternal, setBusy] = React.useState(false)
+  const [failedInternal, setFailed] = React.useState(false)
+  // a `state` prop drives the form (success shows the screen the flow ends on); without it the form runs by itself
+  const phase = formPhase(stateProp)
+  const view: ForgotPassword1View = phase === "done" ? (viewInternal === "reset" || viewInternal === "done" ? "done" : "sent") : viewInternal
+  const busy = phase === "sending" || busyInternal
+  const failed = phase === "error" || (phase === undefined && failedInternal)
   const [wait, setWait] = React.useState(initialView === "sent" ? resendAfter : 0)
   const [resent, setResent] = React.useState(false)
   const headingRef = React.useRef<HTMLHeadingElement>(null)
@@ -138,9 +146,11 @@ function ForgotPassword1({
             <Icon><KeyRound /></Icon>
             <h1 ref={headingRef} tabIndex={-1} className={cn(heading, "mt-6")}>Forgot your password?</h1>
             <p className="text-muted-foreground mt-2 text-pretty">Enter the email you signed up with and we’ll send you a link to choose a new one.</p>
-            <form noValidate onSubmit={request} aria-label="Request a password reset" className="mt-7">
+            <form noValidate onSubmit={request} aria-label="Request a password reset" aria-busy={busy || undefined} className="mt-7">
+              {/* while the request is in flight nothing in the form can be changed or sent twice */}
+              <fieldset disabled={busy} className="contents">
               <FieldGroup>
-                {failed && <p role="alert" className="border-destructive/40 text-destructive rounded-lg border px-3 py-2.5 text-sm">We couldn’t send the email. Please try again.</p>}
+                {failed && <p role="alert" className="border-destructive/40 text-destructive rounded-lg border px-3 py-2.5 text-sm">{errorState?.description ?? "We couldn’t send the email. Please try again."}</p>}
                 <Field invalid={!!emailError}>
                   <FieldLabel>Email</FieldLabel>
                   <FieldInput type="email" autoComplete="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, email: true }))} />
@@ -148,6 +158,7 @@ function ForgotPassword1({
                 </Field>
                 <Button type="submit" size="lg" shape="pill" loading={busy} className="w-full">Send reset link <ArrowRight  className="rtl:rotate-180"/></Button>
               </FieldGroup>
+              </fieldset>
             </form>
             <a href={loginHref} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 mt-6 inline-flex items-center gap-1.5 rounded-sm text-sm outline-none focus-visible:ring-[3px]"><ArrowLeft className="size-4 rtl:rotate-180" aria-hidden="true" />Back to sign in</a>
           </>
@@ -175,9 +186,10 @@ function ForgotPassword1({
             <Icon><KeyRound /></Icon>
             <h1 ref={headingRef} tabIndex={-1} className={cn(heading, "mt-6")}>Choose a new password</h1>
             <p className="text-muted-foreground mt-2 text-pretty">Pick something you haven’t used elsewhere. You’ll be signed out of other devices.</p>
-            <form noValidate onSubmit={reset} aria-label="Choose a new password" className="mt-7">
+            <form noValidate onSubmit={reset} aria-label="Choose a new password" aria-busy={busy || undefined} className="mt-7">
+              <fieldset disabled={busy} className="contents">
               <FieldGroup>
-                {failed && <p role="alert" className="border-destructive/40 text-destructive rounded-lg border px-3 py-2.5 text-sm">This link has expired. Request a new one and try again.</p>}
+                {failed && <p role="alert" className="border-destructive/40 text-destructive rounded-lg border px-3 py-2.5 text-sm">{errorState?.description ?? "This link has expired. Request a new one and try again."}</p>}
                 <Field invalid={!!passwordError}>
                   <FieldLabel>New password</FieldLabel>
                   <FieldPassword label="New password" value={password} onValueChange={setPassword} onBlur={() => setTouched((t) => ({ ...t, password: true }))} />
@@ -191,6 +203,7 @@ function ForgotPassword1({
                 </Field>
                 <Button type="submit" size="lg" shape="pill" loading={busy} className="w-full">Update password</Button>
               </FieldGroup>
+              </fieldset>
             </form>
           </>
         )}

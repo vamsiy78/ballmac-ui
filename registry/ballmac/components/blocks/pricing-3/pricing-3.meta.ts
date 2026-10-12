@@ -15,6 +15,7 @@ export default defineItem({
     { name: "pricing-3-demo", title: "Default", file: "pricing-3-demo.tsx" },
     { name: "pricing-3-two", title: "Two plans", file: "pricing-3-two.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "The detailed pricing table for buyers who compare. Pass plans=[{ key, name, price, period?, cta, featured? }] and groups=[{ title, rows: [{ label, hint?, values: { [planKey]: boolean | string } }] }].",
     whenToUse: ["Below pricing cards, for buyers who want every detail", "Products with many differentiating features"],

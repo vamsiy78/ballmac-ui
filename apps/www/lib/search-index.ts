@@ -28,6 +28,7 @@ export function searchEntries(): MenuEntry[] {
     { name: "theming", title: "Theming", description: "Tokens, brand color and dark mode.", group: "Docs", href: "/docs/theming" },
     { name: "motion", title: "Motion", description: "Speed, bounce, travel, hover and stagger as part of the theme, with reduced-motion support.", group: "Docs", href: "/docs/motion" },
     { name: "feels-showcase", title: "Platform feels showcase", description: "One app in macOS, iOS, Windows and web feels, live.", group: "Docs", href: "/feels" },
+    { name: "states", title: "States", description: "Loading, empty, error, submitting and success for every data and form block, through one state prop.", group: "Docs", href: "/docs/states" },
     { name: "feels", title: "Platform feels", description: "Make every component handle like macOS, iOS or Windows, for Tauri and Electron apps and the web.", group: "Docs", href: "/docs/feels" },
     { name: "installation", title: "Installation", description: "Set up a project and add your first component.", group: "Docs", href: "/docs/installation" },
     { name: "cli", title: "Updates & tests", description: "Update components without losing your edits, and install the tests that ship with them.", group: "Docs", href: "/docs/cli" },

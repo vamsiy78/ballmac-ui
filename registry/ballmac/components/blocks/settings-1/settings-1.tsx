@@ -15,6 +15,9 @@ import { PasswordInput } from "@/components/ballmac/password-input"
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ballmac/select"
 import { Textarea } from "@/components/ballmac/textarea"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 
 type Settings1Values = {
@@ -26,7 +29,7 @@ type Settings1Values = {
   theme: "light" | "dark" | "system"
 }
 
-type Settings1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
+type Settings1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & FormStateProps & {
   /** Page heading. */
   title?: string
   /** One line under the heading. */
@@ -83,7 +86,7 @@ function Group({ title, description, children, tone }: { title: string; descript
   )
 }
 
-function Settings1({
+function Settings1Inner({
   title = "Account settings",
   description = "Manage your profile, sign-in details and preferences.",
   defaultValues = defaults,
@@ -93,12 +96,17 @@ function Settings1({
   timezones = ["Europe/Lisbon (WET)", "America/New_York (EST)", "America/Los_Angeles (PST)", "Asia/Tokyo (JST)"],
   onSave,
   onDeleteAccount,
+  state: stateProp,
+  errorState,
   className,
   ...props
 }: Settings1Props) {
   const [saved, setSaved] = React.useState(defaultValues)
   const [v, setV] = React.useState(defaultValues)
-  const [state, setState] = React.useState<"idle" | "saving" | "saved" | "error">("idle")
+  const [internal, setState] = React.useState<"idle" | "saving" | "saved" | "error">("idle")
+  // a `state` prop drives the save bar (submitting is a save in flight, success the confirmation); without it the form runs by itself
+  const phase = formPhase(stateProp)
+  const state = phase === undefined ? internal : phase === "sending" ? "saving" : phase === "done" ? "saved" : phase
   const [confirm, setConfirm] = React.useState("")
   const [pwOpen, setPwOpen] = React.useState(false)
   const [pw, setPw] = React.useState({ current: "", next: "" })
@@ -254,16 +262,16 @@ function Settings1({
 
       {/* The save bar appears only when something changed, and stays on screen while you scroll. */}
       <div
-        aria-hidden={!dirty && state !== "saved" ? true : undefined}
+        aria-hidden={!dirty && state === "idle" ? true : undefined}
         className={cn(
           "sticky bottom-4 z-10 mt-4 flex items-center justify-between gap-3 rounded-2xl border bg-background/90 p-3 ps-5 shadow-[0_20px_50px_-20px_rgb(0_0_0/0.35)] backdrop-blur-xl transition-all duration-300 motion-reduce:transition-none",
-          dirty || state === "saved" || state === "error" ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
+          dirty || state !== "idle" ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
         )}
       >
         <p role="status" className="flex items-center gap-2 text-sm">
           {state === "saving" && <><Loader2 className="size-4 animate-spin motion-reduce:animate-none" aria-hidden="true" />Saving…</>}
           {state === "saved" && !dirty && <><Check className="text-chart-2 size-4" aria-hidden="true" />All changes saved</>}
-          {state === "error" && <span className="text-destructive">We couldn’t save your changes. Try again.</span>}
+          {state === "error" && <span className="text-destructive">{errorState?.description ?? "We couldn’t save your changes. Try again."}</span>}
           {dirty && state !== "saving" && state !== "error" && "You have unsaved changes"}
         </p>
         {dirty && (
@@ -273,6 +281,58 @@ function Settings1({
           </div>
         )}
       </div>
+    </section>
+  )
+}
+
+
+/** The same shapes as the ready form, so nothing jumps when the values arrive. */
+function Settings1Skeleton() {
+  return (
+    <div className="grid" aria-hidden="true">
+      {[
+        { rows: 3, avatar: true },
+        { rows: 2, avatar: false },
+        { rows: 2, avatar: false },
+      ].map((g, i) => (
+        <div key={i} className="grid gap-4 border-t py-8 first:border-t-0 first:pt-0 lg:grid-cols-[16rem_1fr] lg:gap-10">
+          <div className="grid content-start gap-2">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-3.5 w-44" />
+          </div>
+          <div className="grid gap-5">
+            {g.avatar ? (
+              <div className="flex items-center gap-4">
+                <Skeleton className="size-16 rounded-full" />
+                <Skeleton className="h-8 w-28 rounded-md" />
+              </div>
+            ) : null}
+            {Array.from({ length: g.rows }).map((_, r) => (
+              <div key={r} className="grid gap-2">
+                <Skeleton className="h-3.5 w-20" />
+                <Skeleton className="h-9 w-full rounded-md" />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/**
+ * With `state="loading"` this shows a skeleton of the form under the real heading while its values are fetched. The other states
+ * drive the form itself: `submitting` is a save in flight, `success` the confirmation, `error` the failure.
+ */
+function Settings1({ state, title = "Account settings", description = "Manage your profile, sign-in details and preferences.", className, ...props }: Settings1Props) {
+  if (state !== "loading") return <Settings1Inner state={state} title={title} description={description} className={className} {...props} />
+  return (
+    <section data-slot="settings-1" data-state="loading" className={cn("mx-auto w-full max-w-4xl px-4 py-8 sm:px-6", className)} {...frameProps(props)}>
+      <h2 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h2>
+      <p className="text-muted-foreground mt-1 text-sm">{description}</p>
+      <StateView state="loading" className="mt-8" loading={<Settings1Skeleton />} label="Loading your settings">
+        {null}
+      </StateView>
     </section>
   )
 }

@@ -12,6 +12,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils"],
   examples: [{ name: "features-2-demo", title: "Default", file: "features-2-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A calm, scannable grid for 3–9 features. Pass features=[{ icon, title, body }] with lucide icons.",
     whenToUse: ["Listing several product benefits evenly", "Developer tools and libraries"],

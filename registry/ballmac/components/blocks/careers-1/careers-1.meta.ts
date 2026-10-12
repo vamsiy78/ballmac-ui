@@ -15,6 +15,7 @@ export default defineItem({
     { name: "careers-1-demo", title: "Default", file: "careers-1-demo.tsx" },
     { name: "careers-1-small", title: "A few roles", file: "careers-1-small.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A jobs section. Pass jobs=[{ title, team, location, type?, href }] and optionally perks=[{ icon?, title, description }]; teams and filters are derived from the jobs.",
     whenToUse: ["Company careers pages", "Open source projects looking for maintainers"],

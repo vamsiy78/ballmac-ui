@@ -11,6 +11,7 @@ export default defineItem({
   files: [{ path: "components/blocks/faq-1/faq-1.tsx" }],
   registryDependencies: ["shadcn:utils", "accordion"],
   examples: [{ name: "faq-1-demo", title: "Default", file: "faq-1-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "An FAQ section. Pass items=[{ question, answer }]; the first answer starts open.",
     whenToUse: ["Pricing pages and landing pages", "Support and onboarding pages"],

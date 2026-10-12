@@ -15,6 +15,7 @@ export default defineItem({
     { name: "footer-2-demo", title: "Default", file: "footer-2-demo.tsx" },
     { name: "footer-2-long", title: "Long brand name", file: "footer-2-long.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A confident site footer. Pass columns, socials, legal and legalLinks; the wordmark scales to the footer width from its length.",
     whenToUse: ["Brand-led marketing sites", "Pages that end with a big visual moment"],

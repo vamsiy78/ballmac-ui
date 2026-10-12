@@ -12,6 +12,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "button", "gradient-text", "laptop-frame", "mac-window"],
   examples: [{ name: "hero-5-demo", title: "Default", file: "hero-5-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Top of a desktop-app landing page. Edit title, highlight, description, actions and requirements; pass `screen` (an image or your UI) to replace the sample app window.",
     whenToUse: ["Landing pages for Mac or desktop apps", "Products whose UI is the selling point"],

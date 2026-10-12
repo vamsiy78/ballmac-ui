@@ -15,6 +15,7 @@ export default defineItem({
     { name: "stats-1-demo", title: "Default", file: "stats-1-demo.tsx" },
     { name: "stats-1-simple", title: "Numbers only", file: "stats-1-simple.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Social proof as numbers. Pass stats=[{ label, value, prefix?, suffix?, decimals?, delta?, trend?, trendLabel?, note? }].",
     whenToUse: ["Under a hero or logo cloud as proof", "Company and about pages"],

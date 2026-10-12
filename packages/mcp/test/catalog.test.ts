@@ -252,3 +252,64 @@ describe("platform feel", () => {
   })
 })
 
+
+describe("states", () => {
+  const withStates = [
+    item({
+      name: "dashboard-1", kind: "block", category: "blocks", blockCategory: "dashboard", title: "Dashboard 1", description: "Store overview.",
+      states: [
+        { id: "loading", title: "Loading", example: "dashboard-1-loading", trigger: 'state="loading"', note: "A skeleton of the cards.", preview: "https://ui.test/preview/dashboard-1-loading" },
+        { id: "error", title: "Could not load", example: "dashboard-1-error", trigger: 'state="error"' },
+      ],
+    }),
+    item({
+      name: "login-1", kind: "block", category: "blocks", blockCategory: "auth", title: "Login 1", description: "Sign in.",
+      states: [{ id: "submitting", title: "Signing in", example: "login-1-submitting", trigger: 'state="submitting"' }],
+    }),
+    item({ name: "hero-1", kind: "block", category: "blocks", blockCategory: "hero", title: "Hero 1", description: "Split hero.", statesNone: "Static content: nothing to load, submit or fail." }),
+  ]
+  const fetchStates = (async (url: string) => {
+    const u = String(url)
+    if (u.endsWith("/api/v1/index.json")) return new Response(JSON.stringify({ version: 1, setup: "", namespace: "@ballmac", items: withStates }))
+    const name = decodeURIComponent(u.split("/").pop()!.replace(/\.json$/, ""))
+    const Comp = name.replace(/(^|-)(\w)/g, (_, __, c: string) => c.toUpperCase())
+    return new Response(JSON.stringify({ ...withStates.find((i) => i.name === name), exports: [Comp], import: `import { ${Comp} } from "@/components/ballmac/blocks/${name}/${name}"`, props: [], a11y: [], customization: [], files: [], exampleCode: [] }))
+  }) as typeof fetch
+  const catalog = new Catalog("https://ui.test", fetchStates)
+
+  it("lists each section's states, and why a block has none", async () => {
+    const plan = await composePage(catalog, "a hero, a dashboard and a login screen")
+    const by = Object.fromEntries(plan.sections.map((s) => [s.block, s as { states: { id: string; trigger: string }[]; statesNone?: string }]))
+    expect(by["dashboard-1"]!.states.map((s) => s.id)).toEqual(["loading", "error"])
+    expect(by["dashboard-1"]!.states[0]!.trigger).toBe('state="loading"')
+    expect(by["login-1"]!.states.map((s) => s.id)).toEqual(["submitting"])
+    expect(by["hero-1"]!.states).toEqual([])
+    expect(by["hero-1"]!.statesNone).toContain("Static")
+  })
+
+  it("wires a data block to useResource and a form block to a phase, and leaves a static block alone", async () => {
+    const { scaffold } = await composePage(catalog, "a hero, a dashboard and a login screen")
+    expect(scaffold.startsWith('"use client"')).toBe(true)
+    expect(scaffold).toContain('import { useResource } from "@/lib/ballmac/use-resource"')
+    expect(scaffold).toContain("const dashboard1 = useResource(")
+    expect(scaffold).toContain("<Dashboard1 state={dashboard1.state} onRetry={dashboard1.retry} />")
+    expect(scaffold).toContain('const [login1, setLogin1] = React.useState<BlockState>("ready")')
+    expect(scaffold).toContain("<Login1 state={login1} />")
+    expect(scaffold).toContain("<Hero1 />")
+  })
+
+  it("keeps a page of static blocks exactly as it was", async () => {
+    const { scaffold } = await composePage(catalog, "a hero")
+    expect(scaffold).not.toContain("use client")
+    expect(scaffold).not.toContain("useResource")
+    expect(scaffold).toContain("<Hero1 />")
+  })
+
+  it("shows states, or why there are none, in an item's markdown", async () => {
+    const d = await catalog.detail("dashboard-1")
+    const md = toMarkdown(d)
+    expect(md).toContain("## States")
+    expect(md).toContain('**Loading** (`state="loading"`): A skeleton of the cards. Preview: https://ui.test/preview/dashboard-1-loading')
+    expect(toMarkdown(await catalog.detail("hero-1"))).toContain("None. Static content")
+  })
+})

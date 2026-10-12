@@ -13,6 +13,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "button"],
   examples: [{ name: "header-1-demo", title: "Default", file: "header-1-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "The top navigation bar for a marketing site. Pass links and the two actions; it handles the mobile menu.",
     whenToUse: ["Marketing sites and landing pages", "Docs sites with a few top-level sections"],

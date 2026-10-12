@@ -15,6 +15,7 @@ export default defineItem({
     { name: "features-6-demo", title: "Default", file: "features-6-demo.tsx" },
     { name: "features-6-two", title: "Two tabs", file: "features-6-two.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A compact way to show several feature areas without a long scroll. Pass tabs=[{ value, label, icon?, title, description, points?, link?, visual }].",
     whenToUse: ["Four to six equal feature areas", "Pages that need to stay short"],

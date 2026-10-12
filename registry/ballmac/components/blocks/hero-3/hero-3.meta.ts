@@ -13,6 +13,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "badge", "prompt-input", "reasoning-disclosure", "streaming-text", "tool-call-card", "media"],
   examples: [{ name: "hero-3-demo", title: "Default", file: "hero-3-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Top section for an AI assistant or agent product. The prompt is real: handle onSubmit (e.g. send visitors to sign-up with their question).",
     whenToUse: ["AI assistants, copilots and agents", "Products whose value is best shown as a question and answer"],

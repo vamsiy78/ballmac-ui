@@ -8,6 +8,22 @@ import * as React from "react"
  */
 export type BlockState = "ready" | "loading" | "empty" | "error" | "submitting" | "success"
 
+/** The props every form block takes. Leave `state` out and the form runs by itself; pass it and you drive the form. */
+export type FormStateProps = {
+  /** `submitting` shows the request in flight, `success` the confirmation, `error` the failure. Leave out to let the form decide. */
+  state?: BlockState
+  /** Copy for the error state. */
+  errorState?: { title?: string; description?: string }
+}
+
+/**
+ * Where a form is in its life. Forms keep this themselves; `formPhase` turns the public `state` prop into it, or returns
+ * undefined when the prop is not given so the form's own value is used.
+ */
+export type FormPhase = "idle" | "sending" | "error" | "done"
+export const formPhase = (state: BlockState | undefined): FormPhase | undefined =>
+  state === undefined ? undefined : state === "submitting" || state === "loading" ? "sending" : state === "error" ? "error" : state === "success" ? "done" : "idle"
+
 /** Whether something is in flight, so a region can set `aria-busy`. */
 export const isBusy = (state: BlockState) => state === "loading" || state === "submitting"
 

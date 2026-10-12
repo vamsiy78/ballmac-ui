@@ -12,6 +12,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "button", "globe", "media"],
   examples: [{ name: "hero-4-demo", title: "Default", file: "hero-4-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Top-of-page hero for global or infrastructure products. Edit announcement, title, description, actions, stats and globe markers ([lat, long]).",
     whenToUse: ["Infrastructure, hosting, edge or global-reach products", "Companies with offices or users worldwide"],

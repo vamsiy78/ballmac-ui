@@ -15,6 +15,7 @@ export default defineItem({
     { name: "blog-post-1-demo", title: "Default", file: "blog-post-1-demo.tsx" },
     { name: "blog-post-1-short", title: "Your own content", file: "blog-post-1-short.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "An article template. Pass title, subtitle, author, date and readMinutes, give the body as children (plain h2, h3, p, ul, blockquote and pre are styled), and list the headings in toc.",
     whenToUse: ["Blog posts, guides and announcements", "Any long reading page"],

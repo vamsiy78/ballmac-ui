@@ -11,6 +11,7 @@ import { ProBadge } from "@/components/site/pro-notice"
 import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { ItemJsonLd } from "@/components/site/item-jsonld"
+import { ItemStates } from "@/components/site/item-states"
 import { SectionHeading } from "@/components/site/section-heading"
 import { nudgeText } from "@/lib/founding"
 import { getOffer } from "@/lib/offer"
@@ -55,6 +56,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
           example={example.name}
           v0={!isPro(item)}
           pro={isPro(item)}
+          states={item.states}
           title={`${item.title} preview`}
           code={
             <div className="space-y-4 p-4">
@@ -80,6 +82,12 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
             ) : (
               <CodePanel code={readSource(example.source)} title={`Example: ${example.file}`} />
             )}
+          </section>
+        )}
+        {(item.states.length > 0 || item.statesNone) && (
+          <section className="space-y-4">
+            <SectionHeading id="states">States</SectionHeading>
+            <ItemStates states={item.states} none={item.statesNone} />
           </section>
         )}
         <section className="space-y-4">

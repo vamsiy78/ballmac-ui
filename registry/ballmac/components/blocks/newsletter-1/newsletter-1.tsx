@@ -6,10 +6,13 @@ import { ArrowRight, Check, Mail } from "lucide-react"
 
 import { Button } from "@/components/ballmac/button"
 import { Input } from "@/components/ballmac/input"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
 import { cn } from "@/lib/utils"
 import { Media, type MediaSource } from "@/components/ballmac/media"
 
-type Newsletter1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
+type Newsletter1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & FormStateProps & {
+  /** The email to start with. */
+  defaultEmail?: string
   /** Label above the heading. */
   eyebrow?: string
   /** Section heading. */
@@ -55,28 +58,33 @@ function Newsletter1({
   onSubmit,
   media,
   mediaAlt,
+  defaultEmail = "",
+  state: stateProp,
+  errorState,
   className,
   ...props
 }: Newsletter1Props) {
-  const [email, setEmail] = React.useState("")
+  const [email, setEmail] = React.useState(defaultEmail)
   const [chosen, setChosen] = React.useState<string[]>(defaultTopics)
-  const [state, setState] = React.useState<"idle" | "invalid" | "sending" | "done" | "error">("idle")
+  const [internal, setInternal] = React.useState<"idle" | "invalid" | "sending" | "done" | "error">("idle")
+  // a `state` prop drives the form; without it the form runs by itself
+  const state = formPhase(stateProp) ?? internal
   const inputId = React.useId()
   const errorId = `${inputId}-error`
 
   async function submit(e: React.FormEvent) {
     e.preventDefault()
     if (!emailPattern.test(email)) {
-      setState("invalid")
+      setInternal("invalid")
       return
     }
-    setState("sending")
+    setInternal("sending")
     try {
       if (onSubmit) await onSubmit(email, chosen)
       else await new Promise((r) => setTimeout(r, 800))
-      setState("done")
+      setInternal("done")
     } catch {
-      setState("error")
+      setInternal("error")
     }
   }
 
@@ -100,11 +108,13 @@ function Newsletter1({
                 <span className="bg-chart-2/15 mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full"><Check className="size-4" aria-hidden="true" /></span>
                 <p className="text-sm">
                   <span className="block font-semibold">You’re subscribed.</span>
-                  <span className="text-muted-foreground">Check {email} for a confirmation link. Your first issue arrives soon.</span>
+                  <span className="text-muted-foreground">Check {email || "your inbox"} for a confirmation link. Your first issue arrives soon.</span>
                 </p>
               </div>
             ) : (
-              <form onSubmit={submit} noValidate className="mt-8 max-w-md">
+              <form onSubmit={submit} noValidate aria-busy={state === "sending" || undefined} className="mt-8 max-w-md">
+                {/* while the request is in flight nothing in the form can be changed or sent twice */}
+                <fieldset disabled={state === "sending"} className="contents">
                 {topics.length > 0 && (
                   <fieldset className="mb-4">
                     <legend className="mb-2 text-sm font-medium">What would you like to read?</legend>
@@ -136,7 +146,7 @@ function Newsletter1({
                     autoComplete="email"
                     placeholder="you@company.com"
                     value={email}
-                    onChange={(e) => { setEmail(e.target.value); if (state === "invalid") setState("idle") }}
+                    onChange={(e) => { setEmail(e.target.value); if (state === "invalid") setInternal("idle") }}
                     aria-invalid={state === "invalid" || undefined}
                     aria-describedby={state === "invalid" || state === "error" ? errorId : undefined}
                     className="bg-background/80 sm:flex-1"
@@ -147,9 +157,10 @@ function Newsletter1({
                 </div>
                 <p id={errorId} role="alert" className="text-destructive mt-2 min-h-5 text-sm">
                   {state === "invalid" && "Enter a full email address, like name@company.com."}
-                  {state === "error" && "We couldn’t subscribe you just now. Please try again."}
+                  {state === "error" && (errorState?.description ?? "We couldn’t subscribe you just now. Please try again.")}
                 </p>
                 <p className="text-muted-foreground text-sm">{note}</p>
+                </fieldset>
               </form>
             )}
 

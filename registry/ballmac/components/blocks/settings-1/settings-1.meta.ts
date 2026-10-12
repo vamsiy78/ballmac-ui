@@ -10,10 +10,19 @@ export default defineItem({
   tags: ["settings", "profile", "account", "preferences", "save bar", "danger zone"],
   files: [{ path: "components/blocks/settings-1/settings-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "alert-dialog", "avatar", "badge", "button", "dialog", "field", "input", "password-input", "segmented-control", "select", "textarea"],
-  examples: [
-    { name: "settings-1-demo", title: "Default", file: "settings-1-demo.tsx" },
+  registryDependencies: ["shadcn:utils", "alert-dialog", "avatar", "badge", "button", "dialog", "field", "input", "password-input", "segmented-control", "select", "textarea", "use-resource", "state-view", "skeleton"],
+  examples: [{ name: "settings-1-demo", title: "Default", file: "settings-1-demo.tsx" },
     { name: "settings-1-save", title: "Failing save", file: "settings-1-save.tsx" },
+    { name: "settings-1-loading", title: "Loading", file: "settings-1-loading.tsx" },
+    { name: "settings-1-saving", title: "Saving", file: "settings-1-saving.tsx" },
+    { name: "settings-1-saved", title: "Saved", file: "settings-1-saved.tsx" },
+    { name: "settings-1-error", title: "Could not save", file: "settings-1-error.tsx" },
+  ],
+  states: [
+    { id: "loading", title: "Loading", example: "settings-1-loading", trigger: "state=\"loading\"", note: "A skeleton of the profile, sign-in and preferences groups under the real heading, announced as loading." },
+    { id: "submitting", title: "Saving", example: "settings-1-saving", trigger: "state=\"submitting\"", note: "A save bar appears with a spinner and \"Saving\u2026\" and Save and Discard are disabled." },
+    { id: "success", title: "Saved", example: "settings-1-saved", trigger: "state=\"success\"", note: "The bar says \"All changes saved\"." },
+    { id: "error", title: "Could not save", example: "settings-1-error", trigger: "state=\"error\"", note: "The bar says the save failed and offers to try again; the edits are kept." },
   ],
   ai: {
     summary: "Profile and account settings. Pass defaultValues, email, onSave(values) (throw to show an error) and onDeleteAccount; the dirty-state save bar, validation and availability hint are built in.",
@@ -25,8 +34,12 @@ export default defineItem({
       { keys: "Delete account", action: "An alert dialog asks you to type 'delete'; the confirm button stays disabled until you do" },
       { keys: "Invalid name or username", action: "Errors are announced and linked to the field; saving is blocked" },
     ],
-    customization: ["defaultValues, email, takenUsernames, languages, timezones", "onSave(values), onDeleteAccount()"],
+    customization: ["defaultValues, email, takenUsernames, languages, timezones", "onSave(values), onDeleteAccount()", "state: \"submitting\" | \"success\" | \"error\" (omit it and the form runs by itself); errorState.description sets the failure message. Pair with your own async handler: state={pending ? \"submitting\" : failed ? \"error\" : done ? \"success\" : undefined}"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.1.0",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-11", note: "Adds state: loading shows a skeleton of the form while its values are fetched; submitting, success and error drive the save status. Unchanged without state." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

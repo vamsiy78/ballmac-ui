@@ -7,6 +7,9 @@ import { BellRing, Check, Moon } from "lucide-react"
 import { Input } from "@/components/ballmac/input"
 import { Switch } from "@/components/ballmac/switch"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ballmac/toggle-group"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 
 type Settings2Channel = "email" | "push" | "inApp"
@@ -23,7 +26,7 @@ type Settings2Values = {
   quiet: { enabled: boolean; from: string; to: string; days: string[] }
 }
 
-type Settings2Props = Omit<React.ComponentProps<"section">, "title" | "onChange"> & {
+type Settings2Props = Omit<React.ComponentProps<"section">, "title" | "onChange"> & FormStateProps & {
   /** Page heading. */
   title?: string
   /** One line under the heading. */
@@ -73,12 +76,14 @@ function initialEvents(events: Settings2Event[]) {
   ) as Settings2Values["events"]
 }
 
-function Settings2({
+function Settings2Inner({
   title = "Notifications",
   description = "Choose what you hear about and where. Changes save as you make them.",
   events = defaultEvents,
   defaultValues,
   onChange,
+  state: stateProp,
+  errorState,
   className,
   ...props
 }: Settings2Props) {
@@ -88,7 +93,10 @@ function Settings2({
     quiet: { enabled: true, from: "22:00", to: "07:00", days: ["mon", "tue", "wed", "thu", "fri"] },
     ...defaultValues,
   })
-  const [status, setStatus] = React.useState<"idle" | "saving" | "saved" | "error">("idle")
+  const [internal, setStatus] = React.useState<"idle" | "saving" | "saved" | "error">("idle")
+  // a `state` prop drives the status; without it the settings run by themselves
+  const phase = formPhase(stateProp)
+  const status = phase === undefined ? internal : phase === "sending" ? "saving" : phase === "done" ? "saved" : phase
   const quietId = React.useId()
 
   function commit(next: Settings2Values) {
@@ -111,7 +119,7 @@ function Settings2({
         <p role="status" className="text-muted-foreground flex h-6 items-center gap-1.5 text-sm">
           {status === "saving" && "Saving…"}
           {status === "saved" && <><Check className="text-chart-2 size-4" aria-hidden="true" />Saved</>}
-          {status === "error" && <span className="text-destructive">Couldn’t save. Try again.</span>}
+          {status === "error" && <span className="text-destructive">{errorState?.description ?? "Couldn’t save. Try again."}</span>}
         </p>
       </div>
 
@@ -213,6 +221,61 @@ function Settings2({
           </div>
         </div>
       </div>
+    </section>
+  )
+}
+
+
+/** The same shapes as the ready form, so nothing jumps when the values arrive. */
+function Settings2Skeleton() {
+  return (
+    <div className="space-y-8" aria-hidden="true">
+      <div>
+        <Skeleton className="h-4 w-28" />
+        <Skeleton className="mt-2 h-3.5 w-64" />
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {[0, 1, 2, 3].map((i) => (
+            <Skeleton key={i} className="h-16 w-full rounded-xl" />
+          ))}
+        </div>
+      </div>
+      <div>
+        <Skeleton className="h-4 w-24" />
+        <ul className="mt-4 divide-y rounded-2xl border">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <li key={i} className="flex items-center justify-between gap-4 p-4">
+              <div className="grid gap-2">
+                <Skeleton className="h-4 w-32" />
+                <Skeleton className="h-3.5 w-52" />
+              </div>
+              <div className="flex gap-3">
+                {[0, 1, 2].map((c) => (
+                  <Skeleton key={c} className="h-5 w-9 rounded-full" />
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * With `state="loading"` this shows a skeleton of the form under the real heading while its values are fetched. The other states
+ * drive the form itself: `submitting` is a save in flight, `success` the confirmation, `error` the failure.
+ */
+function Settings2({ state, title = "Notifications", description = "Choose what you hear about and where. Changes save as you make them.", className, ...props }: Settings2Props) {
+  if (state !== "loading") return <Settings2Inner state={state} title={title} description={description} className={className} {...props} />
+  return (
+    <section data-slot="settings-2" data-state="loading" className={cn("mx-auto w-full max-w-4xl px-4 py-8 sm:px-6", className)} {...frameProps(props)}>
+      <div>
+        <h2 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h2>
+        <p className="text-muted-foreground mt-1 text-sm">{description}</p>
+      </div>
+      <StateView state="loading" className="mt-8" loading={<Settings2Skeleton />} label="Loading your notification settings">
+        {null}
+      </StateView>
     </section>
   )
 }

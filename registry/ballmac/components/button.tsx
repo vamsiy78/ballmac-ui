@@ -73,7 +73,8 @@ function Button({
               <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
             </svg>
           </span>
-          <span className="invisible inline-flex items-center gap-2">{children}</span>
+          {/* opacity, not visibility: the label stays in the accessibility tree, so a busy button still has a name */}
+          <span className="inline-flex items-center gap-2 opacity-0">{children}</span>
         </>
       ) : (
         children

@@ -15,6 +15,7 @@ export default defineItem({
     { name: "logo-cloud-1-demo", title: "Marquee", file: "logo-cloud-1-demo.tsx" },
     { name: "logo-cloud-1-grid", title: "Grid", file: "logo-cloud-1-grid.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Social proof strip under a hero. Pass `logos` ({ name, icon? | logo? }[]) with your customers' SVG logos via `logo`; choose variant \"marquee\" or \"grid\".",
     whenToUse: ["Directly under a hero", "Near pricing to reassure buyers"],

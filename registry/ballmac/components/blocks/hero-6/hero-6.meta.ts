@@ -15,6 +15,7 @@ export default defineItem({
     { name: "hero-6-demo", title: "Default", file: "hero-6-demo.tsx" },
     { name: "hero-6-custom", title: "Custom cards", file: "hero-6-custom.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A bold, friendly landing hero. Edit eyebrow, title, highlight (the gradient words), description, actions and highlights; pass `cards` to replace the floating cards.",
     whenToUse: ["Consumer and prosumer SaaS landing pages", "Launches that want a memorable first screen"],

@@ -15,6 +15,7 @@ export default defineItem({
     { name: "pricing-4-demo", title: "Default", file: "pricing-4-demo.tsx" },
     { name: "pricing-4-custom", title: "Two tiers in euros", file: "pricing-4-custom.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Pricing for apps with a one-time license and a subscription. Pass tiers=[{ id, name, description?, once, yearly }], optional renewal (price of paid updates after year 1), years, currency and href(tierId, mode). The chart and the 'pays for itself in year N' message are computed from the numbers.",
     whenToUse: ["Mac and desktop apps that offer a perpetual license next to a subscription", "When you want to show buyers the long-run cost honestly"],

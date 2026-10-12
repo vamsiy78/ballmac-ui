@@ -13,6 +13,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "badge", "border-beam", "button"],
   examples: [{ name: "pricing-1-demo", title: "Default", file: "pricing-1-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Pricing for a free-plus-paid or two-plan product. Pass plans=[{ name, price, period, description, features, cta, featured }].",
     whenToUse: ["Freemium products", "Two-plan pricing pages"],

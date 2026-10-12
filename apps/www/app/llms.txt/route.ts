@@ -18,6 +18,7 @@ export function GET() {
     `- [Updates and tests](${SITE_URL}/docs/cli): npx @ballmac/cli keeps installed components up to date without losing your edits (three-way merge) and installs the tests that ship with them`,
     `- [CLI and registry](${SITE_URL}/docs/registry): namespaces, direct URLs, search, view and update`,
     `- [Motion](${SITE_URL}/docs/motion): speed, bounce, travel, hover and stagger as theme tokens that Tailwind's duration and ease classes and every component follow; five feels (@ballmac/motion-native, -calm, -snappy, -playful, -still); reduced-motion fallback`,
+    `- [States](${SITE_URL}/docs/states): every data block takes state ("loading" | "ready" | "empty" | "error") with onRetry, emptyState and errorState, and every form block can show submitting, success and error; useResource and stateOf map fetches and TanStack Query or SWR onto it; StateView for your own views`,
     `- [Platform feels](${SITE_URL}/docs/feels): one switch makes every component handle like macOS, iOS or Windows (sizes, corners, focus ring, shadows, menus, sidebars, window chrome); @ballmac/feel-macos, -ios, -windows, -web and -auto (device detection before first paint); app-window for Tauri and Electron apps`,
     `- [Right-to-left](${SITE_URL}/docs/rtl): every component mirrors for Arabic, Hebrew, Persian and Urdu`,
     `- [Translations](${SITE_URL}/docs/i18n): translate all built-in strings with one provider; keys at ${SITE_URL}/i18n/en.json`,

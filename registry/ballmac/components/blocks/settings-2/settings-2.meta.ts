@@ -10,10 +10,19 @@ export default defineItem({
   tags: ["settings", "notifications", "preferences", "switches", "quiet hours", "digest"],
   files: [{ path: "components/blocks/settings-2/settings-2.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "input", "switch", "toggle-group"],
-  examples: [
-    { name: "settings-2-demo", title: "Default", file: "settings-2-demo.tsx" },
+  registryDependencies: ["shadcn:utils", "input", "switch", "toggle-group", "use-resource", "state-view", "skeleton"],
+  examples: [{ name: "settings-2-demo", title: "Default", file: "settings-2-demo.tsx" },
     { name: "settings-2-custom", title: "Your events", file: "settings-2-custom.tsx" },
+    { name: "settings-2-loading", title: "Loading", file: "settings-2-loading.tsx" },
+    { name: "settings-2-saving", title: "Saving", file: "settings-2-saving.tsx" },
+    { name: "settings-2-saved", title: "Saved", file: "settings-2-saved.tsx" },
+    { name: "settings-2-error", title: "Could not save", file: "settings-2-error.tsx" },
+  ],
+  states: [
+    { id: "loading", title: "Loading", example: "settings-2-loading", trigger: "state=\"loading\"", note: "A skeleton of the digest choice and the notification list under the real heading, announced as loading." },
+    { id: "submitting", title: "Saving", example: "settings-2-saving", trigger: "state=\"submitting\"", note: "\"Saving\u2026\" appears beside the heading." },
+    { id: "success", title: "Saved", example: "settings-2-saved", trigger: "state=\"success\"", note: "\"Saved\" with a check appears beside the heading." },
+    { id: "error", title: "Could not save", example: "settings-2-error", trigger: "state=\"error\"", note: "The heading shows that saving failed; the choices are kept." },
   ],
   ai: {
     summary: "Notification preferences with instant saving. Pass events=[{ id, label, description }], defaultValues and onChange(values) (return a promise; throw to show an error).",
@@ -25,8 +34,12 @@ export default defineItem({
       { keys: "Screen reader", action: "Each switch is named 'Event by Channel'; the saving state is announced politely" },
       { keys: "Weekdays", action: "A toggle group with full day names as labels" },
     ],
-    customization: ["events: { id, label, description }[]", "defaultValues: digest, events, quiet", "onChange(values) async"],
+    customization: ["events: { id, label, description }[]", "defaultValues: digest, events, quiet", "onChange(values) async", "state: \"submitting\" | \"success\" | \"error\" (omit it and the form runs by itself); errorState.description sets the failure message. Pair with your own async handler: state={pending ? \"submitting\" : failed ? \"error\" : done ? \"success\" : undefined}"],
   },
-  version: "1.0.0",
-  updated: "2026-10-01",
+  version: "1.1.0",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-11", note: "Adds state: loading shows a skeleton of the form while its values are fetched; submitting, success and error drive the save status. Unchanged without state." },
+    { version: "1.0.0", date: "2026-10-01", note: "First release." },
+  ],
 })

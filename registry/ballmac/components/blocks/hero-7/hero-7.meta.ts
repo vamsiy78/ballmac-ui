@@ -15,6 +15,7 @@ export default defineItem({
     { name: "hero-7-demo", title: "Default", file: "hero-7-demo.tsx" },
     { name: "hero-7-custom", title: "Your own screen", file: "hero-7-custom.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A landing hero that lets the product do the talking. Edit eyebrow, title, description and actions; pass `screenshot` ({ src, alt }) or `screen` (any UI laid out 1180px wide) to replace the sample dashboard.",
     whenToUse: ["Products with a strong UI", "Pages where a first-screen screenshot sells the product"],

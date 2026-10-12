@@ -15,6 +15,7 @@ export default defineItem({
     { name: "devices-1-demo", title: "Default", file: "devices-1-demo.tsx" },
     { name: "devices-1-custom", title: "Your own screens", file: "devices-1-custom.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A multi-platform section. Edit eyebrow, title, description and captions; pass screens={{ mac, ipad, iphone, watch }} to replace the sample screens, each laid out at its real device width (1280, 834, 393, 208).",
     whenToUse: ["Apps that ship on several Apple platforms", "Showing responsive or cross-device behaviour"],

@@ -9,12 +9,15 @@ import { Checkbox } from "@/components/ballmac/checkbox"
 import { Field, FieldError, FieldGroup, FieldLabel, useFieldControl } from "@/components/ballmac/field"
 import { Input } from "@/components/ballmac/input"
 import { PasswordInput } from "@/components/ballmac/password-input"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
 import { cn } from "@/lib/utils"
 import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Login2Values = { email: string; password: string; remember: boolean }
 
-type Login2Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
+type Login2Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & FormStateProps & {
+  /** The email to start with, for example one the person typed on the previous page. */
+  defaultEmail?: string
   /** Brand name beside the logo mark. */
   brand?: string
   /** Your logo mark instead of the brand's first letter: an image URL, an object with alt text and a dark-mode file, or your own element. A plain URL is described by the brand name. */
@@ -72,14 +75,20 @@ function Login2({
   visual,
   image,
   imageAlt,
+  defaultEmail = "",
+  state: stateProp,
+  errorState,
   className,
   ...props
 }: Login2Props) {
-  const [email, setEmail] = React.useState("")
+  const [email, setEmail] = React.useState(defaultEmail)
   const [password, setPassword] = React.useState("")
   const [remember, setRemember] = React.useState(true)
   const [touched, setTouched] = React.useState({ email: false, password: false })
-  const [state, setState] = React.useState<"idle" | "sending" | "error">("idle")
+  const [internal, setInternal] = React.useState<"idle" | "sending" | "error">("idle")
+  // a `state` prop drives the form; without it the form runs by itself. This form has no confirmation, so success looks like idle.
+  const phase = formPhase(stateProp)
+  const state = phase === undefined ? internal : phase === "done" ? "idle" : phase
   const emailError = touched.email && !emailPattern.test(email) ? "Enter a full email address, like name@company.com." : undefined
   const passwordError = touched.password && !password ? "Enter your password." : undefined
 
@@ -87,13 +96,13 @@ function Login2({
     e.preventDefault()
     setTouched({ email: true, password: true })
     if (!emailPattern.test(email) || !password) return
-    setState("sending")
+    setInternal("sending")
     try {
       if (onSubmit) await onSubmit({ email, password, remember })
       else await new Promise((r) => setTimeout(r, 800))
-      setState("idle")
+      setInternal("idle")
     } catch {
-      setState("error")
+      setInternal("error")
     }
   }
 
@@ -120,9 +129,11 @@ function Login2({
             <span className="bg-border h-px flex-1" />
           </div>
 
-          <form noValidate onSubmit={submit} aria-label="Sign in">
+          <form noValidate onSubmit={submit} aria-label="Sign in" aria-busy={state === "sending" || undefined}>
+            {/* while the request is in flight nothing in the form can be changed or sent twice */}
+            <fieldset disabled={state === "sending"} className="contents">
             <FieldGroup>
-              {state === "error" && <p role="alert" className="border-destructive/40 text-destructive rounded-lg border px-3 py-2.5 text-sm">{errorMessage}</p>}
+              {state === "error" && <p role="alert" className="border-destructive/40 text-destructive rounded-lg border px-3 py-2.5 text-sm">{errorState?.description ?? errorMessage}</p>}
               <Field invalid={!!emailError}>
                 <FieldLabel>Email</FieldLabel>
                 <FieldInput type="email" autoComplete="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, email: true }))} />
@@ -144,6 +155,7 @@ function Login2({
                 Sign in <ArrowRight  className="rtl:rotate-180"/>
               </Button>
             </FieldGroup>
+            </fieldset>
           </form>
 
           <p className="text-muted-foreground mt-8 text-center text-sm">

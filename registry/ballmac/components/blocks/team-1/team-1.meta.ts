@@ -15,6 +15,7 @@ export default defineItem({
     { name: "team-1-demo", title: "Default", file: "team-1-demo.tsx" },
     { name: "team-1-small", title: "Four people", file: "team-1-small.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "An About-page team section. Pass members=[{ name, role, bio?, location?, image?, links? }].",
     whenToUse: ["About and careers pages", "Showing the humans behind a product"],

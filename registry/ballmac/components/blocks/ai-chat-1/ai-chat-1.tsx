@@ -2,7 +2,7 @@
 "use client"
 
 import * as React from "react"
-import { MessageSquare, PanelLeft, Plus, RotateCcw } from "lucide-react"
+import { CircleAlert, MessageSquare, PanelLeft, Plus, RotateCcw, RotateCw, Sparkles } from "lucide-react"
 
 import { Chat, ChatFooter, ChatMessages } from "@/components/ballmac/ai-chat"
 import { Message, MessageAction, MessageActions, MessageAvatar, MessageContent, MessageCopyAction } from "@/components/ballmac/ai-message"
@@ -12,6 +12,8 @@ import { ReasoningDisclosure } from "@/components/ballmac/reasoning-disclosure"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ballmac/select"
 import { StreamingText } from "@/components/ballmac/streaming-text"
 import { ToolCallCard, type ToolCallCardProps } from "@/components/ballmac/tool-call-card"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import type { StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 
 type ChatTurn = {
@@ -26,7 +28,7 @@ type ChatTurn = {
   tools?: Pick<ToolCallCardProps, "name" | "status" | "duration" | "input" | "result">[]
 }
 
-type AiChat1Props = Omit<React.ComponentProps<"div">, "onSubmit"> & {
+type AiChat1Props = Omit<React.ComponentProps<"div">, "onSubmit"> & StateProps & {
   /** Conversations in the sidebar. */
   conversations?: { id: string; title: string }[]
   /** The open conversation's id. */
@@ -70,6 +72,55 @@ const demoModels = [
   { id: "deep", label: "Deep reasoning" },
 ]
 
+/** A conversation's worth of placeholder messages, so the thread keeps its shape while history loads. */
+function ChatThreadSkeleton() {
+  return (
+    <div className="grid gap-8" aria-hidden="true">
+      <div className="flex justify-end">
+        <Skeleton className="h-10 w-2/3 max-w-sm rounded-2xl" />
+      </div>
+      <div className="flex gap-3">
+        <Skeleton className="size-8 shrink-0 rounded-full" />
+        <div className="grid flex-1 content-start gap-2.5">
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-11/12" />
+          <Skeleton className="h-4 w-3/5" />
+        </div>
+      </div>
+      <div className="flex justify-end">
+        <Skeleton className="h-10 w-1/2 max-w-xs rounded-2xl" />
+      </div>
+      <div className="flex gap-3">
+        <Skeleton className="size-8 shrink-0 rounded-full" />
+        <div className="grid flex-1 content-start gap-2.5">
+          <Skeleton className="h-4 w-5/6" />
+          <Skeleton className="h-4 w-2/3" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/** The reply failed: say so where the reply would have been, and let the person try again. */
+function ChatReplyError({ onRetry, title, description }: { onRetry?: () => void; title?: string; description?: string }) {
+  return (
+    <div role="alert" data-slot="chat-error" className="border-destructive/25 bg-destructive/[0.04] flex items-start gap-3 rounded-xl border p-3.5">
+      <span aria-hidden="true" className="bg-destructive/10 text-destructive flex size-8 shrink-0 items-center justify-center rounded-full [&>svg]:size-4">
+        <CircleAlert />
+      </span>
+      <div className="min-w-0 flex-1 text-sm">
+        <p className="font-medium">{title ?? "That reply did not come through"}</p>
+        <p className="text-muted-foreground mt-0.5 text-pretty">{description ?? "The assistant stopped before it finished. Your message is saved."}</p>
+        {onRetry ? (
+          <Button variant="outline" size="sm" className="mt-3" onClick={onRetry}>
+            <RotateCw aria-hidden="true" /> Try again
+          </Button>
+        ) : null}
+      </div>
+    </div>
+  )
+}
+
 function AiChat1({
   conversations = demoConversations,
   activeConversation = "c2",
@@ -81,6 +132,10 @@ function AiChat1({
   onSubmit,
   onStop,
   streaming = false,
+  state = "ready",
+  onRetry,
+  emptyState,
+  errorState,
   className,
   ...props
 }: AiChat1Props) {
@@ -88,7 +143,7 @@ function AiChat1({
   const [modelState, setModelState] = React.useState(models[1]?.id ?? models[0]?.id)
   const model = modelProp ?? modelState
   return (
-    <div data-slot="ai-chat-1" className={cn("flex h-[720px] w-full overflow-hidden border bg-background", className)} {...props}>
+    <div data-slot="ai-chat-1" data-state={state === "ready" ? undefined : state} aria-busy={state === "loading" || undefined} className={cn("flex h-[720px] w-full overflow-hidden border bg-background", className)} {...props}>
       <aside hidden={!sidebar} className="hidden w-64 shrink-0 flex-col border-e bg-card md:flex [&[hidden]]:hidden">
         <div className="p-3">
           <Button variant="outline" className="w-full justify-start" onClick={() => onSelectConversation?.(null)}>
@@ -146,6 +201,20 @@ function AiChat1({
         </div>
         <Chat className="min-h-0 flex-1">
           <ChatMessages contentClassName="mx-auto w-full max-w-3xl px-4 py-6">
+            {state === "loading" ? (
+              <div role="status" data-slot="chat-loading">
+                <span className="sr-only">Loading the conversation</span>
+                <ChatThreadSkeleton />
+              </div>
+            ) : state === "empty" || messages.length === 0 ? (
+              <div data-slot="chat-empty" className="text-muted-foreground flex min-h-64 flex-col items-center justify-center text-center">
+                <Sparkles className="size-8" aria-hidden="true" />
+                <p className="text-foreground mt-4 font-medium">{emptyState?.title ?? "Start a conversation"}</p>
+                <p className="mt-1 max-w-sm text-sm text-pretty">{emptyState?.description ?? "Ask a question, paste an error or describe what you are building."}</p>
+                {emptyState?.action ? <div className="mt-5">{emptyState.action}</div> : null}
+              </div>
+            ) : (
+              <>
             {messages.map((m) =>
               m.role === "user" ? (
                 <Message key={m.id} role="user">
@@ -174,9 +243,12 @@ function AiChat1({
                 </Message>
               )
             )}
+            {state === "error" ? <ChatReplyError onRetry={onRetry} title={errorState?.title} description={errorState?.description} /> : null}
+              </>
+            )}
           </ChatMessages>
           <ChatFooter contentClassName="mx-auto w-full max-w-3xl px-4 pb-4">
-            <PromptInput onSubmit={(v, f) => onSubmit?.(v, f)} status={streaming ? "streaming" : "idle"} onStop={onStop}>
+            <PromptInput onSubmit={(v, f) => onSubmit?.(v, f)} status={streaming ? "streaming" : "idle"} onStop={onStop} disabled={state === "loading"}>
               <PromptInputAttachments />
               <PromptInputTextarea placeholder="Message the assistant…" />
               <PromptInputToolbar>

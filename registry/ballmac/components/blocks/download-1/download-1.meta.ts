@@ -15,6 +15,7 @@ export default defineItem({
     { name: "download-1-demo", title: "Default", file: "download-1-demo.tsx" },
     { name: "download-1-simple", title: "One build, no notes", file: "download-1-simple.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "The download page of a Mac app. Pass app, tagline, downloads={ arm64: { href, file, size, sha256? }, x64: {...} }, requirements, brew, steps and releases=[{ version, date, changes: [{ type, text }] }].",
     whenToUse: ["Direct-download Mac apps", "Any desktop app with separate builds per chip"],

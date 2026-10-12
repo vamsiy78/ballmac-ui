@@ -15,6 +15,7 @@ export default defineItem({
     { name: "testimonials-2-demo", title: "Default", file: "testimonials-2-demo.tsx" },
     { name: "testimonials-2-autoplay", title: "Autoplay", file: "testimonials-2-autoplay.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A focused testimonial section. Pass items=[{ quote, name, role, company, image?, result? }]; control the index with value/onValueChange or let it manage itself.",
     whenToUse: ["Three to five strong quotes", "Above a pricing or CTA section"],

@@ -15,6 +15,7 @@ export default defineItem({
     { name: "error-1-demo", title: "404", file: "error-1-demo.tsx" },
     { name: "error-1-server", title: "500 with reference", file: "error-1-server.tsx" },
   ],
+  statesNone: "This block is the error page itself.",
   ai: {
     summary: "Drop into not-found.tsx or error.tsx. Set status ('404' | '403' | '500'); override title and description if you like; pass onSearch to wire the search box, links for next steps and reference for a request id.",
     whenToUse: ["Next.js not-found.tsx and error.tsx", "Any missing, forbidden or failed page"],

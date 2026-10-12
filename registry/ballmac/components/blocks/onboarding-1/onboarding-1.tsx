@@ -8,13 +8,14 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { Button, buttonVariants } from "@/components/ballmac/button"
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel, useFieldControl } from "@/components/ballmac/field"
 import { Input } from "@/components/ballmac/input"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
 import { cn } from "@/lib/utils"
 
 type Onboarding1Goal = { id: string; title: string; description: string; icon?: React.ReactNode }
 
 type Onboarding1Values = { name: string; slug: string; color: string; goals: string[]; invites: string[] }
 
-type Onboarding1Props = Omit<React.ComponentProps<"section">, "onSubmit"> & {
+type Onboarding1Props = Omit<React.ComponentProps<"section">, "onSubmit"> & FormStateProps & {
   /** Product name used in the copy and the web address prefix. */
   product?: string
   /** Domain shown before the workspace address. */
@@ -56,11 +57,13 @@ function Onboarding1({
   goals = defaultGoals,
   onComplete,
   continueHref = "#",
+  state: stateProp,
+  errorState,
   className,
   ...props
 }: Onboarding1Props) {
   const reduce = useReducedMotion()
-  const [step, setStep] = React.useState(0)
+  const [stepInternal, setStep] = React.useState(0)
   const [dir, setDir] = React.useState(1)
   const [name, setName] = React.useState("")
   const [slug, setSlug] = React.useState("")
@@ -71,8 +74,15 @@ function Onboarding1({
   const [draft, setDraft] = React.useState("")
   const [draftError, setDraftError] = React.useState<string>()
   const [tried, setTried] = React.useState(false)
-  const [busy, setBusy] = React.useState(false)
-  const [failed, setFailed] = React.useState(false)
+  const [busyInternal, setBusy] = React.useState(false)
+  const [failedInternal, setFailed] = React.useState(false)
+  // a `state` prop drives the last step: submitting and error show the review step, success the finish screen; without it the wizard runs by itself
+  const phase = formPhase(stateProp)
+  const step = phase === "done" ? 4 : phase === "sending" || phase === "error" ? 3 : stepInternal
+  const busy = phase === "sending" || busyInternal
+  const failed = phase === "error" || (phase === undefined && failedInternal)
+  // what the review and finish screens call the workspace when nothing was typed, as when a `state` shows them on their own
+  const shownName = name.trim() || "Your workspace"
   // The heading mounts only after the previous step has animated out, so focus it as it mounts (not on first load).
   const ready = React.useRef(false)
   React.useEffect(() => {
@@ -290,30 +300,30 @@ function Onboarding1({
                         <dt className="text-muted-foreground text-sm">Workspace</dt>
                         <dd className="flex items-center gap-2.5 text-sm font-medium">
                           <span aria-hidden="true" className={cn("text-background flex size-6 items-center justify-center rounded-md text-xs font-bold", swatch.cls)}>{(name.trim()[0] ?? "W").toUpperCase()}</span>
-                          {name.trim()}
+                          {shownName}
                         </dd>
                       </div>
                       <div className="flex items-center justify-between gap-4 p-4">
                         <dt className="text-muted-foreground text-sm">Address</dt>
-                        <dd className="min-w-0 truncate font-mono text-sm">{domain}/{slug}</dd>
+                        <dd className="min-w-0 truncate font-mono text-sm">{domain}/{slug || "your-workspace"}</dd>
                       </div>
                       <div className="flex items-center justify-between gap-4 p-4">
                         <dt className="text-muted-foreground text-sm">Goals</dt>
-                        <dd className="text-end text-sm font-medium">{picked.map((id) => goals.find((g) => g.id === id)?.title).join(", ")}</dd>
+                        <dd className="text-end text-sm font-medium">{picked.length ? picked.map((id) => goals.find((g) => g.id === id)?.title).join(", ") : "None yet"}</dd>
                       </div>
                       <div className="flex items-center justify-between gap-4 p-4">
                         <dt className="text-muted-foreground text-sm">Invitations</dt>
                         <dd className="text-sm font-medium">{invites.length ? `${invites.length} ${invites.length === 1 ? "person" : "people"}` : "None yet"}</dd>
                       </div>
                     </dl>
-                    {failed && <p role="alert" className="text-destructive mt-4 text-sm">We couldn’t create the workspace. Please try again.</p>}
+                    {failed && <p role="alert" className="text-destructive mt-4 text-sm">{errorState?.description ?? "We couldn’t create the workspace. Please try again."}</p>}
                   </>
                 )}
 
                 {done && (
                   <div className="flex min-h-[24rem] flex-col items-center justify-center text-center">
                     <span aria-hidden="true" className={cn("text-background flex size-16 items-center justify-center rounded-2xl", swatch.cls)}><Rocket className="size-8" /></span>
-                    <h1 ref={headingRef} tabIndex={-1} className={cn(heading, "mt-6")}>{name.trim()} is ready</h1>
+                    <h1 ref={headingRef} tabIndex={-1} className={cn(heading, "mt-6")}>{shownName} is ready</h1>
                     <p role="status" className="text-muted-foreground mt-2 max-w-sm text-pretty">
                       Your workspace is set up{invites.length ? ` and ${invites.length} ${invites.length === 1 ? "invitation is" : "invitations are"} on the way` : ""}. Let’s get to work.
                     </p>

@@ -12,6 +12,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "animated-grid", "button"],
   examples: [{ name: "cta-1-demo", title: "Default", file: "cta-1-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "The last section before the footer: one decisive action. Edit title, description and the two actions.",
     whenToUse: ["End of landing and pricing pages", "Between long content sections to prompt sign-up"],

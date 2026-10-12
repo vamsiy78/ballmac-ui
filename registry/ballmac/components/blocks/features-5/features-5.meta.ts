@@ -15,6 +15,7 @@ export default defineItem({
     { name: "features-5-demo", title: "Default", file: "features-5-demo.tsx" },
     { name: "features-5-custom", title: "Custom steps", file: "features-5-custom.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A how-it-works section that shows the product as you read. Pass steps=[{ title, description, points?, visual }] where visual is any ReactNode.",
     whenToUse: ["Explaining a workflow in three to five steps", "Products where each step has a distinct screen"],

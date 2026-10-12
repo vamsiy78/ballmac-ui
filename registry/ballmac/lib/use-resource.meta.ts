@@ -16,6 +16,10 @@ export default defineItem({
     composesWith: ["state-view"],
     customization: ["isEmpty: decide what counts as no data", "enabled: wait until you can fetch", "deps: fetch again when they change", "setData: update the data after an optimistic edit"],
   },
-  version: "1.0.0",
-  updated: "2026-10-12",
+  version: "1.1.0",
+  updated: "2026-10-11",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-11", note: "Adds FormStateProps and formPhase, the shared state contract for form blocks (submitting, success, error)." },
+    { version: "1.0.0", date: "2026-10-12", note: "First release." },
+  ],
 })

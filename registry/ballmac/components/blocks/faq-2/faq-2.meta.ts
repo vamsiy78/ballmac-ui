@@ -15,6 +15,7 @@ export default defineItem({
     { name: "faq-2-demo", title: "Default", file: "faq-2-demo.tsx" },
     { name: "faq-2-compact", title: "Two topics", file: "faq-2-compact.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A help-centre style FAQ. Pass categories=[{ name, questions: [{ question, answer }] }]; an All filter and search are built in.",
     whenToUse: ["More than eight questions across topics", "Pricing and product pages that attract many questions"],

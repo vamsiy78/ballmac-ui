@@ -2,6 +2,9 @@
 
 export type Kind = "component" | "block" | "template" | "foundation"
 
+/** A state an item can show, with how to get it and an example that shows it. */
+export type ItemState = { id: string; title: string; example: string; trigger: string; note?: string; preview?: string }
+
 export type Summary = {
   name: string
   kind: Kind
@@ -22,6 +25,10 @@ export type Summary = {
   dependencies: string[]
   registryDependencies: string[]
   examples: string[]
+  /** What the item can show beyond ready (loading, empty, error, submitting, success, ...). */
+  states?: ItemState[]
+  /** Why an item has no states, when it has none. */
+  statesNone?: string
   preview?: string
   templateKind?: string
   pages?: { title: string; path?: string; preview: string }[]
@@ -416,6 +423,39 @@ export function planFeel(intent: string, explicit?: FeelChoice, pm?: PackageMana
   return { id, reason, items, install: installCommands(items, pm).add, docs: "https://ui.ballmac.com/docs/feels", notes }
 }
 
+
+const camel = (name: string) => name.replace(/-(\w)/g, (_, c: string) => c.toUpperCase())
+
+/**
+ * The page.tsx scaffold. Static blocks are rendered as they are. A block that loads data gets a `useResource` and its state and
+ * retry; a form block gets a phase it can drive from your own submit handler. Nothing is invented about your API: the places
+ * that need your code say so.
+ */
+export function pageScaffold(details: Detail[], imports: string[], components: string[]) {
+  const kind = (d: Detail) => (d.states?.some((s) => s.id === "submitting") ? "form" : d.states?.some((s) => s.id === "loading" || s.id === "error") ? "data" : "static")
+  const kinds = details.map(kind)
+  if (kinds.every((k) => k === "static")) {
+    return [...imports, "", "export default function Page() {", "  return (", "    <main>", ...components.map((c) => `      <${c} />`), "    </main>", "  )", "}", ""].join("\n")
+  }
+  const usesData = kinds.includes("data")
+  const usesForm = kinds.includes("form")
+  const head = ['"use client"', "", ...(usesForm ? ['import * as React from "react"'] : []), ...imports, ...(usesData ? ['import { useResource } from "@/lib/ballmac/use-resource"'] : []), ...(usesForm ? ['import type { BlockState } from "@/lib/ballmac/use-resource"'] : []), ""]
+  const body: string[] = []
+  const jsx: string[] = []
+  details.forEach((d, i) => {
+    const c = components[i]!
+    const v = camel(d.name)
+    if (kinds[i] === "data") {
+      body.push(`  // ${d.title}: replace the fetcher with your API. state is loading, ready, empty or error; retry() fetches again.`, `  const ${v} = useResource((signal) => fetch("/api/${d.name}", { signal }).then((r) => r.json()))`)
+      jsx.push(`      <${c} state={${v}.state} onRetry={${v}.retry} /> {/* pass ${v}.data to the prop that carries this block's data */}`)
+    } else if (kinds[i] === "form") {
+      body.push(`  // ${d.title}: drive it from your submit handler. Leave state out and the form runs by itself.`, `  const [${v}, set${v[0]!.toUpperCase()}${v.slice(1)}] = React.useState<BlockState>("ready")`)
+      jsx.push(`      <${c} state={${v}} /> {/* set${v[0]!.toUpperCase()}${v.slice(1)}("submitting") before your request, then "success" or "error" */}`)
+    } else jsx.push(`      <${c} />`)
+  })
+  return [...head, "export default function Page() {", ...body, "  return (", "    <main>", ...jsx, "    </main>", "  )", "}", ""].join("\n")
+}
+
 /** Picks one block per requested section, in page order, writes a page scaffold, and points at whole templates that fit. */
 export async function composePage(catalog: Catalog, intent: string, opts: { pm?: PackageManager; includePro?: boolean; feel?: FeelChoice } = {}) {
   const text = intent.toLowerCase()
@@ -437,18 +477,7 @@ export async function composePage(catalog: Catalog, intent: string, opts: { pm?:
   const details = await Promise.all(picked.map((p) => catalog.detail(p.block.name)))
   const imports = details.map((d) => d.import).filter(Boolean)
   const components = details.map((d) => d.exports[0]).filter(Boolean)
-  const scaffold = [
-    ...imports,
-    "",
-    "export default function Page() {",
-    "  return (",
-    "    <main>",
-    ...components.map((c) => `      <${c} />`),
-    "    </main>",
-    "  )",
-    "}",
-    "",
-  ].join("\n")
+  const scaffold = pageScaffold(details, imports as string[], components as string[])
   const templateMatches = templates
     .filter((t) => opts.includePro || t.tier === "free")
     .map((t) => ({ t, s: score(t, terms) }))
@@ -457,7 +486,16 @@ export async function composePage(catalog: Catalog, intent: string, opts: { pm?:
     .slice(0, 2)
     .map(({ t }) => ({ name: t.name, title: t.title, description: t.description, pages: t.pages?.map((p) => p.path ?? p.title) ?? [], install: installCommands([t.name], opts.pm, proSet).add }))
   return {
-    sections: picked.map((p) => ({ section: p.section, block: p.block.name, title: p.block.title, description: p.block.description, tier: p.block.tier })),
+    sections: picked.map((p, i) => ({
+      section: p.section,
+      block: p.block.name,
+      title: p.block.title,
+      description: p.block.description,
+      tier: p.block.tier,
+      // what this block can show beyond ready, so every state gets built, not only the happy path
+      states: (details[i]?.states ?? []).map((st) => ({ id: st.id, trigger: st.trigger, preview: st.preview })),
+      ...(details[i]?.statesNone ? { statesNone: details[i]!.statesNone } : {}),
+    })),
     missing,
     commands: installCommands(picked.map((p) => p.block.name), opts.pm, proSet),
     scaffold,
@@ -472,6 +510,8 @@ export function toMarkdown(d: Detail) {
   if (d.import) lines.push("", "```tsx", d.import, "```")
   if (d.whenToUse.length) lines.push("", "## When to use", ...d.whenToUse.map((w) => `- ${w}`))
   if (d.whenNotToUse.length) lines.push("", "## When not to use", ...d.whenNotToUse.map((w) => `- ${w}`))
+  if (d.states?.length) lines.push("", "## States", ...d.states.map((st) => `- **${st.title}** (\`${st.trigger}\`): ${st.note ?? ""}${st.preview ? ` Preview: ${st.preview}` : ""}`.trimEnd()))
+  else if (d.statesNone) lines.push("", "## States", `None. ${d.statesNone}`)
   if (d.pages?.length) lines.push("", "## Pages", ...d.pages.map((p) => `- ${p.title}${p.path ? ` (${p.path})` : ""}`))
   for (const c of d.props) {
     if (!c.props.length) continue

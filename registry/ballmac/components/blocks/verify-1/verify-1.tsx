@@ -7,9 +7,12 @@ import { motion, useReducedMotion } from "motion/react"
 
 import { Button, buttonVariants } from "@/components/ballmac/button"
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ballmac/input-otp"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
 import { cn } from "@/lib/utils"
 
-type Verify1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
+type Verify1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & FormStateProps & {
+  /** A code to start with, for example from a link in the email. */
+  defaultCode?: string
   /** Where the code was sent. Shown partly masked. */
   email?: string
   /** Heading. */
@@ -46,12 +49,18 @@ function Verify1({
   resendAfter = 30,
   onChangeEmail = () => {},
   continueHref = "#",
+  defaultCode = "",
+  state: stateProp,
+  errorState,
   className,
   ...props
 }: Verify1Props) {
   const reduce = useReducedMotion()
-  const [code, setCode] = React.useState("")
-  const [state, setState] = React.useState<"idle" | "checking" | "wrong" | "done">("idle")
+  const [code, setCode] = React.useState(defaultCode)
+  const [internal, setInternal] = React.useState<"idle" | "checking" | "wrong" | "done">("idle")
+  // a `state` prop drives the form; without it the form runs by itself
+  const phase = formPhase(stateProp)
+  const state = phase === undefined ? internal : phase === "sending" ? "checking" : phase === "error" ? "wrong" : phase
   const [wait, setWait] = React.useState(resendAfter)
   const [resent, setResent] = React.useState(false)
   const headingRef = React.useRef<HTMLHeadingElement>(null)
@@ -64,17 +73,17 @@ function Verify1({
   }, [wait])
 
   async function check(value: string) {
-    setState("checking")
+    setInternal("checking")
     try {
       if (onVerify) await onVerify(value)
       else {
         await new Promise((r) => setTimeout(r, 800))
         if (/^0+$/.test(value)) throw new Error("wrong")
       }
-      setState("done")
+      setInternal("done")
       window.setTimeout(() => headingRef.current?.focus(), 0)
     } catch {
-      setState("wrong")
+      setInternal("wrong")
       setCode("")
       window.setTimeout(() => otpRef.current?.focus(), 0)
     }
@@ -83,7 +92,7 @@ function Verify1({
   async function resend() {
     setResent(true)
     setCode("")
-    setState("idle")
+    setInternal("idle")
     setWait(resendAfter)
     await onResend?.()
     otpRef.current?.focus()
@@ -129,7 +138,7 @@ function Verify1({
                 aria-label={`${length}-digit verification code`}
                 aria-invalid={state === "wrong" || undefined}
                 aria-describedby="verify-1-status"
-                onChange={(v) => { setCode(v); if (state === "wrong") setState("idle") }}
+                onChange={(v) => { setCode(v); if (state === "wrong") setInternal("idle") }}
                 onComplete={check}
               >
                 <InputOTPGroup>{slots.slice(0, half).map((i) => <InputOTPSlot key={i} index={i} invalid={state === "wrong"} />)}</InputOTPGroup>
@@ -140,7 +149,7 @@ function Verify1({
 
             <p id="verify-1-status" role={state === "wrong" ? "alert" : "status"} className={cn("mt-4 min-h-5 text-sm", state === "wrong" ? "text-destructive" : "text-muted-foreground")}>
               {state === "checking" && "Checking your code…"}
-              {state === "wrong" && "That code isn’t right. Check the email and try again."}
+              {state === "wrong" && (errorState?.description ?? "That code isn’t right. Check the email and try again.")}
               {state === "idle" && resent && "A new code is on its way."}
             </p>
 

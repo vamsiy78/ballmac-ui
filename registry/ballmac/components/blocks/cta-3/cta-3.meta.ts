@@ -15,6 +15,7 @@ export default defineItem({
     { name: "cta-3-demo", title: "Default", file: "cta-3-demo.tsx" },
     { name: "cta-3-custom", title: "Custom command", file: "cta-3-custom.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "The last section of a developer landing page. Set command (run through npm, pnpm, yarn and bun) or commands for explicit per-manager strings.",
     whenToUse: ["Libraries, CLIs and APIs", "Docs landing pages"],

@@ -15,6 +15,7 @@ export default defineItem({
     { name: "header-2-demo", title: "Default", file: "header-2-demo.tsx" },
     { name: "header-2-simple", title: "Simple links", file: "header-2-simple.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A navigation header for products with many pages. Pass items (the same shape as mega-menu), brand, logo, secondaryAction and primaryAction.",
     whenToUse: ["Sites with several product areas", "Anything that outgrew four top-level links"],

@@ -4,6 +4,18 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-12",
+    title: "States: loading, empty and error built into the blocks",
+    items: [
+      "Every data block takes one prop, state: \"loading\", \"ready\", \"empty\" or \"error\", with onRetry, emptyState and errorState. Loading is a skeleton with the same shape as the block, empty is a clear message, error has a retry. 11 blocks: Mail 1, Dashboard 1 and 2, Kanban 1, Calendar 1, Blog 1, Changelog 1, Billing 1 and 2, Settings 3 and the two AI chats",
+      "Every form block (Login 1 and 2, Sign up, Forgot password, Verify, Contact, Newsletter, Invite, Onboarding, Settings 1 and 2) can show submitting, success and error from the same prop, so you can drive it from your own async code. Fields lock while a request is in flight, so nothing is sent twice. Several also take defaultValues or defaultEmail to prefill",
+      "New state-view for your own views, and use-resource: a fetch state machine that aborts replaced requests, never lets a slow old answer win, and retries. stateOf() maps TanStack Query and SWR results onto the same states",
+      "Block pages have a State switch above the preview, with the prop to copy and what each state does, and a States table. A link such as /blocks/mail-1?state=loading opens a state. New /docs/states",
+      "Each item can list its states in its metadata, and a block with nothing to load says why. The registry JSON and the API carry them, and a build check fails when a free block does neither or a state example would break a production build",
+      "Skeletons are a little stronger on light pages and their pulse follows the theme's decorative-loops switch. Announced as loading, busy while loading, errors announced as alerts, and focus is never moved for you",
+    ],
+  },
+  {
+    date: "2026-10-12",
     title: "Platform feels: every component can handle like macOS, iOS or Windows",
     items: [
       "A feel is everything about a product except its colours: control and menu sizes, corners, text scale, focus ring, shadows, sidebar style, frosted surfaces, press feedback, scrollbars, window controls and motion. Four feels: Web (today's look, the default), macOS, iOS and Windows. They work on top of any colour theme",

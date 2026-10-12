@@ -12,6 +12,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "bento-grid", "kbd"],
   examples: [{ name: "features-4-demo", title: "Default", file: "features-4-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Feature section for Mac or desktop apps. Edit eyebrow/title/description props; change the five BentoCards and their visuals in the source to match your features.",
     whenToUse: ["Desktop or Mac app landing pages", "Showing five features with visuals instead of icons"],

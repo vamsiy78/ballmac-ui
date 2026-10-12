@@ -12,6 +12,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "animated-beam"],
   examples: [{ name: "features-3-demo", title: "Default", file: "features-3-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Explains integrations or data flow. Pass up to six `integrations` ({ name, icon }) and set hubIcon/hubLabel for your product.",
     whenToUse: ["Integrations or connectors pages", "Showing that a product sits between many tools (AI agents, automation, sync)"],

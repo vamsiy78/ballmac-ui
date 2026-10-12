@@ -9,12 +9,15 @@ import { Checkbox } from "@/components/ballmac/checkbox"
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel, useFieldControl } from "@/components/ballmac/field"
 import { Input } from "@/components/ballmac/input"
 import { PasswordInput } from "@/components/ballmac/password-input"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
 import { cn } from "@/lib/utils"
 import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Signup1Values = { name: string; email: string; password: string }
 
-type Signup1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
+type Signup1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & FormStateProps & {
+  /** Values to start the form with, for example from an invitation link. */
+  defaultValues?: Partial<Pick<Signup1Values, "name" | "email">>
   /** Brand name beside the logo mark. */
   brand?: string
   /** Your logo mark instead of the brand's first letter: an image URL, an object with alt text and a dark-mode file, or your own element. A plain URL is described by the brand name. */
@@ -63,13 +66,18 @@ function Signup1({
   proof = "Joined by 12,400 teams this year",
   loginHref = "#",
   termsHref = "#",
+  defaultValues,
+  state: stateProp,
+  errorState,
   className,
   ...props
 }: Signup1Props) {
-  const [v, setV] = React.useState({ name: "", email: "", password: "" })
+  const [v, setV] = React.useState({ name: "", email: "", password: "", ...defaultValues })
   const [agree, setAgree] = React.useState(false)
   const [touched, setTouched] = React.useState<Record<string, boolean>>({})
-  const [state, setState] = React.useState<"idle" | "sending" | "error" | "done">("idle")
+  const [internal, setInternal] = React.useState<"idle" | "sending" | "error" | "done">("idle")
+  // a `state` prop drives the form; without it the form runs by itself
+  const state = formPhase(stateProp) ?? internal
   const errors = {
     name: v.name.trim() ? undefined : "Tell us your name.",
     email: emailPattern.test(v.email) ? undefined : "Enter a full email address, like name@company.com.",
@@ -82,13 +90,13 @@ function Signup1({
     e.preventDefault()
     setTouched({ name: true, email: true, password: true, agree: true })
     if (Object.values(errors).some(Boolean)) return
-    setState("sending")
+    setInternal("sending")
     try {
       if (onSubmit) await onSubmit(v)
       else await new Promise((r) => setTimeout(r, 900))
-      setState("done")
+      setInternal("done")
     } catch {
-      setState("error")
+      setInternal("error")
     }
   }
 
@@ -125,7 +133,7 @@ function Signup1({
           <div role="status" className="flex min-h-[26rem] flex-col items-center justify-center text-center">
             <span className="bg-chart-2/15 flex size-14 items-center justify-center rounded-full"><MailCheck className="size-7" aria-hidden="true" /></span>
             <h2 className="mt-6 text-2xl font-semibold tracking-[-0.02em]">Check your inbox</h2>
-            <p className="text-muted-foreground mt-2 max-w-xs text-pretty">We sent a confirmation link to <span className="text-foreground font-medium">{v.email}</span>. It expires in 24 hours.</p>
+            <p className="text-muted-foreground mt-2 max-w-xs text-pretty">We sent a confirmation link to <span className="text-foreground font-medium">{v.email || "your email"}</span>. It expires in 24 hours.</p>
             <a href={loginHref} className="text-foreground focus-visible:ring-ring/50 mt-8 rounded-sm text-sm font-medium underline underline-offset-4 outline-none focus-visible:ring-[3px]">Back to sign in</a>
           </div>
         ) : (
@@ -140,9 +148,11 @@ function Signup1({
                 </div>
               </>
             )}
-            <form noValidate onSubmit={submit} aria-label="Create account" className={cn(!onSso && "mt-6")}>
+            <form noValidate onSubmit={submit} aria-label="Create account" aria-busy={state === "sending" || undefined} className={cn(!onSso && "mt-6")}>
+              {/* while the request is in flight nothing in the form can be changed or sent twice */}
+              <fieldset disabled={state === "sending"} className="contents">
               <FieldGroup>
-                {state === "error" && <p role="alert" className="border-destructive/40 text-destructive rounded-lg border px-3 py-2.5 text-sm">We couldn’t create your account. Please try again.</p>}
+                {state === "error" && <p role="alert" className="border-destructive/40 text-destructive rounded-lg border px-3 py-2.5 text-sm">{errorState?.description ?? "We couldn’t create your account. Please try again."}</p>}
                 <Field invalid={!!show("name")}>
                   <FieldLabel required>Full name</FieldLabel>
                   <FieldInput autoComplete="name" placeholder="Jordan Lee" value={v.name} onChange={(e) => setV({ ...v, name: e.target.value })} onBlur={() => setTouched((t) => ({ ...t, name: true }))} />
@@ -172,6 +182,7 @@ function Signup1({
                   {buttonLabel} <ArrowRight  className="rtl:rotate-180"/>
                 </Button>
               </FieldGroup>
+              </fieldset>
             </form>
             <p className="text-muted-foreground mt-6 text-center text-sm">
               Already have an account?{" "}

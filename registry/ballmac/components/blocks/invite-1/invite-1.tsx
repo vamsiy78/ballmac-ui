@@ -6,12 +6,13 @@ import { ArrowRight, Check, Clock, Users } from "lucide-react"
 
 import { Badge } from "@/components/ballmac/badge"
 import { Button, buttonVariants } from "@/components/ballmac/button"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
 import { cn } from "@/lib/utils"
 import { Media, type MediaSource } from "@/components/ballmac/media"
 
 type Invite1Status = "pending" | "expired"
 
-type Invite1Props = Omit<React.ComponentProps<"section">, "onSubmit"> & {
+type Invite1Props = Omit<React.ComponentProps<"section">, "onSubmit"> & FormStateProps & {
   /** The workspace's logo instead of its first letter: an image URL, an object with alt text and a dark-mode file, or your own element. A plain URL is described by the workspace name. */
   logo?: MediaSource
   /** Whether the invitation can still be accepted. */
@@ -52,13 +53,20 @@ function Invite1({
   onRequestNew,
   onSwitchAccount = () => {},
   continueHref = "#",
+  state: stateProp,
+  errorState,
   className,
   logo,
   ...props
 }: Invite1Props) {
-  const [view, setView] = React.useState<"idle" | "accepted" | "declined" | "requested">("idle")
-  const [busy, setBusy] = React.useState<"accept" | "decline" | "request" | null>(null)
-  const [failed, setFailed] = React.useState(false)
+  const [viewInternal, setView] = React.useState<"idle" | "accepted" | "declined" | "requested">("idle")
+  const [busyInternal, setBusy] = React.useState<"accept" | "decline" | "request" | null>(null)
+  const [failedInternal, setFailed] = React.useState(false)
+  // a `state` prop drives the screen (success is the welcome); without it the invitation runs by itself
+  const phase = formPhase(stateProp)
+  const view: "idle" | "accepted" | "declined" | "requested" = phase === "done" ? "accepted" : viewInternal
+  const busy = phase === "sending" ? (status === "expired" ? "request" : "accept") : busyInternal
+  const failed = phase === "error" || (phase === undefined && failedInternal)
   const headingRef = React.useRef<HTMLHeadingElement>(null)
   const first = React.useRef(true)
   React.useEffect(() => {
@@ -117,7 +125,7 @@ function Invite1({
             <span aria-hidden="true" className="bg-muted flex size-14 items-center justify-center rounded-2xl"><Clock className="size-7" /></span>
             <h1 ref={headingRef} tabIndex={-1} className={cn(heading, "mt-6")}>This invitation has expired</h1>
             <p className="text-muted-foreground mt-2 text-pretty">Invitations to {workspace.name} are valid for 7 days. Ask {inviter.name} to send a new one, or request it now.</p>
-            {failed && <p role="alert" className="text-destructive mt-4 text-sm">We couldn’t send the request. Please try again.</p>}
+            {failed && <p role="alert" className="text-destructive mt-4 text-sm">{errorState?.description ?? "We couldn’t send the request. Please try again."}</p>}
             <Button size="lg" shape="pill" loading={busy === "request"} className="mt-8 w-full" onClick={() => run("request", onRequestNew, "requested")}>Request a new invitation</Button>
           </div>
         ) : (
@@ -153,7 +161,7 @@ function Invite1({
               )}
             </p>
 
-            {failed && <p role="alert" className="text-destructive mt-4 text-sm">We couldn’t complete that. Please try again.</p>}
+            {failed && <p role="alert" className="text-destructive mt-4 text-sm">{errorState?.description ?? "We couldn’t complete that. Please try again."}</p>}
             <div className="mt-6 grid gap-2">
               <Button size="lg" shape="pill" loading={busy === "accept"} disabled={busy === "decline"} onClick={() => run("accept", onAccept, "accepted")}>Accept invitation</Button>
               {onDecline && (

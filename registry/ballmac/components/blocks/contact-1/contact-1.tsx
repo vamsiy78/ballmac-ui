@@ -11,6 +11,7 @@ import { Input } from "@/components/ballmac/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ballmac/select"
 import { StatusDot } from "@/components/ballmac/status-dot"
 import { Textarea } from "@/components/ballmac/textarea"
+import { formPhase, type FormStateProps } from "@/lib/ballmac/use-resource"
 import { cn } from "@/lib/utils"
 
 type Contact1Values = { name: string; email: string; topic: string; message: string }
@@ -25,7 +26,9 @@ type Contact1Method = {
   href?: string
 }
 
-type Contact1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & {
+type Contact1Props = Omit<React.ComponentProps<"section">, "title" | "onSubmit"> & FormStateProps & {
+  /** Values to start the form with, for example for someone who is signed in. */
+  defaultValues?: Partial<Contact1Values>
   /** Section heading. */
   title?: string
   /** One or two sentences under the heading. */
@@ -80,13 +83,18 @@ function Contact1({
   responseTime = "We usually reply within 4 hours",
   maxLength = 600,
   onSubmit,
+  defaultValues,
+  state: stateProp,
+  errorState,
   className,
   ...props
 }: Contact1Props) {
-  const [values, setValues] = React.useState<Contact1Values>({ name: "", email: "", topic: "", message: "" })
+  const [values, setValues] = React.useState<Contact1Values>({ name: "", email: "", topic: "", message: "", ...defaultValues })
   const [consent, setConsent] = React.useState(false)
   const [touched, setTouched] = React.useState<Record<string, boolean>>({})
-  const [state, setState] = React.useState<"idle" | "sending" | "done" | "error">("idle")
+  const [internal, setInternal] = React.useState<"idle" | "sending" | "done" | "error">("idle")
+  // a `state` prop drives the form; without it the form runs by itself
+  const state = formPhase(stateProp) ?? internal
   const formRef = React.useRef<HTMLFormElement>(null)
   const errors = validate(values, consent, topics)
   const show = (k: keyof typeof errors) => (touched[k] ? errors[k] : undefined)
@@ -100,13 +108,13 @@ function Contact1({
       formRef.current?.querySelector<HTMLElement>(`[data-field="${first}"] input, [data-field="${first}"] textarea, [data-field="${first}"] button`)?.focus()
       return
     }
-    setState("sending")
+    setInternal("sending")
     try {
       if (onSubmit) await onSubmit(values)
       else await new Promise((r) => setTimeout(r, 900))
-      setState("done")
+      setInternal("done")
     } catch {
-      setState("error")
+      setInternal("error")
     }
   }
 
@@ -114,7 +122,7 @@ function Contact1({
     setValues({ name: "", email: "", topic: "", message: "" })
     setConsent(false)
     setTouched({})
-    setState("idle")
+    setInternal("idle")
   }
 
   return (
@@ -153,11 +161,13 @@ function Contact1({
                 <Check className="size-7" aria-hidden="true" />
               </span>
               <h3 className="mt-6 text-2xl font-semibold tracking-[-0.02em]">Message sent</h3>
-              <p className="text-muted-foreground mt-2 max-w-xs text-pretty">Thanks, {values.name.split(" ")[0]}. We’ll reply to {values.email} soon.</p>
+              <p className="text-muted-foreground mt-2 max-w-xs text-pretty">Thanks{values.name.trim() ? `, ${values.name.trim().split(" ")[0]}` : ""}. We’ll reply to {values.email || "you"} soon.</p>
               <Button variant="outline" shape="pill" className="mt-8" onClick={reset}>Send another message</Button>
             </div>
           ) : (
-            <form ref={formRef} noValidate onSubmit={submit} aria-label="Contact form">
+            <form ref={formRef} noValidate onSubmit={submit} aria-label="Contact form" aria-busy={state === "sending" || undefined}>
+              {/* while the request is in flight nothing in the form can be changed or sent twice */}
+              <fieldset disabled={state === "sending"} className="contents">
               <FieldGroup>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Field invalid={!!show("name")} data-field="name">
@@ -202,11 +212,12 @@ function Contact1({
                     <FieldError errors={[show("consent")]} />
                   </div>
                 </Field>
-                {state === "error" && <p role="alert" className="text-destructive text-sm">Something went wrong sending your message. Please try again, or email us directly.</p>}
+                {state === "error" && <p role="alert" className="text-destructive text-sm">{errorState?.description ?? "Something went wrong sending your message. Please try again, or email us directly."}</p>}
                 <Button type="submit" size="lg" shape="pill" loading={state === "sending"} className="w-full">
                   {state === "sending" ? "Sending…" : <>Send message <ArrowRight  className="rtl:rotate-180"/></>}
                 </Button>
               </FieldGroup>
+              </fieldset>
             </form>
           )}
         </div>

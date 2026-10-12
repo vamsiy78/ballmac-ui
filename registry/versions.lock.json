@@ -16,12 +16,12 @@
     "hash": "d83654a3e6b7b18cf95dbe6be3da882d5946ca6359146fc8303ae28608cbd620"
   },
   "ai-chat-1": {
-    "version": "1.0.0",
-    "hash": "3fef1044ac376f5af48496ccb44ffaeb06f22f6ffa776da9798c119f5c4bae77"
+    "version": "1.1.0",
+    "hash": "53e15bc90ed3d03bd54795a1ffd2a87b7716d3c4db329fb87fa3b16c8ce5dee2"
   },
   "ai-chat-2": {
-    "version": "1.0.0",
-    "hash": "eede384e7de91adb2cd5bc10b37502f485692c7f1697990a85d87537bcb43df2"
+    "version": "1.1.0",
+    "hash": "043fb8a64f6c1c0cb7bc816f79992fa6b00a9f96ae895ea24a0ece7c2fa324e4"
   },
   "ai-message": {
     "version": "1.0.0",
@@ -172,8 +172,8 @@
     "hash": "a2f4c6c1c2434ba4a009f39beea7c96a5002365a3c2a851a3006ef80043e4bfb"
   },
   "button": {
-    "version": "1.0.2",
-    "hash": "e5ddd0a5c721f291a1d8149d7868e8123c9652c396ed1d6b2010843eb4f7ae71"
+    "version": "1.0.3",
+    "hash": "f9ad7468d6995fb1074546d141f7be0d52bd85c38289a61c9bd95edf88bf4001"
   },
   "button-group": {
     "version": "1.0.0",
@@ -276,8 +276,8 @@
     "hash": "e78413b7559ffd75a0794948b3faf1cef5e2a246420f6aec8537718145b57df1"
   },
   "contact-1": {
-    "version": "1.0.0",
-    "hash": "fa08eb104e70ad45e70a1ca4e34037194405f4f97cb8c9f571046909ab6775f3"
+    "version": "1.1.0",
+    "hash": "b218f1053f6a888332320b5ecfb8e1665798225af905832de181c7c63df22eea"
   },
   "container-scroll": {
     "version": "1.0.0",
@@ -512,8 +512,8 @@
     "hash": "f871f31df4581bb08188190db5bbea8556bb17d7d2658bee8743859834c34edd"
   },
   "forgot-password-1": {
-    "version": "1.0.0",
-    "hash": "3bacfd79ed72eeaee389821b8e771c6e948ec41262a7daa265f6d83eaaa8183f"
+    "version": "1.1.0",
+    "hash": "2a1f906fa415d4d0c9573b134342c24ee502a608f33161ab4a654b082fd04a58"
   },
   "form": {
     "version": "1.0.0",
@@ -636,8 +636,8 @@
     "hash": "79aea95601fee25e071ab157ed5498c11099bfb846a36560861fec7a2f782508"
   },
   "invite-1": {
-    "version": "1.0.0",
-    "hash": "6d00f94009e1bb4df0e1fb52fea82d97f0236c17a2d910898bf4b3126e45615d"
+    "version": "1.1.0",
+    "hash": "2929218e1b9c80687bac9feb288798e2d11e9b1a8e7a8360e9c3a3fee66f7414"
   },
   "invite-members": {
     "version": "1.0.0",
@@ -704,12 +704,12 @@
     "hash": "1ac50ab78c6bde4d8001ffaecb56161a778d6005e0a763b45b5c28d2396e5405"
   },
   "login-1": {
-    "version": "1.0.0",
-    "hash": "2c18fa71034258f8850171ac778c9dd797f0f30bd5fdcf3441108b84c1b0cdbb"
+    "version": "1.1.0",
+    "hash": "fea6c95333c78b996aaaa7bf12e928e240d8d6f46756313bcca0fd40e6900d17"
   },
   "login-2": {
-    "version": "1.0.0",
-    "hash": "e6e4e89908f1cce31279d9d2ced6604b571cb21cb88b79893300c2dfef4f681b"
+    "version": "1.1.0",
+    "hash": "774aff7637ba7f6cb800493da25e7c70b660a1ac02610f9bff64c09d62fc30c2"
   },
   "logo-cloud-1": {
     "version": "1.0.0",
@@ -820,8 +820,8 @@
     "hash": "5111a2eb67d71b8673373545a21d89937b89c79d4b1ff79c46da7c175ff3b040"
   },
   "newsletter-1": {
-    "version": "1.0.0",
-    "hash": "f4090fe4c111ecde38731f77be2db2d57e457d45a15a5e868a4aab45b21ebb53"
+    "version": "1.1.0",
+    "hash": "ab8d07f179dc5dede6933fbf863bdcc537bec8566f9930230a99d7fd32e8ab1c"
   },
   "noise-texture": {
     "version": "1.0.1",
@@ -844,8 +844,8 @@
     "hash": "3e6485c364ec4bba82c54d95ac54a51d9e3326e273ea8910d33db62e9be0dc20"
   },
   "onboarding-1": {
-    "version": "1.0.0",
-    "hash": "d1a41392c786dfd5ee5e60430090688a6737ecd279ba03237ddd2fc571e7a445"
+    "version": "1.1.0",
+    "hash": "a36718f30cc211a96104ed958c1a16b1d65447ca94867a3124fa16ec67e6117a"
   },
   "onboarding-checklist": {
     "version": "1.0.0",
@@ -996,16 +996,16 @@
     "hash": "25fa2322976e0e86edd83c141617351260c72eb937ade3cc7b594a1b8522d168"
   },
   "settings-1": {
-    "version": "1.0.0",
-    "hash": "8c06a6998876dfb6e42b582e6f761bd0251953c2b631336a2f76a21ad3c3c93a"
+    "version": "1.1.0",
+    "hash": "b6847fb8e8b66dc6a9a44492cc821f46e1c1732961c31823174307dce38ac77d"
   },
   "settings-2": {
-    "version": "1.0.0",
-    "hash": "aaca3608339d5e8c831ed968c90777cbb012637c127122cfe8e82e618b6ed7ff"
+    "version": "1.1.0",
+    "hash": "847b0325c706f7efa2766743f40aef94503afa31f22492aeccbd73b50a21cc97"
   },
   "settings-3": {
-    "version": "1.0.0",
-    "hash": "cb39338290917565ff1873db47e8a6adccaf08f3b61ee7d2c233dbc624eb8828"
+    "version": "1.1.0",
+    "hash": "0b971fb55b1cb940115c9c2119e893107a85e05cc298bf76e9fe1c984c6bd62b"
   },
   "settings-panel": {
     "version": "1.0.0",
@@ -1044,8 +1044,8 @@
     "hash": "befb34d19e2500d296713e7b941b55ea0c75f2354191aeb8173e8a7c533ee9ee"
   },
   "signup-1": {
-    "version": "1.0.0",
-    "hash": "ed825e6b843bbcd6d8bc4cccd51b3308dba90ebd373f3a423803066a8c9a3264"
+    "version": "1.1.0",
+    "hash": "b73bc7ff918522c2476d8ca046701a9abae2787eeeb4571644311e5316d36e56"
   },
   "skeleton": {
     "version": "1.0.1",
@@ -1380,16 +1380,16 @@
     "hash": "c5c6605e32aece1441db1e5f6d021bc42aa764d026840484bace12438c960343"
   },
   "use-resource": {
-    "version": "1.0.0",
-    "hash": "40345093a8f9818b119adccbe996006404400effd24317cb2cd7e4ab5074bd29"
+    "version": "1.1.0",
+    "hash": "fcdcccfd94e1fb4de50155babcca118c0df971f240e2e2f55cab5e8add1a4a2b"
   },
   "user-menu": {
     "version": "1.0.0",
     "hash": "fe0344ab7a8e07051b10be69594788f4f9f6c8ac1d765099b82f67decc6dc606"
   },
   "verify-1": {
-    "version": "1.0.0",
-    "hash": "af9c54b7d40e6941430000dcf2b4a6bdf0326f167a477ee6fc8749a84122c7e9"
+    "version": "1.1.0",
+    "hash": "235c9ac0c63391a170dc1b0e0d55800a7975b20275eb92dfc87e646f1cfd9424"
   },
   "video-dialog": {
     "version": "1.0.0",

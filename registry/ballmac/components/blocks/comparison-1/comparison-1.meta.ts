@@ -15,6 +15,7 @@ export default defineItem({
     { name: "comparison-1-demo", title: "Default", file: "comparison-1-demo.tsx" },
     { name: "comparison-1-single", title: "One alternative", file: "comparison-1-single.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "A switch-from-X page section. Pass product, competitors=[{ key, name }] and rows=[{ label, hint?, values: { us, [key]: true | false | 'partial' | text } }].",
     whenToUse: ["Landing pages aimed at people evaluating alternatives", "Migration and 'vs' pages"],

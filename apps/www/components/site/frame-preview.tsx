@@ -1,6 +1,6 @@
 "use client"
 
-import { ExternalLink, Languages, Monitor, Moon, RotateCcw, Smartphone, Sun, Tablet, Terminal } from "lucide-react"
+import { Ban, CircleAlert, CircleCheck, Clock, ExternalLink, Inbox, Languages, LoaderCircle, Monitor, Moon, RotateCcw, Send, Smartphone, Sun, Tablet, Terminal, WifiOff } from "lucide-react"
 import * as React from "react"
 
 import { CopyButton } from "@/components/site/copy-button"
@@ -13,6 +13,25 @@ const viewports = [
   { id: "tablet", label: "Tablet", width: "768px", icon: Tablet },
   { id: "mobile", label: "Mobile", width: "375px", icon: Smartphone },
 ] as const
+
+/** A state an item can show, with the example that shows it. */
+export type PreviewState = { id: string; title: string; example: string; trigger: string; note?: string }
+
+const stateLook: Record<string, { icon: React.ComponentType<{ className?: string }>; dot: string }> = {
+  loading: { icon: LoaderCircle, dot: "bg-chart-3" },
+  empty: { icon: Inbox, dot: "bg-muted-foreground" },
+  error: { icon: CircleAlert, dot: "bg-destructive" },
+  submitting: { icon: Send, dot: "bg-chart-1" },
+  success: { icon: CircleCheck, dot: "bg-chart-2" },
+  disabled: { icon: Ban, dot: "bg-muted-foreground" },
+  expired: { icon: Clock, dot: "bg-chart-5" },
+  offline: { icon: WifiOff, dot: "bg-muted-foreground" },
+}
+
+/** The event the States table sends to pick a state in the preview, so the table and the preview stay one control. */
+export const SHOW_STATE_EVENT = "ballmac-show-state"
+
+const subscribeNever = () => () => {}
 
 const iconButton =
   "text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:ring-ring/50 inline-flex size-7 items-center justify-center rounded-md outline-none transition-colors focus-visible:ring-[3px] [&_svg]:size-3.5"
@@ -28,6 +47,7 @@ export function FramePreview({
   v0 = true,
   pages,
   pro = false,
+  states,
 }: {
   src: string
   title: string
@@ -43,6 +63,8 @@ export function FramePreview({
   pages?: { title: string; src: string }[]
   /** Pro item: the install command uses the licensed @ballmac-pro namespace. */
   pro?: boolean
+  /** The states this item can show. When given, chips switch the preview between ready and each of them. */
+  states?: PreviewState[]
 }) {
   const [tab, setTab] = React.useState<"preview" | "code">("preview")
   const [viewport, setViewport] = React.useState<(typeof viewports)[number]["id"]>("desktop")
@@ -51,7 +73,31 @@ export function FramePreview({
   const [theme, setTheme] = React.useState<"site" | "light" | "dark">("site")
   const [dir, setDir] = React.useState<"ltr" | "rtl">("ltr")
   const frame = React.useRef<HTMLIFrameElement>(null)
-  const current = pages?.[pageIndex]?.src ?? src
+  // `?state=loading` in the address opens the preview on that state, so a state is a link you can share
+  const fromUrl = React.useSyncExternalStore(subscribeNever, () => new URLSearchParams(window.location.search).get("state"), () => null)
+  const [picked, setPicked] = React.useState<string | null | undefined>(undefined)
+  const stateId = picked === undefined ? (states?.some((s) => s.id === fromUrl) ? fromUrl : null) : picked
+  const activeState = states?.find((s) => s.id === stateId)
+  const choose = React.useCallback((id: string | null) => {
+    setPicked(id)
+    setTab("preview")
+    try {
+      const url = new URL(window.location.href)
+      if (id) url.searchParams.set("state", id)
+      else url.searchParams.delete("state")
+      window.history.replaceState(null, "", url)
+    } catch {}
+  }, [])
+  React.useEffect(() => {
+    const on = (e: Event) => {
+      const id = (e as CustomEvent<string>).detail
+      if (states?.some((s) => s.id === id)) choose(id)
+    }
+    window.addEventListener(SHOW_STATE_EVENT, on)
+    return () => window.removeEventListener(SHOW_STATE_EVENT, on)
+  }, [choose, states])
+  const currentExample = activeState?.example ?? example
+  const current = pages?.[pageIndex]?.src ?? (activeState ? `/preview/${activeState.example}` : src)
   const applyTheme = React.useCallback((t: "site" | "light" | "dark") => {
     if (t === "site") return
     try {
@@ -66,7 +112,7 @@ export function FramePreview({
   const width = viewports.find((v) => v.id === viewport)!.width
   const command = name ? `npx shadcn@latest add @ballmac${pro ? "-pro" : ""}/${name}` : ""
   return (
-    <div className="space-y-3">
+    <div id="preview" className="scroll-mt-24 space-y-3">
       {pages && pages.length > 1 && (
         <div role="tablist" aria-label="Pages" className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none]">
           {pages.map((p, i) => (
@@ -86,6 +132,48 @@ export function FramePreview({
               {p.title}
             </button>
           ))}
+        </div>
+      )}
+      {states && states.length > 0 && (
+        <div className="space-y-2">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span id="preview-states" className="text-muted-foreground me-1 text-[13px] font-medium">
+              State
+            </span>
+            <div role="group" aria-labelledby="preview-states" className="flex flex-wrap gap-1.5">
+              {[{ id: null as string | null, title: "Ready", dot: "bg-foreground/40", icon: null }, ...states.map((st) => ({ id: st.id as string | null, title: st.title, dot: (stateLook[st.id] ?? stateLook.empty!).dot, icon: (stateLook[st.id] ?? stateLook.empty!).icon }))].map((chip) => {
+                const on = chip.id === (activeState?.id ?? null)
+                return (
+                  <button
+                    key={chip.id ?? "ready"}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() => choose(chip.id)}
+                    className={cn(
+                      "focus-visible:ring-ring/50 inline-flex h-8 shrink-0 items-center gap-2 rounded-full border px-3 text-[13px] font-medium outline-none transition-colors focus-visible:ring-[3px]",
+                      on ? "bg-foreground text-background border-foreground" : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    )}
+                  >
+                    <span aria-hidden="true" className={cn("size-1.5 rounded-full", on ? "bg-background" : chip.dot)} />
+                    {chip.title}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+          <p role="status" className="text-muted-foreground flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1 text-[13px]">
+            {activeState ? (
+              <>
+                <code className="bg-muted text-foreground inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 font-mono text-xs">
+                  {activeState.trigger}
+                  <CopyButton value={activeState.trigger} label="Copy the prop" />
+                </code>
+                {activeState.note ? <span className="text-pretty">{activeState.note}</span> : null}
+              </>
+            ) : (
+              <span>The normal view. Pick a state to see what the block shows while it loads, is empty or fails.</span>
+            )}
+          </p>
         </div>
       )}
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -166,9 +254,9 @@ export function FramePreview({
               <CopyButton value={command} label="Copy install command" />
             </div>
           )}
-          {example && v0 && (
+          {currentExample && v0 && (
             <a
-              href={`https://v0.dev/chat/api/open?url=${encodeURIComponent(`${SITE_URL}/r/${example}.json`)}`}
+              href={`https://v0.dev/chat/api/open?url=${encodeURIComponent(`${SITE_URL}/r/${currentExample}.json`)}`}
               target="_blank"
               rel="noreferrer"
               className="focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 rounded-lg bg-black px-2.5 text-xs font-medium text-white outline-none transition-opacity hover:opacity-85 focus-visible:ring-[3px] dark:bg-white dark:text-black"

@@ -11,6 +11,7 @@ export default defineItem({
   files: [{ path: "components/blocks/testimonials-1/testimonials-1.tsx" }],
   registryDependencies: ["shadcn:utils", "avatar", "marquee"],
   examples: [{ name: "testimonials-1-demo", title: "Default", file: "testimonials-1-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Social proof section: pass `testimonials` ({ quote, name, role }[]); they are spread across three vertical marquees. Replace the placeholder quotes with real ones.",
     whenToUse: ["Landing pages after features or pricing", "Showing many short quotes without a carousel"],

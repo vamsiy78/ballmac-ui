@@ -12,6 +12,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { Input } from "@/components/ballmac/input"
 import { SearchField } from "@/components/ballmac/search-field"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ballmac/select"
+import { Skeleton } from "@/components/ballmac/skeleton"
+import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 
 type Settings3Member = {
@@ -24,7 +26,7 @@ type Settings3Member = {
   lastActive?: string
 }
 
-type Settings3Props = Omit<React.ComponentProps<"section">, "title"> & {
+type Settings3Props = Omit<React.ComponentProps<"section">, "title"> & Omit<StateProps, "emptyState"> & {
   /** Page heading. */
   title?: string
   /** One line under the heading. */
@@ -57,7 +59,7 @@ const tones = ["bg-chart-1/25", "bg-chart-3/25", "bg-chart-5/25", "bg-chart-2/25
 const emailPattern = /^\S+@\S+\.\S+$/
 const initials = (name: string) => name.replace(/@.*/, "").split(/[\s.]+/).map((w) => w[0]?.toUpperCase()).join("").slice(0, 2)
 
-function Settings3({
+function Settings3Inner({
   title = "Team",
   description = "Invite people and choose what each of them can do.",
   members: initialMembers = defaults,
@@ -225,6 +227,66 @@ function Settings3({
       </AlertDialog>
     </section>
   )
+}
+
+
+/** The same invite row and member list as the ready view, so nothing jumps when people arrive. */
+function Settings3Skeleton() {
+  return (
+    <div aria-hidden="true">
+      <div className="bg-card rounded-2xl border p-4 sm:p-5">
+        <div className="flex flex-wrap items-center gap-3">
+          <Skeleton className="h-9 min-w-48 flex-1 rounded-md" />
+          <Skeleton className="h-9 w-32 rounded-md" />
+          <Skeleton className="h-9 w-24 rounded-md" />
+        </div>
+      </div>
+      <div className="mt-4 flex items-center gap-3">
+        <Skeleton className="h-9 flex-1 rounded-md" />
+        <Skeleton className="h-9 w-28 rounded-md" />
+      </div>
+      <ul className="bg-card mt-4 divide-y rounded-2xl border">
+        {[0, 1, 2, 3].map((i) => (
+          <li key={i} className="flex items-center gap-3 p-4">
+            <Skeleton className="size-9 rounded-full" />
+            <div className="grid flex-1 gap-1.5">
+              <Skeleton className="h-4 w-40" />
+              <Skeleton className="h-3.5 w-56" />
+            </div>
+            <Skeleton className="h-8 w-24 rounded-md" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+/**
+ * The team page. `state="loading"` shows a skeleton of the invite row and member list under the real heading, `state="error"` an
+ * error with retry, and `state="empty"` the real page with nobody on the team yet, so inviting still works.
+ */
+function Settings3({ state = "ready", onRetry, errorState, members, title = "Team", description = "Invite people and choose what each of them can do.", className, ...props }: Settings3Props) {
+  if (state === "loading" || state === "error") {
+    return (
+      <section data-slot="settings-3" data-state={state} className={cn("mx-auto w-full max-w-4xl px-4 py-8 sm:px-6", className)} {...frameProps(props)}>
+        <div>
+          <h2 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h2>
+          <p className="text-muted-foreground mt-1 text-sm">{description}</p>
+        </div>
+        <StateView
+          state={state}
+          className="mt-8"
+          loading={<Settings3Skeleton />}
+          label="Loading your team"
+          error={{ title: "Could not load your team", description: "The team list did not load. Nobody has been changed.", ...errorState }}
+          onRetry={onRetry}
+        >
+          {null}
+        </StateView>
+      </section>
+    )
+  }
+  return <Settings3Inner members={state === "empty" ? [] : members} title={title} description={description} className={className} {...props} />
 }
 
 export { Settings3, type Settings3Props, type Settings3Member }

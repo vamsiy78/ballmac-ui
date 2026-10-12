@@ -17,7 +17,7 @@ install them too, through MCP. Now listed in the official [shadcn registry direc
 - **240+ components:** primitives, forms, data display, navigation, feedback, motion, backgrounds, text effects, AI interfaces, developer
   tools, device frames and desktop-style surfaces.
 - **60+ blocks and 17 templates:** heroes, pricing, dashboards, sign-in, settings and more, composed from the components.
-- **12 themes** with a live builder, light and dark. Motion is part of the theme: speed, bounce, travel, hover and stagger, five ready-made feels, and a reduced-motion fallback. Platform feels make every component handle like macOS, iOS or Windows, with window chrome for Tauri and Electron apps.
+- **12 themes** with a live builder, light and dark. Motion is part of the theme: speed, bounce, travel, hover and stagger, five ready-made feels, and a reduced-motion fallback. Data and form blocks show loading, empty, error, submitting and success through one `state` prop. Platform feels make every component handle like macOS, iOS or Windows, with window chrome for Tauri and Electron apps.
 - **Built to a standard:** every item has examples, keyboard support, reduced-motion handling, right-to-left support and one translation
   provider for its built-in text. See [`AUTHORING.md`](AUTHORING.md).
 - **Made for AI agents:** each item carries a description, when to use it and when not to, what it composes with, and keyboard notes. Available

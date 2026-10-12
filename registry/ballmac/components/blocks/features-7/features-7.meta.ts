@@ -15,6 +15,7 @@ export default defineItem({
     { name: "features-7-demo", title: "Default", file: "features-7-demo.tsx" },
     { name: "features-7-two", title: "Two features", file: "features-7-two.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "For menu bar and utility apps. Pass features=[{ id, title, description, keys?, icon?, panel }] where panel is the UI that hangs from the menu bar icon; time sets the clock in the mock menu bar.",
     whenToUse: ["Menu bar utilities and background apps", "Anything the user reaches with a shortcut"],

@@ -15,6 +15,7 @@ export default defineItem({
     { name: "pricing-2-demo", title: "Default", file: "pricing-2-demo.tsx" },
     { name: "pricing-2-custom", title: "Custom plans", file: "pricing-2-custom.tsx" },
   ],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "Standard SaaS pricing with a billing toggle. Pass plans=[{ name, description, price: { monthly, yearly } | string, unit?, lead?, features, cta, featured? }].",
     whenToUse: ["SaaS products with three plans", "Products that discount annual billing"],

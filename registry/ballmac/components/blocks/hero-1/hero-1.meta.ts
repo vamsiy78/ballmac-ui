@@ -13,6 +13,7 @@ export default defineItem({
   dependencies: ["lucide-react"],
   registryDependencies: ["shadcn:utils", "animated-grid", "badge", "button", "number-ticker", "text-reveal", "media"],
   examples: [{ name: "hero-1-demo", title: "Default", file: "hero-1-demo.tsx" }],
+  statesNone: "Static content: nothing to load, submit or fail.",
   ai: {
     summary: "The top section of a SaaS or product landing page. Edit the props for copy and swap HeroVisual for your own product screenshot or component.",
     whenToUse: ["Landing pages with a product to show", "Launch pages that need a clear primary action"],
