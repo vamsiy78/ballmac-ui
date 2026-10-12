@@ -1,7 +1,7 @@
 /**
  * Extra registry outputs that `ballmac outdated`, `ballmac update` and `ballmac add --with-tests` read:
  *
- *   r/versions.json          every item: version, changelog, files, Ballmac dependencies, whether it ships tests
+ *   r/versions.json          every item: version, changelog, files, Ballmac dependencies, whether it ships tests, its exports and states
  *   r/tests/<item>.json      the item's test file, ready to install next to it
  *   r/tests/_setup.json      the shared test setup (jest-dom, cleanup, jsdom stubs)
  *
@@ -12,6 +12,18 @@ import { mkdirSync, readFileSync, existsSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 
 import { importPathFor, ROOT, targetFor, type LoadedItem } from "./lib"
+
+/** The public export names of an item's main file, from its `export { … }` list (types and variant helpers left out). */
+export function exportsOf(code: string) {
+  const m = code.match(/export\s*\{([^}]+)\}/)
+  if (!m) return []
+  return m[1]!
+    .split(",")
+    .map((x) => x.trim())
+    .filter((x) => x && !x.startsWith("type ") && !/Variants$/.test(x))
+    .map((x) => x.split(/\s+as\s+/).pop()!.trim())
+}
+const mainExports = (i: LoadedItem) => (i.files[0] ? exportsOf(readFileSync(join(i.baseDir, i.files[0].path), "utf8")) : [])
 
 /**
  * Packages every shipped test needs in the project that runs it, pinned to the majors the tests run on here.
@@ -96,6 +108,9 @@ export function writeVersions(items: LoadedItem[], registry: string, outDir: str
             requires: i.registryDependencies.filter((d) => !d.startsWith("shadcn:")),
             tests: plan.has(i.name),
             changelog: i.changelog,
+            // What `ballmac check` needs to tell that <DashboardPro1 /> can show states but was used without a state prop.
+            ...(mainExports(i).length ? { exports: mainExports(i) } : {}),
+            ...(i.states?.length ? { states: i.states.map((x) => x.id) } : {}),
           },
         ] as const)
         .sort(([a], [b]) => a.localeCompare(b))

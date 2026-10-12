@@ -16,6 +16,8 @@ export function GET() {
     `- [Installation](${SITE_URL}/docs/installation): add components by name; a registry entry is only for older CLIs`,
     `- [MCP](${SITE_URL}/docs/mcp): use Ballmac UI from Claude Code, Cursor, VS Code and Codex (npx -y @ballmac/mcp)`,
     `- [Updates and tests](${SITE_URL}/docs/cli): npx @ballmac/cli keeps installed components up to date without losing your edits (three-way merge) and installs the tests that ship with them`,
+    `- [Quality check](${SITE_URL}/docs/check): npx @ballmac/cli check audits your app for missing states, accessibility gaps, hard-coded colors and layout problems; the MCP tool audit_project does the same for agents`,
+    `- [Quality, measured](${SITE_URL}/quality): every item loaded in a real browser in light, dark, phone width, reduced motion and right to left; results published including failures`,
     `- [CLI and registry](${SITE_URL}/docs/registry): namespaces, direct URLs, search, view and update`,
     `- [Motion](${SITE_URL}/docs/motion): speed, bounce, travel, hover and stagger as theme tokens that Tailwind's duration and ease classes and every component follow; five feels (@ballmac/motion-native, -calm, -snappy, -playful, -still); reduced-motion fallback`,
     `- [States](${SITE_URL}/docs/states): every data block takes state ("loading" | "ready" | "empty" | "error") with onRetry, emptyState and errorState, and every form block can show submitting, success and error; useResource and stateOf map fetches and TanStack Query or SWR onto it; StateView for your own views`,

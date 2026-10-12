@@ -18,7 +18,7 @@ const check = (label, ok, detail = "") => {
 }
 
 const { tools } = await client.listTools()
-check("lists 10 tools", tools.length === 10, tools.map((t) => t.name).join(", "))
+check("lists 12 tools", tools.length === 12, tools.map((t) => t.name).join(", "))
 
 const blocksRes = await client.callTool({ name: "list_items", arguments: { kind: "block" } })
 const blocks = json(blocksRes).items
@@ -72,5 +72,14 @@ check("compose_page scaffold imports blocks", plan.scaffold.includes('from "@/co
 
 const missing = await client.callTool({ name: "get_item", arguments: { name: "does-not-exist" } })
 check("unknown item is an error", missing.isError === true)
+
+const rules = json(await client.callTool({ name: "get_quality_rules", arguments: {} }))
+check("get_quality_rules lists the rules", rules.rules.length >= 12 && rules.rules.some((r) => r.id === "states/ballmac-state-prop"), `${rules.rules.length} rules`)
+
+// audit_project reads a real folder: audit this repository's own package, which has a package.json and no UI.
+const audited = json(await client.callTool({ name: "audit_project", arguments: { path: new URL("..", import.meta.url).pathname } }))
+check("audit_project answers with a verdict and a summary", typeof audited.verdict === "string" && audited.summary.filesScanned >= 0, audited.verdict)
+const refused = await client.callTool({ name: "audit_project", arguments: { path: "/" } })
+check("audit_project refuses the filesystem root", refused.isError === true, text(refused))
 
 await client.close()

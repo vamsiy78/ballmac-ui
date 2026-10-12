@@ -34,9 +34,10 @@ export default defineItem({
   copyright: "Copyright (c) 2021 Shu Ding",
   modified: true
 },
-  version: "1.0.1",
-  updated: "2026-10-11",
+  version: "1.0.2",
+  updated: "2026-10-12",
   changelog: [
+    { version: "1.0.2", date: "2026-10-12", note: "The route lines held still correctly only after the page knew about reduced motion; a loop that had already started now stops too." },
     { version: "1.0.1", date: "2026-10-11", note: "Decorative loops hold still when the theme turns ambient motion off (and under reduced motion), via useLoopsPaused. Unchanged by default." },
     { version: "1.0.0", date: "2026-10-01", note: "First release." },
   ],

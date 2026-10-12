@@ -26,6 +26,8 @@ const tools = [
   ["get_tests", "The test that ships with an item, to check it still works after an edit."],
   ["get_install_command", "The exact shadcn CLI commands for pnpm, npm, yarn or bun."],
   ["get_setup", "How to prepare a project: shadcn init, the registry entry and the optional theme."],
+  ["get_quality_rules", "The rules Ballmac holds an app to (states, accessibility, tokens, motion, layout), each with why and a good and bad example. Read before writing a component."],
+  ["audit_project", "Audits the project's source, read-only, and returns findings worst first, each with its fix. Run it before saying a task is done."],
   ["compose_page", "A page plan from blocks in order, with a page.tsx scaffold, and any template that already fits."],
 ]
 
@@ -69,6 +71,10 @@ export default function McpPage() {
           </li>
         ))}
       </ul>
+      <p>
+        Tell your agent: “before you finish, run <code>audit_project</code> and fix every error.” The rules are explained in{" "}
+        <Link href="/docs/check">Quality check</Link>.
+      </p>
       <p>
         It also offers the resources <code>ballmac://catalog</code> and <code>ballmac://items/{"{name}"}</code>, and the
         prompts <code>build_page</code> and <code>choose_component</code>.

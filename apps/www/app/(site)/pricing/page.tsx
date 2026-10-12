@@ -278,6 +278,16 @@ export default async function PricingPage() {
                   <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
                 </tr>
                 <tr>
+                  <th scope="row" className="px-5 py-3.5 text-start font-normal">Updates that merge into your edited files (ballmac update)</th>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                </tr>
+                <tr>
+                  <th scope="row" className="px-5 py-3.5 text-start font-normal">Quality scorecards, and ballmac check for your own app</th>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                  <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>
+                </tr>
+                <tr>
                   <th scope="row" className="px-5 py-3.5 text-start font-normal">Private registry with your licence key</th>
                   <td className="px-5 py-3.5"><Minus className="text-muted-foreground size-4" aria-label="Not included" /></td>
                   <td className="px-5 py-3.5"><Check className="size-4" aria-label="Included" /></td>

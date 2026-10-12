@@ -35,9 +35,10 @@ export default defineItem({
     ],
     customization: ["plan, usage, card, contact, invoices", "currency, locale", "onChangePlan, onUpdateCard", "state: \"ready\" | \"loading\" | \"empty\" | \"error\"; onRetry, emptyState and errorState set the retry action and the copy. Pair with useResource: state={r.state} onRetry={r.retry}"],
   },
-  version: "1.1.0",
-  updated: "2026-10-11",
+  version: "1.1.1",
+  updated: "2026-10-12",
   changelog: [
+    { version: "1.1.1", date: "2026-10-12", note: "The loading skeleton no longer makes the page scroll sideways on a phone: its columns can shrink below the width of the placeholders." },
     { version: "1.1.0", date: "2026-10-11", note: "Adds state (loading, empty, error) with onRetry, emptyState and errorState: a skeleton with the same shapes as the ready view, an error with retry, and an empty message. Unchanged without state." },
     { version: "1.0.0", date: "2026-10-01", note: "First release." },
   ],

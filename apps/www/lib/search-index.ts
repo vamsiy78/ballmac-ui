@@ -32,6 +32,8 @@ export function searchEntries(): MenuEntry[] {
     { name: "feels", title: "Platform feels", description: "Make every component handle like macOS, iOS or Windows, for Tauri and Electron apps and the web.", group: "Docs", href: "/docs/feels" },
     { name: "installation", title: "Installation", description: "Set up a project and add your first component.", group: "Docs", href: "/docs/installation" },
     { name: "cli", title: "Updates & tests", description: "Update components without losing your edits, and install the tests that ship with them.", group: "Docs", href: "/docs/cli" },
+    { name: "check", title: "Quality check", description: "Audit your own app for missing states, accessibility gaps and layout problems, and gate AI agents on it.", group: "Docs", href: "/docs/check" },
+    { name: "quality", title: "Quality, measured", description: "Every item loaded in a real browser, with the results published.", group: "Docs", href: "/quality" },
     { name: "mcp", title: "MCP", description: "Let Claude Code, Cursor or VS Code install Ballmac UI for you.", group: "Docs", href: "/docs/mcp" },
   ]
 }

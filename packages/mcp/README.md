@@ -84,6 +84,8 @@ args = ["-y", "@ballmac/mcp"]
 | `get_item` | Description, when to use and when not to, import line, props, keyboard behaviour, dependencies, template pages and the full source. |
 | `get_examples` | The working examples shown on the item's page. |
 | `get_changes` | What changed in an item, version by version (with `since` to see only newer changes), and whether anything is breaking. |
+| `get_quality_rules` | The rules a Ballmac app is held to (states, accessibility, tokens, motion, layout) with why and a good and bad example. Read before writing a component. |
+| `audit_project` | Read-only audit of the project's source. Returns findings worst first, each with its fix. Run it before saying a task is done. |
 | `get_tests` | The vitest + Testing Library test that ships with an item, to check it still works after an edit. |
 | `get_install_command` | The shadcn CLI commands for pnpm, npm, yarn or bun. |
 | `compose_page` | A page plan from blocks in the right order, install commands, a `page.tsx` scaffold, and any complete template that already fits. Each section lists the states its block can show, and the scaffold wires data blocks to `useResource` and form blocks to a state you drive. When the request names macOS, Windows, iOS, Tauri or Electron (or you pass `feel`), it also returns the platform feel to install, with the wiring notes. |

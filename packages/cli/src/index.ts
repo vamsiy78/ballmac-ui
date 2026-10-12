@@ -9,6 +9,7 @@ import { createRequire } from "node:module"
 import { parseArgs } from "node:util"
 
 import { addItems } from "./add.js"
+import { checkCommand } from "./check.js"
 import type { Ctx } from "./ctx.js"
 import { diffItem } from "./diff.js"
 import { lockPath } from "./lock.js"
@@ -38,6 +39,16 @@ Usage: ballmac <command> [options]
   diff <item>            What you changed since you installed an item
   track [item…]          Start tracking items you installed with plain shadcn
         --rebase           declare your files up to date with the latest version
+  check [path…]          Audit your app for what agents and people get wrong: missing states,
+                         unlabelled controls, fixed colours, endless motion, overflow on phones
+        --rules            list the rules and exit
+        --format <f>       pretty (default), json or github (annotations for CI)
+        --fail-on <level>  error (default), warn or never: when to exit with 1
+        --all              show every finding, not the first few per rule
+        --offline          do not read the Ballmac catalogue
+        --include-library  also audit components/ui and components/ballmac
+        --url <address>    also load a running app in a real browser (axe, overflow, console)
+        --routes <a,b>     routes to load with --url (default /)
   test [item…]           Run the Ballmac tests installed in this project
   test add <item…>       Install the tests for items that are already installed
 
@@ -63,6 +74,14 @@ const { values, positionals } = parseArgs({
     "exit-code": { type: "boolean" },
     "dry-run": { type: "boolean" },
     rebase: { type: "boolean" },
+    rules: { type: "boolean" },
+    all: { type: "boolean" },
+    offline: { type: "boolean" },
+    "include-library": { type: "boolean" },
+    format: { type: "string" },
+    "fail-on": { type: "string" },
+    url: { type: "string" },
+    routes: { type: "string" },
     cwd: { type: "string" },
     version: { type: "boolean", short: "v" },
     help: { type: "boolean", short: "h" },
@@ -75,6 +94,30 @@ async function main() {
   if (values.help || !command || command === "help") return console.log(HELP)
 
   const cwd = (values.cwd as string | undefined) ?? process.cwd()
+
+  // check works in any React project, not only one set up with shadcn.
+  if (command === "check") {
+    const format = (values.format as string | undefined) ?? "pretty"
+    const failOn = (values["fail-on"] as string | undefined) ?? "error"
+    if (!["pretty", "json", "github"].includes(format)) throw new CliError(`--format must be pretty, json or github, not "${format}".`)
+    if (!["error", "warn", "never"].includes(failOn)) throw new CliError(`--fail-on must be error, warn or never, not "${failOn}".`)
+    const { failed } = await checkCommand({
+      cwd,
+      paths: rest,
+      format: format as "pretty" | "json" | "github",
+      failOn: failOn as "error" | "warn" | "never",
+      all: Boolean(values.all),
+      rules: Boolean(values.rules),
+      includeLibrary: Boolean(values["include-library"]),
+      offline: Boolean(values.offline),
+      url: values.url as string | undefined,
+      routes: ((values.routes as string | undefined) ?? "").split(",").map((r) => r.trim()).filter(Boolean),
+      out: (line) => console.log(line),
+    })
+    if (failed) process.exitCode = 1
+    return
+  }
+
   const root = findRoot(cwd)
   // The registry a project was set up with wins over the default, so a project made against a preview keeps using it.
   const recorded = existsSync(lockPath(root)) ? (JSON.parse(readFileSync(lockPath(root), "utf8")) as { registry?: string }).registry : undefined

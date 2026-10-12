@@ -135,8 +135,9 @@ function DottedMap({ markers = [], arcs = [], dots = 150, latRange = [-56, 73], 
               strokeWidth="2.2"
               strokeLinecap="round"
               initial={reduce ? { pathLength: 1, opacity: 0.9 } : { pathLength: 0, opacity: 0 }}
-              animate={reduce ? undefined : { pathLength: [0, 1, 1], opacity: [0, 1, 0] }}
-              transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.7, times: [0, 0.6, 1] }}
+              // Saying where the route rests (rather than leaving animate empty) also stops a loop that began before the reduced-motion setting was known.
+              animate={reduce ? { pathLength: 1, opacity: 0.9 } : { pathLength: [0, 1, 1], opacity: [0, 1, 0] }}
+              transition={reduce ? { duration: 0 } : { duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.7, times: [0, 0.6, 1] }}
             />
           </g>
         ))}

@@ -11,6 +11,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod"
 
 import { Catalog, composePage, installCommands, NotFoundError, PRO_REGISTRY, toMarkdown, type Summary } from "./catalog.js"
+import { auditProject, qualityRules } from "./quality.js"
 
 const { version } = createRequire(import.meta.url)("../package.json") as { version: string }
 
@@ -68,7 +69,8 @@ const server = new McpServer(
       "Ballmac UI is a shadcn registry (namespace @ballmac) of accessible React 19 + Tailwind CSS v4 components, page blocks and multi-page templates. " +
       "Use search_items or list_items to find candidates (list_categories shows what exists), get_item to read an item's API, props, keyboard behaviour and source, " +
       "and get_install_command for the exact CLI command, which you run in the user's project. For a whole page use compose_page; it also suggests full templates. " +
-      "Items install into components/ballmac and never overwrite components/ui. Follow each item's whenToUse and whenNotToUse guidance when choosing.",
+      "Items install into components/ballmac and never overwrite components/ui. Follow each item's whenToUse and whenNotToUse guidance when choosing. " +
+      "Before you write or change UI, call get_quality_rules and build to them; when you finish, call audit_project on the project folder and fix every error it reports.",
   }
 )
 
@@ -208,6 +210,52 @@ server.registerTool(
       return result(t ? { name, shipped: true, version: t.version, file: t.file, content: t.content, requires: t.requires, devDependencies: t.devDependencies, install } : { name, shipped: false, requires: [], devDependencies: [], install })
     } catch (e) {
       return e instanceof NotFoundError ? notFound(name) : failure(e)
+    }
+  }
+)
+
+server.registerTool(
+  "get_quality_rules",
+  {
+    title: "Get the quality rules",
+    description: "The rules `audit_project` checks, with why each matters, how to fix it and a bad and a good example: missing loading, empty and error states, unlabelled controls, removed focus outlines, fixed colours instead of theme tokens, endless motion, layouts that overflow a phone. Read it BEFORE writing UI so the first draft already follows them. It needs no project and no network.",
+    inputSchema: {},
+    outputSchema: { howToUse: z.array(z.string()), rules: z.array(z.record(z.string(), z.unknown())) },
+    annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+  },
+  async () => result(qualityRules())
+)
+
+server.registerTool(
+  "audit_project",
+  {
+    title: "Audit a project's UI",
+    description: "Read the project's React source (it never writes or runs anything) and report what people and assistive technology trip over: components that can show loading, empty and error states but are used without a state prop, data fetched with no loading or error handling, icon-only buttons with no name, click handlers on divs, removed focus outlines, images without alt, unlabelled fields, hand-built modals, fixed colours instead of theme tokens, endless animations that ignore reduced motion, and fixed widths wider than a phone. Call it when you finish writing UI, fix every error, and call it again until it is clean. `path` is the project folder (default: the folder this server was started in); it must contain a package.json. Findings come worst first, each with the line and the fix.",
+    inputSchema: {
+      path: z.string().optional().describe("The project folder. Defaults to the folder this server was started in."),
+      paths: z.array(z.string()).optional().describe("Limit the audit to these files or folders, relative to the project folder, for example [\"src/components/header.tsx\"]."),
+      minSeverity: z.enum(["error", "warn", "info"]).optional().describe("The weakest severity to list. Default warn. Counts always include everything."),
+      limit: z.number().int().min(1).max(200).optional().describe("How many findings to return (default 50)."),
+      includeLibrary: z.boolean().optional().describe("Also audit components/ui and components/ballmac (installed library code). Off by default."),
+    },
+    outputSchema: {
+      root: z.string(),
+      verdict: z.string(),
+      summary: z.record(z.string(), z.number()),
+      findings: z.array(z.record(z.string(), z.unknown())),
+      truncated: z.boolean(),
+      totalShown: z.number(),
+      byRule: z.array(z.record(z.string(), z.unknown())),
+      notes: z.array(z.string()),
+      next: z.array(z.string()),
+    },
+    annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+  },
+  async (input) => {
+    try {
+      return result(await auditProject(input, catalog))
+    } catch (e) {
+      return failure(e)
     }
   }
 )

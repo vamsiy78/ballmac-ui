@@ -136,8 +136,8 @@
     "hash": "90340a42c75cad23a8db0715972db826f7972b40c295474f527dc162e0f12ec2"
   },
   "billing-1": {
-    "version": "1.1.0",
-    "hash": "fc17eebca8d9b07f5d6d8d47242a5cc7ddb8153d7c98c89943c0ea6d35cc5b44"
+    "version": "1.1.1",
+    "hash": "200b5570436fcd1c432ee5423f75353629aa4f8ae55712f7e28732c6c496e6c9"
   },
   "billing-2": {
     "version": "1.1.0",
@@ -376,8 +376,8 @@
     "hash": "603ab6529c6aab34fe4e7eed8a90acef5df8083b200d4df98ba1ad776a843549"
   },
   "dotted-map": {
-    "version": "1.0.1",
-    "hash": "fe33a20ecdda8da51129332a75decede4713fc996a78bfb9f6ddfd79b2731f4e"
+    "version": "1.0.2",
+    "hash": "807feb5ad55e6713bf808334524ae9fe49f9c98742482813cb21dfedc9c6dbf3"
   },
   "download-1": {
     "version": "1.0.0",
@@ -1004,8 +1004,8 @@
     "hash": "b6847fb8e8b66dc6a9a44492cc821f46e1c1732961c31823174307dce38ac77d"
   },
   "settings-2": {
-    "version": "1.1.0",
-    "hash": "847b0325c706f7efa2766743f40aef94503afa31f22492aeccbd73b50a21cc97"
+    "version": "1.1.1",
+    "hash": "3877b9d5fa85456912ae63fc6e4464d0a938c002ad6b6f56f800df75dfe16505"
   },
   "settings-3": {
     "version": "1.1.0",

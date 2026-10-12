@@ -49,7 +49,7 @@ export type Detail = Summary & {
 export type Index = { version: number; setup: string; namespace: string; items: Summary[] }
 
 export type ChangeEntry = { version: string; date: string; note: string; breaking?: boolean }
-export type VersionItem = { title: string; type: string; version: string; updated: string; tier: "free" | "pro"; files: string[]; requires: string[]; tests: boolean; changelog: ChangeEntry[] }
+export type VersionItem = { title: string; type: string; version: string; updated: string; tier: "free" | "pro"; files: string[]; requires: string[]; tests: boolean; changelog: ChangeEntry[]; exports?: string[]; states?: string[] }
 export type Versions = { schema: number; items: Record<string, VersionItem> }
 export type TestFile = { name: string; version: string; file: string; content: string; requires: string[]; devDependencies: string[] }
 

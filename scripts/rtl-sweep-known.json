@@ -178,5 +178,61 @@
   {
     "prefix": "auth-pro-3",
     "reason": "One-time code digits run left to right in every language by design."
+  },
+  {
+    "prefix": "activity-feed",
+    "reason": "A sentence is one line of text, so its words keep their order in the demo's English; the line itself starts on the right. In Arabic or Hebrew the words reverse by themselves."
+  },
+  {
+    "prefix": "banner",
+    "reason": "A sentence is one line of text, so its words keep their order in the demo's English; the line itself starts on the right. In Arabic or Hebrew the words reverse by themselves."
+  },
+  {
+    "prefix": "hover-card",
+    "reason": "A sentence is one line of text, so its words keep their order in the demo's English; the line itself starts on the right. In Arabic or Hebrew the words reverse by themselves."
+  },
+  {
+    "prefix": "state-view",
+    "reason": "A sentence is one line of text, so its words keep their order in the demo's English; the line itself starts on the right. In Arabic or Hebrew the words reverse by themselves."
+  },
+  {
+    "prefix": "mac-context-menu",
+    "reason": "A sentence is one line of text, so its words keep their order in the demo's English; the line itself starts on the right. In Arabic or Hebrew the words reverse by themselves."
+  },
+  {
+    "prefix": "api-endpoint",
+    "reason": "URLs, parameters and JSON are left to right inside by design."
+  },
+  {
+    "prefix": "bento-grid",
+    "reason": "Map pins are placed by percentage on a picture of the world, which is not mirrored."
+  },
+  {
+    "prefix": "hero-2-",
+    "reason": "The terminal's commands and output are left to right inside by design."
+  },
+  {
+    "prefix": "input-with-icon",
+    "reason": "The shortcut hint (⌘K) keeps its key order in every language, as it does on the keyboard."
+  },
+  {
+    "prefix": "kbd",
+    "reason": "Keyboard shortcuts keep their key order in every language, as they do on the keyboard."
+  },
+  {
+    "prefix": "mac-window",
+    "reason": "The window controls keep their order, red then yellow then green, as macOS draws them."
+  },
+  {
+    "prefix": "sheet-dialog",
+    "reason": "The window controls keep their order, red then yellow then green, as macOS draws them."
+  },
+  {
+    "prefix": "pricing-4-",
+    "reason": "The chart's axes and legend are drawn by Recharts left to right."
+  },
+  {
+    "prefix": "template-ledger",
+    "reason": "The window controls keep their order, and a sentence keeps its English word order in the demo."
   }
 ]

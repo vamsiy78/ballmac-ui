@@ -4,6 +4,17 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-12",
+    title: "Quality, measured: scorecards on every item, and ballmac check for your own app",
+    items: [
+      "Every item page now has a quality scorecard, measured in a real browser: an axe-core accessibility scan in light and dark, no sideways scrolling at 360, 390 and 1280 px, reduced motion, a right-to-left mirror, a clean console, a keyboard pass, states, tests and size. 477 items and 1,032 examples were loaded; the results are public at /quality",
+      "The first full run found 55 failing checks. They were real: a table that stretched the page sideways on phones in five Pro blocks, skeletons wider than a 360 px screen, compact amounts written differently on the server and in the browser (a React hydration error in three dashboards), a map route that kept animating for visitors who asked for less motion, and a notification table that keyboard users could not scroll while a save was running. All are fixed, and the affected items have new versions that `ballmac update` merges into your copy",
+      "`npx @ballmac/cli check` holds your own app to the same bar. It reads your source (read-only, offline) and reports missing loading and error states, images and buttons without names, positive tabindex, hand-rolled dialogs, hard-coded colors, endless decorative motion and layouts that break on a phone, each with the fix. `--url` also loads your running app with your own Playwright and axe. Settings, suppression comments and a GitHub annotations format are in /docs/check",
+      "The Ballmac MCP server (1.4.0) has two new tools: `get_quality_rules` so an agent reads the rules before it writes a component, and `audit_project` so it can check its work before it says it is done",
+      "The measurement is honest about its limits: automated tools find only a part of accessibility problems, a loading spinner is kept turning on purpose, WCAG 2.2's 24 px target size is reported as a note rather than a failure, and some items are not mirrored by design (code, charts, keyboard shortcuts), each with its reason shown",
+    ],
+  },
+  {
+    date: "2026-10-12",
     title: "Cove: a Tauri desktop starter that looks native on macOS and Windows",
     items: [
       "Cove is a third Pro starter and the first for the desktop: a Tauri 2 notes app with folders, pinning, search that needs every word, trash with undo, Markdown with a preview, and a command palette. It is a real app you can ship, and the quickest way to see the platform feels in a working window",

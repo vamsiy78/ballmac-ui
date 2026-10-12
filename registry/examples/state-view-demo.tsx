@@ -10,10 +10,10 @@ import { StateView } from "@/components/ballmac/state-view"
 import type { BlockState } from "@/lib/ballmac/use-resource"
 
 const activity = [
-  { who: "Maya Jensen", what: "approved the Q4 launch plan", when: "2m ago", tone: "bg-chart-2" },
-  { who: "Dev Patel", what: "commented on Pricing page", when: "18m ago", tone: "bg-chart-1" },
-  { who: "Sana Okafor", what: "shipped build 482 to production", when: "1h ago", tone: "bg-chart-3" },
-  { who: "Lucas Meyer", what: "invited 3 teammates", when: "3h ago", tone: "bg-chart-4" },
+  { who: "Maya Jensen", what: "approved the Q4 launch plan", when: "2m ago", tone: "bg-chart-2/25" },
+  { who: "Dev Patel", what: "commented on Pricing page", when: "18m ago", tone: "bg-chart-1/25" },
+  { who: "Sana Okafor", what: "shipped build 482 to production", when: "1h ago", tone: "bg-chart-3/25" },
+  { who: "Lucas Meyer", what: "invited 3 teammates", when: "3h ago", tone: "bg-chart-4/25" },
 ]
 
 /** The skeleton has the same rows, in the same places, as the ready list, so the page does not jump when data arrives. */
@@ -64,7 +64,7 @@ export default function StateViewDemo() {
         <ul className="divide-y">
           {activity.map((a) => (
             <li key={a.who} className="flex items-center gap-3 py-3 text-sm">
-              <span aria-hidden="true" className={`${a.tone} text-background flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold`}>
+              <span aria-hidden="true" className={`${a.tone} text-foreground flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold`}>
                 {a.who
                   .split(" ")
                   .map((n) => n[0])

@@ -14,6 +14,7 @@ import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@
 import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { ItemStates } from "@/components/site/item-states"
 import { SectionHeading } from "@/components/site/section-heading"
+import { Scorecard } from "@/components/site/scorecard"
 import { nudgeText } from "@/lib/founding"
 import { getOffer } from "@/lib/offer"
 import { blockCategoryLabels, getBlocks, getItem, isPro, readSource } from "@/lib/registry"
@@ -91,6 +92,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
             <ItemStates states={item.states} none={item.statesNone} />
           </section>
         )}
+        <Scorecard name={item.name} version={item.version} />
         <section className="space-y-4">
           <SectionHeading id="dependencies">Dependencies</SectionHeading>
           <ItemDependencies item={item} />

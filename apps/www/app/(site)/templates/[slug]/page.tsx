@@ -10,6 +10,7 @@ import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { SectionHeading } from "@/components/site/section-heading"
+import { Scorecard } from "@/components/site/scorecard"
 import { getItem, getTemplates, itemHref, isPro, namespaceOf, readSource } from "@/lib/registry"
 
 export function generateStaticParams() {
@@ -104,6 +105,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
             </div>
           </section>
         )}
+        <Scorecard name={item.name} version={item.version} />
         <section className="space-y-4">
           <SectionHeading id="dependencies">Dependencies</SectionHeading>
           <ItemDependencies item={item} />

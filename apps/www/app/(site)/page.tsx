@@ -16,6 +16,7 @@ import { getOffer } from "@/lib/offer"
 import { CopyButton } from "@/components/site/copy-button"
 import { FitPreview, FitWidth } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
+import { StayCurrent } from "@/components/site/stay-current"
 import { loadThumb } from "@/lib/examples"
 import { blockGroups, categoryLabels, getBlocks, getComponents, getTemplates, isPro } from "@/lib/registry"
 import { cn } from "@/lib/utils"
@@ -306,6 +307,16 @@ export default async function Home() {
             Compare Free and Pro
           </Link>
         </div>
+      </section>
+
+      {/* Updates and measured quality */}
+      <section aria-labelledby="current-h" className="mx-auto max-w-[1200px] px-4 pt-28 sm:px-6">
+        <div className="max-w-2xl">
+          <p className="text-muted-foreground text-sm font-medium">After the first install</p>
+          <h2 id="current-h" className="mt-3 text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Copy-paste that does not rot</h2>
+          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">Update without losing your edits, and check the quality claims yourself.</p>
+        </div>
+        <StayCurrent className="mt-12" />
       </section>
 
       {/* Agents */}

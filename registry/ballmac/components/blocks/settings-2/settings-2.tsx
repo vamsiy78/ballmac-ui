@@ -244,11 +244,11 @@ function Settings2Skeleton() {
         <ul className="mt-4 divide-y rounded-2xl border">
           {[0, 1, 2, 3, 4].map((i) => (
             <li key={i} className="flex items-center justify-between gap-4 p-4">
-              <div className="grid gap-2">
-                <Skeleton className="h-4 w-32" />
-                <Skeleton className="h-3.5 w-52" />
+              <div className="grid min-w-0 flex-1 gap-2">
+                <Skeleton className="h-4 w-32 max-w-full" />
+                <Skeleton className="h-3.5 w-52 max-w-full" />
               </div>
-              <div className="flex gap-3">
+              <div className="flex shrink-0 gap-3">
                 {[0, 1, 2].map((c) => (
                   <Skeleton key={c} className="h-5 w-9 rounded-full" />
                 ))}

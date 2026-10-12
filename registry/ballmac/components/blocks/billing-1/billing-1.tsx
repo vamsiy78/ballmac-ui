@@ -274,15 +274,15 @@ function Billing1Inner({
 function Billing1Skeleton() {
   return (
     <div aria-hidden="true">
-      <div className="grid gap-4 lg:grid-cols-[1fr_20rem]">
-        <div className="bg-card rounded-2xl border p-5 sm:p-6">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-[minmax(0,1fr)_20rem]">
+        <div className="bg-card min-w-0 rounded-2xl border p-5 sm:p-6">
           <div className="flex justify-between gap-4">
-            <div className="grid gap-2">
+            <div className="grid min-w-0 gap-2">
               <Skeleton className="h-3.5 w-24" />
               <Skeleton className="h-8 w-36" />
-              <Skeleton className="h-3.5 w-64" />
+              <Skeleton className="h-3.5 w-64 max-w-full" />
             </div>
-            <div className="grid justify-items-end gap-2">
+            <div className="grid shrink-0 justify-items-end gap-2">
               <Skeleton className="h-9 w-24" />
               <Skeleton className="h-3.5 w-16" />
             </div>

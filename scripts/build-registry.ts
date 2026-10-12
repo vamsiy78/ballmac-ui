@@ -13,9 +13,10 @@ import { join, relative } from "node:path"
 
 import { SCHEMA_VERSION } from "@ballmac-ui/metadata"
 
+import { RULES } from "../packages/audit/src/rules/meta"
 import { extractProps } from "./extract-props"
 import { importPathFor, loadItems, ROOT, targetFor, type LoadedItem } from "./lib"
-import { planTests, writeTests, writeVersions } from "./registry-extras"
+import { exportsOf, planTests, writeTests, writeVersions } from "./registry-extras"
 import { registryUrl } from "./registry-url"
 
 const REGISTRY_URL = registryUrl(process.env)
@@ -53,15 +54,6 @@ function exampleDependencies(item: LoadedItem, file: string) {
     if (owner) deps.add(owner)
   }
   return [...[...deps].map(dep), ...(utils ? ["utils"] : [])]
-}
-function exportsOf(code: string) {
-  const m = code.match(/export\s*\{([^}]+)\}/)
-  if (!m) return []
-  return m[1]!
-    .split(",")
-    .map((x) => x.trim())
-    .filter((x) => x && !x.startsWith("type ") && !/Variants$/.test(x))
-    .map((x) => x.split(/\s+as\s+/).pop()!.trim())
 }
 const npmOf = (spec: string) => (spec.startsWith("@") ? spec.split("/").slice(0, 2).join("/") : spec.split("/")[0])
 // Version range for each npm package, taken from the items that declare it, so examples install the same major.
@@ -211,6 +203,17 @@ const index = items.map(({ metaPath, baseDir, examplesDir, ...meta }) => ({
   examples: meta.examples.map((e) => ({ ...e, source: relative(ROOT, join(examplesDir, e.file)) })),
 }))
 writeFileSync(join(generated, "index.json"), JSON.stringify(index, null, 2) + "\n")
+
+// The measured quality scorecards (registry/quality.json, written by `pnpm quality`), without the raw per-example numbers the pages do not use.
+{
+  const file = join(ROOT, "registry/quality.json")
+  const q = existsSync(file) ? (JSON.parse(readFileSync(file, "utf8")) as { schema: number; generated: string; tools: unknown; items: Record<string, { v: string; checks: unknown; size: unknown; ex: Record<string, unknown> }> }) : { schema: 1, generated: "", tools: {}, items: {} }
+  const slim = { ...q, items: Object.fromEntries(Object.entries(q.items).map(([name, i]) => [name, { v: i.v, checks: i.checks, size: i.size, examples: Object.keys(i.ex ?? {}).length }])) }
+  writeFileSync(join(generated, "quality.json"), JSON.stringify(slim) + "\n")
+}
+
+// The rules `ballmac check` applies, for the /docs/check page. One list feeds the CLI, the MCP server and the docs.
+writeFileSync(join(generated, "check-rules.json"), JSON.stringify(RULES, null, 2) + "\n")
 
 // Source code for the site's code tabs. Free items only: Pro source never enters the site bundle.
 const sources: Record<string, string> = {}

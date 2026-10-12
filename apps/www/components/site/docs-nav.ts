@@ -10,6 +10,7 @@ export const docsNav = [
       { href: "/docs/states", label: "States" },
       { href: "/docs/mcp", label: "MCP & AI agents" },
       { href: "/docs/cli", label: "Updates & tests" },
+      { href: "/docs/check", label: "Quality check" },
       { href: "/docs/pro", label: "Pro" },
       { href: "/support", label: "Support" },
     ],

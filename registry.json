@@ -4648,9 +4648,15 @@
           "payment method",
           "plan"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.1.1",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.1.1",
+            "date": "2026-10-12",
+            "note": "The loading skeleton no longer makes the page scroll sideways on a phone: its columns can shrink below the width of the placeholders.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -12503,9 +12509,15 @@
           "quiet hours",
           "digest"
         ],
-        "version": "1.1.0",
-        "updated": "2026-10-11",
+        "version": "1.1.1",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.1.1",
+            "date": "2026-10-12",
+            "note": "The loading skeleton no longer makes the page scroll sideways on a phone: its columns can shrink below the width of the placeholders.",
+            "breaking": false
+          },
           {
             "version": "1.1.0",
             "date": "2026-10-11",
@@ -19556,9 +19568,15 @@
           "markers",
           "locations"
         ],
-        "version": "1.0.1",
-        "updated": "2026-10-11",
+        "version": "1.0.2",
+        "updated": "2026-10-12",
         "changelog": [
+          {
+            "version": "1.0.2",
+            "date": "2026-10-12",
+            "note": "The route lines held still correctly only after the page knew about reduced motion; a loop that had already started now stops too.",
+            "breaking": false
+          },
           {
             "version": "1.0.1",
             "date": "2026-10-11",

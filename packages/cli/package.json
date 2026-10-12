@@ -1,6 +1,6 @@
 {
   "name": "@ballmac/cli",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Keep Ballmac UI components up to date without losing your changes, and install their tests. Works next to the shadcn CLI.",
   "keywords": [
     "shadcn",
@@ -40,11 +40,12 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.json && chmod +x dist/index.js",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "build": "npm run vendor && rm -rf dist && tsc -p tsconfig.json && chmod +x dist/index.js",
+    "typecheck": "npm run vendor && tsc --noEmit",
+    "test": "npm run vendor && vitest run",
     "test:e2e": "node test/e2e.mjs",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "npm run build && npm test",
+    "vendor": "node ../audit/scripts/vendor.mjs src/vendor/audit"
   },
   "devDependencies": {
     "@types/node": "^20",

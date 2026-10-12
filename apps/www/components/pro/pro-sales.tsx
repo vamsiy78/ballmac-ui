@@ -10,6 +10,7 @@ import { FoundingCountdown } from "@/components/site/founding-countdown"
 import Link from "@/components/site/link"
 import { PageCard } from "@/components/site/page-card"
 import { Sampler } from "@/components/site/sampler"
+import { StayCurrent } from "@/components/site/stay-current"
 import { endsLabel, leftPhrase } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
@@ -266,6 +267,14 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
             ]}
           />
         </div>
+      </section>
+
+      {/* Updates and measured quality */}
+      <section aria-labelledby="current-h" className="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+        <Heading id="current-h" eyebrow="After the first install" title="Still good in six months">
+          A block you copy should not rot. Updates merge into your edits, and every claim about quality is measured and public.
+        </Heading>
+        <StayCurrent className="mt-12" />
       </section>
 
       {/* Starter apps */}

@@ -30,6 +30,10 @@ export default function IntroductionPage() {
           <Link href="/docs/cli">The ballmac CLI</Link> merges new versions into your edited copies, and installs the tests that ship with components.
         </li>
         <li>
+          <strong>Quality you can check.</strong> Every item is loaded in a real browser and the <Link href="/quality">results are public</Link>, including
+          failures. <Link href="/docs/check">ballmac check</Link> runs the same bar over your own app, and your AI agent can run it before it finishes.
+        </li>
+        <li>
           <strong>Native-app polish.</strong> Ballmac builds native apps, and brings the same care for springs, depth and
           hairlines to the web: app windows, docks, a live notch, menus and notifications that work in any product.
         </li>

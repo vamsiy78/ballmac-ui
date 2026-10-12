@@ -14,6 +14,10 @@ export type ManifestItem = {
   requires: string[]
   tests: boolean
   changelog: ChangelogEntry[]
+  /** Public export names of the item's main file (for example "DashboardPro1"). Newer registries only. */
+  exports?: string[]
+  /** The ids of the states the item can show beyond ready (loading, empty, error, submitting…). Newer registries only. */
+  states?: string[]
 }
 export type Manifest = { schema: 1; registry: string; items: Record<string, ManifestItem> }
 export type TestItem = { schema: 1; name: string; version: string; file: string; content: string; requires: string[]; devDependencies: string[] }

@@ -21,6 +21,7 @@ const columns = [
       { href: "/docs/theming", label: "Theming" },
       { href: "/docs/registry", label: "CLI & registry" },
       { href: "/docs/mcp", label: "MCP & AI agents" },
+      { href: "/quality", label: "Quality, measured" },
     ],
   },
   {

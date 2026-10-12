@@ -1,0 +1,18 @@
+{
+  "name": "@ballmac-ui/audit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The audit engine behind `ballmac check` and the @ballmac/mcp audit tools. Internal: its source is copied into both published packages at build time (scripts/vendor.mjs), so there is nothing extra to install or publish.",
+  "type": "module",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5",
+    "vitest": "^4.1.11"
+  }
+}

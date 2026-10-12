@@ -131,6 +131,14 @@ Originals are in .ballmac/backup/2026-10-11T10-54-02-743Z/`}
         </li>
       </ul>
 
+      <h2>Check your own app</h2>
+      <p>
+        <code>ballmac check</code> reads your source and reports missing loading and error states, images and buttons without names, hard-coded
+        colors, endless decorative motion and layouts that break on a phone, each with the fix. It is read-only and works offline.{" "}
+        <Link href="/docs/check">Rules, settings and CI</Link>.
+      </p>
+      <CodePanel lang="bash" code={"npx @ballmac/cli check"} />
+
       <h2>Limits</h2>
       <ul>
         <li>

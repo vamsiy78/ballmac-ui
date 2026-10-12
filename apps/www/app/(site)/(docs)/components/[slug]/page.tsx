@@ -7,6 +7,8 @@ import { CodePanel } from "@/components/site/code-panel"
 import { ProBadge, ProNotice } from "@/components/site/pro-notice"
 import { CopyPageButton } from "@/components/site/copy-page-button"
 import { ItemVersion } from "@/components/site/item-version"
+import { Scorecard, ScoreChip } from "@/components/site/scorecard"
+import { getScore } from "@/lib/quality"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { PreviewTabs } from "@/components/site/preview-tabs"
 import { ProCallout } from "@/components/site/pro-callout"
@@ -55,6 +57,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
     ...(rest.length ? [["examples", "Examples"] as const] : []),
     ...(item.props.length ? [["api", "API reference"] as const] : []),
     ...(item.ai?.a11y?.length ? [["accessibility", "Accessibility"] as const] : []),
+    ...(getScore(item.name) ? [["quality", "Quality scorecard"] as const] : []),
     ["ai", "Use with AI"],
     ["credits", "Credits"],
   ] as const
@@ -100,6 +103,9 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             </div>
           </div>
           <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <ScoreChip name={item.name} />
+          </div>
           <ItemVersion item={item} />
           {fixedInRtl && (
             <p className="text-muted-foreground max-w-2xl text-sm">
@@ -166,6 +172,8 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             </div>
           </section>
         ) : null}
+
+        <Scorecard name={item.name} version={item.version} />
 
         <section className="space-y-5">
           <SectionHeading id="ai">Use with AI</SectionHeading>

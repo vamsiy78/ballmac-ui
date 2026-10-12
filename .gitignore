@@ -21,3 +21,7 @@ figma-kit
 .next-*
 .lighthouse
 .vercel
+
+# The audit engine is copied into the CLI and MCP packages at build time (packages/audit/scripts/vendor.mjs).
+packages/cli/src/vendor/
+packages/mcp/src/vendor/

@@ -36,9 +36,10 @@ export default defineItem({
     ],
     customization: ["events: { id, label, description }[]", "defaultValues: digest, events, quiet", "onChange(values) async", "state: \"submitting\" | \"success\" | \"error\" (omit it and the form runs by itself); errorState.description sets the failure message. Pair with your own async handler: state={pending ? \"submitting\" : failed ? \"error\" : done ? \"success\" : undefined}"],
   },
-  version: "1.1.0",
-  updated: "2026-10-11",
+  version: "1.1.1",
+  updated: "2026-10-12",
   changelog: [
+    { version: "1.1.1", date: "2026-10-12", note: "The loading skeleton no longer makes the page scroll sideways on a phone: its columns can shrink below the width of the placeholders." },
     { version: "1.1.0", date: "2026-10-11", note: "Adds state: loading shows a skeleton of the form while its values are fetched; submitting, success and error drive the save status. Unchanged without state." },
     { version: "1.0.0", date: "2026-10-01", note: "First release." },
   ],
