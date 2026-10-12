@@ -79,14 +79,10 @@ export default function ProDocsPage() {
       <p>
         The answer is <code>{'{"valid":true}'}</code> or a reason the key is not accepted.
       </p>
-      {process.env.NEXT_PUBLIC_PRO_LICENSE_URL && (
-        <>
-          <h2>Licence terms</h2>
-          <p>
-            What you may do with Pro items is set out in the <a href={process.env.NEXT_PUBLIC_PRO_LICENSE_URL}>Pro licence terms</a>.
-          </p>
-        </>
-      )}
+      <h2>Licence terms</h2>
+      <p>
+        What you may do with Pro items is set out in the <a href={process.env.NEXT_PUBLIC_PRO_LICENSE_URL || "/license/pro"}>Pro licence agreement</a>. In short: build as many apps and sites as you like, for yourself or your clients, but do not share, resell or publish the Pro source or your key.
+      </p>
       <h2>Troubleshooting</h2>
       <ul>
         <li>

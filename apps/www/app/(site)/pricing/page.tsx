@@ -13,6 +13,7 @@ import { Sampler } from "@/components/site/sampler"
 import { endsLabel, leftPhrase } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { getOffer } from "@/lib/offer"
+import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
 import { blockGroups, getBlocks, getItem, isPro } from "@/lib/registry"
 import { SAMPLER_BLOCKS } from "@/lib/sampler"
 import { thumbFor } from "@/lib/thumbs"
@@ -28,7 +29,7 @@ export const revalidate = 300
 
 const teamCheckout = process.env.NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL
 const teamPrice = process.env.NEXT_PUBLIC_PRO_TEAM_PRICE
-const licenseUrl = process.env.NEXT_PUBLIC_PRO_LICENSE_URL
+const licenseUrl = process.env.NEXT_PUBLIC_PRO_LICENSE_URL || PRO_LICENCE_PATH
 // The number of Pro blocks comes from the registry when Pro is part of this build.
 const proBlocks = getBlocks().filter(isPro).length || 150
 // A spread of what Pro holds, chosen for range: an analytics dashboard, a command-palette hero, a calendar, a product listing, a mail client and a kanban board.
@@ -130,7 +131,15 @@ export default async function PricingPage() {
     { q: "Will free components become paid?", a: "No. Anything released as free stays free. Pro adds new premium items; it doesn't take any away." },
     { q: "I bought Pro. How do I get my code?", a: "Open the Pro log in page and paste the licence key from your purchase email. There is no account to create: the key is the login. You can then read and copy any Pro block, download the starter apps, and get install commands with your key filled in. The shadcn CLI and the MCP server work with the same key." },
     { q: "How does Pro work with the CLI?", a: "Add your licence key once as an environment variable and the @ballmac-pro registry to components.json. The shadcn CLI and the MCP server then install Pro items the same way as free ones. The Pro guide walks through it." },
-    ...(licenseUrl ? [{ q: "What can I do with a Pro licence?", a: `The Pro licence terms are published at ${licenseUrl}. Read them before you buy.` }] : []),
+    {
+      q: "What can I do with a Pro licence?",
+      a: (
+        <>
+          Build any number of apps and sites with it, for yourself or your clients, and change the code. You cannot resell, share or publish the Pro source, share your key, build a competing library or starter from it, or use it to train AI models. One licence is one person. All sales are final. Read the full{" "}
+          <a href={licenseUrl} className="text-foreground underline underline-offset-4">Pro licence agreement</a> before you buy.
+        </>
+      ),
+    },
     { q: "Who handles tax and invoices?", a: "Our payment provider acts as the merchant of record: it charges the right sales tax or VAT and sends you an invoice." },
   ]
 
@@ -203,6 +212,11 @@ export default async function PricingPage() {
                   <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs opacity-75">
                     <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
                     Tax and invoice handled for you.
+                  </p>
+                )}
+                {pro && onSale && (
+                  <p className="mt-2 text-center text-xs opacity-70">
+                    By buying you agree to the <a href={licenseUrl} className="underline underline-offset-2">Pro licence</a>.
                   </p>
                 )}
               </div>

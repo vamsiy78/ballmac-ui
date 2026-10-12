@@ -46,7 +46,7 @@ export default function LicensePage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">License</h1>
-      <p className="text-muted-foreground mt-3 text-base leading-relaxed">Last updated September 29, 2026</p>
+      <p className="text-muted-foreground mt-3 text-base leading-relaxed">Last updated October 12, 2026</p>
 
       <div className="text-muted-foreground mt-10 space-y-10 leading-relaxed [&_h2]:text-foreground [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_a]:text-foreground [&_a]:underline [&_a]:underline-offset-4">
         <section className="space-y-4">
@@ -61,8 +61,9 @@ export default function LicensePage() {
         <section className="space-y-4">
           <h2>Pro</h2>
           <p>
-            Ballmac UI Pro items will be covered by a separate commercial license, published before Pro goes on sale. See{" "}
-            <Link href="/pricing">pricing</Link>.
+            Ballmac UI Pro is not under the MIT License. It is covered by the{" "}
+            <Link href="/license/pro">Ballmac UI Pro Licence Agreement</Link>, which lets you build any number of apps and sites with it
+            but does not let you share, resell or publish the Pro source. See <Link href="/pricing">pricing</Link>.
           </p>
         </section>
 

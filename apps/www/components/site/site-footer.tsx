@@ -81,9 +81,14 @@ export function SiteFooter() {
       <div className="border-t">
         <div className="text-muted-foreground mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-3 px-4 py-6 text-[13px] sm:px-6">
           <p>© 2026 Ballmac</p>
-          <Link href="/license" className="hover:text-foreground transition-colors">
-            License
-          </Link>
+          <span className="flex items-center gap-5">
+            <Link href="/license/pro" className="hover:text-foreground transition-colors">
+              Pro licence
+            </Link>
+            <Link href="/license" className="hover:text-foreground transition-colors">
+              License
+            </Link>
+          </span>
         </div>
       </div>
     </footer>

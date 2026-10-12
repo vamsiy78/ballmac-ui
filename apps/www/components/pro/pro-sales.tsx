@@ -12,13 +12,13 @@ import { PageCard } from "@/components/site/page-card"
 import { Sampler } from "@/components/site/sampler"
 import { endsLabel, leftPhrase } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
+import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
 import { getOffer } from "@/lib/offer"
 import { getBlocks, getItem, isPro, itemHref } from "@/lib/registry"
 import { SAMPLER_BLOCKS } from "@/lib/sampler"
 import { thumbFor } from "@/lib/thumbs"
 import { cn } from "@/lib/utils"
 
-const licenseUrl = process.env.NEXT_PUBLIC_PRO_LICENSE_URL || undefined
 const utm = (where: string) => `/pricing?utm_source=ballmac-ui&utm_medium=pro-page&utm_campaign=${where}#plans`
 
 function Heading({ id, eyebrow, title, children, center = false }: { id: string; eyebrow?: string; title: string; children?: React.ReactNode; center?: boolean }) {
@@ -70,14 +70,11 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
   { q: "Can my AI agent use it?", a: "Yes. Pro installs through the same shadcn CLI and MCP server as the free library. Add your key once and Claude Code, Cursor, Codex or VS Code can search and install Pro blocks for you." },
   {
     q: "What can I do with the code?",
-    a: licenseUrl ? (
+    a: (
       <>
-        One licence is for one person. The full terms are published: <a href={licenseUrl} className="text-foreground underline underline-offset-4">read the Pro licence</a> before you buy.
-      </>
-    ) : (
-      <>
-        One licence is for one person. If you are buying for a team or an agency, or you have a question about how you plan to use it, write to{" "}
-        <a href={`mailto:${FOUNDERS_EMAIL}`} className="text-foreground underline underline-offset-4">{FOUNDERS_EMAIL}</a> before you buy and you will get an answer from a person.
+        Build any number of apps and sites with it, for yourself or your clients, and change it however you like. You cannot resell, share or publish the Pro source, share your key, build a competing library or starter from it, or use it to train AI models. One licence is one person, and all sales are final. Read the full{" "}
+        <a href={PRO_LICENCE_PATH} className="text-foreground underline underline-offset-4">Pro licence agreement</a> before you buy. For a team or an agency, write to{" "}
+        <a href={`mailto:${FOUNDERS_EMAIL}`} className="text-foreground underline underline-offset-4">{FOUNDERS_EMAIL}</a>.
       </>
     ),
   },
@@ -158,6 +155,10 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
               ) : (
                 "One payment. No subscription."
               )}
+            </p>
+            <p className="text-muted-foreground mt-2 text-[13px]">
+              By buying you agree to the{" "}
+              <a href={PRO_LICENCE_PATH} className="text-foreground underline underline-offset-4">Pro licence</a>.
             </p>
             <ul className="mt-8 grid max-w-xl gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
               {["One payment, no subscription", "Every future update included", "Works with the shadcn CLI and your AI agent", "Tax and invoice handled for you"].map((t) => (
@@ -479,6 +480,9 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
           <p className="mx-auto mt-6 flex items-center justify-center gap-2 text-xs opacity-70">
             <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
             Tax and invoice handled for you.
+          </p>
+          <p className="mx-auto mt-2 text-center text-xs opacity-70">
+            By buying you agree to the <a href={PRO_LICENCE_PATH} className="underline underline-offset-2">Pro licence</a>. All sales are final.
           </p>
         </div>
       </section>

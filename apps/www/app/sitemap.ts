@@ -5,7 +5,7 @@ import { PRESETS } from "@ballmac-ui/theme-engine"
 import { changelog } from "@/lib/changelog"
 import { getAllItems, itemHref, SITE_URL } from "@/lib/registry"
 
-const pages = ["", "/components", "/blocks", "/templates", "/themes", "/feels", "/pricing", "/pro", "/support", "/founders", "/changelog", "/docs", "/docs/installation", "/docs/theming", "/docs/motion", "/docs/feels", "/docs/states", "/docs/registry", "/docs/mcp", "/docs/cli", "/docs/pro", "/docs/rtl", "/docs/i18n", "/docs/images", "/license"]
+const pages = ["", "/components", "/blocks", "/templates", "/themes", "/feels", "/pricing", "/pro", "/support", "/founders", "/changelog", "/docs", "/docs/installation", "/docs/theming", "/docs/motion", "/docs/feels", "/docs/states", "/docs/registry", "/docs/mcp", "/docs/cli", "/docs/pro", "/docs/rtl", "/docs/i18n", "/docs/images", "/license", "/license/pro"]
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const items = getAllItems().filter((i) => i.category !== "foundation")

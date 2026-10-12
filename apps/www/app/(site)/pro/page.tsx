@@ -6,6 +6,7 @@ import { ProSales } from "@/components/pro/pro-sales"
 import { PageCard } from "@/components/site/page-card"
 import Link from "@/components/site/link"
 import { proDownloads } from "@/lib/pro-downloads"
+import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
 import { getBlocks, isPro, itemHref } from "@/lib/registry"
 import { thumbFor } from "@/lib/thumbs"
 
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 // The sales page counts down to the founding deadline, so the page is rebuilt every few minutes.
 export const revalidate = 300
 
-const licenseUrl = process.env.NEXT_PUBLIC_PRO_LICENSE_URL || undefined
+const licenseUrl = process.env.NEXT_PUBLIC_PRO_LICENSE_URL || PRO_LICENCE_PATH
 
 /** One block per category first, so the showcase has range, then the rest in order. */
 function showcase(limit: number) {
