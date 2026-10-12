@@ -115,8 +115,8 @@ export function Sampler({ reminders }: { reminders: boolean }) {
           onDone={(d) => setItems(d.items)}
           consent={
             reminders
-              ? "You get the blocks on this page now, plus two reminder emails before the founding price ends. Nothing else, and one click to unsubscribe."
-              : "You get the blocks on this page now. We keep your address only to tell you about Ballmac UI Pro, and you can unsubscribe in one click."
+              ? "You get the blocks on this page now, plus one short personal note from us and two reminder emails before the founding price ends. Nothing else, and one click to unsubscribe."
+              : "You get the blocks on this page now, plus one short personal note from us. We keep your address only to tell you about Ballmac UI Pro, and you can unsubscribe in one click."
           }
         />
       )}
