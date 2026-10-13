@@ -13,7 +13,7 @@ describe("licence validation", () => {
   })
 
   it("ignores test keys on Vercel production", async () => {
-    const v = createLicenseValidator({ VERCEL_ENV: "production", BALLMAC_PRO_TEST_KEYS: "dev-key" })
+    const v = createLicenseValidator({ DEPLOY_ENV: "production", BALLMAC_PRO_TEST_KEYS: "dev-key" })
     expect((await v("dev-key")).valid).toBe(false)
   })
 

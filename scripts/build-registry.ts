@@ -5,7 +5,7 @@
  *  3. Runs the official `shadcn build` to produce apps/www/public/r/*.json.
  *  4. Writes apps/www/lib/generated/index.json and examples.ts for the website.
  *
- * Env: REGISTRY_URL (default https://ui.ballmac.com, or the branch address on a Vercel preview), used for registry dependencies.
+ * Env: REGISTRY_URL (default https://ui.ballmac.com; the preview deploy sets the preview's address), used for registry dependencies.
  */
 import { execFileSync } from "node:child_process"
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"

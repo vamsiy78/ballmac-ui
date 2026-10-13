@@ -70,8 +70,7 @@ export function SetupTabs({ licenseKey, sampleItem }: { licenseKey: string; samp
     <Tabs defaultValue="cli" className="gap-5">
       {origin !== SITE_URL && (
         <p role="note" className="bg-muted/60 text-muted-foreground rounded-lg border px-3.5 py-2.5 text-[13px] leading-5">
-          You are on <code className="text-foreground font-mono">{origin}</code>, not {SITE_URL.replace("https://", "")}, so these commands use this site. If it is a Vercel preview, the CLI and agents are
-          blocked by its login unless deployment protection is off or you add the bypass header.
+          You are on <code className="text-foreground font-mono">{origin}</code>, not {SITE_URL.replace("https://", "")}, so these commands use this site.
         </p>
       )}
       <TabsList aria-label="How to install">

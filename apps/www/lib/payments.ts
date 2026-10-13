@@ -3,8 +3,8 @@
  * anyone could buy with a test card and get a key that unlocks Pro, so it sells nothing and refuses every key until the live settings are in.
  * Previews and local development are unaffected. No framework imports.
  */
-/** True on the production deployment: DEPLOY_ENV on Cloudflare (set in wrangler.jsonc and by the deploy workflow), VERCEL_ENV on Vercel. */
-export const isProduction = (env: Record<string, string | undefined>) => (env.DEPLOY_ENV ?? env.VERCEL_ENV) === "production"
+/** True on the production deployment: DEPLOY_ENV is "production" there (set in wrangler.jsonc and by the deploy workflow). */
+export const isProduction = (env: Record<string, string | undefined>) => env.DEPLOY_ENV === "production"
 
 export const testModeInProduction = (env: Record<string, string | undefined>) => isProduction(env) && env.DODO_MODE === "test"
 

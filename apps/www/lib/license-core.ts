@@ -8,7 +8,6 @@ export type LicenseResult = { valid: boolean; reason?: string }
 
 export type LicenseEnv = {
   DEPLOY_ENV?: string
-  VERCEL_ENV?: string
   BALLMAC_LICENSE_PROVIDER?: string
   BALLMAC_PRO_TEST_KEYS?: string
   LEMONSQUEEZY_STORE_ID?: string

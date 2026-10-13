@@ -29,7 +29,7 @@ export type FetchPlan =
   | { action: "fail"; reason: string }
 
 export function isRequired(env: FetchEnv) {
-  return (env.DEPLOY_ENV ?? env.VERCEL_ENV) === "production" || env.BALLMAC_REQUIRE_PRO === "1"
+  return env.DEPLOY_ENV === "production" || env.BALLMAC_REQUIRE_PRO === "1"
 }
 
 export function planFetch(env: FetchEnv, present: boolean): FetchPlan {
@@ -43,7 +43,7 @@ export function planFetch(env: FetchEnv, present: boolean): FetchPlan {
   }
   const repo = env.PRO_REPO?.trim() || "vamsiy78/ballmac-ui-pro"
   if (!/^[\w.-]+\/[\w.-]+$/.test(repo)) return { action: "fail", reason: `PRO_REPO "${repo}" is not owner/name` }
-  const ref = env.PRO_REPO_REF?.trim() || ((env.DEPLOY_ENV ?? env.VERCEL_ENV) === "production" ? "main" : "preprod")
+  const ref = env.PRO_REPO_REF?.trim() || (env.DEPLOY_ENV === "production" ? "main" : "preprod")
   if (!/^[\w./-]+$/.test(ref) || ref.startsWith("-")) return { action: "fail", reason: `PRO_REPO_REF "${ref}" is not a valid ref` }
   return { action: "fetch", repo, ref, required }
 }

@@ -2,7 +2,7 @@
  * Finishes out/ after `next build` with BALLMAC_EXPORT=1: adds Cloudflare's _headers and _redirects, and fails when the build would not fit or would
  * leak. Run by `pnpm cf:build`.
  */
-import { copyFileSync, existsSync, readdirSync, statSync } from "node:fs"
+import { appendFileSync, copyFileSync, existsSync, readdirSync, statSync } from "node:fs"
 import { join, relative } from "node:path"
 
 const www = join(import.meta.dirname, "..")
@@ -10,6 +10,8 @@ const out = join(www, "out")
 if (!existsSync(out)) throw new Error("out/ is missing: run next build with BALLMAC_EXPORT=1 first")
 
 for (const f of ["_headers", "_redirects"]) copyFileSync(join(www, "cloudflare", f), join(out, f))
+// A preview build (DEPLOY_ENV=preview) must never be indexed: every file it serves says so.
+if (process.env.DEPLOY_ENV && process.env.DEPLOY_ENV !== "production") appendFileSync(join(out, "_headers"), "\n# Preview build: keep it out of search engines.\n/*\n  X-Robots-Tag: noindex\n")
 
 const files: string[] = []
 let dirs = 0

@@ -24,10 +24,11 @@
   "observability": { "enabled": true },
   "vars": { "DEPLOY_ENV": "development" },
   "env": {
-    // preprod: https://ballmac-ui-preview.<account>.workers.dev
+    // preprod: https://preprod.ui.ballmac.com (and https://ballmac-ui-preview.ballmac.workers.dev)
     "preview": {
       "name": "ballmac-ui-preview",
       "workers_dev": true,
+      "routes": [{ "pattern": "preprod.ui.ballmac.com", "custom_domain": true }],
       "vars": { "DEPLOY_ENV": "preview" }
     },
     "production": {

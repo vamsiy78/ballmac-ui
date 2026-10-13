@@ -13,12 +13,12 @@ describe("planFetch", () => {
     expect(planFetch({}, false).action).toBe("free-only")
   })
   it("fails without a token in production or when required", () => {
-    expect(planFetch({ VERCEL_ENV: "production" }, false).action).toBe("fail")
+    expect(planFetch({ DEPLOY_ENV: "production" }, false).action).toBe("fail")
     expect(planFetch({ BALLMAC_REQUIRE_PRO: "1" }, false).action).toBe("fail")
   })
   it("defaults the ref by environment", () => {
-    expect(planFetch({ PRO_REPO_TOKEN: "t", VERCEL_ENV: "production" }, false)).toMatchObject({ ref: "main", required: true })
-    expect(planFetch({ PRO_REPO_TOKEN: "t", VERCEL_ENV: "preview" }, false)).toMatchObject({ ref: "preprod", repo: "vamsiy78/ballmac-ui-pro" })
+    expect(planFetch({ PRO_REPO_TOKEN: "t", DEPLOY_ENV: "production" }, false)).toMatchObject({ ref: "main", required: true })
+    expect(planFetch({ PRO_REPO_TOKEN: "t", DEPLOY_ENV: "preview" }, false)).toMatchObject({ ref: "preprod", repo: "vamsiy78/ballmac-ui-pro" })
     expect(planFetch({ PRO_REPO_TOKEN: "t", PRO_REPO_REF: "v1.0.0" }, false)).toMatchObject({ ref: "v1.0.0" })
   })
   it("rejects malformed repo and ref values", () => {

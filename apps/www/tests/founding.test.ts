@@ -39,7 +39,7 @@ describe("founding offer", () => {
     expect(founding({ ...full, NEXT_PUBLIC_PRO_FOUNDING_ENDS: "soon" }, after)).not.toBeNull()
   })
   it("never runs in test mode on production", () => {
-    expect(founding({ ...full, VERCEL_ENV: "production", DODO_MODE: "test" }, before)).toBeNull()
+    expect(founding({ ...full, DEPLOY_ENV: "production", DODO_MODE: "test" }, before)).toBeNull()
   })
 })
 
@@ -62,7 +62,7 @@ describe("what Pro sells right now", () => {
     expect(proOffer({})).toMatchObject({ onSale: false })
   })
   it("sells nothing in test mode on production", () => {
-    expect(proOffer({ ...full, VERCEL_ENV: "production", DODO_MODE: "test" }, before).onSale).toBe(false)
+    expect(proOffer({ ...full, DEPLOY_ENV: "production", DODO_MODE: "test" }, before).onSale).toBe(false)
   })
 })
 

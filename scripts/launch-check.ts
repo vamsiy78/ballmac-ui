@@ -1,7 +1,7 @@
 /**
  * Launch readiness check for the Pro registry.
  *
- *   pnpm launch:check                       against the current environment (set production values to mirror Vercel)
+ *   pnpm launch:check                       against the current environment (set the production values from the Pro repository's GitHub settings)
  *   pnpm launch:check --live [--key K]      also calls the licence provider (bogus key must be rejected; --key must be accepted)
  *
  * Exit 1 when something that would break or weaken a production launch is missing.
@@ -68,7 +68,7 @@ export function evaluate({ env, proSource, proBuilt, production }: CheckInput): 
 
 async function live(env: Record<string, string | undefined>, key?: string) {
   const { createLicenseValidator } = await import("../apps/www/lib/license-core")
-  const v = createLicenseValidator({ ...env, BALLMAC_PRO_TEST_KEYS: "", VERCEL_ENV: "production" } as never)
+  const v = createLicenseValidator({ ...env, BALLMAC_PRO_TEST_KEYS: "", DEPLOY_ENV: "production" } as never)
   const out: Check[] = []
   try {
     const bogus = await v("bogus-key-0000-0000-0000")
@@ -110,7 +110,7 @@ function countMeta(dir: string): number {
 }
 
 async function main() {
-  const production = process.env.VERCEL_ENV === "production" || process.env.BALLMAC_REQUIRE_PRO === "1" || process.argv.includes("--production")
+  const production = process.env.DEPLOY_ENV === "production" || process.env.BALLMAC_REQUIRE_PRO === "1" || process.argv.includes("--production")
   const built = join(ROOT, "apps/www/.registry-pro")
   const proBuilt = existsSync(built) ? readdirSync(built).filter((f) => f.endsWith(".json") && f !== "registry.json").length : 0
   let checks = evaluate({ env: process.env, proSource: countMeta(join(ROOT, "registry/pro/ballmac")), proBuilt, production })

@@ -5,8 +5,8 @@
  *   pnpm reminders:schedule               create and schedule the broadcasts
  *
  * Needs RESEND_API_KEY, RESEND_AUDIENCE_ID and RESEND_FROM, and the same founding variables as the site (NEXT_PUBLIC_PRO_PRICE, NEXT_PUBLIC_PRO_CHECKOUT_URL,
- * NEXT_PUBLIC_PRO_FOUNDING_LIMIT, NEXT_PUBLIC_PRO_FOUNDING_ENDS, NEXT_PUBLIC_PRO_LIST_PRICE). Pull them first, for example
- * `vercel env pull .env.production.local --environment=production`, then `set -a; . ./.env.production.local; set +a`.
+ * NEXT_PUBLIC_PRO_FOUNDING_LIMIT, NEXT_PUBLIC_PRO_FOUNDING_ENDS, NEXT_PUBLIC_PRO_LIST_PRICE). They are stored in the private Pro repository's GitHub
+ * settings, so run it there: Actions → "Founding reminders" (dry-run first, then schedule).
  *
  * Safe to run again: a reminder whose broadcast already exists (same name) is skipped, and a reminder whose time has passed is never sent late.
  * A broadcast goes to everyone in the audience when it sends, so run this when the deadline and the copy are final. Unsubscribing is handled by Resend.
