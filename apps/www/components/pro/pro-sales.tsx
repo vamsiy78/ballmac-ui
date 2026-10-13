@@ -11,7 +11,8 @@ import Link from "@/components/site/link"
 import { PageCard } from "@/components/site/page-card"
 import { Sampler } from "@/components/site/sampler"
 import { StayCurrent } from "@/components/site/stay-current"
-import { endsLabel, leftPhrase } from "@/lib/founding"
+import { LeftPhrase } from "@/components/site/founding-text"
+import { endsLabel } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
 import { getOffer } from "@/lib/offer"
@@ -84,7 +85,7 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
 
 /**
  * The page a visitor without a licence sees at /pro: what Pro is, who it is for, what is in it, what it costs. It is built from the real catalogue, so the numbers
- * and previews are always the ones in this build. Pages that show it are rebuilt every few minutes (see `revalidate` on the route) so the countdown stays true.
+ * and previews are always the ones in this build. The countdown and "ends in" phrases follow the visitor's clock between builds.
  */
 export async function ProSales({ downloads }: { downloads: { starters: { slug: string }[] } }) {
   const now = new Date()
@@ -119,7 +120,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
 
   return (
     <>
-      {f && <FoundingBanner offer={f} phrase={f.endsAt ? leftPhrase(f.endsAt, now) : null} href="#buy" />}
+      {f && <FoundingBanner offer={f} at={now.getTime()} href="#buy" />}
 
       {/* Hero */}
       <section className="relative isolate overflow-hidden border-b" aria-labelledby="pro-h">
@@ -129,7 +130,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
           <div className={rise}>
             <p className="bg-muted/60 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[13px] font-medium dark:bg-white/[0.06]">
               <span className="bg-chart-1 size-1.5 rounded-full" aria-hidden="true" />
-              Ballmac UI Pro{f?.endsAt ? <span className="text-muted-foreground">· founding price {leftPhrase(f.endsAt, now)}</span> : null}
+              Ballmac UI Pro{f?.endsAt ? <span className="text-muted-foreground">· founding price <LeftPhrase endsAt={f.endsAt} at={now.getTime()} /></span> : null}
             </p>
             <h1 id="pro-h" className="mt-6 text-5xl leading-[1.02] font-semibold tracking-[-0.05em] text-balance sm:text-6xl">
               Ship the real screens of your app this week.

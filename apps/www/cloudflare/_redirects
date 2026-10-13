@@ -1,0 +1,2 @@
+# Redirects for the static site on Cloudflare (copied into out/ by worker/postbuild.ts). Keep in step with redirects() in next.config.ts.
+/docs/licensing /license 301

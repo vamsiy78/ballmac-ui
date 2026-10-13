@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next"
 
 import { SITE_URL } from "@/lib/registry"
 
+// Built once with the site (the Cloudflare build is static).
+export const dynamic = "force-static"
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/", disallow: ["/preview/"] },

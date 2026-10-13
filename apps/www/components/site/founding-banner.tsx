@@ -4,6 +4,7 @@ import { ArrowRight, X } from "lucide-react"
 import * as React from "react"
 
 import Link from "@/components/site/link"
+import { LeftPhrase } from "@/components/site/founding-text"
 import { endsShort, type Founding } from "@/lib/founding"
 
 const KEY = "founding-banner"
@@ -32,8 +33,8 @@ const subscribe = (onChange: () => void) => {
  * about 0.1 on the home and pricing pages). A visitor who dismissed it earlier gets `data-founding-off` on <html> from the script below before first
  * paint, and the rule in globals.css hides it, so a dismissed banner never flashes either.
  */
-/** `phrase` is how long is left ("ends in 5 days"), worked out on the server so the banner matches what was rendered. */
-export function FoundingBanner({ offer, phrase, href = "/pricing" }: { offer: Founding; phrase?: string | null; href?: string }) {
+/** `at` is when the page was rendered: the banner starts from it, so it matches the HTML, then says how long is left by the visitor's clock. */
+export function FoundingBanner({ offer, at, href = "/pricing" }: { offer: Founding; at: number; href?: string }) {
   const id = `${offer.limit}-${offer.price}`
   // Read from storage as an external store: the server renders it visible, then the browser adopts what the visitor chose.
   const stored = React.useSyncExternalStore(subscribe, () => readStored() === id, () => false)
@@ -56,7 +57,7 @@ export function FoundingBanner({ offer, phrase, href = "/pricing" }: { offer: Fo
                 {offer.endsAt ? <> after {endsShort(offer.endsAt)}</> : null}
               </>
             ) : null}
-            . First <span className="font-semibold">{offer.limit}</span> buyers only{phrase ? <>. {phrase.charAt(0).toUpperCase() + phrase.slice(1)}</> : null}.
+            . First <span className="font-semibold">{offer.limit}</span> buyers only{offer.endsAt ? <>. <LeftPhrase endsAt={offer.endsAt} at={at} capitalize /></> : null}.
           </p>
           <Link href={href} className="focus-visible:ring-background/60 inline-flex items-center gap-1 rounded-sm font-medium underline underline-offset-4 outline-none focus-visible:ring-2">
             Get Pro <ArrowRight className="size-3.5" aria-hidden="true" />

@@ -1,4 +1,5 @@
-# Tells Bing and other IndexNow search engines about changed pages after every successful production deploy.
+# Tells Bing and other IndexNow search engines about changed pages after every successful production deploy on Vercel. On Cloudflare the deploy
+# workflow (Deploy, in the private Pro repository) runs `pnpm indexnow` itself after a production deploy.
 # Run it by hand from the Actions tab with "all" ticked to send every URL in the sitemap.
 name: IndexNow
 

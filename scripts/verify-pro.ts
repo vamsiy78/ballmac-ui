@@ -4,7 +4,7 @@
  *   pnpm verify:pro                                   static scan (run after a build)
  *   pnpm verify:pro --base-url https://host --key K   also probes a running site
  *
- * Static: scans apps/www/public, .next/static and prerendered .next/server/app for fingerprints
+ * Static: scans apps/www/public, .next/static, prerendered .next/server/app and the Cloudflare build (apps/www/out) for fingerprints
  * (long, distinctive Pro source lines that are not present in free sources), and checks git
  * history for Pro paths. Runtime: licence gating on /r/pro, 404 on public Pro names, and no
  * fingerprints in public API/pages.
@@ -53,8 +53,8 @@ function fingerprints() {
     }
   }
   // Props tables are public documentation, so default values (shown on item pages and in the API) are not leaks.
-  const dir = join(ROOT, "apps/www/.next/server/app/api/v1/items")
-  for (const f of walk(dir).filter((f) => f.endsWith(".body"))) {
+  const items = [...walk(join(ROOT, "apps/www/.next/server/app/api/v1/items")).filter((f) => f.endsWith(".body")), ...walk(join(ROOT, "apps/www/out/api/v1/items")).filter((f) => f.endsWith(".json"))]
+  for (const f of items) {
     try {
       const body = JSON.parse(readFileSync(f, "utf8")) as { props?: { default?: unknown }[] }
       for (const p of body.props ?? []) if (typeof p.default === "string") for (const l of p.default.split("\n")) fp.delete(l.trim())
@@ -65,13 +65,17 @@ function fingerprints() {
 
 function scanTargets(fp: string[]) {
   const www = join(ROOT, "apps/www")
-  const dirs = [join(www, "public"), join(www, ".next/static"), join(www, ".next/server/app")].filter(existsSync)
+  const dirs = [join(www, "public"), join(www, ".next/static"), join(www, ".next/server/app"), join(www, "out")].filter(existsSync)
   // JS chunks escape quotes, so search for both forms. grep -F uses Aho-Corasick, which keeps this fast on large builds.
   const patterns = fp.flatMap((l) => [l, l.replace(/"/g, '\\"')])
   const file = join(tmpdir(), `verify-pro-${process.pid}.txt`)
   writeFileSync(file, [...new Set(patterns)].join("\n") + "\n")
   try {
-    const r = spawnSync("grep", ["-rlF", "--exclude-dir=pro", "-f", file, ...dirs], { encoding: "utf8", maxBuffer: 1 << 26 })
+    // ripgrep when it is installed (much faster on macOS, where grep -F with many patterns takes most of an hour on a full build), else grep.
+    const rg = spawnSync("rg", ["--version"]).status === 0
+    const r = rg
+      ? spawnSync("rg", ["-lF", "--no-ignore", "--hidden", "-g", "!**/pro/**", "-f", file, ...dirs], { encoding: "utf8", maxBuffer: 1 << 26 })
+      : spawnSync("grep", ["-rlF", "--exclude-dir=pro", "-f", file, ...dirs], { encoding: "utf8", maxBuffer: 1 << 26 })
     if (r.status === 2) throw new Error(r.stderr)
     for (const f of r.stdout.split("\n").filter(Boolean).slice(0, 10)) fail(`Pro source lines found in ${relative(ROOT, f)}`)
   } finally {

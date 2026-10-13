@@ -16,8 +16,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/pro" },
 }
 
-// The sales page counts down to the founding deadline, so the page is rebuilt every few minutes.
-export const revalidate = 300
 
 const licenseUrl = process.env.NEXT_PUBLIC_PRO_LICENSE_URL || PRO_LICENCE_PATH
 

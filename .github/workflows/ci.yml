@@ -36,5 +36,25 @@ jobs:
       - run: pnpm test
       - name: No Pro source in git history
         run: pnpm verify:pro
-      - name: Build site
-        run: pnpm --filter @ballmac-ui/www exec next build
+      - name: Build site (the static Cloudflare build, free items only)
+        run: pnpm --filter @ballmac-ui/www cf:build
+      - name: Bundle the Worker (no upload)
+        run: pnpm --filter @ballmac-ui/www exec wrangler deploy --dry-run --outdir .wrangler/dry-run
+
+  # After the checks pass on main or preprod, starts the Cloudflare deploy in the private Pro repository (its "Deploy" workflow), for this exact commit.
+  # main deploys ui.ballmac.com; preprod deploys the preview. Off until the repository variable CF_DEPLOY is "on". Setup: internal/CLOUDFLARE.md in the Pro repository.
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && vars.CF_DEPLOY == 'on'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Start the deploy
+        run: |
+          gh workflow run deploy.yml -R vamsiy78/ballmac-ui-pro --ref "$BRANCH" \
+            -f target="$TARGET" -f ui_ref="$GITHUB_SHA" -f pro_ref="$BRANCH" -f reason="ballmac-ui ${GITHUB_SHA::7}"
+          echo "Started the $TARGET deploy of ${GITHUB_SHA::7}: https://github.com/vamsiy78/ballmac-ui-pro/actions/workflows/deploy.yml" | tee -a "$GITHUB_STEP_SUMMARY"
+        env:
+          GH_TOKEN: ${{ secrets.PRO_DEPLOY_TOKEN }}
+          BRANCH: ${{ github.ref_name }}
+          TARGET: ${{ github.ref_name == 'main' && 'production' || 'preview' }}

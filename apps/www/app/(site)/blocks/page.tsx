@@ -14,8 +14,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blocks" },
 }
 
-// The Pro card counts down to the founding deadline, so the page is rebuilt every few minutes.
-export const revalidate = 300
 
 export default async function BlocksPage() {
   const blocks = await Promise.all(

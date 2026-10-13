@@ -6,6 +6,7 @@ import * as React from "react"
 import { fetchProItem, useProFlag, type ProItem } from "@/components/pro/session"
 import { CopyButton } from "@/components/site/copy-button"
 import { ProNotice } from "@/components/site/pro-notice"
+import type { Nudge } from "@/lib/founding"
 
 function Skeleton() {
   return (
@@ -20,7 +21,7 @@ function Skeleton() {
  * The source of a Pro item. Visitors see the notice; a buyer who is logged in sees the real code with copy buttons, fetched from
  * the licence-checked API, so the page itself stays static and public.
  */
-export function ProCode({ name, nudge = null }: { name: string; nudge?: string | null }) {
+export function ProCode({ name, nudge = null }: { name: string; nudge?: Nudge }) {
   const signedIn = useProFlag()
   // undefined while loading, null when the session turned out not to be valid.
   const [loaded, setLoaded] = React.useState<{ name: string; item: ProItem | null } | undefined>()

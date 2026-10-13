@@ -1,16 +1,30 @@
 import type { NextConfig } from "next"
 
+/**
+ * Two ways to build:
+ *   BALLMAC_EXPORT=1 next build   the site as static files in out/, for Cloudflare (see wrangler.jsonc). Headers and redirects then come from
+ *                                 cloudflare/_headers and cloudflare/_redirects, and the routes that need a request run in the Worker (worker/).
+ *   next dev / next build         a Node server, for development. The Worker's routes are proxied to `pnpm cf:worker` (wrangler dev, port 8787).
+ */
+const exportBuild = process.env.BALLMAC_EXPORT === "1"
+const WORKER_DEV = process.env.BALLMAC_WORKER_URL || "http://127.0.0.1:8787"
+// Keep in step with run_worker_first in wrangler.jsonc.
+const workerRoutes = ["/api/pro/:path*", "/api/reminders", "/api/sampler", "/api/support", "/api/v1/license/:path*", "/r/pro/:path*", "/themes/custom.json"]
+
 const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
   transpilePackages: ["@ballmac-ui/metadata", "@ballmac-ui/theme-engine"],
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
-  // The private Pro registry route reads the Pro build from disk at request time.
-  outputFileTracingIncludes: { "/r/pro/\\[name\\]": ["./.registry-pro/**/*"], "/r/pro/starters/\\[file\\]": ["./.registry-pro/starters/**/*"], "/r/pro/kits/\\[file\\]": ["./.registry-pro/kits/**/*"] },
-  async redirects() {
+  ...(exportBuild ? { output: "export", images: { unoptimized: true } } : {}),
+}
+
+if (!exportBuild) {
+  nextConfig.rewrites = async () => workerRoutes.map((source) => ({ source, destination: `${WORKER_DEV}${source}` }))
+  nextConfig.redirects = async function redirects() {
     return [{ source: "/docs/licensing", destination: "/license", permanent: true }]
-  },
-  async headers() {
+  }
+  nextConfig.headers = async function headers() {
     return [
       {
         // Free registry items: public, cacheable, and fetchable cross-origin by the shadcn CLI and v0.
@@ -41,7 +55,7 @@ const nextConfig: NextConfig = {
         ],
       },
     ]
-  },
+  }
 }
 
 export default nextConfig

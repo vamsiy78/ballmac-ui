@@ -1,0 +1,42 @@
+// ui.ballmac.com on Cloudflare: the static site (out/, from `next build` with BALLMAC_EXPORT=1) plus a small Worker for the routes that need a request.
+// Deploys: `pnpm cf:deploy --env preview` or `--env production` (the deploy workflow in the private Pro repository runs these). Local: `pnpm cf:dev`.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ballmac-ui-dev",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  // nodejs_compat also fills process.env from vars and secrets, which the shared lib code reads.
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "out",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    // Only these reach the Worker; everything else is a static file. Keep in step with ROUTES in worker/index.ts.
+    "run_worker_first": ["/api/pro/*", "/api/reminders", "/api/sampler", "/api/support", "/api/v1/license/*", "/r/pro/*", "/themes/custom.json"]
+  },
+  "alias": { "server-only": "./worker/server-only.ts" },
+  // The private Pro build is bundled as modules (worker/build-data.ts): registry JSON and highlighted items as text, archives as bytes.
+  "rules": [
+    { "type": "Text", "globs": ["**/*.txt"], "fallthrough": true },
+    { "type": "Data", "globs": ["**/*.bin"], "fallthrough": true }
+  ],
+  "observability": { "enabled": true },
+  "vars": { "DEPLOY_ENV": "development" },
+  "env": {
+    // preprod: https://ballmac-ui-preview.<account>.workers.dev
+    "preview": {
+      "name": "ballmac-ui-preview",
+      "workers_dev": true,
+      "vars": { "DEPLOY_ENV": "preview" }
+    },
+    "production": {
+      "name": "ballmac-ui",
+      "workers_dev": false,
+      "routes": [{ "pattern": "ui.ballmac.com", "custom_domain": true }],
+      "vars": { "DEPLOY_ENV": "production", "DEPLOY_REPO": "vamsiy78/ballmac-ui-pro", "DEPLOY_WORKFLOW": "deploy.yml" },
+      // Rebuilds the site when the Pro offer changes (worker/offer-watch.ts).
+      "triggers": { "crons": ["*/15 * * * *"] }
+    }
+  }
+}

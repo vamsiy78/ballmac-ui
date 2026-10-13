@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "types": ["@cloudflare/workers-types"],
+    "jsx": "react-jsx",
+    "incremental": false,
+    "plugins": []
+  },
+  "include": ["./**/*.ts", "./*.d.ts"],
+  "exclude": ["./generated/pro/**"]
+}

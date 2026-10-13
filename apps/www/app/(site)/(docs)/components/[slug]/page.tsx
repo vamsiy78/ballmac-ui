@@ -26,8 +26,6 @@ export function generateStaticParams() {
 }
 export const dynamicParams = false
 
-// The Pro card counts down to the founding deadline, so the page is rebuilt every few minutes.
-export const revalidate = 300
 
 export async function generateMetadata({ params }: PageProps<"/components/[slug]">): Promise<Metadata> {
   const item = getItem((await params).slug)

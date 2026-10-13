@@ -10,7 +10,7 @@ import { Themed } from "@/components/pro/shots"
 import { FoundingBanner } from "@/components/site/founding-banner"
 import { ProCallout } from "@/components/site/pro-callout"
 import { SiteJsonLd } from "@/components/site/site-jsonld"
-import { leftPhrase } from "@/lib/founding"
+import { LeftPhrase } from "@/components/site/founding-text"
 import { thumbFor } from "@/lib/thumbs"
 import { getOffer } from "@/lib/offer"
 import { CopyButton } from "@/components/site/copy-button"
@@ -23,8 +23,6 @@ import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = { alternates: { canonical: "/" } }
 
-// The founding-price banner counts down to a deadline, so the page is rebuilt every few minutes.
-export const revalidate = 300
 
 // The collection as an asymmetric bento: two large anchors (desktop top left, devices bottom right),
 // a tall AI tile, a wide motion strip and small tiles filling the gaps. Each shows a real example.
@@ -69,7 +67,7 @@ export default async function Home() {
   return (
     <>
       <SiteJsonLd />
-      {offer && <FoundingBanner offer={offer} phrase={offer.endsAt ? leftPhrase(offer.endsAt, now) : null} />}
+      {offer && <FoundingBanner offer={offer} at={now.getTime()} />}
       {/* Hero */}
       <section className="mx-auto max-w-[1440px] px-4 pt-16 pb-12 text-center sm:px-6 md:pt-24 md:pb-16">
         <Link
@@ -98,7 +96,7 @@ export default async function Home() {
         <p className="text-muted-foreground mt-3 text-[13px]">
           {offer ? (
             <>
-              Founding price: ${offer.price} once{offer.listPrice ? `, then $${offer.listPrice}` : ""}. First {offer.limit} buyers{offer.endsAt ? `. ${leftPhrase(offer.endsAt, now).replace(/^./, (c) => c.toUpperCase())}` : ""}.
+              Founding price: ${offer.price} once{offer.listPrice ? `, then $${offer.listPrice}` : ""}. First {offer.limit} buyers{offer.endsAt ? <>. <LeftPhrase endsAt={offer.endsAt} at={now.getTime()} capitalize /></> : null}.
             </>
           ) : (
             "One payment. Every future update included."

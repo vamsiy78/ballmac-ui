@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next"
 
 // Lets phones and browsers name and style the site when it is saved to a home screen. The icons are the same files the tab uses.
+// Built once with the site (the Cloudflare build is static).
+export const dynamic = "force-static"
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Ballmac UI",

@@ -4,7 +4,7 @@ import { validateLicense } from "@/lib/license"
 import { createProGate } from "@/lib/pro-gate-core"
 import { openSession, readCookie, SESSION_COOKIE } from "@/lib/pro-session-core"
 import { clientId, licenseFailures } from "@/lib/rate-limit"
-import { SITE_URL } from "@/lib/registry"
+import { SITE_URL } from "@/lib/site-url"
 
 /** The secret that seals session cookies. Only a development fallback exists: a production server without the variable has no browser login. */
 export const sessionSecret = () => process.env.PRO_SESSION_SECRET || (process.env.NODE_ENV === "production" ? "" : "ballmac-development-session-secret")

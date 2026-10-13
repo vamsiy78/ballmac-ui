@@ -2,9 +2,12 @@
  * Licence checks for Ballmac UI Pro, with no Next.js imports so it can be tested on its own.
  * Providers: Lemon Squeezy, Polar or Dodo Payments (all are merchants of record and issue licence keys), plus test keys for development.
  */
+import { isProduction, testModeInProduction } from "./payments"
+
 export type LicenseResult = { valid: boolean; reason?: string }
 
 export type LicenseEnv = {
+  DEPLOY_ENV?: string
   VERCEL_ENV?: string
   BALLMAC_LICENSE_PROVIDER?: string
   BALLMAC_PRO_TEST_KEYS?: string
@@ -38,8 +41,8 @@ const list = (v?: string) => (v ?? "").split(",").map((s) => s.trim()).filter(Bo
 
 export function createLicenseValidator(env: LicenseEnv, fetchImpl: typeof fetch = fetch, now: () => number = Date.now) {
   const cache = new Map<string, { result: LicenseResult; until: number }>()
-  // Test keys never unlock anything on Vercel production, even if the variable is set by mistake.
-  const testKeys = new Set(env.VERCEL_ENV === "production" ? [] : list(env.BALLMAC_PRO_TEST_KEYS))
+  // Test keys never unlock anything in production, even if the variable is set by mistake.
+  const testKeys = new Set(isProduction(env) ? [] : list(env.BALLMAC_PRO_TEST_KEYS))
   const provider = (env.BALLMAC_LICENSE_PROVIDER ?? "").toLowerCase()
   const keysets = new Map<string, { keys: Set<string>; at: number }>()
   const loading = new Map<string, Promise<Set<string>>>()
@@ -128,7 +131,7 @@ export function createLicenseValidator(env: LicenseEnv, fetchImpl: typeof fetch 
    */
   async function dodo(key: string): Promise<LicenseResult> {
     // Production in test mode would accept test purchases as real licences, so it accepts nothing (see lib/payments.ts).
-    if (env.VERCEL_ENV === "production" && env.DODO_MODE === "test") return { valid: false, reason: "Licence checks are not live yet." }
+    if (testModeInProduction(env)) return { valid: false, reason: "Licence checks are not live yet." }
     const res = await fetchImpl(`${dodoBase()}/licenses/validate`, {
       method: "POST",
       headers: { accept: "application/json", "content-type": "application/json" },

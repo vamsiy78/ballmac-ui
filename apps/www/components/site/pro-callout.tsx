@@ -3,7 +3,8 @@ import { ArrowRight, Clock } from "lucide-react"
 import { buttonVariants } from "@/components/ballmac/button"
 import Link from "@/components/site/link"
 import { Sampler } from "@/components/site/sampler"
-import { nudgeText } from "@/lib/founding"
+import { NudgeText } from "@/components/site/founding-text"
+import { nudgeOf } from "@/lib/founding"
 import { getOffer } from "@/lib/offer"
 import { getBlocks, getItem, isPro } from "@/lib/registry"
 import { SAMPLER_BLOCKS } from "@/lib/sampler"
@@ -12,11 +13,11 @@ import { cn } from "@/lib/utils"
 /**
  * A quiet card for the free pages people read most (the component and block lists and their pages): what Pro adds, the founding price while it runs, and the
  * free sampler for anyone who is not ready. `where` says which page it sits on and is added to the pricing link as a campaign, so Analytics shows which pages send
- * people to Pricing. It renders on the server; pages that show it are rebuilt every few minutes (`revalidate`) so the countdown stays true.
+ * people to Pricing. It renders when the page is built; the founding line then follows the visitor's clock (NudgeText).
  */
 export async function ProCallout({ where, className }: { where: string; className?: string }) {
   const offer = (await getOffer()).founding
-  const nudge = nudgeText(offer)
+  const nudge = nudgeOf(offer)
   const proBlocks = getBlocks().filter(isPro).length || 150
   // The sampler needs the Pro source, so it is left out of builds that do not have it (the public repository on its own).
   const sampler = SAMPLER_BLOCKS.some((n) => {
@@ -42,7 +43,7 @@ export async function ProCallout({ where, className }: { where: string; classNam
         {nudge && (
           <p className="text-muted-foreground inline-flex items-center gap-2 text-sm">
             <Clock className="size-3.5 shrink-0" aria-hidden="true" />
-            {nudge}
+            <NudgeText nudge={nudge} />
           </p>
         )}
       </div>

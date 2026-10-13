@@ -7,6 +7,9 @@ import { getAllItems, itemHref, SITE_URL } from "@/lib/registry"
 
 const pages = ["", "/components", "/blocks", "/templates", "/themes", "/feels", "/pricing", "/pro", "/support", "/founders", "/changelog", "/docs", "/docs/installation", "/docs/theming", "/docs/motion", "/docs/feels", "/docs/states", "/docs/registry", "/docs/mcp", "/docs/cli", "/docs/check", "/quality", "/docs/pro", "/docs/rtl", "/docs/i18n", "/docs/images", "/license", "/license/pro"]
 
+// Built once with the site (the Cloudflare build is static).
+export const dynamic = "force-static"
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const items = getAllItems().filter((i) => i.category !== "foundation")
   // Pages, docs and themes change with the site, not only with items, so they follow the newest of the item dates and the latest changelog entry.

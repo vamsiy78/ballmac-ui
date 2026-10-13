@@ -58,6 +58,8 @@
   "exclude": [
     "node_modules",
     "../../registry/**/node_modules",
-    "../../registry/pro/starters"
+    "../../registry/pro/starters",
+    "worker",
+    "out"
   ]
 }

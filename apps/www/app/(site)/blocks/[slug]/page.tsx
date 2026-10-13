@@ -15,7 +15,7 @@ import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { ItemStates } from "@/components/site/item-states"
 import { SectionHeading } from "@/components/site/section-heading"
 import { Scorecard } from "@/components/site/scorecard"
-import { nudgeText } from "@/lib/founding"
+import { nudgeOf } from "@/lib/founding"
 import { getOffer } from "@/lib/offer"
 import { blockCategoryLabels, getBlocks, getItem, isPro, readSource } from "@/lib/registry"
 
@@ -23,8 +23,6 @@ export function generateStaticParams() {
   return getBlocks().map((b) => ({ slug: b.name }))
 }
 export const dynamicParams = false
-// The founding-price line on Pro blocks counts down, so these pages are rebuilt every few minutes.
-export const revalidate = 300
 
 export async function generateMetadata({ params }: PageProps<"/blocks/[slug]">): Promise<Metadata> {
   const item = getItem((await params).slug)
@@ -36,7 +34,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
   const item = getItem((await params).slug)
   if (!item || item.category !== "blocks") notFound()
   const example = item.examples[0]
-  const nudge = isPro(item) ? nudgeText((await getOffer()).founding) : null
+  const nudge = isPro(item) ? nudgeOf((await getOffer()).founding) : null
   const related = getBlocks().filter((b) => b.name !== item.name && b.blockCategory === item.blockCategory).slice(0, 4)
   return (
     <div className="mx-auto max-w-[1440px] space-y-10 px-4 py-12 sm:px-6">
@@ -49,7 +47,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
         </nav>
         <h1 className="flex items-center gap-3 text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}{isPro(item) && <ProBadge />}</h1>
         <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
-        {nudge && <FoundingNudge text={nudge} />}
+        {nudge && <FoundingNudge nudge={nudge} />}
       </header>
       {example && (
         <FramePreview

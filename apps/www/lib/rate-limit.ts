@@ -19,8 +19,10 @@ export function createFailureLimiter({ max = 20, windowMs = 10 * 60 * 1000, now 
   }
 }
 
+// On Cloudflare, cf-connecting-ip is set by Cloudflare and cannot be forged; x-forwarded-for can be sent by anyone there, so it is only the fallback
+// (on Vercel, which overwrites it).
 export function clientId(headers: Headers) {
-  return headers.get("x-forwarded-for")?.split(",")[0]?.trim() || headers.get("x-real-ip") || "unknown"
+  return headers.get("cf-connecting-ip") || headers.get("x-forwarded-for")?.split(",")[0]?.trim() || headers.get("x-real-ip") || "unknown"
 }
 
 export const licenseFailures = createFailureLimiter()

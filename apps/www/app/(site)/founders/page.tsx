@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/founders" },
 }
 
-export const revalidate = 300
 
 export default async function FoundersPage() {
   const offer = (await getOffer()).founding

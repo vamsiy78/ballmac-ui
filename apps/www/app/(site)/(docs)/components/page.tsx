@@ -18,8 +18,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/components" },
 }
 
-// The Pro card counts down to the founding deadline, so the page is rebuilt every few minutes.
-export const revalidate = 300
 
 // Small controls get a smaller design size so their thumbnails aren't lost in empty space.
 const compact = new Set(["primitives", "forms", "feedback"])

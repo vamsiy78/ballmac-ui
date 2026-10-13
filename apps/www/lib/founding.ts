@@ -119,6 +119,11 @@ export function nudgeText(offer: Founding | null, now: Date = new Date()): strin
   return `Founding price for the first ${offer.limit} buyers${then}`
 }
 
+/** The founding offer and the moment a page was rendered, so the browser can keep the nudge line true (see NudgeText). Null when no offer runs. */
+export type Nudge = { offer: Founding; at: number } | null
+
+export const nudgeOf = (offer: Founding | null, at: number = Date.now()): Nudge => (offer ? { offer, at } : null)
+
 /** A short date for a banner, in India time: "21 Oct". */
 export function endsShort(endsAt: string): string {
   return new Intl.DateTimeFormat("en-GB", { timeZone: IST, day: "numeric", month: "short" }).format(new Date(endsAt))

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { auditTheme, type ThemeVars } from "@ballmac-ui/theme-engine"
 
-import { GET } from "../app/(site)/themes/custom.json/route"
+import { GET } from "../worker/routes/theme-custom"
 
 const get = async (query: string) => {
   const res = GET(new Request(`https://ui.test/themes/custom.json?${query}`))

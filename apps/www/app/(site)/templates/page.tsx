@@ -12,8 +12,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/templates" },
 }
 
-// The Pro card counts down to the founding deadline, so the page is rebuilt every few minutes.
-export const revalidate = 300
 
 export default async function TemplatesPage() {
   const templates = await Promise.all(

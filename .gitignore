@@ -25,3 +25,10 @@ figma-kit
 # The audit engine is copied into the CLI and MCP packages at build time (packages/audit/scripts/vendor.mjs).
 packages/cli/src/vendor/
 packages/mcp/src/vendor/
+
+# Cloudflare: the static build, the Worker's bundled Pro data, and wrangler's local state and secrets.
+apps/www/out
+apps/www/worker/generated
+.wrangler
+.dev.vars*
+.cf-secrets.json

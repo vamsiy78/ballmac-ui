@@ -10,7 +10,7 @@ import { FoundingCountdown } from "@/components/site/founding-countdown"
 import { PageCard } from "@/components/site/page-card"
 import { Eyebrow } from "@/components/site/section-heading"
 import { Sampler } from "@/components/site/sampler"
-import { endsLabel, leftPhrase } from "@/lib/founding"
+import { endsLabel } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { getOffer } from "@/lib/offer"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
@@ -24,8 +24,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/pricing" },
 }
 
-// The founding price ends at a deadline, so the page is rebuilt every few minutes instead of once: the switch to the regular price reaches visitors without a redeploy.
-export const revalidate = 300
 
 const teamCheckout = process.env.NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL
 const teamPrice = process.env.NEXT_PUBLIC_PRO_TEAM_PRICE
@@ -145,7 +143,7 @@ export default async function PricingPage() {
 
   return (
     <>
-      {f && <FoundingBanner offer={f} phrase={f.endsAt ? leftPhrase(f.endsAt, now) : null} href="#plans" />}
+      {f && <FoundingBanner offer={f} at={now.getTime()} href="#plans" />}
       <div className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6">
         <header className="mx-auto max-w-2xl space-y-4 text-center">
           <div className="flex justify-center">
