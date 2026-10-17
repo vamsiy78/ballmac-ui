@@ -347,6 +347,30 @@
     "version": "1.0.0",
     "hash": "4ac979235eb90754fdd8239329c85d625413aa07a9638005e48313415687c3a6"
   },
+  "desktop-1": {
+    "version": "1.0.0",
+    "hash": "033a19dae58e4711dda8e6d732e3847b5a481047149775566a1dfaba64c5d7b4"
+  },
+  "desktop-2": {
+    "version": "1.0.0",
+    "hash": "0cc33c43d4c1c1da468f7e2b8ed70fddae8c20bcedb84c965a5830e890d9b5a1"
+  },
+  "desktop-3": {
+    "version": "1.0.0",
+    "hash": "40402d8da90848f93c54634a500aa1da03c494f99e8eae21fa1e3acf113b95e7"
+  },
+  "desktop-4": {
+    "version": "1.0.0",
+    "hash": "214c7a57d5dfd10aea71251b8500e2ec2f8d0f0a87342b9966b2f117fb3dfe78"
+  },
+  "desktop-5": {
+    "version": "1.0.0",
+    "hash": "3a9c98efefc68f43b8f1248c3b1156c6227143880ed352ea5bcaf99c6e40b710"
+  },
+  "desktop-6": {
+    "version": "1.0.0",
+    "hash": "7338db625a08c01b11595df05fde3dc4491dcb28ff84b274db4c3e86b8367a41"
+  },
   "desktop-icons": {
     "version": "1.0.0",
     "hash": "48d70d657e274af3ffafb16377d6e8785d90bf4e454e618743437bebb95694b6"

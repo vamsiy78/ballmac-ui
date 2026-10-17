@@ -156,6 +156,7 @@ export const blockCategoryLabels: Record<string, string> = {
   download: "Download",
   devices: "Devices",
   ecommerce: "Ecommerce",
+  desktop: "Desktop app",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -195,6 +196,12 @@ export const blockGroups = [
     label: "Mac and devices",
     description: "Showcase a desktop or mobile app with live device scenes and download sections.",
     categories: ["showcase", "download", "devices"],
+  },
+  {
+    id: "desktop",
+    label: "Desktop apps",
+    description: "Screens inside a Tauri or Electron app: preferences, a menu bar panel, updates, licence, permissions and About. Each handles like macOS or Windows.",
+    categories: ["desktop"],
   },
 ] as const
 

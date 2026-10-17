@@ -3,6 +3,19 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2026-10-17",
+    title: "Desktop app blocks: the screens every Tauri and Electron app needs",
+    items: [
+      "A new Desktop apps group with six free blocks for the windows people expect in a desktop app. Each draws real window chrome through app-window and handles like macOS or Windows from the page's feel, or from a feel prop",
+      "Desktop 1, preferences: toolbar tabs and a window named after the pane on macOS, a side nav and setting cards on Windows. Launch at login, menu bar, appearance, update channel, and a shortcut recorder that writes ⇧⌘Space on a Mac and Ctrl+Shift+Space on Windows. Settings apply as they change, with no Save button",
+      "Desktop 2, menu bar and tray panel: a clipboard history with search, pins and a pause switch, keyboard selection (Up, Down, Enter, ⌘P), and Preferences and Quit. Drawn opening from a menu bar slice or above a taskbar, or on its own for the real tray window",
+      "Desktop 3, software update: the whole cycle as states (checking, available with release notes, downloading with progress, ready to relaunch, up to date, failed). Leave state out and it runs itself; the AI notes show how to wire tauri-plugin-updater and electron-updater",
+      "Desktop 4, licence activation: a trial meter, a key field that cleans up pasted keys, the reason when a key is refused, the licensed view with deactivate, and a trial-ended mode. Desktop 5, permissions setup: why each permission is needed, the exact System Settings path for one that was turned off, and a re-check when the window gets focus back. Desktop 6, About: version and build with a copy button, links, acknowledgements and Check for updates",
+      "Wording and button order follow the platform: Title Case and the default button last on macOS, sentence case and the default button first on Windows, \"this Mac\" or \"this PC\". frame={false} drops the chrome inside a real native window",
+      "All six pass every scorecard check (axe in light and dark, 360 px, reduced motion, right to left, console, keyboard) and ship their tests with `ballmac add --with-tests`. The MCP server finds them for desktop, Tauri, Electron, preferences, tray and licence",
+    ],
+  },
+  {
     date: "2026-10-12",
     title: "Quality, measured: scorecards on every item, and ballmac check for your own app",
     items: [

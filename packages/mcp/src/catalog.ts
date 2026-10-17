@@ -254,7 +254,7 @@ const SYNONYMS: Record<string, string[]> = {
   docs: ["documentation", "docs"], documentation: ["docs"], blog: ["blog", "publication", "article"], magazine: ["publication"],
   event: ["conference", "summit", "event"], conference: ["summit", "event"], podcast: ["podcast", "audio"],
   portfolio: ["portfolio"], agency: ["studio", "agency"], dashboard: ["dashboard", "admin", "analytics"], admin: ["admin", "dashboard"],
-  chat: ["chat", "message", "ai"], assistant: ["ai", "chat"], llm: ["ai"], mac: ["macos", "mac"], phone: ["phone", "mobile", "devices"],
+  chat: ["chat", "message", "ai"], assistant: ["ai", "chat"], llm: ["ai"], mac: ["macos", "mac", "desktop"], desktop: ["desktop", "macos", "window"], tauri: ["desktop", "tauri", "window"], electron: ["desktop", "electron", "window"], preferences: ["preferences", "settings"], updater: ["update", "desktop"], licence: ["license", "licence"], license: ["license", "licence"], tray: ["tray", "desktop"], phone: ["phone", "mobile", "devices"],
   animation: ["motion", "animated"], animated: ["motion", "animated"], loader: ["spinner", "loading"], loading: ["spinner", "skeleton", "loading"],
 }
 

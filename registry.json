@@ -7264,6 +7264,1318 @@
       }
     },
     {
+      "name": "desktop-1",
+      "type": "registry:block",
+      "title": "Desktop 1: preferences window",
+      "description": "The Settings window of a Tauri or Electron app: toolbar tabs on macOS, a side nav with setting cards on Windows. Launch at login, menu bar, appearance, a global shortcut recorder and update settings that apply as they change.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/app-window.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/direction.json",
+        "https://ui.ballmac.com/r/feel-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/desktop-1/desktop-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/desktop-1/desktop-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "desktop"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "desktop",
+          "preferences",
+          "settings",
+          "tauri",
+          "electron",
+          "macos",
+          "windows",
+          "shortcut",
+          "hotkey",
+          "feel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A complete preferences window. <Desktop1 appName defaultValues onValuesChange={(v) => persist(v)} onCheckForUpdates />. Panes: General, Appearance, Shortcuts (a key-combination recorder that writes ⇧⌘Space on a Mac and Ctrl+Shift+Space on Windows), Updates, Advanced, plus extraPanes. Layout follows the feel: toolbar tabs and a pane-named title on macOS, side nav and setting cards on Windows.",
+          "whenToUse": [
+            "The Settings or Preferences window of a Tauri or Electron app",
+            "A desktop-style web app that needs app-level preferences"
+          ],
+          "whenNotToUse": [
+            "Account settings saved with a button (use settings-1)",
+            "A settings page inside a web app's layout (use settings-2 or settings-panel)"
+          ],
+          "composesWith": [
+            "app-window",
+            "feel-auto",
+            "desktop-3",
+            "desktop-6"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys in the tabs",
+              "action": "Move between panes (left and right on macOS, up and down in the Windows side nav); right-to-left swaps them"
+            },
+            {
+              "keys": "Enter on the shortcut field",
+              "action": "Starts recording; the next combination with a modifier is saved, Escape cancels, Delete clears"
+            },
+            {
+              "keys": "Tab",
+              "action": "Every switch, segmented control and select is labelled by its row"
+            }
+          ],
+          "customization": [
+            "feel: 'macos' | 'windows' | 'ios' | 'web' (defaults to the page's feel)",
+            "frame={false} drops the window chrome inside a real native window",
+            "values + onValuesChange to control it; shortcut strings use Mod for ⌘ or Ctrl, e.g. 'Mod+Shift+Space'",
+            "extraPanes=[{ id, label, icon, content }]; formatShortcut(shortcut, feel) is exported for your menus",
+            "Tauri: pass the shortcut to @tauri-apps/plugin-global-shortcut (replace Mod with CommandOrControl)"
+          ]
+        },
+        "statesNone": "Settings apply the moment they change, as desktop apps do: nothing to load, submit or fail.",
+        "examples": [
+          "desktop-1-demo",
+          "desktop-1-windows",
+          "desktop-1-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/desktop-1"
+      }
+    },
+    {
+      "name": "desktop-1-demo",
+      "type": "registry:example",
+      "title": "Desktop 1: preferences window: macOS",
+      "description": "macOS example of Desktop 1: preferences window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-1-windows",
+      "type": "registry:example",
+      "title": "Desktop 1: preferences window: Windows",
+      "description": "Windows example of Desktop 1: preferences window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-1-windows.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-1-windows.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-1-custom",
+      "type": "registry:example",
+      "title": "Desktop 1: preferences window: Your own pane, no frame",
+      "description": "Your own pane, no frame example of Desktop 1: preferences window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-1.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-1-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-1-custom.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-2",
+      "type": "registry:block",
+      "title": "Desktop 2: menu bar and tray panel",
+      "description": "The panel of a menu bar app on macOS or a tray flyout on Windows: a clipboard history with search, pins, a pause switch, keyboard selection and Preferences and Quit, with loading, empty and error states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/feel-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/desktop-2/desktop-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/desktop-2/desktop-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "desktop"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "desktop",
+          "menu bar",
+          "tray",
+          "status item",
+          "popover",
+          "clipboard",
+          "tauri",
+          "electron",
+          "macos",
+          "windows",
+          "feel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A status-item app panel. <Desktop2 appName items={[{ id, text, kind: 'text' | 'link' | 'code' | 'color', source, time, pinned }]} onCopy onTogglePin onClear onOpenPreferences onQuit />. frame draws a menu bar slice (macOS) or taskbar (Windows) around it for marketing pages; frame={false} renders only the panel for the real tray window. Swap the list for your own content by forking the file: the header, search, listbox and footer are separate parts.",
+          "whenToUse": [
+            "The popover of a macOS menu bar app or a Windows tray app built with Tauri or Electron",
+            "Showing a menu bar utility on its landing page"
+          ],
+          "whenNotToUse": [
+            "Command search across an app (use command or spotlight-search)",
+            "A plain dropdown menu (use dropdown-menu)"
+          ],
+          "composesWith": [
+            "desktop-1",
+            "app-window",
+            "feel-auto"
+          ],
+          "a11y": [
+            {
+              "keys": "Up / Down in the search field",
+              "action": "Moves through the history (a combobox with a listbox); the item is announced"
+            },
+            {
+              "keys": "Enter",
+              "action": "Copies the selected item; \"Copied\" is announced"
+            },
+            {
+              "keys": "⌘P or Ctrl+P",
+              "action": "Pins or unpins the selected item"
+            }
+          ],
+          "customization": [
+            "feel: 'macos' | 'windows' (defaults to the page's feel); macOS draws menu-style footer rows, Windows icon buttons",
+            "paused + onPausedChange control the recording switch",
+            "Tauri: open it with a tray icon (tray-icon feature) and a borderless, transparent window, then render frame={false}",
+            "state, onRetry, emptyState and errorState as in every Ballmac block with states"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "desktop-2-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton rows the shape of history items, announced as loading; search and Clear are disabled."
+          },
+          {
+            "id": "empty",
+            "title": "Nothing copied yet",
+            "example": "desktop-2-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Explains that copied items will appear; emptyState sets the copy and can add an action."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "desktop-2-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry); Preferences and Quit still work."
+          }
+        ],
+        "examples": [
+          "desktop-2-demo",
+          "desktop-2-windows",
+          "desktop-2-loading",
+          "desktop-2-empty",
+          "desktop-2-error"
+        ],
+        "url": "https://ui.ballmac.com/components/desktop-2"
+      }
+    },
+    {
+      "name": "desktop-2-demo",
+      "type": "registry:example",
+      "title": "Desktop 2: menu bar and tray panel: macOS menu bar",
+      "description": "macOS menu bar example of Desktop 2: menu bar and tray panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-2-windows",
+      "type": "registry:example",
+      "title": "Desktop 2: menu bar and tray panel: Windows tray",
+      "description": "Windows tray example of Desktop 2: menu bar and tray panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-2-windows.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-2-windows.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-2-loading",
+      "type": "registry:example",
+      "title": "Desktop 2: menu bar and tray panel: Loading",
+      "description": "Loading example of Desktop 2: menu bar and tray panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-2-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-2-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-2-empty",
+      "type": "registry:example",
+      "title": "Desktop 2: menu bar and tray panel: Nothing copied yet",
+      "description": "Nothing copied yet example of Desktop 2: menu bar and tray panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-2-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-2-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-2-error",
+      "type": "registry:example",
+      "title": "Desktop 2: menu bar and tray panel: Could not load",
+      "description": "Could not load example of Desktop 2: menu bar and tray panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-2-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-2-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-3",
+      "type": "registry:block",
+      "title": "Desktop 3: software update",
+      "description": "The update window of a desktop app, the whole cycle: checking, a new version with release notes, downloading with progress, ready to relaunch, up to date and failed. Buttons follow each platform's order and wording.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/app-window.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/progress.json",
+        "https://ui.ballmac.com/r/spinner.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/use-resource.json",
+        "https://ui.ballmac.com/r/feel-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/desktop-3/desktop-3.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/desktop-3/desktop-3.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "desktop"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "desktop",
+          "update",
+          "updater",
+          "sparkle",
+          "release notes",
+          "tauri",
+          "electron",
+          "macos",
+          "windows",
+          "progress",
+          "feel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "An updater window. Leave state out and it runs itself: <Desktop3 currentVersion releases={[{ version, date, changes: [{ type: 'new' | 'improved' | 'fixed', text }] }]} onInstall={async (report) => { …; report(0.5) }} onRelaunch onSkip onRemindLater />. Or drive it from your updater with state (loading = checking, submitting + progress = downloading, success = ready, empty = up to date, error). macOS: Title Case buttons, default button last. Windows: sentence case, default button first.",
+          "whenToUse": [
+            "The update prompt of a Tauri app (tauri-plugin-updater) or an Electron app (electron-updater)",
+            "A changelog-style \"what's new\" window after an update"
+          ],
+          "whenNotToUse": [
+            "A public changelog page (use changelog-1)",
+            "A small in-app banner that an update exists (use banner)"
+          ],
+          "composesWith": [
+            "desktop-1",
+            "app-window",
+            "feel-auto"
+          ],
+          "a11y": [
+            {
+              "keys": "Heading",
+              "action": "Each stage's heading is announced politely; the byte count is not, so it does not chatter"
+            },
+            {
+              "keys": "Tab to the release notes",
+              "action": "The notes region scrolls with the arrow keys"
+            },
+            {
+              "keys": "Tab",
+              "action": "Buttons are in the platform's visual order, so focus order matches what people see"
+            }
+          ],
+          "customization": [
+            "feel: 'macos' | 'windows' (defaults to the page's feel); frame={false} inside a real native window",
+            "Tauri: const update = await check(); onInstall={(report) => update.downloadAndInstall((e) => …report(done / total))}; onRelaunch={() => relaunch()}",
+            "Electron: map autoUpdater's checking-for-update, download-progress, update-downloaded and error events onto state and progress; onRelaunch={() => autoUpdater.quitAndInstall()}",
+            "automatic + onAutomaticChange control the checkbox; size is the download size in bytes"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Checking",
+            "example": "desktop-3-checking",
+            "trigger": "state=\"loading\"",
+            "note": "A spinner and \"Checking for updates…\" with the current version; marked busy."
+          },
+          {
+            "id": "submitting",
+            "title": "Downloading",
+            "example": "desktop-3-downloading",
+            "trigger": "state=\"submitting\" progress={0.4}",
+            "note": "A progress bar with megabytes done of the total; the release notes stay readable and Hide keeps it going in the background."
+          },
+          {
+            "id": "success",
+            "title": "Ready to relaunch",
+            "example": "desktop-3-ready",
+            "trigger": "state=\"success\"",
+            "note": "\"Install and Relaunch\" (macOS) or \"Restart now\" (Windows) calls onRelaunch; the other button installs on quit."
+          },
+          {
+            "id": "empty",
+            "title": "Up to date",
+            "example": "desktop-3-up-to-date",
+            "trigger": "state=\"empty\"",
+            "note": "Says the current version is the newest, with OK."
+          },
+          {
+            "id": "error",
+            "title": "Download failed",
+            "example": "desktop-3-error",
+            "trigger": "state=\"error\"",
+            "note": "Says nothing was changed and offers Try Again (onRetry); errorState sets the copy."
+          }
+        ],
+        "examples": [
+          "desktop-3-demo",
+          "desktop-3-windows",
+          "desktop-3-checking",
+          "desktop-3-downloading",
+          "desktop-3-ready",
+          "desktop-3-up-to-date",
+          "desktop-3-error"
+        ],
+        "url": "https://ui.ballmac.com/components/desktop-3"
+      }
+    },
+    {
+      "name": "desktop-3-demo",
+      "type": "registry:example",
+      "title": "Desktop 3: software update: macOS: update available",
+      "description": "macOS: update available example of Desktop 3: software update.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-3-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-3-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-3-windows",
+      "type": "registry:example",
+      "title": "Desktop 3: software update: Windows",
+      "description": "Windows example of Desktop 3: software update.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-3-windows.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-3-windows.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-3-checking",
+      "type": "registry:example",
+      "title": "Desktop 3: software update: Checking",
+      "description": "Checking example of Desktop 3: software update.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-3-checking.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-3-checking.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-3-downloading",
+      "type": "registry:example",
+      "title": "Desktop 3: software update: Downloading",
+      "description": "Downloading example of Desktop 3: software update.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-3-downloading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-3-downloading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-3-ready",
+      "type": "registry:example",
+      "title": "Desktop 3: software update: Ready to relaunch",
+      "description": "Ready to relaunch example of Desktop 3: software update.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-3-ready.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-3-ready.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-3-up-to-date",
+      "type": "registry:example",
+      "title": "Desktop 3: software update: Up to date",
+      "description": "Up to date example of Desktop 3: software update.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-3-up-to-date.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-3-up-to-date.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-3-error",
+      "type": "registry:example",
+      "title": "Desktop 3: software update: Download failed",
+      "description": "Download failed example of Desktop 3: software update.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-3-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-3-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-4",
+      "type": "registry:block",
+      "title": "Desktop 4: licence activation",
+      "description": "Licence activation for a paid desktop app: a trial meter, a key field that cleans up pasted keys, activation that shows why a key failed, the licensed view with deactivate, and a trial-ended mode.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/app-window.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/progress.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/use-resource.json",
+        "https://ui.ballmac.com/r/feel-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/desktop-4/desktop-4.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/desktop-4/desktop-4.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "desktop"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "desktop",
+          "licence",
+          "license",
+          "activation",
+          "trial",
+          "paywall",
+          "license key",
+          "tauri",
+          "electron",
+          "macos",
+          "windows",
+          "feel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A licence window. <Desktop4 appName trialDaysLeft trialLength buyUrl onActivate={async (key) => { const r = await validate(key); if (!r.ok) throw new Error(r.reason); return { licensedTo: r.email, plan: 'Pro' } }} onContinueTrial onDeactivate />. trialDaysLeft={0} switches to the trial-ended mode with Quit instead of Continue. Pass licence to open on the licensed view.",
+          "whenToUse": [
+            "Activating a paid Tauri or Electron app with a licence key (Dodo Payments, Lemon Squeezy, Keygen, Paddle)",
+            "The window shown when a trial ends"
+          ],
+          "whenNotToUse": [
+            "Web subscriptions with sign-in (use billing-1 or pricing blocks)",
+            "Entering a one-time code (use verify-1 or input-otp)"
+          ],
+          "composesWith": [
+            "desktop-1",
+            "desktop-6",
+            "app-window",
+            "feel-auto"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter in the key field",
+              "action": "Activates; the field is labelled and its error is linked with aria-describedby"
+            },
+            {
+              "keys": "Failure",
+              "action": "The reason is announced as an alert and the field is marked invalid"
+            },
+            {
+              "keys": "Success",
+              "action": "The activated heading is announced politely"
+            }
+          ],
+          "customization": [
+            "feel: 'macos' | 'windows' (defaults to the page's feel); wording follows it (\"this Mac\", \"this PC\") and macOS uses Title Case buttons",
+            "seatsNote: one line under the field, e.g. \"One licence works on up to 3 Macs.\"",
+            "Dodo Payments: call /licenses/activate from your backend or Tauri command with the key and a device name, then store the instance id for deactivate",
+            "state: \"submitting\" | \"success\" | \"error\" to drive it yourself; leave it out and it runs itself"
+          ]
+        },
+        "states": [
+          {
+            "id": "submitting",
+            "title": "Activating",
+            "example": "desktop-4-activating",
+            "trigger": "state=\"submitting\"",
+            "note": "The field goes read-only and Activate shows a spinner and \"Activating…\"; announced politely."
+          },
+          {
+            "id": "success",
+            "title": "Activated",
+            "example": "desktop-4-activated",
+            "trigger": "state=\"success\" (or pass licence)",
+            "note": "Who it is licensed to and on which device, with Done and, when onDeactivate is set, Deactivate."
+          },
+          {
+            "id": "error",
+            "title": "Key refused",
+            "example": "desktop-4-error",
+            "trigger": "state=\"error\"",
+            "note": "The reason under the field, announced as an alert and linked to it; errorState.description sets it. Thrown Error messages from onActivate show the same way."
+          }
+        ],
+        "examples": [
+          "desktop-4-demo",
+          "desktop-4-windows",
+          "desktop-4-expired",
+          "desktop-4-activating",
+          "desktop-4-activated",
+          "desktop-4-error"
+        ],
+        "url": "https://ui.ballmac.com/components/desktop-4"
+      }
+    },
+    {
+      "name": "desktop-4-demo",
+      "type": "registry:example",
+      "title": "Desktop 4: licence activation: macOS: in the trial",
+      "description": "macOS: in the trial example of Desktop 4: licence activation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-4-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-4-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-4-windows",
+      "type": "registry:example",
+      "title": "Desktop 4: licence activation: Windows",
+      "description": "Windows example of Desktop 4: licence activation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-4-windows.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-4-windows.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-4-expired",
+      "type": "registry:example",
+      "title": "Desktop 4: licence activation: Trial ended",
+      "description": "Trial ended example of Desktop 4: licence activation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-4-expired.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-4-expired.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-4-activating",
+      "type": "registry:example",
+      "title": "Desktop 4: licence activation: Activating",
+      "description": "Activating example of Desktop 4: licence activation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-4-activating.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-4-activating.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-4-activated",
+      "type": "registry:example",
+      "title": "Desktop 4: licence activation: Activated",
+      "description": "Activated example of Desktop 4: licence activation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-4-activated.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-4-activated.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-4-error",
+      "type": "registry:example",
+      "title": "Desktop 4: licence activation: Key refused",
+      "description": "Key refused example of Desktop 4: licence activation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-4-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-4-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-5",
+      "type": "registry:block",
+      "title": "Desktop 5: permissions setup",
+      "description": "The first-run permissions window: why each one is needed, Allow for ones not asked yet, the exact System Settings path for ones turned off, a re-check on return, and Continue once required ones are on.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/app-window.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/feel-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/desktop-5/desktop-5.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/desktop-5/desktop-5.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "desktop"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "desktop",
+          "permissions",
+          "onboarding",
+          "first run",
+          "privacy",
+          "accessibility",
+          "screen recording",
+          "tauri",
+          "electron",
+          "macos",
+          "windows",
+          "feel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A permissions onboarding window. <Desktop5 appName permissions={[{ id, title, description, required, status: 'granted' | 'denied' | 'prompt', settingsPath: { macos, windows } }]} onRequest={async (id) => status} onOpenSettings={(id) => open(url)} onRecheck={() => refresh()} onContinue />. onRecheck runs when the window regains focus, which is when people return from System Settings.",
+          "whenToUse": [
+            "First run of a Tauri or Electron app that needs Accessibility, Screen Recording, Microphone, Camera, Full Disk Access or Notifications",
+            "A Permissions pane that shows what is on and off"
+          ],
+          "whenNotToUse": [
+            "Product onboarding questions (use onboarding-1)",
+            "Cookie consent on a website"
+          ],
+          "composesWith": [
+            "desktop-1",
+            "desktop-4",
+            "app-window",
+            "feel-auto"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Each Allow or Open Settings button is named for its permission"
+            },
+            {
+              "keys": "Continue",
+              "action": "Disabled until required permissions are on; the reason is linked with aria-describedby and announced as it changes"
+            }
+          ],
+          "customization": [
+            "feel: 'macos' | 'windows' (defaults to the page's feel); the settings app name and paths follow it",
+            "macOS deep links for onOpenSettings: x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility (or Privacy_ScreenCapture, Privacy_Microphone)",
+            "Windows: ms-settings:privacy-microphone, ms-settings:privacy-webcam, ms-settings:notifications",
+            "Tauri: tauri-plugin-macos-permissions reads and requests the macOS ones",
+            "onSkip shows \"Set up later\""
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Checking",
+            "example": "desktop-5-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton rows while the current statuses are read; Continue is disabled."
+          },
+          {
+            "id": "error",
+            "title": "Could not read",
+            "example": "desktop-5-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert that points to System Settings, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "desktop-5-demo",
+          "desktop-5-windows",
+          "desktop-5-loading",
+          "desktop-5-error"
+        ],
+        "url": "https://ui.ballmac.com/components/desktop-5"
+      }
+    },
+    {
+      "name": "desktop-5-demo",
+      "type": "registry:example",
+      "title": "Desktop 5: permissions setup: macOS",
+      "description": "macOS example of Desktop 5: permissions setup.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-5-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-5-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-5-windows",
+      "type": "registry:example",
+      "title": "Desktop 5: permissions setup: Windows",
+      "description": "Windows example of Desktop 5: permissions setup.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-5-windows.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-5-windows.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-5-loading",
+      "type": "registry:example",
+      "title": "Desktop 5: permissions setup: Checking",
+      "description": "Checking example of Desktop 5: permissions setup.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-5-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-5-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-5-error",
+      "type": "registry:example",
+      "title": "Desktop 5: permissions setup: Could not read",
+      "description": "Could not read example of Desktop 5: permissions setup.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-5-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-5-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-6",
+      "type": "registry:block",
+      "title": "Desktop 6: About window",
+      "description": "The About window of a desktop app: icon, name, version and build with a copy button, links, open-source acknowledgements and Check for updates. Small and centered on macOS, a dialog with OK on Windows.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/app-window.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/feel-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/desktop-6/desktop-6.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/desktop-6/desktop-6.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "desktop"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "desktop",
+          "about",
+          "version",
+          "acknowledgements",
+          "credits",
+          "licenses",
+          "tauri",
+          "electron",
+          "macos",
+          "windows",
+          "feel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "An About window. <Desktop6 appName version build tagline copyright links={[{ label, href }]} acknowledgements={[{ name, license, href }]} onCheckForUpdates onClose />. Acknowledgements open in the same window with a Back button; the copy button puts \"Acme Version 2.4.1 (241)\" on the clipboard.",
+          "whenToUse": [
+            "The About item in a Tauri or Electron app's app menu",
+            "Crediting the open-source licences a desktop app ships with"
+          ],
+          "whenNotToUse": [
+            "A company About page on a website (use team-1 or a marketing block)"
+          ],
+          "composesWith": [
+            "desktop-1",
+            "desktop-3",
+            "app-window",
+            "feel-auto"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "The copy button is named \"Copy version\" and announces \"Version copied\""
+            },
+            {
+              "keys": "Acknowledgements",
+              "action": "The list is a focusable scroll region; Back returns to the About view"
+            }
+          ],
+          "customization": [
+            "feel: 'macos' | 'windows' (defaults to the page's feel); frame={false} inside a real native window",
+            "Tauri: version from getVersion() in @tauri-apps/api/app; Electron: app.getVersion()",
+            "Generate acknowledgements from your lockfile with a licence checker at build time"
+          ]
+        },
+        "statesNone": "Static content: nothing to load, submit or fail.",
+        "examples": [
+          "desktop-6-demo",
+          "desktop-6-windows"
+        ],
+        "url": "https://ui.ballmac.com/components/desktop-6"
+      }
+    },
+    {
+      "name": "desktop-6-demo",
+      "type": "registry:example",
+      "title": "Desktop 6: About window: macOS",
+      "description": "macOS example of Desktop 6: About window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-6-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-6-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-6-windows",
+      "type": "registry:example",
+      "title": "Desktop 6: About window: Windows",
+      "description": "Windows example of Desktop 6: About window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-6-windows.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-6-windows.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-6",
+        "tier": "free"
+      }
+    },
+    {
       "name": "devices-1",
       "type": "registry:block",
       "title": "Devices 1: Mac, iPad, iPhone and Watch lineup",
