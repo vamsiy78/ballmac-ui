@@ -27,6 +27,14 @@
     "version": "1.0.0",
     "hash": "4d085d994d7a2128a8efec2df87a7dbdf806e34e0fe3fe56125a9ed0b91b66cb"
   },
+  "agent-6": {
+    "version": "1.0.0",
+    "hash": "f6125501682d632166ad6a18c95f6482ff7f24c371e3a1e3eaa924733fa84738"
+  },
+  "agent-7": {
+    "version": "1.0.0",
+    "hash": "c91e187419fd265a49d0dc6f35463b0cb94ae70985a25853deeb8d65c0c8194d"
+  },
   "agent-plan": {
     "version": "1.0.0",
     "hash": "7ff6938b4c4b4208754afd5f610fe0a849ee8e179adec47184229230e530771c"
@@ -331,6 +339,10 @@
     "version": "1.0.0",
     "hash": "4ba233f2eb060a642d81915a0f2c9a29f492219929a1cd2616a7b51e499c9ea2"
   },
+  "cover-art": {
+    "version": "1.0.0",
+    "hash": "c311736dbe460a056ac97b5727378277aca75621669267390ffa6d4cca41e90b"
+  },
   "cta-1": {
     "version": "1.0.0",
     "hash": "91e05629534ec401aacc175388a814c48932862882a195de58bfaac62bc7a064"
@@ -610,6 +622,10 @@
   "header-2": {
     "version": "1.0.0",
     "hash": "38d84f1b751c0ed56b781cfd470c7e6add8bfab57d531ffa398ac41601ef52f7"
+  },
+  "help-1": {
+    "version": "1.0.0",
+    "hash": "ee5c6d98d0cb0ced58f9e9af7a489d0ad110881aa8663ecc643b3bf7ec19909a"
   },
   "hero-1": {
     "version": "1.0.0",
@@ -962,6 +978,10 @@
   "pricing-4": {
     "version": "1.0.0",
     "hash": "9a64c42f5f761ae894ff7d2c49ce6a246d14bfc470b99b2c9d2a3e1b3e6a5573"
+  },
+  "profile-1": {
+    "version": "1.0.0",
+    "hash": "9b533c69cd93bb0ec9cd403a204c93edba266c5cbf4bf764ddd6ff10917aa48d"
   },
   "progress": {
     "version": "1.0.0",

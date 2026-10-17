@@ -4,6 +4,18 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-17",
+    title: "A public profile, a help center, assistant memory and an agent builder",
+    items: [
+      "Profile 1, public profile: a cover and avatar with art drawn from the handle when there are no pictures, a verified badge, Follow that updates the follower count straight away and undoes itself if it fails, stats that count up, an About card, project cards that light up under the pointer, and an Activity tab with a contribution graph. A new Profile section on /blocks",
+      "Help 1, help center home: a hero search that suggests articles as you type with the matches highlighted (arrow keys, Enter, Escape, and / to jump to it from anywhere), topic cards, popular articles, and a contact strip with who is online. The contact strip stays even when the guides fail to load. A new Help center section on /blocks",
+      "Agent 6, assistant memory: a three-ring chart splitting what an AI assistant remembers, a switch to pause memory, each memory with where it was learned and how often it was used, edited in place, pinned, or forgotten with seven seconds to undo, and Forget everything behind a confirmation",
+      "Agent 7, agent builder: instructions and a model, each tool set to off, ask first or allowed (tools that change data are flagged and start at ask first), the knowledge the agent may read, guardrails, and a live preview that follows every setting, including the approval step for a tool set to ask first. Publishing shows submitting, success and error",
+      "New cover-art: cover pictures drawn from a seed in your theme's chart colors (color fields, rings, bars, dots and waves). The same seed always draws the same picture, using plain arithmetic so the server and every browser agree. Profile 1, Help 1 and Agent 7 use it as the fallback for images you have not set",
+      "All pass every scorecard check, including a 360 px check, the right-to-left mirror and reduced motion, and ship their tests. The MCP server finds them for profile, help, support, memory, builder and cover",
+    ],
+  },
+  {
+    date: "2026-10-17",
     title: "Team chat, eval results, a welcome window and a shortcuts editor",
     items: [
       "Chat 1, team chat: channels and direct messages with unread counts and presence, messages grouped by person and day with a New divider, reactions, threads in a side panel, @mentions that suggest people as you type, and messages that show while sending and offer Retry when they fail. A new Team chat section on /blocks",

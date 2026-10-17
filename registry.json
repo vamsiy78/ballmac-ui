@@ -5096,6 +5096,546 @@
       }
     },
     {
+      "name": "agent-6",
+      "type": "registry:block",
+      "title": "Agent 6: assistant memory",
+      "description": "What an AI assistant remembers about someone: a ring splitting memory by kind, a switch to pause it, each memory with its source and use count, edited in place, pinned or forgotten with undo, and Forget everything.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/circular-progress.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-6/agent-6.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-6/agent-6.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "memory",
+          "personalization",
+          "privacy",
+          "assistant",
+          "context",
+          "preferences",
+          "controls"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A memory control page for an AI assistant. <Agent6 assistantName memories={[{ id, text, scope: 'you' | 'work' | 'preferences', source, learned, uses, pinned }]} capacity activity={{ chats, updated }} paused onPausedChange onEdit={async (id, text) => …} onPin onForget onRestore onForgetAll />. Forgetting calls onForget at once and offers Undo for seven seconds (onRestore); throw from onEdit to keep the old text and show the error.",
+          "whenToUse": [
+            "Giving people control over what an AI assistant or agent remembers (a trust and privacy requirement in many products)",
+            "A settings page for personalization"
+          ],
+          "whenNotToUse": [
+            "A knowledge base the assistant searches (use sources-list)",
+            "Chat history (use ai-chat-1)"
+          ],
+          "composesWith": [
+            "settings-3",
+            "agent-1",
+            "agent-3",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab to a memory",
+              "action": "Pin, Edit and Forget appear (always visible on touch screens); each says what it acts on"
+            },
+            {
+              "keys": "Ctrl+Enter or Escape in the edit box",
+              "action": "Saves or cancels; errors are announced as alerts"
+            },
+            {
+              "keys": "Forget",
+              "action": "An Undo bar appears as a status message; every change is announced politely"
+            }
+          ],
+          "customization": [
+            "assistantName, capacity, activity",
+            "paused + onPausedChange to control the switch; defaultPaused for the first value",
+            "Memories are grouped by scope; write the text the way the assistant would say it"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-6-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton of the summary and memory cards under the real heading."
+          },
+          {
+            "id": "empty",
+            "title": "Nothing remembered",
+            "example": "agent-6-empty",
+            "trigger": "state=\"empty\" (or memories={[]})",
+            "note": "Explains how the assistant learns and that the person decides what stays; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-6-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "agent-6-demo",
+          "agent-6-editing",
+          "agent-6-paused",
+          "agent-6-loading",
+          "agent-6-empty",
+          "agent-6-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-6"
+      }
+    },
+    {
+      "name": "agent-6-demo",
+      "type": "registry:example",
+      "title": "Agent 6: assistant memory: Default",
+      "description": "Default example of Agent 6: assistant memory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-6-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-6-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-6-editing",
+      "type": "registry:example",
+      "title": "Agent 6: assistant memory: Editing a memory",
+      "description": "Editing a memory example of Agent 6: assistant memory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-6-editing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-6-editing.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-6-paused",
+      "type": "registry:example",
+      "title": "Agent 6: assistant memory: Memory paused",
+      "description": "Memory paused example of Agent 6: assistant memory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-6-paused.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-6-paused.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-6-loading",
+      "type": "registry:example",
+      "title": "Agent 6: assistant memory: Loading",
+      "description": "Loading example of Agent 6: assistant memory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-6-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-6-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-6-empty",
+      "type": "registry:example",
+      "title": "Agent 6: assistant memory: Nothing remembered",
+      "description": "Nothing remembered example of Agent 6: assistant memory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-6-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-6-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-6-error",
+      "type": "registry:example",
+      "title": "Agent 6: assistant memory: Could not load",
+      "description": "Could not load example of Agent 6: assistant memory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-6-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-6-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-7",
+      "type": "registry:block",
+      "title": "Agent 7: agent builder",
+      "description": "An agent builder: instructions and model, each tool set to off, ask first or allowed, the knowledge it may read, guardrails, and a live preview that changes with every setting. Publishing shows submitting, success and error.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/approval-card.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/model-picker.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/textarea.json",
+        "https://ui.ballmac.com/r/tool-call-card.json",
+        "https://ui.ballmac.com/r/use-resource.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-7/agent-7.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-7/agent-7.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "builder",
+          "no-code",
+          "tools",
+          "permissions",
+          "knowledge",
+          "guardrails",
+          "instructions",
+          "publish",
+          "preview"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "An agent configuration page. <Agent7 tools={[{ id, name, description, icon, writes }]} sources={[{ id, name, kind, status: 'ready' | 'syncing' | 'failed', synced }]} models={ModelOption[]} defaultConfig={{ name, instructions, model, tools: { [id]: 'off' | 'ask' | 'allow' }, sources: [ids], askBeforeExternal, maxSteps }} onChange onPublish={async (config) => …} onAddSource onRemoveSource />. The preview shows the first enabled tool: behind an approval card when set to Ask first, as a finished tool call when Allowed.",
+          "whenToUse": [
+            "Letting people create or edit an AI agent in a no-code way",
+            "An internal admin page for configuring an agent's tools, knowledge and limits"
+          ],
+          "whenNotToUse": [
+            "Chatting with an agent (use ai-chat-1)",
+            "Approving an agent's actions as it works (use agent-1 or agent-2)",
+            "Choosing a model only (use model-picker)"
+          ],
+          "composesWith": [
+            "agent-2",
+            "agent-3",
+            "agent-6",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Each tool and source has a switch named for it; a tool's permission is a radio group that appears when it is on"
+            },
+            {
+              "keys": "Publish with missing fields",
+              "action": "The name and instructions are marked invalid and their reasons are announced as alerts"
+            },
+            {
+              "keys": "Status",
+              "action": "Draft, Unpublished changes, Publishing… and Published are a status region"
+            }
+          ],
+          "customization": [
+            "maxInstructions, sampleRequest (the text of the request in the preview)",
+            "state: \"submitting\" | \"success\" | \"error\" to drive publishing yourself; leave it out and the block runs it",
+            "Tools marked writes default to Ask first when turned on; map the permission to your agent runtime's approval setting"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-7-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton of the settings and the preview under the real header."
+          },
+          {
+            "id": "submitting",
+            "title": "Publishing",
+            "example": "agent-7-publishing",
+            "trigger": "state=\"submitting\"",
+            "note": "Publish shows a spinner and \"Publishing…\" and is disabled; the status reads Publishing…"
+          },
+          {
+            "id": "success",
+            "title": "Published",
+            "example": "agent-7-published",
+            "trigger": "state=\"success\"",
+            "note": "The button and status say Published until something changes again."
+          },
+          {
+            "id": "error",
+            "title": "Could not publish",
+            "example": "agent-7-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert says the changes are kept and why it failed (errorState sets the copy or throw an Error from onPublish)."
+          }
+        ],
+        "examples": [
+          "agent-7-demo",
+          "agent-7-bare",
+          "agent-7-loading",
+          "agent-7-publishing",
+          "agent-7-published",
+          "agent-7-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-7"
+      }
+    },
+    {
+      "name": "agent-7-demo",
+      "type": "registry:example",
+      "title": "Agent 7: agent builder: Default",
+      "description": "Default example of Agent 7: agent builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-7-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-7-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-7-bare",
+      "type": "registry:example",
+      "title": "Agent 7: agent builder: A new agent, no tools",
+      "description": "A new agent, no tools example of Agent 7: agent builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-7-bare.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-7-bare.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-7-loading",
+      "type": "registry:example",
+      "title": "Agent 7: agent builder: Loading",
+      "description": "Loading example of Agent 7: agent builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-7-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-7-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-7-publishing",
+      "type": "registry:example",
+      "title": "Agent 7: agent builder: Publishing",
+      "description": "Publishing example of Agent 7: agent builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-7-publishing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-7-publishing.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-7-published",
+      "type": "registry:example",
+      "title": "Agent 7: agent builder: Published",
+      "description": "Published example of Agent 7: agent builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-7-published.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-7-published.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-7-error",
+      "type": "registry:example",
+      "title": "Agent 7: agent builder: Could not publish",
+      "description": "Could not publish example of Agent 7: agent builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-7-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-7-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-7",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ai-chat-1",
       "type": "registry:block",
       "title": "AI Chat 1: full chat app pane",
@@ -12294,6 +12834,269 @@
       }
     },
     {
+      "name": "help-1",
+      "type": "registry:block",
+      "title": "Help 1: help center home",
+      "description": "A help center home: a hero search that suggests articles as you type with highlighted matches, topic cards that light up under the pointer, popular articles, and ways to reach a person with who is online.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/dot-pattern.json",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/spotlight-card.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/help-1/help-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/help-1/help-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "help"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "help center",
+          "support",
+          "knowledge base",
+          "docs",
+          "search",
+          "faq",
+          "categories",
+          "contact",
+          "self-serve"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A help center home. <Help1 categories={[{ id, title, description, icon, count, href }]} articles={[{ id, title, summary, categoryId, minutes, href, popular }]} suggestions={['Reset password']} channels={[{ id, label, description, icon, online, action, href }]} onOpenArticle onOpenCategory onContact onSearch />. Search runs in the browser over title and summary; pass onSearch to log queries or fetch your own results.",
+          "whenToUse": [
+            "The front page of a help center or knowledge base",
+            "Self-serve support before people contact you"
+          ],
+          "whenNotToUse": [
+            "A short list of questions (use faq-1)",
+            "A documentation site's navigation (use sidebar and command)",
+            "A contact form (use contact-1)"
+          ],
+          "composesWith": [
+            "header-2",
+            "footer-2",
+            "faq-1",
+            "contact-1"
+          ],
+          "a11y": [
+            {
+              "keys": "/",
+              "action": "Jumps to the search from anywhere on the page, unless you are typing in a field"
+            },
+            {
+              "keys": "Up / Down, Enter, Escape in the search",
+              "action": "Chooses a suggestion, opens it, and closes the list (then clears the box); the result count is announced"
+            },
+            {
+              "keys": "Tab",
+              "action": "Each topic card and popular article is one link with a single tab stop"
+            }
+          ],
+          "customization": [
+            "title, description, suggestions, channels (set online to show the green dot and \"Online\" for screen readers)",
+            "defaultQuery opens the search with a query already typed",
+            "Search matches every word in an article's title or summary and lists title matches first; replace it with your own search through onSearch"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "help-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton topic cards and article rows under the real heading; search is disabled."
+          },
+          {
+            "id": "empty",
+            "title": "No guides yet",
+            "example": "help-1-empty",
+            "trigger": "state=\"empty\" (or categories={[]})",
+            "note": "Says guides will be listed here; emptyState sets the copy. The contact strip stays."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "help-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry). The hero and the contact strip stay, so people can still reach you."
+          }
+        ],
+        "examples": [
+          "help-1-demo",
+          "help-1-searching",
+          "help-1-no-results",
+          "help-1-loading",
+          "help-1-empty",
+          "help-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/help-1"
+      }
+    },
+    {
+      "name": "help-1-demo",
+      "type": "registry:example",
+      "title": "Help 1: help center home: Default",
+      "description": "Default example of Help 1: help center home.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/help-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/help-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/help-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "help-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "help-1-searching",
+      "type": "registry:example",
+      "title": "Help 1: help center home: Searching",
+      "description": "Searching example of Help 1: help center home.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/help-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/help-1-searching.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/help-1-searching.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "help-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "help-1-no-results",
+      "type": "registry:example",
+      "title": "Help 1: help center home: Nothing found",
+      "description": "Nothing found example of Help 1: help center home.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/help-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/help-1-no-results.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/help-1-no-results.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "help-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "help-1-loading",
+      "type": "registry:example",
+      "title": "Help 1: help center home: Loading",
+      "description": "Loading example of Help 1: help center home.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/help-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/help-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/help-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "help-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "help-1-empty",
+      "type": "registry:example",
+      "title": "Help 1: help center home: No guides yet",
+      "description": "No guides yet example of Help 1: help center home.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/help-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/help-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/help-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "help-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "help-1-error",
+      "type": "registry:example",
+      "title": "Help 1: help center home: Could not load",
+      "description": "Could not load example of Help 1: help center home.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/help-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/help-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/help-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "help-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "hero-1",
       "type": "registry:block",
       "title": "Hero 1: split with product visual",
@@ -15205,6 +16008,248 @@
       "meta": {
         "example": true,
         "of": "pricing-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "profile-1",
+      "type": "registry:block",
+      "title": "Profile 1: public profile",
+      "description": "A public profile: cover and avatar art drawn from the handle, a verified badge, Follow that updates the count and undoes itself on failure, stats that count up, About, pointer-lit project cards and an Activity tab.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/animated-tabs.json",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/contribution-graph.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/media.json",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/spotlight-card.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/profile-1/profile-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/profile-1/profile-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "profile"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "profile",
+          "user",
+          "public profile",
+          "portfolio",
+          "follow",
+          "social",
+          "creator",
+          "community",
+          "activity"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A public profile page. <Profile1 person={{ name, handle, headline, bio, location, joined, verified, avatar, cover, availability, followers, following, isFollowing, skills, links }} projects={[{ id, title, description, tags, stars, updated, href, cover }]} activity={[{ date, count }]} recent={[{ id, text, time }]} onFollow={async (next) => …} onMessage onShare />. Without images it draws cover and avatar art from the handle and each project's id. Follow is optimistic: throw from onFollow to undo it.",
+          "whenToUse": [
+            "The public page of a member, creator, designer or developer in a community or marketplace",
+            "A portfolio-style profile with projects and activity"
+          ],
+          "whenNotToUse": [
+            "Editing your own account (use settings-1)",
+            "A company About page (use team-1)",
+            "An article author box (use blog-post-1)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "chat-1",
+            "header-2",
+            "footer-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Follow is a toggle button (aria-pressed) and its result is announced politely; each project is one link with a single tab stop"
+            },
+            {
+              "keys": "Arrow keys in Work and Activity",
+              "action": "Move between the two tabs"
+            },
+            {
+              "keys": "Motion",
+              "action": "Entrances, the count-up and the card glow are skipped when reduced motion is on"
+            }
+          ],
+          "customization": [
+            "cover and avatar take a URL or an image with alt text; leave them out for generated art in the theme's chart colors",
+            "defaultTab: 'work' | 'activity'; locale formats numbers",
+            "Pass real daily counts as activity, one per day in calendar order"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "profile-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton of the cover, avatar and project cards, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No projects yet",
+            "example": "profile-1-empty",
+            "trigger": "state=\"empty\" (or projects={[]})",
+            "note": "The profile shows as usual and the Work tab says nothing is shared yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "profile-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "profile-1-demo",
+          "profile-1-following",
+          "profile-1-loading",
+          "profile-1-empty",
+          "profile-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/profile-1"
+      }
+    },
+    {
+      "name": "profile-1-demo",
+      "type": "registry:example",
+      "title": "Profile 1: public profile: Default",
+      "description": "Default example of Profile 1: public profile.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/profile-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/profile-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/profile-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "profile-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "profile-1-following",
+      "type": "registry:example",
+      "title": "Profile 1: public profile: Already following, Activity tab",
+      "description": "Already following, Activity tab example of Profile 1: public profile.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/profile-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/profile-1-following.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/profile-1-following.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "profile-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "profile-1-loading",
+      "type": "registry:example",
+      "title": "Profile 1: public profile: Loading",
+      "description": "Loading example of Profile 1: public profile.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/profile-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/profile-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/profile-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "profile-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "profile-1-empty",
+      "type": "registry:example",
+      "title": "Profile 1: public profile: No projects yet",
+      "description": "No projects yet example of Profile 1: public profile.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/profile-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/profile-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/profile-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "profile-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "profile-1-error",
+      "type": "registry:example",
+      "title": "Profile 1: public profile: Could not load",
+      "description": "Could not load example of Profile 1: public profile.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/profile-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/profile-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/profile-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "profile-1",
         "tier": "free"
       }
     },
@@ -21736,6 +22781,123 @@
       "meta": {
         "example": true,
         "of": "countdown",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cover-art",
+      "type": "registry:ui",
+      "title": "Cover Art",
+      "description": "Cover pictures drawn from a seed in your theme's chart colors: color fields, rings, bars, dots or waves. The same seed always draws the same picture, so an item without an image still looks finished.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/cover-art.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/cover-art.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "cover",
+          "artwork",
+          "generative",
+          "placeholder",
+          "avatar",
+          "thumbnail",
+          "gradient",
+          "seed"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "<CoverArt seed={project.id} /> fills its parent with a picture chosen and drawn from the seed; variant: 'mesh' | 'rings' | 'bars' | 'dots' | 'waves' | 'auto'; grid adds a faint grid. Put it in a sized container (an aspect-video div, a size-10 rounded avatar). It is decorative and hidden from screen readers, so keep the item's name as text next to it.",
+          "whenToUse": [
+            "The fallback for a card, channel, project or agent that has no image",
+            "A profile cover or a thumbnail while images load"
+          ],
+          "whenNotToUse": [
+            "A real photograph or logo (use media)",
+            "An animated hero background (use aurora-background or beams-background)"
+          ],
+          "composesWith": [
+            "media",
+            "card",
+            "avatar"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Decorative: aria-hidden, no focus. Never the only way to tell items apart."
+            }
+          ],
+          "customization": [
+            "seed picks the picture and the chart colors it uses, so a theme change recolors every picture",
+            "className sets size and corners: <CoverArt seed={id} className=\"aspect-video rounded-xl\" />",
+            "Use it as the fallback of Media: <Media media={cover} fallback={<CoverArt seed={id} />} fill />"
+          ]
+        },
+        "examples": [
+          "cover-art-demo",
+          "cover-art-seeds"
+        ],
+        "url": "https://ui.ballmac.com/components/cover-art"
+      }
+    },
+    {
+      "name": "cover-art-demo",
+      "type": "registry:example",
+      "title": "Cover Art: Five pictures",
+      "description": "Five pictures example of Cover Art.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cover-art.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cover-art-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cover-art-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cover-art",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cover-art-seeds",
+      "type": "registry:example",
+      "title": "Cover Art: One per name",
+      "description": "One per name example of Cover Art.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cover-art.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cover-art-seeds.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cover-art-seeds.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cover-art",
         "tier": "free"
       }
     },

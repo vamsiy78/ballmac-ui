@@ -67,6 +67,8 @@ export const blockCategories = [
   "desktop",
   "agents",
   "chat",
+  "profile",
+  "help",
 ] as const
 
 // Registry item types Ballmac publishes (a subset of the shadcn spec).

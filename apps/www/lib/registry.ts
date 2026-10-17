@@ -159,6 +159,8 @@ export const blockCategoryLabels: Record<string, string> = {
   desktop: "Desktop app",
   agents: "AI agents",
   chat: "Team chat",
+  profile: "Profile",
+  help: "Help center",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -172,14 +174,14 @@ export const blockGroups = [
   {
     id: "content",
     label: "Content and company",
-    description: "Blog, changelog, careers, contact and error pages.",
-    categories: ["blog", "changelog", "careers", "contact", "error"],
+    description: "Blog, changelog, careers, contact, help center and error pages.",
+    categories: ["blog", "changelog", "careers", "contact", "help", "error"],
   },
   {
     id: "account",
     label: "Account",
-    description: "Sign in, sign up, verification and onboarding.",
-    categories: ["auth", "onboarding"],
+    description: "Sign in, sign up, verification, onboarding and public profiles.",
+    categories: ["auth", "onboarding", "profile"],
   },
   {
     id: "application",
