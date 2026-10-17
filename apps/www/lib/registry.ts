@@ -161,6 +161,10 @@ export const blockCategoryLabels: Record<string, string> = {
   chat: "Team chat",
   profile: "Profile",
   help: "Help center",
+  search: "Search results",
+  notifications: "Notifications",
+  upload: "File upload",
+  developer: "Developer",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -174,8 +178,8 @@ export const blockGroups = [
   {
     id: "content",
     label: "Content and company",
-    description: "Blog, changelog, careers, contact, help center and error pages.",
-    categories: ["blog", "changelog", "careers", "contact", "help", "error"],
+    description: "Blog, changelog, careers, contact, help center, search results and error pages.",
+    categories: ["blog", "changelog", "careers", "contact", "help", "search", "error"],
   },
   {
     id: "account",
@@ -186,8 +190,8 @@ export const blockGroups = [
   {
     id: "application",
     label: "Application",
-    description: "Screens inside a product: shell, dashboards, settings, billing, inbox, team chat, boards, AI chat and AI agents.",
-    categories: ["app-shell", "dashboard", "settings", "billing", "mail", "chat", "kanban", "calendar", "ai-chat", "agents"],
+    description: "Screens inside a product: shell, dashboards, settings, billing, inbox, notifications, team chat, boards, uploads, developer tools, AI chat and AI agents.",
+    categories: ["app-shell", "dashboard", "settings", "billing", "mail", "notifications", "chat", "kanban", "calendar", "upload", "developer", "ai-chat", "agents"],
   },
   {
     id: "shop",

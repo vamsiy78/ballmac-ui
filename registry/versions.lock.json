@@ -35,6 +35,10 @@
     "version": "1.0.0",
     "hash": "c91e187419fd265a49d0dc6f35463b0cb94ae70985a25853deeb8d65c0c8194d"
   },
+  "agent-8": {
+    "version": "1.0.0",
+    "hash": "bda1891031725946f08c4427bb06394171c1058cfd9ebe90ee50eb2252d0f405"
+  },
   "agent-plan": {
     "version": "1.0.0",
     "hash": "7ff6938b4c4b4208754afd5f610fe0a849ee8e179adec47184229230e530771c"
@@ -419,6 +423,10 @@
     "version": "1.0.0",
     "hash": "48d70d657e274af3ffafb16377d6e8785d90bf4e454e618743437bebb95694b6"
   },
+  "dev-1": {
+    "version": "1.0.0",
+    "hash": "4aa2dca4964462ffbc86232a1a4370658f54b5388e75a4ea8fdcf43486946a60"
+  },
   "devices-1": {
     "version": "1.0.0",
     "hash": "ffc66130df4bcccb4f46d354abc202ce111ce1983787bef54caee2da7f8c4e95"
@@ -625,7 +633,7 @@
   },
   "help-1": {
     "version": "1.0.0",
-    "hash": "ee5c6d98d0cb0ced58f9e9af7a489d0ad110881aa8663ecc643b3bf7ec19909a"
+    "hash": "cb3bb833161c309cf0fa702340ace71c526b552b2d9e2b4041512ad1bc292a62"
   },
   "hero-1": {
     "version": "1.0.0",
@@ -686,6 +694,10 @@
   "in-view": {
     "version": "1.0.0",
     "hash": "0c656fc2952b073e503e8d9c7894e1573ff8f32743edfa0f408de6f47d9e34bb"
+  },
+  "inbox-1": {
+    "version": "1.0.0",
+    "hash": "9f970dade2babdf2cdfc4bd5bfd1977cb40f3ff94309ca5e267edc504106f9dc"
   },
   "inline-alert": {
     "version": "1.0.0",
@@ -822,6 +834,10 @@
   "masonry-grid": {
     "version": "1.0.0",
     "hash": "6423262f08f6d8cf5c6e29c23d949ae31c59a63c7dd941d355cf5b9eaa360792"
+  },
+  "match-highlight": {
+    "version": "1.0.0",
+    "hash": "30a78ec3f851f690f37b4bbb7303cfe86e32de952f56ed60c2267b611f987f66"
   },
   "media": {
     "version": "1.0.1",
@@ -1054,6 +1070,10 @@
   "scroll-velocity": {
     "version": "1.0.0",
     "hash": "9379eaa449564625426d2abb547470ef1fde29bca39fefdcfabe886656bf71ce"
+  },
+  "search-1": {
+    "version": "1.0.0",
+    "hash": "e097458175445b69eb27db96558511255840d04916b020486ec3013ec8b5874a"
   },
   "search-field": {
     "version": "1.0.0",
@@ -1466,6 +1486,10 @@
   "typing-text": {
     "version": "1.0.0",
     "hash": "dd760f0b6daa5fcd8ddf075bacc95fda30b4a655d585a7f8d6580c7690e11e05"
+  },
+  "upload-1": {
+    "version": "1.0.0",
+    "hash": "7bf43c63babeba9010052f208c95b2ec6dbd0457317ae2cc40d7f537d86ce850"
   },
   "usage-meter": {
     "version": "1.0.0",

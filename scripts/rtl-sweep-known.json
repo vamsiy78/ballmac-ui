@@ -234,5 +234,9 @@
   {
     "prefix": "template-ledger",
     "reason": "The window controls keep their order, and a sentence keeps its English word order in the demo."
+  },
+  {
+    "prefix": "match-highlight",
+    "reason": "The marks sit inside running text, whose word order follows the language of the text, so a mirror image of English prose cannot apply. It marks Arabic and Hebrew text correctly (tested)."
   }
 ]

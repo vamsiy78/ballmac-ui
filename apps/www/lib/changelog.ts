@@ -3,6 +3,19 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2026-10-18",
+    title: "Search results, a notifications inbox, an upload manager, a knowledge manager and a developers page",
+    items: [
+      "Search 1, search results page: a large search box (press / to reach it), the type of result as a filter with live counts, a date filter and a sort, results with a trail and highlighted words, Show more, and a no-results page that suggests a spelling and lists what to try. A new Search results section on /blocks",
+      "Inbox 1, notifications page: grouped by day with unread marked by an accent and a dot, mentions and comments with excerpts, requests answered right in the list (Approve, Deny, Accept, Decline), keyboard triage (J and K to move, E to archive, U for read or unread) and an Undo bar after archiving. A new Notifications section",
+      "Upload 1, upload manager: a drop area that reacts to dragging, validation that says why each file was refused, and a list where every file has its own state (waiting, uploading with progress, finishing, done, or failed with the reason and Retry), real previews of images, cancel through an abort signal, and a summary with Clear completed. A new File upload section",
+      "Agent 8, knowledge manager: a health bar across an agent's sources, each source with sync progress or its failure and a retry, a switch for whether the agent may use it, and a panel that shows which passages come back for a question, with the matching words marked. It shows retrieval rather than a generated answer, so you can see exactly what the agent would find",
+      "Dev 1, developers page: a 14-day request chart with errors stacked and the numbers in a table for screen readers, success rate and median time, API keys shown in full exactly once and revoked behind a confirmation, test and live modes with a warning, and a request log with a filter, expandable responses and copy as curl. A new Developer section",
+      "New match-highlight: the words of a search marked in text, with real mark elements in a theme tint, and helpers to split a query, test a match and count matches. It works on the server and on Arabic and Hebrew text. Help 1 now uses it instead of its own copy (no change in behaviour)",
+      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and right to left, and ship their tests. match-highlight's mirror check is marked not applicable, with the reason shown, because words inside a line of text keep the order of their language. The MCP server finds them for results, notifications, alerts, files, developer, logs, knowledge and rag",
+    ],
+  },
+  {
     date: "2026-10-17",
     title: "A public profile, a help center, assistant memory and an agent builder",
     items: [

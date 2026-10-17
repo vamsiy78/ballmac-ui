@@ -9,6 +9,7 @@ import { Button } from "@/components/ballmac/button"
 import { CoverArt } from "@/components/ballmac/cover-art"
 import { DotPattern } from "@/components/ballmac/dot-pattern"
 import { Kbd } from "@/components/ballmac/kbd"
+import { MatchHighlight } from "@/components/ballmac/match-highlight"
 import { Skeleton } from "@/components/ballmac/skeleton"
 import { SpotlightCard } from "@/components/ballmac/spotlight-card"
 import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
@@ -100,27 +101,6 @@ const sampleChannels: Help1Channel[] = [
 ]
 
 const tones = ["bg-chart-1/20", "bg-chart-2/20", "bg-chart-3/25", "bg-chart-4/20", "bg-chart-5/20", "bg-chart-1/20"]
-
-const escape = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-
-/** Wraps each place a search word occurs in a highlight. */
-function Highlight({ text, tokens }: { text: string; tokens: string[] }) {
-  if (!tokens.length) return <>{text}</>
-  const parts = text.split(new RegExp(`(${tokens.map(escape).join("|")})`, "ig"))
-  return (
-    <>
-      {parts.map((part, i) =>
-        i % 2 ? (
-          <mark key={i} className="bg-chart-3/35 text-foreground rounded-sm">
-            {part}
-          </mark>
-        ) : (
-          part
-        )
-      )}
-    </>
-  )
-}
 
 function HelpSkeleton() {
   return (
@@ -393,11 +373,11 @@ function Help1({
                         <FileSearch aria-hidden="true" className="text-muted-foreground size-4 shrink-0" />
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-sm font-medium">
-                            <Highlight text={a.title} tokens={tokens} />
+                            <MatchHighlight text={a.title} query={tokens} />
                           </span>
                           {a.summary ? (
                             <span className="text-muted-foreground block truncate text-xs">
-                              <Highlight text={a.summary} tokens={tokens} />
+                              <MatchHighlight text={a.summary} query={tokens} />
                             </span>
                           ) : null}
                         </span>

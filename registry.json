@@ -5636,6 +5636,245 @@
       }
     },
     {
+      "name": "agent-8",
+      "type": "registry:block",
+      "title": "Agent 8: knowledge manager",
+      "description": "A knowledge manager for an AI agent: a health bar across its sources, each source with sync progress or failure and a retry, a switch for whether the agent may use it, and a panel showing which passages come back for a question.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/dropdown-menu.json",
+        "https://ui.ballmac.com/r/match-highlight.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-8/agent-8.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-8/agent-8.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "knowledge",
+          "rag",
+          "sources",
+          "retrieval",
+          "documents",
+          "sync",
+          "training data",
+          "knowledge base"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "An agent knowledge page. <Agent8 sources={[{ id, name, kind: 'website' | 'file' | 'text', location, status: 'ready' | 'syncing' | 'failed', progress, passages, synced, error, enabled, excerpts }]} onAdd={(kind) => …} onResync onRemove onToggle onAsk={async (question, sources) => ({ passages: [{ sourceId, text, score }], answer })} defaultQuestion />. The test panel shows retrieval, not a generated answer; onAsk returns your vector search's top passages. Without onAsk it searches each source's excerpts.",
+          "whenToUse": [
+            "Managing what a support, docs or internal agent may read (RAG sources)",
+            "Checking that a question is covered before shipping an agent"
+          ],
+          "whenNotToUse": [
+            "Showing the sources an answer used (use sources-list and citation)",
+            "Configuring tools and instructions (use agent-7)"
+          ],
+          "composesWith": [
+            "agent-7",
+            "agent-6",
+            "agent-3",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Each source has a switch named for it, a retry or sync button and a remove button; failures are announced as alerts"
+            },
+            {
+              "keys": "Remove",
+              "action": "Asks for confirmation in an alert dialog first"
+            },
+            {
+              "keys": "Test",
+              "action": "Results are a polite live region marked busy while searching; matches are real mark elements and scores are also written as text"
+            }
+          ],
+          "customization": [
+            "title, exampleQuestions, defaultQuestion (runs once at the start)",
+            "progress (0 to 1) drives the bar of a syncing source",
+            "onAsk gets the enabled, ready sources; return passages with a score from 0 to 1 and, if you have one, an answer"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-8-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton of the summary, the source cards and the test panel under the real heading."
+          },
+          {
+            "id": "empty",
+            "title": "No sources yet",
+            "example": "agent-8-empty",
+            "trigger": "state=\"empty\" (or sources={[]})",
+            "note": "Explains what knowledge is and offers the three ways to add it as large buttons (website, files, pasted text); emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-8-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A single source that fails to sync shows its reason and Retry on its own card."
+          }
+        ],
+        "examples": [
+          "agent-8-demo",
+          "agent-8-no-match",
+          "agent-8-empty",
+          "agent-8-loading",
+          "agent-8-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-8"
+      }
+    },
+    {
+      "name": "agent-8-demo",
+      "type": "registry:example",
+      "title": "Agent 8: knowledge manager: Default, with a test run",
+      "description": "Default, with a test run example of Agent 8: knowledge manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-8.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-8-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-8-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-8",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-8-no-match",
+      "type": "registry:example",
+      "title": "Agent 8: knowledge manager: A question nothing covers",
+      "description": "A question nothing covers example of Agent 8: knowledge manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-8.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-8-no-match.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-8-no-match.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-8",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-8-empty",
+      "type": "registry:example",
+      "title": "Agent 8: knowledge manager: No sources yet",
+      "description": "No sources yet example of Agent 8: knowledge manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-8.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-8-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-8-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-8",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-8-loading",
+      "type": "registry:example",
+      "title": "Agent 8: knowledge manager: Loading",
+      "description": "Loading example of Agent 8: knowledge manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-8.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-8-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-8-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-8",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-8-error",
+      "type": "registry:example",
+      "title": "Agent 8: knowledge manager: Could not load",
+      "description": "Could not load example of Agent 8: knowledge manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-8.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-8-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-8-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-8",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ai-chat-1",
       "type": "registry:block",
       "title": "AI Chat 1: full chat app pane",
@@ -10827,6 +11066,248 @@
       }
     },
     {
+      "name": "dev-1",
+      "type": "registry:block",
+      "title": "Dev 1: developers page",
+      "description": "A developers page: a 14-day request chart with errors stacked, success rate and median time, API keys shown in full once and revoked behind a confirmation, and a request log with filter, responses and copy as curl.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/json-viewer.json",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/dev-1/dev-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/dev-1/dev-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "developer"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "developer",
+          "api",
+          "api keys",
+          "request log",
+          "usage",
+          "test mode",
+          "live mode",
+          "curl",
+          "logs",
+          "dashboard",
+          "platform"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A developer dashboard page. <Dev1 keys={[{ id, name, scope: 'read' | 'write' | 'admin', last4, created, lastUsed }]} usage={{ days: [{ label, ok, errors }], p50 }} requests={[{ id, method, path, status, ms, time, ip, keyName, response }]} baseUrl onCreateKey={async ({ name, scope, env }) => ({ id, secret })} onRevokeKey onEnvChange defaultEnv />. The secret returned by onCreateKey is shown once in a copy banner and only its last four characters are kept in the list.",
+          "whenToUse": [
+            "The developer or API section of a platform product",
+            "Letting customers manage keys and debug requests themselves"
+          ],
+          "whenNotToUse": [
+            "Showing one secret in a settings form (use api-key-field)",
+            "Webhook endpoints and deliveries (use webhook-card)",
+            "Server logs for operators (use log-stream)"
+          ],
+          "composesWith": [
+            "settings-4",
+            "settings-5",
+            "app-shell-1",
+            "agent-3"
+          ],
+          "a11y": [
+            {
+              "keys": "Chart",
+              "action": "An image with a text summary, plus a hidden table with the numbers for each day; bars never carry meaning by color alone"
+            },
+            {
+              "keys": "Create key",
+              "action": "The new key is announced and shown in an alert with a Copy button; Revoke asks first in an alert dialog"
+            },
+            {
+              "keys": "Enter / Space on a request",
+              "action": "Opens its response (aria-expanded); status is an icon, the number and words, not color alone"
+            }
+          ],
+          "customization": [
+            "baseUrl for the curl commands; defaultEnv: 'test' | 'live' (live shows a warning and sk_live_ prefixes)",
+            "onCreateKey must call your backend: the secret must never be derivable on the client",
+            "defaultOpenRequest opens a request at first"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "dev-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton of the usage chart, the keys and the request log under the real heading."
+          },
+          {
+            "id": "empty",
+            "title": "No requests yet",
+            "example": "dev-1-empty",
+            "trigger": "state=\"empty\" (or requests={[]})",
+            "note": "Explains that requests appear within seconds and gives a ready curl command to make the first one, with a copy button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "dev-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying keys are safe and nothing changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "dev-1-demo",
+          "dev-1-live",
+          "dev-1-empty",
+          "dev-1-loading",
+          "dev-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/dev-1"
+      }
+    },
+    {
+      "name": "dev-1-demo",
+      "type": "registry:example",
+      "title": "Dev 1: developers page: Default (test mode)",
+      "description": "Default (test mode) example of Dev 1: developers page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dev-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dev-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dev-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dev-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dev-1-live",
+      "type": "registry:example",
+      "title": "Dev 1: developers page: Live mode, a failed request open",
+      "description": "Live mode, a failed request open example of Dev 1: developers page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dev-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dev-1-live.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dev-1-live.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dev-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dev-1-empty",
+      "type": "registry:example",
+      "title": "Dev 1: developers page: No requests yet",
+      "description": "No requests yet example of Dev 1: developers page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dev-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dev-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dev-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dev-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dev-1-loading",
+      "type": "registry:example",
+      "title": "Dev 1: developers page: Loading",
+      "description": "Loading example of Dev 1: developers page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dev-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dev-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dev-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dev-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dev-1-error",
+      "type": "registry:example",
+      "title": "Dev 1: developers page: Could not load",
+      "description": "Could not load example of Dev 1: developers page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dev-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dev-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dev-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dev-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "devices-1",
       "type": "registry:block",
       "title": "Devices 1: Mac, iPad, iPhone and Watch lineup",
@@ -12849,6 +13330,7 @@
         "https://ui.ballmac.com/r/cover-art.json",
         "https://ui.ballmac.com/r/dot-pattern.json",
         "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/match-highlight.json",
         "https://ui.ballmac.com/r/skeleton.json",
         "https://ui.ballmac.com/r/spotlight-card.json",
         "https://ui.ballmac.com/r/state-view.json"
@@ -13817,6 +14299,243 @@
       "meta": {
         "example": true,
         "of": "hero-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inbox-1",
+      "type": "registry:block",
+      "title": "Inbox 1: notifications page",
+      "description": "A notifications page grouped by day: unread marked by an accent, mentions and comments with excerpts, requests answered inline (Approve, Deny, Accept, Decline), keyboard triage and an Undo bar after archiving.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/inbox-1/inbox-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/inbox-1/inbox-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "notifications"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "notifications",
+          "inbox",
+          "activity",
+          "alerts",
+          "mentions",
+          "unread",
+          "archive",
+          "approvals",
+          "triage",
+          "keyboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A notifications page. <Inbox1 items={[{ id, kind: 'mention' | 'comment' | 'approval' | 'invite' | 'system' | 'billing', actor, action, target, preview, day, time, unread, actions: { primary, secondary }, outcome }]} onOpen onMarkRead onArchive onRestore onMarkAllRead onAction onSettings />. Items render as \"<b>actor</b> action <b>target</b>\"; give a system item only an action. Answering an inline request shows its outcome at once.",
+          "whenToUse": [
+            "The full page behind a notification bell",
+            "Mentions, comments and requests that people answer without opening each one"
+          ],
+          "whenNotToUse": [
+            "A dropdown from a bell (use notification-center)",
+            "Email-style threads (use mail-1)",
+            "Notification preferences (use settings-2)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "settings-2",
+            "agent-2",
+            "chat-1"
+          ],
+          "a11y": [
+            {
+              "keys": "J / K or Down / Up",
+              "action": "Moves between notifications; each is one button whose name starts with Unread and its kind"
+            },
+            {
+              "keys": "E / U on a notification",
+              "action": "Archives it (with Undo) / marks it read or unread; every change is announced politely"
+            },
+            {
+              "keys": "Tab",
+              "action": "Inline Approve and Deny sit after the notification; hover actions appear on focus and are always visible on touch screens"
+            }
+          ],
+          "customization": [
+            "title; defaultTab: 'all' | 'unread' | 'mentions'",
+            "day groups items in the order you pass them, so sort newest first",
+            "Wire onAction to your approval or invitation API; the outcome text is Approved, Denied, Accepted or Declined"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "inbox-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton notifications under the real heading, announced as loading; the filter and Mark all as read are disabled."
+          },
+          {
+            "id": "empty",
+            "title": "All caught up",
+            "example": "inbox-1-empty",
+            "trigger": "state=\"empty\" (or nothing in the chosen view)",
+            "note": "A friendly message that changes with the view (all, unread, mentions); emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "inbox-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was lost, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "inbox-1-demo",
+          "inbox-1-mentions",
+          "inbox-1-empty",
+          "inbox-1-loading",
+          "inbox-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/inbox-1"
+      }
+    },
+    {
+      "name": "inbox-1-demo",
+      "type": "registry:example",
+      "title": "Inbox 1: notifications page: Default",
+      "description": "Default example of Inbox 1: notifications page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inbox-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inbox-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inbox-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inbox-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inbox-1-mentions",
+      "type": "registry:example",
+      "title": "Inbox 1: notifications page: Mentions only",
+      "description": "Mentions only example of Inbox 1: notifications page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inbox-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inbox-1-mentions.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inbox-1-mentions.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inbox-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inbox-1-empty",
+      "type": "registry:example",
+      "title": "Inbox 1: notifications page: All caught up",
+      "description": "All caught up example of Inbox 1: notifications page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inbox-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inbox-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inbox-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inbox-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inbox-1-loading",
+      "type": "registry:example",
+      "title": "Inbox 1: notifications page: Loading",
+      "description": "Loading example of Inbox 1: notifications page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inbox-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inbox-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inbox-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inbox-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inbox-1-error",
+      "type": "registry:example",
+      "title": "Inbox 1: notifications page: Could not load",
+      "description": "Could not load example of Inbox 1: notifications page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inbox-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inbox-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inbox-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inbox-1",
         "tier": "free"
       }
     },
@@ -16254,6 +16973,242 @@
       }
     },
     {
+      "name": "search-1",
+      "type": "registry:block",
+      "title": "Search 1: results page",
+      "description": "A search results page: a large search box, the type of result as a filter with live counts, a date filter and sort, results with a trail and highlighted words, and a no-results page that suggests what to try.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/match-highlight.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/search-1/search-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/search-1/search-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "search"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "search",
+          "results",
+          "filters",
+          "facets",
+          "highlight",
+          "query",
+          "docs",
+          "site search",
+          "enterprise search"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A site or workspace search results page. <Search1 results={[{ id, kind: 'doc' | 'person' | 'project' | 'file', title, snippet, path: ['Docs', 'API'], updated, ageDays, author, href }]} defaultQuery onQueryChange onOpen timing pageSize didYouMean />. It filters and ranks the results you pass; for server search, pass the results your API returned for onQueryChange and keep the filters here.",
+          "whenToUse": [
+            "The page behind a site, docs or workspace search",
+            "Mixed results of several types that people narrow by type and date"
+          ],
+          "whenNotToUse": [
+            "A quick-jump palette (use command or spotlight-search)",
+            "Searching inside one list (use search-field with the list)",
+            "A help center home (use help-1)"
+          ],
+          "composesWith": [
+            "header-2",
+            "footer-2",
+            "app-shell-1",
+            "match-highlight"
+          ],
+          "a11y": [
+            {
+              "keys": "/",
+              "action": "Jumps to the search from anywhere on the page, unless you are typing in a field"
+            },
+            {
+              "keys": "Arrow keys on the Type filter",
+              "action": "Move between types (native radio buttons); counts are part of each label"
+            },
+            {
+              "keys": "Typing",
+              "action": "The result count is announced politely; each result is one link with a single tab stop"
+            }
+          ],
+          "customization": [
+            "pageSize and Show more; timing for \"0.14 s\"",
+            "ageDays drives the Updated filter and Newest sort; updated is the label people read",
+            "didYouMean appears when there are fewer than three results and on the no-results page"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "search-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton filters and results under the real search box, announced as searching; the box is disabled."
+          },
+          {
+            "id": "empty",
+            "title": "No results",
+            "example": "search-1-no-results",
+            "trigger": "state=\"empty\" (or a search that matches nothing)",
+            "note": "A page that says what was searched, suggests a spelling (didYouMean), lists what to try and offers to clear filters; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not search",
+            "example": "search-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying the search was kept, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "search-1-demo",
+          "search-1-few",
+          "search-1-no-results",
+          "search-1-loading",
+          "search-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/search-1"
+      }
+    },
+    {
+      "name": "search-1-demo",
+      "type": "registry:example",
+      "title": "Search 1: results page: Default",
+      "description": "Default example of Search 1: results page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/search-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/search-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/search-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "search-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "search-1-few",
+      "type": "registry:example",
+      "title": "Search 1: results page: Few results, with a suggestion",
+      "description": "Few results, with a suggestion example of Search 1: results page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/search-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/search-1-few.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/search-1-few.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "search-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "search-1-no-results",
+      "type": "registry:example",
+      "title": "Search 1: results page: No results",
+      "description": "No results example of Search 1: results page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/search-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/search-1-no-results.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/search-1-no-results.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "search-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "search-1-loading",
+      "type": "registry:example",
+      "title": "Search 1: results page: Loading",
+      "description": "Loading example of Search 1: results page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/search-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/search-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/search-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "search-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "search-1-error",
+      "type": "registry:example",
+      "title": "Search 1: results page: Could not search",
+      "description": "Could not search example of Search 1: results page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/search-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/search-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/search-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "search-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "settings-1",
       "type": "registry:block",
       "title": "Settings 1: profile and account",
@@ -18327,6 +19282,215 @@
       "meta": {
         "example": true,
         "of": "testimonials-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "upload-1",
+      "type": "registry:block",
+      "title": "Upload 1: upload manager",
+      "description": "An upload manager: a drop area that reacts to dragging, validation that explains each rejection, and a list where every file has its own state (waiting, uploading with progress, finishing, done, or failed with a reason and retry).",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/media.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/upload-1/upload-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/upload-1/upload-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "upload"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "upload",
+          "files",
+          "drag and drop",
+          "dropzone",
+          "progress",
+          "retry",
+          "validation",
+          "attachments",
+          "images",
+          "multi-file"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A multi-file upload page. <Upload1 accept=\"image/*,.pdf,.csv\" acceptLabel=\"PNG, JPG, PDF or CSV\" maxSize={10_000_000} maxFiles={10} concurrency={2} onUpload={async (file, report, signal) => { /* send it; call report(0..1); throw to fail */ }} onItemsChange />. Each file is one of queued, uploading, processing, done or failed; rejected files (wrong type, too large, over the limit) are listed as failed with the reason. Without onUpload it simulates uploading.",
+          "whenToUse": [
+            "Uploading several files to a project, library or ticket",
+            "Anywhere progress per file, retry and cancel matter"
+          ],
+          "whenNotToUse": [
+            "Picking one file in a form (use file-dropzone)",
+            "Attaching a file to a chat message (use chat-attachment)",
+            "Avatar upload (use file-dropzone with a preview)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "billing-1",
+            "file-dropzone"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab to Browse",
+              "action": "Opens the system file picker with Enter or Space; dropping is an addition, never the only way"
+            },
+            {
+              "keys": "Each file",
+              "action": "Has a progress bar with a name and value; completions and failures are announced politely, not every percent"
+            },
+            {
+              "keys": "Failures",
+              "action": "State the reason in words and offer Retry when the file is still available"
+            }
+          ],
+          "customization": [
+            "accept, acceptLabel, maxSize, maxFiles, concurrency",
+            "onUpload gets an AbortSignal: pass it to fetch so Cancel really stops the request; presigned S3 or R2 PUTs report progress with XMLHttpRequest",
+            "defaultItems shows earlier uploads; they are display only (there is no file to retry)"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "upload-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton of the drop area and the list under the real heading."
+          },
+          {
+            "id": "empty",
+            "title": "Nothing yet",
+            "example": "upload-1-empty",
+            "trigger": "state=\"empty\" (or defaultItems={[]})",
+            "note": "Just the drop area, which is the empty state: it says where to drop and what is accepted."
+          },
+          {
+            "id": "error",
+            "title": "Uploads unavailable",
+            "example": "upload-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry) and a drop area that is switched off, so nothing is dropped into a broken page."
+          }
+        ],
+        "examples": [
+          "upload-1-demo",
+          "upload-1-empty",
+          "upload-1-loading",
+          "upload-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/upload-1"
+      }
+    },
+    {
+      "name": "upload-1-demo",
+      "type": "registry:example",
+      "title": "Upload 1: upload manager: Files in every state",
+      "description": "Files in every state example of Upload 1: upload manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/upload-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/upload-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/upload-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "upload-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "upload-1-empty",
+      "type": "registry:example",
+      "title": "Upload 1: upload manager: Nothing yet",
+      "description": "Nothing yet example of Upload 1: upload manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/upload-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/upload-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/upload-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "upload-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "upload-1-loading",
+      "type": "registry:example",
+      "title": "Upload 1: upload manager: Loading",
+      "description": "Loading example of Upload 1: upload manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/upload-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/upload-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/upload-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "upload-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "upload-1-error",
+      "type": "registry:example",
+      "title": "Upload 1: upload manager: Uploads unavailable",
+      "description": "Uploads unavailable example of Upload 1: upload manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/upload-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/upload-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/upload-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "upload-1",
         "tier": "free"
       }
     },
@@ -31517,6 +32681,123 @@
       "meta": {
         "example": true,
         "of": "masonry-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "match-highlight",
+      "type": "registry:ui",
+      "title": "Match Highlight",
+      "description": "Text with the words of a search marked, as search results show them: real mark elements in a theme tint that stays readable in light and dark, plus helpers that split a query and test whether text matches it.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/match-highlight.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/match-highlight.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "search",
+          "highlight",
+          "mark",
+          "results",
+          "query",
+          "autocomplete",
+          "snippet"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "<MatchHighlight text={result.title} query={query} /> marks every occurrence of every word of the query, ignoring case. queryTokens(query) gives the words, matchesAll(text, query) tests that all of them occur, countMatches(text, query) counts occurrences for ranking. No \"use client\": it works in server components.",
+          "whenToUse": [
+            "Search results, suggestions and autocomplete rows",
+            "Showing why an item matched a filter"
+          ],
+          "whenNotToUse": [
+            "Syntax highlighting of code (use code-block)",
+            "A hand-drawn emphasis mark on a phrase (use highlighter)"
+          ],
+          "composesWith": [
+            "search-field",
+            "command",
+            "help-1",
+            "search-1"
+          ],
+          "a11y": [
+            {
+              "keys": "None",
+              "action": "Uses <mark>, which assistive technology can announce; the tint is chosen so the text keeps its contrast."
+            }
+          ],
+          "customization": [
+            "className sets the look of the wrapper; to change the tint, copy the file and edit the mark's classes",
+            "query can be a string or a list of words, so you can pass your own tokens"
+          ]
+        },
+        "statesNone": "A display of text: nothing to load, submit or fail.",
+        "examples": [
+          "match-highlight-demo",
+          "match-highlight-live"
+        ],
+        "url": "https://ui.ballmac.com/components/match-highlight"
+      }
+    },
+    {
+      "name": "match-highlight-demo",
+      "type": "registry:example",
+      "title": "Match Highlight: Marked matches",
+      "description": "Marked matches example of Match Highlight.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/match-highlight.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/match-highlight-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/match-highlight-demo.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "match-highlight",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "match-highlight-live",
+      "type": "registry:example",
+      "title": "Match Highlight: Type to search",
+      "description": "Type to search example of Match Highlight.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/match-highlight.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/match-highlight-live.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/match-highlight-live.tsx"
+        }
+      ],
+      "categories": [
+        "text"
+      ],
+      "meta": {
+        "example": true,
+        "of": "match-highlight",
         "tier": "free"
       }
     },

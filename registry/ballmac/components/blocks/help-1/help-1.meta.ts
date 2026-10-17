@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["help center", "support", "knowledge base", "docs", "search", "faq", "categories", "contact", "self-serve"],
   files: [{ path: "components/blocks/help-1/help-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "blur-fade", "button", "cover-art", "dot-pattern", "kbd", "skeleton", "spotlight-card", "state-view"],
+  registryDependencies: ["shadcn:utils", "blur-fade", "button", "cover-art", "dot-pattern", "kbd", "match-highlight", "skeleton", "spotlight-card", "state-view"],
   examples: [
     { name: "help-1-demo", title: "Default", file: "help-1-demo.tsx" },
     { name: "help-1-searching", title: "Searching", file: "help-1-searching.tsx" },
