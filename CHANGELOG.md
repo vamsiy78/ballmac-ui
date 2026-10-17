@@ -2,6 +2,16 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
+## 2026-10-17: AI agent blocks, an integrations directory and an audit log
+
+- A new AI agents section with four free blocks for products where agents do the work and people stay in charge. Until now the catalog had chat blocks only
+- Agent 1, live agent run: the task and its status ("Waiting for you" is announced), the plan beside it, every note, tool call and approval request in order, approvals that pause the run, the result with copy, Stop, Run again and a follow-up box
+- Agent 2, approvals inbox: every action agents are waiting on, newest first with its risk, the full request beside the list, A and D to approve or deny, J and K to move, and one button that approves every low-risk request. After a decision the next request is selected, so a queue clears from the keyboard
+- Agent 3, runs and traces: runs with status, time, tokens and cost, and a waterfall of model calls, tool calls and retrieval for the selected run. A failed span opens first, and each span tells screen readers its kind, start and duration. Agent 4, prompt playground: one prompt on two models side by side, {{variables}} that become fields, ⌘Enter to run, time, tokens and cost for each answer, ratings and Pick this one
+- Settings 4, integrations directory: search, categories, connected ones first, Connect with progress and the reason when it fails, Disconnect after a confirmation, coming-soon entries and a request link
+- Settings 5, audit log: who changed what, by people, agents, API keys and the system, grouped by day, filtered by who, area and time, each event opening to its IP address, a before-and-after diff and raw details, and a CSV export
+- All six have loading, empty and error states (the playground has running and error), pass every scorecard check and ship their tests. The MCP server finds them for agent, approval, trace, observability, playground, audit and integrations
+
 ## 2026-10-17: Desktop app blocks: the screens every Tauri and Electron app needs
 
 - A new Desktop apps group with six free blocks for the windows people expect in a desktop app. Each draws real window chrome through app-window and handles like macOS or Windows from the page's feel, or from a feel prop

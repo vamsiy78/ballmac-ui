@@ -4010,6 +4010,884 @@
       }
     },
     {
+      "name": "agent-1",
+      "type": "registry:block",
+      "title": "Agent 1: live agent run",
+      "description": "One AI agent run as it happens: the task and status, the plan beside it, every note, tool call and approval request in order, approvals that pause the run, the result with copy, and a follow-up box.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/agent-plan.json",
+        "https://ui.ballmac.com/r/approval-card.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/tool-call-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-1/agent-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-1/agent-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "run",
+          "tool calls",
+          "approval",
+          "human in the loop",
+          "plan",
+          "trace",
+          "autonomous"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "An agent run view. <Agent1 run={{ task, agent, status: 'running' | 'waiting' | 'done' | 'failed' | 'stopped', elapsed, usage: { tokens, cost }, steps: PlanStep[], events: [{ type: 'message', text } | { type: 'tool', name, status, input, result, duration } | { type: 'approval', title, risk, details, preview, status }], output }} onApprove={(id) => …} onDeny onStop onRunAgain onFollowUp />. Map your agent loop's stream (AI SDK tool calls, LangGraph interrupts) onto events.",
+          "whenToUse": [
+            "Watching an autonomous agent work and approving its risky steps",
+            "The detail page of a background agent task"
+          ],
+          "whenNotToUse": [
+            "A chat conversation (use ai-chat-1 or ai-chat-2)",
+            "A list of many runs (use agent-3)",
+            "A queue of approvals from many agents (use agent-2)"
+          ],
+          "composesWith": [
+            "agent-2",
+            "agent-3",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Status",
+              "action": "The run status is a live status region, so \"Waiting for you\" is announced"
+            },
+            {
+              "keys": "Tab",
+              "action": "Reaches each tool call's details toggle and each approval's Approve and Deny"
+            },
+            {
+              "keys": "Enter in the follow-up box",
+              "action": "Sends the instruction (onFollowUp)"
+            }
+          ],
+          "customization": [
+            "Approvals update in place when pressed; pass the new run from your backend to confirm",
+            "preview on an approval takes any node: a diff-viewer, a code-block or an email draft",
+            "locale formats the token count"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton of the plan and the activity under the real header."
+          },
+          {
+            "id": "empty",
+            "title": "No run yet",
+            "example": "agent-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Explains that the plan and progress will appear; emptyState can add a Start button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "agent-1-demo",
+          "agent-1-done",
+          "agent-1-loading",
+          "agent-1-empty",
+          "agent-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-1"
+      }
+    },
+    {
+      "name": "agent-1-demo",
+      "type": "registry:example",
+      "title": "Agent 1: live agent run: Waiting for approval",
+      "description": "Waiting for approval example of Agent 1: live agent run.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-1-done",
+      "type": "registry:example",
+      "title": "Agent 1: live agent run: Done, with a result",
+      "description": "Done, with a result example of Agent 1: live agent run.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-1-done.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-1-done.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-1-loading",
+      "type": "registry:example",
+      "title": "Agent 1: live agent run: Loading",
+      "description": "Loading example of Agent 1: live agent run.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-1-empty",
+      "type": "registry:example",
+      "title": "Agent 1: live agent run: No run yet",
+      "description": "No run yet example of Agent 1: live agent run.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-1-error",
+      "type": "registry:example",
+      "title": "Agent 1: live agent run: Could not load",
+      "description": "Could not load example of Agent 1: live agent run.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-2",
+      "type": "registry:block",
+      "title": "Agent 2: approvals inbox",
+      "description": "One inbox for every action AI agents are waiting on: requests with their risk, the full request beside the list, Approve and Deny with A and D, J and K to move, and approve all low-risk requests at once.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/approval-card.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-2/agent-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-2/agent-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "approvals",
+          "human in the loop",
+          "inbox",
+          "queue",
+          "review",
+          "keyboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "An approvals queue for many agents. <Agent2 requests={[{ id, agent, title, description, risk: 'low' | 'medium' | 'high', details, preview, requested: '2 min ago', task, status: 'pending' | 'approved' | 'denied' | 'expired' }]} onApprove={(id) => …} onDeny={(id) => …} />. After a decision the next waiting request is selected, so a queue clears from the keyboard.",
+          "whenToUse": [
+            "A central place where people approve what agents want to do (refunds, emails, deploys, data changes)",
+            "Human-in-the-loop review for AI SDK tool calls that need approval or LangGraph interrupts"
+          ],
+          "whenNotToUse": [
+            "One approval inside a single run (use agent-1 or approval-card)",
+            "Approving documents or expenses between people"
+          ],
+          "composesWith": [
+            "agent-1",
+            "agent-3",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Up / Down or J / K in the list",
+              "action": "Moves between requests (a listbox; the selection is announced)"
+            },
+            {
+              "keys": "A / D in the list",
+              "action": "Approves or denies the selected request; the decision is announced"
+            },
+            {
+              "keys": "Tab",
+              "action": "From the list to the request's Approve and Deny buttons"
+            }
+          ],
+          "customization": [
+            "title",
+            "Decisions update in place; refresh requests from your backend to confirm",
+            "preview takes any node, e.g. a diff-viewer"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-2-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton requests and a detail panel under the real heading; the filter is disabled."
+          },
+          {
+            "id": "empty",
+            "title": "All caught up",
+            "example": "agent-2-empty",
+            "trigger": "state=\"empty\" (or no waiting requests)",
+            "note": "Says nothing is waiting. Shown by itself once the last request is decided."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-2-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "agent-2-demo",
+          "agent-2-loading",
+          "agent-2-empty",
+          "agent-2-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-2"
+      }
+    },
+    {
+      "name": "agent-2-demo",
+      "type": "registry:example",
+      "title": "Agent 2: approvals inbox: Default",
+      "description": "Default example of Agent 2: approvals inbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-2-loading",
+      "type": "registry:example",
+      "title": "Agent 2: approvals inbox: Loading",
+      "description": "Loading example of Agent 2: approvals inbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-2-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-2-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-2-empty",
+      "type": "registry:example",
+      "title": "Agent 2: approvals inbox: All caught up",
+      "description": "All caught up example of Agent 2: approvals inbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-2-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-2-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-2-error",
+      "type": "registry:example",
+      "title": "Agent 2: approvals inbox: Could not load",
+      "description": "Could not load example of Agent 2: approvals inbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-2-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-2-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-3",
+      "type": "registry:block",
+      "title": "Agent 3: runs and traces",
+      "description": "AI agent runs with status, time, tokens and cost, filtered and searched, and a trace waterfall for the selected run: model calls, tool calls and retrieval, each span with input, output and error.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/json-viewer.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-3/agent-3.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-3/agent-3.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "observability",
+          "trace",
+          "waterfall",
+          "spans",
+          "runs",
+          "llm",
+          "tokens",
+          "cost",
+          "debugging"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "Agent observability. <Agent3 runs={[{ id, agent, task, status: 'success' | 'error' | 'running', started, duration (ms), tokens, cost, spans: [{ id, name, kind: 'llm' | 'tool' | 'retrieval' | 'step', start (ms from run start), duration (ms), depth, status, tokens, input, output, error }] }]} />. Map OpenTelemetry GenAI spans, Langfuse or AI SDK telemetry onto spans; a failed span is selected first.",
+          "whenToUse": [
+            "Debugging what an agent did and where time and tokens went",
+            "An admin page of recent agent runs"
+          ],
+          "whenNotToUse": [
+            "Watching one run live (use agent-1)",
+            "General request tracing for web services (use log-stream or a data-table)"
+          ],
+          "composesWith": [
+            "agent-1",
+            "agent-2",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Each run's task is a toggle button; each span is a button that opens its details"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Each span names its kind, start, duration and whether it failed, since the bars are visual only"
+            },
+            {
+              "keys": "Arrow keys in the table region",
+              "action": "Scroll it sideways on narrow screens"
+            }
+          ],
+          "customization": [
+            "title, defaultRunId, locale",
+            "Bars use insetInlineStart, so the waterfall mirrors in right-to-left"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-3-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton table and trace; search and the status filter are disabled."
+          },
+          {
+            "id": "empty",
+            "title": "No runs yet",
+            "example": "agent-3-empty",
+            "trigger": "state=\"empty\" (or runs={[]})",
+            "note": "Explains that runs and traces appear once agents work; a filter with no matches says so inside the table instead."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-3-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "agent-3-demo",
+          "agent-3-failed",
+          "agent-3-loading",
+          "agent-3-empty",
+          "agent-3-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-3"
+      }
+    },
+    {
+      "name": "agent-3-demo",
+      "type": "registry:example",
+      "title": "Agent 3: runs and traces: Default",
+      "description": "Default example of Agent 3: runs and traces.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-3-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-3-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-3-failed",
+      "type": "registry:example",
+      "title": "Agent 3: runs and traces: A failed run",
+      "description": "A failed run example of Agent 3: runs and traces.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-3-failed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-3-failed.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-3-loading",
+      "type": "registry:example",
+      "title": "Agent 3: runs and traces: Loading",
+      "description": "Loading example of Agent 3: runs and traces.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-3-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-3-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-3-empty",
+      "type": "registry:example",
+      "title": "Agent 3: runs and traces: No runs yet",
+      "description": "No runs yet example of Agent 3: runs and traces.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-3-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-3-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-3-error",
+      "type": "registry:example",
+      "title": "Agent 3: runs and traces: Could not load",
+      "description": "Could not load example of Agent 3: runs and traces.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-3-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-3-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-4",
+      "type": "registry:block",
+      "title": "Agent 4: prompt playground with model compare",
+      "description": "A prompt playground that runs one prompt on two models side by side: system prompt, {{variables}} that become fields, Run with ⌘Enter, each answer with time, tokens and cost, ratings and Pick this one.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/model-picker.json",
+        "https://ui.ballmac.com/r/textarea.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/use-resource.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-4/agent-4.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-4/agent-4.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "llm",
+          "prompt",
+          "playground",
+          "compare",
+          "models",
+          "evaluation",
+          "a/b",
+          "variables",
+          "prompt engineering"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A side-by-side prompt playground. <Agent4 models={ModelOption[]} defaultModels={['a', 'b']} defaultSystem defaultPrompt=\"… {{customer}} …\" defaultVariables={{ customer: 'Jordan' }} onRun={async ({ model, system, prompt, variables }) => ({ text, latencyMs, tokens: { input, output }, cost })} onRate onPick />. Variables are detected from {{name}} in the prompt and must be filled before running.",
+          "whenToUse": [
+            "Choosing a model or prompt for a feature by comparing real answers",
+            "An internal tool for prompt iteration with ratings saved for evaluation"
+          ],
+          "whenNotToUse": [
+            "A chat with one model (use ai-chat-1)",
+            "Watching an agent run (use agent-1)"
+          ],
+          "composesWith": [
+            "agent-3",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "⌘Enter or Ctrl+Enter in any field",
+              "action": "Runs both sides"
+            },
+            {
+              "keys": "Answers",
+              "action": "Each side is a live region and is marked busy while running; errors are alerts"
+            },
+            {
+              "keys": "Tab",
+              "action": "Rating buttons are toggles named for their side"
+            }
+          ],
+          "customization": [
+            "AI SDK: onRun={async ({ model, system, prompt }) => { const t = performance.now(); const r = await generateText({ model, system, prompt }); return { text: r.text, latencyMs: performance.now() - t, tokens: { input: r.usage.inputTokens, output: r.usage.outputTokens } } }}",
+            "defaultResults shows a saved comparison before the first run",
+            "onRate and onPick receive the full request, so ratings can be stored as eval data"
+          ]
+        },
+        "states": [
+          {
+            "id": "submitting",
+            "title": "Running",
+            "example": "agent-4-running",
+            "trigger": "state=\"submitting\"",
+            "note": "Both sides show Running…, are marked busy, and Run and the model pickers are disabled."
+          },
+          {
+            "id": "error",
+            "title": "A model did not answer",
+            "example": "agent-4-error",
+            "trigger": "state=\"error\" (or onRun throws)",
+            "note": "The side shows an alert with the reason; errorState sets the copy. A thrown Error's message is shown on that side only."
+          }
+        ],
+        "examples": [
+          "agent-4-demo",
+          "agent-4-fresh",
+          "agent-4-running",
+          "agent-4-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-4"
+      }
+    },
+    {
+      "name": "agent-4-demo",
+      "type": "registry:example",
+      "title": "Agent 4: prompt playground with model compare: Two answers compared",
+      "description": "Two answers compared example of Agent 4: prompt playground with model compare.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-4-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-4-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-4-fresh",
+      "type": "registry:example",
+      "title": "Agent 4: prompt playground with model compare: Before the first run",
+      "description": "Before the first run example of Agent 4: prompt playground with model compare.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-4-fresh.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-4-fresh.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-4-running",
+      "type": "registry:example",
+      "title": "Agent 4: prompt playground with model compare: Running",
+      "description": "Running example of Agent 4: prompt playground with model compare.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-4-running.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-4-running.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-4-error",
+      "type": "registry:example",
+      "title": "Agent 4: prompt playground with model compare: A model did not answer",
+      "description": "A model did not answer example of Agent 4: prompt playground with model compare.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-4-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-4-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-4",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ai-chat-1",
       "type": "registry:block",
       "title": "AI Chat 1: full chat app pane",
@@ -14311,6 +15189,424 @@
       "meta": {
         "example": true,
         "of": "settings-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-4",
+      "type": "registry:block",
+      "title": "Settings 4: integrations directory",
+      "description": "An integrations page: search, category filters, connected ones first, Connect with progress and the reason when it fails, Manage, Disconnect after a confirmation, coming-soon entries and a request link.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/settings-4/settings-4.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/settings-4/settings-4.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "settings"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "settings",
+          "integrations",
+          "apps",
+          "connect",
+          "marketplace",
+          "directory",
+          "oauth"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "An integrations directory. <Settings4 integrations={[{ id, name, description, category, icon, connected, account, comingSoon }]} onConnect={async (id) => accountName} onDisconnect onManage onRequest />. Throw from onConnect to show the reason on the card; categories come from the data.",
+          "whenToUse": [
+            "The Integrations or Apps page of a SaaS product",
+            "Connecting OAuth apps from settings"
+          ],
+          "whenNotToUse": [
+            "A marketing page that shows logos of integrations (use features-3 or logo-cloud-1)",
+            "API keys and webhooks for developers (use api-key-field and webhook-card)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "settings-1",
+            "settings-3"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Category filters are toggle buttons; each card's buttons name their integration"
+            },
+            {
+              "keys": "Disconnect",
+              "action": "An alert dialog confirms first; focus returns to the page"
+            },
+            {
+              "keys": "Connect",
+              "action": "\"Connected\" or the failure reason is announced"
+            }
+          ],
+          "customization": [
+            "title, description",
+            "Integration icons are any node: your brand marks or lucide icons",
+            "Connect usually opens an OAuth popup: resolve when it closes successfully"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "settings-4-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton cards; search and the category filter are disabled."
+          },
+          {
+            "id": "empty",
+            "title": "No integrations",
+            "example": "settings-4-empty",
+            "trigger": "state=\"empty\" (or integrations={[]})",
+            "note": "A clear message; emptyState can add an action. A search with no matches says so in place."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "settings-4-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry). A failed Connect shows its reason on that card instead."
+          }
+        ],
+        "examples": [
+          "settings-4-demo",
+          "settings-4-loading",
+          "settings-4-empty",
+          "settings-4-error"
+        ],
+        "url": "https://ui.ballmac.com/components/settings-4"
+      }
+    },
+    {
+      "name": "settings-4-demo",
+      "type": "registry:example",
+      "title": "Settings 4: integrations directory: Default",
+      "description": "Default example of Settings 4: integrations directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-4-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-4-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-4-loading",
+      "type": "registry:example",
+      "title": "Settings 4: integrations directory: Loading",
+      "description": "Loading example of Settings 4: integrations directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-4-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-4-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-4-empty",
+      "type": "registry:example",
+      "title": "Settings 4: integrations directory: No integrations",
+      "description": "No integrations example of Settings 4: integrations directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-4-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-4-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-4-error",
+      "type": "registry:example",
+      "title": "Settings 4: integrations directory: Could not load",
+      "description": "Could not load example of Settings 4: integrations directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-4-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-4-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-5",
+      "type": "registry:block",
+      "title": "Settings 5: audit log",
+      "description": "An audit log of who changed what, by people, AI agents, API keys and the system: grouped by day, filtered by who, area and time, searched, each event opening to its IP, a before-and-after diff and raw details, exported as CSV.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/diff-viewer.json",
+        "https://ui.ballmac.com/r/json-viewer.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/settings-5/settings-5.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/settings-5/settings-5.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "settings"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "settings",
+          "audit log",
+          "activity",
+          "security",
+          "compliance",
+          "history",
+          "admin",
+          "export",
+          "csv"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "An audit log page. <Settings5 events={[{ id, actor: { name, email, kind: 'user' | 'agent' | 'api' | 'system' }, action: 'member.role_changed', summary, day: 'Today', time: '09:42', target, ip, location, severity: 'info' | 'warning' | 'critical', changes: { before, after }, metadata }]} range onRangeChange hasMore onLoadMore onExport />. The area filter comes from the part of action before the dot.",
+          "whenToUse": [
+            "Security and compliance pages of a B2B product (SOC 2, enterprise plans)",
+            "Showing what AI agents changed, next to what people changed"
+          ],
+          "whenNotToUse": [
+            "A friendly activity feed for a team (use activity-feed)",
+            "Raw server logs (use log-stream)",
+            "Agent traces (use agent-3)"
+          ],
+          "composesWith": [
+            "settings-3",
+            "settings-4",
+            "agent-3",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space on an event",
+              "action": "Expands or collapses its details (aria-expanded); events with no details are plain rows"
+            },
+            {
+              "keys": "Tab",
+              "action": "Search, the who filter (a radio group), area and time range selects, Export"
+            },
+            {
+              "keys": "Severity",
+              "action": "Warnings and critical events carry a labelled icon, not colour alone"
+            }
+          ],
+          "customization": [
+            "title, description",
+            "range + onRangeChange to fetch from your API; hasMore + onLoadMore for paging",
+            "onExport replaces the built-in CSV download"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "settings-5-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton rows; the filters and Export are disabled."
+          },
+          {
+            "id": "empty",
+            "title": "Nothing recorded",
+            "example": "settings-5-empty",
+            "trigger": "state=\"empty\" (or events={[]})",
+            "note": "Says nothing changed in the chosen time range. Filters with no matches say so in place."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "settings-5-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "settings-5-demo",
+          "settings-5-loading",
+          "settings-5-empty",
+          "settings-5-error"
+        ],
+        "url": "https://ui.ballmac.com/components/settings-5"
+      }
+    },
+    {
+      "name": "settings-5-demo",
+      "type": "registry:example",
+      "title": "Settings 5: audit log: Default",
+      "description": "Default example of Settings 5: audit log.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-5-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-5-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-5-loading",
+      "type": "registry:example",
+      "title": "Settings 5: audit log: Loading",
+      "description": "Loading example of Settings 5: audit log.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-5-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-5-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-5-empty",
+      "type": "registry:example",
+      "title": "Settings 5: audit log: Nothing recorded",
+      "description": "Nothing recorded example of Settings 5: audit log.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-5-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-5-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-5-error",
+      "type": "registry:example",
+      "title": "Settings 5: audit log: Could not load",
+      "description": "Could not load example of Settings 5: audit log.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-5-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-5-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-5",
         "tier": "free"
       }
     },

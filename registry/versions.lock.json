@@ -7,6 +7,22 @@
     "version": "1.0.0",
     "hash": "4e05ef57ede1526b9984a51b1eb042545543677ee32fa9215e241ab082ef04c6"
   },
+  "agent-1": {
+    "version": "1.0.0",
+    "hash": "a99b6aa7b7db66d9889bc9d8a1c3f59cef4d05bfde71376e10b992d2065b2fe3"
+  },
+  "agent-2": {
+    "version": "1.0.0",
+    "hash": "7c26952798c31961ad83ba07e3f00a37e0c74398ffafddd0bb5ab2f4e16fbcc8"
+  },
+  "agent-3": {
+    "version": "1.0.0",
+    "hash": "351b0f4eb943533a4e329656daaee026c9e1106060610b554cd330180b6adff5"
+  },
+  "agent-4": {
+    "version": "1.0.0",
+    "hash": "8a468953ae7e725c2e443efa6a1056de7afd3070acfbb7f84937c16f6df4586f"
+  },
   "agent-plan": {
     "version": "1.0.0",
     "hash": "7ff6938b4c4b4208754afd5f610fe0a849ee8e179adec47184229230e530771c"
@@ -1034,6 +1050,14 @@
   "settings-3": {
     "version": "1.1.0",
     "hash": "0b971fb55b1cb940115c9c2119e893107a85e05cc298bf76e9fe1c984c6bd62b"
+  },
+  "settings-4": {
+    "version": "1.0.0",
+    "hash": "137be4b4348b06c79da81f7dd60eb6a2bc7c75f0a0622677ff3377ad4f668691"
+  },
+  "settings-5": {
+    "version": "1.0.0",
+    "hash": "cf5195974c4e8882be010166651a0f68c22a6c8ec39c298cf2dfa47a8c97109f"
   },
   "settings-panel": {
     "version": "1.0.0",
