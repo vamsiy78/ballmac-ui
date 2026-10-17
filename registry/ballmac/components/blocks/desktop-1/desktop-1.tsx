@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ballmac/switch"
 import { useDirection } from "@/lib/ballmac/direction"
 import { useFeel, type FeelId } from "@/lib/ballmac/feel"
+import { formatShortcut, shortcutFromEvent, usesMacKeys } from "@/lib/ballmac/shortcut"
 import { cn } from "@/lib/utils"
 
 type Desktop1Values = {
@@ -74,45 +75,13 @@ const defaults: Desktop1Values = {
   crashReports: true,
 }
 
-const MODIFIERS = ["Mod", "Ctrl", "Alt", "Shift"] as const
-const macKeys: Record<string, string> = { Mod: "⌘", Ctrl: "⌃", Alt: "⌥", Shift: "⇧", Space: "Space", Enter: "↩", Backspace: "⌫", Tab: "⇥", ArrowUp: "↑", ArrowDown: "↓", ArrowLeft: "←", ArrowRight: "→" }
-const pcKeys: Record<string, string> = { Mod: "Ctrl", Ctrl: "Ctrl", Alt: "Alt", Shift: "Shift", ArrowUp: "Up", ArrowDown: "Down", ArrowLeft: "Left", ArrowRight: "Right" }
-
-/** Writes a shortcut the way the platform does: ⇧⌘Space on a Mac (modifiers in Apple's order, no separators), Ctrl+Shift+Space elsewhere. */
-function formatShortcut(shortcut: string, feel: FeelId) {
-  if (!shortcut) return ""
-  const parts = shortcut.split("+")
-  if (feel === "macos" || feel === "ios") {
-    const order = ["Ctrl", "Alt", "Shift", "Mod"]
-    const mods = order.filter((m) => parts.includes(m)).map((m) => macKeys[m])
-    const key = parts.find((p) => !(MODIFIERS as readonly string[]).includes(p)) ?? ""
-    return mods.join("") + (macKeys[key] ?? key)
-  }
-  const mods = ["Mod", "Ctrl", "Alt", "Shift"].filter((m) => parts.includes(m)).map((m) => pcKeys[m])
-  const key = parts.find((p) => !(MODIFIERS as readonly string[]).includes(p)) ?? ""
-  return [...new Set(mods), pcKeys[key] ?? key].join("+")
-}
-
-/** Turns a key press into a shortcut string, or null when only modifiers are down or no modifier is held. */
-function shortcutFromEvent(e: React.KeyboardEvent, mac: boolean): string | null {
-  if (["Meta", "Control", "Alt", "Shift"].includes(e.key)) return null
-  const mods: string[] = []
-  if (mac ? e.metaKey : e.ctrlKey) mods.push("Mod")
-  if (mac && e.ctrlKey) mods.push("Ctrl")
-  if (e.altKey) mods.push("Alt")
-  if (e.shiftKey) mods.push("Shift")
-  if (!mods.length) return null
-  const key = e.code === "Space" ? "Space" : e.key.length === 1 ? e.key.toUpperCase() : e.key
-  return [...mods, key].join("+")
-}
-
 /**
  * A button that records the next key combination. Escape cancels, Backspace or Delete clears. A combination needs at least one
  * modifier, so typing a letter cannot steal it from every other app.
  */
 function ShortcutRecorder({ value, onChange, feel, labelledBy }: { value: string; onChange: (v: string) => void; feel: FeelId; labelledBy: string }) {
   const [recording, setRecording] = React.useState(false)
-  const mac = feel === "macos" || feel === "ios"
+  const mac = usesMacKeys(feel)
   return (
     <div className="flex items-center gap-2">
       <button

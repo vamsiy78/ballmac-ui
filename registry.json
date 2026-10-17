@@ -4888,6 +4888,214 @@
       }
     },
     {
+      "name": "agent-5",
+      "type": "registry:block",
+      "title": "Agent 5: eval results",
+      "description": "Evaluation results for a prompt or model change: a verdict that calls out regressions, each metric against the baseline with which way is better, cases filtered to regressions or improvements, and both answers side by side or as a diff.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/diff-viewer.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-5/agent-5.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-5/agent-5.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "llm",
+          "evals",
+          "evaluation",
+          "regression",
+          "testing",
+          "prompt",
+          "model",
+          "quality",
+          "comparison"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "An evals comparison page. <Agent5 title baselineLabel candidateLabel metrics={[{ id, label, baseline, candidate, format: 'percent' | 'ms' | 'currency' | 'number', higherIsBetter }]} cases={[{ id, input, expected, baseline: { output, pass, score }, candidate: { output, pass, score }, tags }]} onShip onKeepBaseline />. A regression is a case that passed on the baseline and fails on the candidate; the first one is selected.",
+          "whenToUse": [
+            "Deciding whether a prompt or model change can ship",
+            "Reviewing an eval suite's results in an internal AI tool"
+          ],
+          "whenNotToUse": [
+            "Trying prompts by hand (use agent-4)",
+            "Tracing one run (use agent-3)"
+          ],
+          "composesWith": [
+            "agent-3",
+            "agent-4",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Verdict",
+              "action": "A status region, so the number of regressions is read out"
+            },
+            {
+              "keys": "Metrics",
+              "action": "Each says Better or Worse in words next to its arrow, since lower is better for time and cost"
+            },
+            {
+              "keys": "Tab",
+              "action": "Cases are toggle buttons; pass and fail are words with an icon, each naming baseline or candidate"
+            }
+          ],
+          "customization": [
+            "locale formats percentages and currency",
+            "Feed it from Promptfoo, Braintrust, LangSmith or your own runner"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-5-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton metric cards and a case list under the real heading."
+          },
+          {
+            "id": "empty",
+            "title": "No results yet",
+            "example": "agent-5-empty",
+            "trigger": "state=\"empty\" (or cases={[]})",
+            "note": "Asks to run the suite; emptyState can add a Run button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-5-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "agent-5-demo",
+          "agent-5-loading",
+          "agent-5-empty",
+          "agent-5-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-5"
+      }
+    },
+    {
+      "name": "agent-5-demo",
+      "type": "registry:example",
+      "title": "Agent 5: eval results: With a regression",
+      "description": "With a regression example of Agent 5: eval results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-5-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-5-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-5-loading",
+      "type": "registry:example",
+      "title": "Agent 5: eval results: Loading",
+      "description": "Loading example of Agent 5: eval results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-5-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-5-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-5-empty",
+      "type": "registry:example",
+      "title": "Agent 5: eval results: No results yet",
+      "description": "No results yet example of Agent 5: eval results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-5-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-5-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-5-error",
+      "type": "registry:example",
+      "title": "Agent 5: eval results: Could not load",
+      "description": "Could not load example of Agent 5: eval results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-5-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-5-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-5",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ai-chat-1",
       "type": "registry:block",
       "title": "AI Chat 1: full chat app pane",
@@ -6980,6 +7188,242 @@
       }
     },
     {
+      "name": "chat-1",
+      "type": "registry:block",
+      "title": "Chat 1: team chat with threads",
+      "description": "A team chat: channels and direct messages with unread counts and presence, messages grouped by person and day with a New divider, reactions, threads, @mentions that suggest people, and Retry when a message fails to send.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/chat-1/chat-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/chat-1/chat-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "chat"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chat",
+          "team chat",
+          "messaging",
+          "channels",
+          "threads",
+          "reactions",
+          "mentions",
+          "slack",
+          "realtime",
+          "collaboration"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A Slack-style team chat. <Chat1 people={[{ id, name, status }]} meId channels={[{ id, name, kind: 'channel' | 'dm', private, topic, unread, personId }]} messages={{ [channelId]: [{ id, authorId, text, day, time, reactions, replies }] }} firstUnread={{ [channelId]: messageId }} onSend={async ({ channelId, text, threadId }) => …} onReact onChannelChange />. Messages appear straight away while sending; throw from onSend to mark one Not sent with Retry.",
+          "whenToUse": [
+            "Team or community messaging inside a product",
+            "Customer conversations with internal threads"
+          ],
+          "whenNotToUse": [
+            "Talking to an AI assistant (use ai-chat-1 or ai-chat-2)",
+            "Email-style threads (use mail-1)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "settings-2",
+            "agent-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Shift+Enter in the composer",
+              "action": "Sends / adds a line"
+            },
+            {
+              "keys": "@ then Up / Down and Enter or Tab",
+              "action": "Suggests people and inserts the mention (a combobox)"
+            },
+            {
+              "keys": "Tab into a message",
+              "action": "Shows Add a reaction and Reply in thread; reactions are toggle buttons with their count"
+            },
+            {
+              "keys": "Messages",
+              "action": "A log region named after the channel, with day and New separators"
+            }
+          ],
+          "customization": [
+            "Wire onSend to your realtime backend and pass new messages back through messages",
+            "Below 768 px the sidebar becomes a channel select and threads open over the conversation"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "chat-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton messages while the channel loads; the sidebar and composer stay usable."
+          },
+          {
+            "id": "empty",
+            "title": "New channel",
+            "example": "chat-1-empty",
+            "trigger": "state=\"empty\" (or a channel with no messages)",
+            "note": "\"This is the start of #channel\" with a prompt to say hello; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "chat-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry). A single message that fails to send shows Not sent and Retry instead."
+          }
+        ],
+        "examples": [
+          "chat-1-demo",
+          "chat-1-thread",
+          "chat-1-loading",
+          "chat-1-empty",
+          "chat-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/chat-1"
+      }
+    },
+    {
+      "name": "chat-1-demo",
+      "type": "registry:example",
+      "title": "Chat 1: team chat with threads: Default",
+      "description": "Default example of Chat 1: team chat with threads.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chat-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chat-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chat-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chat-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chat-1-thread",
+      "type": "registry:example",
+      "title": "Chat 1: team chat with threads: Thread open",
+      "description": "Thread open example of Chat 1: team chat with threads.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chat-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chat-1-thread.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chat-1-thread.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chat-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chat-1-loading",
+      "type": "registry:example",
+      "title": "Chat 1: team chat with threads: Loading",
+      "description": "Loading example of Chat 1: team chat with threads.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chat-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chat-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chat-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chat-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chat-1-empty",
+      "type": "registry:example",
+      "title": "Chat 1: team chat with threads: New channel",
+      "description": "New channel example of Chat 1: team chat with threads.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chat-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chat-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chat-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chat-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chat-1-error",
+      "type": "registry:example",
+      "title": "Chat 1: team chat with threads: Could not load",
+      "description": "Could not load example of Chat 1: team chat with threads.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chat-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chat-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chat-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chat-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "comparison-1",
       "type": "registry:block",
       "title": "Comparison 1: us versus the alternatives",
@@ -8159,7 +8603,8 @@
         "https://ui.ballmac.com/r/select.json",
         "https://ui.ballmac.com/r/switch.json",
         "https://ui.ballmac.com/r/direction.json",
-        "https://ui.ballmac.com/r/feel-presets.json"
+        "https://ui.ballmac.com/r/feel-presets.json",
+        "https://ui.ballmac.com/r/shortcut.json"
       ],
       "files": [
         {
@@ -8187,8 +8632,22 @@
           "hotkey",
           "feel"
         ],
-        "version": "1.0.0",
+        "version": "1.0.1",
         "updated": "2026-10-17",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-17",
+            "note": "The shortcut formatting and recording moved into the shortcut lib item, which this block now installs. formatShortcut is still exported from here; behaviour is unchanged.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-17",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "A complete preferences window. <Desktop1 appName defaultValues onValuesChange={(v) => persist(v)} onCheckForUpdates />. Panes: General, Appearance, Shortcuts (a key-combination recorder that writes ⇧⌘Space on a Mac and Ctrl+Shift+Space on Windows), Updates, Advanced, plus extraPanes. Layout follows the feel: toolbar tabs and a pane-named title on macOS, side nav and setting cards on Windows.",
@@ -9450,6 +9909,380 @@
       "meta": {
         "example": true,
         "of": "desktop-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-7",
+      "type": "registry:block",
+      "title": "Desktop 7: welcome window",
+      "description": "The window a desktop app opens with when nothing is open: name and version, ways to start (new, open, clone) with shortcuts, and recent projects to search, open with Enter and remove from the list.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/app-window.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/feel-presets.json",
+        "https://ui.ballmac.com/r/shortcut.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/desktop-7/desktop-7.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/desktop-7/desktop-7.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "desktop"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "desktop",
+          "welcome",
+          "start",
+          "recent",
+          "projects",
+          "launcher",
+          "tauri",
+          "electron",
+          "macos",
+          "windows",
+          "feel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A welcome or launcher window. <Desktop7 appName version actions={[{ id, label, description, icon, shortcut: 'Mod+N' }]} recents={[{ id, name, path, opened }]} onAction onOpenRecent onRemoveRecent showOnLaunch onShowOnLaunchChange />. Recents are a combobox with a listbox: type to search, arrows to move, Enter to open.",
+          "whenToUse": [
+            "The start window of an editor, IDE or document app built with Tauri or Electron",
+            "Choosing a recent project before the main window opens"
+          ],
+          "whenNotToUse": [
+            "A dashboard home inside a web app (use dashboard-1)",
+            "Signing in (use login-1)"
+          ],
+          "composesWith": [
+            "desktop-1",
+            "desktop-6",
+            "app-window",
+            "feel-auto"
+          ],
+          "a11y": [
+            {
+              "keys": "Up / Down in the search field",
+              "action": "Moves through recent projects; the selection is announced"
+            },
+            {
+              "keys": "Enter",
+              "action": "Opens the selected project"
+            },
+            {
+              "keys": "Tab",
+              "action": "Reaches each start action and Remove from list for the selected project"
+            }
+          ],
+          "customization": [
+            "feel: 'macos' | 'windows' (defaults to the page's feel); shortcuts are written in the platform's notation",
+            "Tauri: keep recents in the store plugin; open with the dialog plugin's open({ directory: true })"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading recents",
+            "example": "desktop-7-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton rows in the Recent column while the list is read; the start actions work straight away."
+          },
+          {
+            "id": "empty",
+            "title": "First launch",
+            "example": "desktop-7-empty",
+            "trigger": "state=\"empty\" (or recents={[]})",
+            "note": "Says opened projects will be listed; emptyState can add an action."
+          },
+          {
+            "id": "error",
+            "title": "Could not read recents",
+            "example": "desktop-7-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert in the Recent column with Try again (onRetry); the start actions still work."
+          }
+        ],
+        "examples": [
+          "desktop-7-demo",
+          "desktop-7-windows",
+          "desktop-7-loading",
+          "desktop-7-empty",
+          "desktop-7-error"
+        ],
+        "url": "https://ui.ballmac.com/components/desktop-7"
+      }
+    },
+    {
+      "name": "desktop-7-demo",
+      "type": "registry:example",
+      "title": "Desktop 7: welcome window: macOS",
+      "description": "macOS example of Desktop 7: welcome window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-7-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-7-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-7-windows",
+      "type": "registry:example",
+      "title": "Desktop 7: welcome window: Windows",
+      "description": "Windows example of Desktop 7: welcome window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-7-windows.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-7-windows.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-7-loading",
+      "type": "registry:example",
+      "title": "Desktop 7: welcome window: Loading recents",
+      "description": "Loading recents example of Desktop 7: welcome window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-7-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-7-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-7-empty",
+      "type": "registry:example",
+      "title": "Desktop 7: welcome window: First launch",
+      "description": "First launch example of Desktop 7: welcome window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-7-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-7-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-7-error",
+      "type": "registry:example",
+      "title": "Desktop 7: welcome window: Could not read recents",
+      "description": "Could not read recents example of Desktop 7: welcome window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-7.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-7-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-7-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-8",
+      "type": "registry:block",
+      "title": "Desktop 8: keyboard shortcuts editor",
+      "description": "A shortcuts editor: commands grouped and searchable by name or by pressing the keys, a recorder on each row, a warning with Replace when keys are taken, reset per command, Restore defaults, and each platform's notation.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/app-window.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/feel-presets.json",
+        "https://ui.ballmac.com/r/shortcut.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/desktop-8/desktop-8.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/desktop-8/desktop-8.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "desktop"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "desktop",
+          "keyboard",
+          "shortcuts",
+          "hotkeys",
+          "keybindings",
+          "preferences",
+          "tauri",
+          "electron",
+          "macos",
+          "windows",
+          "feel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "A keybindings editor. <Desktop8 commands={[{ id, label, group, shortcut: 'Mod+Shift+N' }]} values={overrides} onValuesChange={(overrides) => save(overrides)} />. values holds only what differs from the defaults ('' means removed). Conflicts are found with normalizeShortcut, so Ctrl and Mod count as one key on Windows.",
+          "whenToUse": [
+            "The Keyboard Shortcuts pane or window of a desktop or power-user web app",
+            "Letting people remap commands that a command palette also runs"
+          ],
+          "whenNotToUse": [
+            "A read-only cheat sheet (use keyboard-shortcuts)",
+            "One global shortcut (use the recorder in desktop-1)"
+          ],
+          "composesWith": [
+            "desktop-1",
+            "keyboard-shortcuts",
+            "command",
+            "app-window"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter on a shortcut",
+              "action": "Starts recording; the next combination is saved, Escape cancels, Delete removes it"
+            },
+            {
+              "keys": "By keys",
+              "action": "Press a combination to find the command using it; Escape returns to search by name"
+            },
+            {
+              "keys": "Conflicts",
+              "action": "Announced as an alert with Cancel and Replace; every change is announced politely"
+            }
+          ],
+          "customization": [
+            "feel: 'macos' | 'windows' (defaults to the page's feel); frame={false} to place it in a settings pane",
+            "Pass the effective shortcuts to your hotkey hook or Tauri's global-shortcut plugin (Mod → CommandOrControl)"
+          ]
+        },
+        "statesNone": "Shortcuts are local settings that apply as they change: nothing to load, submit or fail.",
+        "examples": [
+          "desktop-8-demo",
+          "desktop-8-windows"
+        ],
+        "url": "https://ui.ballmac.com/components/desktop-8"
+      }
+    },
+    {
+      "name": "desktop-8-demo",
+      "type": "registry:example",
+      "title": "Desktop 8: keyboard shortcuts editor: macOS",
+      "description": "macOS example of Desktop 8: keyboard shortcuts editor.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-8.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-8-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-8-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-8",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "desktop-8-windows",
+      "type": "registry:example",
+      "title": "Desktop 8: keyboard shortcuts editor: Windows, with changes",
+      "description": "Windows, with changes example of Desktop 8: keyboard shortcuts editor.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/desktop-8.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/desktop-8-windows.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/desktop-8-windows.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "desktop-8",
         "tier": "free"
       }
     },
@@ -49100,6 +49933,56 @@
         },
         "examples": [],
         "url": "https://ui.ballmac.com/components/scroll"
+      }
+    },
+    {
+      "name": "shortcut",
+      "type": "registry:lib",
+      "title": "Shortcut",
+      "description": "Keyboard shortcuts as plain strings (\"Mod+Shift+K\"): written as ⇧⌘K on a Mac and Ctrl+Shift+K elsewhere, recorded from key presses, and normalized so conflicts can be found.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/feel-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/lib/shortcut.ts",
+          "type": "registry:lib",
+          "target": "@lib/ballmac/shortcut.ts"
+        }
+      ],
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "keyboard",
+          "shortcut",
+          "hotkey",
+          "macos",
+          "windows",
+          "feel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-17",
+        "tests": true,
+        "ai": {
+          "summary": "formatShortcut('Mod+Shift+K', feel) → '⇧⌘K' or 'Ctrl+Shift+K'. shortcutFromEvent(event, isMac) records a key press (null while only modifiers are down). normalizeShortcut(s, feel) gives one spelling per combination for comparing.",
+          "whenToUse": [
+            "Showing shortcuts in menus, tooltips and settings in each platform's notation",
+            "Recording or comparing user-chosen shortcuts"
+          ],
+          "whenNotToUse": [
+            "Listening for shortcuts at runtime: use your framework's hotkey hook or Tauri's global-shortcut plugin, and pass them these strings"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": []
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/shortcut"
       }
     },
     {

@@ -158,6 +158,7 @@ export const blockCategoryLabels: Record<string, string> = {
   ecommerce: "Ecommerce",
   desktop: "Desktop app",
   agents: "AI agents",
+  chat: "Team chat",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -183,8 +184,8 @@ export const blockGroups = [
   {
     id: "application",
     label: "Application",
-    description: "Screens inside a product: shell, dashboards, settings, billing, inbox, boards, AI chat and AI agents.",
-    categories: ["app-shell", "dashboard", "settings", "billing", "mail", "kanban", "calendar", "ai-chat", "agents"],
+    description: "Screens inside a product: shell, dashboards, settings, billing, inbox, team chat, boards, AI chat and AI agents.",
+    categories: ["app-shell", "dashboard", "settings", "billing", "mail", "chat", "kanban", "calendar", "ai-chat", "agents"],
   },
   {
     id: "shop",

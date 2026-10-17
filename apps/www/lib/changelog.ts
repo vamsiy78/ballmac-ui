@@ -4,6 +4,18 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-17",
+    title: "Team chat, eval results, a welcome window and a shortcuts editor",
+    items: [
+      "Chat 1, team chat: channels and direct messages with unread counts and presence, messages grouped by person and day with a New divider, reactions, threads in a side panel, @mentions that suggest people as you type, and messages that show while sending and offer Retry when they fail. A new Team chat section on /blocks",
+      "Agent 5, eval results: a verdict that calls out cases that passed before and fail now, each metric against the baseline with Better or Worse in words (lower is better for time and cost), cases filtered to regressions or improvements, and both answers side by side or as a diff",
+      "Desktop 7, welcome window: the app's name and version, ways to start (new, open, clone) with shortcuts in the platform's notation, and recent projects to search, open with Enter and remove from the list",
+      "Desktop 8, keyboard shortcuts editor: commands grouped and searchable by name or by pressing the keys, a recorder on each row, a warning with Replace when a combination is taken, reset per command and Restore defaults. It saves only what differs from the defaults",
+      "New shortcut lib: formatShortcut, shortcutFromEvent and normalizeShortcut, shared by Desktop 1, 7 and 8. Option+letter on a Mac records the letter rather than its symbol. Desktop 1 is 1.0.1 and installs it; its behaviour is unchanged",
+      "All pass every scorecard check and ship their tests. The MCP server finds them for slack, channels, messaging, evals, welcome, hotkeys and keybindings",
+    ],
+  },
+  {
+    date: "2026-10-17",
     title: "AI agent blocks, an integrations directory and an audit log",
     items: [
       "A new AI agents section with four free blocks for products where agents do the work and people stay in charge. Until now the catalog had chat blocks only",

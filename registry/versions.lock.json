@@ -23,6 +23,10 @@
     "version": "1.0.0",
     "hash": "8a468953ae7e725c2e443efa6a1056de7afd3070acfbb7f84937c16f6df4586f"
   },
+  "agent-5": {
+    "version": "1.0.0",
+    "hash": "4d085d994d7a2128a8efec2df87a7dbdf806e34e0fe3fe56125a9ed0b91b66cb"
+  },
   "agent-plan": {
     "version": "1.0.0",
     "hash": "7ff6938b4c4b4208754afd5f610fe0a849ee8e179adec47184229230e530771c"
@@ -235,6 +239,10 @@
     "version": "1.0.0",
     "hash": "afec0393eb152a77f6790fede99e8b9d37a19ed568e3c0bf960e6944ace0a406"
   },
+  "chat-1": {
+    "version": "1.0.0",
+    "hash": "73b578c65b723707793f32a951e6f6770871756869385c22be52fee42f7fc6bc"
+  },
   "chat-attachment": {
     "version": "1.0.0",
     "hash": "d2aa04641713bfa244f21458be5b19c09fd6b3f3831fab58589bcd80e57ed4be"
@@ -364,8 +372,8 @@
     "hash": "4ac979235eb90754fdd8239329c85d625413aa07a9638005e48313415687c3a6"
   },
   "desktop-1": {
-    "version": "1.0.0",
-    "hash": "033a19dae58e4711dda8e6d732e3847b5a481047149775566a1dfaba64c5d7b4"
+    "version": "1.0.1",
+    "hash": "4f0e757fdf77ee78727d48a32a8bb76921f27dee34d1b45ddfe5ec5f9e2f0014"
   },
   "desktop-2": {
     "version": "1.0.0",
@@ -386,6 +394,14 @@
   "desktop-6": {
     "version": "1.0.0",
     "hash": "7338db625a08c01b11595df05fde3dc4491dcb28ff84b274db4c3e86b8367a41"
+  },
+  "desktop-7": {
+    "version": "1.0.0",
+    "hash": "a7f0c7e21e04462cae1cceb3dd97730b5da4422fb45ca8007b1667c9aaf41378"
+  },
+  "desktop-8": {
+    "version": "1.0.0",
+    "hash": "3f9fda69d4b1e556665b6e10da284957579a5de147a3d682d00cb13b9926652c"
   },
   "desktop-icons": {
     "version": "1.0.0",
@@ -1078,6 +1094,10 @@
   "shiny-button": {
     "version": "1.0.1",
     "hash": "7282f43036d204ea48dafb0694a812e0a36749ba7e747e6d2d58b21b1487096e"
+  },
+  "shortcut": {
+    "version": "1.0.0",
+    "hash": "c0d1b6f6bfd87bbb2d06f25dcf32cc0cb628dfc60a1faf8ac1dea1a04d79771a"
   },
   "shortcut-hint": {
     "version": "1.0.0",

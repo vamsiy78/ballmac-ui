@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["desktop", "preferences", "settings", "tauri", "electron", "macos", "windows", "shortcut", "hotkey", "feel"],
   files: [{ path: "components/blocks/desktop-1/desktop-1.tsx" }],
   dependencies: ["lucide-react", "radix-ui"],
-  registryDependencies: ["shadcn:utils", "app-window", "button", "segmented-control", "select", "switch", "direction", "feel-presets"],
+  registryDependencies: ["shadcn:utils", "app-window", "button", "segmented-control", "select", "switch", "direction", "feel-presets", "shortcut"],
   examples: [
     { name: "desktop-1-demo", title: "macOS", file: "desktop-1-demo.tsx" },
     { name: "desktop-1-windows", title: "Windows", file: "desktop-1-windows.tsx" },
@@ -37,6 +37,10 @@ export default defineItem({
       "Tauri: pass the shortcut to @tauri-apps/plugin-global-shortcut (replace Mod with CommandOrControl)",
     ],
   },
-  version: "1.0.0",
+  version: "1.0.1",
   updated: "2026-10-17",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-17", note: "The shortcut formatting and recording moved into the shortcut lib item, which this block now installs. formatShortcut is still exported from here; behaviour is unchanged." },
+    { version: "1.0.0", date: "2026-10-17", note: "First release." },
+  ],
 })
