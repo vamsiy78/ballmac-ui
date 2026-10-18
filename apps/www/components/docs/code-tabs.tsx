@@ -21,7 +21,7 @@ export function CodeBlockTabs({ children }: { children: React.ReactNode; default
   const id = React.useId()
   return (
     <Ctx.Provider value={{ pm, set, id }}>
-      <div className="bg-card not-prose my-5 overflow-hidden rounded-xl border">{children}</div>
+      <div dir="ltr" className="bg-card not-prose my-5 overflow-hidden rounded-xl border text-start">{children}</div>
     </Ctx.Provider>
   )
 }
@@ -31,7 +31,7 @@ export function CodeBlockTabsList({ children }: { children: React.ReactNode }) {
   const onKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const tabs = Array.from(e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]'))
     const i = tabs.indexOf(document.activeElement as HTMLButtonElement)
-    const dir = getComputedStyle(e.currentTarget).direction === "rtl" ? -1 : 1
+    const dir = 1 // the tabs are drawn left to right, like the commands under them
     let next = -1
     if (e.key === "ArrowRight") next = (i + dir + tabs.length) % tabs.length
     if (e.key === "ArrowLeft") next = (i - dir + tabs.length) % tabs.length

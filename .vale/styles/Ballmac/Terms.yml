@@ -1,0 +1,19 @@
+extends: substitution
+message: "Use '%s' instead of '%s'."
+level: error
+ignorecase: false
+swap:
+  Ballmac UI Library: Ballmac UI
+  BallmacUI: Ballmac UI
+  Ballmac-UI: Ballmac UI
+  Shadcn: shadcn
+  ShadCN: shadcn
+  shadcn/UI: shadcn/ui
+  Tailwindcss: Tailwind CSS
+  tailwind css: Tailwind CSS
+  Github: GitHub
+  github: GitHub
+  Javascript: JavaScript
+  Typescript: TypeScript
+  colour: color
+  Colour: Color

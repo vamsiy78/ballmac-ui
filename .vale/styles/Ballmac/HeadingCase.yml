@@ -1,0 +1,54 @@
+extends: capitalization
+message: "Use sentence case in headings: '%s'."
+level: error
+scope: heading
+match: $sentence
+indicators:
+  - ':'
+exceptions:
+  - Ballmac UI
+  - Ballmac UI Pro
+  - ballmac
+  - Ballmac
+  - Tauri
+  - Electron
+  - Windows
+  - macOS
+  - iOS
+  - MCP
+  - CLI
+  - RTL
+  - JSON
+  - CSS
+  - JavaScript
+  - TypeScript
+  - Next.js
+  - TanStack Query
+  - SWR
+  - StateView
+  - AppWindow
+  - Media
+  - GitHub
+  - Pro
+  - Figma
+  - AI
+  - UI
+  - I
+  - HTML
+  - API
+  - URL
+  - URLs
+  - CI
+  - RTL-safe
+  - Beacon
+  - Cove
+  - Quire
+  - Playwright
+  - Radix
+  - Tailwind
+  - Vale
+  - Diátaxis
+  - Windows 11
+  - Chrome
+  - Markdown
+  - Node.js

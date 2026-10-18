@@ -15,7 +15,7 @@ imageAlt: "The Gallery 1 block, a masonry of tiles with category chips above it.
 - [Trust 1](/blocks/trust-1) lists certifications with dates, security controls with what is still in progress, documents behind a validated request form, a subprocessor table, and a disclosure contact that stays visible if the page fails to load.
 - [Tasks 1](/blocks/tasks-1) groups tasks as overdue, today, upcoming and no date with due dates in words, edits inline, reorders with buttons or Alt and the arrow keys, has shortcuts (N, X, E, J, K) and Undo on delete; pass today in.
 - [Leaderboard 1](/blocks/leaderboard-1) shows a podium and ranked rows with bars against the leader, movement in words ("Up 2 places"), a week, month and all-time switch, and your own place pinned when you are further down.
-- [return-focus](/components/return-focus) puts keyboard focus back where it was when a dialog closes. Radix returns focus only to a dialog's trigger, so a dialog opened from state dropped it to the top of the page; Gallery 1, Trust 1, Settings 4, Agent 6, Agent 8 and Dev 1 use it.
+- [return-focus](/docs/reference/building-blocks#return-focus) puts keyboard focus back where it was when a dialog closes. Radix returns focus only to a dialog's trigger, so a dialog opened from state dropped it to the top of the page; Gallery 1, Trust 1, Settings 4, Agent 6, Agent 8 and Dev 1 use it.
 
 ### Improved
 

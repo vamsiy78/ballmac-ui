@@ -1,0 +1,10 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "access": "public",
+  "baseBranch": "preprod",
+  "updateInternalDependencies": "patch",
+  "ignore": ["@ballmac-ui/www", "@ballmac-ui/audit", "@ballmac-ui/theme-engine", "@ballmac-ui/metadata"],
+  "privatePackages": { "version": true, "tag": false }
+}

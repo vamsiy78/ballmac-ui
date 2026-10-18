@@ -15,7 +15,7 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
         {/* Like shadcn: a short solid divider on the sticky panel (not a full-height border), no visible scrollbar,
             and a soft fade where the list runs under the bottom edge. */}
         <div className="sticky top-14 h-[calc(100dvh-3.5rem)] py-8">
-          <div className="after:bg-border relative h-full after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:w-px">
+          <div className="after:bg-border relative h-full after:pointer-events-none after:absolute after:inset-y-0 after:end-0 after:w-px">
             <SidebarScroll className="h-full overflow-y-auto overscroll-contain px-4 pb-10 [mask-image:linear-gradient(to_bottom,black_calc(100%-3rem),transparent)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <DocsSidebar groups={sidebarGroups()} />
             </SidebarScroll>

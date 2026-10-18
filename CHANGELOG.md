@@ -157,7 +157,7 @@ This file is generated: edit the entries in `apps/www/content/changelog/` and ru
 - [Trust 1](https://ui.ballmac.com/blocks/trust-1) lists certifications with dates, security controls with what is still in progress, documents behind a validated request form, a subprocessor table, and a disclosure contact that stays visible if the page fails to load.
 - [Tasks 1](https://ui.ballmac.com/blocks/tasks-1) groups tasks as overdue, today, upcoming and no date with due dates in words, edits inline, reorders with buttons or Alt and the arrow keys, has shortcuts (N, X, E, J, K) and Undo on delete; pass today in.
 - [Leaderboard 1](https://ui.ballmac.com/blocks/leaderboard-1) shows a podium and ranked rows with bars against the leader, movement in words ("Up 2 places"), a week, month and all-time switch, and your own place pinned when you are further down.
-- [return-focus](https://ui.ballmac.com/components/return-focus) puts keyboard focus back where it was when a dialog closes. Radix returns focus only to a dialog's trigger, so a dialog opened from state dropped it to the top of the page; Gallery 1, Trust 1, Settings 4, Agent 6, Agent 8 and Dev 1 use it.
+- [return-focus](https://ui.ballmac.com/docs/reference/building-blocks#return-focus) puts keyboard focus back where it was when a dialog closes. Radix returns focus only to a dialog's trigger, so a dialog opened from state dropped it to the top of the page; Gallery 1, Trust 1, Settings 4, Agent 6, Agent 8 and Dev 1 use it.
 
 ### Changed
 
@@ -214,7 +214,7 @@ This file is generated: edit the entries in `apps/www/content/changelog/` and ru
 - [Agent 5](https://ui.ballmac.com/blocks/agent-5) shows eval results: a verdict that calls out cases that passed before and fail now, each metric against the baseline with Better or Worse in words, and answers side by side or as a diff.
 - [Desktop 7](https://ui.ballmac.com/blocks/desktop-7) is a welcome window with the app's name and version, ways to start (new, open, clone) with shortcuts in the platform's notation, and recent projects you search, open and remove.
 - [Desktop 8](https://ui.ballmac.com/blocks/desktop-8) edits keyboard shortcuts: commands searchable by name or by pressing the keys, a recorder per row, a Replace warning when a combination is taken, and Restore defaults; it saves only what differs from the defaults.
-- [shortcut](https://ui.ballmac.com/components/shortcut) adds `formatShortcut`, `shortcutFromEvent` and `normalizeShortcut`, shared by Desktop 1, 7 and 8. Option+letter on a Mac records the letter rather than its symbol.
+- [shortcut](https://ui.ballmac.com/docs/reference/building-blocks#shortcut) adds `formatShortcut`, `shortcutFromEvent` and `normalizeShortcut`, shared by Desktop 1, 7 and 8. Option+letter on a Mac records the letter rather than its symbol.
 
 ### Changed
 
@@ -266,7 +266,7 @@ This file is generated: edit the entries in `apps/www/content/changelog/` and ru
 
 - Every data block takes `state`: `"loading"`, `"ready"`, `"empty"` or `"error"`, with `onRetry`, `emptyState` and `errorState`. Eleven blocks: Mail 1, Dashboard 1 and 2, Kanban 1, Calendar 1, Blog 1, Changelog 1, Billing 1 and 2, Settings 3 and the two AI chats. See [Handle loading, empty and error states](https://ui.ballmac.com/docs/guides/states).
 - Every form block (Login 1 and 2, Sign up, Forgot password, Verify, Contact, Newsletter, Invite, Onboarding, Settings 1 and 2) can show submitting, success and error from the same prop. Fields lock while a request is in flight, so nothing is sent twice.
-- [state-view](https://ui.ballmac.com/components/state-view) is for your own views, and [use-resource](https://ui.ballmac.com/components/use-resource) is a fetch state machine that aborts replaced requests, never lets a slow old answer win, and retries; `stateOf()` maps TanStack Query and SWR results onto the same states.
+- [state-view](https://ui.ballmac.com/components/state-view) is for your own views, and [use-resource](https://ui.ballmac.com/docs/reference/building-blocks#use-resource) is a fetch state machine that aborts replaced requests, never lets a slow old answer win, and retries; `stateOf()` maps TanStack Query and SWR results onto the same states.
 - Block pages have a State switch above the preview with the prop to copy and what each state does; a link such as `/blocks/mail-1?state=loading` opens a state.
 
 ### Changed

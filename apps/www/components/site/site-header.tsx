@@ -13,15 +13,15 @@ export function SiteHeader() {
     <header className="bg-background/80 supports-[backdrop-filter]:bg-background/70 sticky top-0 z-40 border-b backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-[1440px] items-center gap-2 px-4 sm:px-6">
         <MobileNav groups={sidebarGroups()} />
-        <Link href="/" className="focus-visible:ring-ring/50 mr-3 flex items-center rounded-md outline-none focus-visible:ring-[3px]">
+        <Link href="/" className="focus-visible:ring-ring/50 me-3 flex items-center rounded-md outline-none focus-visible:ring-[3px]">
           <span className="sr-only">Ballmac UI home</span>
           <span aria-hidden="true" className="flex">
             <Logo />
           </span>
         </Link>
         <MainNav />
-        <div className="ml-auto flex flex-1 items-center justify-end gap-1">
-          <div className="mr-1 sm:w-full sm:max-w-72">
+        <div className="ms-auto flex flex-1 items-center justify-end gap-1">
+          <div className="me-1 sm:w-full sm:max-w-72">
             <CommandMenu />
           </div>
           <a
@@ -43,7 +43,7 @@ export function SiteHeader() {
             </svg>
           </a>
           <ThemeToggle />
-          <ProAccount className="ml-1" />
+          <ProAccount className="ms-1" />
         </div>
       </div>
     </header>

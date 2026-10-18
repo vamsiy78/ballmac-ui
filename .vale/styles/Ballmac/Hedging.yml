@@ -1,0 +1,17 @@
+extends: existence
+message: "Don't write '%s'. State the step or the fact without hedging how hard it is."
+level: error
+ignorecase: true
+tokens:
+  - simply
+  - just
+  - easy
+  - easily
+  - obviously
+  - of course
+  - basically
+  - actually
+  - please
+  - very
+  - quite
+  - straightforward

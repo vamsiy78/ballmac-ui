@@ -81,7 +81,7 @@ export function FeedView({ entries, tag, onTag }: { entries: ChangelogEntry[]; t
                 )}
               >
                 {t ?? "All"}
-                <span className={cn("text-[11px] tabular-nums", active ? "opacity-70" : "opacity-60")}>{t ? counts[t] : entries.length}</span>
+                <span className="text-[11px] tabular-nums">{t ? counts[t] : entries.length}</span>
               </button>
             )
           })}

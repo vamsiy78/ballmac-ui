@@ -1,0 +1,24 @@
+# Weekly check of the links that leave the site (docs and changelog), because other sites move pages. The same files are checked for
+# internal links on every push in ci.yml, against the built site.
+name: Docs links
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  external-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check external links in the content
+        uses: lycheeverse/lychee-action@v2
+        with:
+          lycheeVersion: v0.24.2
+          args: --config lychee.toml --no-progress 'apps/www/content/**/*.md' 'apps/www/content/**/*.mdx' README.md CONTRIBUTING.md docs/STYLE.md
+          fail: true

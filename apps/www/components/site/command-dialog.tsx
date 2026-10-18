@@ -7,6 +7,23 @@ import { useRouter } from "next/navigation"
 import type { MenuEntry } from "@/lib/search-index"
 
 /** The search dialog itself. Loaded the first time the box opens, with the entries it fetched. */
+/**
+ * Every word you type has to appear somewhere in the entry; matches in the title count most, then the name, then the description.
+ * (cmdk's own fuzzy match let "motion" find any page that merely mentions it in passing before the Motion page.)
+ */
+function score(_value: string, search: string, keywords: string[] = []) {
+  const [title = "", name = "", description = ""] = keywords.map((k) => k.toLowerCase())
+  const words = search.toLowerCase().split(/\s+/).filter(Boolean)
+  let total = 0
+  for (const w of words) {
+    const inTitle = title.includes(w)
+    const hit = inTitle ? (title.split(/\W+/).some((t) => t.startsWith(w)) ? 4 : 3) : name.includes(w) ? 2 : description.includes(w) ? 1 : 0
+    if (!hit) return 0
+    total += hit
+  }
+  return total / (4 * words.length)
+}
+
 export default function CommandDialog({ open, onOpenChange, entries }: { open: boolean; onOpenChange: (open: boolean) => void; entries: MenuEntry[] }) {
   const router = useRouter()
   // Docs first, then the changelog, then what you can install.
@@ -14,6 +31,7 @@ export default function CommandDialog({ open, onOpenChange, entries }: { open: b
   const groups = [...new Set(entries.map((e) => e.group))].sort((a, b) => rank(a) - rank(b))
   return (
       <Command.Dialog
+        filter={score}
         open={open}
         onOpenChange={onOpenChange}
         label="Search Ballmac UI"
@@ -33,7 +51,8 @@ export default function CommandDialog({ open, onOpenChange, entries }: { open: b
                 .map((e) => (
                   <Command.Item
                     key={e.href}
-                    value={`${e.title} ${e.name} ${e.description}`}
+                    value={e.href}
+                    keywords={[e.title, e.name, e.description]}
                     onSelect={() => {
                       onOpenChange(false)
                       router.push(e.href)

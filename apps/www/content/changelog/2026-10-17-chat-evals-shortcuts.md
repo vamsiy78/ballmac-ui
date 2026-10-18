@@ -14,7 +14,7 @@ imageAlt: "The Chat 1 block, team chat with channels, direct messages and a thre
 - [Agent 5](/blocks/agent-5) shows eval results: a verdict that calls out cases that passed before and fail now, each metric against the baseline with Better or Worse in words, and answers side by side or as a diff.
 - [Desktop 7](/blocks/desktop-7) is a welcome window with the app's name and version, ways to start (new, open, clone) with shortcuts in the platform's notation, and recent projects you search, open and remove.
 - [Desktop 8](/blocks/desktop-8) edits keyboard shortcuts: commands searchable by name or by pressing the keys, a recorder per row, a Replace warning when a combination is taken, and Restore defaults; it saves only what differs from the defaults.
-- [shortcut](/components/shortcut) adds `formatShortcut`, `shortcutFromEvent` and `normalizeShortcut`, shared by Desktop 1, 7 and 8. Option+letter on a Mac records the letter rather than its symbol.
+- [shortcut](/docs/reference/building-blocks#shortcut) adds `formatShortcut`, `shortcutFromEvent` and `normalizeShortcut`, shared by Desktop 1, 7 and 8. Option+letter on a Mac records the letter rather than its symbol.
 
 ### Improved
 

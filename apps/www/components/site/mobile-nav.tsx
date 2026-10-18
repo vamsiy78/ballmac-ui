@@ -28,7 +28,7 @@ export function MobileNav({ groups }: { groups: NavGroup[] }) {
       </DialogPrimitive.Trigger>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
-        <DialogPrimitive.Content className="bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left fixed inset-y-0 left-0 z-50 flex w-[85vw] max-w-80 flex-col border-r shadow-xl duration-200">
+        <DialogPrimitive.Content className="bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left rtl:data-[state=open]:slide-in-from-right rtl:data-[state=closed]:slide-out-to-right fixed inset-y-0 start-0 z-50 flex w-[85vw] max-w-80 flex-col border-e shadow-xl duration-200">
           <div className="flex h-14 items-center justify-between border-b px-4">
             <DialogPrimitive.Title className="text-sm font-semibold">Ballmac UI</DialogPrimitive.Title>
             <DialogPrimitive.Close className="text-muted-foreground hover:text-foreground hover:bg-accent inline-flex size-8 items-center justify-center rounded-md" aria-label="Close navigation">

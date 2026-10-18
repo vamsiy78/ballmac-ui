@@ -1,0 +1,6 @@
+extends: occurrence
+message: "This sentence is long. Keep one idea per sentence and split it."
+level: suggestion
+scope: sentence
+max: 38
+token: '\b\w+\b'

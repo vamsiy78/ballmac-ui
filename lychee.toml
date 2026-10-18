@@ -1,0 +1,21 @@
+# Link checker settings. CI runs `pnpm docs:links` on the built site (every internal link and #fragment, and the external links on those pages),
+# and weekly checks the external links in the Markdown (.github/workflows/docs.yml). Run it locally against a build:
+#   pnpm --filter @ballmac-ui/www cf:build && pnpm docs:links   (needs lychee on your PATH)
+include_fragments = "full"
+max_retries = 2
+timeout = 20
+accept = ["200", "204", "206", "429"]
+# Hosts that block bots or need a login, and addresses that only exist for the reader's own project.
+exclude = [
+  '^https?://(www\.)?(x|twitter)\.com',
+  '^https?://localhost:3000',
+  '^https?://127\.0\.0\.1',
+  '^https://ballmac\.com/services',
+  '^https://github\.com/vamsiy78/ballmac-ui/(edit|issues)',
+  # The site's own absolute addresses (canonical links, feeds) point at production, which doesn't have a new page until it is deployed.
+  '^https://ui\.ballmac\.com',
+  '^https://ui\.shadcn\.com',
+  # Added to the page by JavaScript (the theme builder's sections), so they are not in the exported HTML.
+  '/themes#',
+]
+exclude_path = ["apps/www/out/preview", "apps/www/out/_next"]

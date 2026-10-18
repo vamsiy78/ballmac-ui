@@ -20,7 +20,8 @@ export function Pre({ title, icon, className, children, ...props }: ComponentPro
   void icon // the file-type icon the highlighter adds; the title is enough
   const code = textOf(children).replace(/\n$/, "")
   return (
-    <div className={"bg-card not-prose my-5 overflow-hidden rounded-xl border"}>
+    // Code reads left to right in every language, as in an editor; the page around it mirrors.
+    <div dir="ltr" className="bg-card not-prose my-5 overflow-hidden rounded-xl border text-start">
       {title && (
         <div className="flex h-10 items-center justify-between border-b ps-4 pe-2">
           <span className="text-muted-foreground font-mono text-xs">{title}</span>

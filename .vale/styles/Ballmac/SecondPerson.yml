@@ -1,0 +1,12 @@
+extends: existence
+message: "Write to the reader as 'you', not '%s'."
+level: error
+ignorecase: true
+tokens:
+  - the user
+  - the users
+  - end user
+  - the developer
+  - developers should
+  - we recommend
+  - let's

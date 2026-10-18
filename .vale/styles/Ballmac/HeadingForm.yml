@@ -1,0 +1,9 @@
+extends: existence
+message: "Start the heading '%s' with a verb that says what the reader does ('Install the package'), not 'How to', 'Using' or a noun phrase for a task."
+level: error
+scope: heading
+nonword: true
+tokens:
+  - '^How to\b'
+  - '^How do (I|you)\b'
+  - '^(Using|Getting|Installing|Configuring|Setting up|Working with|Introduction to|Overview of|Understanding)\b'

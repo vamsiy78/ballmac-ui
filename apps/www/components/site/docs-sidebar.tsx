@@ -21,7 +21,7 @@ function Item({ item, active, activeRef }: { item: NavLink; active: boolean; act
         )}
       >
         <span className="min-w-0 leading-snug">{item.label}</span>
-        {item.badge === "new" && <span className="bg-chart-1 ml-auto size-1.5 shrink-0 rounded-full" role="img" aria-label="New" />}
+        {item.badge === "new" && <span className="bg-chart-1 ms-auto size-1.5 shrink-0 rounded-full" role="img" aria-label="New" />}
       </Link>
     </li>
   )
@@ -74,16 +74,16 @@ export function DocsSidebar({ groups, className }: { groups: NavGroup[]; classNa
                     aria-controls={id}
                     onClick={() => setToggled((t) => ({ ...t, [group.title]: !open }))}
                     className={cn(
-                      "focus-visible:ring-ring/50 flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left outline-none transition-colors focus-visible:ring-[3px]",
+                      "focus-visible:ring-ring/50 flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-start outline-none transition-colors focus-visible:ring-[3px]",
                       open || group.title === activeGroup ? "text-foreground" : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                     )}
                   >
-                    <ChevronRight className={cn("size-3.5 shrink-0 transition-transform duration-200", open && "rotate-90")} aria-hidden="true" />
+                    <ChevronRight className={cn("size-3.5 shrink-0 transition-transform duration-200 rtl:-scale-x-100", open && "rotate-90")} aria-hidden="true" />
                     <span className="flex-1 truncate">{group.title}</span>
                     <span className="text-muted-foreground text-[11px] tabular-nums">{group.items.length}</span>
                   </button>
                   {open && (
-                    <ul id={id} className="mt-px mb-1 ml-[15px] space-y-px border-l pl-2">
+                    <ul id={id} className="mt-px mb-1 ms-[15px] space-y-px border-s ps-2">
                       {group.items.map((item) => (
                         <Item key={item.href} item={item} active={pathname === item.href} activeRef={activeRef} />
                       ))}

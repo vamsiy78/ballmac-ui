@@ -32,3 +32,14 @@
   Content-Type: image/png
 /templates/:slug/opengraph-image-*
   Content-Type: image/png
+
+# Feeds and the Markdown copies of the docs. The Markdown is for readers and agents, so it stays out of search results (the pages carry the same text).
+/changelog/rss.xml
+  Content-Type: application/rss+xml; charset=utf-8
+/changelog/atom.xml
+  Content-Type: application/atom+xml; charset=utf-8
+/md/*
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: noindex
+/llms-full.txt
+  Content-Type: text/markdown; charset=utf-8
