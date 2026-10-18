@@ -16,7 +16,7 @@
  *
  * Messages, fixed-layout items and block states come from the registry build (`pnpm build:registry`), which has to run first.
  */
-import { spawn } from "node:child_process"
+import { spawnSync } from "node:child_process"
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { createRequire } from "node:module"
 import { join } from "node:path"
@@ -169,6 +169,9 @@ function schemaType(s: JsonSchema): string {
 }
 
 async function listMcp() {
+  // The server imports the audit engine from a generated copy that is git-ignored, so a fresh checkout (CI) has to make it first.
+  const vendor = spawnSync("node", ["../audit/scripts/vendor.mjs", "src/vendor/audit"], { cwd: join(ROOT, "packages/mcp"), encoding: "utf8" })
+  if (vendor.status !== 0) throw new Error(`Could not copy the audit engine into packages/mcp: ${vendor.stderr}`)
   const require = createRequire(join(ROOT, "packages/mcp/package.json"))
   const { Client } = await import(require.resolve("@modelcontextprotocol/sdk/client/index.js"))
   const { StdioClientTransport } = await import(require.resolve("@modelcontextprotocol/sdk/client/stdio.js"))
