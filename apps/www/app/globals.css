@@ -219,3 +219,8 @@
 html[data-founding-off] [data-founding-banner] {
   display: none;
 }
+
+/* The what is new strip works the same way (see whats-new-banner.tsx). */
+html[data-whatsnew-off] [data-whatsnew-banner] {
+  display: none;
+}
