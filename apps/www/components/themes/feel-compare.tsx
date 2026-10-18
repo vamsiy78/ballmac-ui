@@ -30,7 +30,7 @@ export function MiniApp({ feel }: { feel: FeelId }) {
         </Button>
       </AppWindowTitleBar>
       <AppWindowContent className="flex">
-        <nav aria-label="Folders" className="bg-muted/40 flex w-32 shrink-0 flex-col gap-0.5 border-e p-1.5">
+        <nav aria-label={`Folders (${feel})`} className="bg-muted/40 flex w-32 shrink-0 flex-col gap-0.5 border-e p-1.5">
           {rows.map(({ name, icon: Icon }) => (
             <button
               key={name}

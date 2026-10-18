@@ -114,6 +114,25 @@ export class Catalog {
   }
 
   /** Counts per kind and category, so an agent knows what to filter by. */
+  /**
+   * Makes a design system (colors, shape, typeface, platform feel, motion) from a description and returns its 16-character code and install command.
+   * The site does the work, so the answer always matches what the theme builder produces. A bad value comes back as a message that says what is valid.
+   */
+  async makePreset(options: Record<string, string | number | boolean | undefined>): Promise<Record<string, unknown>> {
+    const query = new URLSearchParams()
+    for (const [k, v] of Object.entries(options)) if (v !== undefined && v !== "") query.set(k, String(v))
+    const url = `${this.baseUrl.replace(/\/$/, "")}/api/v1/preset${query.size ? `?${query}` : ""}`
+    let res: Response
+    try {
+      res = await this.fetchImpl(url, { headers: { accept: "application/json" }, signal: AbortSignal.timeout(TIMEOUT) })
+    } catch (e) {
+      throw new Error(`Could not reach Ballmac UI at ${this.baseUrl} (${e instanceof Error ? e.message : String(e)}).`)
+    }
+    if (res.status === 400) throw new Error(((await res.json().catch(() => ({}))) as { error?: string }).error ?? "Ballmac UI did not accept those preset settings.")
+    if (!res.ok) throw new Error(`Ballmac UI API /api/v1/preset returned ${res.status}`)
+    return (await res.json()) as Record<string, unknown>
+  }
+
   async categories() {
     const items = await this.list()
     const count = (key: (i: Summary) => string | undefined, kind: Kind) => {

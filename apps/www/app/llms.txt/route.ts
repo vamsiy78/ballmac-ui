@@ -1,4 +1,4 @@
-import { PRESETS } from "@ballmac-ui/theme-engine"
+import { PRESETS, SYSTEMS } from "@ballmac-ui/theme-engine"
 
 import { mdHref, orderedDocs } from "@/lib/docs"
 import { useCases } from "@/lib/use-cases"
@@ -30,6 +30,10 @@ export function GET() {
     "## Pro",
     `- [Pricing](${SITE_URL}/pricing): free versus Pro`,
     `- [Pro setup](${SITE_URL}/docs/guides/pro): Pro blocks and starter apps install through the private @ballmac-pro registry with a licence key`,
+    "",
+    "## Presets",
+    `- [Presets](${SITE_URL}/presets): ${SYSTEMS.length} complete design systems (colour, shape, typeface, platform feel, motion). Install one with the shadcn CLI, or make your own at ${SITE_URL}/themes and install it by its 16-character code: npx shadcn@latest add @ballmac/preset-<code>`,
+    ...SYSTEMS.map((p) => `- [${p.title}](${SITE_URL}/presets/${p.slug}): ${p.tagline}. Install: @ballmac/preset-${p.slug}`),
     "",
     "## Themes",
     `- [Theme builder](${SITE_URL}/themes): twelve free themes and a live builder with contrast checks and a motion lab`,

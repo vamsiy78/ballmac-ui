@@ -313,3 +313,28 @@ describe("states", () => {
     expect(toMarkdown(await catalog.detail("hero-1"))).toContain("None. Static content")
   })
 })
+
+describe("makePreset", () => {
+  it("passes the settings to the site and returns its answer", async () => {
+    const seen: string[] = []
+    const fetchImpl = (async (url: string) => {
+      seen.push(String(url))
+      return new Response(JSON.stringify({ code: "aaaa-bbbb-cccc-dddd", install: "npx shadcn@latest add @ballmac/preset-aaaa-bbbb-cccc-dddd" }))
+    }) as typeof fetch
+    const result = await new Catalog("https://ui.test/", fetchImpl).makePreset({ from: "ink", hue: 150, paper: true, font: undefined, feel: "" })
+    expect(seen).toEqual(["https://ui.test/api/v1/preset?from=ink&hue=150&paper=true"])
+    expect(result.code).toBe("aaaa-bbbb-cccc-dddd")
+  })
+
+  it("turns a rejected value into a message that says what is valid", async () => {
+    const fetchImpl = (async () => new Response(JSON.stringify({ error: '"font" must be one of keep, system.' }), { status: 400 })) as typeof fetch
+    await expect(new Catalog("https://ui.test", fetchImpl).makePreset({ font: "comic" })).rejects.toThrow('"font" must be one of keep, system.')
+  })
+
+  it("says so when the site cannot be reached", async () => {
+    const fetchImpl = (async () => {
+      throw new Error("offline")
+    }) as typeof fetch
+    await expect(new Catalog("https://ui.test", fetchImpl).makePreset({})).rejects.toThrow(/Could not reach Ballmac UI/)
+  })
+})

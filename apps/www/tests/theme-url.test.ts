@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { decodeSpec, DEFAULT_SPEC, getPreset, normalizeSpec, PRESETS } from "@ballmac-ui/theme-engine"
+import { decodeSpec, DEFAULT_SPEC, getPreset, getSystem, normalizeSpec, PRESETS } from "@ballmac-ui/theme-engine"
 
 import { themeUrl } from "../lib/theme-url"
 
@@ -51,6 +51,13 @@ describe("themeUrl", () => {
     const playful = normalizeSpec({ ...ocean, ...getPreset("violet")!.spec, hue: ocean.hue })
     const url = themeUrl({ spec: playful, view: "light", initial: ocean, basePath: "/themes" })
     expect(new URL(url, "https://x.test").searchParams.get("mo")).toBe("playful")
+  })
+
+  it("gives a design system its own address under /presets", () => {
+    const ink = getSystem("ink")!.spec
+    expect(themeUrl({ spec: ink, view: "light", initial: ocean, basePath: "/themes" })).toBe("/presets/ink")
+    expect(themeUrl({ spec: ink, view: "light", initial: ink, basePath: "/presets/ink" })).toBe("/presets/ink")
+    expect(themeUrl({ spec: ocean, view: "light", initial: ink, basePath: "/presets/ink" })).toBe("/themes/ocean")
   })
 
   it("adds view only for dark and split", () => {

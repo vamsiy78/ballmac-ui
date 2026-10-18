@@ -1,0 +1,94 @@
+---
+title: Install a preset
+description: "Give your app a whole design system with one command: color, shape, typeface, platform feel and motion. Pick one of fifteen, or make your own and share it as a 16-character code."
+---
+
+A preset is a design system in one install. It sets your colors (light and dark, contrast checked), corner radius and density, typeface, platform feel and motion together, so they suit each other.
+
+A [theme](/docs/get-started/make-it-yours) only sets color, corners and motion. A preset adds the typeface and the platform feel, and it has a code.
+
+## Install one
+
+Browse the [presets](/presets), pick one, and run its command:
+
+```npm
+npx shadcn@latest add @ballmac/preset-ink
+```
+
+The command writes the tokens into your global CSS and, when the preset has an installable typeface, adds the font. Your components keep working because they read the same tokens.
+
+Run it again with another name to switch. Presets replace each other.
+
+## Make your own and share the code
+
+The [builder](/themes) changes every setting on a live preview of real components. The panel shows a **preset code**:
+
+```text
+2gf1-6sax-5gj7-5xdq
+```
+
+The code is the design: color, shape, typeface, feel and motion packed into 16 characters. Nothing is stored on a server. Anyone can install it:
+
+```npm
+npx shadcn@latest add @ballmac/preset-2gf1-6sax-5gj7-5xdq
+```
+
+Paste a code into **Load a code** in the builder, or open `/themes?code=2gf1-6sax-5gj7-5xdq`, and the design loads so you can keep tuning it. A code that has a typo is rejected, not guessed at.
+
+## Install only some parts [#only]
+
+Add `only` to take parts of a preset and keep the rest of your design. The parts are `colors`, `shape`, `font`, `motion` and `feel`. Use the URL form, and quote it:
+
+```npm
+npx shadcn@latest add "https://ui.ballmac.com/r/preset-ink.json?only=colors,font"
+```
+
+The builder's **What to install** boxes write this command for you. The URL form also works with a code.
+
+| Part | What it sets |
+| --- | --- |
+| `colors` | Light and dark colors, including the five chart colors |
+| `shape` | Corner radius and density |
+| `font` | The typeface |
+| `motion` | Speed, bounce, travel, hover, stagger and the reduced-motion fallback |
+| `feel` | Control sizes, focus ring, shadows and materials for the platform feel |
+
+## Typefaces [#typefaces]
+
+A preset can name one of these open-source variable fonts, or a system font stack that costs nothing to load. The shadcn CLI installs a named font from [Fontsource](https://fontsource.org), so the files are served from your own app and not from a third-party host. On Next.js it uses `next/font`.
+
+| Font | Kind | Good for | Install on its own |
+| --- | --- | --- | --- |
+| Inter | sans | Neutral, built for screens. The safe default. | `@ballmac/font-inter` |
+| Geist | sans | Crisp and technical. Developer tools, dashboards. | `@ballmac/font-geist` |
+| DM Sans | sans | Low contrast, geometric, friendly. | `@ballmac/font-dm-sans` |
+| Manrope | sans | Modern and a little wide. Fintech, SaaS. | `@ballmac/font-manrope` |
+| Plus Jakarta Sans | sans | Warm geometric forms. Consumer apps. | `@ballmac/font-jakarta` |
+| Figtree | sans | Friendly and open. Health, education, community. | `@ballmac/font-figtree` |
+| Instrument Sans | sans | Slightly condensed, editorial. Studios and brands. | `@ballmac/font-instrument-sans` |
+| Space Grotesk | sans | Quirky, technical. Crypto, hardware, creative tools. | `@ballmac/font-space-grotesk` |
+| Bricolage Grotesque | sans | Characterful and bold. Marketing, portfolios. | `@ballmac/font-bricolage` |
+| Fraunces | serif | A soft, expressive serif. Editorial, food, lifestyle. | `@ballmac/font-fraunces` |
+| Newsreader | serif | A reading serif. Publications, docs, long text. | `@ballmac/font-newsreader` |
+| Source Serif 4 | serif | Sturdy and neutral. Finance, legal, research. | `@ballmac/font-source-serif` |
+| JetBrains Mono | mono | Made for code. Terminals, developer products. | `@ballmac/font-jetbrains-mono` |
+| Geist Mono | mono | Clean monospace to pair with Geist. | `@ballmac/font-geist-mono` |
+
+Install a font without a preset, for example `npx shadcn@latest add @ballmac/font-fraunces`. It sets `--font-sans`.
+
+## How the code works
+
+- Each setting is rounded to the step of its slider, then all of them are packed into one number and written in 32 letters and digits that cannot be confused with each other. The last character is a check.
+- You can type it in any case, with or without dashes. `o` reads as `0`, and `i` and `l` read as `1`.
+- The format has a version. A code made today keeps meaning the same design, because new fonts are only ever added at the end of the list.
+- Every value is clamped by the theme engine, so a made-up code can only produce a safe theme.
+
+## Use it from an agent or a script
+
+The preset address is plain JSON, so a script can read it: `https://ui.ballmac.com/r/preset-<code or name>.json`. The [Ballmac skill](/docs/guides/agent-skill) tells a coding agent when to use a preset, and the [MCP server](/docs/get-started/connect-your-agent) can make one from a description.
+
+## Related
+
+- [Make it yours](/docs/get-started/make-it-yours)
+- [Pick a platform feel](/docs/guides/platform-feels)
+- [Use theme motion in your own code](/docs/guides/motion)

@@ -4,6 +4,7 @@
  * it is set by `assets.run_worker_first` in wrangler.jsonc; keep that list and ROUTES below in step.
  */
 import { offerWatch } from "./offer-watch"
+import * as apiPreset from "./routes/api-preset"
 import * as changelogSubscribe from "./routes/changelog-subscribe"
 import * as docsFeedback from "./routes/docs-feedback"
 import * as licenseVerify from "./routes/license-verify"
@@ -17,9 +18,11 @@ import * as reminders from "./routes/reminders"
 import * as sampler from "./routes/sampler"
 import * as stars from "./routes/stars"
 import * as support from "./routes/support"
+import * as preset from "./routes/preset"
 import * as themeCustom from "./routes/theme-custom"
 
-type Handler = (req: Request, ctx: { params: Promise<Record<string, string>> }) => Response | Promise<Response>
+/** A handler that returns undefined declines the request, and it goes to the next route or the static files. */
+type Handler = (req: Request, ctx: { params: Promise<Record<string, string>> }) => Response | undefined | Promise<Response | undefined>
 type Methods = Partial<Record<"GET" | "POST" | "DELETE", Handler>>
 
 const ROUTES: [URLPattern, Methods][] = [
@@ -34,9 +37,11 @@ const ROUTES: [URLPattern, Methods][] = [
   ["/api/stars", stars],
   ["/api/support", support],
   ["/api/v1/license/verify", licenseVerify],
+  ["/api/v1/preset", apiPreset],
   ["/r/pro/starters/:file", { GET: starters }],
   ["/r/pro/kits/:file", { GET: kits }],
   ["/r/pro/:name", proRegistry],
+  ["/r/:file(preset-.+)", preset],
   ["/themes/custom.json", themeCustom],
 ].map(([pathname, methods]) => [new URLPattern({ pathname: pathname as string }), methods as Methods])
 
@@ -56,7 +61,8 @@ async function route(req: Request, env: Env): Promise<Response> {
     const handler = methods[method]
     if (!handler) return new Response(null, { status: 405, headers: { allow: Object.keys(methods).join(", ") } })
     const params = Object.fromEntries(Object.entries(match.pathname.groups).map(([k, v]) => [k, decodeURIComponent(v ?? "")]))
-    return handler(req, { params: Promise.resolve(params) })
+    const res = await handler(req, { params: Promise.resolve(params) })
+    if (res) return res
   }
   // A path listed in run_worker_first that no route answers: hand it to the static files (their 404 page, usually).
   return env.ASSETS.fetch(req)

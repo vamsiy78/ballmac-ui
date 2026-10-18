@@ -218,6 +218,17 @@ export const itemMeta = z
       })
       .optional(),
     css: z.record(z.any()).optional(),
+    /** `registry:font` items only: what the shadcn CLI installs (the Fontsource package) and which CSS variable it sets. */
+    font: z
+      .object({
+        family: z.string(),
+        provider: z.literal("google"),
+        import: z.string(),
+        variable: z.string().regex(/^--[a-z-]+$/),
+        subsets: z.array(z.string()).optional(),
+        dependency: z.string().optional(),
+      })
+      .optional(),
     ai: z
       .object({
         summary: z.string(),
@@ -261,6 +272,9 @@ export const itemMeta = z
     }
     if (item.category === "templates" && !item.templateKind) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: "templates need a templateKind", path: ["templateKind"] })
+    }
+    if (item.type === "registry:font" && !item.font) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "font items need a font", path: ["font"] })
     }
     if (item.type !== "registry:theme" && item.type !== "registry:style" && item.type !== "registry:font" && item.files.length === 0) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: "items must ship at least one file", path: ["files"] })

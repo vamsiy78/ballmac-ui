@@ -631,6 +631,62 @@
     "version": "1.0.0",
     "hash": "193920d8894b8a4be40d367c6412905cbbcace795d60d30588c988ff727a85f9"
   },
+  "font-bricolage": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-dm-sans": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-figtree": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-fraunces": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-geist": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-geist-mono": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-instrument-sans": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-inter": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-jakarta": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-jetbrains-mono": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-manrope": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-newsreader": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-source-serif": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "font-space-grotesk": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
   "footer-1": {
     "version": "1.0.0",
     "hash": "8adac5f91c22318bc18448bb145f395488095613bc93c85f4799d4fc1482f818"
@@ -1086,6 +1142,66 @@
   "portfolio-1": {
     "version": "1.0.0",
     "hash": "78e18f876fd4b1a52078f9b52f989b2bac0242af5f9b18006f1c88efbb5293f6"
+  },
+  "preset-atelier": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-bloom": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-canopy": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-forge": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-harbor": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-ink": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-lagoon": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-lumen": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-menubar": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-pane": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-paper": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-pocket": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-rosewater": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-signal": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preset-terminal": {
+    "version": "1.0.0",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "pricing-1": {
     "version": "1.0.0",

@@ -6,33 +6,48 @@ import {
   auditTheme,
   buildTheme,
   DEFAULT_SPEC,
+  decodeCode,
   decodeSpec,
-  encodeSpec,
+  encodeCode,
   feelSpec,
   FEELS,
+  FONT_FACES,
+  getFontFace,
+  isCode,
   matchPersonality,
   MOTION_PERSONALITIES,
   MOTION_RANGES,
   normalizeSpec,
+  PRESET_PART_INFO,
+  PRESET_PARTS,
+  presetRegistryItem,
   PRESETS,
+  snapSpec,
   SPEC_PARAMS,
+  SYSTEMS,
   themeCss,
-  themeRegistryItem,
   type Density,
   type FontChoice,
+  type PresetPart,
   type ThemeSpec,
 } from "@ballmac-ui/theme-engine"
 
+import { Checkbox } from "@/components/ballmac/checkbox"
+import { Input } from "@/components/ballmac/input"
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ballmac/select"
 import { Switch } from "@/components/ballmac/switch"
 import { CopyButton } from "@/components/site/copy-button"
 import { InstallTabs } from "@/components/site/install-tabs"
+import "@/lib/generated/fonts.css"
 import { themeUrl } from "@/lib/theme-url"
 import { cn } from "@/lib/utils"
 
 import { FeelCompare } from "./feel-compare"
 import { MotionLab } from "./motion-lab"
 import { PresetMini } from "./preset-card"
+import { SystemMini } from "./system-preview"
+import { systemFacts } from "./system-gallery"
 import { Group, RangeField, Row } from "./theme-controls"
 import { ThemeStage } from "./theme-stage"
 import { type Mode } from "./theme-style"
@@ -45,6 +60,7 @@ const subscribeReduced = (cb: () => void) => {
   q.addEventListener("change", cb)
   return () => q.removeEventListener("change", cb)
 }
+const PART_LABELS: Record<PresetPart, string> = { colors: "Colours", shape: "Shape", font: "Typeface", motion: "Motion", feel: "Platform feel" }
 const fmtX = (n: number) => `${n.toFixed(2).replace(/\.?0+$/, "")}×`
 const pct = (n: number) => `${Math.round(n * 100)}%`
 const same = (a: ThemeSpec, b: ThemeSpec) => (Object.keys(a) as (keyof ThemeSpec)[]).every((k) => a[k] === b[k])
@@ -61,12 +77,16 @@ function copyToClipboard(text: string) {
 }
 
 /** Live theme builder: pick a preset, adjust a few controls, see real components change, copy CSS or install. */
-export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeSpec; presetSlug?: string; siteUrl: string }) {
+export function ThemeBuilder({ initial, presetSlug, systemSlug, siteUrl }: { initial: ThemeSpec; presetSlug?: string; systemSlug?: string; siteUrl: string }) {
   // The address bar and the site's colour scheme are read through a store, so the server HTML is the same for everyone and the client adopts them after hydration.
   const search = React.useSyncExternalStore(subscribeNever, () => window.location.search, () => "")
   const siteDark = React.useSyncExternalStore(subscribeNever, () => document.documentElement.classList.contains("dark"), () => false)
   const params = React.useMemo(() => new URLSearchParams(search), [search])
-  const fromUrl = React.useMemo(() => ([...params.keys()].some((k) => SPEC_PARAMS.has(k)) ? decodeSpec(params, DEFAULT_SPEC) : null), [params])
+  const fromUrl = React.useMemo(() => {
+    const fromCode = params.get("code") ? decodeCode(params.get("code")!) : null
+    if (fromCode) return fromCode
+    return [...params.keys()].some((k) => SPEC_PARAMS.has(k)) ? decodeSpec(params, DEFAULT_SPEC) : null
+  }, [params])
   const osReduced = React.useSyncExternalStore(subscribeReduced, () => window.matchMedia("(prefers-reduced-motion: reduce)").matches, () => false)
   const [reducePreview, setReducePreview] = React.useState(false)
   const [edited, setEdited] = React.useState<ThemeSpec | null>(null)
@@ -84,7 +104,7 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
   const setLinkNeutral = setLinkEdit
 
   // Keep the address bar in step with the design, so the URL is always a shareable link. replaceState, not pushState: a slider drag would otherwise add dozens of history entries.
-  const basePath = presetSlug ? `/themes/${presetSlug}` : "/themes"
+  const basePath = systemSlug ? `/presets/${systemSlug}` : presetSlug ? `/themes/${presetSlug}` : "/themes"
   React.useEffect(() => {
     if (!edited && !viewEdit) return
     window.history.replaceState(null, "", themeUrl({ spec, view, initial, basePath }))
@@ -96,7 +116,14 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
     setLinkNeutral(null)
   }
   const matched = PRESETS.find((p) => same(p.spec, spec))
-  const base = PRESETS.find((p) => p.slug === presetSlug)
+  const matchedSystem = SYSTEMS.find((p) => same(p.spec, spec))
+  const base = SYSTEMS.find((p) => p.slug === systemSlug) ?? PRESETS.find((p) => p.slug === presetSlug)
+  const code = React.useMemo(() => encodeCode(spec), [spec])
+  const onGrid = React.useMemo(() => same(snapSpec(spec), spec), [spec])
+  const [codeInput, setCodeInput] = React.useState("")
+  const codeError = codeInput.trim() !== "" && !decodeCode(codeInput) ? (isCode(codeInput) ? "That code does not check out. Look for a mistyped character." : "A code is 16 letters and digits, like 3k7q-m9x2-w4hd-v8be.") : ""
+  const [parts, setParts] = React.useState<PresetPart[]>([...PRESET_PARTS])
+  const allParts = parts.length === PRESET_PARTS.length
   const vars = React.useMemo(() => buildTheme(spec), [spec])
   const checks = React.useMemo(() => auditTheme(vars), [vars])
   const failing = checks.filter((c) => !c.pass)
@@ -124,8 +151,9 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
     )
   }
 
-  const installUrl = `${siteUrl}/themes/custom.json?${encodeSpec(spec).toString() || "h=" + spec.hue}`
-  const commands = (matched ? `@ballmac/theme-${matched.slug}` : `"${installUrl}"`)
+  const presetName = matchedSystem?.slug ?? code
+  const onlyQuery = PRESET_PARTS.filter((p) => parts.includes(p)).join(",")
+  const commands = allParts ? `@ballmac/preset-${presetName}` : `"${siteUrl}/r/preset-${presetName}.json?only=${onlyQuery}"`
   const installCommands = {
     pnpm: `pnpm dlx shadcn@latest add ${commands}`,
     npm: `npx shadcn@latest add ${commands}`,
@@ -133,7 +161,13 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
     bun: `bunx --bun shadcn@latest add ${commands}`,
   }
   const registryJson = JSON.stringify(
-    themeRegistryItem(spec, { name: matched ? `theme-${matched.slug}` : "theme-custom", title: matched ? `${matched.title} theme` : "Custom theme", description: matched?.description ?? "A custom Ballmac UI theme." }),
+    presetRegistryItem(spec, {
+      name: `preset-${presetName}`,
+      title: matchedSystem ? `${matchedSystem.title} preset` : `Ballmac preset ${code}`,
+      description: matchedSystem?.description ?? "A custom Ballmac UI design system.",
+      registry: siteUrl,
+      parts: allParts ? null : parts,
+    }),
     null,
     2
   )
@@ -142,13 +176,54 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
 
   return (
     <div className="space-y-12">
+      <section aria-labelledby={`${baseId}-systems`} className="space-y-4">
+        <div>
+          <h2 id={`${baseId}-systems`} className="text-xl font-semibold tracking-tight">
+            Start from a design system
+          </h2>
+          <p className="text-muted-foreground mt-1 max-w-2xl text-sm">
+            Colour, corners, typeface, platform feel and motion, tuned together. Pick one, then change anything below. Each has a code, so it is one line to share.
+          </p>
+        </div>
+        <div role="group" aria-label="Design systems" className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {SYSTEMS.map((p) => {
+            const selected = matchedSystem?.slug === p.slug
+            return (
+              <div
+                key={p.slug}
+                className={cn(
+                  "focus-within:ring-ring/50 relative grid min-w-0 content-start gap-2.5 rounded-2xl border p-2 transition-[border-color,box-shadow] focus-within:ring-[3px]",
+                  selected ? "border-foreground ring-foreground shadow-sm ring-1" : "hover:border-foreground/30"
+                )}
+              >
+                {/* a picture of the system; the whole tile is one button */}
+                <SystemMini spec={p.spec} mode={previewMode} className="pointer-events-none" />
+                <div className="px-1 pb-1">
+                  <button
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => choose(p.spec)}
+                    className="flex w-full items-center justify-between gap-2 text-start text-sm font-medium outline-none after:absolute after:inset-0 after:rounded-2xl"
+                  >
+                    {p.title}
+                    {selected && <Check className="size-4" aria-label="Selected" />}
+                  </button>
+                  <span className="text-muted-foreground mt-0.5 block text-xs leading-snug">{p.tagline}</span>
+                  <span className="text-muted-foreground mt-0.5 block text-xs leading-snug">{systemFacts(p).join(" · ")}</span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </section>
+
       <section aria-labelledby={`${baseId}-presets`} className="space-y-4">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 id={`${baseId}-presets`} className="text-xl font-semibold tracking-tight">
-              Start from a preset
+              Or start from a colour theme
             </h2>
-            <p className="text-muted-foreground mt-1 text-sm">Twelve themes, each checked for contrast in light and dark. Pick one, then make it yours below.</p>
+            <p className="text-muted-foreground mt-1 text-sm">Twelve themes, each checked for contrast in light and dark. They set colour, corners and motion and leave your font and feel alone.</p>
           </div>
           <button
             type="button"
@@ -179,7 +254,7 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
                     {selected && <Check className="size-4" aria-label="Selected" />}
                   </span>
                   <span className="text-muted-foreground mt-0.5 block text-xs leading-snug">{p.tagline}</span>
-                  <span className="text-muted-foreground/80 mt-0.5 block text-[11px] leading-snug capitalize">{p.motion} motion</span>
+                  <span className="text-muted-foreground mt-0.5 block text-[11px] leading-snug capitalize">{p.motion} motion</span>
                 </span>
               </button>
             )
@@ -193,7 +268,7 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
         </h2>
         <div className="bg-card grid gap-6 rounded-2xl border p-5">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-sm font-medium">{matched ? matched.title : base ? `${base.title}, customised` : "Custom theme"}</p>
+            <p className="text-sm font-medium">{matchedSystem ? matchedSystem.title : matched ? matched.title : base ? `${base.title}, customised` : "Custom design"}</p>
             <button
               type="button"
               onClick={() => choose(initial)}
@@ -202,6 +277,43 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
               <RotateCcw className="size-3.5" aria-hidden="true" /> Reset
             </button>
           </div>
+
+          <Group title="Preset code">
+            <div className="bg-muted/60 flex items-center justify-between gap-2 rounded-lg border ps-3 pe-1">
+              <code className="py-2 font-mono text-[13px] tracking-wide" dir="ltr" aria-label="Preset code">
+                {code}
+              </code>
+              <CopyButton value={code} label="Copy the preset code" />
+            </div>
+            <div className="grid gap-1.5">
+              <label htmlFor={`${baseId}-code`} className="text-sm font-medium">
+                Load a code
+              </label>
+              <Input
+                id={`${baseId}-code`}
+                dir="ltr"
+                value={codeInput}
+                spellCheck={false}
+                autoComplete="off"
+                placeholder="xxxx-xxxx-xxxx-xxxx"
+                aria-invalid={codeError ? true : undefined}
+                aria-describedby={`${baseId}-code-hint`}
+                onChange={(e) => {
+                  const next = e.currentTarget.value
+                  setCodeInput(next)
+                  const loaded = decodeCode(next)
+                  if (loaded) {
+                    choose(loaded)
+                    setCodeInput("")
+                  }
+                }}
+              />
+              <p id={`${baseId}-code-hint`} role={codeError ? "alert" : undefined} className={cn("text-xs", codeError ? "text-destructive" : "text-muted-foreground")}>
+                {codeError || "Paste a code and the design loads. Nothing is stored: the code is the design."}
+              </p>
+              {!onGrid && <p className="text-muted-foreground text-xs">The code rounds each slider to its step.</p>}
+            </div>
+          </Group>
 
           <Group title="Platform feel">
             <div className="grid grid-cols-2 gap-2" role="group" aria-label="Platform feel">
@@ -320,14 +432,45 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
           </Group>
 
           <Group title="Type">
-            <Row label="Font" hint={spec.font === "keep" ? "Your project's font is left alone." : "Sets --font-sans to a system stack; no font files to load."}>
-              <SegmentedControl aria-label="Font" fullWidth value={spec.font} onValueChange={(v) => update({ font: v as FontChoice })}>
-                <SegmentedControlItem value="keep">Keep</SegmentedControlItem>
-                <SegmentedControlItem value="system">Sans</SegmentedControlItem>
-                <SegmentedControlItem value="serif">Serif</SegmentedControlItem>
-                <SegmentedControlItem value="mono">Mono</SegmentedControlItem>
-              </SegmentedControl>
-            </Row>
+            <div className="grid gap-1.5">
+              <label htmlFor={`${baseId}-font`} className="text-sm font-medium">
+                Typeface
+              </label>
+              <Select value={spec.font} onValueChange={(v) => update({ font: v as FontChoice })}>
+                <SelectTrigger id={`${baseId}-font`} className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Your project</SelectLabel>
+                    <SelectItem value="keep">Keep my font</SelectItem>
+                  </SelectGroup>
+                  <SelectGroup>
+                    <SelectLabel>System stacks</SelectLabel>
+                    <SelectItem value="system">System sans</SelectItem>
+                    <SelectItem value="serif">System serif</SelectItem>
+                    <SelectItem value="mono">System mono</SelectItem>
+                  </SelectGroup>
+                  {(["sans", "serif", "mono"] as const).map((kind) => (
+                    <SelectGroup key={kind}>
+                      <SelectLabel>{kind === "sans" ? "Sans-serif" : kind === "serif" ? "Serif" : "Monospace"}, installed</SelectLabel>
+                      {FONT_FACES.filter((f) => f.kind === kind).map((f) => (
+                        <SelectItem key={f.id} value={f.id} style={{ fontFamily: f.family }}>
+                          {f.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  ))}
+                </SelectContent>
+              </Select>
+              <p className="text-muted-foreground text-xs">
+                {getFontFace(spec.font)
+                  ? `${getFontFace(spec.font)!.note} Installed from Fontsource, so the files are served from your own app.`
+                  : spec.font === "keep"
+                    ? "Your project's font is left alone."
+                    : "Sets --font-sans to a system stack; no font files to load."}
+              </p>
+            </div>
           </Group>
 
           <Group title="Motion">
@@ -473,13 +616,25 @@ export function ThemeBuilder({ initial, presetSlug, siteUrl }: { initial: ThemeS
           {exportTab === "install" ? (
             <div className="space-y-3">
               <InstallTabs commands={installCommands} />
+              <fieldset className="grid gap-2 border-0 p-0">
+                <legend className="mb-1 text-sm font-medium">What to install</legend>
+                <div className="flex flex-wrap gap-x-4 gap-y-2">
+                  {PRESET_PARTS.map((part) => (
+                    <label key={part} className="flex items-center gap-2 text-sm" title={PRESET_PART_INFO[part]}>
+                      <Checkbox
+                        checked={parts.includes(part)}
+                        onCheckedChange={(on) => setParts((prev) => (on === true ? PRESET_PARTS.filter((p) => p === part || prev.includes(p)) : prev.length > 1 ? prev.filter((p) => p !== part) : prev))}
+                      />
+                      {PART_LABELS[part]}
+                    </label>
+                  ))}
+                </div>
+                <p className="text-muted-foreground text-xs">{allParts ? "Everything. Untick a part to keep your own: the command then installs only what is ticked." : parts.map((p) => PRESET_PART_INFO[p]).join(". ") + "."}</p>
+              </fieldset>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                {matched ? (
-                  <>This is the {matched.title} preset, so it installs by name.</>
-                ) : (
-                  <>This installs your exact settings from a link; nothing is stored on our side.</>
-                )}{" "}
-                The command writes the tokens into your <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-[0.85em]">globals.css</code>.
+                {matchedSystem ? <>This is the {matchedSystem.title} preset, so it installs by name.</> : <>This installs your exact design from its code; nothing is stored on our side.</>} The command writes the tokens into your{" "}
+                <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-[0.85em]">globals.css</code>
+                {parts.includes("font") && getFontFace(spec.font) ? ", and adds the typeface (with next/font on Next.js, from Fontsource elsewhere)" : ""}.
               </p>
             </div>
           ) : (

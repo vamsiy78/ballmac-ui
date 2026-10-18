@@ -20,7 +20,7 @@ export function summary(i: SiteItem) {
     tags: i.tags,
     version: i.version,
     updated: i.updated,
-    url: `${SITE_URL}${i.category === "foundation" ? "/docs/get-started/make-it-yours" : itemHref(i)}`,
+    url: `${SITE_URL}${i.category === "foundation" && !/^(preset|font)-/.test(i.name) ? "/docs/get-started/make-it-yours" : itemHref(i)}`,
     registryUrl: `${SITE_URL}/r/${i.name}.json`,
     install: `npx shadcn@latest add ${i.tier === "pro" ? "@ballmac-pro" : "@ballmac"}/${i.name}`,
     summary: i.ai?.summary,

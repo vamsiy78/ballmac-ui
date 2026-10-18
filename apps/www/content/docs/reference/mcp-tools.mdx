@@ -8,7 +8,7 @@ generatedFrom: packages/mcp/src/index.ts
 
 ## Tools [#tools]
 
-12 tools.
+13 tools.
 
 ### list_items [#list_items]
 
@@ -61,6 +61,26 @@ The changelog of an item: what changed in each version, newest first, and whethe
 | --- | --- | --- |
 | `name` | `string` | Yes |
 | `since` | `string` | No |
+
+### make_preset [#make_preset]
+
+Make a whole design system (colors, corner radius, typeface, platform feel and motion) from a description, and get its 16-character code and the command that installs it: `npx shadcn@latest add @ballmac/preset-<code>`. Start from a ready-made system with `from` (ink, harbor, lumen, bloom, forge, rosewater, canopy, lagoon, atelier, paper, terminal, signal, menubar, pocket, pane), a theme name such as ocean, or an existing code, then change what the user asked for. With no input it returns the default. Contrast is checked for every pairing in light and dark; the result lists any that fail. Add ?only=colors,shape,font,motion,feel to the returned url to install only some parts.
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `from` | `string` | No |
+| `hue` | `number` (0 to 360) | No |
+| `chroma` | `number` (0 to 0.26) | No |
+| `greyHue` | `number` (0 to 360) | No |
+| `tint` | `number` (0 to 0.03) | No |
+| `radius` | `number` (0 to 1.5) | No |
+| `primary` | `"brand" \| "ink"` | No |
+| `paper` | `boolean` | No |
+| `edge` | `"soft" \| "strong"` | No |
+| `density` | `"compact" \| "default" \| "comfortable"` | No |
+| `font` | `string` | No |
+| `feel` | `"web" \| "macos" \| "ios" \| "windows"` | No |
+| `motion` | `"native" \| "calm" \| "snappy" \| "playful" \| "still"` | No |
 
 ### get_tests [#get_tests]
 

@@ -53,7 +53,7 @@ export function dependencyProblems(items: LoadedItem[], only?: Set<string>) {
     if (usesUtils && !declaredReg.has("shadcn:utils")) problems.push(`${item.name}: imports @/lib/utils; add "shadcn:utils" to registryDependencies`)
     if (!usesUtils && declaredReg.has("shadcn:utils")) problems.push(`${item.name}: declares shadcn:utils but never imports @/lib/utils`)
     for (const b of usedBallmac) if (!declaredReg.has(b)) problems.push(`${item.name}: imports Ballmac item "${b}" but doesn't declare it`)
-    for (const d of declaredReg) if (!d.startsWith("shadcn:") && !usedBallmac.has(d) && item.type !== "registry:style") problems.push(`${item.name}: declares "${d}" but never imports it`)
+    for (const d of declaredReg) if (!d.startsWith("shadcn:") && !usedBallmac.has(d) && item.type !== "registry:style" && item.type !== "registry:theme") problems.push(`${item.name}: declares "${d}" but never imports it`)
   }
   return problems
 }

@@ -41,7 +41,7 @@ describe("the agent skill", () => {
 
 describe("context.mjs", () => {
   const script = join(skill, "scripts/context.mjs")
-  const run = (dir: string) => JSON.parse(execFileSync("node", [script, dir], { encoding: "utf8" })) as Record<string, any>
+  const run = (dir: string) => JSON.parse(execFileSync("node", [script, dir], { encoding: "utf8" })) as { shadcn: { base: string }; stack: { cacheComponents?: boolean; charts: boolean }; ballmac: { installed: string[] }; notes: string[]; next_steps: string[] }
 
   it("reads the style, base library, stack and installed items of a project", () => {
     const dir = mkdtempSync(join(tmpdir(), "skill-"))

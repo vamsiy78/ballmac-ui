@@ -1,9 +1,11 @@
 import { contrast, format, parse, solve, type Oklch } from "./color"
+import { getFontFace, isFontChoice } from "./fonts"
 import { DEFAULT_FEEL, feelSpec, feelVars, feelRules, isFeelId, normalizeFeel, type FeelFields } from "./feel"
 import { DEFAULT_MOTION, matchPersonality, getPersonality, motionVars, normalizeMotion, reducedMotionCss, type MotionFields } from "./motion"
 
 export type Density = "compact" | "default" | "comfortable"
-export type FontChoice = "keep" | "system" | "serif" | "mono"
+/** "keep" leaves your font alone, "system", "serif" and "mono" are font stacks, and any id from `FONT_FACES` (see fonts.ts) is an installable typeface. */
+export type FontChoice = string
 
 /** Everything a theme is made of. Colours are derived from these few numbers, so every result is accessible by construction. */
 export type ThemeSpec = MotionFields & FeelFields & {
@@ -24,6 +26,7 @@ export type ThemeSpec = MotionFields & FeelFields & {
   /** "strong": borders and input outlines reach 3:1 contrast. */
   edge: "soft" | "strong"
   density: Density
+  /** The typeface written to `--font-sans`. */
   font: FontChoice
 }
 
@@ -58,7 +61,7 @@ export function normalizeSpec(input: Partial<ThemeSpec> = {}): ThemeSpec {
     paper: s.paper === true,
     edge: s.edge === "strong" ? "strong" : "soft",
     density: s.density === "compact" || s.density === "comfortable" ? s.density : "default",
-    font: s.font === "system" || s.font === "serif" || s.font === "mono" ? s.font : "keep",
+    font: isFontChoice(s.font) ? s.font : "keep",
     ...normalizeMotion(s),
     feel: normalizeFeel(s.feel),
   }
@@ -73,7 +76,7 @@ export type ThemeVars = {
 }
 
 const SPACING: Record<Density, string | undefined> = { compact: "0.225rem", default: undefined, comfortable: "0.275rem" }
-const FONTS: Record<FontChoice, string | undefined> = {
+const FONTS: Record<string, string | undefined> = {
   keep: undefined,
   system: 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   serif: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
@@ -175,7 +178,7 @@ export function buildTheme(input: Partial<ThemeSpec> = {}): ThemeVars {
   const s = normalizeSpec(input)
   const theme: Record<string, string> = {}
   const spacing = SPACING[s.density]
-  const font = FONTS[s.font]
+  const font = getFontFace(s.font)?.family ?? FONTS[s.font]
   if (spacing) theme.spacing = spacing
   if (font) theme["font-sans"] = font
   const motion = motionVars(s)
@@ -320,7 +323,7 @@ export function decodeSpec(params: URLSearchParams | Record<string, string | str
   const p = get(KEYS.primary); if (p === "brand" || p === "ink") out.primary = p
   const e = get(KEYS.edge); if (e === "soft" || e === "strong") out.edge = e
   const d = get(KEYS.density); if (d === "compact" || d === "default" || d === "comfortable") out.density = d
-  const f = get(KEYS.font); if (f === "keep" || f === "system" || f === "serif" || f === "mono") out.font = f
+  const f = get(KEYS.font); if (f !== undefined && isFontChoice(f)) out.font = f
   const paper = get(KEYS.paper); if (paper !== undefined) out.paper = paper === "1" || paper === "true"
   const mo = getPersonality(get(MOTION_PARAM) ?? ""); if (mo) Object.assign(out, mo.motion)
   num("speed"); num("bounce"); num("travel"); num("hover"); num("stagger")

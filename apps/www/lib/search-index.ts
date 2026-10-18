@@ -1,6 +1,6 @@
 import "server-only"
 
-import { PRESETS } from "@ballmac-ui/theme-engine"
+import { PRESETS, SYSTEMS } from "@ballmac-ui/theme-engine"
 
 import { getChangelog } from "@/lib/changelog"
 import { useCases } from "@/lib/use-cases"
@@ -23,6 +23,8 @@ export function searchEntries(): MenuEntry[] {
     ...getBlocks().map((b) => ({ name: b.name, title: b.title, description: b.description, group: `Blocks · ${blockCategoryLabels[b.blockCategory ?? ""] ?? ""}`, href: `/blocks/${b.name}` })),
     ...getTemplates().map((t) => ({ name: t.name, title: t.title, description: t.description, group: "Templates", href: `/templates/${t.name}` })),
     { name: "themes", title: "Theme builder", description: "Twelve free themes and a live builder with contrast checks and a motion lab.", group: "Themes", href: "/themes" },
+    { name: "presets", title: "Presets", description: "Complete design systems: colour, shape, typeface, platform feel and motion in one command.", group: "Themes", href: "/presets" },
+    ...SYSTEMS.map((p) => ({ name: `preset-${p.slug}`, title: `${p.title} preset`, description: p.tagline, group: "Themes", href: `/presets/${p.slug}` })),
     ...PRESETS.map((p) => ({ name: `theme-${p.slug}`, title: `${p.title} theme`, description: p.tagline, group: "Themes", href: `/themes/${p.slug}` })),
     { name: "feels-showcase", title: "Platform feels showcase", description: "One app in macOS, iOS, Windows and web feels, live.", group: "Docs", href: "/feels" },
     { name: "quality", title: "Quality, measured", description: "Every item loaded in a real browser, with the results published.", group: "Docs", href: "/quality" },

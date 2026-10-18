@@ -195,6 +195,38 @@ server.registerTool(
 )
 
 server.registerTool(
+  "make_preset",
+  {
+    title: "Make a design system preset",
+    description: "Make a whole design system (colors, corner radius, typeface, platform feel and motion) from a description, and get its 16-character code and the command that installs it: `npx shadcn@latest add @ballmac/preset-<code>`. Start from a ready-made system with `from` (ink, harbor, lumen, bloom, forge, rosewater, canopy, lagoon, atelier, paper, terminal, signal, menubar, pocket, pane), a theme name such as ocean, or an existing code, then change what the user asked for. With no input it returns the default. Contrast is checked for every pairing in light and dark; the result lists any that fail. Add ?only=colors,shape,font,motion,feel to the returned url to install only some parts.",
+    inputSchema: {
+      from: z.string().optional().describe("A design system (ink, paper, menubar…), a theme (ocean, violet…) or a 16-character code to start from."),
+      hue: z.number().min(0).max(360).optional().describe("Brand hue in degrees: 0 red, 45 orange, 90 yellow, 150 green, 200 teal, 250 blue, 290 purple, 340 pink. The greys follow it unless greyHue is set."),
+      chroma: z.number().min(0).max(0.26).optional().describe("Brand color intensity, 0 (grey) to 0.26. Around 0.15 is calm, 0.2 is vivid."),
+      greyHue: z.number().min(0).max(360).optional().describe("Hue the greys lean towards, when it should differ from the brand hue."),
+      tint: z.number().min(0).max(0.03).optional().describe("How much color the greys carry, 0 to 0.03."),
+      radius: z.number().min(0).max(1.5).optional().describe("Corner radius in rem: 0 square, 0.5 default, 1 round."),
+      primary: z.enum(["brand", "ink"]).optional().describe("brand: buttons use the brand color. ink: buttons are near-black and the brand color is for accents."),
+      paper: z.boolean().optional().describe("A warm off-white page instead of pure white."),
+      edge: z.enum(["soft", "strong"]).optional().describe("strong: borders reach 3:1 contrast."),
+      density: z.enum(["compact", "default", "comfortable"]).optional(),
+      font: z.string().optional().describe("keep, system, serif, mono, or an installable typeface: inter, geist, dm-sans, manrope, jakarta, figtree, instrument-sans, space-grotesk, bricolage, fraunces, newsreader, source-serif, jetbrains-mono, geist-mono."),
+      feel: z.enum(["web", "macos", "ios", "windows"]).optional().describe("Platform feel: control sizes, focus ring, shadows and materials. macos, ios and windows also set radius, density, font and motion."),
+      motion: z.enum(["native", "calm", "snappy", "playful", "still"]).optional().describe("How the product moves."),
+    },
+    outputSchema: { code: z.string(), name: z.string().nullable(), install: z.string(), url: z.string(), builder: z.string(), madeOf: z.record(z.string(), z.unknown()), contrast: z.record(z.string(), z.unknown()), onlyParts: z.string(), spec: z.record(z.string(), z.unknown()) },
+    annotations: readOnly,
+  },
+  async (input) => {
+    try {
+      return result(await catalog.makePreset(input) as Record<string, unknown> & { code: string })
+    } catch (e) {
+      return failure(e)
+    }
+  }
+)
+
+server.registerTool(
   "get_tests",
   {
     title: "Get an item's tests",
