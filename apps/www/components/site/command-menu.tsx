@@ -43,7 +43,7 @@ export function CommandMenu() {
         className="text-muted-foreground hover:text-foreground bg-muted/60 hover:bg-muted focus-visible:ring-ring/50 inline-flex h-8 w-8 items-center justify-center gap-2 rounded-lg text-[13px] sm:w-full sm:justify-start sm:px-2.5 outline-none transition-colors focus-visible:ring-[3px] dark:bg-white/[0.06] dark:hover:bg-white/10"
       >
         <Search className="size-3.5 shrink-0" aria-hidden="true" />
-        <span className="flex-1 truncate text-left max-sm:sr-only">Search documentation…</span>
+        <span className="flex-1 truncate text-left max-sm:sr-only">Search docs, blocks, components…</span>
         <kbd className="bg-background text-muted-foreground hidden rounded border px-1.5 font-sans text-[10px] font-medium sm:inline">⌘K</kbd>
       </button>
       {open && entries ? (

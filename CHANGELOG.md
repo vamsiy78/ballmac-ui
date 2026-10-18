@@ -6,6 +6,26 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-18-searchable-blocks-gallery] - 2026-10-18
+
+**A searchable blocks gallery and a clearer home page.** Find a block by typing, split free from Pro, and see what is new, with a home page that says what is in the library.
+
+### Added
+
+- The [blocks gallery](https://ui.ballmac.com/blocks) has a search box, a Free, Pro and All switch and a New filter. The filters are in the address, so a filtered view can be shared.
+- The gallery opens on six free blocks that show the range, and every card marks what is new in the latest release.
+- The home page leads with what is inside (free blocks, templates and components, and what Pro adds) and has a GitHub star link; the star count appears once it is worth showing and updates live.
+
+### Changed
+
+- The 70 newest free blocks have thumbnails, so the gallery loads pictures instead of rendering each block.
+- Header blocks show in a short window and come last in Marketing, so the first cards of a section are the ones with something to see.
+- The search box now says it searches docs, blocks and components.
+
+### Fixed
+
+- The `ballmac update` example on the home page now meets contrast requirements and its output can be scrolled with the keyboard.
+
 ## [2026-10-18-shifts-recipes-habits] - 2026-10-18
 
 **Shifts, recipes and habits.** Five everyday planning blocks, from a weekly shift roster to a day-by-day trip itinerary.

@@ -217,7 +217,7 @@ export const blockGroups = [
     id: "marketing",
     label: "Marketing",
     description: "Sections for landing pages: heroes, features, pricing, proof and calls to action.",
-    categories: ["header", "hero", "features", "integrations", "stats", "logo-cloud", "testimonials", "reviews", "casestudy", "team", "comparison", "pricing", "calculator", "event", "seatmap", "faq", "cta", "waitlist", "newsletter", "footer"],
+    categories: ["hero", "features", "integrations", "stats", "logo-cloud", "testimonials", "reviews", "casestudy", "team", "comparison", "pricing", "calculator", "event", "seatmap", "faq", "cta", "waitlist", "newsletter", "header", "footer"],
   },
   {
     id: "content",

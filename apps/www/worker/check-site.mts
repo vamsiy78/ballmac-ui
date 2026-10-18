@@ -101,6 +101,12 @@ await check("custom theme link", async () => {
   status(res, 200)
   expect(((await res.json()) as { name?: string }).name === "theme-custom", "not a theme")
 })
+await check("GitHub star count", async () => {
+  const res = await get("/api/stars")
+  status(res, 200)
+  const { stars } = (await res.json()) as { stars?: number | null }
+  expect(stars === null || (typeof stars === "number" && stars >= 0), `stars is ${JSON.stringify(stars)}`)
+})
 await check("wrong method is refused", async () => status(await get("/api/support"), 405))
 await check("support form validates", async () => {
   const res = await get("/api/support", { method: "POST", headers: { "content-type": "application/json", origin }, body: "{}" })

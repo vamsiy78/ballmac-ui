@@ -7,11 +7,13 @@ import { buttonVariants } from "@/components/ballmac/button"
 import { AgentDiagram } from "@/components/home/agent-diagram"
 import { LazyMosaic } from "@/components/home/lazy-mosaic"
 import { Themed } from "@/components/pro/shots"
+import { GithubStars } from "@/components/site/github-stars"
 import { FoundingBanner } from "@/components/site/founding-banner"
 import { WhatsNewBanner } from "@/components/site/whats-new-banner"
 import { ProCallout } from "@/components/site/pro-callout"
 import { SiteJsonLd } from "@/components/site/site-jsonld"
 import { LeftPhrase } from "@/components/site/founding-text"
+import { starsAtBuild } from "@/lib/github-stars-build"
 import { thumbFor } from "@/lib/thumbs"
 import { getOffer } from "@/lib/offer"
 import { CopyButton } from "@/components/site/copy-button"
@@ -64,6 +66,8 @@ export default async function Home() {
   const proOffer = await getOffer(now)
   const offer = proOffer.founding
   const proBlockCount = blocks.filter(isPro).length || 150
+  const freeBlockCount = blocks.filter((b) => !isPro(b)).length
+  const stars = await starsAtBuild()
   const proHref = "/pro?utm_source=ballmac-ui&utm_medium=home-hero&utm_campaign=hero"
   return (
     <>
@@ -81,18 +85,18 @@ export default async function Home() {
           <ArrowRight className="size-3.5" aria-hidden="true" />
         </Link>
         <h1 className="mx-auto mt-6 max-w-4xl text-4xl leading-[1.05] font-semibold tracking-[-0.045em] text-balance sm:text-6xl">
-          Ship your SaaS dashboard this week
+          React components that feel native
         </h1>
         <p className="text-muted-foreground mx-auto mt-5 max-w-2xl text-base leading-relaxed text-pretty sm:text-lg">
-          {proBlockCount} production-ready blocks and 3 starter apps for React, Tailwind and shadcn, with loading, empty and error states built in. Start with the free library, or go straight to Pro.
+          {freeBlockCount} free blocks, {templates.length} templates and {components.length} components for React, Tailwind and shadcn, with loading, empty and error states built in. Pro adds {proBlockCount} more blocks and 3 starter apps.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
-          <Link href={proHref} className={buttonVariants({ shape: "pill", size: "lg" })}>
-            {proOffer.onSale && proOffer.price ? `Get Pro for $${proOffer.price}` : "See Ballmac UI Pro"}
+          <Link href="/blocks" className={buttonVariants({ shape: "pill", size: "lg" })}>
+            Browse the free library
             <ArrowRight />
           </Link>
-          <Link href="/components" className={buttonVariants({ shape: "pill", size: "lg", variant: "outline" })}>
-            Browse free
+          <Link href={proHref} className={buttonVariants({ shape: "pill", size: "lg", variant: "outline" })}>
+            {proOffer.onSale && proOffer.price ? `Get Pro for $${proOffer.price}` : "See Ballmac UI Pro"}
           </Link>
         </div>
         <p className="text-muted-foreground mt-3 text-[13px]">
@@ -109,18 +113,24 @@ export default async function Home() {
           <span className="text-foreground truncate">{install}</span>
           <CopyButton value={install} label="Copy install command" />
         </div>
-        <p className="text-muted-foreground mt-3 text-[13px]">
-          Free to start, no setup needed. Listed in the{" "}
-          <a
-            href="https://ui.shadcn.com/docs/directory"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground focus-visible:ring-ring/50 rounded-sm underline underline-offset-4 outline-none focus-visible:ring-[3px]"
-          >
-            official shadcn registry directory
-          </a>
-          .
-        </p>
+        <div className="text-muted-foreground mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[13px]">
+          <GithubStars initial={stars} variant="hero" />
+          <span>
+            Free and MIT licensed. Listed in the{" "}
+            <a
+              href="https://ui.shadcn.com/docs/directory"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground focus-visible:ring-ring/50 rounded-sm underline underline-offset-4 outline-none focus-visible:ring-[3px]"
+            >
+              official shadcn registry directory
+            </a>
+            .
+          </span>
+          <Link href="/quality" className="text-foreground focus-visible:ring-ring/50 rounded-sm underline underline-offset-4 outline-none focus-visible:ring-[3px]">
+            Every item is measured in a real browser
+          </Link>
+        </div>
       </section>
 
       {/* Live mosaic */}
@@ -266,7 +276,7 @@ export default async function Home() {
             Free gets you started. Pro gets you to launch.
           </h2>
           <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
-            The free library covers components, marketing pages and a starter set of app screens. Pro goes much deeper, and adds whole apps to start from.
+            Free is {components.length} components, {freeBlockCount} blocks, {templates.length} templates and twelve themes, all MIT licensed. Pro adds {proBlockCount} blocks that go deeper in every area, three complete starter apps and Figma tokens.
           </p>
         </div>
         <div className="mt-12 grid gap-5 lg:grid-cols-3">

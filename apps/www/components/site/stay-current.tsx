@@ -14,7 +14,7 @@ function Terminal() {
         <span className="bg-border size-2.5 rounded-full" />
         <span className="text-muted-foreground ms-3 font-mono text-xs">your-app</span>
       </div>
-      <pre className="overflow-x-auto p-4 font-mono text-[12.5px] leading-6 sm:p-5">
+      <pre tabIndex={0} aria-label="Example output of ballmac update" className="focus-visible:ring-ring/50 overflow-x-auto p-4 font-mono text-[12.5px] leading-6 outline-none focus-visible:ring-[3px] focus-visible:ring-inset sm:p-5">
         <code>
           <span className="text-muted-foreground">$ </span>
           <span className="text-foreground">npx @ballmac/cli update</span>
@@ -24,13 +24,13 @@ function Terminal() {
           {"\n"}
           <span className="text-muted-foreground">  The lg size is taller so it matches the lg input.</span>
           {"\n"}
-          <span className="text-emerald-600 dark:text-emerald-400">  merged   </span>
+          <span className="text-emerald-700 dark:text-emerald-400">  merged   </span>
           <span className="text-muted-foreground">button.tsx  your changes kept</span>
           {"\n\n"}
           <span className="text-foreground">dialog</span>
           <span className="text-muted-foreground">  1.0.0 → 1.1.0</span>
           {"\n"}
-          <span className="text-amber-600 dark:text-amber-400">  CONFLICT </span>
+          <span className="text-amber-800 dark:text-amber-400">  CONFLICT </span>
           <span className="text-muted-foreground">dialog.tsx  1 conflict, you choose</span>
           {"\n\n"}
           <span className="text-muted-foreground">Originals saved in .ballmac/backup/</span>

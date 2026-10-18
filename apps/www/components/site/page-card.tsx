@@ -17,6 +17,8 @@ export function PageCard({
   tall = false,
   priority = false,
   pro = false,
+  isNew = false,
+  short = false,
   height = 300,
 }: {
   href: string
@@ -34,6 +36,10 @@ export function PageCard({
   priority?: boolean
   /** Show the Pro label. */
   pro?: boolean
+  /** Show the New label (added or changed in the newest release). */
+  isNew?: boolean
+  /** A short window, for blocks that are only a strip of the page (a header), so the card is not mostly empty. */
+  short?: boolean
   height?: number
 }) {
   return (
@@ -46,14 +52,14 @@ export function PageCard({
         </div>
         {thumb ? (
           // Both pictures are in the page; the one that does not match the colour scheme is display:none, so the browser never downloads it.
-          <div className="bg-muted/30 relative w-full overflow-hidden" style={{ aspectRatio: tall ? "1280 / 840" : "1280 / 640" }}>
+          <div className="bg-muted/30 relative w-full overflow-hidden" style={{ aspectRatio: tall ? "1280 / 840" : short ? "1280 / 300" : "1280 / 640" }}>
             {(["light", "dark"] as const).map((mode) => (
               <Image
                 key={mode}
                 src={`${thumb}.${mode}.webp`}
                 alt={`${title} preview`}
                 width={800}
-                height={tall ? 525 : 400}
+                height={tall ? 525 : short ? 188 : 400}
                 unoptimized
                 loading={priority ? "eager" : "lazy"}
                 fetchPriority={priority ? "high" : "auto"}
@@ -63,7 +69,7 @@ export function PageCard({
             ))}
           </div>
         ) : (
-          <PageThumb height={height} title={`${title} preview`} frame={frame}>
+          <PageThumb height={short ? 150 : height} title={`${title} preview`} frame={frame}>
             {Preview ? <Preview /> : null}
           </PageThumb>
         )}
@@ -73,6 +79,9 @@ export function PageCard({
           {title}
         </Link>
         {pro && <ProBadge className="ms-2 align-middle" />}
+        {isNew && !pro && (
+          <span className="bg-chart-1/15 text-foreground ms-2 rounded-full px-2 py-0.5 text-[11px] font-medium align-middle">New</span>
+        )}
         <span className="text-muted-foreground hidden font-mono text-xs sm:inline">@ballmac/{name}</span>
       </div>
       <p className="text-muted-foreground mt-1 line-clamp-2 text-sm leading-relaxed">{description}</p>

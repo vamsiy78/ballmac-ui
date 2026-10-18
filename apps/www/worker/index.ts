@@ -13,6 +13,7 @@ import * as proRegistry from "./routes/pro-registry"
 import * as proSession from "./routes/pro-session"
 import * as reminders from "./routes/reminders"
 import * as sampler from "./routes/sampler"
+import * as stars from "./routes/stars"
 import * as support from "./routes/support"
 import * as themeCustom from "./routes/theme-custom"
 
@@ -26,6 +27,7 @@ const ROUTES: [URLPattern, Methods][] = [
   ["/api/pro/download/:dir/:file", proDownload],
   ["/api/reminders", reminders],
   ["/api/sampler", sampler],
+  ["/api/stars", stars],
   ["/api/support", support],
   ["/api/v1/license/verify", licenseVerify],
   ["/r/pro/starters/:file", { GET: starters }],

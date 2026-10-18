@@ -13,7 +13,7 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
     // Only these reach the Worker; everything else is a static file. Keep in step with ROUTES in worker/index.ts.
-    "run_worker_first": ["/api/pro/*", "/api/reminders", "/api/sampler", "/api/support", "/api/v1/license/*", "/r/pro/*", "/themes/custom.json"]
+    "run_worker_first": ["/api/pro/*", "/api/reminders", "/api/sampler", "/api/stars", "/api/support", "/api/v1/license/*", "/r/pro/*", "/themes/custom.json"]
   },
   "alias": { "server-only": "./worker/server-only.ts" },
   // The private Pro build is bundled as modules (worker/build-data.ts): registry JSON and highlighted items as text, archives as bytes.
