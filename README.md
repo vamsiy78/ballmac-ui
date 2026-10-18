@@ -49,6 +49,12 @@ the optional Ballmac theme.
 claude mcp add ballmac -- npx -y @ballmac/mcp
 ```
 
+Or install the skill, which teaches the agent the method (find, install, build to the rules, check) and reads your project first:
+
+```bash
+npx skills add vamsiy78/ballmac-ui
+```
+
 The server is read-only and needs no account. It searches the catalog, returns props, keyboard behaviour and source, gives the exact install
 command, and can plan a whole page from blocks. Setup for Cursor, VS Code, Windsurf, Codex and Claude Desktop is in the
 [MCP docs](https://ui.ballmac.com/docs/get-started/connect-your-agent) and in [`packages/mcp`](packages/mcp). The official shadcn MCP server also works with this registry.

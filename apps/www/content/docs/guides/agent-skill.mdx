@@ -1,0 +1,47 @@
+---
+title: Install the Ballmac UI skill
+description: Teach Claude Code, Cursor, Codex and other coding agents how to pick, install and check Ballmac UI, with one command and no server to run.
+---
+
+The skill is a folder of instructions your coding agent loads when it builds UI. It tells the agent how to find the right item, how to install it, which rules to build to and how to check its work. It reads your project first, so it knows your shadcn style, whether you use Radix or Base UI, and which Ballmac items you already have.
+
+It works next to the [MCP server](/docs/get-started/connect-your-agent). The skill carries the method and the catalogue reference; the server answers live questions. Use either, or both.
+
+## Install it
+
+```npm
+npx skills add vamsiy78/ballmac-ui
+```
+
+The command copies `skills/ballmac-ui` into the skills folder of each agent you pick. It works with Claude Code, Codex, Cursor, Windsurf and the other agents the skills command supports. Add `--skill ballmac-ui` to skip the picker, or `-g` to install it for every project.
+
+## What the agent does with it
+
+1. **Reads the project.** It runs a small script that prints your shadcn style, base library, React, Next.js and Tailwind versions, whether Cache Components is on, and the Ballmac items you have installed.
+2. **Finds the item.** It looks in the catalogue reference, or asks the MCP server if you connected it. It picks a block over assembling the same section from parts.
+3. **Installs it** with `npx shadcn@latest add @ballmac/<name>` and tracks it so later versions merge into your edits.
+4. **Builds to the rules.** Loading, empty and error states, theme tokens instead of colours, logical direction classes, names on every control, motion that respects reduced-motion settings, and the Next.js rules for prerendering.
+5. **Checks its work** with `npx @ballmac/cli check` and fixes every error. See [Check your own app](/docs/guides/check-your-app).
+
+## What is in the folder
+
+| File | What it holds |
+| --- | --- |
+| `SKILL.md` | The workflow and the rules, short enough to load in full |
+| `scripts/context.mjs` | Prints the project facts as JSON. Read-only, no dependencies |
+| `references/pages.md` | Which blocks make a landing page, dashboard, sign-in, settings, AI product or desktop app |
+| `references/blocks.md`, `references/components/` | Every free block and component, one line each, with its exports and states |
+| `references/templates.md`, `references/helpers.md`, `references/themes.md` | Templates, shared helpers, themes, motion and platform feels |
+| `references/rules.md` | The quality rules with a bad and a good example for each |
+
+Everything under `references/` except `pages.md` is generated from the catalogue and the check rules, and a check fails the build when it is out of date, so the skill cannot describe an item that does not exist.
+
+## Update it
+
+Run the install command again. The skill changes when the catalogue does.
+
+## Related
+
+- [Connect your AI agent](/docs/get-started/connect-your-agent)
+- [Check your own app](/docs/guides/check-your-app)
+- [MCP tools reference](/docs/reference/mcp-tools)
