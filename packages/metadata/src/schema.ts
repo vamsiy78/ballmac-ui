@@ -102,6 +102,11 @@ export const blockCategories = [
   "flags",
   "workflow",
   "api",
+  "goals",
+  "timesheet",
+  "expenses",
+  "editor",
+  "crm",
 ] as const
 
 // Registry item types Ballmac publishes (a subset of the shadcn spec).

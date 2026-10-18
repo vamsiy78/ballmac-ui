@@ -367,6 +367,10 @@
     "version": "1.0.0",
     "hash": "410668abbfdc78d375e8a59ba9b6ca5aaeb4ab88469f1f3874295a47ea44d667"
   },
+  "crm-1": {
+    "version": "1.0.0",
+    "hash": "612fb54cc4f1c56431af495152bafeb279a4d535833f7fb3a493c9c8b88067a2"
+  },
   "cta-1": {
     "version": "1.0.0",
     "hash": "91e05629534ec401aacc175388a814c48932862882a195de58bfaac62bc7a064"
@@ -495,6 +499,10 @@
     "version": "1.0.0",
     "hash": "7ef937e3e59e97dec61a4e8c86ec4f8647e2b0833615370361507ddf902d943b"
   },
+  "editor-1": {
+    "version": "1.0.0",
+    "hash": "aa94e70cfb0203550ea6183602d2771871ddd49c3d4cdf392c7bb486701250eb"
+  },
   "empty": {
     "version": "1.0.0",
     "hash": "fb425c747fc9af090b836450a511968ebd4f8b64e10bafa17a3a0dbe16644260"
@@ -514,6 +522,10 @@
   "event-1": {
     "version": "1.0.0",
     "hash": "24d2de6b846a32a8a2358bf53fa0cebda330004b81baee061cb3a34113dcdf75"
+  },
+  "expenses-1": {
+    "version": "1.0.0",
+    "hash": "95e251442622b0a3adafb1385dcd1cf8feb4c6ef9d15c65a9467e9ab812f1e87"
   },
   "experiments-1": {
     "version": "1.0.0",
@@ -662,6 +674,10 @@
   "glow-border": {
     "version": "1.0.0",
     "hash": "f13ab901d0c1235f26414a9c50cfc89cc2e98ff2dbf0ae9f28aed487e4d9cf6d"
+  },
+  "goals-1": {
+    "version": "1.0.0",
+    "hash": "c6a85992ac65c91df211bd0f893cb3f379782c63cc11b6788478e96cf0dbbe12"
   },
   "gradient-text": {
     "version": "1.0.1",
@@ -1554,6 +1570,10 @@
   "timeline": {
     "version": "1.0.0",
     "hash": "1534b3036f735fe22c8638a553c407683a5d2cfe8cca666ae59714d09fa8da3e"
+  },
+  "timesheet-1": {
+    "version": "1.0.0",
+    "hash": "6b1b9efea6be7a92e09c1073923abebdc2dbb55859fca823a8ae18b59c9c1646"
   },
   "toast": {
     "version": "1.0.0",

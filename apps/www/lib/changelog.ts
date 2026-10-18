@@ -4,6 +4,19 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-18",
+    title: "Goals and OKRs, a weekly timesheet, an expense report, a Markdown editor and a CRM contact record",
+    items: [
+      "Goals 1, objectives and key results: progress worked out from start, current and target (a target below the start means lower is better), a mark on every bar for where it should be today, On track, At risk, Behind or Done judged against how much of the period is gone and written in words, overall progress, a team filter, and numbers you update in place. A save that fails puts the old number back with the reason",
+      "Timesheet 1, weekly hours: a row per project and a box per day, time typed the way people say it (1.5, 1:30, 90m, 2h), row, day and week totals worked out as you type, daily bars that say '+1:15 over' when a day runs long, a refusal above 24 hours in a day, weeks to page through, an add-project menu, and Submit that locks the week and says why if it cannot",
+      "Expenses 1, expense report: lines with merchant, category, amount and receipt, a total broken down by category with a text equivalent, rules checked as you go (a receipt is needed over a threshold, a category can have a limit), an add form that validates, receipts you attach to any line, and Submit that names exactly which lines still need a receipt",
+      "Editor 1, Markdown editor: a toolbar and the usual shortcuts (Ctrl or Command with B, I, K, and S to save now) that wrap the selection, a live preview built from safe elements with only http, https and mailto links, word count and reading time, a Write and Preview switch on phones, and autosave that says Saved, Saving, Unsaved changes or Not saved with a Retry that keeps your text",
+      "CRM 1, contact record: a pipeline stage you can move, deal value, last contact and an overdue follow-up worked out from the day you pass, a timeline of notes, calls, emails and meetings, and a form to log the next one; a logged item appears at once and, if saving fails, stays in the list with Not saved and Retry",
+      "Five new block groups: Goals and OKRs, Timesheets, Expenses, Editor and CRM, also found by the MCP server for okr, hours, reimbursement, markdown, deals and lead",
+      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and right to left, and ship their tests",
+    ],
+  },
+  {
+    date: "2026-10-18",
     title: "A support ticket, a webhooks manager, feature flags, an automation builder and an API explorer",
     items: [
       "Tickets 1, support ticket: the conversation with customer messages, replies and private notes (dashed, tinted and labelled in words so a note is never mistaken for a reply), a reply timer that says how long is left or how late you are, a composer that switches between Reply and Internal note with canned replies and a keyboard shortcut, and a side panel with the customer, assignee, status and priority. A message that fails to send stays in the thread with Not sent and Retry",

@@ -194,6 +194,11 @@ export const blockCategoryLabels: Record<string, string> = {
   flags: "Feature flags",
   workflow: "Automation",
   api: "API explorer",
+  goals: "Goals and OKRs",
+  timesheet: "Timesheets",
+  expenses: "Expenses",
+  editor: "Editor",
+  crm: "CRM",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -220,7 +225,7 @@ export const blockGroups = [
     id: "application",
     label: "Application",
     description: "Screens inside a product: shell, dashboards, settings, billing, inbox, notifications, team chat, boards, uploads, developer tools, AI chat and AI agents.",
-    categories: ["app-shell", "dashboard", "funnel", "retention", "experiments", "settings", "billing", "invoice", "mail", "tickets", "notifications", "chat", "kanban", "tasks", "calendar", "gantt", "survey", "quiz", "upload", "import", "developer", "webhooks", "api", "flags", "workflow", "leaderboard", "ai-chat", "agents"],
+    categories: ["app-shell", "dashboard", "funnel", "retention", "experiments", "settings", "billing", "invoice", "mail", "tickets", "notifications", "chat", "kanban", "tasks", "calendar", "gantt", "goals", "timesheet", "expenses", "crm", "editor", "survey", "quiz", "upload", "import", "developer", "webhooks", "api", "flags", "workflow", "leaderboard", "ai-chat", "agents"],
   },
   {
     id: "shop",

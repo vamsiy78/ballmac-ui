@@ -9480,6 +9480,242 @@
       }
     },
     {
+      "name": "crm-1",
+      "type": "registry:block",
+      "title": "CRM 1: contact and deal record",
+      "description": "A contact record for a sales team: the pipeline stage you can move, deal value, last contact and an overdue follow-up worked out from the day you pass, and a timeline of notes, calls, emails and meetings with a form to log the next.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/crm-1/crm-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/crm-1/crm-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "crm"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "crm",
+          "contact",
+          "deal",
+          "pipeline",
+          "sales",
+          "leads",
+          "activity",
+          "follow-up",
+          "customer record",
+          "account"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A CRM contact record. <Crm1 contact={{ id, name, title, company, email, phone, location, owner, stage: 2, value: 48000, tags, followUp: '2026-10-16', activities: [{ id, kind: 'note' | 'call' | 'email' | 'meeting', date: '2026-10-09', by, summary }] }} stages={['Lead', 'Qualified', 'Proposal', 'Negotiation', 'Won']} today='2026-10-18' currency locale onLog={({ kind, summary, date }) => Promise} onStageChange={(index) => ...} onFollowUp={(date) => ...} />. Last contact and the follow-up status (Due in N days, Due today, Overdue by N days) are worked out from today; pass it yourself, the block never reads the clock. A logged item appears at once; reject onLog and it stays with Not saved and Retry.",
+          "whenToUse": [
+            "A customer or lead record in a CRM or support tool",
+            "An account page for sales and customer success"
+          ],
+          "whenNotToUse": [
+            "A list or board of deals (use kanban-1)",
+            "A support conversation (use tickets-1)"
+          ],
+          "composesWith": [
+            "directory-1",
+            "tickets-1",
+            "invoice-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Each pipeline stage is a button that says done, current stage or nothing; the activity type is a radio group and the form fields have labels"
+            },
+            {
+              "keys": "Follow-up",
+              "action": "'Overdue by 2 days' is written in words with the date, and the card is tinted as well as worded"
+            },
+            {
+              "keys": "Logging",
+              "action": "A new activity shows Saving, and a failure is an alert with a Retry button"
+            }
+          ],
+          "customization": [
+            "stages is a plain list of names, so any pipeline works",
+            "Value, dates and relative times follow currency, locale and today",
+            "The timeline line and stages mirror in right-to-left"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "crm-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton header, timeline and side panel, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Contact not found",
+            "example": "crm-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says they may have been merged or removed; emptyState sets the copy and can add a link back."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "crm-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A logged activity that fails to save stays in the timeline with Not saved and Retry."
+          }
+        ],
+        "examples": [
+          "crm-1-demo",
+          "crm-1-won",
+          "crm-1-loading",
+          "crm-1-empty",
+          "crm-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/crm-1"
+      }
+    },
+    {
+      "name": "crm-1-demo",
+      "type": "registry:example",
+      "title": "CRM 1: contact and deal record: A follow-up overdue",
+      "description": "A follow-up overdue example of CRM 1: contact and deal record.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/crm-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/crm-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/crm-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "crm-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "crm-1-won",
+      "type": "registry:example",
+      "title": "CRM 1: contact and deal record: A won deal",
+      "description": "A won deal example of CRM 1: contact and deal record.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/crm-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/crm-1-won.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/crm-1-won.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "crm-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "crm-1-loading",
+      "type": "registry:example",
+      "title": "CRM 1: contact and deal record: Loading",
+      "description": "Loading example of CRM 1: contact and deal record.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/crm-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/crm-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/crm-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "crm-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "crm-1-empty",
+      "type": "registry:example",
+      "title": "CRM 1: contact and deal record: Contact not found",
+      "description": "Contact not found example of CRM 1: contact and deal record.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/crm-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/crm-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/crm-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "crm-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "crm-1-error",
+      "type": "registry:example",
+      "title": "CRM 1: contact and deal record: Could not load",
+      "description": "Could not load example of CRM 1: contact and deal record.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/crm-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/crm-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/crm-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "crm-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "cta-1",
       "type": "registry:block",
       "title": "CTA 1: framed call to action",
@@ -12715,6 +12951,232 @@
       }
     },
     {
+      "name": "editor-1",
+      "type": "registry:block",
+      "title": "Editor 1: Markdown with live preview",
+      "description": "A Markdown editor with live preview: a toolbar and shortcuts that wrap the selection, a preview built from safe elements, word count and reading time, and autosave that says Saved, Saving, Unsaved changes or Not saved with Retry.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/editor-1/editor-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/editor-1/editor-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "editor"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "editor",
+          "markdown",
+          "writing",
+          "notes",
+          "preview",
+          "autosave",
+          "text editor",
+          "docs",
+          "wysiwyg",
+          "composer"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A Markdown editor. <Editor1 title defaultValue autosaveMs={1200} onSave={(value) => Promise} onChange={(value) => ...} defaultTab='write' | 'preview' />. Supports headings (1 to 3), bold, italic, inline code, links (http, https, mailto only), bulleted and numbered lists, quotes and rules. Ctrl or Command with B, I, K format and S saves now. Saving happens autosaveMs after the last keystroke; reject onSave to show Not saved with Retry. The preview never uses dangerouslySetInnerHTML.",
+          "whenToUse": [
+            "Notes, docs, release notes and posts written in Markdown",
+            "A comment or message composer that needs formatting"
+          ],
+          "whenNotToUse": [
+            "A full rich text editor with tables and images",
+            "A short single-line field (use input)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "tickets-1",
+            "changelog-1",
+            "help-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Ctrl or Command + B / I / K / S",
+              "action": "The toolbar buttons say their shortcut in their name; the writing field has its own label; S saves right away"
+            },
+            {
+              "keys": "Saving",
+              "action": "The status line is a live region: Saved, Saving, Unsaved changes, or Not saved with a Retry button"
+            },
+            {
+              "keys": "Preview",
+              "action": "A labelled region updated as you type; on narrow screens a Write and Preview tablist switches between the two"
+            }
+          ],
+          "customization": [
+            "The writing field uses dir=auto, so Arabic and Hebrew text flow the right way as you type",
+            "Formatting marks wrap the selection, or a placeholder that is selected so typing replaces it",
+            "Reading time assumes 220 words a minute"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "editor-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton toolbar and page under the real heading, announced as loading."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "editor-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A save that fails shows Not saved with Retry and keeps the text."
+          }
+        ],
+        "examples": [
+          "editor-1-demo",
+          "editor-1-preview",
+          "editor-1-failed",
+          "editor-1-loading",
+          "editor-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/editor-1"
+      }
+    },
+    {
+      "name": "editor-1-demo",
+      "type": "registry:example",
+      "title": "Editor 1: Markdown with live preview: Write and preview",
+      "description": "Write and preview example of Editor 1: Markdown with live preview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/editor-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/editor-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/editor-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "editor-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "editor-1-preview",
+      "type": "registry:example",
+      "title": "Editor 1: Markdown with live preview: Preview tab (phones)",
+      "description": "Preview tab (phones) example of Editor 1: Markdown with live preview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/editor-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/editor-1-preview.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/editor-1-preview.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "editor-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "editor-1-failed",
+      "type": "registry:example",
+      "title": "Editor 1: Markdown with live preview: Saving fails",
+      "description": "Saving fails example of Editor 1: Markdown with live preview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/editor-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/editor-1-failed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/editor-1-failed.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "editor-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "editor-1-loading",
+      "type": "registry:example",
+      "title": "Editor 1: Markdown with live preview: Loading",
+      "description": "Loading example of Editor 1: Markdown with live preview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/editor-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/editor-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/editor-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "editor-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "editor-1-error",
+      "type": "registry:example",
+      "title": "Editor 1: Markdown with live preview: Could not load",
+      "description": "Could not load example of Editor 1: Markdown with live preview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/editor-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/editor-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/editor-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "editor-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "error-1",
       "type": "registry:block",
       "title": "Error 1: friendly 404, 403 and 500 page",
@@ -12990,6 +13452,240 @@
       "meta": {
         "example": true,
         "of": "event-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "expenses-1",
+      "type": "registry:block",
+      "title": "Expenses 1: expense report",
+      "description": "An expense report you can finish: lines with category, amount and receipt, a total by category, rules checked as you go (receipt needed over a threshold, category limits), an add form, and Submit that lists what needs fixing.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/expenses-1/expenses-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/expenses-1/expenses-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "expenses"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "expenses",
+          "expense report",
+          "receipts",
+          "reimbursement",
+          "travel",
+          "finance",
+          "approval",
+          "spending",
+          "claims"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "An expense report. <Expenses1 report lines={[{ id, date: '2026-10-13', merchant, category, amount, receipt: 'file.pdf', note }]} categories={[{ id, label, limit }]} currency='EUR' locale='en-GB' receiptOver={25} onChange={(lines) => ...} onSubmit={(lines, total) => Promise} />. The total and the category breakdown are worked out from the lines. A line over receiptOver without a receipt blocks Submit and is named in the message; a line over its category limit shows a warning but does not block. Adding a line validates the merchant and amount. Reject onSubmit to show the reason and stay open.",
+          "whenToUse": [
+            "Employee expense claims and reimbursements",
+            "Trip or project cost reports"
+          ],
+          "whenNotToUse": [
+            "A customer invoice (use invoice-1)",
+            "Hours worked (use timesheet-1)"
+          ],
+          "composesWith": [
+            "timesheet-1",
+            "invoice-1",
+            "app-shell-1",
+            "upload-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter",
+              "action": "Each line's Attach receipt is a real file input labelled with the merchant; the add form fields all have visible labels"
+            },
+            {
+              "keys": "Problems",
+              "action": "'Needs a receipt: it is over €25.00' and 'Over the €75.00 limit for Meals' are written beside an icon on the line, and Submit names what is missing"
+            },
+            {
+              "keys": "Breakdown",
+              "action": "The category bar has a text equivalent listing each category and its amount"
+            }
+          ],
+          "customization": [
+            "receiptOver and each category's limit are plain numbers in the report's currency",
+            "Currency and dates follow the locale",
+            "Removing a line says which one and its amount to a screen reader"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "expenses-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton summary and list under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No expenses yet",
+            "example": "expenses-1-empty",
+            "trigger": "state=\"empty\" (or lines={[]})",
+            "note": "Says to add what you paid for; emptyState sets the copy and can add a button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "expenses-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A failed submit says nothing was lost, in place beside the button."
+          }
+        ],
+        "examples": [
+          "expenses-1-demo",
+          "expenses-1-clean",
+          "expenses-1-loading",
+          "expenses-1-empty",
+          "expenses-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/expenses-1"
+      }
+    },
+    {
+      "name": "expenses-1-demo",
+      "type": "registry:example",
+      "title": "Expenses 1: expense report: A report with problems",
+      "description": "A report with problems example of Expenses 1: expense report.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/expenses-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/expenses-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/expenses-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "expenses-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "expenses-1-clean",
+      "type": "registry:example",
+      "title": "Expenses 1: expense report: Ready to send",
+      "description": "Ready to send example of Expenses 1: expense report.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/expenses-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/expenses-1-clean.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/expenses-1-clean.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "expenses-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "expenses-1-loading",
+      "type": "registry:example",
+      "title": "Expenses 1: expense report: Loading",
+      "description": "Loading example of Expenses 1: expense report.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/expenses-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/expenses-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/expenses-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "expenses-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "expenses-1-empty",
+      "type": "registry:example",
+      "title": "Expenses 1: expense report: No expenses yet",
+      "description": "No expenses yet example of Expenses 1: expense report.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/expenses-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/expenses-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/expenses-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "expenses-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "expenses-1-error",
+      "type": "registry:example",
+      "title": "Expenses 1: expense report: Could not load",
+      "description": "Could not load example of Expenses 1: expense report.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/expenses-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/expenses-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/expenses-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "expenses-1",
         "tier": "free"
       }
     },
@@ -15612,6 +16308,241 @@
       "meta": {
         "example": true,
         "of": "gantt-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "goals-1",
+      "type": "registry:block",
+      "title": "Goals 1: objectives and key results",
+      "description": "Objectives and key results for a period: progress worked out from start, current and target, a pace mark on each bar for where it should be today, on track, at risk or behind in words, overall progress, team filter and in-place updates.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/goals-1/goals-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/goals-1/goals-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "goals"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "goals",
+          "okr",
+          "okrs",
+          "objectives",
+          "key results",
+          "progress",
+          "targets",
+          "quarter",
+          "planning",
+          "team"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "OKRs. <Goals1 objectives={[{ id, title, owner, team, keyResults: [{ id, title, start, target, current, unit, prefix }] }]} period='Q4 2026' range={['2026-10-01', '2026-12-31']} today='2026-11-12' locale onUpdate={(objective, keyResult, value) => Promise} />. Key result progress is (current - start) / (target - start), clamped 0 to 1, so a target below the start means lower is better. Status compares progress with the share of the period gone: within 10 points On track, within 25 At risk, else Behind, 100% Done. Pass today yourself; the block never reads the clock. Reject onUpdate and the old value returns with the message.",
+          "whenToUse": [
+            "A team or company goals page",
+            "A quarterly review dashboard"
+          ],
+          "whenNotToUse": [
+            "A project plan with dates and dependencies (use gantt-1)",
+            "A list of to-dos (use tasks-1)"
+          ],
+          "composesWith": [
+            "gantt-1",
+            "tasks-1",
+            "funnel-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter / Escape",
+              "action": "Each key result has an Update button named for it; Enter saves the number and Escape cancels"
+            },
+            {
+              "keys": "Status",
+              "action": "Written as On track, At risk, Behind or Done with an icon and the percentage, never by color alone; the pace mark is explained in a caption"
+            },
+            {
+              "keys": "Summary",
+              "action": "Counts by status are a labelled list ('2 On track, 1 At risk')"
+            }
+          ],
+          "customization": [
+            "unit goes after the number ('%', ' ms') and prefix before it ('$')",
+            "Lower-is-better results are recognised from target < start and say so",
+            "The bars, ring and pace marks mirror in right-to-left"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "goals-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton summary and objective cards under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No goals yet",
+            "example": "goals-1-empty",
+            "trigger": "state=\"empty\" (or objectives={[]})",
+            "note": "Says to set an objective and the results that would show it worked; emptyState sets the copy and can add a button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "goals-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). An update that fails to save puts the old number back with the reason."
+          }
+        ],
+        "examples": [
+          "goals-1-demo",
+          "goals-1-late",
+          "goals-1-loading",
+          "goals-1-empty",
+          "goals-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/goals-1"
+      }
+    },
+    {
+      "name": "goals-1-demo",
+      "type": "registry:example",
+      "title": "Goals 1: objectives and key results: Mid-quarter",
+      "description": "Mid-quarter example of Goals 1: objectives and key results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/goals-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/goals-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/goals-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "goals-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "goals-1-late",
+      "type": "registry:example",
+      "title": "Goals 1: objectives and key results: Late in the quarter",
+      "description": "Late in the quarter example of Goals 1: objectives and key results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/goals-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/goals-1-late.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/goals-1-late.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "goals-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "goals-1-loading",
+      "type": "registry:example",
+      "title": "Goals 1: objectives and key results: Loading",
+      "description": "Loading example of Goals 1: objectives and key results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/goals-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/goals-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/goals-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "goals-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "goals-1-empty",
+      "type": "registry:example",
+      "title": "Goals 1: objectives and key results: No goals yet",
+      "description": "No goals yet example of Goals 1: objectives and key results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/goals-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/goals-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/goals-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "goals-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "goals-1-error",
+      "type": "registry:example",
+      "title": "Goals 1: objectives and key results: Could not load",
+      "description": "Could not load example of Goals 1: objectives and key results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/goals-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/goals-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/goals-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "goals-1",
         "tier": "free"
       }
     },
@@ -24974,6 +25905,239 @@
       "meta": {
         "example": true,
         "of": "tickets-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "timesheet-1",
+      "type": "registry:block",
+      "title": "Timesheet 1: weekly hours",
+      "description": "A weekly timesheet: a row per project and a box per day, time typed the way people say it (1.5, 1:30, 90m), totals worked out as you type, daily bars that say when a day runs over, weeks to page through, and submit that locks the week.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/timesheet-1/timesheet-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/timesheet-1/timesheet-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "timesheet"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "timesheet",
+          "time tracking",
+          "hours",
+          "weekly",
+          "projects",
+          "billable",
+          "payroll",
+          "work log",
+          "submit"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A weekly timesheet. <Timesheet1 projects={[{ id, name, client, entries: { '2026-10-12': 240 } /* minutes by ISO date */ }]} available={[{ id, name, client }]} weekStart='2026-10-12' /* a Monday */ dayTarget={8} submittedWeeks={['2026-10-05']} locale onChange={(projectId, date, minutes) => ...} onSubmit={({ weekStart, minutes, entries }) => Promise} />. Typed time accepts 1.5, 1,5, 1:30, 90m and 2h; entries are stored as minutes. A day over 24 hours is refused with the reason; a weekday over dayTarget shows how much over. Submitting locks that week. Reject onSubmit to show the reason and stay open.",
+          "whenToUse": [
+            "Time tracking for agencies, consultants and teams",
+            "A weekly hours entry before payroll or invoicing"
+          ],
+          "whenNotToUse": [
+            "A start/stop timer",
+            "A calendar of meetings (use calendar-1)"
+          ],
+          "composesWith": [
+            "invoice-1",
+            "goals-1",
+            "tasks-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter",
+              "action": "Every cell is a text field named for its project and day ('Website redesign, Mon 12 Oct'); Enter or leaving the field saves it"
+            },
+            {
+              "keys": "Over time",
+              "action": "A day over the target says '+1:15 over' in words beside its bar; a refused entry is an alert in the cell"
+            },
+            {
+              "keys": "Table",
+              "action": "A real table with a caption, column and row headers and totals in the footer; it scrolls sideways on a phone and is itself a focusable region"
+            }
+          ],
+          "customization": [
+            "dayTarget sets what a full day is (weekends are not counted against the week target)",
+            "Weeks page with Previous and Next; the data for every week lives in the entries by date",
+            "Day names and dates follow the locale"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "timesheet-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton grid under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No projects",
+            "example": "timesheet-1-empty",
+            "trigger": "state=\"empty\" (or projects={[]})",
+            "note": "Says to add a project; emptyState sets the copy and can add a button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "timesheet-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A failed submit says nothing was lost, in place under the table."
+          }
+        ],
+        "examples": [
+          "timesheet-1-demo",
+          "timesheet-1-submitted",
+          "timesheet-1-loading",
+          "timesheet-1-empty",
+          "timesheet-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/timesheet-1"
+      }
+    },
+    {
+      "name": "timesheet-1-demo",
+      "type": "registry:example",
+      "title": "Timesheet 1: weekly hours: A draft week",
+      "description": "A draft week example of Timesheet 1: weekly hours.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/timesheet-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/timesheet-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/timesheet-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "timesheet-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "timesheet-1-submitted",
+      "type": "registry:example",
+      "title": "Timesheet 1: weekly hours: A submitted week",
+      "description": "A submitted week example of Timesheet 1: weekly hours.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/timesheet-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/timesheet-1-submitted.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/timesheet-1-submitted.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "timesheet-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "timesheet-1-loading",
+      "type": "registry:example",
+      "title": "Timesheet 1: weekly hours: Loading",
+      "description": "Loading example of Timesheet 1: weekly hours.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/timesheet-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/timesheet-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/timesheet-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "timesheet-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "timesheet-1-empty",
+      "type": "registry:example",
+      "title": "Timesheet 1: weekly hours: No projects",
+      "description": "No projects example of Timesheet 1: weekly hours.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/timesheet-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/timesheet-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/timesheet-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "timesheet-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "timesheet-1-error",
+      "type": "registry:example",
+      "title": "Timesheet 1: weekly hours: Could not load",
+      "description": "Could not load example of Timesheet 1: weekly hours.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/timesheet-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/timesheet-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/timesheet-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "timesheet-1",
         "tier": "free"
       }
     },
