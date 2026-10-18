@@ -25,6 +25,9 @@ describe("stylePaths", () => {
     expect(stylePaths("radix-nova", "popover.json")).toEqual(["/r/popover.json"])
     expect(stylePaths("new-york-v4", "popover.json")).toEqual(["/r/popover.json"])
   })
+  it("gives a client that never filled in {style} the Radix item", () => {
+    expect(stylePaths("{style}", "popover.json")).toEqual(["/r/popover.json"])
+  })
   it("leaves the folders that hold files, and anything odd, alone", () => {
     for (const folder of ["pro", "tests", "base"]) expect(stylePaths(folder, "popover.json")).toBeUndefined()
     expect(stylePaths("base-nova", "../secret.json")).toBeUndefined()

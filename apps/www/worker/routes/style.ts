@@ -15,6 +15,8 @@ const FOLDERS = new Set(["pro", "tests", "base"])
 
 /** The static files to try, best first, for a style and a file name. Undefined when the path is not a style at all. */
 export function stylePaths(style: string, file: string): string[] | undefined {
+  // A client that does not fill the placeholder in (a health check, an old CLI) asks for the literal `{style}`: give it the default.
+  if (style === "{style}") style = "default"
   if (FOLDERS.has(style) || !/^[a-z0-9][a-z0-9-]*$/.test(style) || !/^[a-z0-9][a-z0-9-]*\.json$/.test(file)) return undefined
   return style.startsWith("base-") ? [`/r/base/${file}`, `/r/${file}`] : [`/r/${file}`]
 }
