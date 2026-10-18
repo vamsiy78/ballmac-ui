@@ -355,6 +355,10 @@
     "version": "1.0.0",
     "hash": "4ba233f2eb060a642d81915a0f2c9a29f492219929a1cd2616a7b51e499c9ea2"
   },
+  "course-1": {
+    "version": "1.0.0",
+    "hash": "9a5825d4ff64df2c5231d1ed001638b42347cfd7a936603554b30ec03dc3c20e"
+  },
   "cover-art": {
     "version": "1.0.0",
     "hash": "410668abbfdc78d375e8a59ba9b6ca5aaeb4ab88469f1f3874295a47ea44d667"
@@ -503,6 +507,10 @@
     "version": "1.0.1",
     "hash": "06ac941093e6ac5ad4959775dd4cae5f522a0eaa84a1328944cda75b6a5ee089"
   },
+  "experiments-1": {
+    "version": "1.0.0",
+    "hash": "3d9a31aefc524ceca3e5cf9af470b0a98a30df4c748e4b30841709504a51c17b"
+  },
   "faq-1": {
     "version": "1.0.0",
     "hash": "eb27572e36a6718faf42123af7d0d9577ca5ac12d6e13b01a3ed58ca493516eb"
@@ -614,6 +622,10 @@
   "frame-props": {
     "version": "1.0.0",
     "hash": "62f55e6393252fa499e6ba72774cd0d7f1482c544a0862dc5156e1e3d0378626"
+  },
+  "funnel-1": {
+    "version": "1.0.0",
+    "hash": "270dc03b3f693d879b5aca0da090ac8ebc1e427cee05cb961f8106595b55ec7f"
   },
   "gallery-1": {
     "version": "1.0.0",
@@ -814,6 +826,10 @@
   "loading-dots": {
     "version": "1.0.0",
     "hash": "a4d9afa29fbeace974f4eaa559af439a52e6d4004779d740722479a1732444d8"
+  },
+  "locations-1": {
+    "version": "1.0.0",
+    "hash": "43c4a77526278ebdc5852b080332048704353b45725bfc2c37464ad82a3bd0a1"
   },
   "lock-screen": {
     "version": "1.0.1",
@@ -1086,6 +1102,10 @@
   "return-focus": {
     "version": "1.0.0",
     "hash": "f3ea133937d4fe32b40420f6e3449981365e76fe5c76472707d8e14262b262e6"
+  },
+  "reviews-1": {
+    "version": "1.0.0",
+    "hash": "282ecf9ac5743da2154ec62c02e1eeb8ef78f8ad2ae8aba4dbe662381d461bee"
   },
   "ripple": {
     "version": "1.0.1",

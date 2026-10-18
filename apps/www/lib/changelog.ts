@@ -4,6 +4,19 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-18",
+    title: "Customer reviews, A/B test results, a conversion funnel, a locations finder and a course page",
+    items: [
+      "Reviews 1, customer reviews: an average with a bar for each star count that also filters, sorting (most helpful, newest, highest, lowest), a verified-only switch, review cards with Read more, helpful votes that count at once and can be taken back, and replies from the business. The average, every bar and the share of 4 and 5 stars are worked out from the reviews, and the drawn stars are replaced by '4 out of 5 stars' for screen readers",
+      "Experiments 1, A/B test results: each variant's conversion rate with its 95% confidence interval on one shared axis, the lift over the control, the chance it beats the control, a p-value, and a plain verdict: a winner, the control is still best, not enough data (with the visitors still needed), or no clear difference. All statistics are worked out from visitors and conversions and are deterministic; certainty is never shown as 100%",
+      "Funnel 1, conversion funnel: bars sized against the first step joined by connectors that narrow as people drop away, the share kept and people lost at each step, the biggest leak written out as a sentence with what winning some back would be worth, a group switch (everyone, mobile, desktop) and a panel for any chosen step",
+      "Locations 1, locations finder: a dotted world map with a pressable pin for every place (each is a real button), a searchable list with type filters, and a card for the chosen place with address, contacts, directions and whether it is open now in its own time zone, worked out from the moment you pass and each place's hours",
+      "Course 1, course page: a hero with a progress ring and a Continue button for the next lesson, expandable modules with their own progress, lessons you can open or mark done, locked lessons that say why, time left, and a certificate that unlocks when every lesson is done",
+      "Five new block groups: Reviews, Funnel, Experiments, Locations and Courses, also found by the MCP server for ratings, conversion, abtest, stores, locator, offices, lessons, curriculum and lms",
+      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the left-to-right chart axes in Experiments 1, right to left, and ship their tests",
+    ],
+  },
+  {
+    date: "2026-10-18",
     title: "A status page, a pricing estimator, a feedback survey, a people directory and a referral waitlist",
     items: [
       "Status 1, system status page: a banner worked out from the services (all operational, slower than usual, down, maintenance), each service with a 90-day history you scrub with a pointer or the arrow keys (each bar is a slider that reads the date and what happened), uptime figures worked out from the days, live incidents as a timeline of updates, two weeks of past incidents with quiet days folded into one row, and a subscribe box. Pass today yourself; the block never reads the clock",

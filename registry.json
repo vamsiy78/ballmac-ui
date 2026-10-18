@@ -8991,6 +8991,264 @@
       }
     },
     {
+      "name": "course-1",
+      "type": "registry:block",
+      "title": "Course 1: curriculum and progress",
+      "description": "A course page: a hero with a progress ring and a Continue button for the next lesson, expandable modules with their own progress, lessons you can open or mark done, locked ones with the reason, and a certificate that unlocks at the end.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/course-1/course-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/course-1/course-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "course"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "course",
+          "curriculum",
+          "lessons",
+          "learning",
+          "progress",
+          "modules",
+          "lms",
+          "education",
+          "certificate",
+          "training"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A course page. <Course1 title subtitle instructor={{ name, role }} level modules={[{ id, title, lessons: [{ id, title, kind: 'video' | 'reading' | 'quiz' | 'project', minutes, done, locked: 'reason' }] }]} defaultOpenId onOpenLesson={(lesson) => ...} onToggleDone={(lesson, done) => ...} />. Progress, the ring, time left, the next lesson for Continue and the certificate unlock are worked out from the lessons. A locked lesson is disabled and says why.",
+          "whenToUse": [
+            "A course landing and progress page in a learning product",
+            "Onboarding academies and training programs"
+          ],
+          "whenNotToUse": [
+            "A single lesson player",
+            "A list of courses to browse (use a card grid)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "profile-1",
+            "onboarding-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Each module heading is a button (expanded state announced); each lesson has its own done checkbox and an open button"
+            },
+            {
+              "keys": "Progress",
+              "action": "A labelled progress bar and 'N of M done' in text; the ring is decorative"
+            },
+            {
+              "keys": "Locked",
+              "action": "Disabled with the reason written beside the type, such as 'Quiz · Finish the project first'"
+            }
+          ],
+          "customization": [
+            "Lesson kinds: video, reading, quiz, project, each with its icon and word",
+            "Continue goes to the first lesson that is not done and not locked",
+            "The ring and the module bars fill with a short transition that is off for reduced motion"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "course-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton hero and module cards, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No lessons yet",
+            "example": "course-1-empty",
+            "trigger": "state=\"empty\" (or modules={[]})",
+            "note": "Says the first lessons are on their way; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "course-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying progress is safe, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "course-1-demo",
+          "course-1-new",
+          "course-1-complete",
+          "course-1-loading",
+          "course-1-empty",
+          "course-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/course-1"
+      }
+    },
+    {
+      "name": "course-1-demo",
+      "type": "registry:example",
+      "title": "Course 1: curriculum and progress: Partly done",
+      "description": "Partly done example of Course 1: curriculum and progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/course-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/course-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/course-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "course-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "course-1-new",
+      "type": "registry:example",
+      "title": "Course 1: curriculum and progress: Not started",
+      "description": "Not started example of Course 1: curriculum and progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/course-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/course-1-new.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/course-1-new.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "course-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "course-1-complete",
+      "type": "registry:example",
+      "title": "Course 1: curriculum and progress: Finished",
+      "description": "Finished example of Course 1: curriculum and progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/course-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/course-1-complete.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/course-1-complete.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "course-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "course-1-loading",
+      "type": "registry:example",
+      "title": "Course 1: curriculum and progress: Loading",
+      "description": "Loading example of Course 1: curriculum and progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/course-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/course-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/course-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "course-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "course-1-empty",
+      "type": "registry:example",
+      "title": "Course 1: curriculum and progress: No lessons yet",
+      "description": "No lessons yet example of Course 1: curriculum and progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/course-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/course-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/course-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "course-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "course-1-error",
+      "type": "registry:example",
+      "title": "Course 1: curriculum and progress: Could not load",
+      "description": "Could not load example of Course 1: curriculum and progress.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/course-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/course-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/course-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "course-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "cta-1",
       "type": "registry:block",
       "title": "CTA 1: framed call to action",
@@ -12369,6 +12627,262 @@
       }
     },
     {
+      "name": "experiments-1",
+      "type": "registry:block",
+      "title": "Experiments 1: A/B test results",
+      "description": "A/B test results with the statistics done: each variant's rate with its 95% confidence interval on one shared axis, lift, chance to beat the control, and a plain verdict: a winner, no clear difference, or more traffic needed.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/experiments-1/experiments-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/experiments-1/experiments-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "experiments"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "experiments",
+          "ab test",
+          "a/b testing",
+          "conversion",
+          "statistics",
+          "significance",
+          "confidence interval",
+          "growth",
+          "optimization"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A/B test results. <Experiments1 title hypothesis metric status variants={[{ id, name, visitors, conversions, control?: true }]} confidence={0.95} onShip={(variant) => ...} />. Pass raw counts: rates, Wilson 95% intervals, relative lift, chance to beat the control (normal approximation), a two-sided p-value and the verdict are worked out. The verdict is a winner (p below 1 minus confidence), a loser, 'not enough data' with the visitors still needed at 80% power, or 'no clear difference'.",
+          "whenToUse": [
+            "An experimentation or growth tool showing test results",
+            "A landing-page testing report"
+          ],
+          "whenNotToUse": [
+            "Plain KPI cards (use stats-1 or a dashboard block)",
+            "Many metrics over time (use a chart)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "funnel-1",
+            "settings-5"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Each Ship button; the verdict is a live region so a change in the data is announced"
+            },
+            {
+              "keys": "Intervals",
+              "action": "Every drawn interval has a text equivalent: the rate and the range it likely lies in"
+            },
+            {
+              "keys": "Winning",
+              "action": "Marked with a word and an icon as well as color; losses are written as lift in words, such as -4.2% vs control"
+            }
+          ],
+          "customization": [
+            "confidence: 0.8 to 0.99 sets how sure to be before calling a winner",
+            "The interval axis runs left to right in every language, like a chart",
+            "All statistics are deterministic, so server and client agree"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "experiments-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton verdict and variant rows under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No results yet",
+            "example": "experiments-1-empty",
+            "trigger": "state=\"empty\" (or variants={[]})",
+            "note": "Says results appear once visitors have seen the versions; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "experiments-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "experiments-1-demo",
+          "experiments-1-early",
+          "experiments-1-flat",
+          "experiments-1-loading",
+          "experiments-1-empty",
+          "experiments-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/experiments-1"
+      }
+    },
+    {
+      "name": "experiments-1-demo",
+      "type": "registry:example",
+      "title": "Experiments 1: A/B test results: A winner",
+      "description": "A winner example of Experiments 1: A/B test results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/experiments-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/experiments-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/experiments-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "experiments-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "experiments-1-early",
+      "type": "registry:example",
+      "title": "Experiments 1: A/B test results: Too early to tell",
+      "description": "Too early to tell example of Experiments 1: A/B test results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/experiments-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/experiments-1-early.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/experiments-1-early.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "experiments-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "experiments-1-flat",
+      "type": "registry:example",
+      "title": "Experiments 1: A/B test results: No difference",
+      "description": "No difference example of Experiments 1: A/B test results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/experiments-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/experiments-1-flat.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/experiments-1-flat.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "experiments-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "experiments-1-loading",
+      "type": "registry:example",
+      "title": "Experiments 1: A/B test results: Loading",
+      "description": "Loading example of Experiments 1: A/B test results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/experiments-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/experiments-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/experiments-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "experiments-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "experiments-1-empty",
+      "type": "registry:example",
+      "title": "Experiments 1: A/B test results: No results yet",
+      "description": "No results yet example of Experiments 1: A/B test results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/experiments-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/experiments-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/experiments-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "experiments-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "experiments-1-error",
+      "type": "registry:example",
+      "title": "Experiments 1: A/B test results: Could not load",
+      "description": "Could not load example of Experiments 1: A/B test results.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/experiments-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/experiments-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/experiments-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "experiments-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "faq-1",
       "type": "registry:block",
       "title": "FAQ 1: accordion with heading",
@@ -13738,6 +14252,237 @@
       "meta": {
         "example": true,
         "of": "forgot-password-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "funnel-1",
+      "type": "registry:block",
+      "title": "Funnel 1: conversion funnel",
+      "description": "A conversion funnel: bars sized against the first step, joined by connectors that narrow as people drop away, with share kept and people lost at each step, the biggest leak written out, a group switch and a panel for any chosen step.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/funnel-1/funnel-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/funnel-1/funnel-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "funnel"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "funnel",
+          "conversion",
+          "analytics",
+          "drop-off",
+          "checkout",
+          "growth",
+          "steps",
+          "dashboard",
+          "metrics"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A conversion funnel. <Funnel1 title description period='Last 30 days' segments={[{ id, label, steps: [{ id, name, count }] }]} locale />. Counts must be people who reached each step, first to last. Share of the first step, share kept from the step before, people lost, overall conversion and the biggest leak (the largest proportional drop) are worked out. A segment switch shows when there are two or more groups.",
+          "whenToUse": [
+            "Analytics for signup, onboarding or checkout flows",
+            "Showing where a growth experiment should focus"
+          ],
+          "whenNotToUse": [
+            "Results of an A/B test (use experiments-1)",
+            "Trends over time (use a chart)"
+          ],
+          "composesWith": [
+            "experiments-1",
+            "app-shell-1",
+            "dashboard-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Each step is a button that says its count, its share of the first step and of the step before; pressing it shows the same in a panel announced politely"
+            },
+            {
+              "keys": "Loss",
+              "action": "Written as 'N lost · 38%' beside the connector, and the biggest leak is a full sentence, not only a red outline"
+            },
+            {
+              "keys": "Group",
+              "action": "A labelled switch between groups, such as Everyone, Mobile and Desktop"
+            }
+          ],
+          "customization": [
+            "Bars use two theme colors blended by step",
+            "A step narrower than 6% of the first is drawn at 6% so it stays visible; its true share is written beside it",
+            "Connectors mirror in right-to-left"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "funnel-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton bars that narrow like the real funnel, under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No data yet",
+            "example": "funnel-1-empty",
+            "trigger": "state=\"empty\" (or segments={[]})",
+            "note": "Says the funnel appears once visitors move through the steps; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "funnel-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "funnel-1-demo",
+          "funnel-1-single",
+          "funnel-1-loading",
+          "funnel-1-empty",
+          "funnel-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/funnel-1"
+      }
+    },
+    {
+      "name": "funnel-1-demo",
+      "type": "registry:example",
+      "title": "Funnel 1: conversion funnel: Three groups",
+      "description": "Three groups example of Funnel 1: conversion funnel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/funnel-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/funnel-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/funnel-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "funnel-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "funnel-1-single",
+      "type": "registry:example",
+      "title": "Funnel 1: conversion funnel: One group, a step chosen",
+      "description": "One group, a step chosen example of Funnel 1: conversion funnel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/funnel-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/funnel-1-single.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/funnel-1-single.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "funnel-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "funnel-1-loading",
+      "type": "registry:example",
+      "title": "Funnel 1: conversion funnel: Loading",
+      "description": "Loading example of Funnel 1: conversion funnel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/funnel-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/funnel-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/funnel-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "funnel-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "funnel-1-empty",
+      "type": "registry:example",
+      "title": "Funnel 1: conversion funnel: No data yet",
+      "description": "No data yet example of Funnel 1: conversion funnel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/funnel-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/funnel-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/funnel-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "funnel-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "funnel-1-error",
+      "type": "registry:example",
+      "title": "Funnel 1: conversion funnel: Could not load",
+      "description": "Could not load example of Funnel 1: conversion funnel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/funnel-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/funnel-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/funnel-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "funnel-1",
         "tier": "free"
       }
     },
@@ -16682,6 +17427,240 @@
       }
     },
     {
+      "name": "locations-1",
+      "type": "registry:block",
+      "title": "Locations 1: finder on a world map",
+      "description": "A locations finder on a dotted world map: pressable pins, a searchable list, filters by type, and a card for the chosen place with address, contacts, directions and whether it is open now in its own time zone.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/dotted-map.json",
+        "https://ui.ballmac.com/r/match-highlight.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/locations-1/locations-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/locations-1/locations-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "locations"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "locations",
+          "store locator",
+          "offices",
+          "map",
+          "find us",
+          "stores",
+          "branches",
+          "opening hours",
+          "contact"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A locations finder. <Locations1 places={[{ id, name, kind: 'Office' | 'Store', city, country, address, lat, lng, utcOffset: 1, hours: { open: 9, close: 18, days: [1,2,3,4,5] }, phone, email }]} now='2026-10-19T10:42:00Z' defaultSelectedId onSelect />. Open now, closing and opening times are worked out from now, each utcOffset and hours (days default to Monday to Friday). Pass now yourself; the block never reads the clock. Pins are real buttons placed from lat and lng.",
+          "whenToUse": [
+            "A contact or find-us page for a business with several offices or shops",
+            "A store locator on a marketing site"
+          ],
+          "whenNotToUse": [
+            "One address with a map embed",
+            "Turn-by-turn routes or live traffic"
+          ],
+          "composesWith": [
+            "contact-1",
+            "footer-1",
+            "about-1",
+            "directory-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Search, type filter, each place in the list as one button (pressed when chosen), then the pins, which are the same places as buttons with their name and city"
+            },
+            {
+              "keys": "Open now",
+              "action": "Written as 'Open now · until 18:00' or 'Closed · opens 09:00', beside a dot, never by color alone"
+            },
+            {
+              "keys": "Links",
+              "action": "Phone, email and directions are real links; directions says it opens in a new tab"
+            }
+          ],
+          "customization": [
+            "Hours can be half hours (17.5) and any set of days",
+            "Phone numbers are shown left to right in right-to-left layouts, like any number",
+            "The map and its pins keep their geography in every language"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "locations-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton list and map under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No locations",
+            "example": "locations-1-empty",
+            "trigger": "state=\"empty\" (or places={[]})",
+            "note": "Says places appear when a shop or office opens; emptyState sets the copy. A search with no match says so with Clear."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "locations-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "locations-1-demo",
+          "locations-1-night",
+          "locations-1-loading",
+          "locations-1-empty",
+          "locations-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/locations-1"
+      }
+    },
+    {
+      "name": "locations-1-demo",
+      "type": "registry:example",
+      "title": "Locations 1: finder on a world map: Default",
+      "description": "Default example of Locations 1: finder on a world map.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/locations-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/locations-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/locations-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "locations-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "locations-1-night",
+      "type": "registry:example",
+      "title": "Locations 1: finder on a world map: Late evening in Europe",
+      "description": "Late evening in Europe example of Locations 1: finder on a world map.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/locations-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/locations-1-night.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/locations-1-night.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "locations-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "locations-1-loading",
+      "type": "registry:example",
+      "title": "Locations 1: finder on a world map: Loading",
+      "description": "Loading example of Locations 1: finder on a world map.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/locations-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/locations-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/locations-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "locations-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "locations-1-empty",
+      "type": "registry:example",
+      "title": "Locations 1: finder on a world map: No locations",
+      "description": "No locations example of Locations 1: finder on a world map.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/locations-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/locations-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/locations-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "locations-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "locations-1-error",
+      "type": "registry:example",
+      "title": "Locations 1: finder on a world map: Could not load",
+      "description": "Could not load example of Locations 1: finder on a world map.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/locations-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/locations-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/locations-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "locations-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "login-1",
       "type": "registry:block",
       "title": "Login 1: card with SSO and magic link",
@@ -18859,6 +19838,214 @@
       "meta": {
         "example": true,
         "of": "profile-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reviews-1",
+      "type": "registry:block",
+      "title": "Reviews 1: customer reviews",
+      "description": "Customer reviews: an average with a bar for each star count that also filters, sorting, a verified-only switch, review cards with Read more, helpful votes that count at once and business replies. All figures are worked out from the reviews.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/reviews-1/reviews-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/reviews-1/reviews-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "reviews"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "reviews",
+          "ratings",
+          "stars",
+          "customer feedback",
+          "testimonials",
+          "social proof",
+          "verified",
+          "product reviews"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "Customer reviews. <Reviews1 reviews={[{ id, author, rating: 1..5, title, body, date: '14 October 2026', iso: '2026-10-14', verified, helpful, context, reply: { from, body, date } }]} onWrite onHelpful={(review, helpful) => ...} />. The average, the bar for each star count and the percentage of 4 and 5 stars are worked out from the reviews. Clicking a bar filters by that star count.",
+          "whenToUse": [
+            "A product or service page with customer reviews",
+            "A reviews section under pricing or a store listing"
+          ],
+          "whenNotToUse": [
+            "A few hand-picked quotes (use testimonials-1 or testimonials-2)",
+            "A customer story with results (use casestudy-1)"
+          ],
+          "composesWith": [
+            "testimonials-1",
+            "pricing-1",
+            "faq-1",
+            "cta-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Star-count buttons (each says its count and whether it is on), the verified switch, sort menu, then per review Read more and Helpful"
+            },
+            {
+              "keys": "Stars",
+              "action": "Drawn stars are hidden from assistive technology and replaced by '4 out of 5 stars' in text"
+            },
+            {
+              "keys": "Count",
+              "action": "'Showing 4 of 8 reviews' is announced politely as filters change"
+            }
+          ],
+          "customization": [
+            "Sort options: most helpful, newest, highest and lowest rated",
+            "Read more appears for bodies over about 220 characters",
+            "A business reply sits under its review with a rule on the reading edge, so it mirrors in right-to-left"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "reviews-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton summary and review cards under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No reviews yet",
+            "example": "reviews-1-empty",
+            "trigger": "state=\"empty\" (or reviews={[]})",
+            "note": "Invites the first review, with a Write a review button when onWrite is given. Filters with no match say so in place."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "reviews-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "reviews-1-demo",
+          "reviews-1-loading",
+          "reviews-1-empty",
+          "reviews-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/reviews-1"
+      }
+    },
+    {
+      "name": "reviews-1-demo",
+      "type": "registry:example",
+      "title": "Reviews 1: customer reviews: Default",
+      "description": "Default example of Reviews 1: customer reviews.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reviews-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reviews-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reviews-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reviews-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reviews-1-loading",
+      "type": "registry:example",
+      "title": "Reviews 1: customer reviews: Loading",
+      "description": "Loading example of Reviews 1: customer reviews.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reviews-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reviews-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reviews-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reviews-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reviews-1-empty",
+      "type": "registry:example",
+      "title": "Reviews 1: customer reviews: No reviews yet",
+      "description": "No reviews yet example of Reviews 1: customer reviews.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reviews-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reviews-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reviews-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reviews-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reviews-1-error",
+      "type": "registry:example",
+      "title": "Reviews 1: customer reviews: Could not load",
+      "description": "Could not load example of Reviews 1: customer reviews.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reviews-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reviews-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reviews-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reviews-1",
         "tier": "free"
       }
     },

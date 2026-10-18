@@ -246,5 +246,9 @@
   {
     "prefix": "status-1",
     "reason": "The 90-day history bars run oldest to newest from left to right in every language, like a chart, and make up most of the page's elements."
+  },
+  {
+    "prefix": "experiments-1",
+    "reason": "The confidence-interval axes run from low to high rates left to right in every language, like a chart, and carry most of the page's elements."
   }
 ]
