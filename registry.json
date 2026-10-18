@@ -12627,6 +12627,142 @@
       }
     },
     {
+      "name": "event-1",
+      "type": "registry:block",
+      "title": "Event 1: agenda and my schedule",
+      "description": "An event page with its agenda: dates, venue and a countdown, the schedule by day with a filter per track, a star on each session to build your own schedule, a warning for overlaps, and a calendar file download.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/event-1/event-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/event-1/event-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "event"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "event",
+          "conference",
+          "agenda",
+          "schedule",
+          "sessions",
+          "speakers",
+          "tracks",
+          "calendar",
+          "ics",
+          "summit",
+          "meetup"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "An event agenda. <Event1 name tagline dates={['2026-11-12', '2026-11-13']} venue utcOffset={1} sessions={[{ id, day: '2026-11-12', start: '09:00', end: '09:45', title, track, room, speakers: [{ name, role }], description }]} now='2026-10-18T10:00:00Z' defaultSaved={['s1']} onSavedChange />. Days and tracks come from the sessions; overlaps among saved sessions are found for you; 'Add to my calendar' builds an .ics file in the browser using utcOffset. Pass now yourself; the block never reads the clock.",
+          "whenToUse": [
+            "A conference, meetup or webinar series page with a schedule",
+            "An internal offsite agenda"
+          ],
+          "whenNotToUse": [
+            "Ticket purchase (use a pricing block)",
+            "A month calendar of many events (use calendar-1)"
+          ],
+          "composesWith": [
+            "hero-1",
+            "pricing-1",
+            "faq-1",
+            "footer-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Left / Right on the day tabs",
+              "action": "Move between days (a tablist); the schedule below is the tab panel"
+            },
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Track buttons say whether they are on; each Save button says which session, and its pressed state"
+            },
+            {
+              "keys": "Overlap",
+              "action": "Written as a warning with the clashing session's name and times, not only a color; changes to your schedule are announced politely"
+            }
+          ],
+          "customization": [
+            "Sessions at the same time sit side by side in the list, ordered by title",
+            "utcOffset sets the time zone of the calendar file",
+            "Dates use the locale you pass"
+          ]
+        },
+        "statesNone": "Static content: nothing to load, submit or fail.",
+        "examples": [
+          "event-1-demo",
+          "event-1-saved"
+        ],
+        "url": "https://ui.ballmac.com/components/event-1"
+      }
+    },
+    {
+      "name": "event-1-demo",
+      "type": "registry:example",
+      "title": "Event 1: agenda and my schedule: Default",
+      "description": "Default example of Event 1: agenda and my schedule.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/event-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/event-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/event-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "event-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "event-1-saved",
+      "type": "registry:example",
+      "title": "Event 1: agenda and my schedule: A schedule with an overlap",
+      "description": "A schedule with an overlap example of Event 1: agenda and my schedule.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/event-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/event-1-saved.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/event-1-saved.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "event-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "experiments-1",
       "type": "registry:block",
       "title": "Experiments 1: A/B test results",
@@ -16226,6 +16362,233 @@
       }
     },
     {
+      "name": "import-1",
+      "type": "registry:block",
+      "title": "Import 1: CSV import with column matching",
+      "description": "A data import in four steps: choose a CSV, match its columns to your fields (found for you where names are alike), review which rows are ready and which have problems and why, then import with progress and a summary.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/progress.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/import-1/import-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/import-1/import-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "import"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "import",
+          "csv",
+          "spreadsheet",
+          "upload",
+          "column mapping",
+          "data migration",
+          "validation",
+          "bulk",
+          "contacts",
+          "wizard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A CSV importer. <Import1 fields={[{ key, label, required, aliases: ['e-mail'], validate: (value) => string | null }]} sampleCsv onImport={(rows, progress) => Promise} defaultStep />. Columns are matched by key, label and aliases; required fields must be matched; each row is checked for missing required values, validate() reasons and duplicate emails; only passing rows reach onImport, which can call progress(done). Reject onImport to show its message and keep the rows. Without onImport a run is simulated.",
+          "whenToUse": [
+            "Importing contacts, products or users from a spreadsheet",
+            "Migrating data from another tool"
+          ],
+          "whenNotToUse": [
+            "Uploading files of any kind (use upload-1)",
+            "Editing rows in place (use a data table)"
+          ],
+          "composesWith": [
+            "upload-1",
+            "app-shell-1",
+            "data-table"
+          ],
+          "a11y": [
+            {
+              "keys": "Steps",
+              "action": "An ordered list that marks the current step and each finished one in words; focus moves to the new step's heading"
+            },
+            {
+              "keys": "Matching",
+              "action": "Each field's menu is labelled with the field name and says (required); a sample of the matched values shows beside it"
+            },
+            {
+              "keys": "Review",
+              "action": "A real table with a caption; every row says Ready or lists its problems in words beside an icon, not only by color"
+            }
+          ],
+          "customization": [
+            "fields decide what can be imported, how it is checked and what other column names match it",
+            "A CSV reader handles quotes, commas and line breaks inside quotes",
+            "Choosing a file works by drag, click or the sample button, and a wrong file type says how to export a CSV"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "import-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton card under the real heading, announced as loading."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "import-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry). A failed import keeps you on the last step with your rows and a Try again button."
+          }
+        ],
+        "examples": [
+          "import-1-demo",
+          "import-1-match",
+          "import-1-review",
+          "import-1-loading",
+          "import-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/import-1"
+      }
+    },
+    {
+      "name": "import-1-demo",
+      "type": "registry:example",
+      "title": "Import 1: CSV import with column matching: Choose a file",
+      "description": "Choose a file example of Import 1: CSV import with column matching.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/import-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/import-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/import-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "import-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "import-1-match",
+      "type": "registry:example",
+      "title": "Import 1: CSV import with column matching: Match columns",
+      "description": "Match columns example of Import 1: CSV import with column matching.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/import-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/import-1-match.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/import-1-match.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "import-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "import-1-review",
+      "type": "registry:example",
+      "title": "Import 1: CSV import with column matching: Review with problems",
+      "description": "Review with problems example of Import 1: CSV import with column matching.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/import-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/import-1-review.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/import-1-review.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "import-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "import-1-loading",
+      "type": "registry:example",
+      "title": "Import 1: CSV import with column matching: Loading",
+      "description": "Loading example of Import 1: CSV import with column matching.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/import-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/import-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/import-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "import-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "import-1-error",
+      "type": "registry:example",
+      "title": "Import 1: CSV import with column matching: Could not load",
+      "description": "Could not load example of Import 1: CSV import with column matching.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/import-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/import-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/import-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "import-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "inbox-1",
       "type": "registry:block",
       "title": "Inbox 1: notifications page",
@@ -16941,6 +17304,232 @@
       "meta": {
         "example": true,
         "of": "invite-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "invoice-1",
+      "type": "registry:block",
+      "title": "Invoice 1: invoice you can pay",
+      "description": "An invoice you can read, print and pay: parties, dates and line items, totals worked out from the lines, a status from the dates (paid, due in N days, overdue by N days) and a Pay now that handles waiting and failure.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/invoice-1/invoice-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/invoice-1/invoice-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "invoice"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "invoice",
+          "billing",
+          "payment",
+          "receipt",
+          "bill",
+          "line items",
+          "tax",
+          "pay now",
+          "print",
+          "accounting"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "An invoice. <Invoice1 invoice={{ number, issued, due, paidOn, from: { name, lines }, to: { name, lines }, lines: [{ id, description, detail, quantity, unitPrice }], discountPercent, taxPercent, note, paymentDetails: [{ label, value }] }} today='2026-10-18' currency='USD' locale onPay={() => Promise} onDownload />. Subtotal, discount, tax and total are worked out from the lines; status is paid (paidOn set or payment succeeded), overdue by N days, or due in N days, from due and today. Pass today yourself; the block never reads the clock. Reject onPay to show its message.",
+          "whenToUse": [
+            "A customer-facing invoice page or a payment link",
+            "An invoice detail in a billing area"
+          ],
+          "whenNotToUse": [
+            "A list of invoices (use a data table)",
+            "Changing plans with proration (use billing-2)"
+          ],
+          "composesWith": [
+            "billing-1",
+            "billing-2",
+            "app-shell-1",
+            "settings-5"
+          ],
+          "a11y": [
+            {
+              "keys": "Status",
+              "action": "A live region that says Paid on a date, Due in N days, or Overdue by N days, with an icon, not only color"
+            },
+            {
+              "keys": "Table",
+              "action": "The items are a real table with a caption and column headers; totals are a description list"
+            },
+            {
+              "keys": "Pay now",
+              "action": "The button says the amount and shows Paying while busy; a failure is an alert that says no charge was made"
+            }
+          ],
+          "customization": [
+            "currency and locale format every amount and date",
+            "Print hides the buttons and the card border",
+            "Bank details are shown left to right in right-to-left layouts, like any number"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "invoice-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton sheet announced as loading."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "invoice-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry). A failed payment says you were not charged, in place beside Pay now."
+          }
+        ],
+        "examples": [
+          "invoice-1-demo",
+          "invoice-1-due",
+          "invoice-1-paid",
+          "invoice-1-loading",
+          "invoice-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/invoice-1"
+      }
+    },
+    {
+      "name": "invoice-1-demo",
+      "type": "registry:example",
+      "title": "Invoice 1: invoice you can pay: Overdue",
+      "description": "Overdue example of Invoice 1: invoice you can pay.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/invoice-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/invoice-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/invoice-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "invoice-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "invoice-1-due",
+      "type": "registry:example",
+      "title": "Invoice 1: invoice you can pay: Due soon, with tax",
+      "description": "Due soon, with tax example of Invoice 1: invoice you can pay.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/invoice-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/invoice-1-due.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/invoice-1-due.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "invoice-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "invoice-1-paid",
+      "type": "registry:example",
+      "title": "Invoice 1: invoice you can pay: Paid",
+      "description": "Paid example of Invoice 1: invoice you can pay.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/invoice-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/invoice-1-paid.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/invoice-1-paid.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "invoice-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "invoice-1-loading",
+      "type": "registry:example",
+      "title": "Invoice 1: invoice you can pay: Loading",
+      "description": "Loading example of Invoice 1: invoice you can pay.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/invoice-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/invoice-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/invoice-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "invoice-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "invoice-1-error",
+      "type": "registry:example",
+      "title": "Invoice 1: invoice you can pay: Could not load",
+      "description": "Could not load example of Invoice 1: invoice you can pay.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/invoice-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/invoice-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/invoice-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "invoice-1",
         "tier": "free"
       }
     },
@@ -19838,6 +20427,395 @@
       "meta": {
         "example": true,
         "of": "profile-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "quiz-1",
+      "type": "registry:block",
+      "title": "Quiz 1: questions with feedback",
+      "description": "A short quiz: one question at a time with progress, single or multiple answers, instant right or wrong with the reason, locked once checked, then a score against the pass mark with a review of every question and a retake.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/quiz-1/quiz-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/quiz-1/quiz-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "quiz"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "quiz",
+          "questions",
+          "test",
+          "exam",
+          "assessment",
+          "learning",
+          "score",
+          "pass mark",
+          "trivia",
+          "knowledge check"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A quiz. <Quiz1 title questions={[{ id, prompt, options: [{ id, text }], answer: 'b' | ['a', 'd'], explanation }]} passMark={0.7} onComplete={({ score, total, passed, answers }) => ...} />. An answer array means choose all that apply (checkboxes); one id means radio buttons. Answers lock once checked. The result shows the score ring, pass or fail, and every question with what you chose when you were wrong.",
+          "whenToUse": [
+            "A knowledge check at the end of a lesson",
+            "A quick assessment or onboarding quiz"
+          ],
+          "whenNotToUse": [
+            "Collecting opinions (use survey-1)",
+            "Timed exams with proctoring"
+          ],
+          "composesWith": [
+            "course-1",
+            "onboarding-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys / Space",
+              "action": "Options are real radio buttons or checkboxes; the group is named 'Choose one answer' or 'Choose all the answers that apply'"
+            },
+            {
+              "keys": "Checking",
+              "action": "The result is announced politely ('That is right' or 'Not quite' with the reason), and the correct and wrong options say so in words"
+            },
+            {
+              "keys": "Next",
+              "action": "Focus moves to the new question's heading, or to the result heading at the end"
+            }
+          ],
+          "customization": [
+            "passMark sets the share needed",
+            "onComplete fires once, after the last answer is checked",
+            "Checked answers cannot be changed, so the review reflects what the person chose"
+          ]
+        },
+        "statesNone": "Self-contained: it holds its own answers and has nothing to load, submit or fail.",
+        "examples": [
+          "quiz-1-demo",
+          "quiz-1-score",
+          "quiz-1-empty"
+        ],
+        "url": "https://ui.ballmac.com/components/quiz-1"
+      }
+    },
+    {
+      "name": "quiz-1-demo",
+      "type": "registry:example",
+      "title": "Quiz 1: questions with feedback: First question",
+      "description": "First question example of Quiz 1: questions with feedback.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/quiz-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/quiz-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/quiz-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "quiz-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "quiz-1-score",
+      "type": "registry:example",
+      "title": "Quiz 1: questions with feedback: Result, failed",
+      "description": "Result, failed example of Quiz 1: questions with feedback.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/quiz-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/quiz-1-score.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/quiz-1-score.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "quiz-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "quiz-1-empty",
+      "type": "registry:example",
+      "title": "Quiz 1: questions with feedback: No questions",
+      "description": "No questions example of Quiz 1: questions with feedback.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/quiz-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/quiz-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/quiz-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "quiz-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "retention-1",
+      "type": "registry:block",
+      "title": "Retention 1: cohort heatmap",
+      "description": "A cohort retention table as a heatmap: rows of people who started together, columns of later periods, each cell tinted by the share still active, with headline numbers, percent or people, a keyboard grid and a size-weighted average row.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/retention-1/retention-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/retention-1/retention-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "retention"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "retention",
+          "cohorts",
+          "heatmap",
+          "churn",
+          "analytics",
+          "engagement",
+          "growth",
+          "dashboard",
+          "cohort analysis"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A cohort retention heatmap. <Retention1 cohorts={[{ id, label: 'Week of 3 August', size: 1420, retention: [100, 64, 51, ...] }]} period='Week' locale />. retention is the percent still active in each period starting at period 0; newer cohorts have fewer entries. The average row weights each period by cohort size and only counts cohorts old enough to reach it. Headline numbers (period 1, period 4, trend) are worked out from the table.",
+          "whenToUse": [
+            "Product analytics: do people come back?",
+            "Comparing the quality of signups week by week"
+          ],
+          "whenNotToUse": [
+            "A step-by-step conversion path (use funnel-1)",
+            "A trend line of one metric (use a chart)"
+          ],
+          "composesWith": [
+            "funnel-1",
+            "experiments-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, then arrow keys, Home and End",
+              "action": "The table is a grid with one tab stop; each cell is read as the cohort, the period, the percent and the number of people"
+            },
+            {
+              "keys": "Selection",
+              "action": "A sentence under the table says how the chosen cell compares with the average, announced politely"
+            },
+            {
+              "keys": "Color",
+              "action": "Every cell shows its number; the tint is only an extra cue"
+            }
+          ],
+          "customization": [
+            "period: Week, Month or Day names the columns",
+            "Percent or People switch shows counts instead of shares",
+            "The table scrolls sideways on a phone and keeps its left-to-right order in every language, like a chart"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "retention-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton stat cards and table under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No cohorts yet",
+            "example": "retention-1-empty",
+            "trigger": "state=\"empty\" (or cohorts={[]})",
+            "note": "Says retention appears once people have started and a full period has passed; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "retention-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "retention-1-demo",
+          "retention-1-monthly",
+          "retention-1-loading",
+          "retention-1-empty",
+          "retention-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/retention-1"
+      }
+    },
+    {
+      "name": "retention-1-demo",
+      "type": "registry:example",
+      "title": "Retention 1: cohort heatmap: Weekly cohorts",
+      "description": "Weekly cohorts example of Retention 1: cohort heatmap.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/retention-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/retention-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/retention-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "retention-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "retention-1-monthly",
+      "type": "registry:example",
+      "title": "Retention 1: cohort heatmap: Monthly, people",
+      "description": "Monthly, people example of Retention 1: cohort heatmap.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/retention-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/retention-1-monthly.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/retention-1-monthly.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "retention-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "retention-1-loading",
+      "type": "registry:example",
+      "title": "Retention 1: cohort heatmap: Loading",
+      "description": "Loading example of Retention 1: cohort heatmap.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/retention-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/retention-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/retention-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "retention-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "retention-1-empty",
+      "type": "registry:example",
+      "title": "Retention 1: cohort heatmap: No cohorts yet",
+      "description": "No cohorts yet example of Retention 1: cohort heatmap.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/retention-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/retention-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/retention-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "retention-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "retention-1-error",
+      "type": "registry:example",
+      "title": "Retention 1: cohort heatmap: Could not load",
+      "description": "Could not load example of Retention 1: cohort heatmap.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/retention-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/retention-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/retention-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "retention-1",
         "tier": "free"
       }
     },

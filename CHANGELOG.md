@@ -2,6 +2,16 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
+## 2026-10-18: A retention heatmap, a CSV importer, an event agenda, a quiz and an invoice
+
+- Retention 1, cohort heatmap: rows of people who started together, columns of later periods, each cell tinted by the share still active, three headline numbers (period 1, period 4, trend) and a size-weighted average row that only counts cohorts old enough. The table is a keyboard grid (arrows, Home and End) that reads each cell as the cohort, the period, the percent and the number of people, and a sentence says how the chosen cell compares with the average. A Percent or People switch changes the cells
+- Import 1, CSV import: choose a file by drag, click or a sample, match its columns to your fields (found for you by name and alias; required fields must be matched), review which rows are ready and which have problems and why (missing values, bad emails and phones, duplicate emails), then import with progress and a summary. A failed import keeps you on the last step with the rows intact. The CSV reader handles quoted fields with commas and line breaks
+- Event 1, event agenda: dates, venue and a days-to-go count, the schedule by day (a tablist with arrow keys) with a filter for each track, a Save star on every session, a warning that names the other session when two of yours overlap, and one press to download your schedule as a calendar file with the venue's time zone
+- Quiz 1, quiz: one question at a time with progress, radio buttons or checkboxes (one answer or choose all that apply), instant right or wrong with the reason, answers locked once checked, then the score against the pass mark with a review of every question and what you chose when wrong, and a retake. Focus moves to each new question
+- Invoice 1, invoice you can pay: parties, dates and line items; subtotal, discount, tax and total worked out from the lines; a status from the dates and the day you pass (Paid on a date, Due in N days, Overdue by N days); print and download; and Pay now that shows Paying and, on failure, says you were not charged. Bank details are shown left to right in right-to-left layouts
+- Five new block groups: Invoices, Data import, Retention, Events and Quizzes, also found by the MCP server for receipt, csv, mapping, cohort, churn, agenda, test and exam
+- All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the left-to-right cohort grid in Retention 1, right to left, and ship their tests
+
 ## 2026-10-18: Customer reviews, A/B test results, a conversion funnel, a locations finder and a course page
 
 - Reviews 1, customer reviews: an average with a bar for each star count that also filters, sorting (most helpful, newest, highest, lowest), a verified-only switch, review cards with Read more, helpful votes that count at once and can be taken back, and replies from the business. The average, every bar and the share of 4 and 5 stars are worked out from the reviews, and the drawn stars are replaced by '4 out of 5 stars' for screen readers

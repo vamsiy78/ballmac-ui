@@ -184,6 +184,11 @@ export const blockCategoryLabels: Record<string, string> = {
   funnel: "Funnel",
   experiments: "Experiments",
   course: "Courses",
+  invoice: "Invoices",
+  import: "Data import",
+  retention: "Retention",
+  event: "Events",
+  quiz: "Quizzes",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -192,7 +197,7 @@ export const blockGroups = [
     id: "marketing",
     label: "Marketing",
     description: "Sections for landing pages: heroes, features, pricing, proof and calls to action.",
-    categories: ["header", "hero", "features", "integrations", "stats", "logo-cloud", "testimonials", "reviews", "casestudy", "team", "comparison", "pricing", "calculator", "faq", "cta", "waitlist", "newsletter", "footer"],
+    categories: ["header", "hero", "features", "integrations", "stats", "logo-cloud", "testimonials", "reviews", "casestudy", "team", "comparison", "pricing", "calculator", "event", "faq", "cta", "waitlist", "newsletter", "footer"],
   },
   {
     id: "content",
@@ -210,7 +215,7 @@ export const blockGroups = [
     id: "application",
     label: "Application",
     description: "Screens inside a product: shell, dashboards, settings, billing, inbox, notifications, team chat, boards, uploads, developer tools, AI chat and AI agents.",
-    categories: ["app-shell", "dashboard", "funnel", "experiments", "settings", "billing", "mail", "notifications", "chat", "kanban", "tasks", "calendar", "gantt", "survey", "upload", "developer", "leaderboard", "ai-chat", "agents"],
+    categories: ["app-shell", "dashboard", "funnel", "retention", "experiments", "settings", "billing", "invoice", "mail", "notifications", "chat", "kanban", "tasks", "calendar", "gantt", "survey", "quiz", "upload", "import", "developer", "leaderboard", "ai-chat", "agents"],
   },
   {
     id: "shop",
