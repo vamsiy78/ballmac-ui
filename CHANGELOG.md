@@ -2,6 +2,16 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
+## 2026-10-18: A support ticket, a webhooks manager, feature flags, an automation builder and an API explorer
+
+- Tickets 1, support ticket: the conversation with customer messages, replies and private notes (dashed, tinted and labelled in words so a note is never mistaken for a reply), a reply timer that says how long is left or how late you are, a composer that switches between Reply and Internal note with canned replies and a keyboard shortcut, and a side panel with the customer, assignee, status and priority. A message that fails to send stays in the thread with Not sent and Retry
+- Webhooks 1, webhooks manager: endpoints with a health worked out from their last ten deliveries (Healthy, Some failing, Failing, Disabled), the chosen one's masked signing secret and events, a delivery log with status codes, timing and attempts, the payload and what the endpoint answered for each delivery with Send again, and an add dialog that checks the address is https and an event is chosen
+- Flags 1, feature flags manager: a switch for each environment, a production rollout slider that applies only on Save, who gets it first, flags fully on for months marked ready to remove, a confirmation that says exactly who is affected before changing Production, and a change that fails to save put back with the reason
+- Workflow 1, automation builder: a trigger and a vertical flow of conditions, waits and actions you add, reorder and delete, each opening to its settings, and a test run that shows every step as ran fine, or where and why a condition stopped it. The whole automation switches on and off, and every edit reports the full list of steps
+- API 1, API explorer: a method, an address, headers and a JSON body; the answer with its status in words, time and size and the body as a tree; a broken body or address caught before sending with the reason; a history that restores past requests; Copy as cURL; and a built-in demo API so it works with no server
+- Five new block groups: Support tickets, Webhooks, Feature flags, Automation and API explorer, also found by the MCP server for helpdesk, sla, rollout, trigger, postman and explorer
+- All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the code inside Webhooks 1 and API 1, right to left, and ship their tests
+
 ## 2026-10-18: A retention heatmap, a CSV importer, an event agenda, a quiz and an invoice
 
 - Retention 1, cohort heatmap: rows of people who started together, columns of later periods, each cell tinted by the share still active, three headline numbers (period 1, period 4, trend) and a size-weighted average row that only counts cohorts old enough. The table is a keyboard grid (arrows, Home and End) that reads each cell as the cohort, the period, the percent and the number of people, and a sentence says how the chosen cell compares with the average. A Percent or People switch changes the cells

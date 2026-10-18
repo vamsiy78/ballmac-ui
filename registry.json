@@ -6477,6 +6477,237 @@
       }
     },
     {
+      "name": "api-1",
+      "type": "registry:block",
+      "title": "API 1: request explorer",
+      "description": "An API explorer: a method, an address, headers and a JSON body, then the answer with its status in words, time and size and the body as a tree; a broken body is caught before sending, with history and Copy as cURL.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/json-viewer.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/api-1/api-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/api-1/api-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "api"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "api",
+          "request",
+          "http",
+          "rest",
+          "postman",
+          "playground",
+          "curl",
+          "developer",
+          "docs",
+          "explorer",
+          "json"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "An API explorer. <Api1 title defaultRequest={{ method: 'POST', url, headers: [{ id, key, value }], body }} defaultResponse onSend={(request) => Promise<{ status, statusText, ms, headers, body }>} />. Send is disabled while the address is not a full https URL or a body is not valid JSON, and says why. Every send is added to a history of six. Copy as cURL builds the command from the current request. Without onSend a built-in demo API for /v1/users answers (401 without an Authorization header, 200, 201, 404, 422).",
+          "whenToUse": [
+            "API documentation with a try-it panel",
+            "A developer dashboard where customers test their keys"
+          ],
+          "whenNotToUse": [
+            "Showing one endpoint's reference (use api-endpoint)",
+            "Watching live traffic (use log-stream)"
+          ],
+          "composesWith": [
+            "dev-1",
+            "webhooks-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter",
+              "action": "Method menu, address, then Send; pressing Enter in the address sends. Header rows are labelled by position and each has a Remove button"
+            },
+            {
+              "keys": "Validation",
+              "action": "A bad address or broken JSON is an alert that says what is wrong and why Send is off"
+            },
+            {
+              "keys": "Response",
+              "action": "The panel is a polite live region that reads the status in words, such as '404 Not Found', with time and size"
+            }
+          ],
+          "customization": [
+            "Addresses, headers and bodies are shown left to right in right-to-left layouts, like code",
+            "History restores a past request into the form",
+            "Methods without a body (GET, DELETE) hide the body field and say so"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "api-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton request bar and panel under the real heading, announced as loading. While a request is in flight the response panel shows a skeleton and the page is marked busy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "api-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry). A request that gets no answer shows 'No response' with the reason in the response panel."
+          }
+        ],
+        "examples": [
+          "api-1-demo",
+          "api-1-created",
+          "api-1-notfound",
+          "api-1-loading",
+          "api-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/api-1"
+      }
+    },
+    {
+      "name": "api-1-demo",
+      "type": "registry:example",
+      "title": "API 1: request explorer: Ready to send",
+      "description": "Ready to send example of API 1: request explorer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/api-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/api-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/api-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "api-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "api-1-created",
+      "type": "registry:example",
+      "title": "API 1: request explorer: A POST answered 201",
+      "description": "A POST answered 201 example of API 1: request explorer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/api-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/api-1-created.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/api-1-created.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "api-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "api-1-notfound",
+      "type": "registry:example",
+      "title": "API 1: request explorer: An error answer",
+      "description": "An error answer example of API 1: request explorer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/api-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/api-1-notfound.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/api-1-notfound.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "api-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "api-1-loading",
+      "type": "registry:example",
+      "title": "API 1: request explorer: Loading",
+      "description": "Loading example of API 1: request explorer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/api-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/api-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/api-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "api-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "api-1-error",
+      "type": "registry:example",
+      "title": "API 1: request explorer: Could not load",
+      "description": "Could not load example of API 1: request explorer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/api-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/api-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/api-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "api-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "app-shell-1",
       "type": "registry:block",
       "title": "App Shell 1: collapsible sidebar with command menu",
@@ -13952,6 +14183,243 @@
       "meta": {
         "example": true,
         "of": "features-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "flags-1",
+      "type": "registry:block",
+      "title": "Flags 1: feature flags manager",
+      "description": "A feature flags manager: a switch per environment, a production rollout slider, flags fully on for months marked ready to remove, a confirmation before changing production, and failed saves undone with the reason.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/match-highlight.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/slider.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/return-focus.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/flags-1/flags-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/flags-1/flags-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "flags"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "feature flags",
+          "toggles",
+          "rollout",
+          "release",
+          "environments",
+          "launchdarkly",
+          "experiments",
+          "developer",
+          "production"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A feature flags manager. <Flags1 flags={[{ id, key: 'checkout-v2', description, enabled: { dev, staging, production }, rollout: 0..100, rules: 'Staff, and the Beta group', owner, changedDays }]} onChange={(flag) => Promise} />. A flag is 'Ready to remove' when it is on in production at 100% and unchanged for 90 days or more. Changing Production asks first and says who it affects; other environments change at once. Reject onChange and the flag goes back with the message. Rollout moves in steps of 5 and needs Save.",
+          "whenToUse": [
+            "An internal tool for releasing features gradually",
+            "A settings area of a developer product with flags or toggles per environment"
+          ],
+          "whenNotToUse": [
+            "A user's own preference switches (use settings-1)",
+            "A/B test results (use experiments-1)"
+          ],
+          "composesWith": [
+            "experiments-1",
+            "webhooks-1",
+            "dev-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Space",
+              "action": "Each switch is named for the flag and the environment ('checkout-v2 in Production'); the row's expand button says whether it is open"
+            },
+            {
+              "keys": "Production changes",
+              "action": "An alert dialog says exactly who is affected and returns focus to the switch you used when it closes"
+            },
+            {
+              "keys": "Rollout",
+              "action": "A labelled slider in steps of 5 with the value read aloud; nothing is applied until Save rollout"
+            }
+          ],
+          "customization": [
+            "Keys and descriptions are highlighted when they match the search",
+            "The filter buttons show how many flags each one holds, across all flags",
+            "Keys are shown left to right in right-to-left layouts, like code"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "flags-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton rows under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No flags yet",
+            "example": "flags-1-empty",
+            "trigger": "state=\"empty\" (or flags={[]})",
+            "note": "Explains what a flag is; emptyState sets the copy and can add a button. A search with no match says so with Clear filters."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "flags-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A change that fails to save is undone with its message under the flag."
+          }
+        ],
+        "examples": [
+          "flags-1-demo",
+          "flags-1-open",
+          "flags-1-loading",
+          "flags-1-empty",
+          "flags-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/flags-1"
+      }
+    },
+    {
+      "name": "flags-1-demo",
+      "type": "registry:example",
+      "title": "Flags 1: feature flags manager: Default",
+      "description": "Default example of Flags 1: feature flags manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/flags-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/flags-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/flags-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "flags-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "flags-1-open",
+      "type": "registry:example",
+      "title": "Flags 1: feature flags manager: A rollout open",
+      "description": "A rollout open example of Flags 1: feature flags manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/flags-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/flags-1-open.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/flags-1-open.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "flags-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "flags-1-loading",
+      "type": "registry:example",
+      "title": "Flags 1: feature flags manager: Loading",
+      "description": "Loading example of Flags 1: feature flags manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/flags-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/flags-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/flags-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "flags-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "flags-1-empty",
+      "type": "registry:example",
+      "title": "Flags 1: feature flags manager: No flags yet",
+      "description": "No flags yet example of Flags 1: feature flags manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/flags-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/flags-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/flags-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "flags-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "flags-1-error",
+      "type": "registry:example",
+      "title": "Flags 1: feature flags manager: Could not load",
+      "description": "Could not load example of Flags 1: feature flags manager.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/flags-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/flags-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/flags-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "flags-1",
         "tier": "free"
       }
     },
@@ -24250,6 +24718,266 @@
       }
     },
     {
+      "name": "tickets-1",
+      "type": "registry:block",
+      "title": "Tickets 1: support ticket",
+      "description": "One support ticket as an agent sees it: replies and private notes, a reply timer, a composer that switches between Reply and Internal note with canned replies, and a side panel for the customer, assignee, status and priority.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/tickets-1/tickets-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/tickets-1/tickets-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "tickets"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "tickets",
+          "support",
+          "helpdesk",
+          "customer service",
+          "conversation",
+          "sla",
+          "internal notes",
+          "canned replies",
+          "inbox"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A support ticket. <Tickets1 ticket={{ id, number, subject, status: 'open' | 'pending' | 'solved', priority: 'low' | 'normal' | 'high' | 'urgent', assignee, tags, replyDueAt: ISO, requester: { name, email, plan, location, since }, messages: [{ id, from: 'customer' | 'agent' | 'note', author, time, body }] }} agents cannedReplies now='2026-10-18T10:42:00Z' me onSend={({ kind: 'reply' | 'note', body }) => Promise} onStatusChange onPriorityChange onAssign />. The reply timer shows only while the last message is from the customer; it says time left, or how late. A sent reply sets the status to Waiting on customer. Reject onSend and the message stays with Retry. Pass now yourself; the block never reads the clock.",
+          "whenToUse": [
+            "A helpdesk or support tool's ticket view",
+            "An internal request or approval thread with private notes"
+          ],
+          "whenNotToUse": [
+            "A live chat widget (use chat-1)",
+            "A public help center (use help-1)"
+          ],
+          "composesWith": [
+            "inbox-1",
+            "app-shell-1",
+            "help-1",
+            "directory-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Ctrl or Command + Enter",
+              "action": "Reply and Internal note are tabs; the composer sends with the button or the shortcut, and the field is named for what it will do"
+            },
+            {
+              "keys": "Notes",
+              "action": "Private notes are dashed, tinted and say 'Internal note, only your team sees this' in words, so they are never mistaken for a reply"
+            },
+            {
+              "keys": "Timer",
+              "action": "'Reply due in 48 min' or 'Reply is 35 min late' is a live region with an icon, not only a color"
+            }
+          ],
+          "customization": [
+            "Messages you send appear at once with Sending, then settle; a failure shows Not sent and Retry in place",
+            "Canned replies insert into the draft without replacing it",
+            "Your messages sit on the reading end and mirror in right-to-left"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "tickets-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton conversation and side panel, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Ticket not found",
+            "example": "tickets-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says the ticket may have been merged or deleted; emptyState sets the copy and can add a link back."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "tickets-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A message that fails to send stays in the thread with Not sent and Retry."
+          }
+        ],
+        "examples": [
+          "tickets-1-demo",
+          "tickets-1-late",
+          "tickets-1-failed",
+          "tickets-1-loading",
+          "tickets-1-empty",
+          "tickets-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/tickets-1"
+      }
+    },
+    {
+      "name": "tickets-1-demo",
+      "type": "registry:example",
+      "title": "Tickets 1: support ticket: A reply is due",
+      "description": "A reply is due example of Tickets 1: support ticket.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tickets-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tickets-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tickets-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tickets-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tickets-1-late",
+      "type": "registry:example",
+      "title": "Tickets 1: support ticket: Reply is late",
+      "description": "Reply is late example of Tickets 1: support ticket.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tickets-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tickets-1-late.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tickets-1-late.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tickets-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tickets-1-failed",
+      "type": "registry:example",
+      "title": "Tickets 1: support ticket: A message that failed",
+      "description": "A message that failed example of Tickets 1: support ticket.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tickets-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tickets-1-failed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tickets-1-failed.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tickets-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tickets-1-loading",
+      "type": "registry:example",
+      "title": "Tickets 1: support ticket: Loading",
+      "description": "Loading example of Tickets 1: support ticket.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tickets-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tickets-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tickets-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tickets-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tickets-1-empty",
+      "type": "registry:example",
+      "title": "Tickets 1: support ticket: Ticket not found",
+      "description": "Ticket not found example of Tickets 1: support ticket.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tickets-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tickets-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tickets-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tickets-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tickets-1-error",
+      "type": "registry:example",
+      "title": "Tickets 1: support ticket: Could not load",
+      "description": "Could not load example of Tickets 1: support ticket.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tickets-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tickets-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tickets-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tickets-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "trust-1",
       "type": "registry:block",
       "title": "Trust 1: security and trust center",
@@ -25119,6 +25847,482 @@
       "meta": {
         "example": true,
         "of": "waitlist-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "webhooks-1",
+      "type": "registry:block",
+      "title": "Webhooks 1: endpoints and deliveries",
+      "description": "A webhooks manager: endpoints with health from recent deliveries, signing secret and events, a delivery log with status codes and timing, payload and response per delivery with Send again, and an add dialog that validates.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/json-viewer.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/return-focus.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/webhooks-1/webhooks-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/webhooks-1/webhooks-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "webhooks"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "webhooks",
+          "events",
+          "endpoints",
+          "deliveries",
+          "developer",
+          "integrations",
+          "api",
+          "retry",
+          "signing secret",
+          "logs"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A webhooks manager. <Webhooks1 endpoints={[{ id, url, enabled, events: ['order.paid'], secret, deliveries: [{ id, event, status: 200 | 500 | 0 /* no reply */, ms, time, attempt, payload, response }] }]} availableEvents onCreate={({ url, events }) => Promise} onToggle onResend={(endpoint, delivery) => Promise} defaultSelectedId defaultOpenDeliveryId />. Health (Healthy 90% or more, Some failing 50% or more, Failing, Disabled) is worked out from each endpoint's last ten deliveries. Adding requires an https URL and at least one event. Reject onCreate or onResend to show the message in place.",
+          "whenToUse": [
+            "The developer settings of an API or SaaS product",
+            "Debugging why events did not arrive"
+          ],
+          "whenNotToUse": [
+            "A single webhook status tile (use webhook-card)",
+            "Raw logs of everything (use log-stream)"
+          ],
+          "composesWith": [
+            "dev-1",
+            "settings-4",
+            "settings-5",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Each endpoint is one button (pressed when chosen); each delivery row is a button that says whether it is expanded"
+            },
+            {
+              "keys": "Status",
+              "action": "Health and every delivery status are written (Healthy, Failing, 500, No reply) beside an icon, never by color alone"
+            },
+            {
+              "keys": "Secret",
+              "action": "Hidden by default with a Show button that says its state; Copy confirms in text. The add dialog returns focus to its button"
+            }
+          ],
+          "customization": [
+            "Addresses, secrets and event names are shown left to right in right-to-left layouts, like any code",
+            "Health looks at the last ten deliveries, newest first",
+            "Send again reports success or failure under the delivery that was resent"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "webhooks-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton list and panel under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No endpoints",
+            "example": "webhooks-1-empty",
+            "trigger": "state=\"empty\" (or endpoints={[]})",
+            "note": "Explains what an endpoint is and offers Add an endpoint; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "webhooks-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A failed Send again and a failed add show their message in place."
+          }
+        ],
+        "examples": [
+          "webhooks-1-demo",
+          "webhooks-1-failing",
+          "webhooks-1-loading",
+          "webhooks-1-empty",
+          "webhooks-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/webhooks-1"
+      }
+    },
+    {
+      "name": "webhooks-1-demo",
+      "type": "registry:example",
+      "title": "Webhooks 1: endpoints and deliveries: A healthy endpoint",
+      "description": "A healthy endpoint example of Webhooks 1: endpoints and deliveries.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/webhooks-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/webhooks-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/webhooks-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "webhooks-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "webhooks-1-failing",
+      "type": "registry:example",
+      "title": "Webhooks 1: endpoints and deliveries: A failing delivery open",
+      "description": "A failing delivery open example of Webhooks 1: endpoints and deliveries.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/webhooks-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/webhooks-1-failing.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/webhooks-1-failing.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "webhooks-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "webhooks-1-loading",
+      "type": "registry:example",
+      "title": "Webhooks 1: endpoints and deliveries: Loading",
+      "description": "Loading example of Webhooks 1: endpoints and deliveries.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/webhooks-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/webhooks-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/webhooks-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "webhooks-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "webhooks-1-empty",
+      "type": "registry:example",
+      "title": "Webhooks 1: endpoints and deliveries: No endpoints",
+      "description": "No endpoints example of Webhooks 1: endpoints and deliveries.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/webhooks-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/webhooks-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/webhooks-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "webhooks-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "webhooks-1-error",
+      "type": "registry:example",
+      "title": "Webhooks 1: endpoints and deliveries: Could not load",
+      "description": "Could not load example of Webhooks 1: endpoints and deliveries.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/webhooks-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/webhooks-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/webhooks-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "webhooks-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workflow-1",
+      "type": "registry:block",
+      "title": "Workflow 1: automation builder",
+      "description": "An automation builder as a vertical flow: a trigger, then conditions, waits and actions you add, reorder and delete, each opening to its settings, and a test run that shows every step as done or where a condition stopped it.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/workflow-1/workflow-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/workflow-1/workflow-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "workflow"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "workflow",
+          "automation",
+          "trigger",
+          "conditions",
+          "actions",
+          "zapier",
+          "rules",
+          "no-code",
+          "builder",
+          "flow"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "An automation builder. <Workflow1 title trigger triggers steps={[{ id, type: 'condition', field, operator: 'is' | 'is not' | 'is more than' | 'contains', value } | { id, type: 'delay', amount, unit: 'minutes' | 'hours' | 'days' } | { id, type: 'action', action: 'email' | 'slack' | 'task' | 'tag', text }]} sample={{ 'Order total': '640' }} stepMs={450} onChange={({ trigger, steps, enabled }) => ...} />. Test run walks the steps with the sample facts; a condition that fails stops it there. Every edit calls onChange with the whole flow.",
+          "whenToUse": [
+            "Rules and automations in a SaaS product",
+            "A no-code 'when this happens, do that' editor"
+          ],
+          "whenNotToUse": [
+            "A marketing diagram of a workflow (use a features block)",
+            "A graph with branches and loops"
+          ],
+          "composesWith": [
+            "flags-1",
+            "webhooks-1",
+            "app-shell-1",
+            "tickets-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Each step's title is a button that says whether it is open; reorder and delete buttons say which step they act on"
+            },
+            {
+              "keys": "Test run",
+              "action": "Each step says Ran fine, Running or Stopped here with why, with an icon, and the end result is a status message"
+            },
+            {
+              "keys": "Changes",
+              "action": "Adding, moving and deleting a step are announced politely, with the new position"
+            }
+          ],
+          "customization": [
+            "Steps are a plain array, so saving and loading flows is a JSON round trip",
+            "stepMs sets how long each step takes in a test run; 0 is instant",
+            "The trigger card is dark so the start of the flow is always clear"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "workflow-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton step cards under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Nothing automated yet",
+            "example": "workflow-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says to pick what starts it and add what should happen; emptyState sets the copy and can add a button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "workflow-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "workflow-1-demo",
+          "workflow-1-open",
+          "workflow-1-loading",
+          "workflow-1-empty",
+          "workflow-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/workflow-1"
+      }
+    },
+    {
+      "name": "workflow-1-demo",
+      "type": "registry:example",
+      "title": "Workflow 1: automation builder: A flow with a condition",
+      "description": "A flow with a condition example of Workflow 1: automation builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workflow-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workflow-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workflow-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workflow-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workflow-1-open",
+      "type": "registry:example",
+      "title": "Workflow 1: automation builder: A step open",
+      "description": "A step open example of Workflow 1: automation builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workflow-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workflow-1-open.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workflow-1-open.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workflow-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workflow-1-loading",
+      "type": "registry:example",
+      "title": "Workflow 1: automation builder: Loading",
+      "description": "Loading example of Workflow 1: automation builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workflow-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workflow-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workflow-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workflow-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workflow-1-empty",
+      "type": "registry:example",
+      "title": "Workflow 1: automation builder: Nothing automated yet",
+      "description": "Nothing automated yet example of Workflow 1: automation builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workflow-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workflow-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workflow-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workflow-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workflow-1-error",
+      "type": "registry:example",
+      "title": "Workflow 1: automation builder: Could not load",
+      "description": "Could not load example of Workflow 1: automation builder.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workflow-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workflow-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workflow-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workflow-1",
         "tier": "free"
       }
     },

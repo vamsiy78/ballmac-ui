@@ -254,5 +254,13 @@
   {
     "prefix": "retention-1",
     "reason": "The cohort grid runs from the first period to the latest left to right in every language, like a chart, and makes up most of the page's elements."
+  },
+  {
+    "prefix": "webhooks-1",
+    "reason": "Addresses, event names, secrets and payloads are code and stay left to right inside by design."
+  },
+  {
+    "prefix": "api-1",
+    "reason": "Addresses, headers, bodies and responses are code and stay left to right inside by design."
   }
 ]
