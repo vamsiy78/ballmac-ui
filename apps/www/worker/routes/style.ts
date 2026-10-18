@@ -34,3 +34,15 @@ export async function GET(request: Request, ctx: { params: Promise<Record<string
   }
   return undefined
 }
+
+/**
+ * `@ballmac/base-popover` asks for `/r/base-popover.json`: the same Base UI variant as `/r/base/popover.json`, under a name that needs no style. An item
+ * with no Base UI variant is handed back to the static files (so `/r/base-manifest.json` still works).
+ */
+export async function baseAlias(request: Request, ctx: { params: Promise<Record<string, string>>; env: StyleEnv }) {
+  const { file } = await ctx.params
+  const m = file?.match(/^base-([a-z0-9][a-z0-9-]*\.json)$/)
+  if (!m) return undefined
+  const res = await ctx.env.ASSETS.fetch(new Request(new URL(`/r/base/${m[1]}`, request.url), { headers: request.headers }))
+  return res.ok ? new Response(res.body, { status: 200, headers: { ...HEADERS, "x-ballmac-variant": "base" } }) : undefined
+}

@@ -43,6 +43,7 @@ const ROUTES: [URLPattern, Methods][] = [
   ["/r/pro/kits/:file", { GET: kits }],
   ["/r/pro/:name", proRegistry],
   ["/r/:file(preset-.+)", preset],
+  ["/r/:file(base-.+)", { GET: style.baseAlias }],
   ["/r/:style/:file", { GET: style.GET }],
   ["/themes/custom.json", themeCustom],
 ].map(([pathname, methods]) => [new URLPattern({ pathname: pathname as string }), methods as Methods])

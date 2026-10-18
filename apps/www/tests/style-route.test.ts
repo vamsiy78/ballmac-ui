@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { GET, stylePaths, type StyleEnv } from "../worker/routes/style"
+import { baseAlias, GET, stylePaths, type StyleEnv } from "../worker/routes/style"
 
 /** A stand-in for Cloudflare's static files: only the paths given exist. */
 function env(files: Record<string, unknown>) {
@@ -57,5 +57,19 @@ describe("/r/{style}/<name>.json", () => {
     const res = await ask("base-nova", "preset-ink.json", {})
     expect(res?.status).toBe(200)
     expect((await res?.json())?.name).toBe("preset-ink")
+  })
+})
+
+describe("/r/base-<name>.json", () => {
+  const alias = (file: string, files: Record<string, unknown>) =>
+    baseAlias(new Request(`https://ui.ballmac.com/r/${file}`), { params: Promise.resolve({ file }), env: env(files) })
+  it("serves the Base UI variant under a name that needs no style", async () => {
+    const res = await alias("base-popover.json", { "/r/base/popover.json": { variant: "base" } })
+    expect(res?.headers.get("x-ballmac-variant")).toBe("base")
+    expect(await res?.json()).toEqual({ variant: "base" })
+  })
+  it("hands anything without a variant back to the static files", async () => {
+    expect(await alias("base-manifest.json", {})).toBeUndefined()
+    expect(await alias("base-popover.html", {})).toBeUndefined()
   })
 })

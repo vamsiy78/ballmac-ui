@@ -15,6 +15,12 @@ npx skills add vamsiy78/ballmac-ui
 
 The command copies `skills/ballmac-ui` into the skills folder of each agent you pick. It works with Claude Code, Codex, Cursor, Windsurf and the other agents the skills command supports. Add `--skill ballmac-ui` to skip the picker, or `-g` to install it for every project.
 
+You can also install it with the shadcn command you already use. It writes the same files to `.claude/skills/ballmac-ui` in your project:
+
+```npm
+npx shadcn@latest add @ballmac/skill
+```
+
 ## What the agent does with it
 
 1. **Reads the project.** It runs a small script that prints your shadcn style, base library, React, Next.js and Tailwind versions, whether Cache Components is on, and the Ballmac items you have installed.

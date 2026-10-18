@@ -235,6 +235,38 @@ baseMode = true
 const baseCount = writeBaseRegistry(join(ROOT, "registry-base.json"), variants)
 baseMode = false
 shadcnBuild("registry-base.json", join(WWW, "public/r/base"))
+// The agent skill as one installable item: `npx shadcn@latest add @ballmac/skill` puts it in .claude/skills/ballmac-ui (the files are the ones in
+// skills/ballmac-ui, so the item and `npx skills add vamsiy78/ballmac-ui` never differ). shadcn build empties its output folder, so it builds aside.
+{
+  const dir = join(ROOT, "skills/ballmac-ui")
+  const walkFiles = (d: string): string[] => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walkFiles(join(d, e.name)) : [join(d, e.name)]))
+  const files = walkFiles(dir).sort()
+  const skill = {
+    $schema: "https://ui.shadcn.com/schema/registry.json",
+    name: "ballmac-skill",
+    homepage: REGISTRY_URL,
+    items: [
+      {
+        name: "skill",
+        type: "registry:file",
+        title: "Ballmac UI agent skill",
+        description: "Teaches Claude Code, Cursor and other coding agents to find, install and use Ballmac UI: how to read the project, which block or component to pick, the quality rules to build to, and how to verify.",
+        author: "Ballmac <https://ui.ballmac.com>",
+        docs: `Installed to .claude/skills/ballmac-ui. Guide: ${REGISTRY_URL}/docs/guides/agent-skill`,
+        files: files.map((f) => ({ path: relative(ROOT, f), type: "registry:file", target: `.claude/skills/ballmac-ui/${relative(dir, f)}` })),
+        categories: ["foundation"],
+        meta: { schema: SCHEMA_VERSION, tier: "free", url: `${REGISTRY_URL}/docs/guides/agent-skill` },
+      },
+    ],
+  }
+  writeFileSync(join(ROOT, "registry-skill.json"), JSON.stringify(skill, null, 2) + "\n")
+  const aside = join(WWW, ".skill-build")
+  shadcnBuild("registry-skill.json", aside)
+  cpSync(join(aside, "skill.json"), join(WWW, "public/r/skill.json"))
+  rmSync(aside, { recursive: true, force: true })
+  rmSync(join(ROOT, "registry-skill.json"), { force: true })
+  console.log(`✓ skill item (${files.length} files) → apps/www/public/r/skill.json`)
+}
 writeFileSync(
   join(WWW, "public/r/base-manifest.json"),
   JSON.stringify({ schema: 1, base: BASE_UI_SPEC, items: [...variants.values()].map((v) => ({ name: v.item.name, version: v.item.version })), helpers: BASE_ONLY.map((h) => h.name) }, null, 2) + "\n"
