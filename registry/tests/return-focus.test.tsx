@@ -57,6 +57,8 @@ describe("useReturnFocus", () => {
     await user.keyboard("{Escape}")
     await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull())
     await new Promise((r) => setTimeout(r, 50))
-    expect(button).not.toHaveFocus()
+    // Radix UI leaves focus behind when a dialog has no trigger; Base UI returns it to the element that was focused on its own.
+    if (process.env.BALLMAC_BASE === "1") expect(button).toHaveFocus()
+    else expect(button).not.toHaveFocus()
   })
 })

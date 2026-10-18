@@ -79,7 +79,7 @@ describe("direction", () => {
     );
     const start = screen.getByRole("dialog");
     expect(start.className).toContain("start-0");
-    expect(start.className).toContain("rtl:data-[state=open]:slide-in-from-right");
+    expect(start.className).toMatch(/rtl:data-(\[state=open\]|open):slide-in-from-right/);
     expect(start.className).not.toMatch(/\bleft-0\b/);
   });
 

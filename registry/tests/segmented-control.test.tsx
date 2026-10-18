@@ -68,6 +68,8 @@ describe("SegmentedControl", () => {
     await user.tab()
     await user.keyboard("{ArrowRight}")
     await waitFor(() => expect(screen.getByRole("radio", { name: "Columns" })).toHaveFocus())
-    expect(screen.getByRole("radio", { name: "Grid" })).toBeDisabled()
+    const grid = screen.getByRole("radio", { name: "Grid" })
+    // A native button in Radix UI, a span with aria-disabled in Base UI.
+    expect((grid as HTMLButtonElement).disabled || grid.getAttribute("aria-disabled") === "true").toBe(true)
   })
 })

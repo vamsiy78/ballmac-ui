@@ -19,7 +19,7 @@ describe("Switch", () => {
     control.focus()
     await userEvent.keyboard(" ")
     expect(control).toHaveAttribute("aria-checked", "true")
-    expect(onCheckedChange).toHaveBeenCalledWith(true)
+    expect(onCheckedChange.mock.calls.at(-1)?.[0]).toBe(true)
   })
 
   it("toggles when its label is clicked and respects defaultChecked", async () => {

@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 
 import {
   Dialog,
@@ -52,5 +52,38 @@ describe("Dialog", () => {
     await user.click(screen.getByRole("button", { name: "Edit profile" }))
     await screen.findByRole("dialog")
     expect(screen.queryByRole("button", { name: "Close" })).not.toBeInTheDocument()
+  })
+  it("lets onOpenAutoFocus and onCloseAutoFocus place focus", async () => {
+    const user = userEvent.setup()
+    const closed = vi.fn((e: Event) => e.preventDefault())
+    render(
+      <>
+        <button id="elsewhere">Elsewhere</button>
+        <Dialog>
+          <DialogTrigger>Edit profile</DialogTrigger>
+          <DialogContent
+            onOpenAutoFocus={(e) => {
+              e.preventDefault()
+              document.getElementById("second")?.focus()
+            }}
+            onCloseAutoFocus={(e) => {
+              closed(e)
+              document.getElementById("elsewhere")?.focus()
+            }}
+          >
+            <DialogTitle>Edit profile</DialogTitle>
+            <DialogDescription>Update your name.</DialogDescription>
+            <input aria-label="First" />
+            <input id="second" aria-label="Second" />
+          </DialogContent>
+        </Dialog>
+      </>,
+    )
+    await user.click(screen.getByRole("button", { name: "Edit profile" }))
+    await waitFor(() => expect(screen.getByLabelText("Second")).toHaveFocus())
+    await user.keyboard("{Escape}")
+    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull())
+    expect(closed).toHaveBeenCalled()
+    await waitFor(() => expect(document.getElementById("elsewhere")).toHaveFocus())
   })
 })

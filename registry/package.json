@@ -6,6 +6,7 @@
   "dependencies": {
     "@ballmac-ui/metadata": "workspace:*",
     "@ballmac-ui/theme-engine": "workspace:*",
+    "@base-ui/react": "^1.9.0",
     "@hookform/resolvers": "^5.9.1",
     "@tanstack/react-table": "^8.21.3",
     "canvas-confetti": "^1.9.3",
@@ -44,6 +45,7 @@
   },
   "scripts": {
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:base": "BALLMAC_BASE=1 vitest run"
   }
 }

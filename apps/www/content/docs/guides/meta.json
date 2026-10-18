@@ -1,4 +1,4 @@
 {
   "title": "Guides",
-  "pages": ["update-components", "track-installed-items", "tests", "check-your-app", "agent-skill", "states", "presets", "motion", "platform-feels", "desktop-app", "right-to-left", "translate", "images", "shadcn-mcp", "pro"]
+  "pages": ["update-components", "track-installed-items", "tests", "check-your-app", "agent-skill", "states", "charts", "presets", "base-ui", "motion", "platform-feels", "desktop-app", "right-to-left", "translate", "images", "shadcn-mcp", "pro"]
 }

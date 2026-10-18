@@ -17,6 +17,7 @@ import { FONT_FACES } from "@ballmac-ui/theme-engine"
 import { RULES } from "../packages/audit/src/rules/meta"
 import { extractProps } from "./extract-props"
 import { importPathFor, loadItems, ROOT, targetFor, type LoadedItem } from "./lib"
+import { BASE_ONLY, BASE_UI_SPEC, baseDependencies, findVariants, type BaseVariant } from "./base-variants"
 import { exportsOf, planTests, writeTests, writeVersions } from "./registry-extras"
 import { registryUrl } from "./registry-url"
 
@@ -38,8 +39,12 @@ const defaultFileType: Record<string, string> = {
 // for a namespaced registry, so dependencies on Pro items are written as @ballmac-pro/<name>.
 let proNames = new Set<string>()
 let testPlan = new Map<string, unknown>()
+// While the Base UI registry is being written, a dependency that has a Base UI variant points at it.
+let baseNames = new Set<string>()
+let baseMode = false
 function dep(name: string) {
   if (name.startsWith("shadcn:")) return name.slice("shadcn:".length)
+  if (baseMode && baseNames.has(name)) return `${REGISTRY_URL}/r/base/${name}.json`
   return proNames.has(name) ? `@ballmac-pro/${name}` : `${REGISTRY_URL}/r/${name}.json`
 }
 
@@ -122,6 +127,68 @@ function toRegistryItems(item: LoadedItem) {
   return [main, ...examples]
 }
 
+/** The Base UI variant of an item and of its examples: the same item with its files, npm packages and registry dependencies swapped. */
+/** The registry items a Base UI variant builds on: what the item declares, what its Base UI files import, and the Base UI helpers. */
+function baseRegistryNames(v: BaseVariant) {
+  const deps = new Set(v.item.registryDependencies)
+  for (const file of v.swaps.values()) {
+    for (const m of readFileSync(file, "utf8").matchAll(/from\s+["'](@\/[^"']+)["']/g)) {
+      const owner = owners.get(m[1]!) ?? owners.get(`${m[1]}/index`)
+      if (owner && owner !== v.item.name) deps.add(owner)
+    }
+  }
+  for (const h of v.helpers) deps.add(h)
+  return deps
+}
+
+function toBaseItems(v: BaseVariant) {
+  const { item } = v
+  const [main, ...examples] = toRegistryItems(item)
+  const deps = baseRegistryNames(v)
+  return [
+    {
+      ...main,
+      dependencies: baseDependencies(item.dependencies),
+      registryDependencies: [...deps].map(dep),
+      files: main.files?.map((f, i) => {
+        const swapped = v.swaps.get(item.files[i]!.path)
+        return swapped ? { ...f, path: relative(ROOT, swapped) } : f
+      }),
+      meta: { ...main.meta, base: true },
+    },
+    ...examples.map((e) => ({ ...e, meta: { ...e.meta, base: true } })),
+  ]
+}
+
+/** Helpers only Base UI needs: they have no Radix counterpart, so they are not catalog items. */
+function baseOnlyItems() {
+  return BASE_ONLY.map((h) => {
+    const path = join(ROOT, "registry/ballmac/base", h.file)
+    return {
+      name: h.name,
+      type: "registry:lib",
+      title: h.title,
+      description: h.description,
+      author: "Ballmac <https://ui.ballmac.com>",
+      dependencies: readFileSync(path, "utf8").includes("@base-ui/react") ? [BASE_UI_SPEC] : undefined,
+      files: [{ path: relative(ROOT, path), type: "registry:lib", target: targetFor(h.file) }],
+      categories: ["foundation"],
+      meta: { schema: SCHEMA_VERSION, tier: "free", base: true, url: `${REGISTRY_URL}/docs/guides/base-ui` },
+    }
+  })
+}
+
+function writeBaseRegistry(file: string, variants: Map<string, BaseVariant>) {
+  const registry = {
+    $schema: "https://ui.shadcn.com/schema/registry.json",
+    name: "ballmac-base",
+    homepage: REGISTRY_URL,
+    items: [...[...variants.values()].flatMap(toBaseItems), ...baseOnlyItems()],
+  }
+  writeFileSync(file, JSON.stringify(registry, null, 2) + "\n")
+  return registry.items.length
+}
+
 function writeRegistry(file: string, items: LoadedItem[]) {
   const registry = {
     $schema: "https://ui.shadcn.com/schema/registry.json",
@@ -161,6 +228,18 @@ for (const i of free) {
 
 const freeCount = writeRegistry(join(ROOT, "registry.json"), free)
 shadcnBuild("registry.json", join(WWW, "public/r"))
+// Base UI variants: public/r/base/<name>.json, served for /r/{style}/<name>.json when the style is a Base UI one (worker/routes/style.ts).
+const variants = findVariants(free)
+baseNames = new Set([...variants.keys(), ...BASE_ONLY.map((h) => h.name)])
+baseMode = true
+const baseCount = writeBaseRegistry(join(ROOT, "registry-base.json"), variants)
+baseMode = false
+shadcnBuild("registry-base.json", join(WWW, "public/r/base"))
+writeFileSync(
+  join(WWW, "public/r/base-manifest.json"),
+  JSON.stringify({ schema: 1, base: BASE_UI_SPEC, items: [...variants.values()].map((v) => ({ name: v.item.name, version: v.item.version })), helpers: BASE_ONLY.map((h) => h.name) }, null, 2) + "\n"
+)
+console.log(`✓ ${variants.size} Base UI variant(s) → ${baseCount} entries in apps/www/public/r/base`)
 // What `ballmac outdated`, `update` and `add --with-tests` read (see scripts/registry-extras.ts).
 writeVersions(free, REGISTRY_URL, join(WWW, "public/r"))
 const freeTests = writeTests(items, join(WWW, "public/r/tests"))
@@ -200,6 +279,14 @@ const index = items.map(({ metaPath, baseDir, examplesDir, ...meta }) => ({
   props: meta.files.filter((f) => f.path.endsWith(".tsx")).flatMap((f) => extractProps(readFileSync(join(baseDir, f.path), "utf8"), f.path)),
   // Whether a test ships with the item (`ballmac add --with-tests`).
   tests: testPlan.has(meta.name),
+  // Whether the item also has a Base UI variant (registry/ballmac/base).
+  base: variants.has(meta.name)
+    ? {
+        files: meta.files.map((f) => ({ source: relative(ROOT, variants.get(meta.name)!.swaps.get(f.path) ?? join(baseDir, f.path)), target: targetFor(f.path) })),
+        dependencies: baseDependencies(meta.dependencies),
+        registryDependencies: [...baseRegistryNames(variants.get(meta.name)!)].filter((d) => !d.startsWith("shadcn:")),
+      }
+    : false,
   // Export names of the main file, so Pro items can show an import line without their source.
   exports: meta.files[0] ? exportsOf(readFileSync(join(baseDir, meta.files[0].path), "utf8")) : [],
   examples: meta.examples.map((e) => ({ ...e, source: relative(ROOT, join(examplesDir, e.file)) })),
@@ -228,7 +315,9 @@ const sources: Record<string, string> = {}
 for (const i of free) {
   for (const f of i.files) sources[relative(ROOT, join(i.baseDir, f.path))] = readFileSync(join(i.baseDir, f.path), "utf8")
   for (const e of i.examples) sources[relative(ROOT, join(i.examplesDir, e.file))] = readFileSync(join(i.examplesDir, e.file), "utf8")
+  for (const file of variants.get(i.name)?.swaps.values() ?? []) sources[relative(ROOT, file)] = readFileSync(file, "utf8")
 }
+for (const h of BASE_ONLY) sources[`registry/ballmac/base/${h.file}`] = readFileSync(join(ROOT, "registry/ballmac/base", h.file), "utf8")
 writeFileSync(join(generated, "sources.json"), JSON.stringify(sources) + "\n")
 
 // Every built-in string, with its English default, for translators: /i18n/en.json and the i18n docs page.

@@ -269,6 +269,7 @@ const SYNONYMS: Record<string, string[]> = {
   table: ["table", "data"], grid: ["grid", "table"], upload: ["dropzone", "file"], date: ["calendar", "date"],
   login: ["auth", "login", "sign"], signin: ["auth", "login"], signup: ["auth", "signup"], register: ["signup"],
   chart: ["chart", "graph"], graph: ["chart"], stat: ["stat", "kpi", "number"], metric: ["kpi", "stat"],
+  donut: ["pie", "donut", "chart"], gauge: ["radial", "gauge", "chart"], radar: ["radar", "chart"], scatter: ["scatter", "chart"], bubble: ["scatter", "bubble"], analytics: ["analytics", "charts", "chart"], scorecard: ["scorecard", "charts"],
   shop: ["store", "ecommerce", "goods"], store: ["store", "ecommerce", "goods"], ecommerce: ["store", "goods"], cart: ["cart", "store"],
   docs: ["documentation", "docs"], documentation: ["docs"], blog: ["blog", "publication", "article"], magazine: ["publication"],
   event: ["conference", "summit", "event"], conference: ["summit", "event"], podcast: ["podcast", "audio"],

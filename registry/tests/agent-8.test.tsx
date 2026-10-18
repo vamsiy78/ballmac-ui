@@ -3,6 +3,7 @@ import { render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { MotionGlobalConfig } from "motion/react"
 import { beforeAll, describe, expect, it, vi } from "vitest"
+import { expectDisabled } from "./helpers";
 
 import { Agent8 } from "@/components/ballmac/blocks/agent-8/agent-8"
 
@@ -23,7 +24,7 @@ describe("Agent8", () => {
     const onResync = vi.fn()
     render(<Agent8 onResync={onResync} />)
     expect(screen.getByText(/saved password has expired/)).toBeInTheDocument()
-    expect(screen.getByRole("switch", { name: "Internal wiki" })).toBeDisabled()
+    expectDisabled(screen.getByRole("switch", { name: "Internal wiki" }))
     await user.click(screen.getByRole("button", { name: "Retry" }))
     expect(onResync).toHaveBeenCalledWith("wiki")
   })

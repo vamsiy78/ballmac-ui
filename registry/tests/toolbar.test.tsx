@@ -41,8 +41,9 @@ describe("Toolbar", () => {
         </ToolbarSegmented>
       </Toolbar>
     );
-    await user.click(screen.getByRole("radio", { name: "B" }));
-    expect(onValueChange).toHaveBeenCalledWith("b");
+    // Radix UI gives single segments the radio role; Base UI makes them toggle buttons.
+    await user.click(screen.queryByRole("radio", { name: "B" }) ?? screen.getByRole("button", { name: "B" }));
+    expect(onValueChange.mock.calls.at(-1)?.[0]).toBe("b");
   });
   it("search clears through its button", async () => {
     const user = userEvent.setup();

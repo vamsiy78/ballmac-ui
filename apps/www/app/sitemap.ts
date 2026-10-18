@@ -7,7 +7,7 @@ import { allDocs } from "@/lib/docs"
 import { useCases } from "@/lib/use-cases"
 import { getAllItems, itemHref, SITE_URL } from "@/lib/registry"
 
-const pages = ["", "/components", "/blocks", "/templates", "/presets", "/themes", "/feels", "/pricing", "/pro", "/support", "/founders", "/changelog", "/use-cases", "/quality", "/license", "/license/pro"]
+const pages = ["", "/components", "/blocks", "/templates", "/charts", "/presets", "/themes", "/feels", "/pricing", "/pro", "/support", "/founders", "/changelog", "/use-cases", "/quality", "/license", "/license/pro"]
 
 // Built once with the site (the Cloudflare build is static).
 export const dynamic = "force-static"

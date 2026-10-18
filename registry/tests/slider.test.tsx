@@ -30,7 +30,8 @@ describe("Slider", () => {
     render(<Slider aria-label="Volume" defaultValue={[40]} showValue formatValue={(v) => `${v}%`} />);
     const thumb = screen.getByRole("slider", { name: "Volume" });
     expect(thumb).toHaveAttribute("aria-valuetext", "40%");
-    expect(thumb).toHaveTextContent("40%");
+    // Radix UI makes the thumb the slider; Base UI puts the slider (a range input) inside the thumb.
+    expect(thumb.closest("[data-slot=slider-thumb]") ?? thumb).toHaveTextContent("40%");
   });
   it("stays controlled", async () => {
     const user = userEvent.setup();
@@ -42,6 +43,7 @@ describe("Slider", () => {
   });
   it("does not respond when disabled", () => {
     render(<Slider aria-label="Locked" defaultValue={[10]} disabled />);
-    expect(screen.getByRole("slider")).toHaveAttribute("data-disabled");
+    const slider = screen.getByRole("slider");
+    expect(slider.hasAttribute("data-disabled") || (slider.closest("[data-slot=slider-thumb]")?.hasAttribute("data-disabled") ?? false) || (slider as HTMLInputElement).disabled).toBe(true);
   });
 });

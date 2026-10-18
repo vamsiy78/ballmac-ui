@@ -4,6 +4,45 @@
 
 Every Ballmac item reads the standard shadcn CSS variables, so it follows your theme. Install a ready-made theme, or build one at https://ui.ballmac.com/themes and install the exact result from its link.
 
+## Presets (15): a whole design system in one install
+
+Install: `npx shadcn@latest add @ballmac/preset-<name>`. A preset sets colors (light and dark), corner radius, typeface, platform feel and motion together. Take one when the user wants a finished look, not just colors. Each has a 16-character code; `@ballmac/preset-<code>` installs any code made at https://ui.ballmac.com/themes, and `?only=colors,shape,font,motion,feel` installs just those parts.
+
+- **ink**: Quiet greys, sharp type. Suits: Dashboards and admin tools; Products that should look neutral and fast. Code: `2a08-xyd3-dr43-nwcz`.
+- **harbor**: Trustworthy blue, open type. Suits: Fintech and SaaS; Anything that has to feel trustworthy. Code: `2814-78n7-rge5-7z4b`.
+- **lumen**: Deep indigo, editorial sans. Suits: AI products and developer tools; Marketing sites that want a recognisable colour. Code: `2gf1-6sax-5gj7-5xdq`.
+- **bloom**: Rich purple, very round, playful. Suits: Creative tools and communities; Consumer apps. Code: `2rka-apvx-r7ep-sa7v`.
+- **forge**: Burnt orange, technical letters. Suits: Developer platforms and media; Calls to action that must stand out. Code: `0d74-mrwe-5p3p-8wh9`.
+- **rosewater**: Blush and soft serif. Suits: Food, lifestyle and wellness; Shops with a personal voice. Code: `03nw-q8wz-rftq-kpqg`.
+- **canopy**: Deep green, friendly and grounded. Suits: Sustainability, finance and wellness; Products meant to feel calm and established. Code: `1c62-dbvb-hffx-tvnt`.
+- **lagoon**: Fresh teal, round and clear. Suits: Health, data and productivity apps; Dashboards with a friendly tone. Code: `1qr6-x84c-jyxh-vjbq`.
+- **atelier**: Paper, gold and bold type. Suits: Studios, portfolios and publications; Brands that want warmth without a coloured button. Code: `0qb8-mcj9-sv3r-9byw`.
+- **paper**: Printed page, reading serif. Suits: Publications, docs and long reading; Shops with a crafted feel. Code: `0bqc-xazs-y8hn-rtg2`.
+- **terminal**: Black, white, square, monospaced. Suits: Technical and brutalist products; Teams that need maximum contrast. Code: `0000-0001-krvj-ayah`.
+- **signal**: Electric blue, built for dark. Suits: Developer and gaming products; Apps used mostly in dark mode. Code: `21bj-14v1-gqcw-jkx0`.
+- **menubar**: A native Mac app. Suits: Tauri and Electron apps on macOS; Tools used all day on a desktop. Code: `2a08-xybq-xekg-ss7c`.
+- **pocket**: An iOS app, in a browser. Suits: Mobile-first consumer apps; Web apps people add to their home screen. Code: `03nw-q8wz-zw0g-e5hm`.
+- **pane**: A Windows app. Suits: Tauri and Electron apps on Windows; Enterprise and line-of-business tools. Code: `2814-78h6-cb96-2h3p`.
+
+## Typefaces (14)
+
+Install: `npx shadcn@latest add @ballmac/font-<name>`. The CLI sets the font up for the framework (next/font in Next.js, Fontsource elsewhere).
+
+- **inter**: Inter. Neutral, built for screens. The safe default.
+- **geist**: Geist. Crisp and technical. Developer tools, dashboards.
+- **dm-sans**: DM Sans. Low contrast, geometric, friendly.
+- **manrope**: Manrope. Modern and a little wide. Fintech, SaaS.
+- **jakarta**: Plus Jakarta Sans. Warm geometric forms. Consumer apps.
+- **figtree**: Figtree. Friendly and open. Health, education, community.
+- **instrument-sans**: Instrument Sans. Slightly condensed, editorial. Studios and brands.
+- **space-grotesk**: Space Grotesk. Quirky, technical. Crypto, hardware, creative tools.
+- **bricolage**: Bricolage Grotesque. Characterful and bold. Marketing, portfolios.
+- **fraunces**: Fraunces. A soft, expressive serif. Editorial, food, lifestyle.
+- **newsreader**: Newsreader. A reading serif. Publications, docs, long text.
+- **source-serif**: Source Serif 4. Sturdy and neutral. Finance, legal, research.
+- **jetbrains-mono**: JetBrains Mono. Made for code. Terminals, developer products.
+- **geist-mono**: Geist Mono. Clean monospace to pair with Geist.
+
 ## Themes (12)
 
 Install: `npx shadcn@latest add @ballmac/theme-<name>`. Each one also sets how the product moves.

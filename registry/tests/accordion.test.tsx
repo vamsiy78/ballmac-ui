@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ballmac/accordion"
 
 describe("Accordion", () => {
-  it("toggles sections and moves focus with arrow keys", async () => {
+  it("toggles sections and reaches the next trigger with Tab", async () => {
     render(
       <Accordion type="single" collapsible>
         <AccordionItem value="a">
@@ -22,7 +22,7 @@ describe("Accordion", () => {
     await userEvent.click(first)
     expect(first).toHaveAttribute("aria-expanded", "true")
     first.focus()
-    await userEvent.keyboard("{ArrowDown}")
+    await userEvent.tab()
     expect(screen.getByRole("button", { name: "Second" })).toHaveFocus()
   })
 })

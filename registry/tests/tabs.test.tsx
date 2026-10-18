@@ -45,7 +45,7 @@ describe("Tabs", () => {
       </Tabs>,
     );
     await user.click(screen.getByRole("tab", { name: "Files" }));
-    expect(onValueChange).toHaveBeenCalledWith("files");
+    expect(onValueChange.mock.calls.at(-1)?.[0]).toBe("files");
     expect(screen.getByRole("tab", { name: "Overview" })).toHaveAttribute(
       "aria-selected",
       "true",

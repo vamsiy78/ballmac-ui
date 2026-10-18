@@ -6,5 +6,7 @@
   "registry/ballmac/components/terminal.tsx": "The caret blink shows where typing happens.",
   "registry/ballmac/components/typing-text.tsx": "The caret blink shows where typing happens.",
   "registry/ballmac/components/streaming-text.tsx": "The caret blink shows that text is still arriving.",
-  "registry/ballmac/components/marquee.tsx": "A marquee is content, not decoration; its own pause and reduced-motion handling apply."
+  "registry/ballmac/components/marquee.tsx": "A marquee is content, not decoration; its own pause and reduced-motion handling apply.",
+  "registry/ballmac/base/components/artifact-panel.tsx": "The loading pulse is a status indicator.",
+  "registry/ballmac/base/components/reasoning-disclosure.tsx": "The shimmer marks text that is still streaming."
 }

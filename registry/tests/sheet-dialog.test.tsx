@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MotionGlobalConfig } from "motion/react";
 import * as React from "react";
@@ -50,9 +50,12 @@ describe("SheetDialog", () => {
     render(<Example />);
     const trigger = screen.getByRole("button", { name: "Open" });
     await user.click(trigger);
-    await screen.findByRole("dialog");
+    const dialog = await screen.findByRole("dialog");
+    // Focus moves in once the dialog is open (Base UI does it a moment after it mounts).
+    await waitFor(() => expect(dialog).toContainElement(document.activeElement as HTMLElement));
     await user.tab();
-    expect(screen.getByRole("dialog")).toContainElement(document.activeElement as HTMLElement);
+    // Base UI sends focus that reaches its edge guard back inside a moment later.
+    await waitFor(() => expect(dialog).toContainElement(document.activeElement as HTMLElement));
     await user.keyboard("{Escape}");
     expect(trigger).toHaveFocus();
   });

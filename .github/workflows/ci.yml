@@ -41,6 +41,8 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
+      - name: Tests against the Base UI variants
+        run: pnpm --filter @ballmac-ui/registry test:base
       - name: No Pro source in git history
         run: pnpm verify:pro
       - name: Build site (the static Cloudflare build, free items only)

@@ -38,6 +38,8 @@ describe("Gallery1", () => {
     const user = userEvent.setup()
     render(<Gallery1 defaultOpenId="g2" />)
     const dialog = screen.getByRole("dialog")
+    // Focus moves into the dialog a moment after it opens (Base UI); wait for it before using the keys.
+    await waitFor(() => expect(dialog).toContainElement(document.activeElement as HTMLElement))
     await user.keyboard("{ArrowRight}")
     expect(dialog).toHaveAccessibleName("The first prototype")
     await user.keyboard("{ArrowLeft}{ArrowLeft}")

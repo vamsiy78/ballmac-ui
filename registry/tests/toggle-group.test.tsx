@@ -14,12 +14,13 @@ describe("ToggleGroup", () => {
         <ToggleGroupItem value="list">List</ToggleGroupItem>
       </ToggleGroup>,
     );
-    screen.getByRole("radio", { name: "Grid" }).focus();
+    // A single group is radios in Radix UI and toggle buttons in Base UI; the behaviour is the same.
+    const item = (name: string) => screen.queryByRole("radio", { name }) ?? screen.getByRole("button", { name });
+    const on = (el: HTMLElement) => el.getAttribute("aria-checked") === "true" || el.getAttribute("aria-pressed") === "true";
+    item("Grid").focus();
     await user.keyboard("{ArrowRight}{Enter}");
-    expect(screen.getByRole("radio", { name: "List" })).toHaveAttribute(
-      "aria-checked",
-      "true",
-    );
+    expect(on(item("List"))).toBe(true);
+    expect(on(item("Grid"))).toBe(false);
   });
   it("reports controlled multiple selections", async () => {
     const user = userEvent.setup();
@@ -36,7 +37,7 @@ describe("ToggleGroup", () => {
       </ToggleGroup>,
     );
     await user.click(screen.getByRole("button", { name: "Italic" }));
-    expect(onValueChange).toHaveBeenCalledWith(["bold", "italic"]);
+    expect(onValueChange.mock.calls.at(-1)?.[0]).toEqual(["bold", "italic"]);
     expect(screen.getByRole("button", { name: "Italic" })).toHaveAttribute(
       "aria-pressed",
       "false",

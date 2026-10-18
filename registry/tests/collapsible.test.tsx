@@ -32,7 +32,7 @@ describe("Collapsible", () => {
       </Collapsible>,
     );
     await user.click(screen.getByRole("button", { name: "Details" }));
-    expect(onOpenChange).toHaveBeenCalledWith(true);
+    expect(onOpenChange.mock.calls.at(-1)?.[0]).toBe(true);
     expect(screen.getByRole("button", { name: "Details" })).toHaveAttribute(
       "aria-expanded",
       "false",

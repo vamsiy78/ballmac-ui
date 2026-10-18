@@ -8615,6 +8615,849 @@
       }
     },
     {
+      "name": "charts-1",
+      "type": "registry:block",
+      "title": "Charts 1: analytics overview",
+      "description": "An analytics overview: a range picker, four figures with their change from the period before, a stacked area chart of new and returning visitors, top pages and a sources donut, each with a table view and CSV download.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/chart-area.json",
+        "https://ui.ballmac.com/r/chart-bar.json",
+        "https://ui.ballmac.com/r/chart-pie.json",
+        "https://ui.ballmac.com/r/kpi-row.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/charts-1/charts-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/charts-1/charts-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "charts"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "analytics",
+          "charts",
+          "dashboard",
+          "traffic",
+          "visitors",
+          "kpi",
+          "area",
+          "donut",
+          "metrics",
+          "range"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "<Charts1 title description daily={[{ date, newVisitors, returning, signups }]} pages sources defaultRange='30' onRangeChange state />. daily is one row per day, oldest first, at least twice the longest range. Figures (visitors, sign-ups, conversion, returning share) and their change from the previous period are worked out from daily. Pages and sources are what you pass; reload them in onRangeChange.",
+          "whenToUse": [
+            "The overview page of a product or marketing site's analytics",
+            "A starting point for any metric dashboard with a range picker"
+          ],
+          "whenNotToUse": [
+            "A funnel (use funnel-1)",
+            "Cohort retention (use retention-1)",
+            "One chart only (use chart-area, chart-bar or chart-pie)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "funnel-1",
+            "retention-1",
+            "chart-frame"
+          ],
+          "a11y": [
+            {
+              "keys": "Range",
+              "action": "A labelled switch between 7, 30 and 90 days; the figures, change and chart follow"
+            },
+            {
+              "keys": "Change",
+              "action": "Written as 'up 12.4% from the previous 30 days', not only an arrow and a color"
+            },
+            {
+              "keys": "Each chart",
+              "action": "Has a Table view of the same numbers, a CSV download and a summary written from its data"
+            }
+          ],
+          "customization": [
+            "Pass daily rows from your API; the figures follow",
+            "onRangeChange to load that range's pages and sources",
+            "Swap any chart for another chart-* component"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "charts-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeletons shaped like the figures and charts, under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No visits yet",
+            "example": "charts-1-empty",
+            "trigger": "state=\"empty\" (or daily={[]})",
+            "note": "Says the numbers appear once people visit; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "charts-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "charts-1-demo",
+          "charts-1-loading",
+          "charts-1-empty",
+          "charts-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/charts-1"
+      }
+    },
+    {
+      "name": "charts-1-demo",
+      "type": "registry:example",
+      "title": "Charts 1: analytics overview: Thirty days",
+      "description": "Thirty days example of Charts 1: analytics overview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-1-loading",
+      "type": "registry:example",
+      "title": "Charts 1: analytics overview: Loading",
+      "description": "Loading example of Charts 1: analytics overview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-1-empty",
+      "type": "registry:example",
+      "title": "Charts 1: analytics overview: No visits yet",
+      "description": "No visits yet example of Charts 1: analytics overview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-1-error",
+      "type": "registry:example",
+      "title": "Charts 1: analytics overview: Could not load",
+      "description": "Could not load example of Charts 1: analytics overview.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-2",
+      "type": "registry:block",
+      "title": "Charts 2: revenue report",
+      "description": "A revenue report: monthly recurring revenue, annual run rate, what was added last month and the largest plan, then revenue by plan as stacked columns and net revenue retention as a line against the 100% mark.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/chart-bar.json",
+        "https://ui.ballmac.com/r/chart-line.json",
+        "https://ui.ballmac.com/r/kpi-row.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/charts-2/charts-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/charts-2/charts-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "charts"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "revenue",
+          "mrr",
+          "finance",
+          "charts",
+          "retention",
+          "saas",
+          "report",
+          "stacked",
+          "dashboard",
+          "metrics"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "<Charts2 title description months={[{ month, starter, pro, team, retention }]} currency='USD' locale state />. One row per month, oldest first. Monthly recurring revenue, annual run rate, the month's net addition and the largest plan are worked out from the rows; plans are fixed to starter, pro and team in this version, so rename them in the source for your own tiers.",
+          "whenToUse": [
+            "A finance or SaaS revenue page",
+            "Showing growth by plan next to retention"
+          ],
+          "whenNotToUse": [
+            "Traffic and conversion (use charts-1)",
+            "A pricing table (use pricing-1)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "billing-1",
+            "charts-1",
+            "chart-frame"
+          ],
+          "a11y": [
+            {
+              "keys": "Change",
+              "action": "Written as 'up 7.8% from Sep', not only an arrow and a color"
+            },
+            {
+              "keys": "Each chart",
+              "action": "Has a Table view of the same numbers, a CSV download and a summary written from its data"
+            },
+            {
+              "keys": "Retention",
+              "action": "A labeled reference line at 100% says what flat looks like"
+            }
+          ],
+          "customization": [
+            "currency and locale for every figure",
+            "Rename the three plans in the source",
+            "Swap a chart for another chart-* component"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "charts-2-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeletons shaped like the figures and the two charts, under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No revenue yet",
+            "example": "charts-2-empty",
+            "trigger": "state=\"empty\" (or months={[]})",
+            "note": "Says revenue appears once there are paying customers; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "charts-2-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "charts-2-demo",
+          "charts-2-loading",
+          "charts-2-empty",
+          "charts-2-error"
+        ],
+        "url": "https://ui.ballmac.com/components/charts-2"
+      }
+    },
+    {
+      "name": "charts-2-demo",
+      "type": "registry:example",
+      "title": "Charts 2: revenue report: Twelve months",
+      "description": "Twelve months example of Charts 2: revenue report.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-2-loading",
+      "type": "registry:example",
+      "title": "Charts 2: revenue report: Loading",
+      "description": "Loading example of Charts 2: revenue report.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-2-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-2-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-2-empty",
+      "type": "registry:example",
+      "title": "Charts 2: revenue report: No revenue yet",
+      "description": "No revenue yet example of Charts 2: revenue report.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-2-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-2-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-2-error",
+      "type": "registry:example",
+      "title": "Charts 2: revenue report: Could not load",
+      "description": "Could not load example of Charts 2: revenue report.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-2-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-2-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-3",
+      "type": "registry:block",
+      "title": "Charts 3: small multiples",
+      "description": "Small multiples: one small area chart per metric with the latest value, its change over the period in words and an arrow, which direction is good news, and a written summary for screen readers.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12",
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/charts-3/charts-3.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/charts-3/charts-3.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "charts"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "sparkline",
+          "small multiples",
+          "metrics",
+          "kpi",
+          "charts",
+          "dashboard",
+          "trend",
+          "health",
+          "overview"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "<Charts3 title description metrics={[{ id, label, values, format?, better? }]} period='week' currency locale state />. values are one number per period, oldest first. The latest value and the change from the first value are worked out. format: number | currency | percent (percent values are fractions: 0.045 is 4.5%). better: 'lower' makes a fall count as good news.",
+          "whenToUse": [
+            "An at-a-glance health page",
+            "Comparing many metrics that share a period"
+          ],
+          "whenNotToUse": [
+            "One metric in depth (use chart-area or chart-line)",
+            "Comparing metrics on one scale (use chart-line with several series)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "charts-1",
+            "stat-card",
+            "sparkline"
+          ],
+          "a11y": [
+            {
+              "keys": "Change",
+              "action": "Written as 'better than 11 weeks ago', not only an arrow and a color; a fall in a 'lower is better' metric counts as better"
+            },
+            {
+              "keys": "Each tile",
+              "action": "Is a figure with a name and a summary: first and last value, change, highest and lowest"
+            },
+            {
+              "keys": "Hover or arrow keys",
+              "action": "Show the value at that point"
+            }
+          ],
+          "customization": [
+            "period, currency and locale",
+            "Per-metric format and better",
+            "Make a tile a link by wrapping its heading in an <a>"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "charts-3-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Six placeholder tiles under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No metrics yet",
+            "example": "charts-3-empty",
+            "trigger": "state=\"empty\" (or metrics={[]})",
+            "note": "Says each metric gets a chart once there is a second period; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "charts-3-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "charts-3-demo",
+          "charts-3-loading",
+          "charts-3-empty",
+          "charts-3-error"
+        ],
+        "url": "https://ui.ballmac.com/components/charts-3"
+      }
+    },
+    {
+      "name": "charts-3-demo",
+      "type": "registry:example",
+      "title": "Charts 3: small multiples: Six metrics",
+      "description": "Six metrics example of Charts 3: small multiples.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-3-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-3-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-3-loading",
+      "type": "registry:example",
+      "title": "Charts 3: small multiples: Loading",
+      "description": "Loading example of Charts 3: small multiples.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-3-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-3-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-3-empty",
+      "type": "registry:example",
+      "title": "Charts 3: small multiples: No metrics yet",
+      "description": "No metrics yet example of Charts 3: small multiples.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-3-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-3-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-3-error",
+      "type": "registry:example",
+      "title": "Charts 3: small multiples: Could not load",
+      "description": "Could not load example of Charts 3: small multiples.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-3-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-3-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-4",
+      "type": "registry:block",
+      "title": "Charts 4: scorecard",
+      "description": "A quarterly scorecard: goals met and average progress, concentric rings for the goals, a radar of the team against its targets and a ranked bar chart, with a table view and CSV download on every chart.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/chart-bar.json",
+        "https://ui.ballmac.com/r/chart-radar.json",
+        "https://ui.ballmac.com/r/chart-radial.json",
+        "https://ui.ballmac.com/r/kpi-row.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/charts-4/charts-4.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/charts-4/charts-4.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "charts"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "scorecard",
+          "okr",
+          "goals",
+          "radar",
+          "radial",
+          "ranking",
+          "charts",
+          "dashboard",
+          "team",
+          "performance"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "<Charts4 title description goals={[{ name, label, value }]} profile={[{ area, current, target }]} leaders={[{ name, value }]} leaderFormatter leaderTitle state />. goals are percents of target (100 is met). profile scores run 0 to 100. The goals met, average progress, biggest gap and leader are worked out from the data.",
+          "whenToUse": [
+            "Quarterly or sprint reviews",
+            "OKR and team performance pages"
+          ],
+          "whenNotToUse": [
+            "Time series (use charts-1 or charts-3)",
+            "Revenue (use charts-2)"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "goals-1",
+            "leaderboard-1",
+            "chart-frame"
+          ],
+          "a11y": [
+            {
+              "keys": "Goals",
+              "action": "Each ring is named and read as 'value of target (share)' in the chart's summary"
+            },
+            {
+              "keys": "Each chart",
+              "action": "Has a Table view of the same numbers, a CSV download and a summary written from its data"
+            },
+            {
+              "keys": "Biggest gap",
+              "action": "Written as 'N points under target', not only a shape"
+            }
+          ],
+          "customization": [
+            "Pass your own goals, profile and leaders",
+            "leaderFormatter writes the ranking's numbers",
+            "Swap a chart for another chart-* component"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "charts-4-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeletons shaped like the figures and the three charts, under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No goals yet",
+            "example": "charts-4-empty",
+            "trigger": "state=\"empty\" (or goals={[]})",
+            "note": "Says progress appears once a goal is set; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "charts-4-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "charts-4-demo",
+          "charts-4-loading",
+          "charts-4-empty",
+          "charts-4-error"
+        ],
+        "url": "https://ui.ballmac.com/components/charts-4"
+      }
+    },
+    {
+      "name": "charts-4-demo",
+      "type": "registry:example",
+      "title": "Charts 4: scorecard: Three goals, six areas, five leaders",
+      "description": "Three goals, six areas, five leaders example of Charts 4: scorecard.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-4-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-4-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-4-loading",
+      "type": "registry:example",
+      "title": "Charts 4: scorecard: Loading",
+      "description": "Loading example of Charts 4: scorecard.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-4-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-4-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-4-empty",
+      "type": "registry:example",
+      "title": "Charts 4: scorecard: No goals yet",
+      "description": "No goals yet example of Charts 4: scorecard.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-4-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-4-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "charts-4-error",
+      "type": "registry:example",
+      "title": "Charts 4: scorecard: Could not load",
+      "description": "Could not load example of Charts 4: scorecard.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/charts-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/charts-4-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/charts-4-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "charts-4",
+        "tier": "free"
+      }
+    },
+    {
       "name": "chat-1",
       "type": "registry:block",
       "title": "Chat 1: team chat with threads",
@@ -31185,6 +32028,1862 @@
       }
     },
     {
+      "name": "chart-area",
+      "type": "registry:ui",
+      "title": "Chart Area",
+      "description": "An area chart with gradient, solid or no fill, stacked or expanded to 100%, four curves and reference lines, in a frame with a table view, a legend that toggles series, patterns for color blindness and loading, empty and error states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/chart-frame.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/chart-area.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/chart-area.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "area",
+          "line",
+          "stacked",
+          "trend",
+          "recharts",
+          "graph",
+          "timeseries"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "ai": {
+          "summary": "<ChartArea title description data xKey series={[{ key, label, color? }]} />. curve: monotone | linear | step | natural. stack: none | stacked | expanded (percent). fillMode: gradient | solid | none. Also dots, grid, yFormatter, yDomain, referenceLines, tooltip, legend, patterns, state and every ChartFrame prop. Colors come from the theme's chart colors in order.",
+          "whenToUse": [
+            "Trends over time, especially more than one series",
+            "Part-to-whole over time (stacked or expanded)"
+          ],
+          "whenNotToUse": [
+            "Comparing a few categories (use chart-bar)",
+            "Exact values matter more than shape (use chart-line with dots or the table view)"
+          ],
+          "composesWith": [
+            "chart-frame",
+            "segmented-control",
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between data points (accessibilityLayer)"
+            },
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Legend buttons switch series; the Chart / Table switch shows the same data as a table"
+            }
+          ],
+          "customization": [
+            "curve, stack and fillMode",
+            "series color: any CSS color or token",
+            "yFormatter and valueFormatter for units",
+            "referenceLines for targets and limits",
+            "yDomain to fix the axis"
+          ]
+        },
+        "examples": [
+          "chart-area-demo",
+          "chart-area-stacked",
+          "chart-area-expanded",
+          "chart-area-step",
+          "chart-area-dots",
+          "chart-area-patterns",
+          "chart-area-target",
+          "chart-area-interactive",
+          "chart-area-states"
+        ],
+        "url": "https://ui.ballmac.com/components/chart-area"
+      }
+    },
+    {
+      "name": "chart-area-demo",
+      "type": "registry:example",
+      "title": "Chart Area: Two series with gradient",
+      "description": "Two series with gradient example of Chart Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-area.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-area-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-area-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-area",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-area-stacked",
+      "type": "registry:example",
+      "title": "Chart Area: Stacked",
+      "description": "Stacked example of Chart Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-area.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-area-stacked.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-area-stacked.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-area",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-area-expanded",
+      "type": "registry:example",
+      "title": "Chart Area: Expanded to 100%",
+      "description": "Expanded to 100% example of Chart Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-area.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-area-expanded.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-area-expanded.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-area",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-area-step",
+      "type": "registry:example",
+      "title": "Chart Area: Step",
+      "description": "Step example of Chart Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-area.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-area-step.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-area-step.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-area",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-area-dots",
+      "type": "registry:example",
+      "title": "Chart Area: Linear with dots",
+      "description": "Linear with dots example of Chart Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-area.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-area-dots.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-area-dots.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-area",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-area-patterns",
+      "type": "registry:example",
+      "title": "Chart Area: Patterns for color blindness",
+      "description": "Patterns for color blindness example of Chart Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-area.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-area-patterns.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-area-patterns.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-area",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-area-target",
+      "type": "registry:example",
+      "title": "Chart Area: Reference line and footer",
+      "description": "Reference line and footer example of Chart Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-area.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-area-target.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-area-target.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-area",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-area-interactive",
+      "type": "registry:example",
+      "title": "Chart Area: With a range picker",
+      "description": "With a range picker example of Chart Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-area.json",
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-area-interactive.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-area-interactive.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-area",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-area-states",
+      "type": "registry:example",
+      "title": "Chart Area: Loading, empty and error",
+      "description": "Loading, empty and error example of Chart Area.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-area.json",
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-area-states.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-area-states.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-area",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-bar",
+      "type": "registry:ui",
+      "title": "Chart Bar",
+      "description": "A bar chart with upright columns or flat bars, grouped, stacked or expanded to 100%, value labels, one color per category, a highlight, negative coloring and sorting, in a frame with a table view, patterns and states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/chart-frame.json",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/chart-bar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/chart-bar.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "bar",
+          "column",
+          "stacked",
+          "ranking",
+          "comparison",
+          "recharts",
+          "graph"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "ai": {
+          "summary": "<ChartBar title description data xKey series={[{ key, label, color? }]} />. layout: columns | bars (flat, for long names). stack: none | stacked | expanded. Also labels, colorBy ('category' for one color per bar), highlight, negativeColor, sort, gap, valueAxis, axisFormatter, referenceLines, legend, patterns, state and every ChartFrame prop.",
+          "whenToUse": [
+            "Comparing values across categories",
+            "Rankings (layout='bars', sort='descending')",
+            "Parts of a whole across groups (stack)"
+          ],
+          "whenNotToUse": [
+            "A trend over time with many points (use chart-area or chart-line)",
+            "A single share of a whole (use chart-pie or chart-radial)"
+          ],
+          "composesWith": [
+            "chart-frame",
+            "stat-card",
+            "segmented-control"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between bars (accessibilityLayer)"
+            },
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Legend buttons switch series or categories; the Chart / Table switch shows the numbers as a table"
+            }
+          ],
+          "customization": [
+            "layout, stack, radius and gap",
+            "highlight to emphasize one category",
+            "negativeColor for gains and losses",
+            "labels with valueAxis={false} for a cleaner look"
+          ]
+        },
+        "examples": [
+          "chart-bar-demo",
+          "chart-bar-horizontal",
+          "chart-bar-stacked",
+          "chart-bar-expanded",
+          "chart-bar-labels",
+          "chart-bar-categories",
+          "chart-bar-negative",
+          "chart-bar-ranked",
+          "chart-bar-patterns"
+        ],
+        "url": "https://ui.ballmac.com/components/chart-bar"
+      }
+    },
+    {
+      "name": "chart-bar-demo",
+      "type": "registry:example",
+      "title": "Chart Bar: Grouped columns",
+      "description": "Grouped columns example of Chart Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-bar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-bar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-bar-horizontal",
+      "type": "registry:example",
+      "title": "Chart Bar: Flat bars with labels",
+      "description": "Flat bars with labels example of Chart Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-bar-horizontal.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-bar-horizontal.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-bar-stacked",
+      "type": "registry:example",
+      "title": "Chart Bar: Stacked",
+      "description": "Stacked example of Chart Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-bar-stacked.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-bar-stacked.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-bar-expanded",
+      "type": "registry:example",
+      "title": "Chart Bar: Expanded to 100%",
+      "description": "Expanded to 100% example of Chart Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-bar-expanded.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-bar-expanded.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-bar-labels",
+      "type": "registry:example",
+      "title": "Chart Bar: Value labels and a highlight",
+      "description": "Value labels and a highlight example of Chart Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-bar-labels.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-bar-labels.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-bar-categories",
+      "type": "registry:example",
+      "title": "Chart Bar: One color per category",
+      "description": "One color per category example of Chart Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-bar-categories.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-bar-categories.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-bar-negative",
+      "type": "registry:example",
+      "title": "Chart Bar: Positive and negative",
+      "description": "Positive and negative example of Chart Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-bar-negative.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-bar-negative.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-bar-ranked",
+      "type": "registry:example",
+      "title": "Chart Bar: Ranking",
+      "description": "Ranking example of Chart Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-bar-ranked.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-bar-ranked.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-bar-patterns",
+      "type": "registry:example",
+      "title": "Chart Bar: Patterns for color blindness",
+      "description": "Patterns for color blindness example of Chart Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-bar-patterns.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-bar-patterns.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-frame",
+      "type": "registry:ui",
+      "title": "Chart Frame",
+      "description": "The card around a Recharts chart: a Table view with CSV download, a legend that toggles series, patterns so series differ by more than color, a summary for screen readers, and loading, empty and error states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/toggle.json",
+        "https://ui.ballmac.com/r/direction.json",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/chart-frame.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/chart-frame.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "recharts",
+          "table",
+          "accessibility",
+          "legend",
+          "patterns",
+          "csv",
+          "states",
+          "graph"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "Wrap any Recharts chart: <ChartFrame title description data xKey series={[{ key, label }]}>{(chart) => <LineChart>…</LineChart>}</ChartFrame>. Use chart.color(key) for strokes, chart.fill(key) for fills, chart.isHidden(key) for `hide`, chart.defs in <defs>, chart.animate for isAnimationActive and chart.rtl to reverse the x axis. The frame adds a Chart/Table switch, a CSV download, a toggling legend, optional patterns, a written summary and state handling. Prefer the ready-made ChartArea, ChartBar, ChartLine, ChartPie, ChartRadar, ChartRadial or ChartScatter when one fits.",
+          "whenToUse": [
+            "Any chart that people need to read, compare or export",
+            "A custom Recharts chart that should be accessible and handle loading and errors"
+          ],
+          "whenNotToUse": [
+            "A tiny inline trend (use sparkline)",
+            "A single ring value (use progress-ring)"
+          ],
+          "composesWith": [
+            "chart",
+            "segmented-control",
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Each legend item is a button that switches its series off or on (at least one stays on)"
+            },
+            {
+              "keys": "Chart / Table switch",
+              "action": "Shows the same numbers as an accessible table with row and column headers, and a CSV download"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The figure has a name and a summary written from the data (first to last, highest and lowest, or a ranking); pass summary to say what it means"
+            },
+            {
+              "keys": "Patterns",
+              "action": "Series are filled with stripes, dots and hatching as well as color, so color is never the only signal"
+            }
+          ],
+          "customization": [
+            "legend: toggle | static | none",
+            "patterns: true | 'toggle'",
+            "aspect: video | wide | panorama | square | tall",
+            "valueFormatter and categoryFormatter write numbers and categories everywhere",
+            "table: your own columns for charts whose data is not one column per series"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "chart-frame-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton in the shape of the chart (area, bars, donut, lines or radar), under the real title."
+          },
+          {
+            "id": "empty",
+            "title": "No data yet",
+            "example": "chart-frame-empty",
+            "trigger": "state=\"empty\" (or data={[]})",
+            "note": "Says when the chart will appear; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "chart-frame-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "chart-frame-demo",
+          "chart-frame-loading",
+          "chart-frame-empty",
+          "chart-frame-error"
+        ],
+        "url": "https://ui.ballmac.com/components/chart-frame"
+      }
+    },
+    {
+      "name": "chart-frame-demo",
+      "type": "registry:example",
+      "title": "Chart Frame: Lines with a table view",
+      "description": "Lines with a table view example of Chart Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-frame.json",
+        "https://ui.ballmac.com/r/chart.json"
+      ],
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-frame-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-frame-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-frame-loading",
+      "type": "registry:example",
+      "title": "Chart Frame: Loading",
+      "description": "Loading example of Chart Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-frame.json"
+      ],
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-frame-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-frame-loading.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-frame-empty",
+      "type": "registry:example",
+      "title": "Chart Frame: No data yet",
+      "description": "No data yet example of Chart Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-frame.json"
+      ],
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-frame-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-frame-empty.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-frame-error",
+      "type": "registry:example",
+      "title": "Chart Frame: Could not load",
+      "description": "Could not load example of Chart Frame.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-frame.json"
+      ],
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-frame-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-frame-error.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-frame",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-line",
+      "type": "registry:ui",
+      "title": "Chart Line",
+      "description": "A line chart with four curves, dots or value labels, dashed series, labels at the end of each line instead of a legend and gaps for missing data, in a frame with a table view, a toggling legend, patterns and states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/chart-frame.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/chart-line.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/chart-line.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "line",
+          "trend",
+          "timeseries",
+          "forecast",
+          "recharts",
+          "graph"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "ai": {
+          "summary": "<ChartLine title description data xKey series={[{ key, label, color? }]} />. curve: monotone | linear | step | natural. Also dots, dashed (series keys), directLabels (write names at the line ends and drop the legend), labels (values on points), gaps (null breaks the line), yFormatter, yDomain, referenceLines, legend, patterns, state and every ChartFrame prop.",
+          "whenToUse": [
+            "Trends where the exact path matters and fills would get in the way",
+            "Several series that cross (use directLabels)",
+            "Forecast against actual (dashed)"
+          ],
+          "whenNotToUse": [
+            "Part-to-whole over time (use chart-area with stack)",
+            "Comparing a few categories (use chart-bar)"
+          ],
+          "composesWith": [
+            "chart-frame",
+            "stat-card",
+            "segmented-control"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between data points (accessibilityLayer)"
+            },
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Legend buttons switch series; the Chart / Table switch shows the numbers as a table"
+            },
+            {
+              "keys": "Dashes",
+              "action": "Dashed lines tell series apart without color; patterns add dash styles to every other line"
+            }
+          ],
+          "customization": [
+            "curve, dots and strokeWidth",
+            "dashed for forecasts",
+            "directLabels instead of a legend",
+            "gaps to keep missing data visible"
+          ]
+        },
+        "examples": [
+          "chart-line-demo",
+          "chart-line-dots",
+          "chart-line-dashed",
+          "chart-line-direct",
+          "chart-line-labels",
+          "chart-line-step",
+          "chart-line-gaps",
+          "chart-line-compare"
+        ],
+        "url": "https://ui.ballmac.com/components/chart-line"
+      }
+    },
+    {
+      "name": "chart-line-demo",
+      "type": "registry:example",
+      "title": "Chart Line: Two series",
+      "description": "Two series example of Chart Line.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-line.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-line-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-line-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-line",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-line-dots",
+      "type": "registry:example",
+      "title": "Chart Line: Linear with dots",
+      "description": "Linear with dots example of Chart Line.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-line.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-line-dots.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-line-dots.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-line",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-line-dashed",
+      "type": "registry:example",
+      "title": "Chart Line: Actual against plan",
+      "description": "Actual against plan example of Chart Line.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-line.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-line-dashed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-line-dashed.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-line",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-line-direct",
+      "type": "registry:example",
+      "title": "Chart Line: Labels on the lines",
+      "description": "Labels on the lines example of Chart Line.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-line.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-line-direct.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-line-direct.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-line",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-line-labels",
+      "type": "registry:example",
+      "title": "Chart Line: Value labels",
+      "description": "Value labels example of Chart Line.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-line.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-line-labels.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-line-labels.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-line",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-line-step",
+      "type": "registry:example",
+      "title": "Chart Line: Step",
+      "description": "Step example of Chart Line.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-line.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-line-step.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-line-step.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-line",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-line-gaps",
+      "type": "registry:example",
+      "title": "Chart Line: Gaps for missing data",
+      "description": "Gaps for missing data example of Chart Line.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-line.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-line-gaps.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-line-gaps.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-line",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-line-compare",
+      "type": "registry:example",
+      "title": "Chart Line: Five series with patterns",
+      "description": "Five series with patterns example of Chart Line.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-line.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-line-compare.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-line-compare.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-line",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-pie",
+      "type": "registry:ui",
+      "title": "Chart Pie",
+      "description": "A pie or donut with the total in the hole, outside labels, a pulled-out slice and a half ring, in a frame with a legend that switches slices off, a table of value and share, a written ranking, patterns and states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/chart-frame.json",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/chart-pie.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/chart-pie.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "pie",
+          "donut",
+          "share",
+          "proportion",
+          "gauge",
+          "recharts",
+          "graph"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "ai": {
+          "summary": "<ChartPie title description data={[{ name, label?, value, color? }]} valueLabel='visitors' />. donut (default) or donut={false}; half for a semicircle; centerLabel (true writes the total; or { value, label }); labels='outside'; highlight (a slice name); gap; legend; patterns; state. The legend switches slices off and the total and shares follow. Slices are rows, not series.",
+          "whenToUse": [
+            "A few parts of one whole (up to about six)",
+            "A goal or quota ring (two slices, custom centerLabel)"
+          ],
+          "whenNotToUse": [
+            "More than six categories or exact comparison (use chart-bar with layout='bars')",
+            "Change over time (use chart-area or chart-line)"
+          ],
+          "composesWith": [
+            "chart-frame",
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between slices (accessibilityLayer)"
+            },
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Legend buttons switch slices off and on; the Chart / Table switch shows value and share as a table"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The summary lists every slice with its share and value, largest first"
+            }
+          ],
+          "customization": [
+            "donut, half and gap",
+            "slice colors through `color` or the theme's chart colors",
+            "centerLabel for a custom total",
+            "valueFormatter for units"
+          ]
+        },
+        "examples": [
+          "chart-pie-demo",
+          "chart-pie-full",
+          "chart-pie-half",
+          "chart-pie-highlight",
+          "chart-pie-patterns",
+          "chart-pie-center"
+        ],
+        "url": "https://ui.ballmac.com/components/chart-pie"
+      }
+    },
+    {
+      "name": "chart-pie-demo",
+      "type": "registry:example",
+      "title": "Chart Pie: Donut with the total",
+      "description": "Donut with the total example of Chart Pie.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-pie.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-pie-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-pie-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-pie",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-pie-full",
+      "type": "registry:example",
+      "title": "Chart Pie: Full pie with labels",
+      "description": "Full pie with labels example of Chart Pie.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-pie.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-pie-full.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-pie-full.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-pie",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-pie-half",
+      "type": "registry:example",
+      "title": "Chart Pie: Half ring",
+      "description": "Half ring example of Chart Pie.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-pie.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-pie-half.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-pie-half.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-pie",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-pie-highlight",
+      "type": "registry:example",
+      "title": "Chart Pie: A pulled-out slice",
+      "description": "A pulled-out slice example of Chart Pie.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-pie.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-pie-highlight.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-pie-highlight.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-pie",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-pie-patterns",
+      "type": "registry:example",
+      "title": "Chart Pie: Patterns for color blindness",
+      "description": "Patterns for color blindness example of Chart Pie.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-pie.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-pie-patterns.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-pie-patterns.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-pie",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-pie-center",
+      "type": "registry:example",
+      "title": "Chart Pie: A goal ring with your own center",
+      "description": "A goal ring with your own center example of Chart Pie.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-pie.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-pie-center.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-pie-center.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-pie",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-radar",
+      "type": "registry:ui",
+      "title": "Chart Radar",
+      "description": "A radar chart with filled or outlined shapes, polygon or circular rings, dots and a fixed scale, in a frame with a legend that switches series off, a table of every axis, patterns and states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/chart-frame.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/chart-radar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/chart-radar.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "radar",
+          "spider",
+          "comparison",
+          "scorecard",
+          "recharts",
+          "graph"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "ai": {
+          "summary": "<ChartRadar title description data xKey series={[{ key, label, color? }]} />. fillShape (false draws outlines), dots, grid: polygon | circle | none, domain ([0, 100]), scale (write the scale), legend, patterns, state and every ChartFrame prop.",
+          "whenToUse": [
+            "Comparing a few things across the same 5 to 8 dimensions",
+            "Scorecards and profiles"
+          ],
+          "whenNotToUse": [
+            "Precise comparison of values (use chart-bar)",
+            "More than three or four overlapping series"
+          ],
+          "composesWith": [
+            "chart-frame",
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between axes (accessibilityLayer)"
+            },
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Legend buttons switch series off and on; the Chart / Table switch shows the numbers as a table"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The figure has a name and a summary written from the data"
+            }
+          ],
+          "customization": [
+            "fillShape and dots",
+            "grid and domain",
+            "series colors"
+          ]
+        },
+        "examples": [
+          "chart-radar-demo",
+          "chart-radar-compare",
+          "chart-radar-circle",
+          "chart-radar-patterns"
+        ],
+        "url": "https://ui.ballmac.com/components/chart-radar"
+      }
+    },
+    {
+      "name": "chart-radar-demo",
+      "type": "registry:example",
+      "title": "Chart Radar: One series",
+      "description": "One series example of Chart Radar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-radar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-radar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-radar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-radar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-radar-compare",
+      "type": "registry:example",
+      "title": "Chart Radar: Two series with the scale",
+      "description": "Two series with the scale example of Chart Radar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-radar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-radar-compare.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-radar-compare.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-radar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-radar-circle",
+      "type": "registry:example",
+      "title": "Chart Radar: Circular rings, outlines and dots",
+      "description": "Circular rings, outlines and dots example of Chart Radar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-radar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-radar-circle.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-radar-circle.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-radar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-radar-patterns",
+      "type": "registry:example",
+      "title": "Chart Radar: Patterns for color blindness",
+      "description": "Patterns for color blindness example of Chart Radar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-radar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-radar-patterns.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-radar-patterns.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-radar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-radial",
+      "type": "registry:ui",
+      "title": "Chart Radial",
+      "description": "Radial bars: one ring is a gauge, several are concentric progress rings. Full or half circle, a track, text in the middle, in a frame with a table, patterns and states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/chart-frame.json",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/chart-radial.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/chart-radial.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "radial",
+          "gauge",
+          "ring",
+          "progress",
+          "goal",
+          "recharts",
+          "graph"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "ai": {
+          "summary": "<ChartRadial title description data={[{ name, label?, value, color? }]} max={100} />. One row is a gauge, several rows are concentric rings. half for a semicircle, centerLabel (true writes the first ring's share, or { value, label }), track, valueLabel, legend, patterns, state.",
+          "whenToUse": [
+            "Progress toward a goal",
+            "A single metric against its maximum",
+            "Activity or goal rings"
+          ],
+          "whenNotToUse": [
+            "Parts of a whole (use chart-pie)",
+            "Comparing many categories (use chart-bar)"
+          ],
+          "composesWith": [
+            "chart-frame",
+            "stat-card",
+            "progress-ring"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "The summary reads every ring as 'value of max (share)'"
+            },
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Legend buttons switch series off and on; the Chart / Table switch shows the numbers as a table"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The figure has a name and a summary written from the data"
+            }
+          ],
+          "customization": [
+            "half and track",
+            "max (the full ring)",
+            "per-ring colors"
+          ]
+        },
+        "examples": [
+          "chart-radial-demo",
+          "chart-radial-rings",
+          "chart-radial-half",
+          "chart-radial-patterns"
+        ],
+        "url": "https://ui.ballmac.com/components/chart-radial"
+      }
+    },
+    {
+      "name": "chart-radial-demo",
+      "type": "registry:example",
+      "title": "Chart Radial: A goal gauge",
+      "description": "A goal gauge example of Chart Radial.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-radial.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-radial-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-radial-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-radial",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-radial-rings",
+      "type": "registry:example",
+      "title": "Chart Radial: Concentric rings",
+      "description": "Concentric rings example of Chart Radial.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-radial.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-radial-rings.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-radial-rings.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-radial",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-radial-half",
+      "type": "registry:example",
+      "title": "Chart Radial: Half-circle gauge",
+      "description": "Half-circle gauge example of Chart Radial.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-radial.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-radial-half.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-radial-half.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-radial",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-radial-patterns",
+      "type": "registry:example",
+      "title": "Chart Radial: Patterns for color blindness",
+      "description": "Patterns for color blindness example of Chart Radial.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-radial.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-radial-patterns.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-radial-patterns.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-radial",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-scatter",
+      "type": "registry:ui",
+      "title": "Chart Scatter",
+      "description": "A scatter or bubble chart with grouped colors, point sizes from a third number and titled axes, in a frame with a toggling legend, a table of every point with CSV download, and states.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "recharts@^3"
+      ],
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart.json",
+        "https://ui.ballmac.com/r/chart-frame.json",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/chart-scatter.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/chart-scatter.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "scatter",
+          "bubble",
+          "correlation",
+          "distribution",
+          "recharts",
+          "graph"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "ai": {
+          "summary": "<ChartScatter title description data xKey yKey xLabel yLabel /> with optional zKey (point size), groupKey plus groups ([{ key, label, color? }]), nameKey, xDomain, yDomain, sizeRange, formatters, legend, patterns, state. Every row is one point.",
+          "whenToUse": [
+            "Relationships between two numbers",
+            "Distributions and outliers",
+            "Bubble charts with a third measure"
+          ],
+          "whenNotToUse": [
+            "Trends over time (use chart-line)",
+            "Categories with one value each (use chart-bar)"
+          ],
+          "composesWith": [
+            "chart-frame"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between points (accessibilityLayer)"
+            },
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Legend buttons switch series off and on; the Chart / Table switch shows the numbers as a table"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The figure has a name and a summary written from the data"
+            },
+            {
+              "keys": "Table",
+              "action": "Every point, with its name, group and values, in a table you can download as CSV"
+            }
+          ],
+          "customization": [
+            "groups and colors",
+            "zKey and sizeRange for bubbles",
+            "xDomain and yDomain"
+          ]
+        },
+        "examples": [
+          "chart-scatter-demo",
+          "chart-scatter-groups",
+          "chart-scatter-bubble"
+        ],
+        "url": "https://ui.ballmac.com/components/chart-scatter"
+      }
+    },
+    {
+      "name": "chart-scatter-demo",
+      "type": "registry:example",
+      "title": "Chart Scatter: One group",
+      "description": "One group example of Chart Scatter.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-scatter.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-scatter-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-scatter-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-scatter",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-scatter-groups",
+      "type": "registry:example",
+      "title": "Chart Scatter: Groups by color",
+      "description": "Groups by color example of Chart Scatter.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-scatter.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-scatter-groups.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-scatter-groups.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-scatter",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "chart-scatter-bubble",
+      "type": "registry:example",
+      "title": "Chart Scatter: Bubbles sized by a third number",
+      "description": "Bubbles sized by a third number example of Chart Scatter.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/chart-scatter.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/chart-scatter-bubble.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/chart-scatter-bubble.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "chart-scatter",
+        "tier": "free"
+      }
+    },
+    {
       "name": "chart",
       "type": "registry:ui",
       "title": "Chart",
@@ -31194,7 +33893,8 @@
         "recharts@^3"
       ],
       "registryDependencies": [
-        "utils"
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
       ],
       "files": [
         {
@@ -31215,8 +33915,16 @@
           "graph",
           "data"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-30",
+        "version": "1.1.0",
+        "updated": "2026-10-18",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-18",
+            "note": "Adds ChartCenterLabel and a `format` prop on ChartContainer, groups tooltip numbers by the locale (useLocale) and looks a series up by what `nameKey` points at first, which fixes pie legends. No prop was removed.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Wrap any Recharts chart in ChartContainer with a config of label and color per series. Use ChartTooltipContent and ChartLegendContent. Always pass label and summary.",
@@ -42973,6 +45681,7 @@
         ],
         "version": "1.0.0",
         "updated": "2026-09-29",
+        "tests": true,
         "ai": {
           "summary": "<MenuBar> holds <MenuBarMenu value><MenuBarTrigger/><MenuBarContent>items</MenuBarContent></MenuBarMenu> (Radix Menubar parts with Mac styling) followed by <MenuBarStatus> with <MenuBarStatusItem aria-label> icon buttons and <MenuBarClock />. Use variant=\"app\" on the app-name trigger and <MenuBarShortcut> for key equivalents.",
           "whenToUse": [

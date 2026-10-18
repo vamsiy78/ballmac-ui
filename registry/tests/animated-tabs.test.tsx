@@ -63,7 +63,7 @@ describe("AnimatedTabs", () => {
     const onValueChange = vi.fn()
     const { rerender } = render(<Example value="one" onValueChange={onValueChange} />)
     await userEvent.click(screen.getByRole("tab", { name: "Three" }))
-    expect(onValueChange).toHaveBeenCalledWith("three")
+    expect(onValueChange.mock.calls.at(-1)?.[0]).toBe("three")
     // Parent hasn't updated yet: selection stays put.
     expect(screen.getByRole("tab", { name: "One" })).toHaveAttribute("aria-selected", "true")
     rerender(<Example value="three" onValueChange={onValueChange} />)

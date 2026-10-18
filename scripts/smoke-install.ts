@@ -4,7 +4,8 @@
  * runs `shadcn init` then `shadcn add` for every free item and example, and finally
  * `tsc --noEmit` and `next build`. Any failure means users would hit it too.
  *
- * Usage: pnpm smoke   (SMOKE_DIR to reuse a folder, SMOKE_BASE=radix, SMOKE_PIN=1 for the Next.js version pinned in apps/www)
+ * Usage: pnpm smoke   (SMOKE_DIR to reuse a folder, SMOKE_BASE=radix, SMOKE_PIN=1 for the Next.js version pinned in apps/www,
+ * SMOKE_LIB=base to install the Base UI variants from /r/base instead of the Radix UI items)
  */
 import { execSync, spawn } from "node:child_process"
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
@@ -57,15 +58,17 @@ try {
     app,
   )
 
+  const baseLib = process.env.SMOKE_LIB === "base"
   const registry = JSON.parse(
-    readFileSync(join(ROOT, "apps/www/public/r/registry.json"), "utf8"),
+    readFileSync(baseLib ? join(ROOT, "registry-base.json") : join(ROOT, "apps/www/public/r/registry.json"), "utf8"),
   )
+  const prefix = baseLib ? `${BASE}/r/base` : `${BASE}/r`
   const names: string[] = registry.items.map((i: { name: string }) => i.name)
   // The CLI cannot reliably resolve hundreds of URLs in one invocation.
   for (let offset = 0; offset < names.length; offset += 20) {
     const batch = names.slice(offset, offset + 20)
     run(
-      `npx -y shadcn@latest add ${batch.map((n) => `${BASE}/r/${n}.json`).join(" ")} -y --overwrite`,
+      `npx -y shadcn@latest add ${batch.map((n) => `${prefix}/${n}.json`).join(" ")} -y --overwrite`,
       app,
     )
   }

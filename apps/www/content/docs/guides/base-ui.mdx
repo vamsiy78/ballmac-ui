@@ -1,0 +1,89 @@
+---
+title: Use Base UI instead of Radix UI
+description: "Every Ballmac UI component built on Radix UI also comes in a Base UI version with the same props, the same keyboard behavior and the same tests. Install it by URL, or let a Base UI style pick it."
+---
+
+Most interactive Ballmac UI components (dialogs, menus, tabs, sliders, tooltips and more) are built on [Radix UI](https://www.radix-ui.com). Each of them also has a version built on [Base UI](https://base-ui.com), the headless library behind shadcn's `base-*` styles. You choose one per project, and you can switch later.
+
+Both versions have the same props, the same exports and the same `data-slot` names. Pages and code that use a component keep working when you change which one is installed.
+
+## Which one do you need
+
+Check your `components.json`. The `style` says which library your project uses:
+
+- A `base-*` style, such as `base-nova`, uses Base UI.
+- Any other style, such as `radix-nova` or `new-york-v4`, uses Radix UI.
+
+If you start a new project with `shadcn init`, you get Base UI unless you ask for Radix. Match the Ballmac version to it, so you ship one headless library, not two.
+
+## Install a Base UI version
+
+Every component page with a Base UI version has a **Radix UI | Base UI** switch above the install command. Pick Base UI, and the command becomes:
+
+```npm
+npx shadcn@latest add https://ui.ballmac.com/r/base/popover.json
+```
+
+The command installs the component, the Ballmac items it builds on (their Base UI versions where they have one), and the `@base-ui/react` package. It leaves Radix UI out.
+
+A component with nothing to swap, such as a chart or a card, has one version that works with both.
+
+### Let the style choose
+
+The address `https://ui.ballmac.com/r/{style}/popover.json` answers with the version that fits the style. The shadcn CLI replaces `{style}` with your project's style, so pin `@ballmac` to it once:
+
+```npm
+npx shadcn@latest registry add @ballmac=https://ui.ballmac.com/r/{style}/{name}.json
+```
+
+After that, the usual command installs the right version for the project:
+
+```npm
+npx shadcn@latest add @ballmac/popover
+```
+
+A `base-*` style gets the Base UI version, and any other style gets the Radix UI version. If a component has no Base UI version, every style gets the one version it has.
+
+## What stays the same
+
+The Base UI versions keep the Radix UI API, so your code does not change. These all work as they do in the Radix UI version:
+
+- `onSelect` on menu items, and `preventDefault()` in a close button's `onClick` to keep a dialog open while a request finishes.
+- `onOpenAutoFocus` and `onCloseAutoFocus` on dialogs, alert dialogs and sheets, to place focus yourself.
+- `asChild` on Button, Badge, Item and the sidebar menu button.
+- `value`, `defaultValue` and `onValueChange` on the menubar, and `type` on the scroll area.
+- Checkbox `"indeterminate"`, toggle group and accordion `type`, and select items written as children.
+- Right-to-left: the arrow keys follow `<html dir>`, as before.
+
+The same test suite runs against both versions in CI, so a behavior that differs fails the build.
+
+## What differs
+
+These are the places where the two libraries behave differently, and what the Base UI version does about it:
+
+| | Radix UI | Base UI |
+| --- | --- | --- |
+| Styling hooks | `data-state="open"`, `"checked"`, `"active"` | `data-open`, `data-checked`, `data-active`, and `data-popup-open` on a trigger. Ballmac's classes already use them. |
+| Rendering as your own element | `asChild` | A `render` prop on the part. For example, a menu item that is a link: `render={<a href="#profile" />}`. |
+| Checkbox, switch and radio | A native button | An element with the right `role`. A disabled one has `aria-disabled` and `data-disabled`, not the `disabled` attribute. Inside a `fieldset disabled`, Ballmac's versions still disable themselves. |
+| Slider | The thumb is the `slider` | The `slider` is a hidden input inside the thumb. Name it with `aria-label`, `aria-labelledby` or `thumbLabels`. |
+| Accordion keys | Arrow keys move between headers | Tab moves between headers. |
+| Focus after a dialog closes | Stays where it was if nothing took it back | Returns to the element that had it. |
+
+If you write your own components on top of the Base UI versions, style with the `data-*` attributes above, and use `render` where you would use `asChild` on a part.
+
+## Switch between them
+
+Install the other version over the first. Run the `add` command with `--overwrite`:
+
+```npm
+npx shadcn@latest add https://ui.ballmac.com/r/base/dialog.json --overwrite
+```
+
+To go back, add the item by its usual name (`@ballmac/dialog`) with `--overwrite`. Then remove the Base UI package if nothing else uses it.
+
+Your own edits to a component are overwritten, so commit first.
+
+## Helpers
+
+A Base UI version may add small helper files to your project, in `lib/ballmac`: `positioner` (maps Radix UI's `side`, `align` and `onSelect` onto Base UI), `slot` (`asChild`), `fieldset` (disabled fieldsets), `menubar-value` and `direction`. They are small, and a component pulls in the ones it needs when you add it.

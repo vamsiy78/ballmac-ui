@@ -1,0 +1,37 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "incremental": false,
+    "paths": {
+      "@/components/ballmac/*": [
+        "../../registry/ballmac/base/components/*",
+        "../../registry/ballmac/components/*"
+      ],
+      "@/lib/ballmac/*": [
+        "../../registry/ballmac/base/lib/*",
+        "../../registry/ballmac/lib/*"
+      ],
+      "@/hooks/ballmac/*": [
+        "../../registry/ballmac/hooks/*"
+      ],
+      "@/registry/*": [
+        "../../registry/*"
+      ],
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "../../registry/ballmac/base/**/*.ts",
+    "../../registry/ballmac/base/**/*.tsx",
+    "../../registry/examples/**/*.tsx",
+    "../../registry/ballmac/components/blocks/**/*.tsx",
+    "../../registry/ballmac/components/templates/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "out"
+  ]
+}

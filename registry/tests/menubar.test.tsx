@@ -48,4 +48,28 @@ describe("Menubar", () => {
     expect(onSelect).toHaveBeenCalledOnce();
     await waitFor(() => expect(screen.queryByRole("menuitem", { name: "New" })).not.toBeInTheDocument());
   });
+  it("opens the menu named by defaultValue and reports which one is open", async () => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    render(
+      <Menubar aria-label="Editor" defaultValue="file" onValueChange={onValueChange}>
+        <MenubarMenu value="file">
+          <MenubarTrigger>File</MenubarTrigger>
+          <MenubarContent>
+            <MenubarItem>New</MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+        <MenubarMenu value="edit">
+          <MenubarTrigger>Edit</MenubarTrigger>
+          <MenubarContent>
+            <MenubarItem>Undo</MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+      </Menubar>,
+    );
+    expect(await screen.findByRole("menuitem", { name: "New" })).toBeInTheDocument();
+    await user.click(screen.getByRole("menuitem", { name: "New" }));
+    await waitFor(() => expect(screen.queryByRole("menuitem", { name: "New" })).toBeNull());
+    expect(onValueChange.mock.calls.at(-1)?.[0]).toBe("");
+  });
 });

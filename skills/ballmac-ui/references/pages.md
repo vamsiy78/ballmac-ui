@@ -24,6 +24,10 @@ Wrap the app in **app-shell-1**, then fill it: **dashboard-1** or **dashboard-2*
 
 For a ready-made admin use **template-atlas** or **template-workspace**.
 
+### Charts and reports
+
+For a page of charts, start from **charts-1** (analytics overview), **charts-2** (revenue report), **charts-3** (small multiples) or **charts-4** (scorecard). For one chart, install `chart-area`, `chart-bar`, `chart-line`, `chart-pie`, `chart-radar`, `chart-radial` or `chart-scatter` and pass `data`, `xKey` and `series`; each draws inside `chart-frame`, which adds a Table view, patterns for color blindness, a written summary and loading, empty and error states. Do not assemble Recharts by hand.
+
 ## Settings
 
 **settings-1** (account), **settings-2** (notifications), **settings-3** (team members), **settings-4** (integrations), **settings-5** (audit log), **settings-6** (data and privacy). **billing-1** and **billing-2** for plans and invoices. **webhooks-1**, **flags-1**, **api-1**, **dev-1** for developer settings.

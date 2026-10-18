@@ -17,6 +17,8 @@ export type SiteItem = Omit<ItemMeta, "files" | "examples"> & {
   /** A test file ships with this item. */
   tests?: boolean
   files: { path: string; source: string; target: string }[]
+  /** The Base UI variant of this item (registry/ballmac/base), or false when it has none. */
+  base?: false | { files: { source: string; target: string }[]; dependencies: string[]; registryDependencies: string[] }
   examples: { name: string; title: string; file: string; source: string; description?: string }[]
 }
 
@@ -106,6 +108,11 @@ export const namespaceOf = (name: string) => (getItem(name)?.tier === "pro" ? "@
 
 export function addCommand(names: string[], pm: PackageManager) {
   const args = `shadcn@latest add ${names.map((n) => `${namespaceOf(n)}/${n}`).join(" ")}`
+  return { pnpm: `pnpm dlx ${args}`, npm: `npx ${args}`, yarn: `yarn dlx ${args}`, bun: `bunx --bun ${args}` }[pm]
+}
+/** Base UI variants are added by URL until the shadcn directory entry takes a `{style}` (see docs/guides/base-ui). */
+export function baseAddCommand(names: string[], pm: PackageManager) {
+  const args = `shadcn@latest add ${names.map((n) => `${SITE_URL}/r/base/${n}.json`).join(" ")}`
   return { pnpm: `pnpm dlx ${args}`, npm: `npx ${args}`, yarn: `yarn dlx ${args}`, bun: `bunx --bun ${args}` }[pm]
 }
 export function installCommand(deps: string[], pm: PackageManager) {
@@ -209,6 +216,7 @@ export const blockCategoryLabels: Record<string, string> = {
   habits: "Habits",
   inventory: "Inventory",
   trip: "Trip itinerary",
+  charts: "Charts",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -235,7 +243,7 @@ export const blockGroups = [
     id: "application",
     label: "Application",
     description: "Screens inside a product: shell, dashboards, settings, billing, inbox, notifications, team chat, boards, uploads, developer tools, AI chat and AI agents.",
-    categories: ["app-shell", "dashboard", "funnel", "retention", "experiments", "settings", "billing", "invoice", "mail", "tickets", "notifications", "chat", "comments", "kanban", "tasks", "calendar", "roster", "gantt", "goals", "habits", "inventory", "timesheet", "expenses", "crm", "editor", "survey", "poll", "quiz", "portfolio", "upload", "import", "developer", "webhooks", "api", "flags", "workflow", "leaderboard", "ai-chat", "agents"],
+    categories: ["app-shell", "dashboard", "charts", "funnel", "retention", "experiments", "settings", "billing", "invoice", "mail", "tickets", "notifications", "chat", "comments", "kanban", "tasks", "calendar", "roster", "gantt", "goals", "habits", "inventory", "timesheet", "expenses", "crm", "editor", "survey", "poll", "quiz", "portfolio", "upload", "import", "developer", "webhooks", "api", "flags", "workflow", "leaderboard", "ai-chat", "agents"],
   },
   {
     id: "shop",

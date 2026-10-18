@@ -10,6 +10,7 @@ const columns = [
       { href: "/components", label: "Components" },
       { href: "/blocks", label: "Blocks" },
       { href: "/templates", label: "Templates" },
+      { href: "/charts", label: "Charts" },
       { href: "/presets", label: "Presets" },
       { href: "/themes", label: "Themes" },
       { href: "/use-cases", label: "What you can build" },

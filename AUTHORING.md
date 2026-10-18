@@ -118,6 +118,16 @@ export default defineItem({
 
 Write descriptions for two readers: a developer scanning a catalog and a coding agent choosing between items. Be specific and honest; no marketing words ("stunning", "beautiful", "powerful").
 
+## Base UI variants
+
+An item built on Radix UI also has a Base UI variant, a file at the same path under `registry/ballmac/base/` (`components/popover.tsx` is `base/components/popover.tsx`). The build swaps the files, replaces `radix-ui` with `@base-ui/react`, and writes the variant to `public/r/base/<name>.json`. The Worker serves it for `/r/{style}/<name>.json` when the style is a `base-*` one.
+
+- **Keep the API.** The variant takes the same props and exports as the Radix file, so users can switch without touching their code. Where Base UI differs, the variant adapts: `onSelect`, `asChild` (use `Slot` from `@/lib/ballmac/slot`), `onOpenAutoFocus`, `preventDefault()` in a close button. See `@/lib/ballmac/positioner`.
+- **Base UI's names.** Style with `data-open`, `data-closed`, `data-checked`, `data-active` and `data-popup-open`, not `data-state`. Floating content is a Positioner plus a Popup; a dialog's overlay is `Backdrop`; a tab is `Tab` and its content `Panel`. `pnpm check` fails a variant that imports `radix-ui` or uses a `data-state` selector, or a Radix item without a variant.
+- **One suite, two libraries.** `pnpm --filter @ballmac-ui/registry test:base` runs the same tests against the variants. Write tests that check behavior, so both pass. Use `expectDisabled` from `registry/tests/helpers.ts` for a disabled switch, checkbox or radio.
+- **Change both.** When you edit a Radix file that has a variant, make the same change in the variant.
+- A helper only Base UI needs goes in `registry/ballmac/base/lib` and in `scripts/base-variants.ts`. Type-check the variants with `npx tsc --noEmit -p apps/www/tsconfig.base-ui.json`, and install them into a fresh app with `SMOKE_LIB=base pnpm smoke`.
+
 ## Examples
 
 - Default export, self-contained, realistic content (no lorem ipsum, no fake brand or customer names; neutral placeholders like "Acme" are fine, or product-neutral copy).

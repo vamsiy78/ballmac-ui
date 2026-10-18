@@ -19,7 +19,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync
 import { dirname, join } from "node:path"
 
 import { RULES } from "../packages/audit/src/rules/meta"
-import { FEELS, MOTION_PERSONALITIES, PRESETS } from "../packages/theme-engine/src/index"
+import { FEELS, FONT_FACES, MOTION_PERSONALITIES, PRESETS, SYSTEMS } from "../packages/theme-engine/src/index"
 
 const ROOT = join(import.meta.dirname, "..")
 const SKILL = join(ROOT, "skills/ballmac-ui")
@@ -169,7 +169,11 @@ put(
   "themes.md",
   `${generated("packages/theme-engine")}# Themes, motion and platform feels\n\n` +
     "Every Ballmac item reads the standard shadcn CSS variables, so it follows your theme. Install a ready-made theme, or build one at https://ui.ballmac.com/themes and install the exact result from its link.\n\n" +
-    `## Themes (${PRESETS.length})\n\nInstall: \`npx shadcn@latest add @ballmac/theme-<name>\`. Each one also sets how the product moves.\n\n` +
+    `## Presets (${SYSTEMS.length}): a whole design system in one install\n\nInstall: \`npx shadcn@latest add @ballmac/preset-<name>\`. A preset sets colors (light and dark), corner radius, typeface, platform feel and motion together. Take one when the user wants a finished look, not just colors. Each has a 16-character code; \`@ballmac/preset-<code>\` installs any code made at https://ui.ballmac.com/themes, and \`?only=colors,shape,font,motion,feel\` installs just those parts.\n\n` +
+    SYSTEMS.map((p) => `- **${p.slug}**: ${p.tagline}. Suits: ${p.suits.join("; ")}. Code: \`${p.code}\`.`).join("\n") +
+    `\n\n## Typefaces (${FONT_FACES.length})\n\nInstall: \`npx shadcn@latest add @ballmac/font-<name>\`. The CLI sets the font up for the framework (next/font in Next.js, Fontsource elsewhere).\n\n` +
+    FONT_FACES.map((f) => `- **${f.id}**: ${f.label}. ${f.note}`).join("\n") +
+    `\n\n## Themes (${PRESETS.length})\n\nInstall: \`npx shadcn@latest add @ballmac/theme-<name>\`. Each one also sets how the product moves.\n\n` +
     PRESETS.map((p) => `- **${p.slug}**: ${p.tagline}. Suits: ${p.suits.join("; ")}. Motion: ${p.motion}.`).join("\n") +
     `\n\n## Motion (${MOTION_PERSONALITIES.length})\n\nInstall: \`npx shadcn@latest add @ballmac/motion-<name>\`. Motion is theme data (speed, bounce, travel, hover, stagger); the reduced-motion fallback is built in.\n\n` +
     MOTION_PERSONALITIES.map((m) => `- **${m.slug}**: ${m.tagline}`).join("\n") +

@@ -26,7 +26,7 @@ describe("Toggle", () => {
       </Toggle>,
     );
     await user.click(screen.getByRole("button", { name: "Pin" }));
-    expect(onPressedChange).toHaveBeenCalledWith(true);
+    expect(onPressedChange.mock.calls.at(-1)?.[0]).toBe(true);
     expect(screen.getByRole("button", { name: "Pin" })).toHaveAttribute(
       "aria-pressed",
       "false",

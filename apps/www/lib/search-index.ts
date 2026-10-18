@@ -23,6 +23,7 @@ export function searchEntries(): MenuEntry[] {
     ...getBlocks().map((b) => ({ name: b.name, title: b.title, description: b.description, group: `Blocks · ${blockCategoryLabels[b.blockCategory ?? ""] ?? ""}`, href: `/blocks/${b.name}` })),
     ...getTemplates().map((t) => ({ name: t.name, title: t.title, description: t.description, group: "Templates", href: `/templates/${t.name}` })),
     { name: "themes", title: "Theme builder", description: "Twelve free themes and a live builder with contrast checks and a motion lab.", group: "Themes", href: "/themes" },
+    { name: "charts", title: "Charts", description: "Area, bar, line, pie, radar, radial and scatter charts with a table view, patterns and states, as live examples.", group: "Components", href: "/charts" },
     { name: "presets", title: "Presets", description: "Complete design systems: colour, shape, typeface, platform feel and motion in one command.", group: "Themes", href: "/presets" },
     ...SYSTEMS.map((p) => ({ name: `preset-${p.slug}`, title: `${p.title} preset`, description: p.tagline, group: "Themes", href: `/presets/${p.slug}` })),
     ...PRESETS.map((p) => ({ name: `theme-${p.slug}`, title: `${p.title} theme`, description: p.tagline, group: "Themes", href: `/themes/${p.slug}` })),

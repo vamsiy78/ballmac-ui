@@ -19,9 +19,27 @@ for (const f of readdirSync(dir)) {
     else ok++
     continue
   }
+  if (f === "base-manifest.json") {
+    // Which items have a Base UI variant in base/: each is listed with the version of the item it replaces.
+    const listed = (data.items ?? []) as { name: string; version: string }[]
+    const missing = listed.filter((i) => !i.version || !existsSync(`${dir}/base/${i.name}.json`)).map((i) => i.name)
+    if (data.schema !== 1 || !listed.length || missing.length) fail(f, `manifest invalid: ${missing.slice(0, 3).join(", ")}`)
+    else ok++
+    continue
+  }
   const r = (f === "registry.json" ? registrySchema : registryItemSchema).safeParse(data)
   if (!r.success) { fail(f, JSON.stringify(r.error.issues.slice(0, 3))); continue }
   ok++
+}
+
+// Base UI variants: every file is a registry item.
+if (existsSync(`${dir}/base`)) {
+  for (const f of readdirSync(`${dir}/base`)) {
+    total++
+    const r = (f === "registry.json" ? registrySchema : registryItemSchema).safeParse(JSON.parse(readFileSync(`${dir}/base/${f}`, "utf8")))
+    if (!r.success) fail(`base/${f}`, JSON.stringify(r.error.issues.slice(0, 3)))
+    else ok++
+  }
 }
 
 // Shipped tests: one JSON per item, with the file content and a version that matches the manifest.

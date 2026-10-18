@@ -28,7 +28,7 @@ install them too, through MCP. Now listed in the official [shadcn registry direc
 ## Quick start
 
 You need a project with React 19, Tailwind CSS v4 and shadcn set up (`npx shadcn@latest init`; it creates `components.json`). Both the Base UI and
-Radix styles work.
+Radix styles work: components built on Radix UI also come in a Base UI version ([guide](https://ui.ballmac.com/docs/guides/base-ui)).
 
 ```bash
 # add components by name; npm dependencies are installed for you

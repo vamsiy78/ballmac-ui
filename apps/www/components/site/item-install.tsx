@@ -4,9 +4,10 @@ import { CodePanel } from "@/components/site/code-panel"
 import { CopyButton } from "@/components/site/copy-button"
 import { InstallSwitcher } from "@/components/site/install-switcher"
 import { InstallTabs } from "@/components/site/install-tabs"
+import { LibrarySwitcher } from "@/components/site/library-switcher"
 import { ProNotice } from "@/components/site/pro-notice"
 import { PRO_REGISTRY_SNIPPET } from "@/lib/pro-snippets"
-import { addCommand, getItem, installCommand, isPro, itemHref, namespaceOf, packageManagers, readSource, SITE_URL, type PackageManager, type SiteItem } from "@/lib/registry"
+import { addCommand, baseAddCommand, getItem, installCommand, isPro, itemHref, namespaceOf, packageManagers, readSource, SITE_URL, type PackageManager, type SiteItem } from "@/lib/registry"
 
 const perPm = (fn: (pm: PackageManager) => string) =>
   Object.fromEntries(packageManagers.map((pm) => [pm, fn(pm)])) as Record<PackageManager, string>
@@ -45,7 +46,7 @@ export function ItemInstall({ item }: { item: SiteItem }) {
       </Steps>
     )
   }
-  return (
+  const radix = (
     <InstallSwitcher
       cli={<InstallTabs commands={perPm((pm) => addCommand([item.name], pm))} />}
       manual={
@@ -67,6 +68,36 @@ export function ItemInstall({ item }: { item: SiteItem }) {
           </Step>
           <Step title="Update the import paths to match your project setup." />
         </Steps>
+      }
+    />
+  )
+  if (!item.base) return radix
+  const base = item.base
+  return (
+    <LibrarySwitcher
+      radix={radix}
+      base={
+        <InstallSwitcher
+          cli={<InstallTabs commands={perPm((pm) => baseAddCommand([item.name], pm))} />}
+          manual={
+            <Steps>
+              <Step title="Install the dependencies.">
+                <InstallTabs commands={perPm((pm) => installCommand(base.dependencies, pm))} />
+              </Step>
+              {base.registryDependencies.length > 0 && (
+                <Step title="Add the Ballmac items it builds on (their Base UI versions where they have one).">
+                  <InstallTabs commands={perPm((pm) => baseAddCommand(base.registryDependencies, pm))} />
+                </Step>
+              )}
+              <Step title="Copy the source into your project.">
+                {base.files.map((f) => (
+                  <CodePanel key={f.target} code={readSource(f.source)} title={shownPath(f.target)} />
+                ))}
+              </Step>
+              <Step title="Update the import paths to match your project setup." />
+            </Steps>
+          }
+        />
       }
     />
   )

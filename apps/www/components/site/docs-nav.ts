@@ -10,6 +10,7 @@ export const browseNav: NavGroup = {
     { href: "/components", label: "All components" },
     { href: "/blocks", label: "Blocks" },
     { href: "/templates", label: "Templates" },
+    { href: "/charts", label: "Charts" },
     { href: "/presets", label: "Presets" },
     { href: "/themes", label: "Theme builder" },
     { href: "/feels", label: "Platform feels" },

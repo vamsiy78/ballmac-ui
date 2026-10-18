@@ -264,8 +264,56 @@
     "hash": "ce1019bcb6988c49a22024315d366d155e983e07f133885dee316157d8121d41"
   },
   "chart": {
+    "version": "1.1.0",
+    "hash": "58c98abb47e737f06206e449b2aa9047dd5112c677ac2c95a8d20bfd214275a5"
+  },
+  "chart-area": {
     "version": "1.0.0",
-    "hash": "afec0393eb152a77f6790fede99e8b9d37a19ed568e3c0bf960e6944ace0a406"
+    "hash": "dfc77be9ce99bff4b234d0b6d7464821e2a81a824b22633cfb52f9d71b364d39"
+  },
+  "chart-bar": {
+    "version": "1.0.0",
+    "hash": "75ad41da7aed251d02a5aa83a272a82eb3c552c717b830e7707db37097b0c68f"
+  },
+  "chart-frame": {
+    "version": "1.0.0",
+    "hash": "df9e77eb3d63ddd177f457bdb979a057cc9e830a73fad4eacbc0dde5cac79605"
+  },
+  "chart-line": {
+    "version": "1.0.0",
+    "hash": "9abb3e8e36970de92700eb864e93bd5ebd84d1347a649290df6c77e10de7fb41"
+  },
+  "chart-pie": {
+    "version": "1.0.0",
+    "hash": "34c930a82b01007ddeab335d5c3c0fc9e8f9f4bd6008dcd29bb5176921c14565"
+  },
+  "chart-radar": {
+    "version": "1.0.0",
+    "hash": "29d94c4445b78c036cb7c95905602403c5724c24b8171e71e2efb6b72c090481"
+  },
+  "chart-radial": {
+    "version": "1.0.0",
+    "hash": "5657b76101d0e7471525015ecc49121224f4659967472d03046e1534fac2c1d4"
+  },
+  "chart-scatter": {
+    "version": "1.0.0",
+    "hash": "235fe1ad5ed72ab45b9c82be94a2421456e3e90cc737de3a08326843701a941e"
+  },
+  "charts-1": {
+    "version": "1.0.0",
+    "hash": "9278e74d9723f65c53035f0c5136ee8a6991b5b22eae49c4eaf45fb63be56742"
+  },
+  "charts-2": {
+    "version": "1.0.0",
+    "hash": "70e262115f84e85ca2ea614e65911fabf3f7263f2174e49cf16dc01fc5485f36"
+  },
+  "charts-3": {
+    "version": "1.0.0",
+    "hash": "18685ea49564f9769012b4d7d12e168dc11d6c9964603619273844248207aa22"
+  },
+  "charts-4": {
+    "version": "1.0.0",
+    "hash": "1a6e4b4a0cc97b3d21150effdb8ed5455b754b8414455bd182efaf940513fb10"
   },
   "chat-1": {
     "version": "1.0.0",

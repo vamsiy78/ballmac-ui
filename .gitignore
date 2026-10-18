@@ -32,3 +32,4 @@ apps/www/worker/generated
 .wrangler
 .dev.vars*
 .cf-secrets.json
+registry-base.json

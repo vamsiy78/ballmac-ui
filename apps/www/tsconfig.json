@@ -60,6 +60,7 @@
     "../../registry/**/node_modules",
     "../../registry/pro/starters",
     "worker",
-    "out"
+    "out",
+    "../../registry/ballmac/base"
   ]
 }
