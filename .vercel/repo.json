@@ -1,0 +1,11 @@
+{
+  "remoteName": "origin",
+  "projects": [
+    {
+      "id": "prj_CkiQ034q9gLechBeYgNuGhRNjfNE",
+      "name": "ballmac-ui",
+      "directory": "apps/www",
+      "orgId": "team_NYJ1AVCOaJGkFzoKNnk4GEdJ"
+    }
+  ]
+}

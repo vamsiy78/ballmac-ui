@@ -36752,6 +36752,345 @@
       }
     },
     {
+      "name": "data-grid",
+      "type": "registry:ui",
+      "title": "Data Grid",
+      "description": "A spreadsheet-style grid for thousands of rows: only visible rows are drawn, cells edit in place, headings sort and resize, columns pin, and it follows the ARIA grid keyboard pattern with undo and paste.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/data-grid.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/data-grid.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "grid",
+          "table",
+          "spreadsheet",
+          "virtualized",
+          "editable",
+          "sorting",
+          "keyboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-19",
+        "tests": true,
+        "ai": {
+          "summary": "Pass columns ({ id, header, accessorKey, type: text | number | boolean | select | date, editable, width, pin }) and rows with data or defaultData. Set height; rows outside it are not drawn. Listen with onDataChange or onCellChange.",
+          "whenToUse": [
+            "Hundreds to tens of thousands of rows people edit like a spreadsheet",
+            "Admin tools, inventories, budgets and review queues with keyboard-heavy users",
+            "Wide data that needs pinned columns and resizable headings"
+          ],
+          "whenNotToUse": [
+            "A small read-only table; use table",
+            "Search, filters, column menus and pagination out of the box; use data-table",
+            "Formulas, merged cells or multi-sheet workbooks"
+          ],
+          "composesWith": [
+            "data-table",
+            "badge",
+            "state-view"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move between cells (left and right swap in right-to-left)"
+            },
+            {
+              "keys": "Home / End / Ctrl+Home / Ctrl+End",
+              "action": "First and last cell of the row or the grid"
+            },
+            {
+              "keys": "Page Up / Page Down",
+              "action": "Move a screenful of rows"
+            },
+            {
+              "keys": "Enter / F2",
+              "action": "Edit the cell; Enter saves and moves down, Tab saves and moves right, Escape cancels"
+            },
+            {
+              "keys": "Type a character",
+              "action": "Start editing a text, number or date cell with that character"
+            },
+            {
+              "keys": "Space",
+              "action": "Toggle a checkbox cell or the row checkbox; Shift+Space selects the row"
+            },
+            {
+              "keys": "Delete",
+              "action": "Clear an editable cell"
+            },
+            {
+              "keys": "Ctrl+Z / Ctrl+Shift+Z",
+              "action": "Undo and redo, one edit or paste at a time"
+            },
+            {
+              "keys": "Ctrl+C / Ctrl+V",
+              "action": "Copy the cell; paste cells copied from a spreadsheet"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "role=grid with aria-rowcount, aria-rowindex, aria-colindex and aria-sort, so virtualized rows keep their place; edits, undo and paste are announced"
+            }
+          ],
+          "customization": [
+            "columns: type, width, pin, editable, options, validate, format, cell, parse, setValue",
+            "density: compact | default | comfortable",
+            "selectable with selectedRowIds, sorting with onSortingChange",
+            "search to filter rows; footer for your own status text",
+            "controlled data with onDataChange(rows, changes)"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "data-grid-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Header and rows drawn as skeletons in the same columns, announced as loading; nothing can be edited."
+          },
+          {
+            "id": "empty",
+            "title": "No rows",
+            "example": "data-grid-empty",
+            "trigger": "state=\"empty\" or data={[]}",
+            "note": "A clear message that there are no rows yet; emptyState sets the copy and can add an action. A search with no match says so inside the grid."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "data-grid-error",
+            "trigger": "state=\"error\"",
+            "note": "An error with a Try again button (onRetry), announced as an alert."
+          }
+        ],
+        "examples": [
+          "data-grid-demo",
+          "data-grid-virtualized",
+          "data-grid-pinned",
+          "data-grid-validation",
+          "data-grid-controlled",
+          "data-grid-loading",
+          "data-grid-empty",
+          "data-grid-error"
+        ],
+        "url": "https://ui.ballmac.com/components/data-grid"
+      }
+    },
+    {
+      "name": "data-grid-demo",
+      "type": "registry:example",
+      "title": "Data Grid: Editable tasks",
+      "description": "Editable tasks example of Data Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/data-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/data-grid-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/data-grid-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "data-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "data-grid-virtualized",
+      "type": "registry:example",
+      "title": "Data Grid: 20,000 rows",
+      "description": "20,000 rows example of Data Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/data-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/data-grid-virtualized.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/data-grid-virtualized.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "data-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "data-grid-pinned",
+      "type": "registry:example",
+      "title": "Data Grid: Pinned columns",
+      "description": "Pinned columns example of Data Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/data-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/data-grid-pinned.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/data-grid-pinned.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "data-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "data-grid-validation",
+      "type": "registry:example",
+      "title": "Data Grid: Validation",
+      "description": "Validation example of Data Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/data-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/data-grid-validation.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/data-grid-validation.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "data-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "data-grid-controlled",
+      "type": "registry:example",
+      "title": "Data Grid: Controlled with bulk action",
+      "description": "Controlled with bulk action example of Data Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/data-grid.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/data-grid-controlled.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/data-grid-controlled.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "data-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "data-grid-loading",
+      "type": "registry:example",
+      "title": "Data Grid: Loading",
+      "description": "Loading example of Data Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/data-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/data-grid-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/data-grid-loading.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "data-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "data-grid-empty",
+      "type": "registry:example",
+      "title": "Data Grid: No rows",
+      "description": "No rows example of Data Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/data-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/data-grid-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/data-grid-empty.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "data-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "data-grid-error",
+      "type": "registry:example",
+      "title": "Data Grid: Could not load",
+      "description": "Could not load example of Data Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/data-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/data-grid-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/data-grid-error.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "data-grid",
+        "tier": "free"
+      }
+    },
+    {
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
@@ -53076,6 +53415,234 @@
       "meta": {
         "example": true,
         "of": "snippet-tabs",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sortable",
+      "type": "registry:ui",
+      "title": "Sortable",
+      "description": "Reorder lists, grids and multi-column boards by pointer, touch or keyboard, with spoken announcements, move buttons for people who cannot drag, a floating lifted item and reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "@dnd-kit/core@^6",
+        "@dnd-kit/sortable@^10",
+        "@dnd-kit/utilities@^3",
+        "motion@^12",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/sortable.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/sortable.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "drag",
+          "drop",
+          "reorder",
+          "sortable",
+          "dnd",
+          "kanban",
+          "keyboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-19",
+        "tests": true,
+        "ai": {
+          "summary": "Hold the order in state: <Sortable label value={ids} onValueChange={setIds}> with a <SortableItem id> per id, each holding a <SortableHandle>. SortableGroups and SortableGroup move items between lists.",
+          "whenToUse": [
+            "Playlists, checklists, filters and settings people put in their own order",
+            "Dashboard tiles in a grid and chips in a row",
+            "Boards where cards move between columns"
+          ],
+          "whenNotToUse": [
+            "A full kanban product with cards, tags and assignees; use kanban-board",
+            "Sorting by a column's value; use data-table or data-grid",
+            "Reordering rows of a huge virtualized list"
+          ],
+          "composesWith": [
+            "button",
+            "badge",
+            "kanban-board"
+          ],
+          "a11y": [
+            {
+              "keys": "Space / Enter on the handle",
+              "action": "Picks up the item; the same keys drop it"
+            },
+            {
+              "keys": "Arrow keys",
+              "action": "Move the lifted item; the new position is announced"
+            },
+            {
+              "keys": "Escape",
+              "action": "Cancels and puts the item back"
+            },
+            {
+              "keys": "SortableMove buttons",
+              "action": "Move an item one place with a click, for people who cannot drag (WCAG 2.5.7)"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Instructions, picked-up, over, dropped and cancelled messages are read out, in the page's language"
+            }
+          ],
+          "customization": [
+            "orientation: vertical | horizontal | grid",
+            "dragEverywhere on an item to drag by its whole body instead of a handle",
+            "overlay={false} to keep the lifted item in place",
+            "getLabel and getGroupLabel for spoken names",
+            "className on the list, the group and each item"
+          ]
+        },
+        "statesNone": "Nothing loads or fails: it reorders the items it is given; an empty list or group simply draws no items.",
+        "source": {
+          "name": "dnd-kit",
+          "url": "https://github.com/clauderic/dnd-kit",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2021, Claudéric Demers",
+          "modified": true
+        },
+        "examples": [
+          "sortable-demo",
+          "sortable-grid",
+          "sortable-horizontal",
+          "sortable-board",
+          "sortable-buttons"
+        ],
+        "url": "https://ui.ballmac.com/components/sortable"
+      }
+    },
+    {
+      "name": "sortable-demo",
+      "type": "registry:example",
+      "title": "Sortable: Playlist",
+      "description": "Playlist example of Sortable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sortable.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sortable-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sortable-demo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sortable",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sortable-grid",
+      "type": "registry:example",
+      "title": "Sortable: Dashboard grid",
+      "description": "Dashboard grid example of Sortable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sortable.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sortable-grid.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sortable-grid.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sortable",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sortable-horizontal",
+      "type": "registry:example",
+      "title": "Sortable: Horizontal chips",
+      "description": "Horizontal chips example of Sortable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sortable.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sortable-horizontal.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sortable-horizontal.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sortable",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sortable-board",
+      "type": "registry:example",
+      "title": "Sortable: Board with columns",
+      "description": "Board with columns example of Sortable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sortable.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sortable-board.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sortable-board.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sortable",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "sortable-buttons",
+      "type": "registry:example",
+      "title": "Sortable: With move buttons",
+      "description": "With move buttons example of Sortable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/sortable.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/sortable-buttons.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/sortable-buttons.tsx"
+        }
+      ],
+      "categories": [
+        "primitives"
+      ],
+      "meta": {
+        "example": true,
+        "of": "sortable",
         "tier": "free"
       }
     },
