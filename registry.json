@@ -4010,6 +4010,148 @@
       }
     },
     {
+      "name": "about-1",
+      "type": "registry:block",
+      "title": "About 1: company story",
+      "description": "A company story page: a large two-tone statement and a wide picture, numbers that count up, the story beside a pull quote, value cards that light up under the pointer, a milestone timeline and a closing call to action.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/media.json",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/spotlight-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/about-1/about-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/about-1/about-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "about"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "about",
+          "company",
+          "story",
+          "mission",
+          "values",
+          "timeline",
+          "stats",
+          "culture",
+          "brand",
+          "editorial"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "An About page. <About1 eyebrow headline={['Line one.', 'Softer line two.']} intro media mediaAlt stats={[{ label, value, suffix, plain }]} story={['Larger first paragraph', '…']} quote={{ text, name, role }} values={[{ title, description, icon }]} milestones={[{ year, title, description }]} cta={{ title, description, primary: { label, href }, secondary }} />. Every part is optional: pass [] for stats, values or milestones, or null for quote or cta, and that section disappears. Without media it draws art from the headline.",
+          "whenToUse": [
+            "The About or Our story page of a company, studio or product",
+            "A manifesto page with numbers, values and history"
+          ],
+          "whenNotToUse": [
+            "A page of people (use team-1)",
+            "A job list (use careers-1)",
+            "A landing page (use the hero blocks)"
+          ],
+          "composesWith": [
+            "header-2",
+            "footer-2",
+            "team-1",
+            "careers-1",
+            "gallery-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Headings",
+              "action": "One h1 for the statement and an h2 for each section; the pull quote is a real blockquote in a figure with a caption"
+            },
+            {
+              "keys": "Motion",
+              "action": "Entrances, the count-up and the card glow are skipped under reduced motion"
+            },
+            {
+              "keys": "Timeline",
+              "action": "An ordered list; the year is text next to each event, so order never depends on the line"
+            }
+          ],
+          "customization": [
+            "headline as one string or two lines",
+            "stats[].plain for years; suffix for \"k+\"",
+            "values[].icon takes any node, usually a lucide icon",
+            "media takes a URL, an image with alt text or an element"
+          ]
+        },
+        "statesNone": "Static content: nothing to load, submit or fail.",
+        "examples": [
+          "about-1-demo",
+          "about-1-short"
+        ],
+        "url": "https://ui.ballmac.com/components/about-1"
+      }
+    },
+    {
+      "name": "about-1-demo",
+      "type": "registry:example",
+      "title": "About 1: company story: Default",
+      "description": "Default example of About 1: company story.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/about-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/about-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/about-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "about-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "about-1-short",
+      "type": "registry:example",
+      "title": "About 1: company story: Just the story",
+      "description": "Just the story example of About 1: company story.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/about-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/about-1-short.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/about-1-short.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "about-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "agent-1",
       "type": "registry:block",
       "title": "Agent 1: live agent run",
@@ -5114,7 +5256,8 @@
         "https://ui.ballmac.com/r/skeleton.json",
         "https://ui.ballmac.com/r/state-view.json",
         "https://ui.ballmac.com/r/switch.json",
-        "https://ui.ballmac.com/r/textarea.json"
+        "https://ui.ballmac.com/r/textarea.json",
+        "https://ui.ballmac.com/r/return-focus.json"
       ],
       "files": [
         {
@@ -5654,7 +5797,8 @@
         "https://ui.ballmac.com/r/match-highlight.json",
         "https://ui.ballmac.com/r/skeleton.json",
         "https://ui.ballmac.com/r/state-view.json",
-        "https://ui.ballmac.com/r/switch.json"
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/return-focus.json"
       ],
       "files": [
         {
@@ -11085,7 +11229,8 @@
         "https://ui.ballmac.com/r/number-ticker.json",
         "https://ui.ballmac.com/r/segmented-control.json",
         "https://ui.ballmac.com/r/skeleton.json",
-        "https://ui.ballmac.com/r/state-view.json"
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/return-focus.json"
       ],
       "files": [
         {
@@ -13089,6 +13234,271 @@
       }
     },
     {
+      "name": "gallery-1",
+      "type": "registry:block",
+      "title": "Gallery 1: filterable gallery with lightbox",
+      "description": "A photo gallery: filter chips with counts, a gap-free masonry of tiles that fade in, and a lightbox with caption, counter, thumbnail strip, arrow-key and swipe navigation, and a link to the original.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/direction.json",
+        "https://ui.ballmac.com/r/masonry-grid.json",
+        "https://ui.ballmac.com/r/media.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/return-focus.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/gallery-1/gallery-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/gallery-1/gallery-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "gallery"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "gallery",
+          "photos",
+          "images",
+          "masonry",
+          "lightbox",
+          "portfolio",
+          "filter",
+          "media",
+          "grid",
+          "carousel"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A gallery page. <Gallery1 items={[{ id, title, caption, meta, category, src, alt, ratio: 'square' | 'landscape' | 'portrait' | 'tall', href }]} title description defaultCategory onOpen />. src takes a URL, an image with alt text or any element (a next/image); without it the tile shows art drawn from the id. Categories come from the items.",
+          "whenToUse": [
+            "A photo, event, studio or portfolio gallery",
+            "Showing work or places with captions and the option to see each larger"
+          ],
+          "whenNotToUse": [
+            "A product image carousel on a store page (use carousel)",
+            "Logos (use logo-cloud-1)",
+            "One hero picture (use media with a frame)"
+          ],
+          "composesWith": [
+            "header-2",
+            "footer-2",
+            "cta-1",
+            "media"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, then Enter on a picture",
+              "action": "Opens the lightbox (a dialog with a hidden title and \"Picture 3 of 12\"); Escape closes it and focus returns to the tile"
+            },
+            {
+              "keys": "Left / Right, Home / End in the lightbox",
+              "action": "Move between pictures; the arrows swap in right-to-left"
+            },
+            {
+              "keys": "Filters",
+              "action": "Category chips are native radio buttons (arrow keys), with counts in their labels"
+            }
+          ],
+          "customization": [
+            "ratio sets the tile shape, which gives the masonry its rhythm; the lightbox shows the whole picture (contain)",
+            "defaultOpenId opens a picture at first; defaultCategory starts on a category",
+            "Set alt on every real picture; the caption and title are text next to it"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "gallery-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton tiles of different heights under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No pictures yet",
+            "example": "gallery-1-empty",
+            "trigger": "state=\"empty\" (or items={[]})",
+            "note": "Says pictures will appear; a category with nothing in it offers Show everything. emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "gallery-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "gallery-1-demo",
+          "gallery-1-lightbox",
+          "gallery-1-team",
+          "gallery-1-loading",
+          "gallery-1-empty",
+          "gallery-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/gallery-1"
+      }
+    },
+    {
+      "name": "gallery-1-demo",
+      "type": "registry:example",
+      "title": "Gallery 1: filterable gallery with lightbox: Default",
+      "description": "Default example of Gallery 1: filterable gallery with lightbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gallery-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gallery-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gallery-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gallery-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gallery-1-lightbox",
+      "type": "registry:example",
+      "title": "Gallery 1: filterable gallery with lightbox: Lightbox open",
+      "description": "Lightbox open example of Gallery 1: filterable gallery with lightbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gallery-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gallery-1-lightbox.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gallery-1-lightbox.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gallery-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gallery-1-team",
+      "type": "registry:example",
+      "title": "Gallery 1: filterable gallery with lightbox: One category",
+      "description": "One category example of Gallery 1: filterable gallery with lightbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gallery-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gallery-1-team.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gallery-1-team.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gallery-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gallery-1-loading",
+      "type": "registry:example",
+      "title": "Gallery 1: filterable gallery with lightbox: Loading",
+      "description": "Loading example of Gallery 1: filterable gallery with lightbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gallery-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gallery-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gallery-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gallery-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gallery-1-empty",
+      "type": "registry:example",
+      "title": "Gallery 1: filterable gallery with lightbox: No pictures yet",
+      "description": "No pictures yet example of Gallery 1: filterable gallery with lightbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gallery-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gallery-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gallery-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gallery-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gallery-1-error",
+      "type": "registry:example",
+      "title": "Gallery 1: filterable gallery with lightbox: Could not load",
+      "description": "Could not load example of Gallery 1: filterable gallery with lightbox.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gallery-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gallery-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gallery-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gallery-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "header-1",
       "type": "registry:block",
       "title": "Header 1: sticky with mobile menu",
@@ -15027,6 +15437,243 @@
       "meta": {
         "example": true,
         "of": "kanban-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "leaderboard-1",
+      "type": "registry:block",
+      "title": "Leaderboard 1: podium and rankings",
+      "description": "A leaderboard: a podium with the leader raised, ranked rows with bars against the leader's score, movement written in words, a week, month and all-time switch, a search, and your own place highlighted and pinned.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/avatar.json",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/leaderboard-1/leaderboard-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/leaderboard-1/leaderboard-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "leaderboard"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "leaderboard",
+          "ranking",
+          "podium",
+          "scores",
+          "gamification",
+          "community",
+          "top users",
+          "contest",
+          "competition"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A ranked board. <Leaderboard1 entries={[{ id, name, subtitle, avatar, scores: { week, month, all }, change: { week, month, all }, isYou }]} unit=\"pts\" defaultPeriod pageSize locale onPeriodChange onSelect />. The block sorts by the chosen period and numbers the ranks itself; change is how many places a person moved (positive is up). Mark the signed-in user with isYou.",
+          "whenToUse": [
+            "Community, sales, support or learning rankings",
+            "A contest or challenge board"
+          ],
+          "whenNotToUse": [
+            "A table of data with many columns (use data-table)",
+            "Showing one person's stats (use stat-card or profile-1)"
+          ],
+          "composesWith": [
+            "profile-1",
+            "app-shell-1",
+            "stat-card",
+            "header-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Podium",
+              "action": "Read as an ordered list: \"Rank 1: name, 1,840 pts\"; the decorative numerals and crown are hidden"
+            },
+            {
+              "keys": "Movement",
+              "action": "Up 2 places, Down 1 place or No change are words for screen readers next to the arrow"
+            },
+            {
+              "keys": "Rows",
+              "action": "With onSelect each row is one button named by rank and person; the period switch is a radio group"
+            }
+          ],
+          "customization": [
+            "unit, title, description, pageSize, locale",
+            "scores for all three periods can come from your API; the block does the sorting and ranking",
+            "The podium tones use chart colors, so a theme change recolors them"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "leaderboard-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton podium and rows under the real heading, announced as loading; the period switch is disabled."
+          },
+          {
+            "id": "empty",
+            "title": "No scores yet",
+            "example": "leaderboard-1-empty",
+            "trigger": "state=\"empty\" (or entries={[]})",
+            "note": "A friendly message that the board fills up with the first points; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "leaderboard-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "leaderboard-1-demo",
+          "leaderboard-1-pinned",
+          "leaderboard-1-loading",
+          "leaderboard-1-empty",
+          "leaderboard-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/leaderboard-1"
+      }
+    },
+    {
+      "name": "leaderboard-1-demo",
+      "type": "registry:example",
+      "title": "Leaderboard 1: podium and rankings: This week",
+      "description": "This week example of Leaderboard 1: podium and rankings.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/leaderboard-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/leaderboard-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/leaderboard-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "leaderboard-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "leaderboard-1-pinned",
+      "type": "registry:example",
+      "title": "Leaderboard 1: podium and rankings: Your place pinned",
+      "description": "Your place pinned example of Leaderboard 1: podium and rankings.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/leaderboard-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/leaderboard-1-pinned.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/leaderboard-1-pinned.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "leaderboard-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "leaderboard-1-loading",
+      "type": "registry:example",
+      "title": "Leaderboard 1: podium and rankings: Loading",
+      "description": "Loading example of Leaderboard 1: podium and rankings.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/leaderboard-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/leaderboard-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/leaderboard-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "leaderboard-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "leaderboard-1-empty",
+      "type": "registry:example",
+      "title": "Leaderboard 1: podium and rankings: No scores yet",
+      "description": "No scores yet example of Leaderboard 1: podium and rankings.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/leaderboard-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/leaderboard-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/leaderboard-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "leaderboard-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "leaderboard-1-error",
+      "type": "registry:example",
+      "title": "Leaderboard 1: podium and rankings: Could not load",
+      "description": "Could not load example of Leaderboard 1: podium and rankings.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/leaderboard-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/leaderboard-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/leaderboard-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "leaderboard-1",
         "tier": "free"
       }
     },
@@ -18040,7 +18687,8 @@
         "https://ui.ballmac.com/r/badge.json",
         "https://ui.ballmac.com/r/button.json",
         "https://ui.ballmac.com/r/skeleton.json",
-        "https://ui.ballmac.com/r/state-view.json"
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/return-focus.json"
       ],
       "files": [
         {
@@ -18948,6 +19596,246 @@
       }
     },
     {
+      "name": "tasks-1",
+      "type": "registry:block",
+      "title": "Tasks 1: task list",
+      "description": "A tasks page: a progress ring and quick add, tasks grouped as overdue, today, upcoming and no date, a strike-through that draws itself, inline edit, reordering by button or Alt and arrow keys, shortcuts and Undo on delete.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/circular-progress.json",
+        "https://ui.ballmac.com/r/kbd.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/tasks-1/tasks-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/tasks-1/tasks-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "tasks"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "tasks",
+          "todo",
+          "to-do",
+          "checklist",
+          "productivity",
+          "due dates",
+          "priority",
+          "keyboard",
+          "reorder",
+          "list"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A personal task list. <Tasks1 tasks={[{ id, title, done, due: '2026-10-18', priority: 'normal' | 'high', assignee: 'JL', labels }]} today=\"2026-10-18\" locale onAdd onToggle onEdit onDelete onRestore onReorder />. Pass today yourself (an ISO date) so the server and browser agree about what is overdue; the block never reads the clock. Groups come from due dates.",
+          "whenToUse": [
+            "A personal or team to-do list inside an app",
+            "A today view with overdue items called out"
+          ],
+          "whenNotToUse": [
+            "A project board (use kanban-1)",
+            "A one-time setup checklist (use onboarding-checklist)",
+            "Gantt or schedule views"
+          ],
+          "composesWith": [
+            "app-shell-1",
+            "kanban-1",
+            "calendar-1",
+            "inbox-1"
+          ],
+          "a11y": [
+            {
+              "keys": "J / K or arrow keys",
+              "action": "Move between tasks; X completes, E edits, Delete removes (with Undo), Alt+Up and Alt+Down reorder, N jumps to the add box"
+            },
+            {
+              "keys": "Reorder buttons",
+              "action": "Move up and Move down buttons exist for every task, so ordering never needs a pointer or a drag"
+            },
+            {
+              "keys": "Due and priority",
+              "action": "Overdue and High priority are written as words next to their icon, not color alone; completing a task is announced"
+            }
+          ],
+          "customization": [
+            "today, locale, title",
+            "defaultShowCompleted opens the Completed section",
+            "Reordering applies within a group (same due date), so every move is visible; persist the new order from onReorder"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "tasks-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton of the summary and the task rows under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Nothing to do",
+            "example": "tasks-1-empty",
+            "trigger": "state=\"empty\" (or tasks={[]})",
+            "note": "A calm message pointing at the add box; a filter with no matches says so instead. emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "tasks-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was lost, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "tasks-1-demo",
+          "tasks-1-completed",
+          "tasks-1-empty",
+          "tasks-1-loading",
+          "tasks-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/tasks-1"
+      }
+    },
+    {
+      "name": "tasks-1-demo",
+      "type": "registry:example",
+      "title": "Tasks 1: task list: Default",
+      "description": "Default example of Tasks 1: task list.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tasks-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tasks-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tasks-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tasks-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tasks-1-completed",
+      "type": "registry:example",
+      "title": "Tasks 1: task list: Completed tasks open",
+      "description": "Completed tasks open example of Tasks 1: task list.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tasks-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tasks-1-completed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tasks-1-completed.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tasks-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tasks-1-empty",
+      "type": "registry:example",
+      "title": "Tasks 1: task list: Nothing to do",
+      "description": "Nothing to do example of Tasks 1: task list.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tasks-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tasks-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tasks-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tasks-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tasks-1-loading",
+      "type": "registry:example",
+      "title": "Tasks 1: task list: Loading",
+      "description": "Loading example of Tasks 1: task list.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tasks-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tasks-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tasks-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tasks-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tasks-1-error",
+      "type": "registry:example",
+      "title": "Tasks 1: task list: Could not load",
+      "description": "Could not load example of Tasks 1: task list.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tasks-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tasks-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tasks-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tasks-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "team-1",
       "type": "registry:block",
       "title": "Team 1: portrait grid with hover bios",
@@ -19282,6 +20170,217 @@
       "meta": {
         "example": true,
         "of": "testimonials-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trust-1",
+      "type": "registry:block",
+      "title": "Trust 1: security and trust center",
+      "description": "A trust center: certification cards with dates, the security controls behind them, documents where audit reports ask for a request under a confidentiality agreement, a subprocessor table with change alerts, and a disclosure contact.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/spotlight-card.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/return-focus.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/trust-1/trust-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/trust-1/trust-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "trust"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "trust",
+          "security",
+          "compliance",
+          "soc 2",
+          "iso 27001",
+          "gdpr",
+          "hipaa",
+          "subprocessors",
+          "privacy",
+          "enterprise",
+          "audit"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A security and compliance page. <Trust1 status={{ label, ok, updated }} certifications={[{ id, name, status: 'certified' | 'aligned' | 'in-progress', detail, valid }]} groups={[{ id, title, icon, controls: [{ text, status: 'done' | 'progress' }] }]} documents={[{ id, name, description, access: 'public' | 'gated', format, updated, href }]} subprocessors={[{ name, purpose, location, data }]} securityEmail companyName onDownload onRequestAccess={async (doc, { email, company }) => …} onSubscribe={async (email) => …} />. Gated documents open a request dialog with validation and submitting, success and error states.",
+          "whenToUse": [
+            "The trust, security or compliance page a B2B buyer's security team reads",
+            "Sharing SOC 2 and penetration test reports behind a request"
+          ],
+          "whenNotToUse": [
+            "A privacy policy or terms (plain text pages)",
+            "A system status page (use the relay template's status page or stats-pro-2)",
+            "A cookie banner (use cookie-consent)"
+          ],
+          "composesWith": [
+            "header-2",
+            "footer-2",
+            "about-1",
+            "faq-1",
+            "contact-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Request access",
+              "action": "Opens a dialog whose fields have labels; errors are announced and linked to their fields; focus returns to the button afterwards"
+            },
+            {
+              "keys": "Status",
+              "action": "Certified, Compliant and In progress are words with an icon, never color alone; controls in progress say so in the text"
+            },
+            {
+              "keys": "Subprocessors table",
+              "action": "A labelled, focusable scroll region on narrow screens, with row headers"
+            }
+          ],
+          "customization": [
+            "companyName for the confidentiality line",
+            "defaultRequestId opens a request at first",
+            "onRequestAccess should create the request in your CRM or send a secure link; never expose the file URL to the browser until it is approved"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "trust-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton certificate and control cards under the real header, announced as loading."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "trust-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry). The header stays so the page never looks broken."
+          }
+        ],
+        "examples": [
+          "trust-1-demo",
+          "trust-1-request",
+          "trust-1-loading",
+          "trust-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/trust-1"
+      }
+    },
+    {
+      "name": "trust-1-demo",
+      "type": "registry:example",
+      "title": "Trust 1: security and trust center: Default",
+      "description": "Default example of Trust 1: security and trust center.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trust-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trust-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trust-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trust-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trust-1-request",
+      "type": "registry:example",
+      "title": "Trust 1: security and trust center: Requesting a report",
+      "description": "Requesting a report example of Trust 1: security and trust center.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trust-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trust-1-request.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trust-1-request.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trust-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trust-1-loading",
+      "type": "registry:example",
+      "title": "Trust 1: security and trust center: Loading",
+      "description": "Loading example of Trust 1: security and trust center.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trust-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trust-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trust-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trust-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trust-1-error",
+      "type": "registry:example",
+      "title": "Trust 1: security and trust center: Could not load",
+      "description": "Could not load example of Trust 1: security and trust center.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trust-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trust-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trust-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trust-1",
         "tier": "free"
       }
     },
@@ -52326,6 +53425,53 @@
         },
         "examples": [],
         "url": "https://ui.ballmac.com/components/motion-presets"
+      }
+    },
+    {
+      "name": "return-focus",
+      "type": "registry:lib",
+      "title": "Return focus",
+      "description": "A hook that puts keyboard focus back on the element that opened a dialog, for dialogs opened from state, which have no trigger for Radix to return focus to.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "files": [
+        {
+          "path": "registry/ballmac/lib/return-focus.ts",
+          "type": "registry:lib",
+          "target": "@lib/ballmac/return-focus.ts"
+        }
+      ],
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "dialog",
+          "focus",
+          "keyboard",
+          "accessibility",
+          "modal",
+          "alert dialog"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "const returnFocus = useReturnFocus(open); <DialogContent {...returnFocus}>. Use it when a dialog is controlled with open and opened by your own code (a Delete button that asks to confirm). Dialogs with a DialogTrigger do not need it.",
+          "whenToUse": [
+            "Any Dialog or AlertDialog that is opened from state rather than from a DialogTrigger",
+            "A lightbox or confirmation opened from a list item"
+          ],
+          "whenNotToUse": [
+            "A dialog that already uses DialogTrigger, which returns focus by itself"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": []
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/return-focus"
       }
     },
     {

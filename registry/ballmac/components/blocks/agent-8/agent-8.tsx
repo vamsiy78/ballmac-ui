@@ -11,6 +11,7 @@ import { Button } from "@/components/ballmac/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ballmac/dropdown-menu"
 import { countMatches, MatchHighlight, queryTokens } from "@/components/ballmac/match-highlight"
 import { Skeleton } from "@/components/ballmac/skeleton"
+import { useReturnFocus } from "@/lib/ballmac/return-focus"
 import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { Switch } from "@/components/ballmac/switch"
 import { cn } from "@/lib/utils"
@@ -145,6 +146,7 @@ function Agent8({
   const [sources, setSources] = React.useState(sourcesProp)
   React.useEffect(() => setSources(sourcesProp), [sourcesProp])
   const [confirm, setConfirm] = React.useState<Agent8Source | null>(null)
+  const returnFocus = useReturnFocus(!!confirm)
   const [question, setQuestion] = React.useState(defaultQuestion ?? "")
   const [asking, setAsking] = React.useState(false)
   const [asked, setAsked] = React.useState<string | null>(null)
@@ -467,7 +469,7 @@ function Agent8({
       </StateView>
 
       <AlertDialog open={!!confirm} onOpenChange={(o) => !o && setConfirm(null)}>
-        <AlertDialogContent>
+        <AlertDialogContent {...returnFocus}>
           <AlertDialogHeader>
             <AlertDialogTitle>Remove {confirm?.name}?</AlertDialogTitle>
             <AlertDialogDescription>The agent stops using it straight away. You can add it again later, but it will be read from scratch.</AlertDialogDescription>

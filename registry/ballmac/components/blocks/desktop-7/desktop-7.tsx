@@ -265,7 +265,7 @@ function Desktop7({
         {onRemoveRecent && current && state === "ready" ? (
           <div className="flex items-center justify-between gap-2 border-t px-3 py-2">
             <p className="text-muted-foreground truncate text-xs">
-              <span className="sr-only">Selected: </span>
+              <span className="sr-only">Selected:</span>{" "}
               {current.name}
             </p>
             <Button variant="ghost" size="sm" onClick={() => remove(current)}>

@@ -2,6 +2,18 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
+## 2026-10-18: A gallery, a company story, a trust center, a task list and a leaderboard
+
+- Gallery 1, filterable gallery: category chips with counts, a gap-free masonry of tiles that fade in, and a lightbox with the caption, a counter, a thumbnail strip, arrow-key and swipe navigation (mirrored in right-to-left) and a link to the original. Tiles without a picture show art drawn from their id, so the gallery looks finished before you have photos. A new Gallery section on /blocks
+- About 1, company story: a large two-tone statement, a wide picture, numbers that count up, the story beside a pull quote, value cards that light up under the pointer, a milestone timeline and a closing call to action. Every part is optional; pass [] or null to leave one out. A new About section
+- Trust 1, trust center: certification cards with dates, the security controls behind them with what is still in progress, documents where audit reports ask for a request under a confidentiality agreement (validated, with submitting, success and error), a subprocessor table with a way to be told of changes, and a disclosure contact that stays visible even if the page fails to load. A new Trust center section
+- Tasks 1, task list: a progress ring and quick add, tasks grouped as overdue, today, upcoming and no date with the due date written in words, a strike-through that draws itself, inline edit, reordering by buttons or Alt and the arrow keys, shortcuts (N, X, E, J, K) and Undo on delete. It never reads the clock: pass today in. A new Tasks section
+- Leaderboard 1, podium and rankings: three steps with the leader raised and a crown, ranked rows with bars against the leader's score that grow in, movement written in words (Up 2 places), a week, month and all-time switch, a search, and your own place highlighted and pinned when you are further down. A new Leaderboard section
+- Cover art now spreads its color fields across the full width, so a wide cover is never empty on one side
+- New return-focus: a hook that puts keyboard focus back where it was when a dialog opens. Radix returns focus to a dialog's trigger, so a dialog opened from state (a Delete confirmation, a lightbox) dropped focus to the top of the page. Gallery 1, Trust 1, Settings 4, Agent 6, Agent 8 and Dev 1 use it
+- Screen-reader-only text now sits beside its visible text with a real space, not inside the span, where some browsers drop it ("DownloadSecurity whitepaper"). Fixed in Trust 1, Inbox 1, Chat 1, Profile 1, Help 1, Agent 5 and Desktop 7
+- All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and right to left, and ship their tests. The MCP server finds them for about, story, trust, compliance, gallery, lightbox, tasks, todo, leaderboard and ranking
+
 ## 2026-10-18: Search results, a notifications inbox, an upload manager, a knowledge manager and a developers page
 
 - Search 1, search results page: a large search box (press / to reach it), the type of result as a filter with live counts, a date filter and a sort, results with a trail and highlighted words, Show more, and a no-results page that suggests a spelling and lists what to try. A new Search results section on /blocks

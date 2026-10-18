@@ -1,4 +1,8 @@
 {
+  "about-1": {
+    "version": "1.0.0",
+    "hash": "bc52deba3386191030b0a93ad58395a1752839aa4ff18ab215519c7095719ff6"
+  },
   "accordion": {
     "version": "1.0.0",
     "hash": "b66cc32ee4a0fd210ed1de6cd9e48e1e3243d2ebf1598d88abff44368f5e61d0"
@@ -25,11 +29,11 @@
   },
   "agent-5": {
     "version": "1.0.0",
-    "hash": "4d085d994d7a2128a8efec2df87a7dbdf806e34e0fe3fe56125a9ed0b91b66cb"
+    "hash": "7fa1c9bc8384092b6a59fca9fe42868d288abd22d272e2a9566b1a2f65630f65"
   },
   "agent-6": {
     "version": "1.0.0",
-    "hash": "f6125501682d632166ad6a18c95f6482ff7f24c371e3a1e3eaa924733fa84738"
+    "hash": "6c697c94fc33869414be89300be1bd28054de3172dcb4706612c3dab29d1646a"
   },
   "agent-7": {
     "version": "1.0.0",
@@ -37,7 +41,7 @@
   },
   "agent-8": {
     "version": "1.0.0",
-    "hash": "bda1891031725946f08c4427bb06394171c1058cfd9ebe90ee50eb2252d0f405"
+    "hash": "c517430dd70ba552311fee2b82f8bd944bd8a02a9f6ca9e7e321117c8d17d286"
   },
   "agent-plan": {
     "version": "1.0.0",
@@ -253,7 +257,7 @@
   },
   "chat-1": {
     "version": "1.0.0",
-    "hash": "73b578c65b723707793f32a951e6f6770871756869385c22be52fee42f7fc6bc"
+    "hash": "606f5658026f5590bbf2ea5a2a8e1fd86139c8a5d3f8a2f399b8a786f672efb6"
   },
   "chat-attachment": {
     "version": "1.0.0",
@@ -345,7 +349,7 @@
   },
   "cover-art": {
     "version": "1.0.0",
-    "hash": "c311736dbe460a056ac97b5727378277aca75621669267390ffa6d4cca41e90b"
+    "hash": "410668abbfdc78d375e8a59ba9b6ca5aaeb4ab88469f1f3874295a47ea44d667"
   },
   "cta-1": {
     "version": "1.0.0",
@@ -413,7 +417,7 @@
   },
   "desktop-7": {
     "version": "1.0.0",
-    "hash": "a7f0c7e21e04462cae1cceb3dd97730b5da4422fb45ca8007b1667c9aaf41378"
+    "hash": "7d7c465b5581605f97d51c3d899ad2e91b4457aff5e089714235568713f022c0"
   },
   "desktop-8": {
     "version": "1.0.0",
@@ -425,7 +429,7 @@
   },
   "dev-1": {
     "version": "1.0.0",
-    "hash": "4aa2dca4964462ffbc86232a1a4370658f54b5388e75a4ea8fdcf43486946a60"
+    "hash": "4be0ad95e5d7ecae280d0c493b3eeeb171e01c61a2ab9623aa34a678b20e1bbc"
   },
   "devices-1": {
     "version": "1.0.0",
@@ -599,6 +603,10 @@
     "version": "1.0.0",
     "hash": "62f55e6393252fa499e6ba72774cd0d7f1482c544a0862dc5156e1e3d0378626"
   },
+  "gallery-1": {
+    "version": "1.0.0",
+    "hash": "ac1ac08d30c105dcf6b9d6511553c0f4f860958a2a429379d1598daa4adc350b"
+  },
   "git-graph": {
     "version": "1.0.0",
     "hash": "7299d7d1ce29505941542bb8f2542f5617adcdcf2a5a0768cda6b32bbcb93914"
@@ -633,7 +641,7 @@
   },
   "help-1": {
     "version": "1.0.0",
-    "hash": "cb3bb833161c309cf0fa702340ace71c526b552b2d9e2b4041512ad1bc292a62"
+    "hash": "20106633640adaa354b020ca3fb8651447c527177ee819a853e548f7758f9b5f"
   },
   "hero-1": {
     "version": "1.0.0",
@@ -697,7 +705,7 @@
   },
   "inbox-1": {
     "version": "1.0.0",
-    "hash": "9f970dade2babdf2cdfc4bd5bfd1977cb40f3ff94309ca5e267edc504106f9dc"
+    "hash": "94cce571c82fc63d2d6a3a94f0f531f2cabd1bd047f20fd8956af950d9d48da4"
   },
   "inline-alert": {
     "version": "1.0.0",
@@ -770,6 +778,10 @@
   "launchpad": {
     "version": "1.0.0",
     "hash": "f8531aa221e8b1232b5bb2a5426a5b429046f2137b89594aef6a677cbad88bb6"
+  },
+  "leaderboard-1": {
+    "version": "1.0.0",
+    "hash": "60ccc7af20a2bb1c633221252d6eae6e703af6c285464d9c4c7ddcb96628d8a1"
   },
   "lens": {
     "version": "1.0.0",
@@ -997,7 +1009,7 @@
   },
   "profile-1": {
     "version": "1.0.0",
-    "hash": "9b533c69cd93bb0ec9cd403a204c93edba266c5cbf4bf764ddd6ff10917aa48d"
+    "hash": "0cb181273c97fdf0a62ce5d1e377e30dfbe32dd207f0b21af7ec7cd549884ea1"
   },
   "progress": {
     "version": "1.0.0",
@@ -1046,6 +1058,10 @@
   "retro-grid": {
     "version": "1.0.1",
     "hash": "9b75df05cc1d4db1457f2bf4e21ba9ed620ac7e3d60b57ec2c8e5d0358107a6e"
+  },
+  "return-focus": {
+    "version": "1.0.0",
+    "hash": "f3ea133937d4fe32b40420f6e3449981365e76fe5c76472707d8e14262b262e6"
   },
   "ripple": {
     "version": "1.0.1",
@@ -1109,7 +1125,7 @@
   },
   "settings-4": {
     "version": "1.0.0",
-    "hash": "137be4b4348b06c79da81f7dd60eb6a2bc7c75f0a0622677ff3377ad4f668691"
+    "hash": "c46b6178e6e08a146f08118ee39c63ae98017e55887b47269e2053b12cfb4631"
   },
   "settings-5": {
     "version": "1.0.0",
@@ -1278,6 +1294,10 @@
   "tag-input": {
     "version": "1.0.0",
     "hash": "fe9973ce6e18f0e422c41c05c26d706dc81f2279cec095c10442a8a19131fa7f"
+  },
+  "tasks-1": {
+    "version": "1.0.0",
+    "hash": "c9384b69cead5fcd8f0a91f7e4930800aa88c013bd598ca01791b006ba2d895f"
   },
   "team-1": {
     "version": "1.0.0",
@@ -1482,6 +1502,10 @@
   "tree-view": {
     "version": "1.0.0",
     "hash": "96495c53441a0bf45a42a597a66fb6711d608d8562e3770a03e1c3a95f911269"
+  },
+  "trust-1": {
+    "version": "1.0.0",
+    "hash": "91381d7354e1bcaf13fd667b148387fd65685bcef2bdac543931362820de8f5c"
   },
   "typing-text": {
     "version": "1.0.0",

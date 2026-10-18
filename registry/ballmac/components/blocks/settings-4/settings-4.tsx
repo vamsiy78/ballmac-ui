@@ -8,6 +8,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Badge } from "@/components/ballmac/badge"
 import { Button } from "@/components/ballmac/button"
 import { Skeleton } from "@/components/ballmac/skeleton"
+import { useReturnFocus } from "@/lib/ballmac/return-focus"
 import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 
@@ -100,6 +101,7 @@ function Settings4({
   const [busy, setBusy] = React.useState<string | null>(null)
   const [errors, setErrors] = React.useState<Record<string, string>>({})
   const [confirm, setConfirm] = React.useState<Settings4Integration | null>(null)
+  const returnFocus = useReturnFocus(!!confirm)
   const [announce, setAnnounce] = React.useState("")
 
   const categories = ["All", ...[...new Set(list.map((i) => i.category))].sort()]
@@ -255,7 +257,7 @@ function Settings4({
       </StateView>
 
       <AlertDialog open={!!confirm} onOpenChange={(o) => !o && setConfirm(null)}>
-        <AlertDialogContent>
+        <AlertDialogContent {...returnFocus}>
           <AlertDialogHeader>
             <AlertDialogTitle>Disconnect {confirm?.name}?</AlertDialogTitle>
             <AlertDialogDescription>Syncing stops straight away. Data already copied stays, and you can connect again at any time.</AlertDialogDescription>

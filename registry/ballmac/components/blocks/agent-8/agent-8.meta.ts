@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["ai", "agent", "knowledge", "rag", "sources", "retrieval", "documents", "sync", "training data", "knowledge base"],
   files: [{ path: "components/blocks/agent-8/agent-8.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "alert-dialog", "badge", "blur-fade", "button", "dropdown-menu", "match-highlight", "skeleton", "state-view", "switch"],
+  registryDependencies: ["shadcn:utils", "alert-dialog", "badge", "blur-fade", "button", "dropdown-menu", "match-highlight", "skeleton", "state-view", "switch", "return-focus"],
   examples: [
     { name: "agent-8-demo", title: "Default, with a test run", file: "agent-8-demo.tsx" },
     { name: "agent-8-no-match", title: "A question nothing covers", file: "agent-8-no-match.tsx" },

@@ -401,7 +401,7 @@ function Profile1({
                             {p.stars !== undefined ? (
                               <span className="flex items-center gap-1.5">
                                 <Star aria-hidden="true" className="size-3.5" />
-                                <span className="sr-only">Stars: </span>
+                                <span className="sr-only">Stars:</span>{" "}
                                 {new Intl.NumberFormat(locale).format(p.stars)}
                               </span>
                             ) : (

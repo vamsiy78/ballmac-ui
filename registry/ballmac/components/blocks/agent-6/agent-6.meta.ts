@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["ai", "agent", "memory", "personalization", "privacy", "assistant", "context", "preferences", "controls"],
   files: [{ path: "components/blocks/agent-6/agent-6.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "alert-dialog", "blur-fade", "button", "circular-progress", "segmented-control", "skeleton", "state-view", "switch", "textarea"],
+  registryDependencies: ["shadcn:utils", "alert-dialog", "blur-fade", "button", "circular-progress", "segmented-control", "skeleton", "state-view", "switch", "textarea", "return-focus"],
   examples: [
     { name: "agent-6-demo", title: "Default", file: "agent-6-demo.tsx" },
     { name: "agent-6-editing", title: "Editing a memory", file: "agent-6-editing.tsx" },

@@ -10,6 +10,7 @@ import { Button } from "@/components/ballmac/button"
 import { CircularProgress } from "@/components/ballmac/circular-progress"
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
 import { Skeleton } from "@/components/ballmac/skeleton"
+import { useReturnFocus } from "@/lib/ballmac/return-focus"
 import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { Switch } from "@/components/ballmac/switch"
 import { Textarea } from "@/components/ballmac/textarea"
@@ -124,6 +125,7 @@ function Agent6({
   const [editError, setEditError] = React.useState<string>()
   const [undo, setUndo] = React.useState<{ memory: Agent6Memory; index: number } | null>(null)
   const [confirmAll, setConfirmAll] = React.useState(false)
+  const returnFocus = useReturnFocus(confirmAll)
   const [announce, setAnnounce] = React.useState("")
   const ready = state === "ready" || state === "empty"
   const empty = state === "empty" || (state === "ready" && !list.length)
@@ -445,7 +447,7 @@ function Agent6({
       ) : null}
 
       <AlertDialog open={confirmAll} onOpenChange={setConfirmAll}>
-        <AlertDialogContent>
+        <AlertDialogContent {...returnFocus}>
           <AlertDialogHeader>
             <AlertDialogTitle>Forget everything?</AlertDialogTitle>
             <AlertDialogDescription>

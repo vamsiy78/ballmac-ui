@@ -265,7 +265,7 @@ function Inbox1({
                             }}
                             className="rounded-sm text-start outline-none after:absolute after:inset-0 after:content-['']"
                           >
-                            {n.unread ? <span className="sr-only">Unread. </span> : null}
+                            {n.unread ? <><span className="sr-only">Unread.</span>{" "}</> : null}
                             <span className="sr-only">{K.label}: </span>
                             {n.actor ? (
                               <>
@@ -348,7 +348,7 @@ function Inbox1({
           {ready && unreadCount ? (
             <span className="bg-primary text-primary-foreground rounded-full px-2.5 py-0.5 text-xs font-semibold tabular-nums">
               {unreadCount}
-              <span className="sr-only"> unread</span>
+              {" "}<span className="sr-only">unread</span>
             </span>
           ) : null}
         </h1>

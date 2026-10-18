@@ -115,7 +115,8 @@ function PassMark({ pass, label }: { pass: boolean; label: string }) {
     <span className="inline-flex items-center gap-1 text-xs whitespace-nowrap">
       <Icon aria-hidden="true" className={cn("size-3.5", pass ? "text-chart-2" : "text-destructive")} />
       {pass ? "Pass" : "Fail"}
-      <span className="sr-only"> ({label})</span>
+      {" "}
+      <span className="sr-only">({label})</span>
     </span>
   )
 }

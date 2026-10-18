@@ -456,7 +456,7 @@ function Help1({
                       <p className="text-sm font-semibold">{c.label}</p>
                       <p className="text-muted-foreground mt-0.5 flex items-center gap-1.5 text-xs">
                         {c.online ? <span aria-hidden="true" className="bg-chart-2 size-1.5 shrink-0 rounded-full" /> : null}
-                        {c.online ? <span className="sr-only">Online. </span> : null}
+                        {c.online ? <><span className="sr-only">Online.</span>{" "}</> : null}
                         {c.description}
                       </p>
                     </div>

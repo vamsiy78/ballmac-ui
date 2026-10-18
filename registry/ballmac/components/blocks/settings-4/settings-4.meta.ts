@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["settings", "integrations", "apps", "connect", "marketplace", "directory", "oauth"],
   files: [{ path: "components/blocks/settings-4/settings-4.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "alert-dialog", "badge", "button", "skeleton", "state-view"],
+  registryDependencies: ["shadcn:utils", "alert-dialog", "badge", "button", "skeleton", "state-view", "return-focus"],
   examples: [
     { name: "settings-4-demo", title: "Default", file: "settings-4-demo.tsx" },
     { name: "settings-4-loading", title: "Loading", file: "settings-4-loading.tsx" },

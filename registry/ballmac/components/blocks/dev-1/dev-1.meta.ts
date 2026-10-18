@@ -11,7 +11,7 @@ export default defineItem({
   tags: ["developer", "api", "api keys", "request log", "usage", "test mode", "live mode", "curl", "logs", "dashboard", "platform"],
   files: [{ path: "components/blocks/dev-1/dev-1.tsx" }],
   dependencies: ["lucide-react"],
-  registryDependencies: ["shadcn:utils", "alert-dialog", "badge", "blur-fade", "button", "copy-button", "json-viewer", "number-ticker", "segmented-control", "skeleton", "state-view"],
+  registryDependencies: ["shadcn:utils", "alert-dialog", "badge", "blur-fade", "button", "copy-button", "json-viewer", "number-ticker", "segmented-control", "skeleton", "state-view", "return-focus"],
   examples: [
     { name: "dev-1-demo", title: "Default (test mode)", file: "dev-1-demo.tsx" },
     { name: "dev-1-live", title: "Live mode, a failed request open", file: "dev-1-live.tsx" },

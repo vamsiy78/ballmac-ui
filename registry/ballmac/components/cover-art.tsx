@@ -51,11 +51,13 @@ function CoverArt({ seed, variant = "auto", grid = false, className, ...props }:
   let field: React.CSSProperties["background"] = `linear-gradient(135deg, color-mix(in oklab, ${tone} 22%, transparent), color-mix(in oklab, ${alt} 14%, transparent))`
 
   if (kind === "mesh") {
-    const at = () => `${Math.round(rnd() * 100)}% ${Math.round(rnd() * 100)}%`
+    // one blob in each third of the width, so a wide cover is never empty on one side
+    const slots = [0, 1, 2]
+    const at = (slot: number) => `${Math.round(slot * 34 + rnd() * 32)}% ${Math.round(8 + rnd() * 84)}%`
     field = [
-      `radial-gradient(60% 90% at ${at()}, color-mix(in oklab, ${tone} 60%, transparent), transparent 70%)`,
-      `radial-gradient(55% 85% at ${at()}, color-mix(in oklab, ${alt} 50%, transparent), transparent 70%)`,
-      `radial-gradient(70% 90% at ${at()}, color-mix(in oklab, ${third} 42%, transparent), transparent 72%)`,
+      `radial-gradient(60% 90% at ${at(slots[0]!)}, color-mix(in oklab, ${tone} 60%, transparent), transparent 70%)`,
+      `radial-gradient(55% 85% at ${at(slots[1]!)}, color-mix(in oklab, ${alt} 50%, transparent), transparent 70%)`,
+      `radial-gradient(70% 90% at ${at(slots[2]!)}, color-mix(in oklab, ${third} 42%, transparent), transparent 72%)`,
     ].join(",")
   } else if (kind === "rings") {
     const cx = 190 + rnd() * 90

@@ -13,6 +13,7 @@ import { JsonViewer } from "@/components/ballmac/json-viewer"
 import { NumberTicker } from "@/components/ballmac/number-ticker"
 import { SegmentedControl, SegmentedControlItem } from "@/components/ballmac/segmented-control"
 import { Skeleton } from "@/components/ballmac/skeleton"
+import { useReturnFocus } from "@/lib/ballmac/return-focus"
 import { frameProps, StateView, type StateProps } from "@/components/ballmac/state-view"
 import { cn } from "@/lib/utils"
 
@@ -181,6 +182,7 @@ function Dev1({
   const [createError, setCreateError] = React.useState<string>()
   const [fresh, setFresh] = React.useState<{ name: string; secret: string } | null>(null)
   const [revoke, setRevoke] = React.useState<Dev1Key | null>(null)
+  const returnFocus = useReturnFocus(!!revoke)
   const [filter, setFilter] = React.useState<"all" | "errors">("all")
   const [query, setQuery] = React.useState("")
   const [open, setOpen] = React.useState<string | null>(defaultOpenRequest ?? null)
@@ -549,7 +551,7 @@ function Dev1({
       </StateView>
 
       <AlertDialog open={!!revoke} onOpenChange={(o) => !o && setRevoke(null)}>
-        <AlertDialogContent>
+        <AlertDialogContent {...returnFocus}>
           <AlertDialogHeader>
             <AlertDialogTitle>Revoke “{revoke?.name}”?</AlertDialogTitle>
             <AlertDialogDescription>Anything using this key stops working straight away. This cannot be undone, but you can create a new key.</AlertDialogDescription>

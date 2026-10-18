@@ -479,7 +479,7 @@ function Chat1({
           {unread ? (
             <span className="bg-primary text-primary-foreground rounded-full px-1.5 text-[10px] leading-4 font-semibold tabular-nums">
               {unread}
-              <span className="sr-only"> unread</span>
+              {" "}<span className="sr-only">unread</span>
             </span>
           ) : null}
         </button>
