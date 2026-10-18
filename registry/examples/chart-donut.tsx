@@ -1,6 +1,6 @@
 "use client";
-import { Cell, Label, Pie, PieChart } from "recharts";
-import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ballmac/chart";
+import { Cell, Pie, PieChart } from "recharts";
+import { ChartCenterLabel, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ballmac/chart";
 const data = [
   { source: "search", visitors: 4210 },
   { source: "direct", visitors: 2890 },
@@ -29,22 +29,8 @@ export default function ChartDonut() {
           {data.map((d) => (
             <Cell key={d.source} fill={`var(--color-${d.source})`} />
           ))}
-          <Label
-            position="center"
-            content={({ viewBox }) =>
-              viewBox && "cx" in viewBox ? (
-                <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
-                  <tspan x={viewBox.cx} y={(viewBox.cy ?? 0) - 6} className="fill-foreground text-2xl font-semibold">
-                    {total.toLocaleString("en-US")}
-                  </tspan>
-                  <tspan x={viewBox.cx} y={(viewBox.cy ?? 0) + 14} className="fill-muted-foreground text-xs">
-                    visitors
-                  </tspan>
-                </text>
-              ) : null
-            }
-          />
         </Pie>
+        <ChartCenterLabel value={total.toLocaleString("en-US")} label="visitors" />
         <ChartLegend content={<ChartLegendContent nameKey="source" />} />
       </PieChart>
     </ChartContainer>

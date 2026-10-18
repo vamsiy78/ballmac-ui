@@ -4,6 +4,7 @@
 
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
+import { useLocale } from "@/lib/ballmac/i18n";
 import { cn } from "@/lib/utils";
 
 const THEMES = { light: "", dark: ".dark" } as const;
@@ -20,7 +21,11 @@ type ChartConfig = {
   );
 };
 
-type ChartContextProps = { config: ChartConfig };
+type ChartContextProps = {
+  config: ChartConfig;
+  /** Writes a value for the tooltip. Without it numbers use the locale's grouping. */
+  format?: (value: number, key: string) => string;
+};
 const ChartContext = React.createContext<ChartContextProps | null>(null);
 
 function useChart() {
@@ -40,6 +45,8 @@ type ChartContainerProps = React.ComponentProps<"figure"> & {
   summary?: string;
   /** Size used before the container is measured, so the server render has a stable box. */
   initialDimension?: { width: number; height: number };
+  /** Writes a value in the tooltip, for example `(v) => "$" + v`. The key is the series. */
+  format?: (value: number, key: string) => string;
 };
 
 /** Wraps a Recharts chart: sizes it responsively, exposes series colors as CSS variables and names it for assistive tech. */
@@ -51,20 +58,23 @@ function ChartContainer({
   label,
   summary,
   initialDimension = { width: 480, height: 270 },
+  format,
   ...props
 }: ChartContainerProps) {
   const uniqueId = React.useId();
   const chartId = `chart-${id ?? uniqueId.replace(/:/g, "")}`;
   const summaryId = `${chartId}-summary`;
+  // Recharts places svg text for a left-to-right page. `direction: ltr` on its svg keeps `text-anchor` meaning what it assumes when the page reads
+  // right to left, where start and end would swap. Charts mirror their axes themselves (see ChartFrame).
   return (
-    <ChartContext.Provider value={{ config }}>
+    <ChartContext.Provider value={{ config, format }}>
       <figure
         data-slot="chart"
         data-chart={chartId}
         aria-label={label}
         aria-describedby={summary ? summaryId : undefined}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke$='ccc']]:stroke-border/60 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke$='fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-pie:focus-visible_.recharts-sector]:stroke-ring [&_.recharts-pie:focus-visible_.recharts-sector]:[stroke-width:2px] [&_.recharts-polar-grid_[stroke$='ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted/60 [&_.recharts-reference-line_[stroke$='ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke$='fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
+          "flex aspect-video justify-center text-xs [&_.recharts-surface]:[direction:ltr] [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke$='ccc']]:stroke-border/60 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke$='fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-pie:focus-visible_.recharts-sector]:stroke-ring [&_.recharts-pie:focus-visible_.recharts-sector]:[stroke-width:2px] [&_.recharts-polar-grid_[stroke$='ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted/60 [&_.recharts-reference-line_[stroke$='ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke$='fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
           className,
         )}
         {...props}
@@ -124,11 +134,12 @@ type PayloadItem = {
 
 function getItemConfig(config: ChartConfig, item: PayloadItem, key: string) {
   const payload = item.payload;
+  // A `nameKey` points at a field of the data row that holds the series' name (a pie slice's "source"), so what it holds is looked up first.
   const candidates = [
+    payload && typeof payload[key] === "string" ? (payload[key] as string) : undefined,
     key,
     typeof item.dataKey === "string" ? item.dataKey : undefined,
     typeof item.name === "string" ? item.name : undefined,
-    payload && typeof payload[key] === "string" ? (payload[key] as string) : undefined,
   ];
   for (const c of candidates) if (c && c in config) return config[c];
   return undefined;
@@ -169,7 +180,8 @@ function ChartTooltipContent({
   nameKey,
   labelKey,
 }: ChartTooltipContentProps) {
-  const { config } = useChart();
+  const { config, format } = useChart();
+  const locale = useLocale();
   const tooltipLabel = React.useMemo(() => {
     if (hideLabel || !payload?.length) return null;
     const [item] = payload;
@@ -231,7 +243,7 @@ function ChartTooltipContent({
                       </div>
                       {item.value !== undefined && (
                         <span className="font-mono font-medium text-foreground tabular-nums">
-                          {typeof item.value === "number" ? item.value.toLocaleString("en-US") : String(item.value)}
+                          {typeof item.value === "number" ? (format ? format(item.value, String(item.dataKey ?? item.name ?? "")) : item.value.toLocaleString(locale)) : String(item.value)}
                         </span>
                       )}
                     </div>
@@ -242,6 +254,40 @@ function ChartTooltipContent({
           })}
       </div>
     </div>
+  );
+}
+
+type ChartCenterLabelProps = {
+  /** The big text: a total, a percentage. */
+  value: string;
+  /** The small text under it. */
+  label?: string;
+  /** Where the ring's center sits, as a share of the plot height. A half ring (a gauge) has its center near the bottom, 0.88. */
+  cy?: number;
+  className?: string;
+};
+
+/**
+ * Text in the middle of a donut or a radial chart. Put it inside the chart after the ring. It is placed from the chart's plot area, so it
+ * stays centered at any size, and it is hidden from assistive technology (say the same thing in the chart's `summary`).
+ */
+function ChartCenterLabel({ value, label, cy = 0.5, className }: ChartCenterLabelProps) {
+  const plot = RechartsPrimitive.usePlotArea();
+  if (!plot) return null;
+  const x = plot.x + plot.width / 2;
+  const y = plot.y + plot.height * cy;
+  const lift = cy > 0.7 ? 26 : 8;
+  return (
+    <text x={x} y={y} textAnchor="middle" dominantBaseline="middle" aria-hidden="true" className={className}>
+      <tspan x={x} y={y - lift} className="fill-foreground text-2xl font-semibold tabular-nums">
+        {value}
+      </tspan>
+      {label ? (
+        <tspan x={x} y={y - lift + 22} className="fill-muted-foreground text-xs">
+          {label}
+        </tspan>
+      ) : null}
+    </text>
   );
 }
 
@@ -299,10 +345,12 @@ export {
   ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
+  ChartCenterLabel,
   ChartStyle,
   useChart,
   type ChartConfig,
   type ChartContainerProps,
   type ChartTooltipContentProps,
   type ChartLegendContentProps,
+  type ChartCenterLabelProps,
 };

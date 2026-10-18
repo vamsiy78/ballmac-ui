@@ -9,7 +9,7 @@ export default defineItem({
   tags: ["chart", "recharts", "graph", "data"],
   files: [{ path: "components/chart.tsx" }],
   dependencies: ["recharts@^3"],
-  registryDependencies: ["shadcn:utils"],
+  registryDependencies: ["shadcn:utils", "i18n"],
   examples: [
     { name: "chart-demo", title: "Revenue area chart", file: "chart-demo.tsx" },
     { name: "chart-bars", title: "Grouped bars", file: "chart-bars.tsx" },
@@ -34,6 +34,9 @@ export default defineItem({
     copyright: "Copyright (c) 2023 shadcn",
     modified: true,
   },
-  version: "1.0.0",
-  updated: "2026-09-30",
+  version: "1.1.0",
+  updated: "2026-10-18",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-18", note: "Adds ChartCenterLabel and a `format` prop on ChartContainer, groups tooltip numbers by the locale (useLocale) and looks a series up by what `nameKey` points at first, which fixes pie legends. No prop was removed." },
+  ],
 });

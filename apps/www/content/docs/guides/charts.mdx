@@ -1,0 +1,121 @@
+---
+title: Add accessible charts
+description: "Install a chart, give it your data, and get a table view, patterns for color blindness, a written summary and loading, empty and error states without extra code."
+---
+
+Ballmac UI has seven chart components built on [Recharts](https://recharts.org) and the shadcn chart: area, bar, line, pie, radar, radial and scatter. Each one draws inside a **chart frame** that adds what a chart needs to work for everyone. Browse them all, live, on the [charts page](/charts).
+
+## Install a chart
+
+```npm
+npx shadcn@latest add @ballmac/chart-area
+```
+
+The command also installs the frame and the base chart, and adds `recharts` to your project. To start from a finished example instead, install it by name, for example `@ballmac/chart-area-stacked`.
+
+## Draw one
+
+Pass rows of data, the key that holds each row's category, and the series to draw:
+
+```tsx title="app/page.tsx"
+import { ChartArea } from "@/components/ballmac/chart-area"
+
+const data = [
+  { month: "Jan", desktop: 4210, mobile: 2480 },
+  { month: "Feb", desktop: 4860, mobile: 3120 },
+  { month: "Mar", desktop: 4540, mobile: 3790 },
+]
+
+export default function Page() {
+  return (
+    <ChartArea
+      title="Visitors"
+      description="Desktop and mobile"
+      data={data}
+      xKey="month"
+      series={[
+        { key: "desktop", label: "Desktop" },
+        { key: "mobile", label: "Mobile" },
+      ]}
+    />
+  )
+}
+```
+
+Colors come from your theme's chart colors in order. Give a series its own with `color: "var(--chart-3)"` or any CSS color.
+
+## Which chart
+
+| You want to show | Use |
+| --- | --- |
+| A trend, or parts of a whole over time | `chart-area` (stacked, expanded to 100%) |
+| An exact trend, forecast against actual, lines that cross | `chart-line` (dashed series, labels on the lines) |
+| A comparison, a ranking, groups | `chart-bar` (columns or flat bars, stacked, sorted) |
+| A few parts of one whole | `chart-pie` (donut, half ring, total in the middle) |
+| A goal, or progress rings | `chart-radial` |
+| A profile across five to eight dimensions | `chart-radar` |
+| A relationship between two numbers | `chart-scatter` (groups, bubbles) |
+
+## What every chart does for you
+
+- **Table view.** A switch above the chart turns it into a table of the same numbers, with a **Download CSV** button. Pass `tableView={false}` to hide the switch.
+- **Legend.** Each legend item is a button that switches its series off and on. At least one always stays on. Use `legend="static"` for a plain legend or `legend="none"`.
+- **Patterns.** Add `patterns="toggle"` for a switch that fills series with stripes, dots and hatching as well as color, or `patterns` to always do it. Line charts use dash styles.
+- **A summary for screen readers.** The chart is a named figure, and its description is written from your data: first to last, highest and lowest, or a ranking. Pass `summary="Mobile caught up in March."` to say what it means instead.
+- **States.** Pass `state="loading"`, `"empty"` or `"error"` and an `onRetry`. The loading skeleton has the shape of the chart. An empty `data` array shows the empty state by itself.
+- **Reduced motion.** Chart animations stop for people who ask for less motion.
+- **Right to left.** Axes reverse and move to the other side when the page reads right to left.
+
+```tsx
+import { useResource } from "@/lib/ballmac/use-resource"
+
+const visits = useResource((signal) => fetch("/api/visits", { signal }).then((r) => r.json()))
+
+<ChartArea title="Visits" data={visits.data ?? []} xKey="day" series={series} state={visits.state} onRetry={visits.retry} />
+```
+
+## Write numbers your way
+
+`valueFormatter` writes a number in the tooltip, the table, the labels and the summary. `categoryFormatter` writes a category, for example a date. The axis has its own formatter, because ticks are usually shorter:
+
+```tsx
+<ChartBar
+  valueFormatter={(v) => `$${v.toLocaleString("en-US")}`}
+  axisFormatter={(v) => `$${v / 1000}k`}
+  categoryFormatter={(v) => dateFormat.format(new Date(`${v}T00:00:00Z`))}
+  …
+/>
+```
+
+Axes get round ticks (0, 500, 1K) instead of whatever the data ends on. Fix a scale with `yDomain` (area, line, scatter) or `domain` (bar).
+
+## Use the frame with any Recharts chart
+
+For a chart these components do not cover, wrap your own Recharts chart in `ChartFrame` and use what it hands you:
+
+```tsx
+import { ChartFrame } from "@/components/ballmac/chart-frame"
+
+<ChartFrame title="Response time" data={data} xKey="week" series={series}>
+  {(chart) => (
+    <LineChart data={data} accessibilityLayer>
+      <XAxis dataKey="week" reversed={chart.rtl} />
+      {series.map((s) => (
+        <Line key={s.key} dataKey={s.key} stroke={chart.color(s.key)} hide={chart.isHidden(s.key)} isAnimationActive={chart.animate} />
+      ))}
+    </LineChart>
+  )}
+</ChartFrame>
+```
+
+`chart.fill(key)` gives a series' fill, which is its pattern when patterns are on. Put `<defs>{chart.defs}</defs>` inside the chart so the patterns exist. For a chart whose data is not one column per series, pass your own `table={{ columns, rows }}`.
+
+## Dashboards
+
+Four blocks put the charts to work: [Charts 1](/blocks/charts-1) is an analytics overview, [Charts 2](/blocks/charts-2) a revenue report, [Charts 3](/blocks/charts-3) small multiples and [Charts 4](/blocks/charts-4) a scorecard. Each works out its figures from your data.
+
+## Related
+
+- [Handle loading, empty and error states](/docs/guides/states)
+- [Right-to-left layouts](/docs/guides/right-to-left)
+- [Quality, measured](/quality)
