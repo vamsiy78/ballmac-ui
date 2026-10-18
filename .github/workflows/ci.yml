@@ -47,7 +47,9 @@ jobs:
         run: pnpm --filter @ballmac-ui/www cf:build
       - name: Check every link and #fragment in the built docs and changelog
         run: |
-          curl -fsSL https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz | sudo tar -xz -C /usr/local/bin lychee
+          mkdir -p "$RUNNER_TEMP/lychee"
+          curl -fsSL https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz | tar -xz -C "$RUNNER_TEMP/lychee"
+          sudo install "$(find "$RUNNER_TEMP/lychee" -name lychee -type f | head -n 1)" /usr/local/bin/lychee
           pnpm docs:links
       - name: Bundle the Worker (no upload)
         run: pnpm --filter @ballmac-ui/www exec wrangler deploy --dry-run --outdir .wrangler/dry-run
