@@ -4,6 +4,20 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-18",
+    title: "A project timeline, an org chart, data and privacy settings, customer stories and an integrations directory",
+    items: [
+      "Gantt 1, project timeline: bars placed by real dates with a progress fill, milestones as diamonds, dependency arrows (a task that starts before what it waits for shows its arrow running backwards), a today line, days, weeks and months zoom, a sticky task column, a details panel with what each task waits for, and a hidden table of the same data for screen readers. Late work is marked with an icon and the word Late, not only by color. The timeline runs left to right in every language, like a chart",
+      "Org chart 1, organization tree: connected person cards with a count toggle on every team, search that opens the path to a person, a panel with their manager and direct reports, and the standard tree keys (arrows to move, Left and Right to close and open a team, Enter to choose). Connectors and keys mirror in right-to-left, and it opens centered on the top or the chosen person",
+      "Settings 6, data and privacy: request an export of chosen data in JSON or CSV and watch each one prepare with a labelled progress bar, download it before it expires, set how long messages are kept, and delete the account behind a typed email with a 30-day grace period you can cancel. Failures show their message in place",
+      "Case study 1, customer stories: one featured story with its quote and results counting up, a grid of the others with a headline number each, an industry filter, and pictures drawn from each company's name, so no image files are needed",
+      "Integrations 1, integrations directory: search that highlights matches, category filters with counts that follow the search, cards that say Connected in words, and a side sheet with what it does and a Connect button that handles the wait and a failure. Focus returns to the card when the sheet closes",
+      "Dev 1: its hidden usage table is now wrapped so it can never widen the page on a phone",
+      "Four new block groups in the gallery and for the MCP server: Project timeline, Org chart, Case studies and Integrations. The MCP server finds them for gantt, schedule, orgchart, hierarchy, privacy, gdpr, export, customers and marketplace",
+      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and right to left, and ship their tests",
+    ],
+  },
+  {
+    date: "2026-10-18",
     title: "A gallery, a company story, a trust center, a task list and a leaderboard",
     items: [
       "Gallery 1, filterable gallery: category chips with counts, a gap-free masonry of tiles that fade in, and a lightbox with the caption, a counter, a thumbnail strip, arrow-key and swipe navigation (mirrored in right-to-left) and a link to the original. Tiles without a picture show art drawn from their id, so the gallery looks finished before you have photos. A new Gallery section on /blocks",

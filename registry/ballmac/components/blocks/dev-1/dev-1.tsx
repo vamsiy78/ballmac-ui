@@ -264,7 +264,8 @@ function Dev1({
                 <span>{usage.days[0]?.label}</span>
                 <span>{usage.days[usage.days.length - 1]?.label}</span>
               </div>
-              <table className="sr-only">
+              <div className="sr-only">
+<table>
                 <caption>Requests per day</caption>
                 <thead>
                   <tr>
@@ -283,6 +284,7 @@ function Dev1({
                   ))}
                 </tbody>
               </table>
+</div>
             </div>
             <dl className="grid content-start gap-3 sm:grid-cols-3 lg:grid-cols-1">
               {[

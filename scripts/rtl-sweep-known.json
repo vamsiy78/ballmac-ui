@@ -238,5 +238,9 @@
   {
     "prefix": "match-highlight",
     "reason": "The marks sit inside running text, whose word order follows the language of the text, so a mirror image of English prose cannot apply. It marks Arabic and Hebrew text correctly (tested)."
+  },
+  {
+    "prefix": "gantt-1",
+    "reason": "A timeline runs left to right in every language, like a chart: dates only make sense in one direction."
   }
 ]

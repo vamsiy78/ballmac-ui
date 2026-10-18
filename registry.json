@@ -7870,6 +7870,141 @@
       }
     },
     {
+      "name": "casestudy-1",
+      "type": "registry:block",
+      "title": "Case study 1: customer stories",
+      "description": "Customer stories for a marketing page: one featured story with its quote and results counting up, a grid of the others with a headline number each, an industry filter, and pictures drawn from each company's name.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/blur-fade.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/number-ticker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/casestudy-1/casestudy-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/casestudy-1/casestudy-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "casestudy"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "case study",
+          "customer stories",
+          "social proof",
+          "results",
+          "metrics",
+          "testimonials",
+          "marketing",
+          "success stories"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "Customer stories. <CaseStudy1 stories={[{ id, company, industry, headline, summary, quote, person: { name, role }, metrics: [{ value: 81, suffix: '%', label }], href }]} art='mesh' | 'rings' | 'waves' | 'bars' | 'dots' />. The first story is featured large with its quote; the rest form a grid. An industry filter shows when there are two or more industries. Numbers count up once on scroll and show their final value with reduced motion.",
+          "whenToUse": [
+            "The social proof section of a marketing site",
+            "A customers page linking to full stories"
+          ],
+          "whenNotToUse": [
+            "Short quotes only (use testimonials-1 or testimonials-2)",
+            "A row of customer logos (use logo-cloud-1)"
+          ],
+          "composesWith": [
+            "hero-1",
+            "testimonials-1",
+            "cta-1",
+            "logo-cloud-1",
+            "footer-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Industry buttons (pressed state announced), then one link per story; the whole card is clickable through its headline link"
+            },
+            {
+              "keys": "Results",
+              "action": "Each result is a term and its number in a description list, so a screen reader hears the label with the value"
+            },
+            {
+              "keys": "Artwork",
+              "action": "Decorative and hidden from assistive technology"
+            }
+          ],
+          "customization": [
+            "art picks the picture style of the featured story; the cards vary on their own",
+            "Pictures come from the company name, so identical on server and client",
+            "Arrows and the card layout mirror in right-to-left"
+          ]
+        },
+        "statesNone": "Static content: nothing to load, submit or fail.",
+        "examples": [
+          "casestudy-1-demo",
+          "casestudy-1-rings"
+        ],
+        "url": "https://ui.ballmac.com/components/casestudy-1"
+      }
+    },
+    {
+      "name": "casestudy-1-demo",
+      "type": "registry:example",
+      "title": "Case study 1: customer stories: Featured story and grid",
+      "description": "Featured story and grid example of Case study 1: customer stories.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/casestudy-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/casestudy-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/casestudy-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "casestudy-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "casestudy-1-rings",
+      "type": "registry:example",
+      "title": "Case study 1: customer stories: Rings artwork, one story",
+      "description": "Rings artwork, one story example of Case study 1: customer stories.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/casestudy-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/casestudy-1-rings.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/casestudy-1-rings.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "casestudy-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "changelog-1",
       "type": "registry:block",
       "title": "Changelog 1: release notes timeline",
@@ -13499,6 +13634,266 @@
       }
     },
     {
+      "name": "gantt-1",
+      "type": "registry:block",
+      "title": "Gantt 1: project timeline",
+      "description": "A project timeline: bars placed by real dates with a progress fill, milestones, dependency arrows, a today line, three zoom levels, a sticky task column, a details panel and a table of the same data for screen readers.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/gantt-1/gantt-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/gantt-1/gantt-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "gantt"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "gantt",
+          "timeline",
+          "project",
+          "schedule",
+          "roadmap",
+          "planning",
+          "milestones",
+          "dependencies",
+          "project management"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A Gantt chart. <Gantt1 tasks={[{ id, name, start: '2026-10-05', end: '2026-10-16', progress: 0..1, group, owner, dependsOn: ['id'], milestone }]} today=\"2026-10-18\" defaultScale='days' | 'weeks' | 'months' defaultSelectedId locale onSelect />. Status is worked out for you: done at progress 1, late when the end date has passed, in progress when it has started, planned otherwise. Pass today yourself (an ISO date); the block never reads the clock. A milestone has the same start and end.",
+          "whenToUse": [
+            "Showing a project plan with dates, progress and dependencies",
+            "A read-only schedule overview in a project tool or a client report"
+          ],
+          "whenNotToUse": [
+            "A board of cards by status (use kanban-1)",
+            "Booking rooms or people by the hour (use calendar-pro-1)",
+            "A simple list of dated items (use timeline or tasks-1)"
+          ],
+          "composesWith": [
+            "tasks-1",
+            "kanban-1",
+            "app-shell-1",
+            "calendar-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, then Up / Down / Home / End",
+              "action": "Move between bars; each bar's name says its dates, progress and status in words"
+            },
+            {
+              "keys": "Table",
+              "action": "A hidden table lists every task with start, end, progress, status and what it waits for, so the chart has a text equivalent"
+            },
+            {
+              "keys": "Late",
+              "action": "Marked with an icon and the word Late in the task column and the details, not only by color"
+            }
+          ],
+          "customization": [
+            "defaultScale: days (44 px a day), weeks (18) or months (6)",
+            "dependsOn draws arrows; a task that starts before what it depends on shows the arrow running backwards, which is the sign of a planning problem",
+            "The timeline runs left to right in every language, like a chart"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "gantt-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton chart under the real heading, announced as loading; zoom and Today are disabled."
+          },
+          {
+            "id": "empty",
+            "title": "No tasks yet",
+            "example": "gantt-1-empty",
+            "trigger": "state=\"empty\" (or tasks={[]})",
+            "note": "Says the plan draws itself once tasks have dates; emptyState sets the copy and can add a button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "gantt-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "gantt-1-demo",
+          "gantt-1-days",
+          "gantt-1-months",
+          "gantt-1-loading",
+          "gantt-1-empty",
+          "gantt-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/gantt-1"
+      }
+    },
+    {
+      "name": "gantt-1-demo",
+      "type": "registry:example",
+      "title": "Gantt 1: project timeline: Weeks, with a task open",
+      "description": "Weeks, with a task open example of Gantt 1: project timeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gantt-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gantt-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gantt-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gantt-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gantt-1-days",
+      "type": "registry:example",
+      "title": "Gantt 1: project timeline: Days",
+      "description": "Days example of Gantt 1: project timeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gantt-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gantt-1-days.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gantt-1-days.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gantt-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gantt-1-months",
+      "type": "registry:example",
+      "title": "Gantt 1: project timeline: Months, a late task open",
+      "description": "Months, a late task open example of Gantt 1: project timeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gantt-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gantt-1-months.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gantt-1-months.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gantt-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gantt-1-loading",
+      "type": "registry:example",
+      "title": "Gantt 1: project timeline: Loading",
+      "description": "Loading example of Gantt 1: project timeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gantt-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gantt-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gantt-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gantt-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gantt-1-empty",
+      "type": "registry:example",
+      "title": "Gantt 1: project timeline: No tasks yet",
+      "description": "No tasks yet example of Gantt 1: project timeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gantt-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gantt-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gantt-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gantt-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gantt-1-error",
+      "type": "registry:example",
+      "title": "Gantt 1: project timeline: Could not load",
+      "description": "Could not load example of Gantt 1: project timeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gantt-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gantt-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gantt-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gantt-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "header-1",
       "type": "registry:block",
       "title": "Header 1: sticky with mobile menu",
@@ -14946,6 +15341,242 @@
       "meta": {
         "example": true,
         "of": "inbox-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "integrations-1",
+      "type": "registry:block",
+      "title": "Integrations 1: directory",
+      "description": "A public integrations directory: search that highlights matches, category filters with counts, cards showing what is connected, and a side sheet with what it does and a Connect button that handles waiting and failure.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/badge.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/match-highlight.json",
+        "https://ui.ballmac.com/r/sheet.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/integrations-1/integrations-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/integrations-1/integrations-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "integrations"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "integrations",
+          "marketplace",
+          "apps",
+          "directory",
+          "connect",
+          "plugins",
+          "partners",
+          "ecosystem"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "An integrations directory. <Integrations1 integrations={[{ id, name, category, summary, description, features: [], badge: 'Popular' | 'New' | 'Beta', connected, docsHref }]} onConnect={(item) => Promise} onDisconnect defaultOpenId />. Categories come from the data and show counts for the current search. Reject onConnect to show its message in the sheet.",
+          "whenToUse": [
+            "A marketing page listing what the product connects to",
+            "An in-app integrations settings page"
+          ],
+          "whenNotToUse": [
+            "A row of partner logos (use logo-cloud-1)",
+            "Step-by-step setup of one connection (use a wizard)"
+          ],
+          "composesWith": [
+            "hero-1",
+            "logo-cloud-1",
+            "cta-1",
+            "settings-1",
+            "footer-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Search, category buttons (pressed state announced), then each card as one button"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Open the details sheet; Escape closes it and focus returns to the card"
+            },
+            {
+              "keys": "Connected",
+              "action": "Shown with a check and the word Connected, not only by color; changes are announced"
+            }
+          ],
+          "customization": [
+            "Pictures are drawn from the name, so no logos are needed to look finished",
+            "Category counts follow the search",
+            "The sheet slides in from the reading end and mirrors in right-to-left"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "integrations-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton cards under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No integrations",
+            "example": "integrations-1-empty",
+            "trigger": "state=\"empty\" (or integrations={[]})",
+            "note": "Explains that integrations appear here when added; emptyState sets the copy and can add a button. A search with no match says so with a Clear filters button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "integrations-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry). A failed connect shows its message in the sheet."
+          }
+        ],
+        "examples": [
+          "integrations-1-demo",
+          "integrations-1-open",
+          "integrations-1-loading",
+          "integrations-1-empty",
+          "integrations-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/integrations-1"
+      }
+    },
+    {
+      "name": "integrations-1-demo",
+      "type": "registry:example",
+      "title": "Integrations 1: directory: Default",
+      "description": "Default example of Integrations 1: directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/integrations-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/integrations-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/integrations-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "integrations-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "integrations-1-open",
+      "type": "registry:example",
+      "title": "Integrations 1: directory: Details open",
+      "description": "Details open example of Integrations 1: directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/integrations-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/integrations-1-open.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/integrations-1-open.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "integrations-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "integrations-1-loading",
+      "type": "registry:example",
+      "title": "Integrations 1: directory: Loading",
+      "description": "Loading example of Integrations 1: directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/integrations-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/integrations-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/integrations-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "integrations-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "integrations-1-empty",
+      "type": "registry:example",
+      "title": "Integrations 1: directory: No integrations",
+      "description": "No integrations example of Integrations 1: directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/integrations-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/integrations-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/integrations-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "integrations-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "integrations-1-error",
+      "type": "registry:example",
+      "title": "Integrations 1: directory: Could not load",
+      "description": "Could not load example of Integrations 1: directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/integrations-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/integrations-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/integrations-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "integrations-1",
         "tier": "free"
       }
     },
@@ -16896,6 +17527,245 @@
       "meta": {
         "example": true,
         "of": "onboarding-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "orgchart-1",
+      "type": "registry:block",
+      "title": "Org chart 1: organization tree",
+      "description": "An organization chart drawn as a real tree: connected person cards, a count toggle on every team, search that opens the path to a person, a details panel with manager and direct reports, and the standard tree keys.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/direction.json",
+        "https://ui.ballmac.com/r/match-highlight.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/orgchart-1/orgchart-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/orgchart-1/orgchart-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "orgchart"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "org chart",
+          "organization",
+          "hierarchy",
+          "team",
+          "people",
+          "tree",
+          "reports",
+          "company",
+          "about"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "An org chart. <Org1 root={{ id, name, title, team, location, email, reports: [...] }} defaultExpandedDepth={2} defaultSelectedId onSelect />. Pass one root person; everyone below hangs off reports. Search opens the path to the person; the side panel shows the manager and direct reports and lets you jump to them.",
+          "whenToUse": [
+            "An about or team page showing who reports to whom",
+            "An internal directory with reporting lines"
+          ],
+          "whenNotToUse": [
+            "A grid of team photos with no hierarchy (use team-1)",
+            "A flat people directory with filters (use a table)"
+          ],
+          "composesWith": [
+            "about-1",
+            "team-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, then Up / Down / Home / End",
+              "action": "Move through the visible people in reading order (a roving tree)"
+            },
+            {
+              "keys": "Right / Left",
+              "action": "Open or close a team; Right on an open team goes to the first report, Left goes to the manager (swapped in right-to-left)"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Choose a person and show their details"
+            },
+            {
+              "keys": "Names",
+              "action": "Each card is announced as name, role, team and how many people are in their organization"
+            }
+          ],
+          "customization": [
+            "defaultExpandedDepth: 1 shows only the top",
+            "Connectors and the count toggle mirror in right-to-left",
+            "Avatars are seeded art from the name, so they are identical on server and client"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "orgchart-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton cards under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No chart yet",
+            "example": "orgchart-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Explains that the chart draws itself once people and reporting lines are added; emptyState sets the copy and can add a button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "orgchart-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "orgchart-1-demo",
+          "orgchart-1-open",
+          "orgchart-1-loading",
+          "orgchart-1-empty",
+          "orgchart-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/orgchart-1"
+      }
+    },
+    {
+      "name": "orgchart-1-demo",
+      "type": "registry:example",
+      "title": "Org chart 1: organization tree: Two levels open",
+      "description": "Two levels open example of Org chart 1: organization tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/orgchart-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/orgchart-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/orgchart-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "orgchart-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "orgchart-1-open",
+      "type": "registry:example",
+      "title": "Org chart 1: organization tree: Everyone, a deep report selected",
+      "description": "Everyone, a deep report selected example of Org chart 1: organization tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/orgchart-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/orgchart-1-open.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/orgchart-1-open.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "orgchart-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "orgchart-1-loading",
+      "type": "registry:example",
+      "title": "Org chart 1: organization tree: Loading",
+      "description": "Loading example of Org chart 1: organization tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/orgchart-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/orgchart-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/orgchart-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "orgchart-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "orgchart-1-empty",
+      "type": "registry:example",
+      "title": "Org chart 1: organization tree: No chart yet",
+      "description": "No chart yet example of Org chart 1: organization tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/orgchart-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/orgchart-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/orgchart-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "orgchart-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "orgchart-1-error",
+      "type": "registry:example",
+      "title": "Org chart 1: organization tree: Could not load",
+      "description": "Could not load example of Org chart 1: organization tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/orgchart-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/orgchart-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/orgchart-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "orgchart-1",
         "tier": "free"
       }
     },
@@ -19088,6 +19958,212 @@
       "meta": {
         "example": true,
         "of": "settings-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-6",
+      "type": "registry:block",
+      "title": "Settings 6: data and privacy",
+      "description": "A data and privacy page: request an export in JSON or CSV and watch it prepare, set how long messages are kept, and delete the account behind a typed confirmation with a grace period you can cancel.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/progress.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/settings-6/settings-6.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/settings-6/settings-6.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "settings"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "settings",
+          "privacy",
+          "gdpr",
+          "data export",
+          "delete account",
+          "retention",
+          "compliance",
+          "download my data",
+          "account"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A data and privacy settings page. <Settings6 email exports={[{ id, requested, contents, format: 'json' | 'csv', status: 'preparing' | 'ready' | 'failed' | 'expired', progress, size, expires }]} onRequestExport={({ scope, format }) => Promise} onDownload retention='30d' | '1y' | 'forever' onRetentionChange analytics onAnalyticsChange deletionDate onDeleteAccount onCancelDeletion />. Reject a promise to show its message in place. Without onRequestExport, a request is simulated so a demo shows the whole path.",
+          "whenToUse": [
+            "Privacy and data-rights pages (GDPR/CCPA access and erasure)",
+            "The danger zone of any account settings"
+          ],
+          "whenNotToUse": [
+            "Cookie choices on first visit (use cookie-consent)",
+            "Who changed what in the workspace (use settings-5)"
+          ],
+          "composesWith": [
+            "settings-1",
+            "settings-5",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Checkboxes, format, request, then each export's download; every control has a visible label"
+            },
+            {
+              "keys": "Delete",
+              "action": "An alert dialog; the confirm button stays disabled until the email is typed exactly, focus returns to Delete account when it closes"
+            },
+            {
+              "keys": "Progress",
+              "action": "Each preparing export has a labelled progress bar and a percentage in text"
+            }
+          ],
+          "customization": [
+            "Requests, deletion and cancelling are all async; reject to show a message",
+            "deletionDate set from the server shows the scheduled state with a way back",
+            "Retention and analytics are controlled with value and onChange props"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "settings-6-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton cards under the real heading, announced as loading."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "settings-6-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). Failed requests show their message in place."
+          }
+        ],
+        "examples": [
+          "settings-6-demo",
+          "settings-6-deleting",
+          "settings-6-loading",
+          "settings-6-error"
+        ],
+        "url": "https://ui.ballmac.com/components/settings-6"
+      }
+    },
+    {
+      "name": "settings-6-demo",
+      "type": "registry:example",
+      "title": "Settings 6: data and privacy: Default",
+      "description": "Default example of Settings 6: data and privacy.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-6-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-6-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-6-deleting",
+      "type": "registry:example",
+      "title": "Settings 6: data and privacy: Deletion scheduled",
+      "description": "Deletion scheduled example of Settings 6: data and privacy.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-6-deleting.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-6-deleting.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-6-loading",
+      "type": "registry:example",
+      "title": "Settings 6: data and privacy: Loading",
+      "description": "Loading example of Settings 6: data and privacy.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-6-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-6-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-6",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "settings-6-error",
+      "type": "registry:example",
+      "title": "Settings 6: data and privacy: Could not load",
+      "description": "Could not load example of Settings 6: data and privacy.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/settings-6.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/settings-6-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/settings-6-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "settings-6",
         "tier": "free"
       }
     },

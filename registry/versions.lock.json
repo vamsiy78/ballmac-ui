@@ -243,6 +243,10 @@
     "version": "1.0.0",
     "hash": "6996c43951f48cb440c38aed8bf7ac5757a85e913e50eccbd9a2394ca0a86e1a"
   },
+  "casestudy-1": {
+    "version": "1.0.0",
+    "hash": "aeec4d7724c9ad9df76a3593a3ce7ece5d591a63e876c3d86d692771e138331c"
+  },
   "changelog-1": {
     "version": "1.1.0",
     "hash": "c095e5d58efc5ec06cacabe93344f502f4607a31f6b2b7a8028eece3de09b649"
@@ -429,7 +433,7 @@
   },
   "dev-1": {
     "version": "1.0.0",
-    "hash": "4be0ad95e5d7ecae280d0c493b3eeeb171e01c61a2ab9623aa34a678b20e1bbc"
+    "hash": "8794152b25c367ed6a2db6ba1901d755c9df46a3b8d81fa516cb7227ea55d311"
   },
   "devices-1": {
     "version": "1.0.0",
@@ -607,6 +611,10 @@
     "version": "1.0.0",
     "hash": "ac1ac08d30c105dcf6b9d6511553c0f4f860958a2a429379d1598daa4adc350b"
   },
+  "gantt-1": {
+    "version": "1.0.0",
+    "hash": "8049ac1167458311e6eee8573405f50e250620c700baabd1fb0bc44c04ddd8e4"
+  },
   "git-graph": {
     "version": "1.0.0",
     "hash": "7299d7d1ce29505941542bb8f2542f5617adcdcf2a5a0768cda6b32bbcb93914"
@@ -726,6 +734,10 @@
   "install-tabs": {
     "version": "1.0.0",
     "hash": "0010a4c2f7fd3e7f1b31dfe1b078b05c944fbd8963bc55ce5aeac56bd95e0a25"
+  },
+  "integrations-1": {
+    "version": "1.0.0",
+    "hash": "ccceab1820a2c723913cb71a544523f6a38b1b54f440c87543d378877cc5e948"
   },
   "interactive-grid": {
     "version": "1.0.0",
@@ -959,6 +971,10 @@
     "version": "1.0.0",
     "hash": "a821a854518cf41c2c4746c783cf37636885a45f01592921a2ea2c124c99d328"
   },
+  "orgchart-1": {
+    "version": "1.0.0",
+    "hash": "93ad8b18bb99408e28645ff501a1ca287cc7b8a3cdc5952d61e4769ba30db1ec"
+  },
   "package-badge": {
     "version": "1.0.0",
     "hash": "eb09e91760c8a6f544af635e1f21750f93d667b5050b4d5849e5eb6e643afe63"
@@ -1130,6 +1146,10 @@
   "settings-5": {
     "version": "1.0.0",
     "hash": "cf5195974c4e8882be010166651a0f68c22a6c8ec39c298cf2dfa47a8c97109f"
+  },
+  "settings-6": {
+    "version": "1.0.0",
+    "hash": "8dfa2cebe3d98721a4abeb7f6f3baae64291fb5afe563351006c0e81191f5c8c"
   },
   "settings-panel": {
     "version": "1.0.0",

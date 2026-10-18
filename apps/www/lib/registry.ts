@@ -170,6 +170,10 @@ export const blockCategoryLabels: Record<string, string> = {
   gallery: "Gallery",
   tasks: "Tasks",
   leaderboard: "Leaderboard",
+  gantt: "Project timeline",
+  orgchart: "Org chart",
+  casestudy: "Case studies",
+  integrations: "Integrations",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -178,13 +182,13 @@ export const blockGroups = [
     id: "marketing",
     label: "Marketing",
     description: "Sections for landing pages: heroes, features, pricing, proof and calls to action.",
-    categories: ["header", "hero", "features", "stats", "logo-cloud", "testimonials", "team", "comparison", "pricing", "faq", "cta", "newsletter", "footer"],
+    categories: ["header", "hero", "features", "integrations", "stats", "logo-cloud", "testimonials", "casestudy", "team", "comparison", "pricing", "faq", "cta", "newsletter", "footer"],
   },
   {
     id: "content",
     label: "Content and company",
     description: "About, blog, changelog, careers, gallery, trust center, contact, help center, search results and error pages.",
-    categories: ["about", "blog", "changelog", "careers", "gallery", "trust", "contact", "help", "search", "error"],
+    categories: ["about", "orgchart", "blog", "changelog", "careers", "gallery", "trust", "contact", "help", "search", "error"],
   },
   {
     id: "account",
@@ -196,7 +200,7 @@ export const blockGroups = [
     id: "application",
     label: "Application",
     description: "Screens inside a product: shell, dashboards, settings, billing, inbox, notifications, team chat, boards, uploads, developer tools, AI chat and AI agents.",
-    categories: ["app-shell", "dashboard", "settings", "billing", "mail", "notifications", "chat", "kanban", "tasks", "calendar", "upload", "developer", "leaderboard", "ai-chat", "agents"],
+    categories: ["app-shell", "dashboard", "settings", "billing", "mail", "notifications", "chat", "kanban", "tasks", "calendar", "gantt", "upload", "developer", "leaderboard", "ai-chat", "agents"],
   },
   {
     id: "shop",
