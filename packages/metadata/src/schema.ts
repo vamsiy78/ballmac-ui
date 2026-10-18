@@ -107,6 +107,11 @@ export const blockCategories = [
   "expenses",
   "editor",
   "crm",
+  "comments",
+  "poll",
+  "tour",
+  "portfolio",
+  "seatmap",
 ] as const
 
 // Registry item types Ballmac publishes (a subset of the shadcn spec).

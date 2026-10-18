@@ -4,6 +4,19 @@ export type ChangelogEntry = { date: string; title: string; items: string[] }
 export const changelog: ChangelogEntry[] = [
   {
     date: "2026-10-18",
+    title: "Threaded comments, a poll, a product tour, an investment portfolio and a seat map",
+    items: [
+      "Comments 1, threaded discussion: a composer where typing @ offers people (arrow keys, Enter or Tab pick one, Escape closes it), replies, emoji reactions that count and toggle and say who reacted, editing and deleting your own comments, threads you can resolve and reopen, and times like '18 hours ago' worked out from the moment you pass. A comment appears at once and, if it cannot be saved, stays with Not posted and Retry",
+      "Poll 1, vote and live results: one choice or several up to a limit, results with each share, the single leader and your own choice marked in words, your vote counted at once and taken back with the reason if it fails, a vote you can change until the poll closes, and the time left from the moment you pass",
+      "Tour 1, guided product tour: a spotlight lifts one part of your interface out of a dimmed page while a card beside it says what it is for. Mark what to point at with data-tour attributes in your own interface, move with Next, Back, the arrow keys and Escape, and focus follows each step without ever being taken on page load. The page behind is inert while the tour runs",
+      "Portfolio 1, investments overview: total value and its change over a week, a month or a year, a line you scrub with the pointer or arrow keys to read any point, an allocation ring with a text equivalent, and sortable holdings with price, share, day change and a small trend line. Gains and losses carry a sign and an arrow, not only color",
+      "Seat map 1, choose seats: rows with walkways, three price tiers, taken and wheelchair seats marked in words, a limit with a running total, a Pick for me helper that finds the best neighbouring seats for a party, keyboard arrows through the hall, and a hold that survives a lost seat: the taken seat is marked and the others stay chosen",
+      "Five new block groups: Comments, Polls, Product tour, Portfolio and Seat map, also found by the MCP server for discussion, vote, walkthrough, holdings, seats and cinema",
+      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the floor plan in Seat map 1, right to left, and ship their tests",
+    ],
+  },
+  {
+    date: "2026-10-18",
     title: "Goals and OKRs, a weekly timesheet, an expense report, a Markdown editor and a CRM contact record",
     items: [
       "Goals 1, objectives and key results: progress worked out from start, current and target (a target below the start means lower is better), a mark on every bar for where it should be today, On track, At risk, Behind or Done judged against how much of the period is gone and written in words, overall progress, a team filter, and numbers you update in place. A save that fails puts the old number back with the reason",

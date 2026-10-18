@@ -199,6 +199,11 @@ export const blockCategoryLabels: Record<string, string> = {
   expenses: "Expenses",
   editor: "Editor",
   crm: "CRM",
+  comments: "Comments",
+  poll: "Polls",
+  tour: "Product tour",
+  portfolio: "Portfolio",
+  seatmap: "Seat map",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -207,7 +212,7 @@ export const blockGroups = [
     id: "marketing",
     label: "Marketing",
     description: "Sections for landing pages: heroes, features, pricing, proof and calls to action.",
-    categories: ["header", "hero", "features", "integrations", "stats", "logo-cloud", "testimonials", "reviews", "casestudy", "team", "comparison", "pricing", "calculator", "event", "faq", "cta", "waitlist", "newsletter", "footer"],
+    categories: ["header", "hero", "features", "integrations", "stats", "logo-cloud", "testimonials", "reviews", "casestudy", "team", "comparison", "pricing", "calculator", "event", "seatmap", "faq", "cta", "waitlist", "newsletter", "footer"],
   },
   {
     id: "content",
@@ -219,13 +224,13 @@ export const blockGroups = [
     id: "account",
     label: "Account",
     description: "Sign in, sign up, verification, onboarding and public profiles.",
-    categories: ["auth", "onboarding", "profile"],
+    categories: ["auth", "onboarding", "tour", "profile"],
   },
   {
     id: "application",
     label: "Application",
     description: "Screens inside a product: shell, dashboards, settings, billing, inbox, notifications, team chat, boards, uploads, developer tools, AI chat and AI agents.",
-    categories: ["app-shell", "dashboard", "funnel", "retention", "experiments", "settings", "billing", "invoice", "mail", "tickets", "notifications", "chat", "kanban", "tasks", "calendar", "gantt", "goals", "timesheet", "expenses", "crm", "editor", "survey", "quiz", "upload", "import", "developer", "webhooks", "api", "flags", "workflow", "leaderboard", "ai-chat", "agents"],
+    categories: ["app-shell", "dashboard", "funnel", "retention", "experiments", "settings", "billing", "invoice", "mail", "tickets", "notifications", "chat", "comments", "kanban", "tasks", "calendar", "gantt", "goals", "timesheet", "expenses", "crm", "editor", "survey", "poll", "quiz", "portfolio", "upload", "import", "developer", "webhooks", "api", "flags", "workflow", "leaderboard", "ai-chat", "agents"],
   },
   {
     id: "shop",

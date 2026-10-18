@@ -315,6 +315,10 @@
     "version": "1.0.0",
     "hash": "e75d149398f342813a8c7166895a7c262ace5d6aac422e56003e858869b6e169"
   },
+  "comments-1": {
+    "version": "1.0.0",
+    "hash": "94f6bb99471d967742a878968d74a7f2863d9404bcf546f2906f13d3e24facf9"
+  },
   "comparison-1": {
     "version": "1.0.0",
     "hash": "2b992677561cb80f9f5d07ba543b5c85996f3162a8a21f05084440d1c7c3b2d1"
@@ -1063,9 +1067,17 @@
     "version": "1.0.0",
     "hash": "dccb7d39c4cc73ebd699ce11d7196e019b4665e53b45201eb22ebd697841f44e"
   },
+  "poll-1": {
+    "version": "1.0.0",
+    "hash": "d3e67a4527086d44dc2d25e2d77ccde6fc999917af68b20e080a91f7dc58de9e"
+  },
   "popover": {
     "version": "1.0.1",
     "hash": "acba72f01955612f2d1dc20d9d376969e34244d5b9c7eefbdac459deccb606e9"
+  },
+  "portfolio-1": {
+    "version": "1.0.0",
+    "hash": "78e18f876fd4b1a52078f9b52f989b2bac0242af5f9b18006f1c88efbb5293f6"
   },
   "pricing-1": {
     "version": "1.0.0",
@@ -1182,6 +1194,10 @@
   "search-field": {
     "version": "1.0.0",
     "hash": "d086f5640eaddc2d4073413164ab2676ad92c570e0c27ccb54d4fbeb9b547962"
+  },
+  "seatmap-1": {
+    "version": "1.0.0",
+    "hash": "be9667bd7faedf43f94d0e5e1e20e02166e9d065c98204ca39ea60dc5c474180"
   },
   "section-tabs": {
     "version": "1.0.0",
@@ -1606,6 +1622,10 @@
   "tooltip": {
     "version": "1.0.0",
     "hash": "a343ce68b2a729d5395b1964208e1216f24c92618dd4c98d9425cd1c776f95a7"
+  },
+  "tour-1": {
+    "version": "1.0.0",
+    "hash": "8c5390f5c460ad7a37009b75b9957fbfa35251c3abda27abc600822ac4c5950a"
   },
   "tree-view": {
     "version": "1.0.0",
