@@ -1,0 +1,29 @@
+---
+title: Track items you already installed
+description: Adopt Ballmac items you installed with plain shadcn, so ballmac update can merge new versions into them.
+---
+
+Installed with plain `shadcn add`? Adopt the items:
+
+```npm
+npx @ballmac/cli track
+npx @ballmac/cli track dialog button
+```
+
+The first command tracks every Ballmac item found in the project. The second tracks only the items you name.
+
+## How it records your files
+
+A file identical to what shadcn writes today is recorded as untouched. One that differs is recorded **without a base**, because it may be edited or from an older version and there is no way to tell.
+
+For those files, an update puts the new version beside your file as `<file>.ballmac-new` instead of guessing.
+
+## Declare a file current
+
+Once you have compared the two files, tell `ballmac` your file is current:
+
+```npm
+npx @ballmac/cli track --rebase button
+```
+
+From then on, `ballmac update` merges new versions into it. See [Update components without losing your edits](/docs/guides/update-components).

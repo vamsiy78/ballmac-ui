@@ -135,7 +135,7 @@ export default function QualityPage() {
         </h2>
         <p className="text-muted-foreground mt-2 max-w-2xl leading-relaxed">
           The same engine is in the command line tool and the MCP server, so you or your AI agent can check the app you build with these components.{" "}
-          <Link href="/docs/check" className="text-foreground underline underline-offset-4">
+          <Link href="/docs/guides/check-your-app" className="text-foreground underline underline-offset-4">
             Read how it works
           </Link>
           .

@@ -1,0 +1,33 @@
+---
+title: Why every block has states
+description: An interface isn't finished until it handles loading, nothing and failure. Every data block and form block takes one prop, state, and shows the right thing.
+---
+
+The edge cases are what make an app feel built. They are also what generated UI skips. In Ballmac UI they are part of the block: skeletons that match its layout, a clear empty message, an error you can retry, and announcements for screen readers.
+
+Open any block in the [gallery](/blocks) and use the **State** chips above the preview to see each one.
+
+## The states
+
+- `loading`: data is on its way. A skeleton with the same shape as the content, announced as loading.
+- `empty`: there is nothing yet. A clear message and, where it helps, a way to make the first thing.
+- `error`: it failed. A message that says what happened and a way to try again.
+- `submitting`: a form request is in flight. Fields lock, the button spins and nothing can be sent twice.
+- `success`: the request went through. The confirmation the flow ends on.
+
+Leave `state` out and the block behaves as it always has. Nothing changes until you pass it.
+
+## What it does for accessibility
+
+- Loading is announced as a status, and the region is marked `aria-busy` while it lasts. The skeleton itself is hidden from assistive technology.
+- An error is announced as an alert. Focus is never moved for you, so nobody loses their place.
+- Under reduced motion the fades stop. The skeleton's pulse follows the theme's [decorative loops](/docs/concepts/motion#reduced-motion-is-not-no-motion) switch, and the fades follow its speed.
+- A form that is submitting is a disabled fieldset, so every control inside is disabled, the same way the browser does it.
+
+## How the repository keeps it true
+
+A free block that lists no states and gives no reason fails `pnpm check`, and so does a state example that would break a production build. The list of blocks and their states is in the [block states reference](/docs/reference/block-states).
+
+## Related
+
+- [Handle loading, empty and error states](/docs/guides/states)

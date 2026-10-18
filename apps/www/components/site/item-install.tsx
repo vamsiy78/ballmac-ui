@@ -122,7 +122,7 @@ export function ItemAi({ item }: { item: SiteItem }) {
     <div className="space-y-4">
       <p className="text-muted-foreground text-sm leading-relaxed [overflow-wrap:anywhere]">
         {item.ai?.summary} With the shadcn MCP server set up (
-        <Link href="/docs/mcp" className="text-foreground underline underline-offset-4">
+        <Link href="/docs/get-started/connect-your-agent" className="text-foreground underline underline-offset-4">
           guide
         </Link>
         ), ask your agent:

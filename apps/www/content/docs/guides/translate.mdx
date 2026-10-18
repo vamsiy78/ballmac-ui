@@ -1,0 +1,76 @@
+---
+title: Translate Ballmac UI
+description: Translate every built-in label, placeholder and screen reader text with one provider, and set the locale for dates and numbers.
+---
+
+Every built-in label, placeholder and screen reader text is a message with an English default. One provider translates all of them and sets the locale for dates and numbers. The full list is in the [messages reference](/docs/reference/messages).
+
+## Add the provider
+
+```npm
+npx shadcn@latest add @ballmac/i18n
+```
+
+```tsx title="app/layout.tsx"
+import { I18nProvider } from "@/lib/ballmac/i18n"
+import ar from "@/messages/ar.json"
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ar" dir="rtl">
+      <body>
+        <I18nProvider locale="ar" messages={ar}>
+          {children}
+        </I18nProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+`messages` is a flat object from key to text. Anything you leave out stays in English, so you can translate in stages.
+
+## Start from the full key list
+
+Download the complete list of keys with their English text from [/i18n/en.json](/i18n/en.json), copy it to `ar.json`, and translate the values.
+
+## Use placeholders and plurals
+
+```json title="messages/ar.json"
+{
+  "pagination.nextPage": "الصفحة التالية",
+  "data-table.pageOf": "الصفحة {page} من {total}",
+  "workspace-card.members_one": "عضو واحد",
+  "workspace-card.members_two": "عضوان",
+  "workspace-card.members_few": "{count} أعضاء",
+  "workspace-card.members_many": "{count} عضوًا",
+  "workspace-card.members_other": "{count} عضو"
+}
+```
+
+`{name}` is replaced with a value. Where a message depends on a number, add one key per plural category your language has (`_zero`, `_one`, `_two`, `_few`, `_many`, `_other`, chosen with `Intl.PluralRules`). English needs only `_one` and `_other`, which are built in.
+
+## Set the locale for dates, numbers and money
+
+The provider's `locale` is used by every component that formats a number, a date, a currency or a duration. Without a provider, `<html lang>` is used, then `en-US`. A `locale` prop on a single component always wins. To get Western digits in an Arabic UI, use `ar-u-nu-latn`.
+
+## Translate your own components
+
+```tsx
+"use client"
+import { useLocale, useMessages } from "@/lib/ballmac/i18n"
+
+export function Greeting({ name }: { name: string }) {
+  const msg = useMessages()
+  return <p>{msg("app.greeting", "Welcome back, {name}", { name })}</p>
+}
+```
+
+`msg.rich` fills placeholders with React nodes, for example a `<kbd>`. If you already use next-intl, i18next or Lingui, keep them for your app and pass their output to `I18nProvider` as `messages`.
+
+## What is translated, and what is not
+
+- All components: accessible names, placeholders, hidden text, default button and empty-state text, status words and templated sentences.
+- Props still win. `closeLabel`, `emptyMessage`, `label` and similar props override the dictionary.
+- Blocks and templates are copy-in starting points. Their headlines and sample copy are props or live in the file, so you edit them as content. The right-to-left layout is covered in [What mirrors in right-to-left](/docs/concepts/right-to-left).
+- Sample values (such as the `.env` placeholder) and brand names aren't messages.

@@ -44,7 +44,7 @@ await check("home page", async () => {
   expect(res.headers.get("content-security-policy")?.includes("frame-ancestors 'self'"), "no content-security-policy")
   expect((await res.text()).includes("Ballmac"), "body does not mention Ballmac")
 })
-for (const path of ["/components", "/components/button", "/blocks/hero-1", "/pricing", "/pro", "/quality", "/docs/check", "/preview/button-demo"]) {
+for (const path of ["/components", "/components/button", "/blocks/hero-1", "/pricing", "/pro", "/quality", "/docs/guides/check-your-app", "/preview/button-demo"]) {
   await check(path, async () => status(await get(path), 200))
 }
 await check("unknown page is a 404 with the site's page", async () => {

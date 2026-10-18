@@ -1,0 +1,55 @@
+---
+title: Registry
+description: Addresses, file locations, dependencies and the JSON format of the @ballmac shadcn registry.
+---
+
+Ballmac UI is a standard shadcn registry. Everything the shadcn CLI can do with a registry, it can do with `@ballmac`.
+
+## Addresses
+
+Every item has a permanent name and a JSON URL:
+
+```npm
+npx shadcn@latest add @ballmac/button
+npx shadcn@latest add https://ui.ballmac.com/r/button.json
+```
+
+The first form uses the namespace: `@ballmac` is in the official shadcn registry directory, so it needs no setup. The second works anywhere.
+
+## Search and inspect
+
+```npm
+npx shadcn@latest search @ballmac -q "chat"
+npx shadcn@latest view @ballmac/prompt-input
+```
+
+`search` lists everything in `@ballmac` that matches. `view` shows an item's files, dependencies and docs.
+
+## Compare before updating
+
+Components are your code once installed, so updates never happen silently. To see what changed in a newer version, compare before overwriting:
+
+```npm
+npx shadcn@latest add @ballmac/button --diff
+npx shadcn@latest add @ballmac/button --overwrite
+```
+
+To merge new versions into edited copies instead, see [Update components without losing your edits](/docs/guides/update-components).
+
+## Where files go [#where-files-go]
+
+- Components: `components/ballmac/`, which respects your `components` alias and `src/` folder
+- Blocks: `components/ballmac/blocks/<name>/`
+- Hooks and helpers: `hooks/ballmac/`, `lib/ballmac/`
+
+Ballmac UI never writes to `components/ui`, so it can't overwrite your shadcn/ui components.
+
+## Dependencies
+
+Each item declares the npm packages it imports and the registry items it builds on, for example `@ballmac/motion-presets` or shadcn's `utils`. The CLI installs them for you. Every build checks that declared dependencies match the actual imports.
+
+## JSON format
+
+Items follow the official [shadcn registry schema](https://ui.shadcn.com/docs/registry). The full index is at [ui.ballmac.com/r/registry.json](https://ui.ballmac.com/r/registry.json). Each item's `meta` adds Ballmac fields for tools and agents: tier, tags, version, when to use it, what it composes with, and keyboard notes.
+
+The same data is available as a [JSON API](https://ui.ballmac.com/api/v1/index.json), and as [llms.txt](/llms.txt) for assistants.

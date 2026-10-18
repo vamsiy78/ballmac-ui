@@ -1,0 +1,68 @@
+---
+title: "Motion settings"
+description: "The six motion settings with their variables, ranges and defaults, and the five ready-made motion feels."
+generatedFrom: packages/theme-engine/src/motion.ts
+---
+
+A theme sets how a product moves with six settings. Each is a CSS variable on `:root`. The defaults reproduce Ballmac UI exactly as it was, so adding the theme changes nothing until you change a setting. For what they do together, see [How motion works](/docs/concepts/motion).
+
+## Settings [#settings]
+
+| Variable | Range | Default | What it does |
+| --- | --- | --- | --- |
+| `--bm-speed` | 0.5 to 2.5 | 1 | Playback speed. 1 is the default, 2 halves every duration, 0.5 doubles them. |
+| `--bm-bounce` | 0 to 1 | 0.25 | Springiness, 0 (settles with no overshoot) to 1 (clearly bouncy). |
+| `--bm-travel` | 0 to 2 | 1 | How far things travel when they enter or move, as a multiple of the default distance. |
+| `--bm-hover` | 0 to 2 | 1 | How strongly controls answer a hover or press: lift, press depth. |
+| `--bm-stagger` | 0 to 2 | 1 | The delay between items in a staggered list, as a multiple of the default step. |
+| `--bm-ambient` | 1 or 0 | 1 | Decorative loops (shimmer, floating, pulsing). Off pauses them. |
+
+Reduced motion has its own setting, `reduce`: "system" follows the visitor's setting. "always" ships the reduced values to everyone.
+
+## Ready-made feels [#ready-made-feels]
+
+Each is a registry theme that changes movement only and leaves your colors alone. Installing another replaces it.
+
+```npm
+npx shadcn@latest add @ballmac/motion-calm
+```
+
+### Native [#native]
+
+The Ballmac default: short fades, a soft settle on spatial moves and a light lift on hover. Reads as the platform, not as an effect. Install: `@ballmac/motion-native`.
+
+| Speed | Bounce | Travel | Hover | Stagger | Loops |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 0.25 | 1 | 1 | 1 | On |
+
+### Calm [#calm]
+
+Longer, softer transitions with no bounce and short travel. Suits products people use for a long time, like editors, health and finance. Install: `@ballmac/motion-calm`.
+
+| Speed | Bounce | Travel | Hover | Stagger | Loops |
+| --- | --- | --- | --- | --- | --- |
+| 0.75 | 0 | 0.7 | 0.5 | 1.4 | On |
+
+### Snappy [#snappy]
+
+Short durations, tight stagger and very little bounce. Suits dense tools and dashboards where speed is the feature. Install: `@ballmac/motion-snappy`.
+
+| Speed | Bounce | Travel | Hover | Stagger | Loops |
+| --- | --- | --- | --- | --- | --- |
+| 1.6 | 0.05 | 0.7 | 0.8 | 0.5 | Off |
+
+### Playful [#playful]
+
+Clear overshoot, longer travel and a pronounced hover lift. Suits consumer apps, creative tools and marketing pages. Install: `@ballmac/motion-playful`.
+
+| Speed | Bounce | Travel | Hover | Stagger | Loops |
+| --- | --- | --- | --- | --- | --- |
+| 1.1 | 0.8 | 1.4 | 1.5 | 1.2 | On |
+
+### Still [#still]
+
+Ships the reduced-motion values to every visitor: no travel, no lift, no loops, no bounce. Opacity changes stay so state remains visible. Install: `@ballmac/motion-still`.
+
+| Speed | Bounce | Travel | Hover | Stagger | Loops |
+| --- | --- | --- | --- | --- | --- |
+| 2 | 0 | 0 | 0 | 0.4 | Off |

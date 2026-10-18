@@ -336,7 +336,7 @@ export default async function Home() {
               </div>
               <p className="text-muted-foreground rounded-lg border px-3.5 py-2.5">&gt; Add a hero with a globe and a dock from @ballmac</p>
             </div>
-            <Link href="/docs/mcp" className={cn(buttonVariants({ variant: "outline", shape: "pill", size: "sm" }), "mt-7")}>
+            <Link href="/docs/get-started/connect-your-agent" className={cn(buttonVariants({ variant: "outline", shape: "pill", size: "sm" }), "mt-7")}>
               Set up MCP <ArrowUpRight />
             </Link>
           </div>

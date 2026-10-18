@@ -1,0 +1,43 @@
+---
+title: Make it yours
+description: Apply a theme, set your brand color and check dark mode. Ballmac components read the standard shadcn CSS variables, so they take on your brand automatically.
+---
+
+By the end of this page your components use your brand color in light and dark.
+
+<Steps>
+
+### Install a theme
+
+The [theme builder](/themes) has twelve ready-made themes: Graphite, Ocean, Indigo, Violet, Rose, Ember, Amber, Forest, Teal, Sand, Mono and Midnight. Each is a full set of light and dark tokens, with contrast checked for text, focus rings and charts.
+
+```npm
+npx shadcn@latest add @ballmac/theme-ocean
+```
+
+Themes change the variables only. Installing a second theme replaces the first, and your components keep working because they read the same tokens.
+
+### Set your brand color
+
+Focus rings, selections and accents come from `--ring` and `--chart-1`. Change them in one place:
+
+```css title="app/globals.css"
+:root {
+  --ring: oklch(0.62 0.19 262);
+  --chart-1: oklch(0.62 0.19 262);
+}
+```
+
+### Check dark mode
+
+Components read tokens only, so dark mode is whatever your `.dark` class defines. With the Ballmac theme, dark mode is an ink navy rather than pure black.
+
+</Steps>
+
+<Tip>Prefer to tune the theme on a live preview? The [theme builder](/themes) changes hue, intensity, radius, density and font, checks contrast, and gives you the result to copy.</Tip>
+
+## Next steps
+
+- See every token a component reads in the [theme tokens reference](/docs/reference/theme-tokens).
+- Change how a product moves in [Use theme motion in your own code](/docs/guides/motion).
+- Make every component handle like macOS, iOS or Windows with [a platform feel](/docs/guides/platform-feels).

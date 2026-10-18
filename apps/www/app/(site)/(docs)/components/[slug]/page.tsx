@@ -107,7 +107,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
           <ItemVersion item={item} />
           {fixedInRtl && (
             <p className="text-muted-foreground max-w-2xl text-sm">
-              <Link href="/docs/rtl" className="text-foreground underline underline-offset-4">Right-to-left</Link>: {fixedInRtl.reason}
+              <Link href="/docs/concepts/right-to-left" className="text-foreground underline underline-offset-4">Right-to-left</Link>: {fixedInRtl.reason}
             </p>
           )}
         </header>
@@ -221,7 +221,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             <p className="text-foreground text-xs font-medium">Resources</p>
             {!pro && <a href={`/r/${item.name}.json`} className="text-muted-foreground hover:text-foreground block">Registry JSON</a>}
             {first && <a href={`/preview/${first.name}`} className="text-muted-foreground hover:text-foreground block">Full-screen preview</a>}
-            <Link href="/docs/mcp" className="text-muted-foreground hover:text-foreground block">Install with an agent</Link>
+            <Link href="/docs/get-started/connect-your-agent" className="text-muted-foreground hover:text-foreground block">Install with an agent</Link>
           </div>
         </div>
       </aside>

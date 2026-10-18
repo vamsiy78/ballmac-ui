@@ -1,0 +1,23 @@
+---
+title: What mirrors in right-to-left
+description: What changes when the page direction is right to left, what stays left to right on purpose, and why.
+---
+
+Set the page direction and every component, block and template mirrors for Arabic, Hebrew, Persian and Urdu: layout, icons, keyboard arrows, sliders, menus and sheets. To turn it on, see [Turn on right-to-left](/docs/guides/right-to-left).
+
+## What mirrors
+
+- **Layout.** Spacing, borders, positions and alignment use CSS logical properties (`ms-`, `me-`, `ps-`, `pe-`, `start-`, `end-`, `text-start`, `border-s`, `rounded-e`), which follow `dir` with no JavaScript.
+- **Icons with a direction.** Arrows, chevrons and back and forward icons carry `rtl:rotate-180` or `rtl:-scale-x-100`. Disclosure chevrons still point down when open.
+- **Keyboard.** In RTL, ArrowLeft goes to the next tab, raises a slider, expands a tree node, moves a card to the next column and pages a carousel forward. Radix handles its primitives. The custom handlers read `useDirection`.
+- **Sides.** `Sheet` and `Sidebar` take `side="start"` or `"end"` (the new default), which flip. `"left"` and `"right"` stay fixed edges.
+- **Dates and numbers** use the locale (see [Translate Ballmac UI](/docs/guides/translate)), including Arabic-Indic digits when you ask for them.
+
+## What stays left to right, on purpose
+
+- **Code and data.** Code blocks, terminals, logs, JSON, diffs, `.env` rows, API keys and keyboard shortcuts are `dir="ltr"` inside, as in every editor. The surrounding chrome still mirrors.
+- **Charts** keep their axes: time runs left to right, as Recharts draws it. Legends and text around them mirror.
+- **Motion with a named direction.** Props such as `direction="left"` on marquees and blur-fade describe a physical direction and aren't flipped.
+- **Hardware frames and two decorative effects** keep a fixed layout. What you put inside a device frame follows the page direction. Mac windows, the menu bar and the Finder mirror, as Safari does in Arabic. The red, yellow and green lights keep their order.
+
+The items that keep a fixed layout are listed, with the reason for each, in the [fixed-layout items reference](/docs/reference/rtl-fixed-items).

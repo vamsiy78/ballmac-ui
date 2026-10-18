@@ -33,7 +33,7 @@ export default function FeelsPage() {
           <Link href="/themes#feels" className="bg-primary text-primary-foreground rounded-lg px-4 py-2 font-medium">
             Try it in the builder
           </Link>
-          <Link href="/docs/feels" className="hover:bg-accent rounded-lg border px-4 py-2 font-medium">
+          <Link href="/docs/concepts/platform-feels" className="hover:bg-accent rounded-lg border px-4 py-2 font-medium">
             Read the docs
           </Link>
         </div>
@@ -74,7 +74,7 @@ export default function FeelsPage() {
           </h2>
           <p className="text-muted-foreground text-sm leading-6">
             Install the window and let the device choose, or install a single feel. Then wire the buttons to Tauri or Electron; the{" "}
-            <Link href="/docs/feels#desktop" className="underline underline-offset-4">
+            <Link href="/docs/guides/desktop-app" className="underline underline-offset-4">
               docs
             </Link>{" "}
             show both.

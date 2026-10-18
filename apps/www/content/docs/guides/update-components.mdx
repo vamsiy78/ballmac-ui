@@ -1,0 +1,83 @@
+---
+title: Update components without losing your edits
+description: Install with the ballmac CLI, see what is behind, and merge new versions into your edited copies.
+---
+
+`ballmac` sits next to the shadcn CLI. shadcn still writes the files and installs packages. `ballmac` runs it for you and records what landed. Run it in a project that already has a `components.json`.
+
+## Install items with ballmac
+
+```npm
+npx @ballmac/cli add dialog --with-tests
+```
+
+That installs `dialog` and the items it needs, then writes `ballmac.lock.json` and a `.ballmac` folder that holds an untouched copy of each file as it was installed.
+
+<Warning>Commit both. The untouched copy is what makes merging possible, and your teammates and CI need it too.</Warning>
+
+## See what is behind
+
+```npm
+npx @ballmac/cli outdated
+```
+
+```text title="Output"
+ITEM    INSTALLED  LATEST  YOUR CHANGES          WHAT CHANGED
+badge   1.0.0      1.1.0   none                  Slightly wider horizontal padding so short labels do not look cramped.
+button  1.0.0      1.1.0   yes (will be merged)  The lg size is taller and larger so it matches the lg input and select.
+dialog  1.0.0      1.1.0   yes (will be merged)  The overlay is a little lighter and uses a standard blur.
+
+3 of 4 behind. Update with: ballmac update  (add --dry-run to preview)
+```
+
+Every item has a version and a changelog written for someone who customised the file: what behaviour changed, and whether props were added, renamed or removed. Breaking changes are marked. The same notes are on each component page under **What changed**.
+
+## Update, keeping your edits
+
+```npm
+npx @ballmac/cli update --dry-run
+npx @ballmac/cli update
+```
+
+The first command shows what would happen and changes nothing. For each file, `ballmac` compares three versions: the one you installed, yours now, and the new one.
+
+- **You never touched it:** replaced with the new version.
+- **You edited it, and Ballmac changed other lines:** merged. Both sets of changes are kept.
+- **You and Ballmac changed the same lines:** the file gets git-style conflict markers, because only you know which one you want. Search for `<<<<<<<`, choose, and run your tests.
+- **A file you deleted:** stays deleted. New files and new dependencies a version adds are installed and tracked.
+
+```text title="Output"
+button  1.0.0 → 1.1.0
+  1.1.0: The lg size is taller and larger so it matches the lg input and select.
+  merged   src/components/ballmac/button.tsx  your changes kept
+  updated  src/components/ballmac/__tests__/button.test.tsx
+
+dialog  1.0.0 → 1.1.0
+  CONFLICT src/components/ballmac/dialog.tsx  1 conflict(s): search for <<<<<<< and choose
+
+2 item(s) updated. 1 file(s) have conflicts to resolve.
+Originals are in .ballmac/backup/2026-10-11T10-54-02-743Z/
+```
+
+Before anything is written, every file it might change is copied to `.ballmac/backup/` (ignored by git), and if shadcn fails halfway your files are put back. Files that shadcn shares between items, such as your own edits to the i18n helper, are never overwritten.
+
+## See what you changed
+
+```npm
+npx @ballmac/cli diff button
+```
+
+This shows your changes against the version you installed, nothing else. Use it before an update, and to remember why a file differs.
+
+## Fail CI when something is behind
+
+`ballmac outdated --exit-code` fails when something is behind, and `--json` prints the same data for scripts. Pro items work the same way: set `BALLMAC_LICENSE_KEY` in your environment or `.env.local` (see [Set up Pro](/docs/guides/pro)). Without it only free items are listed.
+
+## Know the limits
+
+- Merging is line based and needs `git` on your PATH (it uses `git merge-file`; no repository is needed). Without git, edited files get the `.ballmac-new` treatment described in [Track items you already installed](/docs/guides/track-installed-items).
+- A merge that applies cleanly can still be wrong in meaning. Run the tests, and read the changelog note.
+- Themes are CSS variables, not files, so they are not merged. Re-apply a theme with the shadcn CLI.
+- Examples and demos are not tracked, only the items you install. It needs Node.js 20 or later and a project with a `components.json`.
+
+The agent side of this is the MCP tools `get_changes` and `get_tests` in the [MCP tools reference](/docs/reference/mcp-tools). All commands are in the [CLI reference](/docs/reference/cli). Something wrong? [Tell us](/support).

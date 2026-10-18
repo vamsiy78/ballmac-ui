@@ -224,3 +224,35 @@ html[data-founding-off] [data-founding-banner] {
 html[data-whatsnew-off] [data-whatsnew-banner] {
   display: none;
 }
+
+/* Docs code blocks: highlighted and diff lines (from // [!code highlight], {1,3} and // [!code ++] / --). */
+.shiki .line {
+  display: inline-block;
+  min-width: 100%;
+  padding-inline: 1rem;
+  margin-inline: -1rem;
+  box-sizing: content-box;
+}
+.shiki .line.highlighted {
+  background-color: color-mix(in oklch, var(--foreground) 7%, transparent);
+  box-shadow: inset 2px 0 0 var(--foreground);
+}
+.shiki .line.diff.add {
+  background-color: color-mix(in oklch, var(--chart-2) 16%, transparent);
+}
+.shiki .line.diff.remove {
+  background-color: color-mix(in oklch, var(--destructive) 14%, transparent);
+  opacity: 0.8;
+}
+.shiki[data-line-numbers] code {
+  counter-reset: line;
+}
+.shiki[data-line-numbers] .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.5rem;
+  margin-inline-end: 1rem;
+  text-align: end;
+  color: var(--muted-foreground);
+}

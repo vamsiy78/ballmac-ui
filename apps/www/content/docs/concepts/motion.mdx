@@ -1,0 +1,36 @@
+---
+title: How motion works
+description: A theme is color, shape and movement. Six settings describe how a product moves, and every duration, easing, lift and stagger derives from them.
+---
+
+Most libraries hard-code their animation timings. In Ballmac UI, motion is part of the theme, so one set of values changes how every component moves, and your own code can follow it too.
+
+Try it on real components in the [theme builder](/themes#motion), or [install a feel](/docs/reference/motion-settings#ready-made-feels) and tune it by hand.
+
+## Six settings
+
+Each setting is a CSS variable on `:root`: speed, bounce, travel, hover, stagger and decorative loops. The defaults reproduce Ballmac UI exactly as it was, so adding the theme changes nothing until you change a setting. The names, variables and ranges are in [Motion settings](/docs/reference/motion-settings).
+
+## Five ready-made feels
+
+A motion feel is a registry theme that changes movement only and leaves your colors alone. Installing another replaces it. The twelve color themes each carry a feel that suits them: Graphite and Mono are snappy, Sand, Forest and Midnight are calm, Violet and Ember are playful. Installing `@ballmac/theme-violet` brings its motion too.
+
+## What follows automatically
+
+The theme rewrites Tailwind's own scales, so code you already have follows without edits:
+
+- `duration-75` to `duration-1000` and `delay-75` to `delay-1000` are divided by the speed.
+- `ease-out`, `ease-in` and `ease-in-out` use Ballmac's curves. `ease-spring` is a new class: a real spring, written as a CSS `linear()` easing from the bounce setting. A browser that can't parse `linear()` ignores it and keeps the previous easing.
+- Dialogs, popovers, menus, tooltips and accordions take their default duration from the speed, through the enter and exit animations from `tw-animate-css`.
+- Every Ballmac component follows for transitions, hover lift, button press and decorative loops.
+- The shared motion presets (`spring`, `duration`, `ease`, `variants`, `stagger`) that Motion-based components use.
+
+To use the values in your own code, see [Use theme motion in your own code](/docs/guides/motion).
+
+## Reduced motion is not no motion
+
+The theme includes a `prefers-reduced-motion` rule: no travel, no lift, no bounce, no loops, and everything a little faster. Fades remain, because a change of state must stay visible.
+
+The **Still** feel ships those reduced values to every visitor, for products that should hold perfectly still. In the builder, **Preview reduced motion** shows what a visitor with the setting sees.
+
+Spinners and "thinking" indicators carry meaning, so they keep running. Only decorative loops, such as glows, shimmers and drifting backgrounds, hold still.

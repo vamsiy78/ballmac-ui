@@ -55,7 +55,7 @@ export function StayCurrent({ className }: { className?: string }) {
           </div>
           <p className="text-muted-foreground leading-relaxed text-pretty">
             Copy-paste means you are stuck on the version you copied. <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-[0.85em]">ballmac update</code> merges a new version into your edited file, line by line, and stops with a conflict only where you and we changed the same line.{" "}
-            <Link href="/docs/cli" className="text-foreground underline underline-offset-4">
+            <Link href="/docs/guides/update-components" className="text-foreground underline underline-offset-4">
               How it works
             </Link>
           </p>

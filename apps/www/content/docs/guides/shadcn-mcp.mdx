@@ -1,0 +1,39 @@
+---
+title: Use the shadcn MCP server
+description: Ballmac UI is a standard shadcn registry, so the official shadcn MCP server works once the registry is in your project.
+---
+
+## Add the registry to your project
+
+The `shadcn` CLI knows `@ballmac` from the official registry directory, but the MCP server only reads the registries listed in `components.json`, so add it there:
+
+```npm
+npx shadcn@latest registry add @ballmac=https://ui.ballmac.com/r/{name}.json
+```
+
+## Connect your client
+
+```npm
+npx shadcn@latest mcp init --client claude
+```
+
+Use `--client cursor`, `--client vscode`, `--client codex` or `--client opencode` for the others.
+
+For Windsurf and other clients, add the server to your client's MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
+    }
+  }
+}
+```
+
+## What the agent sees
+
+The shadcn MCP server exposes tools to list, search and view registry items, fetch examples, and get the add command. Each Ballmac item includes what an agent needs to pick it and wire it up. See [Built for AI agents](/docs/concepts/built-for-agents).
+
+<Tip>The [Ballmac MCP server](/docs/get-started/connect-your-agent) adds tools the shadcn one doesn't have, such as page planning, change notes, tests and the quality audit.</Tip>

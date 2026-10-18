@@ -40,7 +40,7 @@ import { Button } from "@/components/ballmac/button"
 ```
 
 `@ballmac` is in the official shadcn registry directory, so there is no registry to configure. On an older CLI, or to pin the address, run `npx shadcn@latest registry add "@ballmac=https://ui.ballmac.com/r/{name}.json"` once, or install by URL: `npx shadcn@latest add https://ui.ballmac.com/r/button.json`. Browse and preview everything at
-[ui.ballmac.com/components](https://ui.ballmac.com/components), and see the [installation guide](https://ui.ballmac.com/docs/installation) for
+[ui.ballmac.com/components](https://ui.ballmac.com/components), and see the [installation guide](https://ui.ballmac.com/docs/get-started/install) for
 the optional Ballmac theme.
 
 ## Use it with an AI agent
@@ -51,7 +51,7 @@ claude mcp add ballmac -- npx -y @ballmac/mcp
 
 The server is read-only and needs no account. It searches the catalog, returns props, keyboard behaviour and source, gives the exact install
 command, and can plan a whole page from blocks. Setup for Cursor, VS Code, Windsurf, Codex and Claude Desktop is in the
-[MCP docs](https://ui.ballmac.com/docs/mcp) and in [`packages/mcp`](packages/mcp). The official shadcn MCP server also works with this registry.
+[MCP docs](https://ui.ballmac.com/docs/get-started/connect-your-agent) and in [`packages/mcp`](packages/mcp). The official shadcn MCP server also works with this registry.
 
 ## Free and Pro
 
@@ -64,7 +64,7 @@ command, and can plan a whole page from blocks. Setup for Cursor, VS Code, Winds
 | How you get it | `shadcn add @ballmac/...` | A private registry (`@ballmac-pro`) with a licence key, or log in on the site to copy code and download the starters |
 
 Pro is commercial and licensed separately: its source is not in this repository. Details and pricing at
-[ui.ballmac.com/pricing](https://ui.ballmac.com/pricing), setup at [ui.ballmac.com/docs/pro](https://ui.ballmac.com/docs/pro).
+[ui.ballmac.com/pricing](https://ui.ballmac.com/pricing), setup at [ui.ballmac.com/docs/guides/pro](https://ui.ballmac.com/docs/guides/pro).
 
 ## Repository
 

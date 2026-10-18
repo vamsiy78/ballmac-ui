@@ -1,0 +1,69 @@
+---
+title: Pick a platform feel
+description: Make every component handle like macOS, iOS or Windows, by installing one feel or letting the device choose before the first paint.
+---
+
+## Install one feel
+
+For an app that always runs on one platform, install its feel. It changes handling only and leaves your colors alone.
+
+```npm
+npx shadcn@latest add @ballmac/feel-macos
+```
+
+The other feels are `@ballmac/feel-ios`, `@ballmac/feel-windows` and `@ballmac/feel-web`. See [what each feel sets](/docs/reference/platform-feels).
+
+## Let the device pick
+
+A Tauri or Electron app that ships to Mac and Windows, or a web app used on phones and desktops, should handle like the platform it is on. `feel-auto` includes all four feels and sets the right one before the first paint, so there is no flash.
+
+```npm
+npx shadcn@latest add @ballmac/feel-auto
+```
+
+Add `FeelScript` to your root layout:
+
+```tsx title="app/layout.tsx"
+import { FeelScript } from "@/components/ballmac/feel-script"
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <FeelScript />
+      </head>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+## Let people override it
+
+Go back to the device's own feel with `auto`. The choice is remembered in the browser.
+
+```tsx
+import { useFeel } from "@/lib/ballmac/feel"
+
+const { feel, setFeel } = useFeel()
+setFeel("windows") // "web" | "macos" | "ios" | "windows"
+setFeel("auto") // the device's own feel
+```
+
+## Share a feel as a link
+
+```bash
+# open a feel in the builder
+https://ui.ballmac.com/themes?fe=windows
+```
+
+Install a custom design with a feel, colors and motion together:
+
+```npm
+npx shadcn@latest add "https://ui.ballmac.com/themes/custom.json?h=262&fe=macos"
+```
+
+## Related
+
+- [How platform feels work](/docs/concepts/platform-feels)
+- [Ship a desktop app](/docs/guides/desktop-app)

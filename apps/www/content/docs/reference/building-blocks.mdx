@@ -1,0 +1,358 @@
+---
+title: "Building blocks"
+description: "Props of StateView, AppWindow, Media and the other building blocks, and the signatures of the hooks and helpers, read from their TypeScript types."
+generatedFrom: registry/ballmac
+---
+
+The components and helpers the guides refer to, with their props and signatures read from their TypeScript types. The page of every component and block lists its own props too.
+
+## Components [#components]
+
+### State View [#state-view]
+
+Install: `@ballmac/state-view`. Page: [State View](/components/state-view).
+
+#### `<StateView>` [#stateview-props]
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `state` (required) | `BlockState` |  | What to show. `submitting` and `success` belong to forms and render the children. |
+| `loading` | `React.ReactNode` |  | Shown while loading. Make it the same shape as the ready content so nothing jumps. A plain set of lines is used if you leave it out. |
+| `empty` | `EmptyConfig \| React.ReactNode` |  | Copy and action for the empty state, or your own node. |
+| `error` | `ErrorConfig \| React.ReactNode` |  | Copy for the error state, or your own node. |
+| `onRetry` | `() => void` |  | Called by the retry button. Without it the button is not drawn. |
+| `label` | `string` |  | Text announced to assistive technology while loading. |
+| `bare` | `boolean` | `false` | Drop the empty and error panels' border and tint, for use inside a frame that already has them. |
+| `children` | `React.ReactNode` |  | The ready content. |
+
+#### `<State>` [#state-props]
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `state` | `BlockState` |  | What the block shows. Defaults to `ready`. |
+| `onRetry` | `() => void` |  | Called by the retry button in the error state. Without it the button is not drawn. |
+| `emptyState` | `EmptyConfig` |  | Copy and action for the empty state. |
+| `errorState` | `ErrorConfig` |  | Copy for the error state. |
+
+Also accepts the standard attributes of its root element.
+
+### App Window [#app-window]
+
+Install: `@ballmac/app-window`. Page: [App Window](/components/app-window).
+
+#### `<AppWindow>` [#appwindow-props]
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `feel` | `FeelId` |  | Which platform's chrome to draw. Defaults to the page's feel (`data-feel`), which Feel Auto sets from the device. |
+| `active` | `boolean` |  | Whether the window is the focused one. Defaults to following the real window focus. |
+| `maximized` | `boolean` | `false` | The window fills the screen: corners square off and the Windows button shows "restore". |
+| `onClose` | `() => void` |  | Called by the close button. Without a handler the button is drawn but not focusable. |
+| `onMinimize` | `() => void` |  | Called by the minimize button. |
+| `onMaximize` | `() => void` |  | Called by the maximize (Windows) or zoom (macOS) button, and when the title bar is double-clicked. |
+| `onFullscreen` | `() => void` |  | Called by the macOS green button; hold Option to call onMaximize instead. Falls back to onMaximize. |
+
+#### `<AppWindowControls>` [#appwindowcontrols-props]
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `feel` | `FeelId` |  |  |
+
+#### `<AppWindowTitleBar>` [#appwindowtitlebar-props]
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `title` | `React.ReactNode` |  | The window title. Centered on macOS and iOS, at the start beside the icon on Windows. |
+| `icon` | `React.ReactNode` |  | A small icon before the title (Windows). |
+| `leading` | `React.ReactNode` |  | Items after the controls and title, at the start (a back button, a sidebar toggle). |
+| `controls` | `boolean` | `true` | Draw the window controls. Turn off when something else draws them. |
+
+Also accepts the standard attributes of its root element.
+
+### Media [#media]
+
+Install: `@ballmac/media`. Page: [Media](/components/media).
+
+#### `<Media>` [#media-props]
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `media` | `MediaSource \| null` |  | The picture, or your own element. Leave it out to show `fallback`. |
+| `alt` | `string` |  | Describes a picture passed as a plain URL. Required for informative images; use "" for decoration. |
+| `fallback` | `React.ReactNode` |  | What shows when there is no `media` or the file fails to load. Usually the block's built-in artwork. |
+| `aspect` | `MediaAspect` | `"auto"` | Reserves the box before the image loads, so the page does not jump. `auto` keeps the image's own proportions. |
+| `fit` | `"cover" \| "contain" \| "fill"` | `"cover"` | `cover` fills and crops, `contain` shows all of it, `fill` stretches. |
+| `priority` | `boolean` | `false` | Above the fold: load now and with high priority instead of lazily. |
+| `fill` | `boolean` |  | Fill a parent that has its own size (an absolutely positioned panel) instead of reserving space by aspect ratio. |
+| `frame` | `boolean` | `false` | A card frame (rounded corners, border, soft shadow) around a real image or element. The built-in artwork keeps its own. |
+| `onImageError` | `() => void` |  | Called when the file fails to load (the fallback is shown). |
+
+Also accepts the standard attributes of its root element.
+
+### Match Highlight [#match-highlight]
+
+Install: `@ballmac/match-highlight`. Page: [Match Highlight](/components/match-highlight).
+
+#### `<MatchHighlight>` [#matchhighlight-props]
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` (required) | `string` |  | The text to show. |
+| `query` | `string \| string[]` | `""` | What was searched for: a string (split into words) or a list of words. Every occurrence of any word is marked. |
+
+Also accepts the standard attributes of its root element.
+
+### Cover Art [#cover-art]
+
+Install: `@ballmac/cover-art`. Page: [Cover Art](/components/cover-art).
+
+#### `<CoverArt>` [#coverart-props]
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `seed` (required) | `string \| number` |  | Anything stable: an id, a name, a slug. The same seed always draws the same picture. |
+| `variant` | `CoverArtVariant \| "auto"` | `"auto"` | Which picture to draw. Leave it out (or "auto") to let the seed choose among the five. |
+| `grid` | `boolean` | `false` | Lay a faint grid over the picture. |
+
+Also accepts the standard attributes of its root element.
+
+## Helpers [#helpers]
+
+### use-resource [#use-resource]
+
+Turns a fetch into the state a block takes, and maps TanStack Query or SWR results onto it. Install: `@ballmac/use-resource`.
+
+```ts
+isEmptyValue(value: unknown): boolean
+```
+
+Empty arrays, empty objects with no keys, empty strings, null and undefined count as empty.
+
+```ts
+stateOf<T>(query: QueryLike<T>, isEmpty: (data: T | undefined) => boolean = isEmptyValue): BlockState
+```
+
+Maps the result of TanStack Query, SWR or your own fetch onto a block state:
+
+  const query = useQuery(...)
+  \<Mail1 state=\{stateOf(query)\} messages=\{query.data\} />
+
+```ts
+useResource<T>(fetcher: (signal: AbortSignal) => Promise<T>, options: ResourceOptions<T> = {}): Resource<T>
+```
+
+A small fetch state machine: it starts in `loading`, then becomes `ready`, `empty` or `error`, and `retry()` goes round again.
+A request that is replaced or unmounted is aborted, and a slow older answer can never overwrite a newer one.
+
+  const mail = useResource((signal) => fetch("/api/mail", \{ signal \}).then((r) => r.json()))
+  \<Mail1 state=\{mail.state\} messages=\{mail.data\} onRetry=\{mail.retry\} />
+
+```ts
+formPhase(state: BlockState | undefined): FormPhase | undefined
+```
+
+```ts
+isBusy(state: BlockState)
+```
+
+Whether something is in flight, so a region can set `aria-busy`.
+
+```ts
+type BlockState = "ready" | "loading" | "empty" | "error" | "submitting" | "success"
+```
+
+What a block is showing. `ready` is the normal view. Forms add `submitting` (the request is in flight) and `success`
+(it went through); data views add `loading`, `empty` and `error`.
+
+```ts
+type FormStateProps = { /** `submitting` shows the request in flight, `success` the confirmation, `error` the failure. Leave out to let the form decide. */ state?: BlockState /** Copy for the error state. */ errorState?: { title?: string; description?: string } }
+```
+
+The props every form block takes. Leave `state` out and the form runs by itself; pass it and you drive the form.
+
+```ts
+type FormPhase = "idle" | "sending" | "error" | "done"
+```
+
+Where a form is in its life. Forms keep this themselves; `formPhase` turns the public `state` prop into it, or returns
+undefined when the prop is not given so the form's own value is used.
+
+```ts
+type Resource = { state: BlockState data: T | undefined error: unknown /** Fetches again, showing the loading state. */ retry: () => void /** Replaces the data you have, for example after an optimistic edit. Keeps `ready` or `empty` in step. */ setData: (next: T) => void }
+```
+
+
+### direction [#direction]
+
+The text direction provider and hook for right-to-left. Install: `@ballmac/direction`.
+
+```ts
+useDirection(dir?: TextDirection): TextDirection
+```
+
+The reading direction for code that has to know it (arrow-key order, pointer maths, which way a chevron faces).
+An explicit `dir` wins, then a surrounding `<Direction>` or Radix `DirectionProvider`, then `<html dir>`.
+Server render and the first client render say "ltr", so markup matches, and it updates right after hydration.
+
+```ts
+DirectionProvider({ dir, children }: { dir: TextDirection; children: React.ReactNode })
+```
+
+Sets the direction for a part of the page and tells every Radix-based component inside it, so keyboard arrows,
+sliders, menus and tabs follow it. For the whole app, put it in the root layout next to `<html dir>`.
+
+```ts
+Dir({ dir, children, ...props }: Omit<React.ComponentProps<"div">, "dir"> & { dir: TextDirection })
+```
+
+A box with its own direction (`display: contents`, so it adds no layout), for previews and mixed-language regions.
+
+```ts
+type TextDirection = "ltr" | "rtl"
+```
+
+
+### i18n [#i18n]
+
+The translation provider and hooks. Install: `@ballmac/i18n`.
+
+```ts
+I18nProvider({ messages = {}, locale, children }: { messages?: Messages; locale?: string; children: React.ReactNode })
+```
+
+Translates every built-in string (aria-labels, placeholders, hidden text, default button labels) and sets the locale that
+dates, numbers and sorting use. Put it once near the root. Anything you leave out stays in English.
+
+  \<I18nProvider locale="ar" messages=\{\{ "pagination.nextPage": "الصفحة التالية" \}\}>
+
+```ts
+useLocale(fallback = "en-US"): string
+```
+
+The locale for Intl formatting: the provider's, else `<html lang>`, else `fallback`.
+Server render and the first client render use the provider or the fallback, so markup matches.
+
+```ts
+useMessages(): Msg
+```
+
+Returns `msg(key, english, values?)`. The text comes from the provider's messages, else the English default.
+`{name}` placeholders are filled from `values`. With a numeric `count`, a plural form is used: the dictionary's
+`key_one`, `key_few`, `key_many` or `key_other` (the CLDR categories of the locale), else the English forms you pass as
+`{ one: "{count} item", other: "{count} items" }`.
+
+```ts
+defineMessage(key: string, text: string): Message
+```
+
+```ts
+type Messages = Record<string, string>
+```
+
+A flat dictionary: message key to translated text. Keys and English defaults are listed at /i18n/en.json.
+
+```ts
+type Fallback = string | ({ [K in Intl.LDMLPluralRule]?: string } & { other: string })
+```
+
+English text, or its plural forms keyed by CLDR category (`other` is required).
+
+```ts
+type Message = { key: string; text: string }
+```
+
+A string declared at module level (a status label in a lookup table); render it with `msg.of(message)`.
+
+```ts
+type Msg = { (key: string, fallback: Fallback, values?: Values): string /** Translate a message declared with defineMessage. */ of: (message: Message, values?: Values) => string /** Like `msg`, but `{name}` placeholders are filled with React nodes: msg.rich("k", "Press {key} to open", { key: <Kbd>K</Kbd> }). */ rich: (key: string, fallback: string, nodes: Record<string, React.ReactNode>) => React.ReactNode }
+```
+
+
+### feel [#feel]
+
+Read and set the platform feel. Install: `@ballmac/feel`.
+
+```ts
+detectFeel(nav: Pick<Navigator, "userAgent" | "platform" | "maxTouchPoints"> = navigator): FeelId
+```
+
+The feel that matches the device the page is running on. Works in a browser, a Tauri window and an Electron window, because
+all of them report the platform in the user agent. An iPad that asks for the desktop site still counts as iOS.
+
+```ts
+readFeel(el: Element | null = typeof document === "undefined" ? null : document.documentElement): FeelId
+```
+
+The feel set on the page, or "web" when none is.
+
+```ts
+storedFeel(): FeelId | null
+```
+
+The choice remembered for this browser, if any.
+
+```ts
+setFeel(feel: FeelId | "auto")
+```
+
+Sets the feel for the whole page. `"auto"` goes back to the device's own feel and forgets the override. The choice is
+remembered in localStorage when that is available.
+
+```ts
+useFeel(): { feel: FeelId; setFeel: typeof setFeel }
+```
+
+The feel the page is set to, live. Server render and the first client render say "web", then the real value is read, so
+markup always matches. Pass an element to read a scope inside the page.
+
+```ts
+isFeel(value: unknown): value is FeelId
+```
+
+```ts
+type FeelId = "web" | "macos" | "ios" | "windows"
+```
+
+
+### return-focus [#return-focus]
+
+Puts keyboard focus back where it was when a dialog closes. Install: `@ballmac/return-focus`.
+
+```ts
+useReturnFocus(open: boolean)
+```
+
+Radix returns focus to a dialog's trigger when it closes, so a dialog opened from state (a confirmation after pressing Delete, a
+lightbox opened from a tile) has no trigger and focus falls back to the top of the page. This remembers the element that had focus
+when `open` became true and returns it there. Spread the result onto DialogContent or AlertDialogContent.
+
+
+### shortcut [#shortcut]
+
+Formats and records keyboard shortcuts in each platform's notation. Install: `@ballmac/shortcut`.
+
+```ts
+formatShortcut(shortcut: string, feel: FeelId)
+```
+
+Writes a shortcut the way the platform does: ⇧⌘Space on a Mac (modifiers in Apple's order, no separators), Ctrl+Shift+Space elsewhere.
+
+```ts
+normalizeShortcut(shortcut: string, feel: FeelId = "web")
+```
+
+The same shortcut in one canonical order, so two spellings of one combination compare equal. On Windows and the web Mod and Ctrl are one key.
+
+```ts
+shortcutFromEvent(e: Pick<KeyboardEvent, "key" | "code" | "metaKey" | "ctrlKey" | "altKey" | "shiftKey">, mac: boolean, requireModifier = true): string | null
+```
+
+Turns a key press into a shortcut string, or null while only modifiers are down. With `requireModifier` (the default) a plain
+letter is refused, so a global shortcut cannot take a key from every other app.
+
+```ts
+usesMacKeys(feel: FeelId)
+```
+
+Whether the feel writes shortcuts with Apple's symbols.
+

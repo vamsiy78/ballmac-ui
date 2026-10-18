@@ -1,4 +1,7 @@
+import { createMDX } from "fumadocs-mdx/next"
 import type { NextConfig } from "next"
+
+import docsRedirects from "./content/docs-redirects.json"
 
 /**
  * Two ways to build:
@@ -22,7 +25,11 @@ const nextConfig: NextConfig = {
 if (!exportBuild) {
   nextConfig.rewrites = async () => workerRoutes.map((source) => ({ source, destination: `${WORKER_DEV}${source}` }))
   nextConfig.redirects = async function redirects() {
-    return [{ source: "/docs/licensing", destination: "/license", permanent: true }]
+    return [
+      { source: "/docs/licensing", destination: "/license", permanent: true },
+      // Docs pages that moved when the docs were organised by what the reader needs; see content/docs-redirects.json. cloudflare/_redirects gets the same list in worker/postbuild.mts.
+      ...Object.entries(docsRedirects).map(([source, destination]) => ({ source, destination, permanent: true })),
+    ]
   }
   nextConfig.headers = async function headers() {
     return [
@@ -58,4 +65,4 @@ if (!exportBuild) {
   }
 }
 
-export default nextConfig
+export default createMDX()(nextConfig)

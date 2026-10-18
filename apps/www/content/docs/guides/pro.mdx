@@ -1,0 +1,101 @@
+---
+title: Set up Ballmac UI Pro
+description: Add your licence key and the private registry once per project, then install Pro blocks and starter apps with the shadcn CLI or the MCP server.
+---
+
+Pro items install the same way as free ones, from a private registry that checks your licence key. Set it up once per project.
+
+## Get a licence key
+
+Buy Pro on the [pricing page](/pricing). Your licence key arrives by email from our payment partner. Keep it private: anyone with the key can install Pro items.
+
+<Tip>You don't need the command line to use Pro. [Log in with your licence key](/pro/login) to read and copy the code of any Pro block on its page, download the starter apps as a zip, and get install commands with your key already filled in. There is no password and no account: the key is the login, and it is kept in an encrypted cookie in your browser until you log out.</Tip>
+
+## Add the key to your project
+
+Put it in `.env.local`, which the shadcn CLI reads. Don't commit this file.
+
+```bash title=".env.local"
+BALLMAC_LICENSE_KEY=your-licence-key
+```
+
+## Add the Pro registry
+
+Add both registries to `components.json`. The CLI sends your key only to the Pro registry.
+
+```json title="components.json"
+{
+  "registries": {
+    "@ballmac": "https://ui.ballmac.com/r/{name}.json",
+    "@ballmac-pro": {
+      "url": "https://ui.ballmac.com/r/pro/{name}.json",
+      "headers": { "Authorization": "Bearer ${BALLMAC_LICENSE_KEY}" }
+    }
+  }
+}
+```
+
+## Install Pro items
+
+Pro items use the `@ballmac-pro` namespace. Their page shows the exact command.
+
+```npm
+npx shadcn@latest add @ballmac-pro/<name>
+```
+
+Free items keep working as before, and a Pro item can depend on free ones.
+
+## Download a starter app
+
+A starter is a complete app you download and own. **Beacon SaaS** is a Next.js app with sign-in, workspaces with teams and invitations, Stripe billing, a dashboard, settings and API keys. Download it with the same key:
+
+```bash
+mkdir my-app && curl -fsSL -H "Authorization: Bearer $BALLMAC_LICENSE_KEY" https://ui.ballmac.com/r/pro/starters/beacon-saas.tar.gz | tar -xz -C my-app --strip-components=1 && cd my-app && pnpm install && pnpm dev
+```
+
+It runs on an embedded database in development, so there is nothing else to install. The README in the download covers customising it, billing and deployment.
+
+**Cove** (`cove-desktop`) is a Tauri 2 desktop app, a notes app that looks native on macOS and Windows: traffic lights or caption buttons, the system blur behind the sidebar on a Mac, native menus and a command palette. It runs in a browser too, so you can build the interface without installing Rust.
+
+## Import the Figma design tokens
+
+Every Ballmac theme as W3C design tokens, with light and dark as separate groups (one Figma variable mode each) and the original color kept beside each hex value. Import them with a Figma plugin that reads the W3C token format, such as Tokens Studio.
+
+```bash
+curl -fsSL -H "Authorization: Bearer $BALLMAC_LICENSE_KEY" https://ui.ballmac.com/r/pro/kits/ballmac-figma-tokens.tar.gz | tar -xz
+```
+
+## Use Pro with the MCP server
+
+Give the Ballmac MCP server your key and it can read Pro items and give your agent the right install commands.
+
+```bash title="Claude Code"
+claude mcp add ballmac --env BALLMAC_LICENSE_KEY=your-licence-key -- npx -y @ballmac/mcp
+```
+
+In a JSON config, add `"env": { "BALLMAC_LICENSE_KEY": "your-licence-key" }` next to `args`. Your [Pro library](/pro) shows these commands with your own key filled in.
+
+## Use Pro in CI and with a team
+
+Set `BALLMAC_LICENSE_KEY` as a secret in your CI or hosting provider. Each person on a Team licence can use the shared key in their own `.env.local`.
+
+## Check a key
+
+```bash
+curl -s -X POST https://ui.ballmac.com/api/v1/license/verify -H "content-type: application/json" -d '{"key":"your-licence-key"}'
+```
+
+The answer is `{"valid":true}` or a reason the key isn't accepted.
+
+## Troubleshoot
+
+- **I logged in but the code doesn't show:** reload the page. If you still see the lock, your session ended (for example after you revoked the key); [log in again](/pro/login).
+- **401 licence required:** the CLI didn't send a key. Check that `BALLMAC_LICENSE_KEY` is in `.env.local` and that the `@ballmac-pro` entry has the `headers` block.
+- **403 licence invalid:** the key was mistyped or is no longer active. Copy it again from your purchase email.
+- **Unknown registry @ballmac-pro:** the `registries` block is missing from `components.json`.
+
+Still stuck? [Contact support](/support?topic=help) and include the item name and the error you see. Never send your licence key: we find your purchase from your email.
+
+## Licence terms
+
+What you may do with Pro items is set out in the [Pro licence agreement](/license/pro). In short: build as many apps and sites as you like, for yourself or your clients, but don't share, resell or publish the Pro source or your key.

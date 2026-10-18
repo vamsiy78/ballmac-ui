@@ -5,11 +5,15 @@
 import { appendFileSync, copyFileSync, existsSync, readdirSync, readFileSync, rmdirSync, rmSync, statSync } from "node:fs"
 import { join, relative } from "node:path"
 
+import docsRedirects from "../content/docs-redirects.json" with { type: "json" }
+
 const www = join(import.meta.dirname, "..")
 const out = join(www, "out")
 if (!existsSync(out)) throw new Error("out/ is missing: run next build with BALLMAC_EXPORT=1 first")
 
 for (const f of ["_headers", "_redirects"]) copyFileSync(join(www, "cloudflare", f), join(out, f))
+// Docs pages that moved: permanent redirects, because published packages and other sites still link to the old addresses. Same list as next.config.ts.
+appendFileSync(join(out, "_redirects"), `\n# Docs reorganised by what the reader needs (content/docs-redirects.json)\n${Object.entries(docsRedirects).map(([from, to]) => `${from} ${to} 301`).join("\n")}\n`)
 // A preview build (DEPLOY_ENV=preview) must never be indexed: every file it serves says so.
 if (process.env.DEPLOY_ENV && process.env.DEPLOY_ENV !== "production") appendFileSync(join(out, "_headers"), "\n# Preview build: keep it out of search engines.\n/*\n  X-Robots-Tag: noindex\n")
 

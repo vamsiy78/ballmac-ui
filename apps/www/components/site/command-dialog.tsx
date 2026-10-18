@@ -9,7 +9,9 @@ import type { MenuEntry } from "@/lib/search-index"
 /** The search dialog itself. Loaded the first time the box opens, with the entries it fetched. */
 export default function CommandDialog({ open, onOpenChange, entries }: { open: boolean; onOpenChange: (open: boolean) => void; entries: MenuEntry[] }) {
   const router = useRouter()
-  const groups = [...new Set(entries.map((e) => e.group))]
+  // Docs first, then the changelog, then what you can install.
+  const rank = (g: string) => (g.startsWith("Docs") ? 0 : g === "Changelog" ? 1 : 2)
+  const groups = [...new Set(entries.map((e) => e.group))].sort((a, b) => rank(a) - rank(b))
   return (
       <Command.Dialog
         open={open}
@@ -20,7 +22,7 @@ export default function CommandDialog({ open, onOpenChange, entries }: { open: b
       >
         <div className="flex items-center gap-2 border-b px-4">
           <Search className="text-muted-foreground size-4" />
-          <Command.Input placeholder="Search components, blocks, docs…" className="h-12 w-full bg-transparent text-sm outline-none" />
+          <Command.Input aria-label="Search" placeholder="Search docs, components, blocks…" className="h-12 w-full bg-transparent text-sm outline-none" />
         </div>
         <Command.List className="max-h-[360px] overflow-y-auto p-2">
           <Command.Empty className="text-muted-foreground px-3 py-8 text-center text-sm">No results.</Command.Empty>
@@ -45,6 +47,18 @@ export default function CommandDialog({ open, onOpenChange, entries }: { open: b
             </Command.Group>
           ))}
         </Command.List>
+        <div className="text-muted-foreground flex items-center gap-4 border-t px-4 py-2 text-xs max-sm:hidden" aria-hidden="true">
+          <span className="flex items-center gap-1.5">
+            <kbd className="bg-muted rounded border px-1.5 font-sans">↑</kbd>
+            <kbd className="bg-muted rounded border px-1.5 font-sans">↓</kbd> to move
+          </span>
+          <span className="flex items-center gap-1.5">
+            <kbd className="bg-muted rounded border px-1.5 font-sans">↵</kbd> to open
+          </span>
+          <span className="flex items-center gap-1.5">
+            <kbd className="bg-muted rounded border px-1.5 font-sans">esc</kbd> to close
+          </span>
+        </div>
       </Command.Dialog>
   )
 }

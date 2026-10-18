@@ -1,0 +1,81 @@
+---
+title: Check your own app
+description: Run ballmac check on your source or your running app, tune it for your project, and gate CI and AI agents on it.
+---
+
+`ballmac check` reads your source and reports missing loading and error states, images and buttons without names, hard-coded colors, endless decorative motion and layouts that break on a phone, each with the fix.
+
+## Run it
+
+```npm
+npx @ballmac/cli check
+```
+
+Check one folder, or list every rule:
+
+```npm
+npx @ballmac/cli check src/app
+npx @ballmac/cli check --rules
+```
+
+It is read-only, needs no account and no network (the rule list is bundled; it only looks up which of your components have states if you are online), and uses the TypeScript version your project already has. Your own `components/ui` and Ballmac files are skipped unless you pass `--include-library`.
+
+```text title="Output"
+ballmac check  ·  41 files
+
+error a11y/control-name ×1  A button or link has an icon but no accessible name
+  src/app/toolbar.tsx:18:7
+    <button> contains only an icon and has no accessible name.
+      18 │ <button onClick={() => setOpen(!open)} className="p-2">
+  fix: Add aria-label="What it does" to the control, or include visually hidden text such as <span className="sr-only">Close</span>.
+  https://ui.ballmac.com/docs/check#a11y-control-name
+```
+
+## Check the running app
+
+Reading source can't see what the browser renders. Add `--url` and the tool opens each route in a real browser:
+
+```npm
+npx @ballmac/cli check --url http://localhost:3000 --routes /,/pricing
+```
+
+It uses the Playwright and axe-core that are already in your project (it never installs anything), in light and dark at 390 and 1280 pixels wide. It reports serious or critical axe violations, sideways scrolling on a phone, and console errors. If Playwright isn't installed it says so and still runs the source checks.
+
+## Tune it for your project
+
+Put settings in `.ballmacrc.json`, or a `ballmac` key in `package.json`:
+
+```json title=".ballmacrc.json"
+{
+  "rules": { "layout/fixed-wide": "warn", "tokens/hardcoded-color": "off", "rtl/physical-direction": "warn" },
+  "ignore": ["src/legacy/**", "**/*.stories.tsx"],
+  "rtl": true
+}
+```
+
+Silence one finding where it is, with a reason a teammate can read:
+
+```tsx
+{/* ballmac-ignore-next-line a11y/control-name: the label is added by the wrapper */}
+<IconButton onClick={close} />
+
+// ballmac-ignore-line
+// ballmac-ignore-file
+```
+
+## Fail the build in CI
+
+```yaml title=".github/workflows/quality.yml"
+- run: npx @ballmac/cli check --format github --fail-on error
+```
+
+`--format github` prints GitHub Actions annotations, and `--fail-on` sets when the command exits with 1. All flags are in the [CLI reference](/docs/reference/cli#check).
+
+## Gate an AI agent on it
+
+The [Ballmac MCP server](/docs/get-started/connect-your-agent) has `get_quality_rules`, so an agent reads the rules before it writes a component, and `audit_project`, which runs this check and returns the findings worst first, each with its fix. Tell your agent: "before you finish, run `audit_project` and fix every error."
+
+## Related
+
+- [What the check is, and is not](/docs/concepts/quality)
+- [Every rule](/docs/reference/check-rules)

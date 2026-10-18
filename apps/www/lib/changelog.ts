@@ -1,373 +1,131 @@
-/** What changed and when, newest first. Shown at /changelog and written to CHANGELOG.md by `pnpm changelog`. */
-export type ChangelogEntry = { date: string; title: string; items: string[] }
+/**
+ * The changelog: one Markdown file per release or wave in content/changelog/, newest first.
+ *
+ *   ---
+ *   title: Short headline
+ *   date: 2026-10-18
+ *   seq: 2                 (optional: orders two entries on the same day, higher is newer)
+ *   tags: [blocks, MCP]
+ *   releases: ["@ballmac/mcp 1.4.0"]   (optional: versions that shipped with it)
+ *   summary: One sentence.
+ *   shot: /preview/roster-1-demo   (a page to screenshot with `pnpm changelog:shots`, or file:name.html from content/changelog/shots/)
+ *   image: /marketing/x.webp       (a picture that already exists in public/, instead of shot)
+ *   imageAlt: What the picture shows.
+ *   ---
+ *   ### New        (Keep a Changelog: Added)        ### Improved (Changed)   ### Fixed
+ *   ### Deprecated ### Removed ### Security
+ *   - One plain line, with [links](/docs/...) and `code`.
+ *
+ * Read by the /changelog pages, the RSS and Atom feeds, and `pnpm changelog` (CHANGELOG.md). Nothing here needs a browser or Next.js, so scripts can import it.
+ */
+import { readdirSync, readFileSync } from "node:fs"
+import { join } from "node:path"
+import { parse as parseYaml } from "yaml"
 
-export const changelog: ChangelogEntry[] = [
-  {
-    date: "2026-10-18",
-    title: "A shift roster, a recipe, a habit tracker, a stock overview and a trip itinerary",
-    items: [
-      "Roster 1, weekly shift planner: a row per person and a column per day, shifts you set, change or mark as time off in a dialog, hours per person with overtime against their own limit, a flag when there is too little rest between one day's end and the next day's start, a coverage row ('3 of 4, short by 1') against what each day needs, weeks to page through, and a publish step that stays a draft with the reason if it fails",
-      "Recipe 1, a recipe you can cook from: change how many it serves and every amount scales the way a cook reads it (½ and ¼ for spoons and cups, whole grams), switch between metric and US units, tick off ingredients and steps with counts, and start a timer right on the steps that need waiting, which says Time is up",
-      "Habits 1, habit tracker: each habit's streak (kept alive until today is over, broken by a missed day), best streak, this week against its goal in words, the last seven days to tick, twelve weeks as a grid, a ring for today, and a tick that goes back with the reason if it cannot be saved",
-      "Inventory 1, stock levels and reordering: stock value, lines low or out and units on the way, every item with a bar against its reorder point, days left at today's pace, status in words (Out of stock, Low, In stock, Plenty), a sort that puts what runs out first on top, and an order form that suggests how many to buy and says nothing was charged if it fails",
-      "Trip 1, day-by-day itinerary: destination, dates and days to go, each day's flights, stays, food and things to do in time order with copyable booking codes, anything not booked marked in words and summed up in a notice, the cost by type and per traveler, type filters, and a packing list with progress",
-      "Five new block groups: Shift roster, Recipe, Habits, Inventory and Trip itinerary, also found by the MCP server for rota, shifts, ingredients, streak, warehouse, itinerary and vacation",
-      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the history grid in Habits 1, right to left, and ship their tests",
-    ],
-  },
-  {
-    date: "2026-10-18",
-    title: "Threaded comments, a poll, a product tour, an investment portfolio and a seat map",
-    items: [
-      "Comments 1, threaded discussion: a composer where typing @ offers people (arrow keys, Enter or Tab pick one, Escape closes it), replies, emoji reactions that count and toggle and say who reacted, editing and deleting your own comments, threads you can resolve and reopen, and times like '18 hours ago' worked out from the moment you pass. A comment appears at once and, if it cannot be saved, stays with Not posted and Retry",
-      "Poll 1, vote and live results: one choice or several up to a limit, results with each share, the single leader and your own choice marked in words, your vote counted at once and taken back with the reason if it fails, a vote you can change until the poll closes, and the time left from the moment you pass",
-      "Tour 1, guided product tour: a spotlight lifts one part of your interface out of a dimmed page while a card beside it says what it is for. Mark what to point at with data-tour attributes in your own interface, move with Next, Back, the arrow keys and Escape, and focus follows each step without ever being taken on page load. The page behind is inert while the tour runs",
-      "Portfolio 1, investments overview: total value and its change over a week, a month or a year, a line you scrub with the pointer or arrow keys to read any point, an allocation ring with a text equivalent, and sortable holdings with price, share, day change and a small trend line. Gains and losses carry a sign and an arrow, not only color",
-      "Seat map 1, choose seats: rows with walkways, three price tiers, taken and wheelchair seats marked in words, a limit with a running total, a Pick for me helper that finds the best neighbouring seats for a party, keyboard arrows through the hall, and a hold that survives a lost seat: the taken seat is marked and the others stay chosen",
-      "Five new block groups: Comments, Polls, Product tour, Portfolio and Seat map, also found by the MCP server for discussion, vote, walkthrough, holdings, seats and cinema",
-      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the floor plan in Seat map 1, right to left, and ship their tests",
-    ],
-  },
-  {
-    date: "2026-10-18",
-    title: "Goals and OKRs, a weekly timesheet, an expense report, a Markdown editor and a CRM contact record",
-    items: [
-      "Goals 1, objectives and key results: progress worked out from start, current and target (a target below the start means lower is better), a mark on every bar for where it should be today, On track, At risk, Behind or Done judged against how much of the period is gone and written in words, overall progress, a team filter, and numbers you update in place. A save that fails puts the old number back with the reason",
-      "Timesheet 1, weekly hours: a row per project and a box per day, time typed the way people say it (1.5, 1:30, 90m, 2h), row, day and week totals worked out as you type, daily bars that say '+1:15 over' when a day runs long, a refusal above 24 hours in a day, weeks to page through, an add-project menu, and Submit that locks the week and says why if it cannot",
-      "Expenses 1, expense report: lines with merchant, category, amount and receipt, a total broken down by category with a text equivalent, rules checked as you go (a receipt is needed over a threshold, a category can have a limit), an add form that validates, receipts you attach to any line, and Submit that names exactly which lines still need a receipt",
-      "Editor 1, Markdown editor: a toolbar and the usual shortcuts (Ctrl or Command with B, I, K, and S to save now) that wrap the selection, a live preview built from safe elements with only http, https and mailto links, word count and reading time, a Write and Preview switch on phones, and autosave that says Saved, Saving, Unsaved changes or Not saved with a Retry that keeps your text",
-      "CRM 1, contact record: a pipeline stage you can move, deal value, last contact and an overdue follow-up worked out from the day you pass, a timeline of notes, calls, emails and meetings, and a form to log the next one; a logged item appears at once and, if saving fails, stays in the list with Not saved and Retry",
-      "Five new block groups: Goals and OKRs, Timesheets, Expenses, Editor and CRM, also found by the MCP server for okr, hours, reimbursement, markdown, deals and lead",
-      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and right to left, and ship their tests",
-    ],
-  },
-  {
-    date: "2026-10-18",
-    title: "A support ticket, a webhooks manager, feature flags, an automation builder and an API explorer",
-    items: [
-      "Tickets 1, support ticket: the conversation with customer messages, replies and private notes (dashed, tinted and labelled in words so a note is never mistaken for a reply), a reply timer that says how long is left or how late you are, a composer that switches between Reply and Internal note with canned replies and a keyboard shortcut, and a side panel with the customer, assignee, status and priority. A message that fails to send stays in the thread with Not sent and Retry",
-      "Webhooks 1, webhooks manager: endpoints with a health worked out from their last ten deliveries (Healthy, Some failing, Failing, Disabled), the chosen one's masked signing secret and events, a delivery log with status codes, timing and attempts, the payload and what the endpoint answered for each delivery with Send again, and an add dialog that checks the address is https and an event is chosen",
-      "Flags 1, feature flags manager: a switch for each environment, a production rollout slider that applies only on Save, who gets it first, flags fully on for months marked ready to remove, a confirmation that says exactly who is affected before changing Production, and a change that fails to save put back with the reason",
-      "Workflow 1, automation builder: a trigger and a vertical flow of conditions, waits and actions you add, reorder and delete, each opening to its settings, and a test run that shows every step as ran fine, or where and why a condition stopped it. The whole automation switches on and off, and every edit reports the full list of steps",
-      "API 1, API explorer: a method, an address, headers and a JSON body; the answer with its status in words, time and size and the body as a tree; a broken body or address caught before sending with the reason; a history that restores past requests; Copy as cURL; and a built-in demo API so it works with no server",
-      "Five new block groups: Support tickets, Webhooks, Feature flags, Automation and API explorer, also found by the MCP server for helpdesk, sla, rollout, trigger, postman and explorer",
-      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the code inside Webhooks 1 and API 1, right to left, and ship their tests",
-    ],
-  },
-  {
-    date: "2026-10-18",
-    title: "A retention heatmap, a CSV importer, an event agenda, a quiz and an invoice",
-    items: [
-      "Retention 1, cohort heatmap: rows of people who started together, columns of later periods, each cell tinted by the share still active, three headline numbers (period 1, period 4, trend) and a size-weighted average row that only counts cohorts old enough. The table is a keyboard grid (arrows, Home and End) that reads each cell as the cohort, the period, the percent and the number of people, and a sentence says how the chosen cell compares with the average. A Percent or People switch changes the cells",
-      "Import 1, CSV import: choose a file by drag, click or a sample, match its columns to your fields (found for you by name and alias; required fields must be matched), review which rows are ready and which have problems and why (missing values, bad emails and phones, duplicate emails), then import with progress and a summary. A failed import keeps you on the last step with the rows intact. The CSV reader handles quoted fields with commas and line breaks",
-      "Event 1, event agenda: dates, venue and a days-to-go count, the schedule by day (a tablist with arrow keys) with a filter for each track, a Save star on every session, a warning that names the other session when two of yours overlap, and one press to download your schedule as a calendar file with the venue's time zone",
-      "Quiz 1, quiz: one question at a time with progress, radio buttons or checkboxes (one answer or choose all that apply), instant right or wrong with the reason, answers locked once checked, then the score against the pass mark with a review of every question and what you chose when wrong, and a retake. Focus moves to each new question",
-      "Invoice 1, invoice you can pay: parties, dates and line items; subtotal, discount, tax and total worked out from the lines; a status from the dates and the day you pass (Paid on a date, Due in N days, Overdue by N days); print and download; and Pay now that shows Paying and, on failure, says you were not charged. Bank details are shown left to right in right-to-left layouts",
-      "Five new block groups: Invoices, Data import, Retention, Events and Quizzes, also found by the MCP server for receipt, csv, mapping, cohort, churn, agenda, test and exam",
-      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the left-to-right cohort grid in Retention 1, right to left, and ship their tests",
-    ],
-  },
-  {
-    date: "2026-10-18",
-    title: "Customer reviews, A/B test results, a conversion funnel, a locations finder and a course page",
-    items: [
-      "Reviews 1, customer reviews: an average with a bar for each star count that also filters, sorting (most helpful, newest, highest, lowest), a verified-only switch, review cards with Read more, helpful votes that count at once and can be taken back, and replies from the business. The average, every bar and the share of 4 and 5 stars are worked out from the reviews, and the drawn stars are replaced by '4 out of 5 stars' for screen readers",
-      "Experiments 1, A/B test results: each variant's conversion rate with its 95% confidence interval on one shared axis, the lift over the control, the chance it beats the control, a p-value, and a plain verdict: a winner, the control is still best, not enough data (with the visitors still needed), or no clear difference. All statistics are worked out from visitors and conversions and are deterministic; certainty is never shown as 100%",
-      "Funnel 1, conversion funnel: bars sized against the first step joined by connectors that narrow as people drop away, the share kept and people lost at each step, the biggest leak written out as a sentence with what winning some back would be worth, a group switch (everyone, mobile, desktop) and a panel for any chosen step",
-      "Locations 1, locations finder: a dotted world map with a pressable pin for every place (each is a real button), a searchable list with type filters, and a card for the chosen place with address, contacts, directions and whether it is open now in its own time zone, worked out from the moment you pass and each place's hours",
-      "Course 1, course page: a hero with a progress ring and a Continue button for the next lesson, expandable modules with their own progress, lessons you can open or mark done, locked lessons that say why, time left, and a certificate that unlocks when every lesson is done",
-      "Five new block groups: Reviews, Funnel, Experiments, Locations and Courses, also found by the MCP server for ratings, conversion, abtest, stores, locator, offices, lessons, curriculum and lms",
-      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the left-to-right chart axes in Experiments 1, right to left, and ship their tests",
-    ],
-  },
-  {
-    date: "2026-10-18",
-    title: "A status page, a pricing estimator, a feedback survey, a people directory and a referral waitlist",
-    items: [
-      "Status 1, system status page: a banner worked out from the services (all operational, slower than usual, down, maintenance), each service with a 90-day history you scrub with a pointer or the arrow keys (each bar is a slider that reads the date and what happened), uptime figures worked out from the days, live incidents as a timeline of updates, two weeks of past incidents with quiet days folded into one row, and a subscribe box. Pass today yourself; the block never reads the clock",
-      "Calculator 1, pricing estimator: sliders for seats, requests and storage on fixed steps, monthly or yearly, add-ons, and a dark summary that picks the cheapest plan that fits, rolls the price as you move, itemizes the sum, shows what the other plans would cost, and says Talk to us instead of inventing a price beyond your plans",
-      "Survey 1, NPS feedback: the 0 to 10 question as big buttons (one tab stop, arrows move and choose), a follow-up that changes with the answer, an optional comment, a progress bar, Back that keeps answers, focus moved to each new question, and a failed send that keeps what was typed",
-      "Directory 1, people directory: search across names, roles, teams and cities with highlighted matches, department chips with live counts, a location filter, a grid and a compact list, and for each person their availability in words and their local time right now, worked out from the moment you pass",
-      "Waitlist 1, referral waitlist: an email form with a count of who is waiting, then the place in line (read out as a plain number, not mid-count), a share link with one-press copy, email and X sharing, and a reward ladder that says in words which steps are unlocked",
-      "Five new block groups: Status page, Calculators, Surveys, Directory and Waitlist, also found by the MCP server for uptime, incident, estimator, nps, feedback, people, employees, referral and launch",
-      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the left-to-right history bars, right to left, and ship their tests",
-    ],
-  },
-  {
-    date: "2026-10-18",
-    title: "A project timeline, an org chart, data and privacy settings, customer stories and an integrations directory",
-    items: [
-      "Gantt 1, project timeline: bars placed by real dates with a progress fill, milestones as diamonds, dependency arrows (a task that starts before what it waits for shows its arrow running backwards), a today line, days, weeks and months zoom, a sticky task column, a details panel with what each task waits for, and a hidden table of the same data for screen readers. Late work is marked with an icon and the word Late, not only by color. The timeline runs left to right in every language, like a chart",
-      "Org chart 1, organization tree: connected person cards with a count toggle on every team, search that opens the path to a person, a panel with their manager and direct reports, and the standard tree keys (arrows to move, Left and Right to close and open a team, Enter to choose). Connectors and keys mirror in right-to-left, and it opens centered on the top or the chosen person",
-      "Settings 6, data and privacy: request an export of chosen data in JSON or CSV and watch each one prepare with a labelled progress bar, download it before it expires, set how long messages are kept, and delete the account behind a typed email with a 30-day grace period you can cancel. Failures show their message in place",
-      "Case study 1, customer stories: one featured story with its quote and results counting up, a grid of the others with a headline number each, an industry filter, and pictures drawn from each company's name, so no image files are needed",
-      "Integrations 1, integrations directory: search that highlights matches, category filters with counts that follow the search, cards that say Connected in words, and a side sheet with what it does and a Connect button that handles the wait and a failure. Focus returns to the card when the sheet closes",
-      "Dev 1: its hidden usage table is now wrapped so it can never widen the page on a phone",
-      "Four new block groups in the gallery and for the MCP server: Project timeline, Org chart, Case studies and Integrations. The MCP server finds them for gantt, schedule, orgchart, hierarchy, privacy, gdpr, export, customers and marketplace",
-      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and right to left, and ship their tests",
-    ],
-  },
-  {
-    date: "2026-10-18",
-    title: "A gallery, a company story, a trust center, a task list and a leaderboard",
-    items: [
-      "Gallery 1, filterable gallery: category chips with counts, a gap-free masonry of tiles that fade in, and a lightbox with the caption, a counter, a thumbnail strip, arrow-key and swipe navigation (mirrored in right-to-left) and a link to the original. Tiles without a picture show art drawn from their id, so the gallery looks finished before you have photos. A new Gallery section on /blocks",
-      "About 1, company story: a large two-tone statement, a wide picture, numbers that count up, the story beside a pull quote, value cards that light up under the pointer, a milestone timeline and a closing call to action. Every part is optional; pass [] or null to leave one out. A new About section",
-      "Trust 1, trust center: certification cards with dates, the security controls behind them with what is still in progress, documents where audit reports ask for a request under a confidentiality agreement (validated, with submitting, success and error), a subprocessor table with a way to be told of changes, and a disclosure contact that stays visible even if the page fails to load. A new Trust center section",
-      "Tasks 1, task list: a progress ring and quick add, tasks grouped as overdue, today, upcoming and no date with the due date written in words, a strike-through that draws itself, inline edit, reordering by buttons or Alt and the arrow keys, shortcuts (N, X, E, J, K) and Undo on delete. It never reads the clock: pass today in. A new Tasks section",
-      "Leaderboard 1, podium and rankings: three steps with the leader raised and a crown, ranked rows with bars against the leader's score that grow in, movement written in words (Up 2 places), a week, month and all-time switch, a search, and your own place highlighted and pinned when you are further down. A new Leaderboard section",
-      "Cover art now spreads its color fields across the full width, so a wide cover is never empty on one side",
-      "New return-focus: a hook that puts keyboard focus back where it was when a dialog opens. Radix returns focus to a dialog's trigger, so a dialog opened from state (a Delete confirmation, a lightbox) dropped focus to the top of the page. Gallery 1, Trust 1, Settings 4, Agent 6, Agent 8 and Dev 1 use it",
-      "Screen-reader-only text now sits beside its visible text with a real space, not inside the span, where some browsers drop it (\"DownloadSecurity whitepaper\"). Fixed in Trust 1, Inbox 1, Chat 1, Profile 1, Help 1, Agent 5 and Desktop 7",
-      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and right to left, and ship their tests. The MCP server finds them for about, story, trust, compliance, gallery, lightbox, tasks, todo, leaderboard and ranking",
-    ],
-  },
-  {
-    date: "2026-10-18",
-    title: "Search results, a notifications inbox, an upload manager, a knowledge manager and a developers page",
-    items: [
-      "Search 1, search results page: a large search box (press / to reach it), the type of result as a filter with live counts, a date filter and a sort, results with a trail and highlighted words, Show more, and a no-results page that suggests a spelling and lists what to try. A new Search results section on /blocks",
-      "Inbox 1, notifications page: grouped by day with unread marked by an accent and a dot, mentions and comments with excerpts, requests answered right in the list (Approve, Deny, Accept, Decline), keyboard triage (J and K to move, E to archive, U for read or unread) and an Undo bar after archiving. A new Notifications section",
-      "Upload 1, upload manager: a drop area that reacts to dragging, validation that says why each file was refused, and a list where every file has its own state (waiting, uploading with progress, finishing, done, or failed with the reason and Retry), real previews of images, cancel through an abort signal, and a summary with Clear completed. A new File upload section",
-      "Agent 8, knowledge manager: a health bar across an agent's sources, each source with sync progress or its failure and a retry, a switch for whether the agent may use it, and a panel that shows which passages come back for a question, with the matching words marked. It shows retrieval rather than a generated answer, so you can see exactly what the agent would find",
-      "Dev 1, developers page: a 14-day request chart with errors stacked and the numbers in a table for screen readers, success rate and median time, API keys shown in full exactly once and revoked behind a confirmation, test and live modes with a warning, and a request log with a filter, expandable responses and copy as curl. A new Developer section",
-      "New match-highlight: the words of a search marked in text, with real mark elements in a theme tint, and helpers to split a query, test a match and count matches. It works on the server and on Arabic and Hebrew text. Help 1 now uses it instead of its own copy (no change in behaviour)",
-      "All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and right to left, and ship their tests. match-highlight's mirror check is marked not applicable, with the reason shown, because words inside a line of text keep the order of their language. The MCP server finds them for results, notifications, alerts, files, developer, logs, knowledge and rag",
-    ],
-  },
-  {
-    date: "2026-10-17",
-    title: "A public profile, a help center, assistant memory and an agent builder",
-    items: [
-      "Profile 1, public profile: a cover and avatar with art drawn from the handle when there are no pictures, a verified badge, Follow that updates the follower count straight away and undoes itself if it fails, stats that count up, an About card, project cards that light up under the pointer, and an Activity tab with a contribution graph. A new Profile section on /blocks",
-      "Help 1, help center home: a hero search that suggests articles as you type with the matches highlighted (arrow keys, Enter, Escape, and / to jump to it from anywhere), topic cards, popular articles, and a contact strip with who is online. The contact strip stays even when the guides fail to load. A new Help center section on /blocks",
-      "Agent 6, assistant memory: a three-ring chart splitting what an AI assistant remembers, a switch to pause memory, each memory with where it was learned and how often it was used, edited in place, pinned, or forgotten with seven seconds to undo, and Forget everything behind a confirmation",
-      "Agent 7, agent builder: instructions and a model, each tool set to off, ask first or allowed (tools that change data are flagged and start at ask first), the knowledge the agent may read, guardrails, and a live preview that follows every setting, including the approval step for a tool set to ask first. Publishing shows submitting, success and error",
-      "New cover-art: cover pictures drawn from a seed in your theme's chart colors (color fields, rings, bars, dots and waves). The same seed always draws the same picture, using plain arithmetic so the server and every browser agree. Profile 1, Help 1 and Agent 7 use it as the fallback for images you have not set",
-      "All pass every scorecard check, including a 360 px check, the right-to-left mirror and reduced motion, and ship their tests. The MCP server finds them for profile, help, support, memory, builder and cover",
-    ],
-  },
-  {
-    date: "2026-10-17",
-    title: "Team chat, eval results, a welcome window and a shortcuts editor",
-    items: [
-      "Chat 1, team chat: channels and direct messages with unread counts and presence, messages grouped by person and day with a New divider, reactions, threads in a side panel, @mentions that suggest people as you type, and messages that show while sending and offer Retry when they fail. A new Team chat section on /blocks",
-      "Agent 5, eval results: a verdict that calls out cases that passed before and fail now, each metric against the baseline with Better or Worse in words (lower is better for time and cost), cases filtered to regressions or improvements, and both answers side by side or as a diff",
-      "Desktop 7, welcome window: the app's name and version, ways to start (new, open, clone) with shortcuts in the platform's notation, and recent projects to search, open with Enter and remove from the list",
-      "Desktop 8, keyboard shortcuts editor: commands grouped and searchable by name or by pressing the keys, a recorder on each row, a warning with Replace when a combination is taken, reset per command and Restore defaults. It saves only what differs from the defaults",
-      "New shortcut lib: formatShortcut, shortcutFromEvent and normalizeShortcut, shared by Desktop 1, 7 and 8. Option+letter on a Mac records the letter rather than its symbol. Desktop 1 is 1.0.1 and installs it; its behaviour is unchanged",
-      "All pass every scorecard check and ship their tests. The MCP server finds them for slack, channels, messaging, evals, welcome, hotkeys and keybindings",
-    ],
-  },
-  {
-    date: "2026-10-17",
-    title: "AI agent blocks, an integrations directory and an audit log",
-    items: [
-      "A new AI agents section with four free blocks for products where agents do the work and people stay in charge. Until now the catalog had chat blocks only",
-      "Agent 1, live agent run: the task and its status (\"Waiting for you\" is announced), the plan beside it, every note, tool call and approval request in order, approvals that pause the run, the result with copy, Stop, Run again and a follow-up box",
-      "Agent 2, approvals inbox: every action agents are waiting on, newest first with its risk, the full request beside the list, A and D to approve or deny, J and K to move, and one button that approves every low-risk request. After a decision the next request is selected, so a queue clears from the keyboard",
-      "Agent 3, runs and traces: runs with status, time, tokens and cost, and a waterfall of model calls, tool calls and retrieval for the selected run. A failed span opens first, and each span tells screen readers its kind, start and duration. Agent 4, prompt playground: one prompt on two models side by side, {{variables}} that become fields, ⌘Enter to run, time, tokens and cost for each answer, ratings and Pick this one",
-      "Settings 4, integrations directory: search, categories, connected ones first, Connect with progress and the reason when it fails, Disconnect after a confirmation, coming-soon entries and a request link",
-      "Settings 5, audit log: who changed what, by people, agents, API keys and the system, grouped by day, filtered by who, area and time, each event opening to its IP address, a before-and-after diff and raw details, and a CSV export",
-      "All six have loading, empty and error states (the playground has running and error), pass every scorecard check and ship their tests. The MCP server finds them for agent, approval, trace, observability, playground, audit and integrations",
-    ],
-  },
-  {
-    date: "2026-10-17",
-    title: "Desktop app blocks: the screens every Tauri and Electron app needs",
-    items: [
-      "A new Desktop apps group with six free blocks for the windows people expect in a desktop app. Each draws real window chrome through app-window and handles like macOS or Windows from the page's feel, or from a feel prop",
-      "Desktop 1, preferences: toolbar tabs and a window named after the pane on macOS, a side nav and setting cards on Windows. Launch at login, menu bar, appearance, update channel, and a shortcut recorder that writes ⇧⌘Space on a Mac and Ctrl+Shift+Space on Windows. Settings apply as they change, with no Save button",
-      "Desktop 2, menu bar and tray panel: a clipboard history with search, pins and a pause switch, keyboard selection (Up, Down, Enter, ⌘P), and Preferences and Quit. Drawn opening from a menu bar slice or above a taskbar, or on its own for the real tray window",
-      "Desktop 3, software update: the whole cycle as states (checking, available with release notes, downloading with progress, ready to relaunch, up to date, failed). Leave state out and it runs itself; the AI notes show how to wire tauri-plugin-updater and electron-updater",
-      "Desktop 4, licence activation: a trial meter, a key field that cleans up pasted keys, the reason when a key is refused, the licensed view with deactivate, and a trial-ended mode. Desktop 5, permissions setup: why each permission is needed, the exact System Settings path for one that was turned off, and a re-check when the window gets focus back. Desktop 6, About: version and build with a copy button, links, acknowledgements and Check for updates",
-      "Wording and button order follow the platform: Title Case and the default button last on macOS, sentence case and the default button first on Windows, \"this Mac\" or \"this PC\". frame={false} drops the chrome inside a real native window",
-      "All six pass every scorecard check (axe in light and dark, 360 px, reduced motion, right to left, console, keyboard) and ship their tests with `ballmac add --with-tests`. The MCP server finds them for desktop, Tauri, Electron, preferences, tray and licence",
-    ],
-  },
-  {
-    date: "2026-10-12",
-    title: "Quality, measured: scorecards on every item, and ballmac check for your own app",
-    items: [
-      "Every item page now has a quality scorecard, measured in a real browser: an axe-core accessibility scan in light and dark, no sideways scrolling at 360, 390 and 1280 px, reduced motion, a right-to-left mirror, a clean console, a keyboard pass, states, tests and size. 477 items and 1,032 examples were loaded; the results are public at /quality",
-      "The first full run found 55 failing checks. They were real: a table that stretched the page sideways on phones in five Pro blocks, skeletons wider than a 360 px screen, compact amounts written differently on the server and in the browser (a React hydration error in three dashboards), a map route that kept animating for visitors who asked for less motion, and a notification table that keyboard users could not scroll while a save was running. All are fixed, and the affected items have new versions that `ballmac update` merges into your copy",
-      "`npx @ballmac/cli check` holds your own app to the same bar. It reads your source (read-only, offline) and reports missing loading and error states, images and buttons without names, positive tabindex, hand-rolled dialogs, hard-coded colors, endless decorative motion and layouts that break on a phone, each with the fix. `--url` also loads your running app with your own Playwright and axe. Settings, suppression comments and a GitHub annotations format are in /docs/check",
-      "The Ballmac MCP server (1.4.0) has two new tools: `get_quality_rules` so an agent reads the rules before it writes a component, and `audit_project` so it can check its work before it says it is done",
-      "The measurement is honest about its limits: automated tools find only a part of accessibility problems, a loading spinner is kept turning on purpose, WCAG 2.2's 24 px target size is reported as a note rather than a failure, and some items are not mirrored by design (code, charts, keyboard shortcuts), each with its reason shown",
-    ],
-  },
-  {
-    date: "2026-10-12",
-    title: "Cove: a Tauri desktop starter that looks native on macOS and Windows",
-    items: [
-      "Cove is a third Pro starter and the first for the desktop: a Tauri 2 notes app with folders, pinning, search that needs every word, trash with undo, Markdown with a preview, and a command palette. It is a real app you can ship, and the quickest way to see the platform feels in a working window",
-      "On a Mac it has traffic lights in the sidebar column that dim when the window is in the background, the system blur behind the sidebar (a real NSVisualEffectView), the native menu bar with the system's own undo and paste, and rounded corners. On Windows it has 46 px caption buttons, a title bar with the app icon and a menu bar, a 3 px accent bar on the current item and square corners the system rounds",
-      "Every command is defined once and runs from the palette, the keyboard and both menus, with shortcuts written the way each platform writes them (⇧⌘N, Ctrl+Shift+N). Settings switch the look between macOS, Windows, iOS and the web, the theme, and the motion",
-      "The interface also runs in a browser with no Rust installed. It is tested in WebKit and Chromium with each platform's user agent: both looks, light and dark, keyboard use, axe, High Contrast, reduced motion and the smallest window. Notes are one JSON file; replace the four-method storage to add sync",
-      "The README, a customisation guide and a release guide cover signing and notarizing on macOS, signing on Windows, and updates",
-    ],
-  },
-  {
-    date: "2026-10-12",
-    title: "States: loading, empty and error built into the blocks",
-    items: [
-      "Every data block takes one prop, state: \"loading\", \"ready\", \"empty\" or \"error\", with onRetry, emptyState and errorState. Loading is a skeleton with the same shape as the block, empty is a clear message, error has a retry. 11 blocks: Mail 1, Dashboard 1 and 2, Kanban 1, Calendar 1, Blog 1, Changelog 1, Billing 1 and 2, Settings 3 and the two AI chats",
-      "Every form block (Login 1 and 2, Sign up, Forgot password, Verify, Contact, Newsletter, Invite, Onboarding, Settings 1 and 2) can show submitting, success and error from the same prop, so you can drive it from your own async code. Fields lock while a request is in flight, so nothing is sent twice. Several also take defaultValues or defaultEmail to prefill",
-      "New state-view for your own views, and use-resource: a fetch state machine that aborts replaced requests, never lets a slow old answer win, and retries. stateOf() maps TanStack Query and SWR results onto the same states",
-      "Block pages have a State switch above the preview, with the prop to copy and what each state does, and a States table. A link such as /blocks/mail-1?state=loading opens a state. New /docs/states",
-      "Each item can list its states in its metadata, and a block with nothing to load says why. The registry JSON and the API carry them, and a build check fails when a free block does neither or a state example would break a production build",
-      "Skeletons are a little stronger on light pages and their pulse follows the theme's decorative-loops switch. Announced as loading, busy while loading, errors announced as alerts, and focus is never moved for you",
-    ],
-  },
-  {
-    date: "2026-10-12",
-    title: "Platform feels: every component can handle like macOS, iOS or Windows",
-    items: [
-      "A feel is everything about a product except its colours: control and menu sizes, corners, text scale, focus ring, shadows, sidebar style, frosted surfaces, press feedback, scrollbars, window controls and motion. Four feels: Web (today's look, the default), macOS, iOS and Windows. They work on top of any colour theme",
-      "Install one with `@ballmac/feel-macos`, `-ios`, `-windows` or `-web`, or `@ballmac/feel-auto`, which includes all four and sets the right one from the device before the first paint (no flash). `useFeel()` and `setFeel()` let people override it",
-      "Tailwind's shadow and text scales follow the feel, and one rule restyles the focus ring on every component that uses shadcn's standard focus classes (250 Ballmac items, and shadcn's own). Button, Input, Select, Tabs, Sidebar, menus, popovers and hover cards read feel tokens for sizes, corners, frosting and press dimming; nothing changes without a feel",
-      "New `app-window`: the window chrome of a real Tauri or Electron app. A title bar that drags the window and maximizes on double-click, with traffic lights on the left for macOS, caption buttons on the right for Windows, none for iOS and web. No Tauri or Electron dependency: you pass the actions. Based on tauri-controls (MIT)",
-      "The theme builder has a Platform feel picker, a window in the preview, and a Compare view that shows your colours in all four feels side by side. A link such as /themes?fe=windows opens one. New /docs/feels covers Tauri v2 and Electron setup",
-      "The 12 colour themes and the base theme now carry the web-feel tokens. New checks fail the build when an endless loop ignores the theme or a component draws its own focus ring without being listed",
-      "These are web components that feel like each platform, not native controls, and Ballmac UI is not affiliated with Apple or Microsoft",
-      "The Ballmac MCP server (from 1.2.0) knows about feels: compose_page takes a `feel`, or reads macOS, Windows, iOS, Tauri or Electron from the request, and returns the feel to install plus how to wire it",
-    ],
-  },
-  {
-    date: "2026-10-11",
-    title: "Motion is part of the theme",
-    items: [
-      "Six settings describe how a product moves: speed, bounce, travel, hover, stagger and decorative loops. Durations, easings, hover lift, button press and the CSS spring curve are all derived from them, and the defaults reproduce the current look exactly",
-      "Tailwind's own scales follow: duration-75 to duration-1000, delay-* and ease-out, ease-in and ease-in-out read the theme, and a new ease-spring class is a real spring written as a CSS linear() easing. Dialogs, popovers, menus and accordions follow too, through tw-animate-css's enter and exit animations. Existing components pick this up with no edits",
-      "Five ready-made feels, each its own registry theme: @ballmac/motion-native, -calm, -snappy, -playful and -still. The twelve colour themes each carry a feel that suits them, so installing Violet brings its motion too",
-      "The theme builder has a Motion group (a personality picker and a slider for each setting) and a motion lab that shows easing curves drawn from the real spring, hover and press, stagger, durations, JavaScript springs and loops, with a Preview reduced motion switch. A link such as /themes?mo=playful opens a feel",
-      "Reduced motion is part of the theme: a prefers-reduced-motion rule removes travel, lift, bounce and loops and keeps fades. Still ships those values to every visitor",
-      "Motion presets 1.1.0: spring, duration, variants and stagger read the theme's variables, and new useMotion, useLoopsPaused and MotionProvider hooks give the same numbers in JavaScript. Decorative loops (13 components) hold still when loops are turned off; spinners and thinking indicators keep running",
-      "Hover lift and button press follow the theme in Card, Button, Suggestion Chips, Workspace Card, three blocks and seven templates. A new `pnpm bump` command writes the version bump and changelog entry the version check asks for",
-      "The Figma tokens export now includes the motion settings as W3C duration and number tokens",
-    ],
-  },
-  {
-    date: "2026-10-11",
-    title: "Fixes: server-component crashes, and support for Next.js 16.4 Cache Components",
-    items: [
-      "Bento Grid, Team Switcher, Lock Screen and Control Center failed with \"Attempted to call isMediaImage() from the server\" when a server component rendered them. The helper now lives in its own small item, media-image, and the components import it from there (Media still exports it for code that used it). Each is now 1.0.1, so `ballmac update` merges the fix into your copy",
-      "The pages that read params in the Atlas, Goods, Podcast and Publication templates now do so inside Suspense, which Cache Components (the default in new Next.js 16.4 apps) requires: 1.0.1 each",
-      "A new build check fails when a file that runs on the server imports a function from a file marked \"use client\", so this kind of crash is caught before it ships",
-      "Next.js 16.4 turns on Cache Components in new projects, which does not allow reading the current time while a page is prerendered. Calendar, Date Picker and the Calendar 1 block did (react-day-picker reads today), so any page using them failed to build. Calendar now reads it inside Suspense with a same-size placeholder (pass `today` to skip that), Date Picker works out its year dropdown only when it opens, and Calendar 1 uses its own today: 1.0.1 each. Every free component, block and template, and every Pro block, now builds in a fresh Next.js 16.4 app with Cache Components on",
-    ],
-  },
-  {
-    date: "2026-10-11",
-    title: "Update components without losing your edits, and install their tests",
-    items: [
-      "New command line tool, `npx @ballmac/cli`: it runs the shadcn CLI for you and remembers what it installed (ballmac.lock.json), so `ballmac update` can merge a new version into your edited copy instead of overwriting it. Files you never touched are replaced, edits in other places are merged, and overlapping edits become conflict markers",
-      "`ballmac outdated` lists what is behind with a note on what changed, `ballmac diff` shows your own changes, and `ballmac track` adopts items you installed with plain shadcn. Originals are backed up before anything is written, and `--dry-run` previews everything",
-      "Every item now has a version and a changelog written for people who customised the file; component pages show them under What changed",
-      "200 free items ship with the test we run on them. `ballmac add dialog --with-tests` installs it next to the component, with the packages it needs and a vitest config if you have none",
-      "The Ballmac MCP server gets two tools: `get_changes` (what changed since a version, breaking changes flagged) and `get_tests`",
-      "A build check now fails when an item's files change without a version bump and a changelog entry",
-    ],
-  },
-  {
-    date: "2026-10-07",
-    title: "Founding offer: $49 until 21 October, then $99",
-    items: [
-      "Pricing page rebuilt around the founding offer: a live countdown to 21 Oct 2026, 11:59 pm IST, the $99 list price struck through",
-      "See what is inside before you buy: the 40 second film with captions and six Pro block previews",
-      "A free sampler of three Pro blocks for your email, and a reminder email 72 hours and 24 hours before the founding price ends",
-      "Pro block pages and the locked copy-code prompt say when the founding price ends",
-      "A Founders page and a desk in the Pro library: opt in to be listed by name and vote on the next blocks",
-      "After 21 October, or when the 25 founding licences are gone, the site switches to $99 by itself",
-    ],
-  },
-  {
-    date: "2026-10-07",
-    title: "Install with no setup, and cleaner theme links",
-    items: [
-      "Ballmac UI is now in the official shadcn registry directory, so `npx shadcn@latest add @ballmac/button` works with nothing to configure. The registry entry is kept as a fallback for older CLIs and for the shadcn MCP server, which only reads components.json",
-      "Theme builder: every preset has its own clean link (for example /themes/rose), a customised design is /themes?h=…, a note beside Copy link explains that your design lives in the link and is never stored, and copying is announced to screen readers",
-      "Clearer page titles and descriptions for the components, blocks, templates and themes pages, structured data for the organisation and the website, and an llms.txt that now lists blocks, templates and Pro",
-      "The analytics scripts load only on Vercel, so running the site locally or on your own host no longer logs console errors",
-    ],
-  },
-  {
-    date: "2026-10-05",
-    title: "Log in to Pro with your licence key",
-    items: [
-      "A Pro log in page at /pro: paste your licence key once, with no password and no account. The key stays in an encrypted cookie in your browser and is checked again on every request, so a revoked key stops working within minutes",
-      "Your Pro library: install commands with your key already filled in (hidden on screen, real on the clipboard) for the shadcn CLI, AI agents through MCP and the starter apps, plus browser downloads of Beacon SaaS, Quire and the Figma tokens",
-      "Pro block pages show the real source with copy buttons once you are logged in, while the pages stay public and static for everyone else",
-      "A Log in and Get Pro button in the header, which becomes a Pro library link after you log in",
-      "Buyers are logged in automatically when they return from checkout, with no key to paste",
-      "A support page for bugs, questions, licence and billing help, and suggestions; messages go to a private inbox and you get a confirmation by email",
-      "Pricing copy corrected: Pro adds 150 blocks and two starter apps (it has no templates)",
-    ],
-  },
-  {
-    date: "2026-10-04",
-    title: "Quire, a second Pro starter, and a new look for Beacon",
-    items: [
-      "Quire: an AI starter that answers from your own documents and shows its sources. Streaming chat with numbered citations that highlight the exact sentence, a document library with full-text search, usage limits per plan, Stripe billing, teams and a public API. It runs without an AI key on a built-in demo model",
-      "Beacon SaaS was redesigned: a new landing page, sign-in and onboarding, and app shell",
-    ],
-  },
-  {
-    date: "2026-10-03",
-    title: "Ballmac UI Pro and the first public release",
-    items: [
-      "Ballmac UI Pro: 150 premium blocks (heroes, features, pricing, dashboards, app screens, ecommerce, content, sign-in and onboarding, marketing extras), all with light, dark and right-to-left support",
-      "A private registry for Pro items, installed with the shadcn CLI and the MCP server using a licence key",
-      "Beacon SaaS, the first Pro starter app: sign-in, workspaces with teams and invitations, Stripe billing, a dashboard and API keys",
-      "Figma design tokens (W3C format) for all 13 themes, plus capture tooling for building a Figma library",
-      "@ballmac/mcp 1.0 on npm: search the catalog, read when to use each item and get the install command from your agent",
-      "A designed 404 and error page, tidier page titles and descriptions across the site, and stricter security headers",
-    ],
-  },
-  {
-    date: "2026-10-02",
-    title: "Themes, right-to-left, translations and image slots",
-    items: [
-      "Twelve free themes and a live builder: change hue, radius, density and font, check contrast in light and dark, then install",
-      "Right-to-left support across components, blocks and templates, with an RTL toggle on every preview",
-      "Built-in text moved behind one translation provider, with the full key list available as JSON",
-      "Heroes, features, cards, galleries and templates take an image or media prop with required alt text and dark-mode variants",
-    ],
-  },
-  {
-    date: "2026-10-01",
-    title: "Templates, blocks and a full audit",
-    items: [
-      "Seventeen templates with their own look, from product sites to admin apps, docs, stores and a podcast",
-      "Sixty-three free blocks grouped by purpose, from marketing sections to application screens",
-      "Desktop and device components: windows, docks, menu bars, Finder-style browsing, Launchpad, lock screen and device frames",
-      "Audit fixes: page weight cut from 7.5 to 11.8 MB of JavaScript down to 1.3 to 2.0 MB, hydration fixes for visitors who prefer reduced motion, focus rings and pinned dependency versions",
-    ],
-  },
-  {
-    date: "2026-09-30",
-    title: "Forms, data, SaaS patterns and AI interfaces",
-    items: [
-      "Forms: date and range pickers, currency, phone, tags, multi-select, stepper and signature pad",
-      "Data display: calendar, data table, charts, carousel, drawer and resizable panels",
-      "SaaS patterns: onboarding checklist, settings panel, usage meter, billing card, plan selector and notification center",
-      "AI interfaces: chat messages, reasoning, tool calls, citations, a prompt box, agent plans and approval cards",
-    ],
-  },
-  {
-    date: "2026-09-28",
-    title: "Ballmac UI preview",
-    items: [
-      "Registry at ui.ballmac.com/r with the Ballmac theme and motion presets",
-      "Primitives, motion, AI interface and developer components",
-      "Blocks and a launch-page template",
-      "Docs for installation, the CLI and registry, and MCP",
-    ],
-  },
-]
+import { CHANGELOG_GROUPS, CHANGELOG_TAGS, type ChangelogEntry, type ChangelogGroupKey, type ChangelogTag } from "./changelog-shared"
 
-/** The same list as Markdown, for CHANGELOG.md. */
-export function changelogMarkdown(entries: ChangelogEntry[] = changelog): string {
-  const body = entries.map((e) => `## ${e.date}: ${e.title}\n\n${e.items.map((i) => `- ${i}`).join("\n")}`).join("\n\n")
-  return `# Changelog\n\nNew components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit \`apps/www/lib/changelog.ts\` and run \`pnpm changelog\`.\n\n${body}\n`
+export * from "./changelog-shared"
+
+const DIR = join(/* turbopackIgnore: true */ process.cwd().endsWith("apps/www") ? process.cwd() : join(process.cwd(), "apps/www"), "content/changelog")
+const MAX_PER_GROUP = 6
+
+export function parseEntry(slug: string, source: string): ChangelogEntry {
+  const m = source.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
+  if (!m) throw new Error(`${slug}: missing frontmatter`)
+  const fm = parseYaml(m[1]!) as Record<string, unknown>
+  const fail = (why: string): never => {
+    throw new Error(`content/changelog/${slug}.md: ${why}`)
+  }
+  const str = (k: string) => (typeof fm[k] === "string" && (fm[k] as string).trim() ? (fm[k] as string).trim() : fail(`"${k}" is missing`))
+  // YAML reads 2026-10-18 as a date: keep the text.
+  const date = fm.date instanceof Date ? fm.date.toISOString().slice(0, 10) : String(fm.date ?? "")
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(Date.parse(date))) fail(`"date" must be YYYY-MM-DD, got "${date}"`)
+  if (!slug.startsWith(date)) fail(`the file name must start with its date (${date})`)
+  const tags = (Array.isArray(fm.tags) ? fm.tags : fail('"tags" must be a list')) as string[]
+  if (tags.length === 0) fail('"tags" is empty')
+  for (const t of tags) if (!(CHANGELOG_TAGS as readonly string[]).includes(t)) fail(`unknown tag "${t}" (use ${CHANGELOG_TAGS.join(", ")})`)
+  const summary = str("summary")
+  if (!/[.!?]$/.test(summary) || /[.!?] [A-Z]/.test(summary)) fail('"summary" is one sentence ending with a full stop')
+  const groups: ChangelogEntry["groups"] = {}
+  const order = CHANGELOG_GROUPS.map((g) => g.heading as string)
+  let current: ChangelogGroupKey | undefined
+  let last = -1
+  for (const raw of m[2]!.split("\n")) {
+    const line = raw.trimEnd()
+    if (!line.trim()) continue
+    const h = line.match(/^### (.+)$/)
+    if (h) {
+      const idx = order.indexOf(h[1]!)
+      if (idx < 0) fail(`unknown heading "${h[1]}" (use ${order.join(", ")})`)
+      if (idx <= last) fail(`"${h[1]}" is out of order or repeated (order: ${order.join(", ")})`)
+      last = idx
+      current = CHANGELOG_GROUPS[idx]!.key
+      groups[current] = []
+      continue
+    }
+    const b = line.match(/^- (.+)$/)
+    if (!b || !current) return fail(`each line is a "- " bullet under a "### " heading, got: ${line.slice(0, 60)}`)
+    groups[current]!.push(b[1]!)
+  }
+  let count = 0
+  for (const [k, list] of Object.entries(groups)) {
+    if (list.length === 0) fail(`"${k}" has no bullets`)
+    if (list.length > MAX_PER_GROUP) fail(`"${k}" has ${list.length} bullets; split the entry or merge lines (at most ${MAX_PER_GROUP})`)
+    count += list.length
+  }
+  if (count === 0) fail("no bullets")
+  const shot = typeof fm.shot === "string" ? fm.shot : undefined
+  const image = typeof fm.image === "string" ? fm.image : shot ? `/changelog/${slug}.light.webp` : undefined
+  const imageDark = typeof fm.imageDark === "string" ? fm.imageDark : shot ? `/changelog/${slug}.dark.webp` : undefined
+  if (image && typeof fm.imageAlt !== "string") fail('"imageAlt" is required with a picture')
+  return {
+    slug,
+    title: str("title"),
+    date,
+    seq: typeof fm.seq === "number" ? fm.seq : 0,
+    tags: tags as ChangelogTag[],
+    releases: Array.isArray(fm.releases) ? (fm.releases as string[]) : [],
+    summary,
+    image: image ? { light: image, dark: imageDark, alt: fm.imageAlt as string } : undefined,
+    shot,
+    shotSelector: typeof fm.shotSelector === "string" ? fm.shotSelector : undefined,
+    groups,
+  }
+}
+
+let cache: ChangelogEntry[] | undefined
+
+/** Every entry, newest first. */
+export function getChangelog(): ChangelogEntry[] {
+  cache ??= readdirSync(DIR)
+    .filter((f) => f.endsWith(".md"))
+    .map((f) => parseEntry(f.slice(0, -3), readFileSync(join(DIR, f), "utf8")))
+    .sort((a, b) => b.date.localeCompare(a.date) || b.seq - a.seq || b.slug.localeCompare(a.slug))
+  return cache
+}
+
+export const getEntry = (slug: string) => getChangelog().find((e) => e.slug === slug)
+
+/** CHANGELOG.md in the Keep a Changelog layout, for the repository. */
+export function changelogMarkdown(entries: ChangelogEntry[] = getChangelog(), site = "https://ui.ballmac.com"): string {
+  const abs = (md: string) => md.replace(/\]\((\/[^)]*)\)/g, `](${site}$1)`)
+  const body = entries
+    .map((e) => {
+      const head = `## [${e.slug}] - ${e.date}\n\n**${e.title}.** ${e.summary}${e.releases.length ? ` Releases: ${e.releases.join(", ")}.` : ""}`
+      const groups = CHANGELOG_GROUPS.filter((g) => e.groups[g.key])
+        .map((g) => `### ${g.keepAChangelog}\n\n${e.groups[g.key]!.map((b) => `- ${abs(b)}`).join("\n")}`)
+        .join("\n\n")
+      return `${head}\n\n${groups}`
+    })
+    .join("\n\n")
+  return `# Changelog
+
+All notable changes to Ballmac UI, newest first, in the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) layout. The same list, with pictures and filters, is at ${site}/changelog (feeds: ${site}/changelog/rss.xml and ${site}/changelog/atom.xml).
+
+Ballmac UI ships as a registry, so each heading is a release or wave named by its date and topic rather than a version number. Package releases (\`@ballmac/cli\`, \`@ballmac/mcp\`) are listed on the entries they shipped with and in each package's own CHANGELOG.md.
+
+This file is generated: edit the entries in \`apps/www/content/changelog/\` and run \`pnpm changelog\`. See CONTRIBUTING.md.
+
+${body}
+`
 }

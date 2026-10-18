@@ -35,7 +35,7 @@ export const PAGES: { path: string; mobile: number; desktop: number; pro?: boole
   { path: "/themes", mobile: 68, desktop: 92 },
   { path: "/pro", mobile: 80, desktop: 95, noindex: true },
   { path: "/pricing", mobile: 84, desktop: 95 },
-  { path: "/docs/installation", mobile: 86, desktop: 95 },
+  { path: "/docs/get-started/install", mobile: 86, desktop: 95 },
   { path: "/changelog", mobile: 87, desktop: 95 },
 ]
 

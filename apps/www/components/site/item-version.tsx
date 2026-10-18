@@ -13,12 +13,12 @@ export function ItemVersion({ item }: { item: Pick<SiteItem, "name" | "version" 
         <span className="text-foreground font-mono text-xs font-medium">v{item.version}</span>
         <span>Updated {date(item.updated)}</span>
         {item.tests && (
-          <Link href="/docs/cli#tests" className="hover:text-foreground inline-flex items-center gap-1 underline-offset-4 hover:underline">
+          <Link href="/docs/guides/tests" className="hover:text-foreground inline-flex items-center gap-1 underline-offset-4 hover:underline">
             <Check className="size-3.5" aria-hidden="true" />
             Ships with a test
           </Link>
         )}
-        <Link href="/docs/cli" className="hover:text-foreground underline-offset-4 hover:underline">
+        <Link href="/docs/guides/update-components" className="hover:text-foreground underline-offset-4 hover:underline">
           Update without losing your edits
         </Link>
       </p>

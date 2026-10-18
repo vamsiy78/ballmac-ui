@@ -1,0 +1,276 @@
+---
+title: "Check rules"
+description: "Every rule ballmac check and the audit_project tool apply, with why it matters, how to fix it and an example."
+generatedFrom: packages/audit/src/rules/meta.ts
+---
+
+15 rules. Each one says why it matters to the person using your app and how to fix it. To run them, see [Check your own app](/docs/guides/check-your-app). To change a rule's level, set it in `.ballmacrc.json`.
+
+## States [#states]
+
+### states/ballmac-state-prop [#states-ballmac-state-prop]
+
+**Warning.** A Ballmac component with states is used without a state prop
+
+The component can show a loading skeleton, an empty message and an error with a retry, but this use only ever shows the ready view. When the request is slow or fails, people see a blank area or a frozen screen.
+
+**Fix:** Pass `state` from your data hook, for example state=\{isPending ? "loading" : isError ? "error" : rows.length ? "ready" : "empty"\} and onRetry=\{refetch\}.
+
+Instead of:
+
+```tsx
+<DashboardPro1 />
+```
+
+Write:
+
+```tsx
+<DashboardPro1 state={isPending ? "loading" : isError ? "error" : "ready"} onRetry={refetch} />
+```
+
+### states/data-without-states [#states-data-without-states]
+
+**Warning.** A component fetches data but never reads loading or error state
+
+While the request is running, or if it fails, the screen has nothing to show. That is the first thing a person sees on a slow connection.
+
+**Fix:** Read the loading and error values the hook returns (isPending, isError, error), render a skeleton for loading and a message with a retry for errors, and an empty state when there is no data.
+
+Instead of:
+
+```tsx
+const { data } = useQuery(...)
+return <List items={data} />
+```
+
+Write:
+
+```tsx
+const { data, isPending, isError, refetch } = useQuery(...)
+if (isPending) return <ListSkeleton />
+if (isError) return <ErrorState onRetry={refetch} />
+return <List items={data} />
+```
+
+## Accessibility [#a11y]
+
+### a11y/img-alt [#a11y-img-alt]
+
+**Error.** An image has no alt attribute
+
+Screen reader users hear the file name or nothing. Search engines and failed loads show nothing useful either.
+
+**Fix:** Add alt with a short description of what the image shows, or alt="" if it is purely decorative.
+
+Instead of:
+
+```tsx
+<img src="/hero.png" />
+```
+
+Write:
+
+```tsx
+<img src="/hero.png" alt="The dashboard with a revenue chart" />
+```
+
+### a11y/control-name [#a11y-control-name]
+
+**Error.** A button or link has an icon but no accessible name
+
+Screen reader users hear only “button” with no hint of what it does, and voice control users cannot say its name.
+
+**Fix:** Add aria-label="What it does" to the control, or include visually hidden text such as \<span className="sr-only">Close\</span>.
+
+Instead of:
+
+```tsx
+<button onClick={close}><XIcon /></button>
+```
+
+Write:
+
+```tsx
+<button onClick={close} aria-label="Close"><XIcon aria-hidden="true" /></button>
+```
+
+### a11y/clickable-non-interactive [#a11y-clickable-non-interactive]
+
+**Error.** A click handler is on an element that keyboards cannot reach
+
+A \<div> with onClick cannot be focused or activated with the keyboard, and screen readers do not announce it as something to press.
+
+**Fix:** Use a \<button> (or \<a> for navigation). If it truly must stay a div, add role, tabIndex=\{0\} and onKeyDown for Enter and Space.
+
+Instead of:
+
+```tsx
+<div onClick={open}>Open</div>
+```
+
+Write:
+
+```tsx
+<button type="button" onClick={open}>Open</button>
+```
+
+### a11y/focus-outline-removed [#a11y-focus-outline-removed]
+
+**Error.** The focus outline is removed and nothing replaces it
+
+Keyboard users lose track of where they are. It is one of the most common ways an app becomes unusable without a mouse.
+
+**Fix:** Keep the default outline, or replace it with a visible style such as focus-visible:ring-2 focus-visible:ring-ring.
+
+Instead of:
+
+```tsx
+<button className="outline-none">
+```
+
+Write:
+
+```tsx
+<button className="outline-none focus-visible:ring-2 focus-visible:ring-ring">
+```
+
+### a11y/input-label [#a11y-input-label]
+
+**Warning.** A form field has no label
+
+A placeholder disappears as soon as someone types and is not a label. Screen readers announce an unnamed field, and clicking the text does not focus it.
+
+**Fix:** Add \<label htmlFor="id"> that matches the field's id, wrap the field in a \<label>, or add aria-label.
+
+Instead of:
+
+```tsx
+<input placeholder="Email" />
+```
+
+Write:
+
+```tsx
+<label htmlFor="email">Email</label>
+<input id="email" />
+```
+
+### a11y/positive-tabindex [#a11y-positive-tabindex]
+
+**Error.** tabIndex is greater than zero
+
+It pulls the element to the front of the tab order, so focus jumps around the page in a way nobody expects.
+
+**Fix:** Use tabIndex=\{0\} to make an element focusable in its natural place, or tabIndex=\{-1\} to focus it from code only.
+
+### a11y/hand-rolled-dialog [#a11y-hand-rolled-dialog]
+
+**Warning.** A full-screen overlay is built by hand
+
+A hand-made modal usually misses the focus trap, Escape to close, scroll lock and the dialog role, so keyboard and screen reader users get stuck behind it.
+
+**Fix:** Use the Dialog, Sheet or Drawer component (Radix-based), which does all of that.
+
+Instead of:
+
+```tsx
+<div className="fixed inset-0 z-50 bg-black/50">…</div>
+```
+
+Write:
+
+```tsx
+<Dialog><DialogContent>…</DialogContent></Dialog>
+```
+
+### a11y/link-no-href [#a11y-link-no-href]
+
+**Warning.** A link has no href
+
+An \<a> without href is not focusable or announced as a link. People cannot open it in a new tab or copy its address.
+
+**Fix:** Add an href, or use a \<button> if it performs an action instead of navigating.
+
+## Tokens [#tokens]
+
+### tokens/hardcoded-color [#tokens-hardcoded-color]
+
+**Warning.** A fixed colour is used instead of a theme token
+
+Fixed colours do not follow the theme, so dark mode and any re-theming break: white panels glowing in the dark, grey text that cannot be read.
+
+**Fix:** Use token classes: bg-background, bg-card, text-foreground, text-muted-foreground, border-border, bg-primary, text-destructive.
+
+Instead of:
+
+```tsx
+className="bg-white text-gray-900 border-gray-200"
+```
+
+Write:
+
+```tsx
+className="bg-background text-foreground border-border"
+```
+
+## Motion [#motion]
+
+### motion/endless-decorative [#motion-endless-decorative]
+
+**Warning.** A decorative animation runs forever and ignores reduced motion
+
+People with vestibular disorders turn on “reduce motion” because endless movement makes them ill. An animation that ignores the setting is an accessibility bug.
+
+**Fix:** Add motion-reduce:animate-none to the class, wrap the Motion loop in useReducedMotion, or put the CSS animation inside @media (prefers-reduced-motion: no-preference).
+
+Instead of:
+
+```tsx
+<span className="animate-ping" />
+```
+
+Write:
+
+```tsx
+<span className="animate-ping motion-reduce:animate-none" />
+```
+
+## Layout [#layout]
+
+### layout/fixed-wide [#layout-fixed-wide]
+
+**Warning.** A fixed width is wider than a small phone
+
+A phone is 360 to 390 pixels wide. A fixed 480px element makes the whole page scroll sideways.
+
+**Fix:** Add max-w-full, or make the width responsive: w-full md:w-[480px].
+
+Instead of:
+
+```tsx
+<div className="w-[480px]">
+```
+
+Write:
+
+```tsx
+<div className="w-full max-w-[480px]">
+```
+
+### layout/viewport-height [#layout-viewport-height]
+
+**Note.** h-screen is used for a full-height layout
+
+On phones, 100vh includes the area behind the browser's address bar, so the bottom of the page is cut off.
+
+**Fix:** Use min-h-dvh or h-dvh, which follow the visible area.
+
+## Right to left [#rtl]
+
+### rtl/physical-direction [#rtl-physical-direction]
+
+**Off by default.** A left or right class will not mirror in right-to-left languages
+
+In Arabic, Hebrew, Persian and Urdu the layout should be mirrored. Fixed left and right spacing leaves margins and icons on the wrong side.
+
+**Fix:** Use logical classes: ms-/me- instead of ml-/mr-, ps-/pe- instead of pl-/pr-, text-start/text-end, start-/end- instead of left-/right-.

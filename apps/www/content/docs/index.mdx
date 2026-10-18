@@ -1,0 +1,45 @@
+---
+title: Introduction
+description: Ballmac UI is a shadcn registry of accessible React and Tailwind components, blocks and templates that you and your AI agent install as code.
+---
+
+Ballmac UI is a collection of React and Tailwind CSS components, blocks and templates: desktop-style app surfaces, living backgrounds, text effects, device frames and AI interfaces.
+
+You don't install it as a package. You add the items you need with the shadcn CLI, and the source lands in your project, ready to read and change.
+
+```npm
+npx shadcn@latest add @ballmac/button
+```
+
+Your AI coding agent can do the same through the [Ballmac MCP server](/docs/get-started/connect-your-agent) (`@ballmac/mcp`) or the shadcn MCP server.
+
+## Find what you need
+
+<Cards>
+  <Card href="/docs/get-started/install" title="Get started">Install your first component, connect your agent, make it look like your product.</Card>
+  <Card href="/docs/guides/update-components" title="Guides">Steps for one task: update components, handle states, turn on right-to-left, set up Pro.</Card>
+  <Card href="/docs/reference/cli" title="Reference">Commands, MCP tools, settings, rules and messages, generated from the code.</Card>
+  <Card href="/docs/concepts/how-ballmac-works" title="Concepts">Why Ballmac UI works the way it does: ownership, motion, feels, states and quality.</Card>
+</Cards>
+
+## What makes it different
+
+- **Updates that keep your edits.** [The ballmac CLI](/docs/guides/update-components) merges new versions into your edited copies and installs the tests that ship with components.
+- **Quality you can check.** Every item is loaded in a real browser and the [results are public](/quality), including failures. [ballmac check](/docs/guides/check-your-app) holds your own app to the same bar.
+- **Native-app polish.** Springs, depth and hairlines from native apps, as app windows, docks, a live notch, menus and notifications that work in any product.
+- **One design language.** Primitives, effects, AI interfaces and developer components share tokens, spacing, focus states and motion curves, and follow your theme in light and dark.
+- **Effects with manners.** Globes, beams and particles pause off-screen, stop for reduced motion and keep your page accessible.
+- **No collisions.** Everything installs into `components/ballmac`, so it never overwrites your shadcn/ui files. Dependencies are declared and checked on every build.
+- **Made for AI agents.** Every item carries a description, when to use it, when not to, what it composes with and keyboard notes, through MCP and [llms.txt](/llms.txt).
+- **Verified installs.** Each release installs every item into a fresh Next.js app, then type-checks and builds it.
+
+## Free and Pro
+
+Every component, block, template and theme is free and MIT licensed. [Ballmac UI Pro](/pricing) adds premium blocks, two complete starter apps and the Figma tokens, delivered through a private registry with a licence key. [Set up Pro](/docs/guides/pro).
+
+## Requirements
+
+- React 19 and Tailwind CSS v4
+- A project set up with `shadcn init`, which creates `components.json` and `lib/utils`
+
+Stuck, or found a bug? [Contact support](/support), or open an issue on [GitHub](https://github.com/vamsiy78/ballmac-ui/issues).

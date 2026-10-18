@@ -1,0 +1,37 @@
+---
+title: Theme tokens
+description: The CSS variables Ballmac components read, and the motion variables the Ballmac theme derives.
+---
+
+## Color and shape tokens
+
+Every component reads these standard shadcn variables. Change them in your `globals.css` and every Ballmac component follows.
+
+| Token | Used for |
+| --- | --- |
+| `--background`, `--foreground` | Page and text |
+| `--card` | Raised surfaces |
+| `--primary` | Primary actions |
+| `--muted` | Quiet surfaces and secondary text |
+| `--accent` | Hover and selected states |
+| `--border`, `--input` | Hairlines and field borders |
+| `--ring` | Focus ring |
+| `--destructive` | Errors and dangerous actions |
+| `--chart-1` to `--chart-5` | Charts, accents and status dots |
+| `--radius` | Corner radius |
+
+## Motion tokens
+
+Motion is part of the theme. The Ballmac theme sets these variables:
+
+| Token | Meaning |
+| --- | --- |
+| `--bm-speed` | How fast everything moves |
+| `--bm-bounce` | How springy |
+| `--bm-travel` | How far things travel |
+| `--bm-hover` | How much hover lifts |
+| `--bm-stagger` | The delay between items |
+
+It derives `--bm-ease-out`, `--bm-ease-spring`, and `--bm-duration-fast`, `--bm-duration-base` and `--bm-duration-slow` from them. Tailwind's `duration-*` and `ease-*` classes follow, and animated components import the same values from `@ballmac/motion-presets`, so CSS and Motion animations share one rhythm.
+
+See [Motion settings](/docs/reference/motion-settings) for the ranges, and [how motion works](/docs/concepts/motion).

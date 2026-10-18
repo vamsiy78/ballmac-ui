@@ -1,0 +1,56 @@
+---
+title: Turn on right-to-left
+description: Set the page direction and every component, block and template mirrors. Add the direction provider, write RTL-safe code and test it.
+---
+
+## Set the direction
+
+Set `dir` and `lang` on `<html>`, and wrap the app in `DirectionProvider` so the Radix-based components (tabs, sliders, menus, radio groups) know the direction too.
+
+```npm
+npx shadcn@latest add @ballmac/direction
+```
+
+```tsx title="app/layout.tsx"
+import { DirectionProvider } from "@/lib/ballmac/direction"
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ar" dir="rtl">
+      <body>
+        <DirectionProvider dir="rtl">{children}</DirectionProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+Items that need the direction in code (`Tabs`, `Slider`, `Calendar`, `Carousel`, `Sidebar` and others) add it for you. They also read `<html dir>` on their own, so an app that sets only the attribute still works. The provider adds the Radix side.
+
+Give a region its own direction with `<Dir dir="ltr">`.
+
+## Test it
+
+Every component and block preview has a right-to-left toggle in its toolbar. Any preview opens right-to-left with `/preview/<name>?dir=rtl`.
+
+`pnpm rtl:sweep` loads every preview in both directions and reports any whose layout isn't the mirror image of the other, or that overflows only in RTL.
+
+## Write RTL-safe code
+
+The repository checks this on every build (`pnpm check` runs `scripts/rtl.ts`):
+
+- Physical classes are rejected: `ml-` `mr-` `pl-` `pr-` become `ms-` `me-` `ps-` `pe-`; `left-` and `right-` become `start-` and `end-`; `text-left` becomes `text-start`; `border-l` becomes `border-s`; `rounded-l` becomes `rounded-s`. Centering with `left-1/2 -translate-x-1/2` is symmetric and allowed.
+- Directional icons from lucide-react must have an `rtl:` class. `npx tsx scripts/rtl.ts --fix` rewrites the safe cases.
+- Anything that is physical on purpose carries a comment containing `rtl-fixed` and a reason, or is listed in `scripts/rtl-exceptions.json`.
+- A `translate-x` nudge needs its mirror: `group-hover:translate-x-1 rtl:group-hover:-translate-x-1`.
+
+## Know the limits
+
+- Templates mirror, but their sample copy is English and written into the files, so translate it as you would any content.
+- Recharts draws SVG in its own coordinates: axes don't mirror. Pass `reversed` to an axis yourself if your design needs it.
+- The marquee and blur-fade `direction` props are physical. Choose the value you want for your reading direction.
+
+## Related
+
+- [What mirrors, and what doesn't](/docs/concepts/right-to-left)
+- [Translate Ballmac UI](/docs/guides/translate)

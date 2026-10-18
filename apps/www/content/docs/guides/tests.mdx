@@ -1,0 +1,36 @@
+---
+title: Install the tests that ship with components
+description: Add the vitest tests Ballmac runs on a component, keep them updated with it, and run them in your project.
+---
+
+Most free components come with the test we run on them: keyboard use, states and ARIA, written with vitest and Testing Library.
+
+## Add tests when you install
+
+```npm
+npx @ballmac/cli add dialog --with-tests
+```
+
+## Add tests for items you already have
+
+```npm
+npx @ballmac/cli test add button
+```
+
+## Run every Ballmac test
+
+```npm
+npx @ballmac/cli test
+```
+
+## What gets installed
+
+Tests go in `__tests__` next to the components, with one shared `setup.ts`. The tool installs the packages they need at versions known to work together (vitest, jsdom, Testing Library, the React plugin) and, if you have no vitest config yet, creates one with your `@` alias.
+
+Pages for components that have a test say so. A test is yours once installed, and it is updated with the component: your additions are merged like any other file.
+
+## Close the loop with an agent
+
+After an AI agent edits a component, it can run the test and fix what it broke. The MCP tool `get_tests` returns the test for an item.
+
+<Note>Pro blocks are tested in batches rather than one by one, so they don't ship per-item tests yet.</Note>

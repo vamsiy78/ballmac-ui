@@ -1,0 +1,34 @@
+---
+title: "Platform feels"
+description: "What the web, macOS, iOS and Windows feels set: control size, corners, focus ring and window controls."
+generatedFrom: packages/theme-engine/src/feel.ts
+---
+
+A feel is everything about a product except its colors. This page lists what each of the four feels sets. For how they work and their limits, see [How platform feels work](/docs/concepts/platform-feels). To use one, see [Pick a platform feel](/docs/guides/platform-feels).
+
+## What each feel sets [#what-each-feel-sets]
+
+| Feel | Control height | Corners | Focus ring | Window controls |
+| --- | --- | --- | --- | --- |
+| **Web**<br />Neutral, as it is today | 36 px | 10 px | 3px, 50% | None |
+| **macOS**<br />Compact, soft shadows, frosted menus | 28 px | 6 px | 3px, 50% | Left (traffic lights) |
+| **iOS**<br />Big targets, rounded, dims on press | 44 px | 12 px | 3px, 40% | None |
+| **Windows**<br />Square-ish, bordered, crisp 2 px focus | 32 px | 4 px | 2px, 100% | Right (caption buttons) |
+
+## The four feels [#the-four-feels]
+
+### Web [#web]
+
+Ballmac UI's own feel and the default: shadcn proportions, a soft focus halo and Tailwind's shadows. Nothing changes until you pick another feel. Install: `@ballmac/feel-web`.
+
+### macOS [#macos]
+
+Compact 28 px controls, 13 px text, a soft focus halo, hairline-edged shadows and frosted popovers and sidebars. For desktop apps built with Tauri or Electron that should sit comfortably next to native Mac apps. Install: `@ballmac/feel-macos`.
+
+### iOS [#ios]
+
+44 px touch targets, 17 px text, large corners, flat grouped surfaces and a springier motion. Controls dim when pressed and nothing reacts to hover. For mobile web apps and webviews. Install: `@ballmac/feel-ios`.
+
+### Windows [#windows]
+
+4 px corners, 32 px controls, Fluent-style layered shadows, a 2 px solid focus outline and a fast, no-bounce motion. For desktop apps that should sit comfortably next to native Windows apps. Install: `@ballmac/feel-windows`.

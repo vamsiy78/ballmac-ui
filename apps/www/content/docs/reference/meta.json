@@ -1,0 +1,4 @@
+{
+  "title": "Reference",
+  "pages": ["cli", "check-rules", "mcp-tools", "registry", "theme-tokens", "motion-settings", "platform-feels", "building-blocks", "block-states", "messages", "rtl-fixed-items"]
+}

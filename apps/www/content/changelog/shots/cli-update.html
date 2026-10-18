@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ballmac outdated and update</title>
+<style>
+  :root { color-scheme: light dark; --bg: #f4f4f5; --win: #0f1115; --bar: #1a1d24; --fg: #e6e8ee; --dim: #8b93a7; --ok: #5dd39e; --warn: #f2c35b; --bad: #ff7a85; --cmd: #8ab4ff; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #09090b; --win: #12151b; --bar: #1c2029; } }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: radial-gradient(900px 500px at 50% 0%, color-mix(in oklab, var(--cmd) 14%, var(--bg)), var(--bg)); display: grid; place-items: center; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .win { width: 1200px; border-radius: 14px; overflow: hidden; background: var(--win); box-shadow: 0 30px 80px -20px rgb(0 0 0 / .45), 0 0 0 1px rgb(255 255 255 / .08); }
+  .bar { height: 44px; background: var(--bar); display: flex; align-items: center; padding: 0 16px; gap: 8px; }
+  .bar i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+  .bar span { margin-inline: auto; color: var(--dim); font-size: 13px; transform: translateX(-30px); }
+  pre { margin: 0; padding: 24px 28px 30px; color: var(--fg); font-size: 14px; line-height: 1.65; white-space: pre; }
+  .p { color: var(--ok); } .c { color: var(--cmd); } .d { color: var(--dim); } .w { color: var(--warn); } .b { color: var(--bad); }
+</style>
+</head>
+<body>
+<div class="win" role="img" aria-label="A terminal running ballmac outdated, then ballmac update, which merges a new button and keeps the edits">
+  <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>my-app: ballmac</span></div>
+<pre><span class="p">$</span> <span class="c">npx @ballmac/cli outdated</span>
+<span class="d">ITEM    INSTALLED  LATEST  YOUR CHANGES          WHAT CHANGED</span>
+badge   1.0.0      1.1.0   none                  Slightly wider horizontal padding so short labels do not look cramped.
+button  1.0.0      1.1.0   <span class="w">yes (will be merged)</span>  The lg size is taller and larger so it matches the lg input and select.
+dialog  1.0.0      1.1.0   <span class="w">yes (will be merged)</span>  The overlay is a little lighter and uses a standard blur.
+
+<span class="d">3 of 4 behind. Update with: ballmac update  (add --dry-run to preview)</span>
+
+<span class="p">$</span> <span class="c">npx @ballmac/cli update</span>
+button  1.0.0 → 1.1.0
+  <span class="p">merged</span>   src/components/ballmac/button.tsx  <span class="d">your changes kept</span>
+  <span class="p">updated</span>  src/components/ballmac/__tests__/button.test.tsx
+
+dialog  1.0.0 → 1.1.0
+  <span class="b">CONFLICT</span> src/components/ballmac/dialog.tsx  <span class="d">1 conflict(s): search for &lt;&lt;&lt;&lt;&lt;&lt;&lt; and choose</span>
+
+<span class="d">2 item(s) updated. 1 file(s) have conflicts to resolve.</span>
+<span class="d">Originals are in .ballmac/backup/2026-10-11T10-54-02-743Z/</span></pre>
+</div>
+</body>
+</html>

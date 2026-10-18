@@ -1,0 +1,34 @@
+---
+title: How Ballmac UI works
+description: Why Ballmac UI is a registry you install from, not a package, and what that means for ownership, updates and collisions.
+---
+
+Ballmac UI is a standard shadcn registry. The shadcn CLI copies an item's source into your project, so you read it, change it and own it. There is no runtime dependency on Ballmac UI to keep up to date.
+
+## You own the code
+
+Copy-paste libraries give you the code once, and then you are on your own: fix a bug upstream and your copy never gets it, re-add the component and you lose your edits. The [ballmac CLI](/docs/guides/update-components) remembers what it installed and merges new versions into your edited copies, with the item's own change notes beside each version.
+
+## Nothing collides
+
+Everything installs into `components/ballmac`, so it never overwrites your shadcn/ui files. Each item declares the npm packages it imports and the registry items it builds on, such as `@ballmac/motion-presets` or shadcn's `utils`. The CLI installs them for you, and every build checks that declared dependencies match the actual imports. File locations are in the [registry reference](/docs/reference/registry#where-files-go).
+
+## One design language
+
+Primitives, effects, AI interfaces and developer components share tokens, spacing, focus states and motion curves. They follow your theme in light and dark, because they read the standard shadcn CSS variables. See [theme tokens](/docs/reference/theme-tokens).
+
+## Effects with manners
+
+Globes, beams and particles pause off-screen, stop for reduced motion and keep your page accessible. [How motion works](/docs/concepts/motion).
+
+## Updates are never silent
+
+Components are your code once installed, so updates never happen silently. You compare before you overwrite, with `npx shadcn@latest add @ballmac/button --diff`, or let `ballmac update` merge.
+
+## Verified before every release
+
+Each release installs every item into a fresh Next.js app, then type-checks and builds it, and every item is loaded in a real browser with the results [published, including failures](/quality). [What the quality measurement covers](/docs/concepts/quality).
+
+## A registry for your own team
+
+This is the same setup we build for clients: your components, in your brand, installable with one command and available to AI agents over MCP. [Talk to us about it](https://ballmac.com/services?offer=registry&ref=ui-registry#start).

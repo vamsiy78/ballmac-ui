@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 const email = process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "hello@ballmac.com"
 
 const links = [
-  { href: "/docs/installation", label: "Installation guide", note: "Set up the CLI and your first component", icon: BookOpen },
-  { href: "/docs/pro", label: "Pro setup", note: "Licence key, registry and troubleshooting", icon: KeyRound },
+  { href: "/docs/get-started/install", label: "Installation guide", note: "Set up the CLI and your first component", icon: BookOpen },
+  { href: "/docs/guides/pro", label: "Pro setup", note: "Licence key, registry and troubleshooting", icon: KeyRound },
   { href: "https://github.com/vamsiy78/ballmac-ui/issues", label: "Public issues", note: "Open bugs and requests on GitHub", icon: Github },
 ]
 

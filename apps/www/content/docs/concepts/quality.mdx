@@ -1,0 +1,31 @@
+---
+title: What quality measurement covers
+description: How Ballmac UI measures every item in a real browser, what ballmac check does and doesn't tell you, and where the limits are.
+---
+
+Every item in the catalog is measured before it ships, and the results are public on the [quality page](/quality), including failures. `ballmac check` holds your own app to the same bar.
+
+## What it is, and is not
+
+- **Conservative.** A rule reports only when it can see the problem in the code. If a value comes from a variable it can't follow, it stays quiet. A clean result means none of these specific mistakes was found, not that the app is accessible.
+- **Not a replacement for testing.** Automated checks find a subset of problems. Use a keyboard and a screen reader on the real app as well.
+- **Honest about severity.** Errors are things that break for someone, such as an image with no alt or a button with no name. Warnings are likely gaps. You decide what fails the build.
+
+## What each item is measured on
+
+Every item page has a scorecard measured in a real browser: an axe-core accessibility scan in light and dark, no sideways scrolling at 360, 390 and 1280 px, reduced motion, a right-to-left mirror, a clean console, a keyboard pass, states, tests and size.
+
+The measurement is honest about its limits: a loading spinner is kept turning on purpose, WCAG 2.2's 24 px target size is reported as a note rather than a failure, and some items aren't mirrored by design (code, charts, keyboard shortcuts), each with its reason shown.
+
+## Limits of ballmac check
+
+- It reads TypeScript and JSX. Other file types and styles written in separate stylesheets are only partly covered (motion in CSS is).
+- Components from other libraries are treated as able to render what they need. Only plain elements and Ballmac components are judged.
+- Contrast is measured only by `--url` (axe), because it depends on the final rendered colors.
+
+Found a false positive? [Tell us](/support) and include the line.
+
+## Related
+
+- [Check your own app](/docs/guides/check-your-app)
+- [Every rule](/docs/reference/check-rules)

@@ -1,0 +1,51 @@
+---
+title: Use your own images
+description: Every hero, feature, card and template ships with generated artwork. Pass an image and it replaces the artwork, with the shape, loading and alt text handled.
+---
+
+## Pass one prop
+
+```tsx title="app/page.tsx"
+import { Hero1 } from "@/components/ballmac/blocks/hero-1"
+
+<Hero1
+  media={{ src: "/shots/dashboard.png", srcDark: "/shots/dashboard-dark.png", alt: "The dashboard with this week's revenue chart" }}
+/>
+```
+
+The prop is called `media` on blocks with one big picture, and `image` on items in a list (a post, a speaker, a project). It accepts a URL, an object with the alt text, or your own element such as a `next/image` or a video.
+
+```tsx
+<Hero1 media="/shots/dashboard.png" mediaAlt="The dashboard" />          // URL plus alt
+<Hero1 media={{ src, srcDark, alt, width, height, position: "top" }} />  // full control
+<Hero1 media={<Image src={shot} alt="The dashboard" priority fill />} />  // your own element
+```
+
+## What you get
+
+- **Alt text is required.** In development a missing `alt` logs a warning. Use `alt=""` only for decoration.
+- **No layout jump.** Each slot reserves a fixed aspect ratio before the file arrives.
+- **Lazy by default.** Slots above the fold (hero) load right away with high priority.
+- **Dark mode.** `srcDark` swaps the file when an ancestor has the `dark` class.
+- **Never broken.** If the file is missing or fails to load, the built-in artwork shows instead of a broken icon.
+- **Right-to-left safe.** Nothing here depends on reading direction.
+
+## Use the Media component directly
+
+Everything above is one component, `Media`, which you can use in your own layouts.
+
+```npm
+npx shadcn@latest add @ballmac/media
+```
+
+```tsx
+import { Media } from "@/components/ballmac/media"
+
+<Media media="/team.jpg" alt="The team at the 2026 offsite" aspect="video" frame priority />
+```
+
+`aspect` takes `square`, `video`, `photo`, `wide`, `portrait`, `cinema` or a ratio like `"3/2"`. `fit` is `cover`, `contain` or `fill`. All props are in the [building blocks reference](/docs/reference/building-blocks).
+
+## Where it works
+
+Hero, feature and newsletter blocks, login and download screens, blog and changelog cards, the team grid, the device frames (phone, tablet, laptop, browser, watch, Android), the lock screen, control center, bento grid and team switcher, and the portfolio, studio, publication, podcast and goods templates. Each block page lists its image props.

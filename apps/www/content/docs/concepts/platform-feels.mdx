@@ -1,0 +1,51 @@
+---
+title: How platform feels work
+description: A feel is everything about a product except its colors. Pick macOS, iOS, Windows or the neutral web feel and every component follows.
+---
+
+A feel is the sizes, corners, focus ring, shadows, menus, sidebars, window controls and motion of a product, everything except its colors. It works on top of any color theme, so Ocean with the Windows feel is a valid combination.
+
+Try the four side by side in the [theme builder](/themes#feels), or see one app in all of them on the [platform feels showcase](/feels).
+
+<Warning title="Web components, not native controls">
+These are web components that feel like each platform. Ballmac UI is not affiliated with Apple or Microsoft. The feels are original work informed by open-source design tokens and by measuring the platforms.
+</Warning>
+
+## The four feels
+
+Web is the default and changes nothing. macOS, iOS and Windows each set their own control sizes, corners, focus ring and window controls. The values are listed in the [platform feels reference](/docs/reference/platform-feels).
+
+## What follows automatically
+
+- **Shadows and text sizes.** Tailwind's `shadow-xs` to `shadow-2xl` and `text-xs`, `text-sm`, `text-base` are rewritten, so every component and your own classes follow.
+- **Radius and density.** The usual `--radius` and `--spacing`, set by the feel.
+- **The focus ring.** One rule restyles every component that uses shadcn's standard `focus-visible:ring-[3px]`, which includes shadcn's own components. A few Ballmac items draw their own ring and keep it.
+- **Controls, menus and sidebars.** Button, Input, Select and Tabs heights, menu rows and corners, sidebar rows (including the Windows accent pill), frosted popovers and sidebars, press dimming on iOS, and scrollbars.
+- **Motion.** Each feel brings a [motion](/docs/concepts/motion) personality that suits it.
+
+Tokens are plain CSS variables, so you can change any of them:
+
+```css
+:root {
+  --bm-control-h: 2rem;        /* button and input height */
+  --bm-focus-width: 2px;       /* focus ring */
+  --bm-focus-alpha: 100%;
+  --bm-shadow-sm: 0 1px 2px rgb(0 0 0 / .12);
+  --bm-menu-item-h: 2rem;      /* menu rows */
+  --bm-sidebar-item-h: 2.5rem; /* sidebar rows */
+  --bm-sidebar-indicator: 3px; /* the accent pill on the selected row */
+  --bm-material-blur: 30px;    /* frosted menus and sidebars */
+  --bm-press-dim: 0.6;         /* opacity of a pressed button */
+}
+```
+
+## Know the limits
+
+- Windows 11's snap layouts (hovering the maximize button) belong to native caption buttons. If you need them, use Electron's `titleBarOverlay` and pass `controls={false}` to the title bar.
+- On macOS, drawn traffic lights don't get the system's window-tiling menu. Keep the native frame (`titleBarStyle: "hidden"` in Electron) if you rely on it.
+- Most of the [Desktop collection](/components) is Mac-only by nature (Dock, Menu Bar, Spotlight, Launchpad, Dynamic Island, Control Center) and stays that way. `app-window`, the sidebar, menus and the form controls are the parts every platform shares.
+
+## Next steps
+
+- [Pick a platform feel](/docs/guides/platform-feels) for your app.
+- [Ship a desktop app](/docs/guides/desktop-app) with Tauri or Electron.

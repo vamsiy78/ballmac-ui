@@ -1,0 +1,113 @@
+---
+title: Ship a desktop app
+description: Draw your own window chrome in a Tauri v2 or Electron app with app-window, wired to the real window actions.
+---
+
+`app-window` is the window chrome of a real app: a title bar that drags the window, maximizes on double-click, and carries the controls the platform draws. It has no Tauri or Electron dependency. You pass the actions in.
+
+```npm
+npx shadcn@latest add @ballmac/app-window @ballmac/feel-auto
+```
+
+## Use it in Tauri v2
+
+### Turn off the native frame
+
+```json title="src-tauri/tauri.conf.json"
+{
+  "app": {
+    "windows": [{ "title": "Notes", "decorations": false }]
+  }
+}
+```
+
+### Allow the window actions
+
+```json title="src-tauri/capabilities/default.json"
+{
+  "identifier": "default",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-close",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-is-maximized",
+    "core:window:allow-set-fullscreen",
+    "core:window:allow-start-dragging"
+  ]
+}
+```
+
+### Wire the buttons
+
+```tsx title="src/App.tsx"
+import { getCurrentWindow } from "@tauri-apps/api/window"
+import { AppWindow, AppWindowContent, AppWindowTitleBar } from "@/components/ballmac/app-window"
+
+const win = getCurrentWindow()
+
+export default function App() {
+  const [maximized, setMaximized] = useState(false)
+  useEffect(() => {
+    win.isMaximized().then(setMaximized)
+    const unlisten = win.onResized(() => win.isMaximized().then(setMaximized))
+    return () => void unlisten.then((f) => f())
+  }, [])
+
+  return (
+    <AppWindow
+      className="h-screen rounded-none border-0"
+      maximized={maximized}
+      onClose={() => win.close()}
+      onMinimize={() => win.minimize()}
+      onMaximize={() => win.toggleMaximize()}
+      onFullscreen={async () => win.setFullscreen(!(await win.isFullscreen()))}
+    >
+      <AppWindowTitleBar title="Notes" />
+      <AppWindowContent>…</AppWindowContent>
+    </AppWindow>
+  )
+}
+```
+
+## Use it in Electron
+
+Create the window without a frame and handle the actions in the main process:
+
+```ts title="main.ts"
+const win = new BrowserWindow({ frame: false, webPreferences: { preload: join(__dirname, "preload.js") } })
+
+ipcMain.on("window", (event, action: "close" | "minimize" | "maximize") => {
+  const w = BrowserWindow.fromWebContents(event.sender)
+  if (!w) return
+  if (action === "maximize") w.isMaximized() ? w.unmaximize() : w.maximize()
+  else w[action]()
+})
+```
+
+Expose a small bridge in the preload script:
+
+```ts title="preload.ts"
+contextBridge.exposeInMainWorld("windowControls", {
+  send: (action: "close" | "minimize" | "maximize") => ipcRenderer.send("window", action),
+})
+```
+
+Pass the actions to the window in the renderer:
+
+```tsx title="renderer"
+<AppWindow
+  onClose={() => window.windowControls.send("close")}
+  onMinimize={() => window.windowControls.send("minimize")}
+  onMaximize={() => window.windowControls.send("maximize")}
+/>
+```
+
+The title bar sets both `data-tauri-drag-region` and `-webkit-app-region: drag`, and the toolbar inside it is marked no-drag, so buttons stay clickable.
+
+<Note>Windows 11's snap layouts and the macOS window-tiling menu belong to native controls. See [the limits of platform feels](/docs/concepts/platform-feels#know-the-limits).</Note>
+
+## Start from the desktop blocks
+
+The free [desktop blocks](/blocks) (preferences, menu bar and tray, software update, licence activation, permissions setup, About, welcome window and shortcuts editor) draw real window chrome with `app-window` and handle like macOS or Windows from the page's feel. The AI notes on the software update block show how to wire `tauri-plugin-updater` and `electron-updater`.

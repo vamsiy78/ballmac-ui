@@ -16,11 +16,11 @@ function Item({ item, active, activeRef }: { item: NavLink; active: boolean; act
         href={item.href}
         aria-current={active ? "page" : undefined}
         className={cn(
-          "flex items-center gap-2 rounded-md px-2 py-1.5 transition-colors",
+          "flex items-start gap-2 rounded-md px-2 py-1.5 transition-colors",
           active ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
         )}
       >
-        <span className="truncate">{item.label}</span>
+        <span className="min-w-0 leading-snug">{item.label}</span>
         {item.badge === "new" && <span className="bg-chart-1 ml-auto size-1.5 shrink-0 rounded-full" role="img" aria-label="New" />}
       </Link>
     </li>

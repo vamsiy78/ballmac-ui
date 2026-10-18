@@ -1,10 +1,10 @@
-import { docsNav } from "@/components/site/docs-nav"
+import { browseNav, docsGroups } from "@/components/site/docs-nav"
 import { DocsSidebar } from "@/components/site/docs-sidebar"
 import { SidebarScroll } from "@/components/site/sidebar-scroll"
 import { componentGroups, type NavGroup } from "@/lib/registry"
 
 export function sidebarGroups(): NavGroup[] {
-  return [...docsNav.map((g) => ({ title: g.title, items: g.items.map((i) => ({ ...i })) })), ...componentGroups()]
+  return [...docsGroups(), { ...browseNav, items: browseNav.items.map((i) => ({ ...i })) }, ...componentGroups()]
 }
 
 /** Docs and component pages: sticky sidebar with every doc and component, then the page. */

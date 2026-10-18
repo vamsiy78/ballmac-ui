@@ -1,0 +1,81 @@
+---
+title: Handle loading, empty and error states
+description: Drive a data block or a form block from your own fetching with the state prop, and wrap your own views in StateView.
+---
+
+## Show a data block while it loads
+
+Lists, boards, dashboards, calendars and chats take `state`, `onRetry`, `emptyState` and `errorState`. `useResource` turns a fetch into the state to pass:
+
+```tsx title="app/inbox.tsx"
+import { Mail1 } from "@/components/ballmac/blocks/mail-1/mail-1"
+import { useResource } from "@/lib/ballmac/use-resource"
+
+export function Inbox() {
+  const mail = useResource((signal) => fetch("/api/mail", { signal }).then((r) => r.json()))
+  return (
+    <Mail1
+      state={mail.state} // "loading" | "ready" | "empty" | "error"
+      messages={mail.data}
+      onRetry={mail.retry}
+      emptyState={{ title: "Inbox zero", description: "Nothing new. Enjoy it." }}
+      errorState={{ description: "Mail is taking a break. Your messages are safe." }}
+    />
+  )
+}
+```
+
+`useResource` aborts a request that is replaced or unmounted, never lets a slow old answer overwrite a newer one, and goes round again on `retry()`.
+
+## Use TanStack Query or SWR instead
+
+If you already use TanStack Query or SWR, map their result:
+
+```tsx
+import { stateOf } from "@/lib/ballmac/use-resource"
+
+const query = useQuery({ queryKey: ["mail"], queryFn: fetchMail })
+<Mail1 state={stateOf(query)} messages={query.data} onRetry={query.refetch} />
+```
+
+## Drive a form block
+
+Sign-in, sign-up, contact, newsletter, settings and the rest already run their own submit flow. `state` lets you drive it from your own async code, or show one stage on its own: `submitting` locks the fields, `success` shows the confirmation, `error` shows the failure. `errorState.description` sets the message.
+
+```tsx
+const [phase, setPhase] = useState<"ready" | "submitting" | "success" | "error">("ready")
+
+<Signup1
+  state={phase}
+  errorState={{ description: "That email is already registered." }}
+  onSubmit={async (values) => {
+    setPhase("submitting")
+    try { await createAccount(values); setPhase("success") } catch { setPhase("error") }
+  }}
+/>
+```
+
+Leave `state` out and the form decides by itself, as before. Several forms also take `defaultValues` or `defaultEmail` to prefill.
+
+## Wrap your own view
+
+`StateView` is the part the blocks are built on. Wrap anything that loads:
+
+```tsx
+<StateView
+  state={invoices.state}
+  loading={<InvoiceSkeleton />} // the same shape as the real list
+  empty={{ title: "No invoices", action: <Button>Create one</Button> }}
+  error={{ title: "Invoices are unavailable", details: String(invoices.error) }}
+  onRetry={invoices.retry}
+>
+  <InvoiceList items={invoices.data} />
+</StateView>
+```
+
+The props of `StateView` and `useResource` are in the [building blocks reference](/docs/reference/building-blocks).
+
+## Related
+
+- [Why every block has states](/docs/concepts/states)
+- [Which blocks show states](/docs/reference/block-states)

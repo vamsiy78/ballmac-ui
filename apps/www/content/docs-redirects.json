@@ -1,0 +1,15 @@
+{
+  "/docs/installation": "/docs/get-started/install",
+  "/docs/theming": "/docs/get-started/make-it-yours",
+  "/docs/mcp": "/docs/get-started/connect-your-agent",
+  "/docs/cli": "/docs/guides/update-components",
+  "/docs/check": "/docs/reference/check-rules",
+  "/docs/states": "/docs/guides/states",
+  "/docs/motion": "/docs/concepts/motion",
+  "/docs/feels": "/docs/concepts/platform-feels",
+  "/docs/registry": "/docs/reference/registry",
+  "/docs/rtl": "/docs/guides/right-to-left",
+  "/docs/i18n": "/docs/guides/translate",
+  "/docs/images": "/docs/guides/images",
+  "/docs/pro": "/docs/guides/pro"
+}

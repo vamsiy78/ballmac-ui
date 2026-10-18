@@ -1,0 +1,81 @@
+---
+title: Install your first component
+description: Add Ballmac UI to a React and Tailwind v4 project and import your first component. It takes about a minute.
+---
+
+By the end of this page you have a Ballmac component running in your project.
+
+<Steps>
+
+### Set up shadcn
+
+Skip this step if your project already has a `components.json`. Ballmac UI needs React 19 and Tailwind CSS v4.
+
+```npm
+npx shadcn@latest init
+```
+
+### Add components
+
+`@ballmac` is listed in the official shadcn registry directory, so the CLI already knows it. There is nothing to configure.
+
+```npm
+npx shadcn@latest add @ballmac/button @ballmac/number-ticker
+```
+
+Files go to `components/ballmac/`, and the CLI installs the npm packages they need.
+
+### Import and use it
+
+```tsx title="app/page.tsx"
+import { Button } from "@/components/ballmac/button"
+
+export default function Page() {
+  return <Button>Get started</Button>
+}
+```
+
+</Steps>
+
+## Add the Ballmac theme
+
+Every component uses the standard shadcn CSS variables, so it follows your existing theme. To match the Ballmac look (neutral light mode, ink-navy dark mode, blue focus ring), add the theme:
+
+```npm
+npx shadcn@latest add @ballmac/theme
+```
+
+## If the CLI doesn't know @ballmac
+
+Recent versions of the shadcn CLI resolve `@ballmac` on their own. If yours doesn't, or you want to pin the address for a mirror or a preview deployment, add the registry once per project:
+
+```npm
+npx shadcn@latest registry add @ballmac=https://ui.ballmac.com/r/{name}.json
+```
+
+It adds this to your `components.json`:
+
+```json title="components.json"
+{
+  "registries": {
+    "@ballmac": "https://ui.ballmac.com/r/{name}.json"
+  }
+}
+```
+
+<Note>The shadcn MCP server only reads `components.json`, so it needs this entry too.</Note>
+
+You can also install straight from a URL:
+
+```npm
+npx shadcn@latest add https://ui.ballmac.com/r/button.json
+```
+
+## Next steps
+
+<Cards>
+  <Card href="/docs/get-started/connect-your-agent" title="Connect your AI agent">Let Claude Code, Cursor or VS Code search and install for you.</Card>
+  <Card href="/docs/get-started/make-it-yours" title="Make it yours">Apply a theme and set your brand color.</Card>
+  <Card href="/docs/guides/update-components" title="Update components">Merge new versions without losing your edits.</Card>
+  <Card href="/docs/reference/registry" title="Registry reference">Addresses, file locations and the JSON format.</Card>
+</Cards>

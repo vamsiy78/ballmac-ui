@@ -1,0 +1,69 @@
+---
+title: Connect your AI agent
+description: Connect Claude Code, Cursor, VS Code, Windsurf or Codex to Ballmac UI with the @ballmac/mcp server. No account or key needed.
+---
+
+By the end of this page your AI assistant can search Ballmac UI, read props and examples, and give you install commands.
+
+`@ballmac/mcp` knows the whole catalog, including blocks and multi-page templates, and can plan a page from blocks. It is read-only and needs no account. It needs Node.js 20 or later.
+
+<Steps>
+
+### Add the server to your client
+
+Pick your client.
+
+```bash title="Claude Code"
+claude mcp add ballmac -- npx -y @ballmac/mcp
+```
+
+```json title="Cursor (.cursor/mcp.json), Claude Desktop, Windsurf"
+{
+  "mcpServers": {
+    "ballmac": {
+      "command": "npx",
+      "args": ["-y", "@ballmac/mcp"]
+    }
+  }
+}
+```
+
+```json title="VS Code (.vscode/mcp.json)"
+{
+  "servers": {
+    "ballmac": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@ballmac/mcp"]
+    }
+  }
+}
+```
+
+```toml title="Codex (~/.codex/config.toml)"
+[mcp_servers.ballmac]
+command = "npx"
+args = ["-y", "@ballmac/mcp"]
+```
+
+### Ask for something
+
+Try one of these:
+
+- "Show me the Ballmac UI components for AI chat interfaces"
+- "Add @ballmac/prompt-input and @ballmac/ai-message and build a chat panel with them"
+- "Which Ballmac UI component should I use for an animated stat, and how do I install it?"
+- "Build a pricing section using Ballmac UI blocks"
+- "Is there a Ballmac template for an online store? Install it"
+
+### Ask it to check its work
+
+Tell your agent: "before you finish, run `audit_project` and fix every error." The tool reads your source, read-only, and returns findings worst first, each with its fix. The rules are in the [check rules reference](/docs/reference/check-rules).
+
+</Steps>
+
+## Next steps
+
+- See every tool, resource and prompt in the [MCP tools reference](/docs/reference/mcp-tools).
+- Give the server your licence key to read Pro items: [Set up Pro](/docs/guides/pro#use-pro-with-the-mcp-server).
+- Prefer the official server? [Use the shadcn MCP server](/docs/guides/shadcn-mcp).

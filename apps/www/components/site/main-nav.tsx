@@ -11,7 +11,7 @@ const nav = [
   { href: "/blocks", label: "Blocks", match: ["/blocks"] },
   { href: "/templates", label: "Templates", match: ["/templates"] },
   { href: "/themes", label: "Themes", match: ["/themes"] },
-  { href: "/docs/mcp", label: "MCP", match: [] },
+  { href: "/docs/get-started/connect-your-agent", label: "MCP", match: [] },
   { href: "/pricing", label: "Pricing", match: ["/pricing"] },
 ]
 
@@ -21,7 +21,7 @@ export function MainNav() {
   return (
     <nav aria-label="Main" className="hidden items-center gap-0.5 md:flex">
       {nav.map((n) => {
-        const active = pathname === n.href || n.match.some((m) => pathname.startsWith(m) && !(m === "/docs" && pathname === "/docs/mcp"))
+        const active = pathname === n.href || n.match.some((m) => pathname.startsWith(m) && !(m === "/docs" && pathname === "/docs/get-started/connect-your-agent"))
         return (
           <Link
             key={n.href}

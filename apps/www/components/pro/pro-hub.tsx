@@ -200,10 +200,10 @@ function Library({ licenseKey, downloads, sampleItem, licenseUrl, children }: Pr
             <Link href="/blocks" className={buttonVariants({ size: "sm" })}>
               Browse Pro blocks <ArrowUpRight className="size-3.5" aria-hidden="true" />
             </Link>
-            <Link href="/docs/pro" className={buttonVariants({ size: "sm", variant: "outline" })}>
+            <Link href="/docs/guides/pro" className={buttonVariants({ size: "sm", variant: "outline" })}>
               Setup guide
             </Link>
-            <Link href="/docs/mcp" className={buttonVariants({ size: "sm", variant: "outline" })}>
+            <Link href="/docs/get-started/connect-your-agent" className={buttonVariants({ size: "sm", variant: "outline" })}>
               MCP server
             </Link>
             <Link href="/support?topic=help" className={buttonVariants({ size: "sm", variant: "ghost" })}>

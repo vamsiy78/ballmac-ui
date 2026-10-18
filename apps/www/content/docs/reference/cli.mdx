@@ -1,0 +1,93 @@
+---
+title: "CLI commands"
+description: "Every ballmac command and option, generated from the CLI's own help text."
+generatedFrom: packages/cli/src/index.ts
+---
+
+Run `ballmac` through `npx @ballmac/cli`. This page lists every command and option the tool prints in `ballmac --help`.
+
+```npm
+npx @ballmac/cli <command> [options]
+```
+
+## `ballmac add <item…>` [#add]
+
+Install items with shadcn and start tracking them
+
+| Option | What it does |
+| --- | --- |
+| `--with-tests` | also install the tests that ship with the items |
+| `--no-install` | do not install the test packages (print them instead) |
+
+## `ballmac outdated [item…]` [#outdated]
+
+Which tracked items have a newer version, and what changed
+
+| Option | What it does |
+| --- | --- |
+| `--json` | machine-readable output |
+| `--exit-code` | exit 1 when something is behind (for CI) |
+
+## `ballmac update [item…]` [#update]
+
+Merge new versions into your copies (your edits are kept)
+
+| Option | What it does |
+| --- | --- |
+| `--dry-run` | show what would change and write nothing |
+
+## `ballmac diff <item>` [#diff]
+
+What you changed since you installed an item
+
+## `ballmac track [item…]` [#track]
+
+Start tracking items you installed with plain shadcn
+
+| Option | What it does |
+| --- | --- |
+| `--rebase` | declare your files up to date with the latest version |
+
+## `ballmac check [path…]` [#check]
+
+Audit your app for what agents and people get wrong: missing states, unlabelled controls, fixed colours, endless motion, overflow on phones
+
+| Option | What it does |
+| --- | --- |
+| `--rules` | list the rules and exit |
+| `--format <f>` | pretty (default), json or github (annotations for CI) |
+| `--fail-on <level>` | error (default), warn or never: when to exit with 1 |
+| `--all` | show every finding, not the first few per rule |
+| `--offline` | do not read the Ballmac catalogue |
+| `--include-library` | also audit components/ui and components/ballmac |
+| `--url <address>` | also load a running app in a real browser (axe, overflow, console) |
+| `--routes <a,b>` | routes to load with --url (default /) |
+
+## `ballmac test [item…]` [#test]
+
+Run the Ballmac tests installed in this project
+
+## `ballmac test add <item…>` [#test-add]
+
+Install the tests for items that are already installed
+
+## Global options [#global-options]
+
+| Option | What it does |
+| --- | --- |
+| `--cwd <dir>` | Project folder (default: the current folder) |
+| `-v, --version` | Print the version |
+| `-h, --help` | Print this help |
+
+## Environment variables [#environment]
+
+| Variable | What it does |
+| --- | --- |
+| `BALLMAC_UI_URL` | Registry to read (default https://ui.ballmac.com) |
+| `BALLMAC_LICENSE_KEY` | Your Ballmac UI Pro key (env or .env.local); needed for Pro items |
+| `BALLMAC_SHADCN` | How to run shadcn, e.g. "pnpm dlx shadcn@latest" (default: your local copy, else the package manager's runner) |
+
+## Related
+
+- [Update components without losing your edits](/docs/guides/update-components)
+- [Check your own app](/docs/guides/check-your-app)

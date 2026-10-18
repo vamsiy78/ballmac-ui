@@ -29,7 +29,7 @@ export function createProGate({
     const key = await keyFromHeaders(req.headers)
     if (!key) {
       return Response.json(
-        { error: "license_required", message: missing ?? `Ballmac UI Pro items need a licence key. Set BALLMAC_LICENSE_KEY and add the @ballmac-pro registry: ${siteUrl}/docs/pro` },
+        { error: "license_required", message: missing ?? `Ballmac UI Pro items need a licence key. Set BALLMAC_LICENSE_KEY and add the @ballmac-pro registry: ${siteUrl}/docs/guides/pro` },
         { status: 401, headers: { ...proHeaders, "www-authenticate": 'Bearer realm="Ballmac UI Pro"' } }
       )
     }
@@ -45,7 +45,7 @@ export function createProGate({
     }
     if (!check.valid) {
       limiter.fail(id)
-      return Response.json({ error: "license_invalid", message: `${check.reason ?? "This licence key is not valid."} Manage your licence at ${siteUrl}/docs/pro` }, { status: 403, headers: proHeaders })
+      return Response.json({ error: "license_invalid", message: `${check.reason ?? "This licence key is not valid."} Manage your licence at ${siteUrl}/docs/guides/pro` }, { status: 403, headers: proHeaders })
     }
     return null
   }

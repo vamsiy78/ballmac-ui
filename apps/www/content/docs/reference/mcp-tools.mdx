@@ -1,0 +1,142 @@
+---
+title: "MCP tools"
+description: "Every tool, resource and prompt of the @ballmac/mcp server, read from the running server."
+generatedFrom: packages/mcp/src/index.ts
+---
+
+`@ballmac/mcp` is read-only: it answers questions and returns install commands, and never writes files or runs commands. To connect it, see [Connect your AI agent](/docs/get-started/connect-your-agent).
+
+## Tools [#tools]
+
+12 tools.
+
+### list_items [#list_items]
+
+List components, blocks or templates, optionally filtered by kind, category (a component category such as primitives, motion or ai; a block section such as hero or pricing; or a template kind such as marketing) or tier. Call list_categories for the valid names.
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `kind` | `"component" \| "block" \| "template"` | No |
+| `category` | `string` | No |
+| `tier` | `"free" \| "pro"` | No |
+
+### list_categories [#list_categories]
+
+How many components, blocks and templates there are, and the categories each is grouped into, with counts. Use the names as the category filter of list_items.
+
+Takes no input.
+
+### search_items [#search_items]
+
+Search by what the user needs (for example 'chat input with attachments', 'animated stat', 'pricing section', 'online store'). Understands common synonyms such as modal, navbar or ecommerce. Returns the best matches with when-to-use guidance.
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `query` | `string` | Yes |
+| `kind` | `"component" \| "block" \| "template"` | No |
+| `limit` | `integer` (1 to 30) | No |
+
+### get_item [#get_item]
+
+Everything about one item: description, when to use and not, import line, props, keyboard behaviour, dependencies, composition hints, template pages and the full source (for Pro items only when the server has BALLMAC_LICENSE_KEY; see the `licence` field). Set includeSource to false for a shorter answer.
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `name` | `string` | Yes |
+| `includeSource` | `boolean` | No |
+
+### get_examples [#get_examples]
+
+Working example code for an item (the same examples shown on its page).
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `name` | `string` | Yes |
+
+### get_changes [#get_changes]
+
+The changelog of an item: what changed in each version, newest first, and whether anything is breaking. Pass `since` (the version the user has, for example from ballmac.lock.json) to see only newer changes. Use it before updating an installed item; `npx @ballmac/cli outdated` lists which installed items are behind and `npx @ballmac/cli update` merges new versions into the user's edited copies.
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `name` | `string` | Yes |
+| `since` | `string` | No |
+
+### get_tests [#get_tests]
+
+The vitest + Testing Library test file that ships with an item (keyboard use, states, ARIA). Use it to check an item still works after you or the user changed it. `npx @ballmac/cli add <name> --with-tests` installs it next to the component with the packages and config it needs, and `npx @ballmac/cli test` runs it. Returns shipped:false when the item has no test of its own.
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `name` | `string` | Yes |
+
+### get_quality_rules [#get_quality_rules]
+
+The rules `audit_project` checks, with why each matters, how to fix it and a bad and a good example: missing loading, empty and error states, unlabelled controls, removed focus outlines, fixed colours instead of theme tokens, endless motion, layouts that overflow a phone. Read it BEFORE writing UI so the first draft already follows them. It needs no project and no network.
+
+Takes no input.
+
+### audit_project [#audit_project]
+
+Read the project's React source (it never writes or runs anything) and report what people and assistive technology trip over: components that can show loading, empty and error states but are used without a state prop, data fetched with no loading or error handling, icon-only buttons with no name, click handlers on divs, removed focus outlines, images without alt, unlabelled fields, hand-built modals, fixed colours instead of theme tokens, endless animations that ignore reduced motion, and fixed widths wider than a phone. Call it when you finish writing UI, fix every error, and call it again until it is clean. `path` is the project folder (default: the folder this server was started in); it must contain a package.json. Findings come worst first, each with the line and the fix.
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `path` | `string` | No |
+| `paths` | `string[]` | No |
+| `minSeverity` | `"error" \| "warn" \| "info"` | No |
+| `limit` | `integer` (1 to 200) | No |
+| `includeLibrary` | `boolean` | No |
+
+### get_install_command [#get_install_command]
+
+The shadcn CLI commands to add one or more items to the user's project. `setup` is optional: a current shadcn CLI resolves @ballmac without it, so run it only for an older CLI. Then run `add`. `byUrl` works without setup for free items. Pro items install as @ballmac-pro/\<name> and need `proSetup` once.
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `names` | `string[]` | Yes |
+| `packageManager` | `"pnpm" \| "npm" \| "yarn" \| "bun"` | No |
+
+### compose_page [#compose_page]
+
+Plan a page from Ballmac UI blocks for an intent such as 'SaaS landing page with pricing and FAQ' or 'login screen'. Returns the chosen blocks in page order, install commands, a page.tsx scaffold that renders them, and any complete templates that already fit the intent. When the request names macOS, Windows, iOS, Tauri or Electron (or you pass feel), it also returns the platform feel to install so the whole app handles like that platform.
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `intent` | `string` | Yes |
+| `packageManager` | `"pnpm" \| "npm" \| "yarn" \| "bun"` | No |
+| `includePro` | `boolean` | No |
+| `feel` | `"web" \| "macos" \| "ios" \| "windows"` | No |
+
+### get_setup [#get_setup]
+
+How to prepare a project for Ballmac UI (shadcn init, optional theme, and the registry entry older CLIs need) and its requirements.
+
+| Input | Type | Required |
+| --- | --- | --- |
+| `packageManager` | `"pnpm" \| "npm" \| "yarn" \| "bun"` | No |
+
+## Resources [#resources]
+
+- `ballmac://catalog`: Every component, block and template with a one-line description.
+- `ballmac://items/{name}`: One item as Markdown: install, import, props, keyboard behaviour and when to use it.
+
+## Prompts [#prompts]
+
+- `build_page`: Plan and build a page from Ballmac UI blocks, or start from a template that fits. Arguments: `intent`.
+- `choose_component`: Find the right component for a need and wire it up correctly. Arguments: `need`.
+
+## Environment variables [#environment]
+
+Both are environment variables of the server. Neither is needed for the free catalog.
+
+| Variable | What it does |
+| --- | --- |
+| `BALLMAC_UI_URL` | The catalog to read. Default `https://ui.ballmac.com`. Set it to read a local copy of the site. |
+| `BALLMAC_LICENSE_KEY` | Your Ballmac UI Pro licence key. With it, `get_item` and `get_examples` also return the source of Pro items. The key is only sent to the Ballmac UI site. |
+
+`npx @ballmac/mcp --help` and `--version` work from a terminal.
+
+## Pro items [#pro-items]
+
+Pro items show up in search with `tier: "pro"` and install from the `@ballmac-pro` namespace. Without a key the agent still sees their description, props and install command, but not the source. See [Set up Ballmac UI Pro](/docs/guides/pro#use-pro-with-the-mcp-server).

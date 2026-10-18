@@ -2,6 +2,8 @@ import "server-only"
 
 import { PRESETS } from "@ballmac-ui/theme-engine"
 
+import { getChangelog } from "@/lib/changelog"
+import { docSearchEntries } from "@/lib/docs"
 import { blockCategoryLabels, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
 
 export type MenuEntry = { name: string; title: string; description: string; group: string; href: string }
@@ -18,22 +20,11 @@ export function searchEntries(): MenuEntry[] {
     })),
     ...getBlocks().map((b) => ({ name: b.name, title: b.title, description: b.description, group: `Blocks · ${blockCategoryLabels[b.blockCategory ?? ""] ?? ""}`, href: `/blocks/${b.name}` })),
     ...getTemplates().map((t) => ({ name: t.name, title: t.title, description: t.description, group: "Templates", href: `/templates/${t.name}` })),
-    { name: "themes", title: "Theme builder", description: "Twelve free themes and a live builder with contrast checks and a motion lab.", group: "Docs", href: "/themes" },
+    { name: "themes", title: "Theme builder", description: "Twelve free themes and a live builder with contrast checks and a motion lab.", group: "Themes", href: "/themes" },
     ...PRESETS.map((p) => ({ name: `theme-${p.slug}`, title: `${p.title} theme`, description: p.tagline, group: "Themes", href: `/themes/${p.slug}` })),
-    { name: "rtl", title: "Right-to-left", description: "Mirror the whole UI for Arabic, Hebrew, Persian and Urdu.", group: "Docs", href: "/docs/rtl" },
-    { name: "i18n", title: "Translations", description: "Translate every built-in string and set the locale.", group: "Docs", href: "/docs/i18n" },
-    { name: "images", title: "Your own images", description: "Drop product images into blocks and templates with one prop.", group: "Docs", href: "/docs/images" },
-    { name: "introduction", title: "Introduction", description: "What Ballmac UI is and how it works.", group: "Docs", href: "/docs" },
-    { name: "registry", title: "CLI & registry", description: "Namespaces, URLs, search, view and updates.", group: "Docs", href: "/docs/registry" },
-    { name: "theming", title: "Theming", description: "Tokens, brand color and dark mode.", group: "Docs", href: "/docs/theming" },
-    { name: "motion", title: "Motion", description: "Speed, bounce, travel, hover and stagger as part of the theme, with reduced-motion support.", group: "Docs", href: "/docs/motion" },
     { name: "feels-showcase", title: "Platform feels showcase", description: "One app in macOS, iOS, Windows and web feels, live.", group: "Docs", href: "/feels" },
-    { name: "states", title: "States", description: "Loading, empty, error, submitting and success for every data and form block, through one state prop.", group: "Docs", href: "/docs/states" },
-    { name: "feels", title: "Platform feels", description: "Make every component handle like macOS, iOS or Windows, for Tauri and Electron apps and the web.", group: "Docs", href: "/docs/feels" },
-    { name: "installation", title: "Installation", description: "Set up a project and add your first component.", group: "Docs", href: "/docs/installation" },
-    { name: "cli", title: "Updates & tests", description: "Update components without losing your edits, and install the tests that ship with them.", group: "Docs", href: "/docs/cli" },
-    { name: "check", title: "Quality check", description: "Audit your own app for missing states, accessibility gaps and layout problems, and gate AI agents on it.", group: "Docs", href: "/docs/check" },
     { name: "quality", title: "Quality, measured", description: "Every item loaded in a real browser, with the results published.", group: "Docs", href: "/quality" },
-    { name: "mcp", title: "MCP", description: "Let Claude Code, Cursor or VS Code install Ballmac UI for you.", group: "Docs", href: "/docs/mcp" },
+    ...docSearchEntries(),
+    ...getChangelog().map((e) => ({ name: `changelog-${e.slug}`, title: e.title, description: e.summary, group: "Changelog", href: `/changelog/${e.slug}` })),
   ]
 }

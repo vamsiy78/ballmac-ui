@@ -17,10 +17,10 @@ const columns = [
   {
     title: "Docs",
     links: [
-      { href: "/docs/installation", label: "Installation" },
-      { href: "/docs/theming", label: "Theming" },
-      { href: "/docs/registry", label: "CLI & registry" },
-      { href: "/docs/mcp", label: "MCP & AI agents" },
+      { href: "/docs/get-started/install", label: "Installation" },
+      { href: "/docs/get-started/make-it-yours", label: "Theming" },
+      { href: "/docs/reference/registry", label: "CLI & registry" },
+      { href: "/docs/get-started/connect-your-agent", label: "MCP & AI agents" },
       { href: "/quality", label: "Quality, measured" },
     ],
   },
