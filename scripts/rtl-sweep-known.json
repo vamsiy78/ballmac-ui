@@ -266,5 +266,9 @@
   {
     "prefix": "seatmap-1",
     "reason": "The hall is a floor plan: seat 1 stays on the left in every language, and the grid makes up most of the page's elements."
+  },
+  {
+    "prefix": "habits-1",
+    "reason": "The twelve-week history runs oldest to newest from left to right in every language, like a chart, and makes up most of the page's elements."
   }
 ]

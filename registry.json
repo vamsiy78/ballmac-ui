@@ -16781,6 +16781,239 @@
       }
     },
     {
+      "name": "habits-1",
+      "type": "registry:block",
+      "title": "Habits 1: streaks and weekly goals",
+      "description": "A habit tracker: each habit with its streak (kept alive until today ends), best streak, this week against its goal, the last seven days to tick, twelve weeks as a grid, a ring for today, and ticks that go back if they fail.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/habits-1/habits-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/habits-1/habits-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "habits"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "habits",
+          "streak",
+          "habit tracker",
+          "routine",
+          "goals",
+          "daily",
+          "wellness",
+          "consistency",
+          "check-in"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A habit tracker. <Habits1 habits={[{ id, name, target: 5, done: ['2026-10-18'], tone: 1..5 }]} today='2026-10-18' locale onToggle={(habitId, date, done) => Promise} onAdd={({ name, target }) => Promise} />. The streak is the run of days ending today, or yesterday while today is not done yet, so it only breaks when a day is missed. Best streak, this-week count (Monday to today) and the goal are worked out from done. Pass today yourself; the block never reads the clock. Reject onToggle and the day goes back with the message.",
+          "whenToUse": [
+            "Wellness, learning and productivity apps with daily routines",
+            "A team ritual tracker"
+          ],
+          "whenNotToUse": [
+            "One-off to-dos (use tasks-1)",
+            "Long-term targets with numbers (use goals-1)"
+          ],
+          "composesWith": [
+            "goals-1",
+            "tasks-1",
+            "leaderboard-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Space",
+              "action": "Each day is a checkbox named for the habit and the full date ('Read for 20 minutes, Sunday 18 October, today'); toggling is announced politely"
+            },
+            {
+              "keys": "Streak",
+              "action": "'12 days streak' and 'Best 18' are written in text with icons; this week reads '4 of 5 this week, goal reached'"
+            },
+            {
+              "keys": "Twelve weeks",
+              "action": "The grid is a picture with a text equivalent giving how many of the last 84 days were done"
+            }
+          ],
+          "customization": [
+            "tone picks one of five chart colors per habit",
+            "The history grid runs oldest to newest left to right in every language, like a chart",
+            "target is days a week; a week counts Monday to Sunday"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "habits-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton cards under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No habits yet",
+            "example": "habits-1-empty",
+            "trigger": "state=\"empty\" (or habits={[]})",
+            "note": "Says to pick one small thing to do most days; emptyState sets the copy and can add a button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "habits-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was lost, with Try again (onRetry). A tick that fails to save goes back with its reason under the habit."
+          }
+        ],
+        "examples": [
+          "habits-1-demo",
+          "habits-1-fresh",
+          "habits-1-loading",
+          "habits-1-empty",
+          "habits-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/habits-1"
+      }
+    },
+    {
+      "name": "habits-1-demo",
+      "type": "registry:example",
+      "title": "Habits 1: streaks and weekly goals: Four habits",
+      "description": "Four habits example of Habits 1: streaks and weekly goals.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/habits-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/habits-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/habits-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "habits-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "habits-1-fresh",
+      "type": "registry:example",
+      "title": "Habits 1: streaks and weekly goals: Just started",
+      "description": "Just started example of Habits 1: streaks and weekly goals.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/habits-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/habits-1-fresh.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/habits-1-fresh.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "habits-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "habits-1-loading",
+      "type": "registry:example",
+      "title": "Habits 1: streaks and weekly goals: Loading",
+      "description": "Loading example of Habits 1: streaks and weekly goals.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/habits-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/habits-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/habits-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "habits-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "habits-1-empty",
+      "type": "registry:example",
+      "title": "Habits 1: streaks and weekly goals: No habits yet",
+      "description": "No habits yet example of Habits 1: streaks and weekly goals.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/habits-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/habits-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/habits-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "habits-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "habits-1-error",
+      "type": "registry:example",
+      "title": "Habits 1: streaks and weekly goals: Could not load",
+      "description": "Could not load example of Habits 1: streaks and weekly goals.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/habits-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/habits-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/habits-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "habits-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "header-1",
       "type": "registry:block",
       "title": "Header 1: sticky with mobile menu",
@@ -18691,6 +18924,241 @@
       "meta": {
         "example": true,
         "of": "integrations-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inventory-1",
+      "type": "registry:block",
+      "title": "Inventory 1: stock levels and reordering",
+      "description": "A stock overview: stock value, lines low or out, units on the way, and every item with a bar against its reorder point, days of cover at today's pace, status in words, and an order form that suggests how many to buy.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/match-highlight.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/inventory-1/inventory-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/inventory-1/inventory-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "inventory"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "inventory",
+          "stock",
+          "warehouse",
+          "reorder",
+          "products",
+          "sku",
+          "supply",
+          "ecommerce",
+          "low stock",
+          "levels"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A stock overview. <Inventory1 items={[{ id, sku, name, category, onHand, reorderAt, perDay, cost, incoming: { qty, eta } }]} currency locale onReorder={(item, qty) => Promise} />. Status is Out of stock (0), Low (at or under reorderAt), Plenty (over four times reorderAt) or In stock; days left is onHand divided by perDay; stock value is onHand times cost. The suggested order is two reorder points plus fourteen days of sales, minus what is on hand and on the way. Reject onReorder to show the reason; nothing is marked as ordered.",
+          "whenToUse": [
+            "An ecommerce or warehouse admin: what to reorder first",
+            "A restaurant or retail back office"
+          ],
+          "whenNotToUse": [
+            "A customer-facing product page",
+            "Order history (use a data table)"
+          ],
+          "composesWith": [
+            "tickets-1",
+            "invoice-1",
+            "funnel-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter",
+              "action": "Each Reorder button names its product; the order form field is labelled and focused when it opens, and a placed order is announced"
+            },
+            {
+              "keys": "Status",
+              "action": "Out of stock, Low, In stock and Plenty are written beside an icon, and 'N days left' is text; the bar has a text equivalent giving on hand and the reorder point"
+            },
+            {
+              "keys": "Filters",
+              "action": "Buttons say whether they are on and show counts; the number of products shown is announced politely"
+            }
+          ],
+          "customization": [
+            "SKUs are shown left to right in right-to-left layouts, like codes",
+            "The mark on each bar is the reorder point",
+            "Sorting by days left puts what will run out first at the top"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "inventory-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton cards and table under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No stock recorded",
+            "example": "inventory-1-empty",
+            "trigger": "state=\"empty\" (or items={[]})",
+            "note": "Says to add products or connect a store; emptyState sets the copy. A search with no match says so with Clear filters."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "inventory-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). An order that fails says nothing was charged, in place."
+          }
+        ],
+        "examples": [
+          "inventory-1-demo",
+          "inventory-1-ordering",
+          "inventory-1-loading",
+          "inventory-1-empty",
+          "inventory-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/inventory-1"
+      }
+    },
+    {
+      "name": "inventory-1-demo",
+      "type": "registry:example",
+      "title": "Inventory 1: stock levels and reordering: Mixed stock",
+      "description": "Mixed stock example of Inventory 1: stock levels and reordering.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inventory-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inventory-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inventory-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inventory-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inventory-1-ordering",
+      "type": "registry:example",
+      "title": "Inventory 1: stock levels and reordering: Ordering open",
+      "description": "Ordering open example of Inventory 1: stock levels and reordering.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inventory-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inventory-1-ordering.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inventory-1-ordering.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inventory-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inventory-1-loading",
+      "type": "registry:example",
+      "title": "Inventory 1: stock levels and reordering: Loading",
+      "description": "Loading example of Inventory 1: stock levels and reordering.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inventory-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inventory-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inventory-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inventory-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inventory-1-empty",
+      "type": "registry:example",
+      "title": "Inventory 1: stock levels and reordering: No stock recorded",
+      "description": "No stock recorded example of Inventory 1: stock levels and reordering.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inventory-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inventory-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inventory-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inventory-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "inventory-1-error",
+      "type": "registry:example",
+      "title": "Inventory 1: stock levels and reordering: Could not load",
+      "description": "Could not load example of Inventory 1: stock levels and reordering.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/inventory-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/inventory-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/inventory-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "inventory-1",
         "tier": "free"
       }
     },
@@ -22738,6 +23206,142 @@
       }
     },
     {
+      "name": "recipe-1",
+      "type": "registry:block",
+      "title": "Recipe 1: scale, check off and time",
+      "description": "A recipe you can cook from: change how many it serves and every amount scales the way a cook reads it, switch metric and US units, tick off ingredients and steps, and start a timer on the steps that need waiting.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/recipe-1/recipe-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/recipe-1/recipe-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "recipe"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "recipe",
+          "cooking",
+          "ingredients",
+          "servings",
+          "timer",
+          "food",
+          "kitchen",
+          "method",
+          "meal",
+          "baking"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A recipe. <Recipe1 title intro serves={4} prep={10} cook={20} difficulty calories ingredients={[{ id, qty, unit: 'g' | 'ml' | 'tbsp' | 'tsp' | 'cup' | undefined, name, note }]} steps={[{ id, text, minutes }]} />. qty is for the recipe's own serves; changing the servings scales every amount. Spoons and cups read as ½ ¼ ⅓ fractions, g and ml as whole numbers (rounded to 5 above 100); US units turn g into oz and ml into fl oz. A step with minutes gets a start, pause and reset timer that says 'Time is up'.",
+          "whenToUse": [
+            "Food blogs, meal-kit sites and cooking apps",
+            "Any how-to with amounts that scale and steps that need waiting"
+          ],
+          "whenNotToUse": [
+            "A shopping list across recipes",
+            "A meal planner calendar"
+          ],
+          "composesWith": [
+            "gallery-1",
+            "reviews-1",
+            "comments-1",
+            "header-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Space",
+              "action": "Servings are Fewer and More buttons with the count read as '4 people'; every ingredient and step has a real checkbox, and the counts (3 of 7 gathered) are announced politely"
+            },
+            {
+              "keys": "Timer",
+              "action": "Each timer is a role=timer that reads '8 minutes 0 seconds left', its button says Start, Pause or Resume, and 'Time is up' is announced"
+            },
+            {
+              "keys": "Steps",
+              "action": "Each step reads 'Step 2.' first, and the current one is outlined as well as numbered"
+            }
+          ],
+          "customization": [
+            "serves is the base the amounts are written for",
+            "Countable ingredients (eggs) round to a sensible fraction or one decimal",
+            "The timer ring and the hero mirror in right-to-left"
+          ]
+        },
+        "statesNone": "Static content with its own tools: nothing to load, submit or fail.",
+        "examples": [
+          "recipe-1-demo",
+          "recipe-1-baking"
+        ],
+        "url": "https://ui.ballmac.com/components/recipe-1"
+      }
+    },
+    {
+      "name": "recipe-1-demo",
+      "type": "registry:example",
+      "title": "Recipe 1: scale, check off and time: Spaghetti carbonara",
+      "description": "Spaghetti carbonara example of Recipe 1: scale, check off and time.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/recipe-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/recipe-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/recipe-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "recipe-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "recipe-1-baking",
+      "type": "registry:example",
+      "title": "Recipe 1: scale, check off and time: Baking, in cups and spoons",
+      "description": "Baking, in cups and spoons example of Recipe 1: scale, check off and time.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/recipe-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/recipe-1-baking.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/recipe-1-baking.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "recipe-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "retention-1",
       "type": "registry:block",
       "title": "Retention 1: cohort heatmap",
@@ -23173,6 +23777,244 @@
       "meta": {
         "example": true,
         "of": "reviews-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "roster-1",
+      "type": "registry:block",
+      "title": "Roster 1: weekly shift planner",
+      "description": "A weekly shift roster: a row per person and a column per day, shifts you set, change or mark as time off, hours per person with overtime and rest flags, a coverage row against what each day needs, weeks to page through and a publish step.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/dialog.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/return-focus.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/roster-1/roster-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/roster-1/roster-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "roster"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "roster",
+          "shifts",
+          "schedule",
+          "rota",
+          "staff scheduling",
+          "rostering",
+          "workforce",
+          "hospitality",
+          "retail",
+          "coverage"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A shift roster. <Roster1 staff={[{ id, name, role, maxHours }]} positions={[{ id, label, tone }]} shifts={{ 'p1|2026-10-12': { start: '07:00', end: '15:00', position: 'bar' } | { off: true } }} weekStart='2026-10-12' /* a Monday */ required={[3,3,3,4,4,5,4]} minRest={11} locale onChange={(key, shift | null) => ...} onPublish={(weekStart) => Promise} />. Hours, overtime against each maxHours, rest between one day's end and the next day's start (under minRest is flagged) and coverage against required are worked out from the shifts. Press a cell to add, edit or remove a shift or mark time off. Reject onPublish to keep the week a draft with the reason.",
+          "whenToUse": [
+            "Scheduling staff in hospitality, retail, care and support teams",
+            "Planning who covers what each day"
+          ],
+          "whenNotToUse": [
+            "A project timeline (use gantt-1)",
+            "Booking one meeting (use a calendar)"
+          ],
+          "composesWith": [
+            "timesheet-1",
+            "directory-1",
+            "calendar-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter",
+              "action": "Every cell is a button that reads the person, day, hours and position ('Amara Okoye, Mon 12 Oct: 07:00 to 15:00, Bar. Edit') or 'no shift. Add one'; the editor is a dialog that returns focus to the cell"
+            },
+            {
+              "keys": "Flags",
+              "action": "Overtime ('4 h over 32'), too little rest and short coverage ('3 of 4, short by 1') are written in words with icons, and the summary counts them"
+            },
+            {
+              "keys": "Table",
+              "action": "A real table with caption, headers and a coverage footer; it scrolls sideways on a phone and is a focusable region"
+            }
+          ],
+          "customization": [
+            "positions carry their own color classes",
+            "minRest and each person's maxHours are plain numbers",
+            "Weeks page with Previous and Next; the shifts are keyed by person and date so any range can be loaded"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "roster-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton grid under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No staff",
+            "example": "roster-1-empty",
+            "trigger": "state=\"empty\" (or staff={[]})",
+            "note": "Says to add the people who work here; emptyState sets the copy and can add a button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "roster-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A publish that fails says the week is still a draft, in place under the grid."
+          }
+        ],
+        "examples": [
+          "roster-1-demo",
+          "roster-1-published",
+          "roster-1-loading",
+          "roster-1-empty",
+          "roster-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/roster-1"
+      }
+    },
+    {
+      "name": "roster-1-demo",
+      "type": "registry:example",
+      "title": "Roster 1: weekly shift planner: A week with problems",
+      "description": "A week with problems example of Roster 1: weekly shift planner.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/roster-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/roster-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/roster-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "roster-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "roster-1-published",
+      "type": "registry:example",
+      "title": "Roster 1: weekly shift planner: A published week",
+      "description": "A published week example of Roster 1: weekly shift planner.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/roster-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/roster-1-published.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/roster-1-published.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "roster-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "roster-1-loading",
+      "type": "registry:example",
+      "title": "Roster 1: weekly shift planner: Loading",
+      "description": "Loading example of Roster 1: weekly shift planner.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/roster-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/roster-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/roster-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "roster-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "roster-1-empty",
+      "type": "registry:example",
+      "title": "Roster 1: weekly shift planner: No staff",
+      "description": "No staff example of Roster 1: weekly shift planner.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/roster-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/roster-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/roster-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "roster-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "roster-1-error",
+      "type": "registry:example",
+      "title": "Roster 1: weekly shift planner: Could not load",
+      "description": "Could not load example of Roster 1: weekly shift planner.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/roster-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/roster-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/roster-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "roster-1",
         "tier": "free"
       }
     },
@@ -27278,6 +28120,141 @@
       "meta": {
         "example": true,
         "of": "tour-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trip-1",
+      "type": "registry:block",
+      "title": "Trip 1: day-by-day itinerary",
+      "description": "A trip itinerary: destination, dates and a countdown, then day by day what is booked and when with copyable booking codes and unbooked items marked in words, a cost breakdown, per-person total, type filters and a packing list with progress.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/cover-art.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/trip-1/trip-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/trip-1/trip-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "trip"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "trip",
+          "itinerary",
+          "travel",
+          "vacation",
+          "holiday",
+          "plan",
+          "flights",
+          "hotel",
+          "packing",
+          "booking"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A trip itinerary. <Trip1 title destination dates={['2026-11-06', '2026-11-09']} travelers={['Mara', 'Theo']} items={[{ id, kind: 'flight' | 'stay' | 'food' | 'activity' | 'transport', date, time: '08:15', title, detail, ref: 'TP1351', cost, pending }]} packing={[{ id, label, done }]} currency locale today='2026-10-18' />. Nights, days to go, the total, the per-person cost and the cost by type are worked out from the items; a pending item says Not booked yet and is listed in a notice. Pass today yourself; the block never reads the clock.",
+          "whenToUse": [
+            "A shared trip plan or a confirmation page for a booked trip",
+            "Travel apps and agency itineraries"
+          ],
+          "whenNotToUse": [
+            "Booking flights or hotels (use a booking flow)",
+            "A single event agenda (use event-1)"
+          ],
+          "composesWith": [
+            "event-1",
+            "locations-1",
+            "invoice-1",
+            "header-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Space",
+              "action": "Filters say whether they are on; each packing item is a checkbox and the count (2 of 6) and a progress bar update politely; each booking code has a Copy button naming it"
+            },
+            {
+              "keys": "Days",
+              "action": "Each day is a heading ('Day 2 Saturday 7 November') in an ordered list, with items in time order"
+            },
+            {
+              "keys": "Booked or not",
+              "action": "'Not booked yet' is written on the item and summarised in a status notice, not only colored"
+            }
+          ],
+          "customization": [
+            "kind picks the icon and tint",
+            "Booking codes and times are shown left to right in right-to-left layouts, like codes",
+            "Dates, weekdays and money follow the locale and currency"
+          ]
+        },
+        "statesNone": "Static content with its own filters and checklist: nothing to load, submit or fail.",
+        "examples": [
+          "trip-1-demo",
+          "trip-1-underway"
+        ],
+        "url": "https://ui.ballmac.com/components/trip-1"
+      }
+    },
+    {
+      "name": "trip-1-demo",
+      "type": "registry:example",
+      "title": "Trip 1: day-by-day itinerary: A long weekend",
+      "description": "A long weekend example of Trip 1: day-by-day itinerary.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trip-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trip-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trip-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trip-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trip-1-underway",
+      "type": "registry:example",
+      "title": "Trip 1: day-by-day itinerary: Under way, all booked",
+      "description": "Under way, all booked example of Trip 1: day-by-day itinerary.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trip-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trip-1-underway.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trip-1-underway.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trip-1",
         "tier": "free"
       }
     },

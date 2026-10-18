@@ -204,6 +204,11 @@ export const blockCategoryLabels: Record<string, string> = {
   tour: "Product tour",
   portfolio: "Portfolio",
   seatmap: "Seat map",
+  roster: "Shift roster",
+  recipe: "Recipe",
+  habits: "Habits",
+  inventory: "Inventory",
+  trip: "Trip itinerary",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -218,7 +223,7 @@ export const blockGroups = [
     id: "content",
     label: "Content and company",
     description: "About, blog, changelog, careers, gallery, trust center, contact, help center, search results and error pages.",
-    categories: ["about", "orgchart", "directory", "locations", "course", "status", "blog", "changelog", "careers", "gallery", "trust", "contact", "help", "search", "error"],
+    categories: ["about", "orgchart", "directory", "locations", "course", "recipe", "trip", "status", "blog", "changelog", "careers", "gallery", "trust", "contact", "help", "search", "error"],
   },
   {
     id: "account",
@@ -230,7 +235,7 @@ export const blockGroups = [
     id: "application",
     label: "Application",
     description: "Screens inside a product: shell, dashboards, settings, billing, inbox, notifications, team chat, boards, uploads, developer tools, AI chat and AI agents.",
-    categories: ["app-shell", "dashboard", "funnel", "retention", "experiments", "settings", "billing", "invoice", "mail", "tickets", "notifications", "chat", "comments", "kanban", "tasks", "calendar", "gantt", "goals", "timesheet", "expenses", "crm", "editor", "survey", "poll", "quiz", "portfolio", "upload", "import", "developer", "webhooks", "api", "flags", "workflow", "leaderboard", "ai-chat", "agents"],
+    categories: ["app-shell", "dashboard", "funnel", "retention", "experiments", "settings", "billing", "invoice", "mail", "tickets", "notifications", "chat", "comments", "kanban", "tasks", "calendar", "roster", "gantt", "goals", "habits", "inventory", "timesheet", "expenses", "crm", "editor", "survey", "poll", "quiz", "portfolio", "upload", "import", "developer", "webhooks", "api", "flags", "workflow", "leaderboard", "ai-chat", "agents"],
   },
   {
     id: "shop",

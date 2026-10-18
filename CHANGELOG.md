@@ -2,6 +2,16 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
+## 2026-10-18: A shift roster, a recipe, a habit tracker, a stock overview and a trip itinerary
+
+- Roster 1, weekly shift planner: a row per person and a column per day, shifts you set, change or mark as time off in a dialog, hours per person with overtime against their own limit, a flag when there is too little rest between one day's end and the next day's start, a coverage row ('3 of 4, short by 1') against what each day needs, weeks to page through, and a publish step that stays a draft with the reason if it fails
+- Recipe 1, a recipe you can cook from: change how many it serves and every amount scales the way a cook reads it (½ and ¼ for spoons and cups, whole grams), switch between metric and US units, tick off ingredients and steps with counts, and start a timer right on the steps that need waiting, which says Time is up
+- Habits 1, habit tracker: each habit's streak (kept alive until today is over, broken by a missed day), best streak, this week against its goal in words, the last seven days to tick, twelve weeks as a grid, a ring for today, and a tick that goes back with the reason if it cannot be saved
+- Inventory 1, stock levels and reordering: stock value, lines low or out and units on the way, every item with a bar against its reorder point, days left at today's pace, status in words (Out of stock, Low, In stock, Plenty), a sort that puts what runs out first on top, and an order form that suggests how many to buy and says nothing was charged if it fails
+- Trip 1, day-by-day itinerary: destination, dates and days to go, each day's flights, stays, food and things to do in time order with copyable booking codes, anything not booked marked in words and summed up in a notice, the cost by type and per traveler, type filters, and a packing list with progress
+- Five new block groups: Shift roster, Recipe, Habits, Inventory and Trip itinerary, also found by the MCP server for rota, shifts, ingredients, streak, warehouse, itinerary and vacation
+- All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the history grid in Habits 1, right to left, and ship their tests
+
 ## 2026-10-18: Threaded comments, a poll, a product tour, an investment portfolio and a seat map
 
 - Comments 1, threaded discussion: a composer where typing @ offers people (arrow keys, Enter or Tab pick one, Escape closes it), replies, emoji reactions that count and toggle and say who reacted, editing and deleting your own comments, threads you can resolve and reopen, and times like '18 hours ago' worked out from the moment you pass. A comment appears at once and, if it cannot be saved, stays with Not posted and Retry
