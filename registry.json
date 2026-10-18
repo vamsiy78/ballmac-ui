@@ -39158,6 +39158,330 @@
       }
     },
     {
+      "name": "event-calendar",
+      "type": "registry:ui",
+      "title": "Event Calendar",
+      "description": "A full calendar with month, week, day and agenda views: overlapping events side by side, multi-day bars, drag to move, resize or create, keyboard moves, a live now line and locale-aware weeks.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/popover.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json",
+        "https://ui.ballmac.com/r/calendar-dates.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/event-calendar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/event-calendar.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "calendar",
+          "events",
+          "schedule",
+          "month",
+          "week",
+          "agenda",
+          "drag",
+          "timeline"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-19",
+        "ai": {
+          "summary": "Pass events [{ id, title, start, end?, allDay?, tone?, location? }] and a label. Hold view and date in state if you need them. For editing set editable and selectable and handle onEventChange(event, { start, end, allDay }) and onRangeSelect.",
+          "whenToUse": [
+            "Team, booking, room and delivery calendars with several views",
+            "Schedulers where people drag events to reschedule or drag across time to add one",
+            "A month overview with multi-day events and an agenda list for phones"
+          ],
+          "whenNotToUse": [
+            "Picking a date in a form; use calendar or date-picker",
+            "A resource timeline with rows per person or room",
+            "Recurring-event rules or time zone conversion; compute those yourself and pass plain events"
+          ],
+          "composesWith": [
+            "calendar",
+            "popover",
+            "badge",
+            "dialog"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys (month)",
+              "action": "Move between days; Page Up and Page Down change month; Home and End go to the week's ends"
+            },
+            {
+              "keys": "Enter / Space (month)",
+              "action": "Open the focused day"
+            },
+            {
+              "keys": "Enter on an event",
+              "action": "Calls onEventClick"
+            },
+            {
+              "keys": "Alt + arrow keys on an event",
+              "action": "Move it by a day or a slot; Alt+Shift+arrows change its length. The move is announced"
+            },
+            {
+              "keys": "Add event button",
+              "action": "Starts an event without dragging, for keyboard and switch users"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The month is a grid with each day named and counted; every event button reads its title, date, time and place"
+            }
+          ],
+          "customization": [
+            "views: month | week | day | agenda, defaultView, defaultDate",
+            "weekStartsOn (defaults to the locale), slotMinutes, hourHeight, scrollToHour, maxLanes",
+            "tone per event: chart-1 to chart-5 or muted",
+            "renderEvent to draw your own event content",
+            "today to pin the current day in tests and screenshots"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "event-calendar-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A month-shaped skeleton, announced as loading; nothing can be clicked."
+          },
+          {
+            "id": "empty",
+            "title": "No events",
+            "example": "event-calendar-empty",
+            "trigger": "events={[]} in the agenda view",
+            "note": "The agenda says there is nothing this month and emptyState can add an action; the month and week grids stay as plain calendars."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "event-calendar-error",
+            "trigger": "state=\"error\"",
+            "note": "An error with a Try again button (onRetry), announced as an alert."
+          }
+        ],
+        "examples": [
+          "event-calendar-demo",
+          "event-calendar-week",
+          "event-calendar-day",
+          "event-calendar-editable",
+          "event-calendar-agenda",
+          "event-calendar-loading",
+          "event-calendar-empty",
+          "event-calendar-error"
+        ],
+        "url": "https://ui.ballmac.com/components/event-calendar"
+      }
+    },
+    {
+      "name": "event-calendar-demo",
+      "type": "registry:example",
+      "title": "Event Calendar: Month",
+      "description": "Month example of Event Calendar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/event-calendar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/event-calendar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/event-calendar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "event-calendar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "event-calendar-week",
+      "type": "registry:example",
+      "title": "Event Calendar: Week, drag to move and create",
+      "description": "Week, drag to move and create example of Event Calendar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/event-calendar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/event-calendar-week.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/event-calendar-week.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "event-calendar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "event-calendar-day",
+      "type": "registry:example",
+      "title": "Event Calendar: Day",
+      "description": "Day example of Event Calendar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/event-calendar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/event-calendar-day.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/event-calendar-day.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "event-calendar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "event-calendar-editable",
+      "type": "registry:example",
+      "title": "Event Calendar: Editable month",
+      "description": "Editable month example of Event Calendar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/event-calendar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/event-calendar-editable.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/event-calendar-editable.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "event-calendar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "event-calendar-agenda",
+      "type": "registry:example",
+      "title": "Event Calendar: Agenda",
+      "description": "Agenda example of Event Calendar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/event-calendar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/event-calendar-agenda.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/event-calendar-agenda.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "event-calendar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "event-calendar-loading",
+      "type": "registry:example",
+      "title": "Event Calendar: Loading",
+      "description": "Loading example of Event Calendar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/event-calendar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/event-calendar-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/event-calendar-loading.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "event-calendar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "event-calendar-empty",
+      "type": "registry:example",
+      "title": "Event Calendar: No events",
+      "description": "No events example of Event Calendar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/event-calendar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/event-calendar-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/event-calendar-empty.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "event-calendar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "event-calendar-error",
+      "type": "registry:example",
+      "title": "Event Calendar: Could not load",
+      "description": "Could not load example of Event Calendar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/event-calendar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/event-calendar-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/event-calendar-error.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "event-calendar",
+        "tier": "free"
+      }
+    },
+    {
       "name": "feedback-widget",
       "type": "registry:ui",
       "title": "Feedback Widget",
@@ -65067,6 +65391,58 @@
         "example": true,
         "of": "workspace-card",
         "tier": "free"
+      }
+    },
+    {
+      "name": "calendar-dates",
+      "type": "registry:lib",
+      "title": "Calendar Dates",
+      "description": "Date helpers for calendars with no dependencies: weeks that start where the locale says, month grids, daylight-saving-safe day math, and layout for overlapping events.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "files": [
+        {
+          "path": "registry/ballmac/lib/calendar-dates.ts",
+          "type": "registry:lib",
+          "target": "@lib/ballmac/calendar-dates.ts"
+        }
+      ],
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "date",
+          "calendar",
+          "week",
+          "month",
+          "layout",
+          "locale"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-19",
+        "tests": true,
+        "ai": {
+          "summary": "Import from @/lib/ballmac/calendar-dates: toDate, addDays, addMonths, startOfWeek, monthGrid, weekStartFor(locale), spanOf, layoutDay and layoutWeek.",
+          "whenToUse": [
+            "Building a calendar, scheduler or timeline",
+            "Reading dates like 2026-10-20 as local days, not UTC",
+            "Placing overlapping events side by side"
+          ],
+          "whenNotToUse": [
+            "Formatting or time zone conversion for a whole app; use Intl or a date library",
+            "A date picker; use calendar"
+          ],
+          "composesWith": [],
+          "a11y": [],
+          "customization": [
+            "weekStartsOn is 0 (Sunday) to 6",
+            "spanOf treats an all-day event's end as its last day, inclusive"
+          ]
+        },
+        "examples": [],
+        "url": "https://ui.ballmac.com/components/calendar-dates"
       }
     },
     {
