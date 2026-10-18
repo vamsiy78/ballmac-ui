@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2026-10-12",
+    "items": 477,
+    "examples": 1032,
+    "failingChecks": 55
+  },
+  {
+    "date": "2026-10-18",
+    "items": 549,
+    "examples": 1358,
+    "failingChecks": 0
+  }
+]

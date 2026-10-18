@@ -1,5 +1,6 @@
 import "server-only"
 
+import history from "@/lib/generated/quality-history.json"
 import raw from "@/lib/generated/quality.json"
 
 export type CheckStatus = "pass" | "fail" | "na" | "info"
@@ -30,6 +31,9 @@ export function getScore(name: string): ItemScore | undefined {
 }
 
 export const measured = { generated: data.generated, tools: data.tools }
+
+/** One line per day the measurement was run, oldest first (registry/quality-history.json). */
+export const runs = history as { date: string; items: number; examples: number; failingChecks: number }[]
 
 export function formatMeasured(iso: string) {
   return iso ? new Date(iso).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }) : ""

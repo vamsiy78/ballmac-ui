@@ -11,6 +11,7 @@ const columns = [
       { href: "/blocks", label: "Blocks" },
       { href: "/templates", label: "Templates" },
       { href: "/themes", label: "Themes" },
+      { href: "/use-cases", label: "What you can build" },
       { href: "/pricing", label: "Pricing" },
     ],
   },

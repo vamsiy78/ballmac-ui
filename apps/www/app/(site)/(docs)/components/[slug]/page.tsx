@@ -101,10 +101,9 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             </div>
           </div>
           <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <ItemVersion item={item}>
             <ScoreChip name={item.name} />
-          </div>
-          <ItemVersion item={item} />
+          </ItemVersion>
           {fixedInRtl && (
             <p className="text-muted-foreground max-w-2xl text-sm">
               <Link href="/docs/concepts/right-to-left" className="text-foreground underline underline-offset-4">Right-to-left</Link>: {fixedInRtl.reason}

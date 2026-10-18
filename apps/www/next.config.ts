@@ -12,7 +12,7 @@ import docsRedirects from "./content/docs-redirects.json"
 const exportBuild = process.env.BALLMAC_EXPORT === "1"
 const WORKER_DEV = process.env.BALLMAC_WORKER_URL || "http://127.0.0.1:8787"
 // Keep in step with run_worker_first in wrangler.jsonc.
-const workerRoutes = ["/api/pro/:path*", "/api/reminders", "/api/sampler", "/api/stars", "/api/support", "/api/v1/license/:path*", "/r/pro/:path*", "/themes/custom.json"]
+const workerRoutes = ["/api/changelog-subscribe", "/api/docs-feedback", "/api/pro/:path*", "/api/reminders", "/api/sampler", "/api/stars", "/api/support", "/api/v1/license/:path*", "/r/pro/:path*", "/themes/custom.json"]
 
 const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",

@@ -43,3 +43,7 @@
   X-Robots-Tag: noindex
 /llms-full.txt
   Content-Type: text/markdown; charset=utf-8
+
+# Share images of the changelog entries (no file extension in the build). The docs pages' images are .png files under /og/docs.
+/changelog/:slug/opengraph-image-*
+  Content-Type: image/png

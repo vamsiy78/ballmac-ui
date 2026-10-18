@@ -48,7 +48,7 @@ if (existsSync(indexFile)) {
     else if (i.category !== "foundation") components.add(i.name)
   }
 }
-const plainRoutes = new Set(["/", "/components", "/blocks", "/templates", "/themes", "/feels", "/pricing", "/pro", "/pro/login", "/support", "/founders", "/changelog", "/quality", "/license", "/license/pro", "/llms.txt", "/llms-full.txt", "/i18n/en.json", "/changelog/rss.xml", "/changelog/atom.xml"])
+const plainRoutes = new Set(["/", "/components", "/blocks", "/templates", "/themes", "/feels", "/pricing", "/pro", "/pro/login", "/support", "/founders", "/changelog", "/use-cases", "/use-cases/dashboard", "/quality", "/license", "/license/pro", "/llms.txt", "/llms-full.txt", "/i18n/en.json", "/changelog/rss.xml", "/changelog/atom.xml"])
 const changelogSlugs = new Set(getChangelog().map((e) => e.slug))
 
 /** Why an internal link does not resolve, or undefined when it does. */
@@ -73,6 +73,10 @@ function broken(href: string): string | undefined {
 const links = (source: string) => [...source.replace(/```[\s\S]*?```/g, "").matchAll(/\]\((\/[^)\s]*)\)|href="(\/[^"]*)"/g)].map((m) => (m[1] ?? m[2])!)
 
 describe("docs content", () => {
+  it("keeps every page at /docs or /docs/<section>/<page>, which is what the share images cover", () => {
+    for (const url of docs.keys()) expect(/^\/docs(\/[a-z0-9-]+\/[a-z0-9-]+)?$/.test(url), url).toBe(true)
+  })
+
   it("has a title and a one-sentence description on every page", () => {
     for (const [url, { source }] of docs) {
       const fm = source.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? ""

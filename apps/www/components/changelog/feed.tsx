@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import * as React from "react"
 
 import { EntryCard } from "@/components/changelog/entry"
+import { ChangelogEmailSignup } from "@/components/changelog/email-signup"
 import { changelogMonths, CHANGELOG_TAGS, type ChangelogEntry } from "@/lib/changelog-shared"
 import { cn } from "@/lib/utils"
 
@@ -114,9 +115,13 @@ export function FeedView({ entries, tag, onTag }: { entries: ChangelogEntry[]; t
           ))}
         </div>
       </div>
+      <div className="lg:hidden">
+        <ChangelogEmailSignup className="mt-12" />
+      </div>
       <aside className="max-lg:hidden">
         <div className="space-y-8 lg:sticky lg:top-20">
           <Feeds />
+          <ChangelogEmailSignup />
           <nav aria-label="Archive">
             <h2 className="mb-2 text-sm font-semibold">Archive</h2>
             <Archive months={all} />

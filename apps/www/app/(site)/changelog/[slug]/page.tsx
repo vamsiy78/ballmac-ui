@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: entry.title,
     description: entry.summary,
     alternates: { canonical: `/changelog/${entry.slug}` },
-    openGraph: { type: "article", publishedTime: entry.date, title: entry.title, description: entry.summary, url: `${SITE_URL}/changelog/${entry.slug}`, ...(entry.image ? { images: [{ url: entry.image.light, alt: entry.image.alt }] } : {}) },
+    openGraph: { type: "article", publishedTime: entry.date, title: entry.title, description: entry.summary, url: `${SITE_URL}/changelog/${entry.slug}` },
   }
 }
 

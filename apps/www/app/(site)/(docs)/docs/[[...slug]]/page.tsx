@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowRight, ChevronRight, Pencil } from "lucide-react"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { DocsFeedback } from "@/components/docs/feedback"
 import { CopyMarkdownButton } from "@/components/docs/copy-markdown"
 import { mdxComponents } from "@/components/docs/mdx"
 import { docsProse } from "@/components/docs/prose"
@@ -21,10 +22,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }): Promise<Metadata> {
   const page = source.getPage((await params).slug)
   if (!page) return {}
+  const image = page.slugs.length === 2 ? `/og/docs/${page.slugs[0]}/${page.slugs[1]}.png` : "/og/docs/index.png"
   return {
     title: page.data.title,
     description: page.data.description,
     alternates: { canonical: page.url, types: { "text/markdown": mdHref(page) } },
+    openGraph: { type: "article", title: page.data.title, description: page.data.description, images: [{ url: image, width: 1200, height: 630 }] },
+    twitter: { card: "summary_large_image", images: [image] },
   }
 }
 
@@ -92,6 +96,7 @@ export default async function DocsContentPage({ params }: { params: Promise<{ sl
           <MDX components={mdxComponents()} />
         </div>
         <footer className="mt-16 space-y-8 border-t pt-6">
+          <DocsFeedback page={page.url} />
           <div className="text-muted-foreground flex flex-wrap items-center justify-between gap-x-6 gap-y-2 text-[13px]">
             <a href={editUrl(page)} className="hover:text-foreground focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded outline-none focus-visible:ring-[3px]">
               <Pencil className="size-3.5" aria-hidden="true" />

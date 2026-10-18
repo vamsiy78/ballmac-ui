@@ -12,19 +12,26 @@ const MARK = (
   </svg>
 )
 
+// The header and the home page both show the count; one request serves both.
+let live: Promise<number | null> | undefined
+const liveStars = () =>
+  (live ??= fetch("/api/stars")
+    .then((r) => (r.ok ? (r.json() as Promise<{ stars: number | null }>) : null))
+    .then((d) => (typeof d?.stars === "number" ? d.stars : null))
+    .catch(() => null))
+
 /** The count: what the page was built with, then the live number from /api/stars (a cached Worker route). Not asked for in development. */
 function useStars(initial: number | null) {
   const [stars, setStars] = React.useState(initial)
   React.useEffect(() => {
     if (process.env.NODE_ENV !== "production") return
-    const controller = new AbortController()
-    fetch("/api/stars", { signal: controller.signal })
-      .then((r) => (r.ok ? (r.json() as Promise<{ stars: number | null }>) : null))
-      .then((d) => {
-        if (typeof d?.stars === "number") setStars(d.stars)
-      })
-      .catch(() => {})
-    return () => controller.abort()
+    let current = true
+    void liveStars().then((n) => {
+      if (current && n !== null) setStars(n)
+    })
+    return () => {
+      current = false
+    }
   }, [])
   return stars
 }

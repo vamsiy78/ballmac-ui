@@ -8,5 +8,5 @@ export const docsProse = [
   "[&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:ps-5 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:ps-5",
   "[&_strong]:text-foreground [&_strong]:font-medium",
   "[&_a]:text-foreground [&_a]:underline [&_a]:underline-offset-4",
-  "[&_:not(pre)>code]:bg-muted [&_:not(pre)>code]:rounded [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:font-mono [&_:not(pre)>code]:text-[0.85em] [&_:not(pre)>code]:text-foreground",
+  "[&_:not(pre)>code]:bg-muted [&_:not(pre)>code]:rounded [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:font-mono [&_:not(pre)>code]:text-[0.85em] [&_:not(pre)>code]:text-foreground [&_:not(pre)>code]:[overflow-wrap:anywhere]",
 ].join(" ")

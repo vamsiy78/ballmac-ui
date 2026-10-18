@@ -25,11 +25,14 @@ import { createRequire } from "node:module"
 import { join, relative } from "node:path"
 import { gzipSync } from "node:zlib"
 
+import { record, summarize, type QualityRun } from "./quality-history"
+
 import AxeBuilder from "@axe-core/playwright"
 import { chromium, type Browser, type BrowserContext, type Page } from "playwright"
 
 const ROOT = join(import.meta.dirname, "..")
 const OUT = join(ROOT, "registry/quality.json")
+const HISTORY = join(ROOT, "registry/quality-history.json")
 const arg = (n: string, d?: string) => {
   const i = process.argv.indexOf(`--${n}`)
   return i > -1 ? process.argv[i + 1] : d
@@ -540,6 +543,8 @@ async function main() {
     for (const n of Object.keys(result.items)) if (!names.has(n)) delete result.items[n]
     result.generated = new Date().toISOString()
     writeFileSync(OUT, JSON.stringify(sortKeys(result)) + "\n")
+    const history = existsSync(HISTORY) ? (JSON.parse(readFileSync(HISTORY, "utf8")) as QualityRun[]) : []
+    writeFileSync(HISTORY, JSON.stringify(record(history, summarize(result.items, result.generated.slice(0, 10))), null, 2) + "\n")
     const fails = Object.entries(result.items).flatMap(([n, q]) => q.checks.filter((c) => c.status === "fail").map((c) => `${n}: ${c.label}: ${c.detail}`))
     for (const f of fails) console.log(`✗ ${f}`)
     console.log(`Measured ${queue.length} item(s); ${fails.length} failing check(s) across ${Object.keys(result.items).length} item(s) → ${relative(ROOT, OUT)}`)

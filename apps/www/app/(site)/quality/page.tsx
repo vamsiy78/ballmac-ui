@@ -5,7 +5,7 @@ import { Check, TriangleAlert } from "lucide-react"
 import { CodePanel } from "@/components/site/code-panel"
 import Link from "@/components/site/link"
 import { Eyebrow } from "@/components/site/section-heading"
-import { formatMeasured, measured, overview } from "@/lib/quality"
+import { formatMeasured, measured, overview, runs } from "@/lib/quality"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
@@ -38,6 +38,11 @@ export default function QualityPage() {
           Most libraries say they are accessible. We load each of the {o.items} items in a real browser and publish what happened, including the ones that failed.
           {measured.generated ? ` Last run: ${formatMeasured(measured.generated)}.` : ""}
         </p>
+        {measured.tools.axe && (
+          <p className="text-muted-foreground text-sm">
+            Measured with axe-core {measured.tools.axe} in {measured.tools.browser} through Playwright {measured.tools.playwright}.
+          </p>
+        )}
       </header>
 
       <dl className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -73,6 +78,7 @@ export default function QualityPage() {
                   <p className="text-sm tabular-nums">
                     <span className="font-medium">{c.pass}</span> of {total} pass
                     {c.fail > 0 && <span className="text-destructive"> · {c.fail} did not</span>}
+                    {c.na > 0 && <span className="text-muted-foreground"> · {c.na} not applicable</span>}
                   </p>
                   <div className="bg-muted mt-1.5 h-1.5 overflow-hidden rounded-full" role="img" aria-label={`${Math.round(pct)} percent pass`}>
                     <div className={cn("h-full rounded-full", c.fail ? "bg-amber-500" : "bg-emerald-500")} style={{ width: `${pct}%` }} />
@@ -112,6 +118,45 @@ export default function QualityPage() {
           </p>
         )}
       </section>
+
+      {runs.length > 0 && (
+        <section aria-labelledby="history-h" className="mt-14">
+          <h2 id="history-h" className="text-xl font-semibold tracking-tight">
+            Run history
+          </h2>
+          <p className="text-muted-foreground mt-2 max-w-2xl leading-relaxed">
+            One line for each day the measurement was run. The first full run found real defects, which are listed in the{" "}
+            <Link href="/changelog/2026-10-12-quality-scorecards-ballmac-check" className="text-foreground underline underline-offset-4">
+              changelog
+            </Link>
+            .
+          </p>
+          <div role="region" aria-label="Run history" tabIndex={0} className="focus-visible:ring-ring/50 mt-5 overflow-x-auto rounded-2xl border outline-none focus-visible:ring-[3px]">
+            <table className="w-full min-w-[28rem] text-sm">
+              <thead className="bg-card text-start">
+                <tr>
+                  <th scope="col" className="px-4 py-2.5 text-start font-medium">Run</th>
+                  <th scope="col" className="px-4 py-2.5 text-end font-medium">Items</th>
+                  <th scope="col" className="px-4 py-2.5 text-end font-medium">Examples</th>
+                  <th scope="col" className="px-4 py-2.5 text-end font-medium">Failing checks</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {[...runs].reverse().map((r) => (
+                  <tr key={r.date}>
+                    <th scope="row" className="px-4 py-2.5 text-start font-normal">
+                      <time dateTime={r.date}>{formatMeasured(r.date)}</time>
+                    </th>
+                    <td className="px-4 py-2.5 text-end tabular-nums">{r.items}</td>
+                    <td className="px-4 py-2.5 text-end tabular-nums">{r.examples.toLocaleString("en-US")}</td>
+                    <td className="px-4 py-2.5 text-end tabular-nums">{r.failingChecks}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
 
       <section aria-labelledby="limits-h" id="limits" className="mt-14 scroll-mt-24">
         <h2 id="limits-h" className="text-xl font-semibold tracking-tight">

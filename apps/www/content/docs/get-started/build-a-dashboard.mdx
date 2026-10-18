@@ -1,0 +1,145 @@
+---
+title: Build a sales dashboard
+description: Add the dashboard block, feed it your data, handle loading and errors, and match your brand. It takes about ten minutes.
+---
+
+By the end of this page you have a dashboard that loads your own numbers, shows a skeleton while it waits, and offers a retry when the request fails.
+
+You need a project that already has Ballmac UI set up. If you don't, start with [Install your first component](/docs/get-started/install).
+
+<Steps>
+
+### Add the block
+
+```npm
+npx shadcn@latest add @ballmac/dashboard-1
+```
+
+The block goes to `components/ballmac/blocks/dashboard-1/`. The CLI also adds what it builds on, such as the chart, the state view and `recharts`.
+
+### Render it with demo data
+
+With no props the block draws a built-in sales curve, so you can see the page before you connect anything.
+
+```tsx title="app/dashboard/page.tsx"
+import { Dashboard1 } from "@/components/ballmac/blocks/dashboard-1/dashboard-1"
+
+export default function Page() {
+  return <Dashboard1 />
+}
+```
+
+You get a date-range switch, four KPI cards with change and trend, a revenue chart against the previous period, revenue by channel and a recent-orders table. Every number is worked out from the series you pass.
+
+### Pass your own numbers
+
+`getSeries` returns one row per day for the chosen range. `channels` and `orders` are plain lists.
+
+```tsx title="app/dashboard/page.tsx"
+import { Dashboard1 } from "@/components/ballmac/blocks/dashboard-1/dashboard-1"
+
+const week = [
+  { label: "Mon", revenue: 8200, previous: 7600, orders: 61 },
+  { label: "Tue", revenue: 9400, previous: 8100, orders: 70 },
+  { label: "Wed", revenue: 8800, previous: 8700, orders: 66 },
+]
+
+export default function Page() {
+  return (
+    <Dashboard1
+      title="This week"
+      defaultRange="7d"
+      getSeries={() => week}
+      currency="EUR"
+      channels={[{ name: "Web", share: 64 }, { name: "Marketplace", share: 36 }]}
+      orders={[{ id: "ORD-2201", customer: "Fjord Labs", email: "pay@fjord.no", status: "paid", total: 1840, date: "2026-09-30" }]}
+    />
+  )
+}
+```
+
+### Load the data from your API
+
+Fetch with `useResource`. It turns a request into the `state` the block takes, aborts a request that is replaced, and retries on demand.
+
+```tsx title="components/sales-overview.tsx" {10-12,15-17}
+"use client"
+
+import * as React from "react"
+
+import { Dashboard1, type Dashboard1Range } from "@/components/ballmac/blocks/dashboard-1/dashboard-1"
+import { useResource } from "@/lib/ballmac/use-resource"
+
+export function SalesOverview() {
+  const [range, setRange] = React.useState<Dashboard1Range>("7d")
+  const overview = useResource(
+    (signal) => fetch(`/api/overview?range=${range}`, { signal }).then((r) => r.json()),
+    { deps: [range], isEmpty: (o) => o.series.length === 0 }
+  )
+  return (
+    <Dashboard1
+      state={overview.state} // "loading" | "ready" | "empty" | "error"
+      onRetry={overview.retry}
+      defaultRange={range}
+      onRangeChange={setRange}
+      getSeries={() => overview.data?.series ?? []}
+      channels={overview.data?.channels}
+      orders={overview.data?.orders}
+    />
+  )
+}
+```
+
+Changing the range fetches again, and the block shows its skeleton while it waits. `defaultRange={range}` keeps the switch on the range you chose when the block comes back.
+
+### Add a test endpoint
+
+If you don't have an API yet, this route returns the same shape the component expects.
+
+```ts title="app/api/overview/route.ts"
+export function GET(request: Request) {
+  const range = new URL(request.url).searchParams.get("range") ?? "7d"
+  const days = range === "90d" ? 90 : range === "30d" ? 30 : 7
+  const series = Array.from({ length: days }, (_, i) => ({ label: `Day ${i + 1}`, revenue: 8000 + (i % 7) * 900, previous: 7500 + (i % 5) * 700, orders: 60 + (i % 9) * 4 }))
+  return Response.json({
+    series,
+    channels: [{ name: "Web", share: 64 }, { name: "Marketplace", share: 36 }],
+    orders: [{ id: "ORD-1", customer: "Fjord Labs", email: "pay@fjord.no", status: "paid", total: 1840, date: "2026-09-30" }],
+  })
+}
+```
+
+### See every state
+
+Open the block's page and use the **State** switch above the preview to see loading, empty and error, or link straight to one with `/blocks/dashboard-1?state=error`. In your own page, stop the endpoint (or make it return a 500) and the block shows an error with a retry button. Focus is never moved for you, and screen readers hear the loading and error messages.
+
+### Match your brand
+
+The chart and the trend lines use your theme's `--chart-1` color, so changing it changes the dashboard.
+
+```css title="app/globals.css"
+:root {
+  --chart-1: oklch(0.62 0.19 262);
+}
+```
+
+For a whole theme, see [Make it yours](/docs/get-started/make-it-yours).
+
+### Check your work
+
+Run the quality check on your own page. It reports missing states, unnamed controls, hard-coded colors and layouts that break on a phone.
+
+```npm
+npx @ballmac/cli check
+```
+
+</Steps>
+
+## Next steps
+
+<Cards>
+  <Card href="/docs/guides/states" title="Handle loading, empty and error states">The `state` prop on every data block and form block.</Card>
+  <Card href="/blocks/dashboard-1" title="Dashboard 1">All props, examples and the quality scorecard.</Card>
+  <Card href="/docs/guides/update-components" title="Update components without losing your edits">Merge new versions into the copy you changed.</Card>
+  <Card href="/docs/get-started/connect-your-agent" title="Connect your AI agent">Let your agent add the next block for you.</Card>
+</Cards>

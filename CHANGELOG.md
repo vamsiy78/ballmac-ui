@@ -6,6 +6,23 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-18-use-cases-and-docs-feedback] - 2026-10-18
+
+**Use-case pages, a dashboard tutorial and better search.** Start from the job you are doing, follow a ten-minute tutorial, and tell us when a docs page didn't help.
+
+### Added
+
+- [What you can build](https://ui.ballmac.com/use-cases) has a page for dashboards, desktop apps, AI agents, landing pages, admin tools, and sign-in and settings, each with its blocks, templates and guides.
+- [Build a sales dashboard](https://ui.ballmac.com/docs/get-started/build-a-dashboard) is a ten-minute tutorial: add the block, pass your own numbers, load them with `useResource`, see every state and match your brand.
+- Every docs page ends with "Was this page helpful?"; a "no" can say what was missing.
+- The [quality page](https://ui.ballmac.com/quality) shows the tools it was measured with, how many items each check doesn't apply to, and a run history.
+
+### Changed
+
+- Search ranks title matches first, marks your words in the results, and lists the places people go most before you type.
+- The component page header is one row: quality, version, date and test, with the change notes behind "What changed".
+- Docs pages and changelog entries have their own share image.
+
 ## [2026-10-18-searchable-blocks-gallery] - 2026-10-18
 
 **A searchable blocks gallery and a clearer home page.** Find a block by typing, split free from Pro, and see what is new, with a home page that says what is in the library.

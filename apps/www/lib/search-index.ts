@@ -3,10 +3,12 @@ import "server-only"
 import { PRESETS } from "@ballmac-ui/theme-engine"
 
 import { getChangelog } from "@/lib/changelog"
+import { useCases } from "@/lib/use-cases"
 import { docSearchEntries } from "@/lib/docs"
 import { blockCategoryLabels, categoryLabels, getBlocks, getComponents, getTemplates } from "@/lib/registry"
 
-export type MenuEntry = { name: string; title: string; description: string; group: string; href: string }
+/** `context` is shown under a heading result ("In Motion settings") and is not searched, so a page title does not make every one of its headings match. */
+export type MenuEntry = { name: string; title: string; description: string; group: string; href: string; context?: string }
 
 /** Everything the search box can jump to. Served as /search-index.json and fetched when the box is first opened, so no page carries it. */
 export function searchEntries(): MenuEntry[] {
@@ -25,6 +27,7 @@ export function searchEntries(): MenuEntry[] {
     { name: "feels-showcase", title: "Platform feels showcase", description: "One app in macOS, iOS, Windows and web feels, live.", group: "Docs", href: "/feels" },
     { name: "quality", title: "Quality, measured", description: "Every item loaded in a real browser, with the results published.", group: "Docs", href: "/quality" },
     ...docSearchEntries(),
+    ...useCases.map((u) => ({ name: `use-case-${u.slug}`, title: u.name, description: u.description, group: "Use cases", href: `/use-cases/${u.slug}` })),
     ...getChangelog().map((e) => ({ name: `changelog-${e.slug}`, title: e.title, description: e.summary, group: "Changelog", href: `/changelog/${e.slug}` })),
   ]
 }

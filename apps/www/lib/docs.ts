@@ -95,7 +95,7 @@ export function docSearchEntries() {
     const page = { name: `doc-${slug}`, title: p.data.title, description: p.data.description ?? "", group, href: p.url }
     const headings = p.data.toc
       .filter((t) => t.depth === 2)
-      .map((t) => ({ name: `doc-${slug}-${t.url.slice(1)}`, title: textOfNode(t.title), description: `In ${p.data.title}`, group, href: `${p.url}${t.url}` }))
+      .map((t) => ({ name: `doc-${slug}-${t.url.slice(1)}`, title: textOfNode(t.title), description: "", context: `In ${p.data.title}`, group, href: `${p.url}${t.url}` }))
     return [page, ...headings]
   })
 }

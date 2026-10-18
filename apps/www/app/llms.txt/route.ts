@@ -1,6 +1,7 @@
 import { PRESETS } from "@ballmac-ui/theme-engine"
 
 import { mdHref, orderedDocs } from "@/lib/docs"
+import { useCases } from "@/lib/use-cases"
 import { getBlocks, getComponents, getTemplates, isPro, SITE_URL } from "@/lib/registry"
 
 export const dynamic = "force-static"
@@ -22,6 +23,9 @@ export function GET() {
     `- [Changelog](${SITE_URL}/changelog): what is new, newest first. Feeds: ${SITE_URL}/changelog/rss.xml and ${SITE_URL}/changelog/atom.xml`,
     `- [Registry index](${SITE_URL}/r/registry.json): every free item in shadcn registry format`,
     `- [JSON API](${SITE_URL}/api/v1/index.json): every item with its description, when to use it and install command`,
+    "",
+    "## Use cases",
+    ...useCases.map((u) => `- [${u.name}](${SITE_URL}/use-cases/${u.slug}): ${u.description}`),
     "",
     "## Pro",
     `- [Pricing](${SITE_URL}/pricing): free versus Pro`,

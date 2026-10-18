@@ -4,6 +4,8 @@
  * it is set by `assets.run_worker_first` in wrangler.jsonc; keep that list and ROUTES below in step.
  */
 import { offerWatch } from "./offer-watch"
+import * as changelogSubscribe from "./routes/changelog-subscribe"
+import * as docsFeedback from "./routes/docs-feedback"
 import * as licenseVerify from "./routes/license-verify"
 import { kits, starters } from "./routes/pro-archives"
 import * as proDownload from "./routes/pro-download"
@@ -25,6 +27,8 @@ const ROUTES: [URLPattern, Methods][] = [
   ["/api/pro/founders", proFounders],
   ["/api/pro/items/:name", proItems],
   ["/api/pro/download/:dir/:file", proDownload],
+  ["/api/changelog-subscribe", changelogSubscribe],
+  ["/api/docs-feedback", docsFeedback],
   ["/api/reminders", reminders],
   ["/api/sampler", sampler],
   ["/api/stars", stars],

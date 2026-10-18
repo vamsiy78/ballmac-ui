@@ -212,6 +212,12 @@ writeFileSync(join(generated, "index.json"), JSON.stringify(index, null, 2) + "\
   writeFileSync(join(generated, "quality.json"), JSON.stringify(slim) + "\n")
 }
 
+// The run history for /quality (registry/quality-history.json, appended by `pnpm quality`).
+{
+  const file = join(ROOT, "registry/quality-history.json")
+  writeFileSync(join(generated, "quality-history.json"), (existsSync(file) ? readFileSync(file, "utf8").trim() : "[]") + "\n")
+}
+
 // The rules `ballmac check` applies, for the /docs/guides/check-your-app page. One list feeds the CLI, the MCP server and the docs.
 writeFileSync(join(generated, "check-rules.json"), JSON.stringify(RULES, null, 2) + "\n")
 
