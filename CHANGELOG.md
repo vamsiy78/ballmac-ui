@@ -2,6 +2,16 @@
 
 New components, blocks and changes, newest first. The same list is at https://ui.ballmac.com/changelog. This file is generated: edit `apps/www/lib/changelog.ts` and run `pnpm changelog`.
 
+## 2026-10-18: A status page, a pricing estimator, a feedback survey, a people directory and a referral waitlist
+
+- Status 1, system status page: a banner worked out from the services (all operational, slower than usual, down, maintenance), each service with a 90-day history you scrub with a pointer or the arrow keys (each bar is a slider that reads the date and what happened), uptime figures worked out from the days, live incidents as a timeline of updates, two weeks of past incidents with quiet days folded into one row, and a subscribe box. Pass today yourself; the block never reads the clock
+- Calculator 1, pricing estimator: sliders for seats, requests and storage on fixed steps, monthly or yearly, add-ons, and a dark summary that picks the cheapest plan that fits, rolls the price as you move, itemizes the sum, shows what the other plans would cost, and says Talk to us instead of inventing a price beyond your plans
+- Survey 1, NPS feedback: the 0 to 10 question as big buttons (one tab stop, arrows move and choose), a follow-up that changes with the answer, an optional comment, a progress bar, Back that keeps answers, focus moved to each new question, and a failed send that keeps what was typed
+- Directory 1, people directory: search across names, roles, teams and cities with highlighted matches, department chips with live counts, a location filter, a grid and a compact list, and for each person their availability in words and their local time right now, worked out from the moment you pass
+- Waitlist 1, referral waitlist: an email form with a count of who is waiting, then the place in line (read out as a plain number, not mid-count), a share link with one-press copy, email and X sharing, and a reward ladder that says in words which steps are unlocked
+- Five new block groups: Status page, Calculators, Surveys, Directory and Waitlist, also found by the MCP server for uptime, incident, estimator, nps, feedback, people, employees, referral and launch
+- All pass every scorecard check, including 360 px (checked down to 320 px), reduced motion and, apart from the left-to-right history bars, right to left, and ship their tests
+
 ## 2026-10-18: A project timeline, an org chart, data and privacy settings, customer stories and an integrations directory
 
 - Gantt 1, project timeline: bars placed by real dates with a progress fill, milestones as diamonds, dependency arrows (a task that starts before what it waits for shows its arrow running backwards), a today line, days, weeks and months zoom, a sticky task column, a details panel with what each task waits for, and a hidden table of the same data for screen readers. Late work is marked with an icon and the word Late, not only by color. The timeline runs left to right in every language, like a chart

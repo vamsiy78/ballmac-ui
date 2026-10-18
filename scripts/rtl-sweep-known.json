@@ -101,7 +101,7 @@
   },
   {
     "prefix": "hero-pro-3-",
-    "reason": "Keyboard shortcuts (⌘ N) keep their left-to-right order inside the mirrored row, and the background grid flickers at random."
+    "reason": "Keyboard shortcuts (\u2318 N) keep their left-to-right order inside the mirrored row, and the background grid flickers at random."
   },
   {
     "prefix": "hero-pro-11-",
@@ -213,7 +213,7 @@
   },
   {
     "prefix": "input-with-icon",
-    "reason": "The shortcut hint (⌘K) keeps its key order in every language, as it does on the keyboard."
+    "reason": "The shortcut hint (\u2318K) keeps its key order in every language, as it does on the keyboard."
   },
   {
     "prefix": "kbd",
@@ -242,5 +242,9 @@
   {
     "prefix": "gantt-1",
     "reason": "A timeline runs left to right in every language, like a chart: dates only make sense in one direction."
+  },
+  {
+    "prefix": "status-1",
+    "reason": "The 90-day history bars run oldest to newest from left to right in every language, like a chart, and make up most of the page's elements."
   }
 ]

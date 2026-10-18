@@ -7485,6 +7485,144 @@
       }
     },
     {
+      "name": "calculator-1",
+      "type": "registry:block",
+      "title": "Calculator 1: pricing estimator",
+      "description": "A pricing estimator: sliders for seats, requests and storage, monthly or yearly, add-ons, and a dark summary that picks the cheapest plan that fits, rolls the total as you move, itemizes the sum and offers Talk to us beyond the plans.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/animated-number-flow.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/slider.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/calculator-1/calculator-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/calculator-1/calculator-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "calculator"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "calculator",
+          "pricing",
+          "estimator",
+          "usage",
+          "sliders",
+          "cost",
+          "plans",
+          "quote",
+          "seats",
+          "pay as you go"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A usage-based pricing calculator. <Calculator1 plans={[{ id, name, base, perSeat, maxSeats, includedRequests, perThousand, includedStorage, perGb }]} addons={[{ id, name, description, price, per: 'seat' | 'account' }]} yearlyDiscount={0.2} currency='USD' locale onContinue={(estimate) => ...} onTalk />. It picks the cheapest plan whose maxSeats fits, shows each line of the sum and the cost on the other plans, and shows Talk to us when no plan fits. Prices are numbers per month.",
+          "whenToUse": [
+            "A pricing page for per-seat or usage-based products",
+            "Helping a buyer size a plan before they talk to sales"
+          ],
+          "whenNotToUse": [
+            "Fixed tiers with a feature list (use pricing-1 to pricing-4)",
+            "A checkout form"
+          ],
+          "composesWith": [
+            "pricing-1",
+            "faq-1",
+            "cta-1",
+            "comparison-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, then arrow keys",
+              "action": "Each slider is a labelled slider; arrows move one step, Home and End jump to the ends, and the value is read aloud with its unit"
+            },
+            {
+              "keys": "Result",
+              "action": "The suggested plan and monthly price are announced politely as the sliders move"
+            },
+            {
+              "keys": "Add-ons",
+              "action": "Checkboxes inside a labelled group, each with its price in text"
+            }
+          ],
+          "customization": [
+            "Plans and add-ons are plain data, so any pricing model that is a base plus seats plus overage fits",
+            "Requests and storage move along fixed steps, so the slider is never at an awkward number",
+            "The total's digits roll; with reduced motion it changes at once"
+          ]
+        },
+        "statesNone": "Static content: nothing to load, submit or fail.",
+        "examples": [
+          "calculator-1-demo",
+          "calculator-1-enterprise"
+        ],
+        "url": "https://ui.ballmac.com/components/calculator-1"
+      }
+    },
+    {
+      "name": "calculator-1-demo",
+      "type": "registry:example",
+      "title": "Calculator 1: pricing estimator: Yearly, twelve people",
+      "description": "Yearly, twelve people example of Calculator 1: pricing estimator.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/calculator-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/calculator-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/calculator-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "calculator-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "calculator-1-enterprise",
+      "type": "registry:example",
+      "title": "Calculator 1: pricing estimator: Beyond the plans",
+      "description": "Beyond the plans example of Calculator 1: pricing estimator.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/calculator-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/calculator-1-enterprise.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/calculator-1-enterprise.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "calculator-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "calendar-1",
       "type": "registry:block",
       "title": "Calendar 1: week view with mini month",
@@ -11715,6 +11853,241 @@
       "meta": {
         "example": true,
         "of": "devices-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "directory-1",
+      "type": "registry:block",
+      "title": "Directory 1: people directory",
+      "description": "A people directory: search across names, roles, teams and cities, department chips with live counts, a location filter, a grid and a compact list, each person with availability and their local time right now.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/match-highlight.json",
+        "https://ui.ballmac.com/r/segmented-control.json",
+        "https://ui.ballmac.com/r/select.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/directory-1/directory-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/directory-1/directory-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "directory"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "directory",
+          "people",
+          "team",
+          "employees",
+          "contacts",
+          "company",
+          "who is who",
+          "time zones",
+          "staff"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A people directory. <Directory1 people={[{ id, name, title, department, location, utcOffset: 1, email, pronouns, status: 'available' | 'away' | 'out' }]} now='2026-10-18T10:42:00Z' locale defaultView='grid' | 'list' onSelect />. Local times are worked out from now plus each utcOffset; pass now yourself, the block never reads the clock. Department chips and the location menu come from the data.",
+          "whenToUse": [
+            "An internal company directory or a team page with filters",
+            "Remote teams that need to see where people are and what time it is for them"
+          ],
+          "whenNotToUse": [
+            "A reporting hierarchy (use orgchart-1)",
+            "A marketing team section with photos (use team-1)"
+          ],
+          "composesWith": [
+            "orgchart-1",
+            "app-shell-1",
+            "about-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Search, location, view, department buttons (pressed state announced), then one button per person; the email shortcut is its own link"
+            },
+            {
+              "keys": "Count",
+              "action": "'7 people match' is announced politely as filters change"
+            },
+            {
+              "keys": "Availability",
+              "action": "Written as a word (Available, Away, Out of office) beside the dot, never by color alone"
+            }
+          ],
+          "customization": [
+            "Local time uses each person's utcOffset, so half-hour zones work",
+            "A person between 21:00 and 07:00 locally is marked probably offline",
+            "Pictures are drawn from the name, so identical on server and client"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "directory-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton cards under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Nobody listed",
+            "example": "directory-1-empty",
+            "trigger": "state=\"empty\" (or people={[]})",
+            "note": "Says people appear once added; emptyState sets the copy. A search with no match says so with Clear filters."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "directory-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "directory-1-demo",
+          "directory-1-list",
+          "directory-1-loading",
+          "directory-1-empty",
+          "directory-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/directory-1"
+      }
+    },
+    {
+      "name": "directory-1-demo",
+      "type": "registry:example",
+      "title": "Directory 1: people directory: Grid",
+      "description": "Grid example of Directory 1: people directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/directory-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/directory-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/directory-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "directory-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "directory-1-list",
+      "type": "registry:example",
+      "title": "Directory 1: people directory: List",
+      "description": "List example of Directory 1: people directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/directory-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/directory-1-list.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/directory-1-list.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "directory-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "directory-1-loading",
+      "type": "registry:example",
+      "title": "Directory 1: people directory: Loading",
+      "description": "Loading example of Directory 1: people directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/directory-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/directory-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/directory-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "directory-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "directory-1-empty",
+      "type": "registry:example",
+      "title": "Directory 1: people directory: Nobody listed",
+      "description": "Nobody listed example of Directory 1: people directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/directory-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/directory-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/directory-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "directory-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "directory-1-error",
+      "type": "registry:example",
+      "title": "Directory 1: people directory: Could not load",
+      "description": "Could not load example of Directory 1: people directory.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/directory-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/directory-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/directory-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "directory-1",
         "tier": "free"
       }
     },
@@ -20672,6 +21045,468 @@
       }
     },
     {
+      "name": "status-1",
+      "type": "registry:block",
+      "title": "Status 1: system status page",
+      "description": "A public status page: an overall banner worked out from the data, each service with a 90-day history you scrub by pointer or arrow keys, live incidents as a timeline of updates, two weeks of past incidents and a subscribe box.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/status-1/status-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/status-1/status-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "status"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "status",
+          "uptime",
+          "incidents",
+          "system status",
+          "outage",
+          "maintenance",
+          "reliability",
+          "operational",
+          "status page"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A status page. <Status1 components={[{ id, name, description, status: 'operational' | 'degraded' | 'outage' | 'maintenance', days: ('ok' | 'degraded' | 'outage' | 'none')[] /* 90, oldest first */ }]} incidents={[{ id, title, impact: 'minor' | 'major' | 'maintenance', day: '2026-10-18', affects: ['API'], updates: [{ status: 'investigating' | 'identified' | 'monitoring' | 'resolved' | 'scheduled', time: '09:42', body }] /* newest first */ }]} today='2026-10-18' updatedAt='10:42 UTC' onSubscribe />. The banner is the worst current status; an incident is live until its newest update is resolved. Pass today yourself; the block never reads the clock.",
+          "whenToUse": [
+            "A public status page for a service",
+            "An internal reliability page showing uptime and incidents"
+          ],
+          "whenNotToUse": [
+            "A single status dot or badge row (use status-dot or status-badge-row)",
+            "Raw server logs (use log-stream)"
+          ],
+          "composesWith": [
+            "header-1",
+            "footer-1",
+            "settings-5"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, then Left / Right / Home / End",
+              "action": "Each history bar is a slider through its days; the value text reads the date and what happened, and a tooltip shows the same for pointer users"
+            },
+            {
+              "keys": "Summary",
+              "action": "Every history also has a sentence in text: the uptime and how many days had an outage or were degraded"
+            },
+            {
+              "keys": "Status",
+              "action": "Shown with an icon and a word (Operational, Degraded, Outage, Maintenance), never by color alone; the banner is a live region"
+            }
+          ],
+          "customization": [
+            "Uptime counts an outage day as down and a degraded day as half",
+            "The bar and its day order run left to right in every language, like a chart",
+            "Dates use the locale you pass"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "status-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "A skeleton banner and service rows under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No services listed",
+            "example": "status-1-empty",
+            "trigger": "state=\"empty\" (or components={[]})",
+            "note": "Says services appear once added; emptyState sets the copy and can add a button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "status-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert that says this does not mean something is down, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "status-1-demo",
+          "status-1-operational",
+          "status-1-outage",
+          "status-1-loading",
+          "status-1-empty",
+          "status-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/status-1"
+      }
+    },
+    {
+      "name": "status-1-demo",
+      "type": "registry:example",
+      "title": "Status 1: system status page: A slowdown and maintenance",
+      "description": "A slowdown and maintenance example of Status 1: system status page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/status-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/status-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/status-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "status-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "status-1-operational",
+      "type": "registry:example",
+      "title": "Status 1: system status page: All systems operational",
+      "description": "All systems operational example of Status 1: system status page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/status-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/status-1-operational.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/status-1-operational.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "status-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "status-1-outage",
+      "type": "registry:example",
+      "title": "Status 1: system status page: An outage",
+      "description": "An outage example of Status 1: system status page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/status-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/status-1-outage.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/status-1-outage.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "status-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "status-1-loading",
+      "type": "registry:example",
+      "title": "Status 1: system status page: Loading",
+      "description": "Loading example of Status 1: system status page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/status-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/status-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/status-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "status-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "status-1-empty",
+      "type": "registry:example",
+      "title": "Status 1: system status page: No services listed",
+      "description": "No services listed example of Status 1: system status page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/status-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/status-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/status-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "status-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "status-1-error",
+      "type": "registry:example",
+      "title": "Status 1: system status page: Could not load",
+      "description": "Could not load example of Status 1: system status page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/status-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/status-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/status-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "status-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "survey-1",
+      "type": "registry:block",
+      "title": "Survey 1: NPS feedback",
+      "description": "A three-question feedback card: the 0 to 10 recommend question as big buttons, a follow-up that changes with the answer, an optional comment, a progress bar, Back that keeps answers, and a failed send that keeps what was typed.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/textarea.json",
+        "https://ui.ballmac.com/r/use-resource.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/survey-1/survey-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/survey-1/survey-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "survey"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "survey",
+          "nps",
+          "feedback",
+          "score",
+          "rating",
+          "customer satisfaction",
+          "csat",
+          "poll",
+          "form"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "An NPS survey card. <Survey1 product='Acme' lowReasons highReasons onSubmit={({ score, reasons, comment, mayContact }) => Promise} />. Scores 9 and 10 get the high reasons ('What do you like most?'), everything else the low ones. Reject onSubmit to show the error with the answers kept. Pass state to drive it, or leave it out to run by itself.",
+          "whenToUse": [
+            "A feedback page linked from an email",
+            "Asking for NPS after onboarding or a milestone"
+          ],
+          "whenNotToUse": [
+            "A floating widget in the app (use feedback-widget)",
+            "A long, multi-section form"
+          ],
+          "composesWith": [
+            "contact-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, then arrow keys",
+              "action": "The scores are a radio group with one tab stop; arrows move and choose, and each is read with its number (0 as not at all likely, 10 as extremely likely)"
+            },
+            {
+              "keys": "Next / Back",
+              "action": "Focus moves to the new question's heading so nothing is lost when the step changes"
+            },
+            {
+              "keys": "Progress",
+              "action": "A labelled progress bar and 'Question 2 of 3' in text"
+            }
+          ],
+          "customization": [
+            "lowReasons and highReasons are plain arrays",
+            "The mood line under the scale says what the score means in words",
+            "Back keeps every answer; changing between happy and unhappy clears only the reasons, which no longer apply"
+          ]
+        },
+        "states": [
+          {
+            "id": "submitting",
+            "title": "Sending",
+            "example": "survey-1-sending",
+            "trigger": "state=\"submitting\"",
+            "note": "The comment and buttons are disabled, Send shows a spinner and the card is marked busy."
+          },
+          {
+            "id": "success",
+            "title": "Thank you",
+            "example": "survey-1-sent",
+            "trigger": "state=\"success\"",
+            "note": "The progress bar fills and the card thanks the person; the words change for a fan and for someone who was unhappy."
+          },
+          {
+            "id": "error",
+            "title": "Could not send",
+            "example": "survey-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert on the last step saying nothing was lost, with Try again; every answer is still there."
+          }
+        ],
+        "examples": [
+          "survey-1-demo",
+          "survey-1-sending",
+          "survey-1-sent",
+          "survey-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/survey-1"
+      }
+    },
+    {
+      "name": "survey-1-demo",
+      "type": "registry:example",
+      "title": "Survey 1: NPS feedback: Default",
+      "description": "Default example of Survey 1: NPS feedback.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/survey-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/survey-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/survey-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "survey-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "survey-1-sending",
+      "type": "registry:example",
+      "title": "Survey 1: NPS feedback: Sending",
+      "description": "Sending example of Survey 1: NPS feedback.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/survey-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/survey-1-sending.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/survey-1-sending.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "survey-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "survey-1-sent",
+      "type": "registry:example",
+      "title": "Survey 1: NPS feedback: Thank you",
+      "description": "Thank you example of Survey 1: NPS feedback.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/survey-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/survey-1-sent.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/survey-1-sent.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "survey-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "survey-1-error",
+      "type": "registry:example",
+      "title": "Survey 1: NPS feedback: Could not send",
+      "description": "Could not send example of Survey 1: NPS feedback.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/survey-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/survey-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/survey-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "survey-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "tasks-1",
       "type": "registry:block",
       "title": "Tasks 1: task list",
@@ -21909,6 +22744,216 @@
       "meta": {
         "example": true,
         "of": "verify-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "waitlist-1",
+      "type": "registry:block",
+      "title": "Waitlist 1: referral waitlist",
+      "description": "A launch waitlist that grows by referral: an email form with a count of who is waiting, then the person's place in line, their own share link to copy, and a ladder of rewards that fills as friends join.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/copy-button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/input.json",
+        "https://ui.ballmac.com/r/number-ticker.json",
+        "https://ui.ballmac.com/r/use-resource.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/waitlist-1/waitlist-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/waitlist-1/waitlist-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "waitlist"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "waitlist",
+          "launch",
+          "referral",
+          "early access",
+          "signup",
+          "invite",
+          "viral",
+          "coming soon",
+          "pre-launch"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-18",
+        "tests": true,
+        "ai": {
+          "summary": "A referral waitlist. <Waitlist1 product='Acme' waiting={2431} rewards={[{ at: 3, title, description }]} onJoin={(email) => Promise<{ position, link, referrals }>} defaultJoined state />. After joining it shows #position, the share link with a copy button, and rewards that unlock as referrals reaches each at. Reject onJoin to show its message with the email kept.",
+          "whenToUse": [
+            "A pre-launch landing page that collects emails",
+            "Rolling out access in waves with referral rewards"
+          ],
+          "whenNotToUse": [
+            "A newsletter signup (use newsletter-1)",
+            "A full sign-up form (use auth blocks)"
+          ],
+          "composesWith": [
+            "hero-1",
+            "faq-1",
+            "footer-1",
+            "logo-cloud-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Submit",
+              "action": "An invalid email is announced as an alert and linked to the field; a failed join keeps the email"
+            },
+            {
+              "keys": "After joining",
+              "action": "Focus moves to the place in line, which is read as 'Number 1,284' with the message to follow"
+            },
+            {
+              "keys": "Rewards",
+              "action": "Each step says in words whether it is unlocked or how many more friends it needs"
+            }
+          ],
+          "customization": [
+            "rewards: any number of steps by friends needed",
+            "The share link and text are built for email and X; swap in your own channels",
+            "The link is shown left to right even in right-to-left layouts, like any address"
+          ]
+        },
+        "states": [
+          {
+            "id": "submitting",
+            "title": "Joining",
+            "example": "waitlist-1-sending",
+            "trigger": "state=\"submitting\"",
+            "note": "The field and button are disabled, the button says Joining with a spinner and the section is marked busy."
+          },
+          {
+            "id": "success",
+            "title": "On the list",
+            "example": "waitlist-1-joined",
+            "trigger": "state=\"success\"",
+            "note": "The second screen: place in line, share link and the reward ladder."
+          },
+          {
+            "id": "error",
+            "title": "Could not join",
+            "example": "waitlist-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying the email is still there; the person can press Join again."
+          }
+        ],
+        "examples": [
+          "waitlist-1-demo",
+          "waitlist-1-joined",
+          "waitlist-1-sending",
+          "waitlist-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/waitlist-1"
+      }
+    },
+    {
+      "name": "waitlist-1-demo",
+      "type": "registry:example",
+      "title": "Waitlist 1: referral waitlist: Join form",
+      "description": "Join form example of Waitlist 1: referral waitlist.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/waitlist-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/waitlist-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/waitlist-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "waitlist-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "waitlist-1-joined",
+      "type": "registry:example",
+      "title": "Waitlist 1: referral waitlist: On the list",
+      "description": "On the list example of Waitlist 1: referral waitlist.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/waitlist-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/waitlist-1-joined.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/waitlist-1-joined.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "waitlist-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "waitlist-1-sending",
+      "type": "registry:example",
+      "title": "Waitlist 1: referral waitlist: Joining",
+      "description": "Joining example of Waitlist 1: referral waitlist.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/waitlist-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/waitlist-1-sending.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/waitlist-1-sending.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "waitlist-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "waitlist-1-error",
+      "type": "registry:example",
+      "title": "Waitlist 1: referral waitlist: Could not join",
+      "description": "Could not join example of Waitlist 1: referral waitlist.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/waitlist-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/waitlist-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/waitlist-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "waitlist-1",
         "tier": "free"
       }
     },

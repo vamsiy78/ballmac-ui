@@ -215,6 +215,10 @@
     "version": "1.0.0",
     "hash": "4be091077f6cd234f1030a8fa3cbe28ff2f08a107af17e362609a7496b6e8c2b"
   },
+  "calculator-1": {
+    "version": "1.0.0",
+    "hash": "3f17cfba22fb84f72dc5c0499c461ad1028126bba4dfb840ef73bafd168c05e8"
+  },
   "calendar": {
     "version": "1.0.1",
     "hash": "a0fe042260183a6a73609f20e60dac74cd0b42bc64015acf526c3d72698631dc"
@@ -450,6 +454,10 @@
   "direction": {
     "version": "1.0.0",
     "hash": "809e792fc5a85f7fa5cbb9e7bd99838d40434aa0fbf579b12729182d1a2f7165"
+  },
+  "directory-1": {
+    "version": "1.0.0",
+    "hash": "81557968e6d2359692fa59311ed7c280a3fc8e1d5b6ed271e216b780ff33fe1c"
   },
   "dock": {
     "version": "1.0.0",
@@ -1267,6 +1275,10 @@
     "version": "1.0.1",
     "hash": "fe8b2bd34d00c1e19af572ce6b4d7f5075587c4bd43e421541edaea6b210a2f2"
   },
+  "status-1": {
+    "version": "1.0.0",
+    "hash": "5f431883b5b1383d355df16d46bc03f3f8987bc495ba5b5ded0966c0d59a0055"
+  },
   "status-badge-row": {
     "version": "1.0.0",
     "hash": "b22c23511ad3cd2b805734a7423238b9d1044db589a170a4fd8028eb4ec38ca7"
@@ -1290,6 +1302,10 @@
   "suggestion-chips": {
     "version": "1.0.1",
     "hash": "28f09ea8fc9ee17206544da092a7ac21b4fed04213258ace64f3c999f0441d04"
+  },
+  "survey-1": {
+    "version": "1.0.0",
+    "hash": "fb7f3f33cd58eee67601792df4216ed3705553f58e3f37cdd3e91d126d87e397"
   },
   "switch": {
     "version": "1.0.1",
@@ -1558,6 +1574,10 @@
   "voice-input": {
     "version": "1.0.0",
     "hash": "5d41a99bebe4d047836a918e4c0f29eee5e4a307c874dac4c52c574e24b4daac"
+  },
+  "waitlist-1": {
+    "version": "1.0.0",
+    "hash": "fa792f26762125e51121d1899520ab9a2d82db9018b60230e2a340f47f3d3473"
   },
   "warp-background": {
     "version": "1.0.0",
