@@ -1,0 +1,56 @@
+---
+title: Use Ballmac with the shadcn chat kit
+description: Trace, Questionnaire and Code Block have the same parts and props as shadcn's, so agent output drops into a chat built with either library.
+---
+
+shadcn's chat kit has three parts that an AI interface shows in almost every turn: a **Trace** for what the agent did, a **Questionnaire** for questions it needs answered, and a **Code Block** for what it ran or wrote. Ballmac has all three with the same part names and props, so code written for one works with the other.
+
+## Install
+
+```npm
+npx shadcn@latest add @ballmac/trace @ballmac/questionnaire @ballmac/code-block
+```
+
+`questionnaire` is built on shadcn's headless `@shadcn/react/questionnaire`, which is installed with it, so its keyboard, form and validation behavior is the same as theirs. `trace` and `code-block` are our own code with the same API.
+
+## One agent turn
+
+```tsx
+<Trace>
+  <TraceCollapsible>
+    <TraceCollapsibleTrigger>
+      <TraceLine>
+        <TraceIcon><Terminal /></TraceIcon>
+        <TraceTitle>Ran the billing tests</TraceTitle>
+        <TraceDescription>2 failed</TraceDescription>
+      </TraceLine>
+    </TraceCollapsibleTrigger>
+    <TraceCollapsibleContent>
+      <CodeBlock size="sm" variant="destructive">
+        <CodeBlockContent wrap className="max-h-48">{output}</CodeBlockContent>
+      </CodeBlock>
+    </TraceCollapsibleContent>
+  </TraceCollapsible>
+</Trace>
+```
+
+The [Trace page](/components/trace) has this turn live, with a questionnaire under it.
+
+## What is the same
+
+| Part | Same as shadcn | Also in Ballmac |
+| --- | --- | --- |
+| Trace | `TraceLine` with `status`, `TraceIcon`, `TraceTitle`, `TraceDescription`, `TraceCollapsible`, its trigger and content | A running title shimmers, the content respects reduced motion, and the open state is a controlled prop |
+| Questionnaire | Every part, `items`, `shortcuts`, `multiple`, `invalid`, controlled `item` | Button labels come from the [translations](/docs/guides/translate), and the actions use our `Button` |
+| Code Block | `CodeBlockHeader`, `Title`, `Actions`, `CopyButton`, `Content`, `Line`, `Footer`, `size`, `variant`, `lineNumbers`, `startLine`, `wrap` | `useHighlightedCode` highlights with no async loading, and the ready-made panel (`code`, `filename`, `language`) still works |
+
+## Where it differs
+
+- `useHighlightedCode` uses Ballmac's small built-in tokenizer (JSON, shell, JavaScript and TypeScript, Python, Go, HTTP and `.env`), not Shiki, so there is nothing to load and it renders on the server. For other languages, render your own highlighted lines inside `CodeBlockLine`, or use Shiki output as children of the ready-made panel.
+- ANSI colors in terminal output are not rendered. Strip the escape codes before you pass the text in.
+- `CodeBlock` with no parts inside is the ready-made panel; with `CodeBlockHeader`, `CodeBlockActions`, `CodeBlockContent` or `CodeBlockFooter` as direct children it is the compound block. Wrapping the parts in another component switches it back to the panel, so keep them direct.
+
+## Related
+
+- [Built for AI agents](/docs/concepts/built-for-agents)
+- [States](/docs/guides/states)

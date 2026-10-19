@@ -113,14 +113,16 @@ async function boxes(page: Page) {
   return page.evaluate(() => {
     const width = document.documentElement.clientWidth
     const skip = new Set(["SCRIPT", "STYLE", "NEXT-ROUTE-ANNOUNCER", "svg", "path", "circle", "rect", "line", "g", "defs", "use", "polyline", "polygon", "ellipse", "text"])
-    const out: { l: number; r: number; t: number }[] = []
+    const out: { l: number; r: number; t: number; ltr: boolean }[] = []
     for (const el of document.body.querySelectorAll("*")) {
       if (skip.has(el.tagName)) continue
       const b = el.getBoundingClientRect()
       if (b.width < 4 || b.height < 4) continue
       const s = getComputedStyle(el)
       if (s.visibility === "hidden" || s.display === "none") continue
-      out.push({ l: b.left, r: b.right, t: b.top })
+      // Inside an explicit dir="ltr" island (source code, a phone number) things read left to right on purpose; the island itself is still compared.
+      const island = el.parentElement?.closest("[dir]")
+      out.push({ l: b.left, r: b.right, t: b.top, ltr: island !== null && island !== undefined && island !== document.documentElement && island.getAttribute("dir") === "ltr" })
     }
     return { boxes: out, width }
   })
@@ -140,9 +142,15 @@ async function mirrorScore(page: Page, base: string, name: string) {
   const b = await boxes(page)
   if (dir !== "rtl") return null
   if (a.boxes.length !== b.boxes.length) return 1
+  // Islands are read from the right-to-left pass, where a dir="ltr" is a choice and not just the page's own direction.
   let off = 0
-  for (let i = 0; i < a.boxes.length; i++) if (Math.abs(b.boxes[i]!.l - (a.width - a.boxes[i]!.r)) > 3) off++
-  return off / Math.max(a.boxes.length, 1)
+  let compared = 0
+  for (let i = 0; i < a.boxes.length; i++) {
+    if (b.boxes[i]!.ltr) continue
+    compared++
+    if (Math.abs(b.boxes[i]!.l - (a.width - a.boxes[i]!.r)) > 3) off++
+  }
+  return off / Math.max(compared, 1)
 }
 
 /** Endless animations that are running right now. */

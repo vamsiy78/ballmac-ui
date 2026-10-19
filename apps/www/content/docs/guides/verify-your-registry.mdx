@@ -1,0 +1,105 @@
+---
+title: Verify your registry
+description: Score any shadcn registry with ballmac verify, add a badge, gate CI with the GitHub Action, and get listed on the leaderboard.
+---
+
+`ballmac verify` reads a registry's source and scores it on accessibility, theme tokens, declared dependencies, states, motion and right-to-left support. It works on any registry that follows the shadcn schema, not only ours, and our own registry is scored with the same command on the [Ballmac Verified](/verified) page.
+
+## Run it
+
+Point it at a URL, a `registry.json`, or the folder that holds one:
+
+```npm
+npx @ballmac/cli verify https://acme.com
+npx @ballmac/cli verify ./public/r/registry.json
+```
+
+It needs TypeScript in the folder you run it from, because it reads your components the way a compiler does. It writes nothing to your registry and sends nothing anywhere: items are read, then audited in a temporary folder that is deleted afterwards.
+
+```text title="Output"
+acme  84/100  grade B  62 of 71 items scored
+
+  Accessibility            ██████████   100%  58/58
+  Valid item               ██████████   100%  62/62
+  Dependencies declared    █████████░  93.5%  58/62
+  Theme tokens             ███████░░░  71.0%  44/62
+  ...
+
+Start here
+  hero-video     65  imports motion but does not list it in dependencies
+```
+
+The list at the end is the items that lost the most points, each with the first thing to fix.
+
+## Where it finds your items
+
+A catalog entry may or may not carry its files. When it does not, `verify` fetches each item's JSON from the same folder as `registry.json` (`https://acme.com/r/button.json`). If yours live somewhere else, say where:
+
+```npm
+npx @ballmac/cli verify https://acme.com/r/registry.json --item-url "https://acme.com/r/{name}.json"
+```
+
+An item that cannot be read counts as invalid, and the report says how many there were.
+
+## What is scored
+
+Ten checks, each across the items it applies to. A check that does not apply (a hook has no colors) is left out for that item rather than counted as a pass. The score is the average of the checks weighted by how much they matter to people using your components, and accessibility counts most.
+
+| Check | Weight | Passes when |
+| --- | --- | --- |
+| Accessibility | 25 | No unlabelled controls, missing alt text, clickable non-interactive elements, removed focus outlines or hand-made dialogs |
+| Valid item | 15 | A kebab-case name, a known type, and files with a path and content |
+| Dependencies declared | 15 | Every imported package is in `dependencies`, and every shared registry component is in `registryDependencies` |
+| Theme tokens | 10 | Colors come from theme tokens, not hex or palette values |
+| States | 10 | Data views handle loading, empty and error |
+| Motion | 5 | No endless decorative animation without a reduced-motion switch |
+| Right to left | 5 | Logical classes (`ms-`, `pe-`, `text-start`) instead of physical ones |
+| Described | 5 | A title and a description of 20 characters or more |
+| Documented | 5 | A `docs` note, or at least one example item |
+| Attributed | 5 | An `author` or `license` on the item |
+
+These are static checks on the source. They cannot see contrast, focus order or a broken layout on a phone. For those, run [`ballmac check --url`](/docs/guides/check-your-app) on an app that uses your components. A flagged item is a place to look, not proof of a defect: the rules make judgment calls, and the report shows each one so you can decide.
+
+## Add a badge
+
+```npm
+npx @ballmac/cli verify ./public/r/registry.json --badge public/verified.svg --out public/scorecard.json
+```
+
+Commit the SVG and link it from your README:
+
+```md
+[![Ballmac Verified](https://acme.com/verified.svg)](https://ui.ballmac.com/verified)
+```
+
+The badge says the score and grade in its text for screen readers, and its colors keep a contrast ratio of at least 4.5 to 1.
+
+## Gate CI
+
+Fail a pull request when the score drops:
+
+```npm
+npx @ballmac/cli verify ./public/r/registry.json --min-score 80
+```
+
+Or use the GitHub Action, which also writes a summary to the job:
+
+```yaml title=".github/workflows/verified.yml"
+- uses: vamsiy78/ballmac-ui/actions/verify@main
+  with:
+    registry: ./public/r/registry.json
+    min-score: 80
+    badge: public/verified.svg
+```
+
+The Action has outputs for `score`, `grade` and `scorecard`, and inputs for `item-url`, `cli-version` and `node-version`. Build your registry before the step so each item's JSON sits next to `registry.json`.
+
+## Get listed
+
+The [leaderboard](/verified#board-h) lists registries that have published a scorecard. Run the command with `--out`, name the file after your registry, and open a pull request that adds it to `apps/www/content/verified/submissions`. The scorecard has to come from a public `https://` address so anyone can run the command and get the same score. We re-run it before merging, and an entry whose score does not follow from its checks is rejected.
+
+## Related
+
+- [Check your own app](/docs/guides/check-your-app)
+- [Every rule](/docs/reference/check-rules)
+- [CLI reference](/docs/reference/cli)

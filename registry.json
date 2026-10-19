@@ -34592,7 +34592,8 @@
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/highlight.json"
       ],
       "files": [
         {
@@ -34617,11 +34618,19 @@
           "developer",
           "docs"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-28",
+        "version": "1.1.0",
+        "updated": "2026-10-19",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-19",
+            "note": "Adds the compound API of shadcn's Code Block: header, title, actions, copy button, content, line and footer parts, size and variant, diff and highlighted lines, start line and a useHighlightedCode hook. The ready-made panel and CodeBlockTabs are unchanged.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
-          "summary": "<CodeBlock code filename language lineNumbers highlight={[2,3]} /> renders plain monospace text. For syntax colors, highlight on the server (e.g. Shiki) and pass the result as children plus the raw code for copying. <CodeBlockTabs files={[…]}> shows several files.",
+          "summary": "Two ways to use it. Ready-made: <CodeBlock code filename language lineNumbers highlight={[2,3]} /> renders plain monospace text. Compound (the same API as shadcn's Code Block, so chat kits and agent output drop in): <CodeBlock size variant><CodeBlockHeader><CodeBlockTitle/><CodeBlockActions><CodeBlockCopyButton value/></CodeBlockActions></CodeBlockHeader><CodeBlockContent lineNumbers wrap startLine><CodeBlockLine variant=\"added|removed|highlighted\"/></CodeBlockContent><CodeBlockFooter/></CodeBlock>, with useHighlightedCode(code, language) giving one node per line. For syntax colors, highlight on the server (e.g. Shiki) and pass the result as children plus the raw code for copying. <CodeBlockTabs files={[…]}> shows several files.",
           "whenToUse": [
             "Code samples in docs, READMEs rendered on the web and blog posts",
             "Showing a changed file with specific lines highlighted",
@@ -34656,12 +34665,19 @@
             "highlight: 1-based line numbers (plain code only; with Shiki use its notation transformers)",
             "wrap (initial) and wrapToggle; copyable={false} hides copy",
             "bodyClassName for a max height, e.g. 'max-h-80'",
+            "Compound mode: put CodeBlockHeader, CodeBlockActions, CodeBlockContent or CodeBlockFooter directly inside CodeBlock. size=\"sm\" and variant=\"destructive\" suit tool output and errors; CodeBlockActions without a header floats and shows on hover, focus and touch",
             "Shiki: const html = await codeToHtml(code, { lang, themes }) then <CodeBlock code={code} language={lang}><div dangerouslySetInnerHTML={{ __html: html }} /></CodeBlock>"
           ]
         },
         "examples": [
           "code-block-demo",
-          "code-block-tabs"
+          "code-block-tabs",
+          "code-block-compound",
+          "code-block-highlighted",
+          "code-block-diff",
+          "code-block-floating",
+          "code-block-show-more",
+          "code-block-tool-output"
         ],
         "url": "https://ui.ballmac.com/components/code-block"
       }
@@ -34704,6 +34720,157 @@
           "path": "registry/examples/code-block-tabs.tsx",
           "type": "registry:example",
           "target": "@components/ballmac/examples/code-block-tabs.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "code-block",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "code-block-compound",
+      "type": "registry:example",
+      "title": "Code Block: Header, title and actions",
+      "description": "Header, title and actions example of Code Block.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/code-block.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/code-block-compound.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/code-block-compound.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "code-block",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "code-block-highlighted",
+      "type": "registry:example",
+      "title": "Code Block: Highlighted code and lines",
+      "description": "Highlighted code and lines example of Code Block.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/code-block.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/code-block-highlighted.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/code-block-highlighted.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "code-block",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "code-block-diff",
+      "type": "registry:example",
+      "title": "Code Block: Diff",
+      "description": "Diff example of Code Block.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/code-block.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/code-block-diff.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/code-block-diff.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "code-block",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "code-block-floating",
+      "type": "registry:example",
+      "title": "Code Block: Floating actions",
+      "description": "Floating actions example of Code Block.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/code-block.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/code-block-floating.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/code-block-floating.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "code-block",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "code-block-show-more",
+      "type": "registry:example",
+      "title": "Code Block: Show more",
+      "description": "Show more example of Code Block.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/code-block.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/code-block-show-more.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/code-block-show-more.tsx"
+        }
+      ],
+      "categories": [
+        "developer"
+      ],
+      "meta": {
+        "example": true,
+        "of": "code-block",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "code-block-tool-output",
+      "type": "registry:example",
+      "title": "Code Block: Tool output in a Trace",
+      "description": "Tool output in a Trace example of Code Block.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/code-block.json",
+        "https://ui.ballmac.com/r/trace.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/code-block-tool-output.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/code-block-tool-output.tsx"
         }
       ],
       "categories": [
@@ -51285,6 +51452,258 @@
       }
     },
     {
+      "name": "questionnaire",
+      "type": "registry:ui",
+      "title": "Questionnaire",
+      "description": "A multi-step questionnaire with single-choice, multiple-choice, freeform and skippable questions, answer shortcuts, validation and native form data, built on shadcn's headless Questionnaire so the API is the same.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "@shadcn/react@^0.3",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/questionnaire.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/questionnaire.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "questionnaire",
+          "form",
+          "wizard",
+          "agent",
+          "choices",
+          "shortcuts",
+          "shadcn"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-19",
+        "tests": true,
+        "ai": {
+          "summary": "<Questionnaire items onSubmit> with a <QuestionnaireItem name required> per question: Title, Description, Choices holding <QuestionnaireChoice value> and optionally <QuestionnaireInput aria-label>, and an Error. Add <QuestionnaireActions> with Previous, Skip, Next and Submit. Answers are native FormData.",
+          "whenToUse": [
+            "An AI agent asking the person to choose between options before it continues",
+            "Onboarding and intake steps with a few questions",
+            "Surveys where answers become form data"
+          ],
+          "whenNotToUse": [
+            "One question inside a form; use radio-group or checkbox",
+            "A long form with many field types; use form blocks",
+            "Quizzes that score answers; compute that yourself from the form data"
+          ],
+          "composesWith": [
+            "card",
+            "dialog",
+            "trace",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab / arrow keys",
+              "action": "Native radio and checkbox behavior in each question"
+            },
+            {
+              "keys": "Letter or number keys",
+              "action": "With shortcuts set, choose the answer with that key; it does not advance"
+            },
+            {
+              "keys": "Enter",
+              "action": "Next on a question, Submit on the last"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Each question is a fieldset named by its legend; descriptions and errors are linked; progress is a named progress bar; inactive questions are inert"
+            },
+            {
+              "keys": "After a failed step",
+              "action": "Focus goes to an answer of the question that needs one, and its error is announced"
+            }
+          ],
+          "customization": [
+            "items to define the order, shortcuts, and server-rendered progress",
+            "multiple on an item; QuestionnaireInput for a freeform answer",
+            "item and onItemChange to control the active question",
+            "invalid on an item with your own message in QuestionnaireError",
+            "size and variant on the action buttons"
+          ]
+        },
+        "statesNone": "It collects answers and hands them to onSubmit as form data; saving them, and any loading or failure around that, belongs to the page that owns the form.",
+        "source": {
+          "name": "shadcn/ui Questionnaire",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "questionnaire-demo",
+          "questionnaire-multiple",
+          "questionnaire-shortcuts",
+          "questionnaire-skip",
+          "questionnaire-validation",
+          "questionnaire-card"
+        ],
+        "url": "https://ui.ballmac.com/components/questionnaire"
+      }
+    },
+    {
+      "name": "questionnaire-demo",
+      "type": "registry:example",
+      "title": "Questionnaire: Steps with a freeform answer",
+      "description": "Steps with a freeform answer example of Questionnaire.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/questionnaire.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/questionnaire-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/questionnaire-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "questionnaire",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "questionnaire-multiple",
+      "type": "registry:example",
+      "title": "Questionnaire: Multiple selection",
+      "description": "Multiple selection example of Questionnaire.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/questionnaire.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/questionnaire-multiple.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/questionnaire-multiple.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "questionnaire",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "questionnaire-shortcuts",
+      "type": "registry:example",
+      "title": "Questionnaire: Letter shortcuts",
+      "description": "Letter shortcuts example of Questionnaire.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/questionnaire.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/questionnaire-shortcuts.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/questionnaire-shortcuts.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "questionnaire",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "questionnaire-skip",
+      "type": "registry:example",
+      "title": "Questionnaire: Optional and skippable",
+      "description": "Optional and skippable example of Questionnaire.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/questionnaire.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/questionnaire-skip.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/questionnaire-skip.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "questionnaire",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "questionnaire-validation",
+      "type": "registry:example",
+      "title": "Questionnaire: Your own validation",
+      "description": "Your own validation example of Questionnaire.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/questionnaire.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/questionnaire-validation.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/questionnaire-validation.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "questionnaire",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "questionnaire-card",
+      "type": "registry:example",
+      "title": "Questionnaire: In a card",
+      "description": "In a card example of Questionnaire.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/questionnaire.json",
+        "https://ui.ballmac.com/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/questionnaire-card.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/questionnaire-card.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "questionnaire",
+        "tier": "free"
+      }
+    },
+    {
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
@@ -65260,6 +65679,299 @@
       "meta": {
         "example": true,
         "of": "tooltip",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trace",
+      "type": "registry:ui",
+      "title": "Trace",
+      "description": "The one row behind reasoning, tool calls, sources and plans: an icon, a title and optional detail, with running, error and pending states, rows that expand, link or open a dialog, and shadcn's Trace API.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/shimmer-text.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/trace.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/trace.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "trace",
+          "agent",
+          "reasoning",
+          "tool call",
+          "chain of thought",
+          "steps",
+          "shadcn"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-19",
+        "tests": true,
+        "ai": {
+          "summary": "<Trace> holds rows. A row is <TraceLine status><TraceIcon/><TraceTitle/><TraceDescription/></TraceLine>. Wrap it in <TraceCollapsibleTrigger> inside a <TraceCollapsible> to expand, or in a link, or a dialog's trigger. The parts and props match shadcn's Trace.",
+          "whenToUse": [
+            "Showing what an AI agent did: reasoning, tool calls, searches, file edits",
+            "Plans, task lists and sources where every row should look the same",
+            "Rows that expand, link out or open a dialog or sheet"
+          ],
+          "whenNotToUse": [
+            "The agent's reply text; use message or ai-message",
+            "A single tool call with its full input and output; use tool-call-card",
+            "A general disclosure; use collapsible or accordion"
+          ],
+          "composesWith": [
+            "code-block",
+            "questionnaire",
+            "dialog",
+            "shimmer-text",
+            "ai-message"
+          ],
+          "a11y": [
+            {
+              "keys": "Enter / Space",
+              "action": "On a TraceCollapsibleTrigger, opens or closes the row (aria-expanded and aria-controls are set)"
+            },
+            {
+              "keys": "Tab",
+              "action": "A TraceLine on its own is text and not a tab stop; the trigger, link or dialog trigger around it is"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Icons are hidden, so the title is the name: write a sentence (Edited trace.tsx) and put the state in it (Running pnpm build). Closed content is inert"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The shimmer and the chevron turn stop; the title still says what is happening"
+            }
+          ],
+          "customization": [
+            "status on TraceLine: running | error | pending",
+            "open, defaultOpen, onOpenChange, disabled on TraceCollapsible",
+            "className on every part"
+          ]
+        },
+        "statesNone": "A row shows the state of work reported to it (running, error, pending); it loads and fetches nothing itself.",
+        "source": {
+          "name": "shadcn/ui Trace",
+          "url": "https://github.com/shadcn-ui/ui",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2023 shadcn",
+          "modified": true
+        },
+        "examples": [
+          "trace-demo",
+          "trace-status",
+          "trace-collapsible",
+          "trace-steps",
+          "trace-sources",
+          "trace-dialog",
+          "trace-agent-turn"
+        ],
+        "url": "https://ui.ballmac.com/components/trace"
+      }
+    },
+    {
+      "name": "trace-demo",
+      "type": "registry:example",
+      "title": "Trace: An agent's steps",
+      "description": "An agent's steps example of Trace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trace.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trace-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trace-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trace-status",
+      "type": "registry:example",
+      "title": "Trace: Running, error and pending",
+      "description": "Running, error and pending example of Trace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trace.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trace-status.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trace-status.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trace-collapsible",
+      "type": "registry:example",
+      "title": "Trace: Opens while it streams",
+      "description": "Opens while it streams example of Trace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trace.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trace-collapsible.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trace-collapsible.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trace-steps",
+      "type": "registry:example",
+      "title": "Trace: Chain of thought",
+      "description": "Chain of thought example of Trace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trace.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trace-steps.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trace-steps.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trace-sources",
+      "type": "registry:example",
+      "title": "Trace: Sources",
+      "description": "Sources example of Trace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trace.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trace-sources.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trace-sources.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trace-dialog",
+      "type": "registry:example",
+      "title": "Trace: Opens a dialog",
+      "description": "Opens a dialog example of Trace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trace.json",
+        "https://ui.ballmac.com/r/dialog.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trace-dialog.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trace-dialog.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "trace-agent-turn",
+      "type": "registry:example",
+      "title": "Trace: An agent turn with a question",
+      "description": "An agent turn with a question example of Trace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/trace.json",
+        "https://ui.ballmac.com/r/code-block.json",
+        "https://ui.ballmac.com/r/questionnaire.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/trace-agent-turn.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/trace-agent-turn.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "trace",
         "tier": "free"
       }
     },

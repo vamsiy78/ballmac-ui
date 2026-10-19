@@ -63,6 +63,20 @@ Audit your app for what agents and people get wrong: missing states, unlabelled 
 | `--url <address>` | also load a running app in a real browser (axe, overflow, console) |
 | `--routes <a,b>` | routes to load with --url (default /) |
 
+## `ballmac verify <registry>` [#verify]
+
+Score any shadcn registry (a URL, a folder or a registry.json) on what can be checked from its source, and write a badge. Needs TypeScript in this project.
+
+| Option | What it does |
+| --- | --- |
+| `--min-score <n>` | exit 1 when the score is below n (for CI) |
+| `--format <f>` | pretty (default) or json |
+| `--out <file>` | write the scorecard JSON |
+| `--badge <file>` | write the "Ballmac Verified" SVG badge |
+| `--item-url <url>` | where items live when it is not next to registry.json, e.g. https://acme.com/r/\{name\}.json |
+| `--limit <n>` | score only the first n items |
+| `--all` | list every item that lost points |
+
 ## `ballmac test [item…]` [#test]
 
 Run the Ballmac tests installed in this project

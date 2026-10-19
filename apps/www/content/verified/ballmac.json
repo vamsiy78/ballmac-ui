@@ -1,0 +1,429 @@
+{
+  "schema": 1,
+  "tool": "ballmac verify",
+  "registry": {
+    "name": "Ballmac UI",
+    "homepage": "https://ui.ballmac.com",
+    "source": "https://ui.ballmac.com/r/registry.json"
+  },
+  "generated": "2026-10-19T05:11:40.195Z",
+  "items": {
+    "total": 1691,
+    "scored": 434
+  },
+  "score": 97,
+  "grade": "A",
+  "checks": [
+    {
+      "id": "a11y",
+      "label": "Accessibility",
+      "what": "No unlabelled controls, missing alt text, clickable non-interactive elements, removed focus outlines or hand-made dialogs in the source.",
+      "weight": 25,
+      "pass": 403,
+      "fail": 20,
+      "na": 11,
+      "pct": 95.3
+    },
+    {
+      "id": "schema",
+      "label": "Valid item",
+      "what": "A kebab-case name, a known type, and at least one file with a path and content.",
+      "weight": 15,
+      "pass": 434,
+      "fail": 0,
+      "na": 0,
+      "pct": 100
+    },
+    {
+      "id": "deps",
+      "label": "Dependencies declared",
+      "what": "Every package the code imports is in dependencies, and every shared registry component it imports is in registryDependencies.",
+      "weight": 15,
+      "pass": 434,
+      "fail": 0,
+      "na": 0,
+      "pct": 100
+    },
+    {
+      "id": "tokens",
+      "label": "Theme tokens",
+      "what": "Colors come from theme tokens, not hard-coded hex or rgb values, so the item follows the theme and dark mode.",
+      "weight": 10,
+      "pass": 363,
+      "fail": 60,
+      "na": 11,
+      "pct": 85.8
+    },
+    {
+      "id": "states",
+      "label": "States",
+      "what": "Data views handle loading, empty and error, not only the filled case.",
+      "weight": 10,
+      "pass": 421,
+      "fail": 0,
+      "na": 13,
+      "pct": 100
+    },
+    {
+      "id": "motion",
+      "label": "Motion",
+      "what": "No endless decorative animation, which cannot be paused for people who ask for less motion.",
+      "weight": 5,
+      "pass": 422,
+      "fail": 1,
+      "na": 11,
+      "pct": 99.8
+    },
+    {
+      "id": "rtl",
+      "label": "Right to left",
+      "what": "Logical classes (ms-, pe-, text-start) instead of physical ones (ml-, pr-, text-left), so the layout mirrors.",
+      "weight": 5,
+      "pass": 414,
+      "fail": 9,
+      "na": 11,
+      "pct": 97.9
+    },
+    {
+      "id": "describe",
+      "label": "Described",
+      "what": "A title and a description that says what the item is (20 characters or more).",
+      "weight": 5,
+      "pass": 434,
+      "fail": 0,
+      "na": 0,
+      "pct": 100
+    },
+    {
+      "id": "docs",
+      "label": "Documented",
+      "what": "A docs note, or at least one example item in the registry.",
+      "weight": 5,
+      "pass": 421,
+      "fail": 0,
+      "na": 13,
+      "pct": 100
+    },
+    {
+      "id": "author",
+      "label": "Attributed",
+      "what": "The item names its author or license, so you know who maintains it.",
+      "weight": 5,
+      "pass": 434,
+      "fail": 0,
+      "na": 0,
+      "pct": 100
+    }
+  ],
+  "weakest": [
+    {
+      "name": "desktop-2",
+      "type": "registry:block",
+      "score": 65,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <li> has onClick and a role but no keyboard handler (onKeyDown).",
+        "tokens/hardcoded-color: border-black/10 is a fixed colour and will not follow the theme."
+      ]
+    },
+    {
+      "name": "finder-window",
+      "type": "registry:ui",
+      "score": 65,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown).",
+        "tokens/hardcoded-color: text-white is a fixed colour and will not follow the theme.",
+        "tokens/hardcoded-color: text-white is a fixed colour and will not follow the theme."
+      ]
+    },
+    {
+      "name": "launchpad",
+      "type": "registry:ui",
+      "score": 65,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick but is not focusable and has no role.",
+        "tokens/hardcoded-color: bg-black/45, text-white are fixed colours and will not follow the theme.",
+        "tokens/hardcoded-color: text-white/70 is a fixed colour and will not follow the theme."
+      ]
+    },
+    {
+      "name": "template-northwind",
+      "type": "registry:block",
+      "score": 65,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/focus-outline-removed: <button> removes the focus outline and adds no focus style.",
+        "tokens/hardcoded-color: text-white is a fixed colour and will not follow the theme.",
+        "tokens/hardcoded-color: text-white is a fixed colour and will not follow the theme."
+      ]
+    },
+    {
+      "name": "agent-2",
+      "type": "registry:block",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <li> has onClick and a role but no keyboard handler (onKeyDown)."
+      ]
+    },
+    {
+      "name": "app-shell",
+      "type": "registry:ui",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick but is not focusable and has no role."
+      ]
+    },
+    {
+      "name": "data-grid",
+      "type": "registry:ui",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
+      ]
+    },
+    {
+      "name": "desktop-7",
+      "type": "registry:block",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <li> has onClick and a role but no keyboard handler (onKeyDown)."
+      ]
+    },
+    {
+      "name": "event-calendar",
+      "type": "registry:ui",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
+      ]
+    },
+    {
+      "name": "git-graph",
+      "type": "registry:ui",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
+      ]
+    },
+    {
+      "name": "help-1",
+      "type": "registry:block",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <li> has onClick and a role but no keyboard handler (onKeyDown)."
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick but is not focusable and has no role.",
+        "a11y/focus-outline-removed: <input> removes the focus outline and adds no focus style."
+      ]
+    },
+    {
+      "name": "invite-members",
+      "type": "registry:ui",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick but is not focusable and has no role."
+      ]
+    },
+    {
+      "name": "mention-input",
+      "type": "registry:ui",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
+      ]
+    },
+    {
+      "name": "orgchart-1",
+      "type": "registry:block",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick but is not focusable and has no role."
+      ]
+    }
+  ],
+  "notes": []
+}

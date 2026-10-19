@@ -18,7 +18,7 @@ const WHAT: Record<string, string> = {
   a11y: "axe-core finds no serious or critical accessibility violations, in light and dark.",
   mobile: "No sideways scrolling at 1280, 390 and 360 pixels wide.",
   motion: "With reduced motion on, nothing keeps animating.",
-  rtl: "Mirrored for right-to-left languages, the layout is the reflection of the left-to-right one.",
+  rtl: "Mirrored for right-to-left languages, the layout is the reflection of the left-to-right one. Code and anything else set to read left to right on purpose is left out of the comparison.",
   console: "Loading the example logs no errors to the browser console.",
   keyboard: "Pressing Tab moves through the controls and each one shows a visible change when focused.",
   states: "Loading, empty and error views exist for every item that can have them.",

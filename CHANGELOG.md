@@ -6,6 +6,21 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-19-chat-kit-verified-search] - 2026-10-19
+
+**Chat kit parts, an open registry score and server-side search.** Trace, Questionnaire and Code Block now match shadcn's chat kit, any registry can be scored with one command, and shadcn search returns ranked results from our server.
+
+### Added
+
+- `trace`, `questionnaire` and the compound `code-block` have the same parts and props as shadcn's chat kit, so an agent's steps, questions and output drop into a chat built with either library. A trace row shimmers while it runs and opens to a code block with the command's output, and the questionnaire is built on shadcn's headless one, with letter shortcuts, multiple choice and your own validation. See [Use Ballmac with the shadcn chat kit](https://ui.ballmac.com/docs/guides/shadcn-chat-kit).
+- `ballmac verify` scores any shadcn registry on accessibility, theme tokens, declared dependencies, states, motion and right-to-left support, and writes a scorecard and a "Ballmac Verified" badge. Our own registry is scored the same way on the [Ballmac Verified](https://ui.ballmac.com/verified) page, which also has a leaderboard other registries can join.
+- A GitHub Action, `vamsiy78/ballmac-ui/actions/verify`, runs the score in CI and can fail a pull request under a minimum. See [Verify your registry](https://ui.ballmac.com/docs/guides/verify-your-registry).
+- `shadcn search @ballmac` now returns ranked results from our server. Ask `/r/registry.json?q=data+grid` for the matches with a `pagination` object, instead of downloading the whole catalog.
+
+### Changed
+
+- `code-block` has a header, title, actions, copy button, footer, diff and highlighted lines, `size="sm"` for tool output, `variant="destructive"` for errors and a `useHighlightedCode` hook. The ready-made panel (`code`, `filename`, `language`) works as before.
+
 ## [2026-10-19-grids-calendars-editors] - 2026-10-19
 
 **Data grid, drag and drop, event calendar, rich text and more.** Nine hard components that most libraries leave to you: a virtualized data grid, sortable lists and boards, an event calendar, a rich text editor, mentions, QR codes, an emoji picker, an image cropper and a native select.

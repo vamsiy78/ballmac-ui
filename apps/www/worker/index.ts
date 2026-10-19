@@ -19,6 +19,7 @@ import * as sampler from "./routes/sampler"
 import * as stars from "./routes/stars"
 import * as support from "./routes/support"
 import * as preset from "./routes/preset"
+import * as registrySearch from "./routes/registry-search"
 import * as style from "./routes/style"
 import * as themeCustom from "./routes/theme-custom"
 
@@ -42,6 +43,7 @@ const ROUTES: [URLPattern, Methods][] = [
   ["/r/pro/starters/:file", { GET: starters }],
   ["/r/pro/kits/:file", { GET: kits }],
   ["/r/pro/:name", proRegistry],
+  ["/r/registry.json", { GET: registrySearch.GET }],
   ["/r/:file(preset-.+)", preset],
   ["/r/:file(base-.+)", { GET: style.baseAlias }],
   ["/r/:style/:file", { GET: style.GET }],

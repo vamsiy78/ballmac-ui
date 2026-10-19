@@ -25,6 +25,7 @@ const columns = [
       { href: "/docs/reference/registry", label: "CLI & registry" },
       { href: "/docs/get-started/connect-your-agent", label: "MCP & AI agents" },
       { href: "/quality", label: "Quality, measured" },
+      { href: "/verified", label: "Ballmac Verified" },
     ],
   },
   {

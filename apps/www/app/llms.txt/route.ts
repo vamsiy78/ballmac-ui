@@ -19,6 +19,7 @@ export function GET() {
     `- [Full documentation in one file](${SITE_URL}/llms-full.txt): every docs page below as Markdown`,
     ...docs.map((p) => `- [${p.data.title}](${SITE_URL}${p.url}): ${p.data.description ?? ""} Markdown: ${SITE_URL}${mdHref(p)}`),
     `- [Quality, measured](${SITE_URL}/quality): every item loaded in a real browser in light, dark, phone width, reduced motion and right to left; results published including failures`,
+    `- [Ballmac Verified](${SITE_URL}/verified): an open score for any shadcn registry (accessibility, tokens, dependencies, states, motion, right to left), a badge, a leaderboard and a GitHub Action. Registry search: ${SITE_URL}/r/registry.json?q=button`,
     `- [Platform feels showcase](${SITE_URL}/feels): one app in macOS, iOS, Windows and web feels, live`,
     `- [Changelog](${SITE_URL}/changelog): what is new, newest first. Feeds: ${SITE_URL}/changelog/rss.xml and ${SITE_URL}/changelog/atom.xml`,
     `- [Registry index](${SITE_URL}/r/registry.json): every free item in shadcn registry format`,

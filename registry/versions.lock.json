@@ -340,8 +340,8 @@
     "hash": "ab1383d66b564b0cf9fbb1c6ad3407e7cc96b576b1060f5a9f33dde119ee09cf"
   },
   "code-block": {
-    "version": "1.0.0",
-    "hash": "e3290bde4dbe87fa5a6236865c03b439079f7044d35796bf937cf3398bd6930a"
+    "version": "1.1.0",
+    "hash": "1366c847a980caeaafb7989b126a943f269857b0a43bdb12b91782e0a2da5ab4"
   },
   "collapsible": {
     "version": "1.0.0",
@@ -1327,6 +1327,10 @@
     "version": "1.0.0",
     "hash": "8c6803633418282f955e3054070c12df5a2f3cee129cb81c1ccfb7fcd21f111d"
   },
+  "questionnaire": {
+    "version": "1.0.0",
+    "hash": "13ba282eeba2b7147b0277b52df6ae5b793a13a52192da8cdc938e3338418eed"
+  },
   "quiz-1": {
     "version": "1.0.0",
     "hash": "d8dc522c6587c250aebdaca20a56f73113a253b6ee8bcf5e13ea5610d37aa5fe"
@@ -1846,6 +1850,10 @@
   "tour-1": {
     "version": "1.0.0",
     "hash": "8c5390f5c460ad7a37009b75b9957fbfa35251c3abda27abc600822ac4c5950a"
+  },
+  "trace": {
+    "version": "1.0.0",
+    "hash": "82fe5f43f9b672aeb14056c0d631c969351dccf17851d0ebeb9043ac011b2736"
   },
   "tree-view": {
     "version": "1.0.0",

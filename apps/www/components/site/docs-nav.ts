@@ -15,6 +15,7 @@ export const browseNav: NavGroup = {
     { href: "/themes", label: "Theme builder" },
     { href: "/feels", label: "Platform feels" },
     { href: "/quality", label: "Quality, measured" },
+    { href: "/verified", label: "Ballmac Verified" },
     { href: "/changelog", label: "Changelog" },
     { href: "/support", label: "Support" },
   ],

@@ -1,0 +1,91 @@
+name: Ballmac Verify
+description: Score a shadcn-compatible registry on accessibility, theme tokens, dependencies, states, motion and right-to-left support, and write a "Ballmac Verified" badge.
+author: Ballmac
+branding:
+  icon: check-circle
+  color: green
+
+inputs:
+  registry:
+    description: The registry to score. A path to a registry.json (or the folder holding it), or a URL such as https://acme.com.
+    required: false
+    default: ./public/r/registry.json
+  min-score:
+    description: Fail the job when the score is below this number (0 to 100). Leave empty to only report.
+    required: false
+    default: ""
+  badge:
+    description: Where to write the SVG badge, relative to the workspace. Leave empty to skip.
+    required: false
+    default: ""
+  scorecard:
+    description: Where to write the scorecard JSON, relative to the workspace.
+    required: false
+    default: ballmac-scorecard.json
+  item-url:
+    description: Where items live when they are not next to registry.json, for example https://acme.com/r/{name}.json.
+    required: false
+    default: ""
+  cli-version:
+    description: The @ballmac/cli version to run.
+    required: false
+    default: latest
+  node-version:
+    description: The Node.js version to run with.
+    required: false
+    default: "22"
+
+outputs:
+  score:
+    description: The score, 0 to 100.
+    value: ${{ steps.run.outputs.score }}
+  grade:
+    description: The grade, A to F.
+    value: ${{ steps.run.outputs.grade }}
+  scorecard:
+    description: The path of the scorecard JSON.
+    value: ${{ steps.run.outputs.scorecard }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install the Ballmac CLI
+      shell: bash
+      run: |
+        # A private prefix, so nothing is added to the project. verify reads source with TypeScript, so it goes in the same place.
+        npm install --prefix "$RUNNER_TEMP/ballmac" --no-audit --no-fund --silent "@ballmac/cli@${{ inputs.cli-version }}" typescript
+
+    - name: Score the registry
+      id: run
+      shell: bash
+      env:
+        REGISTRY: ${{ inputs.registry }}
+        MIN_SCORE: ${{ inputs.min-score }}
+        BADGE: ${{ inputs.badge }}
+        SCORECARD: ${{ inputs.scorecard }}
+        ITEM_URL: ${{ inputs.item-url }}
+        PREFIX: ${{ runner.temp }}/ballmac
+      run: |
+        # The job runs in the workspace, so a local registry path and the output paths are relative to it. The CLI finds TypeScript beside itself.
+        args=(verify "$REGISTRY" --out "$SCORECARD")
+        [ -n "$BADGE" ] && args+=(--badge "$BADGE")
+        [ -n "$ITEM_URL" ] && args+=(--item-url "$ITEM_URL")
+        [ -n "$MIN_SCORE" ] && args+=(--min-score "$MIN_SCORE")
+        status=0
+        node "$PREFIX/node_modules/@ballmac/cli/dist/index.js" "${args[@]}" > "$RUNNER_TEMP/ballmac-report.txt" || status=$?
+        cat "$RUNNER_TEMP/ballmac-report.txt"
+
+        node - <<'NODE'
+        const fs = require("fs")
+        const card = JSON.parse(fs.readFileSync(process.env.SCORECARD, "utf8"))
+        fs.appendFileSync(process.env.GITHUB_OUTPUT, `score=${card.score}\ngrade=${card.grade}\nscorecard=${process.env.SCORECARD}\n`)
+        const rows = card.checks.map((k) => `| ${k.label} | ${k.pass + k.fail ? k.pct + "%" : "n/a"} | ${k.pass}/${k.pass + k.fail} |`).join("\n")
+        const weak = card.weakest.slice(0, 8).map((r) => `- **${r.name}** (${r.score}): ${r.problems[0] ?? ""}`).join("\n")
+        const md = `## Ballmac Verified: ${card.score}/100, grade ${card.grade}\n\n${card.items.scored} of ${card.items.total} items scored.\n\n| Check | Pass | Items |\n| --- | --- | --- |\n${rows}\n\n${weak ? "### Start here\n\n" + weak + "\n" : ""}`
+        if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, md)
+        NODE
+        exit $status

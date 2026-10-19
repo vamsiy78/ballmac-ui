@@ -39,6 +39,7 @@ Ballmac UI (MIT) includes code adapted from the projects below. Their notices ar
 - **Pagination** (`pagination`) is based on [shadcn/ui Pagination](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Progress** (`progress`) is based on [shadcn/ui Progress](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **QR Code** (`qr-code`) is based on [uqr](https://github.com/unjs/uqr), MIT, Copyright (c) 2023 Anthony Fu.
+- **Questionnaire** (`questionnaire`) is based on [shadcn/ui Questionnaire](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Resizable** (`resizable`) is based on [shadcn/ui Resizable](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Rich Text Editor** (`rich-text-editor`) is based on [Tiptap](https://github.com/ueberdosis/tiptap), MIT, Copyright (c) 2025, Tiptap GmbH.
 - **Select** (`select`) is based on [shadcn/ui Select](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
@@ -54,3 +55,4 @@ Ballmac UI (MIT) includes code adapted from the projects below. Their notices ar
 - **Textarea** (`textarea`) is based on [shadcn/ui Textarea](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Toast** (`toast`) is based on [shadcn/ui Sonner](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Tooltip** (`tooltip`) is based on [shadcn/ui Tooltip](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
+- **Trace** (`trace`) is based on [shadcn/ui Trace](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.

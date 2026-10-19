@@ -21,6 +21,7 @@ import { installTests, runTests } from "./tests.js"
 import { trackItems } from "./track.js"
 import { updateItems } from "./update.js"
 import { CliError, c } from "./util.js"
+import { verifyCommand } from "./verify-command.js"
 
 const { version } = createRequire(import.meta.url)("../package.json") as { version: string }
 
@@ -49,6 +50,15 @@ Usage: ballmac <command> [options]
         --include-library  also audit components/ui and components/ballmac
         --url <address>    also load a running app in a real browser (axe, overflow, console)
         --routes <a,b>     routes to load with --url (default /)
+  verify <registry>      Score any shadcn registry (a URL, a folder or a registry.json) on what can be
+                         checked from its source, and write a badge. Needs TypeScript in this project.
+        --min-score <n>    exit 1 when the score is below n (for CI)
+        --format <f>       pretty (default) or json
+        --out <file>       write the scorecard JSON
+        --badge <file>     write the "Ballmac Verified" SVG badge
+        --item-url <url>   where items live when it is not next to registry.json, e.g. https://acme.com/r/{name}.json
+        --limit <n>        score only the first n items
+        --all              list every item that lost points
   test [item…]           Run the Ballmac tests installed in this project
   test add <item…>       Install the tests for items that are already installed
 
@@ -82,6 +92,11 @@ const { values, positionals } = parseArgs({
     "fail-on": { type: "string" },
     url: { type: "string" },
     routes: { type: "string" },
+    "min-score": { type: "string" },
+    out: { type: "string" },
+    badge: { type: "string" },
+    "item-url": { type: "string" },
+    limit: { type: "string" },
     cwd: { type: "string" },
     version: { type: "boolean", short: "v" },
     help: { type: "boolean", short: "h" },
@@ -113,6 +128,34 @@ async function main() {
       url: values.url as string | undefined,
       routes: ((values.routes as string | undefined) ?? "").split(",").map((r) => r.trim()).filter(Boolean),
       out: (line) => console.log(line),
+    })
+    if (failed) process.exitCode = 1
+    return
+  }
+
+  // verify reads a registry, not a project.
+  if (command === "verify") {
+    const format = (values.format as string | undefined) ?? "pretty"
+    if (!["pretty", "json"].includes(format)) throw new CliError(`--format must be pretty or json, not "${format}".`)
+    const num = (name: string) => {
+      const raw = values[name] as string | undefined
+      if (raw === undefined) return undefined
+      const n = Number(raw)
+      if (!Number.isFinite(n) || n < 0) throw new CliError(`--${name} must be a number, not "${raw}".`)
+      return n
+    }
+    const { failed } = await verifyCommand({
+      cwd,
+      target: rest[0],
+      format: format as "pretty" | "json",
+      minScore: num("min-score"),
+      limit: num("limit"),
+      out: values.out as string | undefined,
+      badge: values.badge as string | undefined,
+      itemUrl: values["item-url"] as string | undefined,
+      all: Boolean(values.all),
+      print: (line) => console.log(line),
+      tool: `@ballmac/cli ${version}`,
     })
     if (failed) process.exitCode = 1
     return
