@@ -1,6 +1,6 @@
 {
   "name": "@ballmac/cli",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Keep Ballmac UI components up to date without losing your changes, and install their tests. Works next to the shadcn CLI.",
   "keywords": [
     "shadcn",

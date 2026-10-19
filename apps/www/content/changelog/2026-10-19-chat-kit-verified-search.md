@@ -4,6 +4,8 @@ date: 2026-10-19
 seq: 2
 tags: [components, CLI, docs]
 summary: "Trace, Questionnaire and Code Block now match shadcn's chat kit, any registry can be scored with one command, and shadcn search returns ranked results from our server."
+shot: /verified
+imageAlt: "The Ballmac Verified page, with the registry score, grade and badge."
 ---
 
 ### New

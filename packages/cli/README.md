@@ -19,6 +19,7 @@ npx @ballmac/cli update                    # merge new versions into your files
 | `add <item…>` | Install items with shadcn and track them. `--with-tests` also installs their tests. |
 | `outdated [item…]` | Items with a newer version, whether you edited them, and the changelog notes. `--json`, `--exit-code` (fails when behind, for CI). |
 | `check [folder]` | Audit your own app for missing states, accessibility gaps, hard-coded colors and layout problems. Read-only. `--url` also loads the running app in a browser; `--format github` for CI; `--rules` lists every rule. [Docs](https://ui.ballmac.com/docs/check) |
+| `verify <registry>` | Score any shadcn registry (a URL, a folder or a `registry.json`) on accessibility, theme tokens, dependencies, states, motion and right-to-left support. `--badge` writes the SVG badge, `--out` the scorecard, `--min-score` fails CI. Needs TypeScript. [Docs](https://ui.ballmac.com/docs/guides/verify-your-registry) |
 | `update [item…]` | Merge new versions into your copies. `--dry-run` shows the plan and writes nothing. |
 | `diff <item>` | What you changed since you installed it. |
 | `track [item…]` | Adopt items you installed with plain `shadcn add`. `--rebase <item>` declares your files current. |
