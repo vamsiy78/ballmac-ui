@@ -67,7 +67,7 @@ describe("Editor1", () => {
   it("says Unsaved changes, then Saving, then Saved after the pause", async () => {
     const user = userEvent.setup()
     const onSave = vi.fn().mockResolvedValue(undefined)
-    render(<Editor1 defaultValue="" autosaveMs={20} onSave={onSave} />)
+    render(<Editor1 defaultValue="" autosaveMs={300} onSave={onSave} />)
     expect(screen.getByRole("status")).toHaveTextContent("Saved")
     await user.type(field(), "hi")
     expect(screen.getByRole("status")).toHaveTextContent(/Unsaved changes|Saving/)
