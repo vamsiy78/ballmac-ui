@@ -76,3 +76,17 @@ describe("/r/base-<name>.json", () => {
     expect(await alias("base-popover.html", {})).toBeUndefined()
   })
 })
+
+describe("/r/{style}/registry.json search", () => {
+  const catalog = { name: "ballmac", items: [{ name: "data-grid", type: "registry:ui", title: "Data Grid", description: "A grid." }, { name: "button", type: "registry:ui", title: "Button", description: "A button." }] }
+  it("answers the CLI's search with ranked results and a pagination object", async () => {
+    const res = await GET(new Request("https://ui.ballmac.com/r/base-nova/registry.json?q=grid&limit=5&offset=0"), { params: Promise.resolve({ style: "base-nova", file: "registry.json" }), env: env({ "/r/registry.json": catalog }) })
+    const body = await res!.json()
+    expect(body.items.map((i: { name: string }) => i.name)).toEqual(["data-grid"])
+    expect(body.pagination.total).toBe(1)
+  })
+  it("serves the plain catalog when there is no search", async () => {
+    const res = await GET(new Request("https://ui.ballmac.com/r/base-nova/registry.json"), { params: Promise.resolve({ style: "base-nova", file: "registry.json" }), env: env({ "/r/registry.json": catalog }) })
+    expect((await res!.json()).pagination).toBeUndefined()
+  })
+})

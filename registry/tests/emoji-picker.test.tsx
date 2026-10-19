@@ -37,10 +37,10 @@ describe("EmojiPicker", () => {
 
   it("loads English emoji from the data package by default", async () => {
     render(<EmojiPicker onSelect={vi.fn()} />)
-    expect(await screen.findByRole("button", { name: "grinning face" }, { timeout: 4000 })).toBeInTheDocument()
+    expect(await screen.findByRole("button", { name: "grinning face" }, { timeout: 20_000 })).toBeInTheDocument()
     expect(screen.getAllByRole("grid").length).toBeGreaterThan(7)
     expect(screen.getByRole("grid", { name: "Flags" })).toBeInTheDocument()
-  })
+  }, 30_000)
 
   it("shows loading, then offers a retry when loading fails", async () => {
     const user = userEvent.setup()

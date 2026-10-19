@@ -1,4 +1,5 @@
 import * as preset from "./preset"
+import * as registrySearch from "./registry-search"
 
 /**
  * `/r/{style}/<name>.json`: the shadcn CLI replaces `{style}` in a registry URL with the project's style (`base-nova`, `radix-nova`, `new-york-v4`...).
@@ -26,6 +27,12 @@ export async function GET(request: Request, ctx: { params: Promise<Record<string
   const paths = style && file ? stylePaths(style, file) : undefined
   if (!paths) return undefined
   const url = new URL(request.url)
+
+  // The CLI's search asks for the catalog under the style too (`/r/base-nova/registry.json?q=…`): answer it with ranked results.
+  if (file === "registry.json") {
+    const found = await registrySearch.GET(request, { env: ctx.env })
+    if (found) return found
+  }
 
   // Presets are made on request, not built: hand them to the preset route.
   if (file!.startsWith("preset-")) return preset.GET(new Request(new URL(`/r/${file}${url.search}`, url), { headers: request.headers }), { params: Promise.resolve({ file: file! }) })
