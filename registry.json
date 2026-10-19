@@ -42618,6 +42618,269 @@
       }
     },
     {
+      "name": "image-cropper",
+      "type": "registry:ui",
+      "title": "Image Cropper",
+      "description": "Crop a picture under a fixed frame: drag to move, wheel, pinch or slider to zoom, straighten and turn by quarters, any aspect ratio or a round avatar, full keyboard control and a canvas export to a file.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/image-cropper.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/image-cropper.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "image",
+          "crop",
+          "avatar",
+          "upload",
+          "zoom",
+          "rotate",
+          "canvas"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-19",
+        "tests": true,
+        "ai": {
+          "summary": "<ImageCropper src aspect={1} cropperRef={ref} />. Get the file with await ref.current.toBlob({ width, type }); onCropComplete gives the area in original pixels to crop on a server. shape=\"round\" for avatars.",
+          "whenToUse": [
+            "Profile pictures, cover images and product photos cropped before upload",
+            "Any upload that needs a fixed aspect ratio",
+            "Straightening a slightly tilted photo"
+          ],
+          "whenNotToUse": [
+            "Free-form selection boxes with resizable handles",
+            "Photo editing with filters, text or drawing",
+            "Pictures from another site without CORS headers, which cannot be exported"
+          ],
+          "composesWith": [
+            "file-dropzone",
+            "avatar",
+            "dialog",
+            "button"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "Move the picture under the frame; Shift moves it further"
+            },
+            {
+              "keys": "+ / -",
+              "action": "Zoom in and out; the zoom is announced"
+            },
+            {
+              "keys": "[ / ]",
+              "action": "Turn a quarter left or right"
+            },
+            {
+              "keys": "0",
+              "action": "Reset"
+            },
+            {
+              "keys": "Sliders and buttons",
+              "action": "Zoom and straighten are native range inputs with spoken values; turn and reset are buttons"
+            }
+          ],
+          "customization": [
+            "aspect, shape, height, maxZoom, grid, zoomOnWheel",
+            "value and onCropChange to hold the crop; onCropComplete for the area in original pixels",
+            "toBlob options: width, maxWidth, type, quality, round, background",
+            "controls={false} to build your own controls on the same ref"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "image-cropper-loading",
+            "trigger": "no src yet, or while the picture loads",
+            "note": "A skeleton in the picture's place, announced as loading; the controls are off."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "image-cropper-error",
+            "trigger": "the picture fails to load",
+            "note": "A message with a Try again button, announced as an alert; onError gets the error."
+          }
+        ],
+        "examples": [
+          "image-cropper-demo",
+          "image-cropper-aspect",
+          "image-cropper-avatar",
+          "image-cropper-controlled",
+          "image-cropper-loading",
+          "image-cropper-error"
+        ],
+        "url": "https://ui.ballmac.com/components/image-cropper"
+      }
+    },
+    {
+      "name": "image-cropper-demo",
+      "type": "registry:example",
+      "title": "Image Cropper: Square crop with a result",
+      "description": "Square crop with a result example of Image Cropper.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/image-cropper.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/image-cropper-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/image-cropper-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "image-cropper",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "image-cropper-aspect",
+      "type": "registry:example",
+      "title": "Image Cropper: Choose the shape",
+      "description": "Choose the shape example of Image Cropper.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/image-cropper.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/image-cropper-aspect.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/image-cropper-aspect.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "image-cropper",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "image-cropper-avatar",
+      "type": "registry:example",
+      "title": "Image Cropper: Round avatar from a file",
+      "description": "Round avatar from a file example of Image Cropper.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/image-cropper.json",
+        "https://ui.ballmac.com/r/button.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/image-cropper-avatar.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/image-cropper-avatar.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "image-cropper",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "image-cropper-controlled",
+      "type": "registry:example",
+      "title": "Image Cropper: Controlled, with the area",
+      "description": "Controlled, with the area example of Image Cropper.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/image-cropper.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/image-cropper-controlled.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/image-cropper-controlled.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "image-cropper",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "image-cropper-loading",
+      "type": "registry:example",
+      "title": "Image Cropper: Loading",
+      "description": "Loading example of Image Cropper.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/image-cropper.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/image-cropper-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/image-cropper-loading.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "image-cropper",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "image-cropper-error",
+      "type": "registry:example",
+      "title": "Image Cropper: Could not load",
+      "description": "Could not load example of Image Cropper.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/image-cropper.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/image-cropper-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/image-cropper-error.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "image-cropper",
+        "tier": "free"
+      }
+    },
+    {
       "name": "in-view",
       "type": "registry:ui",
       "title": "In View",
