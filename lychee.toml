@@ -15,6 +15,8 @@ exclude = [
   # The site's own absolute addresses (canonical links, feeds) point at production, which doesn't have a new page until it is deployed.
   '^https://ui\.ballmac\.com',
   '^https://ui\.shadcn\.com',
+  # Example addresses in the Verify your registry guide.
+  '^https://acme\.(com|test)',
   # Added to the page by JavaScript (the theme builder's sections), so they are not in the exported HTML.
   '/themes#',
 ]
