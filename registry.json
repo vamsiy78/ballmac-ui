@@ -46309,6 +46309,201 @@
       }
     },
     {
+      "name": "mention-input",
+      "type": "registry:ui",
+      "title": "Mention Input",
+      "description": "A text field where typing @ or # opens a list of people, channels or tags: highlighted mentions that know their id, async search, arrow-key choosing, whole-mention backspace and a combobox pattern for screen readers.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/mention-input.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/mention-input.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "mention",
+          "at-mention",
+          "autocomplete",
+          "tags",
+          "textarea",
+          "comments",
+          "combobox"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-19",
+        "tests": true,
+        "ai": {
+          "summary": "Hold { text, mentions } in state: <MentionInput value onValueChange sources={[{ trigger: \"@\", options }]} />. options is an array or a function (query, signal) returning options or a promise. mentionsToMarkup and parseMentionMarkup convert to a string.",
+          "whenToUse": [
+            "Comments, chat and ticket replies where people are mentioned",
+            "Tag or channel pickers inside a sentence",
+            "Anywhere you need to know which entity a name in the text referred to"
+          ],
+          "whenNotToUse": [
+            "Formatting text as well as mentions; use rich-text-editor",
+            "Choosing one value from a list; use combobox",
+            "Plain multi-line text; use textarea"
+          ],
+          "composesWith": [
+            "textarea",
+            "avatar",
+            "rich-text-editor"
+          ],
+          "a11y": [
+            {
+              "keys": "Type @ or #",
+              "action": "Opens the list under the caret; the field is a combobox with aria-activedescendant"
+            },
+            {
+              "keys": "Arrow Up / Arrow Down",
+              "action": "Choose a suggestion; disabled ones are skipped"
+            },
+            {
+              "keys": "Enter / Tab",
+              "action": "Insert the highlighted suggestion"
+            },
+            {
+              "keys": "Escape",
+              "action": "Close the list without inserting"
+            },
+            {
+              "keys": "Backspace after a mention",
+              "action": "Removes the whole mention"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The count of suggestions and the highlighted one are announced; Searching and No matches are announced too"
+            }
+          ],
+          "customization": [
+            "sources: trigger, options, label, className for each kind of mention",
+            "minRows and maxRows, or singleLine",
+            "invalid, disabled and the usual textarea props",
+            "onSubmit for Enter in a single line or Ctrl/Cmd+Enter"
+          ]
+        },
+        "statesNone": "Nothing loads on its own: an async source shows a Searching row in the list while it answers, and a No matches row when it finds nothing.",
+        "examples": [
+          "mention-input-demo",
+          "mention-input-async",
+          "mention-input-single",
+          "mention-input-invalid"
+        ],
+        "url": "https://ui.ballmac.com/components/mention-input"
+      }
+    },
+    {
+      "name": "mention-input-demo",
+      "type": "registry:example",
+      "title": "Mention Input: People and channels",
+      "description": "People and channels example of Mention Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mention-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mention-input-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mention-input-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mention-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mention-input-async",
+      "type": "registry:example",
+      "title": "Mention Input: Search as you type",
+      "description": "Search as you type example of Mention Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mention-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mention-input-async.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mention-input-async.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mention-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mention-input-single",
+      "type": "registry:example",
+      "title": "Mention Input: Single line with tags",
+      "description": "Single line with tags example of Mention Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mention-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mention-input-single.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mention-input-single.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mention-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "mention-input-invalid",
+      "type": "registry:example",
+      "title": "Mention Input: Invalid and disabled choices",
+      "description": "Invalid and disabled choices example of Mention Input.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/mention-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/mention-input-invalid.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/mention-input-invalid.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "mention-input",
+        "tier": "free"
+      }
+    },
+    {
       "name": "menu-bar",
       "type": "registry:ui",
       "title": "Menu Bar",
