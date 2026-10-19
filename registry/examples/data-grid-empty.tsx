@@ -1,3 +1,5 @@
+"use client"
+
 import { DataGrid, type DataGridColumn } from "@/components/ballmac/data-grid"
 
 type Row = { id: string; name: string; plan: string; seats: number }

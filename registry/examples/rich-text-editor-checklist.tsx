@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 
 import { RichTextEditor } from "@/components/ballmac/rich-text-editor"

@@ -1,3 +1,5 @@
+"use client"
+
 import { DataGrid, type DataGridColumn } from "@/components/ballmac/data-grid"
 
 type Task = { id: string; task: string; owner: string; status: string; due: string; hours: number; reviewed: boolean }

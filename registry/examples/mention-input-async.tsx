@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 
 import { MentionInput, type MentionOption, type MentionSource, type MentionValue } from "@/components/ballmac/mention-input"

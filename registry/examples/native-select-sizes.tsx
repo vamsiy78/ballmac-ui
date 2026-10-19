@@ -1,3 +1,5 @@
+"use client"
+
 import { NativeSelect, NativeSelectOption } from "@/components/ballmac/native-select"
 
 export default function NativeSelectSizes() {

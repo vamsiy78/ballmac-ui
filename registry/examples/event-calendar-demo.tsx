@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 
 import { EventCalendar, type CalendarEvent } from "@/components/ballmac/event-calendar"

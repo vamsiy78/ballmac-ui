@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 
 import { QRCode, type QRCodeLevel } from "@/components/ballmac/qr-code"

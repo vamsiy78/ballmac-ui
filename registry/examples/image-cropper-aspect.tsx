@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 
 import { ImageCropper } from "@/components/ballmac/image-cropper"

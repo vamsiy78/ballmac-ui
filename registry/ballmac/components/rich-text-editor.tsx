@@ -229,7 +229,7 @@ function cleanUrl(input: string): string | null {
  * A rich text editor on Tiptap: headings, bold, italic, lists, checklists, quotes, code, links and dividers. It has a toolbar you can drive with the
  * arrow keys, markdown-style shortcuts, a "/" menu for blocks, a link popover (Ctrl+K), a character limit and a count. It hands you HTML.
  */
-function RichTextEditor({
+function RichTextEditorCore({
   label,
   value,
   defaultValue = "",
@@ -593,6 +593,29 @@ function RichTextEditor({
       <span className="sr-only" role="status" aria-live="polite">
         {slash ? (slash.items.length ? msg("rich-text-editor.slashCount", { one: "{count} block available. {name} is highlighted.", other: "{count} blocks available. {name} is highlighted." }, { count: slash.items.length, name: slash.items[slash.index]?.label ?? "" }) : msg("rich-text-editor.slashNone", "No matching blocks")) : ""}
       </span>
+    </div>
+  )
+}
+
+/**
+ * Tiptap makes its ids with `Math.random()`, which a page that is prerendered must not do while it renders. So the editor is made only in the
+ * browser, after the page is shown: until then a same-size shell holds its place, which also means the server and the browser draw the same first frame.
+ */
+function RichTextEditor(props: RichTextEditorProps) {
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => setMounted(true), [])
+  if (mounted) return <RichTextEditorCore {...props} />
+  const { minHeight = 160, className } = props
+  return (
+    <div data-slot="rich-text-editor" data-state="loading" className={cn("min-w-0", className)}>
+      <div className="overflow-hidden rounded-xl border bg-card" aria-hidden="true">
+        <div className="flex gap-1 border-b p-1.5">
+          {Array.from({ length: 8 }, (_, i) => (
+            <Skeleton key={i} className="size-8" />
+          ))}
+        </div>
+        <div style={{ minHeight }} />
+      </div>
     </div>
   )
 }

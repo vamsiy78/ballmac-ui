@@ -1,3 +1,5 @@
+"use client"
+
 import { DataGrid, type DataGridColumn } from "@/components/ballmac/data-grid"
 
 type Quote = { id: string; symbol: string; name: string; price: number; change: number; volume: number; high: number; low: number; cap: number; pe: number; sector: string }

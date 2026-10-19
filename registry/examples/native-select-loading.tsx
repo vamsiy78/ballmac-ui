@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 
 import { NativeSelect, NativeSelectOption } from "@/components/ballmac/native-select"

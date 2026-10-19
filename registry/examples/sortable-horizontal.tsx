@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 
 import { Sortable, SortableItem } from "@/components/ballmac/sortable"

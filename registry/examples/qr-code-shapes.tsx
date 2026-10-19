@@ -1,3 +1,5 @@
+"use client"
+
 import { QRCode, type QRCodeShape } from "@/components/ballmac/qr-code"
 
 const shapes: { shape: QRCodeShape; name: string }[] = [
