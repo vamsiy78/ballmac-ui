@@ -16,7 +16,9 @@ beforeAll(() => {
 
 /** The editor, handed over by a callback ref as soon as Tiptap has made it. */
 function Ed({ onReady, ...rest }: Partial<RichTextEditorProps> & { onReady?: (e: Editor) => void }) {
-  return <RichTextEditor label="Notes" editorRef={(e) => e && onReady?.(e)} {...rest} />
+  return <RichTextEditor label="Notes" editorRef={(e) => {
+        if (e) onReady?.(e)
+      }} {...rest} />
 }
 
 const setup = async (props: Partial<RichTextEditorProps> = {}) => {

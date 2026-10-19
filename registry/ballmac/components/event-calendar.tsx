@@ -646,7 +646,7 @@ function MonthView({
                   data-date-cell={keyOfDate(day)}
                   data-today={isToday || undefined}
                   data-outside={!inMonth || undefined}
-                  aria-label={`${dayLong(day)}${count ? `, ${msg("event-calendar.eventCount", { one: "{count} event", other: "{count} events" }, { count })}` : ""}`}
+                  aria-label={count ? msg("event-calendar.dayWithEvents", { one: "{date}, {count} event", other: "{date}, {count} events" }, { date: dayLong(day), count }) : dayLong(day)}
                   aria-current={isToday ? "date" : undefined}
                   onFocus={(e) => e.target === e.currentTarget && setFocus(day)}
                   onClick={(e) => e.target === e.currentTarget && cal.selectable && cal.onRangeSelect?.({ start: day, end: addDays(day, 1), allDay: true })}
@@ -663,7 +663,7 @@ function MonthView({
                     onClick={() => onOpenDay(day)}
                     aria-label={msg("event-calendar.openDay", "Open {date}", { date: dayLong(day) })}
                     className={cn(
-                      "ms-auto flex size-6 items-center justify-center rounded-full text-xs tabular-nums outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none",
+                      "ms-auto flex size-6 items-center justify-center rounded-full text-xs tabular-nums outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none",
                       !inMonth && "text-muted-foreground",
                       isToday && "bg-primary font-semibold text-primary-foreground hover:bg-primary/90"
                     )}
@@ -679,34 +679,34 @@ function MonthView({
                       style={{ top: 28 + maxLanes * ALL_DAY_LANE }}
                     />
                   ) : null}
+                  {/* a bar starts in the cell of its first day and runs across the cells after it, so the row holds only cells */}
+                  {segs
+                    .filter((seg) => seg.from === di && seg.lane < maxLanes)
+                    .map((seg) => {
+                      const e = seg.span.event
+                      const multi = seg.span.allDay || seg.to > seg.from || !isSameDay(seg.span.start, addMinutes(seg.span.end, -1))
+                      return (
+                        <EventChip
+                          key={`${e.id}-${wi}`}
+                          event={e}
+                          variant={multi ? "block" : "inline"}
+                          continues={{ before: !seg.startsHere, after: !seg.endsHere }}
+                          dragging={drag?.id === e.id}
+                          onPointerDown={startDrag(e)}
+                          onKeyMove={onKeyMove}
+                          className={cn("absolute z-10", cal.editable && !e.readOnly && "cursor-grab")}
+                          style={{
+                            insetInlineStart: 3,
+                            width: `calc(${(seg.to - seg.from + 1) * 100}% - 6px)`,
+                            top: 30 + seg.lane * ALL_DAY_LANE,
+                            height: ALL_DAY_LANE - 2,
+                          }}
+                        />
+                      )
+                    })}
                 </div>
               )
             })}
-            {/* the bars sit above the cells, across the days they cover */}
-            {segs
-              .filter((s) => s.lane < maxLanes)
-              .map((s) => {
-                const e = s.span.event
-                const multi = s.span.allDay || s.to > s.from || !isSameDay(s.span.start, addMinutes(s.span.end, -1))
-                return (
-                  <EventChip
-                    key={`${e.id}-${wi}`}
-                    event={e}
-                    variant={multi ? "block" : "inline"}
-                    continues={{ before: !s.startsHere, after: !s.endsHere }}
-                    dragging={drag?.id === e.id}
-                    onPointerDown={startDrag(e)}
-                    onKeyMove={onKeyMove}
-                    className={cn("absolute z-10", cal.editable && !e.readOnly && "cursor-grab")}
-                    style={{
-                      insetInlineStart: `calc(${(s.from / 7) * 100}% + 3px)`,
-                      width: `calc(${((s.to - s.from + 1) / 7) * 100}% - 6px)`,
-                      top: 30 + s.lane * ALL_DAY_LANE,
-                      height: ALL_DAY_LANE - 2,
-                    }}
-                  />
-                )
-              })}
           </div>
         )
       })}
@@ -726,7 +726,7 @@ function MoreButton({ day, spans, count, className, style }: { day: Date; spans:
   return (
     <Popover>
       <PopoverTrigger
-        className={cn("rounded px-1 text-start text-xs font-medium text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring", className)}
+        className={cn("rounded px-1 text-start text-xs font-medium text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50", className)}
         style={style}
         onClick={(e) => e.stopPropagation()}
         aria-label={msg("event-calendar.moreOn", "{count} more events on {date}", { count, date: dayLong(day) })}

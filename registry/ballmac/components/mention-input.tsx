@@ -35,7 +35,7 @@ type MentionSource = {
   className?: string
 }
 
-type MentionInputProps = Omit<React.ComponentProps<"textarea">, "value" | "defaultValue" | "onChange" | "children"> & {
+type MentionInputProps = Omit<React.ComponentProps<"textarea">, "value" | "defaultValue" | "onChange" | "onSubmit" | "children"> & {
   /** The text and its mentions, when you hold them in state. Pair with `onValueChange`. */
   value?: MentionValue
   defaultValue?: MentionValue

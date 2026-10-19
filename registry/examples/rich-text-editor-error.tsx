@@ -1,3 +1,5 @@
+"use client"
+
 import { RichTextEditor } from "@/components/ballmac/rich-text-editor"
 
 export default function RichTextEditorError() {

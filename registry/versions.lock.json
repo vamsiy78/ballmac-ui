@@ -235,6 +235,10 @@
     "version": "1.0.0",
     "hash": "5015ba4b15b47de46cd4d01117dc22fb15ec57afba02e982910ab3f3aad37e57"
   },
+  "calendar-dates": {
+    "version": "1.0.0",
+    "hash": "0c5110c9fc6c0512032a833becc8b207f04278fefb4d91d36b02427bac3250f8"
+  },
   "callout": {
     "version": "1.0.0",
     "hash": "f61d35978d3343895149938926b71e597533f21f34e4449d2cff80a58940412a"
@@ -447,6 +451,10 @@
     "version": "1.1.0",
     "hash": "2dab261f07ab45d2985c580444a629c7cd011b9429f9a088dc48eb8b4e23783d"
   },
+  "data-grid": {
+    "version": "1.0.0",
+    "hash": "1637e8d4d22c70f82ac228e2f909908f97027d34620d6034ced699bd5e1f26f5"
+  },
   "data-table": {
     "version": "1.0.0",
     "hash": "5e494217bb48960fbf44ebac07ceacd4e3739c4b877b490f7f8321411f791c63"
@@ -555,6 +563,10 @@
     "version": "1.0.0",
     "hash": "aa94e70cfb0203550ea6183602d2771871ddd49c3d4cdf392c7bb486701250eb"
   },
+  "emoji-picker": {
+    "version": "1.0.0",
+    "hash": "652933c6d649d5041ac413c3ac67df908fca5865850897dc144f0cb28b461011"
+  },
   "empty": {
     "version": "1.0.0",
     "hash": "fb425c747fc9af090b836450a511968ebd4f8b64e10bafa17a3a0dbe16644260"
@@ -574,6 +586,10 @@
   "event-1": {
     "version": "1.0.0",
     "hash": "24d2de6b846a32a8a2358bf53fa0cebda330004b81baee061cb3a34113dcdf75"
+  },
+  "event-calendar": {
+    "version": "1.0.0",
+    "hash": "b4da52d95c7b8a4b07baa3050ed6074d10351f11474cdbabf1800454fdc18eb6"
   },
   "expenses-1": {
     "version": "1.0.0",
@@ -867,6 +883,10 @@
     "version": "1.0.0",
     "hash": "0419a4f4d0846567be8767647be5aa3cf02cf7993f5404ff718ebfd942bcd471"
   },
+  "image-cropper": {
+    "version": "1.0.0",
+    "hash": "3852ce5cb413a7ef496a3836821650583c391eaf4371db3c6f88d2dce38f24ab"
+  },
   "import-1": {
     "version": "1.0.0",
     "hash": "b01ee14987aea2748b2d396eac806f09fd14479c6e0abc0b2b71933f6e779195"
@@ -1051,6 +1071,10 @@
     "version": "1.0.0",
     "hash": "e4b7283c6a756616c841246ed76a2ae2e8c2ed1cf4ad84a3d691ff43ba3d15df"
   },
+  "mention-input": {
+    "version": "1.0.0",
+    "hash": "abf63e6248e7ca236e2a7d3f41b9930921793b7c67b542bae0c46e95d76462a2"
+  },
   "menu-bar": {
     "version": "1.0.0",
     "hash": "dc306dc6cb69b3e5090e94aae3835b9cf64842727cf6b891b1b330ae7eef7573"
@@ -1098,6 +1122,10 @@
   "multi-select": {
     "version": "1.0.0",
     "hash": "5f4da86928055ed21586a78af63e495e0ccc92bf8e5503c2020fd36ea4ebf868"
+  },
+  "native-select": {
+    "version": "1.0.0",
+    "hash": "0a72da7496b7847afe62da7c4f2f63b539ffae9c4c46474ffbda951d33871b55"
   },
   "navbar": {
     "version": "1.0.0",
@@ -1295,6 +1323,10 @@
     "version": "1.0.1",
     "hash": "e4685d1dccf67b0d61d3c43adf51e7bb4cb922774a8f76e3cd7c979aa94e1098"
   },
+  "qr-code": {
+    "version": "1.0.0",
+    "hash": "8c6803633418282f955e3054070c12df5a2f3cee129cb81c1ccfb7fcd21f111d"
+  },
   "quiz-1": {
     "version": "1.0.0",
     "hash": "d8dc522c6587c250aebdaca20a56f73113a253b6ee8bcf5e13ea5610d37aa5fe"
@@ -1338,6 +1370,10 @@
   "reviews-1": {
     "version": "1.0.0",
     "hash": "282ecf9ac5743da2154ec62c02e1eeb8ef78f8ad2ae8aba4dbe662381d461bee"
+  },
+  "rich-text-editor": {
+    "version": "1.0.0",
+    "hash": "d7d2c6974b249770bdcf955c080ffd7859b08bed086efada51b3d79a6920da87"
   },
   "ripple": {
     "version": "1.0.1",
@@ -1482,6 +1518,10 @@
   "snippet-tabs": {
     "version": "1.0.0",
     "hash": "0b80f149e9d65decabe3a1a5c5135d4834c4f5f66bc2e55195c64bca7e4517ea"
+  },
+  "sortable": {
+    "version": "1.0.0",
+    "hash": "aaf866a209c65c00c54b24fc6db444e6dcc153038df7ade9afc7a9af8bf29ee2"
   },
   "sources-list": {
     "version": "1.0.0",

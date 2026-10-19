@@ -42,7 +42,7 @@ describe("EventCalendar: month", () => {
     render(<Cal />)
     const bars = screen.getAllByRole("button", { name: /Launch week/ })
     expect(bars).toHaveLength(1)
-    expect(bars[0]!.style.width).toContain("42.857")
+    expect(bars[0]!.style.width).toBe("calc(300% - 6px)") // three days wide
   })
 
   it("moves by month and back to today", async () => {

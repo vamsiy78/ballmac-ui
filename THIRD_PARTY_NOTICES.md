@@ -24,6 +24,7 @@ Ballmac UI (MIT) includes code adapted from the projects below. Their notices ar
 - **Dotted Map** (`dotted-map`) is based on [cobe](https://github.com/shuding/cobe), MIT, Copyright (c) 2021 Shu Ding.
 - **Drawer** (`drawer`) is based on [shadcn/ui Drawer](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Dropdown Menu** (`dropdown-menu`) is based on [shadcn/ui Dropdown Menu](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
+- **Emoji Picker** (`emoji-picker`) is based on [Emojibase](https://github.com/milesj/emojibase), MIT, Copyright (c) 2017-2019 Miles Johnson.
 - **Empty** (`empty`) is based on [shadcn/ui Empty](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Field** (`field`) is based on [shadcn/ui Field](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Form** (`form`) is based on [shadcn/ui Form](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
@@ -33,16 +34,20 @@ Ballmac UI (MIT) includes code adapted from the projects below. Their notices ar
 - **Item** (`item`) is based on [shadcn/ui Item](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Label** (`label`) is based on [shadcn/ui Label](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Menubar** (`menubar`) is based on [shadcn/ui Menubar](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
+- **Native Select** (`native-select`) is based on [shadcn/ui Input](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Navigation Menu** (`navigation-menu`) is based on [shadcn/ui Navigation Menu](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Pagination** (`pagination`) is based on [shadcn/ui Pagination](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Progress** (`progress`) is based on [shadcn/ui Progress](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
+- **QR Code** (`qr-code`) is based on [uqr](https://github.com/unjs/uqr), MIT, Copyright (c) 2023 Anthony Fu.
 - **Resizable** (`resizable`) is based on [shadcn/ui Resizable](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
+- **Rich Text Editor** (`rich-text-editor`) is based on [Tiptap](https://github.com/ueberdosis/tiptap), MIT, Copyright (c) 2025, Tiptap GmbH.
 - **Select** (`select`) is based on [shadcn/ui Select](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Separator** (`separator`) is based on [shadcn/ui Separator](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Sheet** (`sheet`) is based on [shadcn/ui Sheet](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Sidebar** (`sidebar`) is based on [shadcn/ui Sidebar](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Skeleton** (`skeleton`) is based on [shadcn/ui Skeleton](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Slider** (`slider`) is based on [shadcn/ui Slider](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
+- **Sortable** (`sortable`) is based on [dnd-kit](https://github.com/clauderic/dnd-kit), MIT, Copyright (c) 2021, Claudéric Demers.
 - **Spinner** (`spinner`) is based on [shadcn/ui Spinner](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Switch** (`switch`) is based on [shadcn/ui Switch](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.
 - **Table** (`table`) is based on [shadcn/ui Table](https://github.com/shadcn-ui/ui), MIT, Copyright (c) 2023 shadcn.

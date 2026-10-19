@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 
 import { EmojiPicker, type EmojiData } from "@/components/ballmac/emoji-picker"

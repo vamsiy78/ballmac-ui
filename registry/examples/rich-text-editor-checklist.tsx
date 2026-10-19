@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { RichTextEditor } from "@/components/ballmac/rich-text-editor"
 
-const content = `<h3>Before launch</h3><ul data-type="taskList"><li data-type="taskItem" data-checked="true"><p>Run the accessibility audit</p></li><li data-type="taskItem" data-checked="true"><p>Check right-to-left layouts</p></li><li data-type="taskItem" data-checked="false"><p>Write the changelog entry</p></li><li data-type="taskItem" data-checked="false"><p>Tell the support team</p></li></ul>`
+const content = `<h3>Before launch</h3><ul data-type="taskList"><li data-type="taskItem" data-checked="true"><p>Run the accessibility audit</p></li><li data-type="taskItem" data-checked="true"><p>Check mirrored layouts</p></li><li data-type="taskItem" data-checked="false"><p>Write the changelog entry</p></li><li data-type="taskItem" data-checked="false"><p>Tell the support team</p></li></ul>`
 
 export default function RichTextEditorChecklist() {
   const [html, setHtml] = React.useState(content)

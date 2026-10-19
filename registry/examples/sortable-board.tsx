@@ -5,7 +5,7 @@ import { SortableGroup, SortableGroups, SortableHandle, SortableItem, type Sorta
 const titles: Record<string, string> = {
   "fix-login": "Fix the sign-in redirect",
   "invoice-pdf": "Invoice PDF layout",
-  "docs-rtl": "Document right-to-left setup",
+  "docs-rtl": "Document mirrored layouts",
   "empty-states": "Draw empty states",
   "rate-limit": "Rate limit the public API",
   "release-notes": "Write release notes",

@@ -28,6 +28,10 @@ For a ready-made admin use **template-atlas** or **template-workspace**.
 
 For a page of charts, start from **charts-1** (analytics overview), **charts-2** (revenue report), **charts-3** (small multiples) or **charts-4** (scorecard). For one chart, install `chart-area`, `chart-bar`, `chart-line`, `chart-pie`, `chart-radar`, `chart-radial` or `chart-scatter` and pass `data`, `xKey` and `series`; each draws inside `chart-frame`, which adds a Table view, patterns for color blindness, a written summary and loading, empty and error states. Do not assemble Recharts by hand.
 
+### Hard inputs and data
+
+A table people edit like a spreadsheet is `data-grid` (thousands of rows, keyboard, undo); a read-only or filterable table is `data-table`. Reordering uses `sortable` (list, grid or columns). A scheduling view is `event-calendar`. Rich text is `rich-text-editor`; plain text with @mentions or #tags is `mention-input`. Also `qr-code`, `emoji-picker`, `image-cropper` (avatars and banners, exports a file) and `native-select` (the device's own picker).
+
 ## Settings
 
 **settings-1** (account), **settings-2** (notifications), **settings-3** (team members), **settings-4** (integrations), **settings-5** (audit log), **settings-6** (data and privacy). **billing-1** and **billing-2** for plans and invoices. **webhooks-1**, **flags-1**, **api-1**, **dev-1** for developer settings.

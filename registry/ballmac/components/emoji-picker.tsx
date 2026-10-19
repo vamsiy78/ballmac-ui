@@ -337,14 +337,14 @@ function EmojiPicker({
             }
           }}
           aria-label={msg("emoji-picker.search", "Search emoji")}
-          aria-controls={`${id}-grid`}
+          aria-controls={load.status === "ready" ? `${id}-grid` : undefined}
           placeholder={msg("emoji-picker.search", "Search emoji")}
           disabled={load.status !== "ready"}
           lang={locale}
           className="h-9 w-full rounded-md border border-input bg-background ps-9 pe-8 text-sm shadow-xs outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50 [&::-webkit-search-cancel-button]:hidden"
         />
         {query ? (
-          <button type="button" onClick={() => setQuery("")} aria-label={msg("emoji-picker.clear", "Clear search")} className="absolute end-3.5 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center rounded text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
+          <button type="button" onClick={() => setQuery("")} aria-label={msg("emoji-picker.clear", "Clear search")} className="absolute end-3.5 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center rounded text-muted-foreground outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50">
             <X className="size-3.5" aria-hidden="true" />
           </button>
         ) : null}
@@ -438,7 +438,7 @@ function EmojiPicker({
               aria-label={n === 0 ? msg("emoji-picker.toneDefault", "Default skin tone") : msg("emoji-picker.tone", "Skin tone {n}", { n })}
               title={n === 0 ? msg("emoji-picker.toneDefault", "Default skin tone") : msg("emoji-picker.tone", "Skin tone {n}", { n })}
               onClick={() => setSkin(n)}
-              className={cn("flex size-6 items-center justify-center rounded-md text-sm outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none", skin === n && "bg-accent ring-1 ring-ring/40")}
+              className={cn("flex size-6 items-center justify-center rounded-md text-sm outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50 motion-reduce:transition-none", skin === n && "bg-accent ring-1 ring-ring/40")}
             >
               <span aria-hidden="true">{`✋${t}`}</span>
             </button>

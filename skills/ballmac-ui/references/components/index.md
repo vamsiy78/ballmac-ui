@@ -6,17 +6,17 @@ Open the file for the category you need; each line is one component.
 
 - [AI interfaces](ai.md): 18 components
 - [Backgrounds](backgrounds.md): 15 components
-- [Data display](data-display.md): 36 components
+- [Data display](data-display.md): 39 components
 - [Desktop and macOS surfaces](macos.md): 20 components
 - [Developer tools](developer.md): 14 components
 - [Device frames](devices.md): 6 components
 - [Feedback](feedback.md): 18 components
-- [Forms](forms.md): 24 components
+- [Forms](forms.md): 29 components
 - [Foundation](foundation.md): 1 components
 - [Layout](layout.md): 10 components
 - [marketing](marketing.md): 1 components
 - [Motion](motion.md): 29 components
 - [Navigation](navigation.md): 17 components
-- [Primitives](primitives.md): 24 components
+- [Primitives](primitives.md): 25 components
 - [SaaS building blocks](saas.md): 12 components
 - [Text effects](text.md): 11 components

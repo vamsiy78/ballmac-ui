@@ -484,7 +484,7 @@ function RichTextEditor({
               }}
               aria-invalid={linkError ? true : undefined}
               aria-describedby={linkError ? `${id}-href-error` : undefined}
-              placeholder="example.com"
+              placeholder={T("linkPlaceholder", "example.com")}
               className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20"
             />
             {linkError ? (
