@@ -57,7 +57,7 @@ runs:
       shell: bash
       run: |
         # A private prefix, so nothing is added to the project. verify reads source with TypeScript, so it goes in the same place.
-        npm install --prefix "$RUNNER_TEMP/ballmac" --no-audit --no-fund --silent "@ballmac/cli@${{ inputs.cli-version }}" typescript
+        npm install --prefix "$RUNNER_TEMP/ballmac" --no-audit --no-fund --silent "@ballmac/cli@${{ inputs.cli-version }}" typescript@5
 
     - name: Score the registry
       id: run

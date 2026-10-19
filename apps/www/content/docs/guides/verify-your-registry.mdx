@@ -14,7 +14,7 @@ npx @ballmac/cli verify https://acme.com
 npx @ballmac/cli verify ./public/r/registry.json
 ```
 
-It needs TypeScript in the folder you run it from, because it reads your components the way a compiler does. It writes nothing to your registry and sends nothing anywhere: items are read, then audited in a temporary folder that is deleted afterwards.
+It needs TypeScript 5 or 6 in the folder you run it from (`npm i -D typescript@5`; version 7 has no JavaScript API), because it reads your components the way a compiler does. It writes nothing to your registry and sends nothing anywhere: items are read, then audited in a temporary folder that is deleted afterwards.
 
 ```text title="Output"
 acme  84/100  grade B  62 of 71 items scored

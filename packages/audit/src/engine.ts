@@ -18,7 +18,9 @@ const ORDER: Record<RuleLevel, number> = { off: 0, info: 1, warn: 2, error: 3 }
 export function loadTypescript(root: string): TsModule | undefined {
   for (const base of [join(root, "package.json"), import.meta.url]) {
     try {
-      return createRequire(base)("typescript") as TsModule
+      const ts = createRequire(base)("typescript") as TsModule
+      // TypeScript 7 is a native program with no JavaScript API; keep looking for a copy that can read source.
+      if (typeof ts.createSourceFile === "function" && ts.ScriptKind) return ts
     } catch {
       /* try the next place */
     }

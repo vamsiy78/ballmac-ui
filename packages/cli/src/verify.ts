@@ -261,7 +261,7 @@ export type VerifyOptions = {
 export async function verifyRegistry(source: RegistrySource, opts: VerifyOptions): Promise<Scorecard> {
   const notes: string[] = []
   const ts = loadTypescript(opts.cwd)
-  if (!ts) throw new CliError("verify reads the source with TypeScript, which was not found. Install it (npm i -D typescript) and run again.")
+  if (!ts) throw new CliError("verify reads the source with TypeScript 5 or 6, which was not found (TypeScript 7 has no JavaScript API). Install it (npm i -D typescript@5) and run again.")
 
   const names = new Set(source.items.map((i) => i.name))
   let scoredItems = source.items.filter((i) => SCORED.has(i.type))
