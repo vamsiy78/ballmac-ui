@@ -38797,6 +38797,259 @@
       }
     },
     {
+      "name": "emoji-picker",
+      "type": "registry:ui",
+      "title": "Emoji Picker",
+      "description": "An emoji picker that loads its data on first use: search by name or word, jump between groups, pick a skin tone, recent emoji, a real ARIA grid with arrow keys, and any language from Emojibase.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "emojibase-data@^18",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/direction.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/emoji-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/emoji-picker.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "emoji",
+          "picker",
+          "reactions",
+          "chat",
+          "search",
+          "skin tone",
+          "grid"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-19",
+        "tests": true,
+        "ai": {
+          "summary": "<EmojiPicker onSelect={(e) => insert(e.emoji)} />. It loads English emoji on first use. For another language pass loadEmojis that returns fromEmojibase(compact, groups) for that language. Wrap it in a popover for a button.",
+          "whenToUse": [
+            "Chat, comments and reactions where people add emoji",
+            "A reaction bar's \"more\" menu",
+            "Any text field that needs an emoji button"
+          ],
+          "whenNotToUse": [
+            "A fixed handful of reactions; show buttons instead",
+            "Inserting images or stickers",
+            "Custom emoji sets; map them into the same EmojiData and pass loadEmojis"
+          ],
+          "composesWith": [
+            "popover",
+            "textarea",
+            "mention-input",
+            "rich-text-editor"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Search, group buttons, the grid (one tab stop) and the skin tones are separate stops"
+            },
+            {
+              "keys": "Arrow keys",
+              "action": "Move across the grid and into the next group; left and right swap in right-to-left"
+            },
+            {
+              "keys": "Home / End / Ctrl+Home / Ctrl+End",
+              "action": "Start and end of the row, and of the whole grid"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Choose the emoji"
+            },
+            {
+              "keys": "Arrow Down in search",
+              "action": "Moves to the first result"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Each emoji is a button named in the picker's language; results found and the chosen emoji are announced"
+            }
+          ],
+          "customization": [
+            "columns, height, autoFocus",
+            "skinTone and onSkinToneChange to hold the tone yourself",
+            "recent and storageKey, or recent={false}",
+            "loadEmojis for another language or your own emoji"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "emoji-picker-loading",
+            "trigger": "while the emoji data loads",
+            "note": "A grid of skeletons under a disabled search box, announced as loading. The data is fetched the first time the picker is shown."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "emoji-picker-error",
+            "trigger": "loadEmojis rejects",
+            "note": "An error with a Try again button that loads the emoji again, announced as an alert."
+          }
+        ],
+        "source": {
+          "name": "Emojibase",
+          "url": "https://github.com/milesj/emojibase",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2017-2019 Miles Johnson",
+          "modified": true
+        },
+        "examples": [
+          "emoji-picker-demo",
+          "emoji-picker-popover",
+          "emoji-picker-german",
+          "emoji-picker-loading",
+          "emoji-picker-error"
+        ],
+        "url": "https://ui.ballmac.com/components/emoji-picker"
+      }
+    },
+    {
+      "name": "emoji-picker-demo",
+      "type": "registry:example",
+      "title": "Emoji Picker: Picker",
+      "description": "Picker example of Emoji Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/emoji-picker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/emoji-picker-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/emoji-picker-demo.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "emoji-picker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "emoji-picker-popover",
+      "type": "registry:example",
+      "title": "Emoji Picker: In a popover, inserting into text",
+      "description": "In a popover, inserting into text example of Emoji Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/emoji-picker.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/popover.json",
+        "https://ui.ballmac.com/r/textarea.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/emoji-picker-popover.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/emoji-picker-popover.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "emoji-picker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "emoji-picker-german",
+      "type": "registry:example",
+      "title": "Emoji Picker: German",
+      "description": "German example of Emoji Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/emoji-picker.json",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/emoji-picker-german.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/emoji-picker-german.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "emoji-picker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "emoji-picker-loading",
+      "type": "registry:example",
+      "title": "Emoji Picker: Loading",
+      "description": "Loading example of Emoji Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/emoji-picker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/emoji-picker-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/emoji-picker-loading.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "emoji-picker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "emoji-picker-error",
+      "type": "registry:example",
+      "title": "Emoji Picker: Could not load",
+      "description": "Could not load example of Emoji Picker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/emoji-picker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/emoji-picker-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/emoji-picker-error.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ],
+      "meta": {
+        "example": true,
+        "of": "emoji-picker",
+        "tier": "free"
+      }
+    },
+    {
       "name": "empty-state",
       "type": "registry:ui",
       "title": "Empty State",
