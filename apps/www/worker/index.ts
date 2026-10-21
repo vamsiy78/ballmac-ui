@@ -1,8 +1,13 @@
+import { deliverAffiliateNotifications } from "./affiliate-notifications"
 /**
  * The ui.ballmac.com Worker. Every page is a static file served by Cloudflare straight from the build (out/), without running this code. The Worker
  * answers only the routes that need a request: licence checks, the Pro registry and downloads, the forms, and the custom theme link. Which paths reach
  * it is set by `assets.run_worker_first` in wrangler.jsonc; keep that list and ROUTES below in step.
  */
+import * as affiliateAdmin from "./routes/affiliate-admin"
+import * as affiliateAdminSession from "./routes/affiliate-admin-session"
+import * as affiliateSession from "./routes/affiliate-session"
+import * as affiliates from "./routes/affiliates"
 import { offerWatch } from "./offer-watch"
 import * as apiPreset from "./routes/api-preset"
 import * as changelogSubscribe from "./routes/changelog-subscribe"
@@ -28,6 +33,19 @@ type Handler = (req: Request, ctx: { params: Promise<Record<string, string>>; en
 type Methods = Partial<Record<"GET" | "POST" | "DELETE", Handler>>
 
 const ROUTES: [URLPattern, Methods][] = [
+  ["/go/:code", { GET: async (req: Request, ctx: Parameters<Handler>[1]) => {
+    const url = new URL(req.url)
+    url.searchParams.set("ref", (await ctx.params).code)
+    return affiliates.referral(new Request(url, req), ctx)
+  } }],
+  ["/api/affiliates", affiliates],
+  ["/api/affiliates/admin", affiliateAdmin],
+  ["/api/affiliates/admin/session", affiliateAdminSession],
+  ["/api/affiliates/session", affiliateSession],
+  ["/api/affiliates/ref", { GET: affiliates.referral }],
+  ["/api/affiliates/status", { GET: affiliates.referralStatus }],
+  ["/api/affiliates/checkout", { GET: affiliates.checkout }],
+  ["/api/affiliates/webhook", { POST: affiliates.webhook }],
   ["/api/pro/session", proSession],
   ["/api/pro/founders", proFounders],
   ["/api/pro/items/:name", proItems],
@@ -88,5 +106,6 @@ export default {
   },
   async scheduled(_event, env, ctx) {
     ctx.waitUntil(offerWatch(env))
+    ctx.waitUntil(deliverAffiliateNotifications(env.AFFILIATES))
   },
 } satisfies ExportedHandler<Env>

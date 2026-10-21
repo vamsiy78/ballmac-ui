@@ -23,8 +23,8 @@ export async function SiteHeader() {
           </span>
         </Link>
         <MainNav />
-        <div className="ms-auto flex flex-1 items-center justify-end gap-1">
-          <div className="me-1 sm:w-full sm:max-w-72">
+        <div className="ms-auto flex min-w-0 flex-1 items-center justify-end gap-1">
+          <div className="me-1 min-w-0 sm:w-full sm:max-w-72 xl:max-w-48 2xl:max-w-72">
             <CommandMenu />
           </div>
           <GithubStars initial={stars} />

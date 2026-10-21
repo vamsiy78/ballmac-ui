@@ -4,17 +4,46 @@ import * as React from "react"
 
 import { withRedirect } from "@/lib/pro-checkout"
 
-/**
- * A link to the payment provider's checkout. It renders the plain link (so it works without scripts) and, just before the buyer
- * follows it, adds the return address of the current site, so a purchase made on a preview returns to that preview.
- */
-export function CheckoutLink({ href, children, ...props }: React.ComponentProps<"a">) {
+/** Provider link with a same-site return address and server-validated partner discount. */
+export function CheckoutLink({ href, children, onClick, ...props }: React.ComponentProps<"a">) {
+  const [referral, setReferral] = React.useState<boolean | null>(null)
+  const check = React.useCallback(async () => {
+    const response = await fetch("/api/affiliates/status", { cache: "no-store" })
+    if (!response.ok) throw new Error("Referral status unavailable")
+    const data = await response.json()
+    const active = Boolean(data.active)
+    return active
+  }, [])
+  React.useEffect(() => {
+    check().then(setReferral).catch(() => {})
+  }, [check])
   const base = href ?? ""
   const update = (e: React.SyntheticEvent<HTMLAnchorElement>) => {
-    e.currentTarget.href = withRedirect(base, window.location.origin)
+    e.currentTarget.href = referral ? "/api/affiliates/checkout" : withRedirect(base, window.location.origin)
+  }
+  async function click(e: React.MouseEvent<HTMLAnchorElement>) {
+    onClick?.(e)
+    if (e.defaultPrevented) return
+    update(e)
+    if (referral !== null || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+    // A fast click must wait for attribution; never silently lose the buyer's discount while the check is in flight.
+    e.preventDefault()
+    try {
+      const active = await check()
+      const destination = active ? "/api/affiliates/checkout" : withRedirect(base, window.location.origin)
+      window.location.assign(new URL(destination, window.location.origin).toString())
+    } catch {
+      window.location.assign(new URL("/pro?referral_error=unavailable", window.location.origin).toString())
+    }
   }
   return (
-    <a {...props} href={base} onPointerDown={update} onClick={update} onFocus={update}>
+    <a
+      {...props}
+      href={referral ? "/api/affiliates/checkout" : base}
+      onPointerDown={update}
+      onClick={click}
+      onFocus={update}
+    >
       {children}
     </a>
   )

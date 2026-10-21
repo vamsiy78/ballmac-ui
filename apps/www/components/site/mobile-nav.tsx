@@ -21,17 +21,17 @@ export function MobileNav({ groups }: { groups: NavGroup[] }) {
   return (
     <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
       <DialogPrimitive.Trigger
-        className="text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:ring-ring/50 inline-flex size-8 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] md:hidden"
+        className="text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:ring-ring/50 inline-flex size-8 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] xl:hidden"
         aria-label="Open navigation"
       >
         <Menu className="size-4" />
       </DialogPrimitive.Trigger>
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
-        <DialogPrimitive.Content className="bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left rtl:data-[state=open]:slide-in-from-right rtl:data-[state=closed]:slide-out-to-right fixed inset-y-0 start-0 z-50 flex w-[85vw] max-w-80 flex-col border-e shadow-xl duration-200">
+        <DialogPrimitive.Overlay className="motion-reduce:animate-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
+        <DialogPrimitive.Content className="bg-background motion-reduce:animate-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left rtl:data-[state=open]:slide-in-from-right rtl:data-[state=closed]:slide-out-to-right fixed inset-y-0 start-0 z-50 flex w-[85vw] max-w-80 flex-col border-e shadow-xl duration-200">
           <div className="flex h-14 items-center justify-between border-b px-4">
             <DialogPrimitive.Title className="text-sm font-semibold">Ballmac UI</DialogPrimitive.Title>
-            <DialogPrimitive.Close className="text-muted-foreground hover:text-foreground hover:bg-accent inline-flex size-8 items-center justify-center rounded-md" aria-label="Close navigation">
+            <DialogPrimitive.Close className="text-muted-foreground hover:text-foreground hover:bg-accent inline-flex size-8 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50" aria-label="Close navigation">
               <X className="size-4" />
             </DialogPrimitive.Close>
           </div>
@@ -39,7 +39,7 @@ export function MobileNav({ groups }: { groups: NavGroup[] }) {
           <div className="flex-1 overflow-y-auto px-2 py-6">
             <DocsSidebar
               groups={[
-                { title: "Ballmac UI", items: [{ href: "/", label: "Home" }, { href: "/pricing", label: "Pricing" }, { href: "/pro/login", label: "Pro log in" }] },
+                { title: "Ballmac UI", items: [{ href: "/", label: "Home" }, { href: "/pricing", label: "Pricing" }, { href: "/affiliates", label: "Partners · earn 30%" }, { href: "/affiliates/dashboard", label: "Partner dashboard" }, { href: "/pro/login", label: "Pro log in" }] },
                 ...groups,
               ]}
             />

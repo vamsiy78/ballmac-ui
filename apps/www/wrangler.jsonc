@@ -13,7 +13,7 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
     // Only these reach the Worker; everything else is a static file. Keep in step with ROUTES in worker/index.ts.
-    "run_worker_first": ["/api/changelog-subscribe", "/api/docs-feedback", "/api/pro/*", "/api/reminders", "/api/sampler", "/api/stars", "/api/support", "/api/v1/license/*", "/api/v1/preset", "/r/pro/*", "/r/preset-*", "/r/registry.json", "/r/base-*", "/r/*/*.json", "!/r/base/*", "!/r/tests/*", "/themes/custom.json"]
+    "run_worker_first": ["/go/*", "/api/affiliates", "/api/affiliates/*", "/api/changelog-subscribe", "/api/docs-feedback", "/api/pro/*", "/api/reminders", "/api/sampler", "/api/stars", "/api/support", "/api/v1/license/*", "/api/v1/preset", "/r/pro/*", "/r/preset-*", "/r/registry.json", "/r/base-*", "/r/*/*.json", "!/r/base/*", "!/r/tests/*", "/themes/custom.json"]
   },
   "alias": { "server-only": "./worker/server-only.ts" },
   // The private Pro build is bundled as modules (worker/build-data.ts): registry JSON and highlighted items as text, archives as bytes.
@@ -29,7 +29,9 @@
       "name": "ballmac-ui-preview",
       "workers_dev": true,
       "routes": [{ "pattern": "preprod.ui.ballmac.com", "custom_domain": true }],
-      "vars": { "DEPLOY_ENV": "preview" }
+      "d1_databases": [{ "binding": "AFFILIATES", "database_name": "ballmac-affiliates-preview", "database_id": "a0f88aec-1278-4ee1-92ad-2d093aafea13", "migrations_dir": "worker/migrations" }],
+      "vars": { "DEPLOY_ENV": "preview" },
+      "triggers": { "crons": ["*/15 * * * *"] }
     },
     "production": {
       "name": "ballmac-ui",

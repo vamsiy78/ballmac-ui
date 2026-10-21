@@ -32,6 +32,7 @@ const columns = [
     title: "Resources",
     links: [
       { href: "/support", label: "Support" },
+      { href: "/affiliates", label: "Affiliates · earn 30%" },
       { href: "/changelog", label: "Changelog" },
       { href: "/llms.txt", label: "llms.txt" },
       { href: "/r/registry.json", label: "Registry JSON" },

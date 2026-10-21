@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
 
+import { ReferralNotice } from "@/components/affiliates/referral-notice"
 import { ProHub } from "@/components/pro/pro-hub"
 import { ProSales } from "@/components/pro/pro-sales"
 import { PageCard } from "@/components/site/page-card"
@@ -33,6 +34,7 @@ export default function ProPage() {
 
   return (
     <Suspense fallback={null}>
+      <ReferralNotice />
       <ProHub downloads={downloads} sampleItem={picks[0]?.name ?? "hero-pro-1"} licenseUrl={licenseUrl} sales={<ProSales downloads={downloads} />}>
         {picks.length > 0 && (
           <section className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6" aria-labelledby="inside-h">

@@ -13,13 +13,14 @@ const nav = [
   { href: "/presets", label: "Presets", match: ["/presets", "/themes"] },
   { href: "/docs/get-started/connect-your-agent", label: "MCP", match: [] },
   { href: "/pricing", label: "Pricing", match: ["/pricing"] },
+  { href: "/affiliates", label: "Partners", match: ["/affiliates"] },
 ]
 
 /** Top-level sections; the current one reads as selected. */
 export function MainNav() {
   const pathname = usePathname()
   return (
-    <nav aria-label="Main" className="hidden items-center gap-0.5 md:flex">
+    <nav aria-label="Main" className="hidden items-center gap-0.5 xl:flex">
       {nav.map((n) => {
         const active = pathname === n.href || n.match.some((m) => pathname.startsWith(m) && !(m === "/docs" && pathname === "/docs/get-started/connect-your-agent"))
         return (

@@ -6,6 +6,20 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-22-partner-program] - 2026-10-22
+
+**A workspace for Ballmac partners.** Recommend Ballmac UI Pro, earn 30% on eligible purchases and give your audience 10% off, with clear commission and payout tracking.
+
+### Added
+
+- The [partner program](https://ui.ballmac.com/affiliates) gives approved partners a personal referral link, a 30-day referral window and 30% commission on eligible Pro purchases after the buyer’s 10% discount, before tax.
+- A private [partner workspace](https://ui.ballmac.com/affiliates/dashboard) brings together referral links, editable sharing resources, commission activity and payment history. Pending earnings show their eligibility date and progress toward the $50 payout minimum.
+- A separate owner workspace handles application reviews, partner access, provider-backed commission checks and completed-transfer records. New applications notify administrators and receive a confirmation email, with durable retries for temporary delivery failures.
+
+### Changed
+
+- Partner sign-in codes, approval messages and recorded-payout confirmations use consistent transactional email designs. Program terms explain attribution, adjustments, disclosures, privacy and monthly payout reviews.
+
 ## [2026-10-19-chat-kit-verified-search] - 2026-10-19
 
 **Chat kit parts, an open registry score and server-side search.** Trace, Questionnaire and Code Block now match shadcn's chat kit, any registry can be scored with one command, and shadcn search returns ranked results from our server.

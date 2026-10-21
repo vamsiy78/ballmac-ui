@@ -2,7 +2,7 @@
  * Finishes out/ after `next build` with BALLMAC_EXPORT=1: adds Cloudflare's _headers and _redirects, and fails when the build would not fit or would
  * leak. Run by `pnpm cf:build`.
  */
-import { appendFileSync, copyFileSync, existsSync, readdirSync, readFileSync, rmdirSync, rmSync, statSync } from "node:fs"
+import { appendFileSync, copyFileSync, existsSync, readdirSync, readFileSync, rmdirSync, rmSync, statSync, writeFileSync } from "node:fs"
 import { join, relative } from "node:path"
 
 import docsRedirects from "../content/docs-redirects.json" with { type: "json" }
@@ -15,7 +15,13 @@ for (const f of ["_headers", "_redirects"]) copyFileSync(join(www, "cloudflare",
 // Docs pages that moved: permanent redirects, because published packages and other sites still link to the old addresses. Same list as next.config.ts.
 appendFileSync(join(out, "_redirects"), `\n# Docs reorganised by what the reader needs (content/docs-redirects.json)\n${Object.entries(docsRedirects).map(([from, to]) => `${from} ${to} 301`).join("\n")}\n`)
 // A preview build (DEPLOY_ENV=preview) must never be indexed: every file it serves says so.
-if (process.env.DEPLOY_ENV && process.env.DEPLOY_ENV !== "production") appendFileSync(join(out, "_headers"), "\n# Preview build: keep it out of search engines.\n/*\n  X-Robots-Tag: noindex\n")
+if (process.env.DEPLOY_ENV && process.env.DEPLOY_ENV !== "production") {
+  const path = join(out, "_headers")
+  const headers = readFileSync(path, "utf8")
+  if (!/^\/\*$/m.test(headers)) throw new Error("Global static security headers are missing")
+  // Duplicate path blocks overwrite each other in the asset parser. Keep noindex and security headers together.
+  writeFileSync(path, headers.replace(/^\/\*$/m, "/*\n  X-Robots-Tag: noindex"))
+}
 
 /**
  * Previews are only ever loaded in iframes and plain links, so nothing asks for their segment-prefetch payloads (`__next.*.txt`, four per page and

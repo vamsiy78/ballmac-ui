@@ -14,7 +14,7 @@ const out = join(www, "out")
 const local = join(www, ".wrangler/local-assets")
 if (!existsSync(out)) throw new Error("out/ is missing: run pnpm cf:build first")
 
-const SAMPLE = /^(preview|components|blocks|templates)\/((button|hero-1|hero-pro-1|dashboard-pro-1|template-ledger|citation)\b|[^/]+\.(html|txt)$)/
+const SAMPLE = /^(preview|components|blocks|templates)\/((button|hero-1|hero-pro-1|dashboard-pro-1|template-ledger|citation)\b|__next\.[^/]+\.txt$)/
 rmSync(local, { recursive: true, force: true })
 let kept = 0
 const walk = (dir: string) => {

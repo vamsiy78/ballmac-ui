@@ -44,7 +44,7 @@ await check("home page", async () => {
   expect(res.headers.get("content-security-policy")?.includes("frame-ancestors 'self'"), "no content-security-policy")
   expect((await res.text()).includes("Ballmac"), "body does not mention Ballmac")
 })
-for (const path of ["/components", "/components/button", "/blocks/hero-1", "/pricing", "/pro", "/quality", "/docs/guides/check-your-app", "/preview/button-demo"]) {
+for (const path of ["/components", "/components/button", "/blocks/hero-1", "/pricing", "/pro", "/affiliates", "/affiliates/dashboard", "/affiliates/admin", "/quality", "/docs/guides/check-your-app", "/preview/button-demo"]) {
   await check(path, async () => status(await get(path), 200))
 }
 await check("unknown page is a 404 with the site's page", async () => {
@@ -96,6 +96,13 @@ await check("/api/v1/items/button.json", async () => {
 })
 
 console.log("\nWorker routes")
+for (const path of ["/api/affiliates", "/api/affiliates/admin"]) {
+  await check(`${path} requires a private session`, async () => status(await get(path), [401, 503]))
+}
+await check("affiliate webhook refuses unsigned events", async () => {
+  status(await get("/api/affiliates/webhook", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" }), [401, 503])
+})
+
 await check("custom theme link", async () => {
   const res = await get("/themes/custom.json?h=262&c=0.19")
   status(res, 200)

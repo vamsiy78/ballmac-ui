@@ -1,6 +1,7 @@
 // The Worker's bindings and settings. Secrets (DODO_API_KEY, RESEND_API_KEY, PRO_SESSION_SECRET, ...) are read through process.env by the shared lib code,
 // which nodejs_compat fills from them; only what the Worker itself reads is listed here.
 interface Env {
+  AFFILIATES?: D1Database
   ASSETS: Fetcher
   DEPLOY_ENV?: string
   GITHUB_DEPLOY_TOKEN?: string
