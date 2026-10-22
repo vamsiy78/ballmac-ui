@@ -35,6 +35,7 @@
     },
     "production": {
       "name": "ballmac-ui",
+      "d1_databases": [{ "binding": "AFFILIATES", "database_name": "ballmac-affiliates-production", "database_id": "1d13cc5d-b7d9-46ad-bb66-f85276128510", "migrations_dir": "worker/migrations" }],
       "workers_dev": false,
       "routes": [{ "pattern": "ui.ballmac.com", "custom_domain": true }],
       "vars": { "DEPLOY_ENV": "production", "DEPLOY_REPO": "vamsiy78/ballmac-ui-pro", "DEPLOY_WORKFLOW": "deploy.yml" },
