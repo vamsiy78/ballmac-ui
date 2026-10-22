@@ -34,6 +34,7 @@ beforeEach(() => {
     "0002_affiliate_sessions.sql",
     "0003_affiliate_admin.sql",
     "0004_affiliate_notifications.sql",
+    "0005_affiliate_applications.sql",
   ])
     sql.exec(readFileSync(new URL(`../worker/migrations/${migration}`, import.meta.url), "utf8"))
   db = {
@@ -74,7 +75,7 @@ afterEach(() => {
   sql.close()
   vi.unstubAllEnvs()
 })
-const apply = () =>
+const apply = (overrides: Record<string, unknown> = {}) =>
   POST(
     new Request("https://preprod.ui.ballmac.com/api/affiliates", {
       method: "POST",
@@ -84,6 +85,8 @@ const apply = () =>
         email: "partner@example.com",
         channel: "https://example.com",
         terms: true,
+        promotionPlan: "I share React tutorials with my developer newsletter audience.",
+        ...overrides,
       }),
     }),
     { env: { AFFILIATES: db } },
@@ -110,6 +113,35 @@ describe("durable application notifications", () => {
     expect((await apply()).status).toBe(200)
     expect(vi.mocked(resend).mock.calls).toHaveLength(2)
     expect(sql.prepare("SELECT COUNT(*) AS n FROM affiliates").get().n).toBe(1)
+  })
+  it.each([false, undefined, "true", 1])(
+    "rejects missing or non-boolean consent (%s) without storing or emailing",
+    async (terms) => {
+      expect((await apply({ terms })).status).toBe(422)
+      expect(sql.prepare("SELECT COUNT(*) AS n FROM affiliates").get().n).toBe(0)
+      expect(sql.prepare("SELECT COUNT(*) AS n FROM affiliate_notifications").get().n).toBe(0)
+      expect(resend).not.toHaveBeenCalled()
+    },
+  )
+  it.each(["", "short", "x".repeat(1001)])(
+    "rejects incomplete or oversized promotion plans",
+    async (promotionPlan) => {
+      expect((await apply({ promotionPlan })).status).toBe(422)
+      expect(sql.prepare("SELECT COUNT(*) AS n FROM affiliates").get().n).toBe(0)
+      expect(resend).not.toHaveBeenCalled()
+    },
+  )
+  it("stores the promotion plan and server consent timestamp and includes the plan in owner mail", async () => {
+    const before = Date.now()
+    expect((await apply()).status).toBe(200)
+    const record = sql.prepare("SELECT promotion_plan,terms_version,terms_accepted_at FROM affiliates").get()
+    expect(record.promotion_plan).toContain("developer newsletter")
+    expect(record.terms_version).toBe("2026-10-22.2")
+    expect(Date.parse(record.terms_accepted_at)).toBeGreaterThanOrEqual(before)
+    const mail = vi
+      .mocked(resend)
+      .mock.calls.find((call) => (call[1]!.body as { to: string[] }).to[0] === "owner@example.com")
+    expect((mail![1]!.body as { text: string }).text).toContain(record.promotion_plan)
   })
   it("keeps accepted applications and retries provider failures with stable idempotency keys", async () => {
     vi.mocked(resend).mockRejectedValue(new Error("private provider detail"))

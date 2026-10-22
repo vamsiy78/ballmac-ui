@@ -1,6 +1,6 @@
 /** Private operator CLI. Credentials come from the environment; never print them. */
 import { randomBytes } from "node:crypto"
-import { hashToken } from "../apps/www/lib/affiliates"
+import { AFFILIATE, hashToken } from "../apps/www/lib/affiliates"
 
 const [action, email, value, reference] = process.argv.slice(2)
 const required = (name: string) => {
@@ -84,8 +84,8 @@ async function main() {
     console.log("Partner paused. Dashboard remains available.")
   } else if (action === "payout") {
     const amount = Number(value)
-    if (!Number.isSafeInteger(amount) || amount < 5000 || !reference || reference.length > 200)
-      throw new Error("Provide at least 5000 USD cents and a unique completed transfer reference")
+    if (!Number.isSafeInteger(amount) || amount < AFFILIATE.minimumPayout || !reference || reference.length > 200)
+      throw new Error(`Provide at least ${AFFILIATE.minimumPayout} USD cents and a unique completed transfer reference`)
     // Only prior-month earnings are available. One atomic conditional INSERT prevents concurrent overpayment records.
     const result = await query(
       `INSERT INTO affiliate_payouts (id,affiliate_id,amount_cents,reference)

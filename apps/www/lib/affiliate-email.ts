@@ -1,3 +1,5 @@
+import { AFFILIATE, usd } from "./affiliates"
+
 /** Transactional partner email templates. User content is escaped in HTML and never interpolated into URLs. */
 export const escapeEmail = (value: string) =>
   value.replace(
@@ -76,7 +78,7 @@ export function approvalEmail(name: string) {
       ["Your commission", "30% of eligible Pro sales"],
       ["Your audience saves", "10% on regular Pro"],
       ["Referral window", "30 days"],
-      ["Minimum payout", "$50 USD"],
+      ["Minimum payout", `${usd(AFFILIATE.minimumPayout)} USD`],
     ],
     paragraphs: [
       "Sign in with your approved email to get your personal link, sharing resources and commission history.",

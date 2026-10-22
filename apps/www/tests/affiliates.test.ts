@@ -117,7 +117,13 @@ describe("applications and private dashboards", () => {
     expect(
       (
         await POST(
-          request({ name: "Partner", email: "P@example.com", channel: "https://example.com", terms: true }),
+          request({
+            name: "Partner",
+            email: "P@example.com",
+            channel: "https://example.com",
+            promotionPlan: "I will publish React tutorials for my newsletter audience.",
+            terms: true,
+          }),
           context(db),
         )
       ).status,
@@ -130,6 +136,8 @@ describe("applications and private dashboards", () => {
       "https://example.com",
       expect.stringMatching(/^partner-/),
       AFFILIATE.termsVersion,
+      "I will publish React tutorials for my newsletter audience.",
+      expect.stringMatching(/^\d{4}-\d{2}-\d{2}T/),
     )
   })
   it("requires a private dashboard credential", async () => {

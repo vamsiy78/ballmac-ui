@@ -3,8 +3,8 @@ export const AFFILIATE = {
   commission: 30,
   discount: 10,
   cookieDays: 30,
-  minimumPayout: 5000,
-  termsVersion: "2026-10-22",
+  minimumPayout: 10_000,
+  termsVersion: "2026-10-22.2",
 } as const
 export const referralCode = (value: unknown): string | null =>
   typeof value === "string" && /^[a-z0-9][a-z0-9-]{2,31}$/.test(value) ? value : null

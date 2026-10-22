@@ -36,6 +36,7 @@ function setup() {
     "0002_affiliate_sessions.sql",
     "0003_affiliate_admin.sql",
     "0004_affiliate_notifications.sql",
+    "0005_affiliate_applications.sql",
   ])
     sql.exec(readFileSync(new URL(`../worker/migrations/${file}`, import.meta.url), "utf8"))
   sql
@@ -333,21 +334,22 @@ describe("payout recording", () => {
   it("records only confirmed eligible transfers, prevents duplicate references and prevents overpayment", async () => {
     const { ctx, cookie } = await owner()
     sql.exec(
-      "INSERT INTO affiliate_sales VALUES ('pay','partner',30000,9000,'earned',datetime('now','start of month','-1 day'),datetime('now'))",
+      "INSERT INTO affiliate_sales VALUES ('pay','partner',60000,18000,'earned',datetime('now','start of month','-1 day'),datetime('now'))",
     )
     const body = {
       action: "payout",
       id: "partner",
-      amount: "50.00",
+      amount: "100.00",
       reference: "transfer-1",
       method: "wise",
       confirmed: true,
     }
     expect((await POST(request({ ...body, confirmed: false }, cookie), ctx)).status).toBe(422)
-    expect((await POST(request({ ...body, amount: "100.00" }, cookie), ctx)).status).toBe(409)
+    expect((await POST(request({ ...body, amount: "200.00" }, cookie), ctx)).status).toBe(409)
+    expect((await POST(request({ ...body, amount: "99.99" }, cookie), ctx)).status).toBe(422)
     expect((await POST(request(body, cookie), ctx)).status).toBe(200)
     expect(sql.prepare("SELECT amount_cents,method FROM affiliate_payouts").get()).toMatchObject({
-      amount_cents: 5000,
+      amount_cents: 10000,
       method: "wise",
     })
     // Replenish eligible earnings to prove uniqueness is enforced independently of the balance check.
@@ -357,6 +359,17 @@ describe("payout recording", () => {
     expect(
       sql.prepare("SELECT COUNT(*) AS total FROM affiliate_audit WHERE action='payout'").get()?.total,
     ).toBe(1)
+  })
+  it("only lists partners with at least $100 eligible as ready for payout", async () => {
+    const { ctx, cookie } = await owner()
+    sql.exec(
+      "INSERT INTO affiliate_sales VALUES ('pay','partner',33330,9999,'earned',datetime('now','start of month','-1 day'),datetime('now'))",
+    )
+    expect((await (await GET(read(cookie, "view=partners&status=ready"), ctx)).json()).total).toBe(0)
+    expect((await (await GET(read(cookie, "view=overview"), ctx)).json()).total).toBe(0)
+    sql.exec("UPDATE affiliate_sales SET commission_cents=10000")
+    expect((await (await GET(read(cookie, "view=partners&status=ready"), ctx)).json()).total).toBe(1)
+    expect((await (await GET(read(cookie, "view=overview"), ctx)).json()).total).toBe(1)
   })
   it("does not offset another partner's eligible earnings with someone else's debt", async () => {
     const { ctx, cookie } = await owner()

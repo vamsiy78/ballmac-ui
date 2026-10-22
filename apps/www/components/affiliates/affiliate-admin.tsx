@@ -39,7 +39,7 @@ import {
   SelectGroup,
   SelectItem,
 } from "@/components/ballmac/select"
-import { usd } from "@/lib/affiliates"
+import { AFFILIATE, usd } from "@/lib/affiliates"
 import type { AdminPayload, AdminPartner, AdminSale, AdminView } from "@/lib/affiliate-admin"
 
 const views: { key: AdminView; label: string; title: string; description: string }[] = [
@@ -356,8 +356,8 @@ export function AffiliateAdmin() {
       : selected.status === "rejected"
         ? ["approve", "reopen"]
         : selected.status === "paused"
-          ? ["approve", "revoke", ...(selected.eligible >= 5000 ? ["payout"] : [])]
-          : ["pause", "revoke", "notify", ...(selected.eligible >= 5000 ? ["payout"] : [])]
+          ? ["approve", "revoke", ...(selected.eligible >= AFFILIATE.minimumPayout ? ["payout"] : [])]
+          : ["pause", "revoke", "notify", ...(selected.eligible >= AFFILIATE.minimumPayout ? ["payout"] : [])]
     : []
 
   return (
@@ -841,8 +841,8 @@ export function AffiliateAdmin() {
                           <>
                             <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-muted/30 p-4">
                               <p className="max-w-xl text-xs leading-relaxed">
-                                Transfer funds in PayPal or Wise first. Then open the partner’s record and
-                                choose “Record completed transfer”.
+                                Complete the transfer through your payout provider first. Then open the
+                                partner’s record and choose “Record completed transfer”.
                               </p>
                               <Button
                                 size="sm"
@@ -950,9 +950,10 @@ export function AffiliateAdmin() {
                             <div className="mt-6 rounded-xl border bg-muted/25 p-4 text-sm leading-relaxed">
                               <p className="font-medium">Program rules</p>
                               <p className="text-muted-foreground mt-2">
-                                30% commission after the 10% buyer discount, before tax. The minimum payout is
-                                $50. Reviews run on the 1st–15th UTC for earlier-month sales. PayPal/Wise
-                                transfers are manual.
+                                30% commission after the 10% buyer discount, before tax. The minimum payout is{" "}
+                                {usd(AFFILIATE.minimumPayout)}. Reviews run on the 1st–15th UTC for
+                                earlier-month sales. This app records completed transfers; it does not send
+                                funds.
                               </p>
                             </div>
                           </>
@@ -1053,6 +1054,18 @@ export function AffiliateAdmin() {
                   </div>
                 ))}
               </div>
+              <div className="rounded-xl border p-4 text-sm">
+                <h3 className="font-medium">Promotion plan</h3>
+                <p className="text-muted-foreground mt-2 whitespace-pre-wrap break-words leading-relaxed">
+                  {selected.promotion_plan || "Not collected on this earlier application."}
+                </p>
+                <p className="text-muted-foreground mt-3 text-xs">
+                  Terms accepted: {selected.terms_version}
+                  {selected.terms_accepted_at
+                    ? ` · ${new Date(selected.terms_accepted_at).toLocaleDateString("en-US", { timeZone: "UTC" })} UTC`
+                    : " · earlier application"}
+                </p>
+              </div>
               {selected.balance < 0 && (
                 <p role="status" className="text-muted-foreground text-sm leading-relaxed">
                   A balance adjustment of {usd(-selected.balance)} will be offset against this partner’s
@@ -1135,9 +1148,11 @@ export function AffiliateAdmin() {
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
                         required
-                        placeholder="50.00"
+                        placeholder={(AFFILIATE.minimumPayout / 100).toFixed(2)}
                       />
-                      <FieldDescription>Minimum $50.00; cannot exceed the eligible balance.</FieldDescription>
+                      <FieldDescription>
+                        Minimum {usd(AFFILIATE.minimumPayout)}; cannot exceed the eligible balance.
+                      </FieldDescription>
                     </Field>
                     <Field>
                       <FieldLabel htmlFor="payout-method">Transfer method</FieldLabel>

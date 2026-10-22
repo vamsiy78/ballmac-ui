@@ -9,6 +9,9 @@ export type AdminPartner = {
   name: string
   email: string
   channel: string
+  promotion_plan: string
+  terms_version: string
+  terms_accepted_at: string | null
   code: string
   status: string
   discount_code: string | null

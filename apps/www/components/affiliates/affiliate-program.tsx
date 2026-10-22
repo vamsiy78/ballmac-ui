@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { WorkspaceNav } from "./workspace-nav"
 import { Button, buttonVariants } from "@/components/ballmac/button"
+import { Textarea } from "@/components/ballmac/textarea"
 import { Input } from "@/components/ballmac/input"
 import { Field, FieldGroup, FieldLabel, FieldDescription } from "@/components/ballmac/field"
 import { Badge } from "@/components/ballmac/badge"
@@ -34,7 +35,7 @@ const faqs = [
   ],
   [
     "When do I get paid?",
-    "Our monthly payout review window is the 1st–15th (UTC), covering the previous month’s eligible sales, with a $50 minimum. Smaller balances roll over. We arrange payment through PayPal or Wise after approval; any payment fees and required tax information are confirmed with you.",
+    `Our monthly payout review window is the 1st–15th (UTC), covering the previous month’s eligible sales, with a ${usd(AFFILIATE.minimumPayout)} minimum. Smaller balances roll over. A supported payout method, any payment fees and required tax information are confirmed privately before your first transfer.`,
   ],
   [
     "What are the ground rules?",
@@ -46,11 +47,16 @@ export function AffiliateProgram({ productProof }: { productProof: React.ReactNo
   const [sales, setSales] = React.useState(10)
   const [state, setState] = React.useState<"idle" | "sending" | "sent">("idle")
   const [error, setError] = React.useState("")
+  const [acceptedTerms, setAcceptedTerms] = React.useState(false)
   async function apply(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    if (!acceptedTerms || data.get("terms") !== "on") {
+      setError("Please read and accept the program terms before applying.")
+      return
+    }
     setState("sending")
     setError("")
-    const data = new FormData(event.currentTarget)
     try {
       const response = await fetch("/api/affiliates", {
         method: "POST",
@@ -59,6 +65,7 @@ export function AffiliateProgram({ productProof }: { productProof: React.ReactNo
           name: data.get("name"),
           email: data.get("email"),
           channel: data.get("channel"),
+          promotionPlan: data.get("promotionPlan"),
           website: data.get("website"),
           terms: data.get("terms") === "on",
         }),
@@ -321,6 +328,23 @@ export function AffiliateProgram({ productProof }: { productProof: React.ReactNo
                   />
                   <FieldDescription>Your website, newsletter, social profile or channel.</FieldDescription>
                 </Field>
+                <Field>
+                  <FieldLabel htmlFor="partner-promotion">How will you recommend Ballmac?</FieldLabel>
+                  <Textarea
+                    id="partner-promotion"
+                    name="promotionPlan"
+                    required
+                    minLength={20}
+                    maxLength={1000}
+                    rows={4}
+                    aria-describedby="partner-promotion-help"
+                    placeholder="Tell us who you reach and how you would introduce Ballmac UI to them."
+                  />
+                  <FieldDescription id="partner-promotion-help">
+                    A few sentences about your audience and planned content. No minimum audience size. Please
+                    leave out bank, identity and tax details.
+                  </FieldDescription>
+                </Field>
                 <div className="hidden" aria-hidden="true">
                   <label>
                     Leave empty
@@ -330,6 +354,8 @@ export function AffiliateProgram({ productProof }: { productProof: React.ReactNo
                 <label className="text-muted-foreground flex items-start gap-3 text-xs leading-relaxed">
                   <input
                     name="terms"
+                    checked={acceptedTerms}
+                    onChange={(event) => setAcceptedTerms(event.target.checked)}
                     type="checkbox"
                     required
                     className="accent-primary mt-0.5 size-4 shrink-0 focus-visible:outline-ring"
@@ -347,7 +373,17 @@ export function AffiliateProgram({ productProof }: { productProof: React.ReactNo
                     {error}
                   </p>
                 )}
-                <Button type="submit" disabled={state === "sending"} className="w-full">
+                <p id="partner-consent-help" className="text-muted-foreground text-xs leading-relaxed">
+                  {acceptedTerms
+                    ? "Terms accepted. You can submit your application when the fields above are complete."
+                    : "Read the program terms and check the box above to enable your application."}
+                </p>
+                <Button
+                  type="submit"
+                  disabled={!acceptedTerms || state === "sending"}
+                  aria-describedby="partner-consent-help"
+                  className="w-full"
+                >
                   {state === "sending" ? (
                     <>
                       <LoaderCircle
@@ -421,7 +457,7 @@ export function AffiliateProgram({ productProof }: { productProof: React.ReactNo
             ],
             [
               "Payout review",
-              "Earlier-month unpaid commissions become eligible for review on the first day of the next UTC month. Eligible balances of at least $50 USD are reviewed during the 1st–15th; smaller balances roll forward. Transfers are arranged through PayPal or Wise. Availability, provider fees and required documents are confirmed privately before payment. No automatic withdrawal or guaranteed arrival date is offered.",
+              `Earlier-month unpaid commissions become eligible for review on the first day of the next UTC month. Eligible balances of at least ${usd(AFFILIATE.minimumPayout)} USD are reviewed during the 1st–15th; smaller balances roll forward. A supported payout method, availability, provider fees and required documents are confirmed privately before the first transfer. No automatic withdrawal or guaranteed arrival date is offered.`,
             ],
             [
               "Honest recommendations",

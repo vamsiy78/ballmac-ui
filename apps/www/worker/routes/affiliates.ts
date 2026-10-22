@@ -59,9 +59,11 @@ export async function POST(req: Request, { env }: Context) {
   const name = typeof b.name === "string" ? b.name.trim() : ""
   const email = typeof b.email === "string" ? b.email.trim().toLowerCase() : ""
   const channel = typeof b.channel === "string" ? b.channel.trim() : ""
+  const promotionPlan = typeof b.promotionPlan === "string" ? b.promotionPlan.trim() : ""
   let validChannel = false
   try {
-    validChannel = new URL(channel).protocol === "https:"
+    const url = new URL(channel)
+    validChannel = url.protocol === "https:" && !!url.hostname && !url.username && !url.password
   } catch {
     /* validation below */
   }
@@ -72,10 +74,15 @@ export async function POST(req: Request, { env }: Context) {
     email.length > 254 ||
     !validChannel ||
     channel.length > 500 ||
+    promotionPlan.length < 20 ||
+    promotionPlan.length > 1000 ||
     b.terms !== true
   )
     return json(
-      { error: "Enter your name, email and an https audience link, and accept the program terms." },
+      {
+        error:
+          "Enter your name, email, an https audience link and a promotion plan (20–1,000 characters), and accept the program terms.",
+      },
       422,
     )
   if (!affiliateOwners().length)
@@ -83,9 +90,18 @@ export async function POST(req: Request, { env }: Context) {
   const id = crypto.randomUUID()
   await env.AFFILIATES.batch([
     env.AFFILIATES.prepare(
-      "INSERT INTO affiliates (id,email,name,channel,code,terms_version) VALUES (?,?,?,?,?,?) ON CONFLICT(email) DO NOTHING",
-    ).bind(id, email, name, channel, `partner-${crypto.randomUUID().slice(0, 8)}`, AFFILIATE.termsVersion),
-    ...applicationNotifications(env.AFFILIATES, id, { name, email, channel }),
+      "INSERT INTO affiliates (id,email,name,channel,code,terms_version,promotion_plan,terms_accepted_at) VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(email) DO NOTHING",
+    ).bind(
+      id,
+      email,
+      name,
+      channel,
+      `partner-${crypto.randomUUID().slice(0, 8)}`,
+      AFFILIATE.termsVersion,
+      promotionPlan,
+      new Date().toISOString(),
+    ),
+    ...applicationNotifications(env.AFFILIATES, id, { name, email, channel, promotionPlan }),
   ])
   // Acceptance is durable even when the email provider is unavailable. Scheduled retries use the same outbox rows.
   try {

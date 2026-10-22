@@ -7,7 +7,7 @@ type DB = D1Database
 export function applicationNotifications(
   db: DB,
   id: string,
-  applicant: { name: string; email: string; channel: string },
+  applicant: { name: string; email: string; channel: string; promotionPlan: string },
 ) {
   const owners = affiliateOwners()
   const messages = owners.map((recipient) => ({
@@ -21,6 +21,7 @@ export function applicationNotifications(
         ["Applicant", applicant.name],
         ["Email", applicant.email],
         ["Audience link", applicant.channel],
+        ["Promotion plan", applicant.promotionPlan],
       ],
       paragraphs: [
         "Review the audience and application before approving. Approval activates a product-restricted 10% discount and a 30% commission. Our review goal is within three business days.",

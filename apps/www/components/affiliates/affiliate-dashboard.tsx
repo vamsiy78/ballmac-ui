@@ -781,8 +781,8 @@ export function AffiliateDashboard({ resources = [] }: { resources?: Resource[] 
                       roll over.
                     </p>
                     <p className="text-muted-foreground mt-3 text-xs leading-relaxed">
-                      PayPal or Wise details and any required tax information are arranged privately. A review
-                      window is not a guaranteed bank-arrival date.
+                      We confirm a supported payout method and any required tax information privately before
+                      your first transfer. A review window is not a guaranteed bank-arrival date.
                     </p>
                   </div>
                   <div className="rounded-xl border bg-card p-4">
@@ -836,7 +836,7 @@ export function AffiliateDashboard({ resources = [] }: { resources?: Resource[] 
                         : data.totals.eligible >= AFFILIATE.minimumPayout
                           ? "Your eligible balance meets the minimum for review in the scheduled window. Payment is recorded after the transfer is completed."
                           : data.totals.balance >= AFFILIATE.minimumPayout
-                            ? "Your unpaid balance meets the minimum, but at least $50.00 must be eligible before payout review. Pending earnings still need to reach month-end."
+                            ? `Your unpaid balance meets the minimum, but at least ${usd(AFFILIATE.minimumPayout)} must be eligible before payout review. Pending earnings still need to reach month-end.`
                             : `Another ${usd(AFFILIATE.minimumPayout - data.totals.balance)} in commission reaches the minimum. Pending earnings count toward this goal; only eligible earnings can be reviewed for payment.`}
                     </p>
                     {data.affiliate.status === "paused" && (

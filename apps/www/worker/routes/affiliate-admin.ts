@@ -1,6 +1,6 @@
 import { notificationStatement, deliverAffiliateNotifications } from "../affiliate-notifications"
 import { approvalEmail, affiliateOrigin, partnerEmail } from "@/lib/affiliate-email"
-import { commissionCents, hashToken, paymentNetUsdCents } from "@/lib/affiliates"
+import { AFFILIATE, usd, commissionCents, hashToken, paymentNetUsdCents } from "@/lib/affiliates"
 import { payoutCents, type AdminPartner, type AdminView } from "@/lib/affiliate-admin"
 import { sameOrigin } from "@/lib/pro-session-core"
 import { createRateLimiter, clientId } from "@/lib/rate-limit"
@@ -22,7 +22,7 @@ class ActionError extends Error {
   }
 }
 const balances = `WITH balances AS (
-  SELECT a.id,a.name,a.email,a.channel,a.code,a.discount_code,a.review_note,a.created_at,a.revision,
+  SELECT a.id,a.name,a.email,a.channel,a.promotion_plan,a.terms_version,a.terms_accepted_at,a.code,a.discount_code,a.review_note,a.created_at,a.revision,
     CASE WHEN a.review_state='rejected' THEN 'rejected' ELSE a.status END AS status,
     COALESCE(s.conversions,0) AS conversions,COALESCE(s.earned,0) AS earned,COALESCE(s.prior,0) AS prior,COALESCE(p.paid,0) AS paid
   FROM affiliates a LEFT JOIN (
@@ -156,13 +156,13 @@ export async function GET(req: Request, ctx: AdminContext) {
         ? ["status IN ('pending','rejected')"]
         : view === "partners"
           ? ["status IN ('active','paused')"]
-          : ["eligible>=5000 OR status='pending'"]
+          : [`(eligible>=${AFFILIATE.minimumPayout} OR status='pending')`]
     const args: unknown[] = []
     if (q) {
       conditions.push("instr(lower(name||' '||email||' '||code),lower(?))>0")
       args.push(q)
     }
-    if (status === "ready" && view === "partners") conditions.push("eligible>=5000")
+    if (status === "ready" && view === "partners") conditions.push(`eligible>=${AFFILIATE.minimumPayout}`)
     else if (["pending", "rejected", "active", "paused"].includes(status)) {
       conditions.push("status=?")
       args.push(status)
@@ -309,6 +309,11 @@ export async function GET(req: Request, ctx: AdminContext) {
         help: "DODO_API_KEY and DODO_MODE; test mode is refused on production.",
       },
       {
+        label: "Automatic partner payouts",
+        ready: false,
+        help: "Not connected. This app records completed transfers but does not send funds. Set up a payout provider before paying partners.",
+      },
+      {
         label: "Payment webhooks",
         ready: Boolean(process.env.DODO_AFFILIATE_WEBHOOK_SECRET),
         help: "DODO_AFFILIATE_WEBHOOK_SECRET and the Dodo webhook endpoint.",
@@ -403,13 +408,13 @@ export async function POST(req: Request, ctx: AdminContext) {
       if (
         body.confirmed !== true ||
         amount === null ||
-        amount < 5000 ||
+        amount < AFFILIATE.minimumPayout ||
         !reference ||
         reference.length > 200 ||
         !["paypal", "wise", "other"].includes(String(method))
       )
         throw new ActionError(
-          "Confirm the completed transfer, enter at least $50.00 USD, choose a method and supply its unique reference.",
+          `Confirm the completed transfer, enter at least ${usd(AFFILIATE.minimumPayout)} USD, choose a method and supply its unique reference.`,
         )
       const payoutId = crypto.randomUUID()
       const result = await db.batch([
