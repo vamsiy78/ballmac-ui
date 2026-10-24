@@ -25,7 +25,7 @@ describe("the Pro licence", () => {
   it("keeps the clauses that protect the licensor", () => {
     const text = licenceText()
     for (const needle of [
-      "All sales are final",
+      "purchases are final",
       "non-transferable",
       "train, fine-tune",
       "Prohibited Product",
@@ -38,10 +38,17 @@ describe("the Pro licence", () => {
     }
   })
 
-  it("promises no refund and no number of seats it cannot honour", () => {
+  it("states the refund policy exactly: fix within 14 days or refund, nothing wider", () => {
     const text = licenceText()
-    expect(text).not.toMatch(/money-back|refund within|days of purchase/i)
+    expect(text).toContain("within 14 days of your request")
+    expect(text).toContain("within 30 days of purchase")
     expect(text).not.toMatch(/\[[A-Za-z ]+\]/) // no leftover [bracketed] placeholders
+  })
+
+  it("describes the Team licence as 10 named people at one organisation", () => {
+    const text = licenceText()
+    expect(text).toMatch(/up to 10 named people/)
+    expect(text).not.toMatch(/company licence does not give/i)
   })
 
   it("has a plain-English summary for each side", () => {

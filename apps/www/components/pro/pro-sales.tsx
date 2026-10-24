@@ -16,6 +16,8 @@ import { PageCard } from "@/components/site/page-card"
 import { Sampler } from "@/components/site/sampler"
 import { StayCurrent } from "@/components/site/stay-current"
 import { LeftPhrase } from "@/components/site/founding-text"
+import { REFUND_FIX_DAYS, REFUND_PATH } from "@/lib/pro-refund"
+import { TEAM_PRICE, TEAM_SEATS } from "@/lib/pro-team"
 import { endsLabel } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
@@ -78,13 +80,23 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
     q: "What can I do with the code?",
     a: (
       <>
-        Build any number of apps and sites with it, for yourself or your clients, and change it however you like. You cannot resell, share or publish the Pro source, share your key, build a competing library or starter from it, or use it to train AI models. One licence is one person, and all sales are final. Read the full{" "}
+        Build any number of apps and sites with it, for yourself or your clients, and change it however you like. You cannot resell, share or publish the Pro source, share your key, build a competing library or starter from it, or use it to train AI models. One licence is one person (a Team licence covers up to 10 people). Read the full{" "}
         <a href={PRO_LICENCE_PATH} className="text-foreground underline underline-offset-4">Pro licence agreement</a> before you buy. For a team or an agency, write to{" "}
         <a href={`mailto:${FOUNDERS_EMAIL}`} className="text-foreground underline underline-offset-4">{FOUNDERS_EMAIL}</a>.
       </>
     ),
   },
-  { q: "Who handles tax and invoices?", a: "Our payment provider is the merchant of record: it charges the right sales tax or VAT and sends you an invoice." },
+  { q: "Who handles tax and invoices?", a: "The price already includes tax. Our payment provider is the merchant of record: it handles the sales tax or VAT and sends you an invoice. Add a business name or tax ID at checkout if you need one on it." },
+  {
+    q: "What if it does not work?",
+    a: (
+      <>
+        Write to <a href={`mailto:${FOUNDERS_EMAIL}`} className="text-foreground underline underline-offset-4">{FOUNDERS_EMAIL}</a> with what you tried. If a Pro item does not do what its page says, we fix it or give you a working alternative within {REFUND_FIX_DAYS} days of your request. If we cannot, you get a full refund. Mistakes on our side are always refunded. Read the{" "}
+        <a href={REFUND_PATH} className="text-foreground underline underline-offset-4">Refund Policy</a>.
+      </>
+    ),
+  },
+  { q: "Can my team share one licence?", a: `Yes. A Team licence covers up to ${TEAM_SEATS} people at one organisation for $${TEAM_PRICE} once. Pro itself is one licence for one person. See the plans on the pricing page.` },
 ]
 
 /**
@@ -157,7 +169,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
                 </>
               ) : offer.onSale && offer.price ? (
                 <>
-                  <span className="text-foreground font-medium">${offer.price} once</span>, plus any tax where you live. No subscription.
+                  <span className="text-foreground font-medium">${offer.price} once</span>, tax included. No subscription.
                 </>
               ) : (
                 "One payment. No subscription."
@@ -168,7 +180,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
               <a href={PRO_LICENCE_PATH} className="text-foreground underline underline-offset-4">Pro licence</a>.
             </p>
             <ul className="mt-8 grid max-w-xl gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
-              {["One payment, no subscription", "Every future update included", "Works with the shadcn CLI and your AI agent", "Tax and invoice handled for you"].map((t) => (
+              {["One payment, no subscription", "Every future update included", "Works with the shadcn CLI and your AI agent", "Works as described, or your money back"].map((t) => (
                 <li key={t} className="flex items-center gap-2.5">
                   <span className="bg-foreground/[0.07] flex size-5 shrink-0 items-center justify-center rounded-full" aria-hidden="true">
                     <Check className="size-3" />
@@ -517,16 +529,16 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
                 <ArrowRight aria-hidden="true" />
               </Link>
             )}
-            <Link href="/pricing" className="rounded-full px-5 py-2.5 text-sm font-medium underline underline-offset-4 opacity-80 hover:opacity-100">
-              Compare Free and Pro
+            <Link href="/pricing#plans" className="rounded-full px-5 py-2.5 text-sm font-medium underline underline-offset-4 opacity-80 hover:opacity-100">
+              Compare plans, or get Team for ${TEAM_PRICE} (up to {TEAM_SEATS} people)
             </Link>
           </div>
           <p className="mx-auto mt-6 flex items-center justify-center gap-2 text-xs opacity-70">
             <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
-            Tax is added at checkout where it applies, and your invoice is sent for you.
+            Tax is included in the price, and your invoice is sent for you.
           </p>
           <p className="mx-auto mt-2 text-center text-xs opacity-70">
-            By buying you agree to the <a href={PRO_LICENCE_PATH} className="underline underline-offset-2">Pro licence</a>. All sales are final.
+            Works as described, or your money back: if it does not and we cannot fix it within {REFUND_FIX_DAYS} days of your request, you get a full refund. <a href={REFUND_PATH} className="underline underline-offset-2">Refund policy</a>. By buying you agree to the <a href={PRO_LICENCE_PATH} className="underline underline-offset-2">Pro licence</a>.
           </p>
         </div>
       </section>

@@ -51,7 +51,7 @@ export function BuyDock({ href, price }: { href: string; price: string }) {
     >
       <p className="min-w-0 flex-1 text-sm leading-tight">
         <span className="font-semibold">Ballmac UI Pro</span>
-        <span className="text-muted-foreground block truncate text-xs">${price} once · every update included</span>
+        <span className="text-muted-foreground block truncate text-xs">${price} once · tax included · money back if it does not work</span>
       </p>
       <CheckoutLink href={href} className={buttonVariants({ shape: "pill" })}>
         Get Pro <ArrowRight aria-hidden="true" />

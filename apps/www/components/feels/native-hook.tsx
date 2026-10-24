@@ -45,7 +45,7 @@ async function Reveal({ where }: { where: string }) {
             Open any block first
           </Link>
         </div>
-        <p className="text-muted-foreground text-[13px]">{buy ? `$${offer.price} once, plus any tax where you live. No subscription, every update included.` : "One payment. No subscription, every update included."}</p>
+        <p className="text-muted-foreground text-[13px]">{buy ? `$${offer.price} once, tax included. No subscription, every update included. Works as described or your money back.` : "One payment. No subscription, every update included."}</p>
         <div className="text-muted-foreground mt-3 inline-flex max-w-full items-center gap-1.5 rounded-lg border py-1 pr-1 pl-3 font-mono text-[12px]">
           <span className="select-none" aria-hidden="true">$</span>
           <span className="text-foreground truncate">{install}</span>

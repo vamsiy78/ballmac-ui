@@ -17,6 +17,8 @@ import { endsLabel } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { getOffer } from "@/lib/offer"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
+import { REFUND_PATH, REFUND_PROMISE } from "@/lib/pro-refund"
+import { TEAM_CHECKOUT, TEAM_PRICE, TEAM_SEATS, teamPerSeat } from "@/lib/pro-team"
 import { blockGroups, getBlocks, getItem, isPro } from "@/lib/registry"
 import { SAMPLER_BLOCKS } from "@/lib/sampler"
 import { thumbFor } from "@/lib/thumbs"
@@ -28,8 +30,6 @@ export const metadata: Metadata = {
 }
 
 
-const teamCheckout = process.env.NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL
-const teamPrice = process.env.NEXT_PUBLIC_PRO_TEAM_PRICE
 const licenseUrl = process.env.NEXT_PUBLIC_PRO_LICENSE_URL || PRO_LICENCE_PATH
 // The number of Pro blocks comes from the registry when Pro is part of this build.
 const proBlocks = getBlocks().filter(isPro).length || 150
@@ -45,7 +45,8 @@ export default async function PricingPage() {
   const offer = await getOffer(now)
   const f = offer.founding
   const onSale = offer.onSale
-  const teamOnSale = Boolean(onSale && teamCheckout && teamPrice)
+  // The Team plan is always shown. Until its Dodo product exists (NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL), the button writes to us instead.
+  const teamOnSale = Boolean(onSale && TEAM_CHECKOUT)
   const save = f?.listPrice ? Number(f.listPrice) - Number(f.price) : 0
   const deadline = f?.endsAt ? endsLabel(f.endsAt) : null
 
@@ -101,20 +102,22 @@ export default async function PricingPage() {
         [false, "Figma component library (planned)"],
       ],
     },
-    ...(teamOnSale
-      ? ([
-          {
-            name: "Team",
-            price: `$${teamPrice}`,
-            note: "For teams that share one licence.",
-            cta: { label: "Get Team", href: teamCheckout!, external: true },
-            features: [
-              [true, "Everything in Pro"] as [boolean, string],
-              [true, "One key for CI and shared environments"],
-            ],
-          },
-        ] satisfies Plan[])
-      : []),
+    {
+      name: "Team",
+      price: `$${TEAM_PRICE}`,
+      note: `One licence for one organisation and up to ${TEAM_SEATS} people: $${teamPerSeat()} a person.`,
+      cta: teamOnSale
+        ? { label: `Get Team for $${TEAM_PRICE}`, href: TEAM_CHECKOUT, external: true }
+        : { label: "Get Team by email", href: `mailto:${FOUNDERS_EMAIL}?subject=${encodeURIComponent("Team licence for Ballmac UI Pro")}`, external: false },
+      features: [
+        [true, "Everything in Pro"],
+        [true, `Up to ${TEAM_SEATS} named people at one organisation on one licence`],
+        [true, "One licence key for the whole team and your CI"],
+        [true, "Your company name and tax ID on the invoice"],
+        [true, "Every future update included"],
+        [false, `More than ${TEAM_SEATS} people: write to us`],
+      ],
+    },
   ]
 
   const faqs = [
@@ -138,12 +141,21 @@ export default async function PricingPage() {
       q: "What can I do with a Pro licence?",
       a: (
         <>
-          Build any number of apps and sites with it, for yourself or your clients, and change the code. You cannot resell, share or publish the Pro source, share your key, build a competing library or starter from it, or use it to train AI models. One licence is one person. All sales are final. Read the full{" "}
+          Build any number of apps and sites with it, for yourself or your clients, and change the code. You cannot resell, share or publish the Pro source, share your key, build a competing library or starter from it, or use it to train AI models. One Pro licence is one person; a Team licence covers up to 10 people at one organisation. Read the full{" "}
           <a href={licenseUrl} className="text-foreground underline underline-offset-4">Pro licence agreement</a> before you buy.
         </>
       ),
     },
-    { q: "Who handles tax and invoices?", a: "Our payment provider acts as the merchant of record: it charges the right sales tax or VAT and sends you an invoice." },
+    { q: "Who handles tax and invoices?", a: "The price already includes tax. Our payment provider acts as the merchant of record: it handles the sales tax or VAT and sends you an invoice. Add a business name or tax ID at checkout if you need one on it." },
+    {
+      q: "What if it does not work, or I am charged wrongly?",
+      a: (
+        <>
+          {REFUND_PROMISE} Mistakes on our side, such as a double charge, are always refunded. Write to {FOUNDERS_EMAIL} and see the full <a href={REFUND_PATH} className="text-foreground underline underline-offset-4">Refund Policy</a>.
+        </>
+      ),
+    },
+    { q: "How does the Team plan work?", a: `One Team licence is for one organisation and up to ${TEAM_SEATS} named people, for $${TEAM_PRICE} once ($${teamPerSeat()} each). Everyone uses the same licence key and private registry, and the invoice can carry your company name and tax ID. Need more than ${TEAM_SEATS}? Email ${FOUNDERS_EMAIL}.` },
   ]
 
   return (
@@ -173,7 +185,7 @@ export default async function PricingPage() {
           </section>
         )}
 
-        <div id="plans" className="mt-12 grid scroll-mt-20 grid-cols-1 gap-5 lg:grid-cols-[repeat(var(--plans),minmax(0,1fr))]" style={{ "--plans": plans.length } as React.CSSProperties}>
+        <div id="plans" className="mt-12 grid scroll-mt-20 grid-cols-1 gap-5 lg:grid-cols-[repeat(var(--plans),minmax(0,1fr))] lg:items-stretch" style={{ "--plans": plans.length } as React.CSSProperties}>
           {plans.map((plan) => {
             const pro = plan.name === "Pro"
             return (
@@ -204,7 +216,7 @@ export default async function PricingPage() {
                 </ul>
                 {plan.cta ? (
                   <Button asChild size="lg" shape="pill" variant={pro ? "secondary" : "outline"} className="mt-8">
-                    {plan.cta.external ? <CheckoutLink href={plan.cta.href}>{plan.cta.label}</CheckoutLink> : <Link href={plan.cta.href}>{plan.cta.label}</Link>}
+                    {plan.cta.external ? <CheckoutLink href={plan.cta.href}>{plan.cta.label}</CheckoutLink> : plan.cta.href.startsWith("mailto:") ? <a href={plan.cta.href}>{plan.cta.label}</a> : <Link href={plan.cta.href}>{plan.cta.label}</Link>}
                   </Button>
                 ) : (
                   <Button asChild size="lg" shape="pill" variant={pro ? "secondary" : "outline"} className="mt-8">
@@ -214,12 +226,12 @@ export default async function PricingPage() {
                 {pro && onSale && (
                   <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs opacity-75">
                     <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
-                    Tax and invoice handled for you.
+                    Tax is included. Your invoice is sent for you.
                   </p>
                 )}
                 {pro && onSale && (
                   <p className="mt-2 text-center text-xs opacity-70">
-                    By buying you agree to the <a href={licenseUrl} className="underline underline-offset-2">Pro licence</a>.
+                    {REFUND_PROMISE} <a href={REFUND_PATH} className="underline underline-offset-2">Refund policy</a>. By buying you agree to the <a href={licenseUrl} className="underline underline-offset-2">Pro licence</a>.
                   </p>
                 )}
               </div>
@@ -232,6 +244,19 @@ export default async function PricingPage() {
             Log in to your Pro library
           </Link>
         </p>
+
+        <aside aria-labelledby="guarantee-h" className="bg-card mx-auto mt-12 flex max-w-3xl items-start gap-4 rounded-2xl border p-5 sm:p-6">
+          <span className="bg-foreground text-background flex size-10 shrink-0 items-center justify-center rounded-xl" aria-hidden="true">
+            <ShieldCheck className="size-5" />
+          </span>
+          <div>
+            <h2 id="guarantee-h" className="font-semibold tracking-tight">Works as described, or your money back</h2>
+            <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
+              {REFUND_PROMISE.replace("Works as described, or your money back: ", "")} Mistakes on our side are always refunded.{" "}
+              <Link href={REFUND_PATH} className="text-foreground underline underline-offset-4">Read the refund policy</Link>.
+            </p>
+          </div>
+        </aside>
 
         <section aria-labelledby="cost-h" className="mt-24">
           <div className="mx-auto max-w-2xl text-center">
@@ -342,20 +367,6 @@ export default async function PricingPage() {
             </Link>
           </div>
         </section>
-
-        {!teamOnSale && (
-          <section aria-labelledby="team-h" className="bg-card mx-auto mt-16 flex max-w-3xl flex-col items-start gap-5 rounded-2xl border p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-            <div>
-              <h2 id="team-h" className="text-xl font-semibold tracking-tight">
-                Buying for a team or an agency?
-              </h2>
-              <p className="text-muted-foreground mt-1.5 max-w-lg text-sm leading-relaxed">One licence is for one person. If several of you will use Pro, write to us and we will work out a team licence that fits.</p>
-            </div>
-            <Button asChild variant="outline" shape="pill" size="lg" className="shrink-0">
-              <a href={`mailto:${FOUNDERS_EMAIL}?subject=${encodeURIComponent("Team licence for Ballmac UI Pro")}`}>Email us</a>
-            </Button>
-          </section>
-        )}
 
         {previews.length > 0 && (
           <section aria-labelledby="inside-h" className="mt-24">

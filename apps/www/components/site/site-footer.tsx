@@ -91,6 +91,9 @@ export function SiteFooter() {
             <Link href="/license/pro" className="hover:text-foreground transition-colors">
               Pro licence
             </Link>
+            <Link href="/refund" className="hover:text-foreground transition-colors">
+              Refunds
+            </Link>
             <Link href="/license" className="hover:text-foreground transition-colors">
               License
             </Link>

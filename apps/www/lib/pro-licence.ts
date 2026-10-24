@@ -9,8 +9,8 @@
  */
 
 export const PRO_LICENCE_PATH = "/license/pro"
-export const PRO_LICENCE_VERSION = "1.0"
-export const PRO_LICENCE_EFFECTIVE = "12 October 2026"
+export const PRO_LICENCE_VERSION = "1.1"
+export const PRO_LICENCE_EFFECTIVE = "24 October 2026"
 export const PRO_LICENCE_EMAIL = "hello@ballmac.com"
 
 export type Block = { p: string } | { ol: string[] } | { ul: string[] }
@@ -30,9 +30,9 @@ export const proLicenceSummary = {
     "Use it to train, fine-tune or build a dataset for an AI model.",
   ],
   notes: [
-    "One licence is one person. A Team licence covers the seats named on it.",
+    "One Pro licence is one person. A Team licence is for one organisation and up to 10 named people.",
     "“Lifetime updates” means for as long as we keep selling and maintaining Ballmac UI Pro. It does not mean forever.",
-    "All sales are final. There are no refunds unless the law or the payment provider requires one.",
+    "Purchases are final, with clear exceptions: if something does not work as its page says and we cannot fix it within 14 days of your request, or if we charge you in error, you are refunded. See the Refund Policy.",
     "The agreement is governed by Indian law. Disputes go to arbitration in India, and awards can be enforced in most countries.",
   ],
 }
@@ -126,10 +126,10 @@ export const proLicence: Section[] = [
     blocks: [
       {
         ol: [
-          "A Licence Key belongs to its Authorised User. You may use it on your own devices and in your own build and CI systems to install Pro Materials into your own projects, and nowhere else. Keep it secret.",
+          "A Licence Key belongs to its Authorised User or, for a Team licence, to the organisation that bought it, for use by its Authorised Users only. You may use it on your own devices and in your own build and CI systems to install Pro Materials into your own projects, and nowhere else. Keep it secret.",
           "If a Licence Key is exposed, you must tell us and stop using it. We may rotate or disable any key that we reasonably believe has been shared, leaked, published or used by more than the permitted users, without notice and without refund. We may ask you to confirm that you are the rightful holder before we issue a new one.",
           "A seat may be moved to another person only if the previous person loses all access to the Pro Materials, only with our written consent, and no more than once in any 90 days.",
-          "If a company buys a licence, it must name the individual who will use it. A company licence does not give the Pro source to the company's other staff, contractors or Clients.",
+          "If a company buys a Pro licence, it must name the one individual who will use it. A **Team licence** is bought by one organisation for up to 10 named people (the number of seats stated at purchase). Each of them may use the shared Licence Key and the Pro Materials for that organisation's own work. A Team licence does not give the Pro source to anyone beyond those seats, to the organisation's other staff or contractors, or to Clients.",
           "We may apply reasonable rate limits and fair-use limits to the registry and the downloads.",
         ],
       },
@@ -164,13 +164,20 @@ export const proLicence: Section[] = [
   },
   {
     id: "refunds",
-    title: "No refunds",
+    title: "Refunds",
     blocks: [
       {
-        p: "The Pro Materials are digital content that is made available as soon as you pay. **All sales are final.** We do not give refunds, except where the law requires one or the payment provider's rules oblige us to. The Refund Policy on ballmac.com covers Ballmac's Mac apps and does not apply to the Pro Materials.",
+        p: "The Pro Materials are digital content that is made available as soon as you pay, so purchases are final except in the cases below. The full policy is the Refund Policy at ui.ballmac.com/refund, which forms part of this agreement. The Refund Policy on ballmac.com covers Ballmac's Mac apps and does not apply to the Pro Materials.",
       },
       {
-        p: "By buying, you ask us to start providing the Pro Materials immediately and, to the extent the law allows, you accept that you lose any right to withdraw from or cancel the purchase once access begins. Nothing in this agreement limits rights that you have as a consumer and that cannot lawfully be waived.",
+        ol: [
+          "**Something does not work.** If a Pro item does not do what its page says (it fails to install, errors in a supported setup, or behaves differently from its documentation) and you tell us at hello@ballmac.com within 30 days of purchase, we will fix it or give you a working alternative within 14 days of your request. If we cannot, we will refund the full price you paid.",
+          "**A mistake on our side.** If you are charged twice, charged the wrong amount or hit a technical error at checkout, we will refund the wrong payment in full.",
+          "**After a refund** the licence for that purchase ends, the Licence Key stops working, and you must stop using the Pro Materials and delete the copies you hold, except in End Products that you have already delivered to end users.",
+        ],
+      },
+      {
+        p: "By buying, you ask us to start providing the Pro Materials immediately and, to the extent the law allows, you accept that you lose any right to withdraw from or cancel the purchase once access begins. Nothing in this agreement limits rights that you have as a consumer and that cannot lawfully be waived, including your rights if digital content does not conform to the contract.",
       },
     ],
   },
@@ -209,7 +216,7 @@ export const proLicence: Section[] = [
     blocks: [
       {
         ol: [
-          "This agreement lasts for as long as you hold the licence, unless it is ended under this section. You may stop using the Pro Materials at any time, but no refund is due.",
+          "This agreement lasts for as long as you hold the licence, unless it is ended under this section. You may stop using the Pro Materials at any time, but no refund is due except under [[refunds]].",
           "**We may end it immediately by notice**, and revoke the Licence Key, if you materially breach it, including [[grant]], [[restrictions]], [[keys]], [[payment]] or [[compliance]]. If the breach can be fixed we may allow 7 days to fix it, but we are not required to.",
           "**When we end it for your breach**, all rights granted to you end. You must stop using the Pro Materials, delete every copy and derivative copy in your control, and confirm that in writing if we ask. End Products that you have already delivered to end users in compiled or deployed form may keep running but may not be updated with further Pro Materials. If the breach involved redistributing the Pro Materials or building a Prohibited Product, you must also withdraw that product from distribution. No refund is due.",
           "We may suspend a Licence Key at once while we investigate suspected key sharing, redistribution or abuse.",
