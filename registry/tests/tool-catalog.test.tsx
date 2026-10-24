@@ -66,3 +66,17 @@ describe("ToolCatalog", () => {
     expect(pre).toHaveAttribute("dir", "ltr")
   })
 })
+
+describe("ToolCatalog icon and usage bar", () => {
+  it("draws your icon for a tool and a usage bar scaled to the busiest tool", () => {
+    render(<ToolCatalog tools={[{ id: "a", name: "busy", description: "Busy.", enabled: true, calls: 1000, icon: <svg data-testid="logo" /> }, { id: "b", name: "quiet", description: "Quiet.", enabled: true, calls: 250 }]} />)
+    expect(screen.getByTestId("logo")).toBeInTheDocument()
+    const bars = Array.from(document.querySelectorAll("li[data-enabled] [aria-hidden=true].h-1 > div")) as HTMLElement[]
+    expect(bars.map((b) => b.style.width)).toEqual(["100%", "25%"])
+  })
+
+  it("draws no bar for a tool with no calls", () => {
+    render(<ToolCatalog tools={[{ id: "a", name: "idle", description: "Idle.", enabled: true, calls: 0 }]} />)
+    expect(document.querySelector("li[data-enabled] .h-1")).toBeNull()
+  })
+})

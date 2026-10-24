@@ -20,8 +20,12 @@ type TraceSpan = {
   /** Length, in milliseconds. */
   duration: number
   status?: "ok" | "error"
-  /** Tokens used, shown in the detail. */
+  /** Tokens used, shown in the detail and added up in the summary. */
   tokens?: number
+  /** What the span cost. Give it to the spans that do the work (not to the ones that only contain them), since the summary adds every span that has one. */
+  cost?: number
+  /** The model that ran, for a model call, for example "Sonnet 5.5". */
+  model?: string
   /** More detail, shown when the span is selected: an input, an output, an error message. */
   detail?: string
 }
@@ -43,6 +47,13 @@ function formatMs(ms: number) {
   const m = Math.floor(s / 60)
   const r = Math.round(s - m * 60)
   return r === 0 ? `${m} min` : `${m} min ${r} s`
+}
+
+/** 0.0042 → "$0.004", 0.13 → "$0.13", 12 → "$12.00". Small amounts keep three decimals so they do not read as zero. */
+function formatCost(value: number, currency = "USD"): string {
+  if (value > 0 && value < 0.001) return `<${formatCost(0.001, currency)}`
+  const digits = value > 0 && value < 0.1 ? 3 : 2
+  return new Intl.NumberFormat("en-US", { style: "currency", currency, minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value)
 }
 
 type Row = { span: TraceSpan; level: number; setsize: number; pos: number; hasChildren: boolean }
@@ -84,13 +95,17 @@ type TraceWaterfallProps = Omit<React.ComponentProps<"div">, "onSelect"> & {
   onSelectedChange?: (id: string) => void
   /** Spans that start collapsed. */
   defaultCollapsed?: string[]
+  /** Show the totals above the waterfall: duration, cost, tokens, model calls, tool calls and errors. On by default. */
+  summary?: boolean
+  /** ISO currency code for costs. */
+  currency?: string
 }
 
 /**
  * A trace as a waterfall: spans nested under the span that ran them, each a bar on a shared time axis, with its duration beside it. It is a real tree: Up and Down
  * move, Right opens or goes in, Left closes or goes out, Enter selects. Failed spans say "Failed" and show an icon. The bars are drawn with the theme's chart colours.
  */
-function TraceWaterfall({ spans, total: totalProp, selected: selectedProp, defaultSelected = null, onSelectedChange, defaultCollapsed = [], className, ...props }: TraceWaterfallProps) {
+function TraceWaterfall({ spans, total: totalProp, selected: selectedProp, defaultSelected = null, onSelectedChange, defaultCollapsed = [], summary = true, currency = "USD", className, ...props }: TraceWaterfallProps) {
   const msg = useMessages()
   const [collapsed, setCollapsed] = React.useState(() => new Set(defaultCollapsed))
   const [inner, setInner] = React.useState<string | null>(defaultSelected)
@@ -103,6 +118,21 @@ function TraceWaterfall({ spans, total: totalProp, selected: selectedProp, defau
   const chosen = spans.find((s) => s.id === selected)
   const kindText = (k: SpanKind | undefined) => msg(`trace-waterfall.kind.${k ?? "other"}`, KINDS[k ?? "other"].label)
   const parentOf = (s: TraceSpan) => rows.find((r) => r.span.id === s.parentId)
+
+  // Totals for the summary, and the slowest span that does real work (a span with no children).
+  const parents = React.useMemo(() => new Set(spans.map((s) => s.parentId).filter(Boolean)), [spans])
+  const totals = React.useMemo(() => {
+    const priced = spans.filter((s) => s.cost !== undefined)
+    const counted = spans.filter((s) => s.tokens !== undefined)
+    return {
+      cost: priced.length ? priced.reduce((n, s) => n + (s.cost ?? 0), 0) : undefined,
+      tokens: counted.length ? counted.reduce((n, s) => n + (s.tokens ?? 0), 0) : undefined,
+      models: spans.filter((s) => s.kind === "model").length,
+      tools: spans.filter((s) => s.kind === "tool").length,
+      errors: spans.filter((s) => s.status === "error").length,
+    }
+  }, [spans])
+  const slowest = React.useMemo(() => spans.filter((s) => !parents.has(s.id)).sort((a, b) => b.duration - a.duration)[0]?.id, [spans, parents])
 
   function select(id: string) {
     if (selectedProp === undefined) setInner(id)
@@ -143,11 +173,30 @@ function TraceWaterfall({ spans, total: totalProp, selected: selectedProp, defau
     <div data-slot="trace-waterfall" className={cn("grid w-full min-w-0 gap-3", className)} {...props}>
       <div className="overflow-x-auto rounded-xl border bg-card text-card-foreground" dir="ltr">
         <div className="min-w-[36rem]">
+          {summary && (
+            <dl data-slot="trace-waterfall-summary" className="grid grid-cols-3 gap-x-4 gap-y-3 border-b px-4 py-3 sm:grid-cols-6">
+              {(
+                [
+                  [msg("trace-waterfall.sum.duration", "Duration"), formatMs(total)],
+                  ...(totals.cost !== undefined ? [[msg("trace-waterfall.sum.cost", "Cost"), formatCost(totals.cost, currency)]] : []),
+                  ...(totals.tokens !== undefined ? [[msg("trace-waterfall.sum.tokens", "Tokens"), totals.tokens.toLocaleString("en-US")]] : []),
+                  [msg("trace-waterfall.sum.models", "Model calls"), String(totals.models)],
+                  [msg("trace-waterfall.sum.tools", "Tool calls"), String(totals.tools)],
+                  [msg("trace-waterfall.sum.errors", "Errors"), String(totals.errors)],
+                ] as [string, string][]
+              ).map(([label, value]) => (
+                <div key={label}>
+                  <dt className="text-[11px] font-medium tracking-wide text-muted-foreground uppercase">{label}</dt>
+                  <dd className={cn("mt-0.5 font-mono text-base font-semibold tabular-nums", label === msg("trace-waterfall.sum.errors", "Errors") && totals.errors > 0 && "text-destructive")}>{value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
           <div className="grid grid-cols-[minmax(12rem,2fr)_3fr] border-b bg-muted/30 text-[11px] text-muted-foreground">
             <div className="px-3 py-2 font-medium">{msg("trace-waterfall.span", "Step")}</div>
             <div className="relative h-8" aria-hidden="true">
               {ticks.map((t) => (
-                <span key={t} className="absolute top-0 flex h-full items-center font-mono tabular-nums" style={{ left: `${t * 100}%`, transform: t === 0 ? undefined : t === 1 ? "translateX(-100%)" : "translateX(-50%)", paddingInline: t === 0 || t === 1 ? 8 : 0 }}>
+                <span key={t} className="absolute top-0 flex h-full items-center font-mono whitespace-nowrap tabular-nums" style={{ left: `${t * 100}%`, transform: t === 0 ? undefined : t === 1 ? "translateX(-100%)" : "translateX(-50%)", paddingInline: t === 0 || t === 1 ? 8 : 0 }}>
                   {formatMs(total * t)}
                 </span>
               ))}
@@ -160,6 +209,8 @@ function TraceWaterfall({ spans, total: totalProp, selected: selectedProp, defau
               const on = selected === s.id
               const failed = s.status === "error"
               const open = r.hasChildren && !collapsed.has(s.id)
+              // A bar that ends near the right edge has no room for its label there, so the label sits to its left.
+              const late = (s.start + s.duration) / total > 0.7 && s.start / total > 0.25
               return (
                 <div
                   key={s.id}
@@ -173,7 +224,7 @@ function TraceWaterfall({ spans, total: totalProp, selected: selectedProp, defau
                   aria-posinset={r.pos}
                   aria-expanded={r.hasChildren ? open : undefined}
                   aria-selected={on}
-                  aria-label={msg("trace-waterfall.item", "{name}, {kind}, {duration}, starts at {start}{failed}", { name: s.name, kind: kindText(s.kind).toLowerCase(), duration: formatMs(s.duration), start: formatMs(s.start), failed: failed ? `, ${msg("trace-waterfall.failed", "failed").toLowerCase()}` : "" })}
+                  aria-label={msg("trace-waterfall.item", "{name}, {kind}, {duration}, starts at {start}{failed}", { name: s.name, kind: kindText(s.kind).toLowerCase(), duration: formatMs(s.duration), start: formatMs(s.start), failed: `${failed ? `, ${msg("trace-waterfall.failed", "failed").toLowerCase()}` : ""}${s.id === slowest && rows.length > 2 && !failed ? `, ${msg("trace-waterfall.slowest", "slowest").toLowerCase()}` : ""}${s.cost !== undefined ? `, ${formatCost(s.cost, currency)}` : ""}` })}
                   tabIndex={tabbable === s.id ? 0 : -1}
                   onClick={() => select(s.id)}
                   onFocus={() => setFocus(s.id)}
@@ -189,6 +240,8 @@ function TraceWaterfall({ spans, total: totalProp, selected: selectedProp, defau
                       <span aria-hidden="true" className="size-5 shrink-0" />
                     )}
                     <span className="truncate font-medium text-foreground">{s.name}</span>
+                    {s.model && <span className="hidden truncate text-xs text-muted-foreground sm:inline">{s.model}</span>}
+                    {s.id === slowest && rows.length > 2 && !failed && <span className="shrink-0 rounded-full border border-foreground/30 px-1.5 text-[10px] font-medium text-foreground">{msg("trace-waterfall.slowest", "Slowest")}</span>}
                     {failed && <CircleAlert aria-hidden="true" className="size-3.5 shrink-0 text-destructive" />}
                   </div>
                   <div className="relative h-9" aria-hidden="true">
@@ -196,8 +249,11 @@ function TraceWaterfall({ spans, total: totalProp, selected: selectedProp, defau
                       <span key={t} className="absolute inset-y-0 w-px bg-border/60" style={{ left: `${t * 100}%` }} />
                     ))}
                     <span className={cn("absolute top-2 bottom-2 min-w-[3px] rounded-[3px]", failed ? "bg-destructive" : k.bar)} style={{ left: `${(s.start / total) * 100}%`, width: `${Math.max((s.duration / total) * 100, 0.4)}%` }} />
-                    <span className="absolute top-1/2 -translate-y-1/2 ms-1.5 rounded-sm bg-card px-1 font-mono text-[11px] whitespace-nowrap tabular-nums text-muted-foreground" style={{ left: `${Math.min(((s.start + s.duration) / total) * 100, 86)}%` }}>
-                      {failed ? `${msg("trace-waterfall.failedShort", "Failed")} · ` : ""}{formatMs(s.duration)}
+                    <span
+                      className={cn("absolute top-1/2 -translate-y-1/2 rounded-sm bg-card px-1 font-mono text-[11px] whitespace-nowrap tabular-nums text-muted-foreground", late ? "me-1.5" : "ms-1.5")}
+                      style={late ? { right: `${100 - (s.start / total) * 100}%` } : { left: `${((s.start + s.duration) / total) * 100}%` }}
+                    >
+                      {failed ? `${msg("trace-waterfall.failedShort", "Failed")} · ` : ""}{formatMs(s.duration)}{s.cost !== undefined ? ` · ${formatCost(s.cost, currency)}` : ""}
                     </span>
                   </div>
                 </div>
@@ -216,7 +272,7 @@ function TraceWaterfall({ spans, total: totalProp, selected: selectedProp, defau
               {chosen.status === "error" && <span className="text-[11px] font-medium text-destructive">{msg("trace-waterfall.failedShort", "Failed")}</span>}
             </p>
             <p className="font-mono text-xs tabular-nums text-muted-foreground">
-              {formatMs(chosen.start)} → {formatMs(chosen.start + chosen.duration)} · {formatMs(chosen.duration)} · {msg("trace-waterfall.share", "{percent}% of the run", { percent: Math.round((chosen.duration / total) * 1000) / 10 })}{chosen.tokens !== undefined ? ` · ${chosen.tokens.toLocaleString("en-US")} tokens` : ""}
+              {formatMs(chosen.start)} → {formatMs(chosen.start + chosen.duration)} · {formatMs(chosen.duration)} · {msg("trace-waterfall.share", "{percent}% of the run", { percent: Math.round((chosen.duration / total) * 1000) / 10 })}{chosen.tokens !== undefined ? ` · ${chosen.tokens.toLocaleString("en-US")} tokens` : ""}{chosen.cost !== undefined ? ` · ${formatCost(chosen.cost, currency)}` : ""}{chosen.model ? ` · ${chosen.model}` : ""}
             </p>
             {chosen.detail && <p className="text-muted-foreground" dir="auto">{chosen.detail}</p>}
           </div>
@@ -228,4 +284,4 @@ function TraceWaterfall({ spans, total: totalProp, selected: selectedProp, defau
   )
 }
 
-export { TraceWaterfall, flatten, formatMs, type SpanKind, type TraceSpan, type TraceWaterfallProps }
+export { TraceWaterfall, flatten, formatCost, formatMs, type SpanKind, type TraceSpan, type TraceWaterfallProps }

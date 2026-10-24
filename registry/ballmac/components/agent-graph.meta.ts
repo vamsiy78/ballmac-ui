@@ -17,7 +17,7 @@ export default defineItem({
   ],
   ai: {
     summary:
-      "nodes is [{ id, label, kind?: agent | tool | human | memory, status?: idle | working | waiting | blocked | done, detail? }]; edges is [{ from, to, label?, active? }]. Columns are computed from the edges; an edge that loops back is drawn under the nodes. selected / defaultSelected / onSelectedChange. layoutGraph(nodes, edges) is exported.",
+      "Optional title (header strip with working, waiting and blocked counts), fit (default true), and per node subtitle and icon. nodes is [{ id, label, kind?: agent | tool | human | memory, status?: idle | working | waiting | blocked | done, detail? }]; edges is [{ from, to, label?, active? }]. Columns are computed from the edges; an edge that loops back is drawn under the nodes. selected / defaultSelected / onSelectedChange. layoutGraph(nodes, edges) is exported.",
     whenToUse: ["Showing how a multi-agent system is wired and where the work is right now", "A map of tools and people an agent can call"],
     whenNotToUse: ["Who did what over time; use agent-lanes", "A linear list of steps; use trace or agent-plan", "Flows with amounts; use flow-sankey"],
     composesWith: ["agent-roster", "agent-lanes", "handoff-card", "tool-catalog"],
@@ -31,6 +31,10 @@ export default defineItem({
     customization: ["nodes with kind and status", "edges with labels and active", "Controlled selection", "layoutGraph is exported"],
   },
   statesNone: "A presentational diagram: you pass the nodes and edges in, so it has nothing of its own to load or fail.",
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.1.0",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-25", note: "A header strip (title and how many nodes are working, waiting or blocked), a model line and your own icon on a node, and the graph shrinks to fit when it is only a little too wide. New props: title, fit; new node fields: subtitle, icon." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

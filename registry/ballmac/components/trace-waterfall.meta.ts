@@ -17,7 +17,7 @@ export default defineItem({
   ],
   ai: {
     summary:
-      "spans is [{ id, parentId?, name, kind?: model | tool | retrieval | agent | other, start: ms, duration: ms, status?: ok | error, tokens?, detail? }]. total (ms), selected / defaultSelected / onSelectedChange, defaultCollapsed (ids). Spans are nested by parentId; a span whose parent is missing is top level. Exports flatten and formatMs.",
+      "spans is [{ id, parentId?, name, kind?: model | tool | retrieval | agent | other, start: ms, duration: ms, status?: ok | error, tokens?, cost?, model?, detail? }]. summary (default true) shows duration, cost, tokens, model calls, tool calls and errors; currency; give cost to the spans that do the work, since the summary adds every span that has one. total (ms), selected / defaultSelected / onSelectedChange, defaultCollapsed (ids). Spans are nested by parentId; a span whose parent is missing is top level. Exports flatten and formatMs.",
     whenToUse: ["Seeing where an agent run spent its time, with nested model and tool calls", "Debugging latency or a failed step in a trace"],
     whenNotToUse: ["A plain list of steps; use trace", "Who handed work to whom; use agent-lanes", "Cost by step; use run-ledger"],
     composesWith: ["run-replay", "run-ledger", "agent-lanes", "token-meter"],
@@ -32,6 +32,10 @@ export default defineItem({
     customization: ["total", "defaultCollapsed", "Controlled selection", "kind colours use chart 1 to 5"],
   },
   statesNone: "A presentational trace: the spans are passed in, so it has nothing of its own to load or fail.",
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.1.0",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-25", note: "A summary strip (duration, cost, tokens, model calls, tool calls, errors), cost and model per span, and the slowest span marked. New props: summary, currency; new span fields: cost, model." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

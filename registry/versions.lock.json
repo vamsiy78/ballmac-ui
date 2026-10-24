@@ -56,12 +56,12 @@
     "hash": "67b1d0492937f8ed612661873abb0d589996ad2e8ec0e9e40b812c13a84560f0"
   },
   "agent-graph": {
-    "version": "1.0.0",
-    "hash": "eb27875cf4826855742c9974af5299da99a35e85e77fd397694145e597917a31"
+    "version": "1.1.0",
+    "hash": "e4d14ed41a4a7a67afe8576651d1bf6df62cb822359a36043aa7aa79eab52a21"
   },
   "agent-lanes": {
-    "version": "1.0.0",
-    "hash": "8560541abf82357f2096248bbfdb37df1e4bc099ee0d9cc329a8c603884786e7"
+    "version": "1.1.0",
+    "hash": "407b1984031ed8ed3013be8e67ea20348b4d0c9ffc2766c2b35d29fb56d8df40"
   },
   "agent-plan": {
     "version": "1.0.0",
@@ -176,8 +176,8 @@
     "hash": "1db63d033233cc91fb2fa602463da9816b485789e99c9a28c8c2343b33a79092"
   },
   "autonomy-dial": {
-    "version": "1.0.0",
-    "hash": "62fa554f998d141abe4683dd6006cb29557a35107840a9b90bf2b3cd22d4c5ee"
+    "version": "1.1.0",
+    "hash": "a93e047677cda081dc6402660c8d77340221dfadee3693a26707f37f0a08b8fb"
   },
   "avatar": {
     "version": "1.0.0",
@@ -664,8 +664,8 @@
     "hash": "06ac941093e6ac5ad4959775dd4cae5f522a0eaa84a1328944cda75b6a5ee089"
   },
   "escalation-card": {
-    "version": "1.0.0",
-    "hash": "ccbf32e220653100641cebbb8b1517e4e809f382c81f97210c7eba905c740dc7"
+    "version": "1.1.0",
+    "hash": "bd619161b5444889bb3ed55b8d97e37faa392459cda5e5e72fe93295e1120682"
   },
   "event-1": {
     "version": "1.0.0",
@@ -1328,8 +1328,8 @@
     "hash": "0545ef54c4d733547524b9d9050052b5fe5c0af2a11f43b4f4d831af06cb7133"
   },
   "parallel-attempts": {
-    "version": "1.0.0",
-    "hash": "66b5b176cf681ac5bd31bbff425a6344140334283d1bb6ec6387cc775ddd2a27"
+    "version": "1.1.0",
+    "hash": "350d8889e13c49e019c73e1fda386b0c0d4de4de8cd621e6dcd2fe9bded13aab"
   },
   "particles": {
     "version": "1.0.0",
@@ -1983,6 +1983,10 @@
     "version": "1.0.0",
     "hash": "e06d2560604256285b41de8cbe4d09e7d4e705c5bd97860509c4b548e0054512"
   },
+  "thinking-loader": {
+    "version": "1.0.0",
+    "hash": "d3ec4c9aa98318c42f6c8d300c4fcb4f98999cf397e469e4652af4c2288ade97"
+  },
   "tickets-1": {
     "version": "1.0.0",
     "hash": "43c3167c6e57821b7f0bbfcd55e2134a04409d8d4df389d95752eca28c54f29e"
@@ -2028,8 +2032,8 @@
     "hash": "79690d0dd28c21a06f5cf6b66cdf355af78c7bf15a63fb1dd071a648f2c7c8a9"
   },
   "tool-catalog": {
-    "version": "1.0.0",
-    "hash": "8520dd2d77fb0962ad2275a1cc17eb92f58937b48bae9f3870028dfb3328eeaf"
+    "version": "1.1.0",
+    "hash": "a5431f96c3618a9983ceb73d808ac9c04353781aff207c51f22f4cba254c3265"
   },
   "toolbar": {
     "version": "1.0.1",
@@ -2048,8 +2052,8 @@
     "hash": "82fe5f43f9b672aeb14056c0d631c969351dccf17851d0ebeb9043ac011b2736"
   },
   "trace-waterfall": {
-    "version": "1.0.0",
-    "hash": "b1bd21b695504176f2ad6c2a1616e876b25a29802a8577284f5f3727b305f20f"
+    "version": "1.1.0",
+    "hash": "f9c761e0c83023fe2f28e6239f26a59822c93a539838f9a3be46ea550f6eeaea"
   },
   "tree-view": {
     "version": "1.0.0",

@@ -4,11 +4,12 @@ description: "Every translatable message in Ballmac UI, with its key and English
 generatedFrom: registry/ballmac
 ---
 
-Every built-in label, placeholder and screen reader text is a message with an English default: 773 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
+Every built-in label, placeholder and screen reader text is a message with an English default: 808 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
 
 | Key | English |
 | --- | --- |
 | `activity-feed.emptyMessage` | No activity yet |
+| `agent-graph.blocked` | \{count\} blocked |
 | `agent-graph.ends` | Nothing follows it. |
 | `agent-graph.hint` | Select a node to see its connections. The arrow keys follow the edges. |
 | `agent-graph.label` | How the agents and tools are connected |
@@ -16,12 +17,19 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `agent-graph.receives` | Receives from \{names\}. |
 | `agent-graph.sends` | Sends to \{names\}. |
 | `agent-graph.starts` | Starts the work. |
+| `agent-graph.waiting` | \{count\} waiting |
+| `agent-graph.working` | \{count\} working |
 | `agent-lanes.handedBy` | Started by \{from\}. |
 | `agent-lanes.handoffText` | \{from\} hands over to \{to\} at \{time\} |
 | `agent-lanes.handsTo` | Hands over to \{to\}. |
 | `agent-lanes.hint` | Select a step to see what happened. Arrow keys move between steps. |
+| `agent-lanes.idle` | Idle |
 | `agent-lanes.legend` | Step kinds |
+| `agent-lanes.needsYou` | \{count\} need you |
+| `agent-lanes.needsYouChip` | Needs you |
 | `agent-lanes.now` | Now |
+| `agent-lanes.running` | \{count\} running |
+| `agent-lanes.runningChip` | Running |
 | `agent-lanes.step` | \{label\}, \{lane\}, \{kind\}, \{from\} to \{to\} |
 | `agent-plan.progress` | \{title\} progress |
 | `agent-plan.retry` | Retry |
@@ -80,9 +88,13 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `audio-player.play` | Play |
 | `audio-player.playbackSpeedChangeSpeed` | Playback speed \{rate\}×. Change speed |
 | `audio-player.seek` | Seek |
+| `autonomy-dial.always` | Always asks |
 | `autonomy-dial.asks` | Stops to ask about |
+| `autonomy-dial.asksFirst` | Asks you first |
+| `autonomy-dial.destructive` | Destructive |
 | `autonomy-dial.does` | Does on its own |
 | `autonomy-dial.label` | How much can the agent do on its own? |
+| `autonomy-dial.risky` | Risky |
 | `avatar-circles.andMore` | and \{extra\} more |
 | `avatar.more` | \{count\} more |
 | `back-to-top.label` | Back to top |
@@ -287,10 +299,13 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `escalation-card.agent` | Agent |
 | `escalation-card.failed` | That did not go through. Nothing was changed. |
 | `escalation-card.feels` | Seems |
+| `escalation-card.late` | Late by \{count\} min |
+| `escalation-card.left` | \{count\} min left to reply |
 | `escalation-card.messages` | Last messages |
 | `escalation-card.reply` | Suggested reply, edit before sending |
 | `escalation-card.send` | Send reply |
 | `escalation-card.sent` | Reply sent to \{customer\}. |
+| `escalation-card.sla` | Time to reply |
 | `escalation-card.snooze` | Snooze |
 | `escalation-card.snoozed` | Snoozed. It will come back if the customer writes again. |
 | `escalation-card.summary` | What the agent understood |
@@ -512,6 +527,9 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `parallel-attempts.added` | \{count\} added |
 | `parallel-attempts.choose` | Continue with \{label\} |
 | `parallel-attempts.chooseNone` | Continue |
+| `parallel-attempts.count` | \{count\} attempts |
+| `parallel-attempts.doneCount` | \{count\} done |
+| `parallel-attempts.failedCount` | \{count\} failed |
 | `parallel-attempts.files` | \{count\} files |
 | `parallel-attempts.hint` | Pick a finished attempt to continue with. |
 | `parallel-attempts.label` | Attempts |
@@ -519,6 +537,10 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `parallel-attempts.progress` | \{label\} progress |
 | `parallel-attempts.recommended` | Suggested |
 | `parallel-attempts.removed` | \{count\} removed |
+| `parallel-attempts.runningCount` | \{count\} running |
+| `parallel-attempts.stoppedCount` | \{count\} stopped |
+| `parallel-attempts.tests` | \{passed\} of \{total\} tests pass |
+| `parallel-attempts.testsMeter` | \{label\} tests passing |
 | `password-input.fair` | Fair |
 | `password-input.good` | Good |
 | `password-input.hidePassword` | Hide password |
@@ -703,6 +725,12 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `terminal.terminal` | Terminal |
 | `thinking-indicator.label` | Thinking |
 | `thinking-indicator.statusLabel` | Assistant is thinking |
+| `thinking-loader.done` | Done |
+| `thinking-loader.p1` | Thinking |
+| `thinking-loader.p2` | Searching the web |
+| `thinking-loader.p3` | Reading sources |
+| `thinking-loader.p4` | Writing the answer |
+| `thinking-loader.working` | Working |
 | `time-picker.label` | Time |
 | `toast-stack.dismiss` | Dismiss \{title\} |
 | `toast-stack.label` | Notifications |
@@ -739,7 +767,14 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `trace-waterfall.item` | \{name\}, \{kind\}, \{duration\}, starts at \{start\}\{failed\} |
 | `trace-waterfall.label` | Spans of the run |
 | `trace-waterfall.share` | \{percent\}% of the run |
+| `trace-waterfall.slowest` | Slowest |
 | `trace-waterfall.span` | Step |
+| `trace-waterfall.sum.cost` | Cost |
+| `trace-waterfall.sum.duration` | Duration |
+| `trace-waterfall.sum.errors` | Errors |
+| `trace-waterfall.sum.models` | Model calls |
+| `trace-waterfall.sum.tokens` | Tokens |
+| `trace-waterfall.sum.tools` | Tool calls |
 | `treemap.cell` | \{label\}: \{value\}\{unit\}, \{share\}% of the total\{group\} |
 | `treemap.groups` | Groups |
 | `treemap.hint` | Select a block to see its share. |

@@ -30,6 +30,8 @@ type Attempt = {
   cost?: string
   /** 0 to 100 while it is running. */
   progress?: number
+  /** Tests that passed out of those that ran, for a code change. Shown as a bar and in words. */
+  tests?: { passed: number; total: number }
 }
 
 const STATUS: Record<AttemptStatus, { icon: LucideIcon; fallback: string; tone: string }> = {
@@ -64,6 +66,8 @@ type ParallelAttemptsProps = Omit<React.ComponentProps<"div">, "onChange" | "def
   chooseLabel?: string
   /** Heading read by assistive technology. */
   label?: string
+  /** Show a line above the cards: how many attempts, and how many are done, running or failed. On by default. */
+  summary?: boolean
 }
 
 /**
@@ -80,6 +84,7 @@ function ParallelAttempts({
   onChoose,
   chooseLabel,
   label,
+  summary = true,
   className,
   ...props
 }: ParallelAttemptsProps) {
@@ -96,8 +101,19 @@ function ParallelAttempts({
     onValueChange?.(id)
   }
 
+  const count = (st: AttemptStatus) => attempts.filter((a) => a.status === st).length
+
   return (
     <div data-slot="parallel-attempts" className={cn("grid w-full gap-4", className)} {...props}>
+      {summary && attempts.length > 0 && (
+        <p data-slot="parallel-attempts-summary" className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-muted-foreground">
+          <span className="font-semibold text-foreground">{msg("parallel-attempts.count", "{count} attempts", { count: attempts.length })}</span>
+          {count("done") > 0 && <span>{msg("parallel-attempts.doneCount", "{count} done", { count: count("done") })}</span>}
+          {count("running") > 0 && <span>{msg("parallel-attempts.runningCount", "{count} running", { count: count("running") })}</span>}
+          {count("failed") > 0 && <span className="font-medium text-destructive">{msg("parallel-attempts.failedCount", "{count} failed", { count: count("failed") })}</span>}
+          {count("stopped") > 0 && <span>{msg("parallel-attempts.stoppedCount", "{count} stopped", { count: count("stopped") })}</span>}
+        </p>
+      )}
       <fieldset className="min-w-0">
         <legend className="sr-only">{label}</legend>
         <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))]">
@@ -171,6 +187,15 @@ function ParallelAttempts({
                         </span>
                       )}
                     </p>
+                  </div>
+                )}
+
+                {a.tests && a.tests.total > 0 && (
+                  <div className="grid gap-1.5">
+                    <div role="meter" aria-label={msg("parallel-attempts.testsMeter", "{label} tests passing", { label: a.label })} aria-valuemin={0} aria-valuemax={a.tests.total} aria-valuenow={a.tests.passed} aria-valuetext={msg("parallel-attempts.tests", "{passed} of {total} tests pass", { passed: a.tests.passed, total: a.tests.total })} className="h-1.5 overflow-hidden rounded-full bg-muted">
+                      <div className={cn("h-full rounded-full", a.tests.passed === a.tests.total ? "bg-chart-2" : "bg-destructive/70")} style={{ width: `${(a.tests.passed / a.tests.total) * 100}%` }} />
+                    </div>
+                    <p className={cn("text-xs tabular-nums", a.tests.passed < a.tests.total ? "font-medium text-destructive" : "text-muted-foreground")}>{msg("parallel-attempts.tests", "{passed} of {total} tests pass", { passed: a.tests.passed, total: a.tests.total })}</p>
                   </div>
                 )}
 

@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 
 import { CodePanel } from "@/components/site/code-panel"
 import { ProBadge, ProNotice } from "@/components/site/pro-notice"
-import { CopyPageButton } from "@/components/site/copy-page-button"
+import { CopyPageButton, CopyPromptButton } from "@/components/site/copy-page-button"
 import { ItemVersion } from "@/components/site/item-version"
 import { Scorecard, ScoreChip } from "@/components/site/scorecard"
 import { getScore } from "@/lib/quality"
@@ -69,6 +69,14 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
     item.ai?.whenToUse?.length ? `## When to use\n\n${item.ai.whenToUse.map((w) => `- ${w}`).join("\n")}` : "",
     `Docs: https://ui.ballmac.com/components/${item.name}`,
   ].filter(Boolean).join("\n\n")
+  const prompt = [
+    `Add the ${item.title} component from Ballmac UI to my project.`,
+    `Install it with: ${addCommand([item.name], "npm")}`,
+    item.ai?.summary ? `How it works: ${item.ai.summary}` : item.description,
+    item.ai?.whenToUse?.length ? `Use it for: ${item.ai.whenToUse.join("; ")}.` : "",
+    "Keep my existing theme tokens, and wire it to my real data and handlers.",
+    `Docs: https://ui.ballmac.com/components/${item.name}`,
+  ].filter(Boolean).join("\n\n")
   const pager = "bg-background hover:bg-accent focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-[13px] font-medium outline-none transition-colors focus-visible:ring-[3px]"
 
   return (
@@ -87,6 +95,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
               {isNew(item) && <span className="bg-chart-1/12 rounded-full px-2 py-0.5 text-xs font-semibold">New</span>}
             </div>
             <div className="flex items-center gap-1.5">
+              <CopyPromptButton prompt={prompt} />
               <CopyPageButton markdown={markdown} />
               {prev && (
                 <Link href={prev.href} aria-label={`Previous: ${prev.label}`} title={prev.label} className="bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border transition-colors">

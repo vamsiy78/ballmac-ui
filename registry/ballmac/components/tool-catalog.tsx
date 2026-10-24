@@ -25,6 +25,8 @@ type CatalogTool = {
   latencyMs?: number
   /** The input the tool takes, as JSON text. Shown when the tool is opened. */
   schema?: string
+  /** An icon or logo for the tool, shown in a tile before its name. */
+  icon?: React.ReactNode
 }
 
 type ToolCatalogProps = Omit<React.ComponentProps<"section">, "title"> & {
@@ -46,6 +48,7 @@ const needsAttention = (t: CatalogTool) => (t.errorRate ?? 0) >= 0.05 || (t.risk
 function ToolCatalog({ tools: toolsProp, onToggle, title, className, ...props }: ToolCatalogProps) {
   const msg = useMessages()
   const uid = React.useId()
+  const maxCalls = Math.max(1, ...toolsProp.map((t) => t.calls ?? 0))
   title ??= msg("tool-catalog.title", "Tools")
   const [tools, setTools] = React.useState(toolsProp)
   React.useEffect(() => setTools(toolsProp), [toolsProp])
@@ -101,7 +104,8 @@ function ToolCatalog({ tools: toolsProp, onToggle, title, className, ...props }:
             return (
               <li key={t.id} data-enabled={t.enabled} className="rounded-lg border">
                 <div className="flex items-start justify-between gap-4 p-3.5">
-                  <div className="min-w-0">
+                  {t.icon && <span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground [&>svg]:size-[1.1rem]">{t.icon}</span>}
+                  <div className="min-w-0 flex-1">
                     <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
                       <code className="font-mono text-sm font-semibold text-foreground" dir="ltr"><MatchHighlight text={t.name} query={tokens} /></code>
                       {t.risk && (
@@ -118,6 +122,11 @@ function ToolCatalog({ tools: toolsProp, onToggle, title, className, ...props }:
                         {t.errorRate !== undefined && <span className={cn(flaky && "font-medium text-destructive")}>{msg("tool-catalog.errors", "{rate}% fail", { rate: Math.round(t.errorRate * 1000) / 10 })}{flaky ? ` · ${msg("tool-catalog.flaky", "fails often")}` : ""}</span>}
                         {t.latencyMs !== undefined && <span>{msg("tool-catalog.latency", "{ms} ms typical", { ms: t.latencyMs.toLocaleString("en-US") })}</span>}
                       </p>
+                    )}
+                    {t.calls !== undefined && t.calls > 0 && (
+                      <div aria-hidden="true" className="mt-2 h-1 max-w-48 overflow-hidden rounded-full bg-muted">
+                        <div className={cn("h-full rounded-full", flaky ? "bg-destructive/70" : "bg-foreground/70")} style={{ width: `${Math.max(4, (t.calls / maxCalls) * 100)}%` }} />
+                      </div>
                     )}
                     {t.risk === "high" && t.enabled && <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-foreground"><ShieldAlert aria-hidden="true" className="size-3.5 text-destructive" /> {msg("tool-catalog.highOn", "On for a high-risk tool: check it is meant to be.")}</p>}
                   </div>

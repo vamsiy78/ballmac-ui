@@ -55,3 +55,24 @@ describe("EscalationCard", () => {
     expect(screen.getByRole("button", { name: "Take over" })).toBeInTheDocument()
   })
 })
+
+describe("EscalationCard time-to-reply meter", () => {
+  it("says how long is left and fills as the wait grows", () => {
+    render(<EscalationCard {...base} waitedMinutes={2} slaMinutes={5} />)
+    const meter = screen.getByRole("meter", { name: "Time to reply" })
+    expect(meter).toHaveAttribute("aria-valuenow", "2")
+    expect(meter).toHaveAttribute("aria-valuemax", "5")
+    expect(screen.getByText("3 min left to reply")).toBeInTheDocument()
+  })
+
+  it("says how late it is once the target has passed, and stays full", () => {
+    render(<EscalationCard {...base} waitedMinutes={8} slaMinutes={5} />)
+    expect(screen.getByText("Late by 3 min")).toBeInTheDocument()
+    expect(screen.getByRole("meter", { name: "Time to reply" })).toHaveAttribute("aria-valuenow", "5")
+  })
+
+  it("has no meter without both numbers", () => {
+    render(<EscalationCard {...base} waitedMinutes={2} />)
+    expect(screen.queryByRole("meter")).not.toBeInTheDocument()
+  })
+})

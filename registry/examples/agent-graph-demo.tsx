@@ -1,15 +1,17 @@
 "use client"
 
+import { CreditCard, Database, Mail, ReceiptText } from "lucide-react"
+
 import { AgentGraph, type GraphEdge, type GraphNode } from "@/components/ballmac/agent-graph"
 
 const nodes: GraphNode[] = [
   { id: "user", label: "Customer", kind: "human", detail: "Asked why a refund has not arrived." },
-  { id: "router", label: "Router", kind: "agent", status: "done", detail: "Decided this is a billing question." },
-  { id: "billing", label: "Billing agent", kind: "agent", status: "working", detail: "Reading the payment record and the refund policy." },
-  { id: "memory", label: "Customer memory", kind: "memory", status: "idle" },
-  { id: "payments", label: "Payments API", kind: "tool", status: "idle" },
-  { id: "refunds", label: "Refund tool", kind: "tool", status: "waiting", detail: "Waiting for approval, the amount is over the limit." },
-  { id: "reply", label: "Reply writer", kind: "agent", status: "idle" },
+  { id: "router", label: "Router", kind: "agent", status: "done", subtitle: "Haiku 5.5", detail: "Decided this is a billing question." },
+  { id: "billing", label: "Billing agent", kind: "agent", status: "working", subtitle: "Sonnet 5.5", detail: "Reading the payment record and the refund policy." },
+  { id: "memory", label: "Customer memory", kind: "memory", status: "idle", icon: <Database /> },
+  { id: "payments", label: "Payments API", kind: "tool", status: "idle", icon: <CreditCard /> },
+  { id: "refunds", label: "Refund tool", kind: "tool", status: "waiting", icon: <ReceiptText />, detail: "Waiting for approval, the amount is over the limit." },
+  { id: "reply", label: "Reply writer", kind: "agent", status: "idle", subtitle: "Sonnet 5.5", icon: <Mail /> },
 ]
 const edges: GraphEdge[] = [
   { from: "user", to: "router" },
@@ -24,7 +26,7 @@ const edges: GraphEdge[] = [
 export default function AgentGraphDemo() {
   return (
     <div className="w-full max-w-4xl">
-      <AgentGraph nodes={nodes} edges={edges} defaultSelected="billing" />
+      <AgentGraph title="Support team" nodes={nodes} edges={edges} defaultSelected="billing" />
     </div>
   )
 }

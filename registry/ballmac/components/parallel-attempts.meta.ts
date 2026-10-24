@@ -17,7 +17,7 @@ export default defineItem({
   ],
   ai: {
     summary:
-      "attempts is [{ id, label, model?, status: running | done | failed | stopped, summary, added?, removed?, files?, duration?, cost?, progress? }]. value / defaultValue / onValueChange pick a finished attempt; recommended marks one; onChoose adds a confirm button.",
+      "Optional summary (default true) and per attempt tests { passed, total }. attempts is [{ id, label, model?, status: running | done | failed | stopped, summary, added?, removed?, files?, duration?, cost?, progress? }]. value / defaultValue / onValueChange pick a finished attempt; recommended marks one; onChoose adds a confirm button.",
     whenToUse: ["Best-of-n runs where a person chooses the result", "Comparing two or more models on the same task"],
     whenNotToUse: ["Comparing prompts in a table; use the agent-4 block", "A single run's steps; use trace or agent-lanes"],
     composesWith: ["agent-lanes", "run-ledger", "diff-viewer", "approval-card"],
@@ -31,6 +31,10 @@ export default defineItem({
     customization: ["recommended and recommendedLabel", "onChoose and chooseLabel", "Cards fill the width in columns of at least 15rem"],
   },
   statesNone: "A presentational comparison: you pass in the attempts and their statuses, so it has nothing of its own to load or submit.",
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.1.0",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-25", note: "A summary line (how many attempts, done, running, failed) and a test-results meter on each attempt. New prop: summary; new attempt field: tests { passed, total }." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

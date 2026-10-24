@@ -280,11 +280,25 @@
           "diagram",
           "topology"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.1.0",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-25",
+            "note": "A header strip (title and how many nodes are working, waiting or blocked), a model line and your own icon on a node, and the graph shrinks to fit when it is only a little too wide. New props: title, fit; new node fields: subtitle, icon.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
-          "summary": "nodes is [{ id, label, kind?: agent | tool | human | memory, status?: idle | working | waiting | blocked | done, detail? }]; edges is [{ from, to, label?, active? }]. Columns are computed from the edges; an edge that loops back is drawn under the nodes. selected / defaultSelected / onSelectedChange. layoutGraph(nodes, edges) is exported.",
+          "summary": "Optional title (header strip with working, waiting and blocked counts), fit (default true), and per node subtitle and icon. nodes is [{ id, label, kind?: agent | tool | human | memory, status?: idle | working | waiting | blocked | done, detail? }]; edges is [{ from, to, label?, active? }]. Columns are computed from the edges; an edge that loops back is drawn under the nodes. selected / defaultSelected / onSelectedChange. layoutGraph(nodes, edges) is exported.",
           "whenToUse": [
             "Showing how a multi-agent system is wired and where the work is right now",
             "A map of tools and people an agent can call"
@@ -344,6 +358,9 @@
       "description": "A research team example of Agent Graph.",
       "registryDependencies": [
         "https://ui.ballmac.com/r/agent-graph.json"
+      ],
+      "dependencies": [
+        "lucide-react"
       ],
       "files": [
         {
@@ -421,11 +438,25 @@
           "multi-agent",
           "trace"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.1.0",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-25",
+            "note": "A header strip (title, how many agents are running and how many need you), a status chip and model under each agent, and your own icon or logo on a step. New props: title; new fields: lane.model, lane.status, segment.icon.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
-          "summary": "lanes is [{ id, name, role?, segments: [{ id, start, end, kind, label, detail? }] }] with times in seconds; kind is thinking | tool | waiting | blocked | done. handoffs is [{ from, to, label? }] using segment ids. Optional duration, now, selected / defaultSelected / onSelectedChange, formatTime.",
+          "summary": "lanes is [{ id, name, role?, model?, status?: running | idle | needs-you, segments: [{ id, start, end, kind, label, detail?, icon? }] }] with times in seconds; kind is thinking | tool | waiting | blocked | done. handoffs is [{ from, to, label? }] using segment ids. Optional title (a header strip with running and needs-you counts), duration, now, selected / defaultSelected / onSelectedChange, formatTime.",
           "whenToUse": [
             "Showing what several agents did and when, and who handed work to whom",
             "Finding the step where a run waited or got blocked"
@@ -489,6 +520,9 @@
       "description": "A four-agent run example of Agent Lanes.",
       "registryDependencies": [
         "https://ui.ballmac.com/r/agent-lanes.json"
+      ],
+      "dependencies": [
+        "lucide-react"
       ],
       "files": [
         {
@@ -3338,11 +3372,13 @@
       "description": "A stepped dial for how much an agent may do on its own, from suggest-only to full auto, with what it does alone and what it stops to ask about written out for every step.",
       "author": "Ballmac <https://ui.ballmac.com>",
       "dependencies": [
-        "lucide-react"
+        "lucide-react",
+        "motion"
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -3366,11 +3402,25 @@
           "control",
           "safety"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.1.0",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-25",
+            "note": "New actions prop: real actions with icons and risk badges slide between Does on its own and Asks you first as the dial moves, and an action that never runs alone is marked Always asks.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
-          "summary": "levels is [{ value, label, summary, does: string[], asks: string[] }] from least to most autonomous (defaultAutonomyLevels has four). value / defaultValue / onValueChange. A native radio group, so arrow keys work; the panel under the dial says in words what the chosen level allows.",
+          "summary": "levels is [{ value, label, summary, does: string[], asks: string[] }] from least to most autonomous (defaultAutonomyLevels has four). actions is [{ id, label, icon?, risk?: safe | risky | destructive, autoFrom?: a level value }]: with it, real actions sort into Does on its own and Asks you first as the dial moves, and an action with no autoFrom is marked Always asks. value / defaultValue / onValueChange. A native radio group, so arrow keys work; the panel under the dial says in words what the chosen level allows.",
           "whenToUse": [
             "Letting people decide how far an agent may go before asking",
             "A settings row for an assistant's permissions"
@@ -3416,6 +3466,7 @@
         "statesNone": "A control with no data of its own: it shows the levels you pass in and reports the choice.",
         "examples": [
           "autonomy-dial-demo",
+          "autonomy-dial-levels",
           "autonomy-dial-custom"
         ],
         "url": "https://ui.ballmac.com/components/autonomy-dial"
@@ -3424,6 +3475,33 @@
     {
       "name": "autonomy-dial-demo",
       "type": "registry:example",
+      "title": "Autonomy Dial: Real actions",
+      "description": "Real actions example of Autonomy Dial.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/autonomy-dial.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/autonomy-dial-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/autonomy-dial-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "autonomy-dial",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "autonomy-dial-levels",
+      "type": "registry:example",
       "title": "Autonomy Dial: Four levels",
       "description": "Four levels example of Autonomy Dial.",
       "registryDependencies": [
@@ -3431,9 +3509,9 @@
       ],
       "files": [
         {
-          "path": "registry/examples/autonomy-dial-demo.tsx",
+          "path": "registry/examples/autonomy-dial-levels.tsx",
           "type": "registry:example",
-          "target": "@components/ballmac/examples/autonomy-dial-demo.tsx"
+          "target": "@components/ballmac/examples/autonomy-dial-levels.tsx"
         }
       ],
       "categories": [
@@ -47857,11 +47935,25 @@
           "inbox",
           "customer service"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.1.0",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-25",
+            "note": "A time-to-reply meter that turns red as the wait nears the target and says how long is left, or how late it is. New props: waitedMinutes, slaMinutes.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
-          "summary": "customer, channel, reason (required); sentiment calm | frustrated | angry | unknown, waiting, summary string[], messages [{ from: 'customer' | 'agent', text, time? }], suggestedReply (editable). onTakeOver, onSnooze and onSendReply(reply) may return promises; each reports success in words and shows a failure as an alert.",
+          "summary": "Optional waitedMinutes and slaMinutes show a time-to-reply meter. customer, channel, reason (required); sentiment calm | frustrated | angry | unknown, waiting, summary string[], messages [{ from: 'customer' | 'agent', text, time? }], suggestedReply (editable). onTakeOver, onSnooze and onSendReply(reply) may return promises; each reports success in words and shows a failure as an alert.",
           "whenToUse": [
             "Showing a person a conversation an agent could not finish, with context and a head start",
             "An inbox row that needs a human decision"
@@ -58696,11 +58788,25 @@
           "diff",
           "choose"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.1.0",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-25",
+            "note": "A summary line (how many attempts, done, running, failed) and a test-results meter on each attempt. New prop: summary; new attempt field: tests { passed, total }.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
-          "summary": "attempts is [{ id, label, model?, status: running | done | failed | stopped, summary, added?, removed?, files?, duration?, cost?, progress? }]. value / defaultValue / onValueChange pick a finished attempt; recommended marks one; onChoose adds a confirm button.",
+          "summary": "Optional summary (default true) and per attempt tests { passed, total }. attempts is [{ id, label, model?, status: running | done | failed | stopped, summary, added?, removed?, files?, duration?, cost?, progress? }]. value / defaultValue / onValueChange pick a finished attempt; recommended marks one; onChoose adds a confirm button.",
           "whenToUse": [
             "Best-of-n runs where a person chooses the result",
             "Comparing two or more models on the same task"
@@ -73909,6 +74015,133 @@
       }
     },
     {
+      "name": "thinking-loader",
+      "type": "registry:ui",
+      "title": "Thinking Loader",
+      "description": "A small working pill for AI replies: an eight-ray spinner and a shimmering label that rolls through what the assistant is doing, then settles on a check. Heard once by screen readers; still with reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/thinking-loader.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/thinking-loader.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "loader",
+          "thinking",
+          "spinner",
+          "streaming",
+          "assistant",
+          "status"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "phases is string[] (what the assistant is doing, in order; defaults to four general ones), interval in ms (default 1800), done turns it into a check plus doneLabel. role=status announces Working once and the finished text when done, not each phase; the spinner and shimmer stop with reduced motion or when the theme turns loops off.",
+          "whenToUse": [
+            "The wait before and during an AI reply",
+            "Showing which step an agent is on without a progress bar"
+          ],
+          "whenNotToUse": [
+            "A real, measurable progress bar; use progress",
+            "A page or block that is loading; use skeleton or state-view"
+          ],
+          "composesWith": [
+            "ai-chat",
+            "streaming-text",
+            "agent-lanes",
+            "run-replay"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen reader",
+              "action": "A polite status says Working once, and the finished text when done; the rolling phases are hidden from assistive technology"
+            },
+            {
+              "keys": "Reduced motion",
+              "action": "The spinner and the shimmer hold still; the label still changes"
+            }
+          ],
+          "customization": [
+            "phases and interval",
+            "done and doneLabel",
+            "className on the pill"
+          ]
+        },
+        "examples": [
+          "thinking-loader-demo",
+          "thinking-loader-done"
+        ],
+        "url": "https://ui.ballmac.com/components/thinking-loader"
+      }
+    },
+    {
+      "name": "thinking-loader-demo",
+      "type": "registry:example",
+      "title": "Thinking Loader: In a reply",
+      "description": "In a reply example of Thinking Loader.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/thinking-loader.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/thinking-loader-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/thinking-loader-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "thinking-loader",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "thinking-loader-done",
+      "type": "registry:example",
+      "title": "Thinking Loader: Finished",
+      "description": "Finished example of Thinking Loader.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/thinking-loader.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/thinking-loader-done.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/thinking-loader-done.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "thinking-loader",
+        "tier": "free"
+      }
+    },
+    {
       "name": "tilt-card",
       "type": "registry:ui",
       "title": "Tilt Card",
@@ -75055,11 +75288,25 @@
           "catalog",
           "settings"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.1.0",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-25",
+            "note": "A tile for your own icon on each tool and a small usage bar scaled to the busiest tool. New tool field: icon.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
-          "summary": "tools is [{ id, name, description, enabled, risk?: low | medium | high, calls?, errorRate?: 0..1, latencyMs?, schema?: JSON text }]. onToggle(tool, enabled) may return a promise; reject and the switch goes back with the message. Filters: All, On, Off, Needs attention (error rate of 5% or more, or a high-risk tool that is on). Exports needsAttention.",
+          "summary": "Optional icon per tool; a usage bar shows calls relative to the busiest tool. tools is [{ id, name, description, enabled, risk?: low | medium | high, calls?, errorRate?: 0..1, latencyMs?, schema?: JSON text }]. onToggle(tool, enabled) may return a promise; reject and the switch goes back with the message. Filters: All, On, Off, Needs attention (error rate of 5% or more, or a high-risk tool that is on). Exports needsAttention.",
           "whenToUse": [
             "Letting people turn an agent's tools on and off and see how each behaves",
             "A settings page for an MCP server's tools"
@@ -75113,6 +75360,9 @@
       "description": "An assistant's tools example of Tool Catalog.",
       "registryDependencies": [
         "https://ui.ballmac.com/r/tool-catalog.json"
+      ],
+      "dependencies": [
+        "lucide-react"
       ],
       "files": [
         {
@@ -75449,11 +75699,25 @@
           "latency",
           "opentelemetry"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.1.0",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-25",
+            "note": "A summary strip (duration, cost, tokens, model calls, tool calls, errors), cost and model per span, and the slowest span marked. New props: summary, currency; new span fields: cost, model.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
-          "summary": "spans is [{ id, parentId?, name, kind?: model | tool | retrieval | agent | other, start: ms, duration: ms, status?: ok | error, tokens?, detail? }]. total (ms), selected / defaultSelected / onSelectedChange, defaultCollapsed (ids). Spans are nested by parentId; a span whose parent is missing is top level. Exports flatten and formatMs.",
+          "summary": "spans is [{ id, parentId?, name, kind?: model | tool | retrieval | agent | other, start: ms, duration: ms, status?: ok | error, tokens?, cost?, model?, detail? }]. summary (default true) shows duration, cost, tokens, model calls, tool calls and errors; currency; give cost to the spans that do the work, since the summary adds every span that has one. total (ms), selected / defaultSelected / onSelectedChange, defaultCollapsed (ids). Spans are nested by parentId; a span whose parent is missing is top level. Exports flatten and formatMs.",
           "whenToUse": [
             "Seeing where an agent run spent its time, with nested model and tool calls",
             "Debugging latency or a failed step in a trace"

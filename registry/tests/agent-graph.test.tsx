@@ -78,3 +78,25 @@ describe("AgentGraph", () => {
     expect(screen.getByText(/Nothing follows it\./)).toBeInTheDocument()
   })
 })
+
+describe("AgentGraph header, subtitle and icon", () => {
+  it("counts working, waiting and blocked nodes in a header strip with the title", () => {
+    render(<AgentGraph title="Support team" nodes={[...nodes, { id: "e", label: "Wait", status: "waiting" as const }]} edges={edges} />)
+    const head = document.querySelector("[data-slot=agent-graph-header]") as HTMLElement
+    expect(head).toHaveTextContent("Support team")
+    expect(head).toHaveTextContent("1 working")
+    expect(head).toHaveTextContent("1 waiting")
+    expect(head).toHaveTextContent("1 blocked")
+  })
+
+  it("has no header when there is no title and nothing is working, waiting or blocked", () => {
+    render(<AgentGraph nodes={[{ id: "a", label: "A" }, { id: "b", label: "B" }]} edges={[{ from: "a", to: "b" }]} />)
+    expect(document.querySelector("[data-slot=agent-graph-header]")).toBeNull()
+  })
+
+  it("shows the model line, puts it in the node's name and draws your own icon", () => {
+    render(<AgentGraph nodes={[{ id: "a", label: "Billing", status: "working", subtitle: "Sonnet 5.5", icon: <svg data-testid="logo" /> }]} edges={[]} />)
+    expect(screen.getByRole("button", { name: "Billing, agent, working, Sonnet 5.5" })).toHaveTextContent("Sonnet 5.5")
+    expect(screen.getByTestId("logo")).toBeInTheDocument()
+  })
+})

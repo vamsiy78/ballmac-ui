@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
-import { TraceWaterfall, flatten, formatMs, type TraceSpan } from "@/components/ballmac/trace-waterfall"
+import { TraceWaterfall, flatten, formatCost, formatMs, type TraceSpan } from "@/components/ballmac/trace-waterfall"
 
 const spans: TraceSpan[] = [
   { id: "run", name: "Run", kind: "agent", start: 0, duration: 1000 },
@@ -82,5 +82,55 @@ describe("TraceWaterfall", () => {
   it("can start with a branch collapsed", () => {
     render(<TraceWaterfall spans={spans} defaultCollapsed={["a"]} />)
     expect(screen.queryByRole("treeitem", { name: /^Inner,/ })).toBeNull()
+  })
+})
+
+describe("summary, cost and slowest", () => {
+  const priced: TraceSpan[] = [
+    { id: "run", name: "Run", kind: "agent", start: 0, duration: 5000 },
+    { id: "m", parentId: "run", name: "Think", kind: "model", model: "Opus 5.5", start: 0, duration: 3000, tokens: 2000, cost: 0.081 },
+    { id: "t", parentId: "run", name: "Fetch", kind: "tool", start: 3000, duration: 1000, tokens: 500, cost: 0.003, status: "error" },
+    { id: "r", parentId: "run", name: "Reply", kind: "model", start: 4000, duration: 900, tokens: 800, cost: 0.034 },
+  ]
+
+  it("formats costs with three decimals for small amounts", () => {
+    expect(formatCost(0.0042)).toBe("$0.004")
+    expect(formatCost(0.0004)).toBe("<$0.001")
+    expect(formatCost(0.13)).toBe("$0.13")
+    expect(formatCost(12)).toBe("$12.00")
+  })
+
+  it("adds up duration, cost, tokens, model calls, tool calls and errors", () => {
+    render(<TraceWaterfall spans={priced} />)
+    const sum = document.querySelector("[data-slot=trace-waterfall-summary]") as HTMLElement
+    const text = (label: string) => within(sum).getByText(label).nextElementSibling?.textContent
+    expect(text("Duration")).toBe("5 s")
+    expect(text("Cost")).toBe("$0.12")
+    expect(text("Tokens")).toBe("3,300")
+    expect(text("Model calls")).toBe("2")
+    expect(text("Tool calls")).toBe("1")
+    expect(text("Errors")).toBe("1")
+  })
+
+  it("leaves out cost and tokens when no span has them, and can hide the summary", () => {
+    const { rerender } = render(<TraceWaterfall spans={spans} />)
+    expect(screen.queryByText("Cost")).not.toBeInTheDocument()
+    expect(screen.queryByText("Tokens")).toBeInTheDocument()
+    rerender(<TraceWaterfall spans={spans} summary={false} />)
+    expect(document.querySelector("[data-slot=trace-waterfall-summary]")).toBeNull()
+  })
+
+  it("marks the slowest span that does real work, not the one that only contains others", () => {
+    render(<TraceWaterfall spans={priced} />)
+    expect(screen.getAllByText("Slowest")).toHaveLength(1)
+    const row = screen.getByRole("treeitem", { name: /^Think,/ })
+    expect(row).toHaveTextContent("Slowest")
+    expect(row).toHaveAccessibleName(/slowest/)
+  })
+
+  it("shows the model and the cost on the row", () => {
+    render(<TraceWaterfall spans={priced} />)
+    expect(screen.getByText("Opus 5.5")).toBeInTheDocument()
+    expect(screen.getByRole("treeitem", { name: /^Think,/ })).toHaveTextContent("$0.081")
   })
 })

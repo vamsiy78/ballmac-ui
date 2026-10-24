@@ -57,3 +57,23 @@ describe("ParallelAttempts", () => {
     expect(screen.getByRole("button", { name: "Continue" })).toBeDisabled()
   })
 })
+
+describe("ParallelAttempts summary and tests", () => {
+  it("counts the attempts by status above the cards, and can hide the line", () => {
+    const { rerender } = render(<ParallelAttempts attempts={attempts} />)
+    const line = document.querySelector("[data-slot=parallel-attempts-summary]") as HTMLElement
+    expect(line).toHaveTextContent("4 attempts")
+    expect(line).toHaveTextContent("2 done")
+    expect(line).toHaveTextContent("1 running")
+    expect(line).toHaveTextContent("1 failed")
+    rerender(<ParallelAttempts attempts={attempts} summary={false} />)
+    expect(document.querySelector("[data-slot=parallel-attempts-summary]")).toBeNull()
+  })
+
+  it("shows how many tests pass as a meter and in words, and says so when some fail", () => {
+    render(<ParallelAttempts attempts={[{ id: "a", label: "Attempt A", status: "done", summary: "x", tests: { passed: 21, total: 23 } }, { id: "b", label: "Attempt B", status: "done", summary: "y", tests: { passed: 27, total: 27 } }]} />)
+    expect(screen.getByRole("meter", { name: "Attempt A tests passing" })).toHaveAttribute("aria-valuenow", "21")
+    expect(screen.getByText("21 of 23 tests pass")).toBeInTheDocument()
+    expect(screen.getByText("27 of 27 tests pass")).toBeInTheDocument()
+  })
+})

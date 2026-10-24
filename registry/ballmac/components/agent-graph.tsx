@@ -2,7 +2,7 @@
 "use client"
 
 import * as React from "react"
-import { Bot, Brain, CircleAlert, CircleCheck, CircleDot, Hourglass, User, Wrench, type LucideIcon } from "lucide-react"
+import { Bot, Brain, CircleAlert, CircleCheck, CircleDot, Hourglass, Network, User, Wrench, type LucideIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { useMessages } from "@/lib/ballmac/i18n"
@@ -17,6 +17,10 @@ type GraphNode = {
   status?: GraphStatus
   /** A line shown under the graph when the node is selected. */
   detail?: string
+  /** A small second line, such as the model it runs on: "Sonnet 5.5". */
+  subtitle?: string
+  /** An icon or logo shown instead of the one for its kind. */
+  icon?: React.ReactNode
 }
 
 type GraphEdge = {
@@ -132,6 +136,10 @@ type AgentGraphProps = Omit<React.ComponentProps<"div">, "onSelect"> & {
   defaultSelected?: string | null
   /** Called when a node is chosen, or null when it is cleared. */
   onSelectedChange?: (id: string | null) => void
+  /** A heading for a strip above the graph, which also counts how many nodes are working, waiting or blocked. */
+  title?: string
+  /** Shrink the graph to fit its box when it is only a little too wide (down to 70%), instead of scrolling. On by default. */
+  fit?: boolean
 }
 
 /**
@@ -139,10 +147,22 @@ type AgentGraphProps = Omit<React.ComponentProps<"div">, "onSelect"> & {
  * follow the edges (Right to what a node sends to, Left to what feeds it, Up and Down within a column), and the connections of the chosen node are listed
  * in a sentence. The graph reads left to right and scrolls sideways on a narrow screen.
  */
-function AgentGraph({ nodes, edges, selected: selectedProp, defaultSelected = null, onSelectedChange, className, ...props }: AgentGraphProps) {
+function AgentGraph({ nodes, edges, selected: selectedProp, defaultSelected = null, onSelectedChange, title, fit = true, className, ...props }: AgentGraphProps) {
   const msg = useMessages()
+  const box = React.useRef<HTMLDivElement>(null)
+  const [boxWidth, setBoxWidth] = React.useState(0)
+  React.useEffect(() => {
+    const el = box.current
+    if (!el || typeof ResizeObserver === "undefined") return
+    const ro = new ResizeObserver(() => setBoxWidth(el.clientWidth))
+    ro.observe(el)
+    setBoxWidth(el.clientWidth)
+    return () => ro.disconnect()
+  }, [])
   const layout = React.useMemo(() => layoutGraph(nodes, edges), [nodes, edges])
   const byId = new Map(layout.nodes.map((n) => [n.id, n]))
+  const counts = React.useMemo(() => ({ working: nodes.filter((n) => n.status === "working").length, waiting: nodes.filter((n) => n.status === "waiting").length, blocked: nodes.filter((n) => n.status === "blocked").length }), [nodes])
+  const scale = fit && boxWidth > 0 && layout.width > boxWidth - 2 && (boxWidth - 2) / layout.width >= 0.7 ? (boxWidth - 2) / layout.width : 1
   const [inner, setInner] = React.useState<string | null>(defaultSelected)
   const selected = selectedProp !== undefined ? selectedProp : inner
   const chosen = selected ? byId.get(selected) : undefined
@@ -174,8 +194,18 @@ function AgentGraph({ nodes, edges, selected: selectedProp, defaultSelected = nu
 
   return (
     <div data-slot="agent-graph" className={cn("grid w-full min-w-0 gap-3", className)} {...props}>
-      <div dir="ltr" tabIndex={-1} className="overflow-x-auto rounded-xl border bg-card">
-        <div className="relative mx-auto" style={{ width: layout.width, height: layout.height }} role="group" aria-label={msg("agent-graph.label", "How the agents and tools are connected")}>
+      <div ref={box} dir="ltr" tabIndex={-1} className="overflow-x-auto rounded-xl border bg-card">
+        {(title || counts.working > 0 || counts.waiting > 0 || counts.blocked > 0) && (
+          <div data-slot="agent-graph-header" className="sticky start-0 flex flex-wrap items-center gap-x-3 gap-y-1 border-b px-3 py-2.5 text-[13px]">
+            <Network aria-hidden="true" className="size-4 text-muted-foreground" />
+            {title && <span className="font-semibold text-foreground">{title}</span>}
+            {counts.working > 0 && <span className="flex items-center gap-1.5 text-muted-foreground"><span aria-hidden="true" className="size-1.5 rounded-full bg-chart-2" />{msg("agent-graph.working", "{count} working", { count: counts.working })}</span>}
+            {counts.waiting > 0 && <span className="flex items-center gap-1.5 text-muted-foreground"><span aria-hidden="true" className="size-1.5 rounded-full bg-muted-foreground" />{msg("agent-graph.waiting", "{count} waiting", { count: counts.waiting })}</span>}
+            {counts.blocked > 0 && <span className="flex items-center gap-1.5 font-medium text-foreground"><span aria-hidden="true" className="size-1.5 rounded-full bg-destructive" />{msg("agent-graph.blocked", "{count} blocked", { count: counts.blocked })}</span>}
+          </div>
+        )}
+        <div style={{ width: layout.width * scale, height: layout.height * scale }} className="mx-auto">
+        <div className="relative origin-top-left" style={{ width: layout.width, height: layout.height, transform: scale < 1 ? `scale(${scale})` : undefined }} role="group" aria-label={msg("agent-graph.label", "How the agents and tools are connected")}>
           <svg aria-hidden="true" width={layout.width} height={layout.height} className="absolute inset-0 text-foreground">
             <defs>
               <marker id="ag-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -206,7 +236,7 @@ function AgentGraph({ nodes, edges, selected: selectedProp, defaultSelected = nu
                 type="button"
                 aria-pressed={on}
                 tabIndex={tabbable === n.id ? 0 : -1}
-                aria-label={msg("agent-graph.node", "{label}, {kind}{status}", { label: n.label, kind: msg(`agent-graph.kind.${n.kind ?? "agent"}`, K.label).toLowerCase(), status: S ? `, ${msg(`agent-graph.status.${n.status}`, S.label).toLowerCase()}` : "" })}
+                aria-label={msg("agent-graph.node", "{label}, {kind}{status}", { label: n.label, kind: msg(`agent-graph.kind.${n.kind ?? "agent"}`, K.label).toLowerCase(), status: `${S ? `, ${msg(`agent-graph.status.${n.status}`, S.label).toLowerCase()}` : ""}${n.subtitle ? `, ${n.subtitle}` : ""}` })}
                 onClick={() => pick(n.id)}
                 onFocus={() => setFocus(n.id)}
                 onKeyDown={(e) => onKeyDown(e, n)}
@@ -218,19 +248,20 @@ function AgentGraph({ nodes, edges, selected: selectedProp, defaultSelected = nu
                 )}
                 style={{ left: n.x, top: n.y, width: NODE_W, height: NODE_H }}
               >
-                <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted">
-                  <K.icon className="size-4" />
+                <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted [&>svg]:size-4">
+                  {n.icon ?? <K.icon className="size-4" />}
                 </span>
                 <span className="min-w-0">
                   <span className="block truncate text-[13px] font-medium text-foreground">{n.label}</span>
                   <span className={cn("flex items-center gap-1 text-[11px]", n.status === "blocked" ? "font-medium text-destructive" : "text-muted-foreground")}>
                     {S ? <S.icon aria-hidden="true" className="size-3 shrink-0" /> : null}
-                    <span className="truncate">{S ? msg(`agent-graph.status.${n.status}`, S.label) : msg(`agent-graph.kind.${n.kind ?? "agent"}`, K.label)}</span>
+                    <span className="truncate">{S ? msg(`agent-graph.status.${n.status}`, S.label) : msg(`agent-graph.kind.${n.kind ?? "agent"}`, K.label)}{n.subtitle ? ` · ${n.subtitle}` : ""}</span>
                   </span>
                 </span>
               </button>
             )
           })}
+        </div>
         </div>
       </div>
 

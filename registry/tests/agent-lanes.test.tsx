@@ -70,3 +70,37 @@ describe("AgentLanes", () => {
     expect(formatClock(3725)).toBe("1:02:05")
   })
 })
+
+describe("AgentLanes header, status and model", () => {
+  const status: Lane[] = [
+    { id: "a", name: "Planner", model: "Opus 5.5", status: "idle", segments: [{ id: "a1", start: 0, end: 20, kind: "done", label: "Plans" }] },
+    { id: "b", name: "Coder", role: "Writes code", model: "Sonnet 5.5", status: "running", segments: [{ id: "b1", start: 20, end: 80, kind: "tool", label: "Edits files", icon: <svg data-testid="logo" /> }] },
+    { id: "c", name: "Reviewer", status: "needs-you", segments: [{ id: "c1", start: 80, end: 90, kind: "waiting", label: "Waits" }] },
+  ]
+
+  it("counts the agents that are running and the ones that need you in a header strip", () => {
+    render(<AgentLanes lanes={status} title="Agents" />)
+    const head = document.querySelector("[data-slot=agent-lanes-header]") as HTMLElement
+    expect(within(head).getByText("Agents")).toBeInTheDocument()
+    expect(within(head).getByText("1 running")).toBeInTheDocument()
+    expect(within(head).getByText("1 need you")).toBeInTheDocument()
+  })
+
+  it("has no header when there is no title and nobody has a status", () => {
+    render(<AgentLanes lanes={lanes} />)
+    expect(document.querySelector("[data-slot=agent-lanes-header]")).toBeNull()
+  })
+
+  it("shows the model under the name, a chip for idle and needs-you, and includes them in the group's name", () => {
+    render(<AgentLanes lanes={status} />)
+    expect(screen.getByText("Sonnet 5.5")).toBeInTheDocument()
+    expect(screen.getByRole("group", { name: "Planner, Opus 5.5, Idle" })).toBeInTheDocument()
+    expect(screen.getByRole("group", { name: "Reviewer, Needs you" })).toBeInTheDocument()
+    expect(screen.getByRole("group", { name: "Coder, Writes code, Sonnet 5.5, Running" })).toBeInTheDocument()
+  })
+
+  it("draws your own icon on a step in place of the one for its kind", () => {
+    render(<AgentLanes lanes={status} />)
+    expect(screen.getByTestId("logo")).toBeInTheDocument()
+  })
+})

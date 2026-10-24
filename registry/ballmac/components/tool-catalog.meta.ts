@@ -17,7 +17,7 @@ export default defineItem({
   ],
   ai: {
     summary:
-      "tools is [{ id, name, description, enabled, risk?: low | medium | high, calls?, errorRate?: 0..1, latencyMs?, schema?: JSON text }]. onToggle(tool, enabled) may return a promise; reject and the switch goes back with the message. Filters: All, On, Off, Needs attention (error rate of 5% or more, or a high-risk tool that is on). Exports needsAttention.",
+      "Optional icon per tool; a usage bar shows calls relative to the busiest tool. tools is [{ id, name, description, enabled, risk?: low | medium | high, calls?, errorRate?: 0..1, latencyMs?, schema?: JSON text }]. onToggle(tool, enabled) may return a promise; reject and the switch goes back with the message. Filters: All, On, Off, Needs attention (error rate of 5% or more, or a high-risk tool that is on). Exports needsAttention.",
     whenToUse: ["Letting people turn an agent's tools on and off and see how each behaves", "A settings page for an MCP server's tools"],
     whenNotToUse: ["Allow, ask or deny per tool; use permission-grid", "One level of freedom; use autonomy-dial"],
     composesWith: ["permission-grid", "autonomy-dial", "tool-call-card", "agent-graph"],
@@ -30,6 +30,10 @@ export default defineItem({
     customization: ["tools and their stats", "title", "onToggle"],
   },
   statesNone: "A control with no data of its own: it shows the tools you pass in and reports the changes, and it has its own no-match message.",
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.1.0",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-25", note: "A tile for your own icon on each tool and a small usage bar scaled to the busiest tool. New tool field: icon." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

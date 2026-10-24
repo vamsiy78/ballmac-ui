@@ -25,6 +25,9 @@ type EscalationCardProps = Omit<React.ComponentProps<"article">, "title"> & {
   sentiment?: Sentiment
   /** How long they have been waiting, already formatted, such as "4 min". */
   waiting?: string
+  /** How long they have waited and how long they should wait at most, in minutes. With both, a meter shows how close the reply is to being late. */
+  waitedMinutes?: number
+  slaMinutes?: number
   /** What the agent understood so far, as short points. */
   summary?: string[]
   /** The last few messages. */
@@ -45,7 +48,7 @@ const SENTIMENT: Record<Sentiment, string> = { calm: "Calm", frustrated: "Frustr
  * The moment an AI agent hands a conversation to a person: who is waiting and for how long, why it was handed over, how the customer seems to feel (in words),
  * what the agent understood, the last messages, and a suggested reply the person can edit and send. Take over and Snooze report back, and a failure is said plainly.
  */
-function EscalationCard({ customer, channel, reason, sentiment = "unknown", waiting, summary = [], messages = [], suggestedReply = "", onTakeOver, onSnooze, onSendReply, className, ...props }: EscalationCardProps) {
+function EscalationCard({ customer, channel, reason, sentiment = "unknown", waiting, waitedMinutes, slaMinutes, summary = [], messages = [], suggestedReply = "", onTakeOver, onSnooze, onSendReply, className, ...props }: EscalationCardProps) {
   const msg = useMessages()
   const uid = React.useId()
   const [reply, setReply] = React.useState(suggestedReply)
@@ -87,6 +90,22 @@ function EscalationCard({ customer, channel, reason, sentiment = "unknown", wait
           )}
         </p>
       </header>
+
+      {waitedMinutes !== undefined && slaMinutes !== undefined && slaMinutes > 0 && (() => {
+        const late = waitedMinutes > slaMinutes
+        const text = late
+          ? msg("escalation-card.late", "Late by {count} min", { count: Math.round(waitedMinutes - slaMinutes) })
+          : msg("escalation-card.left", "{count} min left to reply", { count: Math.max(0, Math.round(slaMinutes - waitedMinutes)) })
+        const hot = waitedMinutes >= slaMinutes * 0.8
+        return (
+          <div className="grid gap-1.5">
+            <div role="meter" aria-label={msg("escalation-card.sla", "Time to reply")} aria-valuemin={0} aria-valuemax={slaMinutes} aria-valuenow={Math.min(waitedMinutes, slaMinutes)} aria-valuetext={text} className="h-1.5 overflow-hidden rounded-full bg-muted">
+              <div className={cn("h-full rounded-full", hot ? "bg-destructive" : "bg-foreground/70")} style={{ width: `${Math.min(100, (waitedMinutes / slaMinutes) * 100)}%` }} />
+            </div>
+            <p className={cn("text-xs tabular-nums", hot ? "font-medium text-destructive" : "text-muted-foreground")}>{text}</p>
+          </div>
+        )
+      })()}
 
       <p className="flex gap-2 rounded-lg bg-muted/50 px-3 py-2.5 text-[13px] leading-snug">
         <HandHelping aria-hidden="true" className="mt-0.5 size-4 shrink-0" />

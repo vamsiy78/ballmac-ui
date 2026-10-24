@@ -17,7 +17,7 @@ export default defineItem({
   ],
   ai: {
     summary:
-      "customer, channel, reason (required); sentiment calm | frustrated | angry | unknown, waiting, summary string[], messages [{ from: 'customer' | 'agent', text, time? }], suggestedReply (editable). onTakeOver, onSnooze and onSendReply(reply) may return promises; each reports success in words and shows a failure as an alert.",
+      "Optional waitedMinutes and slaMinutes show a time-to-reply meter. customer, channel, reason (required); sentiment calm | frustrated | angry | unknown, waiting, summary string[], messages [{ from: 'customer' | 'agent', text, time? }], suggestedReply (editable). onTakeOver, onSnooze and onSendReply(reply) may return promises; each reports success in words and shows a failure as an alert.",
     whenToUse: ["Showing a person a conversation an agent could not finish, with context and a head start", "An inbox row that needs a human decision"],
     whenNotToUse: ["Approving a tool call; use approval-card", "The packet passed between two agents; use handoff-card"],
     composesWith: ["handoff-card", "approval-card", "agent-roster", "ai-chat"],
@@ -29,6 +29,10 @@ export default defineItem({
     customization: ["sentiment and waiting", "summary and messages", "suggestedReply and onSendReply", "onTakeOver and onSnooze"],
   },
   statesNone: "A presentational card with its own actions: the conversation is passed in, so it has nothing of its own to load, and failures are reported on the card.",
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.1.0",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-25", note: "A time-to-reply meter that turns red as the wait nears the target and says how long is left, or how late it is. New props: waitedMinutes, slaMinutes." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

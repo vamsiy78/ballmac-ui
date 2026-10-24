@@ -10,6 +10,8 @@ export default function EscalationCardDemo() {
         channel="Chat · Help centre"
         sentiment="frustrated"
         waiting="4 min"
+        waitedMinutes={4}
+        slaMinutes={5}
         reason="The refund is over the amount an agent may approve alone, and the customer asked to speak to a person."
         summary={["Order A-9914, paid by card on 12 October", "Item arrived damaged; photos were sent", "Refund of $340 requested, policy allows it"]}
         messages={[

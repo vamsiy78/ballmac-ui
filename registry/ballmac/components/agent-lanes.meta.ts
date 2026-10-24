@@ -17,7 +17,7 @@ export default defineItem({
   ],
   ai: {
     summary:
-      "lanes is [{ id, name, role?, segments: [{ id, start, end, kind, label, detail? }] }] with times in seconds; kind is thinking | tool | waiting | blocked | done. handoffs is [{ from, to, label? }] using segment ids. Optional duration, now, selected / defaultSelected / onSelectedChange, formatTime.",
+      "lanes is [{ id, name, role?, model?, status?: running | idle | needs-you, segments: [{ id, start, end, kind, label, detail?, icon? }] }] with times in seconds; kind is thinking | tool | waiting | blocked | done. handoffs is [{ from, to, label? }] using segment ids. Optional title (a header strip with running and needs-you counts), duration, now, selected / defaultSelected / onSelectedChange, formatTime.",
     whenToUse: ["Showing what several agents did and when, and who handed work to whom", "Finding the step where a run waited or got blocked"],
     whenNotToUse: ["One agent's linear steps; use trace", "A plan with checkable steps; use agent-plan", "A project schedule; use the gantt block"],
     composesWith: ["trace", "token-meter", "approval-card", "tool-call-card"],
@@ -32,6 +32,10 @@ export default defineItem({
     customization: ["duration and now", "formatTime for your own time text", "minTrackWidth before the chart scrolls sideways", "Controlled selection"],
   },
   statesNone: "A presentational chart: you pass the finished or running steps in, so there is nothing for it to load, submit or fail.",
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.1.0",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-25", note: "A header strip (title, how many agents are running and how many need you), a status chip and model under each agent, and your own icon or logo on a step. New props: title; new fields: lane.model, lane.status, segment.icon." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

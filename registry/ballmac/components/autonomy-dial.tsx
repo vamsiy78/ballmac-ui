@@ -2,10 +2,12 @@
 "use client"
 
 import * as React from "react"
-import { Check, HelpCircle } from "lucide-react"
+import { Check, HelpCircle, Lock } from "lucide-react"
+import { LayoutGroup, motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
 import { useMessages } from "@/lib/ballmac/i18n"
+import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 
 type AutonomyLevel = {
   /** Stable value reported to onValueChange. */
@@ -52,6 +54,18 @@ const defaultAutonomyLevels: AutonomyLevel[] = [
   },
 ]
 
+type AutonomyAction = {
+  id: string
+  /** What the agent can do, for example "Send emails". */
+  label: string
+  /** A small icon or logo shown before the label. */
+  icon?: React.ReactNode
+  /** How much harm it can do. Shown as a badge, in words. */
+  risk?: "safe" | "risky" | "destructive"
+  /** The first level (its `value`) at which the agent does this on its own. Leave it out and it always asks. */
+  autoFrom?: string
+}
+
 type AutonomyDialProps = Omit<React.ComponentProps<"fieldset">, "onChange" | "defaultValue"> & {
   /** The settings, from least to most autonomous. Defaults to four general ones. */
   levels?: AutonomyLevel[]
@@ -63,14 +77,17 @@ type AutonomyDialProps = Omit<React.ComponentProps<"fieldset">, "onChange" | "de
   onValueChange?: (value: string) => void
   /** Heading above the dial. */
   label?: string
+  /** Real actions to sort into "Does on its own" and "Asks first" as the dial moves. Replaces each level's `does` and `asks` lists. */
+  actions?: AutonomyAction[]
 }
 
 /**
  * How much an agent may do on its own, as a stepped dial with what each step means written out underneath. The steps are a native radio group, so
  * the arrow keys, Home, End and the browser's own right-to-left handling all work. The track is decoration; the words carry the meaning.
  */
-function AutonomyDial({ levels = defaultAutonomyLevels, value: valueProp, defaultValue, onValueChange, label, className, ...props }: AutonomyDialProps) {
+function AutonomyDial({ levels = defaultAutonomyLevels, value: valueProp, defaultValue, onValueChange, label, actions, className, ...props }: AutonomyDialProps) {
   const msg = useMessages()
+  const reduced = useReducedMotionSafe()
   const name = React.useId()
   label ??= msg("autonomy-dial.label", "How much can the agent do on its own?")
   const [inner, setInner] = React.useState(defaultValue ?? levels[0]?.value)
@@ -129,37 +146,78 @@ function AutonomyDial({ levels = defaultAutonomyLevels, value: valueProp, defaul
         <p className="text-sm leading-relaxed text-foreground">
           <span className="font-semibold">{current.label}.</span> {current.summary}
         </p>
+        {actions ? (
+          <LayoutGroup id={`${name}-actions`}>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {([true, false] as const).map((auto) => {
+                const list = actions.filter((x) => {
+                  const at = x.autoFrom === undefined ? -1 : levels.findIndex((l) => l.value === x.autoFrom)
+                  return (at >= 0 && at <= index) === auto
+                })
+                return (
+                  <div key={String(auto)}>
+                    <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                      {auto ? <Check aria-hidden="true" className="size-3.5" /> : <HelpCircle aria-hidden="true" className="size-3.5" />}
+                      {auto ? msg("autonomy-dial.does", "Does on its own") : msg("autonomy-dial.asksFirst", "Asks you first")}
+                      <span className="rounded-full bg-muted px-1.5 text-[11px] tabular-nums">{list.length}</span>
+                    </p>
+                    <ul className="mt-2 grid gap-1">
+                      {list.map((x) => {
+                        const always = x.autoFrom === undefined
+                        return (
+                          <motion.li key={x.id} layout={!reduced} layoutId={reduced ? undefined : `${name}-${x.id}`} transition={{ type: "spring", stiffness: 420, damping: 36 }} className="flex flex-wrap items-center gap-x-2 gap-y-0.5 rounded-md px-1.5 py-1 text-[13px] leading-snug">
+                            <span aria-hidden="true" className="bg-muted text-muted-foreground flex size-6 shrink-0 items-center justify-center rounded-md [&>svg]:size-3.5">{x.icon ?? <span className="size-1.5 rounded-full bg-current" />}</span>
+                            <span className="min-w-[6.5rem] flex-1">{x.label}</span>
+                            {x.risk && x.risk !== "safe" && (
+                              <span className={cn("shrink-0 rounded-full border px-1.5 py-0.5 text-[11px] font-medium", x.risk === "destructive" ? "border-destructive/40 text-destructive" : "text-muted-foreground")}>
+                                {x.risk === "destructive" ? msg("autonomy-dial.destructive", "Destructive") : msg("autonomy-dial.risky", "Risky")}
+                              </span>
+                            )}
+                            {always && !auto && (
+                              <span className="text-muted-foreground flex shrink-0 items-center gap-1 text-[11px]"><Lock aria-hidden="true" className="size-3" />{msg("autonomy-dial.always", "Always asks")}</span>
+                            )}
+                          </motion.li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                )
+              })}
+            </div>
+          </LayoutGroup>
+        ) : (
         <div className="grid gap-4 sm:grid-cols-2">
-          <div>
-            <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-              <Check aria-hidden="true" className="size-3.5" /> {msg("autonomy-dial.does", "Does on its own")}
-            </p>
-            <ul className="mt-2 grid gap-1.5 text-[13px] leading-snug">
-              {current.does.map((t) => (
-                <li key={t} className="flex gap-2">
-                  <span aria-hidden="true" className="mt-[0.45rem] size-1 shrink-0 rounded-full bg-foreground" />
-                  {t}
-                </li>
-              ))}
-            </ul>
+            <div>
+              <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                <Check aria-hidden="true" className="size-3.5" /> {msg("autonomy-dial.does", "Does on its own")}
+              </p>
+              <ul className="mt-2 grid gap-1.5 text-[13px] leading-snug">
+                {current.does.map((t) => (
+                  <li key={t} className="flex gap-2">
+                    <span aria-hidden="true" className="mt-[0.45rem] size-1 shrink-0 rounded-full bg-foreground" />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                <HelpCircle aria-hidden="true" className="size-3.5" /> {msg("autonomy-dial.asks", "Stops to ask about")}
+              </p>
+              <ul className="mt-2 grid gap-1.5 text-[13px] leading-snug">
+                {current.asks.map((t) => (
+                  <li key={t} className="flex gap-2">
+                    <span aria-hidden="true" className="mt-[0.45rem] size-1 shrink-0 rounded-full border border-foreground" />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div>
-            <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-              <HelpCircle aria-hidden="true" className="size-3.5" /> {msg("autonomy-dial.asks", "Stops to ask about")}
-            </p>
-            <ul className="mt-2 grid gap-1.5 text-[13px] leading-snug">
-              {current.asks.map((t) => (
-                <li key={t} className="flex gap-2">
-                  <span aria-hidden="true" className="mt-[0.45rem] size-1 shrink-0 rounded-full border border-foreground" />
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        )}
       </div>
     </fieldset>
   )
 }
 
-export { AutonomyDial, defaultAutonomyLevels, type AutonomyDialProps, type AutonomyLevel }
+export { AutonomyDial, defaultAutonomyLevels, type AutonomyAction, type AutonomyDialProps, type AutonomyLevel }

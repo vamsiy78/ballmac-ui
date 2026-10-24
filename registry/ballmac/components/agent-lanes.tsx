@@ -23,6 +23,8 @@ type LaneSegment = {
   label: string
   /** More detail, shown in the panel under the chart when the step is selected. */
   detail?: string
+  /** An icon or logo for this step, shown instead of the one for its kind. */
+  icon?: React.ReactNode
 }
 
 type Lane = {
@@ -31,6 +33,10 @@ type Lane = {
   name: string
   /** What it is for, for example "Writes the code". */
   role?: string
+  /** The model it runs on, shown under the name in place of the role, for example "Sonnet 5.5". */
+  model?: string
+  /** Where it is now. Shown as a chip beside the name and counted in the header. */
+  status?: "running" | "idle" | "needs-you"
   segments: LaneSegment[]
 }
 
@@ -53,7 +59,7 @@ const KINDS: Record<LaneKind, { icon: LucideIcon; bar: string; fallback: string 
 
 const ROW = 44
 const HEAD = 32
-const NAME_W = "9rem"
+const NAME_W = "11rem"
 const STEPS = [1, 2, 5, 10, 15, 30, 60, 120, 300, 600, 1200, 3600]
 
 /** 75 → "1:15", 3725 → "1:02:05". */
@@ -93,6 +99,8 @@ type AgentLanesProps = Omit<React.ComponentProps<"div">, "onSelect"> & {
   formatTime?: (seconds: number) => string
   /** Wider values make the chart scroll sideways earlier on small screens. Rem. */
   minTrackWidth?: number
+  /** A heading for the strip above the chart, for example "Agents". The strip also shows how many agents are running and how many need you. */
+  title?: string
 }
 
 function AgentLanes({
@@ -105,6 +113,7 @@ function AgentLanes({
   onSelectedChange,
   formatTime = formatClock,
   minTrackWidth = 34,
+  title,
   dir,
   className,
   ...props
@@ -113,6 +122,8 @@ function AgentLanes({
   const direction = useDirection(dir === "rtl" || dir === "ltr" ? dir : undefined)
   const [inner, setInner] = React.useState<string | null>(defaultSelected)
   const selected = selectedProp !== undefined ? selectedProp : inner
+  const running = lanes.filter((l) => l.status === "running").length
+  const needsYou = lanes.filter((l) => l.status === "needs-you").length
   const total = Math.max(duration ?? 0, ...lanes.flatMap((l) => l.segments.map((s) => s.end)), 1)
   const pct = (t: number) => `${(Math.min(Math.max(t, 0), total) / total) * 100}%`
 
@@ -175,6 +186,24 @@ function AgentLanes({
     <div data-slot="agent-lanes" dir={dir} className={cn("grid w-full min-w-0 gap-3", className)} {...props}>
       <div className="overflow-x-auto rounded-xl border bg-card text-card-foreground">
         <div className="relative" style={{ minWidth: `calc(${NAME_W} + ${minTrackWidth}rem)` }}>
+          {(title || running > 0 || needsYou > 0) && (
+            <div data-slot="agent-lanes-header" className="sticky start-0 flex flex-wrap items-center gap-x-3 gap-y-1 border-b px-3 py-2.5 text-[13px]">
+              <Sparkles aria-hidden="true" className="size-4 text-muted-foreground" />
+              {title && <span className="font-semibold text-foreground">{title}</span>}
+              {running > 0 && (
+                <span className="flex items-center gap-1.5 text-muted-foreground">
+                  <span aria-hidden="true" className="size-1.5 rounded-full bg-chart-2" />
+                  {msg("agent-lanes.running", "{count} running", { count: running })}
+                </span>
+              )}
+              {needsYou > 0 && (
+                <span className="flex items-center gap-1.5 font-medium text-foreground">
+                  <span aria-hidden="true" className="size-1.5 rounded-full bg-destructive" />
+                  {msg("agent-lanes.needsYou", "{count} need you", { count: needsYou })}
+                </span>
+              )}
+            </div>
+          )}
           {/* Axis */}
           <div className="flex border-b" style={{ height: HEAD }}>
             <div className="sticky start-0 z-20 shrink-0 border-e bg-card" style={{ width: NAME_W }} />
@@ -197,10 +226,14 @@ function AgentLanes({
 
           {/* Lanes */}
           {lanes.map((lane, li) => (
-            <div key={lane.id} role="group" aria-label={lane.role ? `${lane.name}, ${lane.role}` : lane.name} className="flex border-b last:border-b-0" style={{ height: ROW }}>
+            <div key={lane.id} role="group" aria-label={[lane.name, lane.role, lane.model, lane.status === "idle" ? msg("agent-lanes.idle", "Idle") : lane.status === "needs-you" ? msg("agent-lanes.needsYouChip", "Needs you") : lane.status === "running" ? msg("agent-lanes.runningChip", "Running") : undefined].filter(Boolean).join(", ")} className="flex border-b last:border-b-0" style={{ height: ROW }}>
               <div className="sticky start-0 z-20 flex shrink-0 flex-col justify-center border-e bg-card px-3" style={{ width: NAME_W }}>
-                <span className="truncate text-[13px] font-medium text-foreground">{lane.name}</span>
-                {lane.role && <span className="truncate text-[11px] text-muted-foreground">{lane.role}</span>}
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <span className="truncate text-[13px] font-medium text-foreground">{lane.name}</span>
+                  {lane.status === "idle" && <span className="shrink-0 rounded-full border px-1.5 text-[10px] text-muted-foreground">{msg("agent-lanes.idle", "Idle")}</span>}
+                  {lane.status === "needs-you" && <span className="shrink-0 rounded-full bg-foreground px-1.5 text-[10px] font-medium text-background">{msg("agent-lanes.needsYouChip", "Needs you")}</span>}
+                </span>
+                {(lane.model ?? lane.role) && <span className="truncate text-[11px] text-muted-foreground">{lane.model ?? lane.role}</span>}
               </div>
               <div className="relative grow">
                 {/* Grid lines */}
@@ -236,7 +269,7 @@ function AgentLanes({
                       )}
                       style={{ insetInlineStart: pct(s.start), width: `${width}%` }}
                     >
-                      {width >= 4 && <Icon aria-hidden="true" className="size-3.5 shrink-0" />}
+                      {width >= 4 && (s.icon ? <span aria-hidden="true" className="flex shrink-0 items-center [&>svg]:size-3.5">{s.icon}</span> : <Icon aria-hidden="true" className="size-3.5 shrink-0" />)}
                       {width >= 12 && <span className="truncate">{s.label}</span>}
                     </button>
                   )
