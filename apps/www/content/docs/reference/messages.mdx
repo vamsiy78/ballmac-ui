@@ -4,14 +4,26 @@ description: "Every translatable message in Ballmac UI, with its key and English
 generatedFrom: registry/ballmac
 ---
 
-Every built-in label, placeholder and screen reader text is a message with an English default: 624 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
+Every built-in label, placeholder and screen reader text is a message with an English default: 694 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
 
 | Key | English |
 | --- | --- |
 | `activity-feed.emptyMessage` | No activity yet |
+| `agent-lanes.handedBy` | Started by \{from\}. |
+| `agent-lanes.handoffText` | \{from\} hands over to \{to\} at \{time\} |
+| `agent-lanes.handsTo` | Hands over to \{to\}. |
+| `agent-lanes.hint` | Select a step to see what happened. Arrow keys move between steps. |
+| `agent-lanes.legend` | Step kinds |
+| `agent-lanes.now` | Now |
+| `agent-lanes.step` | \{label\}, \{lane\}, \{kind\}, \{from\} to \{to\} |
 | `agent-plan.progress` | \{title\} progress |
 | `agent-plan.retry` | Retry |
 | `agent-plan.title` | Plan |
+| `agent-roster.all` | All |
+| `agent-roster.count` | \{count\} agents shown |
+| `agent-roster.filter` | Filter by status |
+| `agent-roster.load` | \{name\} load |
+| `agent-roster.title` | Agents |
 | `ai-chat.label` | Conversation |
 | `ai-chat.scrollButtonLabel` | Scroll to latest message |
 | `ai-chat.suggestions` | Suggestions |
@@ -61,6 +73,9 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `audio-player.play` | Play |
 | `audio-player.playbackSpeedChangeSpeed` | Playback speed \{rate\}×. Change speed |
 | `audio-player.seek` | Seek |
+| `autonomy-dial.asks` | Stops to ask about |
+| `autonomy-dial.does` | Does on its own |
+| `autonomy-dial.label` | How much can the agent do on its own? |
 | `avatar-circles.andMore` | and \{extra\} more |
 | `avatar.more` | \{count\} more |
 | `back-to-top.label` | Back to top |
@@ -131,6 +146,15 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `chat-attachment.uploading` | Uploading \{name\} |
 | `chat-attachment.uploadingEllipsis` | Uploading… |
 | `chat-attachment.uploadingPercent` | Uploading \{percent\}% |
+| `citation-coverage.gapHelp` | This claim has no source. |
+| `citation-coverage.legend` | A wavy underline means no source backs the claim. |
+| `citation-coverage.noSource` | no source |
+| `citation-coverage.none` | Every claim has a source. |
+| `citation-coverage.onlyGaps` | Show only claims without a source |
+| `citation-coverage.source` | source |
+| `citation-coverage.sources` | Sources |
+| `citation-coverage.summary` | \{supported\} of \{total\} claims have a source |
+| `citation-coverage.title` | Source coverage |
 | `citation.nextSource` | Next source |
 | `citation.openSource` | Open source |
 | `citation.previousSource` | Previous source |
@@ -313,6 +337,15 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `git-graph.label` | Commit history |
 | `git-graph.merge` | Merge |
 | `globe.label` | Rotating globe |
+| `guardrail-feed.all` | All |
+| `guardrail-feed.count` | \{count\} checks shown |
+| `guardrail-feed.empty` | Nothing here yet. |
+| `guardrail-feed.filter` | Filter by action |
+| `guardrail-feed.title` | Guardrail activity |
+| `handoff-card.context` | Context passed |
+| `handoff-card.handsOver` | hands over to |
+| `handoff-card.questions` | Open questions |
+| `handoff-card.rules` | Rules to keep |
 | `icon-cloud.label` | Items |
 | `image-cropper.degrees` | \{degrees\} degrees |
 | `image-cropper.errorTitle` | The picture could not be loaded |
@@ -442,6 +475,16 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `pagination.morePages` | More pages |
 | `pagination.nextPage` | Next page |
 | `pagination.previousPage` | Previous page |
+| `parallel-attempts.added` | \{count\} added |
+| `parallel-attempts.choose` | Continue with \{label\} |
+| `parallel-attempts.chooseNone` | Continue |
+| `parallel-attempts.files` | \{count\} files |
+| `parallel-attempts.hint` | Pick a finished attempt to continue with. |
+| `parallel-attempts.label` | Attempts |
+| `parallel-attempts.picked` | \{label\} is selected. |
+| `parallel-attempts.progress` | \{label\} progress |
+| `parallel-attempts.recommended` | Suggested |
+| `parallel-attempts.removed` | \{count\} removed |
 | `password-input.fair` | Fair |
 | `password-input.good` | Good |
 | `password-input.hidePassword` | Hide password |
@@ -451,6 +494,12 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `password-input.strengthHint` | Strength: \{strength\}. Use 8+ characters, mixed case, a number, and a symbol. |
 | `password-input.strong` | Strong |
 | `password-input.tooShort` | Too short |
+| `permission-grid.noAsk` | Runs without asking |
+| `permission-grid.permission` | Permission |
+| `permission-grid.presets` | Presets |
+| `permission-grid.radio` | \{label\}: \{decision\} |
+| `permission-grid.summary` | \{allow\} allowed, \{ask\} ask first, \{deny\} denied |
+| `permission-grid.title` | What the agent may do |
 | `phone-input.countryDialingCode` | Country dialing code |
 | `phone-input.label` | Phone number |
 | `plan-selector.billingPeriod` | Billing period |
@@ -503,6 +552,27 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `rich-text-editor.slashLabel` | Blocks |
 | `rich-text-editor.slashNone` | No matching blocks |
 | `rich-text-editor.toolbar` | Formatting |
+| `run-ledger.budget` | Budget |
+| `run-ledger.cost` | Cost |
+| `run-ledger.left` | \{amount\} left in the budget |
+| `run-ledger.nearing` | Nearing the budget, \{amount\} left |
+| `run-ledger.over` | Over budget by \{amount\} |
+| `run-ledger.step` | Step |
+| `run-ledger.summary` | \{count\} steps, \{time\}, \{tokens\} tokens |
+| `run-ledger.time` | Time |
+| `run-ledger.title` | Run ledger |
+| `run-ledger.tokens` | Tokens |
+| `run-ledger.top` | Most expensive |
+| `run-ledger.total` | Total |
+| `run-replay.markers` | Markers |
+| `run-replay.next` | Next marker |
+| `run-replay.pause` | Pause |
+| `run-replay.play` | Play |
+| `run-replay.prev` | Previous marker |
+| `run-replay.reached` | Reached: \{label\} |
+| `run-replay.replay` | Replay from the start |
+| `run-replay.scrub` | Position in the run |
+| `run-replay.speed` | Playback speed |
 | `scroll-velocity.label` | Scrolling content |
 | `search-field.clearSearch` | Clear search |
 | `search-field.label` | Search |

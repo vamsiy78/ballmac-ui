@@ -6,3 +6,6 @@ contact_links:
   - name: Questions and Pro licence help
     url: https://ui.ballmac.com/support
     about: Help with an item, a purchase or a licence key. A person answers by email.
+  - name: Show your project
+    url: https://github.com/vamsiy78/ballmac-ui/issues/new?template=built-with.yml
+    about: Add a live project to the Built with Ballmac UI gallery.

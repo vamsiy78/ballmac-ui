@@ -322,6 +322,9 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
           A block you copy should not rot. Updates merge into your edits, and every claim about quality is measured and public.
         </Heading>
         <StayCurrent className="mt-12" />
+        <p className="mt-8 text-center text-sm">
+          <Link href="/pro/changelog" className="text-foreground font-medium underline underline-offset-4">See everything that has changed in Pro, with dates</Link>
+        </p>
       </section>
 
       {/* Starter apps */}

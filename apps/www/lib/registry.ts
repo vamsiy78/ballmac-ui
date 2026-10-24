@@ -217,6 +217,21 @@ export const blockCategoryLabels: Record<string, string> = {
   inventory: "Inventory",
   trip: "Trip itinerary",
   charts: "Charts",
+  audit: "Audit log",
+  access: "Access review",
+  oncall: "On-call",
+  incident: "Incidents",
+  pipeline: "Deploy pipeline",
+  queues: "Job queues",
+  slo: "SLOs",
+  cron: "Scheduled jobs",
+  clinic: "Clinic",
+  kitchen: "Kitchen display",
+  matter: "Legal matters",
+  listing: "Property listings",
+  booking: "Class booking",
+  workorder: "Work orders",
+  dispatch: "Dispatch",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -244,6 +259,18 @@ export const blockGroups = [
     label: "Application",
     description: "Screens inside a product: shell, dashboards, settings, billing, inbox, notifications, team chat, boards, uploads, developer tools, AI chat and AI agents.",
     categories: ["app-shell", "dashboard", "charts", "funnel", "retention", "experiments", "settings", "billing", "invoice", "mail", "tickets", "notifications", "chat", "comments", "kanban", "tasks", "calendar", "roster", "gantt", "goals", "habits", "inventory", "timesheet", "expenses", "crm", "editor", "survey", "poll", "quiz", "portfolio", "upload", "import", "developer", "webhooks", "api", "flags", "workflow", "leaderboard", "ai-chat", "agents"],
+  },
+  {
+    id: "ops",
+    label: "Operations",
+    description: "Screens for the people who keep a product running: audit logs, access reviews, on-call rotas, incidents, deploy pipelines, job queues, SLOs and scheduled jobs.",
+    categories: ["audit", "access", "oncall", "incident", "pipeline", "queues", "slo", "cron"],
+  },
+  {
+    id: "vertical",
+    label: "Industry apps",
+    description: "Screens for one trade, each with the states it really has: a clinic schedule, a kitchen display, legal matters, property listings, class booking, work orders and dispatch.",
+    categories: ["clinic", "kitchen", "matter", "listing", "booking", "workorder", "dispatch"],
   },
   {
     id: "shop",

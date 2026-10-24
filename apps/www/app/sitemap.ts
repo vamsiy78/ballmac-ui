@@ -1,3 +1,4 @@
+import { BUILT_WITH } from "@/lib/built-with"
 import type { MetadataRoute } from "next"
 
 import { PRESETS, SYSTEMS } from "@ballmac-ui/theme-engine"
@@ -7,7 +8,7 @@ import { allDocs } from "@/lib/docs"
 import { useCases } from "@/lib/use-cases"
 import { getAllItems, itemHref, SITE_URL } from "@/lib/registry"
 
-const pages = ["", "/components", "/blocks", "/templates", "/charts", "/presets", "/themes", "/feels", "/pricing", "/affiliates", "/pro", "/support", "/founders", "/changelog", "/use-cases", "/quality", "/verified", "/license", "/license/pro", "/refund"]
+const pages = ["", "/components", "/blocks", "/templates", "/charts", "/presets", "/themes", "/feels", "/pricing", "/affiliates", "/pro", "/support", "/founders", "/changelog", "/use-cases", "/quality", "/verified", "/license", "/license/pro", "/refund", "/contribute", "/pro/changelog", ...(BUILT_WITH.length > 0 ? ["/built-with"] : [])]
 
 // Built once with the site (the Cloudflare build is static).
 export const dynamic = "force-static"

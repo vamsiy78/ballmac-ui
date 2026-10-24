@@ -2,6 +2,7 @@ import Link from "@/components/site/link"
 
 import { FooterWordmark } from "@/components/site/footer-wordmark"
 import { Logo } from "@/components/site/logo"
+import { BUILT_WITH } from "@/lib/built-with"
 
 const columns = [
   {
@@ -34,6 +35,9 @@ const columns = [
       { href: "/support", label: "Support" },
       { href: "/affiliates", label: "Affiliates · earn 30%" },
       { href: "/changelog", label: "Changelog" },
+      { href: "/pro/changelog", label: "Pro changelog" },
+      { href: "/contribute", label: "Contribute" },
+      ...(BUILT_WITH.length > 0 ? [{ href: "/built-with", label: "Built with Ballmac UI" }] : []),
       { href: "/llms.txt", label: "llms.txt" },
       { href: "/r/registry.json", label: "Registry JSON" },
     ],

@@ -4,6 +4,8 @@ Thanks for helping. Bug reports, fixes and new items are all welcome.
 
 ## Before you start
 
+- The short version, with the path from idea to merged pull request, is at [ui.ballmac.com/contribute](https://ui.ballmac.com/contribute). To propose an item, use the [proposal form](https://github.com/vamsiy78/ballmac-ui/issues/new?template=propose-item.yml); to show a project, use the [Built with Ballmac UI form](https://github.com/vamsiy78/ballmac-ui/issues/new?template=built-with.yml).
+- Contributions go to the free library. Ballmac UI Pro is written by Ballmac and does not take outside code.
 - Open an issue for anything larger than a small fix, so we can agree on the direction first.
 - Read `AUTHORING.md`: it defines what an item must include (metadata, examples, accessibility, RTL, reduced motion).
 - Branches: open pull requests against `preprod`. `main` is what runs in production and only changes through a reviewed merge.

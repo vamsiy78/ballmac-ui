@@ -245,6 +245,151 @@
       }
     },
     {
+      "name": "agent-lanes",
+      "type": "registry:ui",
+      "title": "Agent Lanes",
+      "description": "A swimlane timeline for multi-agent runs: one lane per agent, steps coloured by what they are doing, dashed handoffs between lanes, a Now line and a detail panel, all reachable with the arrow keys.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/direction.json",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/agent-lanes.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/agent-lanes.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "timeline",
+          "swimlane",
+          "handoff",
+          "multi-agent",
+          "trace"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "lanes is [{ id, name, role?, segments: [{ id, start, end, kind, label, detail? }] }] with times in seconds; kind is thinking | tool | waiting | blocked | done. handoffs is [{ from, to, label? }] using segment ids. Optional duration, now, selected / defaultSelected / onSelectedChange, formatTime.",
+          "whenToUse": [
+            "Showing what several agents did and when, and who handed work to whom",
+            "Finding the step where a run waited or got blocked"
+          ],
+          "whenNotToUse": [
+            "One agent's linear steps; use trace",
+            "A plan with checkable steps; use agent-plan",
+            "A project schedule; use the gantt block"
+          ],
+          "composesWith": [
+            "trace",
+            "token-meter",
+            "approval-card",
+            "tool-call-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves into the chart once, onto one step; the rest are reached with the arrow keys"
+            },
+            {
+              "keys": "ArrowRight / ArrowLeft",
+              "action": "Next or previous step in the same lane (swapped in right-to-left)"
+            },
+            {
+              "keys": "ArrowDown / ArrowUp",
+              "action": "The closest step in the lane below or above"
+            },
+            {
+              "keys": "Home / End",
+              "action": "First or last step in the lane; with Ctrl, in the whole chart"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Selects the step and shows its detail in a polite live region"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Each step reads its label, lane, kind and time range; handoffs are also listed as sentences"
+            }
+          ],
+          "customization": [
+            "duration and now",
+            "formatTime for your own time text",
+            "minTrackWidth before the chart scrolls sideways",
+            "Controlled selection"
+          ]
+        },
+        "statesNone": "A presentational chart: you pass the finished or running steps in, so there is nothing for it to load, submit or fail.",
+        "examples": [
+          "agent-lanes-demo",
+          "agent-lanes-blocked"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-lanes"
+      }
+    },
+    {
+      "name": "agent-lanes-demo",
+      "type": "registry:example",
+      "title": "Agent Lanes: A four-agent run",
+      "description": "A four-agent run example of Agent Lanes.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-lanes.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-lanes-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-lanes-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-lanes",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-lanes-blocked",
+      "type": "registry:example",
+      "title": "Agent Lanes: Waiting and blocked",
+      "description": "Waiting and blocked example of Agent Lanes.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-lanes.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-lanes-blocked.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-lanes-blocked.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-lanes",
+        "tier": "free"
+      }
+    },
+    {
       "name": "agent-plan",
       "type": "registry:ui",
       "title": "Agent Plan",
@@ -373,6 +518,137 @@
       "meta": {
         "example": true,
         "of": "agent-plan",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-roster",
+      "type": "registry:ui",
+      "title": "Agent Roster",
+      "description": "Every agent on a team of agents as a card: name and role, a status in words (working, waiting, blocked, idle, offline), what it is doing, a load meter and when it was last active, with status counts that filter the grid.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/agent-roster.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/agent-roster.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "roster",
+          "status",
+          "team",
+          "multi-agent",
+          "monitor"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "agents is [{ id, name, role?, status: working | idle | waiting | blocked | offline, task?, load?: 0..100, lastActive? }]. selected / defaultSelected / onSelectedChange track the picked agent (a second click clears it). Status counts are filters; statuses with no agents are hidden.",
+          "whenToUse": [
+            "An overview of the agents in a multi-agent product and what each is doing",
+            "Picking an agent to open its run, logs or settings"
+          ],
+          "whenNotToUse": [
+            "One agent's steps; use trace",
+            "A table of users; use data-table",
+            "Who handed what to whom; use agent-lanes or handoff-card"
+          ],
+          "composesWith": [
+            "agent-lanes",
+            "handoff-card",
+            "run-ledger",
+            "trace"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Filters and cards are buttons; a card is a toggle (aria-pressed)"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Status is written as a word beside its icon; the load is a labelled meter; the shown count is a polite live region"
+            },
+            {
+              "keys": "Blocked",
+              "action": "Called out in words and an icon, with a red border only as reinforcement"
+            }
+          ],
+          "customization": [
+            "agents and their wording",
+            "title",
+            "Controlled or uncontrolled selection"
+          ]
+        },
+        "statesNone": "A presentational overview: the agents are passed in, so it has nothing of its own to load or fail.",
+        "examples": [
+          "agent-roster-demo",
+          "agent-roster-select"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-roster"
+      }
+    },
+    {
+      "name": "agent-roster-demo",
+      "type": "registry:example",
+      "title": "Agent Roster: A team of six",
+      "description": "A team of six example of Agent Roster.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-roster.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-roster-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-roster-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-roster",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-roster-select",
+      "type": "registry:example",
+      "title": "Agent Roster: Select to open a run",
+      "description": "Select to open a run example of Agent Roster.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-roster.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-roster-select.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-roster-select.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-roster",
         "tier": "free"
       }
     },
@@ -2915,6 +3191,144 @@
       }
     },
     {
+      "name": "autonomy-dial",
+      "type": "registry:ui",
+      "title": "Autonomy Dial",
+      "description": "A stepped dial for how much an agent may do on its own, from suggest-only to full auto, with what it does alone and what it stops to ask about written out for every step.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/autonomy-dial.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/autonomy-dial.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "permissions",
+          "autonomy",
+          "settings",
+          "control",
+          "safety"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "levels is [{ value, label, summary, does: string[], asks: string[] }] from least to most autonomous (defaultAutonomyLevels has four). value / defaultValue / onValueChange. A native radio group, so arrow keys work; the panel under the dial says in words what the chosen level allows.",
+          "whenToUse": [
+            "Letting people decide how far an agent may go before asking",
+            "A settings row for an assistant's permissions"
+          ],
+          "whenNotToUse": [
+            "A single yes or no approval; use approval-card",
+            "A numeric value; use slider"
+          ],
+          "composesWith": [
+            "approval-card",
+            "settings-panel",
+            "agent-plan",
+            "tool-call-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves into the dial once, onto the selected step"
+            },
+            {
+              "keys": "ArrowRight / ArrowDown",
+              "action": "Next level (native radio behaviour; the browser mirrors it in right-to-left)"
+            },
+            {
+              "keys": "ArrowLeft / ArrowUp",
+              "action": "Previous level"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "A fieldset with a legend, one radio per level, and a polite live region that reads the new meaning when it changes"
+            },
+            {
+              "keys": "Meaning",
+              "action": "Carried by the words under the dial, not by the track or its colour"
+            }
+          ],
+          "customization": [
+            "levels: any number of steps, your own words",
+            "label",
+            "Controlled or uncontrolled value"
+          ]
+        },
+        "statesNone": "A control with no data of its own: it shows the levels you pass in and reports the choice.",
+        "examples": [
+          "autonomy-dial-demo",
+          "autonomy-dial-custom"
+        ],
+        "url": "https://ui.ballmac.com/components/autonomy-dial"
+      }
+    },
+    {
+      "name": "autonomy-dial-demo",
+      "type": "registry:example",
+      "title": "Autonomy Dial: Four levels",
+      "description": "Four levels example of Autonomy Dial.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/autonomy-dial.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/autonomy-dial-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/autonomy-dial-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "autonomy-dial",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "autonomy-dial-custom",
+      "type": "registry:example",
+      "title": "Autonomy Dial: Your own levels",
+      "description": "Your own levels example of Autonomy Dial.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/autonomy-dial.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/autonomy-dial-custom.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/autonomy-dial-custom.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "autonomy-dial",
+        "tier": "free"
+      }
+    },
+    {
       "name": "avatar-circles",
       "type": "registry:ui",
       "title": "Avatar Circles",
@@ -4148,6 +4562,242 @@
       "meta": {
         "example": true,
         "of": "about-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "access-1",
+      "type": "registry:block",
+      "title": "Access 1: access review",
+      "description": "A periodic access review: each person's role and last use, Keep, Reduce or Remove with lower roles only, people idle for months flagged in words, a keep-everyone-active shortcut, progress, and a confirmation before anyone loses access.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/return-focus.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/access-1/access-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/access-1/access-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "access"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "access review",
+          "permissions",
+          "roles",
+          "security",
+          "compliance",
+          "admin",
+          "least privilege"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "A quarterly access review. <Access1 people={[{ id, name, email, role, lastUsed: '3 days ago', idleDays: 3 }]} roles={['Owner','Admin','Member','Viewer']} flagAfterDays={90} due='Due 31 Oct' onSubmit={(decisions) => Promise} />. Each person gets Keep, Reduce (to a lower role) or Remove; undecided people stay as they are. Submit is off until everyone has a decision and asks first when anyone will be removed.",
+          "whenToUse": [
+            "A workspace admin's quarterly check of who has access",
+            "A compliance task that needs a record of every keep, reduce and remove"
+          ],
+          "whenNotToUse": [
+            "Inviting or changing one person's role; use settings or team blocks",
+            "A log of past changes; use audit-1"
+          ],
+          "composesWith": [
+            "audit-1",
+            "settings-1",
+            "invite-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Decisions",
+              "action": "Each person's Keep, Reduce and Remove are a native radio group in a fieldset named for them; the arrow keys move between them"
+            },
+            {
+              "keys": "Progress",
+              "action": "A meter reading '3 of 7 reviewed'; what is left is also written under the list"
+            },
+            {
+              "keys": "Flagged people",
+              "action": "Marked 'not used lately' in words with an icon, not colour alone"
+            },
+            {
+              "keys": "Removing",
+              "action": "An alert dialog names exactly who loses access and returns focus when closed"
+            }
+          ],
+          "customization": [
+            "roles and flagAfterDays",
+            "due text",
+            "onSubmit receives { [id]: { action, to? } }; reject it and the message says nothing was saved"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "access-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton cards under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Nobody to review",
+            "example": "access-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says nobody is to review; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "access-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying no decisions were lost, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "access-1-demo",
+          "access-1-flagged",
+          "access-1-loading",
+          "access-1-empty",
+          "access-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/access-1"
+      }
+    },
+    {
+      "name": "access-1-demo",
+      "type": "registry:example",
+      "title": "Access 1: access review: Default",
+      "description": "Default example of Access 1: access review.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/access-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/access-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/access-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "access-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "access-1-flagged",
+      "type": "registry:example",
+      "title": "Access 1: access review: Reviewing the flagged first",
+      "description": "Reviewing the flagged first example of Access 1: access review.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/access-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/access-1-flagged.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/access-1-flagged.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "access-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "access-1-loading",
+      "type": "registry:example",
+      "title": "Access 1: access review: Loading",
+      "description": "Loading example of Access 1: access review.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/access-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/access-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/access-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "access-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "access-1-empty",
+      "type": "registry:example",
+      "title": "Access 1: access review: Nobody to review",
+      "description": "Nobody to review example of Access 1: access review.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/access-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/access-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/access-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "access-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "access-1-error",
+      "type": "registry:example",
+      "title": "Access 1: access review: Could not load",
+      "description": "Could not load example of Access 1: access review.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/access-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/access-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/access-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "access-1",
         "tier": "free"
       }
     },
@@ -6847,6 +7497,242 @@
       }
     },
     {
+      "name": "audit-1",
+      "type": "registry:block",
+      "title": "Audit 1: audit log",
+      "description": "An audit log you can search: who did what to what, when and from where, filters with counts, failed attempts written out, rows that open to show exactly which values changed, show-more paging and an export of what the filter shows.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/match-highlight.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/audit-1/audit-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/audit-1/audit-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "audit"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "audit log",
+          "security",
+          "compliance",
+          "activity",
+          "admin",
+          "export",
+          "history"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "An audit log. <Audit1 events={[{ id, time, actor: { name, email? }, action, category: 'signin' | 'permissions' | 'data' | 'billing', target, ip?, place?, result?: 'failed', changes?: [{ field, from, to }] }]} onExport={(events) => Promise} />. Search and the kind filter narrow the list and the count; Export sends what is currently shown. Rows with changes open to show from and to.",
+          "whenToUse": [
+            "An admin area where owners review security and data activity",
+            "A compliance screen that needs an exportable trail"
+          ],
+          "whenNotToUse": [
+            "A user's own activity feed; use activity-feed",
+            "The live output of a process; use log-stream",
+            "Agent guardrail checks; use guardrail-feed"
+          ],
+          "composesWith": [
+            "access-1",
+            "settings-1",
+            "webhooks-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Table",
+              "action": "A real table with a caption and column headings; times and addresses stay left to right in right-to-left layouts"
+            },
+            {
+              "keys": "Enter / Space on an action",
+              "action": "Opens the details of what changed (aria-expanded); rows with nothing to show are not buttons"
+            },
+            {
+              "keys": "Failed attempts",
+              "action": "Written as the word Failed with an icon, never colour alone"
+            },
+            {
+              "keys": "Filters",
+              "action": "Toggle buttons with counts; the event count and the export result are polite announcements"
+            }
+          ],
+          "customization": [
+            "Page size and the event you open at first",
+            "onExport receives the filtered events; reject it and the message says the export failed",
+            "Search matches person, action, target and address"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "audit-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton rows under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No activity yet",
+            "example": "audit-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says what will appear and when; emptyState sets the copy. A search or filter with no match says so with Clear filters."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "audit-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "audit-1-demo",
+          "audit-1-failed",
+          "audit-1-loading",
+          "audit-1-empty",
+          "audit-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/audit-1"
+      }
+    },
+    {
+      "name": "audit-1-demo",
+      "type": "registry:example",
+      "title": "Audit 1: audit log: Default",
+      "description": "Default example of Audit 1: audit log.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/audit-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/audit-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/audit-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "audit-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "audit-1-failed",
+      "type": "registry:example",
+      "title": "Audit 1: audit log: Search with no match",
+      "description": "Search with no match example of Audit 1: audit log.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/audit-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/audit-1-failed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/audit-1-failed.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "audit-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "audit-1-loading",
+      "type": "registry:example",
+      "title": "Audit 1: audit log: Loading",
+      "description": "Loading example of Audit 1: audit log.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/audit-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/audit-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/audit-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "audit-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "audit-1-empty",
+      "type": "registry:example",
+      "title": "Audit 1: audit log: No activity yet",
+      "description": "No activity yet example of Audit 1: audit log.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/audit-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/audit-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/audit-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "audit-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "audit-1-error",
+      "type": "registry:example",
+      "title": "Audit 1: audit log: Could not load",
+      "description": "Could not load example of Audit 1: audit log.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/audit-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/audit-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/audit-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "audit-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "billing-1",
       "type": "registry:block",
       "title": "Billing 1: plan, usage and invoices",
@@ -7712,6 +8598,216 @@
       "meta": {
         "example": true,
         "of": "blog-post-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "booking-1",
+      "type": "registry:block",
+      "title": "Booking 1: class timetable",
+      "description": "A weekly class timetable people book from: classes grouped by day, places left written out, one button that does the right thing (book, join the waiting list, cancel, leave), a kind filter, and changes undone with the reason if they fail.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/booking-1/booking-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/booking-1/booking-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "booking"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "booking",
+          "classes",
+          "timetable",
+          "fitness",
+          "studio",
+          "waitlist",
+          "schedule",
+          "wellness"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "A class timetable. <Booking1 classes={[{ id, title, kind, instructor, day: 'Mon 27 Oct', time: '07:00', length: '45 min', capacity, taken, booked?, waitlisted? }]} onChange={(class, 'book' | 'waitlist' | 'cancel' | 'leave') => Promise} />. Places left = capacity minus taken (minus you if booked); 3 or fewer says 'Only 2 places left', zero says 'Full' and offers the waiting list. Changes show at once and are undone if onChange rejects.",
+          "whenToUse": [
+            "A studio, gym or workshop timetable with limited places",
+            "Any scheduled session where people can book, queue or cancel"
+          ],
+          "whenNotToUse": [
+            "A day schedule for staff and patients; use clinic-1",
+            "A calendar of events with tickets; use event-1"
+          ],
+          "composesWith": [
+            "clinic-1",
+            "calendar-1",
+            "event-1",
+            "profile-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Days",
+              "action": "Each day is a labelled region with a heading; classes are list items in time order"
+            },
+            {
+              "keys": "Places left",
+              "action": "Written as words ('Only 1 place left', 'Full'), never colour alone"
+            },
+            {
+              "keys": "Buttons",
+              "action": "Named for the class, day and time ('Book Spin 45, Wed 29 Oct at 06:45'); the result is a polite announcement and a failure is an alert"
+            },
+            {
+              "keys": "Filter",
+              "action": "Toggle buttons with aria-pressed"
+            }
+          ],
+          "customization": [
+            "classes and the filter kinds come from the data",
+            "onChange handles all four actions",
+            "The week summary updates as you book"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "booking-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton day headings and cards under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No classes this week",
+            "example": "booking-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no classes this week; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "booking-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was booked or cancelled, with Try again (onRetry). A booking that fails is undone and says why."
+          }
+        ],
+        "examples": [
+          "booking-1-demo",
+          "booking-1-loading",
+          "booking-1-empty",
+          "booking-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/booking-1"
+      }
+    },
+    {
+      "name": "booking-1-demo",
+      "type": "registry:example",
+      "title": "Booking 1: class timetable: Default",
+      "description": "Default example of Booking 1: class timetable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/booking-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/booking-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/booking-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "booking-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "booking-1-loading",
+      "type": "registry:example",
+      "title": "Booking 1: class timetable: Loading",
+      "description": "Loading example of Booking 1: class timetable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/booking-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/booking-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/booking-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "booking-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "booking-1-empty",
+      "type": "registry:example",
+      "title": "Booking 1: class timetable: No classes this week",
+      "description": "No classes this week example of Booking 1: class timetable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/booking-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/booking-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/booking-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "booking-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "booking-1-error",
+      "type": "registry:example",
+      "title": "Booking 1: class timetable: Could not load",
+      "description": "Could not load example of Booking 1: class timetable.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/booking-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/booking-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/booking-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "booking-1",
         "tier": "free"
       }
     },
@@ -9694,6 +10790,241 @@
       }
     },
     {
+      "name": "clinic-1",
+      "type": "registry:block",
+      "title": "Clinic 1: day schedule",
+      "description": "A clinic's day: a column per provider, a row per quarter hour, appointments at their real time and length with status written out, one button to move a patient on, and a privacy switch that shows initials only.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/clinic-1/clinic-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/clinic-1/clinic-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "clinic"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "clinic",
+          "healthcare",
+          "appointments",
+          "schedule",
+          "front desk",
+          "patients",
+          "medical",
+          "booking"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "A clinic day view. <Clinic1 providers={[{ id, name, role? }]} appointments={[{ id, providerId, start: 0 /* minutes after firstSlot, in 15s */, length: 30, patient, reason, status: 'booked' | 'arrived' | 'in-room' | 'done' | 'no-show' }]} day='Friday 24 October' firstSlot='08:00' slots={12} defaultPrivate onStatus={(appointment, status) => Promise} />. Select an appointment to see the next actions that fit its status. Initials-only mode hides names in the grid and in the accessible labels.",
+          "whenToUse": [
+            "A front-desk screen for a clinic, dentist or therapy practice",
+            "Any day schedule with providers and check-in steps"
+          ],
+          "whenNotToUse": [
+            "A calendar for events; use calendar-1",
+            "Booking a class for many people; use booking-1"
+          ],
+          "composesWith": [
+            "booking-1",
+            "roster-1",
+            "calendar-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Columns",
+              "action": "Each provider is a labelled group; each appointment is a toggle button that reads '08:30 to 09:00, Ken Watanabe, Blood pressure check, In room'"
+            },
+            {
+              "keys": "Status",
+              "action": "Written on every appointment in words (Booked, Arrived, In room, Done, No-show); tints only reinforce it"
+            },
+            {
+              "keys": "Privacy",
+              "action": "The switch is a toggle button; in initials-only mode names are removed from the labels as well, not just hidden"
+            },
+            {
+              "keys": "Moving a patient on",
+              "action": "Real buttons whose names say what happens; the result is a polite announcement and a failure is an alert"
+            }
+          ],
+          "customization": [
+            "providers, firstSlot and slots",
+            "defaultPrivate for waiting-room screens",
+            "onStatus; reject and the status goes back with the message"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "clinic-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton columns under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No appointments today",
+            "example": "clinic-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no appointments today; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "clinic-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying no appointment was changed, with Try again (onRetry). A status update that fails goes back and says why."
+          }
+        ],
+        "examples": [
+          "clinic-1-demo",
+          "clinic-1-private",
+          "clinic-1-loading",
+          "clinic-1-empty",
+          "clinic-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/clinic-1"
+      }
+    },
+    {
+      "name": "clinic-1-demo",
+      "type": "registry:example",
+      "title": "Clinic 1: day schedule: Default",
+      "description": "Default example of Clinic 1: day schedule.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/clinic-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/clinic-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/clinic-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "clinic-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "clinic-1-private",
+      "type": "registry:example",
+      "title": "Clinic 1: day schedule: Initials only, for a shared screen",
+      "description": "Initials only, for a shared screen example of Clinic 1: day schedule.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/clinic-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/clinic-1-private.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/clinic-1-private.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "clinic-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "clinic-1-loading",
+      "type": "registry:example",
+      "title": "Clinic 1: day schedule: Loading",
+      "description": "Loading example of Clinic 1: day schedule.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/clinic-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/clinic-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/clinic-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "clinic-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "clinic-1-empty",
+      "type": "registry:example",
+      "title": "Clinic 1: day schedule: No appointments today",
+      "description": "No appointments today example of Clinic 1: day schedule.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/clinic-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/clinic-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/clinic-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "clinic-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "clinic-1-error",
+      "type": "registry:example",
+      "title": "Clinic 1: day schedule: Could not load",
+      "description": "Could not load example of Clinic 1: day schedule.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/clinic-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/clinic-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/clinic-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "clinic-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "comments-1",
       "type": "registry:block",
       "title": "Comments 1: threaded discussion",
@@ -10789,6 +12120,219 @@
       "meta": {
         "example": true,
         "of": "crm-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cron-1",
+      "type": "registry:block",
+      "title": "Cron 1: scheduled jobs",
+      "description": "The scheduled jobs of a product: each schedule in plain words beside its cron expression, an on and off switch, the last run written out, the next runs, and a Run now button that asks first.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/switch.json",
+        "https://ui.ballmac.com/r/return-focus.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/cron-1/cron-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/cron-1/cron-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "cron"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "cron",
+          "scheduled jobs",
+          "scheduler",
+          "automation",
+          "backups",
+          "tasks",
+          "devops",
+          "timers"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Scheduled jobs. <Cron1 jobs={[{ id, name, schedule: '0 9 * * 1-5', timezone?, enabled, owner?, last?: { status: 'success' | 'failed' | 'running', at, duration? }, next?: string[] }]} onToggle={(job, enabled) => Promise} onRunNow={(job) => Promise} />. Exports describeCron(expr), which turns common five-field expressions into a sentence (every N minutes or hours, daily, weekdays, weekends, one weekday, monthly) and says 'A custom schedule' for the rest instead of guessing.",
+          "whenToUse": [
+            "An admin page for cron jobs and background schedules",
+            "Letting a team pause a job or run it once by hand"
+          ],
+          "whenNotToUse": [
+            "The workers and their failed jobs; use queues-1",
+            "Automations built by users with triggers and steps; use workflow-1"
+          ],
+          "composesWith": [
+            "queues-1",
+            "audit-1",
+            "pipeline-1",
+            "slo-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Schedule",
+              "action": "Written as a sentence and also shown as code, which stays left to right"
+            },
+            {
+              "keys": "Switch",
+              "action": "Named '<job> is on'; a failure is an alert and the switch goes back"
+            },
+            {
+              "keys": "Run now",
+              "action": "A button named for the job that opens an alert dialog, and is off while the job is already running"
+            },
+            {
+              "keys": "Last run",
+              "action": "Written in words with an icon (Last run failed), never colour alone"
+            }
+          ],
+          "customization": [
+            "jobs with last and next runs",
+            "onToggle and onRunNow",
+            "describeCron is exported for your own lists"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "cron-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton rows under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No scheduled jobs",
+            "example": "cron-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no scheduled jobs; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "cron-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed or started, with Try again (onRetry). A switch that fails goes back and says why."
+          }
+        ],
+        "examples": [
+          "cron-1-demo",
+          "cron-1-loading",
+          "cron-1-empty",
+          "cron-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/cron-1"
+      }
+    },
+    {
+      "name": "cron-1-demo",
+      "type": "registry:example",
+      "title": "Cron 1: scheduled jobs: Default",
+      "description": "Default example of Cron 1: scheduled jobs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cron-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cron-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cron-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cron-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cron-1-loading",
+      "type": "registry:example",
+      "title": "Cron 1: scheduled jobs: Loading",
+      "description": "Loading example of Cron 1: scheduled jobs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cron-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cron-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cron-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cron-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cron-1-empty",
+      "type": "registry:example",
+      "title": "Cron 1: scheduled jobs: No scheduled jobs",
+      "description": "No scheduled jobs example of Cron 1: scheduled jobs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cron-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cron-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cron-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cron-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cron-1-error",
+      "type": "registry:example",
+      "title": "Cron 1: scheduled jobs: Could not load",
+      "description": "Could not load example of Cron 1: scheduled jobs.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cron-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cron-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cron-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cron-1",
         "tier": "free"
       }
     },
@@ -13890,6 +15434,216 @@
       "meta": {
         "example": true,
         "of": "directory-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dispatch-1",
+      "type": "registry:block",
+      "title": "Dispatch 1: field service board",
+      "description": "A dispatch board for field work: waiting jobs with urgent ones first and named, a lane per technician with their jobs in time order, assignment by a labelled select instead of a drag, take-back, and changes undone with the reason.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/dispatch-1/dispatch-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/dispatch-1/dispatch-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "dispatch"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "dispatch",
+          "field service",
+          "technicians",
+          "jobs",
+          "scheduling",
+          "trades",
+          "logistics",
+          "assign"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "A dispatch board. <Dispatch1 technicians={[{ id, name, area?, now? }]} jobs={[{ id, title, address, window, priority: 'normal' | 'urgent', assignedTo?: techId, status?: 'scheduled' | 'en-route' | 'on-site' | 'done' }]} onAssign={(jobId, techId | null) => Promise} />. Waiting jobs list urgent first. Assigning uses a labelled select (no drag), and only a scheduled job can be taken back.",
+          "whenToUse": [
+            "An office view for assigning field jobs to technicians",
+            "Any queue where jobs wait and are given to people"
+          ],
+          "whenNotToUse": [
+            "A kitchen's tickets by station; use kitchen-1",
+            "A calendar of a person's day; use calendar-1"
+          ],
+          "composesWith": [
+            "workorder-1",
+            "kitchen-1",
+            "roster-1",
+            "locations-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Assigning",
+              "action": "A native select per waiting job named 'Give Fit a thermostat to'; no drag is needed"
+            },
+            {
+              "keys": "Urgent",
+              "action": "Written as the word Urgent with an icon, never a coloured border alone"
+            },
+            {
+              "keys": "Lanes",
+              "action": "Each technician is a labelled region with a count, and jobs are listed in time order with the status in words"
+            },
+            {
+              "keys": "Take back",
+              "action": "A button named for the job and the technician, only on jobs not yet under way"
+            }
+          ],
+          "customization": [
+            "technicians and jobs",
+            "onAssign; reject and the job goes back",
+            "The waiting count and urgent count update as you assign"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "dispatch-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton for the waiting list and the lanes under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No jobs today",
+            "example": "dispatch-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no jobs today; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "dispatch-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was assigned or changed, with Try again (onRetry). A failed assignment is undone and says why."
+          }
+        ],
+        "examples": [
+          "dispatch-1-demo",
+          "dispatch-1-loading",
+          "dispatch-1-empty",
+          "dispatch-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/dispatch-1"
+      }
+    },
+    {
+      "name": "dispatch-1-demo",
+      "type": "registry:example",
+      "title": "Dispatch 1: field service board: Default",
+      "description": "Default example of Dispatch 1: field service board.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dispatch-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dispatch-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dispatch-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dispatch-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dispatch-1-loading",
+      "type": "registry:example",
+      "title": "Dispatch 1: field service board: Loading",
+      "description": "Loading example of Dispatch 1: field service board.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dispatch-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dispatch-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dispatch-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dispatch-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dispatch-1-empty",
+      "type": "registry:example",
+      "title": "Dispatch 1: field service board: No jobs today",
+      "description": "No jobs today example of Dispatch 1: field service board.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dispatch-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dispatch-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dispatch-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dispatch-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dispatch-1-error",
+      "type": "registry:example",
+      "title": "Dispatch 1: field service board: Could not load",
+      "description": "Could not load example of Dispatch 1: field service board.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dispatch-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dispatch-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dispatch-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dispatch-1",
         "tier": "free"
       }
     },
@@ -19535,6 +21289,247 @@
       }
     },
     {
+      "name": "incident-1",
+      "type": "registry:block",
+      "title": "Incident 1: incident command",
+      "description": "The page for people fixing an incident: severity and status in words, the impact, who holds commander, comms and ops, a form that posts an update with its new status, updates newest first, and a Resolve button that asks first.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/alert-dialog.json",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/return-focus.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/incident-1/incident-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/incident-1/incident-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "incident"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "incident",
+          "outage",
+          "sre",
+          "status",
+          "severity",
+          "postmortem",
+          "on-call",
+          "devops"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "An incident command page. <Incident1 incident={{ id, title, severity: 'SEV1' | 'SEV2' | 'SEV3', status: 'investigating' | 'identified' | 'monitoring' | 'resolved', startedAt, duration, impact, roles: { commander?, comms?, ops? }, updates: [{ id, time, author, status, body }] }} people={[...]} me='Priya Shah' onPostUpdate={({ status, body }) => Promise} onResolve={() => Promise} onAssign={(role, person) => void} />. Pass incident={null} for no incident. Resolve asks first, posts a final update and closes the form.",
+          "whenToUse": [
+            "The shared page during an outage",
+            "A status workflow where updates and roles are tracked in one place"
+          ],
+          "whenNotToUse": [
+            "A public status page for customers; use status-1",
+            "A list of past incidents; use a table or tickets-1"
+          ],
+          "composesWith": [
+            "status-1",
+            "oncall-1",
+            "audit-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Severity and status",
+              "action": "Written as words with icons (SEV2, Identified), never colour alone; the severity is prefixed 'Severity' for screen readers"
+            },
+            {
+              "keys": "Roles",
+              "action": "Three labelled native selects"
+            },
+            {
+              "keys": "Post an update",
+              "action": "A labelled textarea and select; Post update is off until there is text; an error is an alert and the text stays"
+            },
+            {
+              "keys": "Resolve",
+              "action": "An alert dialog that returns focus to the button when closed"
+            },
+            {
+              "keys": "Updates",
+              "action": "An ordered list named 'Updates, newest first'; times stay left to right"
+            }
+          ],
+          "customization": [
+            "people and me",
+            "onPostUpdate, onResolve and onAssign",
+            "incident={null} shows the empty state"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "incident-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton for the header, roles and timeline under the page, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No incident right now",
+            "example": "incident-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says there is no incident right now; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "incident-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was posted, with Try again (onRetry). A failed update keeps your text and says why."
+          }
+        ],
+        "examples": [
+          "incident-1-demo",
+          "incident-1-resolved",
+          "incident-1-loading",
+          "incident-1-empty",
+          "incident-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/incident-1"
+      }
+    },
+    {
+      "name": "incident-1-demo",
+      "type": "registry:example",
+      "title": "Incident 1: incident command: Default",
+      "description": "Default example of Incident 1: incident command.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/incident-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/incident-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/incident-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "incident-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "incident-1-resolved",
+      "type": "registry:example",
+      "title": "Incident 1: incident command: A resolved incident",
+      "description": "A resolved incident example of Incident 1: incident command.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/incident-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/incident-1-resolved.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/incident-1-resolved.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "incident-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "incident-1-loading",
+      "type": "registry:example",
+      "title": "Incident 1: incident command: Loading",
+      "description": "Loading example of Incident 1: incident command.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/incident-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/incident-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/incident-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "incident-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "incident-1-empty",
+      "type": "registry:example",
+      "title": "Incident 1: incident command: No incident right now",
+      "description": "No incident right now example of Incident 1: incident command.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/incident-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/incident-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/incident-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "incident-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "incident-1-error",
+      "type": "registry:example",
+      "title": "Incident 1: incident command: Could not load",
+      "description": "Could not load example of Incident 1: incident command.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/incident-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/incident-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/incident-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "incident-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "integrations-1",
       "type": "registry:block",
       "title": "Integrations 1: directory",
@@ -20723,6 +22718,216 @@
       }
     },
     {
+      "name": "kitchen-1",
+      "type": "registry:block",
+      "title": "Kitchen 1: kitchen display",
+      "description": "A kitchen display: a column per station with the oldest ticket first, items with their changes, allergies always spelled out, late and due-soon tickets written in words, a Bump button and a one-step Recall.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/kitchen-1/kitchen-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/kitchen-1/kitchen-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "kitchen"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "kitchen display",
+          "restaurant",
+          "orders",
+          "pos",
+          "tickets",
+          "hospitality",
+          "food service",
+          "kds"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "A kitchen display system. <Kitchen1 stations={['Grill','Fry','Cold']} tickets={[{ id, number: '128', channel: 'Table 12', station: 'Grill', items: [{ qty, name, mods?: string[], allergy?: string }], elapsed: 95 /* seconds, kept up to date by you */, target: 720 }]} onBump={(ticket) => Promise} onRecall={(ticket) => Promise} />. A ticket is Due soon at 80% of its target and Late past it. It keeps no clock: update elapsed from your own timer or server.",
+          "whenToUse": [
+            "A screen over the pass in a restaurant or ghost kitchen",
+            "Any station-by-station queue where each job has a target time"
+          ],
+          "whenNotToUse": [
+            "Taking orders at a till; use an ecommerce checkout block",
+            "Pick lists in a warehouse; use dispatch-1 or inventory-1"
+          ],
+          "composesWith": [
+            "dispatch-1",
+            "inventory-1",
+            "app-shell-1",
+            "status-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Stations",
+              "action": "Each column is a labelled region with a heading and a count"
+            },
+            {
+              "keys": "Late and due soon",
+              "action": "Written as words with an icon beside the time; the red border only reinforces it"
+            },
+            {
+              "keys": "Allergies",
+              "action": "Always spelled out as 'Allergy: Peanuts' in a bordered tag"
+            },
+            {
+              "keys": "Bump and Recall",
+              "action": "Large buttons named for the order and station ('Bump order 129 at Fry'); a failed bump is an alert and the ticket stays"
+            }
+          ],
+          "customization": [
+            "stations and tickets",
+            "elapsed and target in seconds",
+            "onBump and onRecall"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "kitchen-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton columns under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No tickets",
+            "example": "kitchen-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no tickets; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "kitchen-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was bumped, with Try again (onRetry). A bump that fails puts the ticket back and says why."
+          }
+        ],
+        "examples": [
+          "kitchen-1-demo",
+          "kitchen-1-loading",
+          "kitchen-1-empty",
+          "kitchen-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/kitchen-1"
+      }
+    },
+    {
+      "name": "kitchen-1-demo",
+      "type": "registry:example",
+      "title": "Kitchen 1: kitchen display: Default",
+      "description": "Default example of Kitchen 1: kitchen display.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kitchen-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kitchen-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kitchen-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kitchen-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "kitchen-1-loading",
+      "type": "registry:example",
+      "title": "Kitchen 1: kitchen display: Loading",
+      "description": "Loading example of Kitchen 1: kitchen display.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kitchen-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kitchen-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kitchen-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kitchen-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "kitchen-1-empty",
+      "type": "registry:example",
+      "title": "Kitchen 1: kitchen display: No tickets",
+      "description": "No tickets example of Kitchen 1: kitchen display.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kitchen-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kitchen-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kitchen-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kitchen-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "kitchen-1-error",
+      "type": "registry:example",
+      "title": "Kitchen 1: kitchen display: Could not load",
+      "description": "Could not load example of Kitchen 1: kitchen display.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/kitchen-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/kitchen-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/kitchen-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "kitchen-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "leaderboard-1",
       "type": "registry:block",
       "title": "Leaderboard 1: podium and rankings",
@@ -20956,6 +23161,244 @@
       "meta": {
         "example": true,
         "of": "leaderboard-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "listing-1",
+      "type": "registry:block",
+      "title": "Listing 1: property listing",
+      "description": "A property page: a photo gallery with buttons, thumbnails and arrow keys, price and the facts that matter, description and features, and a viewing request form with times to choose from, field errors and a clear result.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/cover-art.json",
+        "https://ui.ballmac.com/r/media.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/listing-1/listing-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/listing-1/listing-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "listing"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "real estate",
+          "property",
+          "listing",
+          "estate agent",
+          "gallery",
+          "viewing",
+          "rent",
+          "homes"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "A property listing page. <Listing1 listing={{ address, city, price, offer: 'For sale' | 'To rent', per?, type, beds, baths, area, description, features: string[], photos: [{ media?, alt }], agent: { name, role, phone? }, viewings: [{ id, label }] }} currency='USD' onRequestViewing={({ viewingId, name, email }) => Promise} />. Photos use Media with generated artwork until you pass media. listing={null} shows the no-longer-available state.",
+          "whenToUse": [
+            "An estate agent's or landlord's property page",
+            "Any single-item page with a gallery, key facts and a booking request"
+          ],
+          "whenNotToUse": [
+            "A search results grid; use directory-1",
+            "A product page in a shop; use the ecommerce blocks"
+          ],
+          "composesWith": [
+            "directory-1",
+            "locations-1",
+            "gallery-1",
+            "header-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Gallery",
+              "action": "A group with a role description of gallery; Previous and Next buttons, a thumbnail button per photo naming its content, and the arrow keys; the position ('2 of 4') is a polite announcement"
+            },
+            {
+              "keys": "Photos",
+              "action": "Each has its own alt text; thumbnails are decorative"
+            },
+            {
+              "keys": "Form",
+              "action": "Labelled fields, a fieldset for the times, aria-invalid with a message under each missing field; the result is a polite announcement and an error is an alert"
+            },
+            {
+              "keys": "Facts",
+              "action": "A definition list with icons that are decoration"
+            }
+          ],
+          "customization": [
+            "currency",
+            "photos with media and alt",
+            "viewings you offer",
+            "onRequestViewing; reject and what was typed stays"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "listing-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton for the gallery, facts and form under the page, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Listing unavailable",
+            "example": "listing-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says the listing is no longer available and points back to search; pass listing={null}."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "listing-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying to check the connection, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "listing-1-demo",
+          "listing-1-rent",
+          "listing-1-loading",
+          "listing-1-empty",
+          "listing-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/listing-1"
+      }
+    },
+    {
+      "name": "listing-1-demo",
+      "type": "registry:example",
+      "title": "Listing 1: property listing: Default",
+      "description": "Default example of Listing 1: property listing.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/listing-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/listing-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/listing-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "listing-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "listing-1-rent",
+      "type": "registry:example",
+      "title": "Listing 1: property listing: To rent",
+      "description": "To rent example of Listing 1: property listing.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/listing-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/listing-1-rent.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/listing-1-rent.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "listing-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "listing-1-loading",
+      "type": "registry:example",
+      "title": "Listing 1: property listing: Loading",
+      "description": "Loading example of Listing 1: property listing.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/listing-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/listing-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/listing-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "listing-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "listing-1-empty",
+      "type": "registry:example",
+      "title": "Listing 1: property listing: Listing unavailable",
+      "description": "Listing unavailable example of Listing 1: property listing.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/listing-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/listing-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/listing-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "listing-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "listing-1-error",
+      "type": "registry:example",
+      "title": "Listing 1: property listing: Could not load",
+      "description": "Could not load example of Listing 1: property listing.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/listing-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/listing-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/listing-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "listing-1",
         "tier": "free"
       }
     },
@@ -21932,6 +24375,241 @@
       }
     },
     {
+      "name": "matter-1",
+      "type": "registry:block",
+      "title": "Matter 1: legal matters",
+      "description": "A law firm's matters: deadlines that cannot be missed first with overdue and due-soon in words, then each matter with client, lead and status, hours against the month's budget, search, a practice area filter and a show-closed switch.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/match-highlight.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/matter-1/matter-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/matter-1/matter-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "matter"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "legal",
+          "law firm",
+          "matters",
+          "deadlines",
+          "billable hours",
+          "practice management",
+          "cases",
+          "professional services"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "A matters list. <Matter1 matters={[{ id, client, title, area, lead, status: 'open' | 'waiting' | 'closed', deadline?: { label, date, days /* from today; negative is overdue */ }, hours, budget? }]} soonDays={7} />. The panel on top lists open deadlines soonest first and says 'overdue' or 'in 3 days'; a matter over budget says 'Over budget by 3 h'. Closed matters are hidden until the switch is on.",
+          "whenToUse": [
+            "A practice-management home for a law firm or any deadline-driven professional service",
+            "A list where hours are tracked against a budget"
+          ],
+          "whenNotToUse": [
+            "A general task list; use tasks-1",
+            "Time entry; use timesheet-1"
+          ],
+          "composesWith": [
+            "timesheet-1",
+            "invoice-1",
+            "calendar-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Dates panel",
+              "action": "A labelled region with an ordered list; overdue and due-soon are written ('1 day overdue', 'In 3 days') with an icon, never colour alone"
+            },
+            {
+              "keys": "Table",
+              "action": "A real table with a caption; each matter is a row header with client and area under it"
+            },
+            {
+              "keys": "Filters",
+              "action": "A labelled search, a labelled native select and a checkbox; the count is a polite announcement"
+            },
+            {
+              "keys": "Budget",
+              "action": "'Over budget by 3 h' is text under the hours, not only a colour"
+            }
+          ],
+          "customization": [
+            "matters, soonDays and the title",
+            "closed matters are off by default",
+            "Practice areas come from the data"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "matter-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton for the dates panel and rows under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No matters yet",
+            "example": "matter-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no matters yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "matter-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A search or filter with no match says so."
+          }
+        ],
+        "examples": [
+          "matter-1-demo",
+          "matter-1-quiet",
+          "matter-1-loading",
+          "matter-1-empty",
+          "matter-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/matter-1"
+      }
+    },
+    {
+      "name": "matter-1-demo",
+      "type": "registry:example",
+      "title": "Matter 1: legal matters: Default",
+      "description": "Default example of Matter 1: legal matters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/matter-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/matter-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/matter-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "matter-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "matter-1-quiet",
+      "type": "registry:example",
+      "title": "Matter 1: legal matters: No deadlines set",
+      "description": "No deadlines set example of Matter 1: legal matters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/matter-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/matter-1-quiet.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/matter-1-quiet.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "matter-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "matter-1-loading",
+      "type": "registry:example",
+      "title": "Matter 1: legal matters: Loading",
+      "description": "Loading example of Matter 1: legal matters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/matter-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/matter-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/matter-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "matter-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "matter-1-empty",
+      "type": "registry:example",
+      "title": "Matter 1: legal matters: No matters yet",
+      "description": "No matters yet example of Matter 1: legal matters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/matter-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/matter-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/matter-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "matter-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "matter-1-error",
+      "type": "registry:example",
+      "title": "Matter 1: legal matters: Could not load",
+      "description": "Could not load example of Matter 1: legal matters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/matter-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/matter-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/matter-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "matter-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "newsletter-1",
       "type": "registry:block",
       "title": "Newsletter 1: signup with topics and sample issue",
@@ -22416,6 +25094,242 @@
       }
     },
     {
+      "name": "oncall-1",
+      "type": "registry:block",
+      "title": "On-call 1: weekly rota",
+      "description": "An on-call rota for the week: who is on call now per layer, a grid of days by primary and secondary, days nobody covers called out in words, and a selected shift you can take or ask the person on it to swap.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/oncall-1/oncall-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/oncall-1/oncall-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "oncall"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "on-call",
+          "rota",
+          "schedule",
+          "incident",
+          "pager",
+          "sre",
+          "devops",
+          "shifts"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "A weekly on-call rota. <Oncall1 days={[{ label: 'Mon 20', full: 'Monday 20 October' }]} layers={[{ id, name: 'Primary', people: ['Priya Shah', null, ...] }]} todayIndex={4} handover='09:00' me='Priya Shah' onTake={(shift) => Promise} onRequestSwap={(shift) => Promise} />. null in people means nobody; uncovered shifts are listed in words. Select a shift to take it or ask for a swap.",
+          "whenToUse": [
+            "An operations page showing who gets paged this week",
+            "A team calendar for support or engineering cover"
+          ],
+          "whenNotToUse": [
+            "A shift roster for hourly staff; use roster-1",
+            "A calendar of events; use calendar-1"
+          ],
+          "composesWith": [
+            "incident-1",
+            "status-1",
+            "access-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Table",
+              "action": "Layers are row headers and days are column headers named in full ('Friday 24 October'); each shift button reads 'Primary, Friday 24 October: Theo Nakamura'"
+            },
+            {
+              "keys": "Select a shift",
+              "action": "A toggle button (aria-pressed); the details and the result of taking or swapping are a polite live region"
+            },
+            {
+              "keys": "Gaps",
+              "action": "Written as a sentence listing each uncovered shift, and 'Nobody' in the cell; red only reinforces it"
+            },
+            {
+              "keys": "Colour",
+              "action": "A person's tint helps a run of days read as one shift; names are always written"
+            }
+          ],
+          "customization": [
+            "days, layers and todayIndex",
+            "handover text",
+            "me: the person using the page",
+            "onTake and onRequestSwap; reject and the message says it did not go through"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "oncall-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton for the banner and the grid under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No rota yet",
+            "example": "oncall-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no rota exists yet; emptyState sets the copy and can add a button."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "oncall-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nobody was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "oncall-1-demo",
+          "oncall-1-covered",
+          "oncall-1-loading",
+          "oncall-1-empty",
+          "oncall-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/oncall-1"
+      }
+    },
+    {
+      "name": "oncall-1-demo",
+      "type": "registry:example",
+      "title": "On-call 1: weekly rota: Default",
+      "description": "Default example of On-call 1: weekly rota.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/oncall-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/oncall-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/oncall-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "oncall-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "oncall-1-covered",
+      "type": "registry:example",
+      "title": "On-call 1: weekly rota: Every shift covered",
+      "description": "Every shift covered example of On-call 1: weekly rota.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/oncall-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/oncall-1-covered.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/oncall-1-covered.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "oncall-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "oncall-1-loading",
+      "type": "registry:example",
+      "title": "On-call 1: weekly rota: Loading",
+      "description": "Loading example of On-call 1: weekly rota.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/oncall-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/oncall-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/oncall-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "oncall-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "oncall-1-empty",
+      "type": "registry:example",
+      "title": "On-call 1: weekly rota: No rota yet",
+      "description": "No rota yet example of On-call 1: weekly rota.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/oncall-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/oncall-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/oncall-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "oncall-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "oncall-1-error",
+      "type": "registry:example",
+      "title": "On-call 1: weekly rota: Could not load",
+      "description": "Could not load example of On-call 1: weekly rota.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/oncall-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/oncall-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/oncall-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "oncall-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "orgchart-1",
       "type": "registry:block",
       "title": "Org chart 1: organization tree",
@@ -22651,6 +25565,241 @@
       "meta": {
         "example": true,
         "of": "orgchart-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pipeline-1",
+      "type": "registry:block",
+      "title": "Pipeline 1: deploy pipeline",
+      "description": "One run of a deploy pipeline: the commit, each stage as a step with its status written out and duration, logs one click away, an approval gate that says who can approve, and a failed stage that offers to run again from there.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/pipeline-1/pipeline-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/pipeline-1/pipeline-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "pipeline"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ci",
+          "cd",
+          "deploy",
+          "pipeline",
+          "release",
+          "build",
+          "approval",
+          "devops"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "A deploy pipeline run. <Pipeline1 run={{ branch, commit, message, author, stages: [{ id, name, status: 'passed' | 'running' | 'failed' | 'waiting' | 'pending' | 'skipped', duration?, log?: string[], approver? }] }} defaultOpenId='build' onApprove={(stageId) => Promise} onRerun={(stageId) => Promise} />. A waiting stage shows its approver and an Approve button; a failed stage offers Run again from here. Only stages with a log are buttons.",
+          "whenToUse": [
+            "A release page showing where a deploy is and what is blocking it",
+            "An approval step before production"
+          ],
+          "whenNotToUse": [
+            "A list of many runs; use a table",
+            "Server logs in real time; use log-stream"
+          ],
+          "composesWith": [
+            "incident-1",
+            "audit-1",
+            "status-1",
+            "dev-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Stages",
+              "action": "An ordered list named 'Stages'; each status is written ('Passed · 1 min 48 s', 'Waiting for approval'), never colour alone"
+            },
+            {
+              "keys": "Stage with a log",
+              "action": "A button with aria-expanded that controls the log region; a stage with no log is not focusable"
+            },
+            {
+              "keys": "Log",
+              "action": "A focusable, labelled, scrollable region that stays left to right"
+            },
+            {
+              "keys": "Approve and run again",
+              "action": "Real buttons; a failure is an alert beside the stage and the stage stays as it was"
+            }
+          ],
+          "customization": [
+            "run and defaultOpenId",
+            "onApprove and onRerun; reject and the message says why",
+            "The number of stages is not fixed"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "pipeline-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton for the commit and the stages under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No runs yet",
+            "example": "pipeline-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no runs yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "pipeline-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was deployed or changed, with Try again (onRetry). A failed approval keeps the gate waiting and says why."
+          }
+        ],
+        "examples": [
+          "pipeline-1-demo",
+          "pipeline-1-failed",
+          "pipeline-1-loading",
+          "pipeline-1-empty",
+          "pipeline-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/pipeline-1"
+      }
+    },
+    {
+      "name": "pipeline-1-demo",
+      "type": "registry:example",
+      "title": "Pipeline 1: deploy pipeline: Default",
+      "description": "Default example of Pipeline 1: deploy pipeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pipeline-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pipeline-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pipeline-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pipeline-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pipeline-1-failed",
+      "type": "registry:example",
+      "title": "Pipeline 1: deploy pipeline: A failed stage",
+      "description": "A failed stage example of Pipeline 1: deploy pipeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pipeline-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pipeline-1-failed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pipeline-1-failed.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pipeline-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pipeline-1-loading",
+      "type": "registry:example",
+      "title": "Pipeline 1: deploy pipeline: Loading",
+      "description": "Loading example of Pipeline 1: deploy pipeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pipeline-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pipeline-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pipeline-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pipeline-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pipeline-1-empty",
+      "type": "registry:example",
+      "title": "Pipeline 1: deploy pipeline: No runs yet",
+      "description": "No runs yet example of Pipeline 1: deploy pipeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pipeline-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pipeline-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pipeline-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pipeline-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pipeline-1-error",
+      "type": "registry:example",
+      "title": "Pipeline 1: deploy pipeline: Could not load",
+      "description": "Could not load example of Pipeline 1: deploy pipeline.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pipeline-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pipeline-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pipeline-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pipeline-1",
         "tier": "free"
       }
     },
@@ -23887,6 +27036,217 @@
       "meta": {
         "example": true,
         "of": "profile-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "queues-1",
+      "type": "registry:block",
+      "title": "Queues 1: job queues",
+      "description": "The queues behind a product: jobs waiting, arrival and finish rates, the age of the oldest job, a queue that is filling faster than it drains called out in words, failed jobs with their errors to retry or discard, and a pause switch.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/queues-1/queues-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/queues-1/queues-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "queues"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "queues",
+          "jobs",
+          "background jobs",
+          "retries",
+          "dead letter",
+          "workers",
+          "devops",
+          "monitoring"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Background job queues. <Queues1 queues={[{ id, name, depth, inRate, outRate, oldest: '9 min', paused?, series: number[], failed: [{ id, name, error, attempts, at }] }]} defaultOpenId='email' onPause={(queueId, paused) => Promise} onRetryJobs={(queueId, jobId | 'all') => Promise} onDiscard={(queueId, jobId) => Promise} />. A queue is 'Backing up' when jobs arrive over 1.2 times faster than they finish and over 100 wait. Each action updates the screen and reports success or the error.",
+          "whenToUse": [
+            "An operations view of workers and background jobs",
+            "Finding and retrying jobs that failed"
+          ],
+          "whenNotToUse": [
+            "Scheduled jobs and their next runs; use cron-1",
+            "A deploy's stages; use pipeline-1"
+          ],
+          "composesWith": [
+            "cron-1",
+            "slo-1",
+            "incident-1",
+            "webhooks-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Table",
+              "action": "A real table with a caption; each queue name is a button (aria-expanded) that opens its failed jobs"
+            },
+            {
+              "keys": "Backing up",
+              "action": "Written in words with an icon; the sparkline is decoration"
+            },
+            {
+              "keys": "Pause",
+              "action": "A switch named 'Pause email'; the result is a polite announcement and an error is an alert"
+            },
+            {
+              "keys": "Retry and discard",
+              "action": "Buttons named for the job ('Retry Send invoice 4812')"
+            }
+          ],
+          "customization": [
+            "queues and defaultOpenId",
+            "onPause, onRetryJobs and onDiscard; reject and the message says why",
+            "The backing-up rule is 1.2 times and 100 jobs"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "queues-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton rows under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No queues yet",
+            "example": "queues-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no queues yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "queues-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying no jobs were changed, with Try again (onRetry). A failed pause or retry puts things back and says why."
+          }
+        ],
+        "examples": [
+          "queues-1-demo",
+          "queues-1-loading",
+          "queues-1-empty",
+          "queues-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/queues-1"
+      }
+    },
+    {
+      "name": "queues-1-demo",
+      "type": "registry:example",
+      "title": "Queues 1: job queues: Default",
+      "description": "Default example of Queues 1: job queues.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/queues-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/queues-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/queues-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "queues-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "queues-1-loading",
+      "type": "registry:example",
+      "title": "Queues 1: job queues: Loading",
+      "description": "Loading example of Queues 1: job queues.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/queues-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/queues-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/queues-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "queues-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "queues-1-empty",
+      "type": "registry:example",
+      "title": "Queues 1: job queues: No queues yet",
+      "description": "No queues yet example of Queues 1: job queues.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/queues-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/queues-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/queues-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "queues-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "queues-1-error",
+      "type": "registry:example",
+      "title": "Queues 1: job queues: Could not load",
+      "description": "Could not load example of Queues 1: job queues.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/queues-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/queues-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/queues-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "queues-1",
         "tier": "free"
       }
     },
@@ -27173,6 +30533,240 @@
       }
     },
     {
+      "name": "slo-1",
+      "type": "registry:block",
+      "title": "SLO 1: service level objectives",
+      "description": "Service level objectives as cards: the goal, how it is going, error budget left in percent and minutes as a labelled meter, burn rate in words, a chart with the target drawn on it, risky ones listed first, and a filter by service.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/slo-1/slo-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/slo-1/slo-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "slo"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "slo",
+          "sli",
+          "reliability",
+          "error budget",
+          "sre",
+          "uptime",
+          "monitoring",
+          "devops"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Service level objectives. <Slo1 slos={[{ id, name, service, target: 99.9, current: 99.94, windowDays: 30, burn: 0.6, series: [99.9, 100, ...] }]} />. Error budget left = 1 minus the shortfall divided by the allowed shortfall; it is shown in percent and minutes. Order is target missed, burning fast (burn 2 or more, or under 25% left), watch, healthy. Exports budgetLeft.",
+          "whenToUse": [
+            "A reliability overview for a team that promises uptime or speed",
+            "Deciding whether it is safe to ship or time to slow down"
+          ],
+          "whenNotToUse": [
+            "A public status page; use status-1",
+            "Live charts of a metric; use charts-1"
+          ],
+          "composesWith": [
+            "incident-1",
+            "queues-1",
+            "status-1",
+            "dashboard-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Budget",
+              "action": "A meter per objective with a spoken value such as '40 percent of the error budget left, about 17 of 43 minutes'"
+            },
+            {
+              "keys": "Level",
+              "action": "Written as words with an icon (Healthy, Burning budget fast, Target missed); colour only reinforces it"
+            },
+            {
+              "keys": "Order",
+              "action": "Objectives that need attention are first, and the sentence above the list says how many"
+            },
+            {
+              "keys": "Service filter",
+              "action": "A labelled native select"
+            }
+          ],
+          "customization": [
+            "slos with target, current, burn and series",
+            "windowDays per objective",
+            "budgetLeft is exported for your own use"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "slo-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton cards under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No objectives yet",
+            "example": "slo-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no objectives yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "slo-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "slo-1-demo",
+          "slo-1-healthy",
+          "slo-1-loading",
+          "slo-1-empty",
+          "slo-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/slo-1"
+      }
+    },
+    {
+      "name": "slo-1-demo",
+      "type": "registry:example",
+      "title": "SLO 1: service level objectives: Default",
+      "description": "Default example of SLO 1: service level objectives.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/slo-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/slo-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/slo-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "slo-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "slo-1-healthy",
+      "type": "registry:example",
+      "title": "SLO 1: service level objectives: Everything on track",
+      "description": "Everything on track example of SLO 1: service level objectives.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/slo-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/slo-1-healthy.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/slo-1-healthy.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "slo-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "slo-1-loading",
+      "type": "registry:example",
+      "title": "SLO 1: service level objectives: Loading",
+      "description": "Loading example of SLO 1: service level objectives.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/slo-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/slo-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/slo-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "slo-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "slo-1-empty",
+      "type": "registry:example",
+      "title": "SLO 1: service level objectives: No objectives yet",
+      "description": "No objectives yet example of SLO 1: service level objectives.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/slo-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/slo-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/slo-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "slo-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "slo-1-error",
+      "type": "registry:example",
+      "title": "SLO 1: service level objectives: Could not load",
+      "description": "Could not load example of SLO 1: service level objectives.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/slo-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/slo-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/slo-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "slo-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "stats-1",
       "type": "registry:block",
       "title": "Stats 1: headline metrics with trends",
@@ -30447,6 +34041,216 @@
       "meta": {
         "example": true,
         "of": "workflow-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workorder-1",
+      "type": "registry:block",
+      "title": "Work order 1: repair job",
+      "description": "A repair work order: customer, item and reported fault, five steps with one button to advance, parts and labour with subtotal, tax and total, a line form, one-click customer messages, and the history so far.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/workorder-1/workorder-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/workorder-1/workorder-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "workorder"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "work order",
+          "repair",
+          "service",
+          "workshop",
+          "field service",
+          "parts",
+          "labour",
+          "job card"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "A repair work order. <Workorder1 order={{ id, customer, item, issue, status: 'received' | 'diagnosing' | 'waiting-parts' | 'repairing' | 'ready', lines: [{ id, kind: 'part' | 'labour', description, qty, unit }], history: [{ id, time, text }] }} currency='USD' taxRate={0.2} messages={[{ id, label, text }]} onAdvance={(status) => Promise} onAddLine={(line) => Promise} onMessage={({ id, text }) => Promise} />. Totals are computed from the lines. Advancing, adding a line and messaging each update the screen and the history.",
+          "whenToUse": [
+            "A repair shop, workshop or service desk's job page",
+            "Any job with steps, billable lines and customer updates"
+          ],
+          "whenNotToUse": [
+            "A support ticket thread; use tickets-1",
+            "An invoice for sending; use invoice-1"
+          ],
+          "composesWith": [
+            "dispatch-1",
+            "invoice-1",
+            "tickets-1",
+            "inventory-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Progress",
+              "action": "An ordered list where the current step has aria-current='step' and every step says done, current or not started in words"
+            },
+            {
+              "keys": "Totals",
+              "action": "A real table with a caption, a subtotal, tax and total; every number is text"
+            },
+            {
+              "keys": "Add a line",
+              "action": "A labelled form; an incomplete line is simply not added"
+            },
+            {
+              "keys": "Advance and messages",
+              "action": "Real buttons; the result is a polite announcement and a failure is an alert"
+            }
+          ],
+          "customization": [
+            "currency and taxRate",
+            "messages you can send in one click",
+            "onAdvance, onAddLine and onMessage"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "workorder-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton for the header, steps and totals under the page, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No work order selected",
+            "example": "workorder-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no work order is selected; pass order={null} and emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "workorder-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A failed advance, line or message says why."
+          }
+        ],
+        "examples": [
+          "workorder-1-demo",
+          "workorder-1-loading",
+          "workorder-1-empty",
+          "workorder-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/workorder-1"
+      }
+    },
+    {
+      "name": "workorder-1-demo",
+      "type": "registry:example",
+      "title": "Work order 1: repair job: Default",
+      "description": "Default example of Work order 1: repair job.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workorder-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workorder-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workorder-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workorder-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workorder-1-loading",
+      "type": "registry:example",
+      "title": "Work order 1: repair job: Loading",
+      "description": "Loading example of Work order 1: repair job.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workorder-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workorder-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workorder-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workorder-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workorder-1-empty",
+      "type": "registry:example",
+      "title": "Work order 1: repair job: No work order selected",
+      "description": "No work order selected example of Work order 1: repair job.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workorder-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workorder-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workorder-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workorder-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "workorder-1-error",
+      "type": "registry:example",
+      "title": "Work order 1: repair job: Could not load",
+      "description": "Could not load example of Work order 1: repair job.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/workorder-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/workorder-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/workorder-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "workorder-1",
         "tier": "free"
       }
     },
@@ -34449,6 +38253,136 @@
       "meta": {
         "example": true,
         "of": "circular-progress",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "citation-coverage",
+      "type": "registry:ui",
+      "title": "Citation Coverage",
+      "description": "An AI answer shown claim by claim: a coverage meter, claims with no source underlined and marked in words, numbered source markers, selecting a claim to light up its sources and quote, and a switch to see only the gaps.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/citation-coverage.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/citation-coverage.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "citations",
+          "sources",
+          "rag",
+          "grounding",
+          "trust",
+          "verification"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "claims is [{ id, text, sources: number[] }] in reading order (empty sources means unsupported); sources is [{ id, title, url?, quote? }]. selected / defaultSelected / onSelectedChange pick a claim. Computes the coverage percentage itself.",
+          "whenToUse": [
+            "Showing people how much of an AI answer is grounded in sources",
+            "A review screen where unsupported claims need checking"
+          ],
+          "whenNotToUse": [
+            "Plain inline citations in a chat message; use citation and sources-list",
+            "A list of documents only; use sources-list"
+          ],
+          "composesWith": [
+            "citation",
+            "sources-list",
+            "ai-message",
+            "streaming-text"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Each claim is a toggle button; selecting it shows its sources and quote"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "An unsupported claim reads '(no source)'; source markers read 'source 2'; the summary and the filtered answer are polite live regions"
+            },
+            {
+              "keys": "Colour",
+              "action": "Gaps are marked by a wavy underline and words, never colour alone"
+            }
+          ],
+          "customization": [
+            "claims and sources",
+            "Controlled selection",
+            "The coverage meter and the gaps filter are built in"
+          ]
+        },
+        "statesNone": "A presentational review: the claims and sources are passed in, so it has nothing of its own to load or fail.",
+        "examples": [
+          "citation-coverage-demo",
+          "citation-coverage-full"
+        ],
+        "url": "https://ui.ballmac.com/components/citation-coverage"
+      }
+    },
+    {
+      "name": "citation-coverage-demo",
+      "type": "registry:example",
+      "title": "Citation Coverage: An answer with gaps",
+      "description": "An answer with gaps example of Citation Coverage.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/citation-coverage.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/citation-coverage-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/citation-coverage-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "citation-coverage",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "citation-coverage-full",
+      "type": "registry:example",
+      "title": "Citation Coverage: Fully sourced",
+      "description": "Fully sourced example of Citation Coverage.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/citation-coverage.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/citation-coverage-full.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/citation-coverage-full.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "citation-coverage",
         "tier": "free"
       }
     },
@@ -42147,6 +46081,266 @@
       }
     },
     {
+      "name": "guardrail-feed",
+      "type": "registry:ui",
+      "title": "Guardrail Feed",
+      "description": "A feed of what an agent's guardrails did: each check with its rule, action (blocked, redacted, flagged or allowed) and target, counts that double as filters, and rows that open to show why and the text that matched.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/guardrail-feed.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/guardrail-feed.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "guardrails",
+          "safety",
+          "policy",
+          "audit",
+          "moderation",
+          "feed"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "events is [{ id, time, rule, action: allowed | blocked | redacted | flagged, target, reason?, match? }] newest first. Counts by action are filter buttons; a row with reason or match opens to show them. defaultOpenId opens one row at first.",
+          "whenToUse": [
+            "Showing people what an agent's safety rules caught",
+            "An audit view of policy checks on an assistant's output or tool use"
+          ],
+          "whenNotToUse": [
+            "A full audit log of a whole product; use the audit block",
+            "The live stream of an agent's steps; use trace or log-stream"
+          ],
+          "composesWith": [
+            "permission-grid",
+            "approval-card",
+            "agent-lanes",
+            "log-stream"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab, Enter / Space",
+              "action": "Filters are toggle buttons; a row's button opens and closes its detail (aria-expanded)"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "Every action is written as a word with an icon; the count of shown checks is a polite live region"
+            },
+            {
+              "keys": "Disabled filters",
+              "action": "An action with no events is disabled instead of hidden, so the set of filters never moves"
+            }
+          ],
+          "customization": [
+            "events and their wording",
+            "title",
+            "defaultOpenId"
+          ]
+        },
+        "statesNone": "A presentational feed: the events are passed in, so it has nothing of its own to load, and it shows its own empty message.",
+        "examples": [
+          "guardrail-feed-demo",
+          "guardrail-feed-quiet"
+        ],
+        "url": "https://ui.ballmac.com/components/guardrail-feed"
+      }
+    },
+    {
+      "name": "guardrail-feed-demo",
+      "type": "registry:example",
+      "title": "Guardrail Feed: A morning of checks",
+      "description": "A morning of checks example of Guardrail Feed.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/guardrail-feed.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/guardrail-feed-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/guardrail-feed-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "guardrail-feed",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "guardrail-feed-quiet",
+      "type": "registry:example",
+      "title": "Guardrail Feed: Nothing blocked",
+      "description": "Nothing blocked example of Guardrail Feed.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/guardrail-feed.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/guardrail-feed-quiet.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/guardrail-feed-quiet.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "guardrail-feed",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "handoff-card",
+      "type": "registry:ui",
+      "title": "Handoff Card",
+      "description": "The packet one agent passes to another: who hands over to whom, the task, the context that travels with it and its size, the questions still open and the rules to keep, with a status and room for actions.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/handoff-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/handoff-card.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "handoff",
+          "multi-agent",
+          "delegation",
+          "context"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "from and to are { name, role? }; title; context [{ label, detail?, size? }]; questions string[]; constraints string[]; status pending | accepted | returned; at; actions slot. A server-friendly card with no state.",
+          "whenToUse": [
+            "Showing what one agent passed to another, in a transcript, an inbox or a run view",
+            "A human review of a delegation before it is accepted"
+          ],
+          "whenNotToUse": [
+            "The timeline of who did what when; use agent-lanes",
+            "A single step of a plan; use agent-plan"
+          ],
+          "composesWith": [
+            "agent-lanes",
+            "approval-card",
+            "trace",
+            "agent-roster"
+          ],
+          "a11y": [
+            {
+              "keys": "Screen readers",
+              "action": "An article named by its title; the arrow between agents reads 'hands over to'; each list has a labelled section"
+            },
+            {
+              "keys": "Status",
+              "action": "Written as words in a pill, never colour alone"
+            },
+            {
+              "keys": "Actions",
+              "action": "Whatever buttons you pass keep their own keyboard behaviour"
+            }
+          ],
+          "customization": [
+            "context, questions and constraints",
+            "status and statusLabel",
+            "actions slot for Accept and Send back buttons"
+          ]
+        },
+        "statesNone": "A presentational card: the handoff is passed in, so it has nothing of its own to load or fail.",
+        "examples": [
+          "handoff-card-demo",
+          "handoff-card-returned"
+        ],
+        "url": "https://ui.ballmac.com/components/handoff-card"
+      }
+    },
+    {
+      "name": "handoff-card-demo",
+      "type": "registry:example",
+      "title": "Handoff Card: Planner to Coder",
+      "description": "Planner to Coder example of Handoff Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/handoff-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/handoff-card-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/handoff-card-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "handoff-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "handoff-card-returned",
+      "type": "registry:example",
+      "title": "Handoff Card: Sent back with a question",
+      "description": "Sent back with a question example of Handoff Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/handoff-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/handoff-card-returned.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/handoff-card-returned.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "handoff-card",
+        "tier": "free"
+      }
+    },
+    {
       "name": "highlighter",
       "type": "registry:ui",
       "title": "Highlighter",
@@ -49747,6 +53941,144 @@
       }
     },
     {
+      "name": "parallel-attempts",
+      "type": "registry:ui",
+      "title": "Parallel Attempts",
+      "description": "Compare several runs of the same task side by side: status, summary, a changed-lines bar, time and cost on each card, a suggested run, and a native radio group to pick one and continue.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/parallel-attempts.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/parallel-attempts.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "compare",
+          "attempts",
+          "best-of-n",
+          "diff",
+          "choose"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "attempts is [{ id, label, model?, status: running | done | failed | stopped, summary, added?, removed?, files?, duration?, cost?, progress? }]. value / defaultValue / onValueChange pick a finished attempt; recommended marks one; onChoose adds a confirm button.",
+          "whenToUse": [
+            "Best-of-n runs where a person chooses the result",
+            "Comparing two or more models on the same task"
+          ],
+          "whenNotToUse": [
+            "Comparing prompts in a table; use the agent-4 block",
+            "A single run's steps; use trace or agent-lanes"
+          ],
+          "composesWith": [
+            "agent-lanes",
+            "run-ledger",
+            "diff-viewer",
+            "approval-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Moves into the group once; the arrow keys move between finished attempts"
+            },
+            {
+              "keys": "ArrowRight / ArrowDown",
+              "action": "Picks the next finished attempt (native radio behaviour, mirrored in right-to-left by the browser)"
+            },
+            {
+              "keys": "Space",
+              "action": "Picks the focused attempt"
+            },
+            {
+              "keys": "Running, failed or stopped",
+              "action": "Shown with an icon and words, and not selectable"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "A fieldset with a hidden legend; each radio is described by its summary"
+            }
+          ],
+          "customization": [
+            "recommended and recommendedLabel",
+            "onChoose and chooseLabel",
+            "Cards fill the width in columns of at least 15rem"
+          ]
+        },
+        "statesNone": "A presentational comparison: you pass in the attempts and their statuses, so it has nothing of its own to load or submit.",
+        "examples": [
+          "parallel-attempts-demo",
+          "parallel-attempts-choose"
+        ],
+        "url": "https://ui.ballmac.com/components/parallel-attempts"
+      }
+    },
+    {
+      "name": "parallel-attempts-demo",
+      "type": "registry:example",
+      "title": "Parallel Attempts: Four attempts, one running",
+      "description": "Four attempts, one running example of Parallel Attempts.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/parallel-attempts.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/parallel-attempts-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/parallel-attempts-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "parallel-attempts",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "parallel-attempts-choose",
+      "type": "registry:example",
+      "title": "Parallel Attempts: Pick and continue",
+      "description": "Pick and continue example of Parallel Attempts.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/parallel-attempts.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/parallel-attempts-choose.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/parallel-attempts-choose.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "parallel-attempts",
+        "tier": "free"
+      }
+    },
+    {
       "name": "particles",
       "type": "registry:ui",
       "title": "Particles",
@@ -49969,6 +54301,143 @@
       "meta": {
         "example": true,
         "of": "password-input",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "permission-grid",
+      "type": "registry:ui",
+      "title": "Permission Grid",
+      "description": "A grid of everything an agent could do, each row set to Allow, Ask or Deny with native radios, risk written out, a warning when a high-risk action is allowed, grouped rows and one-click presets.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/permission-grid.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/permission-grid.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "permissions",
+          "settings",
+          "safety",
+          "tools",
+          "approval"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "permissions is [{ id, label, description?, risk?: low | medium | high, group? }]; value / defaultValue / onValueChange hold { [id]: 'allow' | 'ask' | 'deny' } (missing ids mean ask). presets is [{ id, label, values }] and fills the grid in one click.",
+          "whenToUse": [
+            "Letting people decide which tools an agent may use without asking",
+            "A permissions page for an assistant or a bot"
+          ],
+          "whenNotToUse": [
+            "One overall level of freedom; use autonomy-dial",
+            "A single approval in the moment; use approval-card",
+            "User roles in a workspace; use the access review block"
+          ],
+          "composesWith": [
+            "autonomy-dial",
+            "approval-card",
+            "tool-call-card",
+            "settings-panel"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "One stop per row: the chosen answer, or the first if none is"
+            },
+            {
+              "keys": "ArrowRight / ArrowLeft / ArrowDown / ArrowUp",
+              "action": "Moves between Allow, Ask and Deny in the row (native radios)"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "A real table; each radio is named 'Run shell commands: Allow'; the counts are a polite live region"
+            },
+            {
+              "keys": "Risk and decisions",
+              "action": "Written as words and icons; colour only reinforces them"
+            }
+          ],
+          "customization": [
+            "permissions with groups and risk",
+            "presets that set many rows at once",
+            "title",
+            "Controlled or uncontrolled value"
+          ]
+        },
+        "statesNone": "A control with no data of its own: it shows the permissions you pass in and reports the choices.",
+        "examples": [
+          "permission-grid-demo",
+          "permission-grid-dial"
+        ],
+        "url": "https://ui.ballmac.com/components/permission-grid"
+      }
+    },
+    {
+      "name": "permission-grid-demo",
+      "type": "registry:example",
+      "title": "Permission Grid: Tools with presets",
+      "description": "Tools with presets example of Permission Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/permission-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/permission-grid-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/permission-grid-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "permission-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "permission-grid-dial",
+      "type": "registry:example",
+      "title": "Permission Grid: With an Autonomy Dial",
+      "description": "With an Autonomy Dial example of Permission Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/permission-grid.json",
+        "https://ui.ballmac.com/r/autonomy-dial.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/permission-grid-dial.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/permission-grid-dial.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "permission-grid",
         "tier": "free"
       }
     },
@@ -52920,6 +57389,279 @@
       "meta": {
         "example": true,
         "of": "ripple",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "run-ledger",
+      "type": "registry:ui",
+      "title": "Run Ledger",
+      "description": "What an agent run cost, step by step: sortable time, tokens and money with each row's share, a total, the most expensive step marked, and an optional budget meter that warns in words.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/run-ledger.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/run-ledger.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "cost",
+          "usage",
+          "ledger",
+          "budget",
+          "tokens",
+          "table"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "rows is [{ id, label, kind?, tokensIn?, tokensOut?, ms, cost }] with cost as a number in currency (default USD). Optional budget (same currency), warnAt (80), locale (en-US), defaultSort. Columns sort by label, time, tokens or cost; totals are computed.",
+          "whenToUse": [
+            "Showing where an agent run's time and money went",
+            "A cost breakdown people check before approving a repeat run"
+          ],
+          "whenNotToUse": [
+            "Plan quotas and billing limits; use usage-meter",
+            "The context window; use token-meter",
+            "A general data table; use data-table"
+          ],
+          "composesWith": [
+            "token-meter",
+            "agent-lanes",
+            "parallel-attempts",
+            "trace"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Reaches each column's sort button"
+            },
+            {
+              "keys": "Enter / Space",
+              "action": "Sorts by the column, then reverses; aria-sort says which way"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "A real table with a caption, row headers and a total row; the budget is a meter with a value such as '$4.20 of $5.00. 80 cents left in the budget.'"
+            },
+            {
+              "keys": "Colour",
+              "action": "The warning and over-budget states add an icon and words; the top cost row says 'Most expensive'"
+            }
+          ],
+          "customization": [
+            "currency and locale",
+            "budget and warnAt",
+            "defaultSort",
+            "kind text on each row"
+          ]
+        },
+        "statesNone": "A presentational breakdown: the rows are passed in, so it has nothing of its own to load or submit.",
+        "examples": [
+          "run-ledger-demo",
+          "run-ledger-over"
+        ],
+        "url": "https://ui.ballmac.com/components/run-ledger"
+      }
+    },
+    {
+      "name": "run-ledger-demo",
+      "type": "registry:example",
+      "title": "Run Ledger: A run with a budget",
+      "description": "A run with a budget example of Run Ledger.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/run-ledger.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/run-ledger-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/run-ledger-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "run-ledger",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "run-ledger-over",
+      "type": "registry:example",
+      "title": "Run Ledger: Over budget",
+      "description": "Over budget example of Run Ledger.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/run-ledger.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/run-ledger-over.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/run-ledger-over.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "run-ledger",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "run-replay",
+      "type": "registry:ui",
+      "title": "Run Replay",
+      "description": "Transport controls for replaying a recorded agent run: play and pause, a scrubber with marker dots, step to the previous or next marker, and 0.5 to 4 times speed. It owns the clock so one control can drive a trace, lanes or a log.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/run-replay.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/run-replay.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "replay",
+          "scrubber",
+          "playback",
+          "timeline",
+          "debug"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "duration in seconds; time / defaultTime / onTimeChange; playing / defaultPlaying / onPlayingChange; markers [{ time, label }]; speeds (0.5, 1, 2, 4). It only keeps the clock and renders controls; read `time` to show the run. Playback never starts by itself.",
+          "whenToUse": [
+            "Debugging a finished agent run by watching it unfold",
+            "Letting people scrub a recorded session next to its trace or logs"
+          ],
+          "whenNotToUse": [
+            "Playing audio or video; use video-dialog or audio-player",
+            "A live run; use trace or agent-lanes with now"
+          ],
+          "composesWith": [
+            "agent-lanes",
+            "trace",
+            "log-stream",
+            "run-ledger"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Previous marker, Play or Pause, Next marker, the speeds, the scrubber, then each marker"
+            },
+            {
+              "keys": "Space / Enter",
+              "action": "Toggles play and pause"
+            },
+            {
+              "keys": "ArrowRight / ArrowLeft on the scrubber",
+              "action": "Moves one second (native range input); Home and End go to the ends"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "The scrubber reads '1:12 of 4:30'; a polite note says which marker playback just reached"
+            }
+          ],
+          "customization": [
+            "speeds",
+            "formatTime",
+            "markers",
+            "Controlled time and playing"
+          ]
+        },
+        "statesNone": "A control with no data of its own: it keeps a clock and reports it, so there is nothing to load or fail.",
+        "examples": [
+          "run-replay-demo",
+          "run-replay-lanes"
+        ],
+        "url": "https://ui.ballmac.com/components/run-replay"
+      }
+    },
+    {
+      "name": "run-replay-demo",
+      "type": "registry:example",
+      "title": "Run Replay: Replaying a run",
+      "description": "Replaying a run example of Run Replay.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/run-replay.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/run-replay-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/run-replay-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "run-replay",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "run-replay-lanes",
+      "type": "registry:example",
+      "title": "Run Replay: Driving Agent Lanes",
+      "description": "Driving Agent Lanes example of Run Replay.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/run-replay.json",
+        "https://ui.ballmac.com/r/agent-lanes.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/run-replay-lanes.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/run-replay-lanes.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "run-replay",
         "tier": "free"
       }
     },

@@ -1,0 +1,45 @@
+name: Built with Ballmac UI
+description: Add your live project to the "Built with Ballmac UI" gallery
+labels: [built-with]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for showing your work. We add projects that are **live** and really use Ballmac UI (free or Pro). We check the site, and we may ask for a better screenshot.
+  - type: input
+    id: name
+    attributes:
+      label: Project name
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Live address
+      description: The public address people can open, starting with https://
+      placeholder: https://example.com
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is it, in one or two sentences
+    validations:
+      required: true
+  - type: textarea
+    id: items
+    attributes:
+      label: Which Ballmac UI items you used
+      description: Names or links, for example `dock`, `settings-1`, `pricing-pro-3`
+  - type: input
+    id: shot
+    attributes:
+      label: A link to a screenshot (optional)
+      description: At least 1600 px wide, light or dark. If you leave it blank we take one.
+  - type: checkboxes
+    id: ok
+    attributes:
+      label: Permission
+      options:
+        - label: I own this project, or have its owner's permission, and you may show its name, address and a screenshot on ui.ballmac.com.
+          required: true

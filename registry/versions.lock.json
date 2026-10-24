@@ -3,6 +3,10 @@
     "version": "1.0.0",
     "hash": "bc52deba3386191030b0a93ad58395a1752839aa4ff18ab215519c7095719ff6"
   },
+  "access-1": {
+    "version": "1.0.0",
+    "hash": "1b34806cc2037052c8735a6ffc7080c30e24b49f8e3d1d1c40fa27fed829a950"
+  },
   "accordion": {
     "version": "1.0.0",
     "hash": "b66cc32ee4a0fd210ed1de6cd9e48e1e3243d2ebf1598d88abff44368f5e61d0"
@@ -43,9 +47,17 @@
     "version": "1.0.0",
     "hash": "c517430dd70ba552311fee2b82f8bd944bd8a02a9f6ca9e7e321117c8d17d286"
   },
+  "agent-lanes": {
+    "version": "1.0.0",
+    "hash": "8560541abf82357f2096248bbfdb37df1e4bc099ee0d9cc329a8c603884786e7"
+  },
   "agent-plan": {
     "version": "1.0.0",
     "hash": "7ff6938b4c4b4208754afd5f610fe0a849ee8e179adec47184229230e530771c"
+  },
+  "agent-roster": {
+    "version": "1.0.0",
+    "hash": "117820b27a1bc59588d4744530b12d81b5acb54c717bdfbee8f1c802cb5460e0"
   },
   "ai-chat": {
     "version": "1.0.0",
@@ -139,9 +151,17 @@
     "version": "1.0.0",
     "hash": "54f30f85cbe22a0bcdecc49ac3b25828a75b7dc512ec570fd2fe35129c473e40"
   },
+  "audit-1": {
+    "version": "1.0.0",
+    "hash": "de4f86cd2e885b2ddf533be853210a48e14d5498b323e6ebe1e67280233f3c10"
+  },
   "aurora-background": {
     "version": "1.0.0",
     "hash": "1db63d033233cc91fb2fa602463da9816b485789e99c9a28c8c2343b33a79092"
+  },
+  "autonomy-dial": {
+    "version": "1.0.0",
+    "hash": "62fa554f998d141abe4683dd6006cb29557a35107840a9b90bf2b3cd22d4c5ee"
   },
   "avatar": {
     "version": "1.0.0",
@@ -198,6 +218,10 @@
   "blur-fade": {
     "version": "1.0.0",
     "hash": "61728b21422981c1f19253b4f2644760d4e8a85c7dfc481a463b89db058ec30a"
+  },
+  "booking-1": {
+    "version": "1.0.0",
+    "hash": "28fd5bf33c763ddda2609992a7a60aade582c45070c909dff677289611c3f9ed"
   },
   "border-beam": {
     "version": "1.0.1",
@@ -339,6 +363,14 @@
     "version": "1.0.0",
     "hash": "ab1383d66b564b0cf9fbb1c6ad3407e7cc96b576b1060f5a9f33dde119ee09cf"
   },
+  "citation-coverage": {
+    "version": "1.0.0",
+    "hash": "4bcbdd9b7ce89f8fe6c098c4821b19fb24e936bc6703b658b2f5dc6f6e8ce212"
+  },
+  "clinic-1": {
+    "version": "1.0.0",
+    "hash": "2659fdc20cd2952ff79d7127ce357ee365e86485b2d704abccc50b548cb13780"
+  },
   "code-block": {
     "version": "1.1.0",
     "hash": "1366c847a980caeaafb7989b126a943f269857b0a43bdb12b91782e0a2da5ab4"
@@ -426,6 +458,10 @@
   "crm-1": {
     "version": "1.0.0",
     "hash": "612fb54cc4f1c56431af495152bafeb279a4d535833f7fb3a493c9c8b88067a2"
+  },
+  "cron-1": {
+    "version": "1.0.0",
+    "hash": "df46150fb9f7a1a8542a22a2d17d700590915d135d1ce5804dc86d1cf9513e0a"
   },
   "cta-1": {
     "version": "1.0.0",
@@ -530,6 +566,10 @@
   "directory-1": {
     "version": "1.0.0",
     "hash": "81557968e6d2359692fa59311ed7c280a3fc8e1d5b6ed271e216b780ff33fe1c"
+  },
+  "dispatch-1": {
+    "version": "1.0.0",
+    "hash": "6c64afa7c6c453097d6a62d923ad823bfb0a8265c34252a10f700414366d979a"
   },
   "dock": {
     "version": "1.0.0",
@@ -811,9 +851,17 @@
     "version": "1.0.0",
     "hash": "afe779b435826f816af1d81889045e0bd0063f8512338988f0b53852a3e8581e"
   },
+  "guardrail-feed": {
+    "version": "1.0.0",
+    "hash": "9b0c56f35322e1ab3b9662429bd92dc0a026254dd16a7346532e07c28660d3b1"
+  },
   "habits-1": {
     "version": "1.0.0",
     "hash": "e2006485fc7bcf9dd6b2e50057a016c6d7a0771ed3ddac8298f606e0876fe729"
+  },
+  "handoff-card": {
+    "version": "1.0.0",
+    "hash": "76d3de33102486ee1289f25b569609867ee955bd94d20b6b51d20177c55243ae"
   },
   "header-1": {
     "version": "1.0.0",
@@ -899,6 +947,10 @@
     "version": "1.0.0",
     "hash": "94cce571c82fc63d2d6a3a94f0f531f2cabd1bd047f20fd8956af950d9d48da4"
   },
+  "incident-1": {
+    "version": "1.0.0",
+    "hash": "91a7b91297142cbe905e64a24724b88941cd91cf6bc451b149a998cad3256e3b"
+  },
   "inline-alert": {
     "version": "1.0.0",
     "hash": "e460a8c33efc5a4a8c88cec32139c5ec4a191e9b3aa95037a246ab8afb259587"
@@ -967,6 +1019,10 @@
     "version": "1.0.0",
     "hash": "bd18e77a9c5fb4d16f8528c43cfc15d4ed04d78d49c8ee3c880471ad09089605"
   },
+  "kitchen-1": {
+    "version": "1.0.0",
+    "hash": "3788b983a04bf6756565722b9dcfdc051fd3ba23f177c3dea1d05732290c9795"
+  },
   "kpi-row": {
     "version": "1.0.0",
     "hash": "1ef2de4f6dbd5b31b5a2a0a6fa5fe84895f515b16e213a3b8c7bcf94b8e71e12"
@@ -994,6 +1050,10 @@
   "light-rays": {
     "version": "1.0.1",
     "hash": "26d03e587d28c6c6de59dbcb5facac6497d5d936f036ed5620bbb8926d8d14d3"
+  },
+  "listing-1": {
+    "version": "1.0.0",
+    "hash": "0da7972133b653661c00b046be83707aa788d22c2a0b48ff328911ad48f8c16a"
   },
   "loading-dots": {
     "version": "1.0.0",
@@ -1058,6 +1118,10 @@
   "match-highlight": {
     "version": "1.0.0",
     "hash": "30a78ec3f851f690f37b4bbb7303cfe86e32de952f56ed60c2267b611f987f66"
+  },
+  "matter-1": {
+    "version": "1.0.0",
+    "hash": "18ff0936594e3569b53ab5b316f76ee7f080a26e7e50bfe4f3a7b34e0ed3d66d"
   },
   "media": {
     "version": "1.0.1",
@@ -1171,6 +1235,10 @@
     "version": "1.0.0",
     "hash": "f14e6d2a770f51a8599a941f00848a507cca4ed61d2f59d39feb371a7d3f6995"
   },
+  "oncall-1": {
+    "version": "1.0.0",
+    "hash": "a6227db7f2018f7b3d3ae0adf4401b2f1e2f54a8714cae4d98a8282780a2bcc5"
+  },
   "orbiting-circles": {
     "version": "1.0.0",
     "hash": "a821a854518cf41c2c4746c783cf37636885a45f01592921a2ea2c124c99d328"
@@ -1187,6 +1255,10 @@
     "version": "1.0.0",
     "hash": "0545ef54c4d733547524b9d9050052b5fe5c0af2a11f43b4f4d831af06cb7133"
   },
+  "parallel-attempts": {
+    "version": "1.0.0",
+    "hash": "66b5b176cf681ac5bd31bbff425a6344140334283d1bb6ec6387cc775ddd2a27"
+  },
   "particles": {
     "version": "1.0.0",
     "hash": "c49db7692c359e6e309a9f0b898f54073da95b4bb691d83d6bd16e9e432da1ef"
@@ -1195,6 +1267,10 @@
     "version": "1.0.0",
     "hash": "4a3de032e10b765865f41f1210e45439f686a78a9c5f3dcfa1acf5ddfee0d051"
   },
+  "permission-grid": {
+    "version": "1.0.0",
+    "hash": "90c683c9382e120c8e60cfbcecc54d45c1bc54f84b260ea9228a8f39f31d6291"
+  },
   "phone-frame": {
     "version": "1.0.0",
     "hash": "fe68543eb44227d98ea764ef2bc0b10ad49daa69715ec49a8af61f2cf1fac548"
@@ -1202,6 +1278,10 @@
   "phone-input": {
     "version": "1.0.0",
     "hash": "a1ae69a48598f3d8b5b90c49c58950afa42975b00f79db4c9c778dc8ec6fa31a"
+  },
+  "pipeline-1": {
+    "version": "1.0.0",
+    "hash": "524894cc3139a828db43b5297b8d62437706b2f0349182936fff5d7ad14a594a"
   },
   "plan-selector": {
     "version": "1.0.0",
@@ -1331,6 +1411,10 @@
     "version": "1.0.0",
     "hash": "13ba282eeba2b7147b0277b52df6ae5b793a13a52192da8cdc938e3338418eed"
   },
+  "queues-1": {
+    "version": "1.0.0",
+    "hash": "78a5bca499cd06c26fec79a95f8589430b6ea3371110d54daab89988b654a040"
+  },
   "quiz-1": {
     "version": "1.0.0",
     "hash": "d8dc522c6587c250aebdaca20a56f73113a253b6ee8bcf5e13ea5610d37aa5fe"
@@ -1386,6 +1470,14 @@
   "roster-1": {
     "version": "1.0.0",
     "hash": "0492f5e895b167d737993c840f7bf9ac26c61358e12fcb2efd1689a2511e6be4"
+  },
+  "run-ledger": {
+    "version": "1.0.0",
+    "hash": "f37640bce592da41dfbbdcf2bc4b8e3b1d1e7dc4a17ae00b169fdcd6f14c9635"
+  },
+  "run-replay": {
+    "version": "1.0.0",
+    "hash": "e6c7499aaeeef7278c5b210bda0ea0690df5d0a2ded623c263755bd7e26942aa"
   },
   "scramble-text": {
     "version": "1.0.0",
@@ -1514,6 +1606,10 @@
   "slider-range": {
     "version": "1.0.0",
     "hash": "b6ccd9c784aa168ded511ba5fb2081c7feea7d0a951ea5663beae64562d18bc7"
+  },
+  "slo-1": {
+    "version": "1.0.0",
+    "hash": "3b08e20f1a98e4afdb717b97ec4e12c3d661482675e1fdfe517053e9624df920"
   },
   "smooth-cursor": {
     "version": "1.0.0",
@@ -1934,6 +2030,10 @@
   "workflow-1": {
     "version": "1.0.0",
     "hash": "0993305749e79d7878740e884ed18018a0e3f6fc8dc793ce3882def046ec12fe"
+  },
+  "workorder-1": {
+    "version": "1.0.0",
+    "hash": "91616cd04b8f0a67dd663a7918242462c7d1afb211ab0d8aa096f2f3c27bd1e2"
   },
   "workspace-card": {
     "version": "1.0.1",

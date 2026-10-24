@@ -1,0 +1,47 @@
+name: Propose an item to build or contribute
+description: A component or block you want to build for the free library, or want us to build
+labels: [enhancement, contribution]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Open this before you write a large item, so we can agree on the shape first. Contributions go to the **free** library under the MIT licence. Pro is made by Ballmac only.
+  - type: input
+    id: name
+    attributes:
+      label: Proposed name
+      description: kebab-case, no prefix, for example `agent-tree`
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options: [Component, Block, Template, Hook or library]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What it does and who needs it
+    validations:
+      required: true
+  - type: textarea
+    id: better
+    attributes:
+      label: What the best existing version does, and what yours does better
+      description: shadcn/ui, Magic UI, Origin UI, Kibo UI and others. Names and links are enough.
+  - type: dropdown
+    id: who
+    attributes:
+      label: Who builds it
+      options: [I will build it, I would like help, I would like Ballmac to build it]
+    validations:
+      required: true
+  - type: checkboxes
+    id: standard
+    attributes:
+      label: Standard
+      options:
+        - label: I have read AUTHORING.md, and the item will use tokens only, support the keyboard and reduced motion, and work in right-to-left.
+          required: true

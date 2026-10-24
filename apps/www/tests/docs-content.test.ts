@@ -48,7 +48,7 @@ if (existsSync(indexFile)) {
     else if (i.category !== "foundation") components.add(i.name)
   }
 }
-const plainRoutes = new Set(["/", "/components", "/blocks", "/templates", "/charts", "/themes", "/presets", "/feels", "/pricing", "/pro", "/pro/login", "/affiliates", "/affiliates/dashboard", "/affiliates/admin", "/support", "/founders", "/changelog", "/use-cases", "/use-cases/dashboard", "/quality", "/verified", "/license", "/license/pro", "/llms.txt", "/llms-full.txt", "/i18n/en.json", "/changelog/rss.xml", "/changelog/atom.xml"])
+const plainRoutes = new Set(["/", "/components", "/blocks", "/templates", "/charts", "/themes", "/presets", "/feels", "/pricing", "/pro", "/pro/login", "/affiliates", "/affiliates/dashboard", "/affiliates/admin", "/support", "/founders", "/changelog", "/use-cases", "/use-cases/dashboard", "/quality", "/verified", "/license", "/license/pro", "/refund", "/contribute", "/built-with", "/pro/changelog", "/llms.txt", "/llms-full.txt", "/i18n/en.json", "/changelog/rss.xml", "/changelog/atom.xml"])
 const changelogSlugs = new Set(getChangelog().map((e) => e.slug))
 
 /** Why an internal link does not resolve, or undefined when it does. */
