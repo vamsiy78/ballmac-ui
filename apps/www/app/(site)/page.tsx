@@ -1,12 +1,9 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Check, ChevronDown } from "lucide-react"
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "@/components/site/link"
 
 import { buttonVariants } from "@/components/ballmac/button"
-import { NativeHook } from "@/components/feels/native-hook"
-import { AgentDiagram } from "@/components/home/agent-diagram"
-import { LazyMosaic } from "@/components/home/lazy-mosaic"
+import { ThemeCompare } from "@/components/home/theme-compare"
 import { Themed } from "@/components/pro/shots"
 import { GithubStars } from "@/components/site/github-stars"
 import { FoundingBanner } from "@/components/site/founding-banner"
@@ -18,50 +15,49 @@ import { starsAtBuild } from "@/lib/github-stars-build"
 import { thumbFor } from "@/lib/thumbs"
 import { getOffer } from "@/lib/offer"
 import { CopyButton } from "@/components/site/copy-button"
-import { FitPreview, FitWidth } from "@/components/site/fit-preview"
+import { FitWidth } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
-import { StayCurrent } from "@/components/site/stay-current"
 import { loadThumb } from "@/lib/examples"
-import { blockGroups, categoryLabels, getBlocks, getComponents, getTemplates, isPro } from "@/lib/registry"
+import { blockGroups, getBlocks, getComponents, getTemplates, isPro } from "@/lib/registry"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = { alternates: { canonical: "/" } }
 
 
-// The collection as an asymmetric bento: two large anchors (desktop top left, devices bottom right),
-// a tall AI tile, a wide motion strip and small tiles filling the gaps. Each shows a real example.
-const collections = [
-  { category: "macos", example: "mac-window-demo", size: "large", span: "sm:col-span-2 sm:row-span-2", design: [720, 520], blurb: "App windows, docks, menu bars, command search and a live notch." },
-  { category: "ai", example: "ai-chat-demo", size: "tall", span: "sm:row-span-2", design: [520, 640], blurb: "Messages, streaming text, tool calls, reasoning and a prompt box." },
-  { category: "backgrounds", example: "beams-background-demo", size: "small", span: "", design: [600, 420], blurb: "" },
-  { category: "text", example: "gradient-text-shiny", size: "small", span: "", design: [520, 360], blurb: "" },
-  { category: "motion", example: "marquee-demo", size: "wide", span: "sm:col-span-2", design: [760, 300], blurb: "Beams, tilt, orbits, marquees and confetti, all spring-tuned." },
-  { category: "devices", example: "laptop-frame-demo", size: "large", span: "sm:col-span-2 sm:row-span-2", design: [760, 520], blurb: "MacBook, iPhone and browser frames for product shots." },
-  { category: "developer", example: "code-block-demo", size: "small", span: "", design: [600, 420], blurb: "" },
-  { category: "primitives", example: "button-variants", size: "small", span: "", design: [480, 320], blurb: "" },
-] as const
-
 const install = "npx shadcn@latest add @ballmac/dock"
+
+const FAQ = [
+  { q: "What is Ballmac UI?", a: "A shadcn-compatible library of React and Tailwind components, blocks and templates. Each item is source you copy into your project and own from then on." },
+  { q: "How do I install a block?", a: "Run the shadcn CLI, for example npx shadcn@latest add @ballmac/alerts-1, or copy the source from its page. There is no package to depend on and nothing to keep in sync." },
+  { q: "Does it work with Claude Code, Cursor or Codex?", a: "Yes. Ballmac UI follows the shadcn registry standard, so the shadcn MCP server can search it, read when to use each item and install it into your project." },
+  { q: "Does it support dark mode, RTL and reduced motion?", a: "Yes, on every item. Colours come from tokens, layouts use logical properties so they flip for right-to-left languages, and motion holds still when a visitor asks for less of it." },
+  { q: "What is free and what is Pro?", a: "The components, blocks and templates in the free library are MIT licensed and free for commercial work. Pro adds 150 deeper app blocks, a private registry, Figma tokens and every future update, for one payment." },
+  { q: "Can I use it in client projects?", a: "Yes. Free items can be used in personal, client and commercial projects. A Pro licence is for one person, and Team covers up to 10 people at one organisation." },
+  { q: "What if Pro does not work as described?", a: "Report it within 14 days of your purchase. If an item does not do what its page says and we cannot fix it, you get a full refund." },
+] as const
 
 export default async function Home() {
   const components = getComponents()
   const blocks = getBlocks()
   const templates = getTemplates()
-  const tiles = await Promise.all(
-    collections.map(async (c) => ({
-      ...c,
-      label: categoryLabels[c.category] ?? c.category,
-      count: components.filter((i) => i.category === c.category).length,
-      Preview: await loadThumb(c.example),
-    }))
-  )
   const templateCards = await Promise.all([...templates].sort((a, b) => Number(b.featured) - Number(a.featured)).slice(0, 2).reverse().map(async (t) => ({ ...t, Preview: t.examples[0] ? await loadThumb(t.examples[0].name) : null })))
-  const blockCategoryLinks = blockGroups.map((g) => ({
-    id: g.id,
-    label: g.label,
-    count: blocks.filter((b) => (g.categories as readonly string[]).includes(b.blockCategory ?? "")).length,
-  })).filter((g) => g.count > 0)
-  const categoryCount = new Set(components.map((c) => c.category)).size
+  // One real screen per kind of work, with a thumbnail that exists in this build.
+  const START = [
+    { id: "application", thumb: "billing-1", note: "Dashboards, billing, settings, inbox, boards and AI agent consoles." },
+    { id: "ops", thumb: "alerts-1", note: "Alerts, on-call, incidents, deploys, costs and runbooks." },
+    { id: "vertical", thumb: "floorplan-1", note: "Restaurant floors, gradebooks, fleets, claims and booking pages." },
+    { id: "marketing", thumb: "hero-1", note: "Heroes, features, pricing, proof and calls to action." },
+    { id: "shop", thumb: "listing-1", note: "Product pages, carts and checkout." },
+    { id: "account", thumb: "login-1", note: "Sign in, sign up, verification and onboarding." },
+    { id: "content", thumb: "changelog-1", note: "Blogs, changelogs, careers, help and trust centres." },
+    { id: "desktop", thumb: "desktop-1", note: "App windows, menu bars and settings for desktop apps." },
+  ] as const
+  const startTiles = START.flatMap((t) => {
+    const g = blockGroups.find((x) => x.id === t.id)
+    const thumb = thumbFor(t.thumb, "free")
+    const count = g ? blocks.filter((b) => (g.categories as readonly string[]).includes(b.blockCategory ?? "")).length : 0
+    return g && thumb && count > 0 ? [{ id: t.id, label: g.label, note: t.note, thumb, count: `${count} ${count === 1 ? "block" : "blocks"}` }] : []
+  })
 
   const now = new Date()
   const proOffer = await getOffer(now)
@@ -74,139 +70,159 @@ export default async function Home() {
     <>
       <SiteJsonLd />
       {offer && <FoundingBanner offer={offer} at={now.getTime()} />}
-      <WhatsNewBanner id="2026-10-waves-1-14" added={70} examples={["a project timeline", "OKRs", "a status page", "feature flags", "a CSV importer", "a seat map"]} />
-      {/* Hero */}
-      <section className="mx-auto max-w-[1440px] px-4 pt-16 pb-12 text-center sm:px-6 md:pt-24 md:pb-16">
+      <WhatsNewBanner id="2026-10-batch-3" added={52} examples={["a restaurant floor plan", "a gradebook", "an agent console", "a treemap", "salon booking", "insurance claims"]} />
+      {/* Hero: calm and specific. One promise, the numbers, two buttons. */}
+      <section className="mx-auto max-w-[1440px] px-4 pt-14 pb-10 text-center sm:px-6 md:pt-20">
         <Link
-          href="#feel"
-          className="bg-muted/60 hover:bg-muted focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-medium outline-none transition-colors focus-visible:ring-[3px] dark:bg-white/[0.06] dark:hover:bg-white/10"
+          href="/blocks"
+          className="bg-muted/60 hover:bg-muted focus-visible:ring-ring/50 inline-flex items-center gap-2 rounded-full py-1 pr-3 pl-1 text-[13px] outline-none transition-colors focus-visible:ring-[3px] dark:bg-white/[0.06] dark:hover:bg-white/10"
         >
-          <span className="bg-chart-1 size-1.5 rounded-full" aria-hidden="true" />
-          Try it: the same app as a web app and with a native feel
-          <ArrowRight className="size-3.5" aria-hidden="true" />
+          <span className="bg-background rounded-full px-2 py-0.5 text-[11px] font-semibold tracking-wide shadow-xs">FREE</span>
+          <span className="text-muted-foreground">{freeBlockCount} blocks, {components.length} components, {templates.length} templates</span>
+          <ArrowRight className="text-muted-foreground size-3.5" aria-hidden="true" />
         </Link>
         <h1 className="mx-auto mt-6 max-w-4xl text-4xl leading-[1.05] font-semibold tracking-[-0.045em] text-balance sm:text-6xl">
-          React components that feel native
+          Finished screens for shadcn
         </h1>
-        <p className="text-muted-foreground mx-auto mt-5 max-w-2xl text-base leading-relaxed text-pretty sm:text-lg">
-          {freeBlockCount} free blocks, {templates.length} templates and {components.length} components for React, Tailwind and shadcn, with loading, empty and error states built in. Pro adds {proBlockCount} more blocks and 3 starter apps.
+        <p className="text-muted-foreground mx-auto mt-5 max-w-xl text-base leading-relaxed text-pretty sm:text-lg">
+          Real working screens for React and Tailwind: dashboards, billing, agent consoles, on-call rotas and more. Copy the source and make it yours. MIT licensed.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
           <Link href="/blocks" className={buttonVariants({ shape: "pill", size: "lg" })}>
-            Browse the free library
-            <ArrowRight />
+            Browse blocks
           </Link>
-          <Link href={proHref} className={buttonVariants({ shape: "pill", size: "lg", variant: "outline" })}>
+          <Link href={proHref} className={buttonVariants({ shape: "pill", size: "lg", variant: "secondary" })}>
             {proOffer.onSale && proOffer.price ? `Get Pro for $${proOffer.price}` : "See Ballmac UI Pro"}
           </Link>
         </div>
-        <p className="text-muted-foreground mt-3 text-[13px]">
-          {offer ? (
-            <>
-              Founding price: ${offer.price} once{offer.listPrice ? `, then $${offer.listPrice}` : ""}. First {offer.limit} buyers{offer.endsAt ? <>. <LeftPhrase endsAt={offer.endsAt} at={now.getTime()} capitalize /></> : null}.
-            </>
-          ) : (
-            "One payment. Every future update included."
-          )}
-        </p>
-        <div className="text-muted-foreground mx-auto mt-6 inline-flex max-w-full items-center gap-1.5 rounded-lg border py-1 pr-1 pl-3 font-mono text-[13px]">
-          <span className="select-none" aria-hidden="true">$</span>
-          <span className="text-foreground truncate">{install}</span>
-          <CopyButton value={install} label="Copy install command" />
-        </div>
-        <div className="text-muted-foreground mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[13px]">
+        {offer && (
+          <p className="text-muted-foreground mt-3 text-[13px]">
+            Founding price: ${offer.price} once{offer.listPrice ? `, then $${offer.listPrice}` : ""}. First {offer.limit} buyers{offer.endsAt ? <>. <LeftPhrase endsAt={offer.endsAt} at={now.getTime()} capitalize /></> : null}.
+          </p>
+        )}
+      </section>
+
+      <section aria-labelledby="same-h" className="mx-auto max-w-[1100px] px-4 pb-24 sm:px-6">
+        <h2 id="same-h" className="mx-auto mb-10 max-w-md text-center text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">The same screen, in light and dark</h2>
+        <ThemeCompare />
+      </section>
+
+      {/* Three small proofs, drawn in HTML so they stay sharp in light and dark */}
+      <section aria-labelledby="own-h" className="mx-auto max-w-[1100px] px-4 pb-24 sm:px-6">
+        <h2 id="own-h" className="mx-auto max-w-md text-center text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Copy it, own it, ship it</h2>
+        <ul className="mt-12 grid gap-4 md:grid-cols-3">
+          <li className="bg-card flex flex-col overflow-hidden rounded-2xl border">
+            <div className="bg-muted/40 grid min-h-52 place-items-center border-b p-5" aria-hidden="true">
+              <div className="bg-background w-full max-w-[17rem] overflow-hidden rounded-xl border font-mono text-[11px] shadow-xs">
+                <div className="bg-muted/60 text-muted-foreground flex items-center justify-between border-b px-3 py-1.5"><span>Terminal</span><span>zsh</span></div>
+                <div className="grid gap-1 p-3 leading-relaxed">
+                  <p><span className="text-muted-foreground">$ </span>npx shadcn add @ballmac/alerts-1</p>
+                  <p className="text-chart-2">✓ Created 1 file</p>
+                  <p className="text-muted-foreground mt-1">components/blocks/alerts-1/</p>
+                  <p className="bg-muted/60 rounded px-2 py-1">alerts-1.tsx</p>
+                </div>
+              </div>
+            </div>
+            <div className="p-5">
+              <h3 className="font-semibold tracking-tight">One command, one file</h3>
+              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">Install with the shadcn CLI or copy it. It lands as plain source you own and can change.</p>
+              <div className="bg-muted/50 mt-4 flex items-center gap-2 rounded-lg border py-1 pr-1 pl-3 font-mono text-xs">
+                <span className="min-w-0 flex-1 truncate">{install}</span>
+                <CopyButton value={install} label="Copy install command" />
+              </div>
+            </div>
+          </li>
+          <li className="bg-card flex flex-col overflow-hidden rounded-2xl border">
+            <div className="bg-muted/40 grid min-h-52 place-items-center border-b p-5" aria-hidden="true">
+              <div className="grid w-full max-w-[17rem] gap-2 text-xs">
+                <p className="bg-foreground text-background ms-auto max-w-[85%] rounded-2xl rounded-br-md px-3 py-2">Add an alert rules screen to the settings page</p>
+                <p className="bg-background max-w-[92%] rounded-2xl rounded-bl-md border px-3 py-2 shadow-xs">Searching @ballmac… found <span className="font-mono">alerts-1</span>. Installing it and wiring the loading, empty and error states.</p>
+                <p className="text-muted-foreground flex items-center gap-1.5 ps-1"><Check className="size-3" />Installed 1 file</p>
+              </div>
+            </div>
+            <div className="p-5">
+              <h3 className="font-semibold tracking-tight">Your agent can install it</h3>
+              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">Follows the shadcn registry standard, so Claude Code, Cursor and Codex can search and install it through MCP.</p>
+              <Link href="/docs/get-started/connect-your-agent" className="text-foreground focus-visible:ring-ring/50 mt-4 inline-flex items-center gap-1 rounded-sm text-sm font-medium underline-offset-4 outline-none hover:underline focus-visible:ring-[3px]">Set up MCP <ArrowUpRight className="size-3.5" aria-hidden="true" /></Link>
+            </div>
+          </li>
+          <li className="bg-card flex flex-col overflow-hidden rounded-2xl border">
+            <div className="bg-muted/40 grid min-h-52 place-items-center border-b p-5" aria-hidden="true">
+              <div className="grid w-full max-w-[17rem] gap-3">
+                <div className="flex items-center gap-2 text-xs"><kbd className="bg-background rounded border px-1.5 py-0.5 font-mono shadow-xs">Tab</kbd><span className="text-muted-foreground">moves through every control</span></div>
+                <div className="flex gap-2">
+                  <span className="bg-background h-8 flex-1 rounded-md border" />
+                  <span className="bg-foreground ring-ring/50 h-8 w-20 rounded-md ring-[3px] ring-offset-2" />
+                </div>
+                <div className="flex items-center gap-2 text-xs"><kbd className="bg-background rounded border px-1.5 py-0.5 font-mono shadow-xs">Esc</kbd><span className="text-muted-foreground">closes it and returns focus</span></div>
+              </div>
+            </div>
+            <div className="p-5">
+              <h3 className="font-semibold tracking-tight">Keyboard first, tested in a browser</h3>
+              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">Every item works without a mouse, flips for right-to-left languages and holds still for visitors who ask for reduced motion.</p>
+              <Link href="/quality" className="text-foreground focus-visible:ring-ring/50 mt-4 inline-flex items-center gap-1 rounded-sm text-sm font-medium underline-offset-4 outline-none hover:underline focus-visible:ring-[3px]">See how it is measured <ArrowUpRight className="size-3.5" aria-hidden="true" /></Link>
+            </div>
+          </li>
+        </ul>
+        <div className="text-muted-foreground mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[13px]">
           <GithubStars initial={stars} variant="hero" />
           <span>
-            Free and MIT licensed. Listed in the{" "}
-            <a
-              href="https://ui.shadcn.com/docs/directory"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground focus-visible:ring-ring/50 rounded-sm underline underline-offset-4 outline-none focus-visible:ring-[3px]"
-            >
+            Listed in the{" "}
+            <a href="https://ui.shadcn.com/docs/directory" target="_blank" rel="noopener noreferrer" className="text-foreground focus-visible:ring-ring/50 rounded-sm underline underline-offset-4 outline-none focus-visible:ring-[3px]">
               official shadcn registry directory
             </a>
             .
           </span>
-          <Link href="/quality" className="text-foreground focus-visible:ring-ring/50 rounded-sm underline underline-offset-4 outline-none focus-visible:ring-[3px]">
-            Every item is measured in a real browser
-          </Link>
         </div>
       </section>
 
-      {/* The promise, proven: the same app as a web app and with a native feel */}
-      <section id="feel" aria-labelledby="feel-h" className="mx-auto max-w-[1200px] scroll-mt-16 px-4 pb-20 sm:px-6">
-        <div className="mx-auto mb-10 max-w-2xl text-center">
-          <h2 id="feel-h" className="text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Which one feels native?</h2>
-          <p className="text-muted-foreground mt-3 text-base leading-relaxed text-pretty sm:text-lg">The same app twice. One is a typical web app. The other has a single setting changed. Use both.</p>
-        </div>
-        <NativeHook where="home" />
+      {/* The numbers, from the real catalogue */}
+      <section aria-label="The library in numbers" className="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-8 border-y py-10 text-center md:grid-cols-4">
+          {[
+            [String(components.length), "components", "With live previews and keyboard support"],
+            [String(blocks.length), "blocks", `${freeBlockCount} free, ${proBlockCount} in Pro`],
+            [String(templates.length), "templates", "Whole pages you install as routes"],
+            ["12", "themes", "Light, dark and right-to-left"],
+          ].map(([n, label, note]) => (
+            <div key={label}>
+              <dt className="text-muted-foreground text-sm font-medium">{label}</dt>
+              <dd className="text-4xl font-semibold tracking-[-0.04em] tabular-nums sm:text-5xl">{n}</dd>
+              <dd className="text-muted-foreground mt-1 text-[13px] text-pretty">{note}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
-      {/* Live mosaic */}
-      <section aria-labelledby="live-examples" className="mx-auto max-w-[1440px] px-4 sm:px-6">
-        <h2 id="live-examples" className="sr-only">
-          Live examples
-        </h2>
-        <LazyMosaic />
-      </section>
-
-      {/* Collections */}
-      <section className="mx-auto max-w-[1440px] px-4 pt-28 sm:px-6">
+      {/* Start from the screen you need */}
+      <section aria-labelledby="start-h" className="mx-auto max-w-[1440px] px-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Explore the collection</h2>
-            <p className="text-muted-foreground mt-3 text-base leading-relaxed sm:text-lg">
-              {components.length} components across {categoryCount} categories, each with live previews, keyboard support and a
-              single install command.
+            <h2 id="start-h" className="text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Start from the screen you need</h2>
+            <p className="text-muted-foreground mt-3 text-base leading-relaxed text-pretty sm:text-lg">
+              Dashboards, agent consoles, on-call rotas, claims, booking pages. Each is a real working screen, not a slice of one.
             </p>
           </div>
-          <Link href="/components" className={buttonVariants({ variant: "outline", shape: "pill", size: "sm" })}>
-            All components <ArrowRight />
+          <Link href="/blocks" className={buttonVariants({ variant: "outline", shape: "pill", size: "sm" })}>
+            All blocks <ArrowRight />
           </Link>
         </div>
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:auto-rows-[240px] sm:grid-cols-2 lg:grid-cols-4">
-          {tiles.map((t) => {
-            const featured = t.size === "large" || t.size === "tall"
-            return (
-              <div
-                key={t.category}
-                className={cn(
-                  "group bm-stage relative h-72 overflow-hidden rounded-2xl border transition-[border-color,box-shadow] duration-300 hover:border-foreground/20 hover:shadow-[0_12px_40px_-16px_rgb(0_0_0/0.35)] sm:h-auto",
-                  featured && "max-sm:h-96",
-                  t.span
-                )}
-              >
-                <div className={cn("absolute inset-x-0 top-0 transition-transform duration-500 ease-[var(--bm-ease-out)] group-hover:scale-[1.02]", featured ? "bottom-24" : "bottom-14")} inert>
-                  <LazyMount className="absolute inset-0">
-                    <FitPreview width={t.design[0]} height={t.design[1]} inset={0.06}>
-                      {t.Preview ? <t.Preview /> : null}
-                    </FitPreview>
-                  </LazyMount>
-                </div>
-                <div className="from-surface via-surface/90 pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t to-transparent px-5 pt-10 pb-4">
-                  <div className="flex items-baseline gap-2">
-                    <Link
-                      href={`/components?category=${t.category}`}
-                      className={cn(
-                        "pointer-events-auto font-semibold tracking-tight outline-none after:absolute after:inset-0 after:rounded-2xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50",
-                        featured ? "text-xl" : "text-[15px]"
-                      )}
-                    >
-                      {t.label}
-                    </Link>
-                    <span className="text-muted-foreground text-sm tabular-nums">{t.count}</span>
-                  </div>
-                  {featured && <p className="text-muted-foreground mt-1 max-w-sm text-sm leading-relaxed">{t.blurb}</p>}
-                </div>
-                <ArrowUpRight
-                  className="text-muted-foreground absolute top-4 right-4 size-4 -translate-x-1 translate-y-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100"
-                  aria-hidden="true"
-                />
+        <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {startTiles.map((t) => (
+            <li key={t.id} className="group bg-card relative overflow-hidden rounded-2xl border transition-[border-color,box-shadow] duration-300 hover:border-foreground/20 hover:shadow-[0_12px_40px_-16px_rgb(0_0_0/0.35)]">
+              <div className="bg-background relative aspect-[2/1] overflow-hidden border-b">
+                <Themed base={t.thumb} alt="" width={800} height={500} className="absolute inset-0 size-full object-cover object-top transition-transform duration-500 ease-[var(--bm-ease-out)] group-hover:scale-[1.03]" />
               </div>
-            )
-          })}
-        </div>
+              <div className="flex items-baseline justify-between gap-3 p-4">
+                <Link href={`/blocks#${t.id}`} className="font-semibold tracking-tight outline-none after:absolute after:inset-0 after:rounded-2xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">
+                  {t.label}
+                </Link>
+                <span className="text-muted-foreground text-sm tabular-nums">{t.count}</span>
+              </div>
+              <p className="text-muted-foreground -mt-2 px-4 pb-4 text-[13px] leading-relaxed">{t.note}</p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* Blocks and templates */}
@@ -218,22 +234,6 @@ export default async function Home() {
               {blocks.length} responsive blocks and {templates.length} templates, composed from the same components. Install a section,
               or an entire page as a route.
             </p>
-            <ul className="mt-9 grid grid-cols-1 border-t sm:grid-cols-2 sm:gap-x-8" aria-label="Block categories">
-              {blockCategoryLinks.map((g) => (
-                <li key={g.id} className="border-b">
-                  <Link
-                    href={`/blocks#${g.id}`}
-                    className="group/row focus-visible:ring-ring/50 flex items-center justify-between gap-3 py-3 text-[15px] outline-none focus-visible:ring-[3px]"
-                  >
-                    <span className="transition-transform duration-200 group-hover/row:translate-x-1">{g.label}</span>
-                    <span className="text-muted-foreground flex items-center gap-1.5 text-sm tabular-nums">
-                      {g.count} {g.count === 1 ? "block" : "blocks"}
-                      <ArrowUpRight className="size-3.5 opacity-0 transition-opacity group-hover/row:opacity-100" aria-hidden="true" />
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
             <div className="mt-8 flex flex-wrap gap-2">
               <Link href="/blocks" className={buttonVariants({ shape: "pill", size: "sm" })}>
                 Browse blocks <ArrowRight />
@@ -286,7 +286,7 @@ export default async function Home() {
             Free gets you started. Pro gets you to launch.
           </h2>
           <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
-            Free is {components.length} components, {freeBlockCount} blocks, {templates.length} templates and twelve themes, all MIT licensed. Pro adds {proBlockCount} blocks that go deeper in every area, three complete starter apps and Figma tokens.
+            Free is {components.length} components, {freeBlockCount} blocks, {templates.length} templates and twelve themes, all MIT licensed. Pro adds {proBlockCount} blocks that go deeper in every area, a private registry for the shadcn CLI, Figma tokens and every future update.
           </p>
         </div>
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
@@ -302,20 +302,20 @@ export default async function Home() {
           </div>
           <div className="bg-card overflow-hidden rounded-2xl border">
             <div className="bg-background relative aspect-[2/1] overflow-hidden border-b">
-              <Themed base="/marketing/state-error" alt="A Pro block showing an error with a Try again button" width={1800} height={575} className="absolute inset-0 h-full object-contain object-center" />
+              {thumbFor("settings-pro-1", "pro") ? <Themed base={`${thumbFor("settings-pro-1", "pro")}`} alt="A Pro settings block" width={800} height={400} className="absolute inset-0 size-full object-cover object-top" /> : null}
             </div>
             <div className="p-6">
-              <h3 className="font-semibold tracking-tight">Loading, empty and error, built in</h3>
-              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">Skeletons, helpful empty states and errors with a retry. One prop switches between them.</p>
+              <h3 className="font-semibold tracking-tight">A private registry for your CLI</h3>
+              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">Install Pro blocks with the same shadcn CLI and MCP you use for the free ones, with Figma tokens for every theme.</p>
             </div>
           </div>
           <div className="bg-card overflow-hidden rounded-2xl border">
             <div className="bg-background relative aspect-[2/1] overflow-hidden border-b">
-              <Image src="/marketing/beacon-dashboard.webp" alt="Beacon, a SaaS starter app" width={1500} height={938} unoptimized loading="lazy" className="absolute inset-0 size-full object-cover object-top" />
+              {thumbFor("dashboard-pro-2", "pro") ? <Themed base={`${thumbFor("dashboard-pro-2", "pro")}`} alt="A Pro dashboard block" width={800} height={400} className="absolute inset-0 h-full object-cover object-top" /> : null}
             </div>
             <div className="p-6">
-              <h3 className="font-semibold tracking-tight">Three complete starter apps</h3>
-              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">Beacon (SaaS), Quire (an AI assistant that cites its sources) and Cove (a desktop app for Mac and Windows).</p>
+              <h3 className="font-semibold tracking-tight">One licence for the whole team</h3>
+              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">Team is $349 for up to 10 people. Every Pro plan has a 14-day fix-or-refund guarantee, and three starter apps are included.</p>
             </div>
           </div>
         </div>
@@ -329,42 +329,19 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Updates and measured quality */}
-      <section aria-labelledby="current-h" className="mx-auto max-w-[1200px] px-4 pt-28 sm:px-6">
-        <div className="max-w-2xl">
-          <p className="text-muted-foreground text-sm font-medium">After the first install</p>
-          <h2 id="current-h" className="mt-3 text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Copy-paste that does not rot</h2>
-          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">Update without losing your edits, and check the quality claims yourself.</p>
-        </div>
-        <StayCurrent className="mt-12" />
-      </section>
-
-      {/* Agents */}
-      <section className="mx-auto max-w-[1440px] px-4 pt-28 sm:px-6">
-        <div className="grid grid-cols-1 items-center gap-12 overflow-hidden rounded-2xl border p-6 sm:p-10 lg:grid-cols-[1fr_1.15fr] lg:p-14">
-          <div className="min-w-0">
-            <p className="text-muted-foreground text-sm font-medium">MCP and AI agents</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Your agent already knows how to use it</h2>
-            <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
-              Ballmac UI follows the shadcn registry standard, so the shadcn MCP server can search it, read when to use each
-              component, and install it into your project.
-            </p>
-            <div className="mt-7 space-y-2 font-mono text-[13px]">
-              <div className="bg-muted/50 flex items-center gap-2 rounded-lg border py-1 pr-1 pl-3.5">
-                <span className="min-w-0 flex-1 truncate">npx shadcn@latest mcp init --client claude</span>
-                <CopyButton value="npx shadcn@latest mcp init --client claude" label="Copy MCP setup command" />
-              </div>
-              <p className="text-muted-foreground rounded-lg border px-3.5 py-2.5">&gt; Add a hero with a globe and a dock from @ballmac</p>
-            </div>
-            <Link href="/docs/get-started/connect-your-agent" className={cn(buttonVariants({ variant: "outline", shape: "pill", size: "sm" }), "mt-7")}>
-              Set up MCP <ArrowUpRight />
-            </Link>
-          </div>
-          <div tabIndex={0} role="region" aria-label="How agents use Ballmac" className="overflow-x-auto focus-visible:ring-ring/50 outline-none focus-visible:ring-[3px]">
-            <div className="min-w-[520px]">
-              <AgentDiagram />
-            </div>
-          </div>
+      {/* Questions, answered */}
+      <section aria-labelledby="faq-h" className="mx-auto max-w-3xl px-4 pt-28 sm:px-6">
+        <h2 id="faq-h" className="text-center text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Questions, answered</h2>
+        <div className="mt-10 divide-y border-y">
+          {FAQ.map((f) => (
+            <details key={f.q} className="group py-1">
+              <summary className="focus-visible:ring-ring/50 flex cursor-pointer list-none items-center justify-between gap-4 rounded-md py-4 text-[15px] font-medium outline-none focus-visible:ring-[3px] [&::-webkit-details-marker]:hidden">
+                {f.q}
+                <ChevronDown className="text-muted-foreground size-4 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
+              </summary>
+              <p className="text-muted-foreground pb-5 text-[15px] leading-relaxed text-pretty">{f.a}</p>
+            </details>
+          ))}
         </div>
       </section>
 

@@ -4,11 +4,18 @@ description: "Every translatable message in Ballmac UI, with its key and English
 generatedFrom: registry/ballmac
 ---
 
-Every built-in label, placeholder and screen reader text is a message with an English default: 694 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
+Every built-in label, placeholder and screen reader text is a message with an English default: 773 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
 
 | Key | English |
 | --- | --- |
 | `activity-feed.emptyMessage` | No activity yet |
+| `agent-graph.ends` | Nothing follows it. |
+| `agent-graph.hint` | Select a node to see its connections. The arrow keys follow the edges. |
+| `agent-graph.label` | How the agents and tools are connected |
+| `agent-graph.node` | \{label\}, \{kind\}\{status\} |
+| `agent-graph.receives` | Receives from \{names\}. |
+| `agent-graph.sends` | Sends to \{names\}. |
+| `agent-graph.starts` | Starts the work. |
 | `agent-lanes.handedBy` | Started by \{from\}. |
 | `agent-lanes.handoffText` | \{from\} hands over to \{to\} at \{time\} |
 | `agent-lanes.handsTo` | Hands over to \{to\}. |
@@ -94,6 +101,7 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `breadcrumb.label` | Breadcrumb |
 | `breadcrumb.morePages` | More pages |
 | `browser-frame.secureConnection` | Secure connection |
+| `bullet-chart.of` | of \{target\} |
 | `calendar-agenda.agenda` | Agenda |
 | `calendar-agenda.chooseDate` | Choose date |
 | `calendar-agenda.emptyMessage` | No events scheduled |
@@ -276,6 +284,20 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `env-editor.value` | value |
 | `env-editor.valueOf` | Value of \{name\} |
 | `env-editor.variableN` | variable \{n\} |
+| `escalation-card.agent` | Agent |
+| `escalation-card.failed` | That did not go through. Nothing was changed. |
+| `escalation-card.feels` | Seems |
+| `escalation-card.messages` | Last messages |
+| `escalation-card.reply` | Suggested reply, edit before sending |
+| `escalation-card.send` | Send reply |
+| `escalation-card.sent` | Reply sent to \{customer\}. |
+| `escalation-card.snooze` | Snooze |
+| `escalation-card.snoozed` | Snoozed. It will come back if the customer writes again. |
+| `escalation-card.summary` | What the agent understood |
+| `escalation-card.take` | Take over |
+| `escalation-card.taken` | You have taken over from the agent. |
+| `escalation-card.waiting` | Waiting \{time\} |
+| `escalation-card.why` | Why a person is needed: |
 | `event-calendar.add` | Add event |
 | `event-calendar.allDay` | All day |
 | `event-calendar.describeAllDay` | \{title\}, \{date\}, all day\{where\} |
@@ -334,6 +356,14 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `finder-window.size` | Size |
 | `finder-window.view` | View |
 | `floating-nav.label` | Primary |
+| `flow-sankey.from` | From |
+| `flow-sankey.hint` | Select a step to follow its flows. |
+| `flow-sankey.inout` | \{inV\} in · \{outV\} out |
+| `flow-sankey.label` | Flows between steps |
+| `flow-sankey.node` | \{label\}: \{inV\} in, \{outV\} out |
+| `flow-sankey.table` | Flows, from one step to the next |
+| `flow-sankey.to` | To |
+| `flow-sankey.value` | Amount |
 | `git-graph.label` | Commit history |
 | `git-graph.merge` | Merge |
 | `globe.label` | Rotating globe |
@@ -346,6 +376,10 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `handoff-card.handsOver` | hands over to |
 | `handoff-card.questions` | Open questions |
 | `handoff-card.rules` | Rules to keep |
+| `heat-grid.cell` | \{row\}, \{column\}: \{value\} |
+| `heat-grid.label` | Values |
+| `heat-grid.legend` | Legend |
+| `heat-grid.none` | No data |
 | `icon-cloud.label` | Items |
 | `image-cropper.degrees` | \{degrees\} degrees |
 | `image-cropper.errorTitle` | The picture could not be loaded |
@@ -508,6 +542,17 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `popover.closeLabel` | Close popover |
 | `progress-steps.label` | Progress |
 | `progress-steps.returnTo` | Return to \{label\} |
+| `prompt-diff.added` | +\{count\} words |
+| `prompt-diff.addedMark` | [added: |
+| `prompt-diff.after` | After |
+| `prompt-diff.before` | Before |
+| `prompt-diff.removed` | −\{count\} words |
+| `prompt-diff.removedMark` | [removed: |
+| `prompt-diff.restore` | Restore \{label\} |
+| `prompt-diff.same` | The two versions are the same. |
+| `prompt-diff.split` | Side by side |
+| `prompt-diff.unified` | Inline |
+| `prompt-diff.view` | View |
 | `prompt-input.attachments` | Attachments |
 | `prompt-input.label` | Attach files |
 | `prompt-input.message` | Message |
@@ -667,9 +712,39 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `token-meter.pill` | \{title\}: \{percent\}% used. \{state\}. |
 | `token-meter.summary` | \{used\} of \{limit\} tokens used, \{percent\}%. \{state\}. |
 | `token-meter.title` | Context window |
+| `tool-catalog.all` | All |
+| `tool-catalog.attention` | Needs attention |
+| `tool-catalog.calls` | \{count\} calls this week |
+| `tool-catalog.count` | \{count\} tools shown |
+| `tool-catalog.errors` | \{rate\}% fail |
+| `tool-catalog.failed` | \{name\} could not be changed, so it is as it was. |
+| `tool-catalog.filter` | Filter tools |
+| `tool-catalog.flaky` | fails often |
+| `tool-catalog.highOn` | On for a high-risk tool: check it is meant to be. |
+| `tool-catalog.latency` | \{ms\} ms typical |
+| `tool-catalog.none` | No tools match. |
+| `tool-catalog.off` | Off |
+| `tool-catalog.on` | On |
+| `tool-catalog.schema` | \{name\} input schema |
+| `tool-catalog.search` | Search tools |
+| `tool-catalog.searchPlaceholder` | Search by name or description |
+| `tool-catalog.switch` | \{name\} is on |
+| `tool-catalog.title` | Tools |
 | `toolbar.ariaLabel` | Search |
 | `toolbar.clearSearch` | Clear search |
 | `toolbar.search` | Search |
+| `trace-waterfall.failed` | failed |
+| `trace-waterfall.failedShort` | Failed |
+| `trace-waterfall.hint` | Select a span to see its timing. Right opens a span, Left closes it. |
+| `trace-waterfall.item` | \{name\}, \{kind\}, \{duration\}, starts at \{start\}\{failed\} |
+| `trace-waterfall.label` | Spans of the run |
+| `trace-waterfall.share` | \{percent\}% of the run |
+| `trace-waterfall.span` | Step |
+| `treemap.cell` | \{label\}: \{value\}\{unit\}, \{share\}% of the total\{group\} |
+| `treemap.groups` | Groups |
+| `treemap.hint` | Select a block to see its share. |
+| `treemap.label` | Share of the total by item |
+| `treemap.share` | \{percent\}% of the total |
 | `user-menu.signOut` | Sign out |
 | `video-dialog.closeVideo` | Close video |
 | `video-dialog.playVideo` | Play video: \{title\} |
@@ -679,6 +754,10 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `voice-input.processingLabel` | Transcribing… |
 | `voice-input.recordingTime` | Recording time |
 | `voice-input.stopAndUseRecording` | Stop and use recording |
+| `waterfall-chart.after` | Total after |
+| `waterfall-chart.change` | Change |
+| `waterfall-chart.ends` | Ends at \{value\}. |
+| `waterfall-chart.step` | Step |
 | `webhook-card.events` | Events |
 | `webhook-card.hideSigningSecret` | Hide signing secret |
 | `webhook-card.moreEvents` | +\{count\} more |

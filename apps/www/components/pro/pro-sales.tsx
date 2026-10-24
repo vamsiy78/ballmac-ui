@@ -153,7 +153,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
               The screens your app needs, finished, and feeling native.
             </h1>
             <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed text-pretty">
-              {total} production-ready blocks and {starters} starter apps for React, Tailwind and shadcn: dashboards, billing, settings, sign-in, mail and more. They take the feel of macOS, Windows or iOS with one setting, and come with loading, empty and error states already handled.
+              {total} finished, production-ready blocks for React, Tailwind and shadcn: dashboards, billing, settings, sign-in, mail and more. They take the feel of macOS, Windows or iOS with one setting, and come with loading, empty and error states already handled.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               {buy("hero")}

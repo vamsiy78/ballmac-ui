@@ -232,6 +232,21 @@ export const blockCategoryLabels: Record<string, string> = {
   booking: "Class booking",
   workorder: "Work orders",
   dispatch: "Dispatch",
+  cost: "Cloud cost",
+  matrix: "Health matrix",
+  runbook: "Runbooks",
+  capacity: "Capacity",
+  secrets: "Secrets",
+  alerts: "Alert rules",
+  deploys: "Deploy history",
+  floorplan: "Floor plan",
+  gradebook: "Gradebook",
+  inspection: "Inspections",
+  fleet: "Fleet",
+  salon: "Salon booking",
+  donations: "Donations",
+  rentals: "Rentals",
+  claims: "Claims",
 }
 
 /** Section order within each group, the order sections appear on a page. */
@@ -264,13 +279,13 @@ export const blockGroups = [
     id: "ops",
     label: "Operations",
     description: "Screens for the people who keep a product running: audit logs, access reviews, on-call rotas, incidents, deploy pipelines, job queues, SLOs and scheduled jobs.",
-    categories: ["audit", "access", "oncall", "incident", "pipeline", "queues", "slo", "cron"],
+    categories: ["audit", "access", "oncall", "incident", "pipeline", "queues", "slo", "cron", "cost", "matrix", "runbook", "capacity", "secrets", "alerts", "deploys"],
   },
   {
     id: "vertical",
     label: "Industry apps",
     description: "Screens for one trade, each with the states it really has: a clinic schedule, a kitchen display, legal matters, property listings, class booking, work orders and dispatch.",
-    categories: ["clinic", "kitchen", "matter", "listing", "booking", "workorder", "dispatch"],
+    categories: ["clinic", "kitchen", "matter", "listing", "booking", "workorder", "dispatch", "floorplan", "gradebook", "inspection", "fleet", "salon", "donations", "rentals", "claims"],
   },
   {
     id: "shop",

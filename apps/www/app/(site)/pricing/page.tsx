@@ -25,7 +25,7 @@ import { thumbFor } from "@/lib/thumbs"
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Ballmac UI's components, blocks and templates are free to use. Ballmac UI Pro adds 150 premium blocks and complete SaaS starter apps.",
+  description: "Ballmac UI's components, blocks and templates are free to use. Ballmac UI Pro adds 150 finished app blocks, a private registry and Figma tokens.",
   alternates: { canonical: "/pricing" },
 }
 
@@ -96,8 +96,8 @@ export default async function PricingPage() {
         [true, "Loading, empty and error states built into blocks that show data"],
         [true, "Light, dark and RTL support on every block"],
         [true, "Screens that take macOS, Windows or iOS handling with one setting, in light and dark"],
-        [true, "Three starter apps: Beacon (SaaS with teams, Stripe billing and a dashboard), Quire (an AI assistant that cites its sources) and Cove (a desktop notes app)"],
         [true, "Figma design tokens for every theme"],
+        [true, "Three starter apps: Beacon (SaaS with teams, Stripe billing and a dashboard), Quire (an AI assistant that cites its sources) and Cove (a desktop notes app)"],
         [false, "More starter apps (planned)"],
         [false, "Figma component library (planned)"],
       ],
@@ -167,7 +167,7 @@ export default async function PricingPage() {
             <Eyebrow>Pricing</Eyebrow>
           </div>
           <h1 className="text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">The screens your app needs, finished. Pay once.</h1>
-          <p className="text-muted-foreground text-lg leading-relaxed">The core library is free for any project. Pro adds {proBlocks} finished screens and three starter apps, so you spend the week on your product.</p>
+          <p className="text-muted-foreground text-lg leading-relaxed">The core library is free for any project. Pro adds {proBlocks} finished screens, a private registry and Figma tokens, so you spend the week on your product.</p>
         </header>
 
         {f?.endsAt && (

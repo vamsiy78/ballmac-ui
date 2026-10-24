@@ -6,10 +6,10 @@
     "homepage": "https://ui.ballmac.com",
     "source": "https://ui.ballmac.com/r/registry.json"
   },
-  "generated": "2026-10-24T16:35:11.605Z",
+  "generated": "2026-10-24T19:11:13.344Z",
   "items": {
-    "total": 1805,
-    "scored": 459
+    "total": 1938,
+    "scored": 486
   },
   "score": 97,
   "grade": "A",
@@ -19,17 +19,17 @@
       "label": "Accessibility",
       "what": "No unlabelled controls, missing alt text, clickable non-interactive elements, removed focus outlines or hand-made dialogs in the source.",
       "weight": 25,
-      "pass": 428,
-      "fail": 20,
+      "pass": 454,
+      "fail": 21,
       "na": 11,
-      "pct": 95.5
+      "pct": 95.6
     },
     {
       "id": "schema",
       "label": "Valid item",
       "what": "A kebab-case name, a known type, and at least one file with a path and content.",
       "weight": 15,
-      "pass": 459,
+      "pass": 486,
       "fail": 0,
       "na": 0,
       "pct": 100
@@ -39,7 +39,7 @@
       "label": "Dependencies declared",
       "what": "Every package the code imports is in dependencies, and every shared registry component it imports is in registryDependencies.",
       "weight": 15,
-      "pass": 459,
+      "pass": 486,
       "fail": 0,
       "na": 0,
       "pct": 100
@@ -49,17 +49,17 @@
       "label": "Theme tokens",
       "what": "Colors come from theme tokens, not hard-coded hex or rgb values, so the item follows the theme and dark mode.",
       "weight": 10,
-      "pass": 386,
-      "fail": 62,
+      "pass": 412,
+      "fail": 63,
       "na": 11,
-      "pct": 86.2
+      "pct": 86.7
     },
     {
       "id": "states",
       "label": "States",
       "what": "Data views handle loading, empty and error, not only the filled case.",
       "weight": 10,
-      "pass": 446,
+      "pass": 473,
       "fail": 0,
       "na": 13,
       "pct": 100
@@ -69,7 +69,7 @@
       "label": "Motion",
       "what": "No endless decorative animation, which cannot be paused for people who ask for less motion.",
       "weight": 5,
-      "pass": 447,
+      "pass": 474,
       "fail": 1,
       "na": 11,
       "pct": 99.8
@@ -79,17 +79,17 @@
       "label": "Right to left",
       "what": "Logical classes (ms-, pe-, text-start) instead of physical ones (ml-, pr-, text-left), so the layout mirrors.",
       "weight": 5,
-      "pass": 439,
+      "pass": 466,
       "fail": 9,
       "na": 11,
-      "pct": 98
+      "pct": 98.1
     },
     {
       "id": "describe",
       "label": "Described",
       "what": "A title and a description that says what the item is (20 characters or more).",
       "weight": 5,
-      "pass": 459,
+      "pass": 486,
       "fail": 0,
       "na": 0,
       "pct": 100
@@ -99,7 +99,7 @@
       "label": "Documented",
       "what": "A docs note, or at least one example item in the registry.",
       "weight": 5,
-      "pass": 446,
+      "pass": 473,
       "fail": 0,
       "na": 13,
       "pct": 100
@@ -109,7 +109,7 @@
       "label": "Attributed",
       "what": "The item names its author or license, so you know who maintains it.",
       "weight": 5,
-      "pass": 459,
+      "pass": 486,
       "fail": 0,
       "na": 0,
       "pct": 100
@@ -304,6 +304,26 @@
       ]
     },
     {
+      "name": "flow-sankey",
+      "type": "registry:ui",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/focus-outline-removed: <button> removes the focus outline and adds no focus style."
+      ]
+    },
+    {
       "name": "git-graph",
       "type": "registry:ui",
       "score": 75,
@@ -402,26 +422,6 @@
       },
       "problems": [
         "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
-      ]
-    },
-    {
-      "name": "orgchart-1",
-      "type": "registry:block",
-      "score": 75,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "pass",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/clickable-non-interactive: <div> has onClick but is not focusable and has no role."
       ]
     }
   ],

@@ -33,7 +33,7 @@ export async function ProCallout({ where, className }: { where: string; classNam
         Need the whole screen, not one piece?
       </h2>
       <p className="text-muted-foreground mt-2 max-w-2xl text-[15px] leading-relaxed text-pretty">
-        {proBlocks} premium blocks (dashboards, settings, calendars, mail, shops, onboarding) and three complete starter apps, including a desktop app that looks native on macOS and Windows. Blocks that
+        {proBlocks} premium blocks (dashboards, settings, calendars, mail, shops, onboarding), a private shadcn registry and Figma tokens. Blocks that
         show data come with loading, empty and error states built in.
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">

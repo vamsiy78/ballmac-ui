@@ -44,7 +44,7 @@ export function WhatsNewBanner({ id, added, examples, href = "/changelog" }: { i
           <p className="flex items-center gap-2">
             <Sparkles className="size-3.5 shrink-0" aria-hidden="true" />
             <span>
-              <span className="font-semibold">{added} new blocks</span> in the free library, including {examples.join(", ")}.
+              <span className="font-semibold">{added} new items</span> in the free library, including {examples.join(", ")}.
             </span>
           </p>
           <Link href={href} className="focus-visible:ring-ring/50 inline-flex items-center gap-1 rounded-sm font-medium underline underline-offset-4 outline-none focus-visible:ring-[3px]">

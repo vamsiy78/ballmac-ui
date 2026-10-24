@@ -14,7 +14,8 @@
  * Site palette: neutral greys so the components carry the color, not the chrome. Components still
  * read only standard shadcn tokens, so this is also a live test that they adapt to any theme.
  */
-:root {
+:root,
+.bm-light {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);

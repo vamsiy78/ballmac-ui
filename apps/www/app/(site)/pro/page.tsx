@@ -12,8 +12,8 @@ import { getBlocks, isPro, itemHref } from "@/lib/registry"
 import { thumbFor } from "@/lib/thumbs"
 
 export const metadata: Metadata = {
-  title: "Ballmac UI Pro: 150 app blocks and 3 starter apps for React and shadcn",
-  description: "Dashboards, billing, settings, sign-in, mail and more, with loading, empty and error states built in, plus Beacon (SaaS), Quire (AI assistant) and Cove (desktop) starter apps. Pay once.",
+  title: "Ballmac UI Pro: 150 finished app blocks for React and shadcn",
+  description: "Dashboards, billing, settings, sign-in, mail and more, with loading, empty and error states built in. A private shadcn registry, Figma tokens and a 14-day fix-or-refund guarantee. Pay once.",
   alternates: { canonical: "/pro" },
 }
 
