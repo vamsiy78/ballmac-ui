@@ -216,7 +216,7 @@ export default async function PricingPage() {
                 </ul>
                 {plan.cta ? (
                   <Button asChild size="lg" shape="pill" variant={pro ? "secondary" : "outline"} className="mt-8">
-                    {plan.cta.external ? <CheckoutLink href={plan.cta.href}>{plan.cta.label}</CheckoutLink> : plan.cta.href.startsWith("mailto:") ? <a href={plan.cta.href}>{plan.cta.label}</a> : <Link href={plan.cta.href}>{plan.cta.label}</Link>}
+                    {plan.cta.external ? <CheckoutLink href={plan.cta.href} plan={plan.name === "Team" ? "team" : "pro"}>{plan.cta.label}</CheckoutLink> : plan.cta.href.startsWith("mailto:") ? <a href={plan.cta.href}>{plan.cta.label}</a> : <Link href={plan.cta.href}>{plan.cta.label}</Link>}
                   </Button>
                 ) : (
                   <Button asChild size="lg" shape="pill" variant={pro ? "secondary" : "outline"} className="mt-8">
