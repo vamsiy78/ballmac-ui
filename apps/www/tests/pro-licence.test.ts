@@ -41,7 +41,7 @@ describe("the Pro licence", () => {
   it("states the refund policy exactly: fix within 14 days or refund, nothing wider", () => {
     const text = licenceText()
     expect(text).toContain("within 14 days of your request")
-    expect(text).toContain("within 30 days of purchase")
+    expect(text).toContain("within 14 days of purchase")
     expect(text).not.toMatch(/\[[A-Za-z ]+\]/) // no leftover [bracketed] placeholders
   })
 

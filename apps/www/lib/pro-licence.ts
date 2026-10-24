@@ -171,7 +171,7 @@ export const proLicence: Section[] = [
       },
       {
         ol: [
-          "**Something does not work.** If a Pro item does not do what its page says (it fails to install, errors in a supported setup, or behaves differently from its documentation) and you tell us at hello@ballmac.com within 30 days of purchase, we will fix it or give you a working alternative within 14 days of your request. If we cannot, we will refund the full price you paid.",
+          "**Something does not work.** If a Pro item does not do what its page says (it fails to install, errors in a supported setup, or behaves differently from its documentation) and you tell us at hello@ballmac.com within 14 days of purchase, we will fix it or give you a working alternative within 14 days of your request. If we cannot, we will refund the full price you paid.",
           "**A mistake on our side.** If you are charged twice, charged the wrong amount or hit a technical error at checkout, we will refund the wrong payment in full.",
           "**After a refund** the licence for that purchase ends, the Licence Key stops working, and you must stop using the Pro Materials and delete the copies you hold, except in End Products that you have already delivered to end users.",
         ],
