@@ -6,6 +6,17 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-25-batch-run-and-review] - 2026-10-25
+
+**A queue, a grid for batch runs, a review desk and three more agent screens.** See a whole batch at a glance and retry only what failed, reorder what runs next, review what agents made from the keyboard, and polish a draft with suggestions you accept one by one.
+
+### Added
+
+- `fan-out-grid` shows many things done at once as tiles, one per file or record, marked by state with an icon and a word, with filters, arrow-key movement in every direction and Retry for the ones that failed. `agent-queue` shows what an agent will do next, with real buttons to move, pause, prioritise and cancel.
+- `review-center` is a desk for what agents made: the agent's confidence, the thing itself, Approve or Request changes, and J, K, A and R keys so a person can go fast. Decisions show at once and are taken back with the reason if saving fails.
+- `writing-assistant` shows suggested edits in place, with a different underline for each kind, and Accept, Dismiss and Accept all. `prompt-library` is a shelf of saved prompts with labelled fields for their {{variables}}. `message-actions` is the small bar under an AI reply: copy, try again, good or bad answer with a reason, branch and share.
+- Blocks that put them together: `agent-13` (review desk), `agent-14` (batch run) and `agent-15` (draft studio).
+
 ## [2026-10-25-agent-workbench] - 2026-10-25
 
 **A run workbench, mission control and six new agent components.** Steer an agent while it works, see its plan against what happened, watch its memory fill, and oversee a whole team of agents with spend and approvals in one place.

@@ -31,6 +31,18 @@
     "version": "1.0.0",
     "hash": "681d093c6d03516d38c5bd17f61012c14a8f86abefb73219f8b8b746f935fd18"
   },
+  "agent-13": {
+    "version": "1.0.0",
+    "hash": "bbe6b47c56e111aa396f7ff5308365bbb134dc7d3baea49b2790eb7390c6b501"
+  },
+  "agent-14": {
+    "version": "1.0.0",
+    "hash": "3d71d930502ec60dd5e3fe2bc3ef39f410ee57bb0ba16673be803ddbc5aedbc3"
+  },
+  "agent-15": {
+    "version": "1.0.0",
+    "hash": "eca8f6882e3f6a3e6b8491247096cef37a9f9b2efceba18aa8d5c74f86df02f9"
+  },
   "agent-2": {
     "version": "1.0.0",
     "hash": "7c26952798c31961ad83ba07e3f00a37e0c74398ffafddd0bb5ab2f4e16fbcc8"
@@ -74,6 +86,10 @@
   "agent-plan": {
     "version": "1.0.0",
     "hash": "7ff6938b4c4b4208754afd5f610fe0a849ee8e179adec47184229230e530771c"
+  },
+  "agent-queue": {
+    "version": "1.0.0",
+    "hash": "97c7a743fab91d8978c0e1192a220e04d809ebac03f09588a408dbde110e223d"
   },
   "agent-roster": {
     "version": "1.0.0",
@@ -703,6 +719,10 @@
     "version": "1.0.0",
     "hash": "3d9a31aefc524ceca3e5cf9af470b0a98a30df4c748e4b30841709504a51c17b"
   },
+  "fan-out-grid": {
+    "version": "1.0.0",
+    "hash": "38f4d780186962127fd02ad75cea63df7ca215b6dd8227606051582854536e98"
+  },
   "faq-1": {
     "version": "1.0.0",
     "hash": "eb27572e36a6718faf42123af7d0d9577ca5ac12d6e13b01a3ed58ca493516eb"
@@ -1239,6 +1259,10 @@
     "version": "1.0.1",
     "hash": "36f9a880e5d63ceeca030f3e6f0a45f5c78821e46de4cac63a183dc003caf613"
   },
+  "message-actions": {
+    "version": "1.0.0",
+    "hash": "f0abfc4c96eebf1183ea7ee3a0cd544bfd23b48d0603e047a6fa98e42fce06a9"
+  },
   "meteors": {
     "version": "1.0.0",
     "hash": "fe9356e1f0b1923685d96a74d3c58af1598365e4d0d72d3dc6d77873593b7312"
@@ -1503,6 +1527,10 @@
     "version": "1.0.0",
     "hash": "dc9059c6faffbc2990063a735cb67f21c1062e4f864f9039eaf4d649bb23040c"
   },
+  "prompt-library": {
+    "version": "1.0.0",
+    "hash": "ed31b0e458259b30198d59008039ddacb860137fc8fda3269e1760b30713d7fc"
+  },
   "pulse-button": {
     "version": "1.0.1",
     "hash": "e4685d1dccf67b0d61d3c43adf51e7bb4cb922774a8f76e3cd7c979aa94e1098"
@@ -1562,6 +1590,10 @@
   "return-focus": {
     "version": "1.0.0",
     "hash": "f3ea133937d4fe32b40420f6e3449981365e76fe5c76472707d8e14262b262e6"
+  },
+  "review-center": {
+    "version": "1.0.0",
+    "hash": "9dfe53c44b007e05c6448508986a52605471ff62446f33f8c9c068b9e65aebf8"
   },
   "reviews-1": {
     "version": "1.0.0",
@@ -2178,5 +2210,9 @@
   "workspace-card": {
     "version": "1.0.1",
     "hash": "1a5f0411f681e33d5c229d689166ec0295dbf4844978d7a6840fd4e4faf7f527"
+  },
+  "writing-assistant": {
+    "version": "1.0.0",
+    "hash": "2df5956e6f579ee06429754d5356afb232cba4a0937586a286697995f8ab01fe"
   }
 }

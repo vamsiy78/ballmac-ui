@@ -4,7 +4,7 @@ description: "Every translatable message in Ballmac UI, with its key and English
 generatedFrom: registry/ballmac
 ---
 
-Every built-in label, placeholder and screen reader text is a message with an English default: 871 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
+Every built-in label, placeholder and screen reader text is a message with an English default: 983 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
 
 | Key | English |
 | --- | --- |
@@ -34,6 +34,32 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `agent-plan.progress` | \{title\} progress |
 | `agent-plan.retry` | Retry |
 | `agent-plan.title` | Plan |
+| `agent-queue.cancel` | Cancel \{title\} |
+| `agent-queue.cancelled` | \{title\} cancelled |
+| `agent-queue.confirm` | Cancel this task? |
+| `agent-queue.confirmLabel` | Confirm cancelling \{title\} |
+| `agent-queue.down` | Move \{title\} down |
+| `agent-queue.empty` | Nothing is waiting. |
+| `agent-queue.failed` | That did not work. Nothing was changed. |
+| `agent-queue.keep` | Keep it |
+| `agent-queue.moved` | \{title\} moved to position \{position\} |
+| `agent-queue.pause` | Pause \{title\} |
+| `agent-queue.paused` | \{title\} paused |
+| `agent-queue.pausedChip` | Paused |
+| `agent-queue.priority` | Priority |
+| `agent-queue.priorityDone` | \{title\} is now \{priority\} priority |
+| `agent-queue.priorityFor` | Priority of \{title\} |
+| `agent-queue.priorityText` | \{priority\} priority |
+| `agent-queue.resume` | Resume \{title\} |
+| `agent-queue.resumed` | \{title\} resumed |
+| `agent-queue.running` | \{count\} running |
+| `agent-queue.runningNow` | Running now |
+| `agent-queue.slotsLabel` | \{busy\} of \{slots\} slots in use |
+| `agent-queue.title` | Queue |
+| `agent-queue.up` | Move \{title\} up |
+| `agent-queue.upNext` | Up next |
+| `agent-queue.waiting` | \{count\} waiting |
+| `agent-queue.yes` | Yes, cancel it |
 | `agent-roster.all` | All |
 | `agent-roster.count` | \{count\} agents shown |
 | `agent-roster.filter` | Filter by status |
@@ -362,6 +388,19 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `event-calendar.openDay` | Open \{date\} |
 | `event-calendar.today` | Today |
 | `event-calendar.viewSwitch` | Calendar view |
+| `fan-out-grid.all` | All |
+| `fan-out-grid.barLabel` | \{done\} done, \{running\} running, \{failed\} failed, \{queued\} queued |
+| `fan-out-grid.failedCount` | \{count\} failed |
+| `fan-out-grid.filter` | Show |
+| `fan-out-grid.hint` | Select a tile to see what happened. Arrow keys move between tiles. |
+| `fan-out-grid.none` | No items match. |
+| `fan-out-grid.retry` | Retry \{count\} failed |
+| `fan-out-grid.retryFailed` | They could not be retried. Nothing was changed. |
+| `fan-out-grid.retryOne` | Retry this one |
+| `fan-out-grid.runningCount` | \{count\} running |
+| `fan-out-grid.summary` | \{done\} of \{total\} finished |
+| `fan-out-grid.tile` | \{label\}, \{status\} |
+| `fan-out-grid.title` | Items |
 | `feedback-widget.tellUsMore` | Tell us more |
 | `feedback-widget.thankYou` | Thank you |
 | `feedback-widget.topic` | Topic |
@@ -504,6 +543,21 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `mention-input.noMatches` | No matches for “\{query\}” |
 | `mention-input.searching` | Searching |
 | `mention-input.suggestions` | Suggestions |
+| `message-actions.bad` | Bad answer |
+| `message-actions.branch` | Branch from here |
+| `message-actions.branched` | A new conversation started from here. |
+| `message-actions.copied` | Copied |
+| `message-actions.copy` | Copy |
+| `message-actions.copyFailed` | It could not be copied. Select the text and copy it yourself. |
+| `message-actions.failed` | That did not work. Nothing was changed. |
+| `message-actions.good` | Good answer |
+| `message-actions.label` | Message actions |
+| `message-actions.regenerate` | Try again |
+| `message-actions.regenerated` | A new answer is on its way. |
+| `message-actions.share` | Share |
+| `message-actions.skip` | Skip |
+| `message-actions.thanks` | Thanks, that helps. |
+| `message-actions.why` | What was wrong? |
 | `model-compare.all` | All |
 | `model-compare.chosen` | \{name\} by \{provider\} is selected. |
 | `model-compare.context` | \{size\} context |
@@ -640,6 +694,24 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `prompt-input.remove` | Remove \{name\} |
 | `prompt-input.stopLabel` | Stop generating |
 | `prompt-input.submitLabel` | Send message |
+| `prompt-library.all` | All |
+| `prompt-library.copied` | Copied |
+| `prompt-library.copy` | Copy |
+| `prompt-library.copyFailed` | It could not be copied. Select the text and copy it yourself. |
+| `prompt-library.hint` | Pick a prompt to fill it in. |
+| `prompt-library.insert` | Insert |
+| `prompt-library.insertFailed` | It could not be inserted. Nothing was changed. |
+| `prompt-library.inserted` | Inserted: \{title\} |
+| `prompt-library.list` | Saved prompts |
+| `prompt-library.missing` | Fill in: \{names\} |
+| `prompt-library.none` | No prompts match. |
+| `prompt-library.pin` | Pin \{title\} |
+| `prompt-library.pinFailed` | It could not be pinned. |
+| `prompt-library.preview` | Preview |
+| `prompt-library.search` | Search prompts |
+| `prompt-library.tags` | Tags |
+| `prompt-library.title` | Prompts |
+| `prompt-library.unpin` | Unpin \{title\} |
 | `qr-code.empty` | Nothing to encode yet |
 | `qr-code.label` | QR code for \{value\} |
 | `qr-code.tooLong` | This is too long to fit in a QR code. Use a shorter link. |
@@ -651,6 +723,28 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `rating.label` | Rating |
 | `rating.ofStars` | \{number\} of \{count\} stars |
 | `resizable.label` | Resize panels |
+| `review-center.approve` | Approve |
+| `review-center.approvedCount` | \{count\} approved |
+| `review-center.approvedDone` | Approved: \{title\} |
+| `review-center.cancel` | Cancel |
+| `review-center.changesCount` | \{count\} sent back |
+| `review-center.changesDone` | Sent back: \{title\} |
+| `review-center.commentLabel` | What should change? |
+| `review-center.confidence` | \{percent\}% sure |
+| `review-center.confidenceMeter` | Agent confidence |
+| `review-center.confidenceSpoken` | \{percent\}% sure |
+| `review-center.empty` | Nothing to review. |
+| `review-center.failed` | The decision was not saved. Nothing was changed. |
+| `review-center.hint` | Select an item to review it. |
+| `review-center.keys` | \{j\} and \{k\} move, \{a\} approves, \{r\} asks for changes. |
+| `review-center.listLabel` | Items to review |
+| `review-center.lowConfidence` | worth a close look |
+| `review-center.needComment` | Say what should change first. |
+| `review-center.requestChanges` | Request changes |
+| `review-center.sendBack` | Send it back |
+| `review-center.title` | Review |
+| `review-center.toReview` | \{count\} to review |
+| `review-center.youAsked` | You asked for: |
 | `rich-text-editor.charsOf` | \{count\} of \{limit\} characters |
 | `rich-text-editor.hint` | Press Escape, then Tab, to leave the editor. |
 | `rich-text-editor.linkInvalid` | Enter a web address like example.com. |
@@ -879,3 +973,21 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `workspace-card.current` | Current |
 | `workspace-card.loadingWorkspace` | Loading workspace |
 | `workspace-card.storageUsed` | Storage used |
+| `writing-assistant.accept` | Accept |
+| `writing-assistant.acceptAll` | Accept all |
+| `writing-assistant.accepted` | Accepted: \{text\} |
+| `writing-assistant.acceptedAll` | Accepted \{count\} suggestions |
+| `writing-assistant.dismiss` | Dismiss |
+| `writing-assistant.dismissed` | Dismissed: \{text\} |
+| `writing-assistant.done` | Done editing |
+| `writing-assistant.draft` | Your draft |
+| `writing-assistant.edit` | Edit the text |
+| `writing-assistant.insert` | Use instead: |
+| `writing-assistant.mark` | Suggestion, \{kind\}: \{text\} |
+| `writing-assistant.none` | No suggestions. This reads well. |
+| `writing-assistant.nothing` | (nothing) |
+| `writing-assistant.remove` | Remove: |
+| `writing-assistant.showSuggestion` | Show: \{text\} |
+| `writing-assistant.textLabel` | Your draft |
+| `writing-assistant.title` | Suggestions |
+| `writing-assistant.whileEditing` | Suggestions come back when you finish editing. |

@@ -697,6 +697,147 @@
       }
     },
     {
+      "name": "agent-queue",
+      "type": "registry:ui",
+      "title": "Agent Queue",
+      "description": "What an agent has on its plate: tasks running in their slots and waiting ones in order, with real buttons to move, pause, prioritise and cancel (cancel asks first), moves shown at once and undone with the reason if they fail.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/agent-queue.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/agent-queue.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "queue",
+          "tasks",
+          "priority",
+          "reorder",
+          "pause",
+          "scheduling"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "tasks is [{ id, title, state: running | queued | paused, priority?: high | normal | low, progress?, eta?, agent? }] (required); slots (default 3). Running tasks fill the slots; the rest wait in order. onMove(id, toIndex), onPause(id, paused), onCancel(id) (after the person confirms) and onPriority(id, priority) may be async: a move is shown at once and put back with the reason if it rejects. Each button only appears when its handler is given.",
+          "whenToUse": [
+            "Letting a person see and reorder the work an agent will do next",
+            "A job queue with priorities, pause and cancel"
+          ],
+          "whenNotToUse": [
+            "Many parallel items of the same kind; use fan-out-grid",
+            "Steps of one plan; use plan-tracker",
+            "Scheduled recurring jobs; use cron-1"
+          ],
+          "composesWith": [
+            "fan-out-grid",
+            "agent-tree",
+            "plan-tracker",
+            "agent-steering"
+          ],
+          "a11y": [
+            {
+              "keys": "Reordering",
+              "action": "Move up and Move down are real buttons named for the task, so it works from the keyboard and a screen reader; the first cannot move up and the last cannot move down"
+            },
+            {
+              "keys": "Announcements",
+              "action": "Every change is announced in a polite live region, such as 'Email receipts moved to position 1'"
+            },
+            {
+              "keys": "Cancel",
+              "action": "A two-step confirmation in a labelled group: 'Cancel this task?' with 'Yes, cancel it' and 'Keep it'"
+            },
+            {
+              "keys": "Progress",
+              "action": "Running tasks have a progressbar named for the task"
+            },
+            {
+              "keys": "Errors",
+              "action": "A failed change is an alert on the task, and a failed move puts the task back"
+            }
+          ],
+          "customization": [
+            "tasks and slots",
+            "onMove, onPause, onCancel, onPriority",
+            "title"
+          ]
+        },
+        "statesNone": "A presentational list: the tasks are passed in with their own state, so it has nothing of its own to load. An empty queue says nothing is waiting.",
+        "examples": [
+          "agent-queue-demo",
+          "agent-queue-empty"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-queue"
+      }
+    },
+    {
+      "name": "agent-queue-demo",
+      "type": "registry:example",
+      "title": "Agent Queue: Reorder, pause and cancel",
+      "description": "Reorder, pause and cancel example of Agent Queue.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-queue.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-queue-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-queue-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-queue",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-queue-empty",
+      "type": "registry:example",
+      "title": "Agent Queue: Nothing waiting",
+      "description": "Nothing waiting example of Agent Queue.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-queue.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-queue-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-queue-empty.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-queue",
+        "tier": "free"
+      }
+    },
+    {
       "name": "agent-roster",
       "type": "registry:ui",
       "title": "Agent Roster",
@@ -6281,6 +6422,695 @@
       "meta": {
         "example": true,
         "of": "agent-12",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-13",
+      "type": "registry:block",
+      "title": "Agent 13: review desk",
+      "description": "A review desk for what agents produced: pick an item, read what it did and changed, approve it or send it back with a reason, all from the keyboard, and it moves on to the next one waiting.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/review-center.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-13/agent-13.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-13/agent-13.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "review",
+          "approval",
+          "human in the loop",
+          "inbox",
+          "diff",
+          "keyboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Review desk. <Agent13 title description items={ReviewItem[]} onApprove={(id) => Promise} onRequestChanges={(id, comment) => Promise} />. Each item's preview can be any node (the sample uses a diff with added and removed lines written out for screen readers). J and K move, A approves, R asks for changes; decisions are optimistic and undone with the reason if they reject.",
+          "whenToUse": [
+            "The screen where a person checks what agents made before it goes out",
+            "A fast approval queue with context"
+          ],
+          "whenNotToUse": [
+            "One approval inside a chat; use approval-card",
+            "Many agents at once; use agent-12",
+            "A batch of identical items; use agent-14"
+          ],
+          "composesWith": [
+            "agent-12",
+            "agent-2",
+            "agent-11",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "List",
+              "action": "A listbox of items with state in words; J and K or the arrow keys move; one option is in the tab order"
+            },
+            {
+              "keys": "Decisions",
+              "action": "A and R decide; Approve and Request changes are native buttons; results are announced politely and failures are alerts"
+            },
+            {
+              "keys": "Diffs",
+              "action": "Added and removed lines are prefixed with the words 'Added:' and 'Removed:' for screen readers, as well as shown by colour and a sign"
+            }
+          ],
+          "customization": [
+            "title and description",
+            "items (with any preview)",
+            "onApprove and onRequestChanges"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-13-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton list and detail under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Nothing to review",
+            "example": "agent-13-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says nothing is to review; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-13-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was approved or sent back, with Try again (onRetry). A decision that fails to save is taken back with the reason."
+          }
+        ],
+        "examples": [
+          "agent-13-demo",
+          "agent-13-clear",
+          "agent-13-loading",
+          "agent-13-empty",
+          "agent-13-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-13"
+      }
+    },
+    {
+      "name": "agent-13-demo",
+      "type": "registry:example",
+      "title": "Agent 13: review desk: Default",
+      "description": "Default example of Agent 13: review desk.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-13.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-13-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-13-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-13",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-13-clear",
+      "type": "registry:example",
+      "title": "Agent 13: review desk: All reviewed",
+      "description": "All reviewed example of Agent 13: review desk.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-13.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-13-clear.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-13-clear.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-13",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-13-loading",
+      "type": "registry:example",
+      "title": "Agent 13: review desk: Loading",
+      "description": "Loading example of Agent 13: review desk.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-13.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-13-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-13-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-13",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-13-empty",
+      "type": "registry:example",
+      "title": "Agent 13: review desk: Nothing to review",
+      "description": "Nothing to review example of Agent 13: review desk.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-13.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-13-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-13-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-13",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-13-error",
+      "type": "registry:example",
+      "title": "Agent 13: review desk: Could not load",
+      "description": "Could not load example of Agent 13: review desk.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-13.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-13-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-13-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-13",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-14",
+      "type": "registry:block",
+      "title": "Agent 14: batch run",
+      "description": "A batch run in one view: tiles for everything being processed (done, running or failed, with Retry), and the queue of what runs next, where waiting work can be reordered, paused or cancelled.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/agent-queue.json",
+        "https://ui.ballmac.com/r/fan-out-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-14/agent-14.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-14/agent-14.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "batch",
+          "bulk",
+          "queue",
+          "retry",
+          "progress",
+          "parallel",
+          "operations"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Batch run. <Agent14 title description items={FanItem[]} tasks={QueueTask[]} slots onRetryItems={(ids) => Promise} onMove onPause onCancel onPriority />. The grid answers which items went wrong (it opens on the first failed one); the queue answers what happens next. Both report failures plainly and change nothing when a handler rejects. (onRetry is the usual retry for the error state.)",
+          "whenToUse": [
+            "Watching a bulk job where one agent task runs over many files or records",
+            "Deciding what runs next and retrying only what failed"
+          ],
+          "whenNotToUse": [
+            "One long run; use agent-11",
+            "A team of different agents; use agent-12"
+          ],
+          "composesWith": [
+            "agent-12",
+            "agent-11",
+            "agent-13",
+            "cost-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Tiles",
+              "action": "Buttons named for the item and state; arrow keys move in every direction; the state is an icon and a word, not only colour"
+            },
+            {
+              "keys": "Queue",
+              "action": "Move up and down are real buttons named for the task; every change is announced"
+            },
+            {
+              "keys": "Retry",
+              "action": "Native buttons; failures are alerts"
+            }
+          ],
+          "customization": [
+            "title, description, slots",
+            "items and tasks",
+            "onRetryItems, onMove, onPause, onCancel, onPriority"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-14-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton grid and queue under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No batch running",
+            "example": "agent-14-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no batch is running; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-14-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A retry or a queue change that fails says why and changes nothing."
+          }
+        ],
+        "examples": [
+          "agent-14-demo",
+          "agent-14-small",
+          "agent-14-loading",
+          "agent-14-empty",
+          "agent-14-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-14"
+      }
+    },
+    {
+      "name": "agent-14-demo",
+      "type": "registry:example",
+      "title": "Agent 14: batch run: Default",
+      "description": "Default example of Agent 14: batch run.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-14.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-14-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-14-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-14",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-14-small",
+      "type": "registry:example",
+      "title": "Agent 14: batch run: A small batch",
+      "description": "A small batch example of Agent 14: batch run.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-14.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-14-small.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-14-small.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-14",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-14-loading",
+      "type": "registry:example",
+      "title": "Agent 14: batch run: Loading",
+      "description": "Loading example of Agent 14: batch run.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-14.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-14-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-14-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-14",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-14-empty",
+      "type": "registry:example",
+      "title": "Agent 14: batch run: No batch running",
+      "description": "No batch running example of Agent 14: batch run.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-14.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-14-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-14-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-14",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-14-error",
+      "type": "registry:example",
+      "title": "Agent 14: batch run: Could not load",
+      "description": "Could not load example of Agent 14: batch run.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-14.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-14-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-14-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-14",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-15",
+      "type": "registry:block",
+      "title": "Agent 15: draft studio",
+      "description": "A drafting studio: pick a saved prompt and fill its blanks, let the agent write a first draft, polish it in place with suggestions you accept or dismiss one by one, and give feedback on the result.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/message-actions.json",
+        "https://ui.ballmac.com/r/prompt-library.json",
+        "https://ui.ballmac.com/r/writing-assistant.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-15/agent-15.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-15/agent-15.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "writing",
+          "draft",
+          "prompts",
+          "editor",
+          "suggestions",
+          "support"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Draft studio. <Agent15 title description prompts={LibraryPrompt[]} draft={{ text, suggestions }} onGenerate={(prompt, source) => Promise<{ text, suggestions } | void>} onFeedback={(value, reason?) => Promise} />. Inserting a finished prompt calls onGenerate; the draft and its suggestions are replaced with what it returns, or the old draft stays and the reason is shown if it rejects.",
+          "whenToUse": [
+            "Writing customer replies or documents from reusable prompts, with a human polish pass",
+            "A place where a model's draft is always reviewed in place"
+          ],
+          "whenNotToUse": [
+            "A long-form editor; use rich-text-editor",
+            "Reviewing many items; use agent-13"
+          ],
+          "composesWith": [
+            "agent-13",
+            "agent-11",
+            "ai-chat-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Steps",
+              "action": "Numbered headings 1 and 2 name the two parts; each part is its own labelled region"
+            },
+            {
+              "keys": "Draft",
+              "action": "Marked phrases are buttons with their kind in the name; Accept and Dismiss name the words they affect"
+            },
+            {
+              "keys": "Results",
+              "action": "Drafted from a prompt, accepted suggestions and feedback are announced politely; failures are alerts"
+            }
+          ],
+          "customization": [
+            "prompts",
+            "draft and suggestions",
+            "onGenerate and onFeedback"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-15-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton prompts and draft under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No prompts yet",
+            "example": "agent-15-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says there are no prompts yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-15-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A draft that fails to write says why and keeps the old one."
+          }
+        ],
+        "examples": [
+          "agent-15-demo",
+          "agent-15-fresh",
+          "agent-15-loading",
+          "agent-15-empty",
+          "agent-15-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-15"
+      }
+    },
+    {
+      "name": "agent-15-demo",
+      "type": "registry:example",
+      "title": "Agent 15: draft studio: Default",
+      "description": "Default example of Agent 15: draft studio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-15.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-15-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-15-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-15",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-15-fresh",
+      "type": "registry:example",
+      "title": "Agent 15: draft studio: With your own draft",
+      "description": "With your own draft example of Agent 15: draft studio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-15.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-15-fresh.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-15-fresh.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-15",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-15-loading",
+      "type": "registry:example",
+      "title": "Agent 15: draft studio: Loading",
+      "description": "Loading example of Agent 15: draft studio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-15.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-15-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-15-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-15",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-15-empty",
+      "type": "registry:example",
+      "title": "Agent 15: draft studio: No prompts yet",
+      "description": "No prompts yet example of Agent 15: draft studio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-15.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-15-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-15-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-15",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-15-error",
+      "type": "registry:example",
+      "title": "Agent 15: draft studio: Could not load",
+      "description": "Could not load example of Agent 15: draft studio.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-15.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-15-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-15-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-15",
         "tier": "free"
       }
     },
@@ -49297,6 +50127,148 @@
       }
     },
     {
+      "name": "fan-out-grid",
+      "type": "registry:ui",
+      "title": "Fan-out Grid",
+      "description": "Many things done at once as a grid of tiles, one per file or record, marked by state with an icon and a word, a segmented progress bar, filters, arrow-key movement in every direction, and Retry for the ones that failed.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/fan-out-grid.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/fan-out-grid.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "batch",
+          "parallel",
+          "grid",
+          "progress",
+          "retry",
+          "fan-out",
+          "bulk"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "items is [{ id, label, status: queued | running | done | failed | skipped, detail?, duration? }] (required); title, selected / defaultSelected / onSelectedChange. onRetry(ids) adds Retry buttons (all failed, and one on a selected failed tile); reject and the card says why. Filters appear for the states that have items. The header counts finished (done, failed and skipped) of the total.",
+          "whenToUse": [
+            "Showing a batch where one agent task runs over many files, rows or records",
+            "Bulk operations where the question is 'which ones failed?'"
+          ],
+          "whenNotToUse": [
+            "A handful of named steps; use plan-tracker",
+            "Work waiting in order; use agent-queue",
+            "A density of numbers by two dimensions; use heat-grid"
+          ],
+          "composesWith": [
+            "agent-queue",
+            "agent-tree",
+            "agent-12",
+            "run-ledger"
+          ],
+          "a11y": [
+            {
+              "keys": "Tiles",
+              "action": "Buttons named for the item and its state, such as 'invoice-004.pdf, failed'; one tile is in the tab order and the arrow keys move in every direction, with Home and End"
+            },
+            {
+              "keys": "State",
+              "action": "Never only colour: done, running, failed and skipped each have their own icon, and the state is a word in the name and in the detail"
+            },
+            {
+              "keys": "Bar",
+              "action": "The segmented bar is an image with a spoken total; the header says it in words too"
+            },
+            {
+              "keys": "Filters",
+              "action": "Toggle buttons with pressed state and counts"
+            },
+            {
+              "keys": "Retry",
+              "action": "Native buttons; a failure is an alert and nothing is changed"
+            }
+          ],
+          "customization": [
+            "items and title",
+            "selected and onSelectedChange",
+            "onRetry"
+          ]
+        },
+        "statesNone": "A presentational grid: the items are passed in with their own status, so it has nothing of its own to load. A filter with no match says so.",
+        "examples": [
+          "fan-out-grid-demo",
+          "fan-out-grid-done"
+        ],
+        "url": "https://ui.ballmac.com/components/fan-out-grid"
+      }
+    },
+    {
+      "name": "fan-out-grid-demo",
+      "type": "registry:example",
+      "title": "Fan-out Grid: 48 invoices in flight",
+      "description": "48 invoices in flight example of Fan-out Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/fan-out-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/fan-out-grid-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/fan-out-grid-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "fan-out-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "fan-out-grid-done",
+      "type": "registry:example",
+      "title": "Fan-out Grid: Everything finished",
+      "description": "Everything finished example of Fan-out Grid.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/fan-out-grid.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/fan-out-grid-done.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/fan-out-grid-done.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "fan-out-grid",
+        "tier": "free"
+      }
+    },
+    {
       "name": "feedback-widget",
       "type": "registry:ui",
       "title": "Feedback Widget",
@@ -57386,6 +58358,141 @@
       }
     },
     {
+      "name": "message-actions",
+      "type": "registry:ui",
+      "title": "Message Actions",
+      "description": "The small bar under an AI reply: copy, try again, good or bad answer (with reasons), branch, share. A real toolbar with arrow-key movement, spoken results, and choices taken back with the reason when they cannot be saved.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/message-actions.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/message-actions.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "chat",
+          "message",
+          "toolbar",
+          "feedback",
+          "copy",
+          "regenerate",
+          "thumbs"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "Each button appears only when you give it something to do: text (Copy), onRegenerate, onFeedback(value, reason?) (the thumbs; a thumbs down asks for a reason from reasons, default five, or Skip), onBranch, onShare. defaultFeedback. Handlers may be async; a rejection is shown as an alert and a thumbs choice is taken back. With nothing to do it renders nothing.",
+          "whenToUse": [
+            "Under every assistant message in a chat or a run",
+            "Collecting quick feedback with a reason on a bad answer"
+          ],
+          "whenNotToUse": [
+            "Actions on a person's own message; use a menu",
+            "A formal rating form; use a form"
+          ],
+          "composesWith": [
+            "ai-chat",
+            "writing-assistant",
+            "thinking-loader",
+            "tool-call-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Toolbar",
+              "action": "role=toolbar with a label; one button is in the tab order and Left, Right, Home and End move between buttons, wrapping at the ends"
+            },
+            {
+              "keys": "Buttons",
+              "action": "Icon buttons with a name and a title; the thumbs have pressed state"
+            },
+            {
+              "keys": "Results",
+              "action": "Copied, the thanks and any error are in one live region; errors are alerts"
+            },
+            {
+              "keys": "Reasons",
+              "action": "A labelled group of buttons after a thumbs down, with Skip"
+            }
+          ],
+          "customization": [
+            "which handlers to give",
+            "reasons",
+            "defaultFeedback"
+          ]
+        },
+        "statesNone": "A presentational toolbar: each action reports its own result, so it has nothing of its own to load.",
+        "examples": [
+          "message-actions-demo",
+          "message-actions-minimal"
+        ],
+        "url": "https://ui.ballmac.com/components/message-actions"
+      }
+    },
+    {
+      "name": "message-actions-demo",
+      "type": "registry:example",
+      "title": "Message Actions: Under an AI reply",
+      "description": "Under an AI reply example of Message Actions.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/message-actions.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/message-actions-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/message-actions-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "message-actions",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "message-actions-minimal",
+      "type": "registry:example",
+      "title": "Message Actions: Copy only",
+      "description": "Copy only example of Message Actions.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/message-actions.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/message-actions-minimal.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/message-actions-minimal.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "message-actions",
+        "tier": "free"
+      }
+    },
+    {
       "name": "meteors",
       "type": "registry:ui",
       "title": "Meteors",
@@ -61686,6 +62793,145 @@
       }
     },
     {
+      "name": "prompt-library",
+      "type": "registry:ui",
+      "title": "Prompt Library",
+      "description": "A shelf of saved prompts: search, filter by tag, pin favourites, and fill in the {{variables}} with labelled fields while a preview shows the finished text. Insert names anything missing; Copy puts it on the clipboard.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/prompt-library.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/prompt-library.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "prompts",
+          "library",
+          "templates",
+          "variables",
+          "snippets",
+          "chat",
+          "composer"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "prompts is [{ id, title, body, description?, tags?, favourite? }] (required); put {{variable}} in body where a person fills something in. title. onInsert(text, prompt) gets the finished text and may be async (reject and the card says why); onFavourite(id, favourite) pins or unpins (shown at once, put back with the reason if it rejects). Insert is refused with 'Fill in: …' naming what is missing. Exports extractVariables and fillPrompt.",
+          "whenToUse": [
+            "A set of reusable prompts a team shares, with blanks to fill in",
+            "The panel next to a chat composer that inserts a prepared prompt"
+          ],
+          "whenNotToUse": [
+            "Recent conversations; use a list of chats",
+            "Comparing two versions of a prompt; use prompt-diff"
+          ],
+          "composesWith": [
+            "message-actions",
+            "prompt-diff",
+            "ai-chat",
+            "writing-assistant"
+          ],
+          "a11y": [
+            {
+              "keys": "Search and tags",
+              "action": "A labelled search box; tags are toggle buttons with pressed state"
+            },
+            {
+              "keys": "List",
+              "action": "A list of buttons with pressed state; pinning is a separate toggle button named 'Pin <title>'"
+            },
+            {
+              "keys": "Variables",
+              "action": "Every variable gets a labelled field (underscores become spaces); an unfilled one is also shown dashed in the preview as {{name}}"
+            },
+            {
+              "keys": "Insert",
+              "action": "Refused with an alert that names what is missing, and the empty fields are marked invalid"
+            },
+            {
+              "keys": "Results",
+              "action": "'Inserted: …' and 'Copied' are announced politely; failures are alerts"
+            }
+          ],
+          "customization": [
+            "prompts and title",
+            "onInsert",
+            "onFavourite"
+          ]
+        },
+        "statesNone": "A presentational library: the prompts are passed in, so it has nothing of its own to load. A search with no match says so.",
+        "examples": [
+          "prompt-library-demo",
+          "prompt-library-small"
+        ],
+        "url": "https://ui.ballmac.com/components/prompt-library"
+      }
+    },
+    {
+      "name": "prompt-library-demo",
+      "type": "registry:example",
+      "title": "Prompt Library: A support team's prompts",
+      "description": "A support team's prompts example of Prompt Library.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/prompt-library.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/prompt-library-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/prompt-library-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "prompt-library",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "prompt-library-small",
+      "type": "registry:example",
+      "title": "Prompt Library: A short shelf",
+      "description": "A short shelf example of Prompt Library.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/prompt-library.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/prompt-library-small.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/prompt-library-small.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "prompt-library",
+        "tier": "free"
+      }
+    },
+    {
       "name": "pulse-button",
       "type": "registry:ui",
       "title": "Pulse Button",
@@ -63106,6 +64352,146 @@
       "meta": {
         "example": true,
         "of": "retro-grid",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "review-center",
+      "type": "registry:ui",
+      "title": "Review Center",
+      "description": "A desk for reviewing what agents made: items with the agent's confidence, a summary and the thing itself, Approve or Request changes with a comment, J, K, A and R keys, and decisions undone with the reason if saving fails.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/review-center.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/review-center.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "review",
+          "approval",
+          "human in the loop",
+          "inbox",
+          "keyboard",
+          "feedback"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "items is [{ id, title, agent?, summary, meta?, confidence?: 0-1, status: pending | approved | changes, feedback?, preview?: ReactNode }] (required); title, selected / defaultSelected / onSelectedChange. onApprove(id) and onRequestChanges(id, comment) may be async: the decision shows at once and is taken back with the reason if it rejects. Keys: J and K or the arrow keys move, A approves, R asks for changes, Home and End jump; after a decision it moves to the next item still waiting. Shortcuts are ignored while typing.",
+          "whenToUse": [
+            "Reviewing drafts, decisions or changes an agent produced before they go out",
+            "A queue where the reviewer's speed matters"
+          ],
+          "whenNotToUse": [
+            "A single yes or no on one action; use approval-card",
+            "A conversation to take over; use escalation-card",
+            "Comparing alternative runs; use parallel-attempts"
+          ],
+          "composesWith": [
+            "agent-12",
+            "approval-card",
+            "escalation-card",
+            "prompt-diff"
+          ],
+          "a11y": [
+            {
+              "keys": "List",
+              "action": "A listbox; each option starts with its state in words, such as 'To review: …'; the selected option has aria-selected and one option is in the tab order"
+            },
+            {
+              "keys": "Keyboard",
+              "action": "J and K or Up and Down move, Home and End jump, A approves and R asks for changes; the shortcuts are off while typing in the comment box, and Escape closes it"
+            },
+            {
+              "keys": "Decisions",
+              "action": "Announced in a polite live region ('Approved: …'); a failed save is an alert and the decision is taken back"
+            },
+            {
+              "keys": "Confidence",
+              "action": "A meter with a spoken value; below 60% it also says 'worth a close look'"
+            },
+            {
+              "keys": "Comment",
+              "action": "A labelled textarea; an empty one is refused with an alert, and Ctrl or Command with Enter sends"
+            }
+          ],
+          "customization": [
+            "items, title and selected",
+            "preview (anything you can render)",
+            "onApprove and onRequestChanges"
+          ]
+        },
+        "statesNone": "A presentational desk: the items are passed in with their own status, so it has nothing of its own to load. With no items it says nothing is to review.",
+        "examples": [
+          "review-center-demo",
+          "review-center-clear"
+        ],
+        "url": "https://ui.ballmac.com/components/review-center"
+      }
+    },
+    {
+      "name": "review-center-demo",
+      "type": "registry:example",
+      "title": "Review Center: Three drafts to review",
+      "description": "Three drafts to review example of Review Center.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/review-center.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/review-center-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/review-center-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "review-center",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "review-center-clear",
+      "type": "registry:example",
+      "title": "Review Center: All reviewed",
+      "description": "All reviewed example of Review Center.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/review-center.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/review-center-clear.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/review-center-clear.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "review-center",
         "tier": "free"
       }
     },
@@ -79303,6 +80689,141 @@
       "meta": {
         "example": true,
         "of": "workspace-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "writing-assistant",
+      "type": "registry:ui",
+      "title": "Writing Assistant",
+      "description": "Suggested edits shown in place: the words that could change are marked in the text with a different underline per kind, and each suggestion says what changes, why, and what the text becomes. Accept, Dismiss, Accept all, or edit it yourself.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/writing-assistant.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/writing-assistant.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "writing",
+          "suggestions",
+          "editor",
+          "grammar",
+          "tone",
+          "diff",
+          "assistant"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "suggestions is [{ id, find, replace, reason, kind?: grammar | clarity | tone | length }] (required); the first occurrence of find in the text is the one marked. text / defaultText / onTextChange, title, onAccept(suggestion), onDismiss(suggestion). Accept replaces the words and drops the suggestion; Accept all applies them all without the edits disturbing each other; one whose words are no longer in the text, or that overlaps an earlier one, is left out. Exports segmentText.",
+          "whenToUse": [
+            "An AI proofreading or rewriting pass over a short piece of text",
+            "Any place where a model proposes small edits a person should approve one by one"
+          ],
+          "whenNotToUse": [
+            "A full rich-text editor; use rich-text-editor",
+            "Comparing two prompts word by word; use prompt-diff"
+          ],
+          "composesWith": [
+            "prompt-diff",
+            "message-actions",
+            "ai-chat",
+            "review-center"
+          ],
+          "a11y": [
+            {
+              "keys": "Marks",
+              "action": "Each marked phrase is a button named 'Suggestion, <kind>: <words>' with pressed state; the kind is also shown by the underline style (wavy, dotted, dashed, double), never colour alone"
+            },
+            {
+              "keys": "Changes",
+              "action": "Each card reads as words: 'Remove: …' and 'Use instead: …'; Accept and Dismiss name the words they affect"
+            },
+            {
+              "keys": "Announcements",
+              "action": "Accepting, dismissing and Accept all are announced in a polite live region"
+            },
+            {
+              "keys": "Editing",
+              "action": "A labelled textarea; suggestions pause while editing and say so"
+            }
+          ],
+          "customization": [
+            "text and suggestions",
+            "title",
+            "onAccept, onDismiss, onTextChange"
+          ]
+        },
+        "statesNone": "A presentational editor: the text and the suggestions are passed in, so it has nothing of its own to load. With no suggestions it says the text reads well.",
+        "examples": [
+          "writing-assistant-demo",
+          "writing-assistant-clean"
+        ],
+        "url": "https://ui.ballmac.com/components/writing-assistant"
+      }
+    },
+    {
+      "name": "writing-assistant-demo",
+      "type": "registry:example",
+      "title": "Writing Assistant: A draft with suggestions",
+      "description": "A draft with suggestions example of Writing Assistant.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/writing-assistant.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/writing-assistant-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/writing-assistant-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "writing-assistant",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "writing-assistant-clean",
+      "type": "registry:example",
+      "title": "Writing Assistant: Nothing to suggest",
+      "description": "Nothing to suggest example of Writing Assistant.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/writing-assistant.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/writing-assistant-clean.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/writing-assistant-clean.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "writing-assistant",
         "tier": "free"
       }
     },
