@@ -3,7 +3,10 @@ import type { Metadata } from "next"
 import Link from "@/components/site/link"
 
 import { Button } from "@/components/ballmac/button"
+import { BuildCost } from "@/components/pro/build-cost"
 import { CheckoutLink } from "@/components/pro/checkout-link"
+import { FeelBlocks } from "@/components/pro/feel-blocks"
+import { ProofWall } from "@/components/pro/proof-wall"
 import { EmailForm } from "@/components/site/email-form"
 import { FoundingBanner } from "@/components/site/founding-banner"
 import { FoundingCountdown } from "@/components/site/founding-countdown"
@@ -89,8 +92,10 @@ export default async function PricingPage() {
         [true, "Everything in Free"],
         [true, `${proBlocks} premium blocks: heroes, features, pricing, dashboards, app screens, ecommerce, content and more`],
         [true, "Private registry for the shadcn CLI and MCP"],
+        [true, "Loading, empty and error states built into blocks that show data"],
         [true, "Light, dark and RTL support on every block"],
-        [true, "Three starter apps: Beacon SaaS (teams, Stripe billing, dashboard), Quire (an AI assistant that cites its sources) and Cove (a Tauri desktop app that looks native on macOS and Windows)"],
+        [true, "Screens that take macOS, Windows or iOS handling with one setting, in light and dark"],
+        [true, "Three starter apps: Beacon (SaaS with teams, Stripe billing and a dashboard), Quire (an AI assistant that cites its sources) and Cove (a desktop notes app)"],
         [true, "Figma design tokens for every theme"],
         [false, "More starter apps (planned)"],
         [false, "Figma component library (planned)"],
@@ -149,8 +154,8 @@ export default async function PricingPage() {
           <div className="flex justify-center">
             <Eyebrow>Pricing</Eyebrow>
           </div>
-          <h1 className="text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Free to build with. Pro when you want more.</h1>
-          <p className="text-muted-foreground text-lg leading-relaxed">The core library is free for any project. Pro adds {proBlocks} premium blocks and complete SaaS starter apps.</p>
+          <h1 className="text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">The screens your app needs, finished. Pay once.</h1>
+          <p className="text-muted-foreground text-lg leading-relaxed">The core library is free for any project. Pro adds {proBlocks} finished screens and three starter apps, so you spend the week on your product.</p>
         </header>
 
         {f?.endsAt && (
@@ -227,6 +232,34 @@ export default async function PricingPage() {
             Log in to your Pro library
           </Link>
         </p>
+
+        <section aria-labelledby="cost-h" className="mt-24">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 id="cost-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">What would it cost to build these yourself?</h2>
+            <p className="text-muted-foreground mt-3 leading-relaxed">Polished states, dark mode, keyboard support and motion take time. Put in your own numbers.</p>
+          </div>
+          <BuildCost
+            className="mt-10"
+            price={Number(offer.price) || 99}
+            action={
+              onSale && offer.checkout ? (
+                <Button asChild size="lg" shape="pill">
+                  <CheckoutLink href={offer.checkout}>{f ? `Get Pro for $${f.price}` : `Get Pro for $${offer.price}`}</CheckoutLink>
+                </Button>
+              ) : null
+            }
+          />
+        </section>
+
+        <section aria-labelledby="feelblocks-h" className="mt-24">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 id="feelblocks-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">The same Pro screen, four ways to handle</h2>
+            <p className="text-muted-foreground mt-3 leading-relaxed">Pick a block and a platform. This is the real block, captured from its own preview.</p>
+          </div>
+          <FeelBlocks className="mt-10" />
+        </section>
+
+        <ProofWall className="mt-24" />
 
         <section aria-labelledby="compare-h" className="mt-24">
           <div className="mx-auto max-w-2xl text-center">

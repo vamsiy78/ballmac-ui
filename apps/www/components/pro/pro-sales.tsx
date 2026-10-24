@@ -2,6 +2,10 @@ import { ArrowRight, Bot, Check, Clock, FileCode2, KeyRound, Layers, MonitorSmar
 import Image from "next/image"
 
 import { buttonVariants } from "@/components/ballmac/button"
+import { NativeHook } from "@/components/feels/native-hook"
+import { BuildCost } from "@/components/pro/build-cost"
+import { ProofWall } from "@/components/pro/proof-wall"
+import { BuyDock } from "@/components/pro/buy-dock"
 import { CheckoutLink } from "@/components/pro/checkout-link"
 import { Frame, Themed } from "@/components/pro/shots"
 import { StateSwitcher } from "@/components/pro/state-switcher"
@@ -120,6 +124,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
 
   return (
     <>
+      {offer.onSale && offer.checkout && offer.price && <BuyDock href={offer.checkout} price={offer.price} />}
       {f && <FoundingBanner offer={f} at={now.getTime()} href="#buy" />}
 
       {/* Hero */}
@@ -133,15 +138,15 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
               Ballmac UI Pro{f?.endsAt ? <span className="text-muted-foreground">· founding price <LeftPhrase endsAt={f.endsAt} at={now.getTime()} /></span> : null}
             </p>
             <h1 id="pro-h" className="mt-6 text-5xl leading-[1.02] font-semibold tracking-[-0.05em] text-balance sm:text-6xl">
-              Ship the real screens of your app this week.
+              The screens your app needs, finished, and feeling native.
             </h1>
             <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed text-pretty">
-              {total} production-ready blocks and {starters} complete starter apps for React, Tailwind and shadcn. Dashboards, billing, settings, sign-in, mail and more, with loading, empty and error states already handled.
+              {total} production-ready blocks and {starters} starter apps for React, Tailwind and shadcn: dashboards, billing, settings, sign-in, mail and more. They take the feel of macOS, Windows or iOS with one setting, and come with loading, empty and error states already handled.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               {buy("hero")}
-              <a href="#blocks" className={buttonVariants({ size: "lg", shape: "pill", variant: "outline" })}>
-                See the blocks
+              <a href="#feel" className={buttonVariants({ size: "lg", shape: "pill", variant: "outline" })}>
+                Feel it first
               </a>
             </div>
             <p className="text-muted-foreground mt-4 text-sm">
@@ -152,7 +157,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
                 </>
               ) : offer.onSale && offer.price ? (
                 <>
-                  <span className="text-foreground font-medium">${offer.price} once.</span> No subscription.
+                  <span className="text-foreground font-medium">${offer.price} once</span>, plus any tax where you live. No subscription.
                 </>
               ) : (
                 "One payment. No subscription."
@@ -195,6 +200,14 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
             </div>
           </div>
         </div>
+      </section>
+
+      {/* The proof: the same app as a web app and as a native one, in the visitor's own platform */}
+      <section id="feel" aria-labelledby="feel-h" className="mx-auto max-w-[1200px] scroll-mt-16 px-4 py-20 sm:px-6">
+        <Heading id="feel-h" eyebrow="Try it before you read any further" title="Which one feels native?" center>
+          Same app, same code. One is a typical web app, the other has one setting changed. Use them both.
+        </Heading>
+        <NativeHook where="pro-page" className="mt-12" />
       </section>
 
       {/* Numbers */}
@@ -252,6 +265,27 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
           </div>
         </section>
       )}
+
+      {/* What it costs to build yourself */}
+      <section aria-labelledby="cost-h" className="mx-auto max-w-[1100px] px-4 pb-24 sm:px-6">
+        <Heading id="cost-h" eyebrow="Do the sum" title="What would it cost to build these yourself?" center>
+          Polished states, dark mode, keyboard support and motion take time. Put in your own numbers.
+        </Heading>
+        <BuildCost
+          className="mt-12"
+          price={Number(offer.price) || 99}
+          action={
+            offer.onSale && offer.checkout ? (
+              <CheckoutLink href={offer.checkout} className={buttonVariants({ size: "lg", shape: "pill" })}>
+                {buyLabel}
+                <ArrowRight aria-hidden="true" />
+              </CheckoutLink>
+            ) : null
+          }
+        />
+      </section>
+
+      <ProofWall className="mx-auto max-w-[1100px] px-4 pb-24 sm:px-6" />
 
       {/* States */}
       <section aria-labelledby="states-h" className="mx-auto max-w-[1200px] px-4 py-24 sm:px-6">
@@ -489,7 +523,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
           </div>
           <p className="mx-auto mt-6 flex items-center justify-center gap-2 text-xs opacity-70">
             <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
-            Tax and invoice handled for you.
+            Tax is added at checkout where it applies, and your invoice is sent for you.
           </p>
           <p className="mx-auto mt-2 text-center text-xs opacity-70">
             By buying you agree to the <a href={PRO_LICENCE_PATH} className="underline underline-offset-2">Pro licence</a>. All sales are final.

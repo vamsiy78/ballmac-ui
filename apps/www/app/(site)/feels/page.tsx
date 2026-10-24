@@ -4,6 +4,7 @@ import Link from "@/components/site/link"
 
 import { CodePanel } from "@/components/site/code-panel"
 import { Eyebrow } from "@/components/site/section-heading"
+import { NativeHook } from "@/components/feels/native-hook"
 import { FeelGallery } from "@/components/feels/feel-gallery"
 import { FeelShowcase } from "@/components/feels/feel-showcase"
 
@@ -38,6 +39,10 @@ export default function FeelsPage() {
           </Link>
         </div>
       </header>
+
+      <section aria-label="Web app against native feel">
+        <NativeHook where="feels" />
+      </section>
 
       <section aria-label="Live feel switcher">
         <FeelShowcase />

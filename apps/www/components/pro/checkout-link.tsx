@@ -33,7 +33,8 @@ export function CheckoutLink({ href, children, onClick, ...props }: React.Compon
       const destination = active ? "/api/affiliates/checkout" : withRedirect(base, window.location.origin)
       window.location.assign(new URL(destination, window.location.origin).toString())
     } catch {
-      window.location.assign(new URL("/pro?referral_error=unavailable", window.location.origin).toString())
+      // If the referral check is down, a buyer must still reach the checkout; the plain link only costs a partner's discount.
+      window.location.assign(withRedirect(base, window.location.origin))
     }
   }
   return (

@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "@/components/site/link"
 
 import { buttonVariants } from "@/components/ballmac/button"
+import { NativeHook } from "@/components/feels/native-hook"
 import { AgentDiagram } from "@/components/home/agent-diagram"
 import { LazyMosaic } from "@/components/home/lazy-mosaic"
 import { Themed } from "@/components/pro/shots"
@@ -77,11 +78,11 @@ export default async function Home() {
       {/* Hero */}
       <section className="mx-auto max-w-[1440px] px-4 pt-16 pb-12 text-center sm:px-6 md:pt-24 md:pb-16">
         <Link
-          href="/pro#starters"
+          href="#feel"
           className="bg-muted/60 hover:bg-muted focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-medium outline-none transition-colors focus-visible:ring-[3px] dark:bg-white/[0.06] dark:hover:bg-white/10"
         >
           <span className="bg-chart-1 size-1.5 rounded-full" aria-hidden="true" />
-          New in Pro: Cove, a desktop starter that looks native on Mac and Windows
+          Try it: the same app as a web app and with a native feel
           <ArrowRight className="size-3.5" aria-hidden="true" />
         </Link>
         <h1 className="mx-auto mt-6 max-w-4xl text-4xl leading-[1.05] font-semibold tracking-[-0.045em] text-balance sm:text-6xl">
@@ -131,6 +132,15 @@ export default async function Home() {
             Every item is measured in a real browser
           </Link>
         </div>
+      </section>
+
+      {/* The promise, proven: the same app as a web app and with a native feel */}
+      <section id="feel" aria-labelledby="feel-h" className="mx-auto max-w-[1200px] scroll-mt-16 px-4 pb-20 sm:px-6">
+        <div className="mx-auto mb-10 max-w-2xl text-center">
+          <h2 id="feel-h" className="text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-4xl">Which one feels native?</h2>
+          <p className="text-muted-foreground mt-3 text-base leading-relaxed text-pretty sm:text-lg">The same app twice. One is a typical web app. The other has a single setting changed. Use both.</p>
+        </div>
+        <NativeHook where="home" />
       </section>
 
       {/* Live mosaic */}
