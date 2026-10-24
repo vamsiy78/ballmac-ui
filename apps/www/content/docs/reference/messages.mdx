@@ -4,7 +4,7 @@ description: "Every translatable message in Ballmac UI, with its key and English
 generatedFrom: registry/ballmac
 ---
 
-Every built-in label, placeholder and screen reader text is a message with an English default: 808 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
+Every built-in label, placeholder and screen reader text is a message with an English default: 871 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
 
 | Key | English |
 | --- | --- |
@@ -39,6 +39,30 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `agent-roster.filter` | Filter by status |
 | `agent-roster.load` | \{name\} load |
 | `agent-roster.title` | Agents |
+| `agent-steering.empty` | Write what the agent should change first. |
+| `agent-steering.failed` | It was not sent. Your instruction is still here. |
+| `agent-steering.idle` | Not running |
+| `agent-steering.label` | Instruction for the agent |
+| `agent-steering.placeholder` | Tell it what to change, for example “Skip the competitor pages” |
+| `agent-steering.remove` | Take back: \{text\} |
+| `agent-steering.removeFailed` | It could not be taken back. |
+| `agent-steering.running` | Working |
+| `agent-steering.send` | Send |
+| `agent-steering.sent` | Instructions sent |
+| `agent-steering.startFirst` | Start a run to steer it. |
+| `agent-steering.title` | Steer the agent |
+| `agent-steering.when` | When should it apply? |
+| `agent-steering.working` | Working on: \{step\} |
+| `agent-tree.count` | \{count\} agents |
+| `agent-tree.delegated` | Delegated to \{count\} agents. |
+| `agent-tree.failed` | \{count\} failed |
+| `agent-tree.hint` | Select an agent to see its task. Right opens an agent, Left closes it. |
+| `agent-tree.item` | \{name\}, \{status\}\{task\} |
+| `agent-tree.label` | Agents and who they delegated to |
+| `agent-tree.running` | \{count\} running |
+| `agent-tree.title` | Agents |
+| `agent-tree.tokens` | \{count\} tokens |
+| `agent-tree.waiting` | \{count\} waiting |
 | `ai-chat.label` | Conversation |
 | `ai-chat.scrollButtonLabel` | Scroll to latest message |
 | `ai-chat.suggestions` | Suggestions |
@@ -209,6 +233,14 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `comparison-table.feature` | Feature |
 | `comparison-table.notSpecified` | Not specified |
 | `comparison-table.unavailable` | Unavailable |
+| `context-window.compact` | Compact conversation |
+| `context-window.compactFailed` | It could not be compacted. Nothing was changed. |
+| `context-window.nearly` | Nearly full |
+| `context-window.of` | of \{limit\} |
+| `context-window.over` | Over the limit |
+| `context-window.reserved` | Kept free for the answer |
+| `context-window.spoken` | \{used\} of \{limit\} tokens, \{percent\}% used |
+| `context-window.title` | Context |
 | `contribution-graph.less` | Less |
 | `contribution-graph.more` | More |
 | `contribution-graph.summary` | \{label\}: \{total\} total across 0 days |
@@ -472,6 +504,22 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `mention-input.noMatches` | No matches for “\{query\}” |
 | `mention-input.searching` | Searching |
 | `mention-input.suggestions` | Suggestions |
+| `model-compare.all` | All |
+| `model-compare.chosen` | \{name\} by \{provider\} is selected. |
+| `model-compare.context` | \{size\} context |
+| `model-compare.cost` | Cost |
+| `model-compare.costValue` | Cost \{value\} of 5, lower is cheaper |
+| `model-compare.hint` | Pick a model to continue. |
+| `model-compare.intelligence` | Intelligence |
+| `model-compare.intelligenceValue` | Intelligence \{value\} of 5 |
+| `model-compare.label` | Choose a model |
+| `model-compare.none` | No models match. |
+| `model-compare.provider` | Provider |
+| `model-compare.recommended` | Recommended |
+| `model-compare.search` | Search models |
+| `model-compare.searchPlaceholder` | Search models |
+| `model-compare.speed` | Speed |
+| `model-compare.speedValue` | Speed \{value\} of 5 |
 | `model-picker.availableWith` | Available with \{plan\} |
 | `model-picker.contextTokens` | \{size\} tokens |
 | `model-picker.costHigh` | High |
@@ -561,6 +609,16 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `plan-selector.billingPeriod` | Billing period |
 | `plan-selector.perMonth` | / month |
 | `plan-selector.save` | Save |
+| `plan-tracker.added` | \{count\} added |
+| `plan-tracker.addedTag` | Added by the agent |
+| `plan-tracker.changed` | The plan changed |
+| `plan-tracker.complete` | complete |
+| `plan-tracker.expected` | expected \{time\} |
+| `plan-tracker.left` | about \{time\} left |
+| `plan-tracker.over` | over by \{time\} |
+| `plan-tracker.skipped` | \{count\} skipped |
+| `plan-tracker.spoken` | \{done\} of \{total\} steps done |
+| `plan-tracker.title` | Plan |
 | `popover.closeLabel` | Close popover |
 | `progress-steps.label` | Progress |
 | `progress-steps.returnTo` | Return to \{label\} |
@@ -740,6 +798,11 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `token-meter.pill` | \{title\}: \{percent\}% used. \{state\}. |
 | `token-meter.summary` | \{used\} of \{limit\} tokens used, \{percent\}%. \{state\}. |
 | `token-meter.title` | Context window |
+| `tool-call-card.copied` | Copied |
+| `tool-call-card.copy` | Copy |
+| `tool-call-card.copyLabel` | Copy \{label\} |
+| `tool-call-card.retry` | Retry |
+| `tool-call-card.retryFailed` | It could not be retried. |
 | `tool-catalog.all` | All |
 | `tool-catalog.attention` | Needs attention |
 | `tool-catalog.calls` | \{count\} calls this week |

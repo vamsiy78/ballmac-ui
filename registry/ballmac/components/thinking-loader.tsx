@@ -57,7 +57,7 @@ function ThinkingLoader({ phases, interval = 1800, done = false, doneLabel, clas
       <motion.span
         aria-hidden="true"
         key={text}
-        initial={paused ? false : { opacity: 0, y: 4 }}
+        initial={paused ? false : { opacity: 0.25, y: 3 }}
         animate={paused ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.2 }}
         className="relative inline-block"

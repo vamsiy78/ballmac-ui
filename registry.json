@@ -828,6 +828,287 @@
       }
     },
     {
+      "name": "agent-steering",
+      "type": "registry:ui",
+      "title": "Agent Steering",
+      "description": "Redirecting an agent while it works: say what to change and when (now, after this step or at the end), and watch each instruction go from queued to applied or dropped. Take back an instruction that has not applied yet.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/agent-steering.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/agent-steering.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "steering",
+          "interrupt",
+          "queue",
+          "human in the loop",
+          "instructions",
+          "control"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "notes is [{ id, text, mode: now | after-step | end, state: queued | applied | dropped, at? }] and the parent owns it (required). running (default true) and step say what it is doing; instructions can only be sent while it runs. onSend(text, mode) and onRemove(id) may be async: reject and the card keeps the text and says why. defaultMode (default after-step). Ctrl or Command with Enter sends.",
+          "whenToUse": [
+            "Letting a person change an agent's course without stopping it",
+            "Showing the instructions that are queued, applied or dropped"
+          ],
+          "whenNotToUse": [
+            "A first prompt before a run starts; use ai-chat or a prompt box",
+            "Approving a risky action; use approval-card",
+            "Setting how much it may do alone; use autonomy-dial"
+          ],
+          "composesWith": [
+            "tool-call-card",
+            "plan-tracker",
+            "autonomy-dial",
+            "agent-lanes"
+          ],
+          "a11y": [
+            {
+              "keys": "Timing",
+              "action": "A native radio group (Now, After this step, At the end); each has a title that says what it does"
+            },
+            {
+              "keys": "States",
+              "action": "Queued, Applied and Dropped are words with icons beside each instruction"
+            },
+            {
+              "keys": "Errors",
+              "action": "An empty instruction, a failed send and a failed take-back are alerts; the text stays in the box"
+            },
+            {
+              "keys": "Take back",
+              "action": "A button named 'Take back: <text>', only on queued instructions"
+            },
+            {
+              "keys": "Keyboard",
+              "action": "Ctrl or Command with Enter sends"
+            }
+          ],
+          "customization": [
+            "notes, running and step",
+            "onSend and onRemove",
+            "defaultMode"
+          ]
+        },
+        "statesNone": "A presentational card: the instructions are passed in with their own state, so it has nothing of its own to load.",
+        "examples": [
+          "agent-steering-demo",
+          "agent-steering-idle"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-steering"
+      }
+    },
+    {
+      "name": "agent-steering-demo",
+      "type": "registry:example",
+      "title": "Agent Steering: Steer a running agent",
+      "description": "Steer a running agent example of Agent Steering.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-steering.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-steering-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-steering-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-steering",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-steering-idle",
+      "type": "registry:example",
+      "title": "Agent Steering: The agent is not running",
+      "description": "The agent is not running example of Agent Steering.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-steering.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-steering-idle.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-steering-idle.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-steering",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-tree",
+      "type": "registry:ui",
+      "title": "Agent Tree",
+      "description": "Who handed work to whom: an orchestrator and the agents it delegated to as a tree, each with its state in words, model, rolled-up progress and cost, a header that adds it up, and the full tree keyboard model.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/agent-tree.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/agent-tree.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "tree",
+          "delegation",
+          "orchestrator",
+          "sub-agents",
+          "multi-agent",
+          "hierarchy"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "agents is [{ id, parentId?, name, task?, status: queued | running | waiting | done | failed, progress?, model?, tokens?, cost?, duration? }] (required); selected / defaultSelected / onSelectedChange, defaultCollapsed (ids), title, currency. A parent without progress shows the average of its sub-agents; the header counts agents, running, waiting and failed, and adds up cost. A real tree: arrow keys, Home, End, Enter. Exports flattenAgents and agentProgress.",
+          "whenToUse": [
+            "Showing an orchestrator and the sub-agents it started, and how each is doing",
+            "A multi-agent run where delegation depth and cost matter"
+          ],
+          "whenNotToUse": [
+            "Agents that work side by side on a timeline; use agent-lanes",
+            "How agents and tools are wired in general; use agent-graph",
+            "Timing of spans; use trace-waterfall"
+          ],
+          "composesWith": [
+            "agent-lanes",
+            "agent-graph",
+            "trace-waterfall",
+            "agent-steering"
+          ],
+          "a11y": [
+            {
+              "keys": "Tab",
+              "action": "Enters the tree once, on the first agent (or the selected one)"
+            },
+            {
+              "keys": "Arrow keys",
+              "action": "Up and Down move; Right opens an agent or goes into it; Left closes it or goes to its parent; Home and End jump"
+            },
+            {
+              "keys": "Enter",
+              "action": "Selects an agent and writes out its task, model, cost and sub-agents below"
+            },
+            {
+              "keys": "Screen readers",
+              "action": "A tree with level, position and expanded state; each name includes the state in words and the task"
+            },
+            {
+              "keys": "State",
+              "action": "Queued, Running, Waiting, Done and Failed are words with icons, never only colour"
+            }
+          ],
+          "customization": [
+            "agents and their numbers",
+            "title, currency",
+            "selected and defaultCollapsed"
+          ]
+        },
+        "statesNone": "A presentational tree: the agents are passed in with their own status, so it has nothing of its own to load.",
+        "examples": [
+          "agent-tree-demo",
+          "agent-tree-failed"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-tree"
+      }
+    },
+    {
+      "name": "agent-tree-demo",
+      "type": "registry:example",
+      "title": "Agent Tree: A research team",
+      "description": "A research team example of Agent Tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-tree.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-tree-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-tree-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-tree",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-tree-failed",
+      "type": "registry:example",
+      "title": "Agent Tree: A failed branch",
+      "description": "A failed branch example of Agent Tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-tree.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-tree-failed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-tree-failed.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-tree",
+        "tier": "free"
+      }
+    },
+    {
       "name": "ai-chat",
       "type": "registry:ui",
       "title": "AI Chat",
@@ -5516,6 +5797,490 @@
       "meta": {
         "example": true,
         "of": "agent-10",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-11",
+      "type": "registry:block",
+      "title": "Agent 11: run workbench",
+      "description": "A run workbench: the conversation with tool calls as openable cards, a live plan, a context meter and a steering box to redirect the agent while it works, with Stop, optimistic instructions and honest failures.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/agent-steering.json",
+        "https://ui.ballmac.com/r/context-window.json",
+        "https://ui.ballmac.com/r/plan-tracker.json",
+        "https://ui.ballmac.com/r/thinking-loader.json",
+        "https://ui.ballmac.com/r/tool-call-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-11/agent-11.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-11/agent-11.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "workbench",
+          "run",
+          "tool calls",
+          "plan",
+          "context",
+          "steering",
+          "human in the loop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Agent run workbench. <Agent11 title model running step messages={[{ id, role: 'user'|'agent', text } | { id, role: 'tool', name, status, server?, input?, result?, duration?, icon? }]} plan={PlanStep[]} context={{ segments, limit, reserved? }} notes={SteeringNote[]} onSteer={(text, mode) => Promise} onRemoveNote onStop onCompact onRetryTool={(messageId) => Promise} />. Steering is optimistic: the instruction shows as queued and is taken back with the reason if onSteer rejects.",
+          "whenToUse": [
+            "The screen where a person watches and steers one long-running agent",
+            "A task view with the conversation, the plan and the memory meter together"
+          ],
+          "whenNotToUse": [
+            "Many agents at once; use agent-12",
+            "Reviewing finished runs; use agent-3",
+            "A plain chat; use ai-chat-1"
+          ],
+          "composesWith": [
+            "agent-12",
+            "agent-2",
+            "agent-9",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Conversation",
+              "action": "A log region that announces new messages politely; each speaker is named for screen readers"
+            },
+            {
+              "keys": "Tool calls",
+              "action": "Disclosure cards with their state in words; Retry on a failed call"
+            },
+            {
+              "keys": "Steering",
+              "action": "A labelled box, a radio group for timing, and Ctrl or Command with Enter to send"
+            },
+            {
+              "keys": "Stop",
+              "action": "A button that shows busy; a failure is an alert and the run keeps its Running state"
+            },
+            {
+              "keys": "Side panels",
+              "action": "A landmark named Run details holding the plan and the context meter"
+            }
+          ],
+          "customization": [
+            "title, model, step, running",
+            "messages, plan, context, notes",
+            "onSteer, onRemoveNote, onStop, onCompact, onRetryTool"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-11-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton conversation and side panels under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No run yet",
+            "example": "agent-11-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says there is no run yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-11-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A steering instruction that fails is taken back with the reason; Stop that fails leaves the run going and says why."
+          }
+        ],
+        "examples": [
+          "agent-11-demo",
+          "agent-11-stopped",
+          "agent-11-loading",
+          "agent-11-empty",
+          "agent-11-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-11"
+      }
+    },
+    {
+      "name": "agent-11-demo",
+      "type": "registry:example",
+      "title": "Agent 11: run workbench: Default",
+      "description": "Default example of Agent 11: run workbench.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-11.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-11-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-11-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-11",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-11-stopped",
+      "type": "registry:example",
+      "title": "Agent 11: run workbench: Stopped",
+      "description": "Stopped example of Agent 11: run workbench.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-11.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-11-stopped.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-11-stopped.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-11",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-11-loading",
+      "type": "registry:example",
+      "title": "Agent 11: run workbench: Loading",
+      "description": "Loading example of Agent 11: run workbench.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-11.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-11-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-11-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-11",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-11-empty",
+      "type": "registry:example",
+      "title": "Agent 11: run workbench: No run yet",
+      "description": "No run yet example of Agent 11: run workbench.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-11.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-11-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-11-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-11",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-11-error",
+      "type": "registry:example",
+      "title": "Agent 11: run workbench: Could not load",
+      "description": "Could not load example of Agent 11: run workbench.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-11.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-11-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-11-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-11",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-12",
+      "type": "registry:block",
+      "title": "Agent 12: mission control",
+      "description": "Mission control for a team of agents: spend, tokens, running agents and decisions waiting at the top, the delegation tree below, and an inbox of requests with Approve and Deny that report back honestly.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/agent-tree.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-12/agent-12.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-12/agent-12.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "multi-agent",
+          "orchestration",
+          "approvals",
+          "cost",
+          "tree",
+          "dashboard",
+          "human in the loop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Multi-agent mission control. <Agent12 title agents={AgentNode[]} requests={[{ id, agentId?, title, detail?, risk?: 'low'|'high' }]} currency onApprove={(request) => Promise} onDeny={(request) => Promise} />. The totals are computed from agents; Needs you is the number of requests. Approve and Deny remove the request and say what was done, or keep it with the reason if the handler rejects.",
+          "whenToUse": [
+            "Overseeing an orchestrator and its sub-agents, with spend and decisions in one place",
+            "A queue of approvals that agents are blocked on"
+          ],
+          "whenNotToUse": [
+            "Steering one run in detail; use agent-11",
+            "A single approval; use agent-2",
+            "Past runs and traces; use agent-3"
+          ],
+          "composesWith": [
+            "agent-11",
+            "agent-2",
+            "agent-9",
+            "cost-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Totals",
+              "action": "A description list: each total has a label and a value"
+            },
+            {
+              "keys": "Tree",
+              "action": "A real tree: arrow keys, Home, End, Enter; every agent's state is a word"
+            },
+            {
+              "keys": "Requests",
+              "action": "A labelled list; risk is written as 'High risk'; Approve and Deny are native buttons"
+            },
+            {
+              "keys": "Result",
+              "action": "What was approved or denied is announced in a polite live region; failures are alerts tied to the request"
+            }
+          ],
+          "customization": [
+            "title and agents",
+            "requests and currency",
+            "onApprove and onDeny"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-12-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton totals, tree and inbox under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No agents running",
+            "example": "agent-12-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says no agents are running; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-12-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). An approve or deny that fails keeps the request and says why."
+          }
+        ],
+        "examples": [
+          "agent-12-demo",
+          "agent-12-clear",
+          "agent-12-loading",
+          "agent-12-empty",
+          "agent-12-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-12"
+      }
+    },
+    {
+      "name": "agent-12-demo",
+      "type": "registry:example",
+      "title": "Agent 12: mission control: Default",
+      "description": "Default example of Agent 12: mission control.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-12.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-12-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-12-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-12",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-12-clear",
+      "type": "registry:example",
+      "title": "Agent 12: mission control: Nothing waiting",
+      "description": "Nothing waiting example of Agent 12: mission control.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-12.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-12-clear.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-12-clear.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-12",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-12-loading",
+      "type": "registry:example",
+      "title": "Agent 12: mission control: Loading",
+      "description": "Loading example of Agent 12: mission control.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-12.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-12-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-12-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-12",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-12-empty",
+      "type": "registry:example",
+      "title": "Agent 12: mission control: No agents running",
+      "description": "No agents running example of Agent 12: mission control.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-12.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-12-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-12-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-12",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-12-error",
+      "type": "registry:example",
+      "title": "Agent 12: mission control: Could not load",
+      "description": "Could not load example of Agent 12: mission control.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-12.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-12-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-12-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-12",
         "tier": "free"
       }
     },
@@ -44399,6 +45164,167 @@
       }
     },
     {
+      "name": "context-window",
+      "type": "registry:ui",
+      "title": "Context Window",
+      "description": "How full an agent's context is and what fills it: a stacked bar by part with tokens and share in a legend, room kept for the answer, a plain warning when nearly full or over, and a Compact button that says why when it cannot.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/context-window.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/context-window.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "context",
+          "tokens",
+          "window",
+          "memory",
+          "usage",
+          "meter",
+          "llm"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "segments is [{ id, label, tokens }] (required) and limit is the window in tokens (required). reserved keeps room for the answer (drawn hatched), warnAt (default 0.8) is where it warns, title, fullNote (what happens when it is full), onCompact (adds the Compact button; reject and the card says why). The bar is a meter with a spoken value; Nearly full and Over the limit are words, not just colour.",
+          "whenToUse": [
+            "Showing a person how much of the model's memory a conversation or run is using",
+            "Warning before an agent starts forgetting the start of a task"
+          ],
+          "whenNotToUse": [
+            "Spend in money; use run-ledger or usage-meter",
+            "A single progress value; use progress"
+          ],
+          "composesWith": [
+            "model-picker",
+            "agent-steering",
+            "plan-tracker",
+            "ai-chat"
+          ],
+          "a11y": [
+            {
+              "keys": "Meter",
+              "action": "The bar is role=meter named by the heading, with aria-valuenow, aria-valuemax and a spoken value such as '142K of 200K tokens, 71% used'"
+            },
+            {
+              "keys": "Warning",
+              "action": "Nearly full and Over the limit are written in a pill with an icon, not only coloured"
+            },
+            {
+              "keys": "Legend",
+              "action": "A list of parts with tokens and share, so the bar is never the only way to read it"
+            },
+            {
+              "keys": "Compact",
+              "action": "A native button that shows busy; a failure is an alert"
+            }
+          ],
+          "customization": [
+            "segments and limit",
+            "reserved and warnAt",
+            "fullNote",
+            "onCompact"
+          ]
+        },
+        "statesNone": "A presentational meter: the segments are passed in, so it has nothing of its own to load.",
+        "examples": [
+          "context-window-demo",
+          "context-window-nearly",
+          "context-window-over"
+        ],
+        "url": "https://ui.ballmac.com/components/context-window"
+      }
+    },
+    {
+      "name": "context-window-demo",
+      "type": "registry:example",
+      "title": "Context Window: Half full, with Compact",
+      "description": "Half full, with Compact example of Context Window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/context-window.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/context-window-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/context-window-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "context-window",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "context-window-nearly",
+      "type": "registry:example",
+      "title": "Context Window: Nearly full",
+      "description": "Nearly full example of Context Window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/context-window.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/context-window-nearly.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/context-window-nearly.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "context-window",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "context-window-over",
+      "type": "registry:example",
+      "title": "Context Window: Over the limit",
+      "description": "Over the limit example of Context Window.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/context-window.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/context-window-over.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/context-window-over.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "context-window",
+        "tier": "free"
+      }
+    },
+    {
       "name": "contribution-graph",
       "type": "registry:ui",
       "title": "Contribution Graph",
@@ -56571,6 +57497,146 @@
       }
     },
     {
+      "name": "model-compare",
+      "type": "registry:ui",
+      "title": "Model Compare",
+      "description": "Models side by side, with intelligence, speed and cost as meters that also have a spoken value, context size, a Recommended mark, search, provider filters, and a plain reason when a model is not available.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/model-compare.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/model-compare.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "model",
+          "picker",
+          "llm",
+          "select",
+          "compare",
+          "providers",
+          "settings"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "models is [{ id, name, provider, description?, intelligence: 1-5, speed: 1-5, cost: 1-5 (1 is cheapest), context?: tokens, recommended?, unavailable?: reason }] (required). value / defaultValue / onValueChange, label, searchable (default: on when there are more than six). Each model is a native radio; one with unavailable is disabled and shows the reason. Search and provider chips filter the list.",
+          "whenToUse": [
+            "Letting a person choose which model runs their agent or chat",
+            "Comparing models by capability, speed and cost on one screen"
+          ],
+          "whenNotToUse": [
+            "A compact searchable selector inside a composer; use model-picker",
+            "A tiny two-way switch between fast and smart; use segmented-control",
+            "Comparing the outputs of several models; use prompt-playground or parallel-attempts"
+          ],
+          "composesWith": [
+            "model-picker",
+            "context-window",
+            "autonomy-dial",
+            "agent-9"
+          ],
+          "a11y": [
+            {
+              "keys": "Arrow keys",
+              "action": "A native radio group: Up, Down, Left and Right move between available models, Space selects; unavailable models are skipped"
+            },
+            {
+              "keys": "Meters",
+              "action": "Each meter is an image with a spoken value, such as 'Intelligence 4 of 5' and 'Cost 2 of 5, lower is cheaper'"
+            },
+            {
+              "keys": "Selected",
+              "action": "Announced in a polite live region as '<name> by <provider> is selected'"
+            },
+            {
+              "keys": "Filters",
+              "action": "Provider chips are toggle buttons with pressed state; search is a labelled search box"
+            },
+            {
+              "keys": "Unavailable",
+              "action": "The reason is written on the card, not only shown by dimming"
+            }
+          ],
+          "customization": [
+            "models and their numbers",
+            "value and onValueChange",
+            "label and searchable"
+          ]
+        },
+        "statesNone": "A presentational picker: the models are passed in, so it has nothing of its own to load. An empty search says nothing matches.",
+        "examples": [
+          "model-compare-demo",
+          "model-compare-short"
+        ],
+        "url": "https://ui.ballmac.com/components/model-compare"
+      }
+    },
+    {
+      "name": "model-compare-demo",
+      "type": "registry:example",
+      "title": "Model Compare: Models from three providers",
+      "description": "Models from three providers example of Model Compare.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/model-compare.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/model-compare-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/model-compare-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "model-compare",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "model-compare-short",
+      "type": "registry:example",
+      "title": "Model Compare: A short list",
+      "description": "A short list example of Model Compare.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/model-compare.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/model-compare-short.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/model-compare-short.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "model-compare",
+        "tier": "free"
+      }
+    },
+    {
       "name": "model-picker",
       "type": "registry:ui",
       "title": "Model Picker",
@@ -59627,6 +60693,143 @@
       "meta": {
         "example": true,
         "of": "plan-selector",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "plan-tracker",
+      "type": "registry:ui",
+      "title": "Plan Tracker",
+      "description": "An agent's plan against what happened: every step with its state in words, expected and actual time, a bar of the whole plan, an honest note when steps were added or skipped, and how far a step ran over.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/plan-tracker.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/plan-tracker.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agents",
+          "plan",
+          "progress",
+          "steps",
+          "tasks",
+          "estimate",
+          "tracker"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "steps is [{ id, title, status: todo | doing | done | skipped | blocked, origin?: planned | added, estimate?: minutes, actual?: minutes, note? }] (required); title. The header says how many of the steps that count are done (skipped ones do not count) and about how long is left. A step over its estimate by a quarter and half a minute says by how much. Exports formatMinutes and remainingMinutes.",
+          "whenToUse": [
+            "Showing the plan an agent is following, and where it has got to",
+            "Making plan changes (added or skipped steps) visible instead of silent"
+          ],
+          "whenNotToUse": [
+            "A checklist a person ticks off; use checklist",
+            "Who is doing what on a shared timeline; use agent-lanes",
+            "Spans with exact timings; use trace-waterfall"
+          ],
+          "composesWith": [
+            "agent-steering",
+            "context-window",
+            "tool-call-card",
+            "run-ledger"
+          ],
+          "a11y": [
+            {
+              "keys": "List",
+              "action": "An ordered list in plan order; each item starts with its state in words ('Done: …') for screen readers"
+            },
+            {
+              "keys": "Progress",
+              "action": "A progressbar named 'Plan' with a spoken value such as '2 of 5 steps done'"
+            },
+            {
+              "keys": "State",
+              "action": "Never only colour: icons, words for In progress and Blocked, and a line-through for Skipped"
+            },
+            {
+              "keys": "Changes",
+              "action": "Added steps carry an 'Added by the agent' tag and the header counts added and skipped steps"
+            }
+          ],
+          "customization": [
+            "steps and title",
+            "estimate and actual in minutes",
+            "note per step"
+          ]
+        },
+        "statesNone": "A presentational list: the steps are passed in with their own status, so it has nothing of its own to load.",
+        "examples": [
+          "plan-tracker-demo",
+          "plan-tracker-blocked"
+        ],
+        "url": "https://ui.ballmac.com/components/plan-tracker"
+      }
+    },
+    {
+      "name": "plan-tracker-demo",
+      "type": "registry:example",
+      "title": "Plan Tracker: A plan that changed",
+      "description": "A plan that changed example of Plan Tracker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/plan-tracker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/plan-tracker-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/plan-tracker-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "plan-tracker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "plan-tracker-blocked",
+      "type": "registry:example",
+      "title": "Plan Tracker: A blocked step",
+      "description": "A blocked step example of Plan Tracker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/plan-tracker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/plan-tracker-blocked.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/plan-tracker-blocked.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "plan-tracker",
         "tier": "free"
       }
     },
@@ -74051,8 +75254,22 @@
           "assistant",
           "status"
         ],
-        "version": "1.0.0",
+        "version": "1.0.1",
         "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "A new phase fades in from a soft grey instead of from nothing, so the label never disappears between phases.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-25",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "phases is string[] (what the assistant is doing, in order; defaults to four general ones), interval in ms (default 1800), done turns it into a check plus doneLabel. role=status announces Working once and the finished text when done, not each phase; the spinner and shimmer stop with reduced motion or when the theme turns loops off.",
@@ -75126,11 +76343,13 @@
       "author": "Ballmac <https://ui.ballmac.com>",
       "dependencies": [
         "lucide-react",
+        "motion",
         "radix-ui"
       ],
       "registryDependencies": [
         "utils",
-        "https://ui.ballmac.com/r/i18n.json"
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
       ],
       "files": [
         {
@@ -75154,11 +76373,25 @@
           "status",
           "llm"
         ],
-        "version": "1.0.0",
-        "updated": "2026-09-28",
+        "version": "1.1.0",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.1.0",
+            "date": "2026-10-25",
+            "note": "A status strip, an icon tile and a server tag; flat inputs listed as keys and values; Copy on input and result; a moving line while running; a Denied status; and Retry on a failed call. New props: server, icon, onRetry.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-09-28",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
-          "summary": "Render each tool invocation of an agent: <ToolCallCard name status duration input result />. Objects are shown as indented JSON, strings as-is; the details panel is a disclosure (collapsed by default).",
+          "summary": "Render each tool invocation of an agent: <ToolCallCard name status duration input result />. status is pending | running | success | error | denied; server (a tag after the name), icon (a tile), onRetry (adds Retry to a failed call; reject and it says why). An input object with only plain values is listed as keys and values; each block has a Copy button. Objects are shown as indented JSON, strings as-is; the details panel is a disclosure (collapsed by default).",
           "whenToUse": [
             "Showing function/tool calls inside an assistant message",
             "Agent run logs where each step calls a tool and returns data",
@@ -75197,7 +76430,8 @@
         },
         "examples": [
           "tool-call-card-demo",
-          "tool-call-card-states"
+          "tool-call-card-states",
+          "tool-call-card-failed"
         ],
         "url": "https://ui.ballmac.com/components/tool-call-card"
       }
@@ -75209,6 +76443,9 @@
       "description": "Default example of Tool Call Card.",
       "registryDependencies": [
         "https://ui.ballmac.com/r/tool-call-card.json"
+      ],
+      "dependencies": [
+        "lucide-react"
       ],
       "files": [
         {
@@ -75239,6 +76476,33 @@
           "path": "registry/examples/tool-call-card-states.tsx",
           "type": "registry:example",
           "target": "@components/ballmac/examples/tool-call-card-states.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "tool-call-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "tool-call-card-failed",
+      "type": "registry:example",
+      "title": "Tool Call Card: A failed call with Retry",
+      "description": "A failed call with Retry example of Tool Call Card.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/tool-call-card.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/tool-call-card-failed.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/tool-call-card-failed.tsx"
         }
       ],
       "categories": [

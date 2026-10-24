@@ -27,6 +27,10 @@ export default defineItem({
     ],
     customization: ["phases and interval", "done and doneLabel", "className on the pill"],
   },
-  version: "1.0.0",
+  version: "1.0.1",
   updated: "2026-10-25",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-25", note: "A new phase fades in from a soft grey instead of from nothing, so the label never disappears between phases." },
+    { version: "1.0.0", date: "2026-10-25", note: "First release." },
+  ],
 })

@@ -23,6 +23,14 @@
     "version": "1.0.0",
     "hash": "ad8b1e2fda84842839dea4ce52f223d1f9228733237c804255ecb507a4645b8b"
   },
+  "agent-11": {
+    "version": "1.0.0",
+    "hash": "052039668cb255399e0c33a2e113c3f7c38caa18867087da0b43736f6dca74e9"
+  },
+  "agent-12": {
+    "version": "1.0.0",
+    "hash": "681d093c6d03516d38c5bd17f61012c14a8f86abefb73219f8b8b746f935fd18"
+  },
   "agent-2": {
     "version": "1.0.0",
     "hash": "7c26952798c31961ad83ba07e3f00a37e0c74398ffafddd0bb5ab2f4e16fbcc8"
@@ -70,6 +78,14 @@
   "agent-roster": {
     "version": "1.0.0",
     "hash": "117820b27a1bc59588d4744530b12d81b5acb54c717bdfbee8f1c802cb5460e0"
+  },
+  "agent-steering": {
+    "version": "1.0.0",
+    "hash": "87ecce7703e7adf53e252deec62e1c1a4dadf2782586c970958e2529f61ba177"
+  },
+  "agent-tree": {
+    "version": "1.0.0",
+    "hash": "b2826bd53e2a1ce08e7c443f47eb54689e395eee153f323071d0f54b56c09d4b"
   },
   "ai-chat": {
     "version": "1.0.0",
@@ -454,6 +470,10 @@
   "context-menu": {
     "version": "1.0.1",
     "hash": "724f86c4ddc8aaff78f70d7196e8bf50870e2980fa3cd704725d45bc76fc802b"
+  },
+  "context-window": {
+    "version": "1.0.0",
+    "hash": "428efe4a6fb5ea0dce2708a31419b799cb28f1f3106bfee53cb1a5559a0371f0"
   },
   "contribution-graph": {
     "version": "1.0.0",
@@ -1223,6 +1243,10 @@
     "version": "1.0.0",
     "hash": "fe9356e1f0b1923685d96a74d3c58af1598365e4d0d72d3dc6d77873593b7312"
   },
+  "model-compare": {
+    "version": "1.0.0",
+    "hash": "65448709fbb1bb2c6e6312e65a55b5d67a7a275158cb80cdc7f9db1ffe08739a"
+  },
   "model-picker": {
     "version": "1.0.0",
     "hash": "a4f625f9cc4d2078256e7005d93ae40ea3b645b9c92b9fb06a8882f079cc5caa"
@@ -1358,6 +1382,10 @@
   "plan-selector": {
     "version": "1.0.0",
     "hash": "dccb7d39c4cc73ebd699ce11d7196e019b4665e53b45201eb22ebd697841f44e"
+  },
+  "plan-tracker": {
+    "version": "1.0.0",
+    "hash": "2bf481c60b0575934224e9de2da6b5b75b36b4f8d4df1325d71988b71da45d66"
   },
   "poll-1": {
     "version": "1.0.0",
@@ -1984,8 +2012,8 @@
     "hash": "e06d2560604256285b41de8cbe4d09e7d4e705c5bd97860509c4b548e0054512"
   },
   "thinking-loader": {
-    "version": "1.0.0",
-    "hash": "d3ec4c9aa98318c42f6c8d300c4fcb4f98999cf397e469e4652af4c2288ade97"
+    "version": "1.0.1",
+    "hash": "5af6fd0c99e20bd2249298fc1b60382b9e7c294cca60b9c076c073177ba2d042"
   },
   "tickets-1": {
     "version": "1.0.0",
@@ -2028,8 +2056,8 @@
     "hash": "233644bab731988212faf40e78fe4ea9aeab823efe72c1a81d382a7e4d929344"
   },
   "tool-call-card": {
-    "version": "1.0.0",
-    "hash": "79690d0dd28c21a06f5cf6b66cdf355af78c7bf15a63fb1dd071a648f2c7c8a9"
+    "version": "1.1.0",
+    "hash": "79f3515a22c753829d9c635868ec611aafcbc391115870ec3959aa452fcfb333"
   },
   "tool-catalog": {
     "version": "1.1.0",

@@ -1,3 +1,7 @@
+"use client"
+
+import { Search } from "lucide-react"
+
 import { ToolCallCard } from "@/components/ballmac/tool-call-card"
 
 export default function ToolCallCardDemo() {
@@ -5,6 +9,8 @@ export default function ToolCallCardDemo() {
     <div className="w-full max-w-xl">
       <ToolCallCard
         name="search_docs"
+        server="docs"
+        icon={<Search />}
         description="Searched the documentation"
         status="success"
         duration={842}

@@ -6,6 +6,21 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-25-agent-workbench] - 2026-10-25
+
+**A run workbench, mission control and six new agent components.** Steer an agent while it works, see its plan against what happened, watch its memory fill, and oversee a whole team of agents with spend and approvals in one place.
+
+### Added
+
+- `agent-11` is a run workbench: the conversation with each tool call as an openable card, a live plan, a context meter and a steering box, with Stop and honest failures. `agent-12` is mission control for a team of agents: spend, tokens, running agents, the delegation tree and an inbox of approvals.
+- `agent-steering` redirects an agent mid-run (now, after this step or at the end) and shows each instruction going from queued to applied. `plan-tracker` shows a plan against what happened, including steps the agent added or skipped.
+- `context-window` shows what fills an agent's memory and warns before it overflows. `agent-tree` shows who delegated to whom, with rolled-up progress and cost. `model-compare` sets models side by side by intelligence, speed and cost. `thinking-loader` is a small working pill for AI replies.
+
+### Changed
+
+- `tool-call-card` gets a status strip, a server tag, an icon tile, keys and values for flat inputs, Copy, a moving line while running, a Denied status and Retry on a failed call.
+- `autonomy-dial`, `trace-waterfall`, `agent-lanes`, `agent-graph`, `parallel-attempts`, `tool-catalog` and `escalation-card` get richer headers, costs, models, icons, risk badges and meters. Every component page now has a Copy prompt button for your coding agent.
+
 ## [2026-10-24-charts-and-more-screens] - 2026-10-24
 
 **Ten data views, two agent screens, and fifteen more screens for operations and trades.** Heat grid, treemap, Sankey, bullet and waterfall charts, a trace waterfall and prompt diff, plus screens for cost, capacity, alerts, fleets, salons, schools and more.

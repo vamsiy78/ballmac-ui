@@ -6,10 +6,10 @@
     "homepage": "https://ui.ballmac.com",
     "source": "https://ui.ballmac.com/r/registry.json"
   },
-  "generated": "2026-10-24T21:27:57.539Z",
+  "generated": "2026-10-24T22:21:56.985Z",
   "items": {
-    "total": 1942,
-    "scored": 487
+    "total": 1971,
+    "scored": 494
   },
   "score": 97,
   "grade": "A",
@@ -19,17 +19,17 @@
       "label": "Accessibility",
       "what": "No unlabelled controls, missing alt text, clickable non-interactive elements, removed focus outlines or hand-made dialogs in the source.",
       "weight": 25,
-      "pass": 455,
+      "pass": 462,
       "fail": 21,
       "na": 11,
-      "pct": 95.6
+      "pct": 95.7
     },
     {
       "id": "schema",
       "label": "Valid item",
       "what": "A kebab-case name, a known type, and at least one file with a path and content.",
       "weight": 15,
-      "pass": 487,
+      "pass": 494,
       "fail": 0,
       "na": 0,
       "pct": 100
@@ -39,7 +39,7 @@
       "label": "Dependencies declared",
       "what": "Every package the code imports is in dependencies, and every shared registry component it imports is in registryDependencies.",
       "weight": 15,
-      "pass": 487,
+      "pass": 494,
       "fail": 0,
       "na": 0,
       "pct": 100
@@ -49,17 +49,17 @@
       "label": "Theme tokens",
       "what": "Colors come from theme tokens, not hard-coded hex or rgb values, so the item follows the theme and dark mode.",
       "weight": 10,
-      "pass": 413,
+      "pass": 420,
       "fail": 63,
       "na": 11,
-      "pct": 86.8
+      "pct": 87
     },
     {
       "id": "states",
       "label": "States",
       "what": "Data views handle loading, empty and error, not only the filled case.",
       "weight": 10,
-      "pass": 474,
+      "pass": 481,
       "fail": 0,
       "na": 13,
       "pct": 100
@@ -69,17 +69,17 @@
       "label": "Motion",
       "what": "No endless decorative animation, which cannot be paused for people who ask for less motion.",
       "weight": 5,
-      "pass": 474,
-      "fail": 2,
+      "pass": 480,
+      "fail": 3,
       "na": 11,
-      "pct": 99.6
+      "pct": 99.4
     },
     {
       "id": "rtl",
       "label": "Right to left",
       "what": "Logical classes (ms-, pe-, text-start) instead of physical ones (ml-, pr-, text-left), so the layout mirrors.",
       "weight": 5,
-      "pass": 467,
+      "pass": 474,
       "fail": 9,
       "na": 11,
       "pct": 98.1
@@ -89,7 +89,7 @@
       "label": "Described",
       "what": "A title and a description that says what the item is (20 characters or more).",
       "weight": 5,
-      "pass": 487,
+      "pass": 494,
       "fail": 0,
       "na": 0,
       "pct": 100
@@ -99,7 +99,7 @@
       "label": "Documented",
       "what": "A docs note, or at least one example item in the registry.",
       "weight": 5,
-      "pass": 474,
+      "pass": 481,
       "fail": 0,
       "na": 13,
       "pct": 100
@@ -109,7 +109,7 @@
       "label": "Attributed",
       "what": "The item names its author or license, so you know who maintains it.",
       "weight": 5,
-      "pass": 487,
+      "pass": 494,
       "fail": 0,
       "na": 0,
       "pct": 100

@@ -9,15 +9,16 @@ export default defineItem({
   category: "ai",
   tags: ["ai", "agent", "tool", "function-calling", "json", "status", "llm"],
   files: [{ path: "components/tool-call-card.tsx" }],
-  dependencies: ["lucide-react", "radix-ui"],
-  registryDependencies: ["shadcn:utils", "i18n"],
+  dependencies: ["lucide-react", "motion", "radix-ui"],
+  registryDependencies: ["shadcn:utils", "i18n", "motion-presets"],
   examples: [
     { name: "tool-call-card-demo", title: "Default", file: "tool-call-card-demo.tsx" },
     { name: "tool-call-card-states", title: "All states", file: "tool-call-card-states.tsx" },
+    { name: "tool-call-card-failed", title: "A failed call with Retry", file: "tool-call-card-failed.tsx" },
   ],
   ai: {
     summary:
-      "Render each tool invocation of an agent: <ToolCallCard name status duration input result />. Objects are shown as indented JSON, strings as-is; the details panel is a disclosure (collapsed by default).",
+      "Render each tool invocation of an agent: <ToolCallCard name status duration input result />. status is pending | running | success | error | denied; server (a tag after the name), icon (a tile), onRetry (adds Retry to a failed call; reject and it says why). An input object with only plain values is listed as keys and values; each block has a Copy button. Objects are shown as indented JSON, strings as-is; the details panel is a disclosure (collapsed by default).",
     whenToUse: [
       "Showing function/tool calls inside an assistant message",
       "Agent run logs where each step calls a tool and returns data",
@@ -41,6 +42,10 @@ export default defineItem({
       "AI SDK: map a tool part's state ('input-streaming' | 'input-available' → running, 'output-available' → success, 'output-error' → error) and pass part.input / part.output",
     ],
   },
-  version: "1.0.0",
-  updated: "2026-09-28",
+  version: "1.1.0",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.1.0", date: "2026-10-25", note: "A status strip, an icon tile and a server tag; flat inputs listed as keys and values; Copy on input and result; a moving line while running; a Denied status; and Retry on a failed call. New props: server, icon, onRetry." },
+    { version: "1.0.0", date: "2026-09-28", note: "First release." },
+  ],
 })
