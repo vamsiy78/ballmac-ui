@@ -7115,6 +7115,709 @@
       }
     },
     {
+      "name": "agent-16",
+      "type": "registry:block",
+      "title": "Agent 16: answer workspace",
+      "description": "A support-style answer workspace: ask in plain words, watch the assistant work, read an answer where every claim points to its source, and correct or switch off what it remembers about the person.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/citation.json",
+        "https://ui.ballmac.com/r/cited-answer.json",
+        "https://ui.ballmac.com/r/memory-panel.json",
+        "https://ui.ballmac.com/r/message-actions.json",
+        "https://ui.ballmac.com/r/thinking-loader.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-16/agent-16.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-16/agent-16.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "chat",
+          "rag",
+          "citations",
+          "sources",
+          "memory",
+          "support",
+          "assistant"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Answer workspace. <Agent16 title description turns={[{ id, question, answer?: { paragraphs, sources } }]} memories={MemoryItem[]} onAsk={(q) => Promise<{ paragraphs, sources }>} onFeedback={(turnId, value, reason?) => void} onForget={(id) => Promise} />. A turn without an answer shows the thinking loader. Paragraphs cite sources with [1] markers. On a phone the memory panel sits behind a Show memory button. A rejected onAsk removes the pending turn and puts the question back in the box.",
+          "whenToUse": [
+            "A customer-facing or internal assistant that answers from a knowledge base",
+            "Any chat where trust depends on seeing sources"
+          ],
+          "whenNotToUse": [
+            "A chat with no sources; use ai-chat-1",
+            "Watching a long agent run; use agent-11"
+          ],
+          "composesWith": [
+            "agent-18",
+            "agent-11",
+            "ai-chat-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Conversation",
+              "action": "An ordered list of turns; the question and the answer are separate; the working state is announced once"
+            },
+            {
+              "keys": "Composer",
+              "action": "A labelled box; Enter sends, Shift+Enter adds a line; Send is a button with a name"
+            },
+            {
+              "keys": "Citations",
+              "action": "Numbers are buttons named for their source; sources are in a list with links"
+            },
+            {
+              "keys": "Memory",
+              "action": "A switch and buttons with names that include the memory; on phones a disclosure button with aria-expanded"
+            }
+          ],
+          "customization": [
+            "title and description",
+            "turns and memories",
+            "onAsk, onFeedback, onForget"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-16-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton conversation and memory under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Ask your first question",
+            "example": "agent-16-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says to ask a first question; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-16-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was sent, with Try again (onRetry). A question that fails to answer comes back into the box with the reason."
+          }
+        ],
+        "examples": [
+          "agent-16-demo",
+          "agent-16-first",
+          "agent-16-loading",
+          "agent-16-empty",
+          "agent-16-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-16"
+      }
+    },
+    {
+      "name": "agent-16-demo",
+      "type": "registry:example",
+      "title": "Agent 16: answer workspace: Default",
+      "description": "Default example of Agent 16: answer workspace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-16.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-16-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-16-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-16",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-16-first",
+      "type": "registry:example",
+      "title": "Agent 16: answer workspace: A new conversation",
+      "description": "A new conversation example of Agent 16: answer workspace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-16.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-16-first.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-16-first.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-16",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-16-loading",
+      "type": "registry:example",
+      "title": "Agent 16: answer workspace: Loading",
+      "description": "Loading example of Agent 16: answer workspace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-16.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-16-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-16-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-16",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-16-empty",
+      "type": "registry:example",
+      "title": "Agent 16: answer workspace: Ask your first question",
+      "description": "Ask your first question example of Agent 16: answer workspace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-16.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-16-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-16-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-16",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-16-error",
+      "type": "registry:example",
+      "title": "Agent 16: answer workspace: Could not load",
+      "description": "Could not load example of Agent 16: answer workspace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-16.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-16-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-16-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-16",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-17",
+      "type": "registry:block",
+      "title": "Agent 17: prompt evaluation",
+      "description": "An evaluation lab for a prompt change: the pass rate against the baseline, which cases got worse or were fixed, what the model said against what was expected, and the exact words that changed in the prompt.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/eval-scorecard.json",
+        "https://ui.ballmac.com/r/prompt-diff.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-17/agent-17.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-17/agent-17.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "evals",
+          "testing",
+          "prompts",
+          "regression",
+          "quality",
+          "scorecard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Prompt evaluation. <Agent17 title description subject cases={EvalCase[]} history={number[]} promptBefore promptAfter onRerun={(ids) => Promise} />. Shows the scorecard (pass rate, change from the baseline, regressions, fixes, trend, filters) and a word-level diff of the prompt. A failed re-run shows its reason.",
+          "whenToUse": [
+            "Checking a prompt or model change before it ships",
+            "A review page for an AI feature's quality"
+          ],
+          "whenNotToUse": [
+            "Live monitoring; use a dashboard",
+            "Comparing two models on one input; use model-compare"
+          ],
+          "composesWith": [
+            "agent-13",
+            "agent-14",
+            "cost-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Scorecard",
+              "action": "Pass rate and change are text; filters are toggle buttons; every case is a disclosure with its status in words"
+            },
+            {
+              "keys": "Diff",
+              "action": "Added and removed words are marked in words for screen readers as well as by color"
+            },
+            {
+              "keys": "Re-run",
+              "action": "Native buttons; results are announced and failures are alerts"
+            }
+          ],
+          "customization": [
+            "title, description, subject",
+            "cases, history",
+            "promptBefore and promptAfter",
+            "onRerun"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-17-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton scorecard under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No cases yet",
+            "example": "agent-17-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says there are no cases yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-17-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was run, with Try again (onRetry). A re-run that fails says why."
+          }
+        ],
+        "examples": [
+          "agent-17-demo",
+          "agent-17-clean",
+          "agent-17-loading",
+          "agent-17-empty",
+          "agent-17-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-17"
+      }
+    },
+    {
+      "name": "agent-17-demo",
+      "type": "registry:example",
+      "title": "Agent 17: prompt evaluation: Default",
+      "description": "Default example of Agent 17: prompt evaluation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-17.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-17-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-17-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-17",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-17-clean",
+      "type": "registry:example",
+      "title": "Agent 17: prompt evaluation: Everything passes",
+      "description": "Everything passes example of Agent 17: prompt evaluation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-17.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-17-clean.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-17-clean.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-17",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-17-loading",
+      "type": "registry:example",
+      "title": "Agent 17: prompt evaluation: Loading",
+      "description": "Loading example of Agent 17: prompt evaluation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-17.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-17-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-17-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-17",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-17-empty",
+      "type": "registry:example",
+      "title": "Agent 17: prompt evaluation: No cases yet",
+      "description": "No cases yet example of Agent 17: prompt evaluation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-17.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-17-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-17-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-17",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-17-error",
+      "type": "registry:example",
+      "title": "Agent 17: prompt evaluation: Could not load",
+      "description": "Could not load example of Agent 17: prompt evaluation.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-17.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-17-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-17-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-17",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-18",
+      "type": "registry:block",
+      "title": "Agent 18: knowledge base",
+      "description": "A knowledge base admin: the sources an assistant reads with their health, document counts and a switch for each, live sync with Retry, and a box to test a question and see which sources the answer comes from.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/citation.json",
+        "https://ui.ballmac.com/r/cited-answer.json",
+        "https://ui.ballmac.com/r/knowledge-sources.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/agent-18/agent-18.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/agent-18/agent-18.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "agents"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "rag",
+          "knowledge base",
+          "sources",
+          "sync",
+          "settings",
+          "citations"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Knowledge base. <Agent18 title description sources={KnowledgeSource[]} onAdd onSync onToggle onRemove onTest={(q) => Promise<{ paragraphs, sources }>} />. The test box asks a question and shows the answer with its sources, so a person can turn a source off and ask again to see what it contributed. A rejected onTest shows the reason.",
+          "whenToUse": [
+            "The settings page of an AI product that answers from customer data",
+            "Checking which sources an answer comes from before launch"
+          ],
+          "whenNotToUse": [
+            "A chat for end users; use agent-16",
+            "Browsing documents; use a file table"
+          ],
+          "composesWith": [
+            "agent-16",
+            "agent-12",
+            "settings-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Sources",
+              "action": "Each source has a switch named for it; status is in words; actions name the source; Remove asks first with focus on Keep it"
+            },
+            {
+              "keys": "Test",
+              "action": "A labelled box and a button; the answer is a normal region with numbered source buttons"
+            },
+            {
+              "keys": "Results",
+              "action": "Announced politely; failures are alerts"
+            }
+          ],
+          "customization": [
+            "title and description",
+            "sources",
+            "onAdd, onSync, onToggle, onRemove, onTest"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "agent-18-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton sources and test box under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No sources yet",
+            "example": "agent-18-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says there are no sources yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "agent-18-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A sync, switch or remove that fails says why and changes nothing."
+          }
+        ],
+        "examples": [
+          "agent-18-demo",
+          "agent-18-healthy",
+          "agent-18-loading",
+          "agent-18-empty",
+          "agent-18-error"
+        ],
+        "url": "https://ui.ballmac.com/components/agent-18"
+      }
+    },
+    {
+      "name": "agent-18-demo",
+      "type": "registry:example",
+      "title": "Agent 18: knowledge base: Default",
+      "description": "Default example of Agent 18: knowledge base.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-18.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-18-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-18-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-18",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-18-healthy",
+      "type": "registry:example",
+      "title": "Agent 18: knowledge base: All healthy",
+      "description": "All healthy example of Agent 18: knowledge base.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-18.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-18-healthy.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-18-healthy.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-18",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-18-loading",
+      "type": "registry:example",
+      "title": "Agent 18: knowledge base: Loading",
+      "description": "Loading example of Agent 18: knowledge base.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-18.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-18-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-18-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-18",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-18-empty",
+      "type": "registry:example",
+      "title": "Agent 18: knowledge base: No sources yet",
+      "description": "No sources yet example of Agent 18: knowledge base.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-18.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-18-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-18-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-18",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "agent-18-error",
+      "type": "registry:example",
+      "title": "Agent 18: knowledge base: Could not load",
+      "description": "Could not load example of Agent 18: knowledge base.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/agent-18.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/agent-18-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/agent-18-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "agent-18",
+        "tier": "free"
+      }
+    },
+    {
       "name": "agent-2",
       "type": "registry:block",
       "title": "Agent 2: approvals inbox",
@@ -44498,6 +45201,142 @@
       }
     },
     {
+      "name": "cited-answer",
+      "type": "registry:ui",
+      "title": "Cited Answer",
+      "description": "An AI answer you can check: numbers in the text are buttons that light up every claim a source supports and open its excerpt, and the source list works the other way round. Says how many sentences are cited.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/citation.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/cited-answer.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/cited-answer.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "chat",
+          "citations",
+          "sources",
+          "rag",
+          "answer",
+          "grounding",
+          "trust"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "paragraphs is string[]; write [1] or [2, 3] after a claim to cite sources by their position in sources ({ title, url, site?, date?, snippet?, favicon? } as in citation). question shows above. showCoverage (default true) adds 'N of M sentences are cited'. Choosing or hovering a number, or a source row, highlights every claim that source supports and opens its snippet; Escape clears. Unknown numbers are ignored.",
+          "whenToUse": [
+            "A RAG or search answer where people need to see where each claim came from",
+            "Support and research assistants that must be checkable"
+          ],
+          "whenNotToUse": [
+            "A plain chat reply with no sources; use ai-message",
+            "Checking claims against sources automatically; use citation-coverage"
+          ],
+          "composesWith": [
+            "message-actions",
+            "sources-list",
+            "citation",
+            "citation-coverage"
+          ],
+          "a11y": [
+            {
+              "keys": "Numbers",
+              "action": "Buttons named 'Source n: title' with pressed state; they work with Enter and Space and show focus"
+            },
+            {
+              "keys": "Sources",
+              "action": "Each row is a button naming the source and how often it is cited; a separate link opens it"
+            },
+            {
+              "keys": "Highlight",
+              "action": "Announced politely ('Highlighting 2 claims from …'); Escape clears; cited claims are underlined as well as tinted"
+            },
+            {
+              "keys": "Coverage",
+              "action": "The count of cited sentences is text, not only a bar"
+            }
+          ],
+          "customization": [
+            "paragraphs and sources",
+            "question",
+            "showCoverage"
+          ]
+        },
+        "statesNone": "A presentational answer: the text and sources are passed in, so it has nothing of its own to load.",
+        "examples": [
+          "cited-answer-demo",
+          "cited-answer-single"
+        ],
+        "url": "https://ui.ballmac.com/components/cited-answer"
+      }
+    },
+    {
+      "name": "cited-answer-demo",
+      "type": "registry:example",
+      "title": "Cited Answer: A support answer with three sources",
+      "description": "A support answer with three sources example of Cited Answer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cited-answer.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cited-answer-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cited-answer-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cited-answer",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "cited-answer-single",
+      "type": "registry:example",
+      "title": "Cited Answer: One source",
+      "description": "One source example of Cited Answer.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/cited-answer.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/cited-answer-single.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/cited-answer-single.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "cited-answer",
+        "tier": "free"
+      }
+    },
+    {
       "name": "code-block",
       "type": "registry:ui",
       "title": "Code Block",
@@ -47721,6 +48560,137 @@
       }
     },
     {
+      "name": "decision-trace",
+      "type": "registry:ui",
+      "title": "Decision Trace",
+      "description": "Why an agent picked one path over the others: options on a branch diagram with fit scores, the chosen one marked in words, reasoning with pros and cons on open, and a way for a person to choose another.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/decision-trace.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/decision-trace.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "agent",
+          "explainability",
+          "decision",
+          "routing",
+          "trace",
+          "transparency",
+          "human in the loop"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "question and options ({ id, label, score 0-1, reason, pros?, cons?, cost? }) are required. The highest score is chosen unless chosen/defaultChosen says otherwise. decidedBy names the decider. onOverride(id) adds 'Use this instead' on the others; reject and the choice goes back with the reason. Options open and close; the chosen one starts open.",
+          "whenToUse": [
+            "Showing why a router, planner or tool-picker chose what it chose",
+            "A review step where a person may overrule an agent's choice"
+          ],
+          "whenNotToUse": [
+            "The sequence of steps in a run; use agent-graph or trace-waterfall",
+            "Comparing outputs; use model-compare"
+          ],
+          "composesWith": [
+            "agent-graph",
+            "trace-waterfall",
+            "escalation-card",
+            "tool-catalog"
+          ],
+          "a11y": [
+            {
+              "keys": "Options",
+              "action": "Each option is a heading with a button, aria-expanded, and the words Chosen or Not chosen; score is text as well as a bar"
+            },
+            {
+              "keys": "Override",
+              "action": "A native button named 'Use this instead'; the result is announced and failures are alerts"
+            },
+            {
+              "keys": "Diagram",
+              "action": "The branch lines are decoration; the list order is highest score first"
+            }
+          ],
+          "customization": [
+            "question, options, decidedBy",
+            "chosen or defaultChosen",
+            "onOverride"
+          ]
+        },
+        "statesNone": "A presentational trace: the options are passed in, so it has nothing of its own to load.",
+        "examples": [
+          "decision-trace-demo",
+          "decision-trace-readonly"
+        ],
+        "url": "https://ui.ballmac.com/components/decision-trace"
+      }
+    },
+    {
+      "name": "decision-trace-demo",
+      "type": "registry:example",
+      "title": "Decision Trace: A router choosing how to answer",
+      "description": "A router choosing how to answer example of Decision Trace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/decision-trace.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/decision-trace-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/decision-trace-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "decision-trace",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "decision-trace-readonly",
+      "type": "registry:example",
+      "title": "Decision Trace: Read only",
+      "description": "Read only example of Decision Trace.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/decision-trace.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/decision-trace-readonly.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/decision-trace-readonly.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "decision-trace",
+        "tier": "free"
+      }
+    },
+    {
       "name": "description-list",
       "type": "registry:ui",
       "title": "Description List",
@@ -49798,6 +50768,141 @@
       "meta": {
         "example": true,
         "of": "escalation-card",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "eval-scorecard",
+      "type": "registry:ui",
+      "title": "Eval Scorecard",
+      "description": "The result of testing a model or prompt against a set of cases: pass rate and change from the baseline in words, a trend, what got worse or was fixed, and every case opened to show the question, a good answer and the model's.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/eval-scorecard.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/eval-scorecard.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "evals",
+          "testing",
+          "quality",
+          "regression",
+          "scorecard",
+          "llm",
+          "prompts"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "cases is [{ id, name, input, expected, actual, status 'pass'|'fail'|'error', previous?, ms?, cost?, tags?, note? }]. previous is the status on the baseline run: a fail that was a pass is 'Got worse', a pass that was a fail is 'Fixed'. history is earlier pass rates (0-1) for the trend; baseline defaults to the last of them. onRerun(ids) adds 'Run the N failed again' and a per-case button; reject and the reason shows. Filters: All, Failed, Got worse.",
+          "whenToUse": [
+            "Reviewing a prompt or model change before shipping it",
+            "A regression dashboard for an AI feature"
+          ],
+          "whenNotToUse": [
+            "Live traffic quality; use a monitoring dashboard",
+            "Comparing two outputs side by side; use model-compare or prompt-diff"
+          ],
+          "composesWith": [
+            "prompt-diff",
+            "model-compare",
+            "run-ledger",
+            "trace-waterfall"
+          ],
+          "a11y": [
+            {
+              "keys": "Result",
+              "action": "Pass rate and change are text; the ring and trend are decoration with a spoken equivalent"
+            },
+            {
+              "keys": "Filter",
+              "action": "A labelled group of toggle buttons with pressed state and counts"
+            },
+            {
+              "keys": "Cases",
+              "action": "Each case is a heading with a button and aria-expanded; status is a word and an icon"
+            },
+            {
+              "keys": "Re-run",
+              "action": "Native buttons; the result is announced and failures are alerts"
+            }
+          ],
+          "customization": [
+            "title and subject",
+            "cases, history, baseline",
+            "onRerun"
+          ]
+        },
+        "statesNone": "A presentational scorecard: the results are passed in, so it has nothing of its own to load. A filter with no match says so.",
+        "examples": [
+          "eval-scorecard-demo",
+          "eval-scorecard-clean"
+        ],
+        "url": "https://ui.ballmac.com/components/eval-scorecard"
+      }
+    },
+    {
+      "name": "eval-scorecard-demo",
+      "type": "registry:example",
+      "title": "Eval Scorecard: A support prompt, six cases",
+      "description": "A support prompt, six cases example of Eval Scorecard.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/eval-scorecard.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/eval-scorecard-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/eval-scorecard-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "eval-scorecard",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "eval-scorecard-clean",
+      "type": "registry:example",
+      "title": "Eval Scorecard: Everything passes",
+      "description": "Everything passes example of Eval Scorecard.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/eval-scorecard.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/eval-scorecard-clean.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/eval-scorecard-clean.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "eval-scorecard",
         "tier": "free"
       }
     },
@@ -55557,6 +56662,141 @@
       }
     },
     {
+      "name": "knowledge-sources",
+      "type": "registry:ui",
+      "title": "Knowledge Sources",
+      "description": "The places an assistant reads from: each source's kind, document count and freshness, a switch for whether answers may use it, live sync progress, a failed sync with the reason and Retry, and Remove that asks first.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/knowledge-sources.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/knowledge-sources.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "rag",
+          "knowledge base",
+          "sources",
+          "sync",
+          "connectors",
+          "settings",
+          "indexing"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "sources is [{ id, name, kind 'drive'|'notion'|'github'|'web'|'slack'|'files'|'database'|string, detail?, status 'synced'|'syncing'|'error'|'paused', docs, lastSync?, error?, progress? 0-1, included }]. The component keeps its own copy and calls onSync(id), onToggle(id, included), onRemove(id) and onAdd(). Handlers may be async; a rejected sync shows the error with Retry, a rejected toggle or remove puts things back and says why. The header sums only the documents in use.",
+          "whenToUse": [
+            "The settings page where a team connects what an assistant can read",
+            "Showing the health of a search or RAG index"
+          ],
+          "whenNotToUse": [
+            "Browsing the documents themselves; use a file table",
+            "Choosing a model; use model-picker"
+          ],
+          "composesWith": [
+            "cited-answer",
+            "sources-list",
+            "memory-panel",
+            "guardrail-feed"
+          ],
+          "a11y": [
+            {
+              "keys": "Switch",
+              "action": "Each source has a role=switch named 'Use <name> in answers'"
+            },
+            {
+              "keys": "Status",
+              "action": "Said in words with an icon, never by color alone; progress is also text"
+            },
+            {
+              "keys": "Actions",
+              "action": "Sync and Retry buttons name the source; Remove opens a confirmation group with focus on Keep it"
+            },
+            {
+              "keys": "Results",
+              "action": "Announced politely; failures are alerts"
+            }
+          ],
+          "customization": [
+            "sources",
+            "title",
+            "onAdd, onSync, onToggle, onRemove"
+          ]
+        },
+        "statesNone": "A presentational list: the sources are passed in, so it has nothing of its own to load. An empty list says so.",
+        "examples": [
+          "knowledge-sources-demo",
+          "knowledge-sources-empty"
+        ],
+        "url": "https://ui.ballmac.com/components/knowledge-sources"
+      }
+    },
+    {
+      "name": "knowledge-sources-demo",
+      "type": "registry:example",
+      "title": "Knowledge Sources: Five sources in different states",
+      "description": "Five sources in different states example of Knowledge Sources.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/knowledge-sources.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/knowledge-sources-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/knowledge-sources-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "knowledge-sources",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "knowledge-sources-empty",
+      "type": "registry:example",
+      "title": "Knowledge Sources: No sources yet",
+      "description": "No sources yet example of Knowledge Sources.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/knowledge-sources.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/knowledge-sources-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/knowledge-sources-empty.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "knowledge-sources",
+        "tier": "free"
+      }
+    },
+    {
       "name": "kpi-row",
       "type": "registry:ui",
       "title": "KPI Row",
@@ -57893,6 +59133,146 @@
       "meta": {
         "example": true,
         "of": "mega-menu",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "memory-panel",
+      "type": "registry:ui",
+      "title": "Memory Panel",
+      "description": "What an assistant remembers, in sentences a person can read: grouped, searchable, editable in place, pinnable and forgettable with Undo. A master switch stops replies using memory without deleting it.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/memory-panel.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/memory-panel.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "memory",
+          "personalization",
+          "privacy",
+          "settings",
+          "assistant",
+          "chat",
+          "preferences"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "memories is [{ id, text, scope, source?, pinned? }]; scopes is [{ id, label, description? }] (default About you, Your work, Style). The panel keeps its own copy and calls onUpdate(id, text), onForget(id) (after undoMs, default 5000, so Undo works), onPin(id, pinned), onEnabledChange(enabled) and onAdd(text, scope) (adds the form). Handlers may be async; a rejection takes the change back and says why.",
+          "whenToUse": [
+            "The settings screen where a user manages what an assistant knows about them",
+            "A side panel in a chat that shows which memories a reply used"
+          ],
+          "whenNotToUse": [
+            "Conversation history; use a list of chats",
+            "What a run did; use trace-waterfall"
+          ],
+          "composesWith": [
+            "message-actions",
+            "prompt-library",
+            "ai-chat",
+            "context-window"
+          ],
+          "a11y": [
+            {
+              "keys": "Switch",
+              "action": "role=switch named 'Use memory in replies', with the effect described under it"
+            },
+            {
+              "keys": "Search",
+              "action": "A labelled search box; the list narrows as you type"
+            },
+            {
+              "keys": "Rows",
+              "action": "Pin, Edit and Forget are buttons whose names include the memory text"
+            },
+            {
+              "keys": "Edit",
+              "action": "Enter saves, Shift+Enter adds a line, Escape cancels; focus moves into the box"
+            },
+            {
+              "keys": "Forget",
+              "action": "Shows an Undo button for the whole window; every result is announced and failures are alerts"
+            }
+          ],
+          "customization": [
+            "memories and scopes",
+            "title",
+            "onUpdate, onForget, onPin, onEnabledChange, onAdd",
+            "undoMs"
+          ]
+        },
+        "statesNone": "A presentational panel: the memories are passed in, so it has nothing of its own to load. An empty list and a search with no match both say so.",
+        "examples": [
+          "memory-panel-demo",
+          "memory-panel-empty"
+        ],
+        "url": "https://ui.ballmac.com/components/memory-panel"
+      }
+    },
+    {
+      "name": "memory-panel-demo",
+      "type": "registry:example",
+      "title": "Memory Panel: Six memories in three groups",
+      "description": "Six memories in three groups example of Memory Panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/memory-panel.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/memory-panel-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/memory-panel-demo.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "memory-panel",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "memory-panel-empty",
+      "type": "registry:example",
+      "title": "Memory Panel: Nothing yet",
+      "description": "Nothing yet example of Memory Panel.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/memory-panel.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/memory-panel-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/memory-panel-empty.tsx"
+        }
+      ],
+      "categories": [
+        "ai"
+      ],
+      "meta": {
+        "example": true,
+        "of": "memory-panel",
         "tier": "free"
       }
     },

@@ -6,6 +6,18 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-25-answers-memory-and-evals] - 2026-10-25
+
+**Answers you can check, a memory you control, and evals for prompt changes.** An answer where every claim points to its source, a memory panel people can correct, a decision trace, an eval scorecard and a knowledge-source manager, put together in three new screens.
+
+### Added
+
+- `cited-answer` is an AI answer you can check. The numbers in the text are real buttons: choose one and every claim that source supports is highlighted and its excerpt opens, and choosing a source in the list works the other way round. It says how many sentences are cited.
+- `memory-panel` shows what an assistant remembers as plain sentences that can be searched, edited in place, pinned or forgotten, with Undo. One switch stops replies using memory without deleting any of it.
+- `decision-trace` shows why an agent picked one path over the others, with fit scores, reasoning, pros and cons, and a button for a person to choose another option.
+- `eval-scorecard` shows how a model or prompt did on a set of cases: the pass rate and its change from the baseline in words, what got worse or was fixed, and each case opened to show what was asked, a good answer and what the model said. `knowledge-sources` manages what an assistant reads, with sync progress, a failed sync with Retry and a switch for each source.
+- Blocks that put them together: `agent-16` (an answer workspace with memory), `agent-17` (a prompt evaluation with the prompt diff) and `agent-18` (a knowledge base with a test question).
+
 ## [2026-10-25-batch-run-and-review] - 2026-10-25
 
 **A queue, a grid for batch runs, a review desk and three more agent screens.** See a whole batch at a glance and retry only what failed, reorder what runs next, review what agents made from the keyboard, and polish a draft with suggestions you accept one by one.

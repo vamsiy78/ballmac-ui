@@ -43,6 +43,18 @@
     "version": "1.0.0",
     "hash": "eca8f6882e3f6a3e6b8491247096cef37a9f9b2efceba18aa8d5c74f86df02f9"
   },
+  "agent-16": {
+    "version": "1.0.0",
+    "hash": "35bd4e4253646cf112fb200956d9294efe5d60f328460d2a897c2884fbdde0b1"
+  },
+  "agent-17": {
+    "version": "1.0.0",
+    "hash": "acae2da7f09e6eaae0150023971e9aa515ea631e61f478b9a986ad615a206614"
+  },
+  "agent-18": {
+    "version": "1.0.0",
+    "hash": "7e146acad6b37d2b88e97719bac2443c17e040f43c21677a2e2d4863c322e82f"
+  },
   "agent-2": {
     "version": "1.0.0",
     "hash": "7c26952798c31961ad83ba07e3f00a37e0c74398ffafddd0bb5ab2f4e16fbcc8"
@@ -423,6 +435,10 @@
     "version": "1.0.0",
     "hash": "4bcbdd9b7ce89f8fe6c098c4821b19fb24e936bc6703b658b2f5dc6f6e8ce212"
   },
+  "cited-answer": {
+    "version": "1.0.0",
+    "hash": "3e5223c0cb9bc346e71829b1036d7b49ffe2a7a1f83a37c7a00bff113456a74d"
+  },
   "claims-1": {
     "version": "1.0.0",
     "hash": "0d6f72561f737d71c2c2c7e1aaa54aa64c0d489e3cf5bc235a3efb7bfa76c6ea"
@@ -571,6 +587,10 @@
     "version": "1.0.0",
     "hash": "5139bf680081b3b505a5b5d0e93c9fb82389b2423b6345d71dcf63dda17206c4"
   },
+  "decision-trace": {
+    "version": "1.0.0",
+    "hash": "8b2a4b8d5ee4f50e388664e54566fa9b05091a3c76aa4046ce129c7859a42976"
+  },
   "deploys-1": {
     "version": "1.0.0",
     "hash": "f88abf37e692e084258506bf36bf4a35b60022066b66eedff5d0c8abaf32756a"
@@ -702,6 +722,10 @@
   "escalation-card": {
     "version": "1.1.0",
     "hash": "bd619161b5444889bb3ed55b8d97e37faa392459cda5e5e72fe93295e1120682"
+  },
+  "eval-scorecard": {
+    "version": "1.0.0",
+    "hash": "a76c23853a27b683ca928a9d267167ffdd01a4aec7aee2fd537e7906ed039576"
   },
   "event-1": {
     "version": "1.0.0",
@@ -1131,6 +1155,10 @@
     "version": "1.0.0",
     "hash": "3788b983a04bf6756565722b9dcfdc051fd3ba23f177c3dea1d05732290c9795"
   },
+  "knowledge-sources": {
+    "version": "1.0.0",
+    "hash": "84b9627702a45296f3987d9192f839764b6a75813179798f30ac25b0e3e0896a"
+  },
   "kpi-row": {
     "version": "1.0.0",
     "hash": "1ef2de4f6dbd5b31b5a2a0a6fa5fe84895f515b16e213a3b8c7bcf94b8e71e12"
@@ -1246,6 +1274,10 @@
   "mega-menu": {
     "version": "1.0.0",
     "hash": "e4b7283c6a756616c841246ed76a2ae2e8c2ed1cf4ad84a3d691ff43ba3d15df"
+  },
+  "memory-panel": {
+    "version": "1.0.0",
+    "hash": "4db0d32893584523a68576612b9d7cbd731399ca69f8673d6f50342f5a6d0af0"
   },
   "mention-input": {
     "version": "1.0.0",

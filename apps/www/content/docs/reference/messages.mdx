@@ -4,7 +4,7 @@ description: "Every translatable message in Ballmac UI, with its key and English
 generatedFrom: registry/ballmac
 ---
 
-Every built-in label, placeholder and screen reader text is a message with an English default: 983 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
+Every built-in label, placeholder and screen reader text is a message with an English default: 1098 in all. To translate them, see [Translate Ballmac UI](/docs/guides/translate). The same keys are available as JSON at [/i18n/en.json](/i18n/en.json).
 
 | Key | English |
 | --- | --- |
@@ -229,6 +229,14 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `citation.openSource` | Open source |
 | `citation.previousSource` | Previous source |
 | `citation.sourceOf` | Source \{n\} of \{total\} |
+| `cited-answer.chip` | Source \{n\}: \{title\} |
+| `cited-answer.cleared` | Showing the whole answer |
+| `cited-answer.coverage` | \{cited\} of \{total\} sentences are cited |
+| `cited-answer.open` | Open \{title\} |
+| `cited-answer.picked` | Highlighting \{count\} claims from \{title\} |
+| `cited-answer.row` | \{title\}, cited \{count\} times. Highlight its claims |
+| `cited-answer.sources` | Sources |
+| `cited-answer.times` | ×\{count\} |
 | `code-block.copied` | Copied |
 | `code-block.copy` | Copy |
 | `code-block.files` | Files |
@@ -317,6 +325,17 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `date-picker.placeholder` | Pick a date |
 | `date-range-picker.from` | From |
 | `date-range-picker.to` | To |
+| `decision-trace.agentPick` | The agent's pick |
+| `decision-trace.chosen` | Chosen |
+| `decision-trace.cons` | Against |
+| `decision-trace.decision` | Decision |
+| `decision-trace.failed` | That did not work. The choice was not changed. |
+| `decision-trace.fit` | fit |
+| `decision-trace.notChosen` | Not chosen |
+| `decision-trace.overridden` | Now using \{label\} |
+| `decision-trace.pros` | In favor |
+| `decision-trace.score` | \{percent\}% |
+| `decision-trace.use` | Use this instead |
 | `desktop-icons.label` | Desktop |
 | `dialog.closeLabel` | Close |
 | `diff-viewer.diff` | \{label\} diff |
@@ -371,6 +390,36 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `escalation-card.taken` | You have taken over from the agent. |
 | `escalation-card.waiting` | Waiting \{time\} |
 | `escalation-card.why` | Why a person is needed: |
+| `eval-scorecard.actual` | The model said |
+| `eval-scorecard.all` | All |
+| `eval-scorecard.better` | Fixed |
+| `eval-scorecard.cost` | Cost of this run |
+| `eval-scorecard.down` | Down \{points\} points from the baseline |
+| `eval-scorecard.error` | Errored |
+| `eval-scorecard.expected` | A good answer |
+| `eval-scorecard.fail` | Failed |
+| `eval-scorecard.failed` | That did not work. Nothing was run. |
+| `eval-scorecard.failedTab` | Failed |
+| `eval-scorecard.filter` | Show cases |
+| `eval-scorecard.fixed` | Fixed |
+| `eval-scorecard.input` | Asked |
+| `eval-scorecard.latency` | Average time |
+| `eval-scorecard.noneFailed` | Every case passed. |
+| `eval-scorecard.noneWorse` | Nothing got worse. Every case that passed before still passes. |
+| `eval-scorecard.pass` | Passed |
+| `eval-scorecard.percent` | \{percent\}% |
+| `eval-scorecard.regressedTab` | Got worse |
+| `eval-scorecard.regressions` | Got worse |
+| `eval-scorecard.rerun` | Started again: \{count\} cases |
+| `eval-scorecard.rerunFailed` | Run the \{count\} failed again |
+| `eval-scorecard.rerunOne` | Run this case again |
+| `eval-scorecard.same` | Same as the baseline |
+| `eval-scorecard.summary` | \{passed\} of \{total\} cases passed |
+| `eval-scorecard.title` | Evaluation |
+| `eval-scorecard.trend` | Trend |
+| `eval-scorecard.trendText` | Pass rate over the last \{count\} runs, from \{from\}% to \{to\}% |
+| `eval-scorecard.up` | Up \{points\} points from the baseline |
+| `eval-scorecard.worse` | Got worse |
 | `event-calendar.add` | Add event |
 | `event-calendar.allDay` | All day |
 | `event-calendar.describeAllDay` | \{title\}, \{date\}, all day\{where\} |
@@ -510,6 +559,36 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `keyboard-shortcuts.press` | Press \{key\} anywhere to open this list. |
 | `keyboard-shortcuts.searchPlaceholder` | Search shortcuts |
 | `keyboard-shortcuts.title` | Keyboard shortcuts |
+| `knowledge-sources.add` | Add a source |
+| `knowledge-sources.broken` | \{count\} needs attention |
+| `knowledge-sources.confirm` | Confirm removing \{name\} |
+| `knowledge-sources.confirmText` | Remove \{name\}? Its \{count\} documents stop appearing in answers. The originals are not touched. |
+| `knowledge-sources.docs` | \{count\} documents |
+| `knowledge-sources.empty` | No sources yet. Add one and the assistant can answer from it. |
+| `knowledge-sources.errorWord` | Sync failed |
+| `knowledge-sources.failed` | That did not work. Nothing was changed. |
+| `knowledge-sources.justNow` | Just now |
+| `knowledge-sources.keep` | Keep it |
+| `knowledge-sources.last` | Synced \{when\} |
+| `knowledge-sources.paused` | Paused |
+| `knowledge-sources.remove` | Remove |
+| `knowledge-sources.removeLabel` | Remove \{name\} |
+| `knowledge-sources.removeYes` | Remove |
+| `knowledge-sources.removed` | \{name\} was removed |
+| `knowledge-sources.retry` | Retry |
+| `knowledge-sources.summary` | \{docs\} documents from \{count\} sources are used in answers |
+| `knowledge-sources.sync` | Sync now |
+| `knowledge-sources.syncFailed` | \{name\} could not be synced |
+| `knowledge-sources.syncLabel` | \{action\}: \{name\} |
+| `knowledge-sources.synced` | \{name\} is up to date |
+| `knowledge-sources.syncing` | Syncing \{name\} |
+| `knowledge-sources.syncingNow` | Syncing |
+| `knowledge-sources.syncingPct` | Syncing, \{percent\}% |
+| `knowledge-sources.title` | Knowledge sources |
+| `knowledge-sources.upToDate` | Up to date |
+| `knowledge-sources.use` | Use \{name\} in answers |
+| `knowledge-sources.usedOff` | \{name\} is no longer used in answers |
+| `knowledge-sources.usedOn` | \{name\} is used in answers |
 | `launchpad.label` | Launchpad |
 | `launchpad.noAppsMatch` | No apps match “\{query\}”. |
 | `launchpad.page` | Page \{n\} |
@@ -540,6 +619,42 @@ Every built-in label, placeholder and screen reader text is a message with an En
 | `mac-window.zoom` | Zoom window |
 | `mega-menu.label` | Main |
 | `mega-menu.learnMore` | Learn more |
+| `memory-panel.add` | Remember |
+| `memory-panel.addLabel` | Something to remember |
+| `memory-panel.addPlaceholder` | Remember that… |
+| `memory-panel.addScope` | Group |
+| `memory-panel.added` | Remembered |
+| `memory-panel.addedByYou` | Added by you |
+| `memory-panel.cancel` | Cancel |
+| `memory-panel.edit` | Edit |
+| `memory-panel.editFor` | Edit: \{text\} |
+| `memory-panel.editLabel` | Edit this memory |
+| `memory-panel.empty` | Nothing remembered yet. It learns as you talk, and you decide what stays. |
+| `memory-panel.failed` | That did not work. Nothing was changed. |
+| `memory-panel.forget` | Forget |
+| `memory-panel.forgetFor` | Forget: \{text\} |
+| `memory-panel.forgetting` | Forgetting. You can still undo. |
+| `memory-panel.forgot` | Forgetting “\{text\}” |
+| `memory-panel.forgotten` | Forgotten |
+| `memory-panel.hintOff` | Memory is off. Replies ignore these notes and nothing is deleted. |
+| `memory-panel.hintOn` | Replies use these notes. Edit or forget anything that is wrong. |
+| `memory-panel.noMatch` | Nothing matches “\{query\}”. |
+| `memory-panel.off` | Memory is off. Nothing is deleted. |
+| `memory-panel.on` | Memory is on. Replies can use it. |
+| `memory-panel.pin` | Pin |
+| `memory-panel.pinLabel` | Pin: \{text\} |
+| `memory-panel.pinned` | Pinned |
+| `memory-panel.pinnedTag` | Pinned |
+| `memory-panel.restored` | Kept |
+| `memory-panel.save` | Save |
+| `memory-panel.saved` | Updated |
+| `memory-panel.search` | Search memory |
+| `memory-panel.searchPlaceholder` | Search what it remembers |
+| `memory-panel.switch` | Use memory in replies |
+| `memory-panel.title` | Memory |
+| `memory-panel.undo` | Undo |
+| `memory-panel.unpin` | Unpin |
+| `memory-panel.unpinned` | Unpinned |
 | `mention-input.noMatches` | No matches for “\{query\}” |
 | `mention-input.searching` | Searching |
 | `mention-input.suggestions` | Suggestions |
