@@ -28,6 +28,10 @@ export default defineItem({
     customization: ["height", "title", "format", "totals in the middle for sub-totals"],
   },
   statesNone: "A presentational chart: you pass the steps in, so it has nothing of its own to load or fail.",
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.0.1",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-25", note: "Step labels wrap on a phone and the chart fits its column." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

@@ -31,6 +31,10 @@ export default defineItem({
     customization: ["domain and format", "tone for pass, warn and fail", "rowLabel and columnLabel", "Controlled selection"],
   },
   statesNone: "A presentational chart: you pass the values in, so it has nothing of its own to load or fail.",
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.0.1",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-25", note: "The grid scrolls inside its own frame on a phone instead of widening the page." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

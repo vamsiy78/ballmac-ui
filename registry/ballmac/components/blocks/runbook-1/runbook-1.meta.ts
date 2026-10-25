@@ -39,6 +39,10 @@ export default defineItem({
     ],
     customization: ["steps with commands, cautions and minutes", "defaultDone", "onStepChange and onComplete"],
   },
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.0.1",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-25", note: "Steps no longer push the page wider than a phone when a command is long." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

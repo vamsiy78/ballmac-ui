@@ -61,7 +61,7 @@ const sample: Cost1Period[] = [
     previous: 14120,
     budget: 16000,
     items: items([["Compute", 4210, "Production"], ["Database", 2380, "Production"], ["CDN", 1120, "Production"], ["Queues", 340, "Production"], ["Model inference", 3150, "AI"], ["Vector store", 760, "AI"], ["Embeddings", 410, "AI"], ["CI runners", 920, "Developer"], ["Logs", 1450, "Observability"], ["Metrics", 530, "Observability"], ["Traces", 210, "Observability"], ["Other", 280, "Other"]]),
-    bridge: [{ id: "s", label: "Last month", value: 14120, kind: "total" }, { id: "a", label: "Inference", value: 1180 }, { id: "b", label: "Compute", value: 640 }, { id: "c", label: "Logs", value: 410 }, { id: "d", label: "CDN", value: -290 }, { id: "e", label: "Other", value: -300 }, { id: "t", label: "This month", value: 15760, kind: "total" }],
+    bridge: [{ id: "s", label: "Last month", value: 14120, kind: "total" }, { id: "a", label: "Models", value: 1180 }, { id: "b", label: "Compute", value: 640 }, { id: "c", label: "Logs", value: 410 }, { id: "d", label: "CDN", value: -290 }, { id: "e", label: "Other", value: -300 }, { id: "t", label: "This month", value: 15760, kind: "total" }],
     anomalies: [
       { id: "an1", service: "Model inference", amount: 640, text: "Spend on model calls jumped 38% on 14 October and has stayed there. The new assistant went live that day." },
       { id: "an2", service: "Logs", amount: 210, text: "The checkout service started logging every request body on 9 October." },
@@ -74,7 +74,7 @@ const sample: Cost1Period[] = [
     previous: 13880,
     budget: 15000,
     items: items([["Compute", 3570, "Production"], ["Database", 2310, "Production"], ["CDN", 1410, "Production"], ["Queues", 330, "Production"], ["Model inference", 1970, "AI"], ["Vector store", 740, "AI"], ["Embeddings", 390, "AI"], ["CI runners", 880, "Developer"], ["Logs", 1040, "Observability"], ["Metrics", 510, "Observability"], ["Traces", 200, "Observability"], ["Other", 580, "Other"]]),
-    bridge: [{ id: "s", label: "August", value: 13880, kind: "total" }, { id: "a", label: "Inference", value: 420 }, { id: "b", label: "Logs", value: 150 }, { id: "c", label: "Compute", value: -210 }, { id: "d", label: "Other", value: -120 }, { id: "t", label: "Last month", value: 14120, kind: "total" }],
+    bridge: [{ id: "s", label: "August", value: 13880, kind: "total" }, { id: "a", label: "Models", value: 420 }, { id: "b", label: "Logs", value: 150 }, { id: "c", label: "Compute", value: -210 }, { id: "d", label: "Other", value: -120 }, { id: "t", label: "Last month", value: 14120, kind: "total" }],
   },
 ]
 

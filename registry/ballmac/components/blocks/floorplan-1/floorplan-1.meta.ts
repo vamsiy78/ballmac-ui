@@ -38,6 +38,10 @@ export default defineItem({
     ],
     customization: ["tables, waiting and title", "onSeat and onStatus", "Table shape and position are data"],
   },
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.0.1",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-25", note: "On a phone the floor plan scrolls sideways in its own focusable region, so tables no longer overlap or leave the screen." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

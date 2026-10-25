@@ -164,7 +164,7 @@ function Treemap({ items, format = (v) => v.toLocaleString("en-US"), aspect = 16
 
   return (
     <div data-slot="treemap" dir={dir} className={cn("grid w-full min-w-0 gap-3", className)} {...props}>
-      <div className="relative w-full overflow-hidden rounded-xl border bg-card" style={{ aspectRatio: String(aspect) }} role="group" aria-label={msg("treemap.label", "Share of the total by item")}>
+      <div className="relative min-h-60 w-full overflow-hidden rounded-xl border bg-card" style={{ aspectRatio: String(aspect) }} role="group" aria-label={msg("treemap.label", "Share of the total by item")}>
         {data.map((i) => {
           const r = rects[i.id]
           if (!r) return null

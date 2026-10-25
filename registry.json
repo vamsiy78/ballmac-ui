@@ -4688,6 +4688,144 @@
       }
     },
     {
+      "name": "bar-list",
+      "type": "registry:ui",
+      "title": "Bar List",
+      "description": "A ranked list of bars with the name and number on top of the bar, so both stay readable at any width. Rows can be links or buttons, a long list folds to its top few, and every value is real text.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/bar-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/bar-list.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "ranking",
+          "top list",
+          "analytics",
+          "bars",
+          "dashboard",
+          "leaderboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "items is [{ id, label, value, href?, icon?, hint? }]. Sorted by value unless sort is false. title, format(value), showShare (percent of total), limit (folds the rest behind a Show N more button). href makes a row a link; onSelect(id) with selected makes rows toggle buttons. The bar is decoration behind real text.",
+          "whenToUse": [
+            "Top pages, sources, countries, products or errors in an analytics view",
+            "A leaderboard where the label matters more than the shape"
+          ],
+          "whenNotToUse": [
+            "Comparing a few values precisely over time; use chart-bar",
+            "Part-to-whole with many parts; use treemap or split-bar"
+          ],
+          "composesWith": [
+            "split-bar",
+            "funnel-chart",
+            "stat-card",
+            "kpi-row"
+          ],
+          "a11y": [
+            {
+              "keys": "List",
+              "action": "An ordered list; each row also says 'Number n' for screen readers"
+            },
+            {
+              "keys": "Rows",
+              "action": "Links and buttons are native; buttons have pressed state"
+            },
+            {
+              "keys": "Fold",
+              "action": "A button with aria-expanded"
+            },
+            {
+              "keys": "Values",
+              "action": "Written as text, with the share as a percent if asked, so nothing depends on bar length"
+            }
+          ],
+          "customization": [
+            "items and title",
+            "format, showShare",
+            "limit",
+            "onSelect and selected"
+          ]
+        },
+        "statesNone": "A presentational list: the items are passed in, so it has nothing of its own to load.",
+        "examples": [
+          "bar-list-demo",
+          "bar-list-select"
+        ],
+        "url": "https://ui.ballmac.com/components/bar-list"
+      }
+    },
+    {
+      "name": "bar-list-demo",
+      "type": "registry:example",
+      "title": "Bar List: Top pages with links and a fold",
+      "description": "Top pages with links and a fold example of Bar List.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/bar-list.json"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/bar-list-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/bar-list-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "bar-list",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "bar-list-select",
+      "type": "registry:example",
+      "title": "Bar List: Rows as filter buttons",
+      "description": "Rows as filter buttons example of Bar List.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/bar-list.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/bar-list-select.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/bar-list-select.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "bar-list",
+        "tier": "free"
+      }
+    },
+    {
       "name": "beams-background",
       "type": "registry:ui",
       "title": "Beams Background",
@@ -10386,6 +10524,244 @@
       }
     },
     {
+      "name": "analytics-1",
+      "type": "registry:block",
+      "title": "Analytics 1: product analytics",
+      "description": "A product analytics page that reads like a report: four metrics with their change and trend, the visit-to-purchase funnel with the biggest drop flagged, a tabbed ranking of pages, sources and countries, and a device split.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/sparkline.json",
+        "https://ui.ballmac.com/r/bar-list.json",
+        "https://ui.ballmac.com/r/funnel-chart.json",
+        "https://ui.ballmac.com/r/split-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/analytics-1/analytics-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/analytics-1/analytics-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "dashboard"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "dashboard",
+          "analytics",
+          "funnel",
+          "metrics",
+          "traffic",
+          "growth",
+          "charts",
+          "report"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Product analytics. <Analytics1 title description periods={[{ id, label, metrics, funnel, lists, devices }]} defaultPeriod onPeriodChange={(id) => void} />. Each period carries four metrics ({ label, value, change, series }), funnel steps, ranked lists for the tabs and device segments. Switching the period swaps every part. The period is a radio group; the ranking is a tablist with arrow keys.",
+          "whenToUse": [
+            "The overview page of an analytics or growth tool",
+            "A report a founder reads every morning"
+          ],
+          "whenNotToUse": [
+            "Operational health; use reliability-1",
+            "Revenue and billing detail; use cost-1 or dashboard-1"
+          ],
+          "composesWith": [
+            "reliability-1",
+            "reviews-2",
+            "app-shell-1",
+            "dashboard-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Period",
+              "action": "A labelled radio group; arrow keys change it and the whole page follows"
+            },
+            {
+              "keys": "Metrics",
+              "action": "A description list; changes are written as 'Up 8.2%', never only an arrow or a color"
+            },
+            {
+              "keys": "Ranking",
+              "action": "A tablist with a tabpanel; Left and Right move between tabs"
+            },
+            {
+              "keys": "Funnel",
+              "action": "Drop-off and conversion are text; steps are toggle buttons"
+            }
+          ],
+          "customization": [
+            "title and description",
+            "periods and defaultPeriod",
+            "onPeriodChange"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "analytics-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton metrics and charts under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No data for this period",
+            "example": "analytics-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says there is no data for the period; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "analytics-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "analytics-1-demo",
+          "analytics-1-week",
+          "analytics-1-loading",
+          "analytics-1-empty",
+          "analytics-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/analytics-1"
+      }
+    },
+    {
+      "name": "analytics-1-demo",
+      "type": "registry:example",
+      "title": "Analytics 1: product analytics: Default",
+      "description": "Default example of Analytics 1: product analytics.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/analytics-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/analytics-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/analytics-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "analytics-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "analytics-1-week",
+      "type": "registry:example",
+      "title": "Analytics 1: product analytics: Last 7 days",
+      "description": "Last 7 days example of Analytics 1: product analytics.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/analytics-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/analytics-1-week.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/analytics-1-week.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "analytics-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "analytics-1-loading",
+      "type": "registry:example",
+      "title": "Analytics 1: product analytics: Loading",
+      "description": "Loading example of Analytics 1: product analytics.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/analytics-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/analytics-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/analytics-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "analytics-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "analytics-1-empty",
+      "type": "registry:example",
+      "title": "Analytics 1: product analytics: No data for this period",
+      "description": "No data for this period example of Analytics 1: product analytics.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/analytics-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/analytics-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/analytics-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "analytics-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "analytics-1-error",
+      "type": "registry:example",
+      "title": "Analytics 1: product analytics: Could not load",
+      "description": "Could not load example of Analytics 1: product analytics.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/analytics-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/analytics-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/analytics-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "analytics-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "api-1",
       "type": "registry:block",
       "title": "API 1: request explorer",
@@ -10988,6 +11364,238 @@
       "meta": {
         "example": true,
         "of": "audit-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "benchmark-1",
+      "type": "registry:block",
+      "title": "Benchmark 1: before and after",
+      "description": "A before-and-after benchmark for two versions of a model or prompt: a sentence on what got better and worse, quality and speed task by task, what a run costs, and where the time goes.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/dumbbell-chart.json",
+        "https://ui.ballmac.com/r/bar-list.json",
+        "https://ui.ballmac.com/r/split-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/benchmark-1/benchmark-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/benchmark-1/benchmark-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "experiments"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ai",
+          "benchmark",
+          "experiments",
+          "comparison",
+          "quality",
+          "latency",
+          "cost",
+          "dumbbell"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Benchmark. <Benchmark1 title description from to quality={DumbbellRow[]} speed={DumbbellRow[]} cost={SplitSegment[]} slowest={BarListItem[]} />. The sentence at the top is computed from quality and speed (better on N of M, average change, faster on N). Speed is lowerIsBetter. Every chart writes each change in words.",
+          "whenToUse": [
+            "Deciding whether to ship a new prompt or model",
+            "An experiment results page"
+          ],
+          "whenNotToUse": [
+            "Checking individual cases; use agent-17",
+            "Live monitoring; use reliability-1"
+          ],
+          "composesWith": [
+            "agent-17",
+            "agent-12",
+            "cost-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Summary",
+              "action": "One sentence says what changed, so no chart has to be read"
+            },
+            {
+              "keys": "Charts",
+              "action": "Each row says 'up N, better' or 'down N, worse'"
+            },
+            {
+              "keys": "Legend",
+              "action": "Named dots; the cost split is a list of buttons with values"
+            }
+          ],
+          "customization": [
+            "title, description, from, to",
+            "quality, speed, cost, slowest"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "benchmark-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton summary and charts under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Nothing to compare yet",
+            "example": "benchmark-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says there is nothing to compare yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "benchmark-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "benchmark-1-demo",
+          "benchmark-1-quality",
+          "benchmark-1-loading",
+          "benchmark-1-empty",
+          "benchmark-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/benchmark-1"
+      }
+    },
+    {
+      "name": "benchmark-1-demo",
+      "type": "registry:example",
+      "title": "Benchmark 1: before and after: Default",
+      "description": "Default example of Benchmark 1: before and after.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/benchmark-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/benchmark-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/benchmark-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "benchmark-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "benchmark-1-quality",
+      "type": "registry:example",
+      "title": "Benchmark 1: before and after: Quality only",
+      "description": "Quality only example of Benchmark 1: before and after.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/benchmark-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/benchmark-1-quality.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/benchmark-1-quality.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "benchmark-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "benchmark-1-loading",
+      "type": "registry:example",
+      "title": "Benchmark 1: before and after: Loading",
+      "description": "Loading example of Benchmark 1: before and after.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/benchmark-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/benchmark-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/benchmark-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "benchmark-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "benchmark-1-empty",
+      "type": "registry:example",
+      "title": "Benchmark 1: before and after: Nothing to compare yet",
+      "description": "Nothing to compare yet example of Benchmark 1: before and after.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/benchmark-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/benchmark-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/benchmark-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "benchmark-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "benchmark-1-error",
+      "type": "registry:example",
+      "title": "Benchmark 1: before and after: Could not load",
+      "description": "Could not load example of Benchmark 1: before and after.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/benchmark-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/benchmark-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/benchmark-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "benchmark-1",
         "tier": "free"
       }
     },
@@ -15401,8 +16009,22 @@
           "infrastructure",
           "anomalies"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.0.1",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "The chart's first step is now labeled Models, so the labels no longer collide on a phone.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "A cloud cost explorer. <Cost1 periods={[{ id, label, total, previous, budget?, items: [{ id, label, value, group? }], bridge: [{ id, label, value, kind?: 'total' }], anomalies?: [{ id, service, amount, text }] }]} currency='USD' defaultPeriod='now' onAcknowledge={(anomaly) => Promise} />. The period control switches everything. The comparison and the budget are written in words ('$1,640 more than the period before', '$240 left of $16,000').",
@@ -22661,8 +23283,22 @@
           "waitlist",
           "hospitality"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.0.1",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "On a phone the floor plan scrolls sideways in its own focusable region, so tables no longer overlap or leave the screen.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Restaurant floor. <Floorplan1 tables={[{ id, name, seats, x, y, shape?: 'round'|'square'|'wide', status: 'free'|'seated'|'reserved'|'dirty', party?, reservation? }]} waiting={[{ id, name, size, waited }]} onSeat={(tableId, party) => Promise} onStatus={(tableId, status) => Promise} />. x and y are percentages. Only free or reserved tables that fit the party can be chosen. Changes show at once and are undone if the handler rejects.",
@@ -33155,6 +33791,241 @@
       }
     },
     {
+      "name": "reliability-1",
+      "type": "registry:block",
+      "title": "Reliability 1: uptime and incidents",
+      "description": "A reliability page: one sentence on whether things work right now, each service's last 60 days day by day, error budgets as gauges with a target, and the incidents behind the red days.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/gauge.json",
+        "https://ui.ballmac.com/r/uptime-tracker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/reliability-1/reliability-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/reliability-1/reliability-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "status"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "status",
+          "uptime",
+          "reliability",
+          "slo",
+          "incidents",
+          "monitoring",
+          "gauge",
+          "status page"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Reliability page. <Reliability1 title description services={[{ id, name, days, uptime? }]} budgets={[{ id, label, value, target, description }]} incidents={[{ id, title, when, duration, status, summary }]} />. The headline is worked out from the last day of each service. Each budget is a gauge with At risk, Watch it and Healthy zones around its target.",
+          "whenToUse": [
+            "A public or internal status page",
+            "The reliability section of a product dashboard"
+          ],
+          "whenNotToUse": [
+            "One incident in detail; use incident-1",
+            "Error budgets only; use slo-1"
+          ],
+          "composesWith": [
+            "analytics-1",
+            "incident-1",
+            "slo-1",
+            "app-shell-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Headline",
+              "action": "A status region that names the services that are down or slow"
+            },
+            {
+              "keys": "Services",
+              "action": "Each row's days are buttons moved with arrow keys; the day is written underneath"
+            },
+            {
+              "keys": "Gauges",
+              "action": "role=meter with the zone in its text"
+            },
+            {
+              "keys": "Incidents",
+              "action": "A list; status is a word with an icon"
+            }
+          ],
+          "customization": [
+            "title and description",
+            "services, budgets, incidents"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "reliability-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton banner, services and gauges under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No services yet",
+            "example": "reliability-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says there are no services yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "reliability-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "reliability-1-demo",
+          "reliability-1-calm",
+          "reliability-1-loading",
+          "reliability-1-empty",
+          "reliability-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/reliability-1"
+      }
+    },
+    {
+      "name": "reliability-1-demo",
+      "type": "registry:example",
+      "title": "Reliability 1: uptime and incidents: Default",
+      "description": "Default example of Reliability 1: uptime and incidents.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reliability-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reliability-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reliability-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reliability-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reliability-1-calm",
+      "type": "registry:example",
+      "title": "Reliability 1: uptime and incidents: No incidents",
+      "description": "No incidents example of Reliability 1: uptime and incidents.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reliability-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reliability-1-calm.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reliability-1-calm.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reliability-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reliability-1-loading",
+      "type": "registry:example",
+      "title": "Reliability 1: uptime and incidents: Loading",
+      "description": "Loading example of Reliability 1: uptime and incidents.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reliability-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reliability-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reliability-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reliability-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reliability-1-empty",
+      "type": "registry:example",
+      "title": "Reliability 1: uptime and incidents: No services yet",
+      "description": "No services yet example of Reliability 1: uptime and incidents.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reliability-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reliability-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reliability-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reliability-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reliability-1-error",
+      "type": "registry:example",
+      "title": "Reliability 1: uptime and incidents: Could not load",
+      "description": "Could not load example of Reliability 1: uptime and incidents.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reliability-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reliability-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reliability-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reliability-1",
+        "tier": "free"
+      }
+    },
+    {
       "name": "rentals-1",
       "type": "registry:block",
       "title": "Rentals 1: rental booking",
@@ -33827,6 +34698,239 @@
       }
     },
     {
+      "name": "reviews-2",
+      "type": "registry:block",
+      "title": "Reviews 2: ratings with insights",
+      "description": "Reviews with the whole picture: the average and the shape of the ratings (which filter the list), what people keep mentioning, and whether the mood is positive. The list follows the star size you choose.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/rating-distribution.json",
+        "https://ui.ballmac.com/r/bar-list.json",
+        "https://ui.ballmac.com/r/split-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/reviews-2/reviews-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/reviews-2/reviews-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "reviews"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "reviews",
+          "ratings",
+          "social proof",
+          "insights",
+          "sentiment",
+          "filter",
+          "ecommerce",
+          "feedback"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Reviews with insights. <Reviews2 title description reviews={[{ id, author, rating, date, title, body, verified?, helpful? }]} counts themes={BarListItem[]} sentiment={SplitSegment[]} />. Counts default to the reviews given. Choosing a star size filters the list and the count is announced politely.",
+          "whenToUse": [
+            "A product or app page where reviews drive the decision",
+            "A review dashboard for the team"
+          ],
+          "whenNotToUse": [
+            "A scrolling quote wall for a landing page; use testimonials-1",
+            "Collecting a review; use a form"
+          ],
+          "composesWith": [
+            "analytics-1",
+            "testimonials-1",
+            "hero-1",
+            "pricing-2"
+          ],
+          "a11y": [
+            {
+              "keys": "Filter",
+              "action": "Each star row is a toggle button named for its count; the list's size is announced"
+            },
+            {
+              "keys": "Reviews",
+              "action": "Each is a list item; the star rating is spoken as 'n out of 5 stars'"
+            },
+            {
+              "keys": "Charts",
+              "action": "The bars and the mood split repeat numbers shown as text"
+            }
+          ],
+          "customization": [
+            "title and description",
+            "reviews and counts",
+            "themes and sentiment"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "reviews-2-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton summary, list and side panels under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No reviews yet",
+            "example": "reviews-2-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says there are no reviews yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "reviews-2-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry)."
+          }
+        ],
+        "examples": [
+          "reviews-2-demo",
+          "reviews-2-few",
+          "reviews-2-loading",
+          "reviews-2-empty",
+          "reviews-2-error"
+        ],
+        "url": "https://ui.ballmac.com/components/reviews-2"
+      }
+    },
+    {
+      "name": "reviews-2-demo",
+      "type": "registry:example",
+      "title": "Reviews 2: ratings with insights: Default",
+      "description": "Default example of Reviews 2: ratings with insights.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reviews-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reviews-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reviews-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reviews-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reviews-2-few",
+      "type": "registry:example",
+      "title": "Reviews 2: ratings with insights: Two reviews",
+      "description": "Two reviews example of Reviews 2: ratings with insights.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reviews-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reviews-2-few.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reviews-2-few.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reviews-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reviews-2-loading",
+      "type": "registry:example",
+      "title": "Reviews 2: ratings with insights: Loading",
+      "description": "Loading example of Reviews 2: ratings with insights.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reviews-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reviews-2-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reviews-2-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reviews-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reviews-2-empty",
+      "type": "registry:example",
+      "title": "Reviews 2: ratings with insights: No reviews yet",
+      "description": "No reviews yet example of Reviews 2: ratings with insights.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reviews-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reviews-2-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reviews-2-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reviews-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "reviews-2-error",
+      "type": "registry:example",
+      "title": "Reviews 2: ratings with insights: Could not load",
+      "description": "Could not load example of Reviews 2: ratings with insights.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/reviews-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/reviews-2-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/reviews-2-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "reviews-2",
+        "tier": "free"
+      }
+    },
+    {
       "name": "roster-1",
       "type": "registry:block",
       "title": "Roster 1: weekly shift planner",
@@ -34103,8 +35207,22 @@
           "procedure",
           "on-call"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.0.1",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "Steps no longer push the page wider than a phone when a command is long.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "A guided runbook. <Runbook1 runbook={{ title, when, steps: [{ id, title, body, command?, caution?, minutes? }] }} defaultDone={['s1']} onStepChange={(stepId, done) => Promise} onComplete={() => Promise} />. The first step not done is marked Next (aria-current='step'). Commands are shown as code with a Copy button and are never executed. Finish is off until every step is ticked.",
@@ -49884,6 +51002,134 @@
       }
     },
     {
+      "name": "dumbbell-chart",
+      "type": "registry:ui",
+      "title": "Dumbbell Chart",
+      "description": "Before and after for many things at once: two dots on one scale with a line between, colored by whether the change is good. Every row also says it in words, such as up 8, better.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/dumbbell-chart.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/dumbbell-chart.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "comparison",
+          "before after",
+          "benchmark",
+          "change",
+          "dumbbell",
+          "analytics"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "rows is [{ id, label, before, after }]. beforeLabel and afterLabel name the dots; lowerIsBetter flips which direction is good; format(value); title. Each row writes 'before → after' and 'up N, better' or 'down N, worse' or 'no change'; the line color only repeats it.",
+          "whenToUse": [
+            "Comparing two versions, periods or models across several measures",
+            "Benchmarks and A/B results"
+          ],
+          "whenNotToUse": [
+            "Change over many points in time; use chart-line",
+            "One number against a target; use bullet-chart"
+          ],
+          "composesWith": [
+            "bar-list",
+            "eval-scorecard",
+            "model-compare",
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Rows",
+              "action": "Each row's change is text with better or worse"
+            },
+            {
+              "keys": "Chart",
+              "action": "The dots and line are decoration"
+            },
+            {
+              "keys": "Legend",
+              "action": "Named dots above the rows"
+            }
+          ],
+          "customization": [
+            "rows",
+            "beforeLabel and afterLabel",
+            "lowerIsBetter",
+            "format and title"
+          ]
+        },
+        "statesNone": "A presentational chart: the rows are passed in, so it has nothing of its own to load.",
+        "examples": [
+          "dumbbell-chart-demo",
+          "dumbbell-chart-lower"
+        ],
+        "url": "https://ui.ballmac.com/components/dumbbell-chart"
+      }
+    },
+    {
+      "name": "dumbbell-chart-demo",
+      "type": "registry:example",
+      "title": "Dumbbell Chart: Answers rated helpful, by topic",
+      "description": "Answers rated helpful, by topic example of Dumbbell Chart.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dumbbell-chart.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dumbbell-chart-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dumbbell-chart-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dumbbell-chart",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "dumbbell-chart-lower",
+      "type": "registry:example",
+      "title": "Dumbbell Chart: Response time, lower is better",
+      "description": "Response time, lower is better example of Dumbbell Chart.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/dumbbell-chart.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/dumbbell-chart-lower.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/dumbbell-chart-lower.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "dumbbell-chart",
+        "tier": "free"
+      }
+    },
+    {
       "name": "dynamic-island",
       "type": "registry:ui",
       "title": "Dynamic Island",
@@ -52753,8 +53999,22 @@
           "conversion",
           "attribution"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.0.1",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "Fits inside its column on a phone.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "nodes is [{ id, label, group? }]; links is [{ source, target, value }]. Columns, order and sizes are computed (layoutSankey is exported). format(value), selected / defaultSelected / onSelectedChange. Links with zero value, unknown ids or a node linking to itself are ignored.",
@@ -52996,6 +54256,266 @@
       "meta": {
         "example": true,
         "of": "form",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "funnel-chart",
+      "type": "registry:ui",
+      "title": "Funnel Chart",
+      "description": "A funnel as bars that narrow step by step. Between steps it says how many carried on and how many dropped out, flags the biggest drop, and ends with the overall result as a sentence.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/funnel-chart.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/funnel-chart.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "funnel",
+          "conversion",
+          "analytics",
+          "steps",
+          "drop-off",
+          "dashboard"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "steps is [{ id, label, value, hint? }] from first to last. title, format(value). Between steps: '40% carried on, 600 dropped out', and the biggest drop is tagged in words. onSelect(id | null) with selected makes steps toggle buttons. Ends with 'X% of everyone who started reached the end'.",
+          "whenToUse": [
+            "Checkout, signup or onboarding conversion",
+            "Any process where people drop out between steps"
+          ],
+          "whenNotToUse": [
+            "Steps that can happen in any order; use bar-list",
+            "Flow with branches; use flow-sankey"
+          ],
+          "composesWith": [
+            "bar-list",
+            "stat-card",
+            "kpi-row",
+            "flow-sankey"
+          ],
+          "a11y": [
+            {
+              "keys": "Steps",
+              "action": "An ordered list; drop-off and conversion are text, never only bar length"
+            },
+            {
+              "keys": "Selection",
+              "action": "Optional buttons with pressed state"
+            },
+            {
+              "keys": "Biggest drop",
+              "action": "Tagged with the words 'Biggest drop'"
+            }
+          ],
+          "customization": [
+            "steps and title",
+            "format",
+            "onSelect and selected"
+          ]
+        },
+        "statesNone": "A presentational chart: the steps are passed in, so it has nothing of its own to load.",
+        "examples": [
+          "funnel-chart-demo",
+          "funnel-chart-static"
+        ],
+        "url": "https://ui.ballmac.com/components/funnel-chart"
+      }
+    },
+    {
+      "name": "funnel-chart-demo",
+      "type": "registry:example",
+      "title": "Funnel Chart: Visit to purchase, with selection",
+      "description": "Visit to purchase, with selection example of Funnel Chart.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/funnel-chart.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/funnel-chart-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/funnel-chart-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "funnel-chart",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "funnel-chart-static",
+      "type": "registry:example",
+      "title": "Funnel Chart: Three steps",
+      "description": "Three steps example of Funnel Chart.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/funnel-chart.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/funnel-chart-static.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/funnel-chart-static.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "funnel-chart",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gauge",
+      "type": "registry:ui",
+      "title": "Gauge",
+      "description": "A half-circle gauge with a needle, colored zones and a target mark. The value, the zone it is in and the target are written as text, and the needle sweeps in once and holds still with reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/gauge.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/gauge.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "gauge",
+          "meter",
+          "kpi",
+          "budget",
+          "slo",
+          "dashboard",
+          "health"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "value and label are required; min and max default to 0 and 100. zones is [{ to, label }] from low to high: with zones the arc is colored and the needle is shown, without them the arc fills. target marks a point. format(value) formats the value and ends; description adds a line. It is a role=meter with a spoken value and zone.",
+          "whenToUse": [
+            "An error budget, quota, load or score at a glance",
+            "A KPI with healthy, watch and at-risk bands"
+          ],
+          "whenNotToUse": [
+            "Progress toward a finish; use progress or circular-progress",
+            "Trends; use sparkline"
+          ],
+          "composesWith": [
+            "stat-card",
+            "kpi-row",
+            "uptime-tracker",
+            "bullet-chart"
+          ],
+          "a11y": [
+            {
+              "keys": "Meter",
+              "action": "role=meter with label, min, max, now and a text value that includes the zone"
+            },
+            {
+              "keys": "Zone",
+              "action": "Written under the value; color only repeats it"
+            },
+            {
+              "keys": "Motion",
+              "action": "The needle sweep is off with reduced motion"
+            }
+          ],
+          "customization": [
+            "value, min, max",
+            "zones",
+            "target",
+            "format and description"
+          ]
+        },
+        "statesNone": "A presentational gauge: the value is passed in, so it has nothing of its own to load.",
+        "examples": [
+          "gauge-demo",
+          "gauge-single"
+        ],
+        "url": "https://ui.ballmac.com/components/gauge"
+      }
+    },
+    {
+      "name": "gauge-demo",
+      "type": "registry:example",
+      "title": "Gauge: Three gauges with zones and a target",
+      "description": "Three gauges with zones and a target example of Gauge.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gauge.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gauge-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gauge-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gauge",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "gauge-single",
+      "type": "registry:example",
+      "title": "Gauge: A 0 to 5 score",
+      "description": "A 0 to 5 score example of Gauge.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/gauge.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/gauge-single.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/gauge-single.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "gauge",
         "tier": "free"
       }
     },
@@ -54051,8 +55571,22 @@
           "chart",
           "table"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.0.1",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "The grid scrolls inside its own frame on a phone instead of widening the page.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "rows and columns are [{ id, label }]; values is number[][] (rows then columns, null for no data). domain [min, max], format(value), selected / onSelectedChange as [row, col]. tone(value) returns 'good' | 'warn' | 'bad' to classify instead of shade; those cells also show an icon and a word.",
@@ -65240,6 +66774,135 @@
       }
     },
     {
+      "name": "rating-distribution",
+      "type": "registry:ui",
+      "title": "Rating Distribution",
+      "description": "The shape of a set of ratings: the average with partly filled stars, the count, and a bar per star size that can filter the reviews beside it.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/rating-distribution.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/rating-distribution.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "reviews",
+          "rating",
+          "stars",
+          "distribution",
+          "histogram",
+          "feedback",
+          "ecommerce"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "counts is { 1, 2, 3, 4, 5 } (how many of each). The average and total are computed and written as text. onSelect(rating | null) with selected makes each row a toggle button for filtering a review list.",
+          "whenToUse": [
+            "Above a list of product, app or course reviews",
+            "A feedback summary"
+          ],
+          "whenNotToUse": [
+            "Collecting a rating; use rating",
+            "Satisfaction over time; use chart-line"
+          ],
+          "composesWith": [
+            "rating",
+            "bar-list",
+            "split-bar",
+            "stat-card"
+          ],
+          "a11y": [
+            {
+              "keys": "Summary",
+              "action": "The average and total are text; the stars are decoration"
+            },
+            {
+              "keys": "Rows",
+              "action": "Buttons named '4 stars: 2 ratings. Show only these' with pressed state"
+            },
+            {
+              "keys": "Counts",
+              "action": "Shown as numbers and percents beside each bar"
+            }
+          ],
+          "customization": [
+            "counts",
+            "onSelect and selected"
+          ]
+        },
+        "statesNone": "A presentational summary: the counts are passed in, so it has nothing of its own to load.",
+        "examples": [
+          "rating-distribution-demo",
+          "rating-distribution-static"
+        ],
+        "url": "https://ui.ballmac.com/components/rating-distribution"
+      }
+    },
+    {
+      "name": "rating-distribution-demo",
+      "type": "registry:example",
+      "title": "Rating Distribution: Filtering by star size",
+      "description": "Filtering by star size example of Rating Distribution.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/rating-distribution.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/rating-distribution-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/rating-distribution-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "rating-distribution",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "rating-distribution-static",
+      "type": "registry:example",
+      "title": "Rating Distribution: Few ratings",
+      "description": "Few ratings example of Rating Distribution.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/rating-distribution.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/rating-distribution-static.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/rating-distribution-static.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "rating-distribution",
+        "tier": "free"
+      }
+    },
+    {
       "name": "rating",
       "type": "registry:ui",
       "title": "Rating",
@@ -70202,6 +71865,132 @@
       "meta": {
         "example": true,
         "of": "spinning-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "split-bar",
+      "type": "registry:ui",
+      "title": "Split Bar",
+      "description": "One bar cut into shares with a legend that says the same in numbers. Pointing at a legend row lights its slice and dims the rest, and choosing it keeps it lit.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/split-bar.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/split-bar.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "chart",
+          "share",
+          "stacked",
+          "composition",
+          "budget",
+          "breakdown",
+          "legend"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "segments is [{ id, label, value, hint? }]; title, total (text above the bar), format(value). The legend lists every segment with its value and percent; hover or focus lights a slice, and a click keeps it lit (aria-pressed).",
+          "whenToUse": [
+            "Breaking a total into a handful of parts",
+            "Spend, storage, traffic or time splits"
+          ],
+          "whenNotToUse": [
+            "Many parts or nested parts; use treemap",
+            "Ranking; use bar-list"
+          ],
+          "composesWith": [
+            "bar-list",
+            "treemap",
+            "stat-card",
+            "waterfall-chart"
+          ],
+          "a11y": [
+            {
+              "keys": "Legend",
+              "action": "The accessible version: buttons with label, value and percent; pressed state"
+            },
+            {
+              "keys": "Bar",
+              "action": "Decoration only"
+            },
+            {
+              "keys": "Color",
+              "action": "Never the only way to tell parts apart"
+            }
+          ],
+          "customization": [
+            "segments and title",
+            "total and format"
+          ]
+        },
+        "statesNone": "A presentational chart: the segments are passed in, so it has nothing of its own to load.",
+        "examples": [
+          "split-bar-demo",
+          "split-bar-two"
+        ],
+        "url": "https://ui.ballmac.com/components/split-bar"
+      }
+    },
+    {
+      "name": "split-bar-demo",
+      "type": "registry:example",
+      "title": "Split Bar: Where the spend goes",
+      "description": "Where the spend goes example of Split Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/split-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/split-bar-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/split-bar-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "split-bar",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "split-bar-two",
+      "type": "registry:example",
+      "title": "Split Bar: Two shares",
+      "description": "Two shares example of Split Bar.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/split-bar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/split-bar-two.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/split-bar-two.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "split-bar",
         "tier": "free"
       }
     },
@@ -80289,8 +82078,22 @@
           "context window",
           "disk usage"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.0.1",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "Keeps a minimum height on a phone so small blocks stay readable.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "items is [{ id, label, value, group?, detail? }]; zero or negative values are dropped. format(value), unit, aspect (width over height, default 16/9), selected / defaultSelected / onSelectedChange. Exports squarify(items, w, h) for your own layouts.",
@@ -80511,6 +82314,133 @@
       "meta": {
         "example": true,
         "of": "typing-text",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "uptime-tracker",
+      "type": "registry:ui",
+      "title": "Uptime Tracker",
+      "description": "A status-page row with one cell per day. It leads with the uptime and the outage count, the cells are one tab stop moved with the arrow keys, and the day you are on is written underneath instead of in a tooltip.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/i18n.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/uptime-tracker.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/uptime-tracker.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "status",
+          "uptime",
+          "reliability",
+          "monitoring",
+          "incidents",
+          "history",
+          "status page"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "days is [{ date, status: 'up'|'degraded'|'down'|'none', note? }] oldest first; label names the service. uptime overrides the computed share of days that were up; startLabel and endLabel caption the ends. Cells are buttons with a name that includes the date, the status and the note; hover or focus writes the day underneath.",
+          "whenToUse": [
+            "A public or internal status page",
+            "A reliability section in a dashboard"
+          ],
+          "whenNotToUse": [
+            "Minute-level charts; use chart-line",
+            "Listing incidents; use incident-1"
+          ],
+          "composesWith": [
+            "gauge",
+            "status-dot",
+            "stat-card",
+            "timeline"
+          ],
+          "a11y": [
+            {
+              "keys": "Cells",
+              "action": "Buttons named for the day, the status in words and the note; one tab stop; Left, Right, Home, End move; Escape clears"
+            },
+            {
+              "keys": "Detail",
+              "action": "The day you are on is text in a live region"
+            },
+            {
+              "keys": "Status",
+              "action": "Never by color alone: every cell's name says it"
+            }
+          ],
+          "customization": [
+            "days and label",
+            "uptime",
+            "startLabel and endLabel"
+          ]
+        },
+        "statesNone": "A presentational tracker: the days are passed in, so it has nothing of its own to load.",
+        "examples": [
+          "uptime-tracker-demo",
+          "uptime-tracker-perfect"
+        ],
+        "url": "https://ui.ballmac.com/components/uptime-tracker"
+      }
+    },
+    {
+      "name": "uptime-tracker-demo",
+      "type": "registry:example",
+      "title": "Uptime Tracker: Three services over 60 days",
+      "description": "Three services over 60 days example of Uptime Tracker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/uptime-tracker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/uptime-tracker-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/uptime-tracker-demo.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "uptime-tracker",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "uptime-tracker-perfect",
+      "type": "registry:example",
+      "title": "Uptime Tracker: A clean month",
+      "description": "A clean month example of Uptime Tracker.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/uptime-tracker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/uptime-tracker-perfect.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/uptime-tracker-perfect.tsx"
+        }
+      ],
+      "categories": [
+        "data-display"
+      ],
+      "meta": {
+        "example": true,
+        "of": "uptime-tracker",
         "tier": "free"
       }
     },
@@ -81324,8 +83254,22 @@
           "cost",
           "change"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.0.1",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "Step labels wrap on a phone and the chart fits its column.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-24",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "steps is [{ id, label, value, kind?: 'change' | 'total' }]. A change floats from where the last step ended (positive is an increase, negative a decrease); a total sits on the baseline and resets the running total. format(value), height, title. Exports buildBars(steps). Server-rendered, no client code.",

@@ -30,6 +30,10 @@ export default defineItem({
     customization: ["aspect", "format and unit", "group colours follow the order groups first appear (chart 1 to 5)", "squarify is exported"],
   },
   statesNone: "A presentational chart: you pass the items in, so it has nothing of its own to load or fail.",
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.0.1",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-25", note: "Keeps a minimum height on a phone so small blocks stay readable." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

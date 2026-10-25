@@ -131,7 +131,7 @@ function Runbook1({ runbook = sample, defaultDone = [], onStepChange, onComplete
               </div>
             </div>
 
-            <ol className="grid gap-3">
+            <ol className="grid grid-cols-[minmax(0,1fr)] gap-3">
               {steps.map((s, i) => {
                 const isDone = done.includes(s.id)
                 const isNext = next?.id === s.id

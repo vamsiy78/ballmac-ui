@@ -147,6 +147,10 @@
     "version": "1.0.0",
     "hash": "5f48e6ee7509a677564340c53f47af5ec2144db73e7b8b0ac6486b0a21bbdebb"
   },
+  "analytics-1": {
+    "version": "1.0.0",
+    "hash": "a8e276ed2bf95c374d23e9d5326ff60d6afb4b3982159231cbf2469d1523fbfa"
+  },
   "android-frame": {
     "version": "1.0.0",
     "hash": "13dc69b9d76b8f40ed60cc7634c8ea5c782114e6c6bec21e196ca8bd4c54632d"
@@ -247,9 +251,17 @@
     "version": "1.0.0",
     "hash": "9bec02d7ee90fd7122f377e1fd99aa55a659fd19c4c9165814ea2d7a8f456402"
   },
+  "bar-list": {
+    "version": "1.0.0",
+    "hash": "14ad70cc9cc2816e2e13e607f28c20ab1a997247b0b4e332177aba173a356e64"
+  },
   "beams-background": {
     "version": "1.0.0",
     "hash": "9dddf5d9004577404d4934f601f7f983a7d7ca2741d623398a227b8e866c1e6d"
+  },
+  "benchmark-1": {
+    "version": "1.0.0",
+    "hash": "8a6034f258c89ca8aed69e0036675c7d759faa949792e52c1444e6f2a35fb043"
   },
   "bento-grid": {
     "version": "1.0.1",
@@ -524,8 +536,8 @@
     "hash": "be1127763206f5a943af8333ac998b532db4741feff5004a9d4fc2874b070ccd"
   },
   "cost-1": {
-    "version": "1.0.0",
-    "hash": "6953ef3a7f56179dabb63316ed420b9f407063db7615e31000ce4327fbd1a384"
+    "version": "1.0.1",
+    "hash": "9056972e24bb35b140f52998e7ccb2defbc0e46abf6b45de3600971b11b51993"
   },
   "countdown": {
     "version": "1.0.0",
@@ -691,6 +703,10 @@
     "version": "1.0.1",
     "hash": "7186aaa9e32afc5b8d503bbc9a0cd1183dac4b3a7eff9ee7ffa579f36625bd63"
   },
+  "dumbbell-chart": {
+    "version": "1.0.0",
+    "hash": "d320da0704cbd99506dfd07eb07bbba72264b30889605e7551fb038f0f054e49"
+  },
   "dynamic-island": {
     "version": "1.0.0",
     "hash": "7ef937e3e59e97dec61a4e8c86ec4f8647e2b0833615370361507ddf902d943b"
@@ -848,12 +864,12 @@
     "hash": "193920d8894b8a4be40d367c6412905cbbcace795d60d30588c988ff727a85f9"
   },
   "floorplan-1": {
-    "version": "1.0.0",
-    "hash": "a297936b0c70b2713e6f98afea92310a5b372d450bd2c269aa9eb683b46ed9a3"
+    "version": "1.0.1",
+    "hash": "4aeea491981fe7ad16c6f2c112d6dcdf19ca5affba11e0484ba571c50a800dc7"
   },
   "flow-sankey": {
-    "version": "1.0.0",
-    "hash": "bd839d2658a3ace0874ac9a39d159fcfd2672f031cecd7348580d2ac47d9d6ee"
+    "version": "1.0.1",
+    "hash": "567a9f19fcb9ccd10a3abfb5a07797dba45e78a595f02b46c22e6d8deccc5205"
   },
   "font-bricolage": {
     "version": "1.0.0",
@@ -935,6 +951,10 @@
     "version": "1.0.0",
     "hash": "270dc03b3f693d879b5aca0da090ac8ebc1e427cee05cb961f8106595b55ec7f"
   },
+  "funnel-chart": {
+    "version": "1.0.0",
+    "hash": "1706f04376f77f7b59c2fd529e8238c15a4d87f183d7ae6af8b8e13bd6f8c897"
+  },
   "gallery-1": {
     "version": "1.0.0",
     "hash": "ac1ac08d30c105dcf6b9d6511553c0f4f860958a2a429379d1598daa4adc350b"
@@ -942,6 +962,10 @@
   "gantt-1": {
     "version": "1.0.0",
     "hash": "8049ac1167458311e6eee8573405f50e250620c700baabd1fb0bc44c04ddd8e4"
+  },
+  "gauge": {
+    "version": "1.0.0",
+    "hash": "a81db66d924e893e973d5a758f6c1a830893636df7fda2b541d25117fa4729eb"
   },
   "git-graph": {
     "version": "1.0.0",
@@ -996,8 +1020,8 @@
     "hash": "38d84f1b751c0ed56b781cfd470c7e6add8bfab57d531ffa398ac41601ef52f7"
   },
   "heat-grid": {
-    "version": "1.0.0",
-    "hash": "d582805fe5a90017386c1354dd648b0d364a0b220e2bd8049bf4cc5e74373a8c"
+    "version": "1.0.1",
+    "hash": "fc99844f6c03def81441fa51eb19b3539e7fb359cf1f9b1557f1cd4734f92b78"
   },
   "help-1": {
     "version": "1.0.0",
@@ -1595,6 +1619,10 @@
     "version": "1.0.0",
     "hash": "249cdfe330547e2c958b1fba3515d17b09ddbeb469940ad928632686600448f2"
   },
+  "rating-distribution": {
+    "version": "1.0.0",
+    "hash": "2fdc985fe625ea315296f07359078127d879cc9b888e3cab101f9623240337fa"
+  },
   "reasoning-disclosure": {
     "version": "1.0.0",
     "hash": "8878ada785850eb12e23fe036e112a2c0eb828927f62f042b99525976c5d3725"
@@ -1602,6 +1630,10 @@
   "recipe-1": {
     "version": "1.0.0",
     "hash": "dfdfb405142d15eacbaf6f35c54ba69aceb6fb501d683c05dce0bfaa64fb2ef5"
+  },
+  "reliability-1": {
+    "version": "1.0.0",
+    "hash": "4edbeaed3ccc775e524f1d6fc9d11b01fcc63c482e84630b9ec8b70d558e8607"
   },
   "rentals-1": {
     "version": "1.0.0",
@@ -1631,6 +1663,10 @@
     "version": "1.0.0",
     "hash": "282ecf9ac5743da2154ec62c02e1eeb8ef78f8ad2ae8aba4dbe662381d461bee"
   },
+  "reviews-2": {
+    "version": "1.0.0",
+    "hash": "811d8d278a1f21656a853468fe39bc4a4d26a037797232073f3eeb4b68e20ea5"
+  },
   "rich-text-editor": {
     "version": "1.0.0",
     "hash": "56445aee22bd14b2a52f5e2858304be4566dd0dd9bb3662915ddb5a3bea6bdf3"
@@ -1652,8 +1688,8 @@
     "hash": "e6c7499aaeeef7278c5b210bda0ea0690df5d0a2ded623c263755bd7e26942aa"
   },
   "runbook-1": {
-    "version": "1.0.0",
-    "hash": "c48790e7ff90d15582b268c726b8548065e1432f0911801c41b853428bb65294"
+    "version": "1.0.1",
+    "hash": "b4a83d37841cb96978321bfbaa187c2f11468850a8edb9193c9c7ab993c7d68d"
   },
   "salon-1": {
     "version": "1.0.0",
@@ -1826,6 +1862,10 @@
   "spinning-text": {
     "version": "1.0.1",
     "hash": "192183c966ac01e5fcefc469558119685c4738275e29e01c5c916c71b453445f"
+  },
+  "split-bar": {
+    "version": "1.0.0",
+    "hash": "71a6f65e8ee7d83ca68e5fb7d669ab8bebeea4a73c857f12a959976b0d0d3fce"
   },
   "split-view": {
     "version": "1.0.0",
@@ -2152,8 +2192,8 @@
     "hash": "96495c53441a0bf45a42a597a66fb6711d608d8562e3770a03e1c3a95f911269"
   },
   "treemap": {
-    "version": "1.0.0",
-    "hash": "1ecaf4fb00ad1a61ebfd43eaf3f1e20c27d7895b2ac93066199f9c01fbb8372b"
+    "version": "1.0.1",
+    "hash": "06f01f18af27f5cc5dcb752ee8b427182809d7fc1da0266d51d657a826341e1d"
   },
   "trip-1": {
     "version": "1.0.0",
@@ -2170,6 +2210,10 @@
   "upload-1": {
     "version": "1.0.0",
     "hash": "7bf43c63babeba9010052f208c95b2ec6dbd0457317ae2cc40d7f537d86ce850"
+  },
+  "uptime-tracker": {
+    "version": "1.0.0",
+    "hash": "32ad4a7aaafcefb0c42f93a69a345578ae6be732518ea9cad10cc35a97e7969f"
   },
   "usage-meter": {
     "version": "1.0.0",
@@ -2208,8 +2252,8 @@
     "hash": "f42fe7b123188c63345367231a2e51783c156040ccaf684b3a42e8d9e3fc6e4f"
   },
   "waterfall-chart": {
-    "version": "1.0.0",
-    "hash": "6be0d47a323710f1178bbbca9fbc350ebcd72c40d12c65e2ce8e94d5dfb270f1"
+    "version": "1.0.1",
+    "hash": "2d1bba3ef0e5a3772f37c0a371b8398b744008eadb3cb8624472ec843a76738f"
   },
   "webhook-card": {
     "version": "1.0.0",

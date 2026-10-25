@@ -109,8 +109,8 @@ function HeatGrid({
   }
 
   return (
-    <div data-slot="heat-grid" dir={dir} className={cn("grid w-full min-w-0 gap-3", className)} {...props}>
-      <div className="overflow-x-auto rounded-xl border bg-card text-card-foreground">
+    <div data-slot="heat-grid" dir={dir} className={cn("grid w-full min-w-0 grid-cols-[minmax(0,1fr)] gap-3", className)} {...props}>
+      <div className="relative overflow-x-auto rounded-xl border bg-card text-card-foreground">
         <div role="grid" aria-label={[rowLabel, columnLabel].filter(Boolean).join(" by ") || msg("heat-grid.label", "Values")} aria-rowcount={rows.length + 1} aria-colcount={columns.length + 1} className="grid min-w-max" style={{ gridTemplateColumns: `minmax(7rem, auto) repeat(${columns.length}, minmax(4.5rem, 1fr))` }}>
           <div role="row" className="contents">
             <div role="columnheader" className="sticky start-0 z-10 border-b border-e bg-card px-3 py-2 text-xs font-medium text-muted-foreground">{rowLabel}</div>

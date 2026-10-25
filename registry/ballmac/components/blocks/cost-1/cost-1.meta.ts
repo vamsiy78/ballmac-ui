@@ -38,6 +38,10 @@ export default defineItem({
     ],
     customization: ["periods, currency and defaultPeriod", "budget is optional per period", "onAcknowledge; reject and it stays listed"],
   },
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.0.1",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-25", note: "The chart's first step is now labeled Models, so the labels no longer collide on a phone." },
+    { version: "1.0.0", date: "2026-10-24", note: "First release." },
+  ],
 })

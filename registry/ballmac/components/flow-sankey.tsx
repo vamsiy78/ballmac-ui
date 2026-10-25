@@ -213,7 +213,7 @@ function FlowSankey({ nodes, links, format = (v) => v.toLocaleString("en-US"), s
   }
 
   return (
-    <div data-slot="flow-sankey" className={cn("grid w-full min-w-0 gap-3", className)} {...props}>
+    <div data-slot="flow-sankey" className={cn("grid w-full min-w-0 grid-cols-[minmax(0,1fr)] gap-3", className)} {...props}>
       <div dir="ltr" className="relative w-full rounded-xl border bg-card p-3 sm:p-5" role="group" aria-label={msg("flow-sankey.label", "Flows between steps")}>
         <div className="relative w-full" style={{ aspectRatio: `${W} / ${H}` }}>
           <svg aria-hidden="true" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="absolute inset-0 size-full overflow-visible">

@@ -61,7 +61,7 @@ function WaterfallChart({ steps, format = (v) => v.toLocaleString("en-US"), heig
   const last = bars[bars.length - 1]
 
   return (
-    <figure data-slot="waterfall-chart" aria-labelledby={title ? `${id}-t` : undefined} className={cn("grid w-full min-w-0 gap-3", className)} {...props}>
+    <figure data-slot="waterfall-chart" aria-labelledby={title ? `${id}-t` : undefined} className={cn("grid w-full min-w-0 grid-cols-[minmax(0,1fr)] gap-3", className)} {...props}>
       {title && (
         <figcaption id={`${id}-t`} className="text-sm font-medium text-foreground">
           {title}
@@ -92,7 +92,7 @@ function WaterfallChart({ steps, format = (v) => v.toLocaleString("en-US"), heig
         </div>
         <div className="mt-2 flex gap-1.5 sm:gap-2.5" aria-hidden="true">
           {bars.map((b) => (
-            <p key={b.step.id} className="min-w-0 flex-1 text-center text-[11px] leading-tight text-muted-foreground sm:text-xs">
+            <p key={b.step.id} className="min-w-0 flex-1 text-center text-[10px] leading-tight break-words hyphens-auto text-muted-foreground sm:text-xs">
               {b.step.label}
             </p>
           ))}

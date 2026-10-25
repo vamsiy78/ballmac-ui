@@ -127,7 +127,8 @@ function Floorplan1({ tables: tablesProp = tables, waiting: waitingProp = waitin
       <StateView state={view} onRetry={onRetry} label="Loading the floor" loading={<Skel />} empty={{ title: "No tables yet", description: "Add the tables of the room and they will appear on the plan.", ...emptyState }} error={{ title: "The floor could not be loaded", description: "No table was changed. Check your connection and try again.", ...errorState }}>
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_17rem]">
           <div className="grid min-w-0 gap-4">
-            <div role="group" aria-label="Tables on the floor" className="bg-muted/30 relative aspect-[16/10] min-h-[22rem] w-full overflow-hidden rounded-2xl border" style={{ backgroundImage: "radial-gradient(var(--border) 1px, transparent 1px)", backgroundSize: "22px 22px" }}>
+            <div role="region" tabIndex={0} aria-label="Floor plan. Scroll sideways on a small screen" className="focus-visible:ring-ring/50 relative overflow-x-auto rounded-2xl outline-none focus-visible:ring-[3px]">
+            <div role="group" aria-label="Tables on the floor" className="bg-muted/30 relative aspect-[16/10] min-h-[22rem] w-full min-w-[40rem] overflow-hidden rounded-2xl border" style={{ backgroundImage: "radial-gradient(var(--border) 1px, transparent 1px)", backgroundSize: "22px 22px" }}>
               {list.map((tb) => {
                 const st = STATUS[tb.status]
                 const on = sel === tb.id
@@ -148,6 +149,7 @@ function Floorplan1({ tables: tablesProp = tables, waiting: waitingProp = waitin
                   </button>
                 )
               })}
+            </div>
             </div>
             <ul className="text-muted-foreground flex flex-wrap gap-x-5 gap-y-1.5 text-xs" aria-label="Legend">
               {(Object.keys(STATUS) as Floorplan1Status[]).map((k) => (
