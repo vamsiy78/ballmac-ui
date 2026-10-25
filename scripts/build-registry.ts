@@ -16,7 +16,7 @@ import { FONT_FACES } from "@ballmac-ui/theme-engine"
 
 import { RULES } from "../packages/audit/src/rules/meta"
 import { extractProps } from "./extract-props"
-import { importPathFor, loadItems, ROOT, targetFor, type LoadedItem } from "./lib"
+import { importPathFor, loadItems, ROOT, targetFor, writeProNames, type LoadedItem } from "./lib"
 import { BASE_ONLY, BASE_UI_SPEC, baseDependencies, findVariants, type BaseVariant } from "./base-variants"
 import { exportsOf, planTests, writeTests, writeVersions } from "./registry-extras"
 import { registryUrl } from "./registry-url"
@@ -206,6 +206,7 @@ function shadcnBuild(registryFile: string, output: string) {
 }
 
 const items = await loadItems()
+writeProNames(items)
 owners = new Map(items.flatMap((i) => i.files.map((f) => [importPathFor(f.path), i.name] as const)).filter((e): e is [string, string] => !!e[0]))
 specs = new Map(
   items.flatMap((i) => i.dependencies).filter((d) => /^@?[^@]+@/.test(d)).map((d) => [npmOf(d.replace(/(.)@[^@/]*$/, "$1")), d] as const)

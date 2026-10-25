@@ -6,14 +6,28 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-25-free-and-pro] - 2026-10-25
+
+**Free and Pro, reorganised.** The free library keeps the everyday components, 46 complete screens, 3 templates and every theme, and most of the rest moved into Pro.
+
+### Changed
+
+- The free library is now a curated starter set: 131 everyday components (forms, navigation, feedback, layout, data display and a taste of every other kind), 46 complete screens (one well-made block for each common page), 3 templates, and every theme, preset, platform feel and typeface. All of it stays MIT licensed.
+- Ballmac UI Pro now holds 183 more components, 293 more screens and 14 more templates, with the starter apps, the private registry and the Figma tokens. Everyone who bought Pro has all of it, with every future Pro update.
+
+### Removed
+
+- 338 items left the public registry: their `@ballmac/<name>` install now answers "not found", and they install from the private `@ballmac-pro` registry with a licence key. Anything you already installed is yours under the MIT licence and keeps working; only `ballmac update` for those items now needs a Pro key.
+- The agent skill and the MCP server list only what is free. Ask your agent to read [the Pro page](https://ui.ballmac.com/pro) for the rest.
+
 ## [2026-10-25-particle-tree] - 2026-10-25
 
 **A tree made of particles, and a hero that uses it.** A generative background for dark AI and developer pages, and a hero built on it, with no photo needed.
 
 ### Added
 
-- `particle-tree` draws a tree from thousands of small points, standing on rings that spread across the ground. It sways a little, parts around the pointer and settles back, stops drawing when it is off screen, and is drawn once and held still when someone asks for reduced motion. The same seed always grows the same tree.
-- `hero-9` puts it behind a centered headline, two buttons and a note, for launch, waitlist and AI product pages that have no screenshot to show yet.
+- `particle-tree` (Pro) draws a tree from thousands of small points, standing on rings that spread across the ground. It sways a little, parts around the pointer and settles back, stops drawing when it is off screen, and is drawn once and held still when someone asks for reduced motion. The same seed always grows the same tree.
+- `hero-9` (Pro) puts it behind a centered headline, two buttons and a note, for launch, waitlist and AI product pages that have no screenshot to show yet.
 
 ## [2026-10-25-ecommerce] - 2026-10-25
 

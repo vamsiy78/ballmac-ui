@@ -6,10 +6,10 @@
     "homepage": "https://ui.ballmac.com",
     "source": "https://ui.ballmac.com/r/registry.json"
   },
-  "generated": "2026-10-25T08:44:00.083Z",
+  "generated": "2026-10-25T11:49:39.912Z",
   "items": {
-    "total": 2130,
-    "scored": 532
+    "total": 702,
+    "scored": 194
   },
   "score": 98,
   "grade": "A",
@@ -19,17 +19,17 @@
       "label": "Accessibility",
       "what": "No unlabelled controls, missing alt text, clickable non-interactive elements, removed focus outlines or hand-made dialogs in the source.",
       "weight": 25,
-      "pass": 500,
-      "fail": 21,
+      "pass": 178,
+      "fail": 5,
       "na": 11,
-      "pct": 96
+      "pct": 97.3
     },
     {
       "id": "schema",
       "label": "Valid item",
       "what": "A kebab-case name, a known type, and at least one file with a path and content.",
       "weight": 15,
-      "pass": 532,
+      "pass": 194,
       "fail": 0,
       "na": 0,
       "pct": 100
@@ -39,7 +39,7 @@
       "label": "Dependencies declared",
       "what": "Every package the code imports is in dependencies, and every shared registry component it imports is in registryDependencies.",
       "weight": 15,
-      "pass": 532,
+      "pass": 194,
       "fail": 0,
       "na": 0,
       "pct": 100
@@ -49,17 +49,17 @@
       "label": "Theme tokens",
       "what": "Colors come from theme tokens, not hard-coded hex or rgb values, so the item follows the theme and dark mode.",
       "weight": 10,
-      "pass": 458,
-      "fail": 63,
+      "pass": 169,
+      "fail": 14,
       "na": 11,
-      "pct": 87.9
+      "pct": 92.3
     },
     {
       "id": "states",
       "label": "States",
       "what": "Data views handle loading, empty and error, not only the filled case.",
       "weight": 10,
-      "pass": 519,
+      "pass": 181,
       "fail": 0,
       "na": 13,
       "pct": 100
@@ -69,27 +69,27 @@
       "label": "Motion",
       "what": "No endless decorative animation, which cannot be paused for people who ask for less motion.",
       "weight": 5,
-      "pass": 517,
-      "fail": 4,
+      "pass": 182,
+      "fail": 1,
       "na": 11,
-      "pct": 99.2
+      "pct": 99.5
     },
     {
       "id": "rtl",
       "label": "Right to left",
       "what": "Logical classes (ms-, pe-, text-start) instead of physical ones (ml-, pr-, text-left), so the layout mirrors.",
       "weight": 5,
-      "pass": 512,
-      "fail": 9,
+      "pass": 180,
+      "fail": 3,
       "na": 11,
-      "pct": 98.3
+      "pct": 98.4
     },
     {
       "id": "describe",
       "label": "Described",
       "what": "A title and a description that says what the item is (20 characters or more).",
       "weight": 5,
-      "pass": 532,
+      "pass": 194,
       "fail": 0,
       "na": 0,
       "pct": 100
@@ -99,7 +99,7 @@
       "label": "Documented",
       "what": "A docs note, or at least one example item in the registry.",
       "weight": 5,
-      "pass": 519,
+      "pass": 181,
       "fail": 0,
       "na": 13,
       "pct": 100
@@ -109,120 +109,13 @@
       "label": "Attributed",
       "what": "The item names its author or license, so you know who maintains it.",
       "weight": 5,
-      "pass": 532,
+      "pass": 194,
       "fail": 0,
       "na": 0,
       "pct": 100
     }
   ],
   "weakest": [
-    {
-      "name": "desktop-2",
-      "type": "registry:block",
-      "score": 65,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "fail",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/clickable-non-interactive: <li> has onClick and a role but no keyboard handler (onKeyDown).",
-        "tokens/hardcoded-color: border-black/10 is a fixed colour and will not follow the theme."
-      ]
-    },
-    {
-      "name": "finder-window",
-      "type": "registry:ui",
-      "score": 65,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "fail",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown).",
-        "tokens/hardcoded-color: text-white is a fixed colour and will not follow the theme.",
-        "tokens/hardcoded-color: text-white is a fixed colour and will not follow the theme."
-      ]
-    },
-    {
-      "name": "launchpad",
-      "type": "registry:ui",
-      "score": 65,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "fail",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/clickable-non-interactive: <div> has onClick but is not focusable and has no role.",
-        "tokens/hardcoded-color: bg-black/45, text-white are fixed colours and will not follow the theme.",
-        "tokens/hardcoded-color: text-white/70 is a fixed colour and will not follow the theme."
-      ]
-    },
-    {
-      "name": "template-northwind",
-      "type": "registry:block",
-      "score": 65,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "fail",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/focus-outline-removed: <button> removes the focus outline and adds no focus style.",
-        "tokens/hardcoded-color: text-white is a fixed colour and will not follow the theme.",
-        "tokens/hardcoded-color: text-white is a fixed colour and will not follow the theme."
-      ]
-    },
-    {
-      "name": "agent-2",
-      "type": "registry:block",
-      "score": 75,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "pass",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/clickable-non-interactive: <li> has onClick and a role but no keyboard handler (onKeyDown)."
-      ]
-    },
     {
       "name": "app-shell",
       "type": "registry:ui",
@@ -241,126 +134,6 @@
       },
       "problems": [
         "a11y/clickable-non-interactive: <div> has onClick but is not focusable and has no role."
-      ]
-    },
-    {
-      "name": "data-grid",
-      "type": "registry:ui",
-      "score": 75,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "pass",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
-      ]
-    },
-    {
-      "name": "desktop-7",
-      "type": "registry:block",
-      "score": 75,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "pass",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/clickable-non-interactive: <li> has onClick and a role but no keyboard handler (onKeyDown)."
-      ]
-    },
-    {
-      "name": "event-calendar",
-      "type": "registry:ui",
-      "score": 75,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "pass",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
-      ]
-    },
-    {
-      "name": "flow-sankey",
-      "type": "registry:ui",
-      "score": 75,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "pass",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/focus-outline-removed: <button> removes the focus outline and adds no focus style."
-      ]
-    },
-    {
-      "name": "git-graph",
-      "type": "registry:ui",
-      "score": 75,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "pass",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
-      ]
-    },
-    {
-      "name": "help-1",
-      "type": "registry:block",
-      "score": 75,
-      "checks": {
-        "schema": "pass",
-        "describe": "pass",
-        "deps": "pass",
-        "a11y": "fail",
-        "tokens": "pass",
-        "states": "pass",
-        "motion": "pass",
-        "rtl": "pass",
-        "docs": "pass",
-        "author": "pass"
-      },
-      "problems": [
-        "a11y/clickable-non-interactive: <li> has onClick and a role but no keyboard handler (onKeyDown)."
       ]
     },
     {
@@ -385,7 +158,48 @@
       ]
     },
     {
-      "name": "invite-members",
+      "name": "mention-input",
+      "type": "registry:ui",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
+      ]
+    },
+    {
+      "name": "rich-text-editor",
+      "type": "registry:ui",
+      "score": 75,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "fail",
+        "tokens": "pass",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "a11y/clickable-non-interactive: <div> has onClick but is not focusable and has no role.",
+        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
+      ]
+    },
+    {
+      "name": "tag-input",
       "type": "registry:ui",
       "score": 75,
       "checks": {
@@ -405,15 +219,59 @@
       ]
     },
     {
-      "name": "mention-input",
+      "name": "android-frame",
       "type": "registry:ui",
-      "score": 75,
+      "score": 85,
       "checks": {
         "schema": "pass",
         "describe": "pass",
         "deps": "pass",
-        "a11y": "fail",
-        "tokens": "pass",
+        "a11y": "pass",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "fail",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "tokens/hardcoded-color: bg-black is a fixed colour and will not follow the theme.",
+        "tokens/hardcoded-color: bg-black, ring-white/5 are fixed colours and will not follow the theme.",
+        "rtl/physical-direction: left-0 → start-0 will not mirror in right-to-left languages."
+      ]
+    },
+    {
+      "name": "spring-drawer",
+      "type": "registry:ui",
+      "score": 85,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "pass",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "fail",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "tokens/hardcoded-color: bg-black/50 is a fixed colour and will not follow the theme.",
+        "rtl/physical-direction: right-0 → end-0, border-l → border-s, left-0 → start-0 and 1 more will not mirror in right-to-left languages.",
+        "rtl/physical-direction: left-0.5 → start-0.5, right-0.5 → end-0.5 will not mirror in right-to-left languages."
+      ]
+    },
+    {
+      "name": "access-1",
+      "type": "registry:block",
+      "score": 90,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "pass",
+        "tokens": "fail",
         "states": "pass",
         "motion": "pass",
         "rtl": "pass",
@@ -421,7 +279,150 @@
         "author": "pass"
       },
       "problems": [
-        "a11y/clickable-non-interactive: <div> has onClick and a role but no keyboard handler (onKeyDown)."
+        "tokens/hardcoded-color: text-white is a fixed colour and will not follow the theme."
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "score": 90,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "pass",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "tokens/hardcoded-color: bg-black/55 is a fixed colour and will not follow the theme.",
+        "tokens/hardcoded-color: data-[destructive=true]:text-white is a fixed colour and will not follow the theme (this element sets dark: styles itself, or the app does not use theme tokens)."
+      ]
+    },
+    {
+      "name": "app-window",
+      "type": "registry:ui",
+      "score": 90,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "pass",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "tokens/hardcoded-color: hover:text-white is a fixed colour and will not follow the theme."
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "score": 90,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "pass",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "tokens/hardcoded-color: bg-black/40 is a fixed colour and will not follow the theme."
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "score": 90,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "pass",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "tokens/hardcoded-color: bg-black/50 is a fixed colour and will not follow the theme."
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "score": 90,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "pass",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "tokens/hardcoded-color: bg-black/50 is a fixed colour and will not follow the theme."
+      ]
+    },
+    {
+      "name": "hud",
+      "type": "registry:ui",
+      "score": 90,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "pass",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "tokens/hardcoded-color: text-white, border-white/15, bg-neutral-900/75, border-white/10 and 1 more are fixed colours and will not follow the theme.",
+        "tokens/hardcoded-color: bg-white/25 is a fixed colour and will not follow the theme."
+      ]
+    },
+    {
+      "name": "image-cropper",
+      "type": "registry:ui",
+      "score": 90,
+      "checks": {
+        "schema": "pass",
+        "describe": "pass",
+        "deps": "pass",
+        "a11y": "pass",
+        "tokens": "fail",
+        "states": "pass",
+        "motion": "pass",
+        "rtl": "pass",
+        "docs": "pass",
+        "author": "pass"
+      },
+      "problems": [
+        "tokens/hardcoded-color: ring-white/90 is a fixed colour and will not follow the theme.",
+        "tokens/hardcoded-color: bg-white/60 is a fixed colour and will not follow the theme."
       ]
     }
   ],

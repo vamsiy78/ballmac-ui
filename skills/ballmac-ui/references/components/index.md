@@ -4,19 +4,19 @@
 
 Open the file for the category you need; each line is one component.
 
-- [AI interfaces](ai.md): 52 components
-- [Backgrounds](backgrounds.md): 16 components
-- [Data display](data-display.md): 51 components
-- [Desktop and macOS surfaces](macos.md): 20 components
-- [Developer tools](developer.md): 14 components
-- [Device frames](devices.md): 6 components
+- [AI interfaces](ai.md): 1 components
+- [Backgrounds](backgrounds.md): 3 components
+- [Data display](data-display.md): 9 components
+- [Desktop and macOS surfaces](macos.md): 4 components
+- [Developer tools](developer.md): 2 components
+- [Device frames](devices.md): 1 components
 - [Feedback](feedback.md): 18 components
 - [Forms](forms.md): 29 components
 - [Foundation](foundation.md): 1 components
 - [Layout](layout.md): 10 components
-- [marketing](marketing.md): 2 components
-- [Motion](motion.md): 29 components
+- [marketing](marketing.md): 1 components
+- [Motion](motion.md): 9 components
 - [Navigation](navigation.md): 17 components
 - [Primitives](primitives.md): 25 components
-- [SaaS building blocks](saas.md): 12 components
-- [Text effects](text.md): 11 components
+- [SaaS building blocks](saas.md): 1 components
+- [Text effects](text.md): 1 components

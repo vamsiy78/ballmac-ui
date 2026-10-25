@@ -34,6 +34,9 @@ let failures = 0
 const fail = (m: string) => { failures++; console.error(`✗ ${m}`) }
 const ok = (m: string) => console.log(`✓ ${m}`)
 
+// Files that were free and public before the October 2026 split are in the public git history, so protecting their lines in the build would protect nothing.
+const FORMERLY_FREE = new Set<string>(existsSync(join(ROOT, "registry/formerly-free.json")) ? (JSON.parse(readFileSync(join(ROOT, "registry/formerly-free.json"), "utf8")) as { files: string[] }).files : [])
+
 function fingerprints() {
   if (!existsSync(PRO)) return null
   const free: string[] = []
@@ -42,7 +45,7 @@ function fingerprints() {
   }
   const corpus = free.join("\n")
   const fp = new Set<string>()
-  for (const f of walk(PRO).filter((f) => /\.tsx?$/.test(f) && !f.endsWith(".meta.ts"))) {
+  for (const f of walk(PRO).filter((f) => /\.tsx?$/.test(f) && !f.endsWith(".meta.ts") && !FORMERLY_FREE.has(relative(PRO, f)))) {
     // The longest distinctive lines per file are enough to detect a copied file, and keep the scan fast.
     const cand = lines(f).filter((l) => distinctive(l) && !/^["'`][^"'`]*["'`][,;]?$/.test(l)).sort((a, b) => b.length - a.length)
     let taken = 0

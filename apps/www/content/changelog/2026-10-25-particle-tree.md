@@ -10,5 +10,5 @@ imageAlt: "A hero on a dark page: a headline and two buttons above a tree made o
 
 ### New
 
-- `particle-tree` draws a tree from thousands of small points, standing on rings that spread across the ground. It sways a little, parts around the pointer and settles back, stops drawing when it is off screen, and is drawn once and held still when someone asks for reduced motion. The same seed always grows the same tree.
-- `hero-9` puts it behind a centered headline, two buttons and a note, for launch, waitlist and AI product pages that have no screenshot to show yet.
+- `particle-tree` (Pro) draws a tree from thousands of small points, standing on rings that spread across the ground. It sways a little, parts around the pointer and settles back, stops drawing when it is off screen, and is drawn once and held still when someone asks for reduced motion. The same seed always grows the same tree.
+- `hero-9` (Pro) puts it behind a centered headline, two buttons and a note, for launch, waitlist and AI product pages that have no screenshot to show yet.

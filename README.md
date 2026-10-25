@@ -63,8 +63,10 @@ command, and can plan a whole page from blocks. Setup for Cursor, VS Code, Winds
 
 | | Free (this repository) | Pro |
 | --- | --- | --- |
-| Components, blocks, templates, themes | All of them, MIT licensed | Everything in Free |
-| Premium blocks | | 150 more: heroes, features, pricing, dashboards, app screens, ecommerce, content and more |
+| Components | 131 everyday components (forms, navigation, feedback, layout, data display and a taste of the rest), MIT licensed | 183 more: AI interfaces, motion, backgrounds, macOS and device frames, charts, text effects and more |
+| Blocks (screens) | 46: one well-made block each for the common pages | 293 more: heroes, features, pricing, dashboards, agent consoles, ecommerce, billing, content and more |
+| Templates | 3 | 14 more |
+| Themes, presets, platform feels, typefaces | All of them, MIT licensed | Everything in Free |
 | Starter apps | | Beacon SaaS (teams, Stripe billing, dashboard), Quire (an AI assistant that cites its sources) and Cove (a Tauri desktop app that looks native on macOS and Windows) |
 | Design tokens | | Figma tokens for every theme |
 | How you get it | `shadcn add @ballmac/...` | A private registry (`@ballmac-pro`) with a licence key, or log in on the site to copy code and download the starters |

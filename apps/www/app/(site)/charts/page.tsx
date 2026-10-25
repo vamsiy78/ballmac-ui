@@ -5,12 +5,12 @@ import { CopyButton } from "@/components/site/copy-button"
 import Link from "@/components/site/link"
 import { PageCard } from "@/components/site/page-card"
 import { Eyebrow } from "@/components/site/section-heading"
-import { getAllItems } from "@/lib/registry"
+import { addCommand, getAllItems } from "@/lib/registry"
 import { thumbFor } from "@/lib/thumbs"
 
 export const metadata: Metadata = {
   title: "Charts for shadcn that everyone can read",
-  description: "Accessible Recharts charts for React and Tailwind: seven kinds, each with a table view, color-blind patterns, a written summary and every state. Free.",
+  description: "Accessible Recharts charts for React and Tailwind: seven kinds, each with a table view, color-blind patterns, a written summary and every state. Part of Ballmac UI Pro.",
   alternates: { canonical: "/charts" },
 }
 
@@ -27,9 +27,9 @@ const points = [
 export default function ChartsPage() {
   const items = getAllItems()
   const families = FAMILIES.map((id) => items.find((i) => i.name === id)).filter((i): i is NonNullable<typeof i> => !!i)
-  const tiles: ChartTile[] = families.flatMap((f) => f.examples.map((e) => ({ id: e.name, title: e.title, family: f.name, familyTitle: f.title.replace(/^Chart /, "") })))
+  const tiles: ChartTile[] = families.flatMap((f) => f.examples.map((e) => ({ id: e.name, title: e.title, family: f.name, familyTitle: f.title.replace(/^Chart /, ""), command: addCommand([f.name], "npm") })))
   const dashboards = DASHBOARDS.map((n) => items.find((i) => i.name === n)).filter((i): i is NonNullable<typeof i> => !!i)
-  const command = "npx shadcn@latest add @ballmac/chart-area"
+  const command = addCommand(["chart-area"], "npm")
 
   return (
     <div className="mx-auto max-w-[1440px] space-y-14 px-4 py-12 sm:px-6 md:py-16">

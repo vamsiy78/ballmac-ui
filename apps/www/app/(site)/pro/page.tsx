@@ -15,10 +15,13 @@ import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
 import { getBlocks, isPro, itemHref } from "@/lib/registry"
 import { thumbFor } from "@/lib/thumbs"
 
-export const metadata: Metadata = {
-  title: "Ballmac UI Pro: 150 app blocks for React and shadcn",
-  description: "Dashboards, billing, settings, sign-in and more, with every state built in. A private shadcn registry, Figma tokens and a 14-day fix-or-refund promise. Pay once.",
-  alternates: { canonical: "/pro" },
+export function generateMetadata(): Metadata {
+  const n = Math.floor((getBlocks().filter(isPro).length || 290) / 10) * 10
+  return {
+    title: `Ballmac UI Pro: ${n}+ app screens for React`,
+    description: "Dashboards, agent consoles, billing, ecommerce and more, with every state built in. A private shadcn registry, Figma tokens and a 14-day fix-or-refund promise. Pay once.",
+    alternates: { canonical: "/pro" },
+  }
 }
 
 
@@ -40,7 +43,7 @@ export default async function ProPage() {
   return (
     <Suspense fallback={null}>
       <ReferralNotice />
-      {offer.onSale && <JsonLd graph={[proProduct({ path: "/pro", description: String(metadata.description), pro: { price: String(offer.price), url: offer.checkout ?? undefined }, team: { price: TEAM_PRICE, seats: TEAM_SEATS } })]} />}
+      {offer.onSale && <JsonLd graph={[proProduct({ path: "/pro", description: String(generateMetadata().description), pro: { price: String(offer.price), url: offer.checkout ?? undefined }, team: { price: TEAM_PRICE, seats: TEAM_SEATS } })]} />}
       <ProHub downloads={downloads} sampleItem={picks[0]?.name ?? "hero-pro-1"} licenseUrl={licenseUrl} sales={<ProSales downloads={downloads} />}>
         {picks.length > 0 && (
           <section className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6" aria-labelledby="inside-h">

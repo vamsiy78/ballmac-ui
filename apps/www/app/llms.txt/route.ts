@@ -2,7 +2,7 @@ import { PRESETS, SYSTEMS } from "@ballmac-ui/theme-engine"
 
 import { mdHref, orderedDocs } from "@/lib/docs"
 import { useCases } from "@/lib/use-cases"
-import { getBlocks, getComponents, getTemplates, isPro, SITE_URL } from "@/lib/registry"
+import { getAllItems, getBlocks, getComponents, getTemplates, isPro, SITE_URL } from "@/lib/registry"
 
 export const dynamic = "force-static"
 
@@ -29,6 +29,7 @@ export function GET() {
     ...useCases.map((u) => `- [${u.name}](${SITE_URL}/use-cases/${u.slug}): ${u.description}`),
     "",
     "## Pro",
+    `- [Ballmac UI Pro](${SITE_URL}/pro): ${getAllItems().filter((i) => isPro(i) && i.category !== "foundation").length} more items (screens, components and templates), starter apps, a private registry and Figma tokens, for a one-time price. Every item is listed with its description and install command in ${SITE_URL}/api/v1/index.json (tier "pro").`,
     `- [Pricing](${SITE_URL}/pricing): free versus Pro`,
     `- [Pro setup](${SITE_URL}/docs/guides/pro): Pro blocks and starter apps install through the private @ballmac-pro registry with a licence key`,
     "",
@@ -50,7 +51,7 @@ export function GET() {
     ...blocks.map((i) => `- [${i.title}](${SITE_URL}/blocks/${i.name}): ${i.description} Install: @ballmac/${i.name}`),
     "",
     "## Components",
-    ...getComponents().map((i) => `- [${i.title}](${SITE_URL}/components/${i.name}): ${i.description} Install: @ballmac/${i.name}`),
+    ...getComponents().filter((i) => !isPro(i)).map((i) => `- [${i.title}](${SITE_URL}/components/${i.name}): ${i.description} Install: @ballmac/${i.name}`),
     "",
   ]
   return new Response(lines.join("\n"), { headers: { "Content-Type": "text/plain; charset=utf-8" } })

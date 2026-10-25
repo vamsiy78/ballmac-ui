@@ -24,7 +24,7 @@ const subscribe = (onChange: () => void) => {
 }
 
 /**
- * A slim, dismissible strip saying what is new in the free library. `id` names this announcement: dismissing it is remembered for that id only, so the next
+ * A slim, dismissible strip saying what is new in the library. `id` names this announcement: dismissing it is remembered for that id only, so the next
  * announcement shows again. It is in the server HTML (no layout shift); a visitor who dismissed it gets `data-whatsnew-off` on <html> before first paint.
  */
 export function WhatsNewBanner({ id, added, examples, href = "/changelog" }: { id: string; added: number; examples: string[]; href?: string }) {
@@ -44,7 +44,7 @@ export function WhatsNewBanner({ id, added, examples, href = "/changelog" }: { i
           <p className="flex items-center gap-2">
             <Sparkles className="size-3.5 shrink-0" aria-hidden="true" />
             <span>
-              <span className="font-semibold">{added} new items</span> in the free library, including {examples.join(", ")}.
+              <span className="font-semibold">{added} new items</span> in the library, including {examples.join(", ")}.
             </span>
           </p>
           <Link href={href} className="focus-visible:ring-ring/50 inline-flex items-center gap-1 rounded-sm font-medium underline underline-offset-4 outline-none focus-visible:ring-[3px]">

@@ -48,6 +48,15 @@ if (existsSync(indexFile)) {
     else if (i.category !== "foundation") components.add(i.name)
   }
 }
+// A public clone has no Pro source, so Pro items are missing from the index. Their names are kept in registry/pro-names.json so links to their pages still check out.
+const proNamesFile = join(www, "../../registry/pro-names.json")
+if (existsSync(proNamesFile)) {
+  for (const name of JSON.parse(readFileSync(proNamesFile, "utf8")) as string[]) {
+    blocks.add(name)
+    components.add(name)
+    templates.add(name)
+  }
+}
 const plainRoutes = new Set(["/", "/components", "/blocks", "/templates", "/charts", "/themes", "/presets", "/feels", "/pricing", "/pro", "/pro/login", "/affiliates", "/affiliates/dashboard", "/affiliates/admin", "/support", "/founders", "/changelog", "/use-cases", "/use-cases/dashboard", "/quality", "/verified", "/license", "/license/pro", "/refund", "/contribute", "/built-with", "/pro/changelog", "/llms.txt", "/llms-full.txt", "/i18n/en.json", "/changelog/rss.xml", "/changelog/atom.xml"])
 const changelogSlugs = new Set(getChangelog().map((e) => e.slug))
 

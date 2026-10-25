@@ -71,7 +71,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
         </div>
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           {blocks.map(({ item, thumb, Preview }, i) => (
-            <PageCard key={item.name} href={`/blocks/${item.name}`} title={item.title} description={item.description} name={item.name} Preview={Preview} thumb={thumb} priority={i < 3} />
+            <PageCard key={item.name} href={`/blocks/${item.name}`} title={item.title} description={item.description} name={item.name} Preview={Preview} thumb={thumb} pro={item.tier === "pro"} priority={i < 3} />
           ))}
         </div>
       </section>

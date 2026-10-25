@@ -5,14 +5,18 @@
     "paths": {
       "@/components/ballmac/*": [
         "../../registry/ballmac/base/components/*",
-        "../../registry/ballmac/components/*"
+        "../../registry/pro/ballmac/base/components/*",
+        "../../registry/ballmac/components/*",
+        "../../registry/pro/ballmac/components/*"
       ],
       "@/lib/ballmac/*": [
         "../../registry/ballmac/base/lib/*",
-        "../../registry/ballmac/lib/*"
+        "../../registry/ballmac/lib/*",
+        "../../registry/pro/ballmac/lib/*"
       ],
       "@/hooks/ballmac/*": [
-        "../../registry/ballmac/hooks/*"
+        "../../registry/ballmac/hooks/*",
+        "../../registry/pro/ballmac/hooks/*"
       ],
       "@/registry/*": [
         "../../registry/*"
@@ -26,6 +30,8 @@
     "next-env.d.ts",
     "../../registry/ballmac/base/**/*.ts",
     "../../registry/ballmac/base/**/*.tsx",
+    "../../registry/pro/ballmac/base/**/*.ts",
+    "../../registry/pro/ballmac/base/**/*.tsx",
     "../../registry/examples/**/*.tsx",
     "../../registry/ballmac/components/blocks/**/*.tsx",
     "../../registry/ballmac/components/templates/**/*.tsx"

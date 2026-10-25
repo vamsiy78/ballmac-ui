@@ -17,10 +17,12 @@ describe("use cases", () => {
     }
   })
 
-  it("name only free blocks and templates that exist", () => {
+  // Use cases show free and Pro items (Pro ones are marked). A public clone has no Pro source, so there a Pro name cannot be looked up and is skipped.
+  it("name only blocks and templates that exist", () => {
+    const proPresent = existsSync(join(__dirname, "../../../registry/pro/ballmac"))
     for (const u of useCases) {
-      for (const n of u.blocks) expect(index.find((i) => i.name === n && i.tier !== "pro" && i.category === "blocks"), `${u.slug}: block ${n}`).toBeTruthy()
-      for (const n of u.templates) expect(index.find((i) => i.name === n && i.tier !== "pro" && i.category === "templates"), `${u.slug}: template ${n}`).toBeTruthy()
+      for (const n of u.blocks) expect(index.find((i) => i.name === n && i.category === "blocks") || !proPresent, `${u.slug}: block ${n}`).toBeTruthy()
+      for (const n of u.templates) expect(index.find((i) => i.name === n && i.category === "templates") || !proPresent, `${u.slug}: template ${n}`).toBeTruthy()
     }
   })
 

@@ -24,10 +24,13 @@ import { blockGroups, getBlocks, getItem, isPro } from "@/lib/registry"
 import { SAMPLER_BLOCKS } from "@/lib/sampler"
 import { thumbFor } from "@/lib/thumbs"
 
-export const metadata: Metadata = {
-  title: "Pricing",
-  description: "Ballmac UI's components, blocks and templates are free to use. Ballmac UI Pro adds 150 finished app blocks, a private registry and Figma tokens.",
-  alternates: { canonical: "/pricing" },
+export function generateMetadata(): Metadata {
+  const pro = getBlocks().filter(isPro).length || 290
+  return {
+    title: "Pricing",
+    description: `Ballmac UI's everyday components, a set of screens and themes are free. Ballmac UI Pro adds ${pro} finished app screens and more, a private registry and Figma tokens.`,
+    alternates: { canonical: "/pricing" },
+  }
 }
 
 
@@ -134,7 +137,7 @@ export default async function PricingPage() {
         ]
       : []),
     { q: "Is the free tier really free for commercial work?", a: "Yes. Use free items in personal, client and commercial projects, and change them however you like. The license notice stays in the source files." },
-    { q: "Will free components become paid?", a: "No. Anything released as free stays free. Pro adds new premium items; it doesn't take any away." },
+    { q: "Will free components become paid?", a: "Whatever you have installed is yours under the MIT licence, whatever we do later. In October 2026 we moved most of the library into Pro to fund it; the free tier keeps the everyday components, 46 complete screens, 3 templates and every theme, and we do not plan to shrink it again." },
     { q: "I bought Pro. How do I get my code?", a: "Open the Pro log in page and paste the licence key from your purchase email. There is no account to create: the key is the login. You can then read and copy any Pro block, download the starter apps, and get install commands with your key filled in. The shadcn CLI and the MCP server work with the same key." },
     { q: "How does Pro work with the CLI?", a: "Add your licence key once as an environment variable and the @ballmac-pro registry to components.json. The shadcn CLI and the MCP server then install Pro items the same way as free ones. The Pro guide walks through it." },
     {

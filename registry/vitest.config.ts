@@ -15,12 +15,22 @@ const baseAliases = (process.env.BALLMAC_BASE === "1" ? ["components", "lib"] : 
     .map((f) => ({ find: new RegExp(`^@/${kind}/ballmac/${f.replace(/\.tsx?$/, "")}$`), replacement: `${dir}/${f}` }))
 })
 
+// Items that live in the private Pro checkout (absent in public clones) are matched by their path under the folder, as users import them.
+const proAliases = ["components", "hooks", "lib"].flatMap((kind) => {
+  const dir = fileURLToPath(new URL(`./pro/ballmac/${kind}`, import.meta.url))
+  if (!existsSync(dir)) return []
+  return (readdirSync(dir, { recursive: true }) as string[])
+    .filter((f) => /\.tsx?$/.test(f) && !f.endsWith(".meta.ts"))
+    .map((f) => ({ find: new RegExp(`^@/${kind}/ballmac/${f.replace(/\.tsx?$/, "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`), replacement: `${dir}/${f}` }))
+})
+
 export default defineConfig({
   plugins: [react()],
   resolve: {
     // The same import paths users get after `shadcn add`.
     alias: [
       ...baseAliases,
+      ...proAliases,
       // Pro blocks live in the private checkout at registry/pro (absent in public clones).
       { find: /^@\/components\/ballmac\/dashboard-kit$/, replacement: r("./pro/ballmac/components/dashboard-kit") },
       { find: /^@\/components\/ballmac\/ecommerce-kit$/, replacement: r("./pro/ballmac/components/ecommerce-kit") },

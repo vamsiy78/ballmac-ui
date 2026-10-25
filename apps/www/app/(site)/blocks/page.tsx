@@ -18,12 +18,12 @@ export const metadata: Metadata = {
 
 /** Six blocks that show the range, in the order a visitor should meet them. They must be free, so the gallery looks the same with or without the Pro source. */
 const START_HERE = [
-  { name: "hero-1", label: "Landing pages" },
+  { name: "hero-4", label: "Landing pages" },
   { name: "dashboard-1", label: "Dashboards" },
-  { name: "agent-1", label: "AI agents" },
-  { name: "gantt-1", label: "Planning" },
   { name: "mail-1", label: "Inbox" },
-  { name: "desktop-1", label: "Desktop apps" },
+  { name: "kanban-1", label: "Planning" },
+  { name: "calendar-1", label: "Scheduling" },
+  { name: "billing-2", label: "Billing" },
 ] as const
 
 export default async function BlocksPage() {

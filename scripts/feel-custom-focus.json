@@ -1,14 +1,5 @@
 {
-  "registry/ballmac/components/finder-window.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
-  "registry/ballmac/components/launchpad.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
-  "registry/ballmac/components/lock-screen.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
-  "registry/ballmac/components/mac-window.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
-  "registry/ballmac/components/menu-bar.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
   "registry/ballmac/components/slider.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
   "registry/ballmac/components/tag-input.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
-  "registry/ballmac/components/templates/pocket/pocket-theme.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
-  "registry/ballmac/components/toolbar.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
-  "registry/ballmac/base/components/menu-bar.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
-  "registry/ballmac/base/components/slider.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet.",
-  "registry/ballmac/base/components/toolbar.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet."
+  "registry/ballmac/base/components/slider.tsx": "Draws its own focus ring width, so it does not follow the feel's focus ring yet."
 }

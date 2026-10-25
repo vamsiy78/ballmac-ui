@@ -1,9 +1,0 @@
-import { LaunchPage } from "@/components/ballmac/templates/launch/launch-page"
-
-export default function TemplateLaunchDemo() {
-  return (
-    <LaunchPage
-      hrefs={{ home: "/preview/template-launch-demo", pricing: "/preview/template-launch-pricing", changelog: "/preview/template-launch-changelog", contact: "/preview/template-launch-contact" }}
-    />
-  )
-}

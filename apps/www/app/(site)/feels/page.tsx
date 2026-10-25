@@ -84,7 +84,7 @@ export default function FeelsPage() {
             </Link>{" "}
             show both.
           </p>
-          <CodePanel lang="bash" code={`npx shadcn@latest add @ballmac/feel-auto @ballmac/app-window`} />
+          <CodePanel lang="bash" code={`npx shadcn@latest add @ballmac/feel-auto`} />
           <CodePanel lang="bash" code={`npx shadcn@latest add @ballmac/feel-windows`} />
         </div>
         <div className="min-w-0 space-y-3">

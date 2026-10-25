@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 
 const proCount = () => getBlocks().filter(isPro).length || 150
 
-const install = "npx shadcn@latest add @ballmac/feel-auto @ballmac/app-window"
+const install = "npx shadcn@latest add @ballmac/feel-auto"
 
 /** What opens after someone has used the two apps: the paid screens in each feel, and the free way to keep the feel. */
 async function Reveal({ where }: { where: string }) {

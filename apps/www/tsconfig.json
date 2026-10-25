@@ -61,6 +61,7 @@
     "../../registry/pro/starters",
     "worker",
     "out",
-    "../../registry/ballmac/base"
+    "../../registry/ballmac/base",
+    "../../registry/pro/ballmac/base"
   ]
 }

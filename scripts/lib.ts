@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, statSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs"
 import { join, relative } from "node:path"
 import { pathToFileURL } from "node:url"
 
@@ -10,6 +10,22 @@ export const REGISTRY_DIRS = [
   // Private Pro source (git submodule, Phase 3). Absent in public clones.
   { dir: join(ROOT, "registry/pro/ballmac"), examples: join(ROOT, "registry/pro/examples"), pro: true },
 ]
+
+/** The names of the Pro items. `pnpm build:registry` writes it while the private Pro source is present, so a public clone (no Pro source) can still check that a free item's "composes with" points at a real item. */
+export const PRO_NAMES_FILE = join(ROOT, "registry/pro-names.json")
+const readProNames = () => {
+  try {
+    return new Set(JSON.parse(readFileSync(PRO_NAMES_FILE, "utf8")) as string[])
+  } catch {
+    return new Set<string>()
+  }
+}
+export function writeProNames(items: { name: string; tier: string }[]) {
+  const names = items.filter((i) => i.tier === "pro").map((i) => i.name).sort()
+  if (names.length === 0) return // a public clone: keep the committed list
+  const next = JSON.stringify(names, null, 2) + "\n"
+  if (!existsSync(PRO_NAMES_FILE) || readFileSync(PRO_NAMES_FILE, "utf8") !== next) writeFileSync(PRO_NAMES_FILE, next)
+}
 
 export type LoadedItem = ItemMeta & { metaPath: string; baseDir: string; examplesDir: string }
 
@@ -54,8 +70,11 @@ export async function loadItems(): Promise<LoadedItem[]> {
       if (!dep.startsWith("shadcn:") && !names.has(dep)) errors.push(`${item.name}: unknown registry dependency "${dep}"`)
     }
   }
+  const proPresent = items.some((i) => i.tier === "pro")
+  const proKnown = proPresent ? new Set<string>() : readProNames()
   for (const item of items) {
     for (const ref of item.ai?.composesWith ?? []) {
+      if (proKnown.has(ref)) continue
       if (!names.has(ref) || names.get(ref) !== ref) errors.push(`${item.name}: ai.composesWith "${ref}" is not a Ballmac item`)
     }
   }

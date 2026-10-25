@@ -25,9 +25,13 @@ import { blockCategoryLabels, blockGroups, getBlocks, getComponents, getItem, ge
 import { thumbFor } from "@/lib/thumbs"
 import { cn } from "@/lib/utils"
 
-export const metadata: Metadata = {
-  description: "180+ finished app screens for shadcn, React and Tailwind, from billing to AI agent consoles. Install one with one command and own the code. Free and MIT licensed.",
-  alternates: { canonical: "/" },
+export function generateMetadata(): Metadata {
+  const blocks = getBlocks()
+  const free = blocks.filter((b) => !isPro(b)).length
+  return {
+    description: `${blocks.length} app screens for shadcn, React and Tailwind, from billing to AI agent consoles. ${free} are free and MIT licensed; install any with one command and own the code.`,
+    alternates: { canonical: "/" },
+  }
 }
 
 const AREAS = [
@@ -44,6 +48,7 @@ export default async function Home() {
   const blocks = getBlocks()
   const templates = getTemplates()
   const proBlocks = blocks.filter(isPro)
+  const freeTemplates = templates.filter((t) => !isPro(t))
   const freeBlocks = blocks.filter((b) => !isPro(b))
   const freeComponents = components.filter((c) => !isPro(c)).length
   const aiComponents = components.filter((c) => c.category === "ai").length
@@ -55,12 +60,12 @@ export default async function Home() {
 
   // The curved row of real screens in the hero: ten phone-sized pictures of blocks from the library, each linking to its page.
   const arcCards = ["dashboard-1", "agent-12", "billing-1", "ecommerce-2", "agent-16", "analytics-1", "settings-1", "reliability-1", "agent-13", "ecommerce-3"].flatMap((n) => {
-    const item = getItem(n)
-    return item ? [{ name: n, title: item.title.split(/:\s*/)[1]?.replace(/^./, (c) => c.toUpperCase()) ?? item.title, href: `/blocks/${n}`, src: `/hero/${n}.jpg` }] : []
+    const title = getItem(n)?.title
+    return [{ name: n, title: title ? (title.split(/:\s*/)[1]?.replace(/^./, (c) => c.toUpperCase()) ?? title) : n, href: `/blocks/${n}`, src: `/hero/${n}.jpg` }]
   })
 
   // The start of a real file, to show that what you install is ordinary source.
-  const source = getItem("agent-12")
+  const source = getItem("dashboard-1")
   const sourceLines = source?.files[0] ? readSource(source.files[0].source).split("\n").slice(0, 24).join("\n") : ""
   const sourceHtml = sourceLines ? await highlight(`${sourceLines}\n// ...`) : ""
 
@@ -72,9 +77,12 @@ export default async function Home() {
 
   const areaTiles = AREAS.flatMap((t) => {
     const g = blockGroups.find((x) => x.id === t.id)
-    const thumb = thumbFor(t.thumb, "free")
-    const count = g ? freeBlocks.filter((b) => (g.categories as readonly string[]).includes(b.blockCategory ?? "")).length : 0
-    return g && thumb && count > 0 ? [{ id: t.id, label: g.label, thumb, count }] : []
+    const owner = getItem(t.thumb)
+    const thumb = thumbFor(t.thumb, owner && isPro(owner) ? "pro" : "free")
+    const inArea = g ? blocks.filter((b) => (g.categories as readonly string[]).includes(b.blockCategory ?? "")) : []
+    const count = inArea.length
+    const free = inArea.filter((b) => !isPro(b)).length
+    return g && thumb && count > 0 ? [{ id: t.id, label: g.label, thumb, count, free }] : []
   })
 
   const byCategory = new Map<string, { free: number; pro: number }>()
@@ -92,16 +100,16 @@ export default async function Home() {
 
   const proPrice = offer.onSale && offer.price ? `$${offer.price}` : null
   const teamHref = TEAM_CHECKOUT || `mailto:${FOUNDERS_EMAIL}?subject=${encodeURIComponent("Team licence for Ballmac UI Pro")}`
-  const command = "npx shadcn@latest add @ballmac/agent-12"
+  const command = "npx shadcn@latest add @ballmac/dashboard-1"
 
   const FAQ: { q: string; a: React.ReactNode; text?: string }[] = [
-    { q: "What is Ballmac UI?", a: `A shadcn registry of ${freeBlocks.length} finished app screens and ${freeComponents} components for React and Tailwind. You install one with a single command and the code is yours, free under the MIT licence.` },
+    { q: "What is Ballmac UI?", a: `A shadcn registry of ${blocks.length} app screens and ${components.length} components for React and Tailwind. ${freeBlocks.length} screens and ${freeComponents} components are free under the MIT licence; Pro adds the rest. You install one with a single command and the code is yours.` },
     { q: "Will it fit my project?", a: "It installs with the shadcn CLI, so it goes wherever shadcn does: Next.js, Vite, Remix." },
     { q: "Can I change it?", a: "All of it. It is plain source in your repo, and ballmac update merges our fixes into your edits." },
     { q: "What does it depend on?", a: "React, Tailwind and a few small libraries each page names. The CLI installs them." },
     { q: "Is the quality real?", a: <>Every item is loaded in a real browser and the results are public, failures included. <Link href="/quality" className="text-foreground underline underline-offset-4">See them</Link>.</>, text: "Every item is loaded in a real browser in light, dark, phone width, reduced motion and right to left, and the results are public at ui.ballmac.com/quality, failures included." },
     { q: "Free for client work?", a: "Yes. Free items are MIT licensed, for personal, client and commercial projects." },
-    { q: "Free or Pro?", a: `Free ships a product. Pro adds ${proBlocks.length} screens, 3 starter apps, a private registry, Figma tokens and every future Pro update.` },
+    { q: "Free or Pro?", a: `Free ships a product. Pro adds ${proBlocks.length} more screens, ${components.filter(isPro).length} more components, ${templates.filter(isPro).length} more templates, 3 starter apps, a private registry, Figma tokens and every future Pro update.` },
     { q: "What can I do with Pro or Team?", a: <>Unlimited apps, yours or your clients&rsquo;. No reselling, sharing or AI training. Pro is one person, Team up to {TEAM_SEATS}. <a href={PRO_LICENCE_PATH} className="text-foreground underline underline-offset-4">Read the licence</a>.</>, text: `Unlimited apps, yours or your clients’. No reselling, sharing or AI training. Pro is one person, Team up to ${TEAM_SEATS}.` },
     { q: "What if Pro does not work?", a: <>Tell us within {REFUND_REPORT_DAYS} days. If we cannot fix it within {REFUND_FIX_DAYS} days of your request, you get a full refund. <a href={REFUND_PATH} className="text-foreground underline underline-offset-4">Refund policy</a>.</>, text: `Tell us within ${REFUND_REPORT_DAYS} days. If we cannot fix it within ${REFUND_FIX_DAYS} days of your request, you get a full refund.` },
   ]
@@ -126,7 +134,7 @@ export default async function Home() {
             Real app screens,
             <br className="hidden sm:block" /> one command away.
           </h1>
-          <p className="mt-3 max-w-2xl text-lg text-white/75">{Math.floor(freeBlocks.length / 10) * 10}+ finished screens for React and Tailwind teams. Install one, own the code.</p>
+          <p className="mt-3 max-w-2xl text-lg text-white/75">{Math.floor(blocks.length / 10) * 10}+ finished screens for React and Tailwind teams. Start with {freeBlocks.length} free, own the code.</p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link href="/blocks" className="focus-visible:ring-ring/70 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[15px] font-semibold text-black outline-none transition-colors hover:bg-white/90 focus-visible:ring-[3px]">
               Browse screens <ArrowRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />
@@ -163,11 +171,11 @@ export default async function Home() {
         </Marquee>
       </section>
 
-      {/* 3. The AI components, running. */}
+      {/* 3. The AI components: pictures here, each one runs on its own page. */}
       <section aria-labelledby="ai-h" className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
           <h2 id="ai-h" className="max-w-xl text-4xl font-semibold tracking-[-0.045em] text-balance sm:text-6xl">Built for AI products.</h2>
-          <p className="text-muted-foreground text-sm sm:text-end">Every one is live.<br />Poke it.</p>
+          <p className="text-muted-foreground text-sm sm:text-end">Open any one<br />to see it run.</p>
         </div>
         <AiBento total={aiComponents} />
       </section>
@@ -180,7 +188,7 @@ export default async function Home() {
               <span dir="ltr">{command}</span>
               <CopyButton value={command} label="Copy the install command" className="text-white/60 hover:bg-white/10 hover:text-white" />
             </div>
-            <div dir="ltr" tabIndex={0} aria-label="The start of agent-12.tsx" className="dark max-h-[25rem] overflow-auto px-5 py-4 text-[13px] outline-none focus-visible:ring-[3px] focus-visible:ring-white/40 focus-visible:ring-inset [&_pre]:bg-transparent!" dangerouslySetInnerHTML={{ __html: sourceHtml }} />
+            <div dir="ltr" tabIndex={0} aria-label="The start of dashboard-1.tsx" className="dark max-h-[25rem] overflow-auto px-5 py-4 text-[13px] outline-none focus-visible:ring-[3px] focus-visible:ring-white/40 focus-visible:ring-inset [&_pre]:bg-transparent!" dangerouslySetInnerHTML={{ __html: sourceHtml }} />
             <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#0d1117] to-transparent" />
           </div>
           <div className="lg:pt-16">
@@ -205,7 +213,7 @@ export default async function Home() {
       <section aria-labelledby="cat-h" className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6">
         <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
           <h2 id="cat-h" className="text-4xl font-semibold tracking-[-0.045em] sm:text-6xl">
-            <span className="tabular-nums">{freeBlocks.length}</span> free screens.
+            <span className="tabular-nums">{blocks.length}</span> screens, <span className="tabular-nums">{freeBlocks.length}</span> free.
           </h2>
           <Link href="/blocks" className={buttonVariants({ variant: "outline", shape: "pill" })}>
             See them all <ArrowRight className="rtl:-scale-x-100" />
@@ -221,7 +229,7 @@ export default async function Home() {
                 <Link href={`/blocks#${t.id}`} className="text-lg font-semibold tracking-tight outline-none after:absolute after:inset-0 after:rounded-3xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">
                   {t.label}
                 </Link>
-                <span className="text-muted-foreground text-sm tabular-nums">{t.count}</span>
+                <span className="text-muted-foreground text-sm tabular-nums">{t.count}{t.free > 0 ? ` · ${t.free} free` : ""}</span>
               </div>
             </li>
           ))}
@@ -274,7 +282,7 @@ export default async function Home() {
                 <p className="text-4xl font-semibold tracking-[-0.05em]">$0</p>
               </div>
               <ul className="mt-5 grid gap-2.5 text-sm">
-                {[`${freeBlocks.length} screens, ${templates.length} templates`, "CLI and MCP installs", "MIT, commercial use"].map((t) => (
+                {[`${freeBlocks.length} screens, ${freeComponents} components, ${freeTemplates.length} templates`, "CLI and MCP installs", "MIT, commercial use"].map((t) => (
                   <li key={t} className="flex gap-3"><Check className="mt-0.5 size-4 shrink-0" aria-hidden="true" />{t}</li>
                 ))}
               </ul>

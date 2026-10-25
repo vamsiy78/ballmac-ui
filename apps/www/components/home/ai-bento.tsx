@@ -1,60 +1,51 @@
-"use client"
-
 import { ArrowUpRight } from "lucide-react"
-import * as React from "react"
 
-import AgentGraphDemo from "@/registry/examples/agent-graph-demo"
-import AutonomyDialDemo from "@/registry/examples/autonomy-dial-demo"
-import CitedAnswerDemo from "@/registry/examples/cited-answer-demo"
-import EvalScorecardDemo from "@/registry/examples/eval-scorecard-demo"
-import ThinkingLoaderDemo from "@/registry/examples/thinking-loader-demo"
-import ToolCallCardDemo from "@/registry/examples/tool-call-card-demo"
-import { LazyMount } from "@/components/site/lazy-mount"
+import { Themed } from "@/components/pro/shots"
 import Link from "@/components/site/link"
 import { cn } from "@/lib/utils"
 
-function Tile({ name, href, label, className, children }: { name: string; href: string; label: string; className?: string; children: React.ReactNode }) {
+type Shot = { name: string; alt: string; width: number; height: number }
+
+const SHOTS: Record<string, Shot> = {
+  "cited-answer": { name: "cited-answer", alt: "An answer in which every claim carries a numbered source chip, above a list of the sources.", width: 1520, height: 968 },
+  "autonomy-dial": { name: "autonomy-dial", alt: "A dial that sets how much an agent may do on its own, from asking for everything to acting alone.", width: 1060, height: 1138 },
+  "tool-call-card": { name: "tool-call-card", alt: "A thinking indicator above a tool call card showing the call's input and output.", width: 1060, height: 1152 },
+  "agent-graph": { name: "agent-graph", alt: "A graph of the steps an agent took, with the tools it called and the branches it tried.", width: 1520, height: 798 },
+  "eval-scorecard": { name: "eval-scorecard", alt: "A scorecard comparing two prompt versions across test cases, with pass rates and regressions marked.", width: 1760, height: 1266 },
+}
+
+function Tile({ shot, className }: { shot: Shot; className?: string }) {
   return (
     <div className={cn("group bg-card relative flex flex-col overflow-hidden rounded-3xl border", className)}>
       <div className="flex items-center justify-between gap-3 px-5 pt-4">
-        <span className="text-muted-foreground font-mono text-xs">{name}</span>
-        <Link href={href} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 inline-flex items-center gap-1 rounded-sm text-xs font-medium outline-none focus-visible:ring-[3px]">
-          {label} <ArrowUpRight className="size-3.5" aria-hidden="true" />
+        <span className="text-muted-foreground flex items-center gap-2 font-mono text-xs">
+          {shot.name}
+          <span className="rounded border px-1 py-px font-sans text-[10px] font-medium tracking-wide uppercase">Pro</span>
+        </span>
+        <Link href={`/components/${shot.name}`} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 inline-flex items-center gap-1 rounded-sm text-xs font-medium outline-none focus-visible:ring-[3px]">
+          See it run <ArrowUpRight className="size-3.5" aria-hidden="true" />
         </Link>
       </div>
-      <LazyMount className="relative min-h-0 flex-1 overflow-hidden px-5 pt-4 pb-5" rootMargin="300px">
-        {children}
+      <div className="relative min-h-0 flex-1 overflow-hidden px-5 pt-4 pb-5">
+        <Themed base={`/home/ai/${shot.name}`} alt={shot.alt} width={shot.width} height={shot.height} className="w-full" />
         <div aria-hidden="true" className="from-card pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t to-transparent" />
-      </LazyMount>
+      </div>
     </div>
   )
 }
 
 /**
- * Real AI components, running. Not pictures of them: hover a number in the answer, drag the dial, open the tool call, click a node in the graph. The tiles are
- * different sizes on purpose, and each one links to its own page.
+ * Pictures of the AI components, each linking to its own page, where it runs. They are Pro, so they are images here and never live code. The tiles are
+ * different sizes on purpose.
  */
 export function AiBento({ total }: { total: number }) {
   return (
     <div className="grid gap-4 lg:grid-cols-12">
-      <Tile name="cited-answer" href="/components/cited-answer" label="Open" className="h-[27rem] lg:col-span-7">
-        <CitedAnswerDemo />
-      </Tile>
-      <Tile name="autonomy-dial" href="/components/autonomy-dial" label="Open" className="h-[27rem] lg:col-span-5">
-        <AutonomyDialDemo />
-      </Tile>
-      <Tile name="tool-call-card" href="/components/tool-call-card" label="Open" className="h-[29rem] lg:col-span-5">
-        <div className="grid gap-5">
-          <ThinkingLoaderDemo />
-          <ToolCallCardDemo />
-        </div>
-      </Tile>
-      <Tile name="agent-graph" href="/components/agent-graph" label="Open" className="h-[29rem] lg:col-span-7">
-        <AgentGraphDemo />
-      </Tile>
-      <Tile name="eval-scorecard" href="/components/eval-scorecard" label="Open" className="h-[26rem] lg:col-span-8">
-        <EvalScorecardDemo />
-      </Tile>
+      <Tile shot={SHOTS["cited-answer"]!} className="h-[27rem] lg:col-span-7" />
+      <Tile shot={SHOTS["autonomy-dial"]!} className="h-[27rem] lg:col-span-5" />
+      <Tile shot={SHOTS["tool-call-card"]!} className="h-[29rem] lg:col-span-5" />
+      <Tile shot={SHOTS["agent-graph"]!} className="h-[29rem] lg:col-span-7" />
+      <Tile shot={SHOTS["eval-scorecard"]!} className="h-[26rem] lg:col-span-8" />
       <div className="bg-foreground text-background flex flex-col justify-between rounded-3xl p-7 lg:col-span-4">
         <p className="text-7xl font-semibold tracking-[-0.06em] tabular-nums sm:text-8xl">{total}</p>
         <div>

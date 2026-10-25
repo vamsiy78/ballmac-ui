@@ -1,7 +1,0 @@
-"use client"
-
-import { AiChat2 } from "@/components/ballmac/blocks/ai-chat-2/ai-chat-2"
-
-export default function AiChat2NewChat() {
-  return <AiChat2 state="empty" />
-}
