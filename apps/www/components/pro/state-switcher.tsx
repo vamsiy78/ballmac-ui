@@ -44,7 +44,7 @@ export function StateSwitcher({ states, block }: { states: StateInfo[]; block: s
       <p className="text-muted-foreground mx-auto mt-5 max-w-xl text-center text-[15px] leading-relaxed" aria-live="polite">
         {current.text}
       </p>
-      <div className="bg-muted/50 mx-auto mt-6 flex w-fit max-w-full items-center gap-3 overflow-x-auto rounded-xl border px-4 py-3 font-mono text-[13px]">
+      <div role="region" aria-label="How the state is set" tabIndex={0} className="bg-muted/50 focus-visible:ring-ring/50 mx-auto mt-6 flex w-fit max-w-full items-center gap-3 overflow-x-auto rounded-xl border px-4 py-3 font-mono text-[13px] outline-none focus-visible:ring-[3px]">
         <Terminal className="text-muted-foreground size-4 shrink-0" aria-hidden="true" />
         <code className="whitespace-nowrap">{`<${block} state="${current.key}" onRetry={refetch} />`}</code>
       </div>

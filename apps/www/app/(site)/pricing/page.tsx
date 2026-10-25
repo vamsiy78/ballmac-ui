@@ -5,7 +5,6 @@ import Link from "@/components/site/link"
 import { Button } from "@/components/ballmac/button"
 import { BuildCost } from "@/components/pro/build-cost"
 import { CheckoutLink } from "@/components/pro/checkout-link"
-import { FeelBlocks } from "@/components/pro/feel-blocks"
 import { ProofWall } from "@/components/pro/proof-wall"
 import { EmailForm } from "@/components/site/email-form"
 import { FoundingBanner } from "@/components/site/founding-banner"
@@ -95,7 +94,6 @@ export default async function PricingPage() {
         [true, "Private registry for the shadcn CLI and MCP"],
         [true, "Loading, empty and error states built into blocks that show data"],
         [true, "Light, dark and RTL support on every block"],
-        [true, "Screens that take macOS, Windows or iOS handling with one setting, in light and dark"],
         [true, "Figma design tokens for every theme"],
         [true, "Three starter apps: Beacon (SaaS with teams, Stripe billing and a dashboard), Quire (an AI assistant that cites its sources) and Cove (a desktop notes app)"],
         [false, "More starter apps (planned)"],
@@ -276,14 +274,6 @@ export default async function PricingPage() {
           />
         </section>
 
-        <section aria-labelledby="feelblocks-h" className="mt-24">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 id="feelblocks-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">The same Pro screen, four ways to handle</h2>
-            <p className="text-muted-foreground mt-3 leading-relaxed">Pick a block and a platform. This is the real block, captured from its own preview.</p>
-          </div>
-          <FeelBlocks className="mt-10" />
-        </section>
-
         <ProofWall className="mt-24" />
 
         <section aria-labelledby="compare-h" className="mt-24">
@@ -295,7 +285,7 @@ export default async function PricingPage() {
               Free covers components, marketing pages and a starter set of app screens. Pro goes much deeper in every area, and adds whole apps to start from.
             </p>
           </div>
-          <div className="mt-10 overflow-x-auto rounded-2xl border">
+          <div className="focus-visible:ring-ring/50 mt-10 overflow-x-auto rounded-2xl border outline-none focus-visible:ring-[3px]" role="region" aria-label="Free and Pro compared" tabIndex={0}>
             <table className="w-full min-w-[560px] border-collapse text-start text-sm">
               <caption className="sr-only">Free and Pro compared</caption>
               <thead>
@@ -374,17 +364,9 @@ export default async function PricingPage() {
               <h2 id="inside-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">
                 See what is inside before you decide
               </h2>
-              <p className="text-muted-foreground mt-3 leading-relaxed">A 40-second film, then six of the {proBlocks} Pro blocks. Each opens as a full page you can look around.</p>
+              <p className="text-muted-foreground mt-3 leading-relaxed">Six of the {proBlocks} Pro blocks. Each opens as a full page you can look around.</p>
             </div>
-            <figure className="mx-auto mt-10 max-w-3xl">
-              <video className="bg-muted aspect-video w-full rounded-2xl border" controls preload="none" playsInline poster="/media/ballmac-ui-explainer-poster.jpg">
-                <source src="/media/ballmac-ui-explainer.mp4" type="video/mp4" />
-                <track kind="captions" src="/media/ballmac-ui-explainer.en.vtt" srcLang="en" label="English" default />
-                Your browser cannot play this video.
-              </video>
-              <figcaption className="text-muted-foreground mt-3 text-center text-sm">Why a web app feels native, and how Ballmac UI gets you there. Captions are on.</figcaption>
-            </figure>
-            <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
               {previews.map((b) => (
                 <PageCard key={b.name} href={`/blocks/${b.name}`} title={b.title} description={b.description} name={b.name} pro Preview={null} thumb={thumbFor(b.name, "pro")} />
               ))}

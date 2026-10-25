@@ -2,7 +2,6 @@ import { ArrowRight, Bot, Check, Clock, FileCode2, KeyRound, Layers, MonitorSmar
 import Image from "next/image"
 
 import { buttonVariants } from "@/components/ballmac/button"
-import { NativeHook } from "@/components/feels/native-hook"
 import { BuildCost } from "@/components/pro/build-cost"
 import { ProofWall } from "@/components/pro/proof-wall"
 import { BuyDock } from "@/components/pro/buy-dock"
@@ -114,7 +113,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
   const areas = AREAS.map((a) => ({ ...a, count: countOf(a.category) })).filter((a) => a.count > 0)
   const categories = new Set(proBlocks.map((b) => b.blockCategory)).size
   const picks = showcase(6)
-  const hero = (["dashboard-pro-1", "billing-pro-1", "settings-pro-1"] as const).map((n) => ({ name: n, thumb: thumbFor(n, "pro") }))
+  const hero = (["kanban-pro-1", "billing-pro-1", "mail-pro-1"] as const).map((n) => ({ name: n, thumb: thumbFor(n, "pro") }))
   const sampler = SAMPLER_BLOCKS.some((n) => {
     const i = getItem(n)
     return Boolean(i && isPro(i))
@@ -140,25 +139,23 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
       {f && <FoundingBanner offer={f} at={now.getTime()} href="#buy" />}
 
       {/* Hero */}
-      <section className="relative isolate overflow-hidden border-b" aria-labelledby="pro-h">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(var(--border)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_70%_75%_at_75%_25%,black,transparent)]" />
-        <div aria-hidden="true" className="pointer-events-none absolute -top-40 right-0 -z-10 size-[38rem] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--foreground)_9%,transparent),transparent)]" />
-        <div className="mx-auto grid max-w-[1200px] gap-14 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-12 lg:py-24">
+      <section className="dark relative isolate overflow-hidden bg-[#09090d] text-white" aria-labelledby="pro-h">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(50%_60%_at_88%_30%,oklch(0.44_0.19_300/0.55),transparent_70%),radial-gradient(40%_45%_at_0%_100%,oklch(0.4_0.12_250/0.4),transparent_70%)]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(rgb(255_255_255/0.09)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
+        <div className="mx-auto grid max-w-[1440px] gap-14 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,8fr)] lg:items-center lg:gap-8 lg:py-24">
           <div className={rise}>
             <p className="bg-muted/60 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[13px] font-medium dark:bg-white/[0.06]">
               <span className="bg-chart-1 size-1.5 rounded-full" aria-hidden="true" />
               Ballmac UI Pro{f?.endsAt ? <span className="text-muted-foreground">· founding price <LeftPhrase endsAt={f.endsAt} at={now.getTime()} /></span> : null}
             </p>
-            <h1 id="pro-h" className="mt-6 text-5xl leading-[1.02] font-semibold tracking-[-0.05em] text-balance sm:text-6xl">
-              The screens your app needs, finished, and feeling native.
+            <h1 id="pro-h" className="mt-6 text-5xl leading-[0.98] font-semibold tracking-[-0.055em] text-balance sm:text-7xl">
+              {total} more screens. Pay once.
             </h1>
-            <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed text-pretty">
-              {total} finished, production-ready blocks for React, Tailwind and shadcn: dashboards, billing, settings, sign-in, mail and more. They take the feel of macOS, Windows or iOS with one setting, and come with loading, empty and error states already handled.
-            </p>
+            <p className="text-muted-foreground mt-6 max-w-sm text-base leading-relaxed">Dashboards, billing, mail, AI consoles and starter apps. Source you own.</p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               {buy("hero")}
-              <a href="#feel" className={buttonVariants({ size: "lg", shape: "pill", variant: "outline" })}>
-                Feel it first
+              <a href="#blocks" className={buttonVariants({ size: "lg", shape: "pill", variant: "outline" })}>
+                Look inside
               </a>
             </div>
             <p className="text-muted-foreground mt-4 text-sm">
@@ -180,7 +177,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
               <a href={PRO_LICENCE_PATH} className="text-foreground underline underline-offset-4">Pro licence</a>.
             </p>
             <ul className="mt-8 grid max-w-xl gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
-              {["One payment, no subscription", "Every future update included", "Works with the shadcn CLI and your AI agent", "Works as described, or your money back"].map((t) => (
+              {["Every future update", "CLI and AI agent install", "Private registry", "Fix-or-refund guarantee"].map((t) => (
                 <li key={t} className="flex items-center gap-2.5">
                   <span className="bg-foreground/[0.07] flex size-5 shrink-0 items-center justify-center rounded-full" aria-hidden="true">
                     <Check className="size-3" />
@@ -193,7 +190,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
 
           {/* A stack of real blocks from the catalogue */}
           <div className={cn(rise, "motion-safe:delay-150")} aria-hidden="true">
-            <div className="relative mx-auto aspect-[5/4] w-full max-w-[600px] lg:max-w-none">
+            <div className="relative mx-auto aspect-[5/4] w-full max-w-[640px] lg:-me-[3vw] lg:w-[108%] lg:max-w-none">
               {hero[0]?.thumb && (
                 <Frame className="absolute top-0 left-0 w-[82%]">
                   <Themed base={hero[0].thumb} alt="" width={800} height={400} priority />
@@ -212,14 +209,6 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
             </div>
           </div>
         </div>
-      </section>
-
-      {/* The proof: the same app as a web app and as a native one, in the visitor's own platform */}
-      <section id="feel" aria-labelledby="feel-h" className="mx-auto max-w-[1200px] scroll-mt-16 px-4 py-20 sm:px-6">
-        <Heading id="feel-h" eyebrow="Try it before you read any further" title="Which one feels native?" center>
-          Same app, same code. One is a typical web app, the other has one setting changed. Use them both.
-        </Heading>
-        <NativeHook where="pro-page" className="mt-12" />
       </section>
 
       {/* Numbers */}
@@ -241,9 +230,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
 
       {/* The screens */}
       <section aria-labelledby="areas-h" className="mx-auto max-w-[1200px] px-4 py-24 sm:px-6">
-        <Heading id="areas-h" eyebrow="What is inside" title="Everything between the landing page and the dashboard">
-          The screens that take a team its first month are the ones your landing page never needed: settings, billing, onboarding, empty lists, error pages. They are done, and they match.
-        </Heading>
+        <Heading id="areas-h" title="Everything between the landing page and the dashboard" />
         <ul className="mt-12 grid gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {areas.map((a) => (
             <li key={a.label} className="bg-background p-6">
@@ -263,7 +250,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
           <div className="mx-auto max-w-[1200px] px-4 py-24 sm:px-6">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <Heading id="blocks-h" title="Open one and look around">
-                Every Pro block has a public preview. Resize it, tab through it, switch themes. Buy when you are sure.
+                Every Pro block has a public preview.
               </Heading>
               <Link href="/blocks" className={buttonVariants({ variant: "outline", shape: "pill" })}>
                 All {total} blocks <ArrowRight aria-hidden="true" />
@@ -280,8 +267,8 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
 
       {/* What it costs to build yourself */}
       <section aria-labelledby="cost-h" className="mx-auto max-w-[1100px] px-4 pb-24 sm:px-6">
-        <Heading id="cost-h" eyebrow="Do the sum" title="What would it cost to build these yourself?" center>
-          Polished states, dark mode, keyboard support and motion take time. Put in your own numbers.
+        <Heading id="cost-h" title="What would it cost to build these yourself?" center>
+          Put in your own numbers.
         </Heading>
         <BuildCost
           className="mt-12"
@@ -301,8 +288,8 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
 
       {/* States */}
       <section aria-labelledby="states-h" className="mx-auto max-w-[1200px] px-4 py-24 sm:px-6">
-        <Heading id="states-h" eyebrow="The part demos leave out" title="Real apps are loading, empty or broken half the time">
-          Blocks that show data come with all three, built in. Skeletons shaped like the content so nothing jumps, an empty state that tells people what to do next, and an error with a way to try again. One <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-[0.85em]">state</code> prop switches between them.
+        <Heading id="states-h" title="Loading, empty and broken are done too">
+          One <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-[0.85em]">state</code> prop switches between them.
         </Heading>
         <div className="mt-12">
           <StateSwitcher
@@ -318,8 +305,8 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
 
       {/* Updates and measured quality */}
       <section aria-labelledby="current-h" className="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
-        <Heading id="current-h" eyebrow="After the first install" title="Still good in six months">
-          A block you copy should not rot. Updates merge into your edits, and every claim about quality is measured and public.
+        <Heading id="current-h" title="Still good in six months">
+          Updates merge into your edits. Quality is measured and public.
         </Heading>
         <StayCurrent className="mt-12" />
         <p className="mt-8 text-center text-sm">

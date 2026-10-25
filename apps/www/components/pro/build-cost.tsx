@@ -39,11 +39,11 @@ export function BuildCost({ price, className, action }: { price: number; classNa
       </div>
       <div className="flex flex-col justify-between gap-6">
         <dl className="grid gap-3">
-          <div className="flex items-baseline justify-between gap-3 border-b pb-3">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-3 border-b pb-3">
             <dt className="text-muted-foreground text-sm">Building it yourself</dt>
             <dd className="text-3xl font-semibold tracking-tight tabular-nums">{money(total)}</dd>
+            <dd className="text-muted-foreground col-span-2 mt-1 text-sm tabular-nums">{screens * hours} hours, about {days < 10 ? days.toFixed(1) : Math.round(days)} working days</dd>
           </div>
-          <p className="text-muted-foreground -mt-1 text-sm tabular-nums">{screens * hours} hours, about {days < 10 ? days.toFixed(1) : Math.round(days)} working days</p>
           <div className="flex items-baseline justify-between gap-3 border-b pb-3">
             <dt className="text-muted-foreground text-sm">Ballmac UI Pro</dt>
             <dd className="text-3xl font-semibold tracking-tight tabular-nums">{money(price)} once</dd>
