@@ -26,7 +26,7 @@ import { thumbFor } from "@/lib/thumbs"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  description: "Real app screens for shadcn, React and Tailwind: dashboards, billing, AI agent consoles and more. One command installs one. Free and MIT licensed.",
+  description: "180+ finished app screens for shadcn, React and Tailwind, from billing to AI agent consoles. Install one with one command and own the code. Free and MIT licensed.",
   alternates: { canonical: "/" },
 }
 
@@ -134,8 +134,8 @@ export default async function Home() {
               Real app screens,
               <br className="hidden sm:block" /> one command away.
             </h1>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
-              Install complete React and Tailwind screens with one shadcn command: dashboards, billing, AI agent consoles and {Math.floor(freeBlocks.length / 10) * 10}+ more. You own the source. Free and MIT licensed.
+            <p className="mt-5 max-w-sm text-lg leading-relaxed text-white/80 sm:text-xl">
+              {Math.floor(freeBlocks.length / 10) * 10}+ finished screens, from billing to AI agent consoles. Install one, own the code.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link href="/blocks" className="focus-visible:ring-ring/70 inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-[15px] font-semibold text-black outline-none transition-colors hover:bg-white/90 focus-visible:ring-[3px]">
@@ -147,7 +147,7 @@ export default async function Home() {
             </div>
             <ul className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-white/65">
               <li><GithubStars initial={stars} variant="hero" /></li>
-              <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />MIT licensed</li>
+              <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Free and MIT</li>
               <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Claude Code, Cursor, Codex</li>
             </ul>
             {founding && (
