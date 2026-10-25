@@ -1,6 +1,10 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
 
+import { JsonLd } from "@/components/site/json-ld"
+import { proProduct } from "@/lib/schema"
+import { getOffer } from "@/lib/offer"
+import { TEAM_PRICE, TEAM_SEATS } from "@/lib/pro-team"
 import { ReferralNotice } from "@/components/affiliates/referral-notice"
 import { ProHub } from "@/components/pro/pro-hub"
 import { ProSales } from "@/components/pro/pro-sales"
@@ -12,8 +16,8 @@ import { getBlocks, isPro, itemHref } from "@/lib/registry"
 import { thumbFor } from "@/lib/thumbs"
 
 export const metadata: Metadata = {
-  title: "Ballmac UI Pro: 150 finished app blocks for React and shadcn",
-  description: "Dashboards, billing, settings, sign-in, mail and more, with loading, empty and error states built in. A private shadcn registry, Figma tokens and a 14-day fix-or-refund guarantee. Pay once.",
+  title: "Ballmac UI Pro: 150 app blocks for React and shadcn",
+  description: "Dashboards, billing, settings, sign-in and more, with every state built in. A private shadcn registry, Figma tokens and a 14-day fix-or-refund promise. Pay once.",
   alternates: { canonical: "/pro" },
 }
 
@@ -28,13 +32,15 @@ function showcase(limit: number) {
   return [...firsts, ...blocks.filter((b) => !firsts.includes(b))].slice(0, limit)
 }
 
-export default function ProPage() {
+export default async function ProPage() {
+  const offer = await getOffer(new Date())
   const downloads = proDownloads()
   const picks = showcase(6)
 
   return (
     <Suspense fallback={null}>
       <ReferralNotice />
+      {offer.onSale && <JsonLd graph={[proProduct({ path: "/pro", description: String(metadata.description), pro: { price: String(offer.price), url: offer.checkout ?? undefined }, team: { price: TEAM_PRICE, seats: TEAM_SEATS } })]} />}
       <ProHub downloads={downloads} sampleItem={picks[0]?.name ?? "hero-pro-1"} licenseUrl={licenseUrl} sales={<ProSales downloads={downloads} />}>
         {picks.length > 0 && (
           <section className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6" aria-labelledby="inside-h">

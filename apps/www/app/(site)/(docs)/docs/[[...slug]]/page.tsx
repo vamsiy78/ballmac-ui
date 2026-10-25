@@ -2,6 +2,8 @@ import { ArrowLeft, ArrowRight, ChevronRight, Pencil } from "lucide-react"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { JsonLd } from "@/components/site/json-ld"
+import { article, breadcrumbs } from "@/lib/schema"
 import { DocsFeedback } from "@/components/docs/feedback"
 import { CopyMarkdownButton } from "@/components/docs/copy-markdown"
 import { mdxComponents } from "@/components/docs/mdx"
@@ -53,6 +55,7 @@ export default async function DocsContentPage({ params }: { params: Promise<{ sl
   return (
     <div className="grid gap-x-12 xl:grid-cols-[minmax(0,1fr)_14rem]">
       <article className="min-w-0 max-w-3xl">
+        <JsonLd graph={[article({ type: "TechArticle", headline: page.data.title, description: page.data.description, path: page.url, modified: updated, section: section?.title }), breadcrumbs([{ name: "Docs", path: "/docs" }, ...(section ? [{ name: section.title, path: section.url ?? "/docs" }] : []), { name: page.data.title, path: page.url }])]} />
         <header className="space-y-4 pb-2">
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
             <nav aria-label="Breadcrumb" className="text-muted-foreground flex items-center gap-1.5 text-sm">

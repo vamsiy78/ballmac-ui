@@ -17,6 +17,8 @@ import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { getOffer } from "@/lib/offer"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
 import { REFUND_PATH, REFUND_PROMISE } from "@/lib/pro-refund"
+import { JsonLd } from "@/components/site/json-ld"
+import { faqPage, proProduct } from "@/lib/schema"
 import { TEAM_CHECKOUT, TEAM_PRICE, TEAM_SEATS, teamPerSeat } from "@/lib/pro-team"
 import { blockGroups, getBlocks, getItem, isPro } from "@/lib/registry"
 import { SAMPLER_BLOCKS } from "@/lib/sampler"
@@ -158,6 +160,7 @@ export default async function PricingPage() {
 
   return (
     <>
+      <JsonLd graph={[...(onSale ? [proProduct({ path: "/pricing", description: "Finished app blocks, starter apps, a private shadcn registry and Figma tokens for React and Tailwind. Pay once, every future Pro update included.", pro: { price: String(offer.price), url: offer.checkout ?? undefined }, team: { price: TEAM_PRICE, seats: TEAM_SEATS } })] : []), faqPage(faqs.flatMap((x) => (typeof x.a === "string" ? [{ q: x.q, text: x.a }] : [])))]} />
       {f && <FoundingBanner offer={f} at={now.getTime()} href="#plans" />}
       <div className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6">
         <header className="mx-auto max-w-2xl space-y-4 text-center">

@@ -3,7 +3,7 @@ title: "Ten agent primitives, eight operations screens, seven industry screens, 
 date: 2026-10-24
 seq: 1
 tags: [components, pro, docs]
-summary: "Ten primitives for agent products, eight screens for the people who keep a product running, seven screens for specific trades, a public Pro changelog, and a page that explains how to build an item for the free library."
+summary: "Ten primitives for agent products, eight screens for running a product, seven for specific trades, a public Pro changelog and a guide to contributing."
 shot: /preview/agent-lanes-demo
 imageAlt: "Agent Lanes: four agents in rows, their steps coloured by kind, dashed handoffs between rows and a Now line."
 ---

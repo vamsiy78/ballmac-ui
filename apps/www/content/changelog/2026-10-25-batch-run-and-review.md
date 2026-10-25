@@ -3,7 +3,7 @@ title: "A queue, a grid for batch runs, a review desk and three more agent scree
 date: 2026-10-25
 seq: 4
 tags: [components, docs]
-summary: "See a whole batch at a glance and retry only what failed, reorder what runs next, review what agents made from the keyboard, and polish a draft with suggestions you accept one by one."
+summary: "See a whole batch at a glance and retry only what failed, reorder what runs next, review what agents made from the keyboard, and accept suggestions one by one."
 shot: /preview/agent-14-demo
 imageAlt: "A batch run: a grid of 48 invoice tiles marked done, running or failed on the left, and the queue of what runs next on the right."
 ---

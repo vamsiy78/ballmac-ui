@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import Link from "@/components/site/link"
 
+import { JsonLd } from "@/components/site/json-ld"
+import { collection } from "@/lib/schema"
 import { BlocksBrowser } from "@/components/site/blocks-browser"
 import { PageCard } from "@/components/site/page-card"
 import { ProCallout } from "@/components/site/pro-callout"
@@ -73,6 +75,7 @@ export default async function BlocksPage() {
 
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 md:py-16">
+      <JsonLd graph={collection({ name: "React page blocks", description: String(metadata.description), path: "/blocks", items: blocks.filter((b) => b.tier !== "pro").map((b) => ({ name: b.title, path: `/blocks/${b.name}` })) })} />
       <header className="mx-auto max-w-2xl text-center">
         <h1 className="text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Blocks for real pages</h1>
         <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">

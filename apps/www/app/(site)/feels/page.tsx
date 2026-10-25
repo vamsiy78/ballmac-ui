@@ -10,7 +10,7 @@ import { FeelShowcase } from "@/components/feels/feel-showcase"
 
 export const metadata: Metadata = {
   title: "Platform feels for shadcn: macOS, iOS and Windows",
-  description: "One set of components that handle like macOS, iOS or Windows: sizes, corners, focus ring, shadows, menus, sidebars and window chrome. For Tauri and Electron apps and the web. Free.",
+  description: "One set of components that handle like macOS, iOS or Windows: sizes, corners, focus rings, menus, sidebars and window chrome. For desktop apps and the web. Free.",
   alternates: { canonical: "/feels" },
 }
 

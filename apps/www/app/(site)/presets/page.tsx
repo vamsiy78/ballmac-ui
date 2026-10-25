@@ -7,7 +7,7 @@ import { SYSTEMS } from "@ballmac-ui/theme-engine"
 
 export const metadata: Metadata = {
   title: "shadcn presets: complete design systems",
-  description: `${SYSTEMS.length} complete design systems for shadcn: colour, shape, typeface, platform feel and motion in one command. Preview on real components, check contrast, install, or make your own with a 16-character code. Free.`,
+  description: `${SYSTEMS.length} complete design systems for shadcn: colour, shape, typeface, platform feel and motion in one command. Preview, check contrast, install, or make your own. Free.`,
   alternates: { canonical: "/presets" },
 }
 

@@ -4,6 +4,8 @@ import { ChevronRight } from "lucide-react"
 import Link from "@/components/site/link"
 
 import { CatalogIndex, CatalogList, CatalogProvider, CopyInstallButton, QuickLookButton, ViewToggle, type CatalogEntry } from "@/components/site/catalog-context"
+import { JsonLd } from "@/components/site/json-ld"
+import { collection } from "@/lib/schema"
 import { CatalogDeepLink } from "@/components/site/catalog-deep-link"
 import { FitPreview } from "@/components/site/fit-preview"
 import { LazyMount } from "@/components/site/lazy-mount"
@@ -93,6 +95,7 @@ export default async function ComponentsPage() {
   const previews = Object.fromEntries(items.map((i) => [i.name, i.Preview ? <i.Preview /> : null]))
   return (
     <CatalogProvider entries={entries} previews={previews}>
+      <JsonLd graph={collection({ name: "React components for shadcn and Tailwind", description: String(metadata.description), path: "/components", items: items.filter((i) => !isPro(i)).map((i) => ({ name: i.title, path: `/components/${i.name}` })) })} />
       <CatalogDeepLink />
       <header className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
         <div className="max-w-2xl">

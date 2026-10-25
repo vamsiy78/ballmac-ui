@@ -45,6 +45,7 @@ export default async function Home() {
   const templates = getTemplates()
   const proBlocks = blocks.filter(isPro)
   const freeBlocks = blocks.filter((b) => !isPro(b))
+  const freeComponents = components.filter((c) => !isPro(c)).length
   const aiComponents = components.filter((c) => c.category === "ai").length
   const now = new Date()
   const offer = await getOffer(now)
@@ -93,20 +94,21 @@ export default async function Home() {
   const teamHref = TEAM_CHECKOUT || `mailto:${FOUNDERS_EMAIL}?subject=${encodeURIComponent("Team licence for Ballmac UI Pro")}`
   const command = "npx shadcn@latest add @ballmac/agent-12"
 
-  const FAQ: { q: string; a: React.ReactNode }[] = [
+  const FAQ: { q: string; a: React.ReactNode; text?: string }[] = [
+    { q: "What is Ballmac UI?", a: `A shadcn registry of ${freeBlocks.length} finished app screens and ${freeComponents} components for React and Tailwind. You install one with a single command and the code is yours, free under the MIT licence.` },
     { q: "Will it fit my project?", a: "It installs with the shadcn CLI, so it goes wherever shadcn does: Next.js, Vite, Remix." },
     { q: "Can I change it?", a: "All of it. It is plain source in your repo, and ballmac update merges our fixes into your edits." },
     { q: "What does it depend on?", a: "React, Tailwind and a few small libraries each page names. The CLI installs them." },
-    { q: "Is the quality real?", a: <>Every item is loaded in a real browser and the results are public, failures included. <Link href="/quality" className="text-foreground underline underline-offset-4">See them</Link>.</> },
+    { q: "Is the quality real?", a: <>Every item is loaded in a real browser and the results are public, failures included. <Link href="/quality" className="text-foreground underline underline-offset-4">See them</Link>.</>, text: "Every item is loaded in a real browser in light, dark, phone width, reduced motion and right to left, and the results are public at ui.ballmac.com/quality, failures included." },
     { q: "Free for client work?", a: "Yes. Free items are MIT licensed, for personal, client and commercial projects." },
     { q: "Free or Pro?", a: `Free ships a product. Pro adds ${proBlocks.length} screens, 3 starter apps, a private registry, Figma tokens and every future Pro update.` },
-    { q: "What can I do with Pro or Team?", a: <>Unlimited apps, yours or your clients&rsquo;. No reselling, sharing or AI training. Pro is one person, Team up to {TEAM_SEATS}. <a href={PRO_LICENCE_PATH} className="text-foreground underline underline-offset-4">Read the licence</a>.</> },
-    { q: "What if Pro does not work?", a: <>Tell us within {REFUND_REPORT_DAYS} days. If we cannot fix it within {REFUND_FIX_DAYS} days of your request, you get a full refund. <a href={REFUND_PATH} className="text-foreground underline underline-offset-4">Refund policy</a>.</> },
+    { q: "What can I do with Pro or Team?", a: <>Unlimited apps, yours or your clients&rsquo;. No reselling, sharing or AI training. Pro is one person, Team up to {TEAM_SEATS}. <a href={PRO_LICENCE_PATH} className="text-foreground underline underline-offset-4">Read the licence</a>.</>, text: `Unlimited apps, yours or your clients’. No reselling, sharing or AI training. Pro is one person, Team up to ${TEAM_SEATS}.` },
+    { q: "What if Pro does not work?", a: <>Tell us within {REFUND_REPORT_DAYS} days. If we cannot fix it within {REFUND_FIX_DAYS} days of your request, you get a full refund. <a href={REFUND_PATH} className="text-foreground underline underline-offset-4">Refund policy</a>.</>, text: `Tell us within ${REFUND_REPORT_DAYS} days. If we cannot fix it within ${REFUND_FIX_DAYS} days of your request, you get a full refund.` },
   ]
 
   return (
     <>
-      <SiteJsonLd />
+      <SiteJsonLd faq={FAQ.map((f) => ({ q: f.q, text: f.text ?? (typeof f.a === "string" ? f.a : "") })).filter((f) => f.text)} libraryDescription={`${freeBlocks.length} finished app screens and ${freeComponents} components for React and Tailwind, free under the MIT licence.`} />
       {founding && <FoundingBanner offer={founding} at={now.getTime()} />}
       <WhatsNewBanner id="2026-10-batch-3" added={52} examples={["a restaurant floor plan", "a gradebook", "an agent console", "a treemap", "salon booking", "insurance claims"]} />
 
@@ -124,7 +126,7 @@ export default async function Home() {
             Real app screens,
             <br className="hidden sm:block" /> one command away.
           </h1>
-          <p className="mt-3 max-w-md text-lg text-white/75">{Math.floor(freeBlocks.length / 10) * 10}+ finished screens. Install one, own the code.</p>
+          <p className="mt-3 max-w-2xl text-lg text-white/75">{Math.floor(freeBlocks.length / 10) * 10}+ finished screens for React and Tailwind teams. Install one, own the code.</p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link href="/blocks" className="focus-visible:ring-ring/70 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[15px] font-semibold text-black outline-none transition-colors hover:bg-white/90 focus-visible:ring-[3px]">
               Browse screens <ArrowRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />
@@ -136,7 +138,7 @@ export default async function Home() {
           <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[13px] text-white/65">
             <li><GithubStars initial={stars} variant="hero" /></li>
             <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Free and MIT</li>
-            <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Claude Code, Cursor, Codex</li>
+            <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Works with Next.js, Vite, Claude Code, Cursor</li>
           </ul>
           {founding && (
             <p className="mt-3 text-[13px] text-white/65">

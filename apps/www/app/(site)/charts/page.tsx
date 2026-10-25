@@ -10,7 +10,7 @@ import { thumbFor } from "@/lib/thumbs"
 
 export const metadata: Metadata = {
   title: "Charts for shadcn that everyone can read",
-  description: "Accessible Recharts charts for React and Tailwind: area, bar, line, pie, radar, radial and scatter, each with a table view, patterns for color blindness, a written summary and loading, empty and error states. Free.",
+  description: "Accessible Recharts charts for React and Tailwind: seven kinds, each with a table view, color-blind patterns, a written summary and every state. Free.",
   alternates: { canonical: "/charts" },
 }
 

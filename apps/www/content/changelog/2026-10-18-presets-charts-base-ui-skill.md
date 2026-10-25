@@ -3,7 +3,7 @@ title: "Presets, accessible charts, Base UI and an agent skill"
 date: 2026-10-18
 seq: 17
 tags: [components, blocks, themes, docs, MCP]
-summary: "Install a whole design system with one command, draw seven kinds of chart that work for everyone, use Base UI instead of Radix UI, and let your coding agent use Ballmac UI well."
+summary: "Install a whole design system with one command, draw seven kinds of chart that work for everyone, use Base UI instead of Radix UI, and teach your coding agent."
 shot: /charts
 imageAlt: "The charts page, a gallery of area, bar, line, pie, radar, radial and scatter charts."
 ---

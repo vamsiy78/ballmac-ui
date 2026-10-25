@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Ballmac Verified",
-  description: "An open score for any shadcn registry: accessibility, theme tokens, dependencies, states, motion and right-to-left support, with a badge, a leaderboard and a GitHub Action you can run on your own.",
+  description: "An open score for any shadcn registry: accessibility, tokens, dependencies, states, motion and right to left, with a badge, a leaderboard and a GitHub Action.",
   alternates: { canonical: "/verified" },
 }
 

@@ -3,7 +3,7 @@ title: "Answers you can check, a memory you control, and evals for prompt change
 date: 2026-10-25
 seq: 5
 tags: [components, docs]
-summary: "An answer where every claim points to its source, a memory panel people can correct, a decision trace, an eval scorecard and a knowledge-source manager, put together in three new screens."
+summary: "An answer where every claim cites its source, a memory panel people can correct, a decision trace, an eval scorecard and a source manager, in three new screens."
 shot: /preview/agent-16-demo
 imageAlt: "An answer workspace: a question, an answer with numbered source buttons and a source list, and a memory panel on the right."
 ---

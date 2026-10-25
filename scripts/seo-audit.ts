@@ -39,14 +39,29 @@ export function checkPage(html: string, url: string, siteOrigin: string): string
   if (!meta(html, "name", "twitter:card")) problems.push("no twitter:card")
   if (!/<html[^>]+lang="[a-z]/.test(html)) problems.push("no html lang")
   if (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/.test(html)) problems.push("page is noindex")
+  const types = new Set<string>()
   for (const m of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
     try {
-      JSON.parse(m[1]!)
+      const data = JSON.parse(m[1]!)
+      for (const node of Array.isArray(data["@graph"]) ? data["@graph"] : [data]) for (const t of [node?.["@type"]].flat()) if (t) types.add(String(t))
     } catch {
       problems.push("invalid JSON-LD")
     }
   }
+  for (const t of expectedTypes(url)) if (!types.has(t)) problems.push(`JSON-LD has no ${t}`)
   return problems
+}
+
+/** The structured data each kind of page must carry, so answer engines can read what the page is. */
+export function expectedTypes(path: string): string[] {
+  if (path === "/") return ["Organization", "SoftwareApplication", "FAQPage"]
+  if (path === "/pricing") return ["FAQPage"]
+  if (["/blocks", "/components", "/templates"].includes(path)) return ["CollectionPage", "ItemList"]
+  if (/^\/docs\/.+/.test(path)) return ["TechArticle", "BreadcrumbList"]
+  if (/^\/changelog\/.+/.test(path)) return ["BlogPosting", "BreadcrumbList"]
+  if (/^\/use-cases\/.+/.test(path)) return ["Article", "BreadcrumbList"]
+  if (/^\/(blocks|components|templates)\/.+/.test(path)) return ["SoftwareSourceCode", "BreadcrumbList"]
+  return []
 }
 
 async function main() {
@@ -59,6 +74,8 @@ async function main() {
   const robotsText = robots.ok ? await robots.text() : ""
   if (!robotsText.includes("Sitemap:")) fail("robots.txt has no Sitemap line")
   if (/Disallow:\s*\/\s*$/m.test(robotsText)) fail("robots.txt disallows the whole site")
+  for (const bot of ["GPTBot", "ClaudeBot", "PerplexityBot"]) if (!new RegExp(`User-Agent: ${bot}`, "i").test(robotsText)) fail(`robots.txt does not mention ${bot}`)
+  for (const file of ["/llms.txt", "/llms-full.txt"]) if (!(await fetch(base + file)).ok) fail(`${file} is missing`)
   const sm = await fetch(`${base}/sitemap.xml`)
   if (!sm.ok) return fail(`sitemap.xml → ${sm.status}`), process.exit(1)
   const urls = [...(await sm.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]!)

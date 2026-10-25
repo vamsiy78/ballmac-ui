@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { JsonLd } from "@/components/site/json-ld"
+import { collection } from "@/lib/schema"
 import { PageCard } from "@/components/site/page-card"
 import { ProCallout } from "@/components/site/pro-callout"
 import { loadThumb } from "@/lib/examples"
@@ -27,6 +29,7 @@ export default async function TemplatesPage() {
     .filter((g) => g.items.length > 0)
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 md:py-16">
+      <JsonLd graph={collection({ name: "React site and app templates", description: String(metadata.description), path: "/templates", items: templates.filter((t) => t.tier !== "pro").map((t) => ({ name: t.title, path: `/templates/${t.name}` })) })} />
       <header className="mx-auto max-w-2xl text-center">
         <h1 className="text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Templates with a point of view</h1>
         <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">

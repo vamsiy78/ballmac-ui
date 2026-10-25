@@ -3,7 +3,7 @@ title: "Data grid, drag and drop, event calendar, rich text and more"
 date: 2026-10-19
 seq: 1
 tags: [components, docs]
-summary: "Nine hard components that most libraries leave to you: a virtualized data grid, sortable lists and boards, an event calendar, a rich text editor, mentions, QR codes, an emoji picker, an image cropper and a native select."
+summary: "Nine hard components most libraries leave to you: a virtualized data grid, sortable boards, an event calendar, a rich text editor, mentions, QR codes and more."
 shot: /components/data-grid
 imageAlt: "The data grid component page, with an editable table of sprint tasks."
 ---

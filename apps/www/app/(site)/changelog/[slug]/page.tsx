@@ -3,8 +3,10 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { EntryGroups, EntryMedia, Releases, TagChips } from "@/components/changelog/entry"
+import { JsonLd } from "@/components/site/json-ld"
 import Link from "@/components/site/link"
 import { dateLabel, getChangelog, getEntry } from "@/lib/changelog"
+import { article, breadcrumbs, fitTitle } from "@/lib/schema"
 import { SITE_URL } from "@/lib/site-url"
 
 export const dynamicParams = false
@@ -17,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const entry = getEntry((await params).slug)
   if (!entry) return {}
   return {
-    title: entry.title,
+    title: fitTitle(entry.title),
     description: entry.summary,
     alternates: { canonical: `/changelog/${entry.slug}` },
     openGraph: { type: "article", publishedTime: entry.date, title: entry.title, description: entry.summary, url: `${SITE_URL}/changelog/${entry.slug}` },
@@ -34,6 +36,7 @@ export default async function ChangelogEntryPage({ params }: { params: Promise<{
   const older = entries[i + 1]
   return (
     <article className="mx-auto max-w-3xl px-4 pt-12 pb-24 sm:px-6 sm:pt-16">
+      <JsonLd graph={[article({ type: "BlogPosting", headline: entry.title, description: entry.summary, path: `/changelog/${entry.slug}`, published: entry.date, section: "Changelog" }), breadcrumbs([{ name: "Changelog", path: "/changelog" }, { name: entry.title, path: `/changelog/${entry.slug}` }])]} />
       <Link href="/changelog" className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded text-sm outline-none focus-visible:ring-[3px]">
         <ArrowLeft className="size-3.5 rtl:rotate-180" aria-hidden="true" />
         Changelog

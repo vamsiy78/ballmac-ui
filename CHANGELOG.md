@@ -32,7 +32,7 @@ This file is generated: edit the entries in `apps/www/content/changelog/` and ru
 
 ## [2026-10-25-analytics-and-reliability] - 2026-10-25
 
-**Seven data components and four report screens, and a phone-width fix pass.** A funnel, a gauge, a status-page tracker, a before-and-after chart, a rating summary, a ranked list and a split bar, put together in analytics, reliability, reviews and benchmark screens.
+**Seven data components and four report screens, and a phone-width fix pass.** A funnel, a gauge, a status tracker, a before-and-after chart, a rating summary, a ranked list and a split bar, put together in four report screens.
 
 ### Added
 
@@ -47,7 +47,7 @@ This file is generated: edit the entries in `apps/www/content/changelog/` and ru
 
 ## [2026-10-25-answers-memory-and-evals] - 2026-10-25
 
-**Answers you can check, a memory you control, and evals for prompt changes.** An answer where every claim points to its source, a memory panel people can correct, a decision trace, an eval scorecard and a knowledge-source manager, put together in three new screens.
+**Answers you can check, a memory you control, and evals for prompt changes.** An answer where every claim cites its source, a memory panel people can correct, a decision trace, an eval scorecard and a source manager, in three new screens.
 
 ### Added
 
@@ -59,7 +59,7 @@ This file is generated: edit the entries in `apps/www/content/changelog/` and ru
 
 ## [2026-10-25-batch-run-and-review] - 2026-10-25
 
-**A queue, a grid for batch runs, a review desk and three more agent screens.** See a whole batch at a glance and retry only what failed, reorder what runs next, review what agents made from the keyboard, and polish a draft with suggestions you accept one by one.
+**A queue, a grid for batch runs, a review desk and three more agent screens.** See a whole batch at a glance and retry only what failed, reorder what runs next, review what agents made from the keyboard, and accept suggestions one by one.
 
 ### Added
 
@@ -97,7 +97,7 @@ This file is generated: edit the entries in `apps/www/content/changelog/` and ru
 
 ## [2026-10-24-agent-lanes-and-community] - 2026-10-24
 
-**Ten agent primitives, eight operations screens, seven industry screens, and a way to contribute.** Ten primitives for agent products, eight screens for the people who keep a product running, seven screens for specific trades, a public Pro changelog, and a page that explains how to build an item for the free library.
+**Ten agent primitives, eight operations screens, seven industry screens, and a way to contribute.** Ten primitives for agent products, eight screens for running a product, seven for specific trades, a public Pro changelog and a guide to contributing.
 
 ### Added
 
@@ -149,7 +149,7 @@ This file is generated: edit the entries in `apps/www/content/changelog/` and ru
 
 ## [2026-10-19-grids-calendars-editors] - 2026-10-19
 
-**Data grid, drag and drop, event calendar, rich text and more.** Nine hard components that most libraries leave to you: a virtualized data grid, sortable lists and boards, an event calendar, a rich text editor, mentions, QR codes, an emoji picker, an image cropper and a native select.
+**Data grid, drag and drop, event calendar, rich text and more.** Nine hard components most libraries leave to you: a virtualized data grid, sortable boards, an event calendar, a rich text editor, mentions, QR codes and more.
 
 ### Added
 
@@ -165,7 +165,7 @@ This file is generated: edit the entries in `apps/www/content/changelog/` and ru
 
 ## [2026-10-18-presets-charts-base-ui-skill] - 2026-10-18
 
-**Presets, accessible charts, Base UI and an agent skill.** Install a whole design system with one command, draw seven kinds of chart that work for everyone, use Base UI instead of Radix UI, and let your coding agent use Ballmac UI well.
+**Presets, accessible charts, Base UI and an agent skill.** Install a whole design system with one command, draw seven kinds of chart that work for everyone, use Base UI instead of Radix UI, and teach your coding agent.
 
 ### Added
 

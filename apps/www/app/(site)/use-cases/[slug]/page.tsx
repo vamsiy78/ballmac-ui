@@ -2,6 +2,8 @@ import { ArrowRight } from "lucide-react"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { JsonLd } from "@/components/site/json-ld"
+import { article, breadcrumbs } from "@/lib/schema"
 import { InstallTabs } from "@/components/site/install-tabs"
 import Link from "@/components/site/link"
 import { PageCard } from "@/components/site/page-card"
@@ -42,6 +44,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
   const first = blocks[0]?.item.name
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 md:py-20">
+      <JsonLd graph={[article({ headline: u.title, description: u.description, path: `/use-cases/${u.slug}`, section: "Use cases" }), breadcrumbs([{ name: "Use cases", path: "/use-cases" }, { name: u.name, path: `/use-cases/${u.slug}` }])]} />
       <header className="mx-auto max-w-3xl text-center">
         <p className="text-muted-foreground text-sm">
           <Link href="/use-cases" className="hover:text-foreground">

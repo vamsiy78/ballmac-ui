@@ -3,7 +3,7 @@ title: "Seven data components and four report screens, and a phone-width fix pas
 date: 2026-10-25
 seq: 6
 tags: [components, docs]
-summary: "A funnel, a gauge, a status-page tracker, a before-and-after chart, a rating summary, a ranked list and a split bar, put together in analytics, reliability, reviews and benchmark screens."
+summary: "A funnel, a gauge, a status tracker, a before-and-after chart, a rating summary, a ranked list and a split bar, put together in four report screens."
 shot: /preview/analytics-1-demo
 imageAlt: "An analytics page: four metrics with trends, a visit-to-purchase funnel with the biggest drop flagged, a top pages list with tabs and a device split."
 ---
