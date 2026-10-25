@@ -1079,6 +1079,10 @@
     "version": "1.0.0",
     "hash": "d07b217bf440b10308266040fdf078ac37c869cd9c78c1d5b298507a425b4d12"
   },
+  "hero-9": {
+    "version": "1.0.0",
+    "hash": "65eea7af479e188d852fdc8642b553eb4e91b434166d848fbaf18d2c48b55859"
+  },
   "highlight": {
     "version": "1.0.0",
     "hash": "67b2d705a57c7bcfc7b1161f8c956f524f7ef5d4620696fd7b3884a7cc6620e6"
@@ -1458,6 +1462,10 @@
   "parallel-attempts": {
     "version": "1.1.0",
     "hash": "350d8889e13c49e019c73e1fda386b0c0d4de4de8cd621e6dcd2fe9bded13aab"
+  },
+  "particle-tree": {
+    "version": "1.0.0",
+    "hash": "2bf24b2de8ab8d762d157a2c83ab43e72c12e6e959c54baf6b327275673d5907"
   },
   "particles": {
     "version": "1.0.0",

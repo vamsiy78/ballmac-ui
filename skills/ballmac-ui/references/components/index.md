@@ -5,7 +5,7 @@
 Open the file for the category you need; each line is one component.
 
 - [AI interfaces](ai.md): 52 components
-- [Backgrounds](backgrounds.md): 15 components
+- [Backgrounds](backgrounds.md): 16 components
 - [Data display](data-display.md): 51 components
 - [Desktop and macOS surfaces](macos.md): 20 components
 - [Developer tools](developer.md): 14 components

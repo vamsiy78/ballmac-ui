@@ -6,6 +6,15 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-25-particle-tree] - 2026-10-25
+
+**A tree made of particles, and a hero that uses it.** A generative background for dark AI and developer pages, and a hero built on it, with no photo needed.
+
+### Added
+
+- `particle-tree` draws a tree from thousands of small points, standing on rings that spread across the ground. It sways a little, parts around the pointer and settles back, stops drawing when it is off screen, and is drawn once and held still when someone asks for reduced motion. The same seed always grows the same tree.
+- `hero-9` puts it behind a centered headline, two buttons and a note, for launch, waitlist and AI product pages that have no screenshot to show yet.
+
 ## [2026-10-25-ecommerce] - 2026-10-25
 
 **A shop from first look to delivery: listing, product page, bag, checkout and order tracking.** Five ecommerce screens that work together, a hero that asks for one email, a price calculator for seat-based plans, and placeholder product art that needs no photos.

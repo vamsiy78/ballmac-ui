@@ -27944,6 +27944,139 @@
       }
     },
     {
+      "name": "hero-9",
+      "type": "registry:block",
+      "title": "Hero 9: a tree of particles",
+      "description": "A calm, memorable hero: a tree of points grows from the bottom of the section and the message sits above it. No photo needed, theme aware, still under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/particle-tree.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/hero-9/hero-9.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/hero-9/hero-9.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "hero"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hero",
+          "particles",
+          "canvas",
+          "ai",
+          "dark",
+          "background",
+          "generative",
+          "landing"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "Hero with a generative particle tree behind centered text. <Hero9 eyebrow title description primaryAction={{ label, href }} secondaryAction note seed />. The tree is the ParticleTree component (decoration, aria-hidden, reduced-motion safe); change seed to change its shape. It looks best on a dark surface: add the dark class to the section or the page.",
+          "whenToUse": [
+            "A launch, waitlist or AI product page that wants one calm, memorable image",
+            "A hero with no screenshot to show yet"
+          ],
+          "whenNotToUse": [
+            "Products that sell on their UI; use hero-1 or hero-7",
+            "Pages where the headline is long"
+          ],
+          "composesWith": [
+            "logo-cloud-1",
+            "features-1",
+            "testimonials-1",
+            "header-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Heading",
+              "action": "One h1, named by the section"
+            },
+            {
+              "keys": "Actions",
+              "action": "Real links with visible focus"
+            },
+            {
+              "keys": "Tree",
+              "action": "Decoration: aria-hidden, no pointer events, and drawn once and still with reduced motion"
+            }
+          ],
+          "customization": [
+            "eyebrow, title, description, note",
+            "primaryAction and secondaryAction",
+            "seed"
+          ]
+        },
+        "statesNone": "Static content: nothing to load, submit or fail.",
+        "examples": [
+          "hero-9-demo",
+          "hero-9-dark"
+        ],
+        "url": "https://ui.ballmac.com/components/hero-9"
+      }
+    },
+    {
+      "name": "hero-9-demo",
+      "type": "registry:example",
+      "title": "Hero 9: a tree of particles: Default",
+      "description": "Default example of Hero 9: a tree of particles.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-9.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-9-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-9-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-9",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hero-9-dark",
+      "type": "registry:example",
+      "title": "Hero 9: a tree of particles: On a dark page",
+      "description": "On a dark page example of Hero 9: a tree of particles.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-9.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-9-dark.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-9-dark.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-9",
+        "tier": "free"
+      }
+    },
+    {
       "name": "import-1",
       "type": "registry:block",
       "title": "Import 1: CSV import with column matching",
@@ -65504,6 +65637,135 @@
       "meta": {
         "example": true,
         "of": "parallel-attempts",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "particle-tree",
+      "type": "registry:ui",
+      "title": "Particle Tree",
+      "description": "A tree made of thousands of small points, standing on rings that spread across the ground. It sways, parts around the pointer and settles back, pauses off screen, and holds still under reduced motion.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/color.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/particle-tree.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/particle-tree.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "background",
+          "particles",
+          "canvas",
+          "tree",
+          "hero",
+          "ai",
+          "interactive",
+          "generative"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "Place <ParticleTree /> as the first child of a relative, overflow-hidden container; it fills it (absolute inset-0, aria-hidden, pointer-events-none) and tracks the pointer at window level, so content above it stays clickable. color is the trunk and branches, accent the leaves and ground rings (CSS variable names or any color). density 0.3 to 2, seed changes the shape (the same seed always grows the same tree), radius is how far the pointer pushes points (0 turns it off), rings toggles the ground rings.",
+          "whenToUse": [
+            "The background of a dark AI, data or developer hero",
+            "A quiet, memorable image for a launch or waitlist page"
+          ],
+          "whenNotToUse": [
+            "Behind long text",
+            "Many instances on one page (each runs its own canvas loop)"
+          ],
+          "composesWith": [
+            "particles",
+            "hero-9",
+            "text-reveal",
+            "shimmer-text"
+          ],
+          "a11y": [
+            {
+              "keys": "Decoration",
+              "action": "aria-hidden and pointer-events-none; content above it stays usable"
+            },
+            {
+              "keys": "Motion",
+              "action": "With reduced motion it is drawn once and does not sway, twinkle or react to the pointer"
+            },
+            {
+              "keys": "Performance",
+              "action": "Stops drawing when off screen or when the tab is hidden"
+            }
+          ],
+          "customization": [
+            "color and accent",
+            "density and seed",
+            "radius",
+            "rings"
+          ]
+        },
+        "statesNone": "A decorative canvas: nothing to load or fail.",
+        "examples": [
+          "particle-tree-demo",
+          "particle-tree-quiet"
+        ],
+        "url": "https://ui.ballmac.com/components/particle-tree"
+      }
+    },
+    {
+      "name": "particle-tree-demo",
+      "type": "registry:example",
+      "title": "Particle Tree: The tree and the pointer",
+      "description": "The tree and the pointer example of Particle Tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/particle-tree.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/particle-tree-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/particle-tree-demo.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "particle-tree",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "particle-tree-quiet",
+      "type": "registry:example",
+      "title": "Particle Tree: Fewer points, one color",
+      "description": "Fewer points, one color example of Particle Tree.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/particle-tree.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/particle-tree-quiet.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/particle-tree-quiet.tsx"
+        }
+      ],
+      "categories": [
+        "backgrounds"
+      ],
+      "meta": {
+        "example": true,
+        "of": "particle-tree",
         "tier": "free"
       }
     },
