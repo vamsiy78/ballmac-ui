@@ -16,11 +16,9 @@
     "run_worker_first": ["/go/*", "/api/affiliates", "/api/affiliates/*", "/api/changelog-subscribe", "/api/checkout-click", "/api/docs-feedback", "/api/pro/*", "/api/reminders", "/api/sampler", "/api/stars", "/api/support", "/api/v1/license/*", "/api/v1/preset", "/r/pro/*", "/r/preset-*", "/r/registry.json", "/r/base-*", "/r/*/*.json", "!/r/base/*", "!/r/tests/*", "/themes/custom.json"]
   },
   "alias": { "server-only": "./worker/server-only.ts" },
-  // The private Pro build is bundled as modules (worker/build-data.ts): registry JSON and highlighted items as text, archives as bytes.
-  "rules": [
-    { "type": "Text", "globs": ["**/*.txt"], "fallthrough": true },
-    { "type": "Data", "globs": ["**/*.bin"], "fallthrough": true }
-  ],
+  // The private Pro build lives in R2, not in the script (it is about 80 MB; a Worker may be 3 MB on the free plan): worker/build-data.mts stages it and
+  // `pnpm cf:upload` sends it, under a folder named for its contents, before the Worker that reads that folder is deployed. Bindings are not inherited by env.*.
+  "r2_buckets": [{ "binding": "PRO_DATA", "bucket_name": "ballmac-pro-data-dev" }],
   "observability": { "enabled": true },
   "vars": { "DEPLOY_ENV": "development" },
   "env": {
@@ -30,12 +28,14 @@
       "workers_dev": true,
       "routes": [{ "pattern": "preprod.ui.ballmac.com", "custom_domain": true }],
       "d1_databases": [{ "binding": "AFFILIATES", "database_name": "ballmac-affiliates-preview", "database_id": "a0f88aec-1278-4ee1-92ad-2d093aafea13", "migrations_dir": "worker/migrations" }],
+      "r2_buckets": [{ "binding": "PRO_DATA", "bucket_name": "ballmac-pro-data-preview" }],
       "vars": { "DEPLOY_ENV": "preview" },
       "triggers": { "crons": ["*/15 * * * *"] }
     },
     "production": {
       "name": "ballmac-ui",
       "d1_databases": [{ "binding": "AFFILIATES", "database_name": "ballmac-affiliates-production", "database_id": "1d13cc5d-b7d9-46ad-bb66-f85276128510", "migrations_dir": "worker/migrations" }],
+      "r2_buckets": [{ "binding": "PRO_DATA", "bucket_name": "ballmac-pro-data" }],
       "workers_dev": false,
       "routes": [{ "pattern": "ui.ballmac.com", "custom_domain": true }],
       "vars": { "DEPLOY_ENV": "production", "DEPLOY_REPO": "vamsiy78/ballmac-ui-pro", "DEPLOY_WORKFLOW": "deploy.yml" },

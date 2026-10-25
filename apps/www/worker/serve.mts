@@ -5,6 +5,7 @@
  * serves every page except the per-item preview, component and block pages, of which it keeps a sample. Hard links, so nothing is copied.
  */
 import { existsSync, linkSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs"
+import { spawnSync } from "node:child_process"
 import { dirname, join, relative } from "node:path"
 
 import { unstable_dev } from "wrangler"
@@ -36,7 +37,13 @@ if (existsSync(join(www, ".dev.vars"))) writeFileSync(join(www, ".wrangler/.dev.
 const config = join(www, ".wrangler/local.jsonc")
 writeFileSync(config, readFileSync(join(www, "wrangler.jsonc"), "utf8").replace('"directory": "out"', `"directory": ${JSON.stringify(local)}`).replace('"main": "worker/index.ts"', `"main": ${JSON.stringify(join(www, "worker/index.ts"))}`).replace('"./worker/server-only.ts"', JSON.stringify(join(www, "worker/server-only.ts"))))
 
+// The Pro data lives in R2: seed the local simulation with the staged data, and give the dev server the same state directory.
+const persist = join(www, ".wrangler/local-state")
+rmSync(persist, { recursive: true, force: true })
+const seeded = spawnSync("pnpm", ["exec", "tsx", "worker/upload-data.mts", "--local", "--persist-to", persist], { cwd: www, stdio: "inherit" })
+if (seeded.status !== 0) throw new Error("could not seed the local R2 bucket")
+
 const port = Number(process.env.PORT ?? 8788)
-const worker = await unstable_dev(join(www, "worker/index.ts"), { config, port, experimental: { watch: false, disableExperimentalWarning: true, showInteractiveDevSession: false, liveReload: false } })
+const worker = await unstable_dev(join(www, "worker/index.ts"), { config, port, persistTo: persist, experimental: { watch: false, disableExperimentalWarning: true, showInteractiveDevSession: false, liveReload: false } })
 console.log(`Serving the Cloudflare build on http://127.0.0.1:${worker.port} with ${kept.toLocaleString("en-US")} of its files (Ctrl-C to stop)`)
 await worker.waitUntilExit()

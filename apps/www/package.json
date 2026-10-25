@@ -14,6 +14,7 @@
     "cf:worker": "pnpm worker:data && mkdir -p out && wrangler dev --port 8787",
     "cf:preview": "tsx worker/serve.mts",
     "cf:deploy": "wrangler deploy",
+    "cf:upload": "tsx worker/upload-data.mts",
     "cf:check": "tsx worker/check-site.mts"
   },
   "dependencies": {

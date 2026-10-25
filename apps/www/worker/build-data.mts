@@ -1,17 +1,23 @@
 /**
- * Prepares what the Worker serves from memory: the private Pro build. Run after `pnpm build:registry` (which writes .registry-pro) and before `wrangler deploy`:
+ * Prepares the private Pro build for the Worker. Run after `pnpm build:registry` (which writes .registry-pro) and before `wrangler deploy`
  *
  *   pnpm --filter @ballmac-ui/www worker:data
  *
- * Pro files never go into the public static assets (out/). They are bundled into the Worker as text and binary modules, so only the Worker's routes can
- * hand them out, after the licence check. Without .registry-pro (a build with no Pro access) the Worker gets empty tables and its Pro routes answer 404.
+ * Pro files never go into the public static assets (out/), and they are too big to live inside the Worker script (about 80 MB, over Cloudflare's size limit), so
+ * they go into a private R2 bucket (the PRO_DATA binding) and the Worker reads them on request, after the licence check. This script only stages them:
  *
- *   worker/generated/pro/registry/<name>.json.txt  the shadcn registry JSON, as /r/pro/<name>.json serves it
- *   worker/generated/pro/items/<name>.txt          the item's files with highlighted HTML, as /api/pro/items/<name> serves it
- *   worker/generated/pro/archives/<dir>/<file>.bin starter apps and kits
- *   worker/generated/pro.ts                        the index the Worker imports
+ *   worker/generated/r2/<version>/registry/<file>.json  the shadcn registry JSON, as /r/pro/<name>.json serves it
+ *   worker/generated/r2/<version>/items/<name>.json     the item's files with highlighted HTML, as /api/pro/items/<name> serves it
+ *   worker/generated/r2/<version>/archives/<dir>/<file> starter apps and kits
+ *   worker/generated/r2-manifest.json                   the key/file pairs `pnpm cf:upload` sends to R2
+ *   worker/generated/pro.ts                             the data version and the names that exist, which the Worker is built with
+ *
+ * <version> is a hash of the contents. The Worker is built with its version, and `cf:upload` writes a version before the Worker that uses it is deployed, so a
+ * Worker never reads data that is not there, and the previous Worker keeps serving the previous version until the switch. Without .registry-pro (a build
+ * with no Pro access) the tables are empty and the Worker's Pro routes answer 404.
  */
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs"
+import { createHash } from "node:crypto"
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 
 import index from "@/lib/generated/index.json"
@@ -20,66 +26,70 @@ import { proSourceFrom, type RawProItem } from "@/lib/pro-source"
 const www = join(import.meta.dirname, "..")
 const src = join(www, ".registry-pro")
 const out = join(www, "worker/generated")
-const pro = join(out, "pro")
+const stage = join(out, "r2/_stage")
 
 rmSync(out, { recursive: true, force: true })
-mkdirSync(join(pro, "registry"), { recursive: true })
-mkdirSync(join(pro, "items"), { recursive: true })
-mkdirSync(join(pro, "archives"), { recursive: true })
+mkdirSync(join(stage, "registry"), { recursive: true })
+mkdirSync(join(stage, "items"), { recursive: true })
+mkdirSync(join(stage, "archives"), { recursive: true })
 
-const imports: string[] = []
-const registry: string[] = []
-const items: string[] = []
-const archives: string[] = []
-let n = 0
-const bind = (path: string) => {
-  const id = `m${n++}`
-  imports.push(`import ${id} from ${JSON.stringify(`./pro/${path}`)}`)
-  return id
+const registryFiles: string[] = []
+const itemNames: string[] = []
+const archiveFiles: string[] = []
+const digest = createHash("sha256")
+let bytes = 0
+// `kind/name` of every staged file, in the order it was written (the version hashes the names and contents together).
+const staged: string[] = []
+const put = (rel: string, body: string | Buffer) => {
+  const path = join(stage, rel)
+  mkdirSync(join(path, ".."), { recursive: true })
+  writeFileSync(path, body)
+  bytes += body.length
+  staged.push(rel)
+  digest.update(rel).update("\0").update(body).update("\0")
 }
 
-let bytes = 0
 if (existsSync(src)) {
   const proNames = new Set((index as { name: string; tier: string }[]).filter((i) => i.tier === "pro").map((i) => i.name))
   for (const file of readdirSync(src).sort()) {
     const path = join(src, file)
     if (statSync(path).isDirectory()) {
-      mkdirSync(join(pro, "archives", file), { recursive: true })
       for (const a of readdirSync(path).sort()) {
-        const body = readFileSync(join(path, a))
-        writeFileSync(join(pro, "archives", file, `${a}.bin`), body)
-        bytes += body.length
-        archives.push(`  ${JSON.stringify(`${file}/${a}`)}: ${bind(`archives/${file}/${a}.bin`)},`)
+        put(`archives/${file}/${a}`, readFileSync(join(path, a)))
+        archiveFiles.push(`${file}/${a}`)
       }
       continue
     }
     if (!file.endsWith(".json")) continue
     const raw = readFileSync(path, "utf8")
-    writeFileSync(join(pro, "registry", `${file}.txt`), raw)
-    bytes += raw.length
-    registry.push(`  ${JSON.stringify(file)}: ${bind(`registry/${file}.txt`)},`)
+    put(`registry/${file}`, raw)
+    registryFiles.push(file)
     // The code viewer and the sampler ask for items by name, never for examples.
     const name = file.replace(/\.json$/, "")
     if (!proNames.has(name)) continue
     const source = await proSourceFrom(name, JSON.parse(raw) as RawProItem)
     if (!source) continue
-    const body = JSON.stringify(source)
-    writeFileSync(join(pro, "items", `${name}.txt`), body)
-    bytes += body.length
-    items.push(`  ${JSON.stringify(name)}: ${bind(`items/${name}.txt`)},`)
+    put(`items/${name}.json`, JSON.stringify(source))
+    itemNames.push(name)
   }
 }
 
+const version = existsSync(src) ? digest.digest("hex").slice(0, 16) : "none"
+if (existsSync(src)) renameSync(stage, join(out, "r2", version))
+else rmSync(join(out, "r2"), { recursive: true, force: true })
+
+writeFileSync(join(out, "r2-manifest.json"), JSON.stringify(staged.map((rel) => ({ key: `${version}/${rel}`, file: join(out, "r2", version, rel) }))))
 writeFileSync(
   join(out, "pro.ts"),
-  `// Generated by worker/build-data.mts. Do not edit.\n${imports.join("\n")}\n\n` +
-    `export const registry: Record<string, string> = {\n${registry.join("\n")}\n}\n\n` +
-    `export const items: Record<string, string> = {\n${items.join("\n")}\n}\n\n` +
-    `export const archives: Record<string, ArrayBuffer> = {\n${archives.join("\n")}\n}\n`
+  `// Generated by worker/build-data.mts. Do not edit.\n` +
+    `export const DATA_VERSION = ${JSON.stringify(version)}\n\n` +
+    `export const registryFiles = new Set<string>(${JSON.stringify(registryFiles)})\n\n` +
+    `export const itemNames = new Set<string>(${JSON.stringify(itemNames)})\n\n` +
+    `export const archiveFiles = new Set<string>(${JSON.stringify(archiveFiles)})\n`
 )
 
 console.log(
   existsSync(src)
-    ? `✓ Worker data: ${registry.length} registry file(s), ${items.length} item(s), ${archives.length} archive(s), ${(bytes / 1048576).toFixed(1)} MiB → worker/generated`
+    ? `✓ Worker data ${version}: ${registryFiles.length} registry file(s), ${itemNames.length} item(s), ${archiveFiles.length} archive(s), ${(bytes / 1048576).toFixed(1)} MiB staged for R2 (not in the Worker)`
     : "! No .registry-pro: the Worker is built without Pro (its Pro routes answer 404)"
 )

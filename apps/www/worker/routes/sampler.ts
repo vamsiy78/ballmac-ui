@@ -14,7 +14,7 @@ import { readProItem } from "../pro-store"
 const limited = createRateLimiter({ max: 6, windowMs: 10 * 60_000 })
 const json = (body: unknown, status = 200) => Response.json(body, { status, headers: { "cache-control": "private, no-store", "x-robots-tag": "noindex" } })
 
-export async function POST(request: Request) {
+export async function POST(request: Request, { env }: { env: Env }) {
   if (!sameOrigin(request.headers, true)) return json({ error: "This request came from another site." }, 403)
   const raw = await request.text()
   if (raw.length > 2_000) return json({ error: "That request is too long." }, 413)
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
   if (parsed.bot) return json({ ok: true, items: [] })
   if (limited(clientId(request.headers))) return json({ error: "Too many requests. Please try again in a few minutes." }, 429)
 
-  const items = SAMPLER_BLOCKS.map((name) => readProItem(name)).filter((i) => i !== null)
+  const items = (await Promise.all(SAMPLER_BLOCKS.map((name) => readProItem(env, name)))).filter((i) => i !== null)
   if (items.length === 0) return json({ error: "The sampler is not available in this build." }, 503)
 
   // Only while a founding offer with a deadline is running is there anything to remind them about.

@@ -2,6 +2,8 @@
 // which nodejs_compat fills from them; only what the Worker itself reads is listed here.
 interface Env {
   AFFILIATES?: D1Database
+  /** The private Pro data (worker/pro-store.ts). Absent when a Worker is built without Pro. */
+  PRO_DATA?: R2Bucket
   ASSETS: Fetcher
   DEPLOY_ENV?: string
   GITHUB_DEPLOY_TOKEN?: string
@@ -9,13 +11,4 @@ interface Env {
   DEPLOY_WORKFLOW?: string
 }
 
-// Bundled by worker/build-data.mts (see the rules in wrangler.jsonc).
-declare module "*.txt" {
-  const text: string
-  export default text
-}
-declare module "*.bin" {
-  const data: ArrayBuffer
-  export default data
-}
 declare module "server-only" {}
