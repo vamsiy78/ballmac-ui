@@ -140,7 +140,7 @@ function Agent16({ title = "Ask anything", description = "Answers come from your
               ))}
             </ol>
             <div ref={end} />
-            <form onSubmit={(e) => void ask(e)} className="sticky bottom-4 grid gap-2">
+            <form onSubmit={(e) => void ask(e)} className="grid gap-2">
               {error && <p role="alert" className="rounded-lg border border-destructive/40 bg-card px-3 py-2 text-sm">{error}</p>}
               <div className="flex items-end gap-2 rounded-2xl border bg-card p-2 shadow-sm focus-within:ring-[3px] focus-within:ring-ring/50">
                 <label htmlFor={`${id}-q`} className="sr-only">Your question</label>

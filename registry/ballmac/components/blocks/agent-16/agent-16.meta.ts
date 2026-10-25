@@ -38,6 +38,10 @@ export default defineItem({
     ],
     customization: ["title and description", "turns and memories", "onAsk, onFeedback, onForget"],
   },
-  version: "1.0.0",
-  updated: "2026-10-24",
+  version: "1.0.1",
+  updated: "2026-10-25",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-25", note: "The question box no longer floats over the answer, so the reply buttons are never covered." },
+    { version: "1.0.0", date: "2026-10-25", note: "First release." },
+  ],
 })

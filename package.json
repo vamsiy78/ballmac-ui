@@ -36,6 +36,7 @@
     "verify": "pnpm build:registry && pnpm check",
     "smoke": "tsx scripts/smoke-install.ts",
     "a11y": "tsx scripts/a11y.ts",
+    "a11y:states": "node scripts/a11y-states.mjs",
     "versions": "tsx scripts/versions.ts",
     "versions:write": "tsx scripts/versions.ts --write",
     "check": "tsx scripts/check-deps.ts && tsx scripts/check-base.ts && tsx scripts/check-client-boundary.ts && tsx scripts/check-motion.ts && tsx scripts/check-feel.ts && tsx scripts/check-states.ts && tsx scripts/versions.ts && tsx scripts/changelog.ts --check && tsx scripts/docs-reference.ts --check && tsx scripts/skill-generate.ts --check && tsx scripts/verified.ts --check && tsx scripts/check-licenses.ts && tsx scripts/rtl.ts && tsx scripts/i18n.ts && tsx scripts/media.ts && tsx scripts/validate-output.ts apps/www/public/r && shadcn registry validate registry.json",

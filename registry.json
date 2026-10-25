@@ -7296,8 +7296,22 @@
           "support",
           "assistant"
         ],
-        "version": "1.0.0",
-        "updated": "2026-10-24",
+        "version": "1.0.1",
+        "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "The question box no longer floats over the answer, so the reply buttons are never covered.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-25",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "Answer workspace. <Agent16 title description turns={[{ id, question, answer?: { paragraphs, sources } }]} memories={MemoryItem[]} onAsk={(q) => Promise<{ paragraphs, sources }>} onFeedback={(turnId, value, reason?) => void} onForget={(id) => Promise} />. A turn without an answer shows the thinking loader. Paragraphs cite sources with [1] markers. On a phone the memory panel sits behind a Show memory button. A rejected onAsk removes the pending turn and puts the question back in the box.",
@@ -20843,6 +20857,1199 @@
       }
     },
     {
+      "name": "ecommerce-1",
+      "type": "registry:block",
+      "title": "Ecommerce 1: product listing with filters",
+      "description": "A product grid that sells: price, sale and rating on each card, color choices, a bag button that says what it did, filters with counts and removable chips, sorting, and results counted aloud.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/product-art.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/ecommerce-1/ecommerce-1.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/ecommerce-1/ecommerce-1.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "ecommerce"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ecommerce",
+          "shop",
+          "products",
+          "listing",
+          "filters",
+          "sort",
+          "cart",
+          "grid"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Product listing. <Ecommerce1 title description products={[{ id, name, price, compareAt?, rating, reviews, category, colors: [{ id, label, tone }], kind, badge? }]} currency onAddToCart={(id, colorId) => Promise} onToggleSaved={(id, saved) => Promise} />. Filters (category, price band, on sale) and sort work on the page; active filters show as removable chips and the result count is announced. On touch screens the bag button is always visible; with a mouse it appears on hover or focus.",
+          "whenToUse": [
+            "A shop, a collection page or a marketplace category",
+            "Any catalog that needs filters and quick add"
+          ],
+          "whenNotToUse": [
+            "One product in detail; use ecommerce-2",
+            "Ranking data; use bar-list"
+          ],
+          "composesWith": [
+            "ecommerce-2",
+            "ecommerce-3",
+            "header-1",
+            "footer-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Filters",
+              "action": "Native checkboxes and radios in labelled fieldsets; on small screens behind a button with aria-expanded"
+            },
+            {
+              "keys": "Cards",
+              "action": "Color choices are radios named for the color; the heart is a toggle with a name; prices say 'was' for the old price"
+            },
+            {
+              "keys": "Bag",
+              "action": "Native button; the result is shown and spoken, failures are alerts"
+            },
+            {
+              "keys": "Results",
+              "action": "The count is announced politely; chips can be removed with the keyboard"
+            }
+          ],
+          "customization": [
+            "title, description, currency",
+            "products",
+            "onAddToCart and onToggleSaved"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "ecommerce-1-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton filters and product grid under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Nothing here yet",
+            "example": "ecommerce-1-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says there is nothing here yet; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "ecommerce-1-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). Adding a product that fails says why on its card."
+          }
+        ],
+        "examples": [
+          "ecommerce-1-demo",
+          "ecommerce-1-sale",
+          "ecommerce-1-loading",
+          "ecommerce-1-empty",
+          "ecommerce-1-error"
+        ],
+        "url": "https://ui.ballmac.com/components/ecommerce-1"
+      }
+    },
+    {
+      "name": "ecommerce-1-demo",
+      "type": "registry:example",
+      "title": "Ecommerce 1: product listing with filters: Default",
+      "description": "Default example of Ecommerce 1: product listing with filters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-1-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-1-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-1-sale",
+      "type": "registry:example",
+      "title": "Ecommerce 1: product listing with filters: Only a few products",
+      "description": "Only a few products example of Ecommerce 1: product listing with filters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-1-sale.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-1-sale.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-1-loading",
+      "type": "registry:example",
+      "title": "Ecommerce 1: product listing with filters: Loading",
+      "description": "Loading example of Ecommerce 1: product listing with filters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-1-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-1-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-1-empty",
+      "type": "registry:example",
+      "title": "Ecommerce 1: product listing with filters: Nothing here yet",
+      "description": "Nothing here yet example of Ecommerce 1: product listing with filters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-1-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-1-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-1-error",
+      "type": "registry:example",
+      "title": "Ecommerce 1: product listing with filters: Could not load",
+      "description": "Could not load example of Ecommerce 1: product listing with filters.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-1.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-1-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-1-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-1",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-2",
+      "type": "registry:block",
+      "title": "Ecommerce 2: product page",
+      "description": "A product page that closes the sale: a gallery you step through with arrow keys, price and rating, named color and option choices, a quantity stepper, an add-to-bag button that reports back, fine print one tap away, and reviews.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/product-art.json",
+        "https://ui.ballmac.com/r/rating-distribution.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/ecommerce-2/ecommerce-2.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/ecommerce-2/ecommerce-2.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "ecommerce"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ecommerce",
+          "shop",
+          "product page",
+          "gallery",
+          "variants",
+          "reviews",
+          "add to cart",
+          "pdp"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Product page. <Ecommerce2 product={{ name, price, compareAt?, summary, kind, colors, option?: { label, values: [{ id, label, available? }] }, details: [{ title, body }], highlights, counts, reviews }} currency onAddToBag={({ color, option, quantity }) => Promise} />. Choosing a color changes the picture; unavailable options are disabled and marked sold out; the total on the button follows the quantity. Details are native disclosure elements.",
+          "whenToUse": [
+            "The page a buyer reads before they buy",
+            "Any single product with options"
+          ],
+          "whenNotToUse": [
+            "Listing many products; use ecommerce-1",
+            "A pricing table for software; use pricing-2"
+          ],
+          "composesWith": [
+            "ecommerce-1",
+            "ecommerce-3",
+            "reviews-2",
+            "header-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Gallery",
+              "action": "A radio group of pictures; Left and Right move and select; each is named 'Picture n of m: color'"
+            },
+            {
+              "keys": "Choices",
+              "action": "Fieldsets with legends; the selected color is written next to its legend; unavailable options say 'sold out'"
+            },
+            {
+              "keys": "Quantity",
+              "action": "A group with named buttons and a live count"
+            },
+            {
+              "keys": "Bag",
+              "action": "Native button with busy state; success and errors are announced"
+            },
+            {
+              "keys": "Details",
+              "action": "Native details and summary"
+            }
+          ],
+          "customization": [
+            "product",
+            "currency",
+            "onAddToBag"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "ecommerce-2-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton gallery and details under the page, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "No longer available",
+            "example": "ecommerce-2-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says the product is no longer available; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "ecommerce-2-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). Adding to the bag that fails says why under the button."
+          }
+        ],
+        "examples": [
+          "ecommerce-2-demo",
+          "ecommerce-2-simple",
+          "ecommerce-2-loading",
+          "ecommerce-2-empty",
+          "ecommerce-2-error"
+        ],
+        "url": "https://ui.ballmac.com/components/ecommerce-2"
+      }
+    },
+    {
+      "name": "ecommerce-2-demo",
+      "type": "registry:example",
+      "title": "Ecommerce 2: product page: Default",
+      "description": "Default example of Ecommerce 2: product page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-2-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-2-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-2-simple",
+      "type": "registry:example",
+      "title": "Ecommerce 2: product page: No second option",
+      "description": "No second option example of Ecommerce 2: product page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-2-simple.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-2-simple.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-2-loading",
+      "type": "registry:example",
+      "title": "Ecommerce 2: product page: Loading",
+      "description": "Loading example of Ecommerce 2: product page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-2-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-2-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-2-empty",
+      "type": "registry:example",
+      "title": "Ecommerce 2: product page: No longer available",
+      "description": "No longer available example of Ecommerce 2: product page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-2-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-2-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-2-error",
+      "type": "registry:example",
+      "title": "Ecommerce 2: product page: Could not load",
+      "description": "Could not load example of Ecommerce 2: product page.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-2.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-2-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-2-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-2",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-3",
+      "type": "registry:block",
+      "title": "Ecommerce 3: shopping bag",
+      "description": "A shopping bag that is hard to get wrong: quantities change at once and go back with the reason, removing leaves an Undo, a promo code says why it failed, and a bar shows how far you are from free shipping.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/product-art.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/ecommerce-3/ecommerce-3.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/ecommerce-3/ecommerce-3.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "ecommerce"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ecommerce",
+          "cart",
+          "bag",
+          "checkout",
+          "promo code",
+          "shipping",
+          "undo",
+          "order summary"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Shopping bag. <Ecommerce3 title lines={[{ id, name, variant, price, quantity, kind, tone, max? }]} currency freeShippingFrom shippingCost onChangeQuantity={(id, q) => Promise} onRemove={(id) => Promise} onApplyPromo={(code) => Promise<{ code, label, amount }>} onCheckout undoMs />. Quantity changes are optimistic and revert with the reason if they reject; Remove waits undoMs (default 5000) so Undo works; a rejected promo shows its message next to the field. Without onApplyPromo the demo code WELCOME10 works.",
+          "whenToUse": [
+            "The page between a product and a checkout",
+            "A mini-cart screen in an app"
+          ],
+          "whenNotToUse": [
+            "Paying; use ecommerce-4",
+            "Listing items for sale; use ecommerce-1"
+          ],
+          "composesWith": [
+            "ecommerce-4",
+            "ecommerce-1",
+            "ecommerce-2",
+            "header-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Lines",
+              "action": "A list; every control names its item ('One more Aria speaker', 'Remove …')"
+            },
+            {
+              "keys": "Shipping bar",
+              "action": "role=meter with a text value and a sentence above it"
+            },
+            {
+              "keys": "Promo",
+              "action": "A labelled field; errors are alerts linked to the field with aria-invalid"
+            },
+            {
+              "keys": "Undo",
+              "action": "A button that appears in place of the removed line"
+            },
+            {
+              "keys": "Results",
+              "action": "Announced politely; failures are alerts"
+            }
+          ],
+          "customization": [
+            "title and lines",
+            "currency, freeShippingFrom, shippingCost",
+            "onChangeQuantity, onRemove, onApplyPromo, onCheckout",
+            "undoMs"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "ecommerce-3-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton lines and summary under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Your bag is empty",
+            "example": "ecommerce-3-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says the bag is empty; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "ecommerce-3-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). A quantity, remove or promo code that fails says why and changes nothing."
+          }
+        ],
+        "examples": [
+          "ecommerce-3-demo",
+          "ecommerce-3-free",
+          "ecommerce-3-loading",
+          "ecommerce-3-empty",
+          "ecommerce-3-error"
+        ],
+        "url": "https://ui.ballmac.com/components/ecommerce-3"
+      }
+    },
+    {
+      "name": "ecommerce-3-demo",
+      "type": "registry:example",
+      "title": "Ecommerce 3: shopping bag: Default",
+      "description": "Default example of Ecommerce 3: shopping bag.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-3-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-3-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-3-free",
+      "type": "registry:example",
+      "title": "Ecommerce 3: shopping bag: Free shipping reached",
+      "description": "Free shipping reached example of Ecommerce 3: shopping bag.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-3-free.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-3-free.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-3-loading",
+      "type": "registry:example",
+      "title": "Ecommerce 3: shopping bag: Loading",
+      "description": "Loading example of Ecommerce 3: shopping bag.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-3-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-3-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-3-empty",
+      "type": "registry:example",
+      "title": "Ecommerce 3: shopping bag: Your bag is empty",
+      "description": "Your bag is empty example of Ecommerce 3: shopping bag.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-3-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-3-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-3-error",
+      "type": "registry:example",
+      "title": "Ecommerce 3: shopping bag: Could not load",
+      "description": "Could not load example of Ecommerce 3: shopping bag.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-3.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-3-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-3-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-3",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-4",
+      "type": "registry:block",
+      "title": "Ecommerce 4: checkout",
+      "description": "A three-step checkout on one page: contact, delivery, payment. Finished steps fold into a summary with Edit, mistakes are named beside their field with focus on the first, and a declined card says so and charges nothing.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/checkbox.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/product-art.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/ecommerce-4/ecommerce-4.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/ecommerce-4/ecommerce-4.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "ecommerce"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ecommerce",
+          "checkout",
+          "payment",
+          "form",
+          "validation",
+          "delivery",
+          "order",
+          "card"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Checkout. <Ecommerce4 title lines methods={[{ id, label, detail, price }]} currency onPlaceOrder={(order) => Promise<string | void>} />. Steps open one at a time and validate on Continue; errors appear next to the field (aria-invalid, aria-describedby) and focus moves to the first. The card number uses a checksum; expiry is checked against today. onPlaceOrder resolves with an order number or rejects with the reason, which is shown as an alert. The sample accepts 4242 4242 4242 4242.",
+          "whenToUse": [
+            "The last screen before payment in a shop",
+            "A checkout you want to feel calm and honest"
+          ],
+          "whenNotToUse": [
+            "Subscriptions and plan changes; use billing-1",
+            "A shopping bag; use ecommerce-3"
+          ],
+          "composesWith": [
+            "ecommerce-3",
+            "ecommerce-2",
+            "billing-1",
+            "header-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Steps",
+              "action": "An ordered list; each step has a heading; finished steps say 'done' and have an Edit button naming the step"
+            },
+            {
+              "keys": "Fields",
+              "action": "Labelled inputs with the right autocomplete and inputMode; errors are alerts linked to the field"
+            },
+            {
+              "keys": "Focus",
+              "action": "On a failed Continue, focus goes to the first invalid field"
+            },
+            {
+              "keys": "Payment",
+              "action": "Failures are alerts above the card fields; the button shows a busy state"
+            },
+            {
+              "keys": "Confirmation",
+              "action": "A status region with the order number"
+            }
+          ],
+          "customization": [
+            "title, lines, methods, currency",
+            "onPlaceOrder"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "ecommerce-4-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton steps and summary under the real heading, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Your bag is empty",
+            "example": "ecommerce-4-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says the bag is empty; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "ecommerce-4-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was charged, with Try again (onRetry). A payment that fails shows the reason above the card fields and charges nothing."
+          }
+        ],
+        "examples": [
+          "ecommerce-4-demo",
+          "ecommerce-4-one",
+          "ecommerce-4-loading",
+          "ecommerce-4-empty",
+          "ecommerce-4-error"
+        ],
+        "url": "https://ui.ballmac.com/components/ecommerce-4"
+      }
+    },
+    {
+      "name": "ecommerce-4-demo",
+      "type": "registry:example",
+      "title": "Ecommerce 4: checkout: Default",
+      "description": "Default example of Ecommerce 4: checkout.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-4-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-4-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-4-one",
+      "type": "registry:example",
+      "title": "Ecommerce 4: checkout: One delivery option",
+      "description": "One delivery option example of Ecommerce 4: checkout.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-4-one.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-4-one.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-4-loading",
+      "type": "registry:example",
+      "title": "Ecommerce 4: checkout: Loading",
+      "description": "Loading example of Ecommerce 4: checkout.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-4-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-4-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-4-empty",
+      "type": "registry:example",
+      "title": "Ecommerce 4: checkout: Your bag is empty",
+      "description": "Your bag is empty example of Ecommerce 4: checkout.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-4-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-4-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-4-error",
+      "type": "registry:example",
+      "title": "Ecommerce 4: checkout: Could not load",
+      "description": "Could not load example of Ecommerce 4: checkout.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-4.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-4-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-4-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-5",
+      "type": "registry:block",
+      "title": "Ecommerce 5: order tracking",
+      "description": "An order tracking page that answers where it is and when it arrives: a sentence on top, five stages with the current one marked in words, the carrier's log, a tracking number to copy, and the right next action.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/skeleton.json",
+        "https://ui.ballmac.com/r/state-view.json",
+        "https://ui.ballmac.com/r/product-art.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/ecommerce-5/ecommerce-5.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/ecommerce-5/ecommerce-5.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "ecommerce"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ecommerce",
+          "order",
+          "tracking",
+          "delivery",
+          "shipping",
+          "timeline",
+          "returns",
+          "status"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-24",
+        "tests": true,
+        "ai": {
+          "summary": "Order tracking. <Ecommerce5 order={{ number, placed, total, stage: 'ordered'|'packed'|'shipped'|'out'|'delivered', eta, carrier, tracking, address, items, events }} onStartReturn={(number) => Promise} onChangeDelivery={(number) => Promise} />. The heading is the ETA sentence, or 'Your order has arrived'. Change delivery shows before the order ships, Start a return once it is delivered. Events are newest first.",
+          "whenToUse": [
+            "The page a customer opens from the shipping email",
+            "An orders area in an account"
+          ],
+          "whenNotToUse": [
+            "Choosing what to buy; use ecommerce-1",
+            "Paying; use ecommerce-4"
+          ],
+          "composesWith": [
+            "ecommerce-4",
+            "ecommerce-3",
+            "header-1",
+            "footer-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Progress",
+              "action": "An ordered list with aria-current on the current stage; each stage says (done), (now) or (not yet)"
+            },
+            {
+              "keys": "Log",
+              "action": "An ordered list, newest first, with the time and place in text"
+            },
+            {
+              "keys": "Tracking number",
+              "action": "A copy button with a name; the result is announced"
+            },
+            {
+              "keys": "Actions",
+              "action": "Native buttons with busy state; results announced, failures are alerts"
+            }
+          ],
+          "customization": [
+            "order",
+            "onStartReturn and onChangeDelivery"
+          ]
+        },
+        "states": [
+          {
+            "id": "loading",
+            "title": "Loading",
+            "example": "ecommerce-5-loading",
+            "trigger": "state=\"loading\"",
+            "note": "Skeleton header, progress and panels under the page, announced as loading."
+          },
+          {
+            "id": "empty",
+            "title": "Order not found",
+            "example": "ecommerce-5-empty",
+            "trigger": "state=\"empty\"",
+            "note": "Says the order could not be found; emptyState sets the copy."
+          },
+          {
+            "id": "error",
+            "title": "Could not load",
+            "example": "ecommerce-5-error",
+            "trigger": "state=\"error\"",
+            "note": "An alert saying nothing was changed, with Try again (onRetry). Starting a return or changing delivery that fails says why."
+          }
+        ],
+        "examples": [
+          "ecommerce-5-demo",
+          "ecommerce-5-delivered",
+          "ecommerce-5-loading",
+          "ecommerce-5-empty",
+          "ecommerce-5-error"
+        ],
+        "url": "https://ui.ballmac.com/components/ecommerce-5"
+      }
+    },
+    {
+      "name": "ecommerce-5-demo",
+      "type": "registry:example",
+      "title": "Ecommerce 5: order tracking: Default",
+      "description": "Default example of Ecommerce 5: order tracking.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-5-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-5-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-5-delivered",
+      "type": "registry:example",
+      "title": "Ecommerce 5: order tracking: Delivered",
+      "description": "Delivered example of Ecommerce 5: order tracking.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-5-delivered.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-5-delivered.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-5-loading",
+      "type": "registry:example",
+      "title": "Ecommerce 5: order tracking: Loading",
+      "description": "Loading example of Ecommerce 5: order tracking.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-5-loading.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-5-loading.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-5-empty",
+      "type": "registry:example",
+      "title": "Ecommerce 5: order tracking: Order not found",
+      "description": "Order not found example of Ecommerce 5: order tracking.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-5-empty.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-5-empty.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "ecommerce-5-error",
+      "type": "registry:example",
+      "title": "Ecommerce 5: order tracking: Could not load",
+      "description": "Could not load example of Ecommerce 5: order tracking.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/ecommerce-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/ecommerce-5-error.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/ecommerce-5-error.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "ecommerce-5",
+        "tier": "free"
+      }
+    },
+    {
       "name": "editor-1",
       "type": "registry:block",
       "title": "Editor 1: Markdown with live preview",
@@ -26596,6 +27803,143 @@
       "meta": {
         "example": true,
         "of": "hero-7",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hero-8",
+      "type": "registry:block",
+      "title": "Hero 8: email signup with floating product",
+      "description": "A hero that asks for one thing, an email. The form checks the address as you leave it, says what happened (working, done, or why not) without losing what you typed, and a product screen floats beside it.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react",
+        "motion@^12"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/motion-presets.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/hero-8/hero-8.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/hero-8/hero-8.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "hero"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "hero",
+          "signup",
+          "email",
+          "form",
+          "waitlist",
+          "saas",
+          "product",
+          "social proof"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "Conversion hero. <Hero8 announcement={{ text, href }} title description action fineprint onSubmit={(email) => Promise} proof={{ rating, text, people }} successText />. The email is checked on blur and on submit; invalid input shows a message beside the field; onSubmit may reject with a reason that is shown and keeps the typed address. The product screen is decoration, inert and hidden from assistive technology, and holds still with reduced motion.",
+          "whenToUse": [
+            "A landing page whose goal is a signup or a waitlist",
+            "A launch page with an announcement and proof under the form"
+          ],
+          "whenNotToUse": [
+            "A hero led by a screenshot; use hero-7",
+            "A developer tool led by a command; use hero-2"
+          ],
+          "composesWith": [
+            "logo-cloud-1",
+            "features-1",
+            "testimonials-1",
+            "header-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Form",
+              "action": "A labelled email field with autocomplete and inputMode; errors are alerts linked with aria-invalid; the button shows a working state"
+            },
+            {
+              "keys": "Result",
+              "action": "The success message is a status region"
+            },
+            {
+              "keys": "Announcement",
+              "action": "A real link"
+            },
+            {
+              "keys": "Decoration",
+              "action": "The floating screen is inert, aria-hidden and still with reduced motion"
+            }
+          ],
+          "customization": [
+            "announcement, title, description, action, fineprint",
+            "onSubmit and successText",
+            "proof"
+          ]
+        },
+        "statesNone": "Static content; the form reports its own working, done and failed states.",
+        "examples": [
+          "hero-8-demo",
+          "hero-8-fails"
+        ],
+        "url": "https://ui.ballmac.com/components/hero-8"
+      }
+    },
+    {
+      "name": "hero-8-demo",
+      "type": "registry:example",
+      "title": "Hero 8: email signup with floating product: Default",
+      "description": "Default example of Hero 8: email signup with floating product.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-8.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-8-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-8-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-8",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "hero-8-fails",
+      "type": "registry:example",
+      "title": "Hero 8: email signup with floating product: The signup fails",
+      "description": "The signup fails example of Hero 8: email signup with floating product.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/hero-8.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/hero-8-fails.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/hero-8-fails.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "hero-8",
         "tier": "free"
       }
     },
@@ -33040,6 +34384,149 @@
       "meta": {
         "example": true,
         "of": "pricing-4",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pricing-5",
+      "type": "registry:block",
+      "title": "Pricing 5: price calculator",
+      "description": "A price you work out yourself: slide the number of people, see the volume band and what each person costs, switch on add-ons, and read the monthly or yearly total with the working written out.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://ui.ballmac.com/r/button.json",
+        "https://ui.ballmac.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/blocks/pricing-5/pricing-5.tsx",
+          "type": "registry:component",
+          "target": "@components/ballmac/blocks/pricing-5/pricing-5.tsx"
+        }
+      ],
+      "categories": [
+        "blocks",
+        "pricing"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "pricing",
+          "calculator",
+          "seats",
+          "volume",
+          "slider",
+          "add-ons",
+          "yearly",
+          "saas"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "Seat-based pricing calculator. <Pricing5 title description tiers={[{ upTo, perSeat }]} addons={[{ id, label, description, price }]} min max yearlyDiscount currency salesFrom includes href={({ seats, addons, yearly }) => string} />. Each volume band's seats cost that band's rate, so the total grows smoothly; the table writes the working out. Yearly is on by default and takes yearlyDiscount (0.2) off. At salesFrom seats the button says Talk to sales.",
+          "whenToUse": [
+            "Per-seat software with volume discounts",
+            "Pages where buyers need to check the price for their team"
+          ],
+          "whenNotToUse": [
+            "A flat two or three tier page; use pricing-2",
+            "One-time licences; use pricing-4"
+          ],
+          "composesWith": [
+            "pricing-3",
+            "faq-2",
+            "cta-1",
+            "header-1"
+          ],
+          "a11y": [
+            {
+              "keys": "Slider",
+              "action": "A native range input with a label, a spoken value (n people) and a live output"
+            },
+            {
+              "keys": "Working",
+              "action": "A real table with a caption, column headers and row headers; your band is tagged in words"
+            },
+            {
+              "keys": "Add-ons",
+              "action": "Native checkboxes in a fieldset with prices in the label"
+            },
+            {
+              "keys": "Yearly",
+              "action": "A labelled switch; the total and the saving are written as text and announced"
+            },
+            {
+              "keys": "Motion",
+              "action": "No animation"
+            }
+          ],
+          "customization": [
+            "title and description",
+            "tiers and addons",
+            "min, max, salesFrom",
+            "yearlyDiscount and currency",
+            "href"
+          ]
+        },
+        "statesNone": "Static content with local choices: the slider, the switches and the total are all on the page, so there is nothing to load or fail.",
+        "examples": [
+          "pricing-5-demo",
+          "pricing-5-simple"
+        ],
+        "url": "https://ui.ballmac.com/components/pricing-5"
+      }
+    },
+    {
+      "name": "pricing-5-demo",
+      "type": "registry:example",
+      "title": "Pricing 5: price calculator: Default",
+      "description": "Default example of Pricing 5: price calculator.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pricing-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pricing-5-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pricing-5-demo.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pricing-5",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "pricing-5-simple",
+      "type": "registry:example",
+      "title": "Pricing 5: price calculator: Two bands, no add-ons",
+      "description": "Two bands, no add-ons example of Pricing 5: price calculator.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/pricing-5.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/pricing-5-simple.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/pricing-5-simple.tsx"
+        }
+      ],
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "example": true,
+        "of": "pricing-5",
         "tier": "free"
       }
     },
@@ -46355,8 +47842,22 @@
           "grounding",
           "trust"
         ],
-        "version": "1.0.0",
+        "version": "1.0.1",
         "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "The number buttons are larger and spaced apart, so they are easy to hit on a touch screen.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-25",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "paragraphs is string[]; write [1] or [2, 3] after a claim to cite sources by their position in sources ({ title, url, site?, date?, snippet?, favicon? } as in citation). question shows above. showCoverage (default true) adds 'N of M sentences are cited'. Choosing or hovering a number, or a source row, highlights every claim that source supports and opens its snippet; Escape clears. Unknown numbers are ignored.",
@@ -60706,8 +62207,22 @@
           "chat",
           "preferences"
         ],
-        "version": "1.0.0",
+        "version": "1.0.1",
         "updated": "2026-10-25",
+        "changelog": [
+          {
+            "version": "1.0.1",
+            "date": "2026-10-25",
+            "note": "When memory is off, the notes keep full contrast and are marked with dashed outlines instead of fading.",
+            "breaking": false
+          },
+          {
+            "version": "1.0.0",
+            "date": "2026-10-25",
+            "note": "First release.",
+            "breaking": false
+          }
+        ],
         "tests": true,
         "ai": {
           "summary": "memories is [{ id, text, scope, source?, pinned? }]; scopes is [{ id, label, description? }] (default About you, Your work, Style). The panel keeps its own copy and calls onUpdate(id, text), onForget(id) (after undoMs, default 5000, so Undo works), onPin(id, pinned), onEnabledChange(enabled) and onAdd(text, scope) (adds the form). Handlers may be async; a rejection takes the change back and says why.",
@@ -64993,6 +66508,124 @@
       "meta": {
         "example": true,
         "of": "popover",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "product-art",
+      "type": "registry:ui",
+      "title": "Product Art",
+      "description": "Soft square placeholders with a simple object drawn in a chart color, for product grids, carts and detail pages before real photos exist, or as the fallback when a photo fails to load. Theme tokens only.",
+      "author": "Ballmac <https://ui.ballmac.com>",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ballmac/components/product-art.tsx",
+          "type": "registry:ui",
+          "target": "@components/ballmac/product-art.tsx"
+        }
+      ],
+      "categories": [
+        "marketing"
+      ],
+      "meta": {
+        "schema": 1,
+        "tier": "free",
+        "tags": [
+          "ecommerce",
+          "product",
+          "placeholder",
+          "illustration",
+          "image",
+          "shop",
+          "fallback"
+        ],
+        "version": "1.0.0",
+        "updated": "2026-10-25",
+        "tests": true,
+        "ai": {
+          "summary": "kind is 'speaker' | 'mug' | 'bag' | 'lamp' | 'bottle' | 'headphones'; tone is 1 to 5 (the chart color that tints the background and the object). It fills the width it is given as a square. Pass label to describe it as an image; without a label it is hidden from screen readers.",
+          "whenToUse": [
+            "Product cards and galleries in demos, templates and loading states",
+            "A fallback when a product photo is missing"
+          ],
+          "whenNotToUse": [
+            "Real product photography; use an image",
+            "Icons; use lucide-react"
+          ],
+          "composesWith": [
+            "ecommerce-1",
+            "ecommerce-2",
+            "ecommerce-3",
+            "ecommerce-4"
+          ],
+          "a11y": [
+            {
+              "keys": "Image",
+              "action": "Decorative by default (aria-hidden); with label it is role=img with that name"
+            }
+          ],
+          "customization": [
+            "kind and tone",
+            "label",
+            "className for the shape"
+          ]
+        },
+        "statesNone": "A static illustration: nothing to load or fail.",
+        "examples": [
+          "product-art-demo",
+          "product-art-tones"
+        ],
+        "url": "https://ui.ballmac.com/components/product-art"
+      }
+    },
+    {
+      "name": "product-art-demo",
+      "type": "registry:example",
+      "title": "Product Art: Six objects",
+      "description": "Six objects example of Product Art.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/product-art.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/product-art-demo.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/product-art-demo.tsx"
+        }
+      ],
+      "categories": [
+        "marketing"
+      ],
+      "meta": {
+        "example": true,
+        "of": "product-art",
+        "tier": "free"
+      }
+    },
+    {
+      "name": "product-art-tones",
+      "type": "registry:example",
+      "title": "Product Art: Five tones",
+      "description": "Five tones example of Product Art.",
+      "registryDependencies": [
+        "https://ui.ballmac.com/r/product-art.json"
+      ],
+      "files": [
+        {
+          "path": "registry/examples/product-art-tones.tsx",
+          "type": "registry:example",
+          "target": "@components/ballmac/examples/product-art-tones.tsx"
+        }
+      ],
+      "categories": [
+        "marketing"
+      ],
+      "meta": {
+        "example": true,
+        "of": "product-art",
         "tier": "free"
       }
     },

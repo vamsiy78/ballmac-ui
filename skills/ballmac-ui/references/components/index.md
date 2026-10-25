@@ -14,7 +14,7 @@ Open the file for the category you need; each line is one component.
 - [Forms](forms.md): 29 components
 - [Foundation](foundation.md): 1 components
 - [Layout](layout.md): 10 components
-- [marketing](marketing.md): 1 components
+- [marketing](marketing.md): 2 components
 - [Motion](motion.md): 29 components
 - [Navigation](navigation.md): 17 components
 - [Primitives](primitives.md): 25 components

@@ -31,6 +31,10 @@ export default defineItem({
     customization: ["memories and scopes", "title", "onUpdate, onForget, onPin, onEnabledChange, onAdd", "undoMs"],
   },
   statesNone: "A presentational panel: the memories are passed in, so it has nothing of its own to load. An empty list and a search with no match both say so.",
-  version: "1.0.0",
+  version: "1.0.1",
   updated: "2026-10-25",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-25", note: "When memory is off, the notes keep full contrast and are marked with dashed outlines instead of fading." },
+    { version: "1.0.0", date: "2026-10-25", note: "First release." },
+  ],
 })

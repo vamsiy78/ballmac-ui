@@ -30,6 +30,10 @@ export default defineItem({
     customization: ["paragraphs and sources", "question", "showCoverage"],
   },
   statesNone: "A presentational answer: the text and sources are passed in, so it has nothing of its own to load.",
-  version: "1.0.0",
+  version: "1.0.1",
   updated: "2026-10-25",
+  changelog: [
+    { version: "1.0.1", date: "2026-10-25", note: "The number buttons are larger and spaced apart, so they are easy to hit on a touch screen." },
+    { version: "1.0.0", date: "2026-10-25", note: "First release." },
+  ],
 })

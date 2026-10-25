@@ -119,7 +119,7 @@ function CitedAnswer({ paragraphs, sources, question, showCoverage = true, class
                       {piece.text}
                     </span>
                     {unique.length > 0 && (
-                      <span className="ms-0.5 inline-flex gap-0.5 align-baseline">
+                      <span className="ms-1 inline-flex gap-1 align-baseline">
                         {unique.map((c) => (
                           <button
                             key={c}
@@ -132,7 +132,7 @@ function CitedAnswer({ paragraphs, sources, question, showCoverage = true, class
                             onFocus={() => setHover(c)}
                             onBlur={() => setHover(null)}
                             className={cn(
-                              "inline-flex h-[1.15rem] min-w-[1.15rem] -translate-y-px items-center justify-center rounded-full border px-1 text-[11px] font-medium leading-none tabular-nums outline-none transition-colors motion-reduce:transition-none",
+                              "inline-flex h-[1.3rem] min-w-[1.3rem] -translate-y-px items-center justify-center rounded-full border px-1 text-[11px] font-medium leading-none tabular-nums outline-none transition-colors motion-reduce:transition-none",
                               "focus-visible:ring-[3px] focus-visible:ring-ring/50",
                               shown === c ? "border-foreground bg-foreground text-background" : "bg-background text-muted-foreground hover:border-foreground/50 hover:text-foreground"
                             )}

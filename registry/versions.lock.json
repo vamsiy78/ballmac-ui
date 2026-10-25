@@ -44,8 +44,8 @@
     "hash": "eca8f6882e3f6a3e6b8491247096cef37a9f9b2efceba18aa8d5c74f86df02f9"
   },
   "agent-16": {
-    "version": "1.0.0",
-    "hash": "35bd4e4253646cf112fb200956d9294efe5d60f328460d2a897c2884fbdde0b1"
+    "version": "1.0.1",
+    "hash": "f9ec2abc36de7a87566a4f59fcdf2d31fb3387964896d081da63f61c48421a6c"
   },
   "agent-17": {
     "version": "1.0.0",
@@ -448,8 +448,8 @@
     "hash": "4bcbdd9b7ce89f8fe6c098c4821b19fb24e936bc6703b658b2f5dc6f6e8ce212"
   },
   "cited-answer": {
-    "version": "1.0.0",
-    "hash": "3e5223c0cb9bc346e71829b1036d7b49ffe2a7a1f83a37c7a00bff113456a74d"
+    "version": "1.0.1",
+    "hash": "cc584f6dae19a63ca5140d88027f09d51cb8a9e7df1fcbb7cf665cf1f8319a78"
   },
   "claims-1": {
     "version": "1.0.0",
@@ -710,6 +710,26 @@
   "dynamic-island": {
     "version": "1.0.0",
     "hash": "7ef937e3e59e97dec61a4e8c86ec4f8647e2b0833615370361507ddf902d943b"
+  },
+  "ecommerce-1": {
+    "version": "1.0.0",
+    "hash": "eb68825629b6850f24e93fd80b8e25ccc1ce4f0d93e6601c5536b14679287668"
+  },
+  "ecommerce-2": {
+    "version": "1.0.0",
+    "hash": "d7543373feea3853f673d20317647acea37d358fd018fc30709e2149b9f582c6"
+  },
+  "ecommerce-3": {
+    "version": "1.0.0",
+    "hash": "e4991465b3df6c083b572397df97274ccc83db60fc589d14201d54b714fae542"
+  },
+  "ecommerce-4": {
+    "version": "1.0.0",
+    "hash": "8f05145ecf7f353adfe719c67e5d2fbffe84dd083979b6b15917091b431c04a4"
+  },
+  "ecommerce-5": {
+    "version": "1.0.0",
+    "hash": "424eee10e982f577bae668da96461973b3a4535c40aca122728b1899f0796812"
   },
   "editor-1": {
     "version": "1.0.0",
@@ -1055,6 +1075,10 @@
     "version": "1.0.0",
     "hash": "8eae49e83ff6d9f077632071860b18d41bed32db0e1c82ab524957f43bea350f"
   },
+  "hero-8": {
+    "version": "1.0.0",
+    "hash": "d07b217bf440b10308266040fdf078ac37c869cd9c78c1d5b298507a425b4d12"
+  },
   "highlight": {
     "version": "1.0.0",
     "hash": "67b2d705a57c7bcfc7b1161f8c956f524f7ef5d4620696fd7b3884a7cc6620e6"
@@ -1300,8 +1324,8 @@
     "hash": "e4b7283c6a756616c841246ed76a2ae2e8c2ed1cf4ad84a3d691ff43ba3d15df"
   },
   "memory-panel": {
-    "version": "1.0.0",
-    "hash": "4db0d32893584523a68576612b9d7cbd731399ca69f8673d6f50342f5a6d0af0"
+    "version": "1.0.1",
+    "hash": "f5d6c2984069168be35fce32cbbabbe63e1efa9cab65378ba0e879dfb07b19bf"
   },
   "mention-input": {
     "version": "1.0.0",
@@ -1554,6 +1578,14 @@
   "pricing-4": {
     "version": "1.0.0",
     "hash": "9a64c42f5f761ae894ff7d2c49ce6a246d14bfc470b99b2c9d2a3e1b3e6a5573"
+  },
+  "pricing-5": {
+    "version": "1.0.0",
+    "hash": "965a53ef60fc5c503b3a2a97b7ddcab95440ddec9587924e65f499b28ad58162"
+  },
+  "product-art": {
+    "version": "1.0.0",
+    "hash": "d3772345809eb05489dfa3f872e2976a33e80f4299be67fc9d756c8fa715df8b"
   },
   "profile-1": {
     "version": "1.0.0",

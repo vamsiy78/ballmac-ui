@@ -209,7 +209,7 @@ function MemoryPanel({ memories, scopes = DEFAULT_SCOPES, title, enabled: enable
         />
       </div>
 
-      <div className={cn("grid gap-5 transition-opacity motion-reduce:transition-none", !enabled && "opacity-60")}>
+      <div className="grid gap-5">
         {scopes.map((s) => {
           const list = visible.filter((m) => m.scope === s.id).sort((a, b) => Number(!!b.pinned) - Number(!!a.pinned))
           if (list.length === 0) return null
@@ -234,7 +234,7 @@ function MemoryPanel({ memories, scopes = DEFAULT_SCOPES, title, enabled: enable
                       </li>
                     )
                   return (
-                    <li key={m.id} className={cn("group/mem grid min-w-0 gap-2 rounded-lg border px-3 py-2.5 transition-colors motion-reduce:transition-none", m.pinned ? "bg-accent/40" : "bg-background hover:bg-accent/30")}>
+                    <li key={m.id} className={cn("group/mem grid min-w-0 gap-2 rounded-lg border px-3 py-2.5 transition-colors motion-reduce:transition-none", !enabled ? "border-dashed bg-muted/40" : m.pinned ? "bg-accent/40" : "bg-background hover:bg-accent/30")}>
                       {editing === m.id ? (
                         <form
                           onSubmit={(e) => {
