@@ -5,7 +5,7 @@ import Link from "@/components/site/link"
 import { buttonVariants } from "@/components/ballmac/button"
 import { Marquee } from "@/components/ballmac/marquee"
 import { AiBento } from "@/components/home/ai-bento"
-import { HeroStage } from "@/components/home/hero-stage"
+import { ScreenArc } from "@/components/home/screen-arc"
 import { CheckoutLink } from "@/components/pro/checkout-link"
 import { Themed } from "@/components/pro/shots"
 import { CopyButton } from "@/components/site/copy-button"
@@ -51,6 +51,12 @@ export default async function Home() {
   const founding = offer.founding
   const stars = await starsAtBuild()
   const quality = overview()
+
+  // The curved row of real screens in the hero: ten phone-sized pictures of blocks from the library, each linking to its page.
+  const arcCards = ["dashboard-1", "agent-12", "billing-1", "ecommerce-2", "agent-16", "analytics-1", "settings-1", "reliability-1", "agent-13", "ecommerce-3"].flatMap((n) => {
+    const item = getItem(n)
+    return item ? [{ name: n, title: item.title.split(/:\s*/)[1]?.replace(/^./, (c) => c.toUpperCase()) ?? item.title, href: `/blocks/${n}`, src: `/hero/${n}.jpg` }] : []
+  })
 
   // The start of a real file, to show that what you install is ordinary source.
   const source = getItem("agent-12")
@@ -104,45 +110,41 @@ export default async function Home() {
       {founding && <FoundingBanner offer={founding} at={now.getTime()} />}
       <WhatsNewBanner id="2026-10-batch-3" added={52} examples={["a restaurant floor plan", "a gradebook", "an agent console", "a treemap", "salon booking", "insurance claims"]} />
 
-      {/* 1. Hero: one message on the left, one product in one frame on the right. */}
+      {/* 1. Hero: a short message in the middle, and a curved row of real screens you can drag, running across the page. */}
       <section aria-labelledby="hero-h" className="dark relative isolate overflow-hidden bg-[#09090d] text-white">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(45%_55%_at_72%_42%,oklch(0.36_0.1_285/0.38),transparent_72%)]" />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(rgb(255_255_255/0.06)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(70%_70%_at_60%_45%,black,transparent)]" />
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-12 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:py-20">
-          <div>
-            <Link href="/blocks" className="focus-visible:ring-ring/70 group inline-flex items-center gap-2 text-[13px] text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-[3px]">
-              <span className="rounded-md border border-white/15 px-1.5 py-0.5 text-[11px] font-medium text-white">New</span>
-              Agent control, evals and a review desk
-              <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5 motion-reduce:transition-none" aria-hidden="true" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(60%_50%_at_50%_85%,oklch(0.36_0.1_285/0.42),transparent_72%)]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(rgb(255_255_255/0.06)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(70%_60%_at_50%_40%,black,transparent)]" />
+        <div className="mx-auto flex max-w-[1440px] flex-col items-center px-4 pt-10 text-center sm:px-6 lg:pt-12">
+          <Link href="/blocks" className="focus-visible:ring-ring/70 group inline-flex items-center gap-2 text-[13px] text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-[3px]">
+            <span className="rounded-md border border-white/15 px-1.5 py-0.5 text-[11px] font-medium text-white">New</span>
+            Agent control, evals and a review desk
+            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5 motion-reduce:transition-none" aria-hidden="true" />
+          </Link>
+          <h1 id="hero-h" className="mt-5 text-[2.6rem] leading-[1.04] font-semibold tracking-[-0.045em] text-balance sm:text-5xl lg:text-[3.5rem]">
+            Real app screens,
+            <br className="hidden sm:block" /> one command away.
+          </h1>
+          <p className="mt-3 max-w-md text-lg text-white/75">{Math.floor(freeBlocks.length / 10) * 10}+ finished screens. Install one, own the code.</p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <Link href="/blocks" className="focus-visible:ring-ring/70 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[15px] font-semibold text-black outline-none transition-colors hover:bg-white/90 focus-visible:ring-[3px]">
+              Browse screens <ArrowRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />
             </Link>
-            <h1 id="hero-h" className="mt-5 text-[2.5rem] leading-[1.06] font-semibold tracking-[-0.04em] sm:text-5xl lg:text-[3.4rem]">
-              Real app screens,
-              <br className="hidden sm:block" /> one command away.
-            </h1>
-            <p className="mt-5 max-w-sm text-lg leading-relaxed text-white/80 sm:text-xl">
-              {Math.floor(freeBlocks.length / 10) * 10}+ finished screens, from billing to AI agent consoles. Install one, own the code.
-            </p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Link href="/blocks" className="focus-visible:ring-ring/70 inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-[15px] font-semibold text-black outline-none transition-colors hover:bg-white/90 focus-visible:ring-[3px]">
-                Browse screens <ArrowRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />
-              </Link>
-              <Link href="/pro?utm_source=ballmac-ui&utm_medium=home-hero&utm_campaign=hero" className="focus-visible:ring-ring/70 inline-flex h-12 items-center rounded-full border border-white/25 px-6 text-[15px] font-medium text-white outline-none transition-colors hover:bg-white/10 focus-visible:ring-[3px]">
-                Get Pro
-              </Link>
-            </div>
-            <ul className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-white/65">
-              <li><GithubStars initial={stars} variant="hero" /></li>
-              <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Free and MIT</li>
-              <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Claude Code, Cursor, Codex</li>
-            </ul>
-            {founding && (
-              <p className="mt-4 text-[13px] text-white/65">
-                Pro: ${founding.price} once{founding.listPrice ? `, then $${founding.listPrice}` : ""}.{founding.endsAt ? <> <LeftPhrase endsAt={founding.endsAt} at={now.getTime()} capitalize /></> : null}
-              </p>
-            )}
+            <Link href="/pro?utm_source=ballmac-ui&utm_medium=home-hero&utm_campaign=hero" className="focus-visible:ring-ring/70 inline-flex h-12 items-center rounded-full border border-white/25 px-7 text-[15px] font-medium text-white outline-none transition-colors hover:bg-white/10 focus-visible:ring-[3px]">
+              Get Pro
+            </Link>
           </div>
-          <HeroStage />
+          <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[13px] text-white/65">
+            <li><GithubStars initial={stars} variant="hero" /></li>
+            <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Free and MIT</li>
+            <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Claude Code, Cursor, Codex</li>
+          </ul>
+          {founding && (
+            <p className="mt-3 text-[13px] text-white/65">
+              Pro: ${founding.price} once{founding.listPrice ? `, then $${founding.listPrice}` : ""}.{founding.endsAt ? <> <LeftPhrase endsAt={founding.endsAt} at={now.getTime()} capitalize /></> : null}
+            </p>
+          )}
         </div>
+        <ScreenArc cards={arcCards} className="mt-2" />
       </section>
 
       {/* 2. A ribbon of names, for the feeling of how much there is. */}
