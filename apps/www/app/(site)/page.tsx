@@ -5,7 +5,7 @@ import Link from "@/components/site/link"
 import { buttonVariants } from "@/components/ballmac/button"
 import { Marquee } from "@/components/ballmac/marquee"
 import { AiBento } from "@/components/home/ai-bento"
-import { HeroStage, type StageScreen } from "@/components/home/hero-stage"
+import { HeroStage } from "@/components/home/hero-stage"
 import { CheckoutLink } from "@/components/pro/checkout-link"
 import { Themed } from "@/components/pro/shots"
 import { CopyButton } from "@/components/site/copy-button"
@@ -30,16 +30,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 }
 
-/** The screens the hero cycles through. AI screens first: that is where Ballmac has no equal. */
-const STAGE = [
-  { id: "agent-12", name: "Agent control" },
-  { id: "agent-16", name: "Answers" },
-  { id: "agent-13", name: "Review desk" },
-  { id: "agent-17", name: "Evals" },
-  { id: "billing-1", name: "Billing" },
-  { id: "analytics-1", name: "Analytics" },
-] as const
-
 const AREAS = [
   { id: "application", thumb: "agent-16" },
   { id: "ops", thumb: "alerts-1" },
@@ -61,11 +51,6 @@ export default async function Home() {
   const founding = offer.founding
   const stars = await starsAtBuild()
   const quality = overview()
-
-  const stage: StageScreen[] = STAGE.map((s) => {
-    const thumb = thumbFor(s.id, "free")
-    return { id: s.id, name: s.name, poster: thumb ? <Themed base={thumb} alt="" width={1200} height={750} priority={s.id === "agent-12"} /> : null }
-  })
 
   // The start of a real file, to show that what you install is ordinary source.
   const source = getItem("agent-12")
@@ -123,7 +108,7 @@ export default async function Home() {
       <section aria-labelledby="hero-h" className="dark relative isolate overflow-hidden bg-[#09090d] text-white">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(45%_55%_at_72%_42%,oklch(0.36_0.1_285/0.38),transparent_72%)]" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(rgb(255_255_255/0.06)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(70%_70%_at_60%_45%,black,transparent)]" />
-        <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14 lg:py-16">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-12 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:py-20">
           <div>
             <Link href="/blocks" className="focus-visible:ring-ring/70 group inline-flex items-center gap-2 text-[13px] text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-[3px]">
               <span className="rounded-md border border-white/15 px-1.5 py-0.5 text-[11px] font-medium text-white">New</span>
@@ -145,7 +130,7 @@ export default async function Home() {
                 Get Pro
               </Link>
             </div>
-            <ul className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-white/65">
+            <ul className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-white/65">
               <li><GithubStars initial={stars} variant="hero" /></li>
               <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Free and MIT</li>
               <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Claude Code, Cursor, Codex</li>
@@ -156,7 +141,7 @@ export default async function Home() {
               </p>
             )}
           </div>
-          <HeroStage screens={stage} />
+          <HeroStage />
         </div>
       </section>
 

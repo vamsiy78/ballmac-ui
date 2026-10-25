@@ -3,21 +3,45 @@
 import { Check, Copy } from "lucide-react"
 import * as React from "react"
 
-import { LiveScreen, type LiveScreenId } from "@/components/home/live-screen"
-import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 import { cn } from "@/lib/utils"
+import { useReducedMotionSafe } from "@/lib/ballmac/motion"
 
-export type StageScreen = { id: LiveScreenId; name: string; poster: React.ReactNode }
+// Each demo is the real example from the library, drawn at its own size so the text stays readable. They load one at a time, when chosen.
+const Demos = {
+  "cited-answer": React.lazy(() => import("@/registry/examples/cited-answer-demo")),
+  "tool-call-card": React.lazy(() =>
+    Promise.all([import("@/registry/examples/thinking-loader-demo"), import("@/registry/examples/tool-call-card-demo")]).then(([a, b]) => ({
+      default: () => (
+        <div className="grid w-full max-w-xl gap-5">
+          <a.default />
+          <b.default />
+        </div>
+      ),
+    }))
+  ),
+  "review-center": React.lazy(() => import("@/registry/examples/review-center-demo")),
+  "eval-scorecard": React.lazy(() => import("@/registry/examples/eval-scorecard-demo")),
+  "autonomy-dial": React.lazy(() => import("@/registry/examples/autonomy-dial-demo")),
+} as const
+
+const SCREENS = [
+  { id: "cited-answer", name: "Answers" },
+  { id: "tool-call-card", name: "Tool calls" },
+  { id: "review-center", name: "Review" },
+  { id: "eval-scorecard", name: "Evals" },
+  { id: "autonomy-dial", name: "Autonomy" },
+] as const satisfies readonly { id: keyof typeof Demos; name: string }[]
 
 /**
- * One product, in one frame. The tabs along the top choose which real screen is shown; the bar along the bottom is the command that installs it, typed out
- * when the screen changes. It moves on by itself every few seconds until someone chooses a screen or points at it, and holds still with reduced motion.
+ * One product, in one frame, at a size you can read. The tabs choose a real AI component from the library; the bar underneath is the command that installs it, typed
+ * out when the choice changes. The component is live: hover the numbers, drag the dial, open a row. It moves on by itself until someone chooses or points at it, and
+ * holds still with reduced motion.
  */
-export function HeroStage({ screens, className }: { screens: StageScreen[]; className?: string }) {
+export function HeroStage({ className }: { className?: string }) {
   const id = React.useId()
   const reduced = useReducedMotionSafe()
   const [index, setIndex] = React.useState(0)
-  const [typed, setTyped] = React.useState(() => `npx shadcn@latest add @ballmac/${screens[0]?.id ?? ""}`.length)
+  const [typed, setTyped] = React.useState(() => `npx shadcn@latest add @ballmac/${SCREENS[0].id}`.length)
   const [added, setAdded] = React.useState(true)
   const [auto, setAuto] = React.useState(true)
   const [hover, setHover] = React.useState(false)
@@ -25,18 +49,19 @@ export function HeroStage({ screens, className }: { screens: StageScreen[]; clas
   const [copied, setCopied] = React.useState(false)
   const root = React.useRef<HTMLDivElement>(null)
   const tabs = React.useRef<(HTMLButtonElement | null)[]>([])
-  const screen = screens[index] ?? screens[0]
-  const command = `npx shadcn@latest add @ballmac/${screen?.id ?? ""}`
+  const screen = SCREENS[index]
+  const Demo = Demos[screen.id]
+  const command = `npx shadcn@latest add @ballmac/${screen.id}`
 
   React.useEffect(() => {
     const el = root.current
     if (!el) return
-    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.2 })
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.3 })
     io.observe(el)
     return () => io.disconnect()
   }, [])
 
-  // Type the command whenever the screen changes. With reduced motion it is simply there.
+  // Type the command whenever the choice changes. With reduced motion it is simply there.
   React.useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = []
     let type: ReturnType<typeof setInterval> | undefined
@@ -66,21 +91,19 @@ export function HeroStage({ screens, className }: { screens: StageScreen[]; clas
     }
   }, [index, command, reduced])
 
-  // Move on while nobody is choosing or pointing, and the frame is on screen.
+  // Move on while nobody is choosing or pointing, and the frame is on screen. A little longer than the other screens need, so each can be read.
   React.useEffect(() => {
     if (reduced || !auto || hover || !visible || !added) return
-    const t = setTimeout(() => setIndex((i) => (i + 1) % screens.length), 7000)
+    const t = setTimeout(() => setIndex((i) => (i + 1) % SCREENS.length), 9000)
     return () => clearTimeout(t)
-  }, [reduced, auto, hover, visible, added, index, screens.length])
-
-  if (!screen) return null
+  }, [reduced, auto, hover, visible, added, index])
 
   function choose(i: number) {
     setAuto(false)
     setIndex(i)
   }
   function onKey(e: React.KeyboardEvent, i: number) {
-    const n = e.key === "ArrowRight" ? (i + 1) % screens.length : e.key === "ArrowLeft" ? (i + screens.length - 1) % screens.length : e.key === "Home" ? 0 : e.key === "End" ? screens.length - 1 : -1
+    const n = e.key === "ArrowRight" ? (i + 1) % SCREENS.length : e.key === "ArrowLeft" ? (i + SCREENS.length - 1) % SCREENS.length : e.key === "Home" ? 0 : e.key === "End" ? SCREENS.length - 1 : -1
     if (n < 0) return
     e.preventDefault()
     choose(n)
@@ -88,7 +111,7 @@ export function HeroStage({ screens, className }: { screens: StageScreen[]; clas
   }
 
   return (
-    <div ref={root} className={cn("w-full", className)} onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
+    <div ref={root} className={cn("w-full min-w-0", className)} onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b10] shadow-[0_40px_100px_-40px_rgb(0_0_0/0.9)] ring-1 ring-white/[0.03]">
         <div className="flex items-center gap-4 border-b border-white/10 bg-white/[0.03] px-4">
           <span className="flex shrink-0 gap-1.5 max-sm:hidden" aria-hidden="true">
@@ -96,8 +119,8 @@ export function HeroStage({ screens, className }: { screens: StageScreen[]; clas
             <span className="size-2.5 rounded-full bg-white/15" />
             <span className="size-2.5 rounded-full bg-white/15" />
           </span>
-          <div role="tablist" aria-label="Screens you can install" className="flex min-w-0 flex-1 gap-1 overflow-x-auto py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {screens.map((s, i) => (
+          <div role="tablist" aria-label="AI components you can install" className="flex min-w-0 flex-1 gap-1 overflow-x-auto py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {SCREENS.map((s, i) => (
               <button
                 key={s.id}
                 ref={(el) => {
@@ -119,8 +142,13 @@ export function HeroStage({ screens, className }: { screens: StageScreen[]; clas
           </div>
         </div>
 
-        <div id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-tab-${screen.id}`}>
-          <LiveScreen key={screen.id} id={screen.id} poster={screen.poster} theme="dark" className="animate-in fade-in duration-500 motion-reduce:animate-none" />
+        <div id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-tab-${screen.id}`} className="relative flex h-[27rem] flex-col overflow-hidden sm:h-[29rem]">
+          <div key={screen.id} className="animate-in fade-in my-auto flex justify-center p-4 duration-500 sm:p-6 motion-reduce:animate-none">
+            <React.Suspense fallback={<div aria-hidden="true" className="h-64 w-full max-w-3xl animate-pulse rounded-2xl bg-white/[0.04] motion-reduce:animate-none" />}>
+              <Demo />
+            </React.Suspense>
+          </div>
+          <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#0b0b10] to-transparent" />
         </div>
 
         <div className="flex items-center gap-3 border-t border-white/10 bg-white/[0.03] py-2 ps-4 pe-2 font-mono text-[13px]">
