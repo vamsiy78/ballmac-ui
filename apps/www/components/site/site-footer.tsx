@@ -1,15 +1,18 @@
 import Link from "@/components/site/link"
 
-import { FooterWordmark } from "@/components/site/footer-wordmark"
+import { FooterVideo } from "@/components/site/footer-video"
 import { Logo } from "@/components/site/logo"
 import { BUILT_WITH } from "@/lib/built-with"
+import { getBlocks, getComponents, isPro } from "@/lib/registry"
 
-const columns = [
+type FooterLink = { href: string; label: string }
+
+const columns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Library",
     links: [
-      { href: "/components", label: "Components" },
       { href: "/blocks", label: "Blocks" },
+      { href: "/components", label: "Components" },
       { href: "/templates", label: "Templates" },
       { href: "/charts", label: "Charts" },
       { href: "/presets", label: "Presets" },
@@ -27,82 +30,72 @@ const columns = [
       { href: "/docs/get-started/connect-your-agent", label: "MCP & AI agents" },
       { href: "/quality", label: "Quality, measured" },
       { href: "/verified", label: "Ballmac Verified" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { href: "/support", label: "Support" },
-      { href: "/affiliates", label: "Affiliates · earn 30%" },
-      { href: "/changelog", label: "Changelog" },
-      { href: "/pro/changelog", label: "Pro changelog" },
-      { href: "/contribute", label: "Contribute" },
-      ...(BUILT_WITH.length > 0 ? [{ href: "/built-with", label: "Built with Ballmac UI" }] : []),
       { href: "/llms.txt", label: "llms.txt" },
       { href: "/r/registry.json", label: "Registry JSON" },
     ],
   },
   {
-    title: "Ballmac",
+    title: "Company",
     links: [
+      { href: "/support", label: "Support" },
+      { href: "/changelog", label: "Changelog" },
+      { href: "/affiliates", label: "Affiliates, earn 30%" },
+      { href: "/contribute", label: "Contribute" },
+      ...(BUILT_WITH.length > 0 ? [{ href: "/built-with", label: "Built with Ballmac UI" }] : []),
       { href: "https://ballmac.com/services?ref=ui-footer", label: "Hire us" },
-      { href: "https://ballmac.com", label: "ballmac.com" },
-      { href: "https://ballmac.com/binzide", label: "Binzide" },
       { href: "https://x.com/ballmacapps", label: "X" },
       { href: "https://github.com/vamsiy78/ballmac-ui", label: "GitHub" },
     ],
   },
 ]
 
+function FooterAnchor({ href, children }: { href: string; children: React.ReactNode }) {
+  return href.startsWith("http") ? <a href={href}>{children}</a> : <Link href={href}>{children}</Link>
+}
+
 export function SiteFooter() {
+  const screens = getBlocks().length
+  const freeScreens = getBlocks().filter((b) => !isPro(b)).length
+  const components = getComponents().length
   return (
-    <footer className="mt-24 border-t">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_repeat(4,1fr)]">
-        <div className="col-span-2 space-y-3 md:col-span-1">
+    <footer className="bm-footer">
+      <div className="bm-footer__stage" aria-hidden="true">
+        <FooterVideo src="/footer/meadow.mp4" poster="/footer/meadow.jpg" />
+      </div>
+      <p className="bm-footer__wordmark" aria-hidden="true">Ballmac</p>
+      <div className="bm-footer__fog" aria-hidden="true" />
+      <div className="bm-footer__content">
+        <div className="bm-footer__brand">
           <Logo />
-          <p className="text-muted-foreground max-w-60 text-sm leading-relaxed">
-            Polished React components from Ballmac, the team behind Binzide, Notchware and Sideme.
+          <h2 className="bm-footer__title">Real app screens, one command away</h2>
+          <p className="bm-footer__text">
+            Finished screens and components for React and Tailwind, from billing to AI agent consoles. Install one with the shadcn CLI and the code is yours.
           </p>
+          <Link href="/blocks" className="bm-footer__cta">
+            Browse screens
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="rtl:-scale-x-100">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </Link>
+          <p className="bm-footer__copy">
+            © 2026 Ballmac · <Link href="/license/pro">Pro licence</Link> · <Link href="/refund">Refunds</Link> · <Link href="/license">MIT licence</Link>
+          </p>
+          <ul className="bm-footer__status" aria-label="The library in numbers">
+            <li className="bm-footer__chip"><span className="bm-footer__dot" aria-hidden="true" />{freeScreens} free screens</li>
+            <li className="bm-footer__chip">{screens} screens in all</li>
+            <li className="bm-footer__chip">{components} components</li>
+          </ul>
         </div>
         {columns.map((c) => (
-          <div key={c.title}>
-            <p className="text-sm font-medium">{c.title}</p>
-            <ul className="mt-3 space-y-2.5 text-sm">
+          <nav key={c.title} aria-label={c.title}>
+            <h3 className="bm-footer__col-title">{c.title}</h3>
+            <ul className="bm-footer__list">
               {c.links.map((l) => (
-                <li key={l.href}>
-                  {l.href.startsWith("http") ? (
-                    <a href={l.href} className="text-muted-foreground hover:text-foreground transition-colors">
-                      {l.label}
-                    </a>
-                  ) : (
-                    <Link href={l.href} className="text-muted-foreground hover:text-foreground transition-colors">
-                      {l.label}
-                    </Link>
-                  )}
-                </li>
+                <li key={l.href}><FooterAnchor href={l.href}>{l.label}</FooterAnchor></li>
               ))}
             </ul>
-          </div>
+          </nav>
         ))}
-      </div>
-      <div className="mx-auto max-w-[1440px] overflow-hidden px-4 sm:px-6">
-        <FooterWordmark />
-      </div>
-      <div className="border-t">
-        <div className="text-muted-foreground mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-3 px-4 py-6 text-[13px] sm:px-6">
-          <p>© 2026 Ballmac</p>
-          <span className="flex items-center gap-5">
-            <Link href="/license/pro" className="hover:text-foreground transition-colors">
-              Pro licence
-            </Link>
-            <Link href="/refund" className="hover:text-foreground transition-colors">
-              Refunds
-            </Link>
-            <Link href="/license" className="hover:text-foreground transition-colors">
-              License
-            </Link>
-          </span>
-        </div>
       </div>
     </footer>
   )

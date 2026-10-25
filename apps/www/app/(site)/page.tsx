@@ -1,14 +1,14 @@
-import { ArrowRight, ArrowUpRight, Check, ChevronDown, ShieldCheck } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, Download, Layers, ShieldCheck, Sparkles } from "lucide-react"
+import { Instrument_Serif } from "next/font/google"
 import type { Metadata } from "next"
 import Link from "@/components/site/link"
 
 import { buttonVariants } from "@/components/ballmac/button"
-import { Marquee } from "@/components/ballmac/marquee"
 import { AiBento } from "@/components/home/ai-bento"
-import { ScreenArc } from "@/components/home/screen-arc"
 import { CheckoutLink } from "@/components/pro/checkout-link"
 import { Themed } from "@/components/pro/shots"
 import { CopyButton } from "@/components/site/copy-button"
+import { FooterVideo } from "@/components/site/footer-video"
 import { FoundingBanner } from "@/components/site/founding-banner"
 import { LeftPhrase } from "@/components/site/founding-text"
 import { GithubStars } from "@/components/site/github-stars"
@@ -24,6 +24,8 @@ import { formatMeasured, measured, overview } from "@/lib/quality"
 import { blockCategoryLabels, blockGroups, getBlocks, getComponents, getItem, getTemplates, highlight, isPro, readSource } from "@/lib/registry"
 import { thumbFor } from "@/lib/thumbs"
 import { cn } from "@/lib/utils"
+
+const serif = Instrument_Serif({ weight: "400", style: "italic", subsets: ["latin"] })
 
 export function generateMetadata(): Metadata {
   const blocks = getBlocks()
@@ -58,22 +60,10 @@ export default async function Home() {
   const stars = await starsAtBuild()
   const quality = overview()
 
-  // The curved row of real screens in the hero: ten phone-sized pictures of blocks from the library, each linking to its page.
-  const arcCards = ["dashboard-1", "agent-12", "billing-1", "ecommerce-2", "agent-16", "analytics-1", "settings-1", "reliability-1", "agent-13", "ecommerce-3"].flatMap((n) => {
-    const title = getItem(n)?.title
-    return [{ name: n, title: title ? (title.split(/:\s*/)[1]?.replace(/^./, (c) => c.toUpperCase()) ?? title) : n, href: `/blocks/${n}`, src: `/hero/${n}.jpg` }]
-  })
-
   // The start of a real file, to show that what you install is ordinary source.
   const source = getItem("dashboard-1")
   const sourceLines = source?.files[0] ? readSource(source.files[0].source).split("\n").slice(0, 24).join("\n") : ""
   const sourceHtml = sourceLines ? await highlight(`${sourceLines}\n// ...`) : ""
-
-  // Short, readable names for the ribbon: one per kind of block, spread across the catalogue.
-  const ribbon = [...new Map(freeBlocks.map((b) => [b.blockCategory ?? "", b])).values()]
-    .map((b) => (b.title.split(/:\s*/)[1] ?? b.title).replace(/^./, (c) => c.toUpperCase()))
-    .slice(0, 36)
-  const half = Math.ceil(ribbon.length / 2)
 
   const areaTiles = AREAS.flatMap((t) => {
     const g = blockGroups.find((x) => x.id === t.id)
@@ -120,55 +110,46 @@ export default async function Home() {
       {founding && <FoundingBanner offer={founding} at={now.getTime()} />}
       <WhatsNewBanner id="2026-10-batch-3" added={52} examples={["a restaurant floor plan", "a gradebook", "an agent console", "a treemap", "salon booking", "insurance claims"]} />
 
-      {/* 1. Hero: a short message in the middle, and a curved row of real screens you can drag, running across the page. */}
-      <section aria-labelledby="hero-h" className="dark relative isolate overflow-hidden bg-[#09090d] text-white">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(60%_50%_at_50%_85%,oklch(0.36_0.1_285/0.42),transparent_72%)]" />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(rgb(255_255_255/0.06)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(70%_60%_at_50%_40%,black,transparent)]" />
-        <div className="mx-auto flex max-w-[1440px] flex-col items-center px-4 pt-10 text-center sm:px-6 lg:pt-12">
-          <Link href="/blocks" className="focus-visible:ring-ring/70 group inline-flex items-center gap-2 text-[13px] text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-[3px]">
-            <span className="rounded-md border border-white/15 px-1.5 py-0.5 text-[11px] font-medium text-white">New</span>
-            Agent control, evals and a review desk
-            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5 motion-reduce:transition-none" aria-hidden="true" />
-          </Link>
-          <h1 id="hero-h" className="mt-5 text-[2.6rem] leading-[1.04] font-semibold tracking-[-0.045em] text-balance sm:text-5xl lg:text-[3.5rem]">
-            Real app screens,
-            <br className="hidden sm:block" /> one command away.
-          </h1>
-          <p className="mt-3 max-w-2xl text-lg text-white/75">{Math.floor(blocks.length / 10) * 10}+ finished screens for React and Tailwind teams. Start with {freeBlocks.length} free, own the code.</p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/blocks" className="focus-visible:ring-ring/70 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[15px] font-semibold text-black outline-none transition-colors hover:bg-white/90 focus-visible:ring-[3px]">
-              Browse screens <ArrowRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />
+      {/* 1. Hero: black, a looping video behind, a short message at the bottom, three facts underneath. */}
+      <section aria-labelledby="hero-h" className="dark relative isolate flex min-h-[max(34rem,calc(100svh-7.5rem))] flex-col overflow-hidden bg-black text-white">
+        <FooterVideo src="/hero/hero.mp4" poster="/hero/hero.jpg" className="absolute inset-0 -z-20 size-full object-cover" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-black/50 via-black/45 to-black/85 lg:from-black/45 lg:via-black/10 lg:to-black/70" />
+        <div className="mx-auto flex w-full max-w-[1440px] flex-1 items-end justify-center px-5 pt-16 pb-10 sm:px-6 lg:pb-16">
+          <div className="flex max-w-[56rem] flex-col items-center text-center">
+            <Link href="/blocks" className="bm-hero-rise focus-visible:ring-ring/70 group inline-flex items-center gap-2 rounded-[5px] bg-gradient-to-r from-[#7d7d7d] via-[#2a2a2a] to-[#0a0a0a] px-3.5 py-2 text-[12.5px] text-[#f2f2f2] outline-none focus-visible:ring-[3px]">
+              <Sparkles className="size-4" aria-hidden="true" />
+              Agent control, evals and a review desk
+              <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5 motion-reduce:transition-none" aria-hidden="true" />
             </Link>
-            <Link href="/pro?utm_source=ballmac-ui&utm_medium=home-hero&utm_campaign=hero" className="focus-visible:ring-ring/70 inline-flex h-12 items-center rounded-full border border-white/25 px-7 text-[15px] font-medium text-white outline-none transition-colors hover:bg-white/10 focus-visible:ring-[3px]">
-              Get Pro
-            </Link>
-          </div>
-          <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[13px] text-white/65">
-            <li><GithubStars initial={stars} variant="hero" /></li>
-            <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Free and MIT</li>
-            <li className="flex items-center gap-1.5"><Check className="size-3.5" aria-hidden="true" />Works with Next.js, Vite, Claude Code, Cursor</li>
-          </ul>
-          {founding && (
-            <p className="mt-3 text-[13px] text-white/65">
-              Pro: ${founding.price} once{founding.listPrice ? `, then $${founding.listPrice}` : ""}.{founding.endsAt ? <> <LeftPhrase endsAt={founding.endsAt} at={now.getTime()} capitalize /></> : null}
+            <h1 id="hero-h" className="mt-5 text-[2.25rem] leading-[1.12] font-medium tracking-[-0.045em] text-balance sm:text-5xl lg:text-[3.5rem] 2xl:text-[4.5rem]">
+              <span className="bm-hero-rise block [animation-delay:0.15s]">
+                Real <em className={cn(serif.className, "text-[#c2c2c2] lg:text-[#9a9a9a]")}>app screens</em>,
+              </span>
+              <span className="bm-hero-rise block [animation-delay:0.3s]">one command away.</span>
+            </h1>
+            <p className="bm-hero-rise mt-5 max-w-[30rem] text-[15.5px] leading-relaxed tracking-[-0.015em] text-[#cfcfcf] lg:text-[#9a9a9a] [animation-delay:0.5s] 2xl:text-lg">
+              {Math.floor(blocks.length / 10) * 10}+ finished screens for React and Tailwind teams. Start with {freeBlocks.length} free, install one with a single command, and own the code.
             </p>
-          )}
+            <div className="bm-hero-rise mt-7 flex w-full flex-col items-center justify-center gap-2.5 [animation-delay:0.65s] sm:w-auto sm:flex-row">
+              <Link href="/blocks" className="focus-visible:ring-ring/70 inline-flex h-[42px] w-full items-center justify-center gap-2 rounded-md border border-white bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] px-5 text-[13.5px] font-medium text-[#111] shadow-[inset_0_1px_0_rgb(255_255_255/0.95)] outline-none transition-[box-shadow,filter] hover:shadow-[inset_0_1px_0_#fff,0_0_26px_rgb(186_208_255/0.4)] focus-visible:ring-[3px] sm:w-auto">
+                Browse screens <ArrowRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />
+              </Link>
+              <Link href="/pro?utm_source=ballmac-ui&utm_medium=home-hero&utm_campaign=hero" className="focus-visible:ring-ring/70 inline-flex h-[42px] w-full items-center justify-center rounded-md border border-[#c6c6c6]/55 bg-gradient-to-br from-white/12 via-black/50 to-[#96aac8]/10 px-5 text-[13.5px] font-medium text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.12)] backdrop-blur-lg outline-none transition-[box-shadow,border-color] hover:border-[#dce6ff]/80 hover:shadow-[0_0_24px_rgb(170_200_255/0.28)] focus-visible:ring-[3px] sm:w-auto">
+                Get Pro
+              </Link>
+            </div>
+            {founding && (
+              <p className="mt-4 text-[13px] text-white/75">
+                Pro: ${founding.price} once{founding.listPrice ? `, then $${founding.listPrice}` : ""}.{founding.endsAt ? <> <LeftPhrase endsAt={founding.endsAt} at={now.getTime()} capitalize /></> : null}
+              </p>
+            )}
+          </div>
         </div>
-        <ScreenArc cards={arcCards} className="mt-2" />
-      </section>
-
-      {/* 2. A ribbon of names, for the feeling of how much there is. */}
-      <section aria-label="Some of the free screens" className="border-b py-6">
-        <Marquee speed={28} gap={10} className="mb-2.5">
-          {ribbon.slice(0, half).map((t) => (
-            <span key={t} className="bg-card text-muted-foreground rounded-full border px-4 py-1.5 text-sm whitespace-nowrap">{t}</span>
-          ))}
-        </Marquee>
-        <Marquee speed={24} gap={10} reverse>
-          {ribbon.slice(half).map((t) => (
-            <span key={t} className="bg-card text-muted-foreground rounded-full border px-4 py-1.5 text-sm whitespace-nowrap">{t}</span>
-          ))}
-        </Marquee>
+        <ul className="mx-auto flex w-full max-w-[1440px] flex-col items-center justify-between gap-4 px-5 pb-8 text-[13.5px] tracking-[-0.015em] text-[#d8d8d8] sm:px-10 lg:flex-row lg:px-[72px]">
+          <li className="bm-hero-rise flex items-center gap-3.5 [animation-delay:1.1s]"><Layers className="size-5 text-[#e8e8e8]" aria-hidden="true" />{blocks.length} screens and {components.length} components</li>
+          <li className="bm-hero-rise flex items-center gap-3.5 [animation-delay:1.25s]"><span className="grid size-5 place-items-center rounded-md bg-white text-[#111]"><Download className="size-3" aria-hidden="true" /></span>{freeBlocks.length} screens free, MIT licensed</li>
+          <li className="bm-hero-rise flex items-center gap-3.5 [animation-delay:1.4s]"><GithubStars initial={stars} variant="hero" /></li>
+        </ul>
       </section>
 
       {/* 3. The AI components: pictures here, each one runs on its own page. */}
