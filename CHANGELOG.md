@@ -6,6 +6,17 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-26-genre-scenes] - 2026-10-26
+
+**Twelve more scenes: flowers, routes, rain, jellyfish and more.** Pro gains twelve full-section scenes across genres, from a meadow of blooming flowers to a black hole, each with a build prompt, a pause button and reduced-motion support.
+
+### Added
+
+- Eight heroes: a meadow of flowers that grow and open, a night globe with live flight routes, a night drive through a rainy windshield, bioluminescent jellyfish, ridges of a track with a playable groove, a breathing orb with a guided session, a tower you open floor by floor, and a glass perfume bottle you can tint.
+- A microscope field of glowing cells with a focus slider and a stain switch.
+- A waitlist section beside a black hole that bends light, a footer of flowing silk, and a pricing section over a river of particles.
+- A small `scene-parts` item with the announcement pill, the pause button and a 2D canvas that every scene shares.
+
 ## [2026-10-26-3d-heroes] - 2026-10-26
 
 **Six 3D heroes and build prompts.** Pro gains six full-screen 3D hero blocks drawn by shaders or CSS 3D, and every one of them comes with a build prompt you can paste into any AI builder.

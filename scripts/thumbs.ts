@@ -49,7 +49,7 @@ const readManifest = (dir: string): Manifest => {
 }
 
 /** Heroes drawn by a shader or in 3D: they need a software GL in headless Chromium, a longer wait for their entrance, and a crop that frames the object. */
-const needsGl = (item: Item) => item.tags?.includes("3d") ?? false
+const needsGl = (item: Item) => item.tags?.some((t) => t === "3d" || t === "webgl" || t === "canvas") ?? false
 /** How far down the page the 640px thumbnail starts, for heroes whose subject sits below the headline. */
 const CROP_Y: Record<string, number> = { "hero-pro-22": 110, "hero-pro-25": 170, "hero-pro-24": 60, "hero-pro-23": 60, "hero-pro-21": 60, "hero-pro-26": 40 }
 
