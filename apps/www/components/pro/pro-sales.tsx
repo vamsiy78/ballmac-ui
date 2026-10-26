@@ -21,6 +21,7 @@ import { endsLabel } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
 import { getOffer } from "@/lib/offer"
+import { CountryPrice } from "@/components/pro/country-price"
 import { getBlocks, getItem, isPro, itemHref } from "@/lib/registry"
 import { SAMPLER_BLOCKS } from "@/lib/sampler"
 import { thumbFor } from "@/lib/thumbs"
@@ -167,6 +168,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
               ) : offer.onSale && offer.price ? (
                 <>
                   <span className="text-foreground font-medium">${offer.price} once</span>, tax included. No subscription.
+                  <CountryPrice price={Number(offer.price)} className="text-foreground mt-2" />
                 </>
               ) : (
                 "One payment. No subscription."

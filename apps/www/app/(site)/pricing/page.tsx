@@ -5,6 +5,7 @@ import Link from "@/components/site/link"
 import { Button } from "@/components/ballmac/button"
 import { BuildCost } from "@/components/pro/build-cost"
 import { CheckoutLink } from "@/components/pro/checkout-link"
+import { CountryPrice } from "@/components/pro/country-price"
 import { ProofWall } from "@/components/pro/proof-wall"
 import { EmailForm } from "@/components/site/email-form"
 import { FoundingBanner } from "@/components/site/founding-banner"
@@ -158,6 +159,7 @@ export default async function PricingPage() {
         </>
       ),
     },
+    { q: "Is there a lower price in my country?", a: "Yes, for Pro. Checkout lowers the price in countries where $99 is a lot to ask, down to about 30% of it in the lowest-income ones. It goes by your billing country, and the checkout page shows the exact price before you pay. The Team plan is the same everywhere." },
     { q: "How does the Team plan work?", a: `One Team licence is for one organisation and up to ${TEAM_SEATS} named people, for $${TEAM_PRICE} once ($${teamPerSeat()} each). Everyone uses the same licence key and private registry, and the invoice can carry your company name and tax ID. Need more than ${TEAM_SEATS}? Email ${FOUNDERS_EMAIL}.` },
   ]
 
@@ -210,6 +212,7 @@ export default async function PricingPage() {
                   {plan.save && <span className="bg-background/15 rounded-full px-2.5 py-0.5 text-xs font-semibold">{plan.save}</span>}
                 </div>
                 <p className={pro ? "mt-2 opacity-70" : "text-muted-foreground mt-2"}>{plan.note}</p>
+                {pro && onSale && !f && <CountryPrice price={Number(offer.price)} className="mt-3" />}
                 <ul className="mt-8 flex-1 space-y-3 text-sm">
                   {plan.features.map(([on, label]) => (
                     <li key={label} className={on ? "flex gap-3" : "flex gap-3 opacity-60"}>
