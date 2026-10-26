@@ -30,7 +30,7 @@ const flag = (n: string) => process.argv.includes(`--${n}`)
 export const THUMB = { width: 1280, heights: { blocks: 640, templates: 840 }, outWidth: 800 } as const
 export const MODES = ["light", "dark"] as const
 
-type Item = { name: string; category: string; tier: string; examples: { name: string }[] }
+type Item = { name: string; category: string; tier: string; examples: { name: string }[]; tags?: string[] }
 export const thumbDir = (tier: string) => (tier === "pro" ? join(ROOT, "registry/pro/thumbs") : join(ROOT, "apps/www/public/thumbs"))
 export const thumbFile = (name: string, mode: string) => `${name}.${mode}.webp`
 
@@ -48,13 +48,22 @@ const readManifest = (dir: string): Manifest => {
   }
 }
 
-async function render(context: BrowserContext, base: string, example: string, mode: string) {
+/** Heroes drawn by a shader or in 3D: they need a software GL in headless Chromium, a longer wait for their entrance, and a crop that frames the object. */
+const needsGl = (item: Item) => item.tags?.includes("3d") ?? false
+/** How far down the page the 640px thumbnail starts, for heroes whose subject sits below the headline. */
+const CROP_Y: Record<string, number> = { "hero-pro-22": 110, "hero-pro-25": 170, "hero-pro-24": 60, "hero-pro-23": 60, "hero-pro-21": 60, "hero-pro-26": 40 }
+
+async function render(context: BrowserContext, base: string, example: string, mode: string, wait = 400) {
   const page = await context.newPage()
   await page.addInitScript((m) => localStorage.setItem("bm-theme", m), mode)
+  await page.addInitScript(() => {
+    // Software renderers are slow: keep the full resolution, whatever the frame rate.
+    ;(window as unknown as { __ballmacGlFullResolution?: boolean }).__ballmacGlFullResolution = true
+  })
   await page.goto(`${base}/preview/${example}`, { waitUntil: "networkidle" })
   await page.evaluate(() => document.fonts.ready)
   await page.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}" })
-  await page.waitForTimeout(400)
+  await page.waitForTimeout(wait)
   return page
 }
 
@@ -67,7 +76,9 @@ async function main() {
   const [shard, shards] = (arg("shard") ?? "0/1").split("/").map(Number) as [number, number]
   const items = thumbItems(index).filter((_, n) => n % shards === shard)
 
-  const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined })
+  const executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined
+  const browser = await chromium.launch({ executablePath })
+  let glBrowser: Awaited<ReturnType<typeof chromium.launch>> | undefined
   const stale: string[] = []
   let done = 0
   for (const item of items) {
@@ -76,9 +87,14 @@ async function main() {
     const manifest = readManifest(dir)
     const example = item.examples[0]!.name
     const height = THUMB.heights[item.category as "blocks" | "templates"]
-    const context = await browser.newContext({ viewport: { width: THUMB.width, height }, deviceScaleFactor: 1 })
+    const gl = needsGl(item)
+    glBrowser ??= gl ? await chromium.launch({ executablePath, args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] }) : undefined
+    const cropY = gl ? (CROP_Y[item.name] ?? 0) : 0
+    const wait = gl ? 7000 : 400
+    // A 3D hero is laid out on a taller page so its whole composition exists, then cropped to the thumbnail size.
+    const context = await (gl ? glBrowser! : browser).newContext({ viewport: { width: THUMB.width, height: gl ? 900 : height }, deviceScaleFactor: 1 })
     try {
-      const probe = await render(context, base, example, "light")
+      const probe = await render(context, base, example, "light", gl ? 800 : 400)
       // Hash the markup with scripts and volatile attributes removed, so unchanged pages are skipped.
       const html = (await probe.content()).replace(/<script[\s\S]*?<\/script>/g, "").replace(/\s(?:id|aria-controls|aria-labelledby|for)="[^"]*(?:_R_|:r)[^"]*"/g, "")
       const hash = createHash("sha256").update(html).digest("hex").slice(0, 16)
@@ -94,8 +110,8 @@ async function main() {
       }
       await probe.close()
       for (const mode of MODES) {
-        const page = await render(context, base, example, mode)
-        const png = await page.screenshot({ clip: { x: 0, y: 0, width: THUMB.width, height } })
+        const page = await render(context, base, example, mode, wait)
+        const png = await page.screenshot({ clip: { x: 0, y: cropY, width: THUMB.width, height } })
         // Chromium encodes the WebP, so no image library is needed.
         const webp = await page.evaluate(
           async ({ b64, w }) => {
@@ -129,6 +145,7 @@ async function main() {
     }
   }
   await browser.close()
+  await glBrowser?.close()
   if (check) {
     if (stale.length) {
       console.error(`${stale.length} thumbnail(s) missing or out of date:\n  ${stale.join("\n  ")}\nRun: pnpm thumbs --base-url ${base}`)

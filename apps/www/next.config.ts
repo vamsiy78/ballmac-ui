@@ -1,3 +1,5 @@
+import { fileURLToPath } from "node:url"
+
 import { createMDX } from "fumadocs-mdx/next"
 import type { NextConfig } from "next"
 
@@ -12,9 +14,17 @@ import docsRedirects from "./content/docs-redirects.json"
 const exportBuild = process.env.BALLMAC_EXPORT === "1"
 const WORKER_DEV = process.env.BALLMAC_WORKER_URL || "http://127.0.0.1:8787"
 // Keep in step with run_worker_first in wrangler.jsonc.
-const workerRoutes = ["/go/:code", "/api/affiliates", "/api/affiliates/:path*", "/api/changelog-subscribe", "/api/checkout-click", "/api/docs-feedback", "/api/pro/:path*", "/api/reminders", "/api/sampler", "/api/stars", "/api/support", "/api/v1/license/:path*", "/api/v1/preset", "/r/pro/:path*", "/r/registry.json", "/r/:file(preset-.+)", "/r/:file(base-.+)", "/r/:style((?!pro$|base$|tests$)[a-z0-9-]+)/:file(.+\\.json)", "/themes/custom.json"]
+const workerRoutes = ["/go/:code", "/api/affiliates", "/api/affiliates/:path*", "/api/changelog-subscribe", "/api/checkout-click", "/api/docs-feedback", "/api/geo", "/api/pro/:path*", "/api/reminders", "/api/sampler", "/api/stars", "/api/support", "/api/v1/license/:path*", "/api/v1/preset", "/r/pro/:path*", "/r/registry.json", "/r/:file(preset-.+)", "/r/:file(base-.+)", "/r/:style((?!pro$|base$|tests$)[a-z0-9-]+)/:file(.+\\.json)", "/themes/custom.json"]
+
+// Shaders in the private Pro blocks are strings, which the minifier leaves as written; this shrinks them in the public bundles (see the loader).
+const glslLoader = fileURLToPath(new URL("./scripts/glsl-minify-loader.cjs", import.meta.url))
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    rules: {
+      "*.tsx": { condition: { all: [{ path: /registry\/pro\/ballmac\// }, { content: /void\s+main\s*\(/ }] }, loaders: [glslLoader], as: "*" },
+    },
+  },
   distDir: process.env.NEXT_DIST_DIR || ".next",
   transpilePackages: ["@ballmac-ui/metadata", "@ballmac-ui/theme-engine"],
   productionBrowserSourceMaps: false,

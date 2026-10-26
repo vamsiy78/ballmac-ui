@@ -7,7 +7,8 @@ import { notFound } from "next/navigation"
 import { CodePanel } from "@/components/site/code-panel"
 import { FoundingNudge } from "@/components/site/founding-nudge"
 import { ProCallout } from "@/components/site/pro-callout"
-import { ProCode } from "@/components/pro/pro-code"
+import { ProCode, ProPrompt } from "@/components/pro/pro-code"
+import { hasPrompt } from "@/lib/pro-prompts"
 import { ProBadge } from "@/components/site/pro-notice"
 import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
@@ -61,7 +62,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
           code={
             <div className="space-y-4 p-4">
               {isPro(item) ? (
-                <ProCode name={item.name} nudge={nudge} />
+                <ProCode name={item.name} nudge={nudge} hasPrompt={hasPrompt(item.name)} />
               ) : (
                 item.files.map((f) => <CodePanel key={f.path} code={readSource(f.source)} title={shownPath(f.target)} />)
               )}
@@ -74,6 +75,15 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
           <SectionHeading id="installation">Installation</SectionHeading>
           <ItemInstall item={item} />
         </section>
+        {isPro(item) && hasPrompt(item.name) && (
+          <section className="space-y-4">
+            <SectionHeading id="prompt">Build prompt</SectionHeading>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Every value of this block written out: layers, sizes at each breakpoint, motion timings, fallbacks and a checklist. Give it to an AI builder to recreate the block in any stack.
+            </p>
+            <ProPrompt name={item.name} nudge={nudge} />
+          </section>
+        )}
         {example && (
           <section className="space-y-4">
             <SectionHeading id="usage">Usage</SectionHeading>

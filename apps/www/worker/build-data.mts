@@ -21,6 +21,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, s
 import { join } from "node:path"
 
 import index from "@/lib/generated/index.json"
+import { readPrompt } from "@/lib/pro-prompts"
 import { proSourceFrom, type RawProItem } from "@/lib/pro-source"
 
 const www = join(import.meta.dirname, "..")
@@ -67,7 +68,7 @@ if (existsSync(src)) {
     // The code viewer and the sampler ask for items by name, never for examples.
     const name = file.replace(/\.json$/, "")
     if (!proNames.has(name)) continue
-    const source = await proSourceFrom(name, JSON.parse(raw) as RawProItem)
+    const source = await proSourceFrom(name, JSON.parse(raw) as RawProItem, readPrompt(name))
     if (!source) continue
     put(`items/${name}.json`, JSON.stringify(source))
     itemNames.push(name)

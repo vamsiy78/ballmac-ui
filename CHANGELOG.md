@@ -6,6 +6,16 @@ Ballmac UI ships as a registry, so each heading is a release or wave named by it
 
 This file is generated: edit the entries in `apps/www/content/changelog/` and run `pnpm changelog`. See CONTRIBUTING.md.
 
+## [2026-10-26-3d-heroes] - 2026-10-26
+
+**Six 3D heroes and build prompts.** Pro gains six full-screen 3D hero blocks drawn by shaders or CSS 3D, and every one of them comes with a build prompt you can paste into any AI builder.
+
+### Added
+
+- Six hero blocks for Pro: a ray-traced glass crystal, a 90,000-particle cloud that morphs between five shapes, liquid chrome in front of a giant word, a night flight over a river valley, a 3D ring of app screens you can throw, and an exploded product that takes itself apart as you scroll. Each follows the pointer, pauses off screen, stays still under reduced motion, and has a pause button.
+- A WebGL toolkit (`webgl` and `webgl-canvas`) for your own shader scenes: theme colors, the pointer and scroll progress arrive as uniforms, and the resolution lowers itself when frames run slow.
+- A "Build prompt" on every one of these blocks' pages: every value of the block written out, so an AI builder can recreate it in any stack. It is shown to Pro licence holders, like the source.
+
 ## [2026-10-25-free-and-pro] - 2026-10-25
 
 **Free and Pro, reorganised.** The free library keeps the everyday components, 46 complete screens, 3 templates and every theme, and most of the rest moved into Pro.

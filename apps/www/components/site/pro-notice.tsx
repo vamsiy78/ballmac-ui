@@ -6,15 +6,19 @@ import { NudgeText } from "@/components/site/founding-text"
 import type { Nudge } from "@/lib/founding"
 
 /** Shown instead of source code for Pro items: the preview stays public, the code ships through the Pro registry. */
-export function ProNotice({ className = "", nudge = null }: { className?: string; /** The founding-price line, when an offer is running (see nudgeText). */ nudge?: Nudge }) {
+export function ProNotice({ className = "", nudge = null, hasPrompt = false, prompt = false }: { className?: string; /** The founding-price line, when an offer is running (see nudgeText). */ nudge?: Nudge; /** This item also comes with a build prompt for AI builders. */ hasPrompt?: boolean; /** The notice stands in for the build prompt itself, not for the source. */ prompt?: boolean }) {
   return (
     <div className={`bg-muted/40 flex flex-col items-start gap-4 rounded-xl border p-6 sm:flex-row sm:items-center ${className}`}>
       <span className="bg-background flex size-10 shrink-0 items-center justify-center rounded-lg border" aria-hidden="true">
         <LockKeyhole className="size-5" />
       </span>
       <div className="min-w-0 flex-1">
-        <p className="font-medium">The source is part of Ballmac UI Pro.</p>
-        <p className="text-muted-foreground mt-1 text-sm">Log in with your licence key to read and copy it here, or install it through the shadcn CLI or the MCP server. You own the code once it is in your project.</p>
+        <p className="font-medium">{prompt ? "The build prompt is part of Ballmac UI Pro." : "The source is part of Ballmac UI Pro."}</p>
+        <p className="text-muted-foreground mt-1 text-sm">
+          {prompt
+            ? "Log in with your licence key to read and copy it here. It is the whole block written out, ready for Claude, Cursor, Lovable or v0."
+            : `Log in with your licence key to read and copy it here, or install it through the shadcn CLI or the MCP server. You own the code once it is in your project.${hasPrompt ? " It also comes with a detailed prompt that recreates it in any AI builder." : ""}`}
+        </p>
         {nudge && <p className="mt-2 text-sm font-semibold"><NudgeText nudge={nudge} /></p>}
       </div>
       <div className="flex shrink-0 gap-2">

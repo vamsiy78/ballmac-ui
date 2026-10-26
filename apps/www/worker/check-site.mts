@@ -171,6 +171,14 @@ if (key) {
     const body = (await res.json()) as { files?: { html?: string }[] }
     expect(body.files?.[0]?.html?.includes("<pre"), "no highlighted code")
   })
+  await check("Build prompt with the login, only on items that have one", async () => {
+    const res = await get("/api/pro/items/hero-pro-21", { headers: { cookie, origin } })
+    status(res, 200)
+    const body = (await res.json()) as { prompt?: string }
+    expect(body.prompt?.startsWith("# Prompt:"), "no build prompt")
+    const plain = (await (await get("/api/pro/items/hero-pro-1", { headers: { cookie, origin } })).json()) as { prompt?: string }
+    expect(plain.prompt === undefined, "an item without a prompt has one")
+  })
   await check("Pro download with the login", async () => {
     const res = await get("/api/pro/download/kits/ballmac-figma-tokens.tar.gz", { headers: { cookie, origin } })
     status(res, 200)

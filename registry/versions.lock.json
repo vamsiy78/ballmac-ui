@@ -35,6 +35,10 @@
     "version": "1.0.0",
     "hash": "13dc69b9d76b8f40ed60cc7634c8ea5c782114e6c6bec21e196ca8bd4c54632d"
   },
+  "animated-beam": {
+    "version": "1.0.0",
+    "hash": "3ae480050fc5bde9430535af1952dd3a51453cf0d38c3be200422f38359e458a"
+  },
   "animated-grid": {
     "version": "1.0.0",
     "hash": "2ea50b2c5e64e5468a45945056a94033958ffc0713ea8bace2f49fe6b90bb0a3"
@@ -62,6 +66,10 @@
   "app-shell-1": {
     "version": "1.0.0",
     "hash": "7431b529cfeeddb84b244f7e885607daeac75fba5172e18b37bf84bd1cce373b"
+  },
+  "app-window": {
+    "version": "1.0.1",
+    "hash": "ec62e29f1be60a79e32eb3c432d1dbb556e5a300c14997abeaa7d88ed69a440e"
   },
   "aspect-ratio": {
     "version": "1.0.0",
@@ -142,6 +150,10 @@
   "callout": {
     "version": "1.0.0",
     "hash": "f61d35978d3343895149938926b71e597533f21f34e4449d2cff80a58940412a"
+  },
+  "card": {
+    "version": "1.0.1",
+    "hash": "7e5cc7512e12d86eae1d560afb73946c04365ee909361a248074383e87fb29e7"
   },
   "careers-1": {
     "version": "1.0.1",
@@ -418,6 +430,10 @@
   "globe": {
     "version": "1.0.0",
     "hash": "1e50f5af14f93be6cd161e88e81954cc3713eeee1b76694eed382815d13f563c"
+  },
+  "glow-border": {
+    "version": "1.0.0",
+    "hash": "f13ab901d0c1235f26414a9c50cfc89cc2e98ff2dbf0ae9f28aed487e4d9cf6d"
   },
   "grid-pattern": {
     "version": "1.0.0",
@@ -962,21 +978,5 @@
   "waitlist-1": {
     "version": "1.0.0",
     "hash": "fa792f26762125e51121d1899520ab9a2d82db9018b60230e2a340f47f3d3473"
-  },
-  "animated-beam": {
-    "version": "1.0.0",
-    "hash": "3ae480050fc5bde9430535af1952dd3a51453cf0d38c3be200422f38359e458a"
-  },
-  "app-window": {
-    "version": "1.0.1",
-    "hash": "ec62e29f1be60a79e32eb3c432d1dbb556e5a300c14997abeaa7d88ed69a440e"
-  },
-  "card": {
-    "version": "1.0.1",
-    "hash": "7e5cc7512e12d86eae1d560afb73946c04365ee909361a248074383e87fb29e7"
-  },
-  "glow-border": {
-    "version": "1.0.0",
-    "hash": "f13ab901d0c1235f26414a9c50cfc89cc2e98ff2dbf0ae9f28aed487e4d9cf6d"
   }
 }

@@ -72,7 +72,7 @@ export async function logout() {
 }
 
 export type ProFile = { path: string; code: string; html: string }
-export type ProItem = { name: string; title?: string; description?: string; dependencies: string[]; registryDependencies: string[]; files: ProFile[] }
+export type ProItem = { name: string; title?: string; description?: string; dependencies: string[]; registryDependencies: string[]; files: ProFile[]; prompt?: string }
 
 const items = new Map<string, Promise<ProItem | null>>()
 /** The source of a Pro item for the logged-in buyer, or null when there is no valid session. Remembered for the page's lifetime. */
