@@ -21,7 +21,7 @@ import { endsLabel } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
 import { getOffer } from "@/lib/offer"
-import { CountryPrice } from "@/components/pro/country-price"
+import { CountryPrice, PriceText } from "@/components/pro/country-price"
 import { getBlocks, getItem, isPro, itemHref } from "@/lib/registry"
 import { SAMPLER_BLOCKS } from "@/lib/sampler"
 import { thumbFor } from "@/lib/thumbs"
@@ -120,7 +120,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
     return Boolean(i && isPro(i))
   })
   const deadline = f?.endsAt ? endsLabel(f.endsAt) : null
-  const buyLabel = offer.onSale && offer.price ? `Get Pro for $${offer.price}` : "See pricing"
+  const buyLabel = offer.onSale && offer.price ? (f ? `Get Pro for $${offer.price}` : <>Get Pro for <PriceText price={Number(offer.price)} /></>) : "See pricing"
   const buy = (where: string, className?: string) =>
     offer.onSale && offer.checkout ? (
       <CheckoutLink href={offer.checkout} className={cn(buttonVariants({ size: "lg", shape: "pill" }), className)}>
@@ -136,7 +136,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
 
   return (
     <>
-      {offer.onSale && offer.checkout && offer.price && <BuyDock href={offer.checkout} price={offer.price} />}
+      {offer.onSale && offer.checkout && offer.price && <BuyDock href={offer.checkout} price={offer.price} regional={!f} />}
       {f && <FoundingBanner offer={f} at={now.getTime()} href="#buy" />}
 
       {/* Hero */}
@@ -167,8 +167,8 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
                 </>
               ) : offer.onSale && offer.price ? (
                 <>
-                  <span className="text-foreground font-medium">${offer.price} once</span>, tax included. No subscription.
-                  <CountryPrice price={Number(offer.price)} className="text-foreground mt-2" />
+                  <span className="text-foreground font-medium"><PriceText price={Number(offer.price)} /> once</span>, tax included. No subscription.
+                  <CountryPrice price={Number(offer.price)} className="text-foreground mt-3 max-w-md" />
                 </>
               ) : (
                 "One payment. No subscription."

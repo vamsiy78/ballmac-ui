@@ -6,6 +6,7 @@ import Link from "@/components/site/link"
 import { buttonVariants } from "@/components/ballmac/button"
 import { AiBento } from "@/components/home/ai-bento"
 import { CheckoutLink } from "@/components/pro/checkout-link"
+import { CountryPrice, PriceDisplay, PriceText } from "@/components/pro/country-price"
 import { Themed } from "@/components/pro/shots"
 import { CopyButton } from "@/components/site/copy-button"
 import { FooterVideo } from "@/components/site/footer-video"
@@ -228,10 +229,11 @@ export default async function Home() {
                 {founding && <span className="rounded-full border border-current/25 px-2.5 py-0.5 text-xs font-medium">Founding price</span>}
               </div>
               <p className={cn("mt-8 flex flex-wrap items-baseline gap-x-4 font-semibold tracking-[-0.06em]", proPrice ? "text-7xl sm:text-8xl" : "text-5xl sm:text-6xl")}>
-                {proPrice ?? "One payment"}
+                {proPrice ? (founding ? proPrice : <PriceDisplay price={Number(offer.price)} />) : "One payment"}
                 {founding?.listPrice && <span className="text-3xl font-medium tracking-normal line-through opacity-50"><span className="sr-only">Regular price </span>${founding.listPrice}</span>}
               </p>
               <p className="mt-1 text-sm opacity-65">{proPrice ? "One payment, tax included. One person." : "One payment. One person."}</p>
+              {proPrice && !founding && <CountryPrice price={Number(offer.price)} className="mt-4 max-w-md" />}
               <ul className="mt-9 grid gap-x-8 gap-y-3 text-[15px] sm:grid-cols-2">
                 {[`${proBlocks.length} more screens`, "3 starter apps", "Private registry for CLI and agent", "Figma tokens", "Every future Pro update", `${REFUND_FIX_DAYS}-day fix-or-refund`].map((t) => (
                   <li key={t} className="flex gap-3"><Check className="mt-0.5 size-4 shrink-0" aria-hidden="true" />{t}</li>
@@ -247,7 +249,7 @@ export default async function Home() {
               <div className="mt-auto pt-10">
                 {offer.onSale && offer.checkout ? (
                   <CheckoutLink href={offer.checkout} plan="pro" className={cn(buttonVariants({ variant: "secondary", shape: "pill", size: "lg" }), "h-13 w-full text-base sm:w-auto sm:px-10")}>
-                    Get Pro for {proPrice}
+                    Get Pro for {founding ? proPrice : <PriceText price={Number(offer.price)} />}
                   </CheckoutLink>
                 ) : (
                   <Link href="/pricing?utm_source=ballmac-ui&utm_medium=home-plans&utm_campaign=pro#plans" className={cn(buttonVariants({ variant: "secondary", shape: "pill", size: "lg" }), "h-13 w-full text-base sm:w-auto sm:px-10")}>
