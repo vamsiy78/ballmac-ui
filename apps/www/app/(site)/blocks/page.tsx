@@ -5,8 +5,11 @@ import { JsonLd } from "@/components/site/json-ld"
 import { collection } from "@/lib/schema"
 import { BlocksBrowser } from "@/components/site/blocks-browser"
 import { PageCard } from "@/components/site/page-card"
+import { MotionStrip } from "@/components/site/motion-strip"
 import { ProCallout } from "@/components/site/pro-callout"
 import { loadThumb } from "@/lib/examples"
+import { isMotionBlock } from "@/lib/blocks-filter"
+import { motionCollection } from "@/lib/motion-collection"
 import { thumbFor } from "@/lib/thumbs"
 import { blockCategoryLabels, blockGroups, getBlocks, isNew } from "@/lib/registry"
 
@@ -71,6 +74,7 @@ export default async function BlocksPage() {
         )
       }
 
+  const motionSet = motionCollection(blocks)
   const featured = START_HERE.map((f) => ({ ...f, block: blocks.find((b) => b.name === f.name) })).filter((f) => f.block)
 
   return (
@@ -85,7 +89,7 @@ export default async function BlocksPage() {
       </header>
       <BlocksBrowser
         groups={groups.map((g) => ({ id: g.id, label: g.label, description: g.description, sections: g.sections.map((s) => ({ id: s.id, label: s.label, items: s.items.map((b) => b.name) })) }))}
-        items={blocks.map((b) => ({ name: b.name, pro: b.tier === "pro", isNew: isNew(b), text: `${b.title} ${b.name} ${b.description} ${groupLabel.get(b.blockCategory ?? "") ?? ""} ${b.tags?.join(" ") ?? ""}`.toLowerCase() }))}
+        items={blocks.map((b) => ({ name: b.name, pro: b.tier === "pro", isNew: isNew(b), motion: isMotionBlock(b.tags), text: `${b.title} ${b.name} ${b.description} ${groupLabel.get(b.blockCategory ?? "") ?? ""} ${b.tags?.join(" ") ?? ""}`.toLowerCase() }))}
         cards={cards}
         featured={
           <section aria-labelledby="start-here" className="mt-14">
@@ -105,6 +109,7 @@ export default async function BlocksPage() {
                 </div>
               ))}
             </div>
+            <MotionStrip className="mt-16" picks={motionSet.picks} total={motionSet.all.length} />
           </section>
         }
         interlude={<ProCallout where="blocks" className="mx-auto mt-20 max-w-4xl" />}

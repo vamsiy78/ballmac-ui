@@ -6,12 +6,14 @@ import { proProduct } from "@/lib/schema"
 import { getOffer } from "@/lib/offer"
 import { TEAM_PRICE, TEAM_SEATS } from "@/lib/pro-team"
 import { ReferralNotice } from "@/components/affiliates/referral-notice"
+import { MotionStrip } from "@/components/site/motion-strip"
 import { ProHub } from "@/components/pro/pro-hub"
 import { ProSales } from "@/components/pro/pro-sales"
 import { PageCard } from "@/components/site/page-card"
 import Link from "@/components/site/link"
 import { proDownloads } from "@/lib/pro-downloads"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
+import { motionCollection } from "@/lib/motion-collection"
 import { getBlocks, isPro, itemHref } from "@/lib/registry"
 import { thumbFor } from "@/lib/thumbs"
 
@@ -39,6 +41,7 @@ export default async function ProPage() {
   const offer = await getOffer(new Date())
   const downloads = proDownloads()
   const picks = showcase(6)
+  const motion = motionCollection(getBlocks())
 
   return (
     <Suspense fallback={null}>
@@ -61,6 +64,7 @@ export default async function ProPage() {
             </div>
           </section>
         )}
+        {motion.picks.length > 0 && <MotionStrip className="mx-auto max-w-[1100px] px-4 pb-16 sm:px-6" picks={motion.picks} total={motion.all.length} />}
       </ProHub>
     </Suspense>
   )

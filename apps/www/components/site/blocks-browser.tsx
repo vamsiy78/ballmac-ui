@@ -60,17 +60,19 @@ export function BlocksBrowser({
   interlude: React.ReactNode
 }) {
   const searchId = React.useId()
-  const { q, access, onlyNew } = useUrlFilters()
+  const { q, access, onlyNew, motion } = useUrlFilters()
   const setQ = (v: string) => updateFilters({ q: v })
   const setAccess = (v: Access) => updateFilters({ access: v })
   const setOnlyNew = (fn: (v: boolean) => boolean) => updateFilters({ onlyNew: fn(onlyNew) })
+  const setMotion = (fn: (v: boolean) => boolean) => updateFilters({ motion: fn(motion) })
 
   const words = q.toLowerCase().split(/\s+/).filter(Boolean)
-  const filtered = React.useMemo(() => filterGroups(groups, items, { q, access, onlyNew }), [groups, items, q, access, onlyNew])
+  const filtered = React.useMemo(() => filterGroups(groups, items, { q, access, onlyNew, motion }), [groups, items, q, access, onlyNew, motion])
   const total = filtered.reduce((n, g) => n + g.sections.reduce((m, s) => m + s.items.length, 0), 0)
-  const active = words.length > 0 || access !== "all" || onlyNew
-  const clear = () => updateFilters({ q: "", access: "all", onlyNew: false })
+  const active = words.length > 0 || access !== "all" || onlyNew || motion
+  const clear = () => updateFilters({ q: "", access: "all", onlyNew: false, motion: false })
   const counts = { free: items.filter((i) => !i.pro).length, pro: items.filter((i) => i.pro).length }
+  const motionCount = items.filter((i) => i.motion).length
 
   return (
     <>
@@ -120,6 +122,20 @@ export function BlocksBrowser({
           >
             New
           </button>
+          {motionCount > 0 && (
+            <button
+              type="button"
+              aria-pressed={motion}
+              onClick={() => setMotion((v) => !v)}
+              className={cn(
+                "focus-visible:ring-ring/50 h-9 rounded-lg border px-3 text-[13px] font-medium outline-none transition-colors focus-visible:ring-[3px]",
+                motion ? "bg-foreground text-background border-foreground" : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              )}
+            >
+              3D &amp; motion
+              <span className="ms-1.5 text-[11px] tabular-nums">{motionCount}</span>
+            </button>
+          )}
         </div>
         <ul className="mt-2.5 flex gap-1.5 overflow-x-auto [scrollbar-width:none] md:flex-wrap" aria-label="Jump to a group">
           {filtered.map((g) => (
