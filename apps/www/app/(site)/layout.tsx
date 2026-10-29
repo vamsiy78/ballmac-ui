@@ -1,3 +1,4 @@
+import { RecoveryOffer } from "@/components/pro/recovery-offer"
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteHeader } from "@/components/site/site-header"
 
@@ -10,6 +11,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <SiteHeader />
       <main className="flex-1" data-gallery>{children}</main>
       <SiteFooter />
+      <RecoveryOffer />
       {/* Page views for the site itself. Not in the root layout: the /preview pages are embedded as iframes all over the galleries and would be counted too. */}
       {cfBeacon ? <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: cfBeacon })} /> : null}
     </>

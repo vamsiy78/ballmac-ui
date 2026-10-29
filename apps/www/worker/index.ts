@@ -12,6 +12,7 @@ import { offerWatch } from "./offer-watch"
 import * as apiPreset from "./routes/api-preset"
 import * as changelogSubscribe from "./routes/changelog-subscribe"
 import * as checkoutClick from "./routes/checkout-click"
+import * as checkout from "./routes/checkout"
 import * as docsFeedback from "./routes/docs-feedback"
 import * as licenseVerify from "./routes/license-verify"
 import { kits, starters } from "./routes/pro-archives"
@@ -53,6 +54,10 @@ const ROUTES: [URLPattern, Methods][] = [
   ["/api/pro/download/:dir/:file", proDownload],
   ["/api/changelog-subscribe", changelogSubscribe],
   ["/api/checkout-click", checkoutClick],
+  ["/api/checkout/pro", { GET: checkout.start }],
+  ["/api/checkout/back", { GET: checkout.back }],
+  ["/api/checkout/offer", { GET: checkout.offer }],
+  ["/api/checkout/claim", { GET: checkout.claim }],
   ["/api/docs-feedback", docsFeedback],
   ["/api/reminders", reminders],
   ["/api/sampler", sampler],

@@ -2,6 +2,8 @@
 
 import * as React from "react"
 
+import { OFFER_USED_KEY } from "@/lib/checkout-offer"
+import { STANDING_CHECKOUT } from "@/lib/limited-offer"
 import { withRedirect } from "@/lib/pro-checkout"
 
 /** Provider link with a same-site return address and server-validated partner discount. */
@@ -36,8 +38,19 @@ export function CheckoutLink({ href, children, onClick, plan = "pro", ...props }
     check().then(setReferral).catch(() => {})
   }, [check])
   const base = href ?? ""
+  // The regular Pro checkout goes through the Worker, which starts the session whose back button leads to the one-time offer (worker/routes/checkout.ts). The
+  // static link stays in the page (crawlers and no-script visitors use it) and is swapped for the Worker's address only once someone reaches for it.
+  const viaSession = plan === "pro" && STANDING_CHECKOUT !== "" && base === STANDING_CHECKOUT
+  const plainTarget = () => {
+    if (!viaSession) return withRedirect(base, window.location.origin)
+    let used = false
+    try {
+      used = window.localStorage.getItem(OFFER_USED_KEY) === "1"
+    } catch {}
+    return used ? "/api/checkout/pro?o=0" : "/api/checkout/pro"
+  }
   const update = (e: React.SyntheticEvent<HTMLAnchorElement>) => {
-    e.currentTarget.href = referral ? "/api/affiliates/checkout" : withRedirect(base, window.location.origin)
+    e.currentTarget.href = referral ? "/api/affiliates/checkout" : plainTarget()
   }
   async function click(e: React.MouseEvent<HTMLAnchorElement>) {
     onClick?.(e)
@@ -52,7 +65,7 @@ export function CheckoutLink({ href, children, onClick, plan = "pro", ...props }
     e.preventDefault()
     try {
       const active = await check()
-      const destination = active ? "/api/affiliates/checkout" : withRedirect(base, window.location.origin)
+      const destination = active ? "/api/affiliates/checkout" : plainTarget()
       window.location.assign(new URL(destination, window.location.origin).toString())
     } catch {
       // If the referral check is down, a buyer must still reach the checkout; the plain link only costs a partner's discount.
