@@ -1,8 +1,8 @@
 import Link from "@/components/site/link"
 
-import { FooterVideo } from "@/components/site/footer-video"
 import { Logo } from "@/components/site/logo"
 import { BUILT_WITH } from "@/lib/built-with"
+import { STANDING_PRICE } from "@/lib/limited-offer"
 import { getBlocks, getComponents, isPro } from "@/lib/registry"
 
 type FooterLink = { href: string; label: string }
@@ -60,7 +60,7 @@ export function SiteFooter() {
   return (
     <footer className="bm-footer">
       <div className="bm-footer__stage" aria-hidden="true">
-        <FooterVideo src="/footer/meadow.mp4" poster="/footer/meadow.jpg" />
+        <div className="bm-grain absolute inset-0" />
       </div>
       <p className="bm-footer__wordmark" aria-hidden="true">Ballmac</p>
       <div className="bm-footer__fog" aria-hidden="true" />
@@ -77,6 +77,7 @@ export function SiteFooter() {
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
           </Link>
+          {STANDING_PRICE && <Link href="/pro?utm_source=ballmac-ui&utm_medium=footer&utm_campaign=pro" className="bm-footer__pro">Pro, ${STANDING_PRICE} once →</Link>}
           <p className="bm-footer__copy">
             © 2026 Ballmac · <Link href="/license/pro">Pro licence</Link> · <Link href="/refund">Refunds</Link> · <Link href="/license">MIT licence</Link>
           </p>

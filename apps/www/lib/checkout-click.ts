@@ -3,7 +3,7 @@
  * address, no IP, no cookie. The page, the campaign tags, the site they came from and the country (from Cloudflare's own header) are enough to see what works.
  * No framework imports.
  */
-export const PLANS = { pro: "Pro", team: "Team" } as const
+export const PLANS = { pro: "Pro", team: "Team", monthly: "Pro monthly" } as const
 export type Plan = keyof typeof PLANS
 
 export type CheckoutClick = { plan: Plan; page: string; utm?: string; from?: string }
@@ -14,7 +14,7 @@ const tag = (v: unknown) => (typeof v === "string" && /^[A-Za-z0-9_.:-]{1,60}$/.
 export function parseClick(raw: unknown): CheckoutClick | null {
   if (!raw || typeof raw !== "object") return null
   const { plan, page, utm, from } = raw as Record<string, unknown>
-  if (plan !== "pro" && plan !== "team") return null
+  if (plan !== "pro" && plan !== "team" && plan !== "monthly") return null
   if (typeof page !== "string" || page.length > 200 || !/^\/[A-Za-z0-9/_.-]*$/.test(page) || page.includes("..")) return null
   const campaign = typeof utm === "string" ? utm.split("/").map(tag).filter(Boolean).slice(0, 3).join(" / ") : ""
   const host = typeof from === "string" && /^[a-z0-9.-]{3,80}$/i.test(from) ? from.toLowerCase() : undefined

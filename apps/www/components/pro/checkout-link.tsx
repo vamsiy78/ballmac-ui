@@ -9,7 +9,7 @@ import { withRedirect } from "@/lib/pro-checkout"
  * Tells the Worker that someone is leaving for the checkout, so the owner is emailed (see worker/routes/checkout-click.ts). It sends no personal data and never
  * delays or blocks the click. Once per page view and plan.
  */
-function notifyClick(plan: "pro" | "team") {
+function notifyClick(plan: "pro" | "team" | "monthly") {
   try {
     const q = new URLSearchParams(window.location.search)
     const utm = ["utm_source", "utm_medium", "utm_campaign"].map((k) => q.get(k) ?? "").join("/").replace(/^\/+|\/+$/g, "")
@@ -22,7 +22,7 @@ function notifyClick(plan: "pro" | "team") {
   } catch {}
 }
 
-export function CheckoutLink({ href, children, onClick, plan = "pro", ...props }: React.ComponentProps<"a"> & { plan?: "pro" | "team" }) {
+export function CheckoutLink({ href, children, onClick, plan = "pro", ...props }: React.ComponentProps<"a"> & { plan?: "pro" | "team" | "monthly" }) {
   const told = React.useRef(false)
   const [referral, setReferral] = React.useState<boolean | null>(null)
   const check = React.useCallback(async () => {

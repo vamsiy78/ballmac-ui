@@ -5,7 +5,11 @@ import Link from "@/components/site/link"
 import { Button } from "@/components/ballmac/button"
 import { BuildCost } from "@/components/pro/build-cost"
 import { CheckoutLink } from "@/components/pro/checkout-link"
-import { CountryPrice, PriceText, PriceDisplay } from "@/components/pro/country-price"
+import { PriceText, PriceDisplay } from "@/components/pro/price"
+import { LimitedOfferBanner } from "@/components/site/limited-offer-banner"
+import { regularPrice } from "@/lib/limited-offer"
+import { MonthlyOption } from "@/components/pro/monthly-option"
+import { MONTHLY_CHECKOUT, MONTHLY_PRICE } from "@/lib/pro-monthly"
 import { ProofWall } from "@/components/pro/proof-wall"
 import { EmailForm } from "@/components/site/email-form"
 import { FoundingBanner } from "@/components/site/founding-banner"
@@ -50,6 +54,7 @@ export default async function PricingPage() {
   const offer = await getOffer(now)
   const f = offer.founding
   const onSale = offer.onSale
+  const regular = !f && onSale ? regularPrice(offer.price) : null
   // The Team plan is always shown. Until its Dodo product exists (NEXT_PUBLIC_PRO_TEAM_CHECKOUT_URL), the button writes to us instead.
   const teamOnSale = Boolean(onSale && TEAM_CHECKOUT)
   const save = f?.listPrice ? Number(f.listPrice) - Number(f.price) : 0
@@ -159,7 +164,7 @@ export default async function PricingPage() {
         </>
       ),
     },
-    { q: "Is there a lower price in my country?", a: "Yes, for Pro. In many countries the price is lower, and the page shows yours under the $99. Checkout applies it by your billing country and shows the exact price before you pay. The Team plan is the same everywhere." },
+    ...(MONTHLY_CHECKOUT ? [{ q: "Can I pay monthly instead?", a: `Yes, when the monthly plan is on sale: $${MONTHLY_PRICE} a month, cancel anytime. It gives the same Pro library for as long as the subscription is active; if it ends, your key stops unlocking new downloads. The one-time licence has no end date.` }] : []),
     { q: "How does the Team plan work?", a: `One Team licence is for one organisation and up to ${TEAM_SEATS} named people, for $${TEAM_PRICE} once ($${teamPerSeat()} each). Everyone uses the same licence key and private registry, and the invoice can carry your company name and tax ID. Need more than ${TEAM_SEATS}? Email ${FOUNDERS_EMAIL}.` },
   ]
 
@@ -167,6 +172,7 @@ export default async function PricingPage() {
     <>
       <JsonLd graph={[...(onSale ? [proProduct({ path: "/pricing", description: "Finished app blocks, starter apps, a private shadcn registry and Figma tokens for React and Tailwind. Pay once, every future Pro update included.", pro: { price: String(offer.price), url: offer.checkout ?? undefined }, team: { price: TEAM_PRICE, seats: TEAM_SEATS } })] : []), faqPage(faqs.flatMap((x) => (typeof x.a === "string" ? [{ q: x.q, text: x.a }] : [])))]} />
       {f && <FoundingBanner offer={f} at={now.getTime()} href="#plans" />}
+      {regular && offer.price && <LimitedOfferBanner price={offer.price} regular={regular} href="#plans" />}
       <div className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6">
         <header className="mx-auto max-w-2xl space-y-4 text-center">
           <div className="flex justify-center">
@@ -195,7 +201,8 @@ export default async function PricingPage() {
           {plans.map((plan) => {
             const pro = plan.name === "Pro"
             return (
-              <div key={plan.name} className={pro ? "bg-foreground text-background flex flex-col rounded-2xl p-8" : "bg-card flex flex-col rounded-2xl border p-8"}>
+              // On a phone the cards stack, so Pro goes first: otherwise the plan most people should buy sits a full screen below the free one.
+              <div key={plan.name} className={pro ? "bg-foreground text-background order-first flex flex-col rounded-2xl p-8 lg:order-none" : "bg-card flex flex-col rounded-2xl border p-8"}>
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-semibold">{plan.name}</h2>
                   {pro && !onSale && <span className="rounded-full border border-current/20 px-2 py-0.5 text-xs font-medium opacity-80">Coming soon</span>}
@@ -208,11 +215,10 @@ export default async function PricingPage() {
                       {plan.was}
                     </p>
                   )}
-                  <p className="text-5xl font-semibold tracking-[-0.04em]">{pro && onSale && !f ? <PriceDisplay price={Number(offer.price)} /> : plan.price}</p>
+                  <p className="text-5xl font-semibold tracking-[-0.04em]">{pro && onSale && !f ? <PriceDisplay price={Number(offer.price)} was={regular} /> : plan.price}</p>
                   {plan.save && <span className="bg-background/15 rounded-full px-2.5 py-0.5 text-xs font-semibold">{plan.save}</span>}
                 </div>
                 <p className={pro ? "mt-2 opacity-70" : "text-muted-foreground mt-2"}>{plan.note}</p>
-                {pro && onSale && !f && <CountryPrice price={Number(offer.price)} className="mt-3" />}
                 <ul className="mt-8 flex-1 space-y-3 text-sm">
                   {plan.features.map(([on, label]) => (
                     <li key={label} className={on ? "flex gap-3" : "flex gap-3 opacity-60"}>
@@ -230,6 +236,7 @@ export default async function PricingPage() {
                     <a href="https://x.com/ballmacapps">Get launch news on X</a>
                   </Button>
                 )}
+                {pro && onSale && <MonthlyOption className="mt-5" />}
                 {pro && onSale && (
                   <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs opacity-75">
                     <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
@@ -272,7 +279,7 @@ export default async function PricingPage() {
           </div>
           <BuildCost
             className="mt-10"
-            price={Number(offer.price) || 99}
+            price={Number(offer.price) || 29}
             action={
               onSale && offer.checkout ? (
                 <Button asChild size="lg" shape="pill">

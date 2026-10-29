@@ -21,7 +21,11 @@ import { endsLabel } from "@/lib/founding"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
 import { getOffer } from "@/lib/offer"
-import { CountryPrice, PriceText } from "@/components/pro/country-price"
+import { PriceText } from "@/components/pro/price"
+import { MonthlyOption } from "@/components/pro/monthly-option"
+import { MONTHLY_CHECKOUT, MONTHLY_PRICE } from "@/lib/pro-monthly"
+import { LimitedOfferBanner } from "@/components/site/limited-offer-banner"
+import { regularPrice } from "@/lib/limited-offer"
 import { getBlocks, getItem, isPro, itemHref } from "@/lib/registry"
 import { SAMPLER_BLOCKS } from "@/lib/sampler"
 import { thumbFor } from "@/lib/thumbs"
@@ -72,7 +76,7 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
     q: "What exactly do I get?",
     a: "Every Pro block, the three starter apps (Beacon, Quire and Cove), a private registry for the shadcn CLI and the MCP server, twelve themes with Figma design tokens, and every future Pro update for your licence key.",
   },
-  { q: "Is it a subscription?", a: "No. You pay once. Future updates to Ballmac UI Pro are included for your licence key." },
+  { q: "Is it a subscription?", a: `The Pro licence is not: you pay once and future updates to Ballmac UI Pro are included for your licence key.${MONTHLY_CHECKOUT ? ` If you would rather spread the cost, there is also a $${MONTHLY_PRICE} a month plan that gives Pro while it is active and can be cancelled anytime.` : ""}` },
   { q: "Do I need an account?", a: "No. The licence key in your purchase email is your login. Paste it on the Pro log in page to read and copy any block, download the starter apps and get install commands with your key already in them." },
   { q: "Will it work with my stack?", a: "Blocks are React and Tailwind and install through the shadcn CLI, so they go wherever shadcn does: Next.js, Vite, Remix and others. Beacon and Quire are Next.js apps. Cove is a Tauri app with a Vite front end." },
   { q: "Can my AI agent use it?", a: "Yes. Pro installs through the same shadcn CLI and MCP server as the free library. Add your key once and Claude Code, Cursor, Codex or VS Code can search and install Pro blocks for you." },
@@ -107,6 +111,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
   const now = new Date()
   const offer = await getOffer(now)
   const f = offer.founding
+  const regular = !f && offer.onSale ? regularPrice(offer.price) : null
   const proBlocks = getBlocks().filter(isPro)
   const total = proBlocks.length || 150
   const starters = downloads.starters.length || 3
@@ -136,8 +141,9 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
 
   return (
     <>
-      {offer.onSale && offer.checkout && offer.price && <BuyDock href={offer.checkout} price={offer.price} regional={!f} />}
+      {offer.onSale && offer.checkout && offer.price && <BuyDock href={offer.checkout} price={offer.price} />}
       {f && <FoundingBanner offer={f} at={now.getTime()} href="#buy" />}
+      {regular && offer.price && <LimitedOfferBanner price={offer.price} regular={regular} href="#buy" />}
 
       {/* Hero */}
       <section className="dark relative isolate overflow-hidden bg-[#09090d] text-white" aria-labelledby="pro-h">
@@ -167,13 +173,14 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
                 </>
               ) : offer.onSale && offer.price ? (
                 <>
-                  <span className="text-foreground font-medium"><PriceText price={Number(offer.price)} /> once</span>, tax included. No subscription.
-                  <CountryPrice price={Number(offer.price)} className="text-foreground mt-3 max-w-md" />
+                  <span className="text-foreground font-medium"><PriceText price={Number(offer.price)} /> once</span>
+                  {regular && <> <s><span className="sr-only">regular price </span>${regular}</s></>}, tax included. Yours to keep, with every future update.
                 </>
               ) : (
                 "One payment. No subscription."
               )}
             </p>
+            {!f && offer.onSale && offer.price && <MonthlyOption className="text-foreground mt-5 max-w-sm" />}
             <p className="text-muted-foreground mt-2 text-[13px]">
               By buying you agree to the{" "}
               <a href={PRO_LICENCE_PATH} className="text-foreground underline underline-offset-4">Pro licence</a>.
@@ -274,7 +281,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
         </Heading>
         <BuildCost
           className="mt-12"
-          price={Number(offer.price) || 99}
+          price={Number(offer.price) || 29}
           action={
             offer.onSale && offer.checkout ? (
               <CheckoutLink href={offer.checkout} className={buttonVariants({ size: "lg", shape: "pill" })}>
@@ -525,6 +532,7 @@ export async function ProSales({ downloads }: { downloads: { starters: { slug: s
               Compare plans, or get Team for ${TEAM_PRICE} (up to {TEAM_SEATS} people)
             </Link>
           </div>
+          {offer.onSale && !f && <MonthlyOption className="mx-auto mt-8 max-w-sm" />}
           <p className="mx-auto mt-6 flex items-center justify-center gap-2 text-xs opacity-70">
             <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
             Tax is included in the price, and your invoice is sent for you.

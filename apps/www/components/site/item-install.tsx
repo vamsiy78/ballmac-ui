@@ -33,15 +33,15 @@ export function ItemInstall({ item }: { item: SiteItem }) {
   if (isPro(item)) {
     return (
       <Steps>
+        <Step title="Get a Pro licence key.">
+          <ProNotice />
+        </Step>
         <Step title="Once per project: add the Pro registry and your licence key.">
           <CodePanel lang="json" title="components.json" code={PRO_REGISTRY_SNIPPET} />
           <CodePanel lang="bash" title=".env.local" code="BALLMAC_LICENSE_KEY=your-licence-key" />
         </Step>
         <Step title="Add it.">
           <InstallTabs commands={perPm((pm) => addCommand([item.name], pm))} />
-        </Step>
-        <Step title="Need a licence or help with setup?">
-          <ProNotice />
         </Step>
       </Steps>
     )

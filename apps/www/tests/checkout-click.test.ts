@@ -33,6 +33,7 @@ describe("parseClick", () => {
   it("accepts a plan with a site path, campaign tags and a referrer host", () => {
     expect(parseClick(click)).toEqual({ plan: "pro", page: "/pro", utm: "ballmac-ui / home-hero / hero", from: "www.reddit.com" })
     expect(parseClick({ plan: "team", page: "/pricing" })).toEqual({ plan: "team", page: "/pricing" })
+    expect(parseClick({ plan: "monthly", page: "/pricing" })).toEqual({ plan: "monthly", page: "/pricing" })
   })
   it("refuses an unknown plan, a page that is not a path on this site, or junk", () => {
     for (const bad of [null, "x", {}, { plan: "free", page: "/pro" }, { plan: "pro", page: "https://evil.test/" }, { plan: "pro", page: "/a/../b" }, { plan: "pro", page: "/pro?x=<script>" }]) expect(parseClick(bad)).toBeNull()

@@ -12,7 +12,6 @@ import { offerWatch } from "./offer-watch"
 import * as apiPreset from "./routes/api-preset"
 import * as changelogSubscribe from "./routes/changelog-subscribe"
 import * as checkoutClick from "./routes/checkout-click"
-import * as geo from "./routes/geo"
 import * as docsFeedback from "./routes/docs-feedback"
 import * as licenseVerify from "./routes/license-verify"
 import { kits, starters } from "./routes/pro-archives"
@@ -55,7 +54,6 @@ const ROUTES: [URLPattern, Methods][] = [
   ["/api/changelog-subscribe", changelogSubscribe],
   ["/api/checkout-click", checkoutClick],
   ["/api/docs-feedback", docsFeedback],
-  ["/api/geo", { GET: geo.GET }],
   ["/api/reminders", reminders],
   ["/api/sampler", sampler],
   ["/api/stars", stars],

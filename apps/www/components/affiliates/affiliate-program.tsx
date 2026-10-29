@@ -148,16 +148,16 @@ export function AffiliateProgram({ productProof }: { productProof: React.ReactNo
               </div>
               <div className="rounded-xl bg-muted/60 p-4">
                 <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="text-muted-foreground">One $99 Pro purchase</span>
-                  <span className="shrink-0 whitespace-nowrap font-mono tabular-nums">$89.10 for them</span>
+                  <span className="text-muted-foreground">One $49 Pro purchase</span>
+                  <span className="shrink-0 whitespace-nowrap font-mono tabular-nums">$44.10 for them</span>
                 </div>
                 <div className="mt-3 flex items-center justify-between gap-4">
                   <span className="font-medium">You earn</span>
-                  <span className="font-mono text-xl font-semibold tabular-nums">$26.73</span>
+                  <span className="font-mono text-xl font-semibold tabular-nums">$13.23</span>
                 </div>
               </div>
               <p className="text-muted-foreground text-xs leading-relaxed">
-                Example at the regular $99 price. Commission is calculated after the discount, before tax.
+                Example at the $49 Pro price. Commission is calculated after the discount, before tax.
               </p>
             </div>
           </div>
@@ -236,11 +236,11 @@ export function AffiliateProgram({ productProof }: { productProof: React.ReactNo
               aria-live="polite"
               className="text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl"
             >
-              {usd(commissionCents(8910) * sales)}
+              {usd(commissionCents(4410) * sales)}
             </output>
           </div>
           <p className="text-muted-foreground mt-4 text-xs leading-relaxed">
-            Illustration based on $99 Pro, less the 10% discount. This is an estimate, not a promise of
+            Illustration based on $49 Pro, less the 10% discount. This is an estimate, not a promise of
             earnings.
           </p>
         </div>

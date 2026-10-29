@@ -5,7 +5,7 @@ import { ArrowRight, X } from "lucide-react"
 
 import { buttonVariants } from "@/components/ballmac/button"
 import { CheckoutLink } from "@/components/pro/checkout-link"
-import { PriceText } from "@/components/pro/country-price"
+import { PriceText } from "@/components/pro/price"
 import { cn } from "@/lib/utils"
 
 const key = "ballmac-buy-dock-closed"
@@ -14,7 +14,7 @@ const key = "ballmac-buy-dock-closed"
  * A slim bar that keeps the purchase one tap away once someone has scrolled past the first screen of the Pro page. It steps aside while the buy
  * section itself is in view, can be dismissed for the session, and is hidden from print. Without storage it simply comes back on reload.
  */
-export function BuyDock({ href, price, regional = true }: { href: string; price: string; regional?: boolean }) {
+export function BuyDock({ href, price }: { href: string; price: string }) {
   const [past, setPast] = React.useState(false)
   const [atBuy, setAtBuy] = React.useState(false)
   const [closed, setClosed] = React.useState(false)
@@ -52,7 +52,7 @@ export function BuyDock({ href, price, regional = true }: { href: string; price:
     >
       <p className="min-w-0 flex-1 text-sm leading-tight">
         <span className="font-semibold">Ballmac UI Pro</span>
-        <span className="text-muted-foreground block truncate text-xs"><PriceText price={Number(price)} regional={regional} /> once · tax included · money back if it does not work</span>
+        <span className="text-muted-foreground block truncate text-xs"><PriceText price={Number(price)} /> once · tax included · money back if it does not work</span>
       </p>
       <CheckoutLink href={href} className={buttonVariants({ shape: "pill" })}>
         Get Pro <ArrowRight aria-hidden="true" />

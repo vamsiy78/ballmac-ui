@@ -57,7 +57,9 @@ export function evaluate({ env, proSource, proBuilt, production }: CheckInput): 
   if (ends || env.NEXT_PUBLIC_PRO_FOUNDING_LIMIT) {
     need(!ends || Number.isFinite(Date.parse(ends)), "NEXT_PUBLIC_PRO_FOUNDING_ENDS is a real date with a zone, for example 2026-10-21T18:29:00Z (11:59 pm IST)")
     need(!ends || Date.parse(ends) > Date.now(), "NEXT_PUBLIC_PRO_FOUNDING_ENDS is in the future", "warn")
-    need(!ends || (Number(env.NEXT_PUBLIC_PRO_LIST_PRICE) > Number(env.NEXT_PUBLIC_PRO_PRICE) && env.NEXT_PUBLIC_PRO_STANDARD_CHECKOUT_URL?.startsWith("https://")), "A founding deadline needs NEXT_PUBLIC_PRO_LIST_PRICE (higher than the founding price) and NEXT_PUBLIC_PRO_STANDARD_CHECKOUT_URL (the regular product's link); without them nothing is for sale after the deadline")
+    // Once the deadline has passed the standing price may equal the founding price; it only has to be higher while the offer still runs.
+    const running = !!ends && Date.parse(ends) > Date.now()
+    need(!ends || (Number(env.NEXT_PUBLIC_PRO_LIST_PRICE) > 0 && (!running || Number(env.NEXT_PUBLIC_PRO_LIST_PRICE) > Number(env.NEXT_PUBLIC_PRO_PRICE)) && env.NEXT_PUBLIC_PRO_STANDARD_CHECKOUT_URL?.startsWith("https://")), "A founding deadline needs NEXT_PUBLIC_PRO_LIST_PRICE (higher than the founding price while the offer runs) and NEXT_PUBLIC_PRO_STANDARD_CHECKOUT_URL (the regular product's link); without them nothing is for sale after the deadline")
     need(env.DODO_FOUNDING_PRODUCT_ID?.trim() && env.DODO_API_KEY?.trim(), "DODO_FOUNDING_PRODUCT_ID and DODO_API_KEY set: they end the offer at the licence cap and open the Founders desk; without them the offer ends only at the deadline", "warn")
     need(!env.DODO_FOUNDING_PRODUCT_ID?.trim() || (env.DODO_PRODUCT_IDS ?? "").split(",").map((x) => x.trim()).includes(env.DODO_FOUNDING_PRODUCT_ID.trim()), "DODO_FOUNDING_PRODUCT_ID is also listed in DODO_PRODUCT_IDS, or founding buyers' keys would be refused")
     need(env.RESEND_AUDIENCE_ID && env.RESEND_API_KEY && env.RESEND_FROM, "Reminder emails configured (RESEND_AUDIENCE_ID, RESEND_API_KEY, RESEND_FROM); without them the reminder form says it is not set up", "warn")
