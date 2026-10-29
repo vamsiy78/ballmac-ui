@@ -17,6 +17,8 @@ exclude = [
   '^https://ui\.shadcn\.com',
   # Example addresses in the Verify your registry guide.
   '^https://acme\.(com|test)',
+  # Pro screens and components have pages only in the private build (the public build the check runs on has no Pro source), and the changelog links to them.
+  '^http://localhost:\d+/(blocks|components)/',
   # Added to the page by JavaScript (the theme builder's sections), so they are not in the exported HTML.
   '/themes#',
 ]
