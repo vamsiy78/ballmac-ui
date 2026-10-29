@@ -20,7 +20,7 @@ export function ShippingLog({ limit = 6 }: { limit?: number }) {
   const month = all.filter((e) => e.date > since).length
   const rows = all.slice(0, limit)
   return (
-    <section aria-labelledby="log-h" className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6">
+    <section aria-labelledby="log-h" className="mx-auto max-w-[1440px] px-4 py-16 sm:py-24 sm:px-6">
       <div className="bm-reveal flex flex-wrap items-end justify-between gap-6">
         <div>
           <p className="text-muted-foreground flex items-center gap-2 text-sm font-medium">

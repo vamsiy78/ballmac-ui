@@ -240,7 +240,7 @@ export default async function Home() {
       </section>
 
       {/* 3. The catalogue, moving. */}
-      <section aria-labelledby="cat-h" className="overflow-hidden py-24">
+      <section aria-labelledby="cat-h" className="overflow-hidden py-16 sm:py-24">
         <div className="bm-reveal mx-auto mb-12 flex max-w-[1440px] flex-wrap items-end justify-between gap-6 px-4 sm:px-6">
           <div>
             <h2 id="cat-h" className="text-4xl font-semibold tracking-[-0.045em] sm:text-6xl">
@@ -278,7 +278,7 @@ export default async function Home() {
       {!founding && offer.onSale && offer.price && <div className="bg-muted/30 border-y"><ValueAnchor price={Number(offer.price)} checkout={offer.checkout} proCount={proBlocks.length} /></div>}
 
       {/* 4. The AI components: pictures here, each one runs on its own page. */}
-      <section aria-labelledby="ai-h" className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6">
+      <section aria-labelledby="ai-h" className="mx-auto max-w-[1440px] px-4 py-16 sm:py-24 sm:px-6">
         <div className="bm-reveal mb-10 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
           <h2 id="ai-h" className="max-w-xl text-4xl font-semibold tracking-[-0.045em] text-balance sm:text-6xl">Built for AI products.</h2>
           <p className="text-muted-foreground text-sm sm:text-end">Open any one<br />to see it run.</p>
@@ -290,7 +290,7 @@ export default async function Home() {
 
       {/* 5. The install, played out. */}
       <section aria-labelledby="src-h" className="bg-muted/30 border-y">
-        <div className="mx-auto grid max-w-[1440px] items-center gap-14 px-4 py-24 sm:px-6 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-20">
+        <div className="mx-auto grid max-w-[1440px] items-center gap-14 px-4 py-16 sm:py-24 sm:px-6 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-20">
           <div className="bm-reveal">
             <InstallDemo command={command} files={sourceFiles} sourceHtml={sourceHtml} />
           </div>
@@ -318,7 +318,7 @@ export default async function Home() {
 
       {/* 6. Plans: Pro is the big one. */}
       <section id="plans" aria-labelledby="plans-h" className="scroll-mt-16">
-        <div className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6">
+        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:py-24 sm:px-6">
           <h2 id="plans-h" className="bm-reveal mb-12 max-w-2xl text-4xl font-semibold tracking-[-0.045em] text-balance sm:text-6xl">Start free. Pay once for more.</h2>
           <div className="grid gap-4 lg:grid-cols-12">
             <Spotlight id="buy" color="oklch(0.9 0.08 80 / 0.22)" className="bm-reveal bg-foreground text-background flex flex-col overflow-hidden rounded-3xl p-8 sm:p-10 lg:col-span-7 lg:row-span-2">
@@ -399,7 +399,7 @@ export default async function Home() {
       </section>
 
       {/* 7. Proof and the short answers. */}
-      <section aria-labelledby="proof-h" className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6">
+      <section aria-labelledby="proof-h" className="mx-auto max-w-[1440px] px-4 py-16 sm:py-24 sm:px-6">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-24">
           <div>
             <p className="text-7xl font-semibold tracking-[-0.06em] tabular-nums sm:text-8xl"><CountUp value={quality.perfect} /><span className="text-muted-foreground">/{quality.items}</span></p>
@@ -428,7 +428,7 @@ export default async function Home() {
           <div className="absolute inset-x-0 top-0 h-[60%] bg-[radial-gradient(ellipse_50%_70%_at_50%_-10%,oklch(1_0_0/0.1),transparent_70%)]" />
           <div className="absolute inset-0 [background-image:linear-gradient(oklch(1_0_0/0.04)_1px,transparent_1px),linear-gradient(90deg,oklch(1_0_0/0.04)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(ellipse_60%_70%_at_50%_100%,black,transparent_80%)]" />
         </div>
-        <div className="bm-reveal mx-auto flex max-w-[1440px] flex-col items-center px-4 py-28 text-center sm:px-6 lg:py-36">
+        <div className="bm-reveal mx-auto flex max-w-[1440px] flex-col items-center px-4 py-20 text-center sm:px-6 sm:py-28 lg:py-36">
           <h2 id="close-h" className="max-w-4xl text-5xl font-semibold tracking-[-0.055em] text-balance sm:text-7xl lg:text-8xl">
             Ship the screens. <span className={cn(serif.className, "bm-silver font-normal italic tracking-[-0.03em]")}>Today.</span>
           </h2>

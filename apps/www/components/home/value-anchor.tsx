@@ -19,7 +19,7 @@ export function ValueAnchor({ price, checkout, proCount }: { price: number; chec
   const rows = [...KITS, { label: "Ballmac UI Pro", price, note: `${proCount} screens, 3 starter apps`, ours: true }]
   const max = Math.max(...rows.map((r) => r.price))
   return (
-    <section aria-labelledby="value-h" className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6">
+    <section aria-labelledby="value-h" className="mx-auto max-w-[1440px] px-4 py-16 sm:py-24 sm:px-6">
       <div className="grid items-end gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-20">
         <div className="bm-reveal">
           <p className="text-muted-foreground flex items-center gap-2 text-sm font-medium"><Clock className="size-4" aria-hidden="true" />The maths</p>
