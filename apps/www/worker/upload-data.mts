@@ -36,7 +36,7 @@ if (entries.length === 0) {
   console.log("cf:upload · nothing to upload: this build has no Pro data")
   process.exit(0)
 }
-const args = ["exec", "wrangler", "r2", "bulk", "put", BUCKETS[env], "--filename", manifest, "--concurrency", "20", "--force", local ? "--local" : "--remote"]
+const args = ["exec", "wrangler", "r2", "bulk", "put", BUCKETS[env], "--filename", manifest, "--concurrency", process.env.R2_CONCURRENCY ?? "20", "--force", local ? "--local" : "--remote"]
 if (local && arg("persist-to")) args.push("--persist-to", arg("persist-to")!)
 // The first deploy of an environment creates its bucket. An existing one is fine.
 if (!local) {
