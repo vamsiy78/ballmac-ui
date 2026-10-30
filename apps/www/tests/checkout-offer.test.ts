@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
 import { OFFER, clock, newNonce, offerStatus, productFromLink, validNonce, type OfferRow } from "../lib/checkout-offer"
-import { back, claim, offer, start } from "../worker/routes/checkout"
+import { back, claim, done, offer, start } from "../worker/routes/checkout"
 
 const PRODUCT = "pdt_0NpFNksV9VqlmGUuv10sV"
 const LINK = `https://checkout.dodopayments.com/buy/${PRODUCT}?quantity=1`
@@ -47,7 +47,7 @@ function fakeDb() {
 
 let db: ReturnType<typeof fakeDb>
 const ctx = () => ({ env: { AFFILIATES: db as never } })
-const get = (path: string) => new Request(`${ORIGIN}${path}`, { headers: { "cf-connecting-ip": `1.1.1.${Math.floor(Math.random() * 250)}` } })
+const get = (path: string, cookie?: string) => new Request(`${ORIGIN}${path}`, { headers: { "cf-connecting-ip": `1.1.1.${Math.floor(Math.random() * 250)}`, ...(cookie ? { cookie } : {}) } })
 const calls: { url: string; body: Record<string, unknown> }[] = []
 
 beforeEach(() => {
@@ -117,7 +117,7 @@ describe("GET /api/checkout/pro", () => {
     expect(location(res)).toBe("https://checkout.dodopayments.com/session/cks_1")
     const body = calls[0].body as { product_cart: { product_id: string }[]; cancel_url: string; return_url: string }
     expect(body.product_cart[0].product_id).toBe(PRODUCT)
-    expect(body.return_url).toBe(`${ORIGIN}/pro`)
+    expect(body.return_url).toBe(`${ORIGIN}/api/checkout/done`)
     expect(body.cancel_url).toMatch(new RegExp(`^${ORIGIN}/api/checkout/back\\?n=[A-Za-z0-9_-]{22}$`))
     expect(db.rows.size).toBe(1)
   })
@@ -145,6 +145,35 @@ describe("GET /api/checkout/pro", () => {
     vi.stubEnv("DODO_MODE", "test")
     await start(get("/api/checkout/pro"), ctx())
     expect(calls.length).toBe(0)
+  })
+})
+
+describe("the buyer comes back from Dodo's first page with the browser's back button", () => {
+  it("leaves a cookie at the start, and the first page opened afterwards starts the ten minutes and shows the same clock everywhere", async () => {
+    vi.useFakeTimers({ now: T0 })
+    const res = await start(get("/api/checkout/pro"), ctx())
+    const cookie = res.headers.get("set-cookie")!
+    expect(cookie).toMatch(/^bm_co=[A-Za-z0-9_-]{22}; Path=\/; Max-Age=21600; HttpOnly; SameSite=Lax/)
+    const header = cookie.split(";")[0]
+    expect(await (await offer(get("/api/checkout/offer", header), ctx())).json()).toEqual({ open: true, remainingMs: OFFER.windowMs, dollars: 5 })
+    vi.setSystemTime(T0 + 4 * 60_000)
+    expect(await (await offer(get("/api/checkout/offer", header), ctx())).json()).toEqual({ open: true, remainingMs: OFFER.windowMs - 4 * 60_000, dollars: 5 })
+    vi.setSystemTime(T0 + OFFER.windowMs + 1000)
+    expect(await (await offer(get("/api/checkout/offer", header), ctx())).json()).toEqual({ open: false })
+  })
+  it("shows nothing without a checkout cookie, and claiming works from the cookie", async () => {
+    expect(await (await offer(get("/api/checkout/offer"), ctx())).json()).toEqual({ open: false })
+    const header = (await start(get("/api/checkout/pro"), ctx())).headers.get("set-cookie")!.split(";")[0]
+    await offer(get("/api/checkout/offer", header), ctx())
+    calls.length = 0
+    expect(location(await claim(get("/api/checkout/claim", header), ctx()))).toBe("https://checkout.dodopayments.com/session/cks_1")
+    expect(calls.some((c) => c.url.endsWith("/discounts"))).toBe(true)
+  })
+  it("forgets the checkout when a payment succeeds, and keeps it when one fails", async () => {
+    const paid = await done(get("/api/checkout/done?status=succeeded"))
+    expect(paid.headers.get("set-cookie")).toContain("Max-Age=0")
+    expect(location(paid)).toBe(`${ORIGIN}/pro`)
+    expect((await done(get("/api/checkout/done?status=failed"))).headers.get("set-cookie")).toBeNull()
   })
 })
 

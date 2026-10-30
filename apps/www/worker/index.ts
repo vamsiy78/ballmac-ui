@@ -58,6 +58,7 @@ const ROUTES: [URLPattern, Methods][] = [
   ["/api/checkout/back", { GET: checkout.back }],
   ["/api/checkout/offer", { GET: checkout.offer }],
   ["/api/checkout/claim", { GET: checkout.claim }],
+  ["/api/checkout/done", { GET: checkout.done }],
   ["/api/docs-feedback", docsFeedback],
   ["/api/reminders", reminders],
   ["/api/sampler", sampler],

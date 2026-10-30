@@ -7,12 +7,13 @@ import { OFFER_USED_KEY, clock } from "@/lib/checkout-offer"
 import { STANDING_PRICE } from "@/lib/limited-offer"
 
 /**
- * The one-time "still thinking?" offer, shown when a buyer clicks back from the Pro checkout and lands on /pro?offer=<id> (see worker/routes/checkout.ts).
- * It asks the Worker whether that offer is really open and for how long, so the clock is the server's and a reload or a second tab shows the same time left.
- * Nothing shows unless the Worker says it is open. It never restarts: when the time is up the card goes away for good.
+ * The one-time "still thinking?" offer for a buyer who started the Pro checkout and came back to the site, from either of Dodo's pages (see worker/routes/checkout.ts).
+ * On every page it asks the Worker whether an offer is open for this browser's checkout and for how long, so the clock is the server's and it keeps counting down on
+ * whatever page the visitor opens next, a reload or a second tab. Nothing shows unless the Worker says it is open. It never restarts: when the time is up it is gone for good.
  */
 export function RecoveryOffer() {
   const [id, setId] = React.useState<string | null>(null)
+  const [open, setOpen] = React.useState(false)
   const [expiresAt, setExpiresAt] = React.useState<number | null>(null)
   const [dollars, setDollars] = React.useState(5)
   const [failed, setFailed] = React.useState(false)
@@ -21,22 +22,36 @@ export function RecoveryOffer() {
 
   React.useEffect(() => {
     const q = new URLSearchParams(window.location.search)
-    const n = q.get("offer")
-    if (!n || !/^[A-Za-z0-9_-]{22}$/.test(n)) return
-    const ctl = new AbortController()
-    fetch(`/api/checkout/offer?n=${n}`, { cache: "no-store", signal: ctl.signal })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d: { open?: boolean; remainingMs?: number; dollars?: number } | null) => {
-        if (!d?.open || typeof d.remainingMs !== "number") return
-        setId(n)
-        setFailed(q.get("offer_error") === "1")
-        setDollars(d.dollars ?? 5)
-        const t = Date.now()
-        setExpiresAt(t + d.remainingMs)
-        setNow(t)
-      })
-      .catch(() => {})
-    return () => ctl.abort()
+    const given = q.get("offer")
+    const n = given && /^[A-Za-z0-9_-]{22}$/.test(given) ? given : null
+    let ctl: AbortController | null = null
+    const load = () => {
+      ctl?.abort()
+      ctl = new AbortController()
+      fetch(`/api/checkout/offer${n ? `?n=${n}` : ""}`, { cache: "no-store", signal: ctl.signal })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d: { open?: boolean; remainingMs?: number; dollars?: number } | null) => {
+          if (!d?.open || typeof d.remainingMs !== "number") return
+          setId(n)
+          setOpen(true)
+          setFailed(q.get("offer_error") === "1")
+          setDollars(d.dollars ?? 5)
+          const t = Date.now()
+          setExpiresAt(t + d.remainingMs)
+          setNow(t)
+        })
+        .catch(() => {})
+    }
+    load()
+    // Coming back with the browser's back button can restore this page from memory without running anything again.
+    const onShow = (e: PageTransitionEvent) => {
+      if (e.persisted) load()
+    }
+    window.addEventListener("pageshow", onShow)
+    return () => {
+      ctl?.abort()
+      window.removeEventListener("pageshow", onShow)
+    }
   }, [])
 
   React.useEffect(() => {
@@ -46,7 +61,7 @@ export function RecoveryOffer() {
   }, [expiresAt])
 
   const left = expiresAt === null ? 0 : expiresAt - now
-  if (!id || hidden || left <= 0) return null
+  if (!open || hidden || left <= 0) return null
   const price = STANDING_PRICE ? Number(STANDING_PRICE) : null
 
   return (
@@ -64,7 +79,7 @@ export function RecoveryOffer() {
       <p className="mt-1 text-sm opacity-70">For this visit only, and once per customer. The price at checkout already has it applied.</p>
       {failed && <p role="alert" className="mt-2 text-sm text-[oklch(0.83_0.15_78)]">That did not go through. Please try again.</p>}
       <a
-        href={`/api/checkout/claim?n=${id}`}
+        href={id ? `/api/checkout/claim?n=${id}` : "/api/checkout/claim"}
         onClick={() => {
           try {
             window.localStorage.setItem(OFFER_USED_KEY, "1")
