@@ -1,4 +1,4 @@
-import { ogImage, ogSize } from "@/lib/og"
+import { ogImage, ogItemImage, ogSize } from "@/lib/og"
 import { getTemplates, getItem, namespaceOf } from "@/lib/registry"
 
 export const size = ogSize
@@ -14,10 +14,13 @@ export function generateStaticParams() {
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const item = getItem((await params).slug)
-  return ogImage({
-    eyebrow: "templates".replace(/s$/, ""),
-    title: item?.title ?? "Ballmac UI",
-    subtitle: item?.description,
-    command: item ? `npx shadcn add ${namespaceOf(item.name)}/${item.name}` : undefined,
+  if (!item) return ogImage({ eyebrow: "template", title: "Ballmac UI" })
+  return ogItemImage({
+    kind: "template",
+    name: item.name,
+    title: item.title,
+    subtitle: item.description,
+    command: `npx shadcn add ${namespaceOf(item.name)}/${item.name}`,
+    pro: item.tier === "pro",
   })
 }

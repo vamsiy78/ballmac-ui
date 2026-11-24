@@ -10,7 +10,7 @@
     "typecheck": "pnpm -w build:registry && next typegen && tsc --noEmit && tsc --noEmit -p tsconfig.base-ui.json && pnpm worker:data && tsc --noEmit -p worker",
     "test": "vitest run",
     "worker:data": "tsx --conditions=react-server worker/build-data.mts",
-    "cf:build": "pnpm -w pro:fetch && pnpm -w build:registry && BALLMAC_EXPORT=1 next build && tsx worker/postbuild.mts && pnpm worker:data",
+    "cf:build": "pnpm -w pro:fetch && pnpm -w build:registry && pnpm -w og:thumbs && BALLMAC_EXPORT=1 next build && tsx worker/postbuild.mts && pnpm worker:data",
     "cf:worker": "pnpm worker:data && mkdir -p out && wrangler dev --port 8787",
     "cf:preview": "tsx worker/serve.mts",
     "cf:deploy": "wrangler deploy",

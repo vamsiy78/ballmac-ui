@@ -14,6 +14,8 @@ apps/www/public/i18n
 # Pro gallery thumbnails are copied here from the private repo at build time
 apps/www/public/thumbs/pro
 apps/www/.registry-pro
+# JPEG copies of the thumbnails for share images (pnpm og:thumbs)
+apps/www/.og-thumbs
 registry-pro.json
 apps/www/lib/generated
 # private Pro source (git submodule, Phase 3)

@@ -300,6 +300,51 @@ export const useCases: UseCase[] = [
     ],
     query: "company",
   },
+  {
+    slug: "auth-pages",
+    name: "Login and sign-up pages",
+    title: "React login, sign-up and password reset pages for shadcn",
+    description: "Login with SSO and magic link, sign up with password strength, one-time codes and forgot-password flows as React blocks with submitting and error states.",
+    intro: "Every screen between a visitor and their account: sign in, sign up, verify a code, reset a password. Each shows a loading submit and clear errors, codes accept paste and autofill, and you wire them to whichever auth provider you use.",
+    blocks: ["login-1", "forgot-password-1", "auth-pro-1", "auth-pro-2", "auth-pro-3", "auth-pro-4"],
+    templates: ["template-auth-kit"],
+    docs: [
+      { href: "/docs/guides/states", label: "Handle loading, empty and error states" },
+      { href: "/docs/guides/translate", label: "Translate Ballmac UI" },
+      { href: "/docs/get-started/install", label: "Install your first component" },
+    ],
+    query: "auth",
+  },
+  {
+    slug: "settings-page",
+    name: "Settings pages",
+    title: "React settings page components: account, team and security",
+    description: "Profile and account, notification preferences, team members and roles, two-step sign-in, sessions and API tokens, integrations and data privacy as React blocks.",
+    intro: "The settings your customers come back to: their profile, who gets notified about what, who is on the team, how they sign in and which apps are connected. Anything destructive asks for confirmation first, and every page stacks cleanly on phones.",
+    blocks: ["settings-4", "settings-1", "settings-2", "settings-3", "settings-pro-2", "settings-6"],
+    templates: ["template-workspace"],
+    docs: [
+      { href: "/docs/guides/states", label: "Handle loading, empty and error states" },
+      { href: "/docs/get-started/make-it-yours", label: "Set your brand color" },
+      { href: "/docs/guides/right-to-left", label: "Turn on right-to-left" },
+    ],
+    query: "settings",
+  },
+  {
+    slug: "ai-chat",
+    name: "AI chat interfaces",
+    title: "React AI chat UI components for shadcn and Tailwind",
+    description: "A full AI chat app pane, chat with an artifact or document panel, an answer workspace, a prompt playground and team chat with threads, as React blocks.",
+    intro: "Chat screens for products built on a language model: streaming replies, a panel for what the assistant made, conversation history and a composer with attachments. Replies stream in, tool calls and sources show inline, and you connect your own model.",
+    blocks: ["chat-1", "ai-chat-1", "ai-chat-2", "ai-chat-pro-1", "agent-16", "agent-4"],
+    templates: ["template-muse"],
+    docs: [
+      { href: "/docs/guides/shadcn-chat-kit", label: "Build a chat with the chat kit" },
+      { href: "/docs/get-started/connect-your-agent", label: "Connect your AI agent" },
+      { href: "/docs/guides/states", label: "Handle loading, empty and error states" },
+    ],
+    query: "chat",
+  },
 ]
 
 export const getUseCase = (slug: string) => useCases.find((u) => u.slug === slug)
