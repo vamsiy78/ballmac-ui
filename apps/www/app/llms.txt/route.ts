@@ -5,6 +5,7 @@ import { STANDING_PRICE, STANDING_REGULAR } from "@/lib/limited-offer"
 import { TEAM_PRICE, TEAM_SEATS } from "@/lib/pro-team"
 import { comparisons } from "@/lib/compare"
 import { blockCategoryPages } from "@/lib/block-categories"
+import { alternatives, bestLists, getProfile } from "@/lib/alternatives"
 import { useCases } from "@/lib/use-cases"
 import { getAllItems, getBlocks, getComponents, getTemplates, isPro, SITE_URL } from "@/lib/registry"
 
@@ -44,6 +45,8 @@ export function GET() {
     "",
     "## Compare",
     ...comparisons.map((c) => `- [${c.title}](${SITE_URL}/compare/${c.slug}): ${c.description}`),
+    ...alternatives.map((a) => `- [${getProfile(a.slug)?.name} alternatives](${SITE_URL}/alternatives/${a.slug}): ${a.why}`),
+    ...bestLists.map((b) => `- [${b.title}](${SITE_URL}/best/${b.slug}): ${b.intro}`),
     "",
     "## Pro",
     `- [Ballmac UI Pro](${SITE_URL}/pro): ${getAllItems().filter((i) => isPro(i) && i.category !== "foundation").length} more items (screens, components and templates), starter apps, a private registry and Figma tokens, for a one-time price. Every item is listed with its description and install command in ${SITE_URL}/api/v1/index.json (tier "pro").`,

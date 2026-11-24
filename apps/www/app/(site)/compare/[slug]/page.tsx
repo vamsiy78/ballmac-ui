@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { JsonLd } from "@/components/site/json-ld"
 import Link from "@/components/site/link"
 import { comparisons, getComparison } from "@/lib/compare"
+import { getAlternatives } from "@/lib/alternatives"
 import { getOffer } from "@/lib/offer"
 import { getBlocks, isPro } from "@/lib/registry"
 import { article, breadcrumbs } from "@/lib/schema"
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return { title: c.title, description: c.description, alternates: { canonical: `/compare/${c.slug}` } }
 }
 
+const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)
 const host = (u: string) => new URL(u).host.replace(/^www\./, "")
 
 export default async function ComparePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -48,7 +50,11 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
           </Link>
         </p>
         <h1 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">{c.title}</h1>
-        <p className="text-muted-foreground mt-5 text-base leading-relaxed text-pretty sm:text-lg">{c.what}</p>
+        {/* The verdict first, their strength before ours: it is what a reader and an AI answer quote. */}
+        <p className="mt-5 text-base leading-relaxed text-pretty sm:text-lg">
+          Pick {c.name} if {lower(c.theirs[0]!)} Pick Ballmac UI if {lower(c.ours[0]!)}
+        </p>
+        <p className="text-muted-foreground mt-3 text-[15px] leading-relaxed text-pretty">{c.what}</p>
         <p className="text-muted-foreground mt-3 text-sm">{c.both}</p>
       </header>
 
@@ -117,7 +123,18 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             </ul>
           </div>
         </div>
-        <p className="text-muted-foreground mt-4 text-sm">You can use both: everything installs as code into your own repository, so mixing libraries is normal.</p>
+        <p className="text-muted-foreground mt-4 text-sm">
+          You can use both: everything installs as code into your own repository, so mixing libraries is normal.
+          {getAlternatives(c.slug) && (
+            <>
+              {" "}
+              <Link href={`/alternatives/${c.slug}`} className="hover:text-foreground underline underline-offset-2">
+                Other {c.name} alternatives
+              </Link>
+              .
+            </>
+          )}
+        </p>
       </section>
 
       <section aria-labelledby="try-h" className="mt-16 rounded-2xl border p-6 sm:p-8">

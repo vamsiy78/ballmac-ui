@@ -3,10 +3,11 @@ import type { Metadata } from "next"
 
 import Link from "@/components/site/link"
 import { comparisons } from "@/lib/compare"
+import { alternatives, bestLists, getProfile } from "@/lib/alternatives"
 
 export const metadata: Metadata = {
   title: "Compare shadcn UI libraries",
-  description: "Ballmac UI next to shadcn/ui blocks, Magic UI, Tailark and 21st.dev: price, license and who each is for, with the source for every claim about others.",
+  description: `Ballmac UI next to ${comparisons.length} other shadcn libraries, alternatives pages and a best-of list: price, licence and who each is for, with a source for every claim.`,
   alternates: { canonical: "/compare" },
 }
 
@@ -38,6 +39,21 @@ export default function CompareIndex() {
           </li>
         ))}
       </ul>
+      <section aria-labelledby="alt-h" className="mt-16">
+        <h2 id="alt-h" className="text-2xl font-semibold tracking-[-0.03em]">Alternatives and best-of lists</h2>
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {bestLists.map((b) => (
+            <li key={b.slug}>
+              <Link href={`/best/${b.slug}`} className="bg-frame hover:bg-accent inline-flex rounded-full px-3.5 py-1.5 text-sm transition-colors motion-reduce:transition-none">{b.title}</Link>
+            </li>
+          ))}
+          {alternatives.map((a) => (
+            <li key={a.slug}>
+              <Link href={`/alternatives/${a.slug}`} className="bg-frame hover:bg-accent inline-flex rounded-full px-3.5 py-1.5 text-sm transition-colors motion-reduce:transition-none">{getProfile(a.slug)?.name} alternatives</Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   )
 }

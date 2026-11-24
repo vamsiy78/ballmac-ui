@@ -157,7 +157,7 @@ export const comparisons: Comparison[] = [
     title: "Ballmac UI vs Shadcnblocks",
     description: "Shadcnblocks is the biggest premium shadcn block library. Ballmac UI is smaller, cheaper and built around app screens with states and published quality results. When to pick which.",
     url: "https://www.shadcnblocks.com",
-    checked: CHECKED,
+    checked: "2026-11-25",
     what: "Shadcnblocks is a premium library of shadcn/ui blocks, components and templates, running since 2023, sold as one-time lifetime plans.",
     facts: [
       { label: "Size", value: "3,503 blocks, 2,241 components and 22 templates", source: "https://www.shadcnblocks.com" },
@@ -176,7 +176,7 @@ export const comparisons: Comparison[] = [
     title: "Ballmac UI vs Shadcn Studio",
     description: "Shadcn Studio bundles blocks, templates, a Figma kit, builders and an MCP server. Ballmac UI focuses on finished app screens with states, for less. Prices and fit compared.",
     url: "https://shadcnstudio.com",
-    checked: CHECKED,
+    checked: "2026-11-25",
     what: "Shadcn Studio is a collection of shadcn/ui blocks, templates, pages and components with a Figma kit, a theme generator, drag-and-drop builders and an MCP server, with a free tier.",
     facts: [
       { label: "Size", value: "1,100+ blocks, 30+ templates and 100+ pages", source: "https://shadcnstudio.com" },
@@ -194,7 +194,7 @@ export const comparisons: Comparison[] = [
     title: "Ballmac UI vs shadcn.io",
     description: "shadcn.io has thousands of blocks for React, Vue, Svelte and Solid on a yearly subscription. Ballmac UI is React only, pay once, built around app screens. Licences and prices compared.",
     url: "https://www.shadcn.io",
-    checked: CHECKED,
+    checked: "2026-11-25",
     what: "shadcn.io is an independent project built on shadcn/ui with blocks, templates, components, icons, charts and tools for React, Vue, Svelte and Solid, and an MCP server.",
     facts: [
       { label: "Size", value: "6,231 blocks, 14 templates and 175 components", source: "https://www.shadcn.io" },
