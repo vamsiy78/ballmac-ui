@@ -1,6 +1,7 @@
 import { PRESETS, SYSTEMS } from "@ballmac-ui/theme-engine"
 
 import { mdHref, orderedDocs } from "@/lib/docs"
+import { comparisons } from "@/lib/compare"
 import { useCases } from "@/lib/use-cases"
 import { getAllItems, getBlocks, getComponents, getTemplates, isPro, SITE_URL } from "@/lib/registry"
 
@@ -27,6 +28,9 @@ export function GET() {
     "",
     "## Use cases",
     ...useCases.map((u) => `- [${u.name}](${SITE_URL}/use-cases/${u.slug}): ${u.description}`),
+    "",
+    "## Compare",
+    ...comparisons.map((c) => `- [${c.title}](${SITE_URL}/compare/${c.slug}): ${c.description}`),
     "",
     "## Pro",
     `- [Ballmac UI Pro](${SITE_URL}/pro): ${getAllItems().filter((i) => isPro(i) && i.category !== "foundation").length} more items (screens, components and templates), starter apps, a private registry and Figma tokens, for a one-time price. Every item is listed with its description and install command in ${SITE_URL}/api/v1/index.json (tier "pro").`,

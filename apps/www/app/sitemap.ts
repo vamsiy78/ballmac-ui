@@ -5,10 +5,11 @@ import { PRESETS, SYSTEMS } from "@ballmac-ui/theme-engine"
 
 import { getChangelog } from "@/lib/changelog"
 import { allDocs } from "@/lib/docs"
+import { comparisons } from "@/lib/compare"
 import { useCases } from "@/lib/use-cases"
 import { getAllItems, itemHref, SITE_URL } from "@/lib/registry"
 
-const pages = ["", "/components", "/blocks", "/templates", "/charts", "/presets", "/themes", "/feels", "/pricing", "/affiliates", "/pro", "/support", "/founders", "/changelog", "/use-cases", "/quality", "/verified", "/license", "/license/pro", "/refund", "/contribute", "/pro/changelog", ...(BUILT_WITH.length > 0 ? ["/built-with"] : [])]
+const pages = ["", "/components", "/blocks", "/templates", "/charts", "/presets", "/themes", "/feels", "/pricing", "/affiliates", "/pro", "/support", "/founders", "/changelog", "/use-cases", "/compare", "/quality", "/verified", "/license", "/license/pro", "/refund", "/contribute", "/pro/changelog", ...(BUILT_WITH.length > 0 ? ["/built-with"] : [])]
 
 // Built once with the site (the Cloudflare build is static).
 export const dynamic = "force-static"
@@ -20,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...pages.map((p) => ({ url: `${SITE_URL}${p}`, lastModified: new Date(`${latest}T00:00:00Z`), priority: p === "" ? 1 : 0.7 })),
     ...allDocs().map((p) => ({ url: `${SITE_URL}${p.url}`, lastModified: new Date(`${latest}T00:00:00Z`), priority: p.url === "/docs" ? 0.8 : 0.7 })),
+    ...comparisons.map((c) => ({ url: `${SITE_URL}/compare/${c.slug}`, lastModified: new Date(`${c.checked}T00:00:00Z`), priority: 0.6 })),
     ...useCases.map((u) => ({ url: `${SITE_URL}/use-cases/${u.slug}`, lastModified: new Date(`${latest}T00:00:00Z`), priority: 0.7 })),
     ...getChangelog().map((e) => ({ url: `${SITE_URL}/changelog/${e.slug}`, lastModified: new Date(`${e.date}T00:00:00Z`), priority: 0.5 })),
     ...SYSTEMS.map((p) => ({ url: `${SITE_URL}/presets/${p.slug}`, lastModified: new Date(`${latest}T00:00:00Z`), priority: 0.6 })),

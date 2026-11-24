@@ -18,6 +18,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
       { href: "/presets", label: "Presets" },
       { href: "/themes", label: "Themes" },
       { href: "/use-cases", label: "What you can build" },
+      { href: "/compare", label: "Compare" },
       { href: "/pricing", label: "Pricing" },
     ],
   },
