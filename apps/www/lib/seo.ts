@@ -21,13 +21,19 @@ export function seoTitle(name: string, descriptive?: string, max = 70 - SUFFIX.l
 }
 
 /**
- * "Pricing 2: three tiers with a billing toggle" becomes "Three tiers with a billing toggle: shadcn block for React": what someone types into a search box comes first and the catalog number
- * does not. The longest ending that fits wins; a plain name (a component such as "Button") keeps its own title.
+ * "Pricing 2: three tiers with a billing toggle" becomes "shadcn pricing section block: three tiers with a billing toggle": the words someone searches for
+ * (the kind of block) come first, the catalog number does not. Without a noun, or when that does not fit, "Three tiers with a billing toggle: shadcn block
+ * for React". The longest form that fits wins; a plain name (a component such as "Button") keeps its own title.
  */
-export function itemSeoTitle(title: string, kind: "block" | "component" | "template"): string {
+export function itemSeoTitle(title: string, kind: "block" | "component" | "template", noun?: string): string {
   const m = title.match(/^[^:]+\s\d+:\s+(.+)$/)
-  const lead = m ? m[1].charAt(0).toUpperCase() + m[1].slice(1) : title
+  const rest = m ? m[1] : title
+  const lead = rest.charAt(0).toUpperCase() + rest.slice(1)
   const max = 70 - SUFFIX.length
+  if (noun && m) {
+    const small = /^[A-Z]{2}/.test(rest) ? rest : rest.charAt(0).toLowerCase() + rest.slice(1)
+    for (const t of [`shadcn ${noun} ${kind}: ${small}`, `${noun.charAt(0).toUpperCase() + noun.slice(1)} ${kind}: ${small}`]) if (t.length <= max) return t
+  }
   for (const end of [`shadcn ${kind} for React`, `shadcn ${kind}`, `React ${kind}`]) if (`${lead}: ${end}`.length <= max) return `${lead}: ${end}`
   return seoTitle(lead)
 }

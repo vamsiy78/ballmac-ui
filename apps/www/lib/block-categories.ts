@@ -54,3 +54,12 @@ export const getBlockCategoryPage = (slug: string) => blockCategoryPages().find(
 
 /** The category page for a block, when its category has one: item breadcrumbs link here instead of to an anchor on /blocks. */
 export const categoryHref = (category: string | undefined) => (category && getBlockCategoryPage(category) ? `/blocks/category/${category}` : `/blocks#${category ?? ""}`)
+
+/** How a searcher names a block's kind: the category page's noun, else its label ("Status page" -> "status page", "AI chat" stays). */
+export function blockNoun(category: string | undefined): string | undefined {
+  if (!category) return undefined
+  if (COPY[category]) return COPY[category].noun
+  const label = blockCategoryLabels[category]
+  if (!label) return undefined
+  return /^[A-Z]{2}/.test(label) ? label : label.charAt(0).toLowerCase() + label.slice(1)
+}

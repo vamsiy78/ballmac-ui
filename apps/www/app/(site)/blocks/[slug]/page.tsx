@@ -18,7 +18,7 @@ import { ItemStates } from "@/components/site/item-states"
 import { SectionHeading } from "@/components/site/section-heading"
 import { Scorecard } from "@/components/site/scorecard"
 import { UseCaseLinks } from "@/components/site/use-case-links"
-import { categoryHref } from "@/lib/block-categories"
+import { blockNoun, categoryHref } from "@/lib/block-categories"
 import { nudgeOf } from "@/lib/founding"
 import { getOffer } from "@/lib/offer"
 import { blockCategoryLabels, getBlocks, getItem, isPro, readSource } from "@/lib/registry"
@@ -31,7 +31,7 @@ export const dynamicParams = false
 export async function generateMetadata({ params }: PageProps<"/blocks/[slug]">): Promise<Metadata> {
   const item = getItem((await params).slug)
   if (!item) return {}
-  return { title: itemSeoTitle(item.title, "block"), description: seoDescription(item.description), alternates: { canonical: `/blocks/${item.name}` } }
+  return { title: itemSeoTitle(item.title, "block", blockNoun(item.blockCategory)), description: seoDescription(item.description), alternates: { canonical: `/blocks/${item.name}` } }
 }
 
 export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">) {
