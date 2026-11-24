@@ -1,4 +1,4 @@
-import { seoDescription, seoTitle } from "@/lib/seo"
+import { itemSeoTitle, seoDescription } from "@/lib/seo"
 import type { Metadata } from "next"
 import Link from "@/components/site/link"
 import { notFound } from "next/navigation"
@@ -21,7 +21,7 @@ export const dynamicParams = false
 export async function generateMetadata({ params }: PageProps<"/templates/[slug]">): Promise<Metadata> {
   const item = getItem((await params).slug)
   if (!item) return {}
-  return { title: seoTitle(item.title, `${item.title}: React + Tailwind template`), description: seoDescription(item.description), alternates: { canonical: `/templates/${item.name}` } }
+  return { title: itemSeoTitle(item.title, "template"), description: seoDescription(item.description), alternates: { canonical: `/templates/${item.name}` } }
 }
 
 export default async function TemplatePage({ params }: PageProps<"/templates/[slug]">) {

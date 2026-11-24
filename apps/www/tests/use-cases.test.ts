@@ -34,3 +34,12 @@ describe("use cases", () => {
       }
   })
 })
+
+describe("item titles for search", () => {
+  it("lead with what a person types and fit a result", async () => {
+    const { itemSeoTitle } = await import("../lib/seo")
+    expect(itemSeoTitle("Pricing 2: three tiers with a billing toggle", "block")).toBe("Three tiers with a billing toggle: shadcn block for React")
+    expect(itemSeoTitle("Button", "component")).toBe("Button: shadcn component for React")
+    for (const i of index) expect(`${itemSeoTitle((i as unknown as { title: string }).title, "block")} | Ballmac UI`.length, i.name).toBeLessThanOrEqual(70)
+  })
+})

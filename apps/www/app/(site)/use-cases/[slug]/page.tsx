@@ -41,7 +41,8 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
   const found = cards.filter((c): c is NonNullable<typeof c> => c !== null)
   const blocks = found.filter((c) => c.kind === "blocks")
   const templates = found.filter((c) => c.kind === "templates")
-  const first = blocks[0]?.item.name
+  // the install command names a free block: a Pro one cannot be added with one command
+  const first = blocks.find((c) => c.item.tier !== "pro")?.item.name
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 md:py-20">
       <JsonLd graph={[article({ headline: u.title, description: u.description, path: `/use-cases/${u.slug}`, section: "Use cases" }), breadcrumbs([{ name: "Use cases", path: "/use-cases" }, { name: u.name, path: `/use-cases/${u.slug}` }])]} />

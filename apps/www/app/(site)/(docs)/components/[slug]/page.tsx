@@ -17,7 +17,7 @@ import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { SectionHeading } from "@/components/site/section-heading"
 import { Toc } from "@/components/site/toc"
 import { loadExample } from "@/lib/examples"
-import { seoDescription, seoTitle } from "@/lib/seo"
+import { itemSeoTitle, seoDescription } from "@/lib/seo"
 import { addCommand, categoryLabels, componentNeighbors, getComponents, getItem, getRelated, isNew, itemHref, isPro, readSource } from "@/lib/registry"
 import rtlFixed from "@/lib/generated/rtl-exceptions.json"
 
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps<"/components/[slug]
   const item = getItem((await params).slug)
   if (!item) return {}
   return {
-    title: seoTitle(item.title, `${item.title}: React + Tailwind component`),
+    title: itemSeoTitle(item.title, "component"),
     description: seoDescription(item.description),
     alternates: { canonical: `/components/${item.name}` },
   }
