@@ -1,4 +1,5 @@
 import { OFFER, newNonce, offerStatus, productFromLink, validNonce, type OfferRow } from "../../lib/checkout-offer"
+import { sitePath } from "../../lib/funnel"
 import { paymentsLive } from "../../lib/payments"
 import { withRedirect } from "../../lib/pro-checkout"
 import { clientId, createRateLimiter } from "../../lib/rate-limit"
@@ -80,14 +81,17 @@ export async function start(req: Request, { env }: Context) {
   const origin = url.origin
   if (!live() || limited(clientId(req.headers))) return plain(origin)
   const withOffer = offerOn(env) && url.searchParams.get("o") !== "0"
+  // The page the buyer clicked Buy on rides along in the checkout's metadata, so the payment webhook can say which page made the sale (lib/funnel.ts).
+  const from = sitePath(url.searchParams.get("from"))
+  const metadata = from ? { metadata: { from_page: from } } : {}
   try {
-    if (!withOffer) return go(await session(origin, {}))
+    if (!withOffer) return go(await session(origin, metadata))
     const nonce = newNonce()
     const now = Date.now()
     await env.AFFILIATES!.prepare("INSERT INTO checkout_offers (nonce, created_at) VALUES (?, ?)").bind(nonce, now).run()
     // Old rows are of no use; a small share of requests sweeps them.
     if (Math.random() < 0.05) await env.AFFILIATES!.prepare("DELETE FROM checkout_offers WHERE created_at < ?").bind(now - 2 * 86_400_000).run()
-    const checkout = await session(origin, { cancel_url: `${origin}/api/checkout/back?n=${nonce}` })
+    const checkout = await session(origin, { ...metadata, cancel_url: `${origin}/api/checkout/back?n=${nonce}` })
     console.log(JSON.stringify({ event: "checkout-start", offer: true }))
     return go(checkout, { "set-cookie": setCookie(origin, nonce, Math.round(OFFER.startedWithinMs / 1000)) })
   } catch (err) {

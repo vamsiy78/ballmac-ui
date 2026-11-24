@@ -47,7 +47,9 @@ export function CheckoutLink({ href, children, onClick, plan = "pro", ...props }
     try {
       used = window.localStorage.getItem(OFFER_USED_KEY) === "1"
     } catch {}
-    return used ? "/api/checkout/pro?o=0" : "/api/checkout/pro"
+    // The page rides along so a sale can be traced back to it (lib/funnel.ts).
+    const from = `from=${encodeURIComponent(window.location.pathname)}`
+    return used ? `/api/checkout/pro?o=0&${from}` : `/api/checkout/pro?${from}`
   }
   const update = (e: React.SyntheticEvent<HTMLAnchorElement>) => {
     e.currentTarget.href = referral ? "/api/affiliates/checkout" : plainTarget()

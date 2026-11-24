@@ -1,18 +1,21 @@
 import { clickEmail, isBot, parseClick } from "../../lib/checkout-click"
+import { recordFunnel } from "../../lib/funnel"
 import { clientId, createRateLimiter } from "../../lib/rate-limit"
 import { resend } from "../../lib/resend"
 import { SITE_URL } from "../../lib/site-url"
 
 /**
  * `POST /api/checkout-click` { plan, page, utm?, from? }, sent by the Buy buttons as the visitor leaves for the Dodo checkout. Every click is written to the
- * Worker's log as one JSON line (event "checkout-click"), which Workers Logs can count by page and plan, and the owner gets an email. The email is held back for
+ * Worker's log as one JSON line (event "checkout-click") and to D1 (funnel_events, read with `pnpm funnel`), and the owner gets an email. The email is held back for
  * crawlers, requests from other sites, and repeats: one per visitor and plan every ten minutes, and a small ceiling per hour, so a script cannot flood the inbox.
  */
 const perVisitor = createRateLimiter({ max: 1, windowMs: 10 * 60_000 })
 const overall = createRateLimiter({ max: 30, windowMs: 60 * 60_000 })
 const ok = () => new Response(null, { status: 204, headers: { "cache-control": "no-store" } })
 
-export async function POST(request: Request) {
+type Context = { env: { AFFILIATES?: import("@cloudflare/workers-types").D1Database } }
+
+export async function POST(request: Request, { env }: Context = { env: {} }) {
   // The beacon is sent as text/plain, which needs no CORS preflight; the body is still JSON.
   const raw = await request.text()
   if (raw.length > 1_000) return new Response(null, { status: 413 })
@@ -29,7 +32,11 @@ export async function POST(request: Request) {
   const sameSite = !origin || new URL(origin).host === new URL(request.url).host || origin === SITE_URL
   if (!sameSite || isBot(request.headers.get("user-agent"))) return ok()
 
-  console.log(JSON.stringify({ event: "checkout-click", ...click, country: request.headers.get("cf-ipcountry") ?? undefined }))
+  const country = request.headers.get("cf-ipcountry") ?? undefined
+  console.log(JSON.stringify({ event: "checkout-click", ...click, country }))
+  // Kept in D1 too, so `pnpm funnel` can compare pages over weeks (Workers Logs keep only days). Repeats from one visitor within the email window are still
+  // counted here: the report counts clicks, not people.
+  await recordFunnel(env.AFFILIATES, { id: crypto.randomUUID(), at: Date.now(), kind: "click", plan: click.plan, page: click.page, utm: click.utm, fromHost: click.from, country })
 
   if (perVisitor(`${clientId(request.headers)}:${click.plan}`) || overall("all")) return ok()
   const to = process.env.CONTACT_TO_EMAIL

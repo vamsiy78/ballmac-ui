@@ -28,6 +28,7 @@
     "pro:ci": "bash scripts/pro-ci.sh",
     "thumbs": "tsx scripts/thumbs.ts",
     "og:thumbs": "tsx scripts/og-thumbs.ts",
+    "funnel": "tsx scripts/funnel.ts",
     "quality": "tsx scripts/quality.ts",
     "verify:pro": "tsx scripts/verify-pro.ts",
     "launch:check": "tsx scripts/launch-check.ts",

@@ -121,6 +121,12 @@ describe("GET /api/checkout/pro", () => {
     expect(body.cancel_url).toMatch(new RegExp(`^${ORIGIN}/api/checkout/back\\?n=[A-Za-z0-9_-]{22}$`))
     expect(db.rows.size).toBe(1)
   })
+  it("carries the page the buyer clicked Buy on into the checkout metadata, and drops anything that is not a site path", async () => {
+    await start(get("/api/checkout/pro?from=%2Fblocks%2Fdashboard-pro-1"), ctx())
+    expect(calls[0].body.metadata).toEqual({ from_page: "/blocks/dashboard-pro-1" })
+    await start(get("/api/checkout/pro?o=0&from=https%3A%2F%2Fevil.test"), ctx())
+    expect(calls[1].body.metadata).toBeUndefined()
+  })
   it("starts a plain session without an offer when this browser already used it", async () => {
     await start(get("/api/checkout/pro?o=0"), ctx())
     expect(calls[0].body.cancel_url).toBeUndefined()

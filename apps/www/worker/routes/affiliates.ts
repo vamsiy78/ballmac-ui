@@ -1,4 +1,5 @@
 import { affiliateOwners } from "@/lib/affiliate-email"
+import { recordFunnel, sitePath } from "../../lib/funnel"
 import { applicationNotifications, deliverAffiliateNotifications } from "../affiliate-notifications"
 import {
   AFFILIATE,
@@ -297,12 +298,23 @@ export async function webhook(req: Request, { env }: Context) {
     settlement_amount?: number
     settlement_tax?: number | null
     created_at: string
-    metadata: { affiliate_id?: string }
+    metadata: { affiliate_id?: string; from_page?: string }
     customer: { email: string }
     product_cart: { product_id: string; quantity: number }[]
     refunds?: { status: string }[]
     disputes?: { dispute_status: string }[]
   }
+  // Every sale, affiliate or not, goes into the funnel with the page it started from (unknown for raw checkout links and in-app buttons).
+  if (event.type === "payment.succeeded" && payment.status === "succeeded")
+    await recordFunnel(env.AFFILIATES, {
+      id: `paid:${payment.payment_id}`,
+      at: Date.parse(payment.created_at) || Date.now(),
+      kind: "paid",
+      page: sitePath(payment.metadata?.from_page),
+      productId: payment.product_cart?.[0]?.product_id ?? null,
+      amount: payment.total_amount,
+      currency: payment.currency,
+    })
   const affiliate = payment.metadata?.affiliate_id
     ? await env.AFFILIATES.prepare("SELECT id,email FROM affiliates WHERE id=?")
         .bind(payment.metadata.affiliate_id)
