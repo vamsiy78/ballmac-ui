@@ -31,3 +31,9 @@ export function itemSeoTitle(title: string, kind: "block" | "component" | "templ
   for (const end of [`shadcn ${kind} for React`, `shadcn ${kind}`, `React ${kind}`]) if (`${lead}: ${end}`.length <= max) return `${lead}: ${end}`
   return seoTitle(lead)
 }
+
+/** The name to show on a gallery card: "Hero 4: split with interactive globe" becomes "Split with interactive globe" (the id beside it carries the number). */
+export function cardTitle(title: string): string {
+  const m = title.match(/^[^:]+\s\d+:\s+(.+)$/)
+  return m ? m[1].charAt(0).toUpperCase() + m[1].slice(1) : title
+}

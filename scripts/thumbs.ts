@@ -62,7 +62,8 @@ async function render(context: BrowserContext, base: string, example: string, mo
   })
   await page.goto(`${base}/preview/${example}`, { waitUntil: "networkidle" })
   await page.evaluate(() => document.fonts.ready)
-  await page.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}" })
+  // nextjs-portal is the dev server's "N" badge: hidden so a capture against `next dev` cannot bake it into a thumbnail.
+  await page.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}nextjs-portal{display:none!important}" })
   await page.waitForTimeout(wait)
   return page
 }

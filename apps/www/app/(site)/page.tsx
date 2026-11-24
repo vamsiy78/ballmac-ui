@@ -6,7 +6,8 @@ import Link from "@/components/site/link"
 
 import { AiBento } from "@/components/home/ai-bento"
 import { KineticTitle } from "@/components/landing/kinetic-title"
-import { ScreenBento, type BentoScreen } from "@/components/landing/screen-bento"
+import { LiveBento, type LiveTile } from "@/components/landing/live-bento"
+import { ScreenShowcase, type Showcase } from "@/components/landing/screen-showcase"
 import { Seal } from "@/components/landing/seal"
 import { TemplateFan, type FanCard } from "@/components/landing/template-fan"
 import { CheckoutLink } from "@/components/pro/checkout-link"
@@ -36,18 +37,25 @@ export function generateMetadata(): Metadata {
   }
 }
 
-/** The bento, in order of the grid's tiles. Big hero captures where we have them (2560 wide), gallery thumbnails otherwise. */
-const BENTO: { name: string; title: string; dark?: boolean }[] = [
-  { name: "login-1", title: "Sign in with SSO" },
-  { name: "dashboard-pro-1", title: "Revenue dashboard", dark: true },
-  { name: "agent-16", title: "Cited AI answers" },
-  { name: "kanban-pro-1", title: "Swimlane board" },
-  { name: "floorplan-1", title: "Restaurant floor", dark: true },
-  { name: "mail-pro-1", title: "Triage inbox" },
-  { name: "calendar-pro-1", title: "Room timeline", dark: true },
-  { name: "billing-pro-1", title: "Plan and usage" },
+/** The live bento, in the grid's tile order: free components, running in the page. Dark stages alternate with light ones. */
+const LIVE: LiveTile[] = [
+  { name: "mac-icons", example: "mac-icons-demo", title: "macOS icons" },
+  { name: "animated-beam", example: "animated-beam-demo", title: "Animated beam", dark: true },
+  { name: "android-frame", example: "android-frame-demo", title: "Android frame", width: 420, height: 640 },
+  { name: "agent-roster", example: "agent-roster-demo", title: "Agent roster", width: 680, height: 460 },
+  { name: "toast-stack", example: "toast-stack-demo", title: "Toast stack", dark: true, width: 460, height: 320 },
+  { name: "rating-distribution", example: "rating-distribution-demo", title: "Rating distribution" },
+  { name: "globe", example: "globe-demo", title: "Interactive globe", dark: true, width: 620, height: 520 },
+  { name: "emoji-picker", example: "emoji-picker-demo", title: "Emoji picker", width: 480, height: 420 },
 ]
-const HERO_SHOTS = new Set(["dashboard-pro-1", "agent-16", "kanban-pro-1", "billing-pro-1", "mail-pro-1", "calendar-pro-1"])
+
+/** Whole screens, shown whole. Captured at 2560 wide (public/home/screens). */
+const SHOWCASE: Showcase[] = [
+  { name: "dashboard-pro-1", title: "Revenue dashboard", note: "KPIs, the period before and a goal ring", pro: true, alt: "A revenue dashboard with four KPI tiles, a revenue chart against the previous period and a quarterly goal ring." },
+  { name: "agent-16", title: "Cited AI answers", note: "Every sentence with its source", pro: true, alt: "An AI answer where every sentence cites a numbered source, beside the memory the assistant keeps about the user." },
+  { name: "kanban-pro-1", title: "Swimlane board", note: "Work-in-progress limits and keyboard moves", pro: true, alt: "A sprint board with swimlanes per person, a work-in-progress limit and a Move menu on every card." },
+  { name: "billing-pro-1", title: "Plan and usage", note: "Seats and meters close to their limits", pro: true, alt: "A billing page with the current plan, seat and usage meters close to their limits, and the payment method." },
+]
 const FAN = ["template-studio", "template-atlas", "template-launch"]
 
 /** Section headings: the large, tightly set title and the grey line under it. */
@@ -88,15 +96,6 @@ export default async function Home() {
   const teamHref = TEAM_CHECKOUT || `mailto:${FOUNDERS_EMAIL}?subject=${encodeURIComponent("Team licence for Ballmac UI Pro")}`
   const command = "npx shadcn@latest add @ballmac/dashboard-1"
 
-  const bento = BENTO.flatMap(({ name, title, dark }): BentoScreen[] => {
-    const item = getItem(name)
-    if (!item) return []
-    const pro = isPro(item)
-    const big = HERO_SHOTS.has(name)
-    const src = big ? `/home/screens/${name}` : thumbFor(name, pro ? "pro" : "free")
-    if (!src) return []
-    return [{ name, title, href: `/blocks/${name}`, pro, src, dark, alt: item.description ?? title, width: big ? 2560 : 800, height: big ? 1600 : 400 }]
-  })
   const fan = FAN.flatMap((name): FanCard[] => {
     const item = getItem(name)
     const src = item ? thumbFor(name, isPro(item) ? "pro" : "free") : undefined
@@ -168,10 +167,21 @@ export default async function Home() {
         </p>
       </section>
 
-      {/* 2. The screens: a bento of real ones, each opening its own page. */}
+      {/* 2. Components, live: Skiper-style tiles, but each one is the real thing running in the page. */}
+      <section aria-labelledby="live-h" className="mx-auto max-w-[1180px] px-4 py-24 sm:px-6 sm:py-32">
+        <Heading id="live-h" title={<>{components.length} components, live</>} sub="Not screenshots. Each one below is running in this page; go ahead and use it." />
+        <LiveBento tiles={LIVE} />
+        <p className="mt-10 text-center">
+          <Link href="/components" className="focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded-md text-[15px] font-medium outline-none focus-visible:ring-[3px]">
+            Explore all components <ArrowRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />
+          </Link>
+        </p>
+      </section>
+
+      {/* 2b. Whole screens, shown whole. */}
       <section aria-labelledby="screens-h" className="mx-auto max-w-[1180px] px-4 py-24 sm:px-6 sm:py-32">
-        <Heading id="screens-h" title={<>{blocks.length}+ finished screens</>} sub="No extra packages, just source in your repo. Install any one with the shadcn CLI you already use." />
-        <ScreenBento screens={bento} />
+        <Heading id="screens-h" title={<>And {blocks.length} finished screens</>} sub="Whole pages with loading, empty and error states done. One command each, and the code is yours." />
+        <ScreenShowcase screens={SHOWCASE} />
         <p className="mt-10 text-center">
           <Link href="/blocks" className="focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded-md text-[15px] font-medium outline-none focus-visible:ring-[3px]">
             Explore all screens <ArrowRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />

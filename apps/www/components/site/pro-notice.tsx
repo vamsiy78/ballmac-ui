@@ -47,6 +47,7 @@ export function ProNotice({ className = "", nudge = null, hasPrompt = false, pro
 }
 
 /** A small "Pro" label for cards and headings. */
+/** A quiet Pro mark: a small outlined pill that reads at a glance without shouting on every card. */
 export function ProBadge({ className = "" }: { className?: string }) {
-  return <span className={`bg-foreground text-background inline-flex h-5 items-center rounded-full px-2 text-[11px] font-semibold tracking-wide ${className}`}>PRO</span>
+  return <span className={`border-foreground/15 text-foreground/80 inline-flex h-5 items-center rounded-full border px-2 text-[11px] font-medium ${className}`}>Pro</span>
 }

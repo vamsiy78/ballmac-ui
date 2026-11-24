@@ -4,6 +4,7 @@ import Link from "@/components/site/link"
 
 import { PageThumb } from "@/components/site/page-thumb"
 import { ProBadge } from "@/components/site/pro-notice"
+import { cardTitle } from "@/lib/seo"
 
 /** A page-sized thumbnail (block or template) in a quiet window frame, with its name and description below. */
 export function PageCard({
@@ -72,7 +73,7 @@ export function PageCard({
       <div className="px-2 pt-2.5 pb-1">
         <div className="flex items-center justify-between gap-3">
           <Link href={href} className="min-w-0 truncate text-[15px] font-medium tracking-[-0.01em] outline-none after:absolute after:inset-0 after:rounded-[1.75rem] focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">
-            {title}
+            {cardTitle(title)}
           </Link>
           <span className="flex shrink-0 items-center gap-2">
             <span className="text-muted-foreground hidden font-mono text-xs sm:inline">{name}</span>

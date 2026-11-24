@@ -14,21 +14,31 @@ const SHOTS: Record<string, Shot> = {
   "eval-scorecard": { name: "eval-scorecard", alt: "A scorecard comparing two prompt versions across test cases, with pass rates and regressions marked.", width: 1760, height: 1266 },
 }
 
+const TITLES: Record<string, string> = {
+  "cited-answer": "Cited answer",
+  "autonomy-dial": "Autonomy dial",
+  "tool-call-card": "Tool call card",
+  "agent-graph": "Agent graph",
+  "eval-scorecard": "Eval scorecard",
+}
+
+/** One AI component in a warm frame: the picture whole on a quiet stage (never cropped), its name and a way to see it run. */
 function Tile({ shot, className }: { shot: Shot; className?: string }) {
   return (
-    <div className={cn("group bg-card relative flex flex-col overflow-hidden rounded-3xl border", className)}>
-      <div className="flex items-center justify-between gap-3 px-5 pt-4">
-        <span className="text-muted-foreground flex items-center gap-2 font-mono text-xs">
-          {shot.name}
-          <span className="rounded border px-1 py-px font-sans text-[10px] font-medium tracking-wide uppercase">Pro</span>
-        </span>
-        <Link href={`/components/${shot.name}`} className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 inline-flex items-center gap-1 rounded-sm text-xs font-medium outline-none focus-visible:ring-[3px]">
-          See it run <ArrowUpRight className="size-3.5" aria-hidden="true" />
-        </Link>
+    <div className={cn("group bg-frame flex flex-col rounded-[1.75rem] p-2.5", className)}>
+      <div className="bm-stage relative flex min-h-0 flex-1 items-center justify-center overflow-hidden rounded-[1.25rem] p-6 ring-1 ring-black/[0.05] sm:p-8 dark:ring-white/[0.06]">
+        <div className="w-full max-w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100 [&_img]:max-h-[22rem] [&_img]:w-auto [&_img]:mx-auto [&_img]:rounded-xl [&_img]:shadow-[0_20px_40px_-24px_rgb(0_0_0/0.35)]">
+          <Themed base={`/home/ai/${shot.name}`} alt={shot.alt} width={shot.width} height={shot.height} />
+        </div>
       </div>
-      <div className="relative min-h-0 flex-1 overflow-hidden px-5 pt-4 pb-5">
-        <Themed base={`/home/ai/${shot.name}`} alt={shot.alt} width={shot.width} height={shot.height} className="w-full" />
-        <div aria-hidden="true" className="from-card pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t to-transparent" />
+      <div className="flex items-center justify-between gap-3 px-2 pt-2.5 pb-1">
+        <Link href={`/components/${shot.name}`} className="focus-visible:ring-ring/50 min-w-0 truncate rounded-sm text-[15px] font-medium tracking-[-0.01em] outline-none hover:underline hover:underline-offset-4 focus-visible:ring-[3px]">
+          {TITLES[shot.name] ?? shot.name}
+        </Link>
+        <span className="text-muted-foreground flex shrink-0 items-center gap-2 font-mono text-xs">
+          {shot.name}
+          <span className="font-sans">Pro</span>
+        </span>
       </div>
     </div>
   )
@@ -40,19 +50,21 @@ function Tile({ shot, className }: { shot: Shot; className?: string }) {
  */
 export function AiBento({ total }: { total: number }) {
   return (
-    <div className="grid gap-4 lg:grid-cols-12">
-      <Tile shot={SHOTS["cited-answer"]!} className="h-[27rem] lg:col-span-7" />
-      <Tile shot={SHOTS["autonomy-dial"]!} className="h-[27rem] lg:col-span-5" />
-      <Tile shot={SHOTS["tool-call-card"]!} className="h-[29rem] lg:col-span-5" />
-      <Tile shot={SHOTS["agent-graph"]!} className="h-[29rem] lg:col-span-7" />
-      <Tile shot={SHOTS["eval-scorecard"]!} className="h-[26rem] lg:col-span-8" />
-      <div className="bg-foreground text-background flex flex-col justify-between rounded-3xl p-7 lg:col-span-4">
-        <p className="text-7xl font-semibold tracking-[-0.06em] tabular-nums sm:text-8xl">{total}</p>
-        <div>
-          <p className="text-lg font-medium">AI components, and the screens that use them.</p>
-          <Link href="/components?category=ai" className="focus-visible:ring-ring/60 mt-4 inline-flex items-center gap-1.5 rounded-sm text-sm font-medium underline underline-offset-4 outline-none focus-visible:ring-[3px]">
-            Browse them all <ArrowUpRight className="size-4" aria-hidden="true" />
-          </Link>
+    <div className="grid grid-cols-1 gap-3 lg:grid-cols-12">
+      <Tile shot={SHOTS["cited-answer"]!} className="min-h-[24rem] lg:col-span-7" />
+      <Tile shot={SHOTS["autonomy-dial"]!} className="min-h-[24rem] lg:col-span-5" />
+      <Tile shot={SHOTS["tool-call-card"]!} className="min-h-[26rem] lg:col-span-5" />
+      <Tile shot={SHOTS["agent-graph"]!} className="min-h-[26rem] lg:col-span-7" />
+      <Tile shot={SHOTS["eval-scorecard"]!} className="min-h-[24rem] lg:col-span-8" />
+      <div className="bg-frame flex flex-col rounded-[1.75rem] p-2.5 lg:col-span-4">
+        <div className="dark bg-[oklch(0.17_0_0)] text-foreground flex flex-1 flex-col justify-between rounded-[1.25rem] p-7">
+          <p className="text-7xl font-semibold tracking-[-0.06em] tabular-nums sm:text-8xl">{total}</p>
+          <div>
+            <p className="text-lg font-medium tracking-[-0.01em]">AI components, and the screens that use them.</p>
+            <Link href="/components?category=ai" className="focus-visible:ring-ring/60 mt-4 inline-flex items-center gap-1.5 rounded-sm text-sm font-medium underline underline-offset-4 outline-none focus-visible:ring-[3px]">
+              Browse them all <ArrowUpRight className="size-4" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>
