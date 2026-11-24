@@ -51,54 +51,48 @@ const columns: { title: string; links: FooterLink[] }[] = [
 ]
 
 function FooterAnchor({ href, children }: { href: string; children: React.ReactNode }) {
-  return href.startsWith("http") ? <a href={href}>{children}</a> : <Link href={href}>{children}</Link>
+  const cls = "hover:text-foreground focus-visible:ring-ring/50 rounded-sm outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none"
+  return href.startsWith("http") ? <a href={href} className={cls}>{children}</a> : <Link href={href} className={cls}>{children}</Link>
 }
 
+/** A quiet footer in the landing's palette: the links (every one kept, they are how people and crawlers find the rest), a faded wordmark and one line. */
 export function SiteFooter() {
   const screens = getBlocks().length
   const freeScreens = getBlocks().filter((b) => !isPro(b)).length
   const components = getComponents().length
   return (
-    <footer className="bm-footer">
-      <div className="bm-footer__stage" aria-hidden="true">
-        <div className="bm-grain absolute inset-0" />
-      </div>
-      <p className="bm-footer__wordmark" aria-hidden="true">Ballmac</p>
-      <div className="bm-footer__fog" aria-hidden="true" />
-      <div className="bm-footer__content">
-        <div className="bm-footer__brand">
+    <footer className="relative mt-16 overflow-hidden border-t border-dashed">
+      <div className="mx-auto grid max-w-[1180px] gap-12 px-4 pt-16 pb-10 sm:px-6 md:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]">
+        <div>
           <Logo />
-          <h2 className="bm-footer__title">Real app screens, one command away</h2>
-          <p className="bm-footer__text">
-            Finished screens and components for React and Tailwind, from billing to AI agent consoles. Install one with the shadcn CLI and the code is yours.
+          <p className="text-muted-foreground mt-4 max-w-xs text-sm leading-relaxed">
+            {screens} app screens and {components} components for React and Tailwind. {freeScreens} screens are free under MIT; install any with the shadcn CLI and the code is yours.
           </p>
-          <Link href="/blocks" className="bm-footer__cta">
-            Browse screens
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="rtl:-scale-x-100">
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </Link>
-          {STANDING_PRICE && <Link href="/pro?utm_source=ballmac-ui&utm_medium=footer&utm_campaign=pro" className="bm-footer__pro">Pro, ${STANDING_PRICE} once →</Link>}
-          <p className="bm-footer__copy">
-            © 2026 Ballmac · <Link href="/license/pro">Pro licence</Link> · <Link href="/refund">Refunds</Link> · <Link href="/license">MIT licence</Link>
-          </p>
-          <ul className="bm-footer__status" aria-label="The library in numbers">
-            <li className="bm-footer__chip"><span className="bm-footer__dot" aria-hidden="true" />{freeScreens} free screens</li>
-            <li className="bm-footer__chip">{screens} screens in all</li>
-            <li className="bm-footer__chip">{components} components</li>
-          </ul>
+          {STANDING_PRICE && (
+            <Link href="/pro?utm_source=ballmac-ui&utm_medium=footer&utm_campaign=pro" className="bg-frame hover:bg-frame/70 focus-visible:ring-ring/50 mt-5 inline-flex h-9 items-center rounded-xl px-4 text-sm font-medium outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none">
+              Pro, ${STANDING_PRICE} once
+            </Link>
+          )}
         </div>
         {columns.map((c) => (
           <nav key={c.title} aria-label={c.title}>
-            <h3 className="bm-footer__col-title">{c.title}</h3>
-            <ul className="bm-footer__list">
+            <h3 className="text-[13px] font-medium">{c.title}</h3>
+            <ul className="text-muted-foreground mt-4 grid gap-2.5 text-sm">
               {c.links.map((l) => (
-                <li key={l.href}><FooterAnchor href={l.href}>{l.label}</FooterAnchor></li>
+                <li key={l.href}>
+                  <FooterAnchor href={l.href}>{l.label}</FooterAnchor>
+                </li>
               ))}
             </ul>
           </nav>
         ))}
       </div>
+      <p aria-hidden="true" className="text-frame pointer-events-none -mb-[0.22em] text-center text-[clamp(5rem,21vw,19rem)] leading-none font-bold tracking-[-0.07em] select-none dark:text-white/[0.04]">
+        Ballmac
+      </p>
+      <p className="text-muted-foreground relative border-t border-dashed px-4 py-5 text-center text-[13px]">
+        © 2026 Ballmac · <Link href="/license/pro" className="hover:text-foreground">Pro licence</Link> · <Link href="/refund" className="hover:text-foreground">Refunds</Link> · <Link href="/license" className="hover:text-foreground">MIT licence</Link> · Designed and built by Ballmac
+      </p>
     </footer>
   )
 }

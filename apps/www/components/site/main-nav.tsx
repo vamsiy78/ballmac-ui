@@ -12,7 +12,7 @@ type Group = { label: string; items: Leaf[] }
 
 const MCP = "/docs/get-started/connect-your-agent"
 
-/** Five top-level entries: the library is grouped, and the group reads as selected when one of its pages is open. */
+/** Three top-level entries, kept short for the floating header (MCP and Partners live in the footer): the library is grouped, and the group reads as selected when one of its pages is open. */
 const nav: (Leaf | Group)[] = [
   { href: "/docs", label: "Docs", match: ["/docs"] },
   {
@@ -24,15 +24,13 @@ const nav: (Leaf | Group)[] = [
       { href: "/presets", label: "Presets", match: ["/presets", "/themes"], hint: "Themes and feels" },
     ],
   },
-  { href: MCP, label: "MCP", match: [] },
   { href: "/pricing", label: "Pricing", match: ["/pricing"] },
-  { href: "/affiliates", label: "Partners", match: ["/affiliates"] },
 ]
 
 const isActive = (pathname: string, n: Leaf) =>
   pathname === n.href || n.match.some((m) => pathname.startsWith(m) && !(m === "/docs" && pathname === MCP))
 
-const item = "focus-visible:ring-ring/50 inline-flex min-h-8 items-center gap-1 rounded-md px-2.5 py-1.5 text-sm outline-none transition-colors focus-visible:ring-[3px]"
+const item = "focus-visible:ring-ring/50 inline-flex min-h-8 items-center gap-1 rounded-lg px-2.5 py-1.5 text-[14px] outline-none transition-colors focus-visible:ring-[3px]"
 
 /** A heading that opens a short list: on hover, on click or Enter, and closed again by Escape, by leaving it or by moving focus away. */
 function Dropdown({ group, pathname }: { group: Group; pathname: string }) {
@@ -83,7 +81,7 @@ function Dropdown({ group, pathname }: { group: Group; pathname: string }) {
 export function MainNav() {
   const pathname = usePathname()
   return (
-    <nav aria-label="Main" className="hidden xl:block">
+    <nav aria-label="Main" className="hidden lg:block">
       <ul className="flex items-center gap-0.5">
         {nav.map((n) =>
           "items" in n ? (

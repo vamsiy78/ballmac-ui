@@ -2,42 +2,31 @@ import Link from "@/components/site/link"
 
 import { CommandMenu } from "@/components/site/command-menu"
 import { sidebarGroups } from "@/components/site/docs-shell"
-import { GithubStars } from "@/components/site/github-stars"
 import { Logo } from "@/components/site/logo"
 import { MainNav } from "@/components/site/main-nav"
 import { MobileNav } from "@/components/site/mobile-nav"
-import { starsAtBuild } from "@/lib/github-stars-build"
 import { ProAccount } from "@/components/pro/pro-account"
 import { ThemeToggle } from "@/components/site/theme-toggle"
 
-export async function SiteHeader() {
-  const stars = await starsAtBuild()
+/**
+ * A floating pill instead of a full-width bar: the page runs edge to edge under it. The outer band is still 3.5rem tall, so the sticky sub-navs and the
+ * docs sidebar that sit at top-14 line up under it as before. The band itself lets clicks through; only the pill takes them.
+ */
+export function SiteHeader() {
   return (
-    <header className="bg-background sticky top-0 z-40 border-b backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-[1440px] items-center gap-2 px-4 sm:px-6">
+    <header className="pointer-events-none sticky top-0 z-40 h-14 px-2 pt-2 sm:px-4">
+      <div className="bg-frame/85 pointer-events-auto mx-auto flex h-12 max-w-[820px] items-center gap-1 rounded-2xl ps-2 pe-2 shadow-[0_1px_0_rgb(255_255_255/0.6)_inset,0_8px_24px_-12px_rgb(0_0_0/0.18)] ring-1 ring-black/[0.04] backdrop-blur-xl sm:ps-4 dark:shadow-[0_8px_24px_-12px_rgb(0_0_0/0.6)] dark:ring-white/[0.06]">
         <MobileNav groups={sidebarGroups()} />
-        <Link href="/" className="focus-visible:ring-ring/50 me-3 flex items-center rounded-md outline-none focus-visible:ring-[3px]">
+        <Link href="/" className="focus-visible:ring-ring/50 me-2 flex items-center rounded-lg outline-none focus-visible:ring-[3px]">
           <span className="sr-only">Ballmac UI home</span>
           <span aria-hidden="true" className="flex">
             <Logo />
           </span>
         </Link>
-        <MainNav />
-        <div className="ms-auto flex min-w-0 flex-1 items-center justify-end gap-1">
-          <div className="me-1 min-w-0 sm:w-full sm:max-w-72 xl:max-w-48 2xl:max-w-72">
-            <CommandMenu />
-          </div>
-          <GithubStars initial={stars} />
-          <a
-            href="https://x.com/ballmacapps"
-            className="text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:ring-ring/50 hidden size-8 items-center justify-center rounded-md outline-none focus-visible:ring-[3px] sm:inline-flex"
-            aria-label="Ballmac on X"
-          >
-            <svg viewBox="0 0 24 24" className="size-3.5 fill-current" aria-hidden="true">
-              <path d="M18.9 1.2h3.7l-8 9.1 9.4 12.5h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9 6.1-6.9Zm-1.3 19.4h2L6.5 3.3H4.3l13.3 17.3Z" />
-            </svg>
-          </a>
-          <ThemeToggle />
+        <div className="ms-auto flex items-center gap-1.5">
+          <MainNav />
+          <CommandMenu compact />
+          <ThemeToggle className="bg-background text-foreground hover:bg-background/70 focus-visible:ring-ring/50 inline-flex size-8 items-center justify-center rounded-lg shadow-[0_1px_2px_rgb(0_0_0/0.06)] outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none" />
           <ProAccount className="ms-1" />
         </div>
       </div>
