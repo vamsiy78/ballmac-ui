@@ -43,16 +43,11 @@ export function PageCard({
   height?: number
 }) {
   return (
-    <div className="group relative">
-      <div className="bg-background overflow-hidden rounded-xl border transition-[border-color,box-shadow] duration-200 group-hover:border-foreground/20 group-hover:shadow-[0_8px_30px_-12px_rgb(0_0_0/0.25)]">
-        <div className="bg-muted/50 flex h-7 items-center gap-1.5 border-b px-3" aria-hidden="true">
-          <span className="bg-foreground/15 size-2 rounded-full" />
-          <span className="bg-foreground/15 size-2 rounded-full" />
-          <span className="bg-foreground/15 size-2 rounded-full" />
-        </div>
+    <div className="group bg-frame relative rounded-[1.75rem] p-2.5 transition-shadow duration-300 hover:shadow-[0_18px_40px_-24px_rgb(0_0_0/0.35)] motion-reduce:transition-none">
+      <div className="bg-background overflow-hidden rounded-[1.25rem] ring-1 ring-black/[0.05] dark:ring-white/[0.06]">
         {thumb ? (
           // Both pictures are in the page; the one that does not match the colour scheme is display:none, so the browser never downloads it.
-          <div className="bg-muted/30 relative w-full overflow-hidden" style={{ aspectRatio: tall ? "1280 / 840" : short ? "1280 / 300" : "1280 / 640" }}>
+          <div className="relative w-full overflow-hidden" style={{ aspectRatio: tall ? "1280 / 840" : short ? "1280 / 300" : "1280 / 640" }}>
             {(["light", "dark"] as const).map((mode) => (
               <Image
                 key={mode}
@@ -64,7 +59,7 @@ export function PageCard({
                 loading={priority ? "eager" : "lazy"}
                 fetchPriority={priority ? "high" : "auto"}
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className={mode === "light" ? "absolute inset-0 size-full object-cover object-top dark:hidden" : "absolute inset-0 hidden size-full object-cover object-top dark:block"}
+                className={`absolute inset-0 size-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${mode === "light" ? "dark:hidden" : "hidden dark:block"}`}
               />
             ))}
           </div>
@@ -74,17 +69,19 @@ export function PageCard({
           </PageThumb>
         )}
       </div>
-      <div className="mt-3 flex items-baseline justify-between gap-3">
-        <Link href={href} className="font-medium outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">
-          {title}
-        </Link>
-        {pro && <ProBadge className="ms-2 align-middle" />}
-        {isNew && !pro && (
-          <span className="bg-chart-1/15 text-foreground ms-2 rounded-full px-2 py-0.5 text-[11px] font-medium align-middle">New</span>
-        )}
-        <span className="text-muted-foreground hidden font-mono text-xs sm:inline">@ballmac/{name}</span>
+      <div className="px-2 pt-2.5 pb-1">
+        <div className="flex items-center justify-between gap-3">
+          <Link href={href} className="min-w-0 truncate text-[15px] font-medium tracking-[-0.01em] outline-none after:absolute after:inset-0 after:rounded-[1.75rem] focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50">
+            {title}
+          </Link>
+          <span className="flex shrink-0 items-center gap-2">
+            <span className="text-muted-foreground hidden font-mono text-xs sm:inline">{name}</span>
+            {pro && <ProBadge />}
+            {isNew && !pro && <span className="text-[12px] font-medium text-[oklch(0.56_0.22_258)] dark:text-[oklch(0.72_0.16_250)]">New</span>}
+          </span>
+        </div>
+        <p className="text-muted-foreground mt-0.5 line-clamp-1 text-[13px] leading-relaxed">{description}</p>
       </div>
-      <p className="text-muted-foreground mt-1 line-clamp-2 text-sm leading-relaxed">{description}</p>
     </div>
   )
 }

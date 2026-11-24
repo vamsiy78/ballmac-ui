@@ -1,58 +1,53 @@
-import { ArrowRight } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "@/components/site/link"
 
-import { Button } from "@/components/ballmac/button"
-import { Eyebrow } from "@/components/site/section-heading"
+import { GoBack } from "@/components/site/go-back"
+import { BallmacMark } from "@/components/site/logo"
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteHeader } from "@/components/site/site-header"
-import { getComponents } from "@/lib/registry"
 
 export const metadata: Metadata = { title: "Page not found", robots: { index: false } }
 
-const places = (components: number) => [
-  { href: "/components", title: "Components", text: `${components} pieces with live previews` },
-  { href: "/blocks", title: "Blocks", text: "Whole sections: heroes, pricing, dashboards" },
-  { href: "/templates", title: "Templates", text: "Complete sites and apps" },
-  { href: "/themes", title: "Themes", text: "Twelve looks and a builder" },
-  { href: "/docs", title: "Docs", text: "Install, theme, connect your agent" },
-  { href: "/pricing", title: "Pricing", text: "Free, and what Pro adds" },
+const places = [
+  { href: "/blocks", title: "Blocks" },
+  { href: "/components", title: "Components" },
+  { href: "/templates", title: "Templates" },
+  { href: "/docs", title: "Docs" },
+  { href: "/pricing", title: "Pricing" },
 ]
+
+const action = "focus-visible:ring-ring/50 inline-flex items-center gap-2.5 rounded-full py-1 ps-1 pe-3 text-[17px] outline-none transition-colors hover:bg-frame focus-visible:ring-[3px] motion-reduce:transition-none"
 
 export default function NotFound() {
   return (
     <>
       <SiteHeader />
-      <main id="main" className="flex-1">
-        <div className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-32">
-          <div className="flex justify-center">
-            <Eyebrow>Error 404</Eyebrow>
+      <main id="main" className="bg-frame/50 flex flex-1 items-center">
+        <div className="mx-auto max-w-2xl px-4 py-32 text-center sm:px-6 sm:py-40">
+          <p className="text-muted-foreground font-mono text-[13px] tracking-[0.06em] uppercase">404 page not found</p>
+          <h1 className="mt-6 text-xl font-medium tracking-[-0.02em] text-balance sm:text-[22px]">You&rsquo;re looking for a page that isn&rsquo;t here</h1>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+            <GoBack className={action} />
+            <Link href="/" className={action}>
+              <span className="inline-flex size-8 items-center justify-center rounded-full bg-[oklch(0.56_0.22_258)] text-white">
+                <BallmacMark className="size-5" />
+              </span>
+              Home
+            </Link>
+            <Link href="/blocks" className={action}>
+              <span className="bg-background inline-flex size-8 items-center justify-center rounded-full font-mono text-sm shadow-[0_1px_2px_rgb(0_0_0/0.08)]" aria-hidden="true">⌘</span>
+              Browse
+            </Link>
           </div>
-          <h1 className="mt-5 text-center text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">This page is not here</h1>
-          <p className="text-muted-foreground mx-auto mt-4 max-w-md text-center text-lg leading-relaxed text-pretty">
-            The link may be old or mistyped. Try search (press <kbd className="bg-muted rounded border px-1.5 py-0.5 font-mono text-sm">⌘K</kbd> or <kbd className="bg-muted rounded border px-1.5 py-0.5 font-mono text-sm">Ctrl K</kbd>) or pick a place to start.
-          </p>
-          <ul className="mt-12 grid gap-3 sm:grid-cols-2">
-            {places(getComponents().length).map((p) => (
-              <li key={p.href}>
-                <Link
-                  href={p.href}
-                  className="bg-card hover:bg-accent focus-visible:ring-ring/50 group flex items-center justify-between gap-4 rounded-xl border p-4 outline-none transition-colors focus-visible:ring-[3px] motion-reduce:transition-none"
-                >
-                  <span>
-                    <span className="block font-medium">{p.title}</span>
-                    <span className="text-muted-foreground block text-sm">{p.text}</span>
-                  </span>
-                  <ArrowRight className="text-muted-foreground size-4 shrink-0 transition-transform group-hover:translate-x-0.5 rtl:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
-                </Link>
-              </li>
+          <p className="text-muted-foreground mt-10 text-sm">
+            Or search with <kbd className="bg-background rounded-md px-1.5 py-0.5 font-mono text-xs shadow-[0_1px_2px_rgb(0_0_0/0.08)]">⌘K</kbd>, or go to{" "}
+            {places.map((p, i) => (
+              <span key={p.href}>
+                <Link href={p.href} className="text-foreground underline-offset-4 hover:underline">{p.title}</Link>
+                {i < places.length - 2 ? ", " : i === places.length - 2 ? " or " : "."}
+              </span>
             ))}
-          </ul>
-          <div className="mt-10 flex justify-center">
-            <Button asChild shape="pill" size="lg">
-              <Link href="/">Back to the home page</Link>
-            </Button>
-          </div>
+          </p>
         </div>
       </main>
       <SiteFooter />

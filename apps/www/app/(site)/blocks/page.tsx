@@ -78,10 +78,10 @@ export default async function BlocksPage() {
   const featured = START_HERE.map((f) => ({ ...f, block: blocks.find((b) => b.name === f.name) })).filter((f) => f.block)
 
   return (
-    <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 md:py-16">
+    <div className="mx-auto max-w-[1440px] px-4 pt-20 pb-36 sm:px-6 md:pt-28">
       <JsonLd graph={collection({ name: "React page blocks", description: String(metadata.description), path: "/blocks", items: blocks.filter((b) => b.tier !== "pro").map((b) => ({ name: b.title, path: `/blocks/${b.name}` })) })} />
       <header className="mx-auto max-w-2xl text-center">
-        <h1 className="text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">Blocks for real pages</h1>
+        <h1 className="text-[2.5rem] leading-[1.02] font-semibold tracking-[-0.055em] text-balance sm:text-6xl">Blocks for real pages</h1>
         <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
           {free} free blocks and {pro} in Pro, from landing pages to dashboards, agents and desktop apps. Preview them at any width, then install one into{" "}
           <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-[0.85em]">components/ballmac/blocks</code>.
@@ -95,16 +95,17 @@ export default async function BlocksPage() {
           <section aria-labelledby="start-here" className="mt-14">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <h2 id="start-here" className="text-2xl font-semibold tracking-[-0.03em]">
+                <h2 id="start-here" className="text-[1.75rem] font-semibold tracking-[-0.045em]">
                   Start with these
+                  <sup className="text-muted-foreground ms-1.5 align-super text-[13px] font-normal tracking-normal tabular-nums">[{featured.length}]</sup>
                 </h2>
                 <p className="text-muted-foreground mt-1.5 text-[15px]">Six blocks that show the range. All free.</p>
               </div>
             </div>
-            <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
               {featured.map(({ name, label, block }, i) => (
                 <div key={name}>
-                  <p className="text-muted-foreground mb-2 text-xs font-medium">{label}</p>
+                  <p className="text-muted-foreground mb-2 ps-2 text-xs font-medium">{label}</p>
                   <PageCard href={`/blocks/${name}`} title={block!.title} description={block!.description} name={name} Preview={block!.Preview} thumb={block!.thumb} frame={block!.frame} priority={i < 3} />
                 </div>
               ))}

@@ -42,12 +42,9 @@ function NewBadge() {
 function Card({ item }: { item: CatalogItem }) {
   const Preview = item.Preview
   return (
-    <div data-ql={item.name} data-kind="card" className="group relative">
+    <div data-ql={item.name} data-kind="card" className="group bg-frame relative rounded-[1.75rem] p-2.5 transition-shadow duration-300 hover:shadow-[0_18px_40px_-24px_rgb(0_0_0/0.35)] motion-reduce:transition-none">
       <div className="relative">
-        <div
-          className="bm-stage relative aspect-[4/3] overflow-hidden rounded-xl border transition-[border-color,box-shadow] duration-200 group-hover:border-foreground/20 group-hover:shadow-[0_8px_30px_-12px_rgb(0_0_0/0.25)]"
-          inert
-        >
+        <div className="bm-stage relative aspect-[4/3] overflow-hidden rounded-[1.25rem] ring-1 ring-black/[0.05] dark:ring-white/[0.06]" inert>
           <LazyMount className="absolute inset-0">
             <FitPreview {...(compact.has(item.category) ? { width: 420, height: 315 } : { width: 600, height: 450 })}>{Preview ? <Preview /> : null}</FitPreview>
           </LazyMount>
@@ -58,17 +55,21 @@ function Card({ item }: { item: CatalogItem }) {
           <CopyInstallButton name={item.name} />
         </div>
       </div>
-      <div className="mt-3 flex items-center gap-2">
-        <Link
-          href={`/components/${item.name}`}
-          className="font-medium outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50"
-        >
-          {item.title}
-        </Link>
-        {isNew(item) && <NewBadge />}
-        {isPro(item) && <ProBadge />}
+      <div className="px-2 pt-2.5 pb-1">
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/components/${item.name}`}
+            className="min-w-0 truncate text-[15px] font-medium tracking-[-0.01em] outline-none after:absolute after:inset-0 after:rounded-[1.75rem] focus-visible:after:ring-[3px] focus-visible:after:ring-ring/50"
+          >
+            {item.title}
+          </Link>
+          <span className="ms-auto flex shrink-0 items-center gap-2">
+            {isNew(item) && <NewBadge />}
+            {isPro(item) && <ProBadge />}
+          </span>
+        </div>
+        <p className="text-muted-foreground mt-0.5 line-clamp-1 text-[13px] leading-relaxed">{item.description}</p>
       </div>
-      <p className="text-muted-foreground mt-1 line-clamp-2 text-sm leading-relaxed">{item.description}</p>
     </div>
   )
 }
@@ -104,7 +105,7 @@ export default async function ComponentsPage() {
             <ChevronRight className="size-3.5" aria-hidden="true" />
             <span className="text-foreground" aria-current="page">Components</span>
           </nav>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Components</h1>
+          <h1 className="mt-3 text-[2.5rem] leading-[1.02] font-semibold tracking-[-0.055em] sm:text-5xl">Components</h1>
           <p className="text-muted-foreground mt-3 text-[1.05rem] leading-7 text-balance sm:text-base">
             Every component in the library. Press Quick Look on any card to try it right here.
           </p>
@@ -114,11 +115,12 @@ export default async function ComponentsPage() {
       {categories.map((cat, n) => (
         <React.Fragment key={cat}>
         {n === 3 && <ProCallout where="components" className="mt-12" />}
-        <section data-category={cat} className="mt-12 group-data-[view=index]/catalog:mt-9">
-          <h2 id={`c-${cat}`} className="mb-5 flex items-baseline gap-2 text-lg font-semibold tracking-tight group-data-[view=index]/catalog:mb-4 group-data-[view=index]/catalog:text-base">
+        <section data-category={cat} className="mt-16 group-data-[view=index]/catalog:mt-9">
+          <h2 id={`c-${cat}`} className="mb-5 text-2xl font-semibold tracking-[-0.045em] group-data-[view=index]/catalog:mb-4 group-data-[view=index]/catalog:text-base">
             {categoryLabels[cat] ?? cat}
+            <sup className="text-muted-foreground ms-1.5 align-super text-[12px] font-normal tracking-normal tabular-nums">[{inCategory(cat).length}]</sup>
           </h2>
-          <div className="grid grid-cols-1 gap-x-5 gap-y-8 group-data-[view=index]/catalog:hidden group-data-[view=list]/catalog:hidden sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 group-data-[view=index]/catalog:hidden group-data-[view=list]/catalog:hidden sm:grid-cols-2 xl:grid-cols-3">
             {inCategory(cat).map((i) => (
               <Card key={i.name} item={i} />
             ))}

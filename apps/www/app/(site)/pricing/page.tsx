@@ -173,12 +173,12 @@ export default async function PricingPage() {
       <JsonLd graph={[...(onSale ? [proProduct({ path: "/pricing", description: "Finished app blocks, starter apps, a private shadcn registry and Figma tokens for React and Tailwind. Pay once, every future Pro update included.", pro: { price: String(offer.price), url: offer.checkout ?? undefined }, team: { price: TEAM_PRICE, seats: TEAM_SEATS } })] : []), faqPage(faqs.flatMap((x) => (typeof x.a === "string" ? [{ q: x.q, text: x.a }] : [])))]} />
       {f && <FoundingBanner offer={f} at={now.getTime()} href="#plans" />}
       {regular && offer.price && <LimitedOfferBanner price={offer.price} regular={regular} href="#plans" />}
-      <div className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6">
+      <div className="mx-auto max-w-[1100px] px-4 pt-20 pb-16 sm:px-6 md:pt-28">
         <header className="mx-auto max-w-2xl space-y-4 text-center">
           <div className="flex justify-center">
             <Eyebrow>Pricing</Eyebrow>
           </div>
-          <h1 className="text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">The screens your app needs, finished. Pay once.</h1>
+          <h1 className="text-[2.5rem] leading-[1.02] font-semibold tracking-[-0.055em] text-balance sm:text-6xl">The screens your app needs, finished. Pay once.</h1>
           <p className="text-muted-foreground text-lg leading-relaxed">The core library is free for any project. Pro adds {proBlocks} finished screens, a private registry and Figma tokens, so you spend the week on your product.</p>
         </header>
 
@@ -202,7 +202,7 @@ export default async function PricingPage() {
             const pro = plan.name === "Pro"
             return (
               // On a phone the cards stack, so Pro goes first: otherwise the plan most people should buy sits a full screen below the free one.
-              <div key={plan.name} className={pro ? "bg-foreground text-background order-first flex flex-col rounded-2xl p-8 lg:order-none" : "bg-card flex flex-col rounded-2xl border p-8"}>
+              <div key={plan.name} className={pro ? "bg-foreground text-background order-first flex flex-col rounded-[1.75rem] p-8 lg:order-none" : "bg-frame flex flex-col rounded-[1.75rem] p-8"}>
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-semibold">{plan.name}</h2>
                   {pro && !onSale && <span className="rounded-full border border-current/20 px-2 py-0.5 text-xs font-medium opacity-80">Coming soon</span>}
@@ -259,7 +259,7 @@ export default async function PricingPage() {
           </Link>
         </p>
 
-        <aside aria-labelledby="guarantee-h" className="bg-card mx-auto mt-12 flex max-w-3xl items-start gap-4 rounded-2xl border p-5 sm:p-6">
+        <aside aria-labelledby="guarantee-h" className="bg-frame mx-auto mt-12 flex max-w-3xl items-start gap-4 rounded-[1.5rem] p-5 sm:p-6">
           <span className="bg-foreground text-background flex size-10 shrink-0 items-center justify-center rounded-xl" aria-hidden="true">
             <ShieldCheck className="size-5" />
           </span>
@@ -272,9 +272,9 @@ export default async function PricingPage() {
           </div>
         </aside>
 
-        <section aria-labelledby="cost-h" className="mt-24">
+        <section aria-labelledby="cost-h" className="mt-32">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 id="cost-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">What would it cost to build these yourself?</h2>
+            <h2 id="cost-h" className="text-[2rem] leading-[1.05] font-semibold tracking-[-0.05em] text-balance sm:text-[2.5rem]">What would it cost to build these yourself?</h2>
             <p className="text-muted-foreground mt-3 leading-relaxed">Polished states, dark mode, keyboard support and motion take time. Put in your own numbers.</p>
           </div>
           <BuildCost
@@ -292,9 +292,9 @@ export default async function PricingPage() {
 
         <ProofWall className="mt-24" />
 
-        <section aria-labelledby="compare-h" className="mt-24">
+        <section aria-labelledby="compare-h" className="mt-32">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 id="compare-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">
+            <h2 id="compare-h" className="text-[2rem] leading-[1.05] font-semibold tracking-[-0.05em] text-balance sm:text-[2.5rem]">
               Which one is for what
             </h2>
             <p className="text-muted-foreground mt-3 leading-relaxed">
@@ -377,7 +377,7 @@ export default async function PricingPage() {
         {previews.length > 0 && (
           <section aria-labelledby="inside-h" className="mt-24">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 id="inside-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">
+              <h2 id="inside-h" className="text-[2rem] leading-[1.05] font-semibold tracking-[-0.05em] text-balance sm:text-[2.5rem]">
                 See what is inside before you decide
               </h2>
               <p className="text-muted-foreground mt-3 leading-relaxed">Six of the {proBlocks} Pro blocks. Each opens as a full page you can look around.</p>
@@ -393,7 +393,7 @@ export default async function PricingPage() {
         {f && (
           <section aria-labelledby="founding-h" className="mt-24">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 id="founding-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">
+              <h2 id="founding-h" className="text-[2rem] leading-[1.05] font-semibold tracking-[-0.05em] text-balance sm:text-[2.5rem]">
                 What founding members get
               </h2>
               <p className="text-muted-foreground mt-3 leading-relaxed">Only the first {f.limit} licences. It costs us little, and it is yours for good.</p>
@@ -428,7 +428,7 @@ export default async function PricingPage() {
         {sampler.length > 0 && (
           <section aria-labelledby="sampler-h" className="mx-auto mt-24 max-w-3xl">
             <div className="text-center">
-              <h2 id="sampler-h" className="text-3xl font-semibold tracking-[-0.03em] text-balance">
+              <h2 id="sampler-h" className="text-[2rem] leading-[1.05] font-semibold tracking-[-0.05em] text-balance sm:text-[2.5rem]">
                 Try three Pro blocks free
               </h2>
               <p className="text-muted-foreground mt-3 leading-relaxed">Real Pro blocks, yours to use in any project. Leave your email and they appear right here, ready to copy.</p>
@@ -468,7 +468,7 @@ export default async function PricingPage() {
           </section>
         )}
 
-        <section aria-labelledby="hire-h" className="bg-card mx-auto mt-20 max-w-3xl rounded-2xl border p-6 sm:p-8">
+        <section aria-labelledby="hire-h" className="bg-frame mx-auto mt-20 max-w-3xl rounded-[1.75rem] p-6 sm:p-8">
           <h2 id="hire-h" className="text-xl font-semibold tracking-tight">
             Rather have it built for you?
           </h2>

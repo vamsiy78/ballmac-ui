@@ -87,9 +87,8 @@ export function SiteFooter() {
           </nav>
         ))}
       </div>
-      <p aria-hidden="true" className="text-frame pointer-events-none -mb-[0.22em] text-center text-[clamp(5rem,21vw,19rem)] leading-none font-bold tracking-[-0.07em] select-none dark:text-white/[0.04]">
-        Ballmac
-      </p>
+      {/* Drawn from a pseudo-element: it is decoration, so it is not text to read or to check for contrast. */}
+      <div aria-hidden="true" data-word="Ballmac" className="text-frame pointer-events-none -mb-[0.22em] text-center text-[clamp(5rem,21vw,19rem)] leading-none font-bold tracking-[-0.07em] select-none before:content-[attr(data-word)] dark:text-white/[0.04]" />
       <p className="text-muted-foreground relative border-t border-dashed px-4 py-5 text-center text-[13px]">
         © 2026 Ballmac · <Link href="/license/pro" className="hover:text-foreground">Pro licence</Link> · <Link href="/refund" className="hover:text-foreground">Refunds</Link> · <Link href="/license" className="hover:text-foreground">MIT licence</Link> · Designed and built by Ballmac
       </p>

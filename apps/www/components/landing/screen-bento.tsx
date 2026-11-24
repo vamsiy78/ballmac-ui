@@ -41,7 +41,7 @@ export function ScreenBento({ screens }: { screens: BentoScreen[] }) {
           >
             <span className={cn("relative block min-h-0 flex-1 overflow-hidden rounded-[1.25rem] ring-1 ring-black/[0.05] dark:ring-white/[0.06]", s.dark ? "bg-[oklch(0.17_0_0)]" : "bg-background")}>
               <Shot s={s} priority={i < 3} />
-              <span className={cn("absolute end-3 top-3 rounded-full px-2 py-0.5 text-[11px] font-medium backdrop-blur-md", s.pro ? "bg-foreground/85 text-background" : "bg-[oklch(0.62_0.19_255)] text-white")}>{s.pro ? "Pro" : "Free"}</span>
+              <span className={cn("absolute end-3 top-3 rounded-full px-2 py-0.5 text-[11px] font-medium backdrop-blur-md", s.pro ? "bg-foreground/85 text-background" : "bg-[oklch(0.5_0.2_258)] text-white")}>{s.pro ? "Pro" : "Free"}</span>
             </span>
             <span className="flex items-center justify-between gap-3 px-2 pt-2.5 pb-1">
               <span className="truncate text-[15px] font-medium tracking-[-0.01em]">{s.title}</span>

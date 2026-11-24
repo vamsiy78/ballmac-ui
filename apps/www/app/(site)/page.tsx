@@ -63,7 +63,7 @@ function Heading({ id, title, sub, className }: { id: string; title: React.React
 /** A thin dashed rule with a small caps label in the middle, as used between the credit rows. */
 function Rule({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-muted-foreground/80 my-10 flex items-center gap-4 text-[11px] font-medium tracking-[0.12em] uppercase before:h-px before:flex-1 before:border-t before:border-dashed before:border-current/40 after:h-px after:flex-1 after:border-t after:border-dashed after:border-current/40">
+    <p className="text-muted-foreground my-10 flex items-center gap-4 text-[11px] font-medium tracking-[0.12em] uppercase before:h-px before:flex-1 before:border-t before:border-dashed before:border-current/40 after:h-px after:flex-1 after:border-t after:border-dashed after:border-current/40">
       {children}
     </p>
   )
@@ -198,8 +198,8 @@ export default async function Home() {
         </Link>
         <p className="text-muted-foreground mt-1 text-sm">items pass every check, results public</p>
         <Rule>Works with</Rule>
-        <div className="bm-marquee-track relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_15%,black_85%,transparent)]">
-          <ul className="bm-marquee flex w-max gap-12 text-2xl font-semibold tracking-[-0.04em] text-black/30 [--bm-marquee-duration:40s] dark:text-white/30">
+        <div tabIndex={0} role="region" aria-label="Works with" className="bm-marquee-track focus-visible:ring-ring/50 relative overflow-hidden rounded-lg outline-none focus-visible:ring-[3px] [mask-image:linear-gradient(90deg,transparent,black_15%,black_85%,transparent)]">
+          <ul className="bm-marquee flex w-max gap-12 text-muted-foreground text-2xl font-semibold tracking-[-0.04em] [--bm-marquee-duration:40s]">
             {[0, 1].flatMap((copy) => ["Next.js", "Vite", "Remix", "Claude Code", "Cursor", "v0", "Windsurf", "MCP"].map((t) => (
               <li key={`${copy}-${t}`} aria-hidden={copy === 1 ? "true" : undefined}>{t}</li>
             )))}
