@@ -1,10 +1,9 @@
-import { ArrowRight, ArrowUpRight, Check, ChevronDown, Clock, KeyRound, Layers, RefreshCw, ShieldCheck, Sparkles, Users } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Check, Clock, KeyRound, Layers, RefreshCw, ShieldCheck, Sparkles, Users } from "lucide-react"
 import * as React from "react"
 import { Instrument_Serif } from "next/font/google"
 import type { Metadata } from "next"
 import Link from "@/components/site/link"
 
-import { AiBento } from "@/components/home/ai-bento"
 import { KineticTitle } from "@/components/landing/kinetic-title"
 import { LiveBento, type LiveTile } from "@/components/landing/live-bento"
 import { ScreenShowcase, type Showcase } from "@/components/landing/screen-showcase"
@@ -18,8 +17,7 @@ import { SiteJsonLd } from "@/components/site/site-jsonld"
 import { FOUNDERS_EMAIL } from "@/lib/founders"
 import { regularPrice } from "@/lib/limited-offer"
 import { getOffer } from "@/lib/offer"
-import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
-import { REFUND_FIX_DAYS, REFUND_PATH, REFUND_REPORT_DAYS } from "@/lib/pro-refund"
+import { REFUND_FIX_DAYS } from "@/lib/pro-refund"
 import { TEAM_CHECKOUT, TEAM_PRICE, TEAM_SEATS } from "@/lib/pro-team"
 import { formatMeasured, measured, overview } from "@/lib/quality"
 import { getBlocks, getComponents, getItem, getTemplates, isPro } from "@/lib/registry"
@@ -46,7 +44,7 @@ const LIVE: LiveTile[] = [
   { name: "toast-stack", example: "toast-stack-demo", title: "Toast stack", dark: true, width: 460, height: 320 },
   { name: "rating-distribution", example: "rating-distribution-demo", title: "Rating distribution" },
   { name: "globe", example: "globe-demo", title: "Interactive globe", dark: true, width: 620, height: 520 },
-  { name: "emoji-picker", example: "emoji-picker-demo", title: "Emoji picker", width: 480, height: 420 },
+  { name: "segmented-control", example: "segmented-control-demo", title: "Segmented control", width: 460, height: 360 },
 ]
 
 /** Whole screens, shown whole. Captured at 2560 wide (public/home/screens). */
@@ -61,7 +59,7 @@ const FAN = ["template-studio", "template-atlas", "template-launch"]
 /** Section headings: the large, tightly set title and the grey line under it. */
 function Heading({ id, title, sub, className }: { id: string; title: React.ReactNode; sub?: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("bm-reveal mx-auto mb-12 max-w-2xl text-center", className)}>
+    <div className={cn("bm-reveal mx-auto mb-10 max-w-2xl text-center", className)}>
       <h2 id={id} className="text-[2.1rem] leading-[1.05] font-semibold tracking-[-0.055em] text-balance sm:text-5xl">{title}</h2>
       {sub && <p className="text-muted-foreground mx-auto mt-3 max-w-md text-[15.5px] leading-snug text-pretty sm:text-[17px]">{sub}</p>}
     </div>
@@ -85,7 +83,6 @@ export default async function Home() {
   const freeBlocks = blocks.filter((b) => !isPro(b))
   const freeComponents = components.filter((c) => !isPro(c)).length
   const freeTemplates = templates.filter((t) => !isPro(t))
-  const aiComponents = components.filter((c) => c.category === "ai").length
   const now = new Date()
   const offer = await getOffer(now)
   const founding = offer.founding
@@ -102,15 +99,6 @@ export default async function Home() {
     return item && src ? [{ name, title: (item.title ?? name).split(":")[0], src, pro: isPro(item) }] : []
   })
 
-  const FAQ: { q: string; a: React.ReactNode; text?: string }[] = [
-    { q: "What is Ballmac UI?", a: `A shadcn registry of ${blocks.length} app screens and ${components.length} components for React and Tailwind. ${freeBlocks.length} screens and ${freeComponents} components are free under the MIT licence; Pro adds the rest. You install one with a single command and the code is yours.` },
-    { q: "Will it fit my project?", a: "It installs with the shadcn CLI, so it goes wherever shadcn does: Next.js, Vite, Remix." },
-    { q: "Can I change it?", a: "All of it. It is plain source in your repo, and ballmac update merges our fixes into your edits." },
-    { q: "Is the quality real?", a: <>Every item is loaded in a real browser and the results are public, failures included. <Link href="/quality" className="text-foreground underline underline-offset-4">See them</Link>.</>, text: "Every item is loaded in a real browser in light, dark, phone width, reduced motion and right to left, and the results are public at ui.ballmac.com/quality, failures included." },
-    { q: "Free for client work?", a: "Yes. Free items are MIT licensed, for personal, client and commercial projects." },
-    { q: "What can I do with Pro or Team?", a: <>Unlimited apps, yours or your clients&rsquo;. No reselling, sharing or AI training. Pro is one person, Team up to {TEAM_SEATS}. <a href={PRO_LICENCE_PATH} className="text-foreground underline underline-offset-4">Read the licence</a>.</>, text: `Unlimited apps, yours or your clients’. No reselling, sharing or AI training. Pro is one person, Team up to ${TEAM_SEATS}.` },
-    { q: "What if Pro does not work?", a: <>Tell us within {REFUND_REPORT_DAYS} days. If we cannot fix it within {REFUND_FIX_DAYS} days of your request, you get a full refund. <a href={REFUND_PATH} className="text-foreground underline underline-offset-4">Refund policy</a>.</>, text: `Tell us within ${REFUND_REPORT_DAYS} days. If we cannot fix it within ${REFUND_FIX_DAYS} days of your request, you get a full refund.` },
-  ]
 
   const proFeatures: [React.ComponentType<{ className?: string }>, string][] = [
     [Layers, `All ${proBlocks.length} Pro screens`],
@@ -128,7 +116,7 @@ export default async function Home() {
 
   return (
     <>
-      <SiteJsonLd faq={FAQ.map((f) => ({ q: f.q, text: f.text ?? (typeof f.a === "string" ? f.a : "") })).filter((f) => f.text)} libraryDescription={`${freeBlocks.length} finished app screens and ${freeComponents} components for React and Tailwind, free under the MIT licence.`} />
+      <SiteJsonLd libraryDescription={`${freeBlocks.length} finished app screens and ${freeComponents} components for React and Tailwind, free under the MIT licence.`} />
 
       {/* 1. Hero: the words roll into place, then one command and one button. The offer, when there is one, is a single quiet line above. */}
       <section aria-labelledby="hero-h" className="relative -mt-14 flex min-h-[100svh] flex-col items-center justify-center px-5 pt-24 pb-16 text-center">
@@ -168,7 +156,7 @@ export default async function Home() {
       </section>
 
       {/* 2. Components, live: Skiper-style tiles, but each one is the real thing running in the page. */}
-      <section aria-labelledby="live-h" className="mx-auto max-w-[1180px] px-4 py-24 sm:px-6 sm:py-32">
+      <section aria-labelledby="live-h" className="mx-auto max-w-[1180px] px-4 py-16 sm:px-6 sm:py-28">
         <Heading id="live-h" title={<>{components.length} components, live</>} sub="Not screenshots. Each one below is running in this page; go ahead and use it." />
         <LiveBento tiles={LIVE} />
         <p className="mt-10 text-center">
@@ -179,9 +167,9 @@ export default async function Home() {
       </section>
 
       {/* 2b. Whole screens, shown whole. */}
-      <section aria-labelledby="screens-h" className="mx-auto max-w-[1180px] px-4 py-24 sm:px-6 sm:py-32">
+      <section aria-labelledby="screens-h" className="mx-auto max-w-[1180px] px-4 py-16 sm:px-6 sm:py-28">
         <Heading id="screens-h" title={<>And {blocks.length} finished screens</>} sub="Whole pages with loading, empty and error states done. One command each, and the code is yours." />
-        <ScreenShowcase screens={SHOWCASE} />
+        <ScreenShowcase screens={SHOWCASE.slice(0, 2)} />
         <p className="mt-10 text-center">
           <Link href="/blocks" className="focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded-md text-[15px] font-medium outline-none focus-visible:ring-[3px]">
             Explore all screens <ArrowRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />
@@ -189,16 +177,8 @@ export default async function Home() {
         </p>
       </section>
 
-      {/* 3. The AI components, our particular strength. */}
-      <section aria-labelledby="ai-h" className="mx-auto max-w-[1180px] px-4 py-24 sm:px-6 sm:py-32">
-        <Heading id="ai-h" title={<><span aria-hidden="true" className="me-3 inline-block size-[0.62em] rounded-full bg-[conic-gradient(from_200deg,oklch(0.3_0.1_265),oklch(0.62_0.19_255),oklch(0.85_0.12_220),oklch(0.3_0.1_265))] align-[0.02em]" />Built for AI products</>} sub={`${aiComponents} components for agents: tool calls, approvals, citations, evals. Open any one to see it run.`} />
-        <div className="bm-reveal">
-          <AiBento total={aiComponents} />
-        </div>
-      </section>
-
       {/* 4. Proof and credits: the measured quality, what it works with, what it is made from. */}
-      <section aria-labelledby="proof-h" className="mx-auto max-w-[860px] px-4 py-24 text-center sm:px-6 sm:py-32">
+      <section aria-labelledby="proof-h" className="mx-auto max-w-[860px] px-4 py-16 text-center sm:px-6 sm:py-28">
         <Heading id="proof-h" title="Checked in a real browser" sub={<>Every item is opened in light, dark, phone width, reduced motion and right to left.{measured.generated ? ` Last run ${formatMeasured(measured.generated)}.` : ""}</>} className="mb-0" />
         <Rule>Quality, measured</Rule>
         <Link href="/quality" className="bm-reveal focus-visible:ring-ring/50 group inline-flex items-baseline gap-1 rounded-lg outline-none focus-visible:ring-[3px]">
@@ -215,18 +195,11 @@ export default async function Home() {
             )))}
           </ul>
         </div>
-        <Rule>Made with</Rule>
-        <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-lg font-semibold tracking-[-0.03em]">
-          {["React", "Tailwind CSS", "shadcn/ui", "Base UI", "Motion"].map((t) => <li key={t}>{t}</li>)}
-        </ul>
-        <p className="text-muted-foreground mt-12 border-t border-dashed pt-6 text-sm">
-          Free tier open source under MIT. <a href="https://github.com/vamsiy78/ballmac-ui" className="text-foreground font-medium underline-offset-4 hover:underline">Star it on GitHub <ArrowRight className="inline size-3.5 rtl:-scale-x-100" aria-hidden="true" /></a>
-        </p>
       </section>
 
       {/* 5. Whole templates, fanned. */}
       {fan.length === 3 && (
-        <section aria-labelledby="tpl-h" className="overflow-hidden px-4 py-24 sm:px-6 sm:py-32">
+        <section aria-labelledby="tpl-h" className="overflow-hidden px-4 py-16 sm:px-6 sm:py-28">
           <Heading id="tpl-h" title="Whole sites, ready to ship" sub={`${templates.length} templates built from the same screens. ${freeTemplates.length} are free.`} />
           <TemplateFan cards={fan as [FanCard, FanCard, FanCard]} />
           <p className="mt-12 text-center">
@@ -238,7 +211,7 @@ export default async function Home() {
       )}
 
       {/* 6. Plans: one payment, two cards. Free is a line under them, since everyone starts there. */}
-      <section id="plans" aria-labelledby="plans-h" className="scroll-mt-16 px-4 py-24 sm:px-6 sm:py-32">
+      <section id="plans" aria-labelledby="plans-h" className="scroll-mt-16 px-4 py-16 sm:px-6 sm:py-28">
         <Heading id="plans-h" title={<>Just one payment,<br />no subscription</>} />
         <div className="mx-auto grid max-w-[700px] gap-3 sm:grid-cols-2">
           {[
@@ -268,24 +241,8 @@ export default async function Home() {
         {offer.onSale && !founding && <MonthlyOption className="mx-auto mt-6 max-w-[700px]" />}
       </section>
 
-      {/* 7. Short answers. */}
-      <section aria-labelledby="faq-h" className="mx-auto max-w-[700px] px-4 py-16 sm:px-6 sm:py-24">
-        <Heading id="faq-h" title="Questions" className="mb-8" />
-        <div className="divide-y border-y border-dashed">
-          {FAQ.map((f) => (
-            <details key={f.q} className="group">
-              <summary className="focus-visible:ring-ring/50 flex cursor-pointer list-none items-center justify-between gap-4 rounded-md py-4 text-[16px] font-medium tracking-tight outline-none focus-visible:ring-[3px] [&::-webkit-details-marker]:hidden">
-                {f.q}
-                <ChevronDown className="text-muted-foreground size-4 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
-              </summary>
-              <div className="text-muted-foreground pb-5 text-[15px] leading-relaxed">{f.a}</div>
-            </details>
-          ))}
-        </div>
-      </section>
-
       {/* 8. Close: the seal and one last way in. */}
-      <section aria-labelledby="close-h" className="flex flex-col items-center px-4 pt-24 pb-20 text-center sm:px-6 sm:pt-32">
+      <section aria-labelledby="close-h" className="flex flex-col items-center px-4 pt-16 pb-16 text-center sm:px-6 sm:pt-28">
         <p className="bm-reveal bg-frame text-muted-foreground rounded-full px-3 py-1 text-[11px] font-medium tracking-[0.08em] uppercase">Ship today</p>
         <h2 id="close-h" className="bm-reveal mt-4 max-w-xl text-[2.1rem] leading-[1.05] font-semibold tracking-[-0.055em] text-balance sm:text-5xl">Every screen you don&rsquo;t build is a day back</h2>
         <div className="bm-reveal mt-14">

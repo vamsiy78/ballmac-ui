@@ -30,7 +30,7 @@ export function LiveBento({ tiles }: { tiles: LiveTile[] }) {
   return (
     <ul className="grid auto-rows-[15.5rem] grid-cols-1 gap-3 sm:grid-cols-2 lg:auto-rows-[18rem] lg:grid-cols-4">
       {tiles.slice(0, 8).map((t, i) => (
-        <li key={t.name} className={cn("bm-reveal group bg-frame flex min-w-0 flex-col rounded-[1.75rem] p-2.5", SPANS[i], i === 2 || i === 6 ? "sm:row-span-2" : "")}>
+        <li key={t.name} className={cn("bm-reveal group bg-frame min-w-0 flex-col rounded-[1.75rem] p-2.5", i < 4 ? "flex" : "hidden sm:flex", SPANS[i], i === 2 || i === 6 ? "sm:row-span-2" : "")}>
           <div className={cn("relative min-h-0 flex-1 overflow-hidden rounded-[1.25rem] ring-1", t.dark ? "dark bg-[oklch(0.17_0_0)] text-foreground ring-white/[0.06]" : "bm-stage ring-black/[0.05] dark:ring-white/[0.06]")}>
             <LazyMount className="absolute inset-0">
               <FitPreview width={t.width ?? 560} height={t.height ?? 400} inset={0.06}>
