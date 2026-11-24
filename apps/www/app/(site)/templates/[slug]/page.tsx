@@ -6,6 +6,7 @@ import { notFound } from "next/navigation"
 import { CodePanel } from "@/components/site/code-panel"
 import { ProCode } from "@/components/pro/pro-code"
 import { ProBadge } from "@/components/site/pro-notice"
+import { ProBuyBar } from "@/components/site/pro-buy"
 import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { ItemJsonLd } from "@/components/site/item-jsonld"
@@ -41,6 +42,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
         </nav>
         <h1 className="flex items-center gap-3 text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}{isPro(item) && <ProBadge />}</h1>
         <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
+        {isPro(item) && <ProBuyBar where="template-page" />}
       </header>
       {example && (
         <FramePreview

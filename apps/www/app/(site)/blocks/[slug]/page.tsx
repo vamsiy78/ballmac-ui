@@ -10,6 +10,7 @@ import { ProCallout } from "@/components/site/pro-callout"
 import { ProCode, ProPrompt } from "@/components/pro/pro-code"
 import { hasPrompt } from "@/lib/pro-prompts"
 import { ProBadge } from "@/components/site/pro-notice"
+import { ProBuyBar, ProMore, proPicks } from "@/components/site/pro-buy"
 import { FramePreview } from "@/components/site/frame-preview"
 import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@/components/site/item-install"
 import { ItemJsonLd } from "@/components/site/item-jsonld"
@@ -36,6 +37,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
   if (!item || item.category !== "blocks") notFound()
   const example = item.examples[0]
   const nudge = isPro(item) ? nudgeOf((await getOffer()).founding) : null
+  const picks = isPro(item) ? [] : proPicks(item)
   const related = getBlocks().filter((b) => b.name !== item.name && b.blockCategory === item.blockCategory).slice(0, 4)
   return (
     <div className="mx-auto max-w-[1440px] space-y-10 px-4 py-12 sm:px-6">
@@ -49,6 +51,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
         <h1 className="flex items-center gap-3 text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}{isPro(item) && <ProBadge />}</h1>
         <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
         {nudge && <FoundingNudge nudge={nudge} />}
+        {isPro(item) && !nudge && <ProBuyBar where="block-page" className="max-w-3xl" />}
       </header>
       {example && (
         <FramePreview
@@ -70,6 +73,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
           }
         />
       )}
+      {picks.length > 0 && <ProMore items={picks} label={picks[0]!.blockCategory === item.blockCategory ? blockCategoryLabels[item.blockCategory ?? ""]?.toLowerCase() : undefined} where="block-page" />}
       <div className="grid max-w-[820px] grid-cols-1 gap-12">
         <section className="space-y-4">
           <SectionHeading id="installation">Installation</SectionHeading>

@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { JsonLd } from "@/components/site/json-ld"
 import { article, breadcrumbs } from "@/lib/schema"
 import { InstallTabs } from "@/components/site/install-tabs"
+import { ProBuyBar } from "@/components/site/pro-buy"
 import Link from "@/components/site/link"
 import { PageCard } from "@/components/site/page-card"
 import { loadThumb } from "@/lib/examples"
@@ -42,6 +43,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
   const blocks = found.filter((c) => c.kind === "blocks")
   const templates = found.filter((c) => c.kind === "templates")
   // the install command names a free block: a Pro one cannot be added with one command
+  const proCount = blocks.filter((c) => c.item.tier === "pro").length
   const first = blocks.find((c) => c.item.tier !== "pro")?.item.name
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 md:py-20">
@@ -75,6 +77,13 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
             <PageCard key={item.name} href={`/blocks/${item.name}`} title={item.title} description={item.description} name={item.name} Preview={Preview} thumb={thumb} pro={item.tier === "pro"} priority={i < 3} />
           ))}
         </div>
+        {proCount > 0 && (
+          <ProBuyBar
+            where={`use-case-${u.slug}`}
+            lead={`${proCount === blocks.length ? "These blocks are" : `${proCount} of these blocks are`} in Ballmac UI Pro.`}
+            className="mt-10"
+          />
+        )}
       </section>
 
       {templates.length > 0 && (

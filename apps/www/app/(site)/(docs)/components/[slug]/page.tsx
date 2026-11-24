@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 
 import { CodePanel } from "@/components/site/code-panel"
 import { ProBadge, ProNotice } from "@/components/site/pro-notice"
+import { ProBuyBar } from "@/components/site/pro-buy"
 import { CopyPageButton, CopyPromptButton } from "@/components/site/copy-page-button"
 import { ItemVersion } from "@/components/site/item-version"
 import { Scorecard, ScoreChip } from "@/components/site/scorecard"
@@ -118,6 +119,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
               <Link href="/docs/concepts/right-to-left" className="text-foreground underline underline-offset-4">Right-to-left</Link>: {fixedInRtl.reason}
             </p>
           )}
+          {pro && <ProBuyBar where="component-page" />}
         </header>
 
         {first?.Component && (

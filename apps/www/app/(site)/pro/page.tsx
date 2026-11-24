@@ -10,6 +10,7 @@ import { MotionStrip } from "@/components/site/motion-strip"
 import { ProHub } from "@/components/pro/pro-hub"
 import { ProSales } from "@/components/pro/pro-sales"
 import { PageCard } from "@/components/site/page-card"
+import { BuyerQuotes } from "@/components/site/buyer-quotes"
 import Link from "@/components/site/link"
 import { proDownloads } from "@/lib/pro-downloads"
 import { PRO_LICENCE_PATH } from "@/lib/pro-licence"
@@ -48,6 +49,7 @@ export default async function ProPage() {
       <ReferralNotice />
       {offer.onSale && <JsonLd graph={[proProduct({ path: "/pro", description: String(generateMetadata().description), pro: { price: String(offer.price), url: offer.checkout ?? undefined }, team: { price: TEAM_PRICE, seats: TEAM_SEATS } })]} />}
       <ProHub downloads={downloads} sampleItem={picks[0]?.name ?? "hero-pro-1"} licenseUrl={licenseUrl} sales={<ProSales downloads={downloads} />}>
+        <BuyerQuotes className="px-4 pt-12 sm:px-6" />
         {picks.length > 0 && (
           <section className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6" aria-labelledby="inside-h">
             <div className="flex flex-wrap items-end justify-between gap-4">

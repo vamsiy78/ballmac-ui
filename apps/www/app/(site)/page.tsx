@@ -2,6 +2,7 @@ import { ArrowRight, ArrowUpRight, Check, Clock, KeyRound, Layers, RefreshCw, Sh
 import * as React from "react"
 import { Instrument_Serif } from "next/font/google"
 import type { Metadata } from "next"
+import { BuyerQuotes } from "@/components/site/buyer-quotes"
 import Link from "@/components/site/link"
 
 import { KineticTitle } from "@/components/landing/kinetic-title"
@@ -139,7 +140,7 @@ export default async function Home() {
         </h1>
         <p className={cn(serif.className, "bm-hero-rise mt-4 text-[15px] tracking-[0.14em] uppercase [animation-delay:0.5s] sm:text-[17px]")}>for shadcn/ui</p>
 
-        <div className="bm-hero-rise mt-16 flex w-full max-w-xl flex-col items-stretch gap-2.5 [animation-delay:0.8s] sm:flex-row sm:items-center sm:justify-center">
+        <div className="bm-hero-rise mt-16 flex w-full max-w-xl flex-col lg:max-w-2xl items-stretch gap-2.5 [animation-delay:0.8s] sm:flex-row sm:items-center sm:justify-center">
           <div className="bg-frame flex min-w-0 items-center gap-2 rounded-2xl py-2 ps-4 pe-2">
             <code dir="ltr" className="min-w-0 flex-1 truncate text-start font-mono text-[12px] min-[380px]:text-[13px] sm:text-sm">
               npx shadcn add <span className="text-muted-foreground">@ballmac/</span>dashboard-1
@@ -149,6 +150,11 @@ export default async function Home() {
           <Link href="/docs/get-started/install" className="focus-visible:ring-ring/50 inline-flex h-12 shrink-0 items-center justify-center rounded-2xl bg-[oklch(0.56_0.22_258)] px-6 text-[15px] font-medium text-white outline-none transition-colors hover:bg-[oklch(0.5_0.22_258)] focus-visible:ring-[3px] motion-reduce:transition-none">
             Quick start
           </Link>
+          {proPrice && offer.checkout ? (
+            <CheckoutLink href={offer.checkout} plan="pro" className="bg-foreground text-background focus-visible:ring-ring/50 inline-flex h-12 shrink-0 items-center justify-center rounded-2xl px-6 text-[15px] font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-[3px] motion-reduce:transition-none">
+              Get Pro, {proPrice}
+            </CheckoutLink>
+          ) : null}
         </div>
         <p className="bm-hero-rise text-muted-foreground mt-5 text-[13px] [animation-delay:0.9s]">
           {freeBlocks.length} screens free under MIT. <Link href="/blocks" className="text-foreground font-medium underline-offset-4 hover:underline">Browse them</Link>
@@ -239,6 +245,7 @@ export default async function Home() {
           <Link href="/pricing" className="text-foreground font-medium underline-offset-4 hover:underline">Compare everything</Link>
         </div>
         {offer.onSale && !founding && <MonthlyOption className="mx-auto mt-6 max-w-[700px]" />}
+        <BuyerQuotes className="mt-12" />
       </section>
 
       {/* 8. Close: the seal and one last way in. */}

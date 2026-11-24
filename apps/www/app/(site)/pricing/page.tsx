@@ -1,5 +1,6 @@
 import { Check, Clock, Lock, Mail, Minus, ShieldCheck, Users, Vote } from "lucide-react"
 import type { Metadata } from "next"
+import { BuyerQuotes } from "@/components/site/buyer-quotes"
 import Link from "@/components/site/link"
 
 import { Button } from "@/components/ballmac/button"
@@ -271,6 +272,8 @@ export default async function PricingPage() {
             </p>
           </div>
         </aside>
+
+        <BuyerQuotes className="mt-16" />
 
         <section aria-labelledby="cost-h" className="mt-32">
           <div className="mx-auto max-w-2xl text-center">
