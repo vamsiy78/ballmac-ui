@@ -1,11 +1,20 @@
 import { PRESETS, SYSTEMS } from "@ballmac-ui/theme-engine"
 
 import { mdHref, orderedDocs } from "@/lib/docs"
+import { STANDING_PRICE, STANDING_REGULAR } from "@/lib/limited-offer"
+import { TEAM_PRICE, TEAM_SEATS } from "@/lib/pro-team"
 import { comparisons } from "@/lib/compare"
 import { useCases } from "@/lib/use-cases"
 import { getAllItems, getBlocks, getComponents, getTemplates, isPro, SITE_URL } from "@/lib/registry"
 
 export const dynamic = "force-static"
+
+function prices() {
+  const free = `Free: ${getBlocks().filter((i) => !isPro(i)).length} blocks, the components, charts, themes and presets, MIT licensed.`
+  if (!STANDING_PRICE) return free
+  const regular = STANDING_REGULAR ? ` (regular price $${STANDING_REGULAR})` : ""
+  return `${free} Pro: $${STANDING_PRICE} once${regular}, one licence for one person, every future update included. Team: $${TEAM_PRICE} once for up to ${TEAM_SEATS} people at one organisation. Prices in US dollars, tax included.`
+}
 
 export function GET() {
   const blocks = getBlocks().filter((i) => !isPro(i))
@@ -34,7 +43,8 @@ export function GET() {
     "",
     "## Pro",
     `- [Ballmac UI Pro](${SITE_URL}/pro): ${getAllItems().filter((i) => isPro(i) && i.category !== "foundation").length} more items (screens, components and templates), starter apps, a private registry and Figma tokens, for a one-time price. Every item is listed with its description and install command in ${SITE_URL}/api/v1/index.json (tier "pro").`,
-    `- [Pricing](${SITE_URL}/pricing): free versus Pro`,
+    // Prices in plain text, read from the same build variables as the pricing page, so AI assistants can quote them and never see a different number.
+    `- [Pricing](${SITE_URL}/pricing): free versus Pro. ${prices()}`,
     `- [Pro setup](${SITE_URL}/docs/guides/pro): Pro blocks and starter apps install through the private @ballmac-pro registry with a licence key`,
     "",
     "## Charts",

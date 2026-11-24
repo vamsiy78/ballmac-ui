@@ -12,6 +12,7 @@ import { ItemAi, ItemCredits, ItemDependencies, ItemInstall, shownPath } from "@
 import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { SectionHeading } from "@/components/site/section-heading"
 import { Scorecard } from "@/components/site/scorecard"
+import { UseCaseLinks } from "@/components/site/use-case-links"
 import { getItem, getTemplates, itemHref, isPro, namespaceOf, readSource } from "@/lib/registry"
 
 export function generateStaticParams() {
@@ -117,6 +118,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
           <ItemAi item={item} />
           <ItemCredits item={item} />
         </section>
+        <UseCaseLinks name={item.name} />
       </div>
     </div>
   )

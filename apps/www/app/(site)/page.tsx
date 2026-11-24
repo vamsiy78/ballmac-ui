@@ -31,6 +31,8 @@ export function generateMetadata(): Metadata {
   const blocks = getBlocks()
   const free = blocks.filter((b) => !isPro(b)).length
   return {
+    // The words people search for first: the root layout's default title is the brand line, which nobody searches.
+    title: { absolute: "Ballmac UI: shadcn blocks and app screens for React" },
     description: `${blocks.length} app screens for shadcn, React and Tailwind, from billing to AI agent consoles. ${free} are free and MIT licensed; install any with one command and own the code.`,
     alternates: { canonical: "/" },
   }
@@ -136,9 +138,10 @@ export default async function Home() {
         )}
         <p className={cn(serif.className, "bm-hero-rise text-[15px] tracking-[0.14em] uppercase sm:text-[17px]")}>Ballmac UI&rsquo;s</p>
         <h1 id="hero-h" className="mt-3 text-[clamp(3rem,10.5vw,8.25rem)] font-bold tracking-[-0.06em] uppercase">
-          <KineticTitle lines={["Real app", "screens"]} />
+          <KineticTitle lines={["Real app", "screens"]} />{" "}
+          {/* Part of the h1, so the heading search engines read names what the screens are for. */}
+          <span className={cn(serif.className, "bm-hero-rise mt-4 block text-[15px] leading-normal font-normal tracking-[0.14em] [animation-delay:0.5s] sm:text-[17px]")}>for shadcn/ui</span>
         </h1>
-        <p className={cn(serif.className, "bm-hero-rise mt-4 text-[15px] tracking-[0.14em] uppercase [animation-delay:0.5s] sm:text-[17px]")}>for shadcn/ui</p>
 
         <div className="bm-hero-rise mt-16 flex w-full max-w-xl flex-col lg:max-w-2xl items-stretch gap-2.5 [animation-delay:0.8s] sm:flex-row sm:items-center sm:justify-center">
           <div className="bg-frame flex min-w-0 items-center gap-2 rounded-2xl py-2 ps-4 pe-2">

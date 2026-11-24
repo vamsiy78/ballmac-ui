@@ -348,3 +348,14 @@ export const useCases: UseCase[] = [
 ]
 
 export const getUseCase = (slug: string) => useCases.find((u) => u.slug === slug)
+
+/**
+ * The use-case pages an item belongs on: the ones that list it, then the ones whose gallery search is the first word of its name (so `pricing-pro-3` finds
+ * the pricing page). Item pages link to these, so every use-case page gets links from the blocks it is about, not only from the footer.
+ */
+export function useCasesFor(name: string, n = 3): UseCase[] {
+  const head = name.split("-")[0]
+  const listed = useCases.filter((u) => u.blocks.includes(name) || u.templates.includes(name))
+  const matched = useCases.filter((u) => u.query === head && !listed.includes(u))
+  return [...listed, ...matched].slice(0, n)
+}

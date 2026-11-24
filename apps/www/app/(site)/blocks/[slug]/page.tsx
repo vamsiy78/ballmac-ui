@@ -17,6 +17,7 @@ import { ItemJsonLd } from "@/components/site/item-jsonld"
 import { ItemStates } from "@/components/site/item-states"
 import { SectionHeading } from "@/components/site/section-heading"
 import { Scorecard } from "@/components/site/scorecard"
+import { UseCaseLinks } from "@/components/site/use-case-links"
 import { nudgeOf } from "@/lib/founding"
 import { getOffer } from "@/lib/offer"
 import { blockCategoryLabels, getBlocks, getItem, isPro, readSource } from "@/lib/registry"
@@ -127,6 +128,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
             </div>
           </section>
         )}
+        <UseCaseLinks name={item.name} />
         {!isPro(item) && <ProCallout where="block-page" />}
       </div>
     </div>

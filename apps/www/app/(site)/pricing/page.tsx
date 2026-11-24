@@ -2,13 +2,14 @@ import { Check, Clock, Lock, Mail, Minus, ShieldCheck, Users, Vote } from "lucid
 import type { Metadata } from "next"
 import { BuyerQuotes } from "@/components/site/buyer-quotes"
 import Link from "@/components/site/link"
+import { comparisons } from "@/lib/compare"
 
 import { Button } from "@/components/ballmac/button"
 import { BuildCost } from "@/components/pro/build-cost"
 import { CheckoutLink } from "@/components/pro/checkout-link"
 import { PriceText, PriceDisplay } from "@/components/pro/price"
 import { LimitedOfferBanner } from "@/components/site/limited-offer-banner"
-import { regularPrice } from "@/lib/limited-offer"
+import { regularPrice, STANDING_PRICE } from "@/lib/limited-offer"
 import { MonthlyOption } from "@/components/pro/monthly-option"
 import { MONTHLY_CHECKOUT, MONTHLY_PRICE } from "@/lib/pro-monthly"
 import { ProofWall } from "@/components/pro/proof-wall"
@@ -33,7 +34,7 @@ import { thumbFor } from "@/lib/thumbs"
 export function generateMetadata(): Metadata {
   const pro = getBlocks().filter(isPro).length || 290
   return {
-    title: "Pricing",
+    title: STANDING_PRICE ? `Pricing: free shadcn blocks, Pro $${STANDING_PRICE} once` : "Pricing: free shadcn blocks and Ballmac UI Pro",
     description: `Ballmac UI's everyday components, a set of screens and themes are free. Ballmac UI Pro adds ${pro} finished app screens and more, a private registry and Figma tokens.`,
     alternates: { canonical: "/pricing" },
   }
@@ -505,6 +506,21 @@ export default async function PricingPage() {
               </div>
             ))}
           </dl>
+        </section>
+
+        {/* Buyers on this page are weighing us against other libraries: each comparison, with the facts and the date they were checked. */}
+        <section aria-labelledby="vs-h" className="mx-auto mt-20 max-w-3xl">
+          <h2 id="vs-h" className="text-xl font-semibold tracking-tight">How Ballmac UI compares</h2>
+          <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {comparisons.map((c) => (
+              <li key={c.slug}>
+                <Link href={`/compare/${c.slug}`} className="hover:bg-accent block h-full rounded-xl border p-4 transition-colors motion-reduce:transition-none">
+                  <span className="block text-sm font-medium">{c.title}</span>
+                  <span className="text-muted-foreground mt-1 line-clamp-2 block text-sm">{c.description}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
     </>
