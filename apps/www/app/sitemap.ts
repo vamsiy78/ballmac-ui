@@ -6,6 +6,7 @@ import { PRESETS, SYSTEMS } from "@ballmac-ui/theme-engine"
 import { getChangelog } from "@/lib/changelog"
 import { allDocs } from "@/lib/docs"
 import { comparisons } from "@/lib/compare"
+import { blockCategoryPages } from "@/lib/block-categories"
 import { useCases } from "@/lib/use-cases"
 import { getAllItems, itemHref, SITE_URL } from "@/lib/registry"
 
@@ -22,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...pages.map((p) => ({ url: `${SITE_URL}${p}`, lastModified: new Date(`${latest}T00:00:00Z`), priority: p === "" ? 1 : 0.7 })),
     ...allDocs().map((p) => ({ url: `${SITE_URL}${p.url}`, lastModified: new Date(`${latest}T00:00:00Z`), priority: p.url === "/docs" ? 0.8 : 0.7 })),
     ...comparisons.map((c) => ({ url: `${SITE_URL}/compare/${c.slug}`, lastModified: new Date(`${c.checked}T00:00:00Z`), priority: 0.6 })),
+    ...blockCategoryPages().map((p) => ({ url: `${SITE_URL}/blocks/category/${p.slug}`, lastModified: new Date(`${latest}T00:00:00Z`), priority: 0.8 })),
     ...useCases.map((u) => ({ url: `${SITE_URL}/use-cases/${u.slug}`, lastModified: new Date(`${latest}T00:00:00Z`), priority: 0.7 })),
     ...getChangelog().map((e) => ({ url: `${SITE_URL}/changelog/${e.slug}`, lastModified: new Date(`${e.date}T00:00:00Z`), priority: 0.5 })),
     ...SYSTEMS.map((p) => ({ url: `${SITE_URL}/presets/${p.slug}`, lastModified: new Date(`${latest}T00:00:00Z`), priority: 0.6 })),

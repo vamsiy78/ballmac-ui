@@ -11,6 +11,7 @@ import { loadThumb } from "@/lib/examples"
 import { isMotionBlock } from "@/lib/blocks-filter"
 import { motionCollection } from "@/lib/motion-collection"
 import { thumbFor } from "@/lib/thumbs"
+import { blockCategoryPages } from "@/lib/block-categories"
 import { blockCategoryLabels, blockGroups, getBlocks, isNew } from "@/lib/registry"
 
 export const metadata: Metadata = {
@@ -115,6 +116,18 @@ export default async function BlocksPage() {
         }
         interlude={<ProCallout where="blocks" className="mx-auto mt-20 max-w-4xl" />}
       />
+      <nav aria-labelledby="by-category" className="mx-auto mt-24 max-w-4xl">
+        <h2 id="by-category" className="text-center text-[1.75rem] font-semibold tracking-[-0.045em]">Browse by category</h2>
+        <ul className="mt-6 flex flex-wrap justify-center gap-2">
+          {blockCategoryPages().map((p) => (
+            <li key={p.slug}>
+              <Link href={`/blocks/category/${p.slug}`} className="bg-frame hover:bg-accent inline-flex rounded-full px-3.5 py-1.5 text-sm transition-colors motion-reduce:transition-none">
+                {p.label} blocks <span className="text-muted-foreground ms-1.5 tabular-nums">{p.blocks.length}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
       <p className="text-muted-foreground mt-20 text-center text-sm">
         Want the whole page? Start from a{" "}
         <Link href="/templates" className="text-foreground underline underline-offset-4">

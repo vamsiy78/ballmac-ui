@@ -4,6 +4,7 @@ import { mdHref, orderedDocs } from "@/lib/docs"
 import { STANDING_PRICE, STANDING_REGULAR } from "@/lib/limited-offer"
 import { TEAM_PRICE, TEAM_SEATS } from "@/lib/pro-team"
 import { comparisons } from "@/lib/compare"
+import { blockCategoryPages } from "@/lib/block-categories"
 import { useCases } from "@/lib/use-cases"
 import { getAllItems, getBlocks, getComponents, getTemplates, isPro, SITE_URL } from "@/lib/registry"
 
@@ -34,6 +35,9 @@ export function GET() {
     `- [Changelog](${SITE_URL}/changelog): what is new, newest first. Feeds: ${SITE_URL}/changelog/rss.xml and ${SITE_URL}/changelog/atom.xml`,
     `- [Registry index](${SITE_URL}/r/registry.json): every free item in shadcn registry format`,
     `- [JSON API](${SITE_URL}/api/v1/index.json): every item with its description, when to use it and install command`,
+    "",
+    "## Block categories",
+    ...blockCategoryPages().map((p) => `- [shadcn ${p.noun} blocks](${SITE_URL}/blocks/category/${p.slug}): ${p.blocks.length} blocks (${p.blocks.filter((b) => !isPro(b)).length} free). ${p.intro}`),
     "",
     "## Use cases",
     ...useCases.map((u) => `- [${u.name}](${SITE_URL}/use-cases/${u.slug}): ${u.description}`),

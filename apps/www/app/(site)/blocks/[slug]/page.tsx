@@ -18,6 +18,7 @@ import { ItemStates } from "@/components/site/item-states"
 import { SectionHeading } from "@/components/site/section-heading"
 import { Scorecard } from "@/components/site/scorecard"
 import { UseCaseLinks } from "@/components/site/use-case-links"
+import { categoryHref } from "@/lib/block-categories"
 import { nudgeOf } from "@/lib/founding"
 import { getOffer } from "@/lib/offer"
 import { blockCategoryLabels, getBlocks, getItem, isPro, readSource } from "@/lib/registry"
@@ -47,7 +48,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[slug]">)
         <nav aria-label="Breadcrumb" className="text-muted-foreground flex items-center gap-1.5 text-sm">
           <Link href="/blocks" className="hover:text-foreground">Blocks</Link>
           <ChevronRight className="size-3.5" aria-hidden="true" />
-          <Link href={`/blocks#${item.blockCategory}`} className="hover:text-foreground">{blockCategoryLabels[item.blockCategory ?? ""] ?? "Block"}</Link>
+          <Link href={categoryHref(item.blockCategory)} className="hover:text-foreground">{blockCategoryLabels[item.blockCategory ?? ""] ?? "Block"}</Link>
         </nav>
         <h1 className="flex items-center gap-3 text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}{isPro(item) && <ProBadge />}</h1>
         <p className="text-muted-foreground max-w-2xl text-[1.05rem] leading-7 text-balance sm:text-base">{item.description}</p>
